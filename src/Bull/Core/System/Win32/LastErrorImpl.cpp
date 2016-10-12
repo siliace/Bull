@@ -38,7 +38,7 @@ namespace Bull
             }
 
             char buffer[256];
-            size_t size = FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, nullptr, m_lastError, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buffer, 256, nullptr);
+            FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, nullptr, m_lastError, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buffer, 256, nullptr);
 
             return String(buffer);
         }
