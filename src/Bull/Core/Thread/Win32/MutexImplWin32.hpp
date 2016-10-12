@@ -9,8 +9,12 @@ namespace Bull
 {
     namespace prv
     {
+        class ConditionVariableImplWin32;
+
         class MutexImplWin32 : public MutexImpl
         {
+            friend class ConditionVariableImplWin32;
+
         public:
 
             /*! \brief Default constructor
@@ -47,7 +51,7 @@ namespace Bull
              */
             MutexHandler getSystemHandler() const override;
 
-        protected:
+        private:
 
             /*! \brief Get a pointer to the handler
              *
@@ -56,9 +60,7 @@ namespace Bull
              * \return Return a pointer to the system handler
              * \see ConditionalVariableImplWin32
              */
-            MutexHandler* getHandlerPointer() override;
-
-        private:
+            MutexHandler* getHandlerPointer();
 
             CRITICAL_SECTION m_handler;
         };

@@ -3,7 +3,7 @@
 
 #include <Bull/Core/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Thread/Mutex.hpp>
+#include <Bull/Core/Thread/MutexImpl.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 namespace Bull
@@ -43,7 +43,7 @@ namespace Bull
              * \param mutex The mutex to lock the resource
              *
              */
-            virtual void wait(Mutex& mutex) = 0;
+            virtual void wait(MutexImpl* mutex) = 0;
 
             /*! \brief Wait for a signal
              *
@@ -53,7 +53,7 @@ namespace Bull
              * \return Return false if timeout, else return true
              *
              */
-            virtual bool wait(Mutex& mutex, const Time& timeout) = 0;
+            virtual bool wait(MutexImpl* mutex, const Time& timeout) = 0;
 
         protected:
 
