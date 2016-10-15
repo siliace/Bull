@@ -36,7 +36,7 @@ namespace Bull
          * \param bitsPerPixel The number of bits per pixel (8, 16, 24 or 32)
          *
          */
-        VideoMode(unsigned int width, unsigned int height, Uint8 bitsPerPixel = 32);
+        VideoMode(unsigned int width, unsigned int height, Uint8 bitsPerPixel = getCurrent().bitsPerPixel);
 
         /*! \brief == operator override
          *
