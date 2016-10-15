@@ -1,6 +1,7 @@
 #include <sys/time.h>
 
 #include <Bull/Core/Thread/Unix/ConditionVariableImplUnix.hpp>
+#include <Bull/Core/Thread/Unix/MutexImplUnix.hpp>
 
 namespace Bull
 {
@@ -43,11 +44,9 @@ namespace Bull
          * \param mutex The mutex to use to lock the resource
          *
          */
-        void ConditionVariableImplUnix::wait(Mutex& mutex)
+        void ConditionVariableImplUnix::wait(MutexImpl* mutex)
         {
-            pthread_mutex_t mutexHandler = mutex.getSystemHandler();
-
-            pthread_cond_wait(&m_handler, &mutexHandler);
+            pthread_cond_wait(&m_handler, static_cast<MutexImplUnix*>(mutex)->getHandlerPointer());
         }
 
         /*! \brief Wait for a signal
@@ -58,19 +57,18 @@ namespace Bull
          * \return Return false if timeout, false otherwise
          *
          */
-        bool ConditionVariableImplUnix::wait(Mutex& mutex, Uint32 timeout)
+        bool ConditionVariableImplUnix::wait(MutexImpl* mutex, const Time& timeout)
         {
             struct timeval tv;
             struct timespec ts;
-            pthread_mutex_t mutexHandler = mutex.getSystemHandler();
 
             gettimeofday(&tv, nullptr);
-            ts.tv_sec = time(nullptr) + timeout / 1000;
-            ts.tv_nsec = tv.tv_usec * 1000 + 1000 * 1000 * (timeout % 1000);
+            ts.tv_sec = time(nullptr) + static_cast<int>(timeout.asMilliseconds()) / 1000;
+            ts.tv_nsec = tv.tv_usec * 1000 + 1000 * 1000 * (static_cast<int>(timeout.asMilliseconds()) % 1000);
             ts.tv_sec += ts.tv_nsec / (1000 * 1000 * 1000);
             ts.tv_nsec %= (1000 * 1000 * 1000);
 
-            return pthread_cond_timedwait(&m_handler, &mutexHandler, &ts) != 0;
+            return pthread_cond_timedwait(&m_handler, static_cast<MutexImplUnix*>(mutex)->getHandlerPointer(), &ts) != 0;
         }
     }
 }
