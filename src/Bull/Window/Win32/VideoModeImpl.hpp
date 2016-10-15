@@ -9,10 +9,8 @@ namespace Bull
 {
     namespace prv
     {
-        class VideoModeImpl
+        struct VideoModeImpl
         {
-        public:
-
             /*! \brief Get the current VideoMode of the main screen
              *
              * \return Return a VideoMode with the current width, height and the deepness of the main screen
