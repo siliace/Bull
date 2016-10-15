@@ -3,5 +3,5 @@
 #if defined BULL_OS_WINDOWS
     #include <Bull/Core/Time/Win32/DateImpl.hpp>
 #else
-    #error Lack of implementation : Date
+    #include <Bull/Core/Time/Unix/DateImpl.hpp>
 #endif
