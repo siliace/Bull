@@ -178,7 +178,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::getCursor() const
         {
-            return 0;
+            return lseek(m_handler, 0, SEEK_CUR);
         }
 
         /*! \brief Move the reading position in the file
@@ -190,7 +190,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::moveCursor(Int64 offset)
         {
-            return 0;
+            return lseek(m_handler, offset, SEEK_CUR);
         }
 
         /*! \brief Set the reading position in the file
@@ -202,7 +202,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::setCursor(Uint64 offset)
         {
-            return 0;
+            return lseek(m_handler, offset, SEEK_SET);
         }
 
         /*! \brief Get the size of the file
