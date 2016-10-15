@@ -24,6 +24,14 @@ namespace Bull
             XCloseDisplay(m_display);
         }
 
+        /*! \brief Flush the display
+         *
+         */
+        void Display::flush()
+        {
+            XFlush(m_display);
+        }
+
         /*! \brief Get the default screen
          *
          * \return Return the ID of the default render screen
