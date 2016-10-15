@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 #include <Bull/Core/FileSystem/Unix/FileImplUnix.hpp>
+#include <Bull/Core/Log.hpp>
 
 namespace Bull
 {
@@ -148,27 +149,59 @@ namespace Bull
          */
         Date FileImplUnix::getCreationDate() const
         {
+            Bull::Log::get()->warning("Creation date is not available on UNIX-like systems");
+
             return Date();
         }
 
-        /*! \brief Get the date of the creation of the file
+        /*! \brief Get the date of the last access of the file
          *
          * \return Return the date of the last access of the file
          *
          */
         Date FileImplUnix::getLastAccessDate() const
         {
-            return Date();
+            Date   lastAccess;
+            struct stat64 info;
+            struct tm* sysDate;
+
+            fstat64(m_handler, &info);
+            sysDate = localtime(&info.st_atim.tv_sec);
+
+            lastAccess.second    = sysDate->tm_sec;
+            lastAccess.minute    = sysDate->tm_min;
+            lastAccess.hour      = sysDate->tm_hour;
+            lastAccess.day       = sysDate->tm_mday;
+            lastAccess.dayOfWeek = Date::Day(sysDate->tm_wday);
+            lastAccess.month     = Date::Month(sysDate->tm_mon);
+            lastAccess.year      = 1900 + sysDate->tm_year;
+
+            return lastAccess;
         }
 
-        /*! \brief Get the date of the creation of the file
+        /*! \brief Get the date of the last write of the file
          *
          * \return Return the date of the last write of the file
          *
          */
         Date FileImplUnix::getLastWriteDate() const
         {
-            return Date();
+            Date   lastWrite;
+            struct stat64 info;
+            struct tm* sysDate;
+
+            fstat64(m_handler, &info);
+            sysDate = localtime(&info.st_mtim.tv_sec);
+
+            lastWrite.second    = sysDate->tm_sec;
+            lastWrite.minute    = sysDate->tm_min;
+            lastWrite.hour      = sysDate->tm_hour;
+            lastWrite.day       = sysDate->tm_mday;
+            lastWrite.dayOfWeek = Date::Day(sysDate->tm_wday);
+            lastWrite.month     = Date::Month(sysDate->tm_mon);
+            lastWrite.year      = 1900 + sysDate->tm_year;
+
+            return lastWrite;
         }
 
         /*! \brief Get the position of the cursor in the file
@@ -215,7 +248,7 @@ namespace Bull
             struct stat64 info;
             fstat64(m_handler, &info);
 
-            return info.st_size;
+            return static_cast<Uint64>(info.st_size);
         }
 
         /*! \brief Get the file system handler
