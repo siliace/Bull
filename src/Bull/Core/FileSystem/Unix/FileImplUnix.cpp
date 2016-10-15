@@ -138,7 +138,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::write(const void* data, Uint64 size)
         {
-            return 0;
+            return ::write(m_handler, data, size);
         }
 
         /*! \brief Get the date of the creation of the file
