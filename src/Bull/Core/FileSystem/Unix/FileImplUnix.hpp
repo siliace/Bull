@@ -89,14 +89,14 @@ namespace Bull
              */
             Date getCreationDate() const override;
 
-            /*! \brief Get the date of the creation of the file
+            /*! \brief Get the date of the last access of the file
              *
              * \return Return the date of the last access of the file
              *
              */
             Date getLastAccessDate() const override;
 
-            /*! \brief Get the date of the creation of the file
+            /*! \brief Get the date of the last write of the file
              *
              * \return Return the date of the last write of the file
              *
