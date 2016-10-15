@@ -2,17 +2,19 @@
 #define Bull_Exception_hpp
 
 #include <Bull/Core/Log.hpp>
+#include <Bull/Core/String.hpp>
 #include <Bull/Core/System/Export.hpp>
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Date.hpp>
 
 #define DeclareException(ExceptionName, ...)                                                                             \
 class ExceptionName : public Bull::Exception                                                                             \
 {                                                                                                                        \
 public:                                                                                                                  \
                                                                                                                          \
-     static ExceptionName createAndLog()                                                                                 \
+     static ExceptionName createAndLog(const char* function)                                                             \
      {                                                                                                                   \
          ExceptionName e;                                                                                                \
+         e.m_function = function;                                                                                        \
          e.log();                                                                                                        \
                                                                                                                          \
          return e;                                                                                                       \
@@ -36,7 +38,7 @@ private:                                                                        
 #define DeclareProtectedException(ExceptionName, ...) protected: DeclareException(ExceptionName, __VA_ARGS__);
 #define DeclarePrivateException(ExceptionName, ...)   private:   DeclareException(ExceptionName, __VA_ARGS__);
 
-#define ThrowException(ExceptionName) throw ExceptionName::createAndLog()
+#define ThrowException(ExceptionName) throw ExceptionName::createAndLog(__func__)
 
 namespace Bull
 {
@@ -74,6 +76,10 @@ namespace Bull
         String m_message;
 
         Log::Level m_level;
+
+        String m_function;
+
+        Date m_when;
     };
 }
 

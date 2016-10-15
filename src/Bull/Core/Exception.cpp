@@ -12,7 +12,7 @@ namespace Bull
         m_message(message),
         m_level(level)
     {
-        /// Nothing
+        m_when = Date::now();
     }
 
     /*! \brief Save the exception into the log
@@ -20,6 +20,14 @@ namespace Bull
      */
     void Exception::log()
     {
-        Log::get()->log("Exception " + getName() + " with message " + m_message + "\n", m_level);
+        String entry;
+
+        entry += "Uncaught exception: \n";
+        entry += "\tType: "     + getName()  + "\n";
+        entry += "\tFunction: " + m_function + "\n";
+        entry += "\tDate: "     + String::number(m_when.year) + "/" + String::number(m_when.month)  + "/" + String::number(m_when.day)                + "\n";
+        entry += "\tAt: "       + String::number(m_when.hour) + ":" + String::number(m_when.minute) + ":" + String::number(m_when.second.asSeconds()) + "\n";
+
+        Log::get()->log(entry, m_level);
     }
 }
