@@ -52,7 +52,7 @@ namespace Bull
          */
         bool FileImplUnix::copy(const String& path, const String& newPath)
         {
-
+            link(path, newPath);
         }
 
         /*! \brief Delete a file

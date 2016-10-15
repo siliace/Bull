@@ -102,7 +102,7 @@ namespace Bull
      */
     File::~File()
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         close();
     }
@@ -117,7 +117,7 @@ namespace Bull
      */
     bool File::open(const String& name, Uint32 mode)
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         if(isOpen())
         {
@@ -143,7 +143,7 @@ namespace Bull
      */
     bool File::isOpen() const
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         return m_impl.get() != nullptr;
     }
@@ -153,7 +153,7 @@ namespace Bull
      */
     void File::close()
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         m_impl.reset(nullptr);
         m_name = "";
@@ -169,7 +169,7 @@ namespace Bull
      */
     Uint64 File::read(void* data, Uint64 size)
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         if(m_impl)
         {
@@ -195,7 +195,7 @@ namespace Bull
      */
     bool File::readLine(String& line)
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         if(m_impl && !m_eof)
         {
@@ -234,7 +234,7 @@ namespace Bull
      */
     Uint64 File::write(const void* data, Uint64 size)
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         if(m_impl)
         {
@@ -253,7 +253,7 @@ namespace Bull
      */
     Uint64 File::write(const String& string)
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         return write(&string[0], string.getSize());
     }
@@ -266,7 +266,7 @@ namespace Bull
      */
     Date File::getCreationDate() const
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         if(m_impl)
         {
@@ -283,7 +283,7 @@ namespace Bull
      */
     Date File::getLastAccessDate() const
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         if(m_impl)
         {
@@ -300,7 +300,7 @@ namespace Bull
      */
     Date File::getLastWriteDate() const
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         if(m_impl)
         {
@@ -317,7 +317,7 @@ namespace Bull
      */
     Uint64 File::getCursor() const
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         if(m_impl)
         {
@@ -336,7 +336,7 @@ namespace Bull
      */
     Uint64 File::moveCursor(Int64 offset)
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         if(m_impl)
         {
@@ -355,7 +355,7 @@ namespace Bull
      */
     Uint64 File::setCursor(Uint64 offset)
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         if(m_impl)
         {
@@ -372,7 +372,7 @@ namespace Bull
      */
     String File::getName() const
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         return m_name;
     }
@@ -384,7 +384,7 @@ namespace Bull
      */
     Uint64 File::getSize() const
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         if(m_impl)
         {
@@ -431,7 +431,7 @@ namespace Bull
      */
     bool File::isAtEof() const
     {
-        Lock lock(m_mutex);
+        //Lock lock(m_mutex);
 
         return m_eof;
     }
