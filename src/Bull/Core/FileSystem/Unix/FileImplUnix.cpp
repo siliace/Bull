@@ -52,7 +52,7 @@ namespace Bull
          */
         bool FileImplUnix::copy(const String& path, const String& newPath)
         {
-
+            return false;
         }
 
         /*! \brief Delete a file
@@ -72,7 +72,7 @@ namespace Bull
          */
         FileImplUnix::~FileImplUnix()
         {
-            /// Nothing
+            close(m_handler);
         }
 
         /*! \brief Open a file
@@ -85,7 +85,37 @@ namespace Bull
          */
         bool FileImplUnix::open(const String& name, Uint32 mode)
         {
-            return false;
+            int flags = 0;
+
+            if(mode & File::OpeningMode::ReadWrite)
+            {
+                flags |= O_RDWR;
+            }
+            else
+            {
+                if(mode & File::OpeningMode::Read)
+                {
+                    flags |= O_RDONLY;
+                }
+                else if(mode & File::OpeningMode::Write)
+                {
+                    flags |= O_WRONLY;
+                }
+            }
+
+            if(!(mode & File::OpeningMode::Exists) && mode & File::OpeningMode::Write)
+            {
+                flags |= O_CREAT;
+            }
+
+            if(mode & File::OpeningMode::Truncate)
+            {
+                flags |= O_TRUNC;
+            }
+
+            m_handler = ::open(name, flags, S_IRWXU);
+
+            return m_handler != -1;
         }
 
         /*! \brief Read in a file
@@ -98,7 +128,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::read(void* dst, Uint64 size)
         {
-            return 0;
+            return ::read(m_handler, dst, size);
         }
 
         /*! \brief Write a byte in this file
@@ -192,7 +222,7 @@ namespace Bull
          */
         FileHandler FileImplUnix::getSystemHandler() const
         {
-            return 0;
+            return m_handler;
         }
     }
 }

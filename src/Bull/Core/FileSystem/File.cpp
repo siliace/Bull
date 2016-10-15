@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstring>
 
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/FileSystem/FileImpl.hpp>
@@ -173,6 +174,7 @@ namespace Bull
 
         if(m_impl)
         {
+            std::memset(data, 0, size);
             Uint64 read = m_impl->read(data, size);
 
             if(read < size)
