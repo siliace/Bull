@@ -141,6 +141,10 @@ namespace Bull
              *
              */
             FileHandler getSystemHandler() const override;
+
+        private:
+
+            int m_handler;
         };
     }
 }
