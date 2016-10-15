@@ -5,7 +5,8 @@
     #include <Bull/Core/Thread/Win32/SemaphoreImplWin32.hpp>
     typedef Bull::prv::SemaphoreImplWin32 SemaphoreImplType;
 #else
-    #error Lack of implementation : Semaphore
+    #include <Bull/Core/Thread/Unix/SemaphoreImplUnix.hpp>
+    typedef Bull::prv::SemaphoreImplUnix SemaphoreImplType;
 #endif // defined
 
 namespace Bull
