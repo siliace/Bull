@@ -212,7 +212,10 @@ namespace Bull
          */
         Uint64 FileImplUnix::getSize() const
         {
-            return 0;
+            struct stat info;
+            fstat(m_handler, &info);
+
+            return info.st_size;
         }
 
         /*! \brief Get the file system handler
