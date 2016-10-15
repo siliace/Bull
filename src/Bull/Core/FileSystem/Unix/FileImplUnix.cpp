@@ -113,7 +113,7 @@ namespace Bull
                 flags |= O_TRUNC;
             }
 
-            m_handler = ::open(name, flags, S_IRWXU);
+            m_handler = ::open64(name, flags, S_IRWXU);
 
             return m_handler != -1;
         }
@@ -178,7 +178,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::getCursor() const
         {
-            return lseek(m_handler, 0, SEEK_CUR);
+            return lseek64(m_handler, 0, SEEK_CUR);
         }
 
         /*! \brief Move the reading position in the file
@@ -190,7 +190,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::moveCursor(Int64 offset)
         {
-            return lseek(m_handler, offset, SEEK_CUR);
+            return lseek64(m_handler, offset, SEEK_CUR);
         }
 
         /*! \brief Set the reading position in the file
@@ -202,7 +202,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::setCursor(Uint64 offset)
         {
-            return lseek(m_handler, offset, SEEK_SET);
+            return lseek64(m_handler, offset, SEEK_SET);
         }
 
         /*! \brief Get the size of the file
@@ -212,8 +212,8 @@ namespace Bull
          */
         Uint64 FileImplUnix::getSize() const
         {
-            struct stat info;
-            fstat(m_handler, &info);
+            struct stat64 info;
+            fstat64(m_handler, &info);
 
             return info.st_size;
         }
