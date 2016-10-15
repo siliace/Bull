@@ -52,7 +52,7 @@ namespace Bull
          */
         bool FileImplUnix::copy(const String& path, const String& newPath)
         {
-            link(path, newPath);
+            return false;
         }
 
         /*! \brief Delete a file
@@ -128,7 +128,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::read(void* dst, Uint64 size)
         {
-            return 0;
+            return ::read(m_handler, dst, size);
         }
 
         /*! \brief Write a byte in this file
