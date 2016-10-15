@@ -14,10 +14,7 @@ namespace Bull
     {
         if(!m_mutex.isLocked())
         {
-            if(!m_mutex.tryLock())
-            {
-                ThrowException(FailToLockMutex);
-            }
+            m_mutex.lock();
         }
     }
 
