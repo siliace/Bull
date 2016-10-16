@@ -1,9 +1,32 @@
 #include <Bull/Window/X11/WindowImplX11.hpp>
 
+#ifndef Button6
+    #define Button6 6
+#endif // Button6
+
+#ifndef Button7
+    #define Button7 7
+#endif // Button6
+
+#ifndef Button8
+    #define Button8 8
+#endif // Button6
+
+#ifndef Button9
+    #define Button9 9
+#endif // Button6
+
 namespace Bull
 {
     namespace prv
     {
+        namespace
+        {
+            const long eventMasks = KeyPressMask      | KeyReleaseMask    | /// Keyboard events
+                                    PointerMotionMask |                    /// Mouse move event
+                                    ButtonPressMask   | ButtonReleaseMask;
+
+        }
         /*! \brief Constructor
          *
          * \param mode The VideoMode to use to create the window
@@ -16,7 +39,7 @@ namespace Bull
             m_handler(0)
         {
             XSetWindowAttributes attribs;
-            attribs.event_mask = KeyPressMask | KeyReleaseMask;
+            attribs.event_mask = eventMasks;
 
             m_handler = XCreateWindow(m_display->getHandler(),
                                       m_display->getRootWindow(),
@@ -71,6 +94,109 @@ namespace Bull
                         event.type = Window::Event::KeyUp;
 
                         pushEvent(event);
+                    }
+                    break;
+
+                    case MotionNotify:
+                    {
+                        Window::Event event;
+
+                        event.type        = Window::Event::MouseMoved;
+                        event.mouseMove.x = e.xmotion.x;
+                        event.mouseMove.y = e.xmotion.y;
+
+                        pushEvent(event);
+                    }
+                    break;
+
+                    case ButtonPress:
+                    {
+                        Window::Event event;
+
+                        if(e.xbutton.button <= Button3 || e.xbutton.button >= Button8)
+                        {
+                            event.type          = Window::Event::MouseButtonDown;
+                            event.mouseButton.x = e.xbutton.x;
+                            event.mouseButton.y = e.xbutton.y;
+
+                        }
+                        else
+                        {
+                            event.type         = Window::Event::MouseWheel;
+                            event.mouseWheel.x = e.xbutton.x;
+                            event.mouseWheel.y = e.xbutton.y;
+                        }
+
+                        switch(e.xbutton.button)
+                        {
+                            case Button1:
+                                event.mouseButton.button = Mouse::Left;
+                            break;
+                            case Button2:
+                                event.mouseButton.button = Mouse::Middle;
+                            break;
+                            case Button3:
+                                event.mouseButton.button = Mouse::Right;
+                            break;
+                            case Button4:
+                                event.mouseWheel.up      = true;
+                                event.mouseWheel.wheel   = Mouse::Vertical;
+                            break;
+                            case Button5:
+                                event.mouseWheel.up      = false;
+                                event.mouseWheel.wheel   = Mouse::Vertical;
+                            break;
+                            case Button6:
+                                event.mouseWheel.up      = true;
+                                event.mouseWheel.wheel   = Mouse::Horizontal;
+                            break;
+                            case Button7:
+                                event.mouseWheel.up      = false;
+                                event.mouseWheel.wheel   = Mouse::Horizontal;
+                            break;
+                            case Button8:
+                                event.mouseButton.button = Mouse::Extra1;
+                            break;
+                            case Button9:
+                                event.mouseButton.button = Mouse::Extra2;
+                            break;
+                        }
+
+                        pushEvent(event);
+                    }
+                    break;
+
+                    case ButtonRelease:
+                    {
+                        if(e.xbutton.button <= Button3 || e.xbutton.button >= Button8)
+                        {
+                            Window::Event event;
+                            event.type = Window::Event::MouseButtonUp;
+
+                            switch(e.xbutton.button)
+                            {
+                                case Button1:
+                                    event.mouseButton.button = Mouse::Left;
+                                break;
+                                case Button2:
+                                    event.mouseButton.button = Mouse::Middle;
+                                break;
+                                case Button3:
+                                    event.mouseButton.button = Mouse::Right;
+                                break;
+                                case Button8:
+                                    event.mouseButton.button = Mouse::Extra1;
+                                break;
+                                case Button9:
+                                    event.mouseButton.button = Mouse::Extra2;
+                                break;
+                            }
+
+                            event.mouseButton.x = e.xbutton.x;
+                            event.mouseButton.y = e.xbutton.y;
+
+                            pushEvent(event);
+                        }
                     }
                     break;
                 }
