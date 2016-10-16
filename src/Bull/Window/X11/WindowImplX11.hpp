@@ -3,6 +3,8 @@
 
 #include <X11/Xlib.h>
 
+#include <Bull/Math/Vector/Vector2.hpp>
+
 #include <Bull/Window/WindowImpl.hpp>
 #include <Bull/Window/X11/Display.hpp>
 
@@ -155,6 +157,9 @@ namespace Bull
             Display::Instance m_display;
 
             ::Window m_handler;
+
+            Vector2UI m_lastSize;
+            Vector2I  m_lastPosition;
         };
     }
 }

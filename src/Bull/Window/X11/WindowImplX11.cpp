@@ -22,9 +22,11 @@ namespace Bull
     {
         namespace
         {
-            const long eventMasks = KeyPressMask      | KeyReleaseMask    | /// Keyboard events
-                                    PointerMotionMask |                    /// Mouse move event
-                                    ButtonPressMask   | ButtonReleaseMask;
+            const long eventMasks = KeyPressMask        | KeyReleaseMask    | /// Keyboard events
+                                    PointerMotionMask   | ButtonMotionMask  | /// Mouse move events
+                                    ButtonPressMask     | ButtonReleaseMask | /// Mouse buttons events
+                                    FocusChangeMask     |                     /// Focus events
+                                    StructureNotifyMask;                      /// Resize events
 
         }
         /*! \brief Constructor
@@ -36,7 +38,9 @@ namespace Bull
          */
         WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style) :
             m_display(Display::get()),
-            m_handler(0)
+            m_handler(0),
+            m_lastSize(mode.width, mode.height),
+            m_lastPosition(0, 0)
         {
             XSetWindowAttributes attribs;
             attribs.event_mask = eventMasks;
@@ -197,6 +201,33 @@ namespace Bull
 
                             pushEvent(event);
                         }
+                    }
+                    break;
+
+                    case ConfigureNotify:
+                    {
+                        Window::Event event;
+                        Vector2UI size(e.xconfigure.width, e.xconfigure.height);
+                        Vector2I  position(e.xconfigure.x, e.xconfigure.y);
+
+                        if(size != m_lastSize)
+                        {
+                            event.type                = Window::Event::Resized;
+                            event.windowResize.width  = size.x;
+                            event.windowResize.height = size.y;
+
+                            m_lastSize = size;
+                        }
+                        else
+                        {
+                            event.type         = Window::Event::Moved;
+                            event.windowMove.x = position.x;
+                            event.windowMove.y = position.y;
+
+                            m_lastPosition = position;
+                        }
+
+                        pushEvent(event);
                     }
                     break;
                 }
