@@ -297,7 +297,9 @@ namespace Bull
          */
         void WindowImplX11::setPosition(const Vector2I& position)
         {
-
+            XMoveWindow(m_display->getHandler(), m_handler, position.x, position.y);
+            m_lastPosition = position;
+            m_display->flush();
         }
 
         /*! \brief Set the size of the window
@@ -308,7 +310,7 @@ namespace Bull
          */
         Vector2I WindowImplX11::getPosition() const
         {
-
+            return m_lastPosition;
         }
 
         /*! \brief Set the size of the window
@@ -318,7 +320,9 @@ namespace Bull
          */
         void WindowImplX11::setSize(const Vector2UI& size)
         {
-
+            XResizeWindow(m_display->getHandler(), m_handler, size.x, size.y);
+            m_lastSize = size;
+            m_display->flush();
         }
 
         /*! \brief Get the size of the window
@@ -328,7 +332,7 @@ namespace Bull
          */
         Vector2UI WindowImplX11::getSize() const
         {
-
+            return m_lastSize;
         }
 
         /*! \brief Set the title of the window
