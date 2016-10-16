@@ -16,7 +16,7 @@ namespace Bull
             m_handler(0)
         {
             XSetWindowAttributes attribs;
-            attribs.event_mask = KeyPress | KeyRelease;
+            attribs.event_mask = KeyPressMask | KeyReleaseMask;
 
             m_handler = XCreateWindow(m_display->getHandler(),
                                       m_display->getRootWindow(),
@@ -48,7 +48,33 @@ namespace Bull
          */
         void WindowImplX11::startProcessEvents()
         {
+            XEvent e;
+            while(XPending(m_display->getHandler()))
+            {
+                XNextEvent(m_display->getHandler(), &e);
+                switch(e.type)
+                {
+                    case KeyPress:
+                    {
+                        Window::Event event;
 
+                        event.type = Window::Event::KeyDown;
+
+                        pushEvent(event);
+                    }
+                    break;
+
+                    case KeyRelease:
+                    {
+                        Window::Event event;
+
+                        event.type = Window::Event::KeyUp;
+
+                        pushEvent(event);
+                    }
+                    break;
+                }
+            }
         }
 
         /*! \brief Minimize a window
