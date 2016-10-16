@@ -160,6 +160,8 @@ namespace Bull
 
             Vector2UI m_lastSize;
             Vector2I  m_lastPosition;
+
+            bool m_isMapped;
         };
     }
 }
