@@ -26,7 +26,8 @@ namespace Bull
                                     PointerMotionMask   | ButtonMotionMask  | /// Mouse move events
                                     ButtonPressMask     | ButtonReleaseMask | /// Mouse buttons events
                                     FocusChangeMask     |                     /// Focus events
-                                    StructureNotifyMask;                      /// Resize events
+                                    StructureNotifyMask |                     /// Resize events
+                                    VisibilityChangeMask;                     /// Visibility change (internal uses only)
 
         }
         /*! \brief Constructor
@@ -40,7 +41,8 @@ namespace Bull
             m_display(Display::get()),
             m_handler(0),
             m_lastSize(mode.width, mode.height),
-            m_lastPosition(0, 0)
+            m_lastPosition(0, 0),
+            m_isMapped(false)
         {
             XSetWindowAttributes attribs;
             attribs.event_mask = eventMasks;
@@ -60,6 +62,8 @@ namespace Bull
 
             XMapWindow(m_display->getHandler(), m_handler);
             m_display->flush();
+
+            m_isMapped = true;
         }
 
         /*! \brief Destructor
@@ -385,7 +389,16 @@ namespace Bull
          */
         void WindowImplX11::setVisible(bool visible)
         {
-
+            if(visible)
+            {
+                XMapWindow(m_display->getHandler(), m_handler);
+                m_display->flush();
+            }
+            else
+            {
+                XUnmapWindow(m_display->getHandler(), m_handler);
+                m_display->flush();
+            }
         }
 
         /*! \brief Get the window system handler
