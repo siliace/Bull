@@ -8,7 +8,8 @@
     #include <Bull/Window/Win32/WindowImplWin32.hpp>
     typedef Bull::prv::WindowImplWin32 WindowImplType;
 #else
-    #error Lack of implementation : Window
+    #include <Bull/Window/X11/WindowImplX11.hpp>
+    typedef Bull::prv::WindowImplX11 WindowImplType;
 #endif
 
 namespace Bull
@@ -47,19 +48,19 @@ namespace Bull
          */
         bool WindowImpl::popEvent(Window::Event& e, bool block)
         {
-            JoystickManager::Instance manager = JoystickManager::get();
+            //JoystickManager::Instance manager = JoystickManager::get();
 
             if(m_events.empty())
             {
                 startProcessEvents();
-                manager->processEvents(m_events);
+                //manager->processEvents(m_events);
 
                 if(m_events.empty() && block)
                 {
                     do
                     {
                         startProcessEvents();
-                        manager->processEvents(m_events);
+                        //manager->processEvents(m_events);
                         Thread::sleep(Time::milliseconds(10));
                     }while(m_events.empty());
                 }

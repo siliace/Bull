@@ -24,6 +24,11 @@ namespace Bull
              */
             ~Display();
 
+            /*! \brief Flush the display
+             *
+             */
+            void flush();
+
             /*! \brief Get the default screen
              *
              * \return Return the ID of the default render screen
