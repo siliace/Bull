@@ -120,6 +120,8 @@ namespace Bull
 
                        return true;
                     }
+
+                    return false;
                 }
 
                 return true;

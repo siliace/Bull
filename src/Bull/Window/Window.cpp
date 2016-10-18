@@ -142,12 +142,29 @@ namespace Bull
         return e;
     }
 
+    /*! \brief Activate or deactivate the context
+     *
+     * \param active True to activate, false to deactivate the context
+     *
+     * \return Return true if the context's status changed successfully, false otherwise
+     *
+     */
+    bool Window::setActive(bool active)
+    {
+        if(m_context)
+        {
+            return m_context->setActive(active);
+        }
+
+        return false;
+    }
+
     /*! \brief Display what has been rendered so far
      *
      */
     void Window::display()
     {
-        if(m_context)
+        if(setActive())
         {
             m_context->display();
         }

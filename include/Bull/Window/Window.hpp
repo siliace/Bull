@@ -225,6 +225,15 @@ namespace Bull
          */
         Event nextEvent();
 
+        /*! \brief Activate or deactivate the context
+         *
+         * \param active True to activate, false to deactivate the context
+         *
+         * \return Return true if the context's status changed successfully, false otherwise
+         *
+         */
+        bool setActive(bool active = true);
+
         /*! \brief Display what has been rendered so far
          *
          */
