@@ -346,15 +346,6 @@ namespace Bull
          */
         void setVisible(bool visible = true);
 
-        /*! \brief Enable or disable the context
-         *
-         * \param True to enable, false to disable
-         *
-         * \return Return true if the operation was successfully, false otherwise
-         *
-         */
-        bool setActive(bool active = true);
-
         /*! \brief Check if a window is in fullscreen
          *
          * \return Return true if the window is in fullscreen, false otherwise
