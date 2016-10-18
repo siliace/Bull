@@ -323,10 +323,11 @@ namespace Bull
          */
         Uint64 FileImplWin32::getSize() const
         {
-            DWORD highOrder = 0;
-            DWORD lowOrder  = GetFileSize(m_handler, &highOrder);
+            LARGE_INTEGER size;
 
-            return lowOrder;
+            GetFileSizeEx(m_handler, &size);
+
+            return size.QuadPart;
         }
 
         /*! \brief Get the file system handler
