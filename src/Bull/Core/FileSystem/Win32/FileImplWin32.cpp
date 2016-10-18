@@ -186,14 +186,15 @@ namespace Bull
          */
         Uint64 FileImplWin32::write(const void* data, Uint64 size)
         {
-            DWORD read = 0;
+            DWORD written = 0;
+            LARGE_INTEGER cursor;
+            cursor.QuadPart = getCursor();
 
-            if(WriteFile(m_handler, data, size, &read, nullptr) && read > 0)
-            {
-                return read;
-            }
+            LockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(size), 0);
+            WriteFile(m_handler, data, static_cast<DWORD>(size), &written, nullptr);
+            UnlockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(size), 0);
 
-            return 0;
+            return written;
         }
 
         /*! \brief Get the date of the creation of the file
