@@ -1,5 +1,7 @@
 #include <Bull/Core/Thread/Thread.hpp>
 
+#include <Bull/Render/Context/GlContext.hpp>
+
 #include <Bull/Window/Window.hpp>
 #include <Bull/Window/WindowImpl.hpp>
 
@@ -69,6 +71,7 @@ namespace Bull
         }
 
         m_impl.reset(prv::WindowImpl::createInstance(mode, title, style));
+        m_context.reset(prv::GlContext::createInstance(getSystemHandler(), mode.bitsPerPixel));
 
         if(style == Style::Fullscreen)
         {
@@ -137,6 +140,17 @@ namespace Bull
         }
 
         return e;
+    }
+
+    /*! \brief Display what has been rendered so far
+     *
+     */
+    void Window::display()
+    {
+        if(m_context)
+        {
+            m_context->display();
+        }
     }
 
     /*! \brief Enable or disable the capture of the cursor inside the window
