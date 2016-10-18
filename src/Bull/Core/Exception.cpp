@@ -1,4 +1,5 @@
 #include <Bull/Core/Exception.hpp>
+#include <Bull/Core/IO/StringStream.hpp>
 
 namespace Bull
 {
@@ -20,15 +21,15 @@ namespace Bull
      */
     void Exception::log()
     {
-        String entry;
+        StringStream entry;
 
-        entry += "Uncaught exception: \n";
-        entry += "\tType: "     + getName()  + "\n";
-        entry += "\tFile: "     + m_file     + "\n";
-        entry += "\tFunction: " + m_function + "\n";
-        entry += "\tLine: "     + String::number(m_line) + "\n";
-        entry += "\tDate: "     + String::number(m_when.year) + "/" + String::number(m_when.month)  + "/" + String::number(m_when.day)                + "\n";
-        entry += "\tAt: "       + String::number(m_when.hour) + ":" + String::number(m_when.minute) + ":" + String::number(m_when.second.asSeconds()) + "\n";
+        entry << "Uncaught exception: " << "\n";
+        entry << "\tType: "             << getName()                   << "\n";
+        entry << "\tFile: "             << m_file                      << "\n";
+        entry << "\tFunction: "         << m_function                  << "\n";
+        entry << "\tLine: "             << String::number(m_line)      << "\n";
+        entry << "\tDate: "             << String::number(m_when.year) << "/" << String::number(m_when.month)  << "/" << String::number(m_when.day)                << "\n";
+        entry << "\tAt: "               << String::number(m_when.hour) << ":" << String::number(m_when.minute) << ":" << String::number(m_when.second.asSeconds()) << "\n";
 
         Log::get()->log(entry, m_level);
     }
