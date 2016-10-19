@@ -6,6 +6,32 @@ namespace Bull
 {
     namespace prv
     {
+        /*! \brief Get an OpenGL function
+         *
+         * \param function The function name
+         *
+         * \param Return the function, nullptr if the function is not available
+         *
+         */
+        void* WglContext::getFunction(const String& function)
+        {
+            void* functionProc = reinterpret_cast<void*>(wglGetProcAddress(function));
+
+            if(functionProc)
+            {
+                return functionProc;
+            }
+
+            static HMODULE module = LoadLibrary("opengl32.dll");
+
+            if(!module)
+            {
+                return nullptr;
+            }
+
+            return reinterpret_cast<void*>(GetProcAddress(module, function));
+        }
+
         /*! \brief Constructor
          *
          * \param shared The shared context

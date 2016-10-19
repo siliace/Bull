@@ -17,6 +17,17 @@ namespace Bull
         {
         public:
 
+            /*! \brief Get an OpenGL function
+             *
+             * \param function The function name
+             *
+             * \param Return the function, nullptr if the function is not available
+             *
+             */
+            static void* getFunction(const String& function);
+
+        public:
+
             /*! \brief Constructor
              *
              * \param shared The shared context

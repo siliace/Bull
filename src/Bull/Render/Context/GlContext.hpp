@@ -2,6 +2,7 @@
 #define Bull_GlContext_hpp
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/String.hpp>
 
 #include <Bull/Window/WindowHandler.hpp>
 
@@ -44,6 +45,15 @@ namespace Bull
              *
              */
             static GlContext* createInstance(WindowHandler window, unsigned int bitsPerPixel);
+
+            /*! \brief Get an OpenGL function
+             *
+             * \param function The function name
+             *
+             * \param Return the function, nullptr if the function is not available
+             *
+             */
+            static void* getFunction(const String& function);
 
         public:
 

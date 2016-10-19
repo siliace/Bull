@@ -93,6 +93,18 @@ namespace Bull
             return context;
         }
 
+        /*! \brief Get an OpenGL function
+         *
+         * \param function The function name
+         *
+         * \param Return the function, nullptr if the function is not available
+         *
+         */
+        void* GlContext::getFunction(const String& function)
+        {
+            return ContextType::getFunction(function);
+        }
+
         /*! \brief Destructor
          *
          */
