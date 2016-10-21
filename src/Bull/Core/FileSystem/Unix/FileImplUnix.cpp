@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 #include <Bull/Core/FileSystem/Unix/FileImplUnix.hpp>
+#include <Bull/Core/Log.hpp>
 
 namespace Bull
 {
@@ -52,7 +53,7 @@ namespace Bull
          */
         bool FileImplUnix::copy(const String& path, const String& newPath)
         {
-
+            return false;
         }
 
         /*! \brief Delete a file
@@ -72,7 +73,7 @@ namespace Bull
          */
         FileImplUnix::~FileImplUnix()
         {
-            /// Nothing
+            close(m_handler);
         }
 
         /*! \brief Open a file
@@ -85,7 +86,37 @@ namespace Bull
          */
         bool FileImplUnix::open(const String& name, Uint32 mode)
         {
-            return false;
+            int flags = 0;
+
+            if(mode & File::OpeningMode::ReadWrite)
+            {
+                flags |= O_RDWR;
+            }
+            else
+            {
+                if(mode & File::OpeningMode::Read)
+                {
+                    flags |= O_RDONLY;
+                }
+                else if(mode & File::OpeningMode::Write)
+                {
+                    flags |= O_WRONLY;
+                }
+            }
+
+            if(!(mode & File::OpeningMode::Exists) && mode & File::OpeningMode::Write)
+            {
+                flags |= O_CREAT;
+            }
+
+            if(mode & File::OpeningMode::Truncate)
+            {
+                flags |= O_TRUNC;
+            }
+
+            m_handler = ::open64(name, flags, S_IRWXU);
+
+            return m_handler != -1;
         }
 
         /*! \brief Read in a file
@@ -98,7 +129,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::read(void* dst, Uint64 size)
         {
-            return 0;
+            return ::read(m_handler, dst, size);
         }
 
         /*! \brief Write a byte in this file
@@ -108,7 +139,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::write(const void* data, Uint64 size)
         {
-            return 0;
+            return ::write(m_handler, data, size);
         }
 
         /*! \brief Get the date of the creation of the file
@@ -118,27 +149,59 @@ namespace Bull
          */
         Date FileImplUnix::getCreationDate() const
         {
+            Bull::Log::get()->warning("Creation date is not available on UNIX-like systems");
+
             return Date();
         }
 
-        /*! \brief Get the date of the creation of the file
+        /*! \brief Get the date of the last access of the file
          *
          * \return Return the date of the last access of the file
          *
          */
         Date FileImplUnix::getLastAccessDate() const
         {
-            return Date();
+            Date   lastAccess;
+            struct stat64 info;
+            struct tm* sysDate;
+
+            fstat64(m_handler, &info);
+            sysDate = localtime(&info.st_atim.tv_sec);
+
+            lastAccess.second    = sysDate->tm_sec;
+            lastAccess.minute    = sysDate->tm_min;
+            lastAccess.hour      = sysDate->tm_hour;
+            lastAccess.day       = sysDate->tm_mday;
+            lastAccess.dayOfWeek = Date::Day(sysDate->tm_wday);
+            lastAccess.month     = Date::Month(sysDate->tm_mon);
+            lastAccess.year      = 1900 + sysDate->tm_year;
+
+            return lastAccess;
         }
 
-        /*! \brief Get the date of the creation of the file
+        /*! \brief Get the date of the last write of the file
          *
          * \return Return the date of the last write of the file
          *
          */
         Date FileImplUnix::getLastWriteDate() const
         {
-            return Date();
+            Date   lastWrite;
+            struct stat64 info;
+            struct tm* sysDate;
+
+            fstat64(m_handler, &info);
+            sysDate = localtime(&info.st_mtim.tv_sec);
+
+            lastWrite.second    = sysDate->tm_sec;
+            lastWrite.minute    = sysDate->tm_min;
+            lastWrite.hour      = sysDate->tm_hour;
+            lastWrite.day       = sysDate->tm_mday;
+            lastWrite.dayOfWeek = Date::Day(sysDate->tm_wday);
+            lastWrite.month     = Date::Month(sysDate->tm_mon);
+            lastWrite.year      = 1900 + sysDate->tm_year;
+
+            return lastWrite;
         }
 
         /*! \brief Get the position of the cursor in the file
@@ -148,7 +211,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::getCursor() const
         {
-            return 0;
+            return lseek64(m_handler, 0, SEEK_CUR);
         }
 
         /*! \brief Move the reading position in the file
@@ -160,7 +223,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::moveCursor(Int64 offset)
         {
-            return 0;
+            return lseek64(m_handler, offset, SEEK_CUR);
         }
 
         /*! \brief Set the reading position in the file
@@ -172,7 +235,7 @@ namespace Bull
          */
         Uint64 FileImplUnix::setCursor(Uint64 offset)
         {
-            return 0;
+            return lseek64(m_handler, offset, SEEK_SET);
         }
 
         /*! \brief Get the size of the file
@@ -182,7 +245,10 @@ namespace Bull
          */
         Uint64 FileImplUnix::getSize() const
         {
-            return 0;
+            struct stat64 info;
+            fstat64(m_handler, &info);
+
+            return static_cast<Uint64>(info.st_size);
         }
 
         /*! \brief Get the file system handler
@@ -192,7 +258,7 @@ namespace Bull
          */
         FileHandler FileImplUnix::getSystemHandler() const
         {
-            return 0;
+            return m_handler;
         }
     }
 }

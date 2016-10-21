@@ -10,7 +10,11 @@ namespace Bull
         MutexImplUnix::MutexImplUnix() :
             m_handler(PTHREAD_MUTEX_INITIALIZER)
         {
-            /// Nothing
+            pthread_mutexattr_t attr;
+            pthread_mutexattr_init(&attr);
+            pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);
+
+            pthread_mutex_init(&m_handler, &attr);
         }
 
         /*! \brief Destructor
@@ -55,6 +59,18 @@ namespace Bull
         MutexHandler MutexImplUnix::getSystemHandler() const
         {
             return m_handler;
+        }
+
+        /*! \brief Get a pointer to the handler
+         *
+         * Used only by ConditionalVariableImplUnix
+         *
+         * \return Return a pointer to the system handler
+         * \see ConditionalVariableImplUnix
+         */
+        MutexHandler* MutexImplUnix::getHandlerPointer()
+        {
+            return &m_handler;
         }
     }
 }

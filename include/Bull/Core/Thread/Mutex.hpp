@@ -8,6 +8,8 @@
 
 namespace Bull
 {
+    class ConditionVariable;
+
     namespace prv
     {
         class MutexImpl;
@@ -15,6 +17,8 @@ namespace Bull
 
     class BULL_API Mutex : public NonCopyable
     {
+        friend class ConditionVariable;
+
     public:
 
         /*! \brief Default constructor

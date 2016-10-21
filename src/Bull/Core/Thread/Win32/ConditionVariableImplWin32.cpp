@@ -1,4 +1,5 @@
 #include <Bull/Core/Thread/Win32/ConditionVariableImplWin32.hpp>
+#include <Bull/Core/Thread/Win32/MutexImplWin32.hpp>
 
 namespace Bull
 {
@@ -33,9 +34,9 @@ namespace Bull
          * \param mutex The mutex to lock the resource
          *
          */
-        void ConditionVariableImplWin32::wait(Mutex& mutex)
+        void ConditionVariableImplWin32::wait(MutexImpl* mutex)
         {
-
+            SleepConditionVariableCS(&m_handler, static_cast<MutexImplWin32*>(mutex)->getHandlerPointer(), INFINITE);
         }
 
         /*! \brief Wait for a signal
@@ -46,9 +47,9 @@ namespace Bull
          * \return Return false if timeout, else return true
          *
          */
-        bool ConditionVariableImplWin32::wait(Mutex& mutex, const Time& timeout)
+        bool ConditionVariableImplWin32::wait(MutexImpl* mutex, const Time& timeout)
         {
-            return false;
+            return SleepConditionVariableCS(&m_handler, static_cast<MutexImplWin32*>(mutex)->getHandlerPointer(), timeout.asMilliseconds()) != 0;
         }
     }
 }

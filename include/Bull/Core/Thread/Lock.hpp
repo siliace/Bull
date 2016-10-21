@@ -1,7 +1,6 @@
 #ifndef Bull_Lock_hpp
 #define Bull_Lock_hpp
 
-#include <Bull/Core/Exception.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/Mutex.hpp>
 
@@ -35,8 +34,6 @@ namespace Bull
     private:
 
         Mutex& m_mutex;
-
-        DeclarePublicException(FailToLockMutex, "The mutex could not be locked");
     };
 }
 

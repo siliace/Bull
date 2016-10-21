@@ -7,7 +7,8 @@
     #include <windows.h>
     typedef HANDLE SemaphoreHandler;
 #else
-    #error Lack of implementation : SemaphoreHandler
+    #include <semaphore.h>
+    typedef sem_t SemaphoreHandler;
 #endif
 
 #endif // Bull_SemaphoreHandler_hpp

@@ -88,6 +88,6 @@ namespace Bull
             return m_impl->getSystemHandler();
         }
 
-        return 0;
+        return SemaphoreHandler();
     }
 }

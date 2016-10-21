@@ -56,15 +56,6 @@ namespace Bull
              *
              */
             MutexImpl() = default;
-
-            /*! \brief Get a pointer to the handler
-             *
-             * Used only by ConditionalVariableImpl
-             *
-             * \return Return a pointer to the system handler
-             * \see ConditionalVariableImpl
-             */
-            virtual MutexHandler* getHandlerPointer() = 0;
         };
     }
 }

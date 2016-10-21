@@ -51,7 +51,7 @@ namespace Bull
     {
         if(m_impl)
         {
-            m_impl->wait(mutex);
+            m_impl->wait(mutex.m_impl.get());
         }
     }
 
@@ -67,7 +67,7 @@ namespace Bull
     {
         if(m_impl)
         {
-            return m_impl->wait(mutex, timeout);
+            return m_impl->wait(mutex.m_impl.get(), timeout);
         }
 
         return false;
