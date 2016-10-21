@@ -88,7 +88,7 @@ namespace Bull
 
             ::Display* m_display;
 
-            DeclarePublicException(FailToOpenDisplay, "Failed to open X11 display");
+            DeclarePublicException(FailToOpenDisplay, "Failed to open X11 display", Log::Critical);
         };
     }
 }
