@@ -1,10 +1,13 @@
 #ifndef Bull_Display_hpp
 #define Bull_Display_hpp
 
+#include <map>
+
 #include <X11/Xlib.h>
 
 #include <Bull/Core/Exception.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
+#include <Bull/Core/String.hpp>
 
 namespace Bull
 {
@@ -77,6 +80,16 @@ namespace Bull
              */
             bool isSupportedExtension(const String& name) const;
 
+            /*! \brief Get an atom
+             *
+             * \param name The name of the atom
+             * \param mustExists If false and the atom does not exists, the atom is created
+             *
+             * \return Return the atom
+             *
+             */
+            Atom getAtom(const String& name, bool mustExists = false);
+
             /*! \brief Get the X11 display
              *
              * \return Return the X11 display
@@ -87,6 +100,7 @@ namespace Bull
         private:
 
             ::Display* m_display;
+            std::map<String, Atom> m_atoms;
 
             DeclarePublicException(FailToOpenDisplay, "Failed to open X11 display", Log::Critical);
         };
