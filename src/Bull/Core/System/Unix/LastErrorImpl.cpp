@@ -1,4 +1,5 @@
 #include <cerrno>
+#include <cstring>
 
 #include <Bull/Core/System/LastErrorImpl.hpp>
 
@@ -15,7 +16,9 @@ namespace Bull
          */
         unsigned int LastErrorImpl::getCode()
         {
-            return errno;
+            m_lastError = errno;
+
+            return m_lastError;
         }
 
         /*! \brief Get the message associated to the last error
@@ -25,7 +28,17 @@ namespace Bull
          */
         String LastErrorImpl::getMessage()
         {
-            return String();
+            if(m_lastError == 0)
+            {
+                m_lastError = errno;
+            }
+
+            if(m_lastError == 0)
+            {
+                return "";
+            }
+
+            return strerror(m_lastError);
         }
     }
 }
