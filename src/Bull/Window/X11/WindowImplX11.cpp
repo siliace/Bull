@@ -71,7 +71,10 @@ namespace Bull
          */
         WindowImplX11::~WindowImplX11()
         {
-            XDestroyWindow(m_display->getHandler(), m_handler);
+            if(m_handler)
+            {
+                XDestroyWindow(m_display->getHandler(), m_handler);
+            }
         }
 
         /*! \brief Start to process events to fill event queue
@@ -314,7 +317,14 @@ namespace Bull
          */
         Vector2I WindowImplX11::getPosition() const
         {
-            return m_lastPosition;
+            ::Window root, child;
+            int localX, localY, x, y;
+            unsigned int width, height, border, depth;
+
+            XGetGeometry(m_display->getHandler(), m_handler, &root, &localX, &localY, &width, &height, &border, &depth);
+            XTranslateCoordinates(m_display->getHandler(), m_handler, root, localX, localY, &x, &y, &child);
+
+            return Vector2I(x, y);
         }
 
         /*! \brief Set the size of the window
@@ -336,7 +346,11 @@ namespace Bull
          */
         Vector2UI WindowImplX11::getSize() const
         {
-            return m_lastSize;
+            XWindowAttributes attributes;
+
+            XGetWindowAttributes(m_display->getHandler(), m_handler, &attributes);
+
+            return Vector2UI(attributes.width, attributes.height);
         }
 
         /*! \brief Set the title of the window
