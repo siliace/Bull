@@ -237,6 +237,24 @@ namespace Bull
                         pushEvent(event);
                     }
                     break;
+
+                    case UnmapNotify:
+                    {
+                        if(e.xunmap.window == m_handler)
+                        {
+                            m_isMapped = false;
+                        }
+                    }
+                    break;
+
+                    case VisibilityNotify:
+                    {
+                        if(e.xvisibility.state != VisibilityFullyObscured)
+                        {
+                            m_isMapped = true;
+                        }
+                    }
+                    break;
                 }
             }
         }
@@ -407,11 +425,21 @@ namespace Bull
             {
                 XMapWindow(m_display->getHandler(), m_handler);
                 m_display->flush();
+
+                while(!m_isMapped)
+                {
+                    startProcessEvents();
+                }
             }
             else
             {
                 XUnmapWindow(m_display->getHandler(), m_handler);
                 m_display->flush();
+
+                while(!m_isMapped)
+                {
+                    startProcessEvents();
+                }
             }
         }
 
