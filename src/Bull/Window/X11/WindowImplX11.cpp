@@ -1,3 +1,5 @@
+#include <Bull/Render/Context/Glx/GlxContext.hpp>
+
 #include <Bull/Window/X11/WindowImplX11.hpp>
 
 #ifndef Button6
@@ -43,7 +45,15 @@ namespace Bull
             m_isMapped(false)
         {
             XSetWindowAttributes attribs;
-            attribs.event_mask = eventMasks;
+            XVisualInfo* vi = GlxContext::getBestVisual();
+
+            attribs.colormap         = XCreateColormap(m_display->getHandler(),
+                                                       m_display->getRootWindow(vi->screen),
+                                                       vi->visual,
+                                                       AllocNone);
+            attribs.event_mask       = eventMasks;
+            attribs.background_pixel = 0;
+            attribs.border_pixel     = 0;
 
             m_handler = XCreateWindow(m_display->getHandler(),
                                       m_display->getRootWindow(),
@@ -52,8 +62,8 @@ namespace Bull
                                       0,
                                       CopyFromParent,
                                       InputOutput,
-                                      nullptr,
-                                      CWEventMask | CWBackPixel,
+                                      vi->visual,
+                                      CWBorderPixel | CWColormap | CWEventMask | CWBackPixel,
                                       &attribs);
 
             setProtocols();
@@ -64,6 +74,7 @@ namespace Bull
             setVisible(true);
 
             m_display->flush();
+            XFree(vi);
         }
 
         /*! \brief Destructor
