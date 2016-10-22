@@ -13,7 +13,8 @@
     #include <Bull/Render/Context/Wgl/WglContext.hpp>
     typedef Bull::prv::WglContext ContextType;
 #else
-    #error Lack of implementation : GlContext
+    #include <Bull/Render/Context/Glx/GlxContext.hpp>
+    typedef Bull::prv::GlxContext ContextType;
 #endif // defined
 
 namespace Bull
@@ -44,7 +45,7 @@ namespace Bull
         void GlContext::globalInit()
         {
             Lock lock(sharedContextMutex);
-            shared = std::make_shared<ContextType>(nullptr, nullptr, VideoMode::getCurrent().bitsPerPixel);
+            shared = std::make_shared<ContextType>(nullptr, 0, VideoMode::getCurrent().bitsPerPixel);
             shared->initialize();
 
             /// Ensure two things:

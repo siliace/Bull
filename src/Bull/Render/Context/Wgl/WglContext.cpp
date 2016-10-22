@@ -43,7 +43,7 @@ namespace Bull
             m_window(window),
             m_device(0),
             m_render(0),
-            m_ownWindow(false)
+            m_ownWindow(window == 0)
         {
             createSurface();
 
