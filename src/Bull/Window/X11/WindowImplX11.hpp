@@ -3,6 +3,8 @@
 
 #include <X11/Xlib.h>
 
+#include <Bull/Core/Exception.hpp>
+
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Window/WindowImpl.hpp>
@@ -154,14 +156,18 @@ namespace Bull
 
         private:
 
+            /*! \brief Set Window manager protocols supported
+             *
+             */
+            void setProtocols();
+
             Display::Instance m_display;
+            ::Window          m_handler;
+            Vector2UI         m_lastSize;
+            Vector2I          m_lastPosition;
+            bool              m_isMapped;
 
-            ::Window m_handler;
-
-            Vector2UI m_lastSize;
-            Vector2I  m_lastPosition;
-
-            bool m_isMapped;
+            DeclarePublicException(FailToGetProtocolsAtom, "Failed to request WM_PROTOCOLS atom", Log::Critical);
         };
     }
 }

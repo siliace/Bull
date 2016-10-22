@@ -40,8 +40,6 @@ namespace Bull
         WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style) :
             m_display(Display::get()),
             m_handler(0),
-            m_lastSize(mode.width, mode.height),
-            m_lastPosition(0, 0),
             m_isMapped(false)
         {
             XSetWindowAttributes attribs;
@@ -58,12 +56,14 @@ namespace Bull
                                       CWEventMask | CWBackPixel,
                                       &attribs);
 
+            setProtocols();
+
             setTitle(title);
+            m_lastPosition = getPosition();
+            m_lastSize     = getSize();
+            setVisible(true);
 
-            XMapWindow(m_display->getHandler(), m_handler);
             m_display->flush();
-
-            m_isMapped = true;
         }
 
         /*! \brief Destructor
@@ -88,6 +88,24 @@ namespace Bull
                 XNextEvent(m_display->getHandler(), &e);
                 switch(e.type)
                 {
+                    case ClientMessage:
+                    {
+                        static Atom atomDelete = m_display->getAtom("WM_DELETE_WINDOW");
+
+                        if(e.xclient.message_type == m_display->getAtom("WM_PROTOCOLS"))
+                        {
+                            if(e.xclient.data.l[0] == static_cast<long>(atomDelete))
+                            {
+                                Window::Event e;
+
+                                e.type = Window::Event::Closed;
+
+                                pushEvent(e);
+                            }
+                        }
+                    }
+                    break;
+
                     case KeyPress:
                     {
                         Window::Event event;
@@ -436,7 +454,7 @@ namespace Bull
                 XUnmapWindow(m_display->getHandler(), m_handler);
                 m_display->flush();
 
-                while(!m_isMapped)
+                while(m_isMapped)
                 {
                     startProcessEvents();
                 }
@@ -451,6 +469,22 @@ namespace Bull
         WindowHandler WindowImplX11::getSystemHandler() const
         {
             return m_handler;
+        }
+
+        /*! \brief Set Window manager protocols supported
+         *
+         */
+        void WindowImplX11::setProtocols()
+        {
+            Atom wmProtocols = m_display->getAtom("WM_PROTOCOLS");
+            Atom wmDeleteWindow = m_display->getAtom("WM_DELETE_WINDOW");
+
+            if(!wmProtocols)
+            {
+                ThrowException(FailToGetProtocolsAtom);
+            }
+
+            XSetWMProtocols(m_display->getHandler(), m_handler, &wmDeleteWindow, 1);
         }
     }
 }

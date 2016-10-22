@@ -99,6 +99,30 @@ namespace Bull
             return XQueryExtension(m_display, name, &version, &version, &version);
         }
 
+        /*! \brief Get an atom
+         *
+         * \param name The name of the atom
+         * \param mustExists If false and the atom does not exists, the atom is created
+         *
+         * \return Return the atom
+         *
+         */
+        Atom Display::getAtom(const String& name, bool mustExists)
+        {
+            std::map<String, Atom>::const_iterator iterator = m_atoms.find(name);
+
+            if(iterator != m_atoms.end())
+            {
+                return iterator->second;
+            }
+
+            Atom atom = XInternAtom(getHandler(), name, mustExists ? True : False);
+
+            m_atoms[name] = atom;
+
+            return atom;
+        }
+
         /*! \brief Get the X11 display
          *
          * \return Return the X11 display
