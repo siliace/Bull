@@ -30,6 +30,11 @@ namespace Bull
 
         public:
 
+            /*! \brief Default constructor
+             *
+             */
+            GlxContext() = delete;
+
             /*! \brief Constructor
              *
              * \param shared The shared context

@@ -58,6 +58,13 @@ namespace Bull
          */
         bool setActive(bool active = true);
 
+        /*! \brief Get the ContextSettings of the context
+         *
+         * \return Return the ContextSettings
+         *
+         */
+        const ContextSettings& getSettings() const;
+
     private:
 
         std::unique_ptr<prv::GlContext> m_impl;

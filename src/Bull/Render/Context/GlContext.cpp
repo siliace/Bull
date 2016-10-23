@@ -176,6 +176,27 @@ namespace Bull
             }
         }
 
+        /*! \brief Get the ContextSettings of the context
+         *
+         * \return Return the ContextSettings
+         *
+         */
+        const ContextSettings& GlContext::getSettings() const
+        {
+            return m_settings;
+        }
+
+        /*! \brief Constructor
+         *
+         * \param settings Settings to use to create the context
+         *
+         */
+        GlContext::GlContext(const ContextSettings& settings) :
+            m_settings(settings)
+        {
+            /// Nothing
+        }
+
         /*! \brief Enable and perform initializations
          *
          */

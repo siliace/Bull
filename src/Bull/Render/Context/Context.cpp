@@ -62,4 +62,19 @@ namespace Bull
 
         return result;
     }
+
+    /*! \brief Get the ContextSettings of the context
+     *
+     * \return Return the ContextSettings
+     *
+     */
+    const ContextSettings& Context::getSettings() const
+    {
+        if(m_impl)
+        {
+            return m_impl->getSettings();
+        }
+
+        return ContextSettings();
+    }
 }

@@ -85,10 +85,11 @@ namespace Bull
          *
          */
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings) :
+            GlContext(settings),
             m_display(Display::get()),
             m_render(0)
         {
-            createSurface(bitsPerPixel, settings);
+            createSurface(bitsPerPixel, m_settings);
 
             if(m_window)
             {
@@ -105,6 +106,7 @@ namespace Bull
          *
          */
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
+            GlContext(settings),
             m_display(Display::get()),
             m_render(0)
         {
