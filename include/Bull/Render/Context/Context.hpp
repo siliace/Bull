@@ -5,6 +5,7 @@
 #include <Bull/Core/Thread/LocalPtr.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
+#include <Bull/Render/Context/ContextSettings.hpp>
 
 namespace Bull
 {
@@ -34,6 +35,14 @@ namespace Bull
          *
          */
         Context();
+
+        /*! \brief Constructor
+         *
+         * \param bitsPerPixel Number of bits per pixel to use
+         * \param settings     Settings to use to create the context
+         *
+         */
+        Context(unsigned int bitsPerPixel, const ContextSettings& settings);
 
         /*! \brief Destructor
          *

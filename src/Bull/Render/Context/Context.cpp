@@ -24,6 +24,18 @@ namespace Bull
         setActive();
     }
 
+    /*! \brief Constructor
+     *
+     * \param bitsPerPixel Number of bits per pixel to use
+     * \param settings     Settings to use to create the context
+     *
+     */
+    Context::Context(unsigned int bitsPerPixel, const ContextSettings& settings) :
+        m_impl(prv::GlContext::createInstance(bitsPerPixel, settings))
+    {
+        setActive();
+    }
+
     /*! \brief Destructor
      *
      */

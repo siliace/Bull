@@ -89,6 +89,22 @@ namespace Bull
 
         /*! \brief Create an OS specific instance of GlContext
          *
+         * \param bitsPerPixel Number of bits per pixel to use
+         * \param settings     Settings to use to create the context
+         *
+         * \return Return the created context
+         *
+         */
+        GlContext* GlContext::createInstance(unsigned int bitsPerPixel, const ContextSettings& settings)
+        {
+            ContextType* context = new ContextType(shared, bitsPerPixel, settings);
+            context->initialize();
+
+            return context;
+        }
+
+        /*! \brief Create an OS specific instance of GlContext
+         *
          * \param window The window to bind the created context
          * \param bitsPerPixel The number of bits to use per pixel
          * \param settings Parameters to create the OpenGL context

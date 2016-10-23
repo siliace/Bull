@@ -40,6 +40,15 @@ namespace Bull
             /*! \brief Constructor
              *
              * \param shared The shared context
+             * \param bitsPerPixel The number of bits to use per pixel
+             * \param settings Parameters to create the OpenGL context
+             *
+             */
+            GlxContext(const std::shared_ptr<GlxContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings);
+
+            /*! \brief Constructor
+             *
+             * \param shared The shared context
              * \param window The window to bind the created context
              * \param bitsPerPixel The number of bits to use per pixel
              * \param settings Parameters to create the OpenGL context
@@ -85,12 +94,10 @@ namespace Bull
 
             /*! \brief Create the render context
              *
-             * \param shared       The shared context
-             * \param bitsPerPixel The number of bits per pixel to use
-             * \param settings     Settings to use to create the context
+             * \param shared The shared context
              *
              */
-            void createContext(const std::shared_ptr<GlxContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings);
+            void createContext(const std::shared_ptr<GlxContext>& shared);
 
             Display::Instance m_display;
             WindowHandler     m_window;
