@@ -1,5 +1,7 @@
 #include <Bull/Core/Thread/Thread.hpp>
 
+#include <Bull/Render/Context/GlContext.hpp>
+
 #include <Bull/Window/Window.hpp>
 #include <Bull/Window/WindowImpl.hpp>
 
@@ -69,6 +71,7 @@ namespace Bull
         }
 
         m_impl.reset(prv::WindowImpl::createInstance(mode, title, style));
+        m_context.reset(prv::GlContext::createInstance(getSystemHandler(), mode.bitsPerPixel));
 
         if(style == Style::Fullscreen)
         {
@@ -137,6 +140,34 @@ namespace Bull
         }
 
         return e;
+    }
+
+    /*! \brief Activate or deactivate the context
+     *
+     * \param active True to activate, false to deactivate the context
+     *
+     * \return Return true if the context's status changed successfully, false otherwise
+     *
+     */
+    bool Window::setActive(bool active)
+    {
+        if(m_context)
+        {
+            return m_context->setActive(active);
+        }
+
+        return false;
+    }
+
+    /*! \brief Display what has been rendered so far
+     *
+     */
+    void Window::display()
+    {
+        if(setActive())
+        {
+            m_context->display();
+        }
     }
 
     /*! \brief Enable or disable the capture of the cursor inside the window

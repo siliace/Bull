@@ -14,17 +14,24 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
+#include <Bull/Render/Context/ContextResource.hpp>
+
 #include <Bull/Window/VideoMode.hpp>
 #include <Bull/Window/WindowHandler.hpp>
+
+#ifdef None
+    #undef None
+#endif
 
 namespace Bull
 {
     namespace prv
     {
         class WindowImpl;
+        class GlContext;
     }
 
-    class BULL_API Window : public NonCopyable
+    class BULL_API Window : public ContextResource, public NonCopyable
     {
     public:
 
@@ -218,6 +225,20 @@ namespace Bull
          */
         Event nextEvent();
 
+        /*! \brief Activate or deactivate the context
+         *
+         * \param active True to activate, false to deactivate the context
+         *
+         * \return Return true if the context's status changed successfully, false otherwise
+         *
+         */
+        bool setActive(bool active = true);
+
+        /*! \brief Display what has been rendered so far
+         *
+         */
+        void display();
+
         /*! \brief Enable or disable the capture of the cursor inside the window
          *
          * \param enable The state of the capture
@@ -342,15 +363,6 @@ namespace Bull
          */
         void setVisible(bool visible = true);
 
-        /*! \brief Enable or disable the context
-         *
-         * \param True to enable, false to disable
-         *
-         * \return Return true if the operation was successfully, false otherwise
-         *
-         */
-        bool setActive(bool active = true);
-
         /*! \brief Check if a window is in fullscreen
          *
          * \return Return true if the window is in fullscreen, false otherwise
@@ -377,7 +389,8 @@ namespace Bull
 
     private:
 
-        std::unique_ptr<prv::WindowImpl> m_impl;   /*!< The OS specific implementation of the window */
+        std::unique_ptr<prv::WindowImpl> m_impl;    /*!< The OS specific implementation of the window */
+        std::unique_ptr<prv::GlContext>  m_context; /*!< The OS specific implementation of the OpenGL context */
     };
 }
 
