@@ -45,7 +45,7 @@ namespace Bull
         void GlContext::globalInit()
         {
             Lock lock(sharedContextMutex);
-            shared = std::make_shared<ContextType>(nullptr, 0, VideoMode::getCurrent().bitsPerPixel);
+            shared = std::make_shared<ContextType>(nullptr);
             shared->initialize();
 
             /// Ensure two things:
@@ -53,6 +53,15 @@ namespace Bull
             /// + The internal context is enable
             shared->setActive(false);
         }
+
+         /*! \brief Perform internal cleanup
+          *
+          */
+         void globalCleanup()
+         {
+             Lock lock(sharedContextMutex);
+             shared.reset();
+         }
 
         /*! \brief Ensure there is an active OpenGL context in this thread
          *
@@ -72,7 +81,7 @@ namespace Bull
          */
          GlContext* GlContext::createInstance()
          {
-            ContextType* context = new ContextType(shared, 0, VideoMode::getCurrent().bitsPerPixel);
+            ContextType* context = new ContextType(shared);
             context->initialize();
 
             return context;
@@ -82,13 +91,14 @@ namespace Bull
          *
          * \param window The window to bind the created context
          * \param bitsPerPixel The number of bits to use per pixel
+         * \param settings Parameters to create the OpenGL context
          *
          * \return Return the created context
          *
          */
-        GlContext* GlContext::createInstance(WindowHandler window, unsigned int bitsPerPixel)
+        GlContext* GlContext::createInstance(WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings)
         {
-            ContextType* context = new ContextType(shared, window, bitsPerPixel);
+            ContextType* context = new ContextType(shared, window, bitsPerPixel, settings);
             context->initialize();
 
             return context;

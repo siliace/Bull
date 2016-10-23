@@ -4,6 +4,8 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/String.hpp>
 
+#include <Bull/Render/Context/ContextSettings.hpp>
+
 #include <Bull/Window/WindowHandler.hpp>
 
 namespace Bull
@@ -24,7 +26,7 @@ namespace Bull
              */
             static void globalCleanup();
 
-            /*! \brief Ensure there is an active OpenGL context in this thead
+            /*! \brief Ensure there is an active OpenGL context in this thread
              *
              */
             static void ensureContext();
@@ -40,11 +42,12 @@ namespace Bull
              *
              * \param window The window to bind the created context
              * \param bitsPerPixel The number of bits to use per pixel
+             * \param settings Parameters to create the OpenGL context
              *
              * \return Return the created context
              *
              */
-            static GlContext* createInstance(WindowHandler window, unsigned int bitsPerPixel);
+            static GlContext* createInstance(WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Get an OpenGL function
              *

@@ -37,19 +37,20 @@ namespace Bull
          * \param mode The VideoMode to use to create the window
          * \param title The title of the window
          * \param style The style to use to create the window
+         * \param settings Parameters to create the OpenGL context
          *
          */
-        WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style) :
+        WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings) :
             m_display(Display::get()),
             m_handler(0),
             m_isMapped(false)
         {
             XSetWindowAttributes attribs;
-            XVisualInfo* vi = GlxContext::getBestVisual();
+            XVisualInfo vi = GlxContext::getBestVisual(mode.bitsPerPixel, settings);
 
             attribs.colormap         = XCreateColormap(m_display->getHandler(),
-                                                       m_display->getRootWindow(vi->screen),
-                                                       vi->visual,
+                                                       m_display->getRootWindow(vi.screen),
+                                                       vi.visual,
                                                        AllocNone);
             attribs.event_mask       = eventMasks;
             attribs.background_pixel = 0;
@@ -62,7 +63,7 @@ namespace Bull
                                       0,
                                       CopyFromParent,
                                       InputOutput,
-                                      vi->visual,
+                                      vi.visual,
                                       CWBorderPixel | CWColormap | CWEventMask | CWBackPixel,
                                       &attribs);
 
@@ -74,7 +75,6 @@ namespace Bull
             setVisible(true);
 
             m_display->flush();
-            XFree(vi);
         }
 
         /*! \brief Destructor
