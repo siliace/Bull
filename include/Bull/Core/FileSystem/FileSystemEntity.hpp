@@ -7,7 +7,7 @@
 
 namespace Bull
 {
-    struct FileSystemEntity
+    struct BULL_API FileSystemEntity
     {
         String name;
         bool   isFile;

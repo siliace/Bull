@@ -1,9 +1,11 @@
 #ifndef Bull_ContextResource_hpp
 #define Bull_ContextResource_hpp
 
+#include <Bull/Core/System/Export.hpp>
+
 namespace Bull
 {
-    class ContextResource
+    class BULL_API ContextResource
     {
     private:
 

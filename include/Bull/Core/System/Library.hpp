@@ -14,7 +14,7 @@ namespace Bull
         class LibraryImpl;
     }
 
-    class Library : public NonCopyable
+    class BULL_API Library : public NonCopyable
     {
     public:
 

@@ -5,7 +5,7 @@
 
 namespace Bull
 {
-    struct ContextSettings
+    struct BULL_API ContextSettings
     {
         Uint8 depths  = 24;
         Uint8 stencil = 8;

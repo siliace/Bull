@@ -3,6 +3,7 @@
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/LocalPtr.hpp>
+#include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Context/ContextSettings.hpp>
@@ -14,7 +15,7 @@ namespace Bull
         class GlContext;
     }
 
-    class Context : public ContextResource, public NonCopyable
+    class BULL_API Context : public ContextResource, public NonCopyable
     {
     public:
 

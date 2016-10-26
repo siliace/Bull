@@ -2,6 +2,7 @@
 #define Bull_Lock_hpp
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/Thread/Mutex.hpp>
 
 namespace Bull
