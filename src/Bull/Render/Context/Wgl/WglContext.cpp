@@ -1,8 +1,7 @@
-#include <iostream>
-
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
+#include <Bull/Render/Context/Wgl/WglCreateContextARB.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
 
@@ -34,6 +33,16 @@ namespace Bull
             }
 
             return reinterpret_cast<void*>(GetProcAddress(module, function));
+        }
+
+        /*! \brief Set the list of extensions to load
+         *
+         * \param loader The instance of the extension loader to use
+         *
+         */
+        void WglContext::requireExtensions(const ExtensionsLoader::Instance& loader)
+        {
+            loader->require(wglCreateARBExtension);
         }
 
         /*! \brief Constructor
@@ -117,6 +126,11 @@ namespace Bull
             }
         }
 
+        SurfaceHandler WglContext::getSurfaceHandler() const
+        {
+            return m_device;
+        }
+
         /*! \brief Display what has been rendered so far
          *
          */
@@ -198,12 +212,22 @@ namespace Bull
 
         void WglContext::createContext(const std::shared_ptr<WglContext>& shared)
         {
-            /// TODO: check if createcontextarb is supported
-            if(false)
-            {
+            HGLRC sharedHandler = shared ? shared->m_render : 0;
 
+            if(ExtensionsLoader::get()->isLoaded(wglCreateARBExtension))
+            {
+                static const int attribs[] =
+                {
+                    WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
+                    WGL_CONTEXT_MINOR_VERSION_ARB, 1,
+                    WGL_CONTEXT_FLAGS_ARB,         0,
+                    0
+                };
+
+                m_render = wglCreateContextAttribsARB(m_device, sharedHandler, attribs);
             }
-            else
+
+            if(m_render == 0)
             {
                 m_render = wglCreateContext(m_device);
 
@@ -212,7 +236,7 @@ namespace Bull
                     static Mutex mutex;
                     Lock lock(mutex);
 
-                    if(!wglShareLists(shared->m_render, m_render))
+                    if(!wglShareLists(sharedHandler, m_render))
                     {
                         ThrowException(FailToShareContext);
                     }

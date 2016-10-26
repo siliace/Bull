@@ -5,6 +5,7 @@
 #include <Bull/Core/String.hpp>
 
 #include <Bull/Render/Context/ContextSettings.hpp>
+#include <Bull/Render/Context/SurfaceHandler.hpp>
 
 #include <Bull/Window/WindowHandler.hpp>
 
@@ -88,6 +89,8 @@ namespace Bull
              *
              */
             virtual void display() = 0;
+
+            virtual SurfaceHandler getSurfaceHandler() const = 0;
 
             /*! \brief Get the ContextSettings of the context
              *

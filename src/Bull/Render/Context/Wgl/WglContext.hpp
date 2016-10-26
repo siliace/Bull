@@ -7,6 +7,7 @@
 
 #include <Bull/Core/Exception.hpp>
 
+#include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
 
 namespace Bull
@@ -25,6 +26,13 @@ namespace Bull
              *
              */
             static void* getFunction(const String& function);
+
+            /*! \brief Set the list of extensions to load
+             *
+             * \param loader The instance of the extension loader to use
+             *
+             */
+            static void requireExtensions(const ExtensionsLoader::Instance& loader = ExtensionsLoader::get());
 
         public:
 
@@ -63,6 +71,8 @@ namespace Bull
              *
              */
             void display() override;
+
+            SurfaceHandler getSurfaceHandler() const override;
 
         protected:
 

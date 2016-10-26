@@ -6,6 +6,7 @@
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
+#include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
@@ -53,8 +54,12 @@ namespace Bull
         void GlContext::globalInit()
         {
             Lock lock(sharedContextMutex);
+            ExtensionsLoader::Instance loader = ExtensionsLoader::get();
             shared = std::make_shared<ContextType>(nullptr);
             shared->initialize();
+
+            ContextType::requireExtensions(loader);
+            loader->load(shared->getSurfaceHandler());
 
             /// Ensure two things:
             /// + The shared context is disabled

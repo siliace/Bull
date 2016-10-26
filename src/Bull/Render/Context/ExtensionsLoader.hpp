@@ -1,0 +1,83 @@
+#ifndef Bull_ExtensionsLoader_hpp
+#define Bull_ExtensionsLoader_hpp
+
+#include <vector>
+
+#include <Bull/Core/Functor.hpp>
+#include <Bull/Core/Pattern/Singleton.hpp>
+#include <Bull/Core/String.hpp>
+
+#include <Bull/Render/Context/SurfaceHandler.hpp>
+
+namespace Bull
+{
+    namespace prv
+    {
+        class ExtensionsLoader : public Singleton<ExtensionsLoader>
+        {
+        public:
+
+            struct Extension
+            {
+                /*! \brief Constructor
+                 *
+                 * \param name The name of the extension
+                 * \param loader The function to call to load the extension
+                 *
+                 */
+                Extension(const String& name, Functor<bool> loader) :
+                    name(name),
+                    loader(loader)
+                {
+                    /// Nothing
+                }
+
+                String        name;
+                Functor<bool> loader;
+                bool          loaded = false;
+            };
+
+        public:
+
+            /*! \brief Add an extension to load
+             *
+             * \param extension The extension to load
+             *
+             */
+            void require(const Extension& extension);
+
+            /*! \brief Load required extensions
+             *
+             * \param handler The surface to use to check whether an extension is supported
+             *
+             */
+            void load(SurfaceHandler handler);
+
+            /*! \brief Check whether an OpenGL extension is loaded
+             *
+             * \param extension The extension
+             *
+             * \return Return true if loaded, false otherwise
+             *
+             */
+            bool isLoaded(const Extension& extension) const;
+
+            /*! \brief Check whether an OpenGL extension is supported
+             *
+             * \param name The name of the extension
+             *
+             * \return Return true if supported, false otherwise
+             *
+             */
+            bool isSupported(const String& name) const;
+
+        private:
+
+            std::vector<Extension> m_extensions;
+            std::vector<String>    m_allExtensions;
+            bool m_loaded = false;
+        };
+    }
+}
+
+#endif // Bull_ExtensionsLoader_hpp
