@@ -23,11 +23,11 @@ namespace Bull
          * \return Return the context is available, nullptr otherwise
          *
          */
-        static LocalPtr<Context>& getActive();
+        static const Context* getActive();
 
     private:
 
-        static LocalPtr<Context> s_active;
+        static thread_local Context* s_active;
 
     public:
 

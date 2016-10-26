@@ -1,4 +1,5 @@
 #include <memory>
+#include <set>
 
 #include <Bull/Core/System/Config.hpp>
 #include <Bull/Core/Thread/LocalPtr.hpp>
@@ -15,7 +16,7 @@
 #else
     #include <Bull/Render/Context/Glx/GlxContext.hpp>
     typedef Bull::prv::GlxContext ContextType;
-#endif // defined
+#endif
 
 namespace Bull
 {
@@ -23,16 +24,23 @@ namespace Bull
     {
         namespace
         {
-            LocalPtr<Context> internal(nullptr);
+            thread_local std::shared_ptr<Context> internal(nullptr);
+            std::set<std::shared_ptr<Context>> internals;
+            Mutex internalsMutex;
+
             LocalPtr<GlContext> current(nullptr);
+
             std::shared_ptr<ContextType> shared;
             Mutex sharedContextMutex;
 
-            LocalPtr<Context>& getInternalContext()
+            std::shared_ptr<Context> getInternalContext()
             {
                 if(internal == nullptr)
                 {
-                    internal = new Context();
+                    internal = std::make_shared<Context>();
+
+                    Lock lock(internalsMutex);
+                    internals.insert(internal);
                 }
 
                 return internal;
@@ -57,9 +65,12 @@ namespace Bull
          /*! \brief Perform internal cleanup
           *
           */
-         void globalCleanup()
+         void GlContext::globalCleanup()
          {
-             Lock lock(sharedContextMutex);
+             Lock lockInternals(internalsMutex);
+             internals.clear();
+
+             Lock lockShared(sharedContextMutex);
              shared.reset();
          }
 

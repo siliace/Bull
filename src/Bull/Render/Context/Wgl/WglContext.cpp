@@ -1,6 +1,10 @@
+#include <iostream>
+
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
+
+#include <Bull/Window/VideoMode.hpp>
 
 namespace Bull
 {
@@ -35,21 +39,56 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param shared The shared context
-         * \param window The window to bind the created context
-         * \param bitsPerPixel The number of bits to use per pixel
          *
          */
-        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, unsigned int bitsPerPixel) :
-            m_window(window),
-            m_device(0),
-            m_render(0),
-            m_ownWindow(window == 0)
+        WglContext::WglContext(const std::shared_ptr<WglContext>& shared) :
+            WglContext(shared, VideoMode::getCurrent().bitsPerPixel, ContextSettings())
         {
-            createSurface();
+            /// Nothing
+        }
 
-            setPixelFormat(bitsPerPixel);
+        /*! \brief Constructor
+         *
+         * \param shared The shared context
+         * \param bitsPerPixel The number of bits to use per pixel
+         * \param settings Parameters to create the OpenGL context
+         *
+         */
+        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings) :
+            GlContext(settings),
+            m_device(0),
+            m_render(0)
+        {
+            createSurface(1, 1);
 
-            createContext(shared);
+            if(m_device)
+            {
+                setPixelFormat(bitsPerPixel, m_settings);
+
+                createContext(shared);
+            }
+        }
+
+        /*! \brief Constructor
+         *
+         * \param shared The shared context
+         * \param window The window to bind the created context
+         * \param bitsPerPixel The number of bits to use per pixel
+         * \param settings Settings to use to create the OpenGL context
+         *
+         */
+        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
+            m_device(0),
+            m_render(0)
+        {
+            createSurface(window);
+
+            if(m_device)
+            {
+                setPixelFormat(bitsPerPixel, m_settings);
+
+                createContext(shared);
+            }
         }
 
         /*! \brief Destructor
@@ -99,22 +138,16 @@ namespace Bull
             return wglMakeCurrent(m_device, m_render);
         }
 
-        void WglContext::createSurface()
+        void WglContext::createSurface(WindowHandler window)
         {
-            if(m_window == 0)
-            {
-                createInternalWindow(1, 1);
-            }
+            m_window = window;
 
             m_device = GetDC(m_window);
 
-            if(m_device == 0)
-            {
-                ThrowException(FailToGetDeviceContext);
-            }
+            m_ownWindow = false;
         }
 
-        void WglContext::createInternalWindow(unsigned int width, unsigned int height)
+        void WglContext::createSurface(unsigned int width, unsigned int height)
         {
             m_window = CreateWindow("STATIC", nullptr,
                                      WS_DISABLED | WS_POPUP,
@@ -129,25 +162,29 @@ namespace Bull
             {
                 ThrowException(FailToCreateSurface);
             }
+
+            m_device = GetDC(m_window);
+
+            m_ownWindow = true;
         }
 
-        void WglContext::setPixelFormat(unsigned int bitsPerPixel)
+        void WglContext::setPixelFormat(unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             PIXELFORMATDESCRIPTOR pfd =
             {
                 sizeof(PIXELFORMATDESCRIPTOR),
                 1,
-                PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    //Flags
-                PFD_TYPE_RGBA,            //The kind of framebuffer. RGBA or palette.
-                bitsPerPixel,                        //Colordepth of the framebuffer.
+                PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
+                PFD_TYPE_RGBA,
+                bitsPerPixel,
                 0, 0, 0, 0, 0, 0,
                 0,
                 0,
                 0,
                 0, 0, 0, 0,
-                24,                        //Number of bits for the depthbuffer
-                8,                        //Number of bits for the stencilbuffer
-                0,                        //Number of Aux buffers in the framebuffer.
+                settings.depths,
+                settings.stencil,
+                0,
                 PFD_MAIN_PLANE,
                 0,
                 0, 0, 0

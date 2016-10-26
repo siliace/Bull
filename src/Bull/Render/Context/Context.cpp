@@ -3,14 +3,14 @@
 
 namespace Bull
 {
-    LocalPtr<Context> Context::s_active;
+    thread_local Context* Context::s_active;
 
     /*! \brief Get the active context in this thread
      *
      * \return Return the context is available, nullptr otherwise
      *
      */
-    LocalPtr<Context>& Context::getActive()
+    const Context* Context::getActive()
     {
         return s_active;
     }
@@ -57,7 +57,7 @@ namespace Bull
 
         if(result)
         {
-            s_active = result ? this : nullptr;
+            s_active = active ? this : nullptr;
         }
 
         return result;

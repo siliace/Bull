@@ -31,11 +31,28 @@ namespace Bull
             /*! \brief Constructor
              *
              * \param shared The shared context
-             * \param window The window to bind the created context
-             * \param bitsPerPixel The number of bits to use per pixel
              *
              */
-            WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, unsigned int bitsPerPixel);
+            WglContext(const std::shared_ptr<WglContext>& shared);
+
+            /*! \brief Constructor
+             *
+             * \param shared The shared context
+             * \param bitsPerPixel The number of bits to use per pixel
+             * \param settings Parameters to create the OpenGL context
+             *
+             */
+            WglContext(const std::shared_ptr<WglContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings);
+
+            /*! \brief Constructor
+             *
+             * \param shared The shared context
+             * \param window The window to bind the created context
+             * \param bitsPerPixel The number of bits to use per pixel
+             * \param settings Settings to use to create the OpenGL context
+             *
+             */
+            WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Destructor
              *
@@ -58,11 +75,11 @@ namespace Bull
 
         private:
 
-            void createSurface();
+            void createSurface(WindowHandler window);
 
-            void createInternalWindow(unsigned int width, unsigned int height);
+            void createSurface(unsigned int width, unsigned int height);
 
-            void setPixelFormat(unsigned int bitsPerPixel);
+            void setPixelFormat(unsigned int bitsPerPixel, const ContextSettings& settings);
 
             void createContext(const std::shared_ptr<WglContext>& shared);
 
