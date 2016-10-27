@@ -23,9 +23,13 @@ namespace Bull
     {
         bool loadCreateContextARB();
 
-        extern HGLRC (WINAPI* wglCreateContextAttribsARB)(HDC hDC, HGLRC hShareContext, const int *attribList);
+        HGLRC (WINAPI* wglCreateContextAttribsARB)(HDC hDC, HGLRC hShareContext, const int *attribList) = nullptr;
 
-        ExtensionsLoader::Extension wglCreateARBExtension("WGL_ARB_create_context", loadCreateContextARB);
+        ExtensionsLoader::Extension wglCreateARBExtension("WGL_ARB_create_context", []{
+                                                                wglCreateContextAttribsARB = reinterpret_cast<HGLRC (WINAPI*)(HDC, HGLRC, const int*)>(GlContext::getFunction("wglCreateContextAttribsARB"));
+
+                                                                return wglCreateContextAttribsARB != nullptr;
+                                                          });
     }
 }
 
