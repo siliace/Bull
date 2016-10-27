@@ -218,8 +218,8 @@ namespace Bull
             {
                 static const int attribs[] =
                 {
-                    WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
-                    WGL_CONTEXT_MINOR_VERSION_ARB, 1,
+                    WGL_CONTEXT_MAJOR_VERSION_ARB, m_settings.major,
+                    WGL_CONTEXT_MINOR_VERSION_ARB, m_settings.minor,
                     WGL_CONTEXT_FLAGS_ARB,         0,
                     0
                 };

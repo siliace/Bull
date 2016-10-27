@@ -7,6 +7,8 @@ namespace Bull
 {
     struct BULL_API ContextSettings
     {
+        unsigned int major = 4;
+        unsigned int minor = 5;
         Uint8 depths  = 24;
         Uint8 stencil = 8;
     };
