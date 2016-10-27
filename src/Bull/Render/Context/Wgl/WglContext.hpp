@@ -34,6 +34,19 @@ namespace Bull
              */
             static void requireExtensions(const ExtensionsLoader::Instance& loader = ExtensionsLoader::get());
 
+        private:
+
+            /*! \brief Get the best pixel format for a device handler
+             *
+             * \param device       The device handler
+             * \param bitsPerPixel The number of bits per pixel to use to create colors
+             * \param settings     Settings to use to create the OpenGL context
+             *
+             * \return Return the pixel format
+             *
+             */
+            static int getBestPixelFormat(HDC device, unsigned int bitsPerPixel, const ContextSettings& settings);
+
         public:
 
             /*! \brief Constructor
@@ -87,9 +100,9 @@ namespace Bull
 
             void createSurface(WindowHandler window);
 
-            void createSurface(unsigned int width, unsigned int height);
+            void createSurface(unsigned int width, unsigned int height, unsigned int bitsPerPixel);
 
-            void setPixelFormat(unsigned int bitsPerPixel, const ContextSettings& settings);
+            void setPixelFormat(unsigned int bitsPerPixel);
 
             void createContext(const std::shared_ptr<WglContext>& shared);
 
@@ -97,13 +110,6 @@ namespace Bull
             HDC   m_device;
             HGLRC m_render;
             bool  m_ownWindow;
-
-            DeclarePublicException(FailToCreateSurface,       "An error occurred during the creation of the internal surface", Log::Critical);
-            DeclarePublicException(FailToGetDeviceContext,    "Impossible to get a valid device context",                      Log::Critical);
-            DeclarePublicException(FailToSetPixelFormat,      "Impossible to set the pixel format according to settings",      Log::Critical);
-            DeclarePublicException(FailToCreateRenderContext, "An error occurred during the creation of the render context",   Log::Critical);
-            DeclarePublicException(FailToShareContext,        "Impossible to share the context with others",                   Log::Critical);
-            DeclarePublicException(FailToDisableShared,       "Impossible to disable the shared context",                      Log::Critical);
         };
     }
 }

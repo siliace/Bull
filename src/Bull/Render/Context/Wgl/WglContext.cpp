@@ -45,6 +45,32 @@ namespace Bull
             loader->require(wglCreateARBExtension);
         }
 
+        /*! \brief Get the best pixel format for a device handler
+         *
+         * \param device       The device handler
+         * \param bitsPerPixel The number of bits per pixel to use to create colors
+         * \param settings     Settings to use to create the OpenGL context
+         *
+         * \return Return the pixel format
+         *
+         */
+        int WglContext::getBestPixelFormat(HDC device, unsigned int bitsPerPixel, const ContextSettings& settings)
+        {
+            PIXELFORMATDESCRIPTOR descriptor;
+            ZeroMemory(&descriptor, sizeof(descriptor));
+            descriptor.nSize        = sizeof(descriptor);
+            descriptor.nVersion     = 1;
+            descriptor.iLayerType   = PFD_MAIN_PLANE;
+            descriptor.dwFlags      = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+            descriptor.iPixelType   = PFD_TYPE_RGBA;
+            descriptor.cColorBits   = static_cast<BYTE>(bitsPerPixel);
+            descriptor.cDepthBits   = static_cast<BYTE>(settings.depths);
+            descriptor.cStencilBits = static_cast<BYTE>(settings.stencil);
+            descriptor.cAlphaBits   = bitsPerPixel == 32 ? 8 : 0;
+
+            return ChoosePixelFormat(device, &descriptor);
+        }
+
         /*! \brief Constructor
          *
          * \param shared The shared context
@@ -66,13 +92,14 @@ namespace Bull
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
             m_device(0),
-            m_render(0)
+            m_render(0),
+            m_ownWindow(false)
         {
-            createSurface(1, 1);
+            createSurface(1, 1, bitsPerPixel);
 
             if(m_device)
             {
-                setPixelFormat(bitsPerPixel, m_settings);
+                setPixelFormat(bitsPerPixel);
 
                 createContext(shared);
             }
@@ -88,13 +115,14 @@ namespace Bull
          */
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
             m_device(0),
-            m_render(0)
+            m_render(0),
+            m_ownWindow(false)
         {
             createSurface(window);
 
             if(m_device)
             {
-                setPixelFormat(bitsPerPixel, m_settings);
+                setPixelFormat(bitsPerPixel);
 
                 createContext(shared);
             }
@@ -157,11 +185,9 @@ namespace Bull
             m_window = window;
 
             m_device = GetDC(m_window);
-
-            m_ownWindow = false;
         }
 
-        void WglContext::createSurface(unsigned int width, unsigned int height)
+        void WglContext::createSurface(unsigned int width, unsigned int height, unsigned int bitsPerPixel)
         {
             m_window = CreateWindow("STATIC", nullptr,
                                      WS_DISABLED | WS_POPUP,
@@ -172,42 +198,21 @@ namespace Bull
                                      GetModuleHandle(nullptr),
                                      nullptr);
 
-            if(m_window == INVALID_HANDLE_VALUE)
-            {
-                ThrowException(FailToCreateSurface);
-            }
-
             m_device = GetDC(m_window);
 
             m_ownWindow = true;
         }
 
-        void WglContext::setPixelFormat(unsigned int bitsPerPixel, const ContextSettings& settings)
+        void WglContext::setPixelFormat(unsigned int bitsPerPixel)
         {
-            PIXELFORMATDESCRIPTOR pfd =
-            {
-                sizeof(PIXELFORMATDESCRIPTOR),
-                1,
-                PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
-                PFD_TYPE_RGBA,
-                bitsPerPixel,
-                0, 0, 0, 0, 0, 0,
-                0,
-                0,
-                0,
-                0, 0, 0, 0,
-                settings.depths,
-                settings.stencil,
-                0,
-                PFD_MAIN_PLANE,
-                0,
-                0, 0, 0
-            };
+            PIXELFORMATDESCRIPTOR descriptor;
+            int bestFormat = getBestPixelFormat(m_device, bitsPerPixel, m_settings);
 
-            if(!SetPixelFormat(m_device, ChoosePixelFormat(m_device, &pfd), &pfd))
-            {
-                ThrowException(FailToSetPixelFormat);
-            }
+            descriptor.nSize    = sizeof(PIXELFORMATDESCRIPTOR);
+            descriptor.nVersion = 1;
+            DescribePixelFormat(m_device, bestFormat, sizeof(PIXELFORMATDESCRIPTOR), &descriptor);
+
+            SetPixelFormat(m_device, bestFormat, &descriptor);
         }
 
         void WglContext::createContext(const std::shared_ptr<WglContext>& shared)
@@ -236,16 +241,8 @@ namespace Bull
                     static Mutex mutex;
                     Lock lock(mutex);
 
-                    if(!wglShareLists(sharedHandler, m_render))
-                    {
-                        ThrowException(FailToShareContext);
-                    }
+                    wglShareLists(sharedHandler, m_render);
                 }
-            }
-
-            if(m_render == 0)
-            {
-                ThrowException(FailToCreateRenderContext);
             }
         }
     }
