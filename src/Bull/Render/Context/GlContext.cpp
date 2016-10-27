@@ -1,6 +1,8 @@
 #include <memory>
 #include <set>
 
+#include <GL/gl.h>
+
 #include <Bull/Core/System/Config.hpp>
 #include <Bull/Core/Thread/LocalPtr.hpp>
 #include <Bull/Core/Thread/Lock.hpp>
@@ -17,6 +19,14 @@
 #else
     #include <Bull/Render/Context/Glx/GlxContext.hpp>
     typedef Bull::prv::GlxContext ContextType;
+#endif
+
+#ifndef GL_MAJOR_VERSION
+    #define GL_MAJOR_VERSION 0x821B
+#endif
+
+#ifndef GL_MINOR_VERSION
+    #define GL_MINOR_VERSION 0x821C
 #endif
 
 namespace Bull
@@ -218,7 +228,35 @@ namespace Bull
          */
         void GlContext::initialize()
         {
-            setActive(true);
+            if(setActive(true))
+            {
+                int majorVersion = 0;
+                int minorVersion = 0;
+
+                glGetIntegerv(GL_MAJOR_VERSION, &majorVersion);
+                glGetIntegerv(GL_MINOR_VERSION, &minorVersion);
+
+                if(glGetError() != GL_INVALID_ENUM)
+                {
+                    m_settings.major = static_cast<unsigned int>(majorVersion);
+                    m_settings.minor = static_cast<unsigned int>(minorVersion);
+                }
+                else
+                {
+                    const GLubyte* version = glGetString(GL_VERSION);
+
+                    if (version)
+                    {
+                        m_settings.major = String::intToChar(version[0]);
+                        m_settings.minor = String::intToChar(version[2]);
+                    }
+                    else
+                    {
+                        m_settings.major = 1;
+                        m_settings.minor = 1;
+                    }
+                }
+            }
         }
     }
 }
