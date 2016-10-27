@@ -42,7 +42,7 @@ namespace Bull
          */
         void WglContext::requireExtensions(const ExtensionsLoader::Instance& loader)
         {
-            loader->require(wglCreateARBExtension);
+            loader->require(WglCreateContextARB);
         }
 
         /*! \brief Get the best pixel format for a device handler
@@ -219,7 +219,7 @@ namespace Bull
         {
             HGLRC sharedHandler = shared ? shared->m_render : 0;
 
-            if(ExtensionsLoader::get()->isLoaded(wglCreateARBExtension))
+            if(ExtensionsLoader::get()->isLoaded(WglCreateContextARB))
             {
                 static const int attribs[] =
                 {
