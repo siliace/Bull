@@ -1,8 +1,6 @@
 #ifndef Bull_WGLCreateContextARB_hpp
 #define Bull_WGLCreateContextARB_hpp
 
-#include <windows.h>
-
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 
 #define WGL_CONTEXT_MAJOR_VERSION_ARB             0x2091
@@ -21,15 +19,14 @@ namespace Bull
 {
     namespace prv
     {
-        bool loadCreateContextARB();
-
         HGLRC (WINAPI* wglCreateContextAttribsARB)(HDC hDC, HGLRC hShareContext, const int *attribList) = nullptr;
 
-        ExtensionsLoader::Extension WglCreateContextARB("WGL_ARB_create_context", []{
-                                                            wglCreateContextAttribsARB = reinterpret_cast<HGLRC (WINAPI*)(HDC, HGLRC, const int*)>(GlContext::getFunction("wglCreateContextAttribsARB"));
+        ExtensionsLoader::Extension WglCreateContextARB("WGL_ARB_create_context", []
+        {
+            wglCreateContextAttribsARB = reinterpret_cast<HGLRC (WINAPI*)(HDC, HGLRC, const int*)>(GlContext::getFunction("wglCreateContextAttribsARB"));
 
-                                                            return wglCreateContextAttribsARB != nullptr;
-                                                        });
+            return wglCreateContextAttribsARB != nullptr;
+        });
     }
 }
 

@@ -1,8 +1,6 @@
 #ifndef Bull_WglPixelFormatARB_hpp
 #define Bull_WglPixelFormatARB_hpp
 
-#include <windows.h>
-
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 
 #define WGL_NUMBER_PIXEL_FORMATS_ARB    0x2000
@@ -59,19 +57,18 @@ namespace Bull
 {
     namespace prv
     {
-        BOOL (WINAPI* wglGetPixelFormatAttribivARB)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues) = nullptr;
+        BOOL (WINAPI* wglGetPixelFormatAttribiv)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues) = nullptr;
+        BOOL (WINAPI* wglGetPixelFormatAttribfv)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues) = nullptr;
+        BOOL (WINAPI* wglChoosePixelFormat)(HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats) = nullptr;
 
-        BOOL (WINAPI* wglGetPixelFormatAttribfvARB)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues) = nullptr;
+        ExtensionsLoader::Extension WglPixelFormatARB("WGL_ARB_pixel_format", []
+        {
+          wglGetPixelFormatAttribiv = reinterpret_cast<BOOL (WINAPI*)(HDC, int, int, UINT, const int*, int*)>("wglGetPixelFormatAttribivARB");
+          wglGetPixelFormatAttribfv = reinterpret_cast<BOOL (WINAPI*)(HDC, int, int, UINT, const int*, FLOAT*)>("wglGetPixelFormatAttribfvARB");
+          wglChoosePixelFormat      = reinterpret_cast<BOOL (WINAPI*)(HDC, const int*, const FLOAT*, UINT, int*, UINT*)>("wglChoosePixelFormatARB");
 
-        BOOL (WINAPI* wglChoosePixelFormatARB)(HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats) = nullptr;
-
-        ExtensionsLoader::Extension WglPixelFormatARB("WGL_ARB_pixel_format", []{
-                                                        wglGetPixelFormatAttribivARB = reinterpret_cast<BOOL (WINAPI*)(HDC, int, int, UINT, const int*, int*)>("wglGetPixelFormatAttribivARB");
-                                                        wglGetPixelFormatAttribfvARB = reinterpret_cast<BOOL (WINAPI*)(HDC, int, int, UINT, const int*, FLOAT*)>("wglGetPixelFormatAttribfvARB");
-                                                        wglChoosePixelFormatARB      = reinterpret_cast<BOOL (WINAPI*)(HDC, const int*, const FLOAT*, UINT, int*, UINT*)>("wglChoosePixelFormatARB");
-
-                                                        return wglGetPixelFormatAttribivARB && wglGetPixelFormatAttribfvARB && wglChoosePixelFormatARB;
-                                                      });
+          return wglGetPixelFormatAttribiv && wglGetPixelFormatAttribfv && wglChoosePixelFormat;
+        });
     }
 }
 

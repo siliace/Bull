@@ -1,11 +1,7 @@
 #ifndef Bull_WglContext_hpp
 #define Bull_WglContext_hpp
 
-#include <memory>
-
 #include <windows.h>
-
-#include <Bull/Core/Exception.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
@@ -14,6 +10,8 @@ namespace Bull
 {
     namespace prv
     {
+        DECLARE_HANDLE(HPBUFFER);
+
         class WglContext : public GlContext
         {
         public:
@@ -106,10 +104,11 @@ namespace Bull
 
             void createContext(const std::shared_ptr<WglContext>& shared);
 
-            HWND  m_window;
-            HDC   m_device;
-            HGLRC m_render;
-            bool  m_ownWindow;
+            HWND     m_window;
+            HDC      m_device;
+            HGLRC    m_render;
+            HPBUFFER m_pbuffer;
+            bool     m_ownWindow;
         };
     }
 }

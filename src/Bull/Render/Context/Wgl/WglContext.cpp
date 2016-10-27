@@ -2,7 +2,9 @@
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
 #include <Bull/Render/Context/Wgl/WglCreateContextARB.hpp>
+#include <Bull/Render/Context/Wgl/WglPbufferARB.hpp>
 #include <Bull/Render/Context/Wgl/WglPixelFormatARB.hpp>
+#include <Bull/Render/Context/Wgl/WglSwapControlEXT.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
 
@@ -45,6 +47,8 @@ namespace Bull
         {
             loader->require(WglCreateContextARB);
             loader->require(WglPixelFormatARB);
+            loader->require(WglSwapControlEXT);
+            loader->require(WglPbufferARB);
         }
 
         /*! \brief Get the best pixel format for a device handler
@@ -107,6 +111,7 @@ namespace Bull
             GlContext(settings),
             m_device(0),
             m_render(0),
+            m_pbuffer(0),
             m_ownWindow(false)
         {
             createSurface(1, 1, bitsPerPixel);
@@ -130,6 +135,7 @@ namespace Bull
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
             m_device(0),
             m_render(0),
+            m_pbuffer(0),
             m_ownWindow(false)
         {
             createSurface(window);
@@ -203,18 +209,26 @@ namespace Bull
 
         void WglContext::createSurface(unsigned int width, unsigned int height, unsigned int bitsPerPixel)
         {
-            m_window = CreateWindow("STATIC", nullptr,
-                                     WS_DISABLED | WS_POPUP,
-                                     0, 0,
-                                     width, height,
-                                     0,
-                                     0,
-                                     GetModuleHandle(nullptr),
-                                     nullptr);
+            if(ExtensionsLoader::get()->isLoaded(WglPbufferARB))
+            {
+                /// Todo: use pbuffer
+            }
 
-            m_device = GetDC(m_window);
+            if(!m_device)
+            {
+                m_window = CreateWindow("STATIC", nullptr,
+                                         WS_DISABLED | WS_POPUP,
+                                         0, 0,
+                                         width, height,
+                                         0,
+                                         0,
+                                         GetModuleHandle(nullptr),
+                                         nullptr);
 
-            m_ownWindow = true;
+                m_device = GetDC(m_window);
+
+                m_ownWindow = true;
+            }
         }
 
         void WglContext::setPixelFormat(unsigned int bitsPerPixel)
