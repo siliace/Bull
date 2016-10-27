@@ -2,6 +2,7 @@
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
 #include <Bull/Render/Context/Wgl/WglCreateContextARB.hpp>
+#include <Bull/Render/Context/Wgl/WglPixelFormatARB.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
 
@@ -43,6 +44,7 @@ namespace Bull
         void WglContext::requireExtensions(const ExtensionsLoader::Instance& loader)
         {
             loader->require(WglCreateContextARB);
+            loader->require(WglPixelFormatARB);
         }
 
         /*! \brief Get the best pixel format for a device handler
@@ -56,19 +58,31 @@ namespace Bull
          */
         int WglContext::getBestPixelFormat(HDC device, unsigned int bitsPerPixel, const ContextSettings& settings)
         {
-            PIXELFORMATDESCRIPTOR descriptor;
-            ZeroMemory(&descriptor, sizeof(descriptor));
-            descriptor.nSize        = sizeof(descriptor);
-            descriptor.nVersion     = 1;
-            descriptor.iLayerType   = PFD_MAIN_PLANE;
-            descriptor.dwFlags      = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
-            descriptor.iPixelType   = PFD_TYPE_RGBA;
-            descriptor.cColorBits   = static_cast<BYTE>(bitsPerPixel);
-            descriptor.cDepthBits   = static_cast<BYTE>(settings.depths);
-            descriptor.cStencilBits = static_cast<BYTE>(settings.stencil);
-            descriptor.cAlphaBits   = bitsPerPixel == 32 ? 8 : 0;
+            int bestPixelFormat = 0;
 
-            return ChoosePixelFormat(device, &descriptor);
+            if(ExtensionsLoader::get()->isLoaded(WglPixelFormatARB))
+            {
+                /// Todo: Use wglpixelformatarb
+            }
+
+            if(!bestPixelFormat)
+            {
+                PIXELFORMATDESCRIPTOR descriptor;
+                ZeroMemory(&descriptor, sizeof(descriptor));
+                descriptor.nSize        = sizeof(descriptor);
+                descriptor.nVersion     = 1;
+                descriptor.iLayerType   = PFD_MAIN_PLANE;
+                descriptor.dwFlags      = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+                descriptor.iPixelType   = PFD_TYPE_RGBA;
+                descriptor.cColorBits   = static_cast<BYTE>(bitsPerPixel);
+                descriptor.cDepthBits   = static_cast<BYTE>(settings.depths);
+                descriptor.cStencilBits = static_cast<BYTE>(settings.stencil);
+                descriptor.cAlphaBits   = bitsPerPixel == 32 ? 8 : 0;
+
+                bestPixelFormat = ChoosePixelFormat(device, &descriptor);
+            }
+
+            return bestPixelFormat;
         }
 
         /*! \brief Constructor
