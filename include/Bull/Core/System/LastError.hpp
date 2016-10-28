@@ -5,7 +5,7 @@
 
 namespace Bull
 {
-    struct LastError
+    struct BULL_API  LastError
     {
         /*! \brief Get the last error code sent by the OS
          *

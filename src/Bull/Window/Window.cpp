@@ -354,6 +354,21 @@ namespace Bull
         return String();
     }
 
+    /*! \brief Get ContextSettings used to create the context
+     *
+     * \return Return the ContextSettings
+     *
+     */
+    const ContextSettings& Window::getSettings() const
+    {
+        if(m_context)
+        {
+            return m_context->getSettings();
+        }
+
+        return ContextSettings();
+    }
+
     /*! \brief Enable or disable the key repeat
      *
      * \param enable The state of the key repeat

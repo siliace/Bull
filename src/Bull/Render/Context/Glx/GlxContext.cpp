@@ -72,17 +72,28 @@ namespace Bull
          *
          */
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared) :
+            GlxContext(shared, VideoMode::getCurrent().bitsPerPixel, ContextSettings())
+        {
+            /// Nothing
+        }
+
+        /*! \brief Constructor
+         *
+         * \param shared The shared context
+         * \param bitsPerPixel The number of bits to use per pixel
+         * \param settings Parameters to create the OpenGL context
+         *
+         */
+        GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings) :
+            GlContext(settings),
             m_display(Display::get()),
             m_render(0)
         {
-            unsigned int bitsPerPixel = VideoMode::getCurrent().bitsPerPixel;
-            ContextSettings settings  = ContextSettings();
-
-            createSurface(bitsPerPixel, settings);
+            createSurface(bitsPerPixel, m_settings);
 
             if(m_window)
             {
-                createContext(shared, bitsPerPixel, settings);
+                createContext(shared);
             }
         }
 
@@ -95,6 +106,7 @@ namespace Bull
          *
          */
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
+            GlContext(settings),
             m_display(Display::get()),
             m_render(0)
         {
@@ -102,7 +114,7 @@ namespace Bull
 
             if(m_window)
             {
-                createContext(shared, bitsPerPixel, settings);
+                createContext(shared);
             }
         }
 
@@ -192,12 +204,10 @@ namespace Bull
 
         /*! \brief Create the render context
          *
-         * \param shared       The shared context
-         * \param bitsPerPixel The number of bits per pixel to use
-         * \param settings     Settings to use to create the context
+         * \param shared The shared context
          *
          */
-        void GlxContext::createContext(const std::shared_ptr<GlxContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings)
+        void GlxContext::createContext(const std::shared_ptr<GlxContext>& shared)
         {
             int count = 0;
             XVisualInfo* visual;

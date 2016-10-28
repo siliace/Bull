@@ -5,6 +5,7 @@
 #include <Bull/Core/String.hpp>
 
 #include <Bull/Render/Context/ContextSettings.hpp>
+#include <Bull/Render/Context/SurfaceHandler.hpp>
 
 #include <Bull/Window/WindowHandler.hpp>
 
@@ -37,6 +38,16 @@ namespace Bull
              *
              */
             static GlContext* createInstance();
+
+            /*! \brief Create an OS specific instance of GlContext
+             *
+             * \param bitsPerPixel Number of bits per pixel to use
+             * \param settings     Settings to use to create the context
+             *
+             * \return Return the created context
+             *
+             */
+            static GlContext* createInstance(unsigned int bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Create an OS specific instance of GlContext
              *
@@ -79,9 +90,28 @@ namespace Bull
              */
             virtual void display() = 0;
 
+            virtual SurfaceHandler getSurfaceHandler() const = 0;
+
+            /*! \brief Get the ContextSettings of the context
+             *
+             * \return Return the ContextSettings
+             *
+             */
+            const ContextSettings& getSettings() const;
+
         protected:
 
+            /*! \brief Default constructor
+             *
+             */
             GlContext() = default;
+
+            /*! \brief Constructor
+             *
+             * \param settings Settings to use to create the context
+             *
+             */
+            GlContext(const ContextSettings& settings);
 
             /*! \brief Make the context current
              *
@@ -89,6 +119,8 @@ namespace Bull
              *
              */
             virtual bool makeCurrent() = 0;
+
+            ContextSettings m_settings;
 
         private:
 
