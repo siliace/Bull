@@ -83,6 +83,11 @@ namespace Bull
              */
             void display() override;
 
+            /*! \brief Get the render surface of the context
+             *
+             * \return Return the render context
+             *
+             */
             SurfaceHandler getSurfaceHandler() const override;
 
         protected:

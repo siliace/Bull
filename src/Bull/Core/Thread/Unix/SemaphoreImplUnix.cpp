@@ -51,7 +51,7 @@ namespace Bull
             ts.tv_nsec %= (1000 * 1000 * 1000);
 
 
-            sem_timedwait(&m_handler, &ts);
+            return sem_timedwait(&m_handler, &ts) != -1;
         }
 
         /*! \brief Get the current count of the semaphore

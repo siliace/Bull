@@ -6,6 +6,7 @@
 
 #include <Bull/Core/Exception.hpp>
 
+#include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
 
 #include <Bull/Window/X11/Display.hpp>
@@ -17,6 +18,22 @@ namespace Bull
         class GlxContext : public GlContext
         {
         public:
+
+            /*! \brief Get an OpenGL function
+             *
+             * \param function The function name
+             *
+             * \param Return the function, nullptr if the function is not available
+             *
+             */
+            static void* getFunction(const String& function);
+
+            /*! \brief Set the list of extensions to load
+             *
+             * \param loader The instance of the extension loader to use
+             *
+             */
+            static void requireExtensions(const ExtensionsLoader::Instance& loader = ExtensionsLoader::get());
 
             /*! \brief Determine the best XVisualInfo
              *
@@ -70,6 +87,13 @@ namespace Bull
              *
              */
             void display();
+
+            /*! \brief Get the render surface of the context
+             *
+             * \return Return the render context
+             *
+             */
+            SurfaceHandler getSurfaceHandler() const override;
 
         protected:
 

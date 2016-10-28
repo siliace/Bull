@@ -303,7 +303,7 @@ namespace Bull
          */
         bool WindowImplX11::isMinimized() const
         {
-
+            return false;
         }
 
         /*! \brief Maximize a window
@@ -321,7 +321,7 @@ namespace Bull
          */
         bool WindowImplX11::isMaximized() const
         {
-
+            return false;
         }
 
         /*! \brief Enable or disable the capture of the cursor inside the window
@@ -417,7 +417,7 @@ namespace Bull
          */
         String WindowImplX11::getTitle() const
         {
-
+            return "";
         }
 
         /*! \brief Check if the window has the focus
@@ -427,7 +427,7 @@ namespace Bull
          */
         bool WindowImplX11::hasFocus() const
         {
-
+            return false;
         }
 
         /*! \brief Enter or leave the fullscreen mode
@@ -440,7 +440,7 @@ namespace Bull
          */
         bool WindowImplX11::switchFullscreen(const VideoMode& mode, bool fullscreen)
         {
-
+            return false;
         }
 
         /*! \brief Show or hide the window

@@ -90,6 +90,11 @@ namespace Bull
              */
             virtual void display() = 0;
 
+            /*! \brief Get the render surface of the context
+             *
+             * \return Return the render context
+             *
+             */
             virtual SurfaceHandler getSurfaceHandler() const = 0;
 
             /*! \brief Get the ContextSettings of the context
