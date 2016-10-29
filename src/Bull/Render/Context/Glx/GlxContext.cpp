@@ -286,29 +286,65 @@ namespace Bull
         void GlxContext::createContext(const std::shared_ptr<GlxContext>& shared)
         {
             int count = 0;
-            XVisualInfo* visual;
             XVisualInfo  tpl;
-            XWindowAttributes attribs;
+            XVisualInfo* visual;
+            XWindowAttributes WindowAttribs;
             GLXContext sharedHandler = (shared.get() != nullptr) ? shared.get()->m_render : 0;
 
-            if(isLoaded(GlxCreateContextARB))
+            XGetWindowAttributes(m_display->getHandler(), m_window, &WindowAttribs);
+
+            tpl.screen   = m_display->getDefaultScreen();
+            tpl.visualid = XVisualIDFromVisual(WindowAttribs.visual);
+
+            visual = XGetVisualInfo(m_display->getHandler(), VisualIDMask | VisualScreenMask, &tpl, &count);
+
+            if(isLoaded(GlxCreateContextARB) )
             {
-                /// Todo
+                int countConfigs;
+                GLXFBConfig* config = nullptr;
+                GLXFBConfig* configs = nullptr;
+                configs = glXChooseFBConfig(m_display->getHandler(), m_display->getDefaultScreen(), nullptr, &countConfigs);
+
+                for(int i = 0; i < countConfigs; i++)
+                {
+                    XVisualInfo* visualInfo = glXGetVisualFromFBConfig(m_display->getHandler(), configs[i]);
+
+                    if(visualInfo && visualInfo->visualid == visual->visualid)
+                    {
+                        config = &configs[i];
+                        XFree(visualInfo);
+                        break;
+                    }
+                    else if(visualInfo)
+                    {
+                        XFree(visualInfo);
+                    }
+                }
+
+                if(config)
+                {
+                    int attribs[] =
+                    {
+                        GLX_CONTEXT_MAJOR_VERSION_ARB, m_settings.major,
+                        GLX_CONTEXT_MINOR_VERSION_ARB, m_settings.minor,
+                        0
+                    };
+
+                    m_render = glXCreateContextAttribs(m_display->getHandler(), *config, sharedHandler, True, attribs);
+                }
+
+                if(configs)
+                {
+                    XFree(configs);
+                }
             }
 
             if(m_render == 0)
             {
-                XGetWindowAttributes(m_display->getHandler(), m_window, &attribs);
-
-                tpl.screen   = m_display->getDefaultScreen();
-                tpl.visualid = XVisualIDFromVisual(attribs.visual);
-
-                visual = XGetVisualInfo(m_display->getHandler(), VisualIDMask | VisualScreenMask, &tpl, &count);
-
                 m_render = glXCreateContext(m_display->getHandler(), visual, sharedHandler, True);
-
-                XFree(visual);
             }
+
+            XFree(visual);
         }
     }
 }
