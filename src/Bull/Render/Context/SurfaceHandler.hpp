@@ -13,6 +13,8 @@ namespace Bull
     {
         #if defined BULL_OS_WINDOWS
             typedef HDC SurfaceHandler;
+        #else
+            typedef int SurfaceHandler;
         #endif
     }
 }

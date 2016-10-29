@@ -76,7 +76,6 @@ namespace Bull
 
                 if(config)
                 {
-                    Rotation rotation;
                     int sizesCount;
                     int depthsCount;
 

@@ -8,6 +8,9 @@
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglExtensionsLoader.hpp>
     typedef Bull::prv::WglExtensionsLoader ExtensionsLoaderType;
+#else
+    #include <Bull/Render/Context/Glx/GlxExtensionsLoader.hpp>
+    typedef Bull::prv::GlxExtensionsLoader ExtensionsLoaderType;
 #endif
 
 namespace Bull

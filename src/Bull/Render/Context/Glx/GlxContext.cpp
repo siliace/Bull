@@ -6,6 +6,28 @@ namespace Bull
 {
     namespace prv
     {
+        /*! \brief Get an OpenGL function
+         *
+         * \param function The function name
+         *
+         * \param Return the function, nullptr if the function is not available
+         *
+         */
+        void* GlxContext::getFunction(const String& function)
+        {
+            return nullptr;
+        }
+
+        /*! \brief Set the list of extensions to load
+         *
+         * \param loader The instance of the extension loader to use
+         *
+         */
+        void GlxContext::requireExtensions(const ExtensionsLoader::Instance& loader)
+        {
+            /// Nothing
+        }
+
         /*! \brief Determine the best XVisualInfo
          *
          * \param bitsPerPixel Number of bits per pixel
@@ -148,6 +170,16 @@ namespace Bull
             {
                 glXSwapBuffers(m_display->getHandler(), m_window);
             }
+        }
+
+        /*! \brief Get the render surface of the context
+         *
+         * \return Return the render context
+         *
+         */
+        SurfaceHandler GlxContext::getSurfaceHandler() const
+        {
+            return Display::get()->getDefaultScreen();
         }
 
         /*! \brief Make the context current
