@@ -20,10 +20,6 @@
 #include <Bull/Window/VideoMode.hpp>
 #include <Bull/Window/WindowHandler.hpp>
 
-#ifdef None
-    #undef None
-#endif
-
 namespace Bull
 {
     namespace prv
