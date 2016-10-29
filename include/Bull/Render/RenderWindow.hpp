@@ -1,13 +1,15 @@
 #ifndef Bull_RenderWindow_hpp
 #define Bull_RenderWindow_hpp
 
+#include <Bull/Core/System/Config.hpp>
+
 #include <Bull/Render/RenderTarget.hpp>
 
 #include <Bull/Window/Window.hpp>
 
 namespace Bull
 {
-    class RenderWindow : public RenderTarget, public Window
+    class BULL_API RenderWindow : public RenderTarget, public Window
     {
     public:
 

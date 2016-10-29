@@ -3,10 +3,11 @@
 
 #include <Bull/Core/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/System/Config.hpp>
 
 namespace Bull
 {
-    class RenderTarget : public NonCopyable
+    class BULL_API RenderTarget : public NonCopyable
     {
     public:
 

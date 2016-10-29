@@ -3,10 +3,10 @@
 
 #include <memory>
 
-#include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/String.hpp>
+#include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Hardware/Joystick.hpp>
 #include <Bull/Hardware/Keyboard.hpp>
