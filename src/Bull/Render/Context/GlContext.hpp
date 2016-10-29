@@ -106,6 +106,21 @@ namespace Bull
              */
             static bool isSupported(const ExtensionsLoader::Extension& extension);
 
+        protected:
+
+            /*! \brief Give a mark to a pixel format
+             *
+             * \param bitsPerPixel
+             * \param depths
+             * \param stencil
+             * \param bitsPerPixelWanted
+             * \param settingsWanted
+             *
+             * \return Return the mark of the pixel format
+             *
+             */
+            static int evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted);
+
         public:
 
             /*! \brief Destructor

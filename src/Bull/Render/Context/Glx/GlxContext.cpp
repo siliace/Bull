@@ -59,19 +59,22 @@ namespace Bull
          */
         XVisualInfo GlxContext::getBestVisual(unsigned int bitsPerPixel, const ContextSettings& settings)
         {
-            Display::Instance display = Display::get();
-
             int count;
+            Display::Instance display = Display::get();
             XVisualInfo best = XVisualInfo();
             XVisualInfo* visuals = XGetVisualInfo(display->getHandler(), 0, nullptr, &count);
 
             if(visuals)
             {
+                int bestScore = 0;
+                int bestVisual;
+
                 for(int i = 0; i < count; i++)
                 {
                     int doubleBuffer;
                     int red, green, blue, alpha;
-                    int depth, stencil;
+                    int depths, stencil;
+                    int score = 0;
 
                     glXGetConfig(display->getHandler(), &visuals[i], GLX_DOUBLEBUFFER, &doubleBuffer);
                     if(!doubleBuffer)
@@ -83,30 +86,28 @@ namespace Bull
                     glXGetConfig(display->getHandler(), &visuals[i], GLX_GREEN_SIZE, &green);
                     glXGetConfig(display->getHandler(), &visuals[i], GLX_BLUE_SIZE,  &blue);
                     glXGetConfig(display->getHandler(), &visuals[i], GLX_ALPHA_SIZE, &alpha);
-                    if(red + green + blue + alpha != bitsPerPixel)
-                    {
-                        continue;
-                    }
-
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_DEPTH_SIZE, &depth);
-                    if(depth != settings.depths)
-                    {
-                        continue;
-                    }
-
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_DEPTH_SIZE, &depths);
                     glXGetConfig(display->getHandler(), &visuals[i], GLX_STENCIL_SIZE, &stencil);
-                    if(stencil != settings.stencil)
-                    {
-                        continue;
-                    }
 
-                    best = visuals[i];
+                    int currentBitsPerPixel = red + green + blue + alpha;
+                    score = evaluatePixelFormat(currentBitsPerPixel, depths, stencil, bitsPerPixel, settings);
+
+                    if(score > bestScore)
+                    {
+                        bestScore  = score;
+                        bestVisual = i;
+                    }
                 }
+
+                best = visuals[bestVisual];
+
+                XFree(visuals);
+
+                return best;
             }
 
-            XFree(visuals);
+            return XVisualInfo();
 
-            return best;
         }
 
         /*! \brief Constructor

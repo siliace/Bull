@@ -205,6 +205,28 @@ namespace Bull
             return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isSupported(extension) : false;
         }
 
+        /*! \brief Give a mark to a pixel format
+         *
+         * \param bitsPerPixel
+         * \param depths
+         * \param stencil
+         * \param bitsPerPixelWanted
+         * \param settingsWanted
+         *
+         * \return Return the mark of the pixel format
+         *
+         */
+        int GlContext::evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted)
+        {
+            int score = 0;
+
+            if(bitsPerPixel == bitsPerPixelWanted)     score += 1;
+            if(depths       == settingsWanted.depths)  score += 1;
+            if(stencil      == settingsWanted.stencil) score += 1;
+
+            return score;
+        }
+
         /*! \brief Destructor
          *
          */
