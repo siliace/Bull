@@ -32,4 +32,14 @@ namespace Bull
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         }
     }
+
+    /*! \brief Clear the RenderTarget with the specified color
+     *
+     * \param color The color to use
+     *
+     */
+    void RenderTarget::clear(const Color& color)
+    {
+        clear(color.red, color.green, color.blue, color.alpha);
+    }
 }
