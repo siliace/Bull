@@ -104,6 +104,7 @@ namespace Bull
         }
 
         m_impl.reset();
+        m_context.reset();
     }
 
     /*! \brief Get the first event on the stack without blocking the current thread
