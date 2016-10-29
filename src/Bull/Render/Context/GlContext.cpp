@@ -8,7 +8,6 @@
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
-#include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
@@ -64,12 +63,12 @@ namespace Bull
         void GlContext::globalInit()
         {
             Lock lock(sharedContextMutex);
-            ExtensionsLoader::Instance loader = ExtensionsLoader::get();
             shared = std::make_shared<ContextType>(nullptr);
             shared->initialize();
 
+            ExtensionsLoader::Instance loader = ExtensionsLoader::get(shared->getSurfaceHandler());
             ContextType::requireExtensions(loader);
-            loader->load(shared->getSurfaceHandler());
+            loader->load();
 
             /// Ensure two things:
             /// + The shared context is disabled
@@ -156,6 +155,54 @@ namespace Bull
         void* GlContext::getFunction(const String& function)
         {
             return ContextType::getFunction(function);
+        }
+
+        /*! \brief Check whether an extensions is loaded
+         *
+         * \param  extension The name of the extension
+         *
+         * \return Return true if the extension is loaded, false otherwise
+         *
+         */
+        bool GlContext::isLoaded(const String& extension)
+        {
+            return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isLoaded(extension) : false;
+        }
+
+        /*! \brief Check whether an extensions is loaded
+         *
+         * \param  extension The extension
+         *
+         * \return Return true if the extension is loaded, false otherwise
+         *
+         */
+        bool GlContext::isLoaded(const ExtensionsLoader::Extension& extension)
+        {
+            return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isLoaded(extension) : false;
+        }
+
+        /*! \brief Check whether an extensions is loaded
+         *
+         * \param  extension The name of the extension
+         *
+         * \return Return true if the extension is supported, false otherwise
+         *
+         */
+        bool GlContext::isSupported(const String& extension)
+        {
+            return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isSupported(extension) : false;
+        }
+
+        /*! \brief Check whether an extensions is loaded
+         *
+         * \param  extension The extension
+         *
+         * \return Return true if the extension is supported, false otherwise
+         *
+         */
+        bool GlContext::isSupported(const ExtensionsLoader::Extension& extension)
+        {
+            return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isSupported(extension) : false;
         }
 
         /*! \brief Destructor

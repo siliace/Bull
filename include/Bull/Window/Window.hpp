@@ -3,10 +3,10 @@
 
 #include <memory>
 
-#include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/String.hpp>
+#include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Hardware/Joystick.hpp>
 #include <Bull/Hardware/Keyboard.hpp>
@@ -169,17 +169,16 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Window();
+        Window() = default;
 
         /*! \brief Constructor
          *
-         * \param mode The VideoMode desired
+         * \param mode  The VideoMode
          * \param title The title of the window
-         * \param style The window decoration desired
-         * \param settings Parameters to create the OpenGL context
+         * \param style The window decorations
          *
          */
-        Window(const VideoMode& mode, const String& title, Uint32 style = Style::Default, const ContextSettings& settings = ContextSettings());
+        Window(const VideoMode& mode, const String& title, Uint32 style = Style::Default);
 
         /*! \brief Destructor
          *
@@ -188,15 +187,14 @@ namespace Bull
 
         /*! \brief Open the window. If a window was already opened, its closed
          *
-         * \param mode The VideoMode of desired
+         * \param mode  The VideoMode
          * \param title The title of the window
-         * \param style The window decoration desired
-         * \param settings Parameters to create the OpenGL context
+         * \param style The window decorations
          *
          * \return Return true if the window was open successfully
          *
          */
-        bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default, const ContextSettings& settings = ContextSettings());
+        bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default);
 
         /*! \brief Check if the window is open
          *
@@ -225,20 +223,6 @@ namespace Bull
          *
          */
         Event nextEvent();
-
-        /*! \brief Activate or deactivate the context
-         *
-         * \param active True to activate, false to deactivate the context
-         *
-         * \return Return true if the context's status changed successfully, false otherwise
-         *
-         */
-        bool setActive(bool active = true);
-
-        /*! \brief Display what has been rendered so far
-         *
-         */
-        void display();
 
         /*! \brief Enable or disable the capture of the cursor inside the window
          *
@@ -336,13 +320,6 @@ namespace Bull
          */
         String getTitle() const;
 
-        /*! \brief Get ContextSettings used to create the context
-         *
-         * \return Return the ContextSettings
-         *
-         */
-        const ContextSettings& getSettings() const;
-
         /*! \brief Enable or disable the key repeat
          *
          * \param enable The state of the key repeat
@@ -395,10 +372,36 @@ namespace Bull
          */
         WindowHandler getSystemHandler() const;
 
+    protected:
+
+        std::unique_ptr<prv::GlContext> m_context; /*!< The OS specific implementation of the OpenGL context */
+
+
+        /*! \brief Constructor
+         *
+         * \param mode     The VideoMode
+         * \param title    The title of the window
+         * \param style    The window decorations
+         * \param settings Settings to use to create the OpenGL context
+         *
+         */
+        Window(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+
+        /*! \brief Open the window. If a window was already opened, its closed
+         *
+         * \param mode     The VideoMode
+         * \param title    The title of the window
+         * \param style    The window decorations
+         * \param settings Settings to use to create the OpenGL context
+         *
+         * \return Return true if the window was open successfully
+         *
+         */
+        bool open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+
     private:
 
         std::unique_ptr<prv::WindowImpl> m_impl;    /*!< The OS specific implementation of the window */
-        std::unique_ptr<prv::GlContext>  m_context; /*!< The OS specific implementation of the OpenGL context */
     };
 }
 

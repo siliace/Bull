@@ -1,4 +1,8 @@
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
+#include <Bull/Render/Context/Glx/GlxCreateContextARB.hpp>
+#include <Bull/Render/Context/Glx/GlxSwapControlEXT.hpp>
+#include <Bull/Render/Context/Glx/GlxSwapControlMESA.hpp>
+#include <Bull/Render/Context/Glx/GlxSwapControlSGI.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
 
@@ -15,7 +19,7 @@ namespace Bull
          */
         void* GlxContext::getFunction(const String& function)
         {
-            return nullptr;
+            return reinterpret_cast<void*>(glXGetProcAddressARB(reinterpret_cast<const unsigned char*>(static_cast<const char*>(function))));
         }
 
         /*! \brief Set the list of extensions to load
@@ -25,7 +29,24 @@ namespace Bull
          */
         void GlxContext::requireExtensions(const ExtensionsLoader::Instance& loader)
         {
-            /// Nothing
+            loader->require(GlxCreateContextARB);
+
+            if(isSupported(GlxSwapControlEXT))
+            {
+                loader->require(GlxSwapControlEXT);
+            }
+            else if(isSupported(GlxSwapControlMESA))
+            {
+                loader->require(GlxSwapControlMESA);
+            }
+            else if(isSupported(GlxSwapControlSGI))
+            {
+                loader->require(GlxSwapControlSGI);
+            }
+            else
+            {
+                Log::get()->notice("VSync is not available on your system");
+            }
         }
 
         /*! \brief Determine the best XVisualInfo
@@ -109,9 +130,10 @@ namespace Bull
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
             m_display(Display::get()),
-            m_render(0)
+            m_render(0),
+            m_ownWindow(false)
         {
-            createSurface(bitsPerPixel, m_settings);
+            createSurface(bitsPerPixel);
 
             if(m_window)
             {
@@ -130,7 +152,8 @@ namespace Bull
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
             m_display(Display::get()),
-            m_render(0)
+            m_render(0),
+            m_ownWindow(false)
         {
             createSurface(window);
 
@@ -200,20 +223,17 @@ namespace Bull
         void GlxContext::createSurface(WindowHandler handler)
         {
             m_window = handler;
-
-            m_ownWindow = false;
         }
 
         /*! \brief Create the render surface
          *
          * \param bitsPerPixel The number of bits per pixel to use
-         * \param settings     Settings to use to create the context
          *
          */
-        void GlxContext::createSurface(unsigned int bitsPerPixel, const ContextSettings& settings)
+        void GlxContext::createSurface(unsigned int bitsPerPixel)
         {
             XSetWindowAttributes attributes;
-            XVisualInfo vi = getBestVisual(bitsPerPixel, settings);
+            XVisualInfo vi = getBestVisual(bitsPerPixel, m_settings);
 
             attributes.colormap = XCreateColormap(m_display->getHandler(),
                                                   m_display->getRootWindow(),
@@ -247,16 +267,24 @@ namespace Bull
             XWindowAttributes attribs;
             GLXContext sharedHandler = (shared.get() != nullptr) ? shared.get()->m_render : 0;
 
-            XGetWindowAttributes(m_display->getHandler(), m_window, &attribs);
+            if(isLoaded(GlxCreateContextARB))
+            {
+                /// Todo
+            }
 
-            tpl.screen   = m_display->getDefaultScreen();
-            tpl.visualid = XVisualIDFromVisual(attribs.visual);
+            if(m_render == 0)
+            {
+                XGetWindowAttributes(m_display->getHandler(), m_window, &attribs);
 
-            visual = XGetVisualInfo(m_display->getHandler(), VisualIDMask | VisualScreenMask, &tpl, &count);
+                tpl.screen   = m_display->getDefaultScreen();
+                tpl.visualid = XVisualIDFromVisual(attribs.visual);
 
-            m_render = glXCreateContext(m_display->getHandler(), visual, sharedHandler, True);
+                visual = XGetVisualInfo(m_display->getHandler(), VisualIDMask | VisualScreenMask, &tpl, &count);
 
-            XFree(visual);
+                m_render = glXCreateContext(m_display->getHandler(), visual, sharedHandler, True);
+
+                XFree(visual);
+            }
         }
     }
 }
