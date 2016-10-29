@@ -116,10 +116,9 @@ namespace Bull
             /*! \brief Create the render surface
              *
              * \param bitsPerPixel The number of bits per pixel to use
-             * \param settings     Settings to use to create the context
              *
              */
-            void createSurface(unsigned int bitsPerPixel, const ContextSettings& settings);
+            void createSurface(unsigned int bitsPerPixel);
 
             /*! \brief Create the render context
              *
