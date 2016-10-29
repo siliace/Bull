@@ -195,6 +195,29 @@ namespace Bull
             }
         }
 
+        /*! \brief Activate or deactivate the vertical synchronization
+         *
+         * \param active True to activate, false to deactivate
+         *
+         * \return Return true if success, false otherwise
+         *
+         */
+        void GlxContext::enableVsync(bool active)
+        {
+            if(isSupported(GlxSwapControlEXT))
+            {
+                ext::glXSwapInterval(m_display->getHandler(), m_window, active ? 1 : 0);
+            }
+            else if(isSupported(GlxSwapControlMESA))
+            {
+                mesa::glXSwapInterval(active ? 1 : 0);
+            }
+            else if(isSupported(GlxSwapControlSGI))
+            {
+                sgi::glXSwapInterval(active ? 1 : 0);
+            }
+        }
+
         /*! \brief Get the render surface of the context
          *
          * \return Return the render context

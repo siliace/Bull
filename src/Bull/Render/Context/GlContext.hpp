@@ -115,7 +115,7 @@ namespace Bull
 
             /*! \brief Activate or deactivate the context
              *
-             * \param active True to activate, false to deactivate the context
+             * \param active True to activate, false to deactivate
              *
              * \return Return true if the context's status changed successfully, false otherwise
              *
@@ -126,6 +126,15 @@ namespace Bull
              *
              */
             virtual void display() = 0;
+
+            /*! \brief Activate or deactivate the vertical synchronization
+             *
+             * \param active True to activate, false to deactivate
+             *
+             * \return Return true if success, false otherwise
+             *
+             */
+            virtual void enableVsync(bool active) = 0;
 
             /*! \brief Get the render surface of the context
              *

@@ -70,6 +70,15 @@ namespace Bull
          */
         unsigned int getFramerateLimit() const;
 
+        /*! \brief Activate or deactivate the vertical synchronization
+         *
+         * \param active True to activate, false to deactivate
+         *
+         * \return Return true if success, false otherwise
+         *
+         */
+        void enableVsync(bool active);
+
         /*! \brief Get ContextSettings used to create the context
          *
          * \return Return the ContextSettings
