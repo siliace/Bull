@@ -5,6 +5,7 @@
 #include <Bull/Render/Context/Glx/GlxSwapControlSGI.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
+#include <Bull/Window/X11/ErrorHandler.hpp>
 
 namespace Bull
 {
@@ -327,6 +328,8 @@ namespace Bull
                         XFree(visualInfo);
                     }
                 }
+
+                ErrorHandler::Instance handler = ErrorHandler::get();
 
                 if(config)
                 {
