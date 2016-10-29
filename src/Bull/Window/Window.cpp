@@ -19,25 +19,30 @@ namespace Bull
         return m_fullscreen;
     }
 
-    /*! \brief Default constructor
-     *
-     */
-    Window::Window()
-    {
-        /// Nothing
-    }
-
     /*! \brief Constructor
      *
      * \param mode The VideoMode desired
      * \param title The title of the window
      * \param style The window decoration desired
-     * \param settings Parameters to create the OpenGL context
      *
      */
-    Window::Window(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+    Window::Window(const VideoMode& mode, const String& title, Uint32 style)
     {
         open(mode, title, style);
+    }
+
+    /*! \brief Open the window. If a window was already opened, its closed
+     *
+     * \param mode  The VideoMode
+     * \param title The title of the window
+     * \param style The window decorations
+     *
+     * \return Return true if the window was open successfully
+     *
+     */
+    bool Window::open(const VideoMode& mode, const String& title, Uint32 style)
+    {
+        return open(mode, title, style, ContextSettings());
     }
 
     /*! \brief Destructor
@@ -46,39 +51,6 @@ namespace Bull
     Window::~Window()
     {
         close();
-    }
-
-    /*! \brief Open the window. If a window was already opened, its closed
-     *
-     * \param mode The VideoMode of desired
-     * \param title The title of the window
-     * \param style The window decoration desired
-     * \param settings Parameters to create the OpenGL context
-     *
-     * \return Return true if the window was open successfully
-     *
-     */
-    bool Window::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
-    {
-        if(isOpen())
-        {
-            close();
-        }
-
-        if(style == Style::Fullscreen && m_fullscreen)
-        {
-            style = Style::Default;
-        }
-
-        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style, settings));
-        m_context.reset(prv::GlContext::createInstance(getSystemHandler(), mode.bitsPerPixel, settings));
-
-        if(style == Style::Fullscreen)
-        {
-            switchFullscreen(mode);
-        }
-
-        return true;
     }
 
     /*! \brief Check if the window is open
@@ -141,34 +113,6 @@ namespace Bull
         }
 
         return e;
-    }
-
-    /*! \brief Activate or deactivate the context
-     *
-     * \param active True to activate, false to deactivate the context
-     *
-     * \return Return true if the context's status changed successfully, false otherwise
-     *
-     */
-    bool Window::setActive(bool active)
-    {
-        if(m_context)
-        {
-            return m_context->setActive(active);
-        }
-
-        return false;
-    }
-
-    /*! \brief Display what has been rendered so far
-     *
-     */
-    void Window::display()
-    {
-        if(setActive())
-        {
-            m_context->display();
-        }
     }
 
     /*! \brief Enable or disable the capture of the cursor inside the window
@@ -355,21 +299,6 @@ namespace Bull
         return String();
     }
 
-    /*! \brief Get ContextSettings used to create the context
-     *
-     * \return Return the ContextSettings
-     *
-     */
-    const ContextSettings& Window::getSettings() const
-    {
-        if(m_context)
-        {
-            return m_context->getSettings();
-        }
-
-        return ContextSettings();
-    }
-
     /*! \brief Enable or disable the key repeat
      *
      * \param enable The state of the key repeat
@@ -481,5 +410,51 @@ namespace Bull
         }
 
         return 0;
+    }
+
+    /*! \brief Constructor
+     *
+     * \param mode     The VideoMode
+     * \param title    The title of the window
+     * \param style    The window decorations
+     * \param settings Settings to use to create the OpenGL context
+     *
+     */
+    Window::Window(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+    {
+        open(mode, title, style, settings);
+    }
+
+    /*! \brief Open the window. If a window was already opened, its closed
+     *
+     * \param mode The VideoMode of desired
+     * \param title The title of the window
+     * \param style The window decoration desired
+     * \param settings Parameters to create the OpenGL context
+     *
+     * \return Return true if the window was open successfully
+     *
+     */
+    bool Window::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+    {
+        if(isOpen())
+        {
+            close();
+        }
+
+        if(style == Style::Fullscreen && m_fullscreen)
+        {
+            style = Style::Default;
+        }
+
+        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style, settings));
+        m_context.reset(prv::GlContext::createInstance(getSystemHandler(), mode.bitsPerPixel, settings));
+
+        if(style == Style::Fullscreen)
+        {
+            switchFullscreen(mode);
+        }
+
+        return true;
     }
 }
