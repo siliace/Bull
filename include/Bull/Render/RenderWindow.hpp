@@ -1,6 +1,8 @@
 #ifndef Bull_RenderWindow_hpp
 #define Bull_RenderWindow_hpp
 
+#include <Bull/Core/Time/Clock.hpp>
+#include <Bull/Core/Time/Time.hpp>
 #include <Bull/Core/System/Config.hpp>
 
 #include <Bull/Render/RenderTarget.hpp>
@@ -16,7 +18,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        RenderWindow() = default;
+        RenderWindow();
 
         /*! \brief Constructor
          *
@@ -54,12 +56,31 @@ namespace Bull
          */
         bool setActive(bool active = true) override;
 
+        /*! \brief Set the maximum framerate of the RenderWindow
+         *
+         * \param limit The maximum
+         *
+         */
+        void setFramerateLimit(unsigned int limit);
+
+        /*! \brief Get the maximum framerate of the RenderWindow
+         *
+         * \param limit The maximum
+         *
+         */
+        unsigned int getFramerateLimit() const;
+
         /*! \brief Get ContextSettings used to create the context
          *
          * \return Return the ContextSettings
          *
          */
         const ContextSettings& getSettings() const;
+
+    private:
+
+        Time  m_frameDelay;
+        Clock m_clock;
     };
 }
 

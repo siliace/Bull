@@ -1,3 +1,5 @@
+#include <Bull/Core/Thread/Thread.hpp>
+
 #include <Bull/Render/RenderWindow.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
 
@@ -5,6 +7,14 @@
 
 namespace Bull
 {
+    /*! \brief Default constructor
+     *
+     */
+    RenderWindow::RenderWindow()
+    {
+        m_clock.start();
+    }
+
     /*! \brief Constructor
      *
      * \param mode     The VideoMode
@@ -16,7 +26,7 @@ namespace Bull
     RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings) :
         Window(mode, title, style, settings)
     {
-        /// Nothing
+        m_clock.start();
     }
 
     /*! \brief Open the window. If a window was already opened, its closed
@@ -43,6 +53,13 @@ namespace Bull
         {
             m_context->display();
         }
+
+        if(m_frameDelay != Time::Zero && m_frameDelay > m_clock.getElapsedTime())
+        {
+            Thread::sleep(m_frameDelay - m_clock.getElapsedTime());
+        }
+
+        m_clock.restart();
     }
 
     /*! \brief Activate or deactivate the context
@@ -60,6 +77,38 @@ namespace Bull
         }
 
         return false;
+    }
+
+    /*! \brief Set the maximum framerate of the RenderWindow
+     *
+     * \param limit The maximum
+     *
+     */
+    void RenderWindow::setFramerateLimit(unsigned int limit)
+    {
+        if(limit)
+        {
+            m_frameDelay = Time::seconds(1 / static_cast<float>(limit));
+        }
+        else
+        {
+            m_frameDelay = Time::Zero;
+        }
+    }
+
+    /*! \brief Get the maximum framerate of the RenderWindow
+     *
+     * \param limit The maximum
+     *
+     */
+    unsigned int RenderWindow::getFramerateLimit() const
+    {
+        if(m_frameDelay != Time::Zero)
+        {
+            return static_cast<unsigned int>(1 / m_frameDelay.asSeconds());
+        }
+
+        return 0;
     }
 
     /*! \brief Get ContextSettings used to create the context
