@@ -74,7 +74,19 @@ namespace Bull
             return false;
         }
 
-        /*! \brief Chck whether an OpenGL extension is supported
+        /*! \brief Check whether an OpenGL extension is loaded
+         *
+         * \param extension The name of the extension
+         *
+         * \return Return true if loaded, false otherwise
+         *
+         */
+        bool ExtensionsLoader::isLoaded(const String& extension) const
+        {
+            return isLoaded(Extension(extension, []{return true;}));
+        }
+
+        /*! \brief Check whether an OpenGL extension is supported
          *
          * \param name The name of the extension
          *
