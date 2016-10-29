@@ -5,6 +5,7 @@
 #include <Bull/Core/String.hpp>
 
 #include <Bull/Render/Context/ContextSettings.hpp>
+#include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/SurfaceHandler.hpp>
 
 #include <Bull/Window/WindowHandler.hpp>
@@ -68,6 +69,42 @@ namespace Bull
              *
              */
             static void* getFunction(const String& function);
+
+            /*! \brief Check whether an extensions is loaded
+             *
+             * \param  extension The name of the extension
+             *
+             * \return Return true if the extension is loaded, false otherwise
+             *
+             */
+            static bool isLoaded(const String& extension);
+
+            /*! \brief Check whether an extensions is loaded
+             *
+             * \param  extension The extension
+             *
+             * \return Return true if the extension is loaded, false otherwise
+             *
+             */
+            static bool isLoaded(const ExtensionsLoader::Extension& extension);
+
+            /*! \brief Check whether an extensions is loaded
+             *
+             * \param  extension The name of the extension
+             *
+             * \return Return true if the extension is supported, false otherwise
+             *
+             */
+            static bool isSupported(const String& extension);
+
+            /*! \brief Check whether an extensions is loaded
+             *
+             * \param  extension The extension
+             *
+             * \return Return true if the extension is supported, false otherwise
+             *
+             */
+            static bool isSupported(const ExtensionsLoader::Extension& extension);
 
         public:
 

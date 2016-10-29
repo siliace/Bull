@@ -33,7 +33,7 @@ namespace Bull
              * \param loader The instance of the extension loader to use
              *
              */
-            static void requireExtensions(const ExtensionsLoader::Instance& loader = ExtensionsLoader::get());
+            static void requireExtensions(const ExtensionsLoader::Instance& loader);
 
             /*! \brief Determine the best XVisualInfo
              *
@@ -116,10 +116,9 @@ namespace Bull
             /*! \brief Create the render surface
              *
              * \param bitsPerPixel The number of bits per pixel to use
-             * \param settings     Settings to use to create the context
              *
              */
-            void createSurface(unsigned int bitsPerPixel, const ContextSettings& settings);
+            void createSurface(unsigned int bitsPerPixel);
 
             /*! \brief Create the render context
              *

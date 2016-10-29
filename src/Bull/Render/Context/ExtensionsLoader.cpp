@@ -17,6 +17,17 @@ namespace Bull
 {
     namespace prv
     {
+         /*! \brief Constructor
+          *
+          * \param handler The handler to use to get supported extensions
+          *
+          */
+         ExtensionsLoader::ExtensionsLoader(SurfaceHandler handler) :
+             m_allExtensions(ExtensionsLoaderType::getExtensions(handler))
+         {
+            /// Nothing
+         }
+
         /*! \brief Add an extension to load
          *
          * \param extension The extension to load
@@ -29,15 +40,11 @@ namespace Bull
 
         /*! \brief Load required extensions
          *
-         * \param handler The surface to use to check whether an extension is supported
-         *
          */
-        void ExtensionsLoader::load(SurfaceHandler handler)
+        void ExtensionsLoader::load()
         {
             if(!m_loaded)
             {
-                m_allExtensions = ExtensionsLoaderType::getExtensions(handler);
-
                 for(Extension& e : m_extensions)
                 {
                     if(isSupported(e.name))
@@ -74,16 +81,40 @@ namespace Bull
             return false;
         }
 
-        /*! \brief Chck whether an OpenGL extension is supported
+        /*! \brief Check whether an OpenGL extension is loaded
          *
-         * \param name The name of the extension
+         * \param extension The name of the extension
+         *
+         * \return Return true if loaded, false otherwise
+         *
+         */
+        bool ExtensionsLoader::isLoaded(const String& extension) const
+        {
+            return isLoaded(Extension(extension, []{return true;}));
+        }
+
+        /*! \brief Check whether an OpenGL extension is supported
+         *
+         * \param extension The extension
          *
          * \return Return true if supported, false otherwise
          *
          */
-        bool ExtensionsLoader::isSupported(const String& name) const
+        bool ExtensionsLoader::isSupported(const Extension& extension) const
         {
-            return std::find(m_allExtensions.begin(), m_allExtensions.end(), name) != m_allExtensions.end();
+            return isSupported(extension.name);
+        }
+
+        /*! \brief Check whether an OpenGL extension is supported
+         *
+         * \param extension The name of the extension
+         *
+         * \return Return true if supported, false otherwise
+         *
+         */
+        bool ExtensionsLoader::isSupported(const String& extension) const
+        {
+            return std::find(m_allExtensions.begin(), m_allExtensions.end(), extension) != m_allExtensions.end();
         }
     }
 }

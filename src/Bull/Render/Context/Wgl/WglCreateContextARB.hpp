@@ -1,5 +1,5 @@
-#ifndef Bull_WGLCreateContextARB_hpp
-#define Bull_WGLCreateContextARB_hpp
+#ifndef Bull_WglCreateContextARB_hpp
+#define Bull_WglCreateContextARB_hpp
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 
@@ -30,4 +30,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_WGLCreateContextARB_hpp
+#endif // Bull_WglCreateContextARB_hpp

@@ -39,6 +39,18 @@ namespace Bull
 
         public:
 
+            /*! \brief Default constructor
+             *
+             */
+            ExtensionsLoader() = default;
+
+            /*! \brief Constructor
+             *
+             * \param handler The handler to use to get supported extensions
+             *
+             */
+            ExtensionsLoader(SurfaceHandler handler);
+
             /*! \brief Add an extension to load
              *
              * \param extension The extension to load
@@ -48,10 +60,8 @@ namespace Bull
 
             /*! \brief Load required extensions
              *
-             * \param handler The surface to use to check whether an extension is supported
-             *
              */
-            void load(SurfaceHandler handler);
+            void load();
 
             /*! \brief Check whether an OpenGL extension is loaded
              *
@@ -62,14 +72,32 @@ namespace Bull
              */
             bool isLoaded(const Extension& extension) const;
 
+            /*! \brief Check whether an OpenGL extension is loaded
+             *
+             * \param extension The name of the extension
+             *
+             * \return Return true if loaded, false otherwise
+             *
+             */
+            bool isLoaded(const String& extension) const;
+
             /*! \brief Check whether an OpenGL extension is supported
              *
-             * \param name The name of the extension
+             * \param extension The extension
              *
              * \return Return true if supported, false otherwise
              *
              */
-            bool isSupported(const String& name) const;
+            bool isSupported(const Extension& extension) const;
+
+            /*! \brief Check whether an OpenGL extension is supported
+             *
+             * \param extension The name of the extension
+             *
+             * \return Return true if supported, false otherwise
+             *
+             */
+            bool isSupported(const String& extension) const;
 
         private:
 

@@ -8,19 +8,36 @@
 
 namespace Bull
 {
-    template <typename TChild>
+    template<typename TChild>
     class BULL_API Singleton : public NonCopyable
     {
     public:
 
         typedef std::shared_ptr<TChild> Instance;
 
-        /*! \brief Get the instance of the singleton
+        /*! \brief Get the instance of the singleton. Create the instance if needed
          *
-         * \param Return the instance of the singleton
+         * \param args Arguments to use to create the instance
+         *
+         * \return Return the instance of the singleton
          *
          */
-        static Instance get();
+        template<typename... Args>
+        static Instance get(Args... args);
+
+        /*! \brief Get the instance only if exists
+         *
+         * \return Return the instance is exists, nullptr otherwise
+         *
+         */
+        static Instance getIfExists();
+
+        /*! \brief Check whether the instance is set
+         *
+         * \param Return true if the instance is set, false otherwise
+         *
+         */
+        static bool isSet();
 
     private:
 
