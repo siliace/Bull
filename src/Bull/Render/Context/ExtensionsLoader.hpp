@@ -39,6 +39,18 @@ namespace Bull
 
         public:
 
+            /*! \brief Default constructor
+             *
+             */
+            ExtensionsLoader() = default;
+
+            /*! \brief Constructor
+             *
+             * \param handler The handler to use to get supported extensions
+             *
+             */
+            ExtensionsLoader(SurfaceHandler handler);
+
             /*! \brief Add an extension to load
              *
              * \param extension The extension to load
@@ -48,10 +60,8 @@ namespace Bull
 
             /*! \brief Load required extensions
              *
-             * \param handler The surface to use to check whether an extension is supported
-             *
              */
-            void load(SurfaceHandler handler);
+            void load();
 
             /*! \brief Check whether an OpenGL extension is loaded
              *

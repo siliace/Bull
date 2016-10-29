@@ -17,6 +17,17 @@ namespace Bull
 {
     namespace prv
     {
+         /*! \brief Constructor
+          *
+          * \param handler The handler to use to get supported extensions
+          *
+          */
+         ExtensionsLoader::ExtensionsLoader(SurfaceHandler handler) :
+             m_allExtensions(ExtensionsLoaderType::getExtensions(handler))
+         {
+            /// Nothing
+         }
+
         /*! \brief Add an extension to load
          *
          * \param extension The extension to load
@@ -29,15 +40,11 @@ namespace Bull
 
         /*! \brief Load required extensions
          *
-         * \param handler The surface to use to check whether an extension is supported
-         *
          */
-        void ExtensionsLoader::load(SurfaceHandler handler)
+        void ExtensionsLoader::load()
         {
             if(!m_loaded)
             {
-                m_allExtensions = ExtensionsLoaderType::getExtensions(handler);
-
                 for(Extension& e : m_extensions)
                 {
                     if(isSupported(e.name))

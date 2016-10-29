@@ -33,7 +33,7 @@ namespace Bull
              * \param loader The instance of the extension loader to use
              *
              */
-            static void requireExtensions(const ExtensionsLoader::Instance& loader = ExtensionsLoader::get());
+            static void requireExtensions(const ExtensionsLoader::Instance& loader);
 
             /*! \brief Determine the best XVisualInfo
              *

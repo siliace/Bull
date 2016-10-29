@@ -30,9 +30,23 @@ namespace Bull
         void GlxContext::requireExtensions(const ExtensionsLoader::Instance& loader)
         {
             loader->require(GlxCreateContextARB);
-            loader->require(GlxSwapControlEXT);
-            loader->require(GlxSwapControlMESA);
-            loader->require(GlxSwapControlSGI);
+
+            if(isSupported(GlxSwapControlEXT))
+            {
+                loader->require(GlxSwapControlEXT);
+            }
+            else if(isSupported(GlxSwapControlMESA))
+            {
+                loader->require(GlxSwapControlMESA);
+            }
+            else if(isSupported(GlxSwapControlSGI))
+            {
+                loader->require(GlxSwapControlSGI);
+            }
+            else
+            {
+                Log::get()->notice("VSync is not available on your system");
+            }
         }
 
         /*! \brief Determine the best XVisualInfo
@@ -253,9 +267,9 @@ namespace Bull
             XWindowAttributes attribs;
             GLXContext sharedHandler = (shared.get() != nullptr) ? shared.get()->m_render : 0;
 
-            if(ExtensionsLoader::get()->isLoaded(GlxCreateContextARB))
+            if(isLoaded(GlxCreateContextARB))
             {
-                /// TODO
+                /// Todo
             }
 
             if(m_render == 0)
