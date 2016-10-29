@@ -1,5 +1,4 @@
-#include <GL/gl.h>
-
+#include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/RenderTarget.hpp>
 
 namespace Bull
