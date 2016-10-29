@@ -16,7 +16,7 @@ namespace Bull
         class DirectoryImpl;
     }
 
-    class Directory
+    class BULL_API Directory
     {
     public:
 

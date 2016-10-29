@@ -3,14 +3,14 @@
 
 namespace Bull
 {
-    LocalPtr<Context> Context::s_active;
+    thread_local Context* Context::s_active;
 
     /*! \brief Get the active context in this thread
      *
      * \return Return the context is available, nullptr otherwise
      *
      */
-    LocalPtr<Context>& Context::getActive()
+    const Context* Context::getActive()
     {
         return s_active;
     }
@@ -20,6 +20,18 @@ namespace Bull
      */
     Context::Context() :
         m_impl(prv::GlContext::createInstance())
+    {
+        setActive();
+    }
+
+    /*! \brief Constructor
+     *
+     * \param bitsPerPixel Number of bits per pixel to use
+     * \param settings     Settings to use to create the context
+     *
+     */
+    Context::Context(unsigned int bitsPerPixel, const ContextSettings& settings) :
+        m_impl(prv::GlContext::createInstance(bitsPerPixel, settings))
     {
         setActive();
     }
@@ -45,9 +57,24 @@ namespace Bull
 
         if(result)
         {
-            s_active = result ? this : nullptr;
+            s_active = active ? this : nullptr;
         }
 
         return result;
+    }
+
+    /*! \brief Get the ContextSettings of the context
+     *
+     * \return Return the ContextSettings
+     *
+     */
+    const ContextSettings& Context::getSettings() const
+    {
+        if(m_impl)
+        {
+            return m_impl->getSettings();
+        }
+
+        return ContextSettings();
     }
 }

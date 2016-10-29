@@ -35,7 +35,7 @@ namespace Bull
      * \param settings Parameters to create the OpenGL context
      *
      */
-    Window::Window(const VideoMode& mode, const String& title, Uint32 style)
+    Window::Window(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
         open(mode, title, style);
     }
@@ -58,7 +58,7 @@ namespace Bull
      * \return Return true if the window was open successfully
      *
      */
-    bool Window::open(const VideoMode& mode, const String& title, Uint32 style)
+    bool Window::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
         if(isOpen())
         {
@@ -70,8 +70,8 @@ namespace Bull
             style = Style::Default;
         }
 
-        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style));
-        m_context.reset(prv::GlContext::createInstance(getSystemHandler(), mode.bitsPerPixel));
+        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style, settings));
+        m_context.reset(prv::GlContext::createInstance(getSystemHandler(), mode.bitsPerPixel, settings));
 
         if(style == Style::Fullscreen)
         {
@@ -352,6 +352,21 @@ namespace Bull
         }
 
         return String();
+    }
+
+    /*! \brief Get ContextSettings used to create the context
+     *
+     * \return Return the ContextSettings
+     *
+     */
+    const ContextSettings& Window::getSettings() const
+    {
+        if(m_context)
+        {
+            return m_context->getSettings();
+        }
+
+        return ContextSettings();
     }
 
     /*! \brief Enable or disable the key repeat

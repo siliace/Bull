@@ -9,6 +9,8 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
+#include <Bull/Render/Context/ContextSettings.hpp>
+
 #include <Bull/Window/VideoMode.hpp>
 #include <Bull/Window/Window.hpp>
 #include <Bull/Window/WindowHandler.hpp>
@@ -26,11 +28,12 @@ namespace Bull
              * \param mode The VideoMode to use to create the window
              * \param title The title of the window
              * \param style The style to use to create the window
+             * \param settings Parameters to create the OpenGL context
              *
              * \return Return the created instance
              *
              */
-            static WindowImpl* createInstance(const VideoMode& mode, const String& title, Uint32 style);
+            static WindowImpl* createInstance(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
 
         public:
 

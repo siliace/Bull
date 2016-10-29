@@ -15,6 +15,7 @@
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
+#include <Bull/Render/Context/ContextSettings.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
 #include <Bull/Window/WindowHandler.hpp>
@@ -178,7 +179,7 @@ namespace Bull
          * \param settings Parameters to create the OpenGL context
          *
          */
-        Window(const VideoMode& mode, const String& title, Uint32 style = Style::Default);
+        Window(const VideoMode& mode, const String& title, Uint32 style = Style::Default, const ContextSettings& settings = ContextSettings());
 
         /*! \brief Destructor
          *
@@ -195,7 +196,7 @@ namespace Bull
          * \return Return true if the window was open successfully
          *
          */
-        bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default);
+        bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default, const ContextSettings& settings = ContextSettings());
 
         /*! \brief Check if the window is open
          *
@@ -334,6 +335,13 @@ namespace Bull
          *
          */
         String getTitle() const;
+
+        /*! \brief Get ContextSettings used to create the context
+         *
+         * \return Return the ContextSettings
+         *
+         */
+        const ContextSettings& getSettings() const;
 
         /*! \brief Enable or disable the key repeat
          *

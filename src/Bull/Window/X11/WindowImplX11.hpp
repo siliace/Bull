@@ -28,9 +28,10 @@ namespace Bull
              * \param mode The VideoMode to use to create the window
              * \param title The title of the window
              * \param style The style to use to create the window
+             * \param settings Parameters to create the OpenGL context
              *
              */
-            WindowImplX11(const VideoMode& mode, const String& title, Uint32 style);
+            WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
 
             /*! \brief Destructor
              *

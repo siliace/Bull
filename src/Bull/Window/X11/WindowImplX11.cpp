@@ -1,3 +1,5 @@
+#include <Bull/Render/Context/Glx/GlxContext.hpp>
+
 #include <Bull/Window/X11/WindowImplX11.hpp>
 
 #ifndef Button6
@@ -35,15 +37,24 @@ namespace Bull
          * \param mode The VideoMode to use to create the window
          * \param title The title of the window
          * \param style The style to use to create the window
+         * \param settings Parameters to create the OpenGL context
          *
          */
-        WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style) :
+        WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings) :
             m_display(Display::get()),
             m_handler(0),
             m_isMapped(false)
         {
             XSetWindowAttributes attribs;
-            attribs.event_mask = eventMasks;
+            XVisualInfo vi = GlxContext::getBestVisual(mode.bitsPerPixel, settings);
+
+            attribs.colormap         = XCreateColormap(m_display->getHandler(),
+                                                       m_display->getRootWindow(vi.screen),
+                                                       vi.visual,
+                                                       AllocNone);
+            attribs.event_mask       = eventMasks;
+            attribs.background_pixel = 0;
+            attribs.border_pixel     = 0;
 
             m_handler = XCreateWindow(m_display->getHandler(),
                                       m_display->getRootWindow(),
@@ -52,8 +63,8 @@ namespace Bull
                                       0,
                                       CopyFromParent,
                                       InputOutput,
-                                      nullptr,
-                                      CWEventMask | CWBackPixel,
+                                      vi.visual,
+                                      CWBorderPixel | CWColormap | CWEventMask | CWBackPixel,
                                       &attribs);
 
             setProtocols();
@@ -292,7 +303,7 @@ namespace Bull
          */
         bool WindowImplX11::isMinimized() const
         {
-
+            return false;
         }
 
         /*! \brief Maximize a window
@@ -310,7 +321,7 @@ namespace Bull
          */
         bool WindowImplX11::isMaximized() const
         {
-
+            return false;
         }
 
         /*! \brief Enable or disable the capture of the cursor inside the window
@@ -406,7 +417,7 @@ namespace Bull
          */
         String WindowImplX11::getTitle() const
         {
-
+            return "";
         }
 
         /*! \brief Check if the window has the focus
@@ -416,7 +427,7 @@ namespace Bull
          */
         bool WindowImplX11::hasFocus() const
         {
-
+            return false;
         }
 
         /*! \brief Enter or leave the fullscreen mode
@@ -429,7 +440,7 @@ namespace Bull
          */
         bool WindowImplX11::switchFullscreen(const VideoMode& mode, bool fullscreen)
         {
-
+            return false;
         }
 
         /*! \brief Show or hide the window
