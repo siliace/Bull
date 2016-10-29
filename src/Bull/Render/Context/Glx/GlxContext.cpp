@@ -59,19 +59,22 @@ namespace Bull
          */
         XVisualInfo GlxContext::getBestVisual(unsigned int bitsPerPixel, const ContextSettings& settings)
         {
-            Display::Instance display = Display::get();
-
             int count;
+            Display::Instance display = Display::get();
             XVisualInfo best = XVisualInfo();
             XVisualInfo* visuals = XGetVisualInfo(display->getHandler(), 0, nullptr, &count);
 
             if(visuals)
             {
+                int bestScore = 0;
+                int bestVisual;
+
                 for(int i = 0; i < count; i++)
                 {
                     int doubleBuffer;
                     int red, green, blue, alpha;
-                    int depth, stencil;
+                    int depths, stencil;
+                    int samples, sampleBuffers;
 
                     glXGetConfig(display->getHandler(), &visuals[i], GLX_DOUBLEBUFFER, &doubleBuffer);
                     if(!doubleBuffer)
@@ -79,34 +82,39 @@ namespace Bull
                         continue;
                     }
 
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_RED_SIZE,   &red);
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_GREEN_SIZE, &green);
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_BLUE_SIZE,  &blue);
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_ALPHA_SIZE, &alpha);
-                    if(red + green + blue + alpha != bitsPerPixel)
-                    {
-                        continue;
-                    }
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_RED_SIZE,       &red);
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_GREEN_SIZE,     &green);
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_BLUE_SIZE,      &blue);
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_ALPHA_SIZE,     &alpha);
 
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_DEPTH_SIZE, &depth);
-                    if(depth != settings.depths)
-                    {
-                        continue;
-                    }
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_DEPTH_SIZE,     &depths);
 
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_STENCIL_SIZE, &stencil);
-                    if(stencil != settings.stencil)
-                    {
-                        continue;
-                    }
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_STENCIL_SIZE,   &stencil);
 
-                    best = visuals[i];
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_SAMPLES,        &samples);
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_SAMPLE_BUFFERS, &sampleBuffers);
+
+                    int currentBitsPerPixel = red + green + blue + alpha;
+                    unsigned int antialiasing = (samples) ? sampleBuffers : 0;
+
+                    int score = evaluatePixelFormat(currentBitsPerPixel, depths, stencil, antialiasing, bitsPerPixel, settings);
+
+                    if(score > bestScore)
+                    {
+                        bestScore  = score;
+                        bestVisual = i;
+                    }
                 }
+
+                best = visuals[bestVisual];
+
+                XFree(visuals);
+
+                return best;
             }
 
-            XFree(visuals);
+            return XVisualInfo();
 
-            return best;
         }
 
         /*! \brief Constructor
@@ -195,6 +203,29 @@ namespace Bull
             }
         }
 
+        /*! \brief Activate or deactivate the vertical synchronization
+         *
+         * \param active True to activate, false to deactivate
+         *
+         * \return Return true if success, false otherwise
+         *
+         */
+        void GlxContext::enableVsync(bool active)
+        {
+            if(isSupported(GlxSwapControlEXT))
+            {
+                ext::glXSwapInterval(m_display->getHandler(), m_window, active ? 1 : 0);
+            }
+            else if(isSupported(GlxSwapControlMESA))
+            {
+                mesa::glXSwapInterval(active ? 1 : 0);
+            }
+            else if(isSupported(GlxSwapControlSGI))
+            {
+                sgi::glXSwapInterval(active ? 1 : 0);
+            }
+        }
+
         /*! \brief Get the render surface of the context
          *
          * \return Return the render context
@@ -262,29 +293,65 @@ namespace Bull
         void GlxContext::createContext(const std::shared_ptr<GlxContext>& shared)
         {
             int count = 0;
-            XVisualInfo* visual;
             XVisualInfo  tpl;
-            XWindowAttributes attribs;
+            XVisualInfo* visual;
+            XWindowAttributes WindowAttribs;
             GLXContext sharedHandler = (shared.get() != nullptr) ? shared.get()->m_render : 0;
 
-            if(isLoaded(GlxCreateContextARB))
+            XGetWindowAttributes(m_display->getHandler(), m_window, &WindowAttribs);
+
+            tpl.screen   = m_display->getDefaultScreen();
+            tpl.visualid = XVisualIDFromVisual(WindowAttribs.visual);
+
+            visual = XGetVisualInfo(m_display->getHandler(), VisualIDMask | VisualScreenMask, &tpl, &count);
+
+            if(isLoaded(GlxCreateContextARB) )
             {
-                /// Todo
+                int countConfigs;
+                GLXFBConfig* config = nullptr;
+                GLXFBConfig* configs = nullptr;
+                configs = glXChooseFBConfig(m_display->getHandler(), m_display->getDefaultScreen(), nullptr, &countConfigs);
+
+                for(int i = 0; i < countConfigs; i++)
+                {
+                    XVisualInfo* visualInfo = glXGetVisualFromFBConfig(m_display->getHandler(), configs[i]);
+
+                    if(visualInfo && visualInfo->visualid == visual->visualid)
+                    {
+                        config = &configs[i];
+                        XFree(visualInfo);
+                        break;
+                    }
+                    else if(visualInfo)
+                    {
+                        XFree(visualInfo);
+                    }
+                }
+
+                if(config)
+                {
+                    int attribs[] =
+                    {
+                        GLX_CONTEXT_MAJOR_VERSION_ARB, m_settings.major,
+                        GLX_CONTEXT_MINOR_VERSION_ARB, m_settings.minor,
+                        0
+                    };
+
+                    m_render = glXCreateContextAttribs(m_display->getHandler(), *config, sharedHandler, True, attribs);
+                }
+
+                if(configs)
+                {
+                    XFree(configs);
+                }
             }
 
             if(m_render == 0)
             {
-                XGetWindowAttributes(m_display->getHandler(), m_window, &attribs);
-
-                tpl.screen   = m_display->getDefaultScreen();
-                tpl.visualid = XVisualIDFromVisual(attribs.visual);
-
-                visual = XGetVisualInfo(m_display->getHandler(), VisualIDMask | VisualScreenMask, &tpl, &count);
-
                 m_render = glXCreateContext(m_display->getHandler(), visual, sharedHandler, True);
-
-                XFree(visual);
             }
+
+            XFree(visual);
         }
     }
 }

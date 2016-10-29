@@ -111,6 +111,21 @@ namespace Bull
         return 0;
     }
 
+    /*! \brief Activate or deactivate the vertical synchronization
+     *
+     * \param active True to activate, false to deactivate
+     *
+     * \return Return true if success, false otherwise
+     *
+     */
+    void RenderWindow::enableVsync(bool active)
+    {
+        if(m_context)
+        {
+            m_context->enableVsync(active);
+        }
+    }
+
     /*! \brief Get ContextSettings used to create the context
      *
      * \return Return the ContextSettings

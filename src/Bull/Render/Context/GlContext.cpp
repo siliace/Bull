@@ -123,7 +123,7 @@ namespace Bull
         GlContext* GlContext::createInstance(unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             ContextType* context = new ContextType(shared, bitsPerPixel, settings);
-            context->initialize();
+            context->initialize(settings);
 
             return context;
         }
@@ -140,7 +140,7 @@ namespace Bull
         GlContext* GlContext::createInstance(WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             ContextType* context = new ContextType(shared, window, bitsPerPixel, settings);
-            context->initialize();
+            context->initialize(settings);
 
             return context;
         }
@@ -203,6 +203,30 @@ namespace Bull
         bool GlContext::isSupported(const ExtensionsLoader::Extension& extension)
         {
             return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isSupported(extension) : false;
+        }
+
+        /*! \brief Give a mark to a pixel format
+         *
+         * \param bitsPerPixel
+         * \param depths
+         * \param stencil
+         * \param antialiasing
+         * \param bitsPerPixelWanted
+         * \param settingsWanted
+         *
+         * \return Return the mark of the pixel format
+         *
+         */
+        int GlContext::evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int antialiasing, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted)
+        {
+            int score = 0;
+
+            if(bitsPerPixel == bitsPerPixelWanted)          score += 1;
+            if(depths       == settingsWanted.depths)       score += 1;
+            if(stencil      == settingsWanted.stencil)      score += 1;
+            if(antialiasing == settingsWanted.antialiasing) score += 1;
+
+            return score;
         }
 
         /*! \brief Destructor
@@ -272,8 +296,10 @@ namespace Bull
 
         /*! \brief Enable and perform initializations
          *
+         * \param wanted Settings wanted to create the context
+         *
          */
-        void GlContext::initialize()
+        void GlContext::initialize(const ContextSettings& wanted)
         {
             if(setActive(true))
             {
@@ -303,7 +329,17 @@ namespace Bull
                         m_settings.minor = 1;
                     }
                 }
+
+                if(m_settings.antialiasing > 0 && wanted.antialiasing > 0)
+                {
+                    glEnable(GL_MULTISAMPLE);
+                }
+                else
+                {
+                    m_settings.antialiasing = 0;
+                }
             }
+
         }
     }
 }
