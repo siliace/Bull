@@ -113,13 +113,14 @@ namespace Bull
              * \param bitsPerPixel
              * \param depths
              * \param stencil
+             * \param antialiasing
              * \param bitsPerPixelWanted
              * \param settingsWanted
              *
              * \return Return the mark of the pixel format
              *
              */
-            static int evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted);
+            static int evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int antialiasing, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted);
 
         public:
 
@@ -192,8 +193,10 @@ namespace Bull
 
             /*! \brief Enable and perform initializations
              *
+             * \param wanted Settings wanted to create the context
+             *
              */
-            void initialize();
+            void initialize(const ContextSettings& wanted = ContextSettings());
         };
     }
 }

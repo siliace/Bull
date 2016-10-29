@@ -74,7 +74,7 @@ namespace Bull
                     int doubleBuffer;
                     int red, green, blue, alpha;
                     int depths, stencil;
-                    int score = 0;
+                    int samples, sampleBuffers;
 
                     glXGetConfig(display->getHandler(), &visuals[i], GLX_DOUBLEBUFFER, &doubleBuffer);
                     if(!doubleBuffer)
@@ -82,15 +82,22 @@ namespace Bull
                         continue;
                     }
 
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_RED_SIZE,   &red);
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_GREEN_SIZE, &green);
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_BLUE_SIZE,  &blue);
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_ALPHA_SIZE, &alpha);
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_DEPTH_SIZE, &depths);
-                    glXGetConfig(display->getHandler(), &visuals[i], GLX_STENCIL_SIZE, &stencil);
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_RED_SIZE,       &red);
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_GREEN_SIZE,     &green);
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_BLUE_SIZE,      &blue);
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_ALPHA_SIZE,     &alpha);
+
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_DEPTH_SIZE,     &depths);
+
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_STENCIL_SIZE,   &stencil);
+
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_SAMPLES,        &samples);
+                    glXGetConfig(display->getHandler(), &visuals[i], GLX_SAMPLE_BUFFERS, &sampleBuffers);
 
                     int currentBitsPerPixel = red + green + blue + alpha;
-                    score = evaluatePixelFormat(currentBitsPerPixel, depths, stencil, bitsPerPixel, settings);
+                    unsigned int antialiasing = (samples) ? sampleBuffers : 0;
+
+                    int score = evaluatePixelFormat(currentBitsPerPixel, depths, stencil, antialiasing, bitsPerPixel, settings);
 
                     if(score > bestScore)
                     {
