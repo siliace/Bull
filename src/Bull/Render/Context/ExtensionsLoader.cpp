@@ -43,15 +43,6 @@ namespace Bull
                     if(isSupported(e.name))
                     {
                         e.loaded = e.loader();
-
-                        if(!e.loaded)
-                        {
-                            Log::get()->warning("Failed to load extension: " + e.name);
-                        }
-                    }
-                    else
-                    {
-                        Log::get()->warning("Tried to load unsupported: " + e.name);
                     }
                 }
             }
