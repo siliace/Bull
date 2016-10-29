@@ -43,6 +43,15 @@ namespace Bull
                     if(isSupported(e.name))
                     {
                         e.loaded = e.loader();
+
+                        if(!e.loaded)
+                        {
+                            Log::get()->warning("Failed to load extension: " + e.name);
+                        }
+                    }
+                    else
+                    {
+                        Log::get()->warning("Tried to load unsupported: " + e.name);
                     }
                 }
             }
@@ -88,14 +97,26 @@ namespace Bull
 
         /*! \brief Check whether an OpenGL extension is supported
          *
-         * \param name The name of the extension
+         * \param extension The extension
          *
          * \return Return true if supported, false otherwise
          *
          */
-        bool ExtensionsLoader::isSupported(const String& name) const
+        bool ExtensionsLoader::isSupported(const Extension& extension) const
         {
-            return std::find(m_allExtensions.begin(), m_allExtensions.end(), name) != m_allExtensions.end();
+            return isSupported(extension.name);
+        }
+
+        /*! \brief Check whether an OpenGL extension is supported
+         *
+         * \param extension The name of the extension
+         *
+         * \return Return true if supported, false otherwise
+         *
+         */
+        bool ExtensionsLoader::isSupported(const String& extension) const
+        {
+            return std::find(m_allExtensions.begin(), m_allExtensions.end(), extension) != m_allExtensions.end();
         }
     }
 }

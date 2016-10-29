@@ -1,5 +1,8 @@
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
 #include <Bull/Render/Context/Glx/GlxCreateContextARB.hpp>
+#include <Bull/Render/Context/Glx/GlxSwapControlEXT.hpp>
+#include <Bull/Render/Context/Glx/GlxSwapControlMESA.hpp>
+#include <Bull/Render/Context/Glx/GlxSwapControlSGI.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
 
@@ -27,6 +30,9 @@ namespace Bull
         void GlxContext::requireExtensions(const ExtensionsLoader::Instance& loader)
         {
             loader->require(GlxCreateContextARB);
+            loader->require(GlxSwapControlEXT);
+            loader->require(GlxSwapControlMESA);
+            loader->require(GlxSwapControlSGI);
         }
 
         /*! \brief Determine the best XVisualInfo

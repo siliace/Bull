@@ -73,12 +73,21 @@ namespace Bull
 
             /*! \brief Check whether an OpenGL extension is supported
              *
-             * \param name The name of the extension
+             * \param extension The extension
              *
              * \return Return true if supported, false otherwise
              *
              */
-            bool isSupported(const String& name) const;
+            bool isSupported(const Extension& extension) const;
+
+            /*! \brief Check whether an OpenGL extension is supported
+             *
+             * \param extension The name of the extension
+             *
+             * \return Return true if supported, false otherwise
+             *
+             */
+            bool isSupported(const String& extension) const;
 
         private:
 
