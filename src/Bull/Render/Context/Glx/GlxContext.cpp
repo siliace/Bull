@@ -269,7 +269,61 @@ namespace Bull
 
             if(isLoaded(GlxCreateContextARB))
             {
-                /// Todo
+                int countConfigs;
+                GLXFBConfig* config = nullptr;
+                GLXFBConfig* configs = nullptr;
+                configs = glXChooseFBConfig(m_display->getHandler(), m_display->getDefaultScreen(), nullptr, &countConfigs);
+
+                for(int i = 0; i < countConfigs; i++)
+                {
+                    XVisualInfo* visualInfo = glXGetVisualFromFBConfig(m_display->getHandler(), configs[i]);
+
+                    if(visualInfo && visualInfo->visualid == visual->visualid)
+                    {
+                        config = &configs[i];
+                        XFree(visualInfo);
+                        break;
+                    }
+                    else if(visualInfo)
+                    {
+                        XFree(visualInfo);
+                    }
+                }
+
+                ErrorHandler::Instance handler = ErrorHandler::get();
+
+                if(config)
+                {
+                    do
+                    {
+                        int attribs[] =
+                        {
+                            GLX_CONTEXT_MAJOR_VERSION_ARB, m_settings.major,
+                            GLX_CONTEXT_MINOR_VERSION_ARB, m_settings.minor,
+                            0
+                        };
+
+                        m_render = glXCreateContextAttribs(m_display->getHandler(), *config, sharedHandler, True, attribs);
+
+                        if(m_render == 0)
+                        {
+                            if(m_settings.minor == 0)
+                            {
+                                m_settings.major -= 1;
+                                m_settings.minor  = 9;
+                            }
+                            else
+                            {
+                                m_settings.minor -= 1;
+                            }
+                        }
+                    }while(m_render == 0 && m_settings.major >= 1);
+                }
+
+                if(configs)
+                {
+                    XFree(configs);
+                }
             }
 
             if(m_render == 0)
