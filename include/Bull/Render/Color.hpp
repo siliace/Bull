@@ -26,8 +26,8 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param red   The red component of the color
-         * \param blue  The blue component of the color
          * \param green The green component of the color
+         * \param blue  The blue component of the color
          * \param alpha The alpha (opacity) component of the color
          *
          */

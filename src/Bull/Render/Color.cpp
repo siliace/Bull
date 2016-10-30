@@ -10,7 +10,7 @@ namespace Bull
     Color Color::Cyan        = Color(0,   255, 255);
     Color Color::Black       = Color(0,   0,   0);
     Color Color::White       = Color(255, 255, 255);
-    Color Color::Transparent = Color(0, 0, 0, 255);
+    Color Color::Transparent = Color(0,   0,   0,   255);
 
     /*! \brief Default constructor
      *
@@ -24,15 +24,15 @@ namespace Bull
     /*! \brief Constructor
      *
      * \param red   The red component of the color
-     * \param blue  The blue component of the color
      * \param green The green component of the color
+     * \param blue  The blue component of the color
      * \param alpha The alpha (opacity) component of the color
      *
      */
-    Color::Color(Uint8 red, Uint8 blue, Uint8 green, Uint8 alpha) :
+    Color::Color(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) :
         red(red),
-        blue(blue),
         green(green),
+        blue(blue),
         alpha(alpha)
     {
         /// Nothing
@@ -45,8 +45,8 @@ namespace Bull
      */
     Color::Color(Uint32 hexa) :
         red  ((hexa & 0xff000000) >> 24),
-        blue ((hexa & 0x00ff0000) >> 16),
-        green((hexa & 0x0000ff00) >> 8),
+        green((hexa & 0x0000ff00) >> 16),
+        blue ((hexa & 0x00ff0000) >> 8),
         alpha((hexa & 0x000000ff) >> 0)
     {
         /// Nothing
