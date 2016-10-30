@@ -1,5 +1,6 @@
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Render/GlLoader.hpp>
 
 namespace Bull
 {
@@ -17,6 +18,7 @@ namespace Bull
         if(s_instanceCount == 1)
         {
             prv::GlContext::globalInit();
+            prv::GlLoader::load();
         }
     }
 

@@ -1,14 +1,13 @@
 #include <memory>
 #include <set>
 
-#include <GL/gl.h>
-
 #include <Bull/Core/System/Config.hpp>
 #include <Bull/Core/Thread/LocalPtr.hpp>
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Render/OpenGL.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
 
@@ -18,14 +17,6 @@
 #else
     #include <Bull/Render/Context/Glx/GlxContext.hpp>
     typedef Bull::prv::GlxContext ContextType;
-#endif
-
-#ifndef GL_MAJOR_VERSION
-    #define GL_MAJOR_VERSION 0x821B
-#endif
-
-#ifndef GL_MINOR_VERSION
-    #define GL_MINOR_VERSION 0x821C
 #endif
 
 namespace Bull
