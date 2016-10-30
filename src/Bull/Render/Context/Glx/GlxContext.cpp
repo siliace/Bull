@@ -333,14 +333,30 @@ namespace Bull
 
                 if(config)
                 {
-                    int attribs[] =
+                    do
                     {
-                        GLX_CONTEXT_MAJOR_VERSION_ARB, m_settings.major,
-                        GLX_CONTEXT_MINOR_VERSION_ARB, m_settings.minor,
-                        0
-                    };
+                        int attribs[] =
+                        {
+                            GLX_CONTEXT_MAJOR_VERSION_ARB, m_settings.major,
+                            GLX_CONTEXT_MINOR_VERSION_ARB, m_settings.minor,
+                            0
+                        };
 
-                    m_render = glXCreateContextAttribs(m_display->getHandler(), *config, sharedHandler, True, attribs);
+                        m_render = glXCreateContextAttribs(m_display->getHandler(), *config, sharedHandler, True, attribs);
+
+                        if(m_render == 0)
+                        {
+                            if(m_settings.minor == 0)
+                            {
+                                m_settings.major -= 1;
+                                m_settings.minor  = 9;
+                            }
+                            else
+                            {
+                                m_settings.minor -= 1;
+                            }
+                        }
+                    }while(m_render == 0 && m_settings.major >= 1);
                 }
 
                 if(configs)
