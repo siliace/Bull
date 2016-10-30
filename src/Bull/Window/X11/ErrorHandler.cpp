@@ -33,29 +33,13 @@ namespace Bull
             m_lock(s_mutex),
             m_code(0)
         {
-            /// Nothing
+            m_previousHandler = XSetErrorHandler(&ErrorHandler::handle);
         }
 
         /*! \brief Destructor
          *
          */
         ErrorHandler::~ErrorHandler()
-        {
-            stop();
-        }
-
-        /*! \brief Start to listen errors to handle
-         *
-         */
-        void ErrorHandler::listen()
-        {
-            m_previousHandler = XSetErrorHandler(&ErrorHandler::handle);
-        }
-
-        /*! \brief Stop to handle errors
-         *
-         */
-        void ErrorHandler::stop()
         {
             XSync(Display::get()->getHandler(), False);
             XSetErrorHandler(m_previousHandler);

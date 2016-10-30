@@ -306,7 +306,7 @@ namespace Bull
 
             visual = XGetVisualInfo(m_display->getHandler(), VisualIDMask | VisualScreenMask, &tpl, &count);
 
-            if(isLoaded(GlxCreateContextARB))
+            if(isLoaded(GlxCreateContextARB) )
             {
                 int countConfigs;
                 GLXFBConfig* config = nullptr;
@@ -330,8 +330,6 @@ namespace Bull
                 }
 
                 ErrorHandler::Instance handler = ErrorHandler::get();
-
-                handler->listen();
 
                 if(config)
                 {
@@ -360,8 +358,6 @@ namespace Bull
                         }
                     }while(m_render == 0 && m_settings.major >= 1);
                 }
-
-                handler->stop();
 
                 if(configs)
                 {

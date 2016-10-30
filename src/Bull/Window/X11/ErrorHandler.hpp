@@ -11,23 +11,9 @@ namespace Bull
 {
     namespace prv
     {
-        class ErrorHandler
+        class ErrorHandler : public Singleton<ErrorHandler>
         {
-        private:
-
-            static Mutex s_mutex;
-
         public:
-
-            /*! \brief Default constructor
-             *
-             */
-            ErrorHandler();
-
-            /*! \brief Start to listen errors to handle
-             *
-             */
-            void listen();
 
             /*! \brief Handle Xlib errors
              *
@@ -37,12 +23,18 @@ namespace Bull
              * \return Return always 0
              *
              */
-            int handle(::Display* display, XErrorEvent* error);
+            static int handle(::Display* display, XErrorEvent* error);
 
-            /*! \brief Stop to handle errors
+        private:
+
+            static Mutex s_mutex;
+
+        public:
+
+            /*! \brief Constructor
              *
              */
-            void stop();
+            ErrorHandler();
 
             /*! \brief Destructor
              *
