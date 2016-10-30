@@ -106,6 +106,22 @@ namespace Bull
              */
             static bool isSupported(const ExtensionsLoader::Extension& extension);
 
+        protected:
+
+            /*! \brief Give a mark to a pixel format
+             *
+             * \param bitsPerPixel
+             * \param depths
+             * \param stencil
+             * \param antialiasing
+             * \param bitsPerPixelWanted
+             * \param settingsWanted
+             *
+             * \return Return the mark of the pixel format
+             *
+             */
+            static int evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int antialiasing, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted);
+
         public:
 
             /*! \brief Destructor
@@ -115,7 +131,7 @@ namespace Bull
 
             /*! \brief Activate or deactivate the context
              *
-             * \param active True to activate, false to deactivate the context
+             * \param active True to activate, false to deactivate
              *
              * \return Return true if the context's status changed successfully, false otherwise
              *
@@ -126,6 +142,15 @@ namespace Bull
              *
              */
             virtual void display() = 0;
+
+            /*! \brief Activate or deactivate the vertical synchronization
+             *
+             * \param active True to activate, false to deactivate
+             *
+             * \return Return true if success, false otherwise
+             *
+             */
+            virtual void enableVsync(bool active) = 0;
 
             /*! \brief Get the render surface of the context
              *
@@ -168,8 +193,10 @@ namespace Bull
 
             /*! \brief Enable and perform initializations
              *
+             * \param wanted Settings wanted to create the context
+             *
              */
-            void initialize();
+            void initialize(const ContextSettings& wanted = ContextSettings());
         };
     }
 }

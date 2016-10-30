@@ -39,18 +39,23 @@ namespace Bull
          */
         static bool isSet();
 
+        /*! \brief Destroy the instance
+         *
+         */
+        static void destroy();
+
     private:
 
-        static Mutex m_mutex;
-        static Instance m_instance;
+        static Mutex s_mutex;
+        static Instance s_instance;
 
     };
 
     template <typename TChild>
-    Mutex Singleton<TChild>::m_mutex;
+    Mutex Singleton<TChild>::s_mutex;
 
     template <typename TChild>
-    std::shared_ptr<TChild> Singleton<TChild>::m_instance = std::shared_ptr<TChild>(nullptr);
+    std::shared_ptr<TChild> Singleton<TChild>::s_instance = std::shared_ptr<TChild>(nullptr);
 }
 
 #include <Bull/Core/Pattern/Singleton.inl>

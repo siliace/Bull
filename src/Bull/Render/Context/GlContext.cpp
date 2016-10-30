@@ -1,14 +1,14 @@
 #include <memory>
 #include <set>
 
-#include <GL/gl.h>
-
 #include <Bull/Core/System/Config.hpp>
 #include <Bull/Core/Thread/LocalPtr.hpp>
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/GlLoader.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
 
@@ -18,14 +18,6 @@
 #else
     #include <Bull/Render/Context/Glx/GlxContext.hpp>
     typedef Bull::prv::GlxContext ContextType;
-#endif
-
-#ifndef GL_MAJOR_VERSION
-    #define GL_MAJOR_VERSION 0x821B
-#endif
-
-#ifndef GL_MINOR_VERSION
-    #define GL_MINOR_VERSION 0x821C
 #endif
 
 namespace Bull
@@ -63,7 +55,12 @@ namespace Bull
         void GlContext::globalInit()
         {
             Lock lock(sharedContextMutex);
+
             shared = std::make_shared<ContextType>(nullptr);
+            shared->setActive(true);
+
+            /// We load OpenGL functions before initialize because this method uses OpenGL functions (glEnable, glGetIntegerv...)
+            GlLoader::load();
             shared->initialize();
 
             ExtensionsLoader::Instance loader = ExtensionsLoader::get(shared->getSurfaceHandler());
@@ -123,7 +120,7 @@ namespace Bull
         GlContext* GlContext::createInstance(unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             ContextType* context = new ContextType(shared, bitsPerPixel, settings);
-            context->initialize();
+            context->initialize(settings);
 
             return context;
         }
@@ -140,7 +137,7 @@ namespace Bull
         GlContext* GlContext::createInstance(WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             ContextType* context = new ContextType(shared, window, bitsPerPixel, settings);
-            context->initialize();
+            context->initialize(settings);
 
             return context;
         }
@@ -203,6 +200,30 @@ namespace Bull
         bool GlContext::isSupported(const ExtensionsLoader::Extension& extension)
         {
             return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isSupported(extension) : false;
+        }
+
+        /*! \brief Give a mark to a pixel format
+         *
+         * \param bitsPerPixel
+         * \param depths
+         * \param stencil
+         * \param antialiasing
+         * \param bitsPerPixelWanted
+         * \param settingsWanted
+         *
+         * \return Return the mark of the pixel format
+         *
+         */
+        int GlContext::evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int antialiasing, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted)
+        {
+            int score = 0;
+
+            if(bitsPerPixel == bitsPerPixelWanted)          score += 1;
+            if(depths       == settingsWanted.depths)       score += 1;
+            if(stencil      == settingsWanted.stencil)      score += 1;
+            if(antialiasing == settingsWanted.antialiasing) score += 1;
+
+            return score;
         }
 
         /*! \brief Destructor
@@ -272,25 +293,27 @@ namespace Bull
 
         /*! \brief Enable and perform initializations
          *
+         * \param wanted Settings wanted to create the context
+         *
          */
-        void GlContext::initialize()
+        void GlContext::initialize(const ContextSettings& wanted)
         {
             if(setActive(true))
             {
                 int majorVersion = 0;
                 int minorVersion = 0;
 
-                glGetIntegerv(GL_MAJOR_VERSION, &majorVersion);
-                glGetIntegerv(GL_MINOR_VERSION, &minorVersion);
+                gl::getIntegerv(GL_MAJOR_VERSION, &majorVersion);
+                gl::getIntegerv(GL_MINOR_VERSION, &minorVersion);
 
-                if(glGetError() != GL_INVALID_ENUM)
+                if(gl::getError() != GL_INVALID_ENUM)
                 {
                     m_settings.major = static_cast<unsigned int>(majorVersion);
                     m_settings.minor = static_cast<unsigned int>(minorVersion);
                 }
                 else
                 {
-                    const GLubyte* version = glGetString(GL_VERSION);
+                    const GLubyte* version = gl::getString(GL_VERSION);
 
                     if (version)
                     {
@@ -303,7 +326,17 @@ namespace Bull
                         m_settings.minor = 1;
                     }
                 }
+
+                if(m_settings.antialiasing > 0 && wanted.antialiasing > 0)
+                {
+                    gl::enable(GL_MULTISAMPLE);
+                }
+                else
+                {
+                    m_settings.antialiasing = 0;
+                }
             }
+
         }
     }
 }

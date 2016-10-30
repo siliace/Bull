@@ -86,7 +86,16 @@ namespace Bull
             /*! \brief Display what has been rendered so far
              *
              */
-            void display();
+            void display() override;
+
+            /*! \brief Activate or deactivate the vertical synchronization
+             *
+             * \param active True to activate, false to deactivate
+             *
+             * \return Return true if success, false otherwise
+             *
+             */
+            void enableVsync(bool active) override;
 
             /*! \brief Get the render surface of the context
              *
@@ -102,7 +111,7 @@ namespace Bull
              * \return Return true if the context is now active, false otherwise
              *
              */
-            bool makeCurrent();
+            bool makeCurrent() override;
 
         private:
 

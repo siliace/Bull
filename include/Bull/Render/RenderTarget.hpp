@@ -5,6 +5,8 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Config.hpp>
 
+#include <Bull/Render/Color.hpp>
+
 namespace Bull
 {
     class BULL_API RenderTarget : public NonCopyable
@@ -24,7 +26,14 @@ namespace Bull
          * \param alpha The alpha component of the color
          *
          */
-        void clear(Uint8 red = 0, Uint8 green = 0, Uint8 blue = 0, Uint8 alpha = 255);
+        void clear(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha = 255);
+
+        /*! \brief Clear the RenderTarget with the specified color
+         *
+         * \param color The color to use
+         *
+         */
+        void clear(const Color& color = Color::Black);
 
     protected:
 

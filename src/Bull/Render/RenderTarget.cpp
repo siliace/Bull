@@ -1,5 +1,4 @@
-#include <GL/gl.h>
-
+#include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/RenderTarget.hpp>
 
 namespace Bull
@@ -24,12 +23,22 @@ namespace Bull
     {
         if(setActive())
         {
-            glClearColor(static_cast<float>(red / 255.f),
-                         static_cast<float>(green / 255.f),
-                         static_cast<float>(blue / 255.f),
-                         static_cast<float>(alpha / 255.f));
+            gl::clearColor(static_cast<float>(red)   / 255.f,
+                           static_cast<float>(green) / 255.f,
+                           static_cast<float>(blue)  / 255.f,
+                           static_cast<float>(alpha) / 255.f);
 
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            gl::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         }
+    }
+
+    /*! \brief Clear the RenderTarget with the specified color
+     *
+     * \param color The color to use
+     *
+     */
+    void RenderTarget::clear(const Color& color)
+    {
+        clear(color.red, color.green, color.blue, color.alpha);
     }
 }
