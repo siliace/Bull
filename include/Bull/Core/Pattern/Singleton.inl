@@ -9,19 +9,19 @@ namespace Bull
     template<typename... Args>
     std::shared_ptr<TChild> Singleton<TChild>::get(Args... args)
     {
-        if(!m_instance.get())
+        if(!s_instance.get())
         {
-            m_mutex.lock();
+            s_mutex.lock();
 
-            if(!m_instance.get())
+            if(!s_instance.get())
             {
-                m_instance = std::make_shared<TChild>(args...);
+                s_instance = std::make_shared<TChild>(args...);
             }
 
-            m_mutex.unlock();
+            s_mutex.unlock();
         }
 
-        return m_instance;
+        return s_instance;
     }
 
     /*! \brief Get the instance only if exists
@@ -32,7 +32,7 @@ namespace Bull
     template<typename TChild>
     std::shared_ptr<TChild> Singleton<TChild>::getIfExists()
     {
-        return isSet() ? m_instance : nullptr;
+        return isSet() ? s_instance : nullptr;
     }
 
     /*! \brief Check whether the instance is set
@@ -43,6 +43,15 @@ namespace Bull
     template <typename TChild>
     bool Singleton<TChild>::isSet()
     {
-        return m_instance.get() != nullptr;
+        return s_instance.get() != nullptr;
+    }
+
+    /*! \brief Destroy the instance
+     *
+     */
+    template <typename TChild>
+    void Singleton<TChild>::destroy()
+    {
+        s_instance.reset();
     }
 }
