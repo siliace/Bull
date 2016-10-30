@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
 #include <Bull/Render/Context/Glx/GlxCreateContextARB.hpp>
 #include <Bull/Render/Context/Glx/GlxSwapControlEXT.hpp>
@@ -216,7 +218,9 @@ namespace Bull
          */
         void GlxContext::display()
         {
-            if(m_render && m_window)
+            ErrorHandler::Instance handler = ErrorHandler::get();
+
+            if(m_window)
             {
                 glXSwapBuffers(m_display->getHandler(), m_window);
             }
@@ -337,16 +341,19 @@ namespace Bull
                 {
                     XVisualInfo* visualInfo = glXGetVisualFromFBConfig(m_display->getHandler(), configs[i]);
 
-                    if(visualInfo && visualInfo->visualid == visual->visualid)
+                    if(!visualInfo)
+                    {
+                        continue;
+                    }
+
+                    if(visualInfo->visualid == visual->visualid)
                     {
                         config = &configs[i];
                         XFree(visualInfo);
                         break;
                     }
-                    else if(visualInfo)
-                    {
-                        XFree(visualInfo);
-                    }
+
+                    XFree(visualInfo);
                 }
 
                 ErrorHandler::Instance handler = ErrorHandler::get();
