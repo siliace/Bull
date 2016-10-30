@@ -31,9 +31,10 @@ namespace Bull
          */
         ErrorHandler::ErrorHandler() :
             m_lock(s_mutex),
-            m_code(0)
+            m_code(0),
+            m_isBinded(false)
         {
-            listen();
+            /// Nothing
         }
 
         /*! \brief Destructor
@@ -65,6 +66,7 @@ namespace Bull
             {
                 XSync(Display::get()->getHandler(), False);
                 XSetErrorHandler(m_previousHandler);
+                m_isBinded = false;
             }
         }
 

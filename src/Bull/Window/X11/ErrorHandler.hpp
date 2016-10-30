@@ -71,7 +71,7 @@ namespace Bull
             String        m_message;
             unsigned int  m_code;
             XErrorHandler m_previousHandler;
-            bool          m_isBinded = false;
+            bool          m_isBinded;
         };
     }
 }

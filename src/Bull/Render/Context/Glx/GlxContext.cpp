@@ -11,6 +11,24 @@ namespace Bull
 {
     namespace prv
     {
+        namespace
+        {
+            struct GlXVersion
+            {
+                int major;
+                int minor;
+            };
+
+            GlXVersion getGlXVersion()
+            {
+                GlXVersion version;
+
+                glXQueryVersion(Display::get()->getHandler(), &version.major, &version.minor);
+
+                return version;
+            }
+        }
+
         /*! \brief Get an OpenGL function
          *
          * \param function The function name
@@ -306,7 +324,9 @@ namespace Bull
 
             visual = XGetVisualInfo(m_display->getHandler(), VisualIDMask | VisualScreenMask, &tpl, &count);
 
-            if(isLoaded(GlxCreateContextARB) )
+            GlXVersion version = getGlXVersion();
+
+            if(isLoaded(GlxCreateContextARB) && (version.major > 1 || (version.major == 1 && version.minor >= 3)))
             {
                 int countConfigs;
                 GLXFBConfig* config = nullptr;
@@ -330,6 +350,8 @@ namespace Bull
                 }
 
                 ErrorHandler::Instance handler = ErrorHandler::get();
+
+                handler->listen();
 
                 if(config)
                 {
