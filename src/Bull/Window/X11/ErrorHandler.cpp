@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <Bull/Window/X11/ErrorHandler.hpp>
 
 namespace Bull
@@ -23,7 +21,7 @@ namespace Bull
             handler->m_code = error->error_code;
             handler->m_message.reserve(256);
 
-            XGetErrorText(display, error->error_code, &handler->m_message[0], handler->m_message.getSize());
+            XGetErrorText(display, error->error_code, &handler->m_message[0], handler->m_message.getCapacity());
 
             return 0;
         }
