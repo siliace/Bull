@@ -31,7 +31,7 @@ namespace Bull
 
         public:
 
-            /*! \brief Constructor
+            /*! \brief Default constructor
              *
              */
             ErrorHandler();
@@ -40,6 +40,16 @@ namespace Bull
              *
              */
             ~ErrorHandler();
+
+            /*! \brief Start to listen errors to handle
+             *
+             */
+            void listen();
+
+            /*! \brief Stop to listen errors
+             *
+             */
+            void close();
 
             /*! \brief Get the message associated to the last error
              *
@@ -61,6 +71,7 @@ namespace Bull
             String        m_message;
             unsigned int  m_code;
             XErrorHandler m_previousHandler;
+            bool          m_isBinded = false;
         };
     }
 }

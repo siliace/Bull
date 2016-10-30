@@ -26,14 +26,14 @@ namespace Bull
             return 0;
         }
 
-        /*! \brief Constructor
+        /*! \brief Default constructor
          *
          */
         ErrorHandler::ErrorHandler() :
             m_lock(s_mutex),
             m_code(0)
         {
-            m_previousHandler = XSetErrorHandler(&ErrorHandler::handle);
+            listen();
         }
 
         /*! \brief Destructor
@@ -41,8 +41,31 @@ namespace Bull
          */
         ErrorHandler::~ErrorHandler()
         {
-            XSync(Display::get()->getHandler(), False);
-            XSetErrorHandler(m_previousHandler);
+            close();
+        }
+
+        /*! \brief Start to listen errors to handle
+         *
+         */
+        void ErrorHandler::listen()
+        {
+            if(!m_isBinded)
+            {
+                m_previousHandler = XSetErrorHandler(&ErrorHandler::handle);
+                m_isBinded = true;
+            }
+        }
+
+        /*! \brief Stop to listen errors
+         *
+         */
+        void ErrorHandler::close()
+        {
+            if(m_isBinded)
+            {
+                XSync(Display::get()->getHandler(), False);
+                XSetErrorHandler(m_previousHandler);
+            }
         }
 
         /*! \brief Get the message associated to the last error

@@ -359,6 +359,8 @@ namespace Bull
                     }while(m_render == 0 && m_settings.major >= 1);
                 }
 
+                handler->close();
+
                 if(configs)
                 {
                     XFree(configs);
