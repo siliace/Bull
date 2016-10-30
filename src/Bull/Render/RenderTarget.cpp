@@ -23,12 +23,12 @@ namespace Bull
     {
         if(setActive())
         {
-            glClearColor(static_cast<float>(red)   / 255.f,
-                         static_cast<float>(green) / 255.f,
-                         static_cast<float>(blue)  / 255.f,
-                         static_cast<float>(alpha) / 255.f);
+            gl::clearColor(static_cast<float>(red)   / 255.f,
+                           static_cast<float>(green) / 255.f,
+                           static_cast<float>(blue)  / 255.f,
+                           static_cast<float>(alpha) / 255.f);
 
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            gl::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         }
     }
 

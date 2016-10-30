@@ -190,6 +190,21 @@ namespace Bull
             }
         }
 
+        /*! \brief Activate or deactivate the vertical synchronization
+         *
+         * \param active True to activate, false to deactivate
+         *
+         * \return Return true if success, false otherwise
+         *
+         */
+        void WglContext::enableVsync(bool active)
+        {
+            if(isLoaded(WglSwapControlEXT))
+            {
+                wglSwapInterval(active ? 1 : 0);
+            }
+        }
+
         /*! \brief Make the context current
          *
          * \return Return true if the context is now active, false otherwise
@@ -249,7 +264,7 @@ namespace Bull
 
             if(ExtensionsLoader::get()->isLoaded(WglCreateContextARB))
             {
-                static const int attribs[] =
+                const int attribs[] =
                 {
                     WGL_CONTEXT_MAJOR_VERSION_ARB, m_settings.major,
                     WGL_CONTEXT_MINOR_VERSION_ARB, m_settings.minor,

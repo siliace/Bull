@@ -8,6 +8,7 @@
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
 #include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/GlLoader.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
 
@@ -54,7 +55,12 @@ namespace Bull
         void GlContext::globalInit()
         {
             Lock lock(sharedContextMutex);
+
             shared = std::make_shared<ContextType>(nullptr);
+            shared->setActive(true);
+
+            /// We load OpenGL functions before initialize because this method uses OpenGL functions (glEnable, glGetIntegerv...)
+            GlLoader::load();
             shared->initialize();
 
             ExtensionsLoader::Instance loader = ExtensionsLoader::get(shared->getSurfaceHandler());
@@ -297,17 +303,17 @@ namespace Bull
                 int majorVersion = 0;
                 int minorVersion = 0;
 
-                glGetIntegerv(GL_MAJOR_VERSION, &majorVersion);
-                glGetIntegerv(GL_MINOR_VERSION, &minorVersion);
+                gl::getIntegerv(GL_MAJOR_VERSION, &majorVersion);
+                gl::getIntegerv(GL_MINOR_VERSION, &minorVersion);
 
-                if(glGetError() != GL_INVALID_ENUM)
+                if(gl::getError() != GL_INVALID_ENUM)
                 {
                     m_settings.major = static_cast<unsigned int>(majorVersion);
                     m_settings.minor = static_cast<unsigned int>(minorVersion);
                 }
                 else
                 {
-                    const GLubyte* version = glGetString(GL_VERSION);
+                    const GLubyte* version = gl::getString(GL_VERSION);
 
                     if (version)
                     {
@@ -323,7 +329,7 @@ namespace Bull
 
                 if(m_settings.antialiasing > 0 && wanted.antialiasing > 0)
                 {
-                    glEnable(GL_MULTISAMPLE);
+                    gl::enable(GL_MULTISAMPLE);
                 }
                 else
                 {

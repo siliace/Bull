@@ -83,6 +83,15 @@ namespace Bull
              */
             void display() override;
 
+            /*! \brief Activate or deactivate the vertical synchronization
+             *
+             * \param active True to activate, false to deactivate
+             *
+             * \return Return true if success, false otherwise
+             *
+             */
+            void enableVsync(bool active) override;
+
             /*! \brief Get the render surface of the context
              *
              * \return Return the render context
