@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
 #include <Bull/Render/Context/Glx/GlxCreateContextARB.hpp>
 #include <Bull/Render/Context/Glx/GlxSwapControlEXT.hpp>
@@ -218,8 +216,6 @@ namespace Bull
          */
         void GlxContext::display()
         {
-            ErrorHandler::Instance handler = ErrorHandler::get();
-
             if(m_window)
             {
                 glXSwapBuffers(m_display->getHandler(), m_window);
