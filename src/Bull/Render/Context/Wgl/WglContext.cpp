@@ -147,12 +147,17 @@ namespace Bull
 
                             if(bestScore > score)
                             {
-                                bestScore = score;
+                                bestScore       = score;
                                 bestPixelFormat = formats[i];
                             }
                         }
                     }
                 }
+            }
+
+            if(usePbuffer)
+            {
+                return bestPixelFormat;
             }
 
             if(!bestPixelFormat)
@@ -200,7 +205,7 @@ namespace Bull
             m_pbuffer(0),
             m_ownWindow(false)
         {
-            createSurface(1, 1, bitsPerPixel);
+            createSurface(shared, 1, 1, bitsPerPixel);
 
             if(m_device)
             {
@@ -251,7 +256,15 @@ namespace Bull
 
             if(m_device)
             {
-                ReleaseDC(m_window, m_device);
+                if(m_pbuffer)
+                {
+                    wglReleasePbufferDC(m_pbuffer, m_device);
+                    wglDestroyPbuffer(m_pbuffer);
+                }
+                else
+                {
+                    ReleaseDC(m_window, m_device);
+                }
             }
 
             if(m_window && m_ownWindow)
@@ -308,11 +321,26 @@ namespace Bull
             m_device = GetDC(m_window);
         }
 
-        void WglContext::createSurface(unsigned int width, unsigned int height, unsigned int bitsPerPixel)
+        void WglContext::createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, unsigned int bitsPerPixel)
         {
-            if(isLoaded(WglPbuffer))
+            if(isLoaded(WglPbuffer) && shared)
             {
-                /// Todo: use pbuffer
+                int format = getBestPixelFormat(shared->m_device, bitsPerPixel, m_settings, true);
+
+                if(format)
+                {
+                    m_pbuffer = wglCreatePbuffer(shared->m_device, format, width, height, nullptr);
+
+                    if(m_pbuffer)
+                    {
+                        m_device = wglGetPbufferDC(m_pbuffer);
+
+                        if(!m_device)
+                        {
+                            wglDestroyPbuffer(m_pbuffer);
+                        }
+                    }
+                }
             }
 
             if(!m_device)

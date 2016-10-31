@@ -113,7 +113,7 @@ namespace Bull
 
             void createSurface(WindowHandler window);
 
-            void createSurface(unsigned int width, unsigned int height, unsigned int bitsPerPixel);
+            void createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, unsigned int bitsPerPixel);
 
             void setPixelFormat(unsigned int bitsPerPixel);
 
