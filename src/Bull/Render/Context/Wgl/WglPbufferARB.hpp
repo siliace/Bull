@@ -4,7 +4,6 @@
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 
 #define WGL_DRAW_TO_PBUFFER_ARB    0x202D
-#define WGL_DRAW_TO_PBUFFER_ARB    0x202D
 #define WGL_MAX_PBUFFER_PIXELS_ARB 0x202E
 #define WGL_MAX_PBUFFER_WIDTH_ARB  0x202F
 #define WGL_MAX_PBUFFER_HEIGHT_ARB 0x2030
@@ -23,7 +22,7 @@ namespace Bull
         BOOL (WINAPI* wglDestroyPbuffer)(HPBUFFER hPbuffer) = nullptr;
         BOOL (WINAPI* wglQueryPbuffer)(HPBUFFER hPbuffer, int iAttribute, int *piValue) = nullptr;
 
-        ExtensionsLoader::Extension WglPbufferARB("WGL_ARB_pbuffer", []
+        ExtensionsLoader::Extension WglPbuffer("WGL_ARB_pbuffer", []
         {
             wglCreatePbuffer    = reinterpret_cast<HPBUFFER (WINAPI*)(HDC, int, int , int, const int*)>(GlContext::getFunction("wglCreatePbufferARB"));
             wglGetPbufferDC     = reinterpret_cast<HDC (WINAPI*)(HPBUFFER)>(GlContext::getFunction("wglGetPbufferDCARB"));
