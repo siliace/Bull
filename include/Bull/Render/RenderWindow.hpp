@@ -86,6 +86,13 @@ namespace Bull
          */
         const ContextSettings& getSettings() const;
 
+        /*! \brief Get the default viewport of the RenderTarget
+         *
+         * \return Return the viewport
+         *
+         */
+        Viewport getDefaultViewport() const override;
+
     private:
 
         Time  m_frameDelay;

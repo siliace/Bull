@@ -140,4 +140,21 @@ namespace Bull
 
         return ContextSettings();
     }
+
+    /*! \brief Get the default viewport of the RenderTarget
+     *
+     * \return Return the viewport
+     *
+     */
+    Viewport RenderWindow::getDefaultViewport() const
+    {
+        Viewport viewport;
+
+        viewport.x      = 0;
+        viewport.y      = 0;
+        viewport.width  = getSize().x;
+        viewport.height = getSize().y;
+
+        return viewport;
+    }
 }

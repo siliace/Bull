@@ -5,7 +5,10 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Config.hpp>
 
+#include <Bull/Math/Vector/Vector2.hpp>
+
 #include <Bull/Render/Color.hpp>
+#include <Bull/Render/Viewport.hpp>
 
 namespace Bull
 {
@@ -35,6 +38,27 @@ namespace Bull
          */
         void clear(const Color& color = Color::Black);
 
+        /*! \brief Change the viewport of the RenderTarget
+         *
+         * \param viewport The viewport
+         *
+         */
+        void setViewport(const Viewport& viewport);
+
+        /*! \brief Get the current viewport of the RenderTarget
+         *
+         * \return Return the viewport
+         *
+         */
+        const Viewport& getViewport() const;
+
+        /*! \brief Get the default viewport of the RenderTarget
+         *
+         * \return Return the viewport
+         *
+         */
+        virtual Viewport getDefaultViewport() const = 0;
+
     protected:
 
         /*! \brief Activate or deactivate the context
@@ -45,6 +69,10 @@ namespace Bull
          *
          */
         virtual bool setActive(bool active = true) = 0;
+
+    private:
+
+        Viewport m_current;
     };
 }
 
