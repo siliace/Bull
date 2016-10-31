@@ -39,11 +39,12 @@ namespace Bull
              * \param device       The device handler
              * \param bitsPerPixel The number of bits per pixel to use to create colors
              * \param settings     Settings to use to create the OpenGL context
+             * \param usePbuffer   The pixel format must be compatible with Pbuffer
              *
              * \return Return the pixel format
              *
              */
-            static int getBestPixelFormat(HDC device, unsigned int bitsPerPixel, const ContextSettings& settings);
+            static int getBestPixelFormat(HDC device, unsigned int bitsPerPixel, const ContextSettings& settings, bool usePbuffer = false);
 
         public:
 
@@ -117,6 +118,8 @@ namespace Bull
             void setPixelFormat(unsigned int bitsPerPixel);
 
             void createContext(const std::shared_ptr<WglContext>& shared);
+
+            void updateSettings();
 
             HWND     m_window;
             HDC      m_device;

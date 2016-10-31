@@ -1,10 +1,14 @@
+#include <limits>
+
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
 #include <Bull/Render/Context/Wgl/WglCreateContextARB.hpp>
+#include <Bull/Render/Context/Wgl/WglMultisampleARB.hpp>
 #include <Bull/Render/Context/Wgl/WglPbufferARB.hpp>
 #include <Bull/Render/Context/Wgl/WglPixelFormatARB.hpp>
 #include <Bull/Render/Context/Wgl/WglSwapControlEXT.hpp>
+#include <Bull/Render/OpenGL.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
 
@@ -45,10 +49,10 @@ namespace Bull
          */
         void WglContext::requireExtensions(const ExtensionsLoader::Instance& loader)
         {
-            loader->require(WglCreateContextARB);
-            loader->require(WglPixelFormatARB);
-            loader->require(WglSwapControlEXT);
-            loader->require(WglPbufferARB);
+            loader->require(WglCreateContext);
+            loader->require(WglPixelFormat);
+            loader->require(WglSwapControl);
+            loader->require(WglPbuffer);
         }
 
         /*! \brief Get the best pixel format for a device handler
@@ -60,13 +64,95 @@ namespace Bull
          * \return Return the pixel format
          *
          */
-        int WglContext::getBestPixelFormat(HDC device, unsigned int bitsPerPixel, const ContextSettings& settings)
+        int WglContext::getBestPixelFormat(HDC device, unsigned int bitsPerPixel, const ContextSettings& settings, bool usePbuffer)
         {
             int bestPixelFormat = 0;
 
-            if(ExtensionsLoader::get()->isLoaded(WglPixelFormatARB))
+            if(isLoaded(WglPixelFormat))
             {
-                /// Todo: Use wglpixelformatarb
+                static const int attribs[] =
+                {
+                    WGL_DRAW_TO_WINDOW_ARB, GL_TRUE,
+                    WGL_SUPPORT_OPENGL_ARB, GL_TRUE,
+                    WGL_DOUBLE_BUFFER_ARB,  GL_TRUE,
+                    WGL_PIXEL_TYPE_ARB,     WGL_TYPE_RGBA_ARB,
+                    0
+                };
+
+                int formats[512];
+                UINT count = 0;
+                bool isValid = wglChoosePixelFormat(device, attribs, nullptr, 512, formats, &count) != 0;
+
+                if(isValid && count > 0)
+                {
+                    int bestScore = std::numeric_limits<int>::max();
+
+                    for(UINT i = 0; i < count; i++)
+                    {
+                        int format[7]  = {0};
+                        int sample[2]  = {0};
+                        static const int formatAttribs[] =
+                        {
+                            WGL_RED_BITS_ARB,
+                            WGL_GREEN_BITS_ARB,
+                            WGL_BLUE_BITS_ARB,
+                            WGL_ALPHA_BITS_ARB,
+                            WGL_DEPTH_BITS_ARB,
+                            WGL_STENCIL_BITS_ARB,
+                            WGL_ACCELERATION_ARB
+                        };
+
+                        if(!wglGetPixelFormatAttribiv(device, formats[i], PFD_MAIN_PLANE, 7, formatAttribs, format))
+                        {
+                            break;
+                        }
+
+                        if(isSupported(WglMultisample))
+                        {
+                            static const int sampleAttribs[] =
+                            {
+                                WGL_SAMPLE_BUFFERS_ARB,
+                                WGL_SAMPLES_ARB
+                            };
+
+                            if(!wglGetPixelFormatAttribiv(device, formats[i], PFD_MAIN_PLANE, 2, sampleAttribs, sample))
+                            {
+                                break;
+                            }
+                        }
+
+                        if(usePbuffer)
+                        {
+                            int pbuffer;
+                            static const int pbufferAttribs[] =
+                            {
+                                WGL_DRAW_TO_PBUFFER_ARB
+                            };
+
+                            if(!wglGetPixelFormatAttribiv(device, formats[i], PFD_MAIN_PLANE, 1, pbufferAttribs, &pbuffer))
+                            {
+                                break;
+                            }
+                            else if(pbuffer != GL_TRUE)
+                            {
+                                continue;
+                            }
+                        }
+
+                        /// We don't care about non hardware accelerated pixel format
+                        if(format[6])
+                        {
+                            int colors = format[0] + format[1] + format[2] + format[3];
+                            int score  = evaluatePixelFormat(colors, format[4], format[5], sample[0] ? sample[1] : 0, bitsPerPixel, settings);
+
+                            if(bestScore > score)
+                            {
+                                bestScore = score;
+                                bestPixelFormat = formats[i];
+                            }
+                        }
+                    }
+                }
             }
 
             if(!bestPixelFormat)
@@ -199,7 +285,7 @@ namespace Bull
          */
         void WglContext::enableVsync(bool active)
         {
-            if(isLoaded(WglSwapControlEXT))
+            if(isLoaded(WglSwapControl))
             {
                 wglSwapInterval(active ? 1 : 0);
             }
@@ -224,7 +310,7 @@ namespace Bull
 
         void WglContext::createSurface(unsigned int width, unsigned int height, unsigned int bitsPerPixel)
         {
-            if(ExtensionsLoader::get()->isLoaded(WglPbufferARB))
+            if(isLoaded(WglPbuffer))
             {
                 /// Todo: use pbuffer
             }
@@ -262,7 +348,7 @@ namespace Bull
         {
             HGLRC sharedHandler = shared ? shared->m_render : 0;
 
-            if(ExtensionsLoader::get()->isLoaded(WglCreateContextARB))
+            if(isLoaded(WglCreateContext))
             {
                 const int attribs[] =
                 {
@@ -286,6 +372,69 @@ namespace Bull
 
                     wglShareLists(sharedHandler, m_render);
                 }
+            }
+
+            updateSettings();
+        }
+
+        void WglContext::updateSettings()
+        {
+            int pixelFormat = GetPixelFormat(m_device);
+            PIXELFORMATDESCRIPTOR pfd;
+            pfd.nVersion = 1;
+            pfd.nSize    = sizeof(PIXELFORMATDESCRIPTOR);
+
+            DescribePixelFormat(m_device, pixelFormat, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
+
+            if(isLoaded(WglPixelFormat))
+            {
+                int format[2] = {0};
+
+                static const int formatAttribs[] =
+                {
+                    WGL_DEPTH_BITS_ARB,
+                    WGL_STENCIL_BITS_ARB
+                };
+
+                if(wglGetPixelFormatAttribiv(m_device, pixelFormat, PFD_MAIN_PLANE, 2, formatAttribs, format))
+                {
+                    m_settings.depths  = format[0];
+                    m_settings.stencil = format[1];
+                }
+                else
+                {
+                    m_settings.depths  = pfd.cDepthBits;
+                    m_settings.stencil = pfd.cStencilBits;
+                }
+
+                if(isSupported(WglMultisample))
+                {
+                    int sample[2] = {0};
+                    static const int sampleAttribs[] =
+                    {
+                        WGL_SAMPLE_BUFFERS_ARB,
+                        WGL_SAMPLES_ARB
+                    };
+
+                    if(wglGetPixelFormatAttribiv(m_device, pixelFormat, PFD_MAIN_PLANE, 2, sampleAttribs, sample))
+                    {
+                        m_settings.antialiasing = sample[0] ? sample[1] : 0;
+                    }
+                    else
+                    {
+                        m_settings.antialiasing = 0;
+                    }
+                }
+                else
+                {
+                    m_settings.antialiasing = 0;
+                }
+            }
+            else
+            {
+                m_settings.depths  = pfd.cDepthBits;
+                m_settings.stencil = pfd.cStencilBits;
+                m_settings.antialiasing = 0;
             }
         }
     }

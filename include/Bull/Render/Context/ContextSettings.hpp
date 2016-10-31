@@ -11,7 +11,7 @@ namespace Bull
         Uint8 minor = 5;
         Uint8 depths  = 24;
         Uint8 stencil = 8;
-        Uint8 antialiasing = 0;
+        Uint8 antialiasing = 16;
     };
 }
 

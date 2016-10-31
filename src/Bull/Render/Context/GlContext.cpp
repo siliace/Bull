@@ -60,12 +60,12 @@ namespace Bull
             shared->setActive(true);
 
             /// We load OpenGL functions before initialize because this method uses OpenGL functions (glEnable, glGetIntegerv...)
-            GlLoader::load();
-            shared->initialize();
-
             ExtensionsLoader::Instance loader = ExtensionsLoader::get(shared->getSurfaceHandler());
             ContextType::requireExtensions(loader);
+            GlLoader::load();
             loader->load();
+
+            shared->initialize();
 
             /// Ensure two things:
             /// + The shared context is disabled
@@ -216,12 +216,17 @@ namespace Bull
          */
         int GlContext::evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int antialiasing, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted)
         {
-            int score = 0;
+            int colorDiff        = static_cast<int>(bitsPerPixelWanted)          - bitsPerPixel;
+            int depthDiff        = static_cast<int>(settingsWanted.depths)       - depths;
+            int stencilDiff      = static_cast<int>(settingsWanted.stencil)      - stencil;
+            int antialiasingDiff = static_cast<int>(settingsWanted.antialiasing) - antialiasing;
 
-            if(bitsPerPixel == bitsPerPixelWanted)          score += 1;
-            if(depths       == settingsWanted.depths)       score += 1;
-            if(stencil      == settingsWanted.stencil)      score += 1;
-            if(antialiasing == settingsWanted.antialiasing) score += 1;
+            colorDiff        *= ((colorDiff        > 0) ? 100000 : 1);
+            depthDiff        *= ((depthDiff        > 0) ? 100000 : 1);
+            stencilDiff      *= ((stencilDiff      > 0) ? 100000 : 1);
+            antialiasingDiff *= ((antialiasingDiff > 0) ? 100000 : 1);
+
+            int score = std::abs(colorDiff) + std::abs(depthDiff) + std::abs(stencilDiff) + std::abs(antialiasingDiff);
 
             return score;
         }
