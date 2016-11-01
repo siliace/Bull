@@ -7,7 +7,7 @@ namespace Bull
      */
     template<typename TChild>
     template<typename... Args>
-    std::shared_ptr<TChild> Singleton<TChild>::get(Args... args)
+    std::unique_ptr<TChild>& Singleton<TChild>::get(Args... args)
     {
         if(!s_instance.get())
         {
@@ -15,7 +15,7 @@ namespace Bull
 
             if(!s_instance.get())
             {
-                s_instance = std::make_shared<TChild>(args...);
+                s_instance = std::make_unique<TChild>(args...);
             }
 
             s_mutex.unlock();
@@ -30,7 +30,7 @@ namespace Bull
      *
      */
     template<typename TChild>
-    std::shared_ptr<TChild> Singleton<TChild>::getIfExists()
+    std::unique_ptr<TChild>& Singleton<TChild>::getIfExists()
     {
         return isSet() ? s_instance : nullptr;
     }
@@ -52,6 +52,6 @@ namespace Bull
     template <typename TChild>
     void Singleton<TChild>::destroy()
     {
-        s_instance.reset();
+        s_instance.reset(nullptr);
     }
 }

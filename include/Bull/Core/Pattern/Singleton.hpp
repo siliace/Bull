@@ -13,7 +13,7 @@ namespace Bull
     {
     public:
 
-        typedef std::shared_ptr<TChild> Instance;
+        typedef std::unique_ptr<TChild>& Instance;
 
         /*! \brief Get the instance of the singleton. Create the instance if needed
          *
@@ -47,7 +47,7 @@ namespace Bull
     private:
 
         static Mutex s_mutex;
-        static Instance s_instance;
+        static std::unique_ptr<TChild> s_instance;
 
     };
 
@@ -55,7 +55,7 @@ namespace Bull
     Mutex Singleton<TChild>::s_mutex;
 
     template <typename TChild>
-    std::shared_ptr<TChild> Singleton<TChild>::s_instance = std::shared_ptr<TChild>(nullptr);
+    std::unique_ptr<TChild> Singleton<TChild>::s_instance = std::unique_ptr<TChild>(nullptr);
 }
 
 #include <Bull/Core/Pattern/Singleton.inl>
