@@ -314,6 +314,11 @@ namespace Bull
             return wglMakeCurrent(m_device, m_render);
         }
 
+        /*! \brief Create the render surface
+         *
+         * \param window The window to bind to the context
+         *
+         */
         void WglContext::createSurface(WindowHandler window)
         {
             m_window = window;
@@ -321,6 +326,14 @@ namespace Bull
             m_device = GetDC(m_window);
         }
 
+        /*! \brief Create the render surface
+         *
+         * \param shared       The shared render context
+         * \param width        The width of the surface
+         * \param height       The height of the surface
+         * \param bitsPerPixel Number of bits per pixel to use
+         *
+         */
         void WglContext::createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, unsigned int bitsPerPixel)
         {
             if(isLoaded(WglPbuffer) && shared)
@@ -360,6 +373,11 @@ namespace Bull
             }
         }
 
+        /*! \brief Set the best pixel format
+         *
+         * \param bitsPerPixel Number of bits per pixel to use
+         *
+         */
         void WglContext::setPixelFormat(unsigned int bitsPerPixel)
         {
             PIXELFORMATDESCRIPTOR descriptor;
@@ -372,6 +390,11 @@ namespace Bull
             SetPixelFormat(m_device, bestFormat, &descriptor);
         }
 
+        /*! \brief Create the render context
+         *
+         * \param shared The shared render context
+         *
+         */
         void WglContext::createContext(const std::shared_ptr<WglContext>& shared)
         {
             HGLRC sharedHandler = shared ? shared->m_render : 0;
@@ -405,6 +428,9 @@ namespace Bull
             updateSettings();
         }
 
+        /*! \brief Update settings according to the pixel format
+         *
+         */
         void WglContext::updateSettings()
         {
             int pixelFormat = GetPixelFormat(m_device);
