@@ -2,6 +2,7 @@
 #define Bull_JoystickImpl_hpp
 
 #include <windows.h>
+#include <mmsystem.h>
 
 #include <Bull/Core/Integer.hpp>
 
