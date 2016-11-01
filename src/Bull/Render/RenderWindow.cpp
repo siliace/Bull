@@ -138,7 +138,7 @@ namespace Bull
             return m_context->getSettings();
         }
 
-        return ContextSettings();
+        return ContextSettings::Empty;
     }
 
     /*! \brief Get the default viewport of the RenderTarget

@@ -222,6 +222,7 @@ namespace Bull
                 case VK_PAUSE:      return Keyboard::Key::Pause;
                 case VK_SNAPSHOT:   return Keyboard::Key::ScreenShot;
                 case VK_SCROLL:     return Keyboard::Key::Scroll;
+                default:            return Keyboard::Key::Unknown;
             }
         }
 
@@ -285,7 +286,10 @@ namespace Bull
 
             if(!(style & Window::Style::Fullscreen))
             {
-                RECT rectangle = {0, 0, mode.width, mode.height};
+                RECT rectangle = {0, 0,
+                                  static_cast<LONG>(mode.width),
+                                  static_cast<LONG>(mode.height)};
+
                 AdjustWindowRect(&rectangle, winStyle, false);
                 width  = rectangle.right - rectangle.left;
                 height = rectangle.bottom - rectangle.top;

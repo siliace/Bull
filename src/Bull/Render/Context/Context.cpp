@@ -75,6 +75,6 @@ namespace Bull
             return m_impl->getSettings();
         }
 
-        return ContextSettings();
+        return ContextSettings::Empty;
     }
 }
