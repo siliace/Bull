@@ -224,6 +224,7 @@ namespace Bull
          *
          */
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
+            GlContext(settings),
             m_device(0),
             m_render(0),
             m_pbuffer(0),
@@ -486,8 +487,8 @@ namespace Bull
             }
             else
             {
-                m_settings.depths  = pfd.cDepthBits;
-                m_settings.stencil = pfd.cStencilBits;
+                m_settings.depths       = pfd.cDepthBits;
+                m_settings.stencil      = pfd.cStencilBits;
                 m_settings.antialiasing = 0;
             }
         }
