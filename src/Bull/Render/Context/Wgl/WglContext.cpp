@@ -404,15 +404,38 @@ namespace Bull
             {
                 do
                 {
-                    const int attribs[] =
-                    {
-                        WGL_CONTEXT_MAJOR_VERSION_ARB, m_settings.major,
-                        WGL_CONTEXT_MINOR_VERSION_ARB, m_settings.minor,
-                        WGL_CONTEXT_FLAGS_ARB,         0,
-                        0
-                    };
+                    std::vector<int> attribs;
 
-                    m_render = wglCreateContextAttribs(m_device, sharedHandler, attribs);
+                    attribs.push_back(WGL_CONTEXT_MAJOR_VERSION_ARB);
+                    attribs.push_back(m_settings.major);
+                    attribs.push_back(WGL_CONTEXT_MINOR_VERSION_ARB);
+                    attribs.push_back(m_settings.minor);
+
+                    if(isSupported("WGL_ARB_create_context_profile"))
+                    {
+                        int profile = (m_settings.flags & ContextSettings::Compatibility)  ? WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : WGL_CONTEXT_CORE_PROFILE_BIT_ARB;
+                        int flags   = 0;
+
+                        if(m_settings.flags & ContextSettings::Debug)
+                        {
+                            flags |= WGL_CONTEXT_DEBUG_BIT_ARB;
+                        }
+
+                        if(m_settings.flags & ContextSettings::ForwardCompatible)
+                        {
+                            flags |= WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
+                        }
+
+                        attribs.push_back(WGL_CONTEXT_PROFILE_MASK_ARB);
+                        attribs.push_back(profile);
+                        attribs.push_back(WGL_CONTEXT_FLAGS_ARB);
+                        attribs.push_back(flags);
+                    }
+
+                    attribs.push_back(0);
+                    attribs.push_back(0);
+
+                    m_render = wglCreateContextAttribs(m_device, sharedHandler, &attribs[0]);
 
                     if(!m_render)
                     {

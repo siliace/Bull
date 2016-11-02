@@ -8,6 +8,14 @@ namespace Bull
 {
     struct BULL_API ContextSettings
     {
+        enum Flag
+        {
+            Default           = 0x0,
+            ForwardCompatible = 0x1,
+            Debug             = 0x2,
+            Compatibility     = 0x4,
+        };
+
         static ContextSettings Best;
         static ContextSettings Worst;
         static ContextSettings Empty;
@@ -51,6 +59,7 @@ namespace Bull
         Uint8 antialiasing;
         Uint8 major;
         Uint8 minor;
+        Uint8 flags = Flag::Default;
     };
 }
 
