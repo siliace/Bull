@@ -402,15 +402,31 @@ namespace Bull
 
             if(isLoaded(WglCreateContext))
             {
-                const int attribs[] =
+                do
                 {
-                    WGL_CONTEXT_MAJOR_VERSION_ARB, m_settings.major,
-                    WGL_CONTEXT_MINOR_VERSION_ARB, m_settings.minor,
-                    WGL_CONTEXT_FLAGS_ARB,         0,
-                    0
-                };
+                    const int attribs[] =
+                    {
+                        WGL_CONTEXT_MAJOR_VERSION_ARB, m_settings.major,
+                        WGL_CONTEXT_MINOR_VERSION_ARB, m_settings.minor,
+                        WGL_CONTEXT_FLAGS_ARB,         0,
+                        0
+                    };
 
-                m_render = wglCreateContextAttribsARB(m_device, sharedHandler, attribs);
+                    m_render = wglCreateContextAttribs(m_device, sharedHandler, attribs);
+
+                    if(!m_render)
+                    {
+                        if(m_settings.minor == 0)
+                        {
+                            m_settings.major -= 1;
+                            m_settings.minor  = 9;
+                        }
+                        else
+                        {
+                            m_settings.minor -= 1;
+                        }
+                    }
+                }while(!m_render && m_settings.major >= 1);
             }
 
             if(m_render == 0)
