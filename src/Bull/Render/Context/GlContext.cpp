@@ -2,7 +2,6 @@
 #include <set>
 
 #include <Bull/Core/System/Config.hpp>
-#include <Bull/Core/Thread/LocalPtr.hpp>
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
@@ -30,7 +29,7 @@ namespace Bull
             std::set<std::shared_ptr<Context>> internals;
             Mutex internalsMutex;
 
-            LocalPtr<GlContext> current(nullptr);
+            thread_local GlContext* current(nullptr);
 
             std::shared_ptr<ContextType> shared;
             Mutex sharedContextMutex;
@@ -332,9 +331,37 @@ namespace Bull
                     }
                 }
 
+                m_settings.flags = ContextSettings::Default;
+
+                if(m_settings.major >= 3)
+                {
+                    int flags;
+                    gl::getIntegerv(GL_CONTEXT_FLAGS, &flags);
+
+                    if(flags && GL_CONTEXT_FLAG_DEBUG_BIT)
+                    {
+                        m_settings.flags |= ContextSettings::Debug;
+                    }
+
+                    if(flags && GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT)
+                    {
+                        m_settings.flags |= ContextSettings::ForwardCompatible;
+                    }
+
+                    if(m_settings.major == 3 && m_settings.minor == 1 && isSupported("GL_ARB_compatibility"))
+                    {
+                        m_settings.flags |= ContextSettings::Compatibility;
+                    }
+                }
+
                 if(m_settings.antialiasing > 0 && wanted.antialiasing > 0)
                 {
                     gl::enable(GL_MULTISAMPLE);
+
+                    if(!gl::isEnabled(GL_MULTISAMPLE))
+                    {
+                        m_settings.antialiasing = 0;
+                    }
                 }
                 else
                 {

@@ -224,6 +224,7 @@ namespace Bull
          *
          */
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
+            GlContext(settings),
             m_device(0),
             m_render(0),
             m_pbuffer(0),
@@ -314,6 +315,11 @@ namespace Bull
             return wglMakeCurrent(m_device, m_render);
         }
 
+        /*! \brief Create the render surface
+         *
+         * \param window The window to bind to the context
+         *
+         */
         void WglContext::createSurface(WindowHandler window)
         {
             m_window = window;
@@ -321,6 +327,14 @@ namespace Bull
             m_device = GetDC(m_window);
         }
 
+        /*! \brief Create the render surface
+         *
+         * \param shared       The shared render context
+         * \param width        The width of the surface
+         * \param height       The height of the surface
+         * \param bitsPerPixel Number of bits per pixel to use
+         *
+         */
         void WglContext::createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, unsigned int bitsPerPixel)
         {
             if(isLoaded(WglPbuffer) && shared)
@@ -360,6 +374,11 @@ namespace Bull
             }
         }
 
+        /*! \brief Set the best pixel format
+         *
+         * \param bitsPerPixel Number of bits per pixel to use
+         *
+         */
         void WglContext::setPixelFormat(unsigned int bitsPerPixel)
         {
             PIXELFORMATDESCRIPTOR descriptor;
@@ -372,21 +391,65 @@ namespace Bull
             SetPixelFormat(m_device, bestFormat, &descriptor);
         }
 
+        /*! \brief Create the render context
+         *
+         * \param shared The shared render context
+         *
+         */
         void WglContext::createContext(const std::shared_ptr<WglContext>& shared)
         {
             HGLRC sharedHandler = shared ? shared->m_render : 0;
 
             if(isLoaded(WglCreateContext))
             {
-                const int attribs[] =
+                do
                 {
-                    WGL_CONTEXT_MAJOR_VERSION_ARB, m_settings.major,
-                    WGL_CONTEXT_MINOR_VERSION_ARB, m_settings.minor,
-                    WGL_CONTEXT_FLAGS_ARB,         0,
-                    0
-                };
+                    std::vector<int> attribs;
 
-                m_render = wglCreateContextAttribsARB(m_device, sharedHandler, attribs);
+                    attribs.push_back(WGL_CONTEXT_MAJOR_VERSION_ARB);
+                    attribs.push_back(m_settings.major);
+                    attribs.push_back(WGL_CONTEXT_MINOR_VERSION_ARB);
+                    attribs.push_back(m_settings.minor);
+
+                    if(isSupported("WGL_ARB_create_context_profile"))
+                    {
+                        int profile = (m_settings.flags & ContextSettings::Compatibility)  ? WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : WGL_CONTEXT_CORE_PROFILE_BIT_ARB;
+                        int flags   = 0;
+
+                        if(m_settings.flags & ContextSettings::Debug)
+                        {
+                            flags |= WGL_CONTEXT_DEBUG_BIT_ARB;
+                        }
+
+                        if(m_settings.flags & ContextSettings::ForwardCompatible)
+                        {
+                            flags |= WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
+                        }
+
+                        attribs.push_back(WGL_CONTEXT_PROFILE_MASK_ARB);
+                        attribs.push_back(profile);
+                        attribs.push_back(WGL_CONTEXT_FLAGS_ARB);
+                        attribs.push_back(flags);
+                    }
+
+                    attribs.push_back(0);
+                    attribs.push_back(0);
+
+                    m_render = wglCreateContextAttribs(m_device, sharedHandler, &attribs[0]);
+
+                    if(!m_render)
+                    {
+                        if(m_settings.minor == 0)
+                        {
+                            m_settings.major -= 1;
+                            m_settings.minor  = 9;
+                        }
+                        else
+                        {
+                            m_settings.minor -= 1;
+                        }
+                    }
+                }while(!m_render && m_settings.major >= 1);
             }
 
             if(m_render == 0)
@@ -405,6 +468,9 @@ namespace Bull
             updateSettings();
         }
 
+        /*! \brief Update settings according to the pixel format
+         *
+         */
         void WglContext::updateSettings()
         {
             int pixelFormat = GetPixelFormat(m_device);
@@ -460,8 +526,8 @@ namespace Bull
             }
             else
             {
-                m_settings.depths  = pfd.cDepthBits;
-                m_settings.stencil = pfd.cStencilBits;
+                m_settings.depths       = pfd.cDepthBits;
+                m_settings.stencil      = pfd.cStencilBits;
                 m_settings.antialiasing = 0;
             }
         }

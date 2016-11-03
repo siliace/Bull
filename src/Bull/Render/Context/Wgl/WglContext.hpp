@@ -111,14 +111,40 @@ namespace Bull
 
         private:
 
+            /*! \brief Create the render surface
+             *
+             * \param window The window to bind to the context
+             *
+             */
             void createSurface(WindowHandler window);
 
+            /*! \brief Create the render surface
+             *
+             * \param shared       The shared render context
+             * \param width        The width of the surface
+             * \param height       The height of the surface
+             * \param bitsPerPixel Number of bits per pixel to use
+             *
+             */
             void createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, unsigned int bitsPerPixel);
 
+            /*! \brief Set the best pixel format
+             *
+             * \param bitsPerPixel Number of bits per pixel to use
+             *
+             */
             void setPixelFormat(unsigned int bitsPerPixel);
 
+            /*! \brief Create the render context
+             *
+             * \param shared The shared render context
+             *
+             */
             void createContext(const std::shared_ptr<WglContext>& shared);
 
+            /*! \brief Update settings according to the pixel format
+             *
+             */
             void updateSettings();
 
             HWND     m_window;
