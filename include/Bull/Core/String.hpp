@@ -190,6 +190,8 @@ namespace Bull
 
         /*! \brief Clear the string
          *
+         * \param clearMemory True to reset capacity, false to keep
+         *
          */
         void clear(bool clearMemory = false);
 

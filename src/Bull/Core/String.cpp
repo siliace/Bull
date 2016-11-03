@@ -411,6 +411,8 @@ namespace Bull
 
     /*! \brief Clear the string
      *
+     * \param clearMemory True to reset capacity, false to keep
+     *
      */
     void String::clear(bool clearMemory)
     {
