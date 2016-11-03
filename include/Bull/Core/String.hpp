@@ -110,6 +110,21 @@ namespace Bull
          */
         String(const char* string, std::size_t size);
 
+        /*! \brief Constructor
+         *
+         * \param string The string to copy
+         *
+         */
+        void set(const char* string);
+
+        /*! \brief Constructor
+         *
+         * \param string The string to copy
+         * \param size   The size of the string
+         *
+         */
+        void set(const char* string, std::size_t size);
+
         /*! \brief Counts occurrences of a character in the string
          *
          * \param character     The character to count

@@ -162,10 +162,9 @@ namespace Bull
      * \param string The string to copy
      *
      */
-    String::String(const char* string) :
-        String(string, (string) ? std::strlen(string) : 0)
+    String::String(const char* string)
     {
-        /// Nothing
+        set(string);
     }
 
     /*! \brief Constructor
@@ -175,6 +174,27 @@ namespace Bull
      *
      */
     String::String(const char* string, std::size_t size)
+    {
+        set(string, size);
+    }
+
+    /*! \brief Constructor
+     *
+     * \param string The string to copy
+     *
+     */
+    void String::set(const char* string)
+    {
+        set(string, (string) ? std::strlen(string) : 0);
+    }
+
+    /*! \brief Constructor
+     *
+     * \param string The string to copy
+     * \param size   The size of the string
+     *
+     */
+    void String::set(const char* string, std::size_t size)
     {
         if(size > 0)
         {
