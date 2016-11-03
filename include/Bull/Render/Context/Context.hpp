@@ -1,8 +1,9 @@
 #ifndef Bull_Context_hpp
 #define Bull_Context_hpp
 
+#include <memory>
+
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Thread/LocalPtr.hpp>
 #include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
