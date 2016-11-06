@@ -82,6 +82,14 @@ namespace Bull
          */
         Shader();
 
+        /*! \brief Constructor
+         *
+         * \param pathVertex   The path to the vertex shader source
+         * \param pathFragment The path to the vertex fragment source
+         *
+         */
+        Shader(const String& pathVertex, const String& pathFragment);
+
         /*! \brief Destructor
          *
          */

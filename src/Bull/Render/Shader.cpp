@@ -127,6 +127,19 @@ namespace Bull
         /// Nothing
     }
 
+    /*! \brief Constructor
+     *
+     * \param pathVertex   The path to the vertex shader source
+     * \param pathFragment The path to the vertex fragment source
+     *
+     */
+    Shader::Shader(const String& pathVertex, const String& pathFragment) :
+        Shader()
+    {
+        loadFromPath(pathVertex,   Shader::Vertex);
+        loadFromPath(pathFragment, Shader::Fragment);
+    }
+
     /*! \brief Destructor
      *
      */
