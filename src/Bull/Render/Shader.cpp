@@ -22,6 +22,20 @@ namespace Bull
         gl::useProgram(0);
     }
 
+    /*! \brief Get the maximum vertex attributes available
+     *
+     * \return Return the max
+     *
+     */
+    unsigned int Shader::getMaxVertexAttribs()
+    {
+        int count;
+
+        gl::getIntegerv(GL_MAX_VERTEX_ATTRIBS, &count);
+
+        return count;
+    }
+
     /*! \brief Create a shader
      *
      * \param code The source of the shader

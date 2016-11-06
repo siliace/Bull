@@ -32,6 +32,13 @@ namespace Bull
          */
         static void unbind();
 
+        /*! \brief Get the maximum vertex attributes available
+         *
+         * \return Return the max
+         *
+         */
+        static unsigned int getMaxVertexAttribs();
+
     private:
 
         /*! \brief Create a shader
