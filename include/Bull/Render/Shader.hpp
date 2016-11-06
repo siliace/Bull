@@ -6,6 +6,7 @@
 #include <Bull/Core/String.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
+#include <Bull/Render/Color.hpp>
 #include <Bull/Render/OpenGL.hpp>
 
 namespace Bull
@@ -119,6 +120,16 @@ namespace Bull
          */
         bool loadFromStream(InStream& stream, Type type, String* error = nullptr);
 
+        /*! \brief Set an uniform variable
+         *
+         * \param name    The name of the uniform variable in the shader
+         * \param uniform The value to set to the uniform variable
+         *
+         * \return Return true if the uniform variable was found, false otherwise
+         *
+         */
+        bool setUniform(const String& name, const Color& uniform);
+
         /*! \brief Get the native system handler
          *
          * \return Return the handler
@@ -127,6 +138,15 @@ namespace Bull
         unsigned int getSystemHandler() const;
 
     private:
+
+        /*! \brief Get the location of an uniform variable
+         *
+         * \param name The name of the uniform variable in the shader
+         *
+         * \return Return the location of the uniform
+         *
+         */
+        int getUniformLocation(const String& name);
 
         GLuint m_program;
     };

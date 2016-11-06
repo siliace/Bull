@@ -183,6 +183,44 @@ namespace Bull
         return loadFromStream(shaderFile, type, error);
     }
 
+    /*! \brief Set an uniform variable
+     *
+     * \param name    The name of the uniform variable in the shader
+     * \param uniform The value to set to the uniform variable
+     *
+     * \return Return true if the uniform variable was found, false otherwise
+     *
+     */
+    bool Shader::setUniform(const String& name, const Color& uniform)
+    {
+        int location = getUniformLocation(name);
+
+        if(location == -1)
+        {
+            return false;
+        }
+
+        if(gl::programUniform4f)
+        {
+            gl::programUniform4f(m_program, location,
+                                 static_cast<float>(uniform.red)   / 255.f,
+                                 static_cast<float>(uniform.green) / 255.f,
+                                 static_cast<float>(uniform.blue)  / 255.f,
+                                 static_cast<float>(uniform.alpha) / 255.f);
+        }
+        else
+        {
+            gl::useProgram(m_program);
+            gl::uniform4f(location,
+                          static_cast<float>(uniform.red)   / 255.f,
+                          static_cast<float>(uniform.green) / 255.f,
+                          static_cast<float>(uniform.blue)  / 255.f,
+                          static_cast<float>(uniform.alpha) / 255.f);
+        }
+
+        return true;
+    }
+
     /*! \brief Load a shader from a stream
      *
      * \param path  The stream to read to get the shader source
@@ -218,5 +256,17 @@ namespace Bull
     unsigned int Shader::getSystemHandler() const
     {
         return m_program;
+    }
+
+    /*! \brief Get the location of an uniform variable
+     *
+     * \param name The name of the uniform variable in the shader
+     *
+     * \return Return the location of the uniform
+     *
+     */
+    int Shader::getUniformLocation(const String& name)
+    {
+        return gl::getUniformLocation(m_program, name);
     }
 }
