@@ -107,6 +107,7 @@ namespace gl
     BULL_API extern PFNGLGETUNIFORMLOCATIONPROC       getUniformLocation;
     BULL_API extern PFNGLINVALIDATEBUFFERDATAPROC     invalidateBufferData;
     BULL_API extern PFNGLISENABLEDPROC                isEnabled;
+    BULL_API extern PFNGLISPROGRAMPROC                isProgram;
     BULL_API extern PFNGLLINEWIDTHPROC                lineWidth;
     BULL_API extern PFNGLLINKPROGRAMPROC              linkProgram;
     BULL_API extern PFNGLMAPBUFFERPROC                mapBuffer;

@@ -45,6 +45,28 @@ namespace Bull
          */
         static GLuint createShader(const String& code, Type type, String* error = nullptr);
 
+        /*! \brief Check whether a shader has an error
+         *
+         * \param shader The shader to check
+         * \param type   The type of error to look for
+         * \param error  A string to store an error
+         *
+         * \return Return true if the shader had an error, false otherwise
+         *
+         */
+        static bool shaderHasError(GLuint shader, GLenum type, String* error = nullptr);
+
+        /*! \brief Check whether a program has an error
+         *
+         * \param program The program to check
+         * \param type    The type of error to look for
+         * \param error   A string to store an error
+         *
+         * \return Return true if the program had an error, false otherwise
+         *
+         */
+        static bool programHasError(GLuint program, GLenum type, String* error = nullptr);
+
     public:
 
         /*! \brief Default constructor

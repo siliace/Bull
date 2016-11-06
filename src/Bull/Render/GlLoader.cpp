@@ -103,6 +103,7 @@ namespace gl
     PFNGLGETUNIFORMLOCATIONPROC       getUniformLocation       = nullptr;
     PFNGLINVALIDATEBUFFERDATAPROC     invalidateBufferData     = nullptr;
     PFNGLISENABLEDPROC                isEnabled                = nullptr;
+    PFNGLISPROGRAMPROC                isProgram                = nullptr;
     PFNGLLINEWIDTHPROC                lineWidth                = nullptr;
     PFNGLLINKPROGRAMPROC              linkProgram              = nullptr;
     PFNGLMAPBUFFERPROC                mapBuffer                = nullptr;
@@ -279,6 +280,7 @@ namespace Bull
                 gl::getTexParameteriv = reinterpret_cast<PFNGLGETTEXPARAMETERIVPROC>(GlContext::getFunction("glGetTexParameteriv"));
                 gl::getUniformLocation = reinterpret_cast<PFNGLGETUNIFORMLOCATIONPROC>(GlContext::getFunction("glGetUniformLocation"));
                 gl::isEnabled = reinterpret_cast<PFNGLISENABLEDPROC>(GlContext::getFunction("glIsEnabled"));
+                gl::isProgram = reinterpret_cast<PFNGLISPROGRAMPROC>(GlContext::getFunction("glIsProgram"));
                 gl::lineWidth = reinterpret_cast<PFNGLLINEWIDTHPROC>(GlContext::getFunction("glLineWidth"));
                 gl::linkProgram = reinterpret_cast<PFNGLLINKPROGRAMPROC>(GlContext::getFunction("glLinkProgram"));
                 gl::mapBuffer = reinterpret_cast<PFNGLMAPBUFFERPROC>(GlContext::getFunction("glMapBuffer"));
