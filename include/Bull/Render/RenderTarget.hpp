@@ -59,6 +59,11 @@ namespace Bull
          */
         virtual Viewport getDefaultViewport() const = 0;
 
+        /*! \brief Reset the viewport by the default one
+         *
+         */
+        void resetViewport();
+
     protected:
 
         /*! \brief Activate or deactivate the context

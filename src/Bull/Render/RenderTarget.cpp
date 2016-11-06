@@ -63,4 +63,12 @@ namespace Bull
     {
         return m_current;
     }
+
+    /*! \brief Reset the viewport by the default one
+     *
+     */
+    void RenderTarget::resetViewport()
+    {
+        setViewport(getDefaultViewport());
+    }
 }
