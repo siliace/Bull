@@ -31,6 +31,15 @@ namespace Bull
          */
         Image(unsigned int width, unsigned int height, const Color& color = Color::Black);
 
+        /*! \brief Load an image from a file
+         *
+         * \param path The path to the image to load
+         *
+         * \return Return true if the image was loaded successfully, false otherwise
+         *
+         */
+        bool load(const String& path);
+
         /*! \brief Set the color of a pixel
          *
          * \param x

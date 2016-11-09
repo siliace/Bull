@@ -1,4 +1,5 @@
 #include <Bull/Utility/Image.hpp>
+#include <Bull/Utility/ImageLoader.hpp>
 
 namespace Bull
 {
@@ -20,6 +21,18 @@ namespace Bull
             m_pixels[i + 2] = color.blue;
             m_pixels[i + 3] = color.alpha;
         }
+    }
+
+    /*! \brief Load an image from a file
+     *
+     * \param path The path to the image to load
+     *
+     * \return Return true if the image was loaded successfully, false otherwise
+     *
+     */
+    bool Image::load(const String& path)
+    {
+        return prv::ImageLoader::load(path, m_pixels, m_size);
     }
 
     /*! \brief Set the color of a pixel
