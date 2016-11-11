@@ -32,7 +32,12 @@ namespace Bull
      */
     bool Image::load(const String& path)
     {
-        return prv::ImageLoader::load(path, m_pixels, m_size);
+        if(File::exists(path))
+        {
+            return prv::ImageLoader::load(path, m_pixels, m_size);
+        }
+
+        return false;
     }
 
     /*! \brief Set the color of a pixel
@@ -100,5 +105,23 @@ namespace Bull
     const std::vector<Uint8>& Image::getPixels() const
     {
         return m_pixels;
+    }
+
+    /*! \brief Save the image
+     *
+     * \param path
+     * \param format
+     *
+     * \return Return
+     *
+     */
+    bool Image::save(const String& path, Format format)
+    {
+        if(!File::exists(path))
+        {
+            return prv::ImageLoader::save(path, format, m_pixels, m_size);
+        }
+
+        return false;
     }
 }

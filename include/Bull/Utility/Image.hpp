@@ -17,6 +17,17 @@ namespace Bull
     {
     public:
 
+        enum Format
+        {
+            Bmp,
+            Jpg,
+            Jpeg,
+            Png,
+            Tga
+        };
+
+    public:
+
         /*! \brief Default constructor
          *
          */
@@ -72,6 +83,16 @@ namespace Bull
          *
          */
         const std::vector<Uint8>& getPixels() const;
+
+        /*! \brief Save the image
+         *
+         * \param path
+         * \param format
+         *
+         * \return Return
+         *
+         */
+        bool save(const String& path, Format format);
 
     private:
 
