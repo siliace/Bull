@@ -249,7 +249,7 @@ namespace Bull
         String buffer;
         Uint64 read = 0;
 
-        buffer.reserve(256);
+        buffer.reserve(1024);
 
         do
         {
