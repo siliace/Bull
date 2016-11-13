@@ -245,20 +245,7 @@ namespace Bull
      */
     bool Shader::loadFromStream(InStream& stream, Type type, String* error)
     {
-        String code;
-        String buffer;
-        Uint64 read = 0;
-
-        buffer.reserve(256);
-
-        do
-        {
-            read = stream.read(&buffer[0], buffer.getCapacity());
-
-            code += (read == buffer.getCapacity()) ? buffer : buffer.subString(0, read);
-        }while(read == buffer.getCapacity());
-
-        return loadFromSource(code, type, error);
+        return loadFromSource(stream.readAll(), type, error);
     }
 
     /*! \brief Get the native system handler
