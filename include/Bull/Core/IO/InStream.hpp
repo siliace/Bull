@@ -2,6 +2,7 @@
 #define Bull_InStream_hpp
 
 #include <Bull/Core/Integer.hpp>
+#include <Bull/Core/String.hpp>
 #include <Bull/Core/System/Export.hpp>
 
 namespace Bull
@@ -25,6 +26,13 @@ namespace Bull
          *
          */
         virtual Uint64 read(void* data, Uint64 size) = 0;
+
+        /*! \brief Get all the content of the stream
+         *
+         * \return Return the content of the stream
+         *
+         */
+        String readAll();
 
         /*! \brief Set the reading position in the stream
          *
