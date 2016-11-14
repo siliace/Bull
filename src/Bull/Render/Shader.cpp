@@ -186,7 +186,7 @@ namespace Bull
      */
     bool Shader::loadFromPath(const String& path, Type type, String* error)
     {
-        File shaderFile(path);
+        File shaderFile(path, File::Read);
 
         if(!shaderFile.isOpen())
         {
