@@ -196,6 +196,21 @@ namespace Bull
         return loadFromStream(shaderFile, type, error);
     }
 
+
+    /*! \brief Load a shader from a stream
+     *
+     * \param path  The stream to read to get the shader source
+     * \param type  The type of shader to load
+     * \param error A string to store an error
+     *
+     * \return Return true if the shader was loaded successfully, false otherwise
+     *
+     */
+    bool Shader::loadFromStream(InStream& stream, Type type, String* error)
+    {
+        return loadFromSource(stream.readAll(), type, error);
+    }
+
     /*! \brief Set an uniform variable
      *
      * \param name    The name of the uniform variable in the shader
@@ -232,20 +247,6 @@ namespace Bull
         }
 
         return true;
-    }
-
-    /*! \brief Load a shader from a stream
-     *
-     * \param path  The stream to read to get the shader source
-     * \param type  The type of shader to load
-     * \param error A string to store an error
-     *
-     * \return Return true if the shader was loaded successfully, false otherwise
-     *
-     */
-    bool Shader::loadFromStream(InStream& stream, Type type, String* error)
-    {
-        return loadFromSource(stream.readAll(), type, error);
     }
 
     /*! \brief Get the native system handler
