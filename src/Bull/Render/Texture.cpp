@@ -138,7 +138,13 @@ namespace Bull
         if(create(size))
         {
             gl::bindTexture(GL_TEXTURE_2D, m_id);
-            gl::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.x, m_size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);
+
+            for(unsigned int i = 0; i < m_size.y; i++)
+            {
+                const Uint8* pixelsPointer = &pixels[m_size.x * (m_size.y - i - 1) * 4];
+
+                gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, m_size.x, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixelsPointer);
+            }
 
             return true;
         }
