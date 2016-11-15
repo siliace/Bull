@@ -1,4 +1,4 @@
-#include <Bull/Core/Log.hpp>
+#include <Bull/Utility/Log.hpp>
 
 namespace Bull
 {

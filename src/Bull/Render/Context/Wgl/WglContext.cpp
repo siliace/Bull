@@ -10,7 +10,7 @@
 #include <Bull/Render/Context/Wgl/WglSwapControlEXT.hpp>
 #include <Bull/Render/OpenGL.hpp>
 
-#include <Bull/Window/VideoMode.hpp>
+#include <Bull/Utility/Window/VideoMode.hpp>
 
 namespace Bull
 {

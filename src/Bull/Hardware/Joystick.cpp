@@ -1,7 +1,7 @@
 #include <Bull/Hardware/Joystick.hpp>
 #include <Bull/Hardware/JoystickImpl.hpp>
 
-#include <Bull/Window/JoystickManager.hpp>
+#include <Bull/Utility/Window/JoystickManager.hpp>
 
 namespace Bull
 {

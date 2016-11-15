@@ -1,6 +1,6 @@
 #include <cstdlib>
 
-#include <Bull/Core/Random.hpp>
+#include <Bull/Utility/Random.hpp>
 
 namespace Bull
 {

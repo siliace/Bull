@@ -9,7 +9,7 @@
 #include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/GlLoader.hpp>
 
-#include <Bull/Window/VideoMode.hpp>
+#include <Bull/Utility/Window/VideoMode.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglContext.hpp>

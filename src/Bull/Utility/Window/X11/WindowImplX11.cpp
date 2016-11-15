@@ -1,6 +1,6 @@
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
 
-#include <Bull/Window/X11/WindowImplX11.hpp>
+#include <Bull/Utility/Window/X11/WindowImplX11.hpp>
 
 #ifndef Button6
     #define Button6 6

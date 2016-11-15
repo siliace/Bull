@@ -5,7 +5,7 @@
 
 #include <Bull/Core/Thread/Lock.hpp>
 
-#include <Bull/Window/X11/Display.hpp>
+#include <Bull/Utility/Window/X11/Display.hpp>
 
 namespace Bull
 {

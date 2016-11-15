@@ -2,7 +2,7 @@
 
 #include <windows.h>
 
-#include <Bull/Window/Win32/VideoModeImpl.hpp>
+#include <Bull/Utility/Window/Win32/VideoModeImpl.hpp>
 
 namespace Bull
 {

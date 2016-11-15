@@ -2,8 +2,8 @@
 
 #include <Bull/Render/Context/GlContext.hpp>
 
-#include <Bull/Window/Window.hpp>
-#include <Bull/Window/WindowImpl.hpp>
+#include <Bull/Utility/Window/Window.hpp>
+#include <Bull/Utility/Window/WindowImpl.hpp>
 
 namespace Bull
 {

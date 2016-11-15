@@ -17,8 +17,8 @@
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Context/ContextSettings.hpp>
 
-#include <Bull/Window/VideoMode.hpp>
-#include <Bull/Window/WindowHandler.hpp>
+#include <Bull/Utility/Window/VideoMode.hpp>
+#include <Bull/Utility/Window/WindowHandler.hpp>
 
 namespace Bull
 {

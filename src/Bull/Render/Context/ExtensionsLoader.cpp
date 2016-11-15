@@ -1,9 +1,10 @@
 #include <algorithm>
 
-#include <Bull/Core/Log.hpp>
 #include <Bull/Core/System/Config.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
+
+#include <Bull/Utility/Log.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglExtensionsLoader.hpp>

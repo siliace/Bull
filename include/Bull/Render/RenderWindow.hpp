@@ -7,7 +7,7 @@
 
 #include <Bull/Render/RenderTarget.hpp>
 
-#include <Bull/Window/Window.hpp>
+#include <Bull/Utility/Window/Window.hpp>
 
 namespace Bull
 {

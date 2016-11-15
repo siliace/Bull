@@ -1,6 +1,6 @@
-#include <Bull/Core/Log.hpp>
-
 #include <Bull/Render/Shader.hpp>
+
+#include <Bull/Utility/Log.hpp>
 
 namespace Bull
 {

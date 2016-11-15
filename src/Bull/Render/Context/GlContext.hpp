@@ -8,7 +8,7 @@
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/SurfaceHandler.hpp>
 
-#include <Bull/Window/WindowHandler.hpp>
+#include <Bull/Utility/Window/WindowHandler.hpp>
 
 namespace Bull
 {

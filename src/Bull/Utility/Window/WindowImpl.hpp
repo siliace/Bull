@@ -1,92 +1,106 @@
-#ifndef Bull_WindowImplX11_hpp
-#define Bull_WindowImplX11_hpp
+#ifndef Bull_WindowImpl_hpp
+#define Bull_WindowImpl_hpp
 
-#include <X11/Xlib.h>
+#include <queue>
 
-#include <Bull/Core/Exception.hpp>
+#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/String.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Window/WindowImpl.hpp>
-#include <Bull/Window/X11/Display.hpp>
+#include <Bull/Render/Context/ContextSettings.hpp>
+
+#include <Bull/Utility/Window/VideoMode.hpp>
+#include <Bull/Utility/Window/Window.hpp>
+#include <Bull/Utility/Window/WindowHandler.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        class WindowImplX11 : public WindowImpl
+        class WindowImpl : public NonCopyable
         {
         public:
 
-            /*! \brief Default constructor
-             *
-             */
-            WindowImplX11() = delete;
-
-            /*! \brief Constructor
+            /*! \brief Create a OS specific WindowImpl instance
              *
              * \param mode The VideoMode to use to create the window
              * \param title The title of the window
              * \param style The style to use to create the window
              * \param settings Parameters to create the OpenGL context
              *
+             * \return Return the created instance
+             *
              */
-            WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+            static WindowImpl* createInstance(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+
+        public:
 
             /*! \brief Destructor
              *
              */
-            ~WindowImplX11();
+            virtual ~WindowImpl();
 
             /*! \brief Start to process events to fill event queue
              *
              */
-            void startProcessEvents() override;
+            virtual void startProcessEvents() = 0;
+
+            /*! \brief Get the first event of the event queue
+             *
+             * \param e The event to fill
+             * \param block If the event queue is empty, block the thread while an event has been not pushed
+             *
+             * \return Return true if the event is usable, otherwise false (if block is true, always return true)
+             *
+             */
+            bool popEvent(Window::Event& e, bool block);
 
             /*! \brief Minimize a window
              *
              */
-            void minimize() override;
+            virtual void minimize() = 0;
 
             /*! \brief Check if the window is minimized
              *
              * \return Return true if the window is minimized, false otherwise
              *
              */
-            bool isMinimized() const override;
+            virtual bool isMinimized() const = 0;
 
             /*! \brief Maximize a window
              *
              */
-            void maximize() override;
+            virtual void maximize() = 0;
 
             /*! \brief Check if the window is maximized
              *
              * \return Return true if the window is maximized, false otherwise
              *
              */
-            bool isMaximized() const override;
+            virtual bool isMaximized() const = 0;
 
             /*! \brief Enable or disable the capture of the cursor inside the window
              *
              * \param enable The state of the capture
              *
              */
-            void enableCaptureCursor(bool capture) override;
+            virtual void enableCaptureCursor(bool capture) = 0;
 
             /*! \brief Hide or show the cursor
              *
              * \param enable The state of the cursor
              *
              */
-            void showCursor(bool enable = true) override;
+            virtual void showCursor(bool enable = true) = 0;
 
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window
              *
              */
-            void setPosition(const Vector2I& position) override;
+            virtual void setPosition(const Vector2I& position) = 0;
 
             /*! \brief Set the size of the window
              *
@@ -94,42 +108,56 @@ namespace Bull
              * \param y The new height of the window
              *
              */
-            Vector2I getPosition() const override;
+            virtual Vector2I getPosition() const = 0;
 
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window
              *
              */
-            void setSize(const Vector2UI& size) override;
+            virtual void setSize(const Vector2UI& size) = 0;
 
             /*! \brief Get the size of the window
              *
              * \return Return the size of the window
              *
              */
-            Vector2UI getSize() const override;
+            virtual Vector2UI getSize() const = 0;
 
             /*! \brief Set the title of the window
              *
              * \param title The title to set to the window
              *
              */
-            void setTitle(const String& title) override;
+            virtual void setTitle(const String& title) = 0;
 
             /*! \brief Get the title of the window
              *
              * \return Return the title of the window
              *
              */
-            String getTitle() const override;
+            virtual String getTitle() const = 0;
+
+            /*! \brief Enable or disable the key repeat
+             *
+             * \param enable The state of the key repeat
+             *
+             */
+            void enableKeyRepeat(bool enable);
+
+            /*! \brief Get the state of the key repeat
+             *
+             * \param Return true if the key repeat is enable, false otherwise
+             *
+             */
+            bool isKeyRepeatEnable() const;
 
             /*! \brief Check if the window has the focus
              *
              * \param Return true if the window has the focus, false otherwise
              *
              */
-            bool hasFocus() const override;
+            virtual bool hasFocus() const = 0;
 
             /*! \brief Enter or leave the fullscreen mode
              *
@@ -139,38 +167,44 @@ namespace Bull
              * \return Return true if the switch was done successfully, false otherwise
              *
              */
-            bool switchFullscreen(const VideoMode& mode, bool fullscreen) override;
+            virtual bool switchFullscreen(const VideoMode& mode, bool fullscreen) = 0;
 
             /*! \brief Show or hide the window
              *
              * \param visible True to show the window, false to hide the window
              *
              */
-            void setVisible(bool visible) override;
+            virtual void setVisible(bool visible) = 0;
 
             /*! \brief Get the window system handler
              *
              * \return Return the native window system handler
              *
              */
-            WindowHandler getSystemHandler() const override;
+            virtual WindowHandler getSystemHandler() const = 0;
+
+        protected:
+
+            /*! \brief Constructor
+             *
+             * Set m_keyrepeat to true
+             *
+             */
+            WindowImpl();
+
+            /*! \brief Add an event to add at the end of the event queue
+             *
+             * \param e The event to add at the end of the event queue
+             *
+             */
+            void pushEvent(const Window::Event& e);
 
         private:
 
-            /*! \brief Set Window manager protocols supported
-             *
-             */
-            void setProtocols();
-
-            Display::Instance m_display;
-            ::Window          m_handler;
-            Vector2UI         m_lastSize;
-            Vector2I          m_lastPosition;
-            bool              m_isMapped;
-
-            DeclarePublicException(FailToGetProtocolsAtom, "Failed to request WM_PROTOCOLS atom", Log::Critical);
+            std::queue<Window::Event> m_events; /*!< The event queue */
+            bool m_keyrepeat; /*!< Does the key repeat is enable? */
         };
     }
 }
 
-#endif // Bull_WindowImplX11_hpp
+#endif // Bull_WindowImpl_hpp

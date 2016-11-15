@@ -1,4 +1,4 @@
-#include <Bull/Window/Win32/WindowImplWin32.hpp>
+#include <Bull/Utility/Window/Win32/WindowImplWin32.hpp>
 
 /// GCC missing define
 #ifndef WM_XBUTTONDOWN

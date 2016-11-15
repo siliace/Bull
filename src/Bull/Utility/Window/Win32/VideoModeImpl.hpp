@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <Bull/Window/VideoMode.hpp>
+#include <Bull/Utility/Window/VideoMode.hpp>
 
 namespace Bull
 {

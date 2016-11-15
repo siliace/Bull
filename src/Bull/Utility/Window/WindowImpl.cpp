@@ -1,14 +1,14 @@
 #include <Bull/Core/System/Config.hpp>
 #include <Bull/Core/Thread/Thread.hpp>
 
-#include <Bull/Window/JoystickManager.hpp>
-#include <Bull/Window/WindowImpl.hpp>
+#include <Bull/Utility/Window/JoystickManager.hpp>
+#include <Bull/Utility/Window/WindowImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #include <Bull/Window/Win32/WindowImplWin32.hpp>
+    #include <Bull/Utility/Window/Win32/WindowImplWin32.hpp>
     typedef Bull::prv::WindowImplWin32 WindowImplType;
 #else
-    #include <Bull/Window/X11/WindowImplX11.hpp>
+    #include <Bull/Utility/Window/X11/WindowImplX11.hpp>
     typedef Bull::prv::WindowImplX11 WindowImplType;
 #endif
 

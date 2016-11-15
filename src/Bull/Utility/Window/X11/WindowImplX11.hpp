@@ -1,78 +1,44 @@
-#ifndef Bull_WindowImplWin32_hpp
-#define Bull_WindowImplWin32_hpp
+#ifndef Bull_WindowImplX11_hpp
+#define Bull_WindowImplX11_hpp
 
-#include <windows.h>
+#include <X11/Xlib.h>
 
-#include <Bull/Window/WindowImpl.hpp>
+#include <Bull/Core/Exception.hpp>
+
+#include <Bull/Math/Vector/Vector2.hpp>
+
+#include <Bull/Utility/Window/WindowImpl.hpp>
+#include <Bull/Utility/Window/X11/Display.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        class WindowImplWin32 : public WindowImpl
+        class WindowImplX11 : public WindowImpl
         {
-        private:
-
-            /*! \brief Register the window class
-             *
-             * \return Return true if the class was registered successfully, false otherwise
-             *
-             */
-            static bool registerWindowClass();
-
-            /*! \brief Window callback event
-             *
-             * \param handler The window concerned by the event
-             * \param message The windows message
-             * \param wParam The WPARAM
-             * \param lParam The LPARAM
-             *
-             * \return Return 0 if the message was WM_CLOSE, a value to continue otherwise
-             *
-             */
-            static LRESULT CALLBACK globalEvent(HWND handler, UINT message, WPARAM wParam, LPARAM lParam);
-
-            /*! \brief Convert a windows key value to a Bull::Keyboard::Key
-             *
-             * \param vkey To VK to convert
-             *
-             * \return Return the Bull::Keyboard::Key equivalent
-             *
-             */
-            static Keyboard::Key convertVKToBullkey(WPARAM vkey);
-
-            /*! \brief Convert a Bull::VideoStyle to a WS
-             *
-             * \param style The Bull::VideoStyle to convert
-             *
-             * \return Return the WS equivalent
-             *
-             */
-            static DWORD computeStyle(Uint32 style);
-
         public:
 
             /*! \brief Default constructor
              *
              */
-            WindowImplWin32() = delete;
+            WindowImplX11() = delete;
 
             /*! \brief Constructor
              *
-             * \param mode The VideoMode to use
-             * \param title The title to use in the window
-             * \param style The window decoration
+             * \param mode The VideoMode to use to create the window
+             * \param title The title of the window
+             * \param style The style to use to create the window
              * \param settings Parameters to create the OpenGL context
              *
              */
-            WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& /*settings*/);
+            WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
 
             /*! \brief Destructor
              *
              */
-            ~WindowImplWin32();
+            ~WindowImplX11();
 
-            /*! \brief Process events stacked so far
+            /*! \brief Start to process events to fill event queue
              *
              */
             void startProcessEvents() override;
@@ -96,7 +62,7 @@ namespace Bull
 
             /*! \brief Check if the window is maximized
              *
-             * \return Return true if the window is minimized, false otherwise
+             * \return Return true if the window is maximized, false otherwise
              *
              */
             bool isMaximized() const override;
@@ -113,7 +79,7 @@ namespace Bull
              * \param enable The state of the cursor
              *
              */
-            void showCursor(bool enable) override;
+            void showCursor(bool enable = true) override;
 
             /*! \brief Set the size of the window
              *
@@ -122,9 +88,10 @@ namespace Bull
              */
             void setPosition(const Vector2I& position) override;
 
-            /*! \brief Get the position in the screen of the window
+            /*! \brief Set the size of the window
              *
-             * \return Return the window position
+             * \param x The new width of the window
+             * \param y The new height of the window
              *
              */
             Vector2I getPosition() const override;
@@ -172,14 +139,14 @@ namespace Bull
              * \return Return true if the switch was done successfully, false otherwise
              *
              */
-            bool switchFullscreen(const VideoMode& mode, bool fullscreen);
+            bool switchFullscreen(const VideoMode& mode, bool fullscreen) override;
 
             /*! \brief Show or hide the window
              *
              * \param visible True to show the window, false to hide the window
              *
              */
-            void setVisible(bool visible);
+            void setVisible(bool visible) override;
 
             /*! \brief Get the window system handler
              *
@@ -190,21 +157,20 @@ namespace Bull
 
         private:
 
-            /*! \brief Process a single event
-             *
-             * \param message The windows message
-             * \param wParam The WPARAM
-             * \param lParam The LPARAM
+            /*! \brief Set Window manager protocols supported
              *
              */
-            void processEvent(UINT message, WPARAM wParam, LPARAM lParam);
+            void setProtocols();
 
-            HWND      m_handler;
-            Vector2UI m_lastSize;
-            Vector2I  m_lastPosition;
-            bool      m_isResizing;
+            Display::Instance m_display;
+            ::Window          m_handler;
+            Vector2UI         m_lastSize;
+            Vector2I          m_lastPosition;
+            bool              m_isMapped;
+
+            DeclarePublicException(FailToGetProtocolsAtom, "Failed to request WM_PROTOCOLS atom", Log::Critical);
         };
     }
 }
 
-#endif // Bull_WindowImplWin32_hpp
+#endif // Bull_WindowImplX11_hpp
