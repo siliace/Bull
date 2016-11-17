@@ -332,8 +332,8 @@ namespace Bull
                 gl::programUniform4dv = reinterpret_cast<PFNGLPROGRAMUNIFORM4DVPROC>(GlContext::getFunction("glProgramUniform4dv"));
                 gl::programUniform4fv = reinterpret_cast<PFNGLPROGRAMUNIFORM4FVPROC>(GlContext::getFunction("glProgramUniform4fv"));
                 gl::programUniform4iv = reinterpret_cast<PFNGLPROGRAMUNIFORM4IVPROC>(GlContext::getFunction("glProgramUniform4iv"));
-                gl::programUniformMatrix4dv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX4DVPROC>(GlContext::getFunction("gl::programUniformMatrix4dv"));
-                gl::programUniformMatrix4fv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX4FVPROC>(GlContext::getFunction("gl::programUniformMatrix4fv"));
+                gl::programUniformMatrix4dv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX4DVPROC>(GlContext::getFunction("glProgramUniformMatrix4dv"));
+                gl::programUniformMatrix4fv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX4FVPROC>(GlContext::getFunction("glProgramUniformMatrix4fv"));
                 gl::readPixels = reinterpret_cast<PFNGLREADPIXELSPROC>(GlContext::getFunction("glReadPixels"));
                 gl::renderbufferStorage = reinterpret_cast<PFNGLRENDERBUFFERSTORAGEPROC>(GlContext::getFunction("glRenderbufferStorage"));
                 gl::samplerParameterf = reinterpret_cast<PFNGLSAMPLERPARAMETERFPROC>(GlContext::getFunction("glSamplerParameterf"));
