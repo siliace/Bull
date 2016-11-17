@@ -249,6 +249,36 @@ namespace Bull
         return true;
     }
 
+    /*! \brief Set an uniform variable
+     *
+     * \param name    The name of the uniform variable in the shader
+     * \param uniform The value to set to the uniform variable
+     *
+     * \return Return true if the uniform variable was found, false otherwise
+     *
+     */
+    bool Shader::setUniform(const String& name, const Matrix4F& uniform)
+    {
+        int location = getUniformLocation(name);
+
+        if(location == -1)
+        {
+            return false;
+        }
+
+        if(gl::programUniform4f)
+        {
+            gl::programUniformMatrix4fv(m_program, location, 1, false, uniform);
+        }
+        else
+        {
+            gl::useProgram(m_program);
+            gl::uniformMatrix4fv(location, 1, false, uniform);
+        }
+
+        return true;
+    }
+
     /*! \brief Get the native system handler
      *
      * \return Return the handler
