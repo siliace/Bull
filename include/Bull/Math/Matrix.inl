@@ -8,7 +8,16 @@ namespace Bull
     template<typename T, std::size_t W, std::size_t H>
     Matrix<T, W, H> Matrix<T, W, H>::createIdentity()
     {
+        static_assert(Matrix<T, W, H>::Width == Matrix<T, W, H>::Height, "Identity matrix can be used only with squares matrices");
 
+        Matrix<T, W, H> identity;
+
+        for(std::size_t i = 0; i < Matrix<T, W, H>::Width; i++)
+        {
+            identity.set(1, i, i);
+        }
+
+        return identity;
     }
 
     /*! \brief Create a translation matrix
@@ -21,9 +30,15 @@ namespace Bull
      *
      */
     template<typename T, std::size_t W, std::size_t H>
-    Matrix<T, 4, 4> createTranslation(T x, T y, T z)
+    Matrix<T, 4, 4> Matrix<T, W, H>::createTranslation(T x, T y, T z)
     {
+        Matrix<T, 4, 4> translation = Matrix<T, 4, 4>::createIdentity();
 
+        translation.set(x, 3, 0);
+        translation.set(y, 3, 1);
+        translation.set(z, 3, 2);
+
+        return translation;
     }
 
     /*! \brief Create a scale matrix
@@ -36,9 +51,16 @@ namespace Bull
      *
      */
     template<typename T, std::size_t W, std::size_t H>
-    Matrix<T, 4, 4> createScale(T x, T y, T z)
+    Matrix<T, 4, 4> Matrix<T, W, H>::createScale(T x, T y, T z)
     {
+        Matrix<T, 4, 4> scale;
 
+        scale.set(x, 0, 0);
+        scale.set(y, 1, 1);
+        scale.set(z, 2, 2);
+        scale.set(1, 3, 3);
+
+        return scale;
     }
 
     /*! \brief Default Constructor
