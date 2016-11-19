@@ -218,6 +218,32 @@ namespace Bull
         return r;
     }
 
+    /*! \brief Compare two matrices
+     *
+     * \param right The matrix to compare to this
+     *
+     * \return Return true if the two matrices are equal, false otherwise
+     *
+     */
+    template<typename T, std::size_t W, std::size_t H>
+    bool Matrix<T, W, H>::operator==(const Matrix<T, W, H>& right)
+    {
+        return m_data == right.m_data;
+    }
+
+    /*! \brief Compare two matrices
+     *
+     * \param right The matrix to compare to this
+     *
+     * \return Return true if the two matrices are not equal, false otherwise
+     *
+     */
+    template<typename T, std::size_t W, std::size_t H>
+    bool Matrix<T, W, H>::operator!=(const Matrix<T, W, H>& right)
+    {
+        return m_data != right.m_data;
+    }
+
     /*! \brief Get a pointer to the internal data
      *
      * \return Return the pointer

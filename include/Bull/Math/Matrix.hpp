@@ -137,6 +137,24 @@ namespace Bull
          */
         std::array<T, W> getRow(std::size_t row) const;
 
+        /*! \brief Compare two matrices
+         *
+         * \param right The matrix to compare to this
+         *
+         * \return Return true if the two matrices are equal, false otherwise
+         *
+         */
+        bool operator==(const Matrix<T, W, H>& right);
+
+        /*! \brief Compare two matrices
+         *
+         * \param right The matrix to compare to this
+         *
+         * \return Return true if the two matrices are not equal, false otherwise
+         *
+         */
+        bool operator!=(const Matrix<T, W, H>& right);
+
         /*! \brief Get a pointer to the internal data
          *
          * \return Return the pointer
