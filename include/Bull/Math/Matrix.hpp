@@ -131,6 +131,18 @@ namespace Bull
         std::array<T, W * H> m_data;
     };
 
+    typedef Matrix<int, 1, 2> Matrix12I;
+    typedef Matrix<float, 1, 2> Matrix12F;
+    typedef Matrix<unsigned int, 1, 2> Matrix12UI;
+
+    typedef Matrix<int, 1, 3> Matrix13I;
+    typedef Matrix<float, 1, 3> Matrix13F;
+    typedef Matrix<unsigned int, 1, 3> Matrix13UI;
+
+    typedef Matrix<int, 1, 4> Matrix14I;
+    typedef Matrix<float, 1, 4> Matrix14F;
+    typedef Matrix<unsigned int, 1, 4> Matrix14UI;
+
     typedef Matrix<int, 2, 2> Matrix2I;
     typedef Matrix<float, 2, 2> Matrix2F;
     typedef Matrix<unsigned int, 2, 2> Matrix2UI;
