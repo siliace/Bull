@@ -239,7 +239,7 @@ namespace Bull
         }
         else
         {
-            ShaderStateSaver save;
+            ShaderStateSaver saver;
             gl::useProgram(m_program);
             gl::uniform4f(location,
                           static_cast<float>(uniform.red)   / 255.f,
@@ -274,6 +274,7 @@ namespace Bull
         }
         else
         {
+            ShaderStateSaver saver;
             gl::useProgram(m_program);
             gl::uniformMatrix4fv(location, 1, true, uniform);
         }

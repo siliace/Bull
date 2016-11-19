@@ -1,5 +1,4 @@
-#include <iostream>
-
+#include <Bull/Render/Context/TextureStateShader.hpp>
 #include <Bull/Render/Texture.hpp>
 
 namespace Bull
@@ -68,6 +67,7 @@ namespace Bull
     {
         if(size.x > 0 && size.y > 0)
         {
+            TextureStateSaver saver;
             m_size = size;
 
             if(m_id == 0)
@@ -137,6 +137,7 @@ namespace Bull
     {
         if(create(size))
         {
+            TextureStateSaver saver;
             gl::bindTexture(GL_TEXTURE_2D, m_id);
 
             for(unsigned int i = 0; i < m_size.y; i++)
@@ -159,6 +160,7 @@ namespace Bull
      */
     void Texture::enableRepeat(bool enable)
     {
+        TextureStateSaver saver;
         m_isRepeated = enable;
 
         gl::bindTexture(GL_TEXTURE_2D, m_id);
@@ -183,6 +185,7 @@ namespace Bull
      */
     void Texture::enableSmooth(bool enable)
     {
+        TextureStateSaver saver;
         m_isSmooth = enable;
 
         gl::bindTexture(GL_TEXTURE_2D, m_id);
