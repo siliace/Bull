@@ -1,3 +1,4 @@
+#include <Bull/Render/Context/ShaderStateSaver.hpp>
 #include <Bull/Render/Shader.hpp>
 
 #include <Bull/Utility/Log.hpp>
@@ -238,6 +239,7 @@ namespace Bull
         }
         else
         {
+            ShaderStateSaver save;
             gl::useProgram(m_program);
             gl::uniform4f(location,
                           static_cast<float>(uniform.red)   / 255.f,
