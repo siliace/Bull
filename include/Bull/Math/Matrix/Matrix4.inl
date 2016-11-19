@@ -178,7 +178,7 @@ namespace Bull
 
         for(std::size_t i = 0; i < 4; i++)
         {
-            r[i] = get(row, i);
+            r[i] = get(i, row);
         }
 
         return r;
@@ -270,6 +270,39 @@ namespace Bull
     Matrix4<T>& Matrix4<T>::operator-=(T right)
     {
         return (*this) -= Matrix4<T>(right);
+    }
+
+    /*! \brief Multiply two matrices
+     *
+     * \param left
+     *
+     * \return Return the product of the multiplication between right and this
+     *
+     */
+    template<typename T>
+    Matrix4<T> Matrix4<T>::operator*=(const Matrix4<T>& right)
+    {
+        std::array<T, 16> product;
+
+        for(std::size_t i = 0; i < 16; i++)
+        {
+            std::array<T, 4> row, col;
+            T sum = 0;
+
+            row = getRow(i / 4);
+            col = right.getColumn(i % 4);
+
+            for(std::size_t j = 0; j < 4; j++)
+            {
+                sum += row[j] * col[j];
+            }
+
+            product[i] = sum;
+        }
+
+        m_data = std::move(product);
+
+        return (*this);
     }
 
     /*! \brief Get a pointer to the internal data
@@ -389,5 +422,23 @@ namespace Bull
         difference -= right;
 
         return difference;
+    }
+
+    /*! \brief Multiply two matrices
+     *
+     * \param right
+     * \param left
+     *
+     * \return Return the product of the multiplication between right and left
+     *
+     */
+    template<typename T>
+    Matrix4<T> operator*(const Matrix4<T>& left, const Matrix4<T>& right)
+    {
+        Matrix4<T> product(left);
+
+        product *= right;
+
+        return product;
     }
 }

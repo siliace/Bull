@@ -142,7 +142,7 @@ namespace Bull
          *
          * \param right
          *
-         * \return Return the sum the addition of right and this
+         * \return Return the sum of the addition between right and this
          *
          */
         Matrix4<T>& operator+=(T right);
@@ -151,7 +151,7 @@ namespace Bull
          *
          * \param right
          *
-         * \return Return the difference the subtraction of right and this
+         * \return Return the difference of the subtraction between right and this
          *
          */
         Matrix4<T>& operator-=(const Matrix4<T>& right);
@@ -160,10 +160,19 @@ namespace Bull
          *
          * \param right
          *
-         * \return Return the difference the subtraction of right and this
+         * \return Return the difference the subtraction between right and this
          *
          */
         Matrix4<T>& operator-=(T right);
+
+        /*! \brief Multiply two matrices
+         *
+         * \param left
+         *
+         * \return Return the product of the multiplication between right and this
+         *
+         */
+        Matrix4<T> operator*=(const Matrix4<T>& right);
 
         /*! \brief Get a pointer to the internal data
          *
@@ -182,7 +191,7 @@ namespace Bull
      * \param right
      * \param left
      *
-     * \return Return the sum the addition of right and left
+     * \return Return the sum of the addition between right and left
      *
      */
     template<typename T>
@@ -193,7 +202,7 @@ namespace Bull
      * \param right
      * \param left
      *
-     * \return Return the sum the addition of right and left
+     * \return Return the sum of the addition between right and left
      *
      */
     template<typename T>
@@ -204,7 +213,7 @@ namespace Bull
      * \param right
      * \param left
      *
-     * \return Return the sum the addition of right and left
+     * \return Return the sum of the addition between right and left
      *
      */
     template<typename T>
@@ -215,7 +224,7 @@ namespace Bull
      * \param right
      * \param left
      *
-     * \return Return the sum the subtraction of right and left
+     * \return Return the difference of the subtraction between right and left
      *
      */
     template<typename T>
@@ -226,7 +235,7 @@ namespace Bull
      * \param right
      * \param left
      *
-     * \return Return the sum the subtraction of right and left
+     * \return Return the difference of the subtraction between right and left
      *
      */
     template<typename T>
@@ -237,11 +246,22 @@ namespace Bull
      * \param right
      * \param left
      *
-     * \return Return the difference the subtraction of right and left
+     * \return Return the difference of the subtraction between right and left
      *
      */
     template<typename T>
     Matrix4<T> operator-(const Matrix4<T>& left, T right);
+
+    /*! \brief Multiply two matrices
+     *
+     * \param right
+     * \param left
+     *
+     * \return Return the product of the multiplication between right and left
+     *
+     */
+    template<typename T>
+    Matrix4<T> operator*(const Matrix4<T>& left, const Matrix4<T>& right);
 
     typedef Matrix4<int> Matrix4I;
     typedef Matrix4<float> Matrix4F;
