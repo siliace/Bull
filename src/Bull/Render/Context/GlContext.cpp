@@ -2,6 +2,7 @@
 #include <set>
 
 #include <Bull/Core/System/Config.hpp>
+#include <Bull/Core/Thread/LocalPtr.hpp>
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
@@ -29,7 +30,7 @@ namespace Bull
             std::set<std::shared_ptr<Context>> internals;
             Mutex internalsMutex;
 
-            thread_local GlContext* current(nullptr);
+            LocalPtr<GlContext> current(nullptr);
 
             std::shared_ptr<ContextType> shared;
             Mutex sharedContextMutex;
