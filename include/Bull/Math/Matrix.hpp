@@ -119,6 +119,24 @@ namespace Bull
          */
         std::size_t getLength() const;
 
+        /*! \brief Get a column a the matrix
+         *
+         * \param column The column to get
+         *
+         * \return Return the column
+         *
+         */
+        std::array<T, H> getColumn(std::size_t column) const;
+
+        /*! \brief Get a row a the matrix
+         *
+         * \param row The row to get
+         *
+         * \return Return the row
+         *
+         */
+        std::array<T, W> getRow(std::size_t row) const;
+
         /*! \brief Get a pointer to the internal data
          *
          * \return Return the pointer

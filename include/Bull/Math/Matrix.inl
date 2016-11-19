@@ -179,6 +179,45 @@ namespace Bull
         return m_data.size();
     }
 
+    /*! \brief Get a column a the matrix
+     *
+     * \param column The column to get
+     *
+     * \return Return the column
+     *
+     */
+    template<typename T, std::size_t W, std::size_t H>
+    std::array<T, H> Matrix<T, W, H>::getColumn(std::size_t column) const
+    {
+        std::array<T, H> col;
+
+        for(std::size_t i = 0; i < getHeight(); i++)
+        {
+            col[i] = get(column, i);
+        }
+
+        return col;
+    }
+
+    /*! \brief Get a row a the matrix
+     *
+     * \param row The row to get
+     *
+     * \return Return the row
+     *
+     */
+    template<typename T, std::size_t W, std::size_t H>    std::array<T, W> Matrix<T, W, H>::getRow(std::size_t row) const
+    {
+        std::array<T, W> r;
+
+        for(std::size_t i = 0; i < getWidth(); i++)
+        {
+            r[i] = get(row, i);
+        }
+
+        return r;
+    }
+
     /*! \brief Get a pointer to the internal data
      *
      * \return Return the pointer
