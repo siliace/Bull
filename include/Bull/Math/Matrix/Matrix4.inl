@@ -241,6 +241,37 @@ namespace Bull
         return (*this) += Matrix4<T>(right);
     }
 
+    /*! \brief Subtract two matrices
+     *
+     * \param right
+     *
+     * \return Return the difference the subtraction of right and this
+     *
+     */
+    template<typename T>
+    Matrix4<T>& Matrix4<T>::operator-=(const Matrix4<T>& right)
+    {
+        for(std::size_t i = 0; i < 16; i++)
+        {
+            m_data[i] -= right.m_data[i];
+        }
+
+        return (*this);
+    }
+
+    /*! \brief Subtract two matrices
+     *
+     * \param right
+     *
+     * \return Return the difference the subtraction of right and this
+     *
+     */
+    template<typename T>
+    Matrix4<T>& Matrix4<T>::operator-=(T right)
+    {
+        return (*this) -= Matrix4<T>(right);
+    }
+
     /*! \brief Get a pointer to the internal data
      *
      * \return Return the pointer
@@ -304,5 +335,59 @@ namespace Bull
         sum += right;
 
         return sum;
+    }
+
+    /*! \brief Subtract two matrices
+     *
+     * \param right
+     * \param left
+     *
+     * \return Return the sum the subtraction of right and left
+     *
+     */
+    template<typename T>
+    Matrix4<T> operator-(const Matrix4<T>& left, const Matrix4<T>& right)
+    {
+        Matrix4<T> difference(left);
+
+        difference -= right;
+
+        return difference;
+    }
+
+    /*! \brief Subtract two matrices
+     *
+     * \param right
+     * \param left
+     *
+     * \return Return the sum the subtraction of right and left
+     *
+     */
+    template<typename T>
+    Matrix4<T> operator-(T left, const Matrix4<T>& right)
+    {
+        Matrix4<T> difference(left);
+
+        difference -= right;
+
+        return difference;
+    }
+
+    /*! \brief Subtract two matrices
+     *
+     * \param right
+     * \param left
+     *
+     * \return Return the difference the subtraction of right and left
+     *
+     */
+    template<typename T>
+    Matrix4<T> operator-(const Matrix4<T>& left, T right)
+    {
+        Matrix4<T> difference(left);
+
+        difference -= right;
+
+        return difference;
     }
 }
