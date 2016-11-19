@@ -129,6 +129,24 @@ namespace Bull
          */
         bool operator!=(const Matrix4<T>& right);
 
+        /*! \brief Addition two matrices
+         *
+         * \param right
+         *
+         * \return Return the sum the addition of right and this
+         *
+         */
+        Matrix4<T>& operator+=(const Matrix4<T>& right);
+
+        /*! \brief Addition two matrices
+         *
+         * \param right
+         *
+         * \return Return the sum the addition of right and this
+         *
+         */
+        Matrix4<T>& operator+=(T right);
+
         /*! \brief Get a pointer to the internal data
          *
          * \return Return the pointer
@@ -140,6 +158,39 @@ namespace Bull
 
         std::array<T, 16> m_data;
     };
+
+    /*! \brief Addition two matrices
+     *
+     * \param right
+     * \param left
+     *
+     * \return Return the sum the addition of right and left
+     *
+     */
+    template<typename T>
+    Matrix4<T> operator+(const Matrix4<T>& left, const Matrix4<T>& right);
+
+    /*! \brief Addition two matrices
+     *
+     * \param right
+     * \param left
+     *
+     * \return Return the sum the addition of right and left
+     *
+     */
+    template<typename T>
+    Matrix4<T> operator+(T left, const Matrix4<T>& right);
+
+    /*! \brief Addition two matrices
+     *
+     * \param right
+     * \param left
+     *
+     * \return Return the sum the addition of right and left
+     *
+     */
+    template<typename T>
+    Matrix4<T> operator+(const Matrix4<T>& left, T right);
 
     typedef Matrix4<int> Matrix4I;
     typedef Matrix4<float> Matrix4F;
