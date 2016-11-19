@@ -5,6 +5,8 @@
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/String.hpp>
 
+#include <Bull/Math/Matrix.hpp>
+
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Color.hpp>
 #include <Bull/Render/OpenGL.hpp>
@@ -137,6 +139,16 @@ namespace Bull
          *
          */
         bool setUniform(const String& name, const Color& uniform);
+
+        /*! \brief Set an uniform variable
+         *
+         * \param name    The name of the uniform variable in the shader
+         * \param uniform The value to set to the uniform variable
+         *
+         * \return Return true if the uniform variable was found, false otherwise
+         *
+         */
+        bool setUniform(const String& name, const Matrix4F& uniform);
 
         /*! \brief Get the native system handler
          *
