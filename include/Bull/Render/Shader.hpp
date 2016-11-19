@@ -5,7 +5,7 @@
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/String.hpp>
 
-#include <Bull/Math/Matrix.hpp>
+#include <Bull/Math/Matrix/Matrix4.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Color.hpp>

@@ -5,14 +5,12 @@ namespace Bull
      * \return Return the matrix
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    Matrix<T, W, H> Matrix<T, W, H>::createIdentity()
+    template<typename T>
+    Matrix4<T> Matrix4<T>::createIdentity()
     {
-        static_assert(Matrix<T, W, H>::Width == Matrix<T, W, H>::Height, "Identity matrix can be used only with squares matrices");
+        Matrix4<T> identity;
 
-        Matrix<T, W, H> identity;
-
-        for(std::size_t i = 0; i < Matrix<T, W, H>::Width; i++)
+        for(std::size_t i = 0; i < 4; i++)
         {
             identity.set(1, i, i);
         }
@@ -29,10 +27,10 @@ namespace Bull
      * \return Return the matrix
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    Matrix<T, 4, 4> Matrix<T, W, H>::createTranslation(T x, T y, T z)
+    template<typename T>
+    Matrix4<T> Matrix4<T>::createTranslation(T x, T y, T z)
     {
-        Matrix<T, 4, 4> translation = Matrix<T, 4, 4>::createIdentity();
+        Matrix4<T> translation = Matrix4<T>::createIdentity();
 
         translation.set(x, 3, 0);
         translation.set(y, 3, 1);
@@ -50,10 +48,10 @@ namespace Bull
      * \return Return the matrix
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    Matrix<T, 4, 4> Matrix<T, W, H>::createScale(T x, T y, T z)
+    template<typename T>
+    Matrix4<T> Matrix4<T>::createScale(T x, T y, T z)
     {
-        Matrix<T, 4, 4> scale;
+        Matrix4<T> scale;
 
         scale.set(x, 0, 0);
         scale.set(y, 1, 1);
@@ -66,8 +64,8 @@ namespace Bull
     /*! \brief Default Constructor
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    Matrix<T, W, H>::Matrix()
+    template<typename T>
+    Matrix4<T>::Matrix4()
     {
         static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
 
@@ -79,8 +77,8 @@ namespace Bull
      * \param value The value of every matrix cell
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    Matrix<T, W, H>::Matrix(T value)
+    template<typename T>
+    Matrix4<T>::Matrix4(T value)
     {
         static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
 
@@ -92,7 +90,7 @@ namespace Bull
      * \param data The matrix content
      *
      */
-    template<typename T, std::size_t W, std::size_t H>    Matrix<T, W, H>::Matrix(const std::array<T, W * H>& data)
+    template<typename T>    Matrix4<T>::Matrix4(const std::array<T, 16>& data)
     {
         static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
 
@@ -104,7 +102,7 @@ namespace Bull
      * \param value The value of every matrix cell
      *
      */
-    template<typename T, std::size_t W, std::size_t H>    void Matrix<T, W, H>::set(T value)
+    template<typename T>    void Matrix4<T>::set(T value)
     {
         m_data.fill(value);
     }
@@ -116,10 +114,10 @@ namespace Bull
      * \param y     The ordinate of the cell in the matrix
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    void Matrix<T, W, H>::set(T value, std::size_t x, std::size_t y)
+    template<typename T>
+    void Matrix4<T>::set(T value, std::size_t x, std::size_t y)
     {
-        m_data[y * Matrix<T, W, H>::Width + x] = value;
+        m_data[y * 4 + x] = value;
     }
 
     /*! \brief Set the matrix content
@@ -127,8 +125,8 @@ namespace Bull
      * \param data The matrix content
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    void Matrix<T, W, H>::set(const std::array<T, W * H>& data)
+    template<typename T>
+    void Matrix4<T>::set(const std::array<T, 16>& data)
     {
         m_data = data;
     }
@@ -141,42 +139,10 @@ namespace Bull
      * \return Return the value
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    T Matrix<T, W, H>::get(std::size_t x, std::size_t y) const
+    template<typename T>
+    T Matrix4<T>::get(std::size_t x, std::size_t y) const
     {
-        return m_data[y * Matrix<T, W, H>::Width + x];
-    }
-
-    /*! \brief Get the width of the matrix
-     *
-     * \return Return the width
-     *
-     */
-    template<typename T, std::size_t W, std::size_t H>
-    std::size_t Matrix<T, W, H>::getWidth() const
-    {
-        return Matrix<T, W, H>::Width;
-    }
-
-    /*! \brief Get the height of the matrix
-     *
-     * \return Return the height
-     *
-     */
-    template<typename T, std::size_t W, std::size_t H>    std::size_t Matrix<T, W, H>::getHeight() const
-    {
-        return Matrix<T, W, H>::Height;
-    }
-
-    /*! \brief Get the length of the matrix
-     *
-     * \return Return the length
-     *
-     */
-    template<typename T, std::size_t W, std::size_t H>
-    std::size_t Matrix<T, W, H>::getLength() const
-    {
-        return m_data.size();
+        return m_data[y * 4 + x];
     }
 
     /*! \brief Get a column a the matrix
@@ -186,12 +152,12 @@ namespace Bull
      * \return Return the column
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    std::array<T, H> Matrix<T, W, H>::getColumn(std::size_t column) const
+    template<typename T>
+    std::array<T, 4> Matrix4<T>::getColumn(std::size_t column) const
     {
-        std::array<T, H> col;
+        std::array<T, 4> col;
 
-        for(std::size_t i = 0; i < getHeight(); i++)
+        for(std::size_t i = 0; i < 4; i++)
         {
             col[i] = get(column, i);
         }
@@ -206,11 +172,11 @@ namespace Bull
      * \return Return the row
      *
      */
-    template<typename T, std::size_t W, std::size_t H>    std::array<T, W> Matrix<T, W, H>::getRow(std::size_t row) const
+    template<typename T>    std::array<T, 4> Matrix4<T>::getRow(std::size_t row) const
     {
-        std::array<T, W> r;
+        std::array<T, 4> r;
 
-        for(std::size_t i = 0; i < getWidth(); i++)
+        for(std::size_t i = 0; i < 4; i++)
         {
             r[i] = get(row, i);
         }
@@ -225,8 +191,8 @@ namespace Bull
      * \return Return true if the two matrices are equal, false otherwise
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    bool Matrix<T, W, H>::operator==(const Matrix<T, W, H>& right)
+    template<typename T>
+    bool Matrix4<T>::operator==(const Matrix4<T>& right)
     {
         return m_data == right.m_data;
     }
@@ -238,8 +204,8 @@ namespace Bull
      * \return Return true if the two matrices are not equal, false otherwise
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    bool Matrix<T, W, H>::operator!=(const Matrix<T, W, H>& right)
+    template<typename T>
+    bool Matrix4<T>::operator!=(const Matrix4<T>& right)
     {
         return m_data != right.m_data;
     }
@@ -249,8 +215,8 @@ namespace Bull
      * \return Return the pointer
      *
      */
-    template<typename T, std::size_t W, std::size_t H>
-    Matrix<T, W, H>::operator const T*() const
+    template<typename T>
+    Matrix4<T>::operator const T*() const
     {
         return &m_data[0];
     }

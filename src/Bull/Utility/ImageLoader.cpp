@@ -46,6 +46,8 @@ namespace Bull
                 case Image::Jpg:
                 case Image::Jpeg: return false;
             }
+
+            return false;
         }
 
         bool ImageLoader::saveBmp(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size)

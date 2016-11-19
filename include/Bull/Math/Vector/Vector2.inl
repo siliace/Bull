@@ -135,22 +135,6 @@ namespace Bull
         return (*this);
     }
 
-    /*! \brief Convert a Vector2 to a Matrix
-     *
-     * \return Return the representation of the Vector2 as a Matrix
-     *
-     */
-    template<typename T>
-    Vector2<T>::operator Matrix<T, 1, 2>() const
-    {
-        Matrix<T, 1, 2> matrix;
-
-        matrix.set(x, 0, 0);
-        matrix.set(x, 0, 1);
-
-        return matrix;
-    }
-
     /*! \brief Addition two Vector2
      *
      * \param left  The vector to add to right

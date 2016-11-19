@@ -5,8 +5,6 @@
 
 #include <Bull/Core/System/Export.hpp>
 
-#include <Bull/Math/Matrix.hpp>
-
 namespace Bull
 {
     template<typename T>
@@ -100,13 +98,6 @@ namespace Bull
          *
          */
         Vector2& operator-=(const Vector2& right);
-
-        /*! \brief Convert a Vector2 to a Matrix
-         *
-         * \return Return the representation of the Vector2 as a Matrix
-         *
-         */
-        operator Matrix<T, 1, 2>() const;
 
         T x, y;
 
