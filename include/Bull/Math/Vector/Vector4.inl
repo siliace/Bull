@@ -173,24 +173,6 @@ namespace Bull
         return (*this);
     }
 
-    /*! \brief Convert a Vector4 to a Matrix
-     *
-     * \return Return the representation of the Vector4 as a Matrix
-     *
-     */
-    template<typename T>
-    Vector4<T>::operator Matrix<T, 1, 4>() const
-    {
-        Matrix<T, 1, 4> matrix;
-
-        matrix.set(x, 0, 0);
-        matrix.set(y, 0, 1);
-        matrix.set(z, 0, 2);
-        matrix.set(w, 0, 3);
-
-        return matrix;
-    }
-
     /*! \brief Addition two Vector4
      *
      * \param left  The vector to add to right

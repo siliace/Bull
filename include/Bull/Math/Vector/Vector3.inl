@@ -166,23 +166,6 @@ namespace Bull
         return (*this);
     }
 
-    /*! \brief Convert a Vector3 to a Matrix
-     *
-     * \return Return the representation of the Vector3 as a Matrix
-     *
-     */
-    template<typename T>
-    Vector3<T>::operator Matrix<T, 1, 3>() const
-    {
-        Matrix<T, 1, 3> matrix;
-
-        matrix.set(x, 0, 0);
-        matrix.set(y, 0, 1);
-        matrix.set(z, 0, 2);
-
-        return matrix;
-    }
-
     /*! \brief Addition two Vector3
      *
      * \param left  The vector to add to right

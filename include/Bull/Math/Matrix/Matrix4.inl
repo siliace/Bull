@@ -274,7 +274,7 @@ namespace Bull
 
     /*! \brief Multiply two matrices
      *
-     * \param left
+     * \param right
      *
      * \return Return the product of the multiplication between right and this
      *
@@ -438,6 +438,27 @@ namespace Bull
         Matrix4<T> product(left);
 
         product *= right;
+
+        return product;
+    }
+
+    /*! \brief Multiply a matrix with a vector
+     *
+     * \param right
+     * \param left
+     *
+     * \return Return the product of the multiplication between right and left
+     *
+     */
+    template<typename T>
+    Vector4<T> operator*(const Matrix4<T>& left, const Vector4<T>& right)
+    {
+        Vector4<T> product;
+
+        product.x = (right.x * left.get(0, 0)) + (right.y * left.get(1, 0)) + (right.z * left.get(2, 0)) + (right.w * left.get(3, 0));
+        product.y = (right.x * left.get(0, 1)) + (right.y * left.get(1, 1)) + (right.z * left.get(2, 1)) + (right.w * left.get(3, 1));
+        product.z = (right.x * left.get(0, 2)) + (right.y * left.get(1, 2)) + (right.z * left.get(2, 2)) + (right.w * left.get(3, 2));
+        product.w = (right.x * left.get(0, 3)) + (right.y * left.get(1, 3)) + (right.z * left.get(2, 3)) + (right.w * left.get(3, 3));
 
         return product;
     }

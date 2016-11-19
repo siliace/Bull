@@ -5,7 +5,6 @@
 
 #include <Bull/Core/System/Export.hpp>
 
-#include <Bull/Math/Matrix.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
 
 namespace Bull
@@ -111,13 +110,6 @@ namespace Bull
          *
          */
         Vector4& operator-=(const Vector4& right);
-
-        /*! \brief Convert a Vector4 to a Matrix
-         *
-         * \return Return the representation of the Vector4 as a Matrix
-         *
-         */
-        operator Matrix<T, 1, 4>() const;
 
         T x, y, z, w;
     };

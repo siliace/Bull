@@ -3,6 +3,8 @@
 
 #include <array>
 
+#include <Bull/Math/Vector/Vector4.hpp>
+
 namespace Bull
 {
     template<typename T>
@@ -156,7 +158,7 @@ namespace Bull
          */
         Matrix4<T>& operator-=(const Matrix4<T>& right);
 
-        /*! \brief Subtract two matrices
+        /*! \brief Subtract a matrix with a scalar
          *
          * \param right
          *
@@ -167,7 +169,7 @@ namespace Bull
 
         /*! \brief Multiply two matrices
          *
-         * \param left
+         * \param right
          *
          * \return Return the product of the multiplication between right and this
          *
@@ -262,6 +264,17 @@ namespace Bull
      */
     template<typename T>
     Matrix4<T> operator*(const Matrix4<T>& left, const Matrix4<T>& right);
+
+    /*! \brief Multiply a matrix with a vector
+     *
+     * \param right
+     * \param left
+     *
+     * \return Return the product of the multiplication between right and left
+     *
+     */
+    template<typename T>
+    Vector4<T> operator*(const Matrix4<T>& left, const Vector4<T>& right);
 
     typedef Matrix4<int> Matrix4I;
     typedef Matrix4<float> Matrix4F;
