@@ -21,7 +21,8 @@ namespace Bull
          * \param value The value to use to fill components
          *
          */
-        Quaternion(T value);
+        template<typename U>
+        Quaternion(U value);
 
         /*! \brief Constructor
          *
@@ -31,7 +32,8 @@ namespace Bull
          * \param z The value of the z axis component
          *
          */
-        Quaternion(T w, T x, T y, T z);
+        template<typename U>
+        Quaternion(U w, U x, U y, U z);
 
         /*! \brief Set the value of the Quaternion
          *
@@ -40,7 +42,8 @@ namespace Bull
          * \return Return this
          *
          */
-        Quaternion<T>& set(T value);
+        template<typename U>
+        Quaternion<T>& set(U value);
 
         /*! \brief Set the value of the Quaternion
          *
@@ -52,7 +55,8 @@ namespace Bull
          * \return Return this
          *
          */
-        Quaternion<T>& set(T w, T x, T y, T z);
+        template<typename U>
+        Quaternion<T>& set(U w, U x, U y, U z);
 
         /*! \brief Set the value of the Quaternion
          *
@@ -61,7 +65,15 @@ namespace Bull
          * \return Return this
          *
          */
-        Quaternion<T>& set(const Quaternion<T>& quat);
+        template<typename U>
+        Quaternion<T>& set(const Quaternion<U>& quat);
+
+        /*! \brief Normalize the Quaternion
+         *
+         * \return Return this
+         *
+         */
+        Quaternion<T>& normalize(T* length = nullptr);
 
         /*! \brief Get the magnitude of the quaternion
          *
@@ -84,7 +96,8 @@ namespace Bull
          * \return Return true if this and right are equal, false otherwise
          *
          */
-        bool operator==(const Quaternion<T>& right) const;
+        template<typename U>
+        bool operator==(const Quaternion<U>& right) const;
 
         /*! \brief Compare two quaternions
          *
@@ -93,7 +106,8 @@ namespace Bull
          * \return Return true if this and right are not equal, false otherwise
          *
          */
-        bool operator!=(const Quaternion<T>& right) const;
+        template<typename U>
+        bool operator!=(const Quaternion<U>& right) const;
 
         /*! \brief Multiply two Quaternions
          *
@@ -102,7 +116,8 @@ namespace Bull
          * \return Return the product of this and right
          *
          */
-        Quaternion<T> operator*(const Quaternion<T>& right) const;
+        template<typename U>
+        Quaternion<T> operator*(const Quaternion<U>& right) const;
 
         /*! \brief Multiply two Quaternions and affect the result to this
          *
@@ -111,7 +126,8 @@ namespace Bull
          * \return Return the product of this and right
          *
          */
-        Quaternion<T>& operator*=(const Quaternion<T>& right);
+        template<typename U>
+        Quaternion<T>& operator*=(const Quaternion<U>& right);
 
         T w, x, y, z;
     };

@@ -8,7 +8,7 @@ namespace Bull
     {
         static_assert(std::is_floating_point<T>::value, "T must be a floating point type");
 
-        set(0);
+        set(0.0);
     }
 
     /*! \brief Constructor
@@ -17,7 +17,8 @@ namespace Bull
      *
      */
     template<typename T>
-    Quaternion<T>::Quaternion(T value)
+    template<typename U>
+    Quaternion<T>::Quaternion(U value)
     {
         static_assert(std::is_floating_point<T>::value, "T must be a floating point type");
 
@@ -33,7 +34,8 @@ namespace Bull
      *
      */
     template<typename T>
-    Quaternion<T>::Quaternion(T w, T x, T y, T z)
+    template<typename U>
+    Quaternion<T>::Quaternion(U w, U x, U y, U z)
     {
         static_assert(std::is_floating_point<T>::value, "T must be a floating point type");
 
@@ -48,12 +50,13 @@ namespace Bull
      *
      */
     template<typename T>
-    Quaternion<T>& Quaternion<T>::set(T value)
+    template<typename U>
+    Quaternion<T>& Quaternion<T>::set(U value)
     {
-        w = value;
-        x = value;
-        y = value;
-        z = value;
+        w = static_cast<T>(value);
+        x = static_cast<T>(value);
+        y = static_cast<T>(value);
+        z = static_cast<T>(value);
 
         return (*this);
     }
@@ -69,12 +72,13 @@ namespace Bull
      *
      */
     template<typename T>
+    template<typename U>
     Quaternion<T>& Quaternion<T>::set(T w, T x, T y, T z)
     {
-        this->w = w;
-        this->x = x;
-        this->y = y;
-        this->z = z;
+        this->w = static_cast<T>(w);
+        this->x = static_cast<T>(x);
+        this->y = static_cast<T>(y);
+        this->z = static_cast<T>(z);
 
         return (*this);
     }
@@ -87,12 +91,12 @@ namespace Bull
      *
      */
     template<typename T>
-    Quaternion<T>& Quaternion<T>::set(const Quaternion<T>& quat)
+    template<typename U>    Quaternion<T>& Quaternion<T>::set(const Quaternion<U>& quat)
     {
-        w = quat.w;
-        x = quat.x;
-        y = quat.y;
-        z = quat.z;
+        w = static_cast<T>(quat.w);
+        x = static_cast<T>(quat.x);
+        y = static_cast<T>(quat.y);
+        z = static_cast<T>(quat.z);
 
         return (*this);
     }
@@ -154,12 +158,13 @@ namespace Bull
      *
      */
     template<typename T>
-    bool Quaternion<T>::operator==(const Quaternion<T>& right) const
+    template<typename U>
+    bool Quaternion<T>::operator==(const Quaternion<U>& right) const
     {
-        return (w == right.w) &&
-               (x == right.x) &&
-               (y == right.y) &&
-               (z == right.z);
+        return (w == static_cast<T>(right.w)) &&
+               (x == static_cast<T>(right.x)) &&
+               (y == static_cast<T>(right.y)) &&
+               (z == static_cast<T>(right.z));
     }
 
     /*! \brief Compare two quaternions
@@ -170,7 +175,8 @@ namespace Bull
      *
      */
     template<typename T>
-    bool Quaternion<T>::operator!=(const Quaternion<T>& right) const
+    template<typename U>
+    bool Quaternion<T>::operator!=(const Quaternion<U>& right) const
     {
         return !((*this) == right);
     }
@@ -183,7 +189,8 @@ namespace Bull
      *
      */
     template<typename T>
-    Quaternion<T> Quaternion<T>::operator*(const Quaternion<T>& right) const
+    template<typename U>
+    Quaternion<T> Quaternion<T>::operator*(const Quaternion<U>& right) const
     {
         return Quaternion<T>((*this)) *= right;
     }
@@ -196,14 +203,15 @@ namespace Bull
      *
      */
     template<typename T>
-    Quaternion<T>& Quaternion<T>::operator*=(const Quaternion<T>& right)
+    template<typename U>
+    Quaternion<T>& Quaternion<T>::operator*=(const Quaternion<U>& right)
     {
         Quaternion<T> product;
 
-        product.w = w * right.w - x * right.x - y * right.y - z * right.z;
-        product.x = w * right.x - x * right.w - y * right.z - z * right.y;
-        product.y = w * right.y - x * right.z - y * right.w - z * right.x;
-        product.z = w * right.z - x * right.y - y * right.x - z * right.w;
+        product.w = w * static_cast<T>(right.w) - x * static_cast<T>(right.x) - y * static_cast<T>(right.y) - z * static_cast<T>(right.z);
+        product.x = w * static_cast<T>(right.x) - x * static_cast<T>(right.w) - y * static_cast<T>(right.z) - z * static_cast<T>(right.y);
+        product.y = w * static_cast<T>(right.y) - x * static_cast<T>(right.z) - y * static_cast<T>(right.w) - z * static_cast<T>(right.x);
+        product.z = w * static_cast<T>(right.z) - x * static_cast<T>(right.y) - y * static_cast<T>(right.x) - z * static_cast<T>(right.w);
 
         return set(product);
     }
