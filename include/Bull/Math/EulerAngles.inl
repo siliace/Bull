@@ -145,4 +145,68 @@ namespace Bull
     {
         return !((*this) == right);
     }
+
+    /*! \brief Addition two EulerAngles
+     *
+     * \param right The EulerAngles to add to this
+     *
+     * \return Return the sum of this and right
+     *
+     */
+    template<typename T>
+    template<typename U>
+    EulerAngles<T> EulerAngles<T>::operator+(const EulerAngles<U>& right)
+    {
+        return EulerAngles((*this)) += right;
+    }
+
+    /*! \brief Addition two EulerAngles
+     *
+     * \param right The EulerAngles to add to this
+     *
+     * \return Return the sum of this and right
+     *
+     */
+    template<typename T>
+    template<typename U>
+    EulerAngles<T>& EulerAngles<T>::operator+=(const EulerAngles<U>& right)
+    {
+        roll  += static_cast<T>(right.roll);
+        pitch += static_cast<T>(right.pitch);
+        yaw   += static_cast<T>(right.yaw);
+
+        return (*this);
+    }
+
+    /*! \brief Subtract two EulerAngles
+     *
+     * \param right The EulerAngles to subtract to this
+     *
+     * \return Return the difference of this and right
+     *
+     */
+    template<typename T>
+    template<typename U>
+    EulerAngles<T> EulerAngles<T>::operator-(const EulerAngles<U>& right)
+    {
+        return EulerAngles((*this)) -= right;
+    }
+
+    /*! \brief Subtract two EulerAngles
+     *
+     * \param right The EulerAngles to subtract to this
+     *
+     * \return Return the difference of this and right
+     *
+     */
+    template<typename T>
+    template<typename U>
+    EulerAngles<T>& EulerAngles<T>::operator-=(const EulerAngles<U>& right)
+    {
+        roll  -= static_cast<T>(right.roll);
+        pitch -= static_cast<T>(right.pitch);
+        yaw   -= static_cast<T>(right.yaw);
+
+        return (*this);
+    }
 }

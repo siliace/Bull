@@ -103,6 +103,46 @@ namespace Bull
         template<typename U>
         bool operator!=(const EulerAngles<U>& right);
 
+        /*! \brief Addition two EulerAngles
+         *
+         * \param right The EulerAngles to add to this
+         *
+         * \return Return the sum of this and right
+         *
+         */
+        template<typename U>
+        EulerAngles<T> operator+(const EulerAngles<U>& right);
+
+        /*! \brief Addition two EulerAngles
+         *
+         * \param right The EulerAngles to add to this
+         *
+         * \return Return the sum of this and right
+         *
+         */
+        template<typename U>
+        EulerAngles<T>& operator+=(const EulerAngles<U>& right);
+
+        /*! \brief Subtract two EulerAngles
+         *
+         * \param right The EulerAngles to subtract to this
+         *
+         * \return Return the difference of this and right
+         *
+         */
+        template<typename U>
+        EulerAngles<T> operator-(const EulerAngles<U>& right);
+
+        /*! \brief Subtract two EulerAngles
+         *
+         * \param right The EulerAngles to subtract to this
+         *
+         * \return Return the difference of this and right
+         *
+         */
+        template<typename U>
+        EulerAngles<T>& operator-=(const EulerAngles<U>& right);
+
         T roll, pitch, yaw;
     };
 }
