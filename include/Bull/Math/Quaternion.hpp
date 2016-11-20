@@ -1,6 +1,7 @@
 #ifndef Bull_Quaternion_hpp
 #define Bull_Quaternion_hpp
 
+#include <cmath>
 #include <functional>
 
 #include <Bull/Core/System/Export.hpp>
@@ -61,6 +62,20 @@ namespace Bull
          *
          */
         Quaternion<T>& set(const Quaternion<T>& quat);
+
+        /*! \brief Get the magnitude of the quaternion
+         *
+         * \return Return magnitude
+         *
+         */
+        T getMagnitude() const;
+
+        /*! \brief Get the squared magnitude of the quaternion
+         *
+         * \return Return squared magnitude
+         *
+         */
+        T getSquaredMagnitude() const;
 
         /*! \brief Compare two quaternions
          *

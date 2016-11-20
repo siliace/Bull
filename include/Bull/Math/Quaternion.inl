@@ -97,6 +97,28 @@ namespace Bull
         return (*this);
     }
 
+    /*! \brief Get the magnitude of the quaternion
+     *
+     * \return Return magnitude
+     *
+     */
+    template<typename T>
+    T Quaternion<T>::getMagnitude() const
+    {
+        return std::sqrt(getSquaredMagnitude());
+    }
+
+    /*! \brief Get the squared magnitude of the quaternion
+     *
+     * \return Return squared magnitude
+     *
+     */
+    template<typename T>
+    T Quaternion<T>::getSquaredMagnitude() const
+    {
+        return w * w + x * x + y * y + z * z;
+    }
+
     /*! \brief Compare two quaternions
      *
      * \param right The Quaternion to compare to this
