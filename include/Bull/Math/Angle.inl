@@ -8,7 +8,7 @@ namespace Bull
      *
      */
     template<typename T>
-    T degree(T rad)
+    T Angle::radToDeg(T rad)
     {
         return rad * (180.0 / Pi);
     }
@@ -21,7 +21,7 @@ namespace Bull
      *
      */
     template<typename T>
-    T radian(T deg)
+    T Angle::degToRad(T deg)
     {
         return deg * (Pi / 180.0);
     }
