@@ -2,10 +2,11 @@
 #define Bull_ShaderStateSaver_hpp
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/System/Export.hpp>
 
 namespace Bull
 {
-    class ShaderStateSaver : public NonCopyable
+    class BULL_API ShaderStateSaver : public NonCopyable
     {
     public:
 

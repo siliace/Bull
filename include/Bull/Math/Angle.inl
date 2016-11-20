@@ -1,8 +1,3 @@
-#include <cmath>
-
-#include <Bull/Math/Angle.hpp>
-#include <Bull/Math/Constants.hpp>
-
 namespace Bull
 {
     /*! \brief Convert an angle from radian to degree
@@ -12,9 +7,10 @@ namespace Bull
      * \return The angle converted in degree
      *
      */
-    float Angle::radToDeg(float rad)
+    template<typename T>
+    T degree(T rad)
     {
-        return rad * (180.f / Pi);
+        return rad * (180.0 / Pi);
     }
 
     /*! \brief Convert an angle from degree to radian
@@ -24,8 +20,9 @@ namespace Bull
      * \return The angle converted in radian
      *
      */
-    float Angle::degToRad(float deg)
+    template<typename T>
+    T radian(T deg)
     {
-        return deg * (Pi / 180.f);
+        return deg * (Pi / 180.0);
     }
 }

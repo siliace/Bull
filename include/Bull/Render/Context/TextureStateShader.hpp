@@ -2,10 +2,11 @@
 #define Bull_TextureStateSaver_hpp
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/System/Export.hpp>
 
 namespace Bull
 {
-    class TextureStateSaver : public NonCopyable
+    class BULL_API TextureStateSaver : public NonCopyable
     {
     public:
 

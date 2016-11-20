@@ -3,12 +3,14 @@
 
 #include <array>
 
+#include <Bull/Core/System/Export.hpp>
+
 #include <Bull/Math/Vector/Vector4.hpp>
 
 namespace Bull
 {
     template<typename T>
-    class Matrix4
+    class BULL_API Matrix4
     {
     public:
 
