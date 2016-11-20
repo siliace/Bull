@@ -97,6 +97,33 @@ namespace Bull
         return (*this);
     }
 
+    /*! \brief Normalize the Quaternion
+     *
+     * \return Return this
+     *
+     */
+    template<typename T>
+    Quaternion<T>& Quaternion<T>::normalize(T* length)
+    {
+        T normal = getMagnitude();
+
+        if(normal > 0.0)
+        {
+            T inversNormal = 1.0 / normal;
+            w *= inversNormal;
+            x *= inversNormal;
+            y *= inversNormal;
+            z *= inversNormal;
+        }
+
+        if(length)
+        {
+            *length = normal;
+        }
+
+        return (*this);
+    }
+
     /*! \brief Get the magnitude of the quaternion
      *
      * \return Return magnitude
