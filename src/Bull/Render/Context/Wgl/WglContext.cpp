@@ -186,9 +186,33 @@ namespace Bull
          *
          */
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared) :
-            WglContext(shared, VideoMode::getCurrent().bitsPerPixel, ContextSettings())
+            WglContext(shared, VideoMode(1, 1), ContextSettings())
         {
             /// Nothing
+        }
+
+        /*! \brief Constructor
+         *
+         * \param shared   The shared context
+         * \param mode     The VideoMode to use to create the context
+         * \param settings Settings to use to create the context
+         *
+         */
+        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, const VideoMode& mode, const ContextSettings& settings) :
+            GlContext(settings),
+            m_device(0),
+            m_render(0),
+            m_pbuffer(0),
+            m_ownWindow(false)
+        {
+            createSurface(shared, mode.width, mode.height, mode.bitsPerPixel);
+
+            if(m_device)
+            {
+                setPixelFormat(mode.bitsPerPixel);
+
+                createContext(shared);
+            }
         }
 
         /*! \brief Constructor
@@ -199,20 +223,9 @@ namespace Bull
          *
          */
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings) :
-            GlContext(settings),
-            m_device(0),
-            m_render(0),
-            m_pbuffer(0),
-            m_ownWindow(false)
+            WglContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
         {
-            createSurface(shared, 1, 1, bitsPerPixel);
-
-            if(m_device)
-            {
-                setPixelFormat(bitsPerPixel);
-
-                createContext(shared);
-            }
+            /// Nothing
         }
 
         /*! \brief Constructor

@@ -370,9 +370,6 @@ namespace Bull
 
     protected:
 
-        std::unique_ptr<prv::GlContext> m_context; /*!< The OS specific implementation of the OpenGL context */
-
-
         /*! \brief Constructor
          *
          * \param mode     The VideoMode
@@ -395,9 +392,11 @@ namespace Bull
          */
         bool open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
 
+        std::unique_ptr<prv::GlContext> m_context; /*!< The OS specific implementation of the OpenGL context */
+
     private:
 
-        std::unique_ptr<prv::WindowImpl> m_impl;    /*!< The OS specific implementation of the window */
+        std::unique_ptr<prv::WindowImpl> m_impl; /*!< The OS specific implementation of the window */
     };
 }
 

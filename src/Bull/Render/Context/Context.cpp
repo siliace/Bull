@@ -26,6 +26,18 @@ namespace Bull
 
     /*! \brief Constructor
      *
+     * \param mode     The VideoMode to use to create the context
+     * \param settings Settings to use to create the context
+     *
+     */
+    Context::Context(const VideoMode& mode, const ContextSettings& settings) :
+        m_impl(prv::GlContext::createInstance(mode, settings))
+    {
+        setActive();
+    }
+
+    /*! \brief Constructor
+     *
      * \param bitsPerPixel Number of bits per pixel to use
      * \param settings     Settings to use to create the context
      *

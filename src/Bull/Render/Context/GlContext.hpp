@@ -8,6 +8,7 @@
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/SurfaceHandler.hpp>
 
+#include <Bull/Utility/Window/VideoMode.hpp>
 #include <Bull/Utility/Window/WindowHandler.hpp>
 
 namespace Bull
@@ -39,6 +40,16 @@ namespace Bull
              *
              */
             static GlContext* createInstance();
+
+            /*! \brief Create an OS specific instance of GlContext
+             *
+             * \param mode     The VideoMode to use to create the context
+             * \param settings Settings to use to create the context
+             *
+             * \return Return the created context
+             *
+             */
+            static GlContext* createInstance(const VideoMode& mode, const ContextSettings& settings);
 
             /*! \brief Create an OS specific instance of GlContext
              *

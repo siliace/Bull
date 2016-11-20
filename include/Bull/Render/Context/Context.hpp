@@ -8,6 +8,8 @@
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Context/ContextSettings.hpp>
 
+#include <Bull/Utility/Window/VideoMode.hpp>
+
 namespace Bull
 {
     namespace prv
@@ -36,6 +38,14 @@ namespace Bull
          *
          */
         Context();
+
+        /*! \brief Constructor
+         *
+         * \param mode     The VideoMode to use to create the context
+         * \param settings Settings to use to create the context
+         *
+         */
+        Context(const VideoMode& mode, const ContextSettings& settings);
 
         /*! \brief Constructor
          *

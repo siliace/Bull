@@ -45,7 +45,7 @@ namespace Bull
         /*! \brief Display what has been rendered so far
          *
          */
-        void display();
+        void display() override;
 
         /*! \brief Activate or deactivate the context
          *
