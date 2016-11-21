@@ -127,9 +127,9 @@ namespace Bull
     template<typename U>
     bool EulerAngles<T>::operator==(const EulerAngles<U>& right)
     {
-        return (roll == static_cast<T>(right.roll)) &&
+        return (roll  == static_cast<T>(right.roll))  &&
                (pitch == static_cast<T>(right.pitch)) &&
-               (yaw == static_cast<T>(right.yaw));
+               (yaw   == static_cast<T>(right.yaw));
     }
 
     /*! \brief Compare two EulerAngles
