@@ -5,6 +5,9 @@
 
 #include <Bull/Core/System/Export.hpp>
 
+#include <Bull/Math/Angle.hpp>
+#include <Bull/Math/EulerAngles.hpp>
+#include <Bull/Math/Quaternion.hpp>
 #include <Bull/Math/Vector/Vector4.hpp>
 
 namespace Bull
@@ -42,6 +45,35 @@ namespace Bull
          *
          */
         static Matrix4<T> createScale(T x, T y, T z);
+
+        /*! \brief Create a rotation matrix
+         *
+         * \param x The rotation on the x axis
+         * \param y The rotation on the y axis
+         * \param z The rotation on the z axis
+         *
+         * \return Return the matrix
+         *
+         */
+        static Matrix4<T> createRotation(T x, T y, T z);
+
+        /*! \brief Create a rotation matrix
+         *
+         * \param angles Angles of rotations
+         *
+         * \return Return the matrix
+         *
+         */
+        static Matrix4<T> createRotation(const EulerAngles<T>& angles);
+
+        /*! \brief Create a rotation matrix
+         *
+         * \param quaternion The quaternion representing a rotation
+         *
+         * \return Return the matrix
+         *
+         */
+        static Matrix4<T> createRotation(const Quaternion<T>& quaternion);
 
     public:
 
@@ -114,6 +146,26 @@ namespace Bull
          *
          */
         std::array<T, 4> getRow(std::size_t row) const;
+
+        /*! \brief
+         *
+         * \param
+         * \param
+         *
+         * \return
+         *
+         */
+        T& operator()(std::size_t x, std::size_t y);
+
+        /*! \brief
+         *
+         * \param
+         * \param
+         *
+         * \return
+         *
+         */
+        const T& operator()(std::size_t x, std::size_t y) const;
 
         /*! \brief Compare two matrices
          *
