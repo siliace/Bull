@@ -47,6 +47,7 @@ namespace Bull
      * \param angles The EulerAngles to use create the Quaternion
      *
      */
+    template<typename T>
     template<typename U>
     Quaternion<T>::Quaternion(const EulerAngles<U>& copy)
     {
@@ -84,7 +85,7 @@ namespace Bull
      */
     template<typename T>
     template<typename U>
-    Quaternion<T>& Quaternion<T>::set(T w, T x, T y, T z)
+    Quaternion<T>& Quaternion<T>::set(U w, U x, U y, U z)
     {
         this->w = static_cast<T>(w);
         this->x = static_cast<T>(x);
@@ -101,6 +102,7 @@ namespace Bull
      * \return Return this
      *
      */
+    template<typename T>
     template<typename U>
     Quaternion<T>& Quaternion<T>::set(const EulerAngles<U>& angles)
     {
