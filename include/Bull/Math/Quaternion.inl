@@ -42,6 +42,17 @@ namespace Bull
         set(w, x, y, z);
     }
 
+    /*! \brief Constructor
+     *
+     * \param angles The EulerAngles to use create the Quaternion
+     *
+     */
+    template<typename U>
+    Quaternion<T>::Quaternion(const EulerAngles<U>& copy)
+    {
+        set(copy);
+    }
+
     /*! \brief Set the value of the Quaternion
      *
      * \param value The value of every components
@@ -79,6 +90,31 @@ namespace Bull
         this->x = static_cast<T>(x);
         this->y = static_cast<T>(y);
         this->z = static_cast<T>(z);
+
+        return (*this);
+    }
+
+    /*! \brief Constructor
+     *
+     * \param angles The EulerAngles to use create the Quaternion
+     *
+     * \return Return this
+     *
+     */
+    template<typename U>
+    Quaternion<T>& Quaternion<T>::set(const EulerAngles<U>& angles)
+    {
+        T cosYaw   = std::cos(static_cast<T>(angles.yaw)   * 0.5f);
+        T sinYaw   = std::sin(static_cast<T>(angles.yaw)   * 0.5f);
+        T cosRoll  = std::cos(static_cast<T>(angles.roll)  * 0.5f);
+        T sinRoll  = std::sin(static_cast<T>(angles.roll)  * 0.5f);
+        T cosPitch = std::cos(static_cast<T>(angles.pitch) * 0.5f);
+        T sinPitch = std::sin(static_cast<T>(angles.pitch) * 0.5f);
+
+        w = cosYaw * cosRoll * cosPitch + sinYaw * sinRoll * sinPitch;
+        x = cosYaw * sinRoll * cosPitch - sinYaw * cosRoll * sinPitch;
+        y = cosYaw * cosRoll * sinPitch + sinYaw * sinRoll * cosPitch;
+        z = sinYaw * cosRoll * cosPitch - cosYaw * sinRoll * sinPitch;
 
         return (*this);
     }

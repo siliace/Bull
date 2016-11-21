@@ -6,6 +6,8 @@
 
 #include <Bull/Core/System/Export.hpp>
 
+#include <Bull/Math/EulerAngles.hpp>
+
 namespace Bull
 {
     template<typename T>
@@ -34,6 +36,14 @@ namespace Bull
          */
         template<typename U>
         Quaternion(U w, U x, U y, U z);
+
+        /*! \brief Constructor
+         *
+         * \param angles The EulerAngles to use create the Quaternion
+         *
+         */
+        template<typename U>
+        Quaternion(const EulerAngles<U>& angles);
 
         /*! \brief Set the value of the Quaternion
          *
@@ -67,6 +77,16 @@ namespace Bull
          */
         template<typename U>
         Quaternion<T>& set(const Quaternion<U>& quat);
+
+        /*! \brief Constructor
+         *
+         * \param angles The EulerAngles to use create the Quaternion
+         *
+         * \return Return this
+         *
+         */
+        template<typename U>
+        Quaternion<T>& set(const EulerAngles<U>& angles);
 
         /*! \brief Normalize the Quaternion
          *
