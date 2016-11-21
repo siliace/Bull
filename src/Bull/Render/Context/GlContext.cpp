@@ -385,7 +385,6 @@ namespace Bull
                     m_settings.antialiasing = 0;
                 }
             }
-
         }
     }
 }
