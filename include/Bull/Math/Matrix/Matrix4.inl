@@ -61,6 +61,59 @@ namespace Bull
         return scale;
     }
 
+    /*! \brief Create a rotation matrix
+     *
+     * \param x The rotation on the x axis
+     * \param y The rotation on the y axis
+     * \param z The rotation on the z axis
+     *
+     * \return Return the matrix
+     *
+     */
+    template<typename T>
+    Matrix4<T> Matrix4<T>::createRotation(T x, T y, T z)
+    {
+        return createRotation(EulerAngles<T>(Angle::degToRad(x), Angle::degToRad(y), Angle::degToRad(z)));
+    }
+
+    /*! \brief Create a rotation matrix
+     *
+     * \param angles Angles of rotations
+     *
+     * \return Return the matrix
+     *
+     */
+    template<typename T>
+    Matrix4<T> Matrix4<T>::createRotation(const EulerAngles<T>& angles)
+    {
+        return createRotation(Quaternion<T>(angles));
+    }
+
+    /*! \brief Create a rotation matrix
+     *
+     * \param quaternion The quaternion representing a rotation
+     *
+     * \return Return the matrix
+     *
+     */
+    template<typename T>
+    Matrix4<T> Matrix4<T>::createRotation(const Quaternion<T>& quaternion)
+    {
+        Matrix4F left, right;
+
+        left.set( quaternion.w, 0, 0);   left.set( quaternion.z, 1, 0);   left.set(-quaternion.y, 2, 0);   left.set(quaternion.x, 3, 0);
+        left.set(-quaternion.z, 0, 1);   left.set( quaternion.w, 1, 1);   left.set( quaternion.x, 2, 1);   left.set(quaternion.y, 3, 1);
+        left.set( quaternion.y, 0, 2);   left.set(-quaternion.x, 1, 2);   left.set( quaternion.w, 2, 2);   left.set(quaternion.z, 3, 2);
+        left.set(-quaternion.x, 0, 3);   left.set(-quaternion.y, 1, 3);   left.set(-quaternion.z, 2, 3);   left.set(quaternion.w, 3, 3);
+
+        right.set( quaternion.w, 0, 0);  right.set( quaternion.z, 1, 0);  right.set(-quaternion.y, 2, 0);  right.set(-quaternion.x, 3, 0);
+        right.set(-quaternion.z, 0, 1);  right.set( quaternion.w, 1, 1);  right.set( quaternion.x, 2, 1);  right.set(-quaternion.y, 3, 1);
+        right.set( quaternion.y, 0, 2);  right.set(-quaternion.x, 1, 2);  right.set( quaternion.w, 2, 2);  right.set(-quaternion.z, 3, 2);
+        right.set( quaternion.x, 0, 3);  right.set( quaternion.y, 1, 3);  right.set( quaternion.z, 2, 3);  right.set( quaternion.w, 3, 3);
+
+        return left * right;
+    }
+
     /*! \brief Default Constructor
      *
      */
@@ -182,6 +235,34 @@ namespace Bull
         }
 
         return r;
+    }
+
+    /*! \brief
+     *
+     * \param
+     * \param
+     *
+     * \return
+     *
+     */
+    template<typename T>
+    T& Matrix4<T>::operator()(std::size_t x, std::size_t y)
+    {
+        return m_data[y * 4 + x];
+    }
+
+    /*! \brief
+     *
+     * \param
+     * \param
+     *
+     * \return
+     *
+     */
+    template<typename T>
+    const T& Matrix4<T>::operator()(std::size_t x, std::size_t y) const
+    {
+        return m_data[y * 4 + x];
     }
 
     /*! \brief Compare two matrices
