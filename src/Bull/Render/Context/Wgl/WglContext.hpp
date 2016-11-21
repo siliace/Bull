@@ -57,9 +57,18 @@ namespace Bull
 
             /*! \brief Constructor
              *
-             * \param shared The shared context
+             * \param shared   The shared context
+             * \param mode     The VideoMode to use to create the context
+             * \param settings Settings to use to create the context
+             *
+             */
+            WglContext(const std::shared_ptr<WglContext>& shared, const VideoMode& mode, const ContextSettings& settings);
+
+            /*! \brief Constructor
+             *
+             * \param shared       The shared context
              * \param bitsPerPixel The number of bits to use per pixel
-             * \param settings Parameters to create the OpenGL context
+             * \param settings     Parameters to create the OpenGL context
              *
              */
             WglContext(const std::shared_ptr<WglContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings);

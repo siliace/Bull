@@ -64,8 +64,6 @@ namespace Bull
          */
         void resetViewport();
 
-    protected:
-
         /*! \brief Activate or deactivate the context
          *
          * \param active True to activate, false to deactivate the context
@@ -74,6 +72,11 @@ namespace Bull
          *
          */
         virtual bool setActive(bool active = true) = 0;
+
+        /*! \brief Display what has been rendered so far
+         *
+         */
+        virtual void display() = 0;
 
     private:
 

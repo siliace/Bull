@@ -111,6 +111,22 @@ namespace Bull
 
         /*! \brief Create an OS specific instance of GlContext
          *
+         * \param mode     The VideoMode to use to create the context
+         * \param settings Settings to use to create the context
+         *
+         * \return Return the created context
+         *
+         */
+        GlContext* GlContext::createInstance(const VideoMode& mode, const ContextSettings& settings)
+        {
+            ContextType* context = new ContextType(shared, mode, settings);
+            context->initialize();
+
+            return context;
+        }
+
+        /*! \brief Create an OS specific instance of GlContext
+         *
          * \param bitsPerPixel Number of bits per pixel to use
          * \param settings     Settings to use to create the context
          *
