@@ -23,14 +23,14 @@ namespace Bull
 
     /*! \brief Constructor
      *
-     * \param roll  The roll of the angle to create
      * \param pitch The pitch of the angle to create
      * \param yaw   The yaw of the angle to create
+     * \param roll  The roll of the angle to create
      *
      */
     template<typename T>
     template<typename U>
-    EulerAngles<T>::EulerAngles(U roll, U pitch, U yaw)
+    EulerAngles<T>::EulerAngles(U pitch, U yaw, U roll)
     {
         set(roll, pitch, yaw);
     }
@@ -80,16 +80,16 @@ namespace Bull
 
     /*! \brief Set the value of the EulerAngles
      *
-     * \param roll  The roll of the angle to create
      * \param pitch The pitch of the angle to create
      * \param yaw   The yaw of the angle to create
+     * \param roll  The roll of the angle to create
      *
      * \return Return this
      *
      */
     template<typename T>
     template<typename U>
-    EulerAngles<T>& EulerAngles<T>::set(U roll, U pitch, U yaw)
+    EulerAngles<T>& EulerAngles<T>::set(U pitch, U yaw, U roll)
     {
         this->roll  = static_cast<T>(roll);
         this->pitch = static_cast<T>(pitch);
