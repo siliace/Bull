@@ -3,10 +3,12 @@
 
 #include <functional>
 
+#include <Bull/Core/System/Export.hpp>
+
 namespace Bull
 {
     template<typename T>
-    struct EulerAngles
+    struct BULL_API EulerAngles
     {
         static constexpr EulerAngles<T> Zero = EulerAngles<T>(0.0);
 
