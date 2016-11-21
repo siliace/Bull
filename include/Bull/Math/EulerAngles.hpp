@@ -25,13 +25,13 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param roll  The roll of the angle to create
          * \param pitch The pitch of the angle to create
          * \param yaw   The yaw of the angle to create
+         * \param roll  The roll of the angle to create
          *
          */
         template<typename U>
-        EulerAngles(U roll, U pitch, U yaw);
+        EulerAngles(U pitch, U yaw, U roll);
 
         /*! \brief Copy constructor
          *
@@ -63,15 +63,15 @@ namespace Bull
 
         /*! \brief Set the value of the EulerAngles
          *
-         * \param roll  The roll of the angle to create
          * \param pitch The pitch of the angle to create
          * \param yaw   The yaw of the angle to create
+         * \param roll  The roll of the angle to create
          *
          * \return Return this
          *
          */
         template<typename U>
-        EulerAngles<T>& set(U roll, U pitch, U yaw);
+        EulerAngles<T>& set(U pitch, U yaw, U roll);
 
         /*! \brief Set the value of the EulerAngles
          *
