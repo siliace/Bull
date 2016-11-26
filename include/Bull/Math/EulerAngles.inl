@@ -6,6 +6,8 @@ namespace Bull
     template<typename T>
     EulerAngles<T>::EulerAngles()
     {
+        static_assert(std::is_floating_point<T>::value, "T must be a floating point type");
+
         set(0.0);
     }
 
@@ -18,6 +20,8 @@ namespace Bull
     template<typename U>
     EulerAngles<T>::EulerAngles(U value)
     {
+        static_assert(std::is_floating_point<T>::value, "T must be a floating point type");
+
         set(value);
     }
 
@@ -32,6 +36,8 @@ namespace Bull
     template<typename U>
     EulerAngles<T>::EulerAngles(U pitch, U yaw, U roll)
     {
+        static_assert(std::is_floating_point<T>::value, "T must be a floating point type");
+
         set(roll, pitch, yaw);
     }
 
@@ -44,6 +50,8 @@ namespace Bull
     template<typename U>
     EulerAngles<T>::EulerAngles(const EulerAngles<U>& copy)
     {
+        static_assert(std::is_floating_point<T>::value, "T must be a floating point type");
+
         set(copy);
     }
 
