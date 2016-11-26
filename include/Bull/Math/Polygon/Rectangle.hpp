@@ -30,12 +30,11 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param topLeft     Coordinates of the top left corner of rectangle
-         * \param bottomRight Coordinates of the top bottom right of rectangle
+         * \param size The size of the rectangle
          *
          */
         template<typename U>
-        Rectangle(const Vector2<U>& topLeft, const Vector2<U>& bottomRight);
+        Rectangle(const Vector2<U>& size);
 
         /*! \brief Constructor
          *
@@ -46,6 +45,15 @@ namespace Bull
          */
         template<typename U>
         Rectangle(const Vector2<U>& topLeft, U width, U height);
+
+        /*! \brief Constructor
+         *
+         * \param topLeft     Coordinates of the top left corner of rectangle
+         * \param bottomRight Coordinates of the top bottom right of rectangle
+         *
+         */
+        template<typename U>
+        Rectangle(const Vector2<U>& topLeft, const Vector2<U>& bottomRight);
 
         /*! \brief Copy constructor
          *
@@ -70,14 +78,13 @@ namespace Bull
 
         /*! \brief Set the rectangle
          *
-         * \param topLeft     Coordinates of the top left corner of rectangle
-         * \param bottomRight Coordinates of the top bottom right of rectangle
+         * \param size The size of the rectangle
          *
          * \return Return this
          *
          */
         template<typename U>
-        Rectangle& set(const Vector2<U>& topLeft, const Vector2<U>& bottomRight);
+        Rectangle& set(const Vector2<U>& size);
 
         /*! \brief Set the rectangle
          *
@@ -93,6 +100,18 @@ namespace Bull
 
         /*! \brief Set the rectangle
          *
+         * \param topLeft     Coordinates of the top left corner of rectangle
+         * \param bottomRight Coordinates of the top bottom right of rectangle
+         *
+         * \return Return this
+         *
+         */
+        template<typename U>
+        Rectangle& set(const Vector2<U>& topLeft, const Vector2<U>& bottomRight);
+
+
+        /*! \brief Set the rectangle
+         *
          * \param rectangle The rectangle to copy
          *
          * \return Return this
@@ -103,6 +122,11 @@ namespace Bull
 
         T x, y, width, height;
     };
+
+    typedef Rectangle<int> RectangleI;
+    typedef Rectangle<float> RectangleF;
+    typedef Rectangle<double> RectangleD;
+    typedef Rectangle<unsigned int> RectangleUI;
 }
 
 #include <Bull/Math/Polygon/Rectangle.inl>
