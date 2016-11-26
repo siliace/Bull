@@ -25,7 +25,6 @@ namespace Bull
     namespace prv
     {
         class WindowImpl;
-        class GlContext;
     }
 
     class BULL_API Window : public ContextResource, public NonCopyable
@@ -187,7 +186,7 @@ namespace Bull
          * \param title The title of the window
          * \param style The window decorations
          *
-         * \return Return true if the window was open successfully
+         * \return Return true if the window was open successfully, false otherwise
          *
          */
         bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default);
@@ -367,32 +366,6 @@ namespace Bull
          *
          */
         WindowHandler getSystemHandler() const;
-
-    protected:
-
-        /*! \brief Constructor
-         *
-         * \param mode     The VideoMode
-         * \param title    The title of the window
-         * \param style    The window decorations
-         * \param settings Settings to use to create the OpenGL context
-         *
-         */
-        Window(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
-
-        /*! \brief Open the window. If a window was already opened, its closed
-         *
-         * \param mode     The VideoMode
-         * \param title    The title of the window
-         * \param style    The window decorations
-         * \param settings Settings to use to create the OpenGL context
-         *
-         * \return Return true if the window was open successfully
-         *
-         */
-        bool open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
-
-        std::unique_ptr<prv::GlContext> m_context; /*!< The OS specific implementation of the OpenGL context */
 
     private:
 

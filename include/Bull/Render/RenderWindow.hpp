@@ -7,11 +7,12 @@
 
 #include <Bull/Render/RenderTarget.hpp>
 
+#include <Bull/Utility/Window/VideoMode.hpp>
 #include <Bull/Utility/Window/Window.hpp>
 
 namespace Bull
 {
-    class BULL_API RenderWindow : public RenderTarget, public Window
+    class BULL_API RenderWindow : public Window, public RenderTarget
     {
     public:
 
@@ -37,7 +38,7 @@ namespace Bull
          * \param style    The window decorations
          * \param settings Settings to use to create the OpenGL context
          *
-         * \return Return true if the window was open successfully
+         * \return Return true if the window was open successfully, false otherwise
          *
          */
         bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default, const ContextSettings& settings = ContextSettings::Best);
@@ -46,15 +47,6 @@ namespace Bull
          *
          */
         void display() override;
-
-        /*! \brief Activate or deactivate the context
-         *
-         * \param active True to activate, false to deactivate the context
-         *
-         * \return Return true if the context's status changed successfully, false otherwise
-         *
-         */
-        bool setActive(bool active = true) override;
 
         /*! \brief Set the maximum framerate of the RenderWindow
          *
@@ -78,13 +70,6 @@ namespace Bull
          *
          */
         void enableVsync(bool active);
-
-        /*! \brief Get ContextSettings used to create the context
-         *
-         * \return Return the ContextSettings
-         *
-         */
-        const ContextSettings& getSettings() const;
 
         /*! \brief Get the default viewport of the RenderTarget
          *

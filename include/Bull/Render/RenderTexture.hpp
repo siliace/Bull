@@ -6,8 +6,6 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Export.hpp>
 
-#include <Bull/Math/Vector/Vector2.hpp>
-
 #include <Bull/Render/Color.hpp>
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/RenderTarget.hpp>
@@ -24,10 +22,13 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /*! \brief Constructor
+         *
+         * \param mode     The VideoMode
+         * \param settings Settings to use to create the OpenGL context
          *
          */
-        RenderTexture();
+        RenderTexture(const VideoMode& mode, const ContextSettings& settings = ContextSettings::Worst);
 
         /*! \brief Destructor
          *
@@ -36,24 +37,12 @@ namespace Bull
 
         /*! \brief Create the RenderTexture
          *
-         * \param size  The size of RenderTexture
          * \param color The color to fill the RenderTexture
          *
          * \return Return true if the RenderTexture was created successfully, false otherwise
          *
          */
-        bool create(const Vector2UI size, Color color = Color::Black);
-
-        /*! \brief Create the RenderTexture
-         *
-         * \param width  The width of the RenderTexture
-         * \param height The height of the RenderTexture
-         * \param color  The color to fill the RenderTexture
-         *
-         * \return Return true if the RenderTexture was created successfully, false otherwise
-         *
-         */
-        bool create(unsigned int width, unsigned int height, Color color = Color::Black);
+        bool create(Color color = Color::Black);
 
         /*! \brief Get the default viewport of the RenderTarget
          *
@@ -61,15 +50,6 @@ namespace Bull
          *
          */
         Viewport getDefaultViewport() const override;
-
-        /*! \brief Activate or deactivate the context
-         *
-         * \param active True to activate, false to deactivate the context
-         *
-         * \return Return true if the context's status changed successfully, false otherwise
-         *
-         */
-        bool setActive(bool active = true) override;
 
         /*! \brief Display what has been rendered so far into the target texture
          *
@@ -101,6 +81,7 @@ namespace Bull
 
         std::unique_ptr<prv::RenderTextureImpl> m_impl;
         Texture                                 m_target;
+        Vector2UI                               m_size;
     };
 }
 

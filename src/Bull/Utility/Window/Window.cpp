@@ -42,7 +42,24 @@ namespace Bull
      */
     bool Window::open(const VideoMode& mode, const String& title, Uint32 style)
     {
-        return open(mode, title, style, ContextSettings());
+        if(isOpen())
+        {
+            close();
+        }
+
+        if(style == Style::Fullscreen && m_fullscreen)
+        {
+            style = Style::Default;
+        }
+
+        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style));
+
+        if(style == Style::Fullscreen)
+        {
+            switchFullscreen(mode);
+        }
+
+        return true;
     }
 
     /*! \brief Destructor
@@ -76,7 +93,6 @@ namespace Bull
         }
 
         m_impl.reset();
-        m_context.reset();
     }
 
     /*! \brief Get the first event on the stack without blocking the current thread
@@ -410,51 +426,5 @@ namespace Bull
         }
 
         return 0;
-    }
-
-    /*! \brief Constructor
-     *
-     * \param mode     The VideoMode
-     * \param title    The title of the window
-     * \param style    The window decorations
-     * \param settings Settings to use to create the OpenGL context
-     *
-     */
-    Window::Window(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
-    {
-        open(mode, title, style, settings);
-    }
-
-    /*! \brief Open the window. If a window was already opened, its closed
-     *
-     * \param mode The VideoMode of desired
-     * \param title The title of the window
-     * \param style The window decoration desired
-     * \param settings Parameters to create the OpenGL context
-     *
-     * \return Return true if the window was open successfully
-     *
-     */
-    bool Window::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
-    {
-        if(isOpen())
-        {
-            close();
-        }
-
-        if(style == Style::Fullscreen && m_fullscreen)
-        {
-            style = Style::Default;
-        }
-
-        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style, settings));
-        m_context.reset(prv::GlContext::createInstance(getSystemHandler(), mode.bitsPerPixel, settings));
-
-        if(style == Style::Fullscreen)
-        {
-            switchFullscreen(mode);
-        }
-
-        return true;
     }
 }

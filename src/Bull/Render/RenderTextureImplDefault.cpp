@@ -10,35 +10,29 @@ namespace Bull
          *
          */
         RenderTextureImplDefault::RenderTextureImplDefault() :
-            m_width(0),
-            m_height(0)
+            m_target(0)
         {
             /// Nothing
         }
 
         /*! \brief Create the RenderTextureImpl
          *
-         * \param width          The width of the RenderTextureImpl
-         * \param height         The height of the RenderTextureImpl
-         * \param target         The target to use to render
-         * \param useDepthBuffer True if a depth buffer is need, false otherwise
+         * \param target The target to use to render
          *
          * \return Return true if the RenderTextureImpl was created successfully, false otherwise
          *
          */
-        bool RenderTextureImplDefault::create(unsigned int width, unsigned int height, unsigned int target, bool useDepthBuffer)
+        bool RenderTextureImplDefault::create(const Vector2UI& size, unsigned int target)
         {
-            ContextSettings settings = ContextSettings::Worst;
+            if(target && size.x && size.y)
+            {
+                m_size   = size;
+                m_target = target;
 
-            m_width  = width;
-            m_height = height;
-            m_target = target;
+                return true;
+            }
 
-            settings.depths = useDepthBuffer ? 32 : 0;
-
-            createInternalContext(VideoMode(m_width, m_height), settings);
-
-            return true;
+            return false;
         }
 
         /*! \brief Display what has been rendered so far into the target texture
@@ -49,7 +43,7 @@ namespace Bull
             TextureStateSaver saver;
 
             gl::bindTexture(GL_TEXTURE_2D, m_target);
-            gl::copyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, m_width, m_height);
+            gl::copyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, m_size.x, m_size.y);
         }
     }
 }

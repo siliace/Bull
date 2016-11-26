@@ -3,11 +3,15 @@
 
 namespace Bull
 {
-    /*! \brief Default constructor
+    /*! \brief Constructor
+     *
+     * \param mode     The VideoMode
+     * \param settings Settings to use to create the OpenGL context
      *
      */
-    RenderTexture::RenderTexture() :
-        m_impl(nullptr)
+    RenderTexture::RenderTexture(const VideoMode& mode, const ContextSettings& settings) :
+        RenderTarget(mode, settings),
+        m_size(mode.width, mode.height)
     {
         /// Nothing
     }
@@ -22,44 +26,24 @@ namespace Bull
 
     /*! \brief Create the RenderTexture
      *
-     * \param size  The size of RenderTexture
      * \param color The color to fill the RenderTexture
      *
      * \return Return true if the RenderTexture was created successfully, false otherwise
      *
      */
-    bool RenderTexture::create(const Vector2UI size, Color color)
+    bool RenderTexture::create(Color color)
     {
-        if(m_target.create(size))
+        if(setActive() && m_target.create(m_size))
         {
             m_impl.reset(new prv::RenderTextureImplDefault());
 
             if(m_impl)
             {
-                if(m_impl->create(size, m_target.getSystemHandler(), true))
-                {
-                    clear(color);
-
-                    return true;
-                }
+                return m_impl->create(m_target.getSize(), m_target.getSystemHandler());
             }
         }
 
         return false;
-    }
-
-    /*! \brief Create the RenderTexture
-     *
-     * \param width  The width of the RenderTexture
-     * \param height The height of the RenderTexture
-     * \param color  The color to fill the RenderTexture
-     *
-     * \return Return true if the RenderTexture was created successfully, false otherwise
-     *
-     */
-    bool RenderTexture::create(unsigned int width, unsigned int height, Color color)
-    {
-        return create(Vector2UI(width, height), color);
     }
 
     /*! \brief Get the default viewport of the RenderTarget
@@ -79,29 +63,12 @@ namespace Bull
         return viewport;
     }
 
-    /*! \brief Activate or deactivate the context
-     *
-     * \param active True to activate, false to deactivate the context
-     *
-     * \return Return true if the context's status changed successfully, false otherwise
-     *
-     */
-    bool RenderTexture::setActive(bool active)
-    {
-        if(m_impl)
-        {
-            return m_impl->setActive(active);
-        }
-
-        return false;
-    }
-
     /*! \brief Display what has been rendered so far into the target texture
      *
      */
     void RenderTexture::display()
     {
-        if(m_impl)
+        if(m_impl && setActive())
         {
             m_impl->updateTarget();
         }

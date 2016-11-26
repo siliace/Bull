@@ -1,7 +1,7 @@
 #include <Bull/Core/Thread/Thread.hpp>
 
-#include <Bull/Render/RenderWindow.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Render/RenderWindow.hpp>
 
 #include <Bull/Utility/Window/WindowImpl.hpp>
 
@@ -24,7 +24,8 @@ namespace Bull
      *
      */
     RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings) :
-        Window(mode, title, style, settings)
+        Window(mode, title, style),
+        RenderTarget(getSystemHandler(), mode.bitsPerPixel, settings)
     {
         m_clock.start();
     }
@@ -36,12 +37,19 @@ namespace Bull
      * \param style    The window decorations
      * \param settings Settings to use to create the OpenGL context
      *
-     * \return Return true if the window was open successfully
+     * \return Return true if the window was open successfully, false otherwise
      *
      */
     bool RenderWindow::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
-        return Window::open(mode, title, style, settings);
+        if(!Window::open(mode, title, style))
+        {
+            return false;
+        }
+
+        create(getSystemHandler(), mode.bitsPerPixel, settings);
+
+        return true;
     }
 
     /*! \brief Display what has been rendered so far
@@ -49,34 +57,14 @@ namespace Bull
      */
     void RenderWindow::display()
     {
-        if(setActive())
-        {
-            m_context->display();
-        }
-
         if(m_frameDelay != Time::Zero && m_frameDelay > m_clock.getElapsedTime())
         {
             Thread::sleep(m_frameDelay - m_clock.getElapsedTime());
         }
 
+        swapBuffers();
+
         m_clock.restart();
-    }
-
-    /*! \brief Activate or deactivate the context
-     *
-     * \param active True to activate, false to deactivate the context
-     *
-     * \return Return true if the context's status changed successfully, false otherwise
-     *
-     */
-    bool RenderWindow::setActive(bool active)
-    {
-        if(m_context)
-        {
-            return m_context->setActive(active);
-        }
-
-        return false;
     }
 
     /*! \brief Set the maximum framerate of the RenderWindow
@@ -120,25 +108,10 @@ namespace Bull
      */
     void RenderWindow::enableVsync(bool active)
     {
-        if(m_context)
+        if(getContext())
         {
-            m_context->enableVsync(active);
+            getContext()->enableVsync(active);
         }
-    }
-
-    /*! \brief Get ContextSettings used to create the context
-     *
-     * \return Return the ContextSettings
-     *
-     */
-    const ContextSettings& RenderWindow::getSettings() const
-    {
-        if(m_context)
-        {
-            return m_context->getSettings();
-        }
-
-        return ContextSettings::Empty;
     }
 
     /*! \brief Get the default viewport of the RenderTarget

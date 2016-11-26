@@ -270,10 +270,9 @@ namespace Bull
          * \param mode The VideoMode to use
          * \param title The title to use in the window
          * \param style The window decoration
-         * \param settings Parameters to create the OpenGL context
          *
          */
-        WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& /*settings*/) :
+        WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style) :
             m_isResizing(false)
         {
             DWORD winStyle = computeStyle(style);

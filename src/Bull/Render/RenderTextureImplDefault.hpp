@@ -18,15 +18,13 @@ namespace Bull
 
             /*! \brief Create the RenderTextureImpl
              *
-             * \param width          The width of the RenderTextureImpl
-             * \param height         The height of the RenderTextureImpl
-             * \param target         The target to use to render
-             * \param useDepthBuffer True if a depth buffer is need, false otherwise
+             * \param size   The size of the rendering target
+             * \param target The rendering target
              *
              * \return Return true if the RenderTextureImpl was created successfully, false otherwise
              *
              */
-            bool create(unsigned int width, unsigned int height, unsigned int target, bool useDepthBuffer = false) override;
+            bool create(const Vector2UI& size, unsigned int target) override;
 
             /*! \brief Display what has been rendered so far into the target texture
              *
@@ -35,7 +33,8 @@ namespace Bull
 
         private:
 
-            unsigned int m_width, m_height;
+            unsigned int m_target;
+            Vector2UI    m_size;
         };
     }
 }
