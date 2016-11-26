@@ -586,7 +586,7 @@ namespace Bull
      */
     bool operator==(const String& left, const String& right)
     {
-        return strcmp(left, right) == 0;
+        return left.getCapacity() && right.getCapacity() && strcmp(left, right) == 0;
     }
 
     /*! \brief Compare two Strings
@@ -599,7 +599,7 @@ namespace Bull
      */
     bool operator==(const char* left, const String& right)
     {
-        return strcmp(left, right) == 0;
+        return left && right.getCapacity() && strcmp(left, right) == 0;
     }
 
     /*! \brief Compare two Strings
@@ -612,7 +612,7 @@ namespace Bull
      */
     bool operator==(const String& left, const char* right)
     {
-        return strcmp(left, right) == 0;
+        return left && right && strcmp(left, right) == 0;
     }
 
     /*! \brief Compare two Strings
@@ -625,7 +625,7 @@ namespace Bull
      */
     bool operator!=(const String& left, const String& right)
     {
-        return strcmp(left, right) != 0;
+        return !(left == right);
     }
 
     /*! \brief Compare two Strings
@@ -638,7 +638,7 @@ namespace Bull
      */
     bool operator!=(const char* left, const String& right)
     {
-        return strcmp(left, right) != 0;
+        return !(left == right);
     }
 
     /*! \brief Compare two Strings
@@ -651,7 +651,7 @@ namespace Bull
      */
     bool operator!=(const String& left, const char* right)
     {
-        return strcmp(left, right) != 0;
+        return !(left == right);
     }
 
     /*! \brief Concatenates two Strings

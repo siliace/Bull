@@ -35,6 +35,31 @@ namespace Bull
 
         /*! \brief Constructor
          *
+         * \param pixels Pixels of the image
+         * \param size   The size of the image
+         *
+         */
+        Image(const std::vector<Uint8>& pixels, const Vector2UI size);
+
+        /*! \brief Constructor
+         *
+         * \param pixels Pixels of the image
+         * \param width  The width of the image to create
+         * \param height The height of the image to create
+         *
+         */
+        Image(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height);
+
+        /*! \brief Constructor
+         *
+         * \param size  The size of the image
+         * \param color The color to fill the image
+         *
+         */
+        Image(const Vector2UI& size, const Color& color = Color::Black);
+
+        /*! \brief Constructor
+         *
          * \param width  The width of the image to create
          * \param height The height of the image to create
          * \param color  The color to fill the image

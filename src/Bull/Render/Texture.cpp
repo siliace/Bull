@@ -213,6 +213,39 @@ namespace Bull
         return m_size;
     }
 
+    /*! \brief Download the texture from the VRAM
+     *
+     * \return Return return the image
+     *
+     */
+    Image Texture::getImage() const
+    {
+        return getImage(RectangleUI(m_size));
+    }
+
+    /*! \brief Download the texture from the VRAM
+     *
+     * \param rectangle The rectangle to use to crop the texture
+     *
+     * \return Return return the image
+     *
+     */
+    Image Texture::getImage(const RectangleUI& rectangle) const
+    {
+        if(m_id)
+        {
+            TextureStateSaver saver;
+            std::vector<Uint8> pixels(m_size.x * m_size.y * 4);
+
+            gl::bindTexture(GL_TEXTURE_2D, m_id);
+            gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);
+
+            return Image(pixels, m_size);
+        }
+
+        return Image();
+    }
+
     /*! \brief Get the system handler
      *
      * \return Return the native system texture handler

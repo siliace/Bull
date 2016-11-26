@@ -4,6 +4,7 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/String.hpp>
 
+#include <Bull/Math/Polygon/Rectangle.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
@@ -121,6 +122,22 @@ namespace Bull
          *
          */
         const Vector2UI& getSize() const;
+
+        /*! \brief Download the texture from the VRAM
+         *
+         * \return Return return the image
+         *
+         */
+        Image getImage() const;
+
+        /*! \brief Download the texture from the VRAM
+         *
+         * \param rectangle The rectangle to use to crop the texture
+         *
+         * \return Return return the image
+         *
+         */
+        Image getImage(const RectangleUI& rectangle) const;
 
         /*! \brief Get the system handler
          *

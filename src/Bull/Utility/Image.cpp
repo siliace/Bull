@@ -5,6 +5,44 @@ namespace Bull
 {
     /*! \brief Constructor
      *
+     * \param pixels Pixels of the image
+     * \param size   The size of the image
+     *
+     */
+    Image::Image(const std::vector<Uint8>& pixels, const Vector2UI size) :
+        m_pixels(pixels),
+        m_size(size)
+    {
+        /// Nothing
+    }
+
+    /*! \brief Constructor
+     *
+     * \param pixels Pixels of the image
+     * \param width  The width of the image to create
+     * \param height The height of the image to create
+     *
+     */
+    Image::Image(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height) :
+        Image(pixels, Vector2UI(width, height))
+    {
+        /// Nothing
+    }
+
+    /*! \brief Constructor
+     *
+     * \param size  The size of the image
+     * \param color The color to fill the image
+     *
+     */
+    Image::Image(const Vector2UI& size, const Color& color) :
+        Image(size.x, size.y, color)
+    {
+        /// Nothing
+    }
+
+    /*! \brief Constructor
+     *
      * \param width  The width of the image to create
      * \param height The height of the image to create
      * \param color  The color to fill the image
@@ -117,7 +155,7 @@ namespace Bull
      */
     bool Image::save(const String& path, Format format)
     {
-        if(!File::exists(path))
+        if(!File::exists(path) && m_pixels.size() > 0)
         {
             return prv::ImageLoader::save(path, format, m_pixels, m_size);
         }
