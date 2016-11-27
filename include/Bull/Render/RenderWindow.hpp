@@ -3,7 +3,6 @@
 
 #include <Bull/Core/Time/Clock.hpp>
 #include <Bull/Core/Time/Time.hpp>
-#include <Bull/Core/System/Config.hpp>
 
 #include <Bull/Render/RenderTarget.hpp>
 
