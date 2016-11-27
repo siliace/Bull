@@ -145,7 +145,7 @@ namespace Bull
      *
      */
     RenderTarget::RenderTarget(WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
-        m_context()
+        m_context(prv::GlContext::createInstance(window, bitsPerPixel, settings))
     {
         /// Nothing
     }
