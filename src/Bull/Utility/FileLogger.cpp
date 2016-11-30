@@ -2,6 +2,15 @@
 
 namespace Bull
 {
+    /*! \brief Default constructor
+     *
+     */
+    FileLogger::FileLogger() :
+        FileLogger("BullApp.log")
+    {
+        /// Nothing
+    }
+
     /*! \brief Constructor
      *
      * \param filename The name of the log file

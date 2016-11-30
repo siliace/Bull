@@ -11,6 +11,11 @@ namespace Bull
     {
     public:
 
+        /*! \brief Default constructor
+         *
+         */
+        FileLogger();
+
         /*! \brief Constructor
          *
          * \param filename The name of the log file
