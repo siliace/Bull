@@ -1,3 +1,5 @@
+#include <Bull/Core/FileSystem/File.hpp>
+
 #include <Bull/Utility/Image.hpp>
 #include <Bull/Utility/ImageLoader.hpp>
 

@@ -1,11 +1,10 @@
 #ifndef Bull_Exception_hpp
 #define Bull_Exception_hpp
 
+#include <Bull/Core/Log.hpp>
 #include <Bull/Core/String.hpp>
 #include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/Time/Date.hpp>
-
-#include <Bull/Utility/Log.hpp>
 
 #define DeclareException(ExceptionName, message, level)                                                                  \
 class ExceptionName : public Bull::Exception                                                                             \
