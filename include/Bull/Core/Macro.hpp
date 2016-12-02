@@ -3,6 +3,6 @@
 
 #include <Bull/Core/String.hpp>
 
-#define MakeString(x) String(#x)
+#define MakeString(x) Bull::String(#x)
 
 #endif // Bull_Macro_hpp
