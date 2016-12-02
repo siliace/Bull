@@ -5,7 +5,6 @@
 
 #include <Bull/Core/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/System/Config.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -27,7 +26,6 @@ namespace Bull
     class BULL_API RenderTarget : public ContextResource, public NonCopyable
     {
     public:
-
 
         /*! \brief Destructor
          *
