@@ -98,14 +98,14 @@ namespace Bull
          * \return Return the list of content entity
          *
          */
-        std::vector<FileSystemEntity> DirectoryImplWin32::getContent(Uint32 flags)
+        std::vector<Path> DirectoryImplWin32::getContent(Uint32 flags)
         {
-            std::vector<FileSystemEntity> content;
+            std::vector<Path> content;
 
             do
             {
                 LARGE_INTEGER size;
-                FileSystemEntity ent;
+                Path ent;
 
                 ent.isDirectory = m_result.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY;
                 ent.isFile      = !ent.isDirectory;
@@ -124,7 +124,7 @@ namespace Bull
                     size.LowPart  = m_result.nFileSizeLow;
                     size.HighPart = m_result.nFileSizeHigh;
 
-                    ent.name           = m_result.cFileName;
+                    ent.pathName       = m_result.cFileName;
                     ent.size           = size.QuadPart;
                     ent.creationDate   = systemTimeToDate(creationDate);
                     ent.lastAccessDate = systemTimeToDate(lastAccessDate);

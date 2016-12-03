@@ -1,7 +1,8 @@
+#include <Bull/Core/FileSystem/File.hpp>
+#include <Bull/Core/Log.hpp>
+
 #include <Bull/Render/Context/ShaderStateSaver.hpp>
 #include <Bull/Render/Shader.hpp>
-
-#include <Bull/Utility/Log.hpp>
 
 namespace Bull
 {
@@ -83,7 +84,7 @@ namespace Bull
                 error->set(info);
             }
 
-            Log::get()->warning(info);
+            Log::get()->write(info, Log::Level::Warning);
         }
 
         return success;
@@ -113,7 +114,7 @@ namespace Bull
                 error->set(info);
             }
 
-            Log::get()->warning(info);
+            Log::get()->write(info, Log::Level::Warning);
         }
 
         return success;

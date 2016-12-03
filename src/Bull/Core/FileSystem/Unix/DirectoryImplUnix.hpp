@@ -13,7 +13,7 @@ namespace Bull
 
             bool open(const String& path) override;
 
-            std::vector<FileSystemEntity> getContent(Uint32 flags) override;
+            std::vector<Path> getContent(Uint32 flags) override;
 
             DirectoryHandler getSystemHandler() const override;
         };

@@ -9,9 +9,9 @@ namespace Bull
             return false;
         }
 
-        std::vector<FileSystemEntity> DirectoryImplUnix::getContent(Uint32 flags)
+        std::vector<Path> DirectoryImplUnix::getContent(Uint32 flags)
         {
-            return std::vector<FileSystemEntity>();
+            return std::vector<Path>();
         }
 
         DirectoryHandler DirectoryImplUnix::getSystemHandler() const

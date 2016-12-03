@@ -73,7 +73,7 @@ namespace Bull
              * \return Return the list of content entity
              *
              */
-            virtual std::vector<FileSystemEntity> getContent(Uint32 flags) = 0;
+            virtual std::vector<Path> getContent(Uint32 flags) = 0;
 
             /*! \brief Get the directory system handler
              *

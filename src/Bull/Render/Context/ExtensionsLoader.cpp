@@ -1,10 +1,9 @@
 #include <algorithm>
 
+#include <Bull/Core/Log.hpp>
 #include <Bull/Core/System/Config.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
-
-#include <Bull/Utility/Log.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglExtensionsLoader.hpp>
@@ -56,7 +55,7 @@ namespace Bull
             }
             else
             {
-                Log::get()->warning("Extensions has already been loaded");
+                Log::get()->write("Extensions has already been loaded", Log::Level::Warning);
             }
 
             m_loaded = true;

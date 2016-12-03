@@ -53,17 +53,17 @@ namespace Bull
             return false;
         }
 
-        for(const FileSystemEntity& ent : target.getContent())
+        for(const Path& entity : target.getContent())
         {
-            if(ent.name != "." && ent.name != "..")
+            if(entity.pathName != "." && entity.pathName != "..")
             {
-                if(ent.isDirectory)
+                if(entity.isDirectory)
                 {
-                    success &= Directory::copy(path + "/" + ent.name, newPath + "/" + ent.name);
+                    success &= Directory::copy(path + "/" + entity.pathName, newPath + "/" + entity.pathName);
                 }
                 else
                 {
-                    success &= File::copy(path + "/" + ent.name, newPath + "/" + ent.name);
+                    success &= File::copy(path + "/" + entity.pathName, newPath + "/" + entity.pathName);
                 }
             }
         }
@@ -167,14 +167,14 @@ namespace Bull
      * \return Return the list of content entity
      *
      */
-    std::vector<FileSystemEntity> Directory::getContent(Uint32 flags)
+    std::vector<Path> Directory::getContent(Uint32 flags)
     {
         if(m_impl)
         {
             return m_impl->getContent(flags);
         }
 
-        return std::vector<FileSystemEntity>();
+        return std::vector<Path>();
     }
 
     /*! \brief Get the path of the directory

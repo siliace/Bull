@@ -5,7 +5,7 @@
 #include <vector>
 
 #include <Bull/Core/FileSystem/DirectoryHandler.hpp>
-#include <Bull/Core/FileSystem/FileSystemEntity.hpp>
+#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Integer.hpp>
 #include <Bull/Core/String.hpp>
 
@@ -122,7 +122,7 @@ namespace Bull
          * \return Return the list of content entity
          *
          */
-        std::vector<FileSystemEntity> getContent(Uint32 flags = SearchFlag::All);
+        std::vector<Path> getContent(Uint32 flags = SearchFlag::All);
 
         /*! \brief Get the path of the directory
          *
