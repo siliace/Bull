@@ -1,17 +1,13 @@
+#include <Bull/Render/Context/GlContext.hpp>
 #include <Bull/Render/RenderTexture.hpp>
 #include <Bull/Render/RenderTextureImplDefault.hpp>
 
 namespace Bull
 {
-    /*! \brief Constructor
-     *
-     * \param mode     The VideoMode
-     * \param settings Settings to use to create the OpenGL context
+    /*! \brief Default constructor
      *
      */
-    RenderTexture::RenderTexture(const VideoMode& mode, const ContextSettings& settings) :
-        RenderTarget(mode, settings),
-        m_size(mode.width, mode.height)
+    RenderTexture::RenderTexture()
     {
         /// Nothing
     }
@@ -26,13 +22,17 @@ namespace Bull
 
     /*! \brief Create the RenderTexture
      *
+     * \param size  The size of the RenderTexture
      * \param color The color to fill the RenderTexture
+     * \param settings Settings to use to create the RenderTexture
      *
      * \return Return true if the RenderTexture was created successfully, false otherwise
      *
      */
-    bool RenderTexture::create(Color color)
+    bool RenderTexture::create(const Vector2UI& size, Color color, const ContextSettings& settings)
     {
+        m_context.reset(prv::GlContext::createInstance(VideoMode(size.x, size.y), settings));
+
         if(setActive() && m_target.create(m_size))
         {
             m_impl.reset(new prv::RenderTextureImplDefault());

@@ -22,13 +22,10 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
-         *
-         * \param mode     The VideoMode
-         * \param settings Settings to use to create the OpenGL context
+        /*! \brief Default constructor
          *
          */
-        RenderTexture(const VideoMode& mode, const ContextSettings& settings = ContextSettings::Worst);
+        RenderTexture();
 
         /*! \brief Destructor
          *
@@ -37,12 +34,14 @@ namespace Bull
 
         /*! \brief Create the RenderTexture
          *
+         * \param size  The size of the RenderTexture
          * \param color The color to fill the RenderTexture
+         * \param settings Settings to use to create the RenderTexture
          *
          * \return Return true if the RenderTexture was created successfully, false otherwise
          *
          */
-        bool create(Color color = Color::Black);
+        bool create(const Vector2UI& size, Color color = Color::Black, const ContextSettings& settings = ContextSettings::Worst);
 
         /*! \brief Get the default viewport of the RenderTarget
          *

@@ -24,8 +24,7 @@ namespace Bull
      *
      */
     RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings) :
-        Window(mode, title, style),
-        RenderTarget(getSystemHandler(), mode.bitsPerPixel, settings)
+        Window(mode, title, style)
     {
         m_clock.start();
     }
@@ -47,7 +46,7 @@ namespace Bull
             return false;
         }
 
-        create(getSystemHandler(), mode.bitsPerPixel, settings);
+        m_context.reset(prv::GlContext::createInstance(getSystemHandler(), mode.bitsPerPixel, settings));
 
         return true;
     }
@@ -62,7 +61,10 @@ namespace Bull
             Thread::sleep(m_frameDelay - m_clock.getElapsedTime());
         }
 
-        swapBuffers();
+        if(setActive())
+        {
+            m_context->display();
+        }
 
         m_clock.restart();
     }
@@ -108,9 +110,9 @@ namespace Bull
      */
     void RenderWindow::enableVsync(bool active)
     {
-        if(getContext())
+        if(setActive())
         {
-            getContext()->enableVsync(active);
+            m_context->enableVsync(active);
         }
     }
 

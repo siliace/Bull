@@ -103,71 +103,9 @@ namespace Bull
          */
         RenderTarget();
 
-        /*! \brief Constructor
-         *
-         * \param mode     The VideoMode to use to create the context
-         * \param settings Settings to use to create the context
-         *
-         */
-        RenderTarget(const VideoMode& mode, const ContextSettings& settings);
-
-        /*! \brief Constructor
-         *
-         * \param bitsPerPixel Number of bits per pixel to use
-         * \param settings     Settings to use to create the context
-         *
-         */
-        RenderTarget(unsigned int bitsPerPixel, const ContextSettings& settings);
-
-        /*! \brief Constructor
-         *
-         * \param window       The window to bind the created context
-         * \param bitsPerPixel The number of bits to use per pixel
-         * \param settings     Parameters to create the OpenGL context
-         *
-         */
-        RenderTarget(WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings);
-
-        /*! \brief Create the internal context
-         *
-         * \param mode     The VideoMode to use to create the context
-         * \param settings Settings to use to create the context
-         *
-         */
-        void create(const VideoMode& mode, const ContextSettings& settings);
-
-        /*! \brief Create the internal context
-         *
-         * \param bitsPerPixel Number of bits per pixel to use
-         * \param settings     Settings to use to create the context
-         *
-         */
-        void create(unsigned int bitsPerPixel, const ContextSettings& settings);
-
-        /*! \brief Create the internal context
-         *
-         * \param window       The window to bind the created context
-         * \param bitsPerPixel The number of bits to use per pixel
-         * \param settings     Parameters to create the OpenGL context
-         *
-         */
-        void create(WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings);
-
-        /*! \brief Swap buffers of the context
-         *
-         */
-        void swapBuffers();
-
-        /*! \brief Get the internal context
-         *
-         * \return Return a constant reference to this internal context
-         *
-         */
-        const std::unique_ptr<prv::GlContext>& getContext() const;
+        std::unique_ptr<prv::GlContext> m_context;
 
     private:
-
-        std::unique_ptr<prv::GlContext> m_context;
 
         Viewport m_currentViewport;
     };
