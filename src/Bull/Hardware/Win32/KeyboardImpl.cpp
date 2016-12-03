@@ -170,6 +170,7 @@ namespace Bull
                 case Keyboard::Key::Pause:        return VK_PAUSE;
                 case Keyboard::Key::ScreenShot:   return VK_SNAPSHOT;
                 case Keyboard::Key::Scroll:       return VK_SCROLL;
+                default:                          return 0;
             }
 
             return 0;

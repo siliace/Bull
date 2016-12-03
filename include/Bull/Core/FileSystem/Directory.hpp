@@ -16,7 +16,7 @@ namespace Bull
         class DirectoryImpl;
     }
 
-    class Directory
+    class BULL_API Directory
     {
     public:
 
@@ -123,13 +123,6 @@ namespace Bull
          *
          */
         std::vector<FileSystemEntity> getContent(Uint32 flags = SearchFlag::All);
-
-        /*! \brief Get the name of the directory
-         *
-         * \return Return the name of the directory
-         *
-         */
-        String getName() const;
 
         /*! \brief Get the path of the directory
          *

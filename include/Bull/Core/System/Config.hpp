@@ -4,8 +4,16 @@
 #if defined _WIN32
     #define BULL_OS_WINDOWS
 
-    /// Prevent conflict with other libs with which would redefined _WIN32_WINNT
+    /// Prevent conflict with other libs which would redefined _WIN32_WINNT
     #if defined BULL_BUILD
+        #ifndef WIN32_LEAN_AND_MEAN
+            #define WIN32_LEAN_AND_MEAN 1
+        #endif
+
+        #ifndef NOMINMAX
+            #define NOMINMAX
+        #endif
+
         #if defined BULL_WINDOWS_8 || defined BULL_WINDOWS_BLUE
             #define BULL_WINNT 0x0602
         #elif defined BULL_WINDOWS_7
@@ -24,7 +32,6 @@
         #else
             #define _WIN32_WINNT BULL_WINNT
         #endif
-
     #endif // defined
 #elif defined __FreeBSD__
     #define BULL_OS_FREEBSD

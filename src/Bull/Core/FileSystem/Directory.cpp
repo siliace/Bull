@@ -177,16 +177,6 @@ namespace Bull
         return std::vector<FileSystemEntity>();
     }
 
-    /*! \brief Get the name of the directory
-     *
-     * \return Return the name of the directory
-     *
-     */
-    String Directory::getName() const
-    {
-
-    }
-
     /*! \brief Get the path of the directory
      *
      * \return Return the path of the directory

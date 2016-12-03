@@ -3,6 +3,8 @@
 
 #include <Bull/Core/System/Export.hpp>
 
+#include <Bull/Math/Constants.hpp>
+
 namespace Bull
 {
     struct BULL_API Angle
@@ -14,7 +16,8 @@ namespace Bull
          * \return The angle converted in degree
          *
          */
-        static float radToDeg(float rad);
+        template<typename T>
+        static T radToDeg(T rad);
 
         /*! \brief Convert an angle from degree to radian
          *
@@ -23,8 +26,11 @@ namespace Bull
          * \return The angle converted in radian
          *
          */
-        static float degToRad(float deg);
+        template<typename T>
+        static T degToRad(T deg);
     };
 }
+
+#include <Bull/Math/Angle.inl>
 
 #endif // Bull_Angle_hpp

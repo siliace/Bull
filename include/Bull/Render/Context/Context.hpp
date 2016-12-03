@@ -3,8 +3,12 @@
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/LocalPtr.hpp>
+#include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
+#include <Bull/Render/Context/ContextSettings.hpp>
+
+#include <Bull/Utility/Window/VideoMode.hpp>
 
 namespace Bull
 {
@@ -13,7 +17,7 @@ namespace Bull
         class GlContext;
     }
 
-    class Context : public ContextResource, public NonCopyable
+    class BULL_API Context : public ContextResource, public NonCopyable
     {
     public:
 
@@ -22,11 +26,11 @@ namespace Bull
          * \return Return the context is available, nullptr otherwise
          *
          */
-        static LocalPtr<Context>& getActive();
+        static const Context* getActive();
 
     private:
 
-        static LocalPtr<Context> s_active;
+        static thread_local Context* s_active;
 
     public:
 
@@ -34,6 +38,22 @@ namespace Bull
          *
          */
         Context();
+
+        /*! \brief Constructor
+         *
+         * \param mode     The VideoMode to use to create the context
+         * \param settings Settings to use to create the context
+         *
+         */
+        Context(const VideoMode& mode, const ContextSettings& settings);
+
+        /*! \brief Constructor
+         *
+         * \param bitsPerPixel Number of bits per pixel to use
+         * \param settings     Settings to use to create the context
+         *
+         */
+        Context(unsigned int bitsPerPixel, const ContextSettings& settings);
 
         /*! \brief Destructor
          *
@@ -48,6 +68,13 @@ namespace Bull
          *
          */
         bool setActive(bool active = true);
+
+        /*! \brief Get the ContextSettings of the context
+         *
+         * \return Return the ContextSettings
+         *
+         */
+        const ContextSettings& getSettings() const;
 
     private:
 

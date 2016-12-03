@@ -131,6 +131,7 @@ namespace Bull
             Pause,
             ScreenShot,
             Scroll,
+            Unknown
         };
 
         /*! \brief Check if a key is pressed

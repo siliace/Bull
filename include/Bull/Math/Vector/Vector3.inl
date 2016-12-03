@@ -8,8 +8,8 @@ namespace Bull
      * \return The value of the dot product of left and right
      *
      */
-    template<typename TComponent>
-    TComponent Vector3<TComponent>::dotProduct(const Vector3& left, const Vector3& right)
+    template<typename T>
+    T Vector3<T>::dotProduct(const Vector3& left, const Vector3& right)
     {
         return (left.x * right.x) + (left.y * right.y) + (left.z * right.z);
     }
@@ -17,8 +17,8 @@ namespace Bull
     /*! \brief Default constructor
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent>::Vector3() :
+    template<typename T>
+    Vector3<T>::Vector3() :
         x(0),
         y(0),
         z(0)
@@ -31,8 +31,8 @@ namespace Bull
      * \param value The value of all components
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent>::Vector3(TComponent value) :
+    template<typename T>
+    Vector3<T>::Vector3(T value) :
         x(value),
         y(value),
         z(value)
@@ -47,8 +47,8 @@ namespace Bull
      * \param z The z component
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent>::Vector3(TComponent x, TComponent y, TComponent z) :
+    template<typename T>
+    Vector3<T>::Vector3(T x, T y, T z) :
         x(x),
         y(y),
         z(z)
@@ -62,8 +62,8 @@ namespace Bull
      * \param z The z component
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent>::Vector3(const Vector2<TComponent>& copy, TComponent z) :
+    template<typename T>
+    Vector3<T>::Vector3(const Vector2<T>& copy, T z) :
         x(copy.x),
         y(copy.y),
         z(z)
@@ -76,8 +76,8 @@ namespace Bull
      * \return Return the length of the vector
      *
      */
-    template<typename TComponent>
-    float Vector3<TComponent>::getLength() const
+    template<typename T>
+    float Vector3<T>::getLength() const
     {
         return std::sqrt(std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2));
     }
@@ -89,8 +89,8 @@ namespace Bull
      * \return The value of the dot product
      *
      */
-    template<typename TComponent>
-    TComponent Vector3<TComponent>::dotProduct(const Vector3& right)
+    template<typename T>
+    T Vector3<T>::dotProduct(const Vector3& right)
     {
         return (x * right.x) + (y * right.y) + (z * right.z);
     }
@@ -102,8 +102,8 @@ namespace Bull
      * \return Return true if this and right are equal, else return false
      *
      */
-    template<typename TComponent>
-    bool Vector3<TComponent>::operator==(const Vector3& right) const
+    template<typename T>
+    bool Vector3<T>::operator==(const Vector3& right) const
     {
         return (x == right.x) && (y == right.y) && (z == right.z);
     }
@@ -115,8 +115,8 @@ namespace Bull
      * \return Return true if this and right are not equal, else return false
      *
      */
-    template<typename TComponent>
-    bool Vector3<TComponent>::operator!=(const Vector3& right) const
+    template<typename T>
+    bool Vector3<T>::operator!=(const Vector3& right) const
     {
         return !((*this) == right);
     }
@@ -128,8 +128,8 @@ namespace Bull
      * \return Return this after addition
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent>& Vector3<TComponent>::operator+=(const Vector3& right)
+    template<typename T>
+    Vector3<T>& Vector3<T>::operator+=(const Vector3& right)
     {
         x += right.x;
         y += right.y;
@@ -143,10 +143,10 @@ namespace Bull
      * \return Return the opposite of this Vector3
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> Vector3<TComponent>::operator-() const
+    template<typename T>
+    Vector3<T> Vector3<T>::operator-() const
     {
-        return Vector3<TComponent>(-x, -y, -z);
+        return Vector3<T>(-x, -y, -z);
     }
 
     /*! \brief -= operator override
@@ -156,8 +156,8 @@ namespace Bull
      * \return Return this after subtraction
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent>& Vector3<TComponent>::operator-=(const Vector3& right)
+    template<typename T>
+    Vector3<T>& Vector3<T>::operator-=(const Vector3& right)
     {
         x -= right.x;
         y -= right.y;
@@ -174,10 +174,10 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator+(const Vector3<TComponent>& left, const Vector3<TComponent>& right)
+    template<typename T>
+    Vector3<T> operator+(const Vector3<T>& left, const Vector3<T>& right)
     {
-        return Vector3<TComponent>(left) += right;
+        return Vector3<T>(left) += right;
     }
 
     /*! \brief Addition two Vector3
@@ -188,10 +188,10 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator+(float left, const Vector3<TComponent>& right)
+    template<typename T>
+    Vector3<T> operator+(float left, const Vector3<T>& right)
     {
-        return Vector3<TComponent>(left) += right;
+        return Vector3<T>(left) += right;
     }
 
     /*! \brief Addition two Vector3
@@ -202,10 +202,10 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator+(const Vector3<TComponent>& left, float right)
+    template<typename T>
+    Vector3<T> operator+(const Vector3<T>& left, float right)
     {
-        return Vector3<TComponent>(left) += Vector3<TComponent>(right);
+        return Vector3<T>(left) += Vector3<T>(right);
     }
 
     /*! \brief Subtract two Vector3
@@ -216,10 +216,10 @@ namespace Bull
      * \return Return a vector resulting of a subtraction of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator-(const Vector3<TComponent>& left, const Vector3<TComponent>& right)
+    template<typename T>
+    Vector3<T> operator-(const Vector3<T>& left, const Vector3<T>& right)
     {
-        return Vector3<TComponent>(left) -= right;
+        return Vector3<T>(left) -= right;
     }
 
     /*! \brief Subtract two Vector3
@@ -230,10 +230,10 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator-(float left, const Vector3<TComponent>& right)
+    template<typename T>
+    Vector3<T> operator-(float left, const Vector3<T>& right)
     {
-        return Vector3<TComponent>(left) -= right;
+        return Vector3<T>(left) -= right;
     }
 
     /*! \brief Subtract two Vector3
@@ -244,9 +244,9 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator-(const Vector3<TComponent>& left, float right)
+    template<typename T>
+    Vector3<T> operator-(const Vector3<T>& left, float right)
     {
-        return Vector3<TComponent>(left) -= Vector3<TComponent>(right);
+        return Vector3<T>(left) -= Vector3<T>(right);
     }
 }

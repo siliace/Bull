@@ -9,7 +9,7 @@
 
 namespace Bull
 {
-    template<typename TComponent>
+    template<typename T>
     struct BULL_API Vector3
     {
         /*! \brief Calculate the dot(scalar) product of two Vector3
@@ -20,7 +20,7 @@ namespace Bull
          * \return The value of the dot product of left and right
          *
          */
-        static TComponent dotProduct(const Vector3& left, const Vector3& right);
+        static T dotProduct(const Vector3& left, const Vector3& right);
 
         /*! \brief Default constructor
          *
@@ -32,7 +32,7 @@ namespace Bull
          * \param value The value of all components
          *
          */
-        Vector3(TComponent value);
+        Vector3(T value);
 
         /*! \brief Constructor
          *
@@ -41,7 +41,7 @@ namespace Bull
          * \param z The z component
          *
          */
-        Vector3(TComponent x, TComponent y, TComponent z);
+        Vector3(T x, T y, T z);
 
         /*! \brief Constructor
          *
@@ -49,7 +49,7 @@ namespace Bull
          * \param z The z component
          *
          */
-        Vector3(const Vector2<TComponent>& copy, TComponent z = 0);
+        Vector3(const Vector2<T>& copy, T z = 0);
 
         /*! \brief Compute the length
          *
@@ -65,7 +65,7 @@ namespace Bull
          * \return The value of the dot product
          *
          */
-        TComponent dotProduct(const Vector3& right);
+        T dotProduct(const Vector3& right);
 
         /*! \brief == operator override
          *
@@ -110,7 +110,7 @@ namespace Bull
          */
         Vector3& operator-=(const Vector3& right);
 
-        TComponent x, y, z;
+        T x, y, z;
     };
 
     /*! \brief Addition two Vector3
@@ -121,8 +121,8 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator+(const Vector3<TComponent>& left, const Vector3<TComponent>& right);
+    template<typename T>
+    Vector3<T> operator+(const Vector3<T>& left, const Vector3<T>& right);
 
     /*! \brief Addition two Vector3
      *
@@ -132,8 +132,8 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator+(float left, const Vector3<TComponent>& right);
+    template<typename T>
+    Vector3<T> operator+(float left, const Vector3<T>& right);
 
     /*! \brief Addition two Vector3
      *
@@ -143,8 +143,8 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator+(const Vector3<TComponent>& left, float right);
+    template<typename T>
+    Vector3<T> operator+(const Vector3<T>& left, float right);
 
     /*! \brief Subtract two Vector3
      *
@@ -154,8 +154,8 @@ namespace Bull
      * \return Return a vector resulting of a subtraction of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator-(const Vector3<TComponent>& left, const Vector3<TComponent>& right);
+    template<typename T>
+    Vector3<T> operator-(const Vector3<T>& left, const Vector3<T>& right);
 
     /*! \brief Subtract two Vector3
      *
@@ -165,8 +165,8 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator-(float left, const Vector3<TComponent>& right);
+    template<typename T>
+    Vector3<T> operator-(float left, const Vector3<T>& right);
 
     /*! \brief Subtract two Vector3
      *
@@ -176,8 +176,8 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector3<TComponent> operator-(const Vector3<TComponent>& left, float right);
+    template<typename T>
+    Vector3<T> operator-(const Vector3<T>& left, float right);
 
     typedef Vector3<float> Vector3F;
     typedef Vector3<int> Vector3I;

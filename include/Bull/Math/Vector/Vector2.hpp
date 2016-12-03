@@ -7,7 +7,7 @@
 
 namespace Bull
 {
-    template<typename TComponent>
+    template<typename T>
     struct BULL_API Vector2
     {
         /*! \brief Calculate the dot(scalar) product of two Vector2
@@ -18,7 +18,7 @@ namespace Bull
          * \return The value of the dot product of left and right
          *
          */
-        static TComponent dotProduct(const Vector2& left, const Vector2& right);
+        static T dotProduct(const Vector2& left, const Vector2& right);
 
         /*! \brief Default constructor
          *
@@ -30,7 +30,7 @@ namespace Bull
          * \param value The value of all components
          *
          */
-        Vector2(TComponent value);
+        Vector2(T value);
 
         /*! \brief Constructor
          *
@@ -38,7 +38,7 @@ namespace Bull
          * \param y The y component
          *
          */
-        Vector2(TComponent x, TComponent y);
+        Vector2(T x, T y);
 
         /*! \brief Compute the length
          *
@@ -54,7 +54,7 @@ namespace Bull
          * \return The value of the dot product
          *
          */
-        TComponent dotProduct(const Vector2& right);
+        T dotProduct(const Vector2& right);
 
         /*! \brief == operator override
          *
@@ -99,7 +99,8 @@ namespace Bull
          */
         Vector2& operator-=(const Vector2& right);
 
-        TComponent x, y;
+        T x, y;
+
     };
 
     /*! \brief Addition two Vector2
@@ -110,8 +111,8 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector2<TComponent> operator+(const Vector2<TComponent>& left, const Vector2<TComponent>& right);
+    template<typename T>
+    Vector2<T> operator+(const Vector2<T>& left, const Vector2<T>& right);
 
     /*! \brief Addition two Vector2
      *
@@ -121,8 +122,8 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector2<TComponent> operator+(float left, const Vector2<TComponent>& right);
+    template<typename T>
+    Vector2<T> operator+(float left, const Vector2<T>& right);
 
     /*! \brief Addition two Vector2
      *
@@ -132,8 +133,8 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector2<TComponent> operator+(const Vector2<TComponent>& left, float right);
+    template<typename T>
+    Vector2<T> operator+(const Vector2<T>& left, float right);
 
     /*! \brief Subtract two Vector2
      *
@@ -143,8 +144,8 @@ namespace Bull
      * \return Return a vector resulting of a subtraction of this and right
      *
      */
-    template<typename TComponent>
-    Vector2<TComponent> operator-(const Vector2<TComponent>& left, const Vector2<TComponent>& right);
+    template<typename T>
+    Vector2<T> operator-(const Vector2<T>& left, const Vector2<T>& right);
 
     /*! \brief Subtract two Vector2
      *
@@ -154,8 +155,8 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector2<TComponent> operator-(float left, const Vector2<TComponent>& right);
+    template<typename T>
+    Vector2<T> operator-(float left, const Vector2<T>& right);
 
     /*! \brief Subtract two Vector2
      *
@@ -165,8 +166,8 @@ namespace Bull
      * \return Return a vector resulting of an addition of this and right
      *
      */
-    template<typename TComponent>
-    Vector2<TComponent> operator-(const Vector2<TComponent>& left, float right);
+    template<typename T>
+    Vector2<T> operator-(const Vector2<T>& left, float right);
 
     typedef Vector2<float> Vector2F;
     typedef Vector2<int> Vector2I;

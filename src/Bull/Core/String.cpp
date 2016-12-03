@@ -162,10 +162,9 @@ namespace Bull
      * \param string The string to copy
      *
      */
-    String::String(const char* string) :
-        String(string, (string) ? std::strlen(string) : 0)
+    String::String(const char* string)
     {
-        /// Nothing
+        set(string);
     }
 
     /*! \brief Constructor
@@ -175,6 +174,27 @@ namespace Bull
      *
      */
     String::String(const char* string, std::size_t size)
+    {
+        set(string, size);
+    }
+
+    /*! \brief Constructor
+     *
+     * \param string The string to copy
+     *
+     */
+    void String::set(const char* string)
+    {
+        set(string, (string) ? std::strlen(string) : 0);
+    }
+
+    /*! \brief Constructor
+     *
+     * \param string The string to copy
+     * \param size   The size of the string
+     *
+     */
+    void String::set(const char* string, std::size_t size)
     {
         if(size > 0)
         {
@@ -411,6 +431,8 @@ namespace Bull
 
     /*! \brief Clear the string
      *
+     * \param clearMemory True to reset capacity, false to keep
+     *
      */
     void String::clear(bool clearMemory)
     {
@@ -564,7 +586,7 @@ namespace Bull
      */
     bool operator==(const String& left, const String& right)
     {
-        return strcmp(left, right) == 0;
+        return left.getCapacity() && right.getCapacity() && strcmp(left, right) == 0;
     }
 
     /*! \brief Compare two Strings
@@ -577,7 +599,7 @@ namespace Bull
      */
     bool operator==(const char* left, const String& right)
     {
-        return strcmp(left, right) == 0;
+        return left && right.getCapacity() && strcmp(left, right) == 0;
     }
 
     /*! \brief Compare two Strings
@@ -590,7 +612,7 @@ namespace Bull
      */
     bool operator==(const String& left, const char* right)
     {
-        return strcmp(left, right) == 0;
+        return left && right && strcmp(left, right) == 0;
     }
 
     /*! \brief Compare two Strings
@@ -603,7 +625,7 @@ namespace Bull
      */
     bool operator!=(const String& left, const String& right)
     {
-        return strcmp(left, right) != 0;
+        return !(left == right);
     }
 
     /*! \brief Compare two Strings
@@ -616,7 +638,7 @@ namespace Bull
      */
     bool operator!=(const char* left, const String& right)
     {
-        return strcmp(left, right) != 0;
+        return !(left == right);
     }
 
     /*! \brief Compare two Strings
@@ -629,7 +651,7 @@ namespace Bull
      */
     bool operator!=(const String& left, const char* right)
     {
-        return strcmp(left, right) != 0;
+        return !(left == right);
     }
 
     /*! \brief Concatenates two Strings

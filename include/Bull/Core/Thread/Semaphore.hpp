@@ -4,6 +4,7 @@
 #include <memory>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/Thread/SemaphoreHandler.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
@@ -14,7 +15,7 @@ namespace Bull
         class SemaphoreImpl;
     }
 
-    class Semaphore : public NonCopyable
+    class BULL_API Semaphore : public NonCopyable
     {
     public:
 

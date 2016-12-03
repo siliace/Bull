@@ -34,7 +34,7 @@ namespace Bull
             Write     = 0x02,
             Exists    = 0x04,
             Truncate  = 0x08,
-            Read      = 0x10,
+            Read      = 0x16,
             ReadWrite = Read | Write,
         };
 

@@ -4,6 +4,7 @@
 #include <memory>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/Thread/MutexHandler.hpp>
 
 namespace Bull
