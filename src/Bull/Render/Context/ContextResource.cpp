@@ -6,6 +6,14 @@ namespace Bull
 {
     unsigned int ContextResource::s_instanceCount = 0;
 
+    /*! \brief Ensure there is an active OpenGL context in this thread
+     *
+     */
+    void ContextResource::ensureContext()
+    {
+        prv::GlContext::ensureContext();
+    }
+
     /*! \brief Constructor
      *
      * Initialize a render context if needed
@@ -18,7 +26,6 @@ namespace Bull
         if(s_instanceCount == 1)
         {
             prv::GlContext::globalInit();
-            prv::GlLoader::load();
         }
     }
 
@@ -35,13 +42,5 @@ namespace Bull
         {
             prv::GlContext::globalCleanup();
         }
-    }
-
-    /*! \brief Ensure there is an active OpenGL context in this thead
-     *
-     */
-    void ContextResource::ensureContext()
-    {
-        prv::GlContext::ensureContext();
     }
 }

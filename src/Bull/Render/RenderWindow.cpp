@@ -23,10 +23,11 @@ namespace Bull
      * \param settings Settings to use to create the OpenGL context
      *
      */
-    RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings) :
-        Window(mode, title, style)
+    RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
         m_clock.start();
+
+        open(mode, title, style, settings);
     }
 
     /*! \brief Open the window. If a window was already opened, its closed
