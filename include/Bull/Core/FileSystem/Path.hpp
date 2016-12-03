@@ -9,18 +9,6 @@ namespace Bull
 {
     struct BULL_API Path
     {
-        /*! \brief Default constructor
-         *
-         */
-        Path();
-
-        /*! \brief Constructor
-         *
-         * \param target The path
-         *
-         */
-        Path(const String& target);
-
         String pathName;
         bool   isFile;
         bool   isDirectory;
