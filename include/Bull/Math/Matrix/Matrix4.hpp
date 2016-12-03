@@ -33,7 +33,8 @@ namespace Bull
          * \return Return the matrix
          *
          */
-        static Matrix4<T> createTranslation(T x, T y, T z);
+        template<typename U>
+        static Matrix4<T> createTranslation(U x, U y, U z);
 
         /*! \brief Create a scale matrix
          *
@@ -44,7 +45,8 @@ namespace Bull
          * \return Return the matrix
          *
          */
-        static Matrix4<T> createScale(T x, T y, T z);
+        template<typename U>
+        static Matrix4<T> createScale(U x, U y, U z);
 
         /*! \brief Create a rotation matrix
          *
@@ -55,7 +57,8 @@ namespace Bull
          * \return Return the matrix
          *
          */
-        static Matrix4<T> createRotation(T x, T y, T z);
+        template<typename U>
+        static Matrix4<T> createRotation(U x, U y, U z);
 
         /*! \brief Create a rotation matrix
          *
@@ -64,7 +67,8 @@ namespace Bull
          * \return Return the matrix
          *
          */
-        static Matrix4<T> createRotation(const EulerAngles<T>& angles);
+        template<typename U>
+        static Matrix4<T> createRotation(const EulerAngles<U>& angles);
 
         /*! \brief Create a rotation matrix
          *
@@ -73,7 +77,8 @@ namespace Bull
          * \return Return the matrix
          *
          */
-        static Matrix4<T> createRotation(const Quaternion<T>& quaternion);
+        template<typename U>
+        static Matrix4<T> createRotation(const Quaternion<U>& quaternion);
 
     public:
 
@@ -87,21 +92,24 @@ namespace Bull
          * \param value The value of every matrix cell
          *
          */
-        Matrix4(T value);
+        template<typename U>
+        Matrix4(U value);
 
         /*! \brief Constructor
          *
          * \param data The matrix content
          *
          */
-        Matrix4(const std::array<T, 16>& data);
+        template<typename U>
+        Matrix4(const std::array<U, 16>& data);
 
         /*! \brief Set the matrix content
          *
          * \param value The value of every matrix cell
          *
          */
-        void set(T value);
+        template<typename U>
+        void set(U value);
 
         /*! \brief The value of a cell of the matrix
          *
@@ -110,14 +118,16 @@ namespace Bull
          * \param y     The ordinate of the cell in the matrix
          *
          */
-        void set(T value, std::size_t x, std::size_t y);
+        template<typename U>
+        void set(U value, std::size_t x, std::size_t y);
 
         /*! \brief Set the matrix content
          *
          * \param data The matrix content
          *
          */
-        void set(const std::array<T, 16>& data);
+        template<typename U>
+        void set(const std::array<U, 16>& data);
 
         /*! \brief Get the value of a cell of the matrix
          *
@@ -174,7 +184,8 @@ namespace Bull
          * \return Return true if the two matrices are equal, false otherwise
          *
          */
-        bool operator==(const Matrix4<T>& right);
+        template<typename U>
+        bool operator==(const Matrix4<U>& right);
 
         /*! \brief Compare two matrices
          *
@@ -183,7 +194,8 @@ namespace Bull
          * \return Return true if the two matrices are not equal, false otherwise
          *
          */
-        bool operator!=(const Matrix4<T>& right);
+        template<typename U>
+        bool operator!=(const Matrix4<U>& right);
 
         /*! \brief Addition two matrices
          *
@@ -192,7 +204,8 @@ namespace Bull
          * \return Return the sum the addition of right and this
          *
          */
-        Matrix4<T>& operator+=(const Matrix4<T>& right);
+        template<typename U>
+        Matrix4<T>& operator+=(const Matrix4<U>& right);
 
         /*! \brief Addition two matrices
          *
@@ -201,7 +214,8 @@ namespace Bull
          * \return Return the sum of the addition between right and this
          *
          */
-        Matrix4<T>& operator+=(T right);
+        template<typename U>
+        Matrix4<T>& operator+=(U right);
 
         /*! \brief Subtract two matrices
          *
@@ -210,7 +224,8 @@ namespace Bull
          * \return Return the difference of the subtraction between right and this
          *
          */
-        Matrix4<T>& operator-=(const Matrix4<T>& right);
+        template<typename U>
+        Matrix4<T>& operator-=(const Matrix4<U>& right);
 
         /*! \brief Subtract a matrix with a scalar
          *
@@ -219,7 +234,8 @@ namespace Bull
          * \return Return the difference the subtraction between right and this
          *
          */
-        Matrix4<T>& operator-=(T right);
+        template<typename U>
+        Matrix4<T>& operator-=(U right);
 
         /*! \brief Multiply two matrices
          *
@@ -228,7 +244,8 @@ namespace Bull
          * \return Return the product of the multiplication between right and this
          *
          */
-        Matrix4<T> operator*=(const Matrix4<T>& right);
+        template<typename U>
+        Matrix4<T> operator*=(const Matrix4<U>& right);
 
         /*! \brief Get a pointer to the internal data
          *
