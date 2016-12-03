@@ -28,13 +28,14 @@ namespace Bull
      *
      */
     template<typename T>
-    Matrix4<T> Matrix4<T>::createTranslation(T x, T y, T z)
+    template<typename U>
+    Matrix4<T> Matrix4<T>::createTranslation(U x, U y, U z)
     {
         Matrix4<T> translation = Matrix4<T>::createIdentity();
 
-        translation.set(x, 3, 0);
-        translation.set(y, 3, 1);
-        translation.set(z, 3, 2);
+        translation.set(3, 0) = static_cast<T>(x);
+        translation.set(3, 1) = static_cast<T>(y);
+        translation.set(3, 2) = static_cast<T>(z);
 
         return translation;
     }
@@ -49,14 +50,15 @@ namespace Bull
      *
      */
     template<typename T>
-    Matrix4<T> Matrix4<T>::createScale(T x, T y, T z)
+    template<typename U>
+    Matrix4<T> Matrix4<T>::createScale(U x, U y, U z)
     {
         Matrix4<T> scale;
 
-        scale.set(x, 0, 0);
-        scale.set(y, 1, 1);
-        scale.set(z, 2, 2);
-        scale.set(1, 3, 3);
+        scale.set(0, 0) = static_cast<T>(x);
+        scale.set(1, 1) = static_cast<T>(y);
+        scale.set(2, 2) = static_cast<T>(z);
+        scale.set(3, 3) = static_cast<T>(1.0);
 
         return scale;
     }
@@ -71,9 +73,10 @@ namespace Bull
      *
      */
     template<typename T>
-    Matrix4<T> Matrix4<T>::createRotation(T x, T y, T z)
+    template<typename U>
+    Matrix4<T> Matrix4<T>::createRotation(U x, U y, U z)
     {
-        return createRotation(EulerAngles<T>(Angle::degToRad(x), Angle::degToRad(y), Angle::degToRad(z)));
+        return createRotation(EulerAngles<U>(Angle::degToRad(x), Angle::degToRad(y), Angle::degToRad(z)));
     }
 
     /*! \brief Create a rotation matrix
@@ -84,9 +87,10 @@ namespace Bull
      *
      */
     template<typename T>
-    Matrix4<T> Matrix4<T>::createRotation(const EulerAngles<T>& angles)
+    template<typename U>
+    Matrix4<T> Matrix4<T>::createRotation(const EulerAngles<U>& angles)
     {
-        return createRotation(Quaternion<T>(angles));
+        return createRotation(Quaternion<U>(angles));
     }
 
     /*! \brief Create a rotation matrix
@@ -97,9 +101,10 @@ namespace Bull
      *
      */
     template<typename T>
-    Matrix4<T> Matrix4<T>::createRotation(const Quaternion<T>& quaternion)
+    template<typename U>
+    Matrix4<T> Matrix4<T>::createRotation(const Quaternion<U>& quaternion)
     {
-        Matrix4F left, right;
+        Matrix4<T> left, right;
 
         left.set( quaternion.w, 0, 0);   left.set( quaternion.z, 1, 0);   left.set(-quaternion.y, 2, 0);   left.set(quaternion.x, 3, 0);
         left.set(-quaternion.z, 0, 1);   left.set( quaternion.w, 1, 1);   left.set( quaternion.x, 2, 1);   left.set(quaternion.y, 3, 1);
@@ -122,7 +127,7 @@ namespace Bull
     {
         static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
 
-        set(0);
+        set(0.0);
     }
 
     /*! \brief Constructor
@@ -131,7 +136,8 @@ namespace Bull
      *
      */
     template<typename T>
-    Matrix4<T>::Matrix4(T value)
+    template<typename U>
+    Matrix4<T>::Matrix4(U value)
     {
         static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
 
@@ -143,7 +149,8 @@ namespace Bull
      * \param data The matrix content
      *
      */
-    template<typename T>    Matrix4<T>::Matrix4(const std::array<T, 16>& data)
+    template<typename T>    template<typename U>
+    Matrix4<T>::Matrix4(const std::array<U, 16>& data)
     {
         static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
 
@@ -155,7 +162,8 @@ namespace Bull
      * \param value The value of every matrix cell
      *
      */
-    template<typename T>    void Matrix4<T>::set(T value)
+    template<typename T>    template<typename U>
+    void Matrix4<T>::set(U value)
     {
         m_data.fill(value);
     }
@@ -168,9 +176,10 @@ namespace Bull
      *
      */
     template<typename T>
-    void Matrix4<T>::set(T value, std::size_t x, std::size_t y)
+    template<typename U>
+    void Matrix4<T>::set(U value, std::size_t x, std::size_t y)
     {
-        m_data[y * 4 + x] = value;
+        m_data[y * 4 + x] = static_cast<T>(value);
     }
 
     /*! \brief Set the matrix content
@@ -179,7 +188,8 @@ namespace Bull
      *
      */
     template<typename T>
-    void Matrix4<T>::set(const std::array<T, 16>& data)
+    template<typename U>
+    void Matrix4<T>::set(const std::array<U, 16>& data)
     {
         m_data = data;
     }
@@ -273,7 +283,8 @@ namespace Bull
      *
      */
     template<typename T>
-    bool Matrix4<T>::operator==(const Matrix4<T>& right)
+    template<typename U>
+    bool Matrix4<T>::operator==(const Matrix4<U>& right)
     {
         return m_data == right.m_data;
     }
@@ -286,7 +297,8 @@ namespace Bull
      *
      */
     template<typename T>
-    bool Matrix4<T>::operator!=(const Matrix4<T>& right)
+    template<typename U>
+    bool Matrix4<T>::operator!=(const Matrix4<U>& right)
     {
         return m_data != right.m_data;
     }
@@ -299,11 +311,12 @@ namespace Bull
      *
      */
     template<typename T>
-    Matrix4<T>& Matrix4<T>::operator+=(const Matrix4<T>& right)
+    template<typename U>
+    Matrix4<T>& Matrix4<T>::operator+=(const Matrix4<U>& right)
     {
         for(std::size_t i = 0; i < 16; i++)
         {
-            m_data[i] += right.m_data[i];
+            m_data[i] += static_cast<U>(right.m_data[i]);
         }
 
         return (*this);
@@ -317,9 +330,10 @@ namespace Bull
      *
      */
     template<typename T>
-    Matrix4<T>& Matrix4<T>::operator+=(T right)
+    template<typename U>
+    Matrix4<T>& Matrix4<T>::operator+=(U right)
     {
-        return (*this) += Matrix4<T>(right);
+        return (*this) += Matrix4<U>(right);
     }
 
     /*! \brief Subtract two matrices
@@ -330,11 +344,12 @@ namespace Bull
      *
      */
     template<typename T>
-    Matrix4<T>& Matrix4<T>::operator-=(const Matrix4<T>& right)
+    template<typename U>
+    Matrix4<T>& Matrix4<T>::operator-=(const Matrix4<U>& right)
     {
         for(std::size_t i = 0; i < 16; i++)
         {
-            m_data[i] -= right.m_data[i];
+            m_data[i] -= static_cast<T>(right.m_data[i]);
         }
 
         return (*this);
@@ -348,9 +363,10 @@ namespace Bull
      *
      */
     template<typename T>
-    Matrix4<T>& Matrix4<T>::operator-=(T right)
+    template<typename U>
+    Matrix4<T>& Matrix4<T>::operator-=(U right)
     {
-        return (*this) -= Matrix4<T>(right);
+        return (*this) -= Matrix4<U>(right);
     }
 
     /*! \brief Multiply two matrices
@@ -361,7 +377,8 @@ namespace Bull
      *
      */
     template<typename T>
-    Matrix4<T> Matrix4<T>::operator*=(const Matrix4<T>& right)
+    template<typename U>
+    Matrix4<T> Matrix4<T>::operator*=(const Matrix4<U>& right)
     {
         std::array<T, 16> product;
 
