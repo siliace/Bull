@@ -73,7 +73,7 @@ namespace Bull
     template<typename T>
     Matrix4<T> Matrix4<T>::createRotation(T x, T y, T z)
     {
-        return createRotation(EulerAngles<T>(Angle::degToRad(x), Angle::degToRad(y), Angle::degToRad(z)));
+        return createRotation(EulerAngles<T>(Angle<T>::radian(x), Angle<T>::radian(y), Angle<T>::radian(z)));
     }
 
     /*! \brief Create a rotation matrix

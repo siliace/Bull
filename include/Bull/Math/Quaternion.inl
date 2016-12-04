@@ -106,12 +106,12 @@ namespace Bull
     template<typename U>
     Quaternion<T>& Quaternion<T>::set(const EulerAngles<U>& angles)
     {
-        T cosYaw   = std::cos(static_cast<T>(angles.yaw)   * 0.5f);
-        T sinYaw   = std::sin(static_cast<T>(angles.yaw)   * 0.5f);
-        T cosRoll  = std::cos(static_cast<T>(angles.roll)  * 0.5f);
-        T sinRoll  = std::sin(static_cast<T>(angles.roll)  * 0.5f);
-        T cosPitch = std::cos(static_cast<T>(angles.pitch) * 0.5f);
-        T sinPitch = std::sin(static_cast<T>(angles.pitch) * 0.5f);
+        T cosYaw   = std::cos(static_cast<T>(angles.yaw)   * static_cast<T>(0.5));
+        T sinYaw   = std::sin(static_cast<T>(angles.yaw)   * static_cast<T>(0.5));
+        T cosRoll  = std::cos(static_cast<T>(angles.roll)  * static_cast<T>(0.5));
+        T sinRoll  = std::sin(static_cast<T>(angles.roll)  * static_cast<T>(0.5));
+        T cosPitch = std::cos(static_cast<T>(angles.pitch) * static_cast<T>(0.5));
+        T sinPitch = std::sin(static_cast<T>(angles.pitch) * static_cast<T>(0.5));
 
         w = cosYaw * cosRoll * cosPitch + sinYaw * sinRoll * sinPitch;
         x = cosYaw * sinRoll * cosPitch - sinYaw * cosRoll * sinPitch;
