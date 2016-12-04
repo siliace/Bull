@@ -106,8 +106,8 @@ namespace Bull
                 case Joystick::Axis::R:    return joystickState.dwRpos;
                 case Joystick::Axis::U:    return joystickState.dwUpos;
                 case Joystick::Axis::V:    return joystickState.dwVpos;
-                case Joystick::Axis::PovX: return std::cos(Angle::radToDeg(joystickState.dwPOV));
-                case Joystick::Axis::PovY: return std::sin(Angle::radToDeg(joystickState.dwPOV));
+                case Joystick::Axis::PovX: return std::cos(AngleUI::degree(joystickState.dwPOV));
+                case Joystick::Axis::PovY: return std::sin(AngleUI::degree(joystickState.dwPOV));
             }
 
             return 0;
