@@ -7,6 +7,13 @@ namespace Bull
 {
     class BULL_API ContextResource
     {
+    protected:
+
+        /*! \brief Ensure there is an active OpenGL context in this thread
+         *
+         */
+        static void ensureContext();
+
     private:
 
         static unsigned int s_instanceCount;
@@ -26,12 +33,6 @@ namespace Bull
          *
          */
         virtual ~ContextResource();
-
-        /*! \brief Ensure there is an active OpenGL context in this thead
-         *
-         */
-        void ensureContext();
-
     };
 }
 
