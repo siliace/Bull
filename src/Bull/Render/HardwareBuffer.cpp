@@ -1,3 +1,5 @@
+#include <cstring>
+
 #include <Bull/Render/HardwareBuffer.hpp>
 
 namespace Bull
@@ -93,9 +95,14 @@ namespace Bull
             }
             else
             {
-                void* ptr = gl::mapBuffer(m_type, GL_WRITE_ONLY);
+                unsigned char* ptr = reinterpret_cast<unsigned char*>(gl::mapBuffer(m_type, GL_WRITE_ONLY));
 
-                std::memcpy(ptr, &data[offset], size)
+                if(!ptr)
+                {
+                    return false;
+                }
+
+                std::memcpy(ptr + offset, data, size);
 
                 gl::unmapBuffer(m_type);
             }

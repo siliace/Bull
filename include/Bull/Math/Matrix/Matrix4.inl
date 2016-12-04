@@ -33,9 +33,9 @@ namespace Bull
     {
         Matrix4<T> translation = Matrix4<T>::createIdentity();
 
-        translation.set(3, 0) = static_cast<T>(x);
-        translation.set(3, 1) = static_cast<T>(y);
-        translation.set(3, 2) = static_cast<T>(z);
+        translation(3, 0) = static_cast<T>(x);
+        translation(3, 1) = static_cast<T>(y);
+        translation(3, 2) = static_cast<T>(z);
 
         return translation;
     }
@@ -55,10 +55,10 @@ namespace Bull
     {
         Matrix4<T> scale;
 
-        scale.set(0, 0) = static_cast<T>(x);
-        scale.set(1, 1) = static_cast<T>(y);
-        scale.set(2, 2) = static_cast<T>(z);
-        scale.set(3, 3) = static_cast<T>(1.0);
+        scale(0, 0) = static_cast<T>(x);
+        scale(1, 1) = static_cast<T>(y);
+        scale(2, 2) = static_cast<T>(z);
+        scale(3, 3) = static_cast<T>(1.0);
 
         return scale;
     }
@@ -76,7 +76,7 @@ namespace Bull
     template<typename U>
     Matrix4<T> Matrix4<T>::createRotation(U x, U y, U z)
     {
-        return createRotation(EulerAngles<U>(Angle::degToRad(x), Angle::degToRad(y), Angle::degToRad(z)));
+        return createRotation(EulerAngles<U>(Angle<U>::radian(x), Angle<U>::radian(y), Angle<U>::radian(z)));
     }
 
     /*! \brief Create a rotation matrix
