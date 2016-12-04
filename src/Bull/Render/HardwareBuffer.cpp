@@ -33,7 +33,8 @@ namespace Bull
      */
     HardwareBuffer::HardwareBuffer(Type type) :
         m_id(0),
-        m_type(type)
+        m_type(type),
+        m_size(0)
     {
         /// Nothing
     }
@@ -67,25 +68,33 @@ namespace Bull
         gl::bindBuffer(m_type, m_id);
         gl::bufferData(m_type, size, nullptr, usage);
 
+        m_size = size;
+
         return true;
     }
 
     /*! \brief Fill the buffer
      *
-     * \param data   Data to use to fill the buffer
-     * \param size   The size of data
-     * \param offset The offset of the data in the buffer
+     * \param data    Data to use to fill the buffer
+     * \param size    The size of data
+     * \param offset  The offset of the data in the buffer
+     * \param discard True to flush the buffer before fill it, false to keep the original content
      *
      * \return Return true if the buffer was filled successfully, false otherwise
      *
      */
-    bool HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
+    bool HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset, bool discard)
     {
         ensureContext();
 
-        if(m_id)
+        if(m_id && data && size)
         {
             gl::bindBuffer(m_type, m_id);
+
+            if(discard)
+            {
+                flush();
+            }
 
             /// It seems that glBufferSubData is more efficient than glMapBuffer with small buffers
             /// http://www.stevestreeting.com/2007/03/17/glmapbuffer-vs-glbuffersubdata-the-return/
@@ -116,15 +125,23 @@ namespace Bull
 
     /*! \brief Flush the buffer
      *
+     * \param keepMemory True to keep the allocated memory, false otherwise
+     *
      */
-    void HardwareBuffer::flush()
+    void HardwareBuffer::flush(bool keepMemory)
     {
         if(m_id)
         {
             ensureContext();
 
             gl::bindBuffer(m_type, m_id);
-            gl::bufferData(m_type, 0, nullptr, StaticDraw);
+
+            if(!keepMemory)
+            {
+                m_size = 0;
+            }
+
+            gl::bufferData(m_type, m_size, nullptr, StaticDraw);
         }
     }
 

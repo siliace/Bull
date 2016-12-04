@@ -66,19 +66,22 @@ namespace Bull
 
         /*! \brief Fill the buffer
          *
-         * \param data   Data to use to fill the buffer
-         * \param size   The size of data
-         * \param offset The offset of the data in the buffer
+         * \param data    Data to use to fill the buffer
+         * \param size    The size of data
+         * \param offset  The offset of the data in the buffer
+         * \param discard True to flush the buffer before fill it, false to keep the original content
          *
          * \return Return true if the buffer was filled successfully, false otherwise
          *
          */
-        bool fill(const void* data, std::size_t size, std::size_t offset = 0);
+        bool fill(const void* data, std::size_t size, std::size_t offset = 0, bool discard = false);
 
         /*! \brief Flush the buffer
          *
+         * \param keepMemory True to keep the allocated memory, false otherwise
+         *
          */
-        void flush();
+        void flush(bool keepMemory = true);
 
         /*! \brief Destroy the buffer
          *
@@ -96,6 +99,7 @@ namespace Bull
 
         unsigned int m_id;
         Type         m_type;
+        std::size_t  m_size;
     };
 }
 
