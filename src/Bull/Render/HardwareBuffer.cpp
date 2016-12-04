@@ -84,7 +84,21 @@ namespace Bull
         if(m_id)
         {
             gl::bindBuffer(m_type, m_id);
-            gl::bufferSubData(m_type, offset, size, data);
+
+            /// It seems that glBufferSubData is more efficient than glMapBuffer with small buffers
+            /// http://www.stevestreeting.com/2007/03/17/glmapbuffer-vs-glbuffersubdata-the-return/
+            if(size < 32 * 1024)
+            {
+                gl::bufferSubData(m_type, offset, size, data);
+            }
+            else
+            {
+                void* ptr = gl::mapBuffer(m_type, GL_WRITE_ONLY);
+
+                std::memcpy(ptr, &data[offset], size)
+
+                gl::unmapBuffer(m_type);
+            }
 
             return true;
         }
