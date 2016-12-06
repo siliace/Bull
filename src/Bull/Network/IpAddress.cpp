@@ -18,7 +18,11 @@ namespace Bull
      */
     String IpAddress::toString(const Ipv4& ipv4)
     {
+        StringStream ss;
 
+        ss << ipv4[0] << "." << ipv4[1] << "." << ipv4[2] << "." << ipv4[3];
+
+        return ss;
     }
 
     /*! \brief Convert an Ipv6 to a String
@@ -28,7 +32,7 @@ namespace Bull
      */
     String IpAddress::toString(const Ipv6& ipv6)
     {
-
+        return String();
     }
 
     /*! \brief Default constructor
@@ -120,9 +124,8 @@ namespace Bull
         {
             case NetProtocol::IPv4: return toString(m_ipv4);
             case NetProtocol::IPv6: return toString(m_ipv6);
+            default:                return String();
         }
-
-        return String();
     }
 
     /*! \brief Get the NetProtocol used by the IpAddres
