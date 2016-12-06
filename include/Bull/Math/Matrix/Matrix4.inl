@@ -119,6 +119,62 @@ namespace Bull
         return left * right;
     }
 
+    /*! \brief Create an orthographic matrix
+     *
+     * \param left   The distance between center and left
+     * \param right  The distance between center and right
+     * \param top    The distance between center and top
+     * \param bottom The distance between center and bottom
+     * \param zNear  The distance where vision begins
+     * \param zFar   The distance where vision ends
+     *
+     * \return Return the created matrix
+     *
+     */
+    template<typename T>
+    template<typename U>
+    Matrix4<T> Matrix4<T>::createOrtho(U left, U right, U top, U bottom, U zNear, U zFar)
+    {
+        Matrix4<T> ortho;
+
+        ortho.set(static_cast<T>(2.0) / static_cast<T>(right - left),          0, 0);
+        ortho.set(static_cast<T>(2.0) / static_cast<T>(top - bottom),          1, 1);
+        ortho.set(static_cast<T>(1.0) / static_cast<T>(zNear - zFar),          2, 2);
+        ortho.set(static_cast<T>(left + right) / static_cast<T>(left - right), 0, 3);
+        ortho.set(static_cast<T>(top + bottom) / static_cast<T>(bottom - top), 1, 3);
+        ortho.set(static_cast<T>(zNear) / static_cast<T>(zNear - zFar),        2, 3);
+        ortho.set(static_cast<T>(1.0),                                         3, 3);
+
+        return ortho;
+    }
+
+    /*! \brief Create a perspective matrix
+     *
+     * \param angle The angle of the perspective
+     * \param ratio The rendering ratio (16/9, 4/3, 16/10...)
+     * \param zNear The distance where vision begins
+     * \param zFar  The distance where vision ends
+     *
+     * \return Return the created matrix
+     *
+     */
+    template<typename T>
+    template<typename U>
+    Matrix4<T> Matrix4<T>::createPersperctive(const Angle<U>& angle, U ratio, U zNear, U zFar)
+    {
+        Matrix4<T> perspective;
+        Angle<U> rotation = angle.asRadian() / 2;
+        T scale           = std::tan(static_cast<T>(Pi / 2) - rotation);
+
+        perspective.set(scale / ratio,                                        0, 0);
+        perspective.set(scale,                                                1, 1);
+        perspective.set(-(zFar + zNear) / (zFar - zNear),                     2, 2);
+        perspective.set(static_cast<T>(-1),                                   3, 2);
+        perspective.set(static_cast<T>(-2) * (zNear * zFar) / (zNear - zFar), 2, 3);
+
+        return perspective;
+    }
+
     /*! \brief Default Constructor
      *
      */
