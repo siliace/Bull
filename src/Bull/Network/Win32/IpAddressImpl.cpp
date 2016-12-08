@@ -38,7 +38,7 @@ namespace Bull
             hints.ai_family   = AF_UNSPEC;
             hints.ai_socktype = SOCK_STREAM;
 
-            int error = getaddrinfo(hostname, "http", &hints, &result);
+            int error = getaddrinfo(hostname, nullptr, &hints, &result);
 
             if(error == 0)
             {
