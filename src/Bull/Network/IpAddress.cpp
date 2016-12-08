@@ -68,6 +68,8 @@ namespace Bull
                 return prv::IpAddressImpl::resolveIpv6(hostname);
             }
         }
+
+        return IpAddress::None;
     }
 
     /*! \brief Default constructor
