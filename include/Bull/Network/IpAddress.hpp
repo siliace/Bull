@@ -44,12 +44,29 @@ namespace Bull
          */
         static String toString(const Ipv6& ipv6);
 
+        /*! \brief Resolve an host-name to an IpAddress
+         *
+         * \param hostname The host-name to resolve
+         * \param protocol The protocol use by the host to resolve
+         *
+         * \return Return the IpAddress of the host if the host-name was resolved, IpAddress::None otherwise
+         *
+         */
+        static IpAddress resolve(const String& hostname, NetProtocol protocol = NetProtocol::IPv4);
+
     public:
 
         /*! \brief Default constructor
          *
          */
         IpAddress();
+
+        /*! \brief Constructor
+         *
+         * \param address The representation of the ip as an integer
+         *
+         */
+        IpAddress(Uint32 address);
 
         /*! \brief Constructor
          *
@@ -88,6 +105,7 @@ namespace Bull
          *
          */
         IpAddress(Uint16 a, Uint16 b, Uint16 c, Uint16 d, Uint16 e, Uint16 f, Uint16 g, Uint16 h);
+
 
         /*! \brief Check whether if the IpAddress can be used
          *
