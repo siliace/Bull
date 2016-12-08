@@ -1,6 +1,7 @@
 #include <Bull/Core/IO/StringStream.hpp>
 
 #include <Bull/Network/IpAddress.hpp>
+#include <Bull/Network/IpAddressImpl.hpp>
 
 namespace Bull
 {
@@ -35,14 +36,63 @@ namespace Bull
         return String();
     }
 
+    /*! \brief Resolve an host-name to an IpAddress
+     *
+     * \param hostname The host-name to resolve
+     * \param protocol The protocol use by the host to resolve
+     *
+     * \return Return the IpAddress of the host if the host-name was resolved, IpAddress::None otherwise
+     *
+     */
+    IpAddress IpAddress::resolve(const String& hostname, NetProtocol protocol)
+    {
+
+        switch(protocol)
+        {
+            case NetProtocol::Any:
+            case NetProtocol::IPv4:
+            case NetProtocol::Unknown:
+            {
+                if(hostname == AnyIpv4.toString())       return AnyIpv4;
+                if(hostname == LoopbackIpv4.toString())  return LoopbackIpv4;
+                if(hostname == BroadcastIpv4.toString()) return BroadcastIpv4;
+
+                return prv::IpAddressImpl::resolveIpv4(hostname);
+            }
+
+            case NetProtocol::IPv6:
+            {
+                if(hostname == AnyIpv6.toString())       return AnyIpv6;
+                if(hostname == LoopbackIpv6.toString())  return LoopbackIpv6;
+
+                return prv::IpAddressImpl::resolveIpv6(hostname);
+            }
+        }
+    }
+
     /*! \brief Default constructor
      *
      */
     IpAddress::IpAddress() :
         m_isValid(false),
-        m_protocol(NetProtocol::Any)
+        m_protocol(NetProtocol::Unknown)
     {
         /// Nothing
+    }
+
+    /*! \brief Constructor
+     *
+     * \param address The representation of the ip as an integer
+     *
+     */
+    IpAddress::IpAddress(Uint32 address) :
+        m_isValid(true),
+        m_protocol(NetProtocol::IPv4)
+    {
+        m_ipv4[0] = (address & 0x000000ff);
+        m_ipv4[1] = (address & 0x0000ff00) >> 8;
+        m_ipv4[2] = (address & 0x00ff0000) >> 16;
+        m_ipv4[3] = (address & 0xff000000) >> 24;
     }
 
     /*! \brief Constructor
