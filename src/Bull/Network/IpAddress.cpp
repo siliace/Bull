@@ -153,6 +153,16 @@ namespace Bull
         /// Nothing
     }
 
+    bool IpAddress::operator==(const IpAddress& right)
+    {
+        return toString() == right.toString();
+    }
+
+    bool IpAddress::operator!=(const IpAddress& right)
+    {
+        return toString() != right.toString();
+    }
+
     /*! \brief Check whether if the IpAddress can be used
      *
      * \return Return true if the IpAddress is valid, false otherwise

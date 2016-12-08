@@ -106,6 +106,9 @@ namespace Bull
          */
         IpAddress(Uint16 a, Uint16 b, Uint16 c, Uint16 d, Uint16 e, Uint16 f, Uint16 g, Uint16 h);
 
+        bool operator==(const IpAddress& right);
+
+        bool operator!=(const IpAddress& right);
 
         /*! \brief Check whether if the IpAddress can be used
          *

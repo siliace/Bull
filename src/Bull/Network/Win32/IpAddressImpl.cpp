@@ -56,7 +56,6 @@ namespace Bull
 
         IpAddress IpAddressImpl::resolveIpv6(const String& hostname)
         {
-
             return IpAddress::None;
         }
     }
