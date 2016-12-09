@@ -106,8 +106,22 @@ namespace Bull
          */
         IpAddress(Uint16 a, Uint16 b, Uint16 c, Uint16 d, Uint16 e, Uint16 f, Uint16 g, Uint16 h);
 
+        /*! \brief Compare two IpAddress
+         *
+         * \param right The IpAddress to compare to this
+         *
+         * \return Return true if right and this are equal, false otherwise
+         *
+         */
         bool operator==(const IpAddress& right);
 
+        /*! \brief Compare two IpAddress
+         *
+         * \param right The IpAddress to compare to this
+         *
+         * \return Return false if right and this are equal, false otherwise
+         *
+         */
         bool operator!=(const IpAddress& right);
 
         /*! \brief Check whether if the IpAddress can be used

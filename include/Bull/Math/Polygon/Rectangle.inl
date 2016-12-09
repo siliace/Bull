@@ -124,6 +124,8 @@ namespace Bull
         y      = static_cast<T>(0);
         width  = static_cast<T>(size.x);
         height = static_cast<T>(size.y);
+
+        return (*this);
     }
 
     /*! \brief Set the rectangle
