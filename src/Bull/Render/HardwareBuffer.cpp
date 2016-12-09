@@ -117,7 +117,14 @@ namespace Bull
             ensureContext();
 
             gl::bindBuffer(m_type, m_id);
-            gl::bufferData(m_type, 0, nullptr, StaticDraw);
+            if(!keepMemory)
+            {
+                m_size = 0;
+            }
+
+            int usage;
+            gl::getBufferParameteriv(m_id, GL_BUFFER_USAGE, &usage);
+            gl::bufferData(m_type, m_size, nullptr, usage);
         }
     }
 
