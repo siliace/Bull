@@ -155,11 +155,25 @@ namespace Bull
         /// Nothing
     }
 
+    /*! \brief Compare two IpAddress
+     *
+     * \param right The IpAddress to compare to this
+     *
+     * \return Return true if right and this are equal, false otherwise
+     *
+     */
     bool IpAddress::operator==(const IpAddress& right)
     {
         return toString() == right.toString();
     }
 
+    /*! \brief Compare two IpAddress
+     *
+     * \param right The IpAddress to compare to this
+     *
+     * \return Return true if right and this are not equal, false otherwise
+     *
+     */
     bool IpAddress::operator!=(const IpAddress& right)
     {
         return toString() != right.toString();
