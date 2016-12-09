@@ -75,11 +75,12 @@ namespace Bull
      * \param data   Data to use to fill the buffer
      * \param size   The size of data
      * \param offset The offset of the data in the buffer
+     * \param discard True to flush the buffer before fill it, false to keep the original content
      *
      * \return Return true if the buffer was filled successfully, false otherwise
      *
      */
-    bool HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
+    bool HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset, bool discard)
     {
         ensureContext();
 
@@ -116,8 +117,10 @@ namespace Bull
 
     /*! \brief Flush the buffer
      *
+     * \param keepMemory True to keep the allocated memory, false otherwise
+     *
      */
-    void HardwareBuffer::flush()
+    void HardwareBuffer::flush(bool keepMemory)
     {
         if(m_id)
         {
