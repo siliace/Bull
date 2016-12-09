@@ -5,9 +5,9 @@
 
 namespace Bull
 {
-    /*! \brief Check if a joystick is connected
+    /*! \brief Check whether a joystick is connected
      *
-     * \param id The unique ID of the joystick
+     * \param joystick The ID of the joystick
      *
      * \return Return true if the joystick is connected, false otherwise
      *
@@ -17,9 +17,9 @@ namespace Bull
         return prv::JoystickImpl::isConnected(id);
     }
 
-    /*! \brief Check if a joystick is connected
+    /*!\brief Get the capabilities of a joystick
      *
-     * \param id The unique ID of the joystick
+     * \param joystick The unique ID of the joystick
      *
      * \return Return the capabilities of the joystick
      *

@@ -46,16 +46,16 @@ namespace Bull
             unsigned int                                     countAxes;
         };
 
-        /*! \brief Check if a joystick is connected
+        /*! \brief Check whether a joystick is connected
          *
-         * \param joystick The unique ID of the joystick
+         * \param joystick The ID of the joystick
          *
          * \return Return true if the joystick is connected, false otherwise
          *
          */
         static bool isConnected(Uint8 joystick);
 
-        /*! \brief Check if a joystick is connected
+        /*! \brief Get the capabilities of a joystick
          *
          * \param joystick The unique ID of the joystick
          *
