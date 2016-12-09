@@ -186,19 +186,4 @@ namespace Bull
     {
         return m_path;
     }
-
-    /*! \brief Get the directory system handler
-     *
-     * \return Return the native directory system handler
-     *
-     */
-    DirectoryHandler Directory::getSystemHandler() const
-    {
-        if(m_impl)
-        {
-            m_impl->getSystemHandler();
-        }
-
-        return 0;
-    }
 }

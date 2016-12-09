@@ -3,7 +3,6 @@
 
 #include <Bull/Core/Functor.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Thread/ThreadHandler.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 namespace Bull
@@ -141,13 +140,6 @@ namespace Bull
          *
          */
         Thread::Priority getPriority() const;
-
-        /*! \brief Get the system handler
-         *
-         * \return Return the native system thread handler
-         *
-         */
-        ThreadHandler getSystemHandler() const;
 
     private:
 

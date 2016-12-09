@@ -437,19 +437,4 @@ namespace Bull
 
         return m_eof;
     }
-
-    /*! \brief Get the file system handler
-     *
-     * \return Return the native file system handler
-     *
-     */
-    FileHandler File::getSystemHandler() const
-    {
-        if(m_impl)
-        {
-            return m_impl->getSystemHandler();
-        }
-
-        return 0;
-    }
 }

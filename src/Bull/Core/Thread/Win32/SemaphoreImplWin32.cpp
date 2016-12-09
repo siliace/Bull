@@ -63,15 +63,5 @@ namespace Bull
         {
             ReleaseSemaphore(m_handler, 1, nullptr);
         }
-
-        /*! \brief Get the system handler
-         *
-         * \return Return the native system semaphore handler
-         *
-         */
-        SemaphoreHandler SemaphoreImplWin32::getSystemHandler() const
-        {
-            return m_handler;
-        }
     }
 }

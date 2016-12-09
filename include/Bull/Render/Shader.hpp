@@ -9,7 +9,6 @@
 
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Color.hpp>
-#include <Bull/Render/OpenGL.hpp>
 
 namespace Bull
 {
@@ -19,8 +18,8 @@ namespace Bull
 
         enum Type
         {
-            Vertex   = GL_VERTEX_SHADER,
-            Fragment = GL_FRAGMENT_SHADER
+            Vertex   = 0x8B31,
+            Fragment = 0x8B30
         };
 
         /*! \brief Bind a shader
@@ -53,7 +52,7 @@ namespace Bull
          * \return Return the handler of the created shader
          *
          */
-        static GLuint createShader(const String& code, Type type, String* error = nullptr);
+        static unsigned int createShader(const String& code, Type type, String* error = nullptr);
 
         /*! \brief Check whether a shader has an error
          *
@@ -64,7 +63,7 @@ namespace Bull
          * \return Return true if the shader had an error, false otherwise
          *
          */
-        static bool shaderHasError(GLuint shader, GLenum type, String* error = nullptr);
+        static bool shaderHasError(unsigned int shader, unsigned int type, String* error = nullptr);
 
         /*! \brief Check whether a program has an error
          *
@@ -75,7 +74,7 @@ namespace Bull
          * \return Return true if the program had an error, false otherwise
          *
          */
-        static bool programHasError(GLuint program, GLenum type, String* error = nullptr);
+        static bool programHasError(unsigned int program, unsigned int type, String* error = nullptr);
 
     public:
 
@@ -168,7 +167,7 @@ namespace Bull
          */
         int getUniformLocation(const String& name);
 
-        GLuint m_program;
+        unsigned int m_program;
     };
 }
 

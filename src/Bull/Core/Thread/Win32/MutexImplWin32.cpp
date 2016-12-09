@@ -46,27 +46,5 @@ namespace Bull
         {
             LeaveCriticalSection(&m_handler);
         }
-
-        /*! \brief Get the native handler
-         *
-         * \return Return the mutex native handler
-         *
-         */
-        MutexHandler MutexImplWin32::getSystemHandler() const
-        {
-            return m_handler;
-        }
-
-        /*! \brief Get a pointer to the handler
-         *
-         * Used only by ConditionalVariableImplWin32
-         *
-         * \return Return a pointer to the system handler
-         * \see ConditionalVariableImplWin32
-         */
-        MutexHandler* MutexImplWin32::getHandlerPointer()
-        {
-            return &m_handler;
-        }
     }
 }

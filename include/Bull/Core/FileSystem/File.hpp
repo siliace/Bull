@@ -3,7 +3,6 @@
 
 #include <memory>
 
-#include <Bull/Core/FileSystem/FileHandler.hpp>
 #include <Bull/Core/Integer.hpp>
 #include <Bull/Core/IO/InOutStream.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
@@ -11,10 +10,6 @@
 #include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/Thread/Mutex.hpp>
 #include <Bull/Core/Time/Date.hpp>
-
-#ifdef None
-    #undef None
-#endif
 
 namespace Bull
 {
@@ -252,13 +247,6 @@ namespace Bull
          *
          */
         bool isAtEof() const;
-
-        /*! \brief Get the file system handler
-         *
-         * \return Return the native file system handler
-         *
-         */
-        FileHandler getSystemHandler() const;
 
     private:
 

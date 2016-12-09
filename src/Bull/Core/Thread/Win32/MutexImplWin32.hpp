@@ -44,23 +44,7 @@ namespace Bull
              */
             void unlock() override;
 
-            /*! \brief Get the native handler
-             *
-             * \return Return the mutex native handler
-             *
-             */
-            MutexHandler getSystemHandler() const override;
-
         private:
-
-            /*! \brief Get a pointer to the handler
-             *
-             * Used only by ConditionalVariableImplWin32
-             *
-             * \return Return a pointer to the system handler
-             * \see ConditionalVariableImplWin32
-             */
-            MutexHandler* getHandlerPointer();
 
             CRITICAL_SECTION m_handler;
         };

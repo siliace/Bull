@@ -2,7 +2,6 @@
 #define Bull_LocalImpl_hpp
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Thread/LocalHandler.hpp>
 
 namespace Bull
 {
@@ -39,13 +38,6 @@ namespace Bull
              *
              */
             virtual void* get() const = 0;
-
-            /*! \brief Get the system native handler
-             *
-             * \return Return the system native handler
-             *
-             */
-            virtual LocalHandler getSystemHandler() const = 0;
 
         protected:
 

@@ -136,15 +136,5 @@ namespace Bull
 
             return content;
         }
-
-        /*! \brief Get the directory system handler
-         *
-         * \return Return the native directory system handler
-         *
-         */
-        DirectoryHandler DirectoryImplWin32::getSystemHandler() const
-        {
-            return m_handler;
-        }
     }
 }

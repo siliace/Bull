@@ -2,6 +2,7 @@
 #include <Bull/Core/Log.hpp>
 
 #include <Bull/Render/Context/ShaderStateSaver.hpp>
+#include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Shader.hpp>
 
 namespace Bull
@@ -13,7 +14,7 @@ namespace Bull
      */
     void Shader::bind(const Shader& shader)
     {
-        gl::useProgram(shader.getSystemHandler());
+        gl::useProgram(shader.m_program);
     }
 
     /*! \brief Unbind any shader

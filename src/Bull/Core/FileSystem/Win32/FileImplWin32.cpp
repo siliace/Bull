@@ -330,15 +330,5 @@ namespace Bull
 
             return size.QuadPart;
         }
-
-        /*! \brief Get the file system handler
-         *
-         * \return Return the native file system handler
-         *
-         */
-        FileHandler FileImplWin32::getSystemHandler() const
-        {
-            return m_handler;
-        }
     }
 }

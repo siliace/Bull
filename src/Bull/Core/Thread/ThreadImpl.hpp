@@ -48,13 +48,6 @@ namespace Bull
              */
             virtual void stop() = 0;
 
-            /*! \brief Get the system handler
-             *
-             * \return Return the native system thread handler
-             *
-             */
-            virtual ThreadHandler getSystemHandler() const = 0;
-
         protected:
 
             /*! \brief Default constructor

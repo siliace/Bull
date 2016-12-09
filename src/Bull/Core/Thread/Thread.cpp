@@ -104,19 +104,4 @@ namespace Bull
     {
         return m_priority;
     }
-
-    /*! \brief Get the system handler
-     *
-     * \return Return the native system thread handler
-     *
-     */
-    ThreadHandler Thread::getSystemHandler() const
-    {
-        if(m_impl)
-        {
-            return m_impl->getSystemHandler();
-        }
-
-        return 0;
-    }
 }

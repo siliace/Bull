@@ -4,7 +4,6 @@
 #include <memory>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Thread/LocalHandler.hpp>
 
 namespace Bull
 {
@@ -47,13 +46,6 @@ namespace Bull
          *
          */
         void* get() const;
-
-        /*! \brief Get the system native handler
-         *
-         * \return Return the system native handler
-         *
-         */
-        LocalHandler getSystemHandler() const;
 
     private:
 

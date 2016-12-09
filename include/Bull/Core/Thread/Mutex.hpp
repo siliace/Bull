@@ -5,7 +5,6 @@
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Export.hpp>
-#include <Bull/Core/Thread/MutexHandler.hpp>
 
 namespace Bull
 {
@@ -55,13 +54,6 @@ namespace Bull
          *
          */
         void unlock();
-
-        /*! \brief Get the native handler
-         *
-         * \return Return the mutex native handler
-         *
-         */
-        MutexHandler getSystemHandler() const;
 
     private:
 

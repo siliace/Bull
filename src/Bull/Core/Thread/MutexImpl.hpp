@@ -2,7 +2,6 @@
 #define Bull_MutexImpl_hpp
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Thread/MutexHandler.hpp>
 
 namespace Bull
 {
@@ -42,13 +41,6 @@ namespace Bull
              *
              */
             virtual void unlock() = 0;
-
-            /*! \brief Get the native handler
-             *
-             * \return Return the mutex native handler
-             *
-             */
-            virtual MutexHandler getSystemHandler() const = 0;
 
         protected:
 

@@ -2,7 +2,6 @@
 #define Bull_SemaphoreImpl_hpp
 
 #include <Bull/Core/Pattern/Singleton.hpp>
-#include <Bull/Core/Thread/SemaphoreHandler.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 namespace Bull
@@ -54,13 +53,6 @@ namespace Bull
              *
              */
             virtual void release() = 0;
-
-            /*! \brief Get the system handler
-             *
-             * \return Return the native system semaphore handler
-             *
-             */
-            virtual SemaphoreHandler getSystemHandler() const = 0;
 
         protected:
 

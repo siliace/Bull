@@ -56,13 +56,6 @@ namespace Bull
              */
             void stop();
 
-            /*! \brief Get the system handler
-             *
-             * \return Return the native system thread handler
-             *
-             */
-            ThreadHandler getSystemHandler() const;
-
         private:
 
             HANDLE m_handler;

@@ -36,7 +36,7 @@ namespace Bull
          */
         void ConditionVariableImplWin32::wait(MutexImpl* mutex)
         {
-            SleepConditionVariableCS(&m_handler, static_cast<MutexImplWin32*>(mutex)->getHandlerPointer(), INFINITE);
+            SleepConditionVariableCS(&m_handler, &static_cast<MutexImplWin32*>(mutex)->m_handler, INFINITE);
         }
 
         /*! \brief Wait for a signal
@@ -49,7 +49,7 @@ namespace Bull
          */
         bool ConditionVariableImplWin32::wait(MutexImpl* mutex, const Time& timeout)
         {
-            return SleepConditionVariableCS(&m_handler, static_cast<MutexImplWin32*>(mutex)->getHandlerPointer(), timeout.asMilliseconds()) != 0;
+            return SleepConditionVariableCS(&m_handler, &static_cast<MutexImplWin32*>(mutex)->m_handler, timeout.asMilliseconds()) != 0;
         }
     }
 }

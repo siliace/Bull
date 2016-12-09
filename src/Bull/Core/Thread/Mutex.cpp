@@ -73,19 +73,4 @@ namespace Bull
             m_locked = false;
         }
     }
-
-    /*! \brief Get the native handler
-     *
-     * \return Return the mutex native handler
-     *
-     */
-    MutexHandler Mutex::getSystemHandler() const
-    {
-        if(m_impl)
-        {
-            return m_impl->getSystemHandler();
-        }
-
-        return MutexHandler();
-    }
 }

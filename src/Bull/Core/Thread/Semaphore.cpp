@@ -75,19 +75,4 @@ namespace Bull
             m_impl->release();
         }
     }
-
-    /*! \brief Get the system handler
-     *
-     * \return Return the native system semaphore handler
-     *
-     */
-    SemaphoreHandler Semaphore::getSystemHandler() const
-    {
-        if(m_impl)
-        {
-            return m_impl->getSystemHandler();
-        }
-
-        return SemaphoreHandler();
-    }
 }

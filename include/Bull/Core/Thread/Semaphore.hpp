@@ -5,7 +5,6 @@
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Export.hpp>
-#include <Bull/Core/Thread/SemaphoreHandler.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 namespace Bull
@@ -61,13 +60,6 @@ namespace Bull
          *
          */
         void release();
-
-        /*! \brief Get the system handler
-         *
-         * \return Return the native system semaphore handler
-         *
-         */
-        SemaphoreHandler getSystemHandler() const;
 
     private:
 

@@ -39,15 +39,5 @@ namespace Bull
         {
             return TlsGetValue(m_id);
         }
-
-        /*! \brief Get the system native handler
-         *
-         * \return Return the system native handler
-         *
-         */
-        LocalHandler LocalImplWin32::getSystemHandler() const
-        {
-            return m_id;
-        }
     }
 }

@@ -50,19 +50,4 @@ namespace Bull
 
         return nullptr;
     }
-
-    /*! \brief Get the system native handler
-     *
-     * \return Return the system native handler
-     *
-     */
-    LocalHandler Local::getSystemHandler() const
-    {
-        if(m_impl)
-        {
-            return m_impl->getSystemHandler();
-        }
-
-        return 0;
-    }
 }

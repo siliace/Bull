@@ -148,13 +148,6 @@ namespace Bull
              */
             Uint64 getSize() const override;
 
-            /*! \brief Get the file system handler
-             *
-             * \return Return the native file system handler
-             *
-             */
-            FileHandler getSystemHandler() const override;
-
         private:
 
             HANDLE m_handler;

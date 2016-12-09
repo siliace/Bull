@@ -75,13 +75,6 @@ namespace Bull
              */
             virtual std::vector<Path> getContent(Uint32 flags) = 0;
 
-            /*! \brief Get the directory system handler
-             *
-             * \return Return the native directory system handler
-             *
-             */
-            virtual DirectoryHandler getSystemHandler() const = 0;
-
         protected:
 
             /*! \brief Default constructor

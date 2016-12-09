@@ -148,13 +148,6 @@ namespace Bull
              */
             virtual Uint64 getSize() const = 0;
 
-            /*! \brief Get the file system handler
-             *
-             * \return Return the native file system handler
-             *
-             */
-            virtual FileHandler getSystemHandler() const = 0;
-
         protected:
 
             /*! \brief Constructor

@@ -103,15 +103,5 @@ namespace Bull
         {
             CloseHandle(m_handler);
         }
-
-        /*! \brief Get the system handler
-         *
-         * \return Return the native system thread handler
-         *
-         */
-        ThreadHandler ThreadImplWin32::getSystemHandler() const
-        {
-            return m_handler;
-        }
     }
 }

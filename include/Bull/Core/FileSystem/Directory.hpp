@@ -4,7 +4,6 @@
 #include <memory>
 #include <vector>
 
-#include <Bull/Core/FileSystem/DirectoryHandler.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Integer.hpp>
 #include <Bull/Core/String.hpp>
@@ -130,13 +129,6 @@ namespace Bull
          *
          */
         String getPath() const;
-
-        /*! \brief Get the directory system handler
-         *
-         * \return Return the native directory system handler
-         *
-         */
-        DirectoryHandler getSystemHandler() const;
 
     private:
 

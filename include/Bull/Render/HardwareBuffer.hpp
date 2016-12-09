@@ -1,11 +1,12 @@
 #ifndef Bull_HardwareBuffer_hpp
 #define Bull_HardwareBuffer_hpp
 
+#include <utility>
+
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
-#include <Bull/Render/OpenGL.hpp>
 
 namespace Bull
 {
@@ -15,15 +16,15 @@ namespace Bull
 
         enum Type
         {
-            Array   = GL_ARRAY_BUFFER,
-            Element = GL_ELEMENT_ARRAY_BUFFER,
+            Array   = 0x8892,
+            Element = 0x8893,
         };
 
         enum Usage
         {
-            StaticDraw  = GL_STATIC_DRAW,
-            DynamicDraw = GL_DYNAMIC_DRAW,
-            StreamDraw  = GL_STREAM_DRAW,
+            StaticDraw  = 0x88E4,
+            DynamicDraw = 0x88E8,
+            StreamDraw  = 0x88E0,
         };
 
         /*! \brief Bind a buffer

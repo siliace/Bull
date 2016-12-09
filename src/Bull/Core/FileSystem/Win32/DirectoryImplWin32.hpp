@@ -74,13 +74,6 @@ namespace Bull
              */
             std::vector<Path> getContent(Uint32 flags) override;
 
-            /*! \brief Get the directory system handler
-             *
-             * \return Return the native directory system handler
-             *
-             */
-            DirectoryHandler getSystemHandler() const override;
-
         private:
 
             HANDLE m_handler;
