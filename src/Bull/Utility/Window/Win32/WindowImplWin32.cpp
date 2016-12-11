@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <Bull/Utility/Window/Win32/WindowImplWin32.hpp>
 
 /// GCC missing define
@@ -510,48 +512,45 @@ namespace Bull
 
         /*! \brief Enter or leave the fullscreen mode
          *
-         * \param mode The VideoMode to use
          * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
          *
-         * \return Return true if the switch was done successfully, false otherwise
-         *
          */
-        bool WindowImplWin32::switchFullscreen(const VideoMode& mode, bool fullscreen)
+        void WindowImplWin32::switchFullscreen(bool fullscreen)
         {
-            bool isChangeSuccessful;
-
             if(fullscreen)
             {
-                DEVMODE fullscreenSettings;
+                VideoMode current = VideoMode::getCurrent();
 
-                EnumDisplaySettings(0, 0, &fullscreenSettings);
-                fullscreenSettings.dmPelsWidth  = mode.width;
-                fullscreenSettings.dmPelsHeight = mode.height;
-                fullscreenSettings.dmBitsPerPel = mode.bitsPerPixel;
-                fullscreenSettings.dmFields     = DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL;
+                m_savedInfo.maximized = isMaximized();
+                GetWindowRect(m_handler, &m_savedInfo.rect);
+                m_savedInfo.style     = GetWindowLong(m_handler, GWL_STYLE);
+                m_savedInfo.styleEx   = GetWindowLong(m_handler, GWL_EXSTYLE);
 
-                SetWindowLongPtr(m_handler, GWL_EXSTYLE, WS_EX_APPWINDOW | WS_EX_TOPMOST);
                 SetWindowLongPtr(m_handler, GWL_STYLE,   WS_POPUP        | WS_VISIBLE);
+                SetWindowLongPtr(m_handler, GWL_EXSTYLE, WS_EX_APPWINDOW | WS_EX_TOPMOST);
 
-                SetWindowPos(m_handler, HWND_TOPMOST, 0, 0, mode.width, mode.height, SWP_SHOWWINDOW);
-
-                isChangeSuccessful = ChangeDisplaySettings(&fullscreenSettings, CDS_FULLSCREEN) == DISP_CHANGE_SUCCESSFUL;
+                SetWindowPos(m_handler, HWND_TOPMOST, 0, 0, current.width, current.height, SWP_SHOWWINDOW);
 
                 ShowWindow(m_handler, SW_MAXIMIZE);
             }
             else
             {
-                SetWindowLongPtr(m_handler, GWL_EXSTYLE, WS_EX_LEFT);
-                SetWindowLongPtr(m_handler, GWL_STYLE,   WS_OVERLAPPEDWINDOW | WS_VISIBLE);
+                SetWindowLongPtr(m_handler, GWL_STYLE,   m_savedInfo.style);
+                SetWindowLongPtr(m_handler, GWL_EXSTYLE, m_savedInfo.styleEx);
 
-                isChangeSuccessful = ChangeDisplaySettings(0, CDS_RESET) == DISP_CHANGE_SUCCESSFUL;
-
-                SetWindowPos(m_handler, HWND_NOTOPMOST, CW_USEDEFAULT, CW_USEDEFAULT, mode.width, mode.height, SWP_SHOWWINDOW);
+                SetWindowPos(m_handler,
+                             nullptr,
+                             m_savedInfo.rect.left, m_savedInfo.rect.top,
+                             m_savedInfo.rect.right - m_savedInfo.rect.left, m_savedInfo.rect.bottom - m_savedInfo.rect.top,
+                             SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED);
 
                 ShowWindow(m_handler, SW_RESTORE);
-            }
 
-            return isChangeSuccessful;
+                if(m_savedInfo.maximized)
+                {
+                    maximize();
+                }
+            }
         }
 
         /*! \brief Show or hide the window

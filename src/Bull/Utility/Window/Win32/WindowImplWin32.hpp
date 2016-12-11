@@ -165,13 +165,10 @@ namespace Bull
 
             /*! \brief Enter or leave the fullscreen mode
              *
-             * \param mode The VideoMode to use
              * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
              *
-             * \return Return true if the switch was done successfully, false otherwise
-             *
              */
-            bool switchFullscreen(const VideoMode& mode, bool fullscreen);
+            void switchFullscreen(bool fullscreen);
 
             /*! \brief Show or hide the window
              *
@@ -189,6 +186,14 @@ namespace Bull
 
         private:
 
+            struct SavedWindowInfo
+            {
+                RECT rect;
+                LONG style;
+                LONG styleEx;
+                bool maximized;
+            };
+
             /*! \brief Process a single event
              *
              * \param message The windows message
@@ -198,10 +203,11 @@ namespace Bull
              */
             void processEvent(UINT message, WPARAM wParam, LPARAM lParam);
 
-            HWND      m_handler;
-            Vector2UI m_lastSize;
-            Vector2I  m_lastPosition;
-            bool      m_isResizing;
+            HWND            m_handler;
+            Vector2UI       m_lastSize;
+            SavedWindowInfo m_savedInfo;
+            bool            m_isResizing;
+            Vector2I        m_lastPosition;
         };
     }
 }

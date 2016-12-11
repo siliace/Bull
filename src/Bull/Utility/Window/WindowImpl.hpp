@@ -160,13 +160,10 @@ namespace Bull
 
             /*! \brief Enter or leave the fullscreen mode
              *
-             * \param mode The VideoMode to use
              * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
              *
-             * \return Return true if the switch was done successfully, false otherwise
-             *
              */
-            virtual bool switchFullscreen(const VideoMode& mode, bool fullscreen) = 0;
+            virtual void switchFullscreen(bool fullscreen) = 0;
 
             /*! \brief Show or hide the window
              *

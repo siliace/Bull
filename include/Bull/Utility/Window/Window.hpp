@@ -180,7 +180,7 @@ namespace Bull
          */
         virtual ~Window();
 
-        /*! \brief Open the window. If a window was already opened, its closed
+        /*! \brief Open the window. If a window was already opened,current its closed
          *
          * \param mode  The VideoMode
          * \param title The title of the window
@@ -343,22 +343,21 @@ namespace Bull
          */
         void setVisible(bool visible = true);
 
-        /*! \brief Check if a window is in fullscreen
-         *
-         * \return Return true if the window is in fullscreen, false otherwise
-         *
-         */
-        bool isFullscreen() const;
-
         /*! \brief Enter or leave the fullscreen mode
          *
-         * \param mode The VideoMode to use
          * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
          *
          * \return Return true if the switch was done successfully, false otherwise
          *
          */
-        bool switchFullscreen(const VideoMode& mode = VideoMode::getCurrent(), bool fullscreen = true);
+        bool enableFullscreen(bool enable = true);
+
+        /*! \brief Check if a window is in fullscreen
+         *
+         * \return Return true if the window is in fullscreen, false otherwise
+         *
+         */
+        bool isFullscreenEnable() const;
 
         /*! \brief Get the window system handler
          *

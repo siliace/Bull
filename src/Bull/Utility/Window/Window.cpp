@@ -1,7 +1,3 @@
-#include <Bull/Core/Thread/Thread.hpp>
-
-#include <Bull/Render/Context/GlContext.hpp>
-
 #include <Bull/Utility/Window/Window.hpp>
 #include <Bull/Utility/Window/WindowImpl.hpp>
 
@@ -56,7 +52,7 @@ namespace Bull
 
         if(style == Style::Fullscreen)
         {
-            switchFullscreen(mode);
+            enableFullscreen();
         }
 
         return true;
@@ -371,32 +367,20 @@ namespace Bull
         }
     }
 
-    /*! \brief Check if a window is in fullscreen
-     *
-     * \return Return true if the window is in fullscreen, false otherwise
-     *
-     */
-    bool Window::isFullscreen() const
-    {
-        return this == m_fullscreen;
-    }
-
-
     /*! \brief Enter or leave the fullscreen mode
      *
-     * \param mode The VideoMode to use
      * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
      *
      * \return Return true if the switch was done successfully, false otherwise
      *
      */
-    bool Window::switchFullscreen(const VideoMode& mode, bool fullscreen)
+    bool Window::enableFullscreen(bool fullscreen)
     {
-        if(m_impl)
+        if(m_impl && (!fullscreen || fullscreen && !m_fullscreen))
         {
-            bool success = m_impl->switchFullscreen(mode, fullscreen);
+            m_impl->switchFullscreen(fullscreen);
 
-            if(success && fullscreen)
+            if(fullscreen)
             {
                 m_fullscreen = this;
                 enableCaptureCursor();
@@ -407,10 +391,20 @@ namespace Bull
                 m_fullscreen = nullptr;
             }
 
-            return success;
+            return true;
         }
 
         return false;
+    }
+
+    /*! \brief Check whether the window is in fullscreen
+     *
+     * \return Return true if the window is in fullscreen, false otherwise
+     *
+     */
+    bool Window::isFullscreenEnable() const
+    {
+        return this == m_fullscreen;
     }
 
     /*! \brief Get the window system handler
