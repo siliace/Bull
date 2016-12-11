@@ -14,9 +14,6 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Render/Context/ContextResource.hpp>
-#include <Bull/Render/Context/ContextSettings.hpp>
-
 #include <Bull/Utility/Window/VideoMode.hpp>
 #include <Bull/Utility/Window/WindowHandler.hpp>
 
@@ -27,7 +24,7 @@ namespace Bull
         class WindowImpl;
     }
 
-    class BULL_API Window : public ContextResource, public NonCopyable
+    class BULL_API Window : public NonCopyable
     {
     public:
 
