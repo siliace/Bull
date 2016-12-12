@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <Bull/Utility/Window/Win32/WindowImplWin32.hpp>
 
 /// GCC missing define
