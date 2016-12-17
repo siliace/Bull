@@ -376,7 +376,7 @@ namespace Bull
      */
     bool Window::enableFullscreen(bool fullscreen)
     {
-        if(m_impl && (!fullscreen || fullscreen && !m_fullscreen))
+        if(m_impl && (!fullscreen || (fullscreen && !m_fullscreen)))
         {
             m_impl->switchFullscreen(fullscreen);
 
