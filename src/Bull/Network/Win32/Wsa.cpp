@@ -28,18 +28,9 @@ namespace Bull
          * \return Return the error
          *
          */
-        Wsa::Error getLastError()
+        int Wsa::getLastError()
         {
-            switch(WSAGetLastError())
-            {
-                case 0:                  return Wsa::Error::Ok;
-                case WSASYSNOTREADY:     return Wsa::Error::SystemNotReady;
-                case WSAVERNOTSUPPORTED: return Wsa::Error::VersionNotSupported;
-                case WSAEINPROGRESS:     return Wsa::Error::InProgress;
-                case WSAEFAULT:          return Wsa::Error::EFault;
-            }
-
-            return Wsa::Error::Unknown;
+            return WSAGetLastError();
         }
     }
 }

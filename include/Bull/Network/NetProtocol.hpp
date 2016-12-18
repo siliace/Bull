@@ -1,3 +1,6 @@
+#ifndef BULL_NETPROTOCOL_HPP
+#define BULL_NETPROTOCOL_HPP
+
 namespace Bull
 {
     enum NetProtocol
@@ -6,3 +9,5 @@ namespace Bull
         Ipv6,
     };
 }
+
+#endif // BULL_NETPROTOCOL_HPP

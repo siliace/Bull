@@ -18,6 +18,12 @@ namespace Bull
         typedef std::array<Uint8, 4> V4;
         typedef std::array<Uint16, 16> V6;
 
+        static IpAddress None;
+        static IpAddress AnyIpv4;
+        static IpAddress AnyIpv6;
+        static IpAddress LoopbackIpv4;
+        static IpAddress LoopbackIpv6;
+        static IpAddress BroadcastIpv4;
 
     private:
 
@@ -25,7 +31,7 @@ namespace Bull
          *
          * \param address The addess to convert to a String
          *
-         * \return Return the representation as a String of the address
+         * \return The representation as a String of the address
          *
          */
         static String toString(const V4& address);
@@ -34,7 +40,7 @@ namespace Bull
          *
          * \param address The addess to convert to a String
          *
-         * \return Return the representation as a String of the address
+         * \return The representation as a String of the address
          *
          */
         static String toString(const V6& address);
@@ -67,16 +73,37 @@ namespace Bull
          */
         String toString() const;
 
+        /*! \brief Convert an IpAddress to an IpAddress:V4
+         *
+         * \return The equivalent IpAddress::V4 of the IpAddress
+         *
+         */
+        V4 toV4() const;
+
+        /*! \brief Convert an IpAddress to an IpAddress:V6
+         *
+         * \return The equivalent IpAddress::V6 of the IpAddress
+         *
+         */
+        V6 toV6() const;
+
+        /*! \brief Convert this IpAddress to an integer
+         *
+         * \return The equivalent Uint32 of the IpAddress
+         *
+         */
+        Uint32 toInteger() const;
+
         /*! \brief Check whether the IpAddress is valid and can be used
          *
-         * \return Return true if the IpAddress is valid, false otherwise
+         * \return True if the IpAddress is valid
          *
          */
         bool isValid() const;
 
         /*! \brief Get the protocol used the IpAddress
          *
-         * \return Return the protocol
+         * \return The protocol
          *
          */
         NetProtocol getProtocol() const;

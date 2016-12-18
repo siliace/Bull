@@ -4,13 +4,14 @@
 
 namespace Bull
 {
-    /*! \brief Convert an ip v4 to a String
-     *
-     * \param address The address to convert to a String
-     *
-     * \return Return the representation as a String of the address
-     *
-     */
+    IpAddress IpAddress::None          = IpAddress();
+    IpAddress IpAddress::AnyIpv4       = IpAddress(IpAddress::V4({0, 0, 0, 0}));
+    IpAddress IpAddress::AnyIpv6       = IpAddress(IpAddress::V6({0, 0, 0, 0, 0, 0, 0, 0}));
+    IpAddress IpAddress::LoopbackIpv4  = IpAddress(IpAddress::V4({127, 0, 0, 1}));
+    IpAddress IpAddress::LoopbackIpv6  = IpAddress(IpAddress::V6({0, 0, 0, 0, 0, 0, 0, 1}));
+    IpAddress IpAddress::BroadcastIpv4 = IpAddress(IpAddress::V4({255, 255, 255, 255}));
+
+
     String IpAddress::toString(const V4& address)
     {
         StringStream ss;
@@ -20,58 +21,33 @@ namespace Bull
         return ss;
     }
 
-    /*! \brief Convert an ip v6 to a String
-     *
-     * \param address The address to convert to a String
-     *
-     * \return Return the representation as a String of the address
-     *
-     */
     String IpAddress::toString(const V6& address)
     {
         return String();
     }
 
-    /*! \brief Default constructor
-     *
-     */
     IpAddress::IpAddress() :
         m_valid(false)
     {
         /// Nothing
     }
 
-    /*! \brief Constructor
-     *
-     * \param ipv4 The ip wanted
-     *
-     */
     IpAddress::IpAddress(const V4& ipv4) :
         m_ipv4(ipv4),
-        m_valid(false),
+        m_valid(true),
         m_protocol(NetProtocol::Ipv4)
     {
         /// Nothing
     }
 
-    /*! \brief Constructor
-     *
-     * \param ipv6 The ip wanted
-     *
-     */
     IpAddress::IpAddress(const V6& ipv6) :
         m_ipv6(ipv6),
-        m_valid(false),
+        m_valid(true),
         m_protocol(NetProtocol::Ipv6)
     {
         /// Nothing
     }
 
-    /*! \brief Convert an IpAddress to a String
-     *
-     * \return Return the representation of the IpAddress as a String
-     *
-     */
     String IpAddress::toString() const
     {
         switch(m_protocol)
@@ -83,21 +59,44 @@ namespace Bull
         return String();
     }
 
-    /*! \brief Check whether the IpAddress is valid and can be used
-     *
-     * \return Return true if the IpAddress is valid, false otherwise
-     *
-     */
+    IpAddress::V4 IpAddress::toV4() const
+    {
+        if(m_protocol == Ipv4)
+        {
+            return m_ipv4;
+        }
+
+        return IpAddress::V4({0});
+    }
+
+    IpAddress::V6 IpAddress::toV6() const
+    {
+        if(m_protocol == Ipv6)
+        {
+            return m_ipv6;
+        }
+
+        return IpAddress::V6({0});
+    }
+
+    Uint32 IpAddress::toInteger() const
+    {
+        if(m_protocol == NetProtocol::Ipv4)
+        {
+            return Uint32(m_ipv4[0]) << 24 |
+                   Uint32(m_ipv4[1]) << 16 |
+		           Uint32(m_ipv4[2]) << 8  |
+                   Uint32(m_ipv4[3]) << 0;
+        }
+
+        return 0;
+    }
+
     bool IpAddress::isValid() const
     {
         return m_valid;
     }
 
-    /*! \brief Get the protocol used the IpAddress
-     *
-     * \return Return the protocol
-     *
-     */
     NetProtocol IpAddress::getProtocol() const
     {
         return m_protocol;

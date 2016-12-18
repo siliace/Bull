@@ -11,22 +11,12 @@ namespace Bull
     {
         struct Wsa
         {
-            enum Error
-            {
-                Ok,
-                SystemNotReady,
-                VersionNotSupported,
-                InProgress,
-                EFault,
-                Unknown,
-            };
-
             /*! \brief Get the last WSA error
              *
              * \return Return the error
              *
              */
-            static Error getLastError();
+            static int getLastError();
         };
     }
 }
