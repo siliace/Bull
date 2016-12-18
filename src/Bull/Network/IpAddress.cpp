@@ -6,7 +6,7 @@ namespace Bull
 {
     /*! \brief Convert an ip v4 to a String
      *
-     * \param address The addess to convert to a String
+     * \param address The address to convert to a String
      *
      * \return Return the representation as a String of the address
      *
@@ -22,7 +22,7 @@ namespace Bull
 
     /*! \brief Convert an ip v6 to a String
      *
-     * \param address The addess to convert to a String
+     * \param address The address to convert to a String
      *
      * \return Return the representation as a String of the address
      *
@@ -49,7 +49,7 @@ namespace Bull
     IpAddress::IpAddress(const V4& ipv4) :
         m_ipv4(ipv4),
         m_valid(false),
-        m_family(Family::Ipv4)
+        m_protocol(NetProtocol::Ipv4)
     {
         /// Nothing
     }
@@ -62,7 +62,7 @@ namespace Bull
     IpAddress::IpAddress(const V6& ipv6) :
         m_ipv6(ipv6),
         m_valid(false),
-        m_family(Family::Ipv6)
+        m_protocol(NetProtocol::Ipv6)
     {
         /// Nothing
     }
@@ -74,10 +74,10 @@ namespace Bull
      */
     String IpAddress::toString() const
     {
-        switch(m_family)
+        switch(m_protocol)
         {
-            case Ipv4: return toString(m_ipv4);
-            case Ipv6: return toString(m_ipv6);
+            case NetProtocol::Ipv4: return toString(m_ipv4);
+            case NetProtocol::Ipv6: return toString(m_ipv6);
         }
 
         return String();
@@ -91,5 +91,15 @@ namespace Bull
     bool IpAddress::isValid() const
     {
         return m_valid;
+    }
+
+    /*! \brief Get the protocol used the IpAddress
+     *
+     * \return Return the protocol
+     *
+     */
+    NetProtocol IpAddress::getProtocol() const
+    {
+        return m_protocol;
     }
 }

@@ -7,6 +7,8 @@
 #include <Bull/Core/String.hpp>
 #include <Bull/Core/System/Export.hpp>
 
+#include <Bull/Network/NetProtocol.hpp>
+
 namespace Bull
 {
     class BULL_API IpAddress
@@ -16,11 +18,6 @@ namespace Bull
         typedef std::array<Uint8, 4> V4;
         typedef std::array<Uint16, 16> V6;
 
-        enum Family
-        {
-            Ipv4,
-            Ipv6
-        };
 
     private:
 
@@ -77,6 +74,13 @@ namespace Bull
          */
         bool isValid() const;
 
+        /*! \brief Get the protocol used the IpAddress
+         *
+         * \return Return the protocol
+         *
+         */
+        NetProtocol getProtocol() const;
+
     private:
 
         union
@@ -85,8 +89,8 @@ namespace Bull
             V6 m_ipv6;
         };
 
-        bool   m_valid;
-        Family m_family;
+        bool        m_valid;
+        NetProtocol m_protocol;
     };
 }
 
