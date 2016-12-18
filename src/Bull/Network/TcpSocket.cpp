@@ -1,5 +1,12 @@
+#include <iostream>
+
+#include <Bull/Core/Thread/Thread.hpp>
+#include <Bull/Core/Time/Clock.hpp>
+
 #include <Bull/Network/SocketImpl.hpp>
 #include <Bull/Network/TcpSocket.hpp>
+
+#include <Bull/Utility/CallOnExit.hpp>
 
 namespace Bull
 {
@@ -16,15 +23,32 @@ namespace Bull
         disconnect();
     }
 
-    Socket::State TcpSocket::connect(const IpAddress& address, Uint16 port, Socket::Error* error)
+    Socket::State TcpSocket::connect(const IpAddress& address, Uint16 port, const Time& timeout, Socket::Error* error)
     {
         if(address.isValid() && port > 0)
         {
+            Clock timer;
+            bool  blockingState = isEnableBlockingMode();
+            CallOnExit resetBlockingMode([this, blockingState]()
+            {
+                enableBlockingMode(blockingState);
+            });
+
             disconnect();
-
             create(address.getProtocol());
+            enableBlockingMode(false);
 
-            m_state = prv::SocketImpl::connect(m_handler, address, port, error);
+            timer.start();
+
+            do
+            {
+                m_state = prv::SocketImpl::connect(m_handler, address, port, error);
+
+                if(m_state == Socket::State::NotConnected)
+                {
+                    Thread::sleep(Time::milliseconds(50.f));
+                }
+            }while(m_state == Socket::State::NotConnected && timer.getElapsedTime() < timeout);
 
             if(m_state == Socket::State::Connected)
             {

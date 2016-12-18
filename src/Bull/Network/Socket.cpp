@@ -20,11 +20,11 @@ namespace Bull
 
     void Socket::enableBlockingMode(bool enable)
     {
+        m_blocking = enable;
+
         if(m_handler != prv::SocketImpl::InvalidHandler)
         {
-            prv::SocketImpl::enableBlockingMode(m_handler, enable);
-
-            m_blocking = enable;
+            prv::SocketImpl::enableBlockingMode(m_handler, m_blocking);
         }
     }
 

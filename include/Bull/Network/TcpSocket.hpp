@@ -3,6 +3,7 @@
 
 #include <Bull/Core/IO/InOutStream.hpp>
 #include <Bull/Core/System/Export.hpp>
+#include <Bull/Core/Time/Time.hpp>
 
 #include <Bull/Network/IpAddress.hpp>
 #include <Bull/Network/Socket.hpp>
@@ -25,14 +26,15 @@ namespace Bull
 
         /*! \brief Connect the socket to a remote host
          *
-         * \param address
-         * \param port
-         * \param error
+         * \param address The remote address to connect
+         * \param port    The remote port to connect
+         * \param timeout The connection timeout
+         * \param error   A pointer to store the error
          *
-         * \return
+         * \return The new socket state
          *
          */
-        State connect(const IpAddress& address, Uint16 port, Socket::Error* error = nullptr);
+        State connect(const IpAddress& address, Uint16 port, const Time& timeout = Time::Zero, Socket::Error* error = nullptr);
 
         /*! \brief Disconnect the socket
          *
