@@ -63,6 +63,12 @@ namespace Bull
             }
         }
 
+        void SocketImpl::enableBlockingMode(SocketHandler socket, bool enable)
+        {
+            u_long blocking = enable ? 0 : 1;
+            ioctlsocket(socket, FIONBIO, &blocking);
+        }
+
         Socket::State SocketImpl::listen(SocketHandler socket, const IpAddress& address, Uint16 port, std::size_t queueLength, Socket::Error* error)
         {
             socklen_t bufferLenght;

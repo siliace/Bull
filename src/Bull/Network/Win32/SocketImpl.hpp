@@ -54,6 +54,14 @@ namespace Bull
              */
             static void close(SocketHandler socket);
 
+            /*! \brief Enable or disable the blocking mode
+             *
+             * \param socket The socket to change blocking mode
+             * \param enable True to enable
+             *
+             */
+            static void enableBlockingMode(SocketHandler socket, bool enable);
+
             /*! \brief Listen a port
              *
              * \param socket  The socket to bind to the port

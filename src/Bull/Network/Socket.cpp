@@ -3,17 +3,11 @@
 
 namespace Bull
 {
-    /*! \brief Destructor
-     *
-     */
     Socket::~Socket()
     {
         close();
     }
 
-    /*! \brief Close the socket
-     *
-     */
     void Socket::close()
     {
         if(m_handler != prv::SocketImpl::InvalidHandler)
@@ -24,55 +18,43 @@ namespace Bull
         }
     }
 
-    /*! \brief Get the type of the Socket
-     *
-     * \return Return the type
-     *
-     */
+    void Socket::enableBlockingMode(bool enable)
+    {
+        if(m_handler != prv::SocketImpl::InvalidHandler)
+        {
+            prv::SocketImpl::enableBlockingMode(m_handler, enable);
+
+            m_blocking = enable;
+        }
+    }
+
+    bool Socket::isEnableBlockingMode() const
+    {
+        return m_blocking;
+    }
+
     Socket::Type Socket::getType() const
     {
         return m_type;
     }
 
-    /*! \brief Get the state of the socket
-     *
-     * \return Return the state
-     *
-     */
     Socket::State Socket::getState() const
     {
         return m_state;
     }
 
-    /*! \brief
-     *
-     * \return
-     *
-     */
     NetProtocol Socket::getProtocol() const
     {
         return m_protocol;
     }
 
-    /*! \brief Constructor
-     *
-     * \param type The type of Socket to create
-     *
-     */
     Socket::Socket(Type type) :
         m_handler(prv::SocketImpl::InvalidHandler),
         m_type(type)
     {
-        /// Nothing
+        enableBlockingMode(false);
     }
 
-    /*! \brief Create the socket handler
-     *
-     * \param protocol The used by the Socket to communicate
-     *
-     * \return Return true if the handler was created successfully, false otherwise
-     *
-     */
     bool Socket::create(NetProtocol protocol)
     {
         if(m_handler == prv::SocketImpl::InvalidHandler || m_protocol != protocol)
@@ -98,6 +80,7 @@ namespace Bull
             close();
 
             m_handler = handler;
+            enableBlockingMode(m_blocking);
         }
     }
 }

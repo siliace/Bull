@@ -46,6 +46,20 @@ namespace Bull
          */
         void close();
 
+        /*! \brief Enable or disable the blocking mode
+         *
+         * \param enable True to enable
+         *
+         */
+        void enableBlockingMode(bool enable = true);
+
+        /*! \brief Check whether the blocking mode is enable
+         *
+         * \return True if enable
+         *
+         */
+        bool isEnableBlockingMode() const;
+
         /*! \brief Get the type of the Socket
          *
          * \return Return the type
@@ -53,16 +67,16 @@ namespace Bull
          */
         Type getType() const;
 
-        /*! \brief Get the state of the socket
+        /*! \brief Get the state of the Socket
          *
-         * \return Return the state
+         * \return The state
          *
          */
         State getState() const;
 
-        /*! \brief
+        /*! \brief Get the protocol of the Socket
          *
-         * \return
+         * \return The protocol
          *
          */
         NetProtocol getProtocol() const;
@@ -100,6 +114,7 @@ namespace Bull
     private:
 
         Type        m_type;
+        bool        m_blocking;
         NetProtocol m_protocol;
     };
 }
