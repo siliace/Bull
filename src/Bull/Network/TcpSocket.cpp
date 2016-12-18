@@ -28,9 +28,15 @@ namespace Bull
         if(address.isValid() && port > 0)
         {
             Clock timer;
+            bool  blockingState = isEnableBlockingMode();
+            CallOnExit resetBlockingMode([this, blockingState]()
+            {
+                enableBlockingMode(blockingState);
+            });
 
             disconnect();
             create(address.getProtocol());
+            enableBlockingMode(false);
 
             timer.start();
 
