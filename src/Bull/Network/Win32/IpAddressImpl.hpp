@@ -19,11 +19,22 @@ namespace Bull
             /*! \brief Convert a sockaddr to a Bull::IpAddress
              *
              * \param socketAddress The sockaddr to convert
-             * \param address       A pointer to the IpAddress to fill
-             * \param port          A pointer to the port to fill
+             * \param port          The port of the sockaddr
+             *
+             * \return The converted IpAddress
              *
              */
-            static void fromSocketAddress(const sockaddr* socketAddress, IpAddress* address, Uint16* port);
+            static IpAddress fromSocketAddress(const sockaddr* socketAddress, Uint16& port);
+
+            /*! \brief Convert a sockaddr to a Bull::IpAddress
+             *
+             * \param socketAddress The sockaddr to convert
+             * \param port          The port of the sockaddr
+             *
+             * \return The converted IpAddress
+             *
+             */
+            static IpAddress fromSocketAddress(const sockaddr_in* socketAddress, Uint16& port);
 
             /*! \brief Convert a sockaddr to a Bull::IpAddress
              *
@@ -31,17 +42,10 @@ namespace Bull
              * \param address       A pointer to the IpAddress to fill
              * \param port          A pointer to the port to fill
              *
-             */
-            static void fromSocketAddress(const sockaddr_in* socketAddress, IpAddress* address, Uint16* port);
-
-            /*! \brief Convert a sockaddr to a Bull::IpAddress
-             *
-             * \param socketAddress The sockaddr to convert
-             * \param address       A pointer to the IpAddress to fill
-             * \param port          A pointer to the port to fill
+             * \return The converted IpAddress
              *
              */
-            static void fromSocketAddress(const sockaddr_in6* socketAddress, IpAddress* address, Uint16* port);
+            static IpAddress fromSocketAddress(const sockaddr_in6* socketAddress, Uint16& port);
 
             /*! \brief Convert a Bull::IpAddress to a sockaddr
              *

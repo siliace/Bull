@@ -17,13 +17,14 @@ namespace Bull
             /*! \brief Accept an incoming connection
              *
              * \param socket        The listener socket
-             * \param clientAddress A pointer to store the IpAddress to the client
+             * \param clientAddress The accepted IpAddress
+             * \param port          The port of the accepted IpAddress
              * \param error         A pointer to store the error
              *
-             * \return The SocketHandler of the client
+             * \return The accepted SocketHandler
              *
              */
-            static SocketHandler accept(SocketHandler socket, IpAddress* clientAddress, Uint16* clientPort, Socket::Error* error);
+            static SocketHandler accept(SocketHandler socket, IpAddress& clientAddress, Uint16& clientPort, Socket::Error* error);
 
             /*! \brief Create a SocketHandler
              *

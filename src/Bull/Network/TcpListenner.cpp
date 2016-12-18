@@ -68,7 +68,7 @@ namespace Bull
         {
             Uint16        clientPort;
             IpAddress     clientAddress;
-            SocketHandler handler = prv::SocketImpl::accept(m_handler, &clientAddress, &clientPort, error);
+            SocketHandler handler = prv::SocketImpl::accept(m_handler, clientAddress, clientPort, error);
 
             if(handler != prv::SocketImpl::InvalidHandler)
             {

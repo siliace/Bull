@@ -4,29 +4,30 @@ namespace Bull
 {
     namespace prv
     {
-        void IpAddressImpl::fromSocketAddress(const sockaddr* socketAddress, IpAddress* address, Uint16* port)
+        IpAddress IpAddressImpl::fromSocketAddress(const sockaddr* socketAddress, Uint16& port)
         {
             switch(socketAddress->sa_family)
             {
-                case AF_INET:  fromSocketAddress(reinterpret_cast<const sockaddr_in*>(&socketAddress), address, port);
-                case AF_INET6: fromSocketAddress(reinterpret_cast<const sockaddr_in6*>(&socketAddress), address, port);
+                case AF_INET:  return fromSocketAddress(reinterpret_cast<const sockaddr_in*>(socketAddress), port);
+                case AF_INET6: return fromSocketAddress(reinterpret_cast<const sockaddr_in6*>(socketAddress), port);
             }
         }
 
-        void IpAddressImpl::fromSocketAddress(const sockaddr_in* socketAddress, IpAddress* address, Uint16* port)
+        IpAddress IpAddressImpl::fromSocketAddress(const sockaddr_in* socketAddress, Uint16& port)
         {
             IpAddress::V4 ipv4;
 
-            ipv4[0] = ntohs(socketAddress->sin_addr.S_un.S_un_b.s_b1);
-            ipv4[1] = ntohs(socketAddress->sin_addr.S_un.S_un_b.s_b2);
-            ipv4[2] = ntohs(socketAddress->sin_addr.S_un.S_un_b.s_b3);
-            ipv4[3] = ntohs(socketAddress->sin_addr.S_un.S_un_b.s_b4);
+            ipv4[0] = socketAddress->sin_addr.S_un.S_un_b.s_b1;
+            ipv4[1] = socketAddress->sin_addr.S_un.S_un_b.s_b2;
+            ipv4[2] = socketAddress->sin_addr.S_un.S_un_b.s_b3;
+            ipv4[3] = socketAddress->sin_addr.S_un.S_un_b.s_b4;
 
-            (*address) = IpAddress(ipv4);
-            (*port)    = ntohs(socketAddress->sin_port);
+            port = ntohs(socketAddress->sin_port);
+
+            return IpAddress(ipv4);
         }
 
-        void IpAddressImpl::fromSocketAddress(const sockaddr_in6* socketAddress, IpAddress* address, Uint16* port)
+        IpAddress IpAddressImpl::fromSocketAddress(const sockaddr_in6* socketAddress, Uint16& port)
         {
             IpAddress::V6 ipv6;
 
@@ -35,8 +36,9 @@ namespace Bull
                 ipv6[i] = ntohs(socketAddress->sin6_addr.u.Word[i]);
             }
 
-            (*address) = IpAddress(ipv6);
-            (*port)    = ntohs(socketAddress->sin6_port);
+            port = ntohs(socketAddress->sin6_port);
+
+            return IpAddress(ipv6);
         }
 
         socklen_t IpAddressImpl::toSocketAddress(const IpAddress& address, Uint16 port, void* buffer)
@@ -45,7 +47,6 @@ namespace Bull
             {
                 case NetProtocol::Ipv4:
                 {
-                    IpAddress::V4 raw = address.toV4();
                     sockaddr_in* socketAddress = reinterpret_cast<sockaddr_in*>(buffer);
 
                     ZeroMemory(socketAddress, sizeof(sockaddr_in));

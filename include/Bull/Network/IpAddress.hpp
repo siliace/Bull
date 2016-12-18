@@ -66,6 +66,20 @@ namespace Bull
          */
         IpAddress(const V6& ipv6);
 
+        /*! \brief Set the ip
+         *
+         * \param ipv4 The ip
+         *
+         */
+        void set(const V4& ipv4);
+
+        /*! \brief Set the ip
+         *
+         * \param ipv6 The ip
+         *
+         */
+        void set(const V6& ipv6);
+
         /*! \brief Convert an IpAddress to a String
          *
          * \return The representation of the IpAddress as a String

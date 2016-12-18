@@ -8,16 +8,16 @@ namespace Bull
 {
     namespace prv
     {
-        SocketHandler SocketImpl::accept(SocketHandler socket, IpAddress* clientAddress, Uint16* clientPort, Socket::Error* error)
+        SocketHandler SocketImpl::accept(SocketHandler socket, IpAddress& clientAddress, Uint16& clientPort, Socket::Error* error)
         {
-            socklen_t bufferLength;
             sockaddr  clientSocketAddress;
+            socklen_t bufferLength = sizeof(sockaddr);
 
             SocketHandler client = ::accept(socket, &clientSocketAddress, &bufferLength);
 
             if(client != InvalidHandler && bufferLength)
             {
-                IpAddressImpl::fromSocketAddress(&clientSocketAddress, clientAddress, clientPort);
+                clientAddress = IpAddressImpl::fromSocketAddress(&clientSocketAddress, clientPort);
 
                 if(error)
                 {

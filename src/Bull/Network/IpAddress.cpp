@@ -32,20 +32,28 @@ namespace Bull
         /// Nothing
     }
 
-    IpAddress::IpAddress(const V4& ipv4) :
-        m_ipv4(ipv4),
-        m_valid(true),
-        m_protocol(NetProtocol::Ipv4)
+    IpAddress::IpAddress(const V4& ipv4)
     {
-        /// Nothing
+        set(ipv4);
     }
 
-    IpAddress::IpAddress(const V6& ipv6) :
-        m_ipv6(ipv6),
-        m_valid(true),
-        m_protocol(NetProtocol::Ipv6)
+    IpAddress::IpAddress(const V6& ipv6)
     {
-        /// Nothing
+        set(ipv6);
+    }
+
+    void IpAddress::set(const V4& ipv4)
+    {
+        m_ipv4     = ipv4;
+        m_valid    = true;
+        m_protocol = NetProtocol::Ipv4;
+    }
+
+    void IpAddress::set(const V6& ipv6)
+    {
+        m_ipv6     = ipv6;
+        m_valid    = true;
+        m_protocol = NetProtocol::Ipv6;
     }
 
     String IpAddress::toString() const

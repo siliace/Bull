@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <Bull/Core/Thread/Thread.hpp>
 #include <Bull/Core/Time/Clock.hpp>
 
@@ -36,7 +34,7 @@ namespace Bull
 
             disconnect();
             create(address.getProtocol());
-            enableBlockingMode(false);
+            enableBlockingMode(true);
 
             timer.start();
 

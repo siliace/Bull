@@ -52,7 +52,7 @@ namespace Bull
         m_handler(prv::SocketImpl::InvalidHandler),
         m_type(type)
     {
-        enableBlockingMode(false);
+        enableBlockingMode(true);
     }
 
     bool Socket::create(NetProtocol protocol)
