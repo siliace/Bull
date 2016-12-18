@@ -79,6 +79,16 @@ namespace Bull
         return IpAddress::V6({0});
     }
 
+    bool IpAddress::operator==(const IpAddress& left)
+    {
+        return toString() == left.toString();
+    }
+
+    bool IpAddress::operator!=(const IpAddress& left)
+    {
+        return toString() != left.toString();
+    }
+
     Uint32 IpAddress::toInteger() const
     {
         if(m_protocol == NetProtocol::Ipv4)

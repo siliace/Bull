@@ -68,14 +68,14 @@ namespace Bull
 
         /*! \brief Convert an IpAddress to a String
          *
-         * \return Return the representation of the IpAddress as a String
+         * \return The representation of the IpAddress as a String
          *
          */
         String toString() const;
 
         /*! \brief Convert an IpAddress to an IpAddress:V4
          *
-         * \return The equivalent IpAddress::V4 of the IpAddress
+         * \return Thes equivalent IpAddress::V4 of the IpAddress
          *
          */
         V4 toV4() const;
@@ -86,6 +86,24 @@ namespace Bull
          *
          */
         V6 toV6() const;
+
+        /*! \brief Compare two IpAddress
+         *
+         * \param left The IpAddress to compare to this
+         *
+         * \return True if this and left are equal
+         *
+         */
+        bool operator==(const IpAddress& left);
+
+        /*! \brief Compare two IpAddress
+         *
+         * \param left The IpAddress to compare to this
+         *
+         * \return True if this and left are not equal
+         *
+         */
+        bool operator!=(const IpAddress& left);
 
         /*! \brief Convert this IpAddress to an integer
          *
