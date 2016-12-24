@@ -48,10 +48,10 @@ namespace Bull
 
     bool HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset, bool discard)
     {
-        ensureContext();
-
         if(m_id)
         {
+            ensureContext();
+
             gl::bindBuffer(m_type, m_id);
 
             /// It seems that glBufferSubData is more efficient than glMapBuffer with small buffers
