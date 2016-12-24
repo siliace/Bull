@@ -26,6 +26,7 @@ namespace Bull
 
     HardwareBuffer::~HardwareBuffer()
     {
+        ensureContext();
         destroy();
     }
 
