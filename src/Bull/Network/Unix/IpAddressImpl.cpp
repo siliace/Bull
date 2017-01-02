@@ -1,4 +1,6 @@
-#include <Bull/Network/Win32/IpAddressImpl.hpp>
+#include <cstring>
+
+#include <Bull/Network/Unix/IpAddressImpl.hpp>
 
 namespace Bull
 {
@@ -17,10 +19,10 @@ namespace Bull
         {
             IpAddress::V4 ipv4;
 
-            ipv4[0] = socketAddress->sin_addr.S_un.S_un_b.s_b1;
-            ipv4[1] = socketAddress->sin_addr.S_un.S_un_b.s_b2;
-            ipv4[2] = socketAddress->sin_addr.S_un.S_un_b.s_b3;
-            ipv4[3] = socketAddress->sin_addr.S_un.S_un_b.s_b4;
+            ipv4[0] = (socketAddress->sin_addr.s_addr & 0xff000000) >> 24;
+            ipv4[1] = (socketAddress->sin_addr.s_addr & 0x00ff0000) >> 16;
+            ipv4[2] = (socketAddress->sin_addr.s_addr & 0x0000ff00) >> 8;
+            ipv4[3] = (socketAddress->sin_addr.s_addr & 0x000000ff) >> 0;
 
             port = ntohs(socketAddress->sin_port);
 
@@ -33,7 +35,7 @@ namespace Bull
 
             for(Uint16 i = 0; i < ipv6.size(); i++)
             {
-                ipv6[i] = ntohs(socketAddress->sin6_addr.u.Word[i]);
+                ipv6[i] = ntohs(socketAddress->sin6_addr.s6_addr16[i]);
             }
 
             port = ntohs(socketAddress->sin6_port);
@@ -49,7 +51,7 @@ namespace Bull
                 {
                     sockaddr_in* socketAddress = reinterpret_cast<sockaddr_in*>(buffer);
 
-                    ZeroMemory(socketAddress, sizeof(sockaddr_in));
+                    std::memset(socketAddress, 0, sizeof(sockaddr_in6));
 
                     socketAddress->sin_family      = AF_INET;
                     socketAddress->sin_port        = htons(port);
@@ -63,14 +65,14 @@ namespace Bull
                     IpAddress::V6 raw = address.toV6();
                     sockaddr_in6* socketAddress = reinterpret_cast<sockaddr_in6*>(buffer);
 
-                    ZeroMemory(socketAddress, sizeof(sockaddr_in6));
+                    std::memset(socketAddress, 0, sizeof(sockaddr_in6));
 
                     socketAddress->sin6_family = AF_INET6;
                     socketAddress->sin6_port   = htons(port);
 
                     for(Uint16 i = 0; i < raw.size(); i++)
                     {
-                        socketAddress->sin6_addr.u.Word[i] = htons(raw[i]);
+                        socketAddress->sin6_addr.s6_addr16[i] = htons(raw[i]);
                     }
 
                     return sizeof(sockaddr_in6);

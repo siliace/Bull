@@ -74,15 +74,5 @@ namespace Bull
         {
             sem_post(&m_handler);
         }
-
-        /*! \brief Get the system handler
-         *
-         * \return Return the native system semaphore handler
-         *
-         */
-        SemaphoreHandler SemaphoreImplUnix::getSystemHandler() const
-        {
-            return m_handler;
-        }
     }
 }

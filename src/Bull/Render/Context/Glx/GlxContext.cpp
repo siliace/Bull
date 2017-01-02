@@ -64,7 +64,7 @@ namespace Bull
             }
             else
             {
-                Log::get()->notice("VSync is not available on your system");
+                Log::get()->write("VSync is not available on your system", Log::Level::Notice);
             }
         }
 
@@ -114,7 +114,7 @@ namespace Bull
                     glXGetConfig(display->getHandler(), &visuals[i], GLX_SAMPLE_BUFFERS, &sampleBuffers);
 
                     int currentBitsPerPixel = red + green + blue + alpha;
-                    unsigned int antialiasing = (samples) ? sampleBuffers : 0;
+                    int antialiasing = (samples) ? sampleBuffers : 0;
 
                     int score = evaluatePixelFormat(currentBitsPerPixel, depths, stencil, antialiasing, bitsPerPixel, settings);
 
@@ -147,13 +147,15 @@ namespace Bull
             /// Nothing
         }
 
-        /*! \brief Constructor
-         *
-         * \param shared The shared context
-         * \param bitsPerPixel The number of bits to use per pixel
-         * \param settings Parameters to create the OpenGL context
-         *
-         */
+        GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, const VideoMode& mode, const ContextSettings& settings) :
+            GlContext(settings),
+            m_display(Display::get()),
+            m_render(0),
+            m_ownWindow(false)
+        {
+            /// Todo
+        }
+
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
             m_display(Display::get()),

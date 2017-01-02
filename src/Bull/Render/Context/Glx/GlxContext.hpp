@@ -47,17 +47,21 @@ namespace Bull
 
         public:
 
-            /*! \brief Default constructor
-             *
-             */
-            GlxContext() = delete;
-
             /*! \brief Constructor
              *
              * \param shared The shared context
              *
              */
             GlxContext(const std::shared_ptr<GlxContext>& shared);
+
+            /*! \brief Constructor
+             *
+             * \param shared   The shared context
+             * \param mode     The VideoMode to use to create the context
+             * \param settings Settings to use to create the context
+             *
+             */
+            GlxContext(const std::shared_ptr<GlxContext>& shared, const VideoMode& mode, const ContextSettings& settings);
 
             /*! \brief Constructor
              *

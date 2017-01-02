@@ -1,5 +1,16 @@
+#Code blocks
 Bull.cbp
 Bull.depend
 Bull.layout
 obj/
+
+#Clion
+.idea/Bull.iml
+.idea/modules.xml
+.idea/workspace.xml
+
+#CMake
 bin/
+build/
+
+#Doxygen
