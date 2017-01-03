@@ -10,6 +10,7 @@ obj/
 .idea/workspace.xml
 
 #CMake
+.idea/
 bin/
 build/
 
