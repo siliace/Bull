@@ -3,5 +3,5 @@
 #if defined BULL_OS_WINDOWS
     #include <Bull/Hardware/Win32/JoystickImpl.hpp>
 #else
-    #error lack of implementation : Joystick
+    #include <Bull/Hardware/Unix/JoystickImpl.hpp>
 #endif

@@ -46,4 +46,8 @@
     #error Your system is not supported by Bull
 #endif
 
+#ifdef BULL_OS_UNIX
+    #undef None
+#endif
+
 #endif // Bull_Os_hpp

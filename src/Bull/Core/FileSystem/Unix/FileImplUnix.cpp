@@ -1,5 +1,4 @@
 #include <fcntl.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
@@ -149,7 +148,7 @@ namespace Bull
          */
         Date FileImplUnix::getCreationDate() const
         {
-            Bull::Log::get()->warning("Creation date is not available on UNIX-like systems");
+            Bull::Log::get()->write("Creation date is not available on UNIX-like systems", Log::Level::Warning);
 
             return Date();
         }
@@ -249,16 +248,6 @@ namespace Bull
             fstat64(m_handler, &info);
 
             return static_cast<Uint64>(info.st_size);
-        }
-
-        /*! \brief Get the file system handler
-         *
-         * \return Return the native file system handler
-         *
-         */
-        FileHandler FileImplUnix::getSystemHandler() const
-        {
-            return m_handler;
         }
     }
 }

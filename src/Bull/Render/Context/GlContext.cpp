@@ -48,9 +48,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Perform internal initialization
-         *
-         */
         void GlContext::globalInit()
         {
             Lock lock(sharedContextMutex);
@@ -72,9 +69,6 @@ namespace Bull
             shared->setActive(false);
         }
 
-         /*! \brief Perform internal cleanup
-          *
-          */
          void GlContext::globalCleanup()
          {
              Lock lockInternals(internalsMutex);
@@ -84,9 +78,6 @@ namespace Bull
              shared.reset();
          }
 
-        /*! \brief Ensure there is an active OpenGL context in this thread
-         *
-         */
         void GlContext::ensureContext()
         {
             if(Context::getActive() == nullptr)
@@ -95,11 +86,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Create an OS specific instance of GlContext
-         *
-         * \return Return the created context
-         *
-         */
          GlContext* GlContext::createInstance()
          {
             ContextType* context = new ContextType(shared);
@@ -108,14 +94,6 @@ namespace Bull
             return context;
          }
 
-        /*! \brief Create an OS specific instance of GlContext
-         *
-         * \param mode     The VideoMode to use to create the context
-         * \param settings Settings to use to create the context
-         *
-         * \return Return the created context
-         *
-         */
         GlContext* GlContext::createInstance(const VideoMode& mode, const ContextSettings& settings)
         {
             ContextType* context = new ContextType(shared, mode, settings);
@@ -124,14 +102,6 @@ namespace Bull
             return context;
         }
 
-        /*! \brief Create an OS specific instance of GlContext
-         *
-         * \param bitsPerPixel Number of bits per pixel to use
-         * \param settings     Settings to use to create the context
-         *
-         * \return Return the created context
-         *
-         */
         GlContext* GlContext::createInstance(unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             ContextType* context = new ContextType(shared, bitsPerPixel, settings);
@@ -140,15 +110,6 @@ namespace Bull
             return context;
         }
 
-        /*! \brief Create an OS specific instance of GlContext
-         *
-         * \param window The window to bind the created context
-         * \param bitsPerPixel The number of bits to use per pixel
-         * \param settings Parameters to create the OpenGL context
-         *
-         * \return Return the created context
-         *
-         */
         GlContext* GlContext::createInstance(WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             ContextType* context = new ContextType(shared, window, bitsPerPixel, settings);
@@ -157,78 +118,31 @@ namespace Bull
             return context;
         }
 
-        /*! \brief Get an OpenGL function
-         *
-         * \param function The function name
-         *
-         * \param Return the function, nullptr if the function is not available
-         *
-         */
         void* GlContext::getFunction(const String& function)
         {
             return ContextType::getFunction(function);
         }
 
-        /*! \brief Check whether an extensions is loaded
-         *
-         * \param  extension The name of the extension
-         *
-         * \return Return true if the extension is loaded, false otherwise
-         *
-         */
         bool GlContext::isLoaded(const String& extension)
         {
             return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isLoaded(extension) : false;
         }
 
-        /*! \brief Check whether an extensions is loaded
-         *
-         * \param  extension The extension
-         *
-         * \return Return true if the extension is loaded, false otherwise
-         *
-         */
         bool GlContext::isLoaded(const ExtensionsLoader::Extension& extension)
         {
             return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isLoaded(extension) : false;
         }
 
-        /*! \brief Check whether an extensions is loaded
-         *
-         * \param  extension The name of the extension
-         *
-         * \return Return true if the extension is supported, false otherwise
-         *
-         */
         bool GlContext::isSupported(const String& extension)
         {
             return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isSupported(extension) : false;
         }
 
-        /*! \brief Check whether an extensions is loaded
-         *
-         * \param  extension The extension
-         *
-         * \return Return true if the extension is supported, false otherwise
-         *
-         */
         bool GlContext::isSupported(const ExtensionsLoader::Extension& extension)
         {
             return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isSupported(extension) : false;
         }
 
-        /*! \brief Give a mark to a pixel format
-         *
-         * \param bitsPerPixel
-         * \param depths
-         * \param stencil
-         * \param antialiasing
-         * \param bitsPerPixelWanted
-         * \param settingsWanted
-         *
-         * \return Return the mark of the pixel format
-         *
-         */
         int GlContext::evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int antialiasing, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted)
         {
             int colorDiff        = static_cast<int>(bitsPerPixelWanted)          - bitsPerPixel;
@@ -246,21 +160,11 @@ namespace Bull
             return score;
         }
 
-        /*! \brief Destructor
-         *
-         */
         GlContext::~GlContext()
         {
             /// Nothing
         }
 
-        /*! \brief Activate or deactivate the context
-         *
-         * \param active True to activate, false to deactivate the context
-         *
-         * \return Return true if the context's status changed successfully, false otherwise
-         *
-         */
         bool GlContext::setActive(bool active)
         {
             if(active)
@@ -290,32 +194,17 @@ namespace Bull
             }
         }
 
-        /*! \brief Get the ContextSettings of the context
-         *
-         * \return Return the ContextSettings
-         *
-         */
         const ContextSettings& GlContext::getSettings() const
         {
             return m_settings;
         }
 
-        /*! \brief Constructor
-         *
-         * \param settings Settings to use to create the context
-         *
-         */
         GlContext::GlContext(const ContextSettings& settings) :
             m_settings(settings)
         {
             /// Nothing
         }
 
-        /*! \brief Enable and perform initializations
-         *
-         * \param wanted Settings wanted to create the context
-         *
-         */
         void GlContext::initialize(const ContextSettings& wanted)
         {
             if(setActive(true))

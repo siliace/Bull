@@ -36,12 +36,12 @@ namespace Bull
 
                         if(rotation == RR_Rotate_90 || RR_Rotate_270)
                         {
-                            desktopMode.width = sizes[currentMode].height;
+                            desktopMode.width  = sizes[currentMode].height;
                             desktopMode.height = sizes[currentMode].width;
                         }
                         else
                         {
-                            desktopMode.width = sizes[currentMode].width;
+                            desktopMode.width  = sizes[currentMode].width;
                             desktopMode.height = sizes[currentMode].height;
                         }
                     }
@@ -49,12 +49,12 @@ namespace Bull
                 }
                 else
                 {
-                    Log::get()->error("Your version of Xorg does not support XRandR extension");
+                    Log::get()->write("Your version of Xorg does not support XRandR extension", Log::Level::Error);
                 }
             }
             else
             {
-                Log::get()->error("Your version of Xorg does not support XRandR extension");
+                Log::get()->write("Your version of Xorg does not support XRandR extension", Log::Level::Error);
             }
 
             return desktopMode;
@@ -101,16 +101,15 @@ namespace Bull
                             }
                         }
                     }
-
                 }
                 else
                 {
-                    Log::get()->error("Your version of Xorg does not support XRandR extension");
+                    Log::get()->write("Your version of Xorg does not support XRandR extension", Log::Level::Error);
                 }
             }
             else
             {
-                Log::get()->error("Your version of Xorg does not support XRandR extension");
+                Log::get()->write("Your version of Xorg does not support XRandR extension", Log::Level::Error);
             }
 
             return modes;

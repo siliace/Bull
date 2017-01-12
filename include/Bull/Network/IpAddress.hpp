@@ -5,6 +5,9 @@
 
 #include <Bull/Core/Integer.hpp>
 #include <Bull/Core/String.hpp>
+#include <Bull/Core/System/Export.hpp>
+
+#include <Bull/Network/NetProtocol.hpp>
 
 namespace Bull
 {
@@ -12,16 +15,8 @@ namespace Bull
     {
     public:
 
-        enum NetProtocol
-        {
-            Any,
-            IPv4,
-            IPv6,
-            Unknown
-        };
-
-        typedef std::array<Uint8, 4> Ipv4;
-        typedef std::array<Uint16, 8> Ipv6;
+        typedef std::array<Uint8, 4> V4;
+        typedef std::array<Uint16, 16> V6;
 
         static IpAddress None;
         static IpAddress AnyIpv4;
@@ -30,29 +25,25 @@ namespace Bull
         static IpAddress LoopbackIpv6;
         static IpAddress BroadcastIpv4;
 
-        /*! \brief Convert an Ipv4 to a String
-         *
-         * \return Return the representation of the Ipv4 as String
-         *
-         */
-        static String toString(const Ipv4& ipv4);
+    private:
 
-        /*! \brief Convert an Ipv6 to a String
+        /*! \brief Convert an ip v4 to a String
          *
-         * \return Return the representation of the Ipv6 as String
+         * \param address The addess to convert to a String
+         *
+         * \return The representation as a String of the address
          *
          */
-        static String toString(const Ipv6& ipv6);
+        static String toString(const V4& address);
 
-        /*! \brief Resolve an host-name to an IpAddress
+        /*! \brief Convert an ip v6 to a String
          *
-         * \param hostname The host-name to resolve
-         * \param protocol The protocol use by the host to resolve
+         * \param address The addess to convert to a String
          *
-         * \return Return the IpAddress of the host if the host-name was resolved, IpAddress::None otherwise
+         * \return The representation as a String of the address
          *
          */
-        static IpAddress resolve(const String& hostname, NetProtocol protocol = NetProtocol::IPv4);
+        static String toString(const V6& address);
 
     public:
 
@@ -63,84 +54,88 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param address The representation of the ip as an integer
+         * \param ipv4 The ip wanted
          *
          */
-        IpAddress(Uint32 address);
+        IpAddress(const V4& ipv4);
 
         /*! \brief Constructor
          *
-         * \param ipv4 The ip v4 The ip address to create
+         * \param ipv6 The ip wanted
          *
          */
-        IpAddress(const Ipv4& ipv4);
+        IpAddress(const V6& ipv6);
 
-        /*! \brief Constructor
+        /*! \brief Set the ip
          *
-         * \param ipv6 The ip v6 The ip address to create
+         * \param ipv4 The ip
          *
          */
-        IpAddress(const Ipv6& ipv6);
+        void set(const V4& ipv4);
 
-        /*! \brief Constructor
+        /*! \brief Set the ip
          *
-         * \param a The first  byte of the address
-         * \param b The second byte of the address
-         * \param c The third  byte of the address
-         * \param d The forth  byte of the address
+         * \param ipv6 The ip
          *
          */
-        IpAddress(Uint8 a, Uint8 b, Uint8 c, Uint8 d);
+        void set(const V6& ipv6);
 
-        /*! \brief Constructor
+        /*! \brief Convert an IpAddress to a String
          *
-         * \param a The first   part of the address
-         * \param b The second  part of the address
-         * \param c The third   part of the address
-         * \param d The forth   part of the address
-         * \param e The fifth   part of the address
-         * \param f The sixth   part of the address
-         * \param g The seventh part of the address
-         * \param h The eighth  part of the address
-         *
-         */
-        IpAddress(Uint16 a, Uint16 b, Uint16 c, Uint16 d, Uint16 e, Uint16 f, Uint16 g, Uint16 h);
-
-        /*! \brief Compare two IpAddress
-         *
-         * \param right The IpAddress to compare to this
-         *
-         * \return Return true if right and this are equal, false otherwise
-         *
-         */
-        bool operator==(const IpAddress& right);
-
-        /*! \brief Compare two IpAddress
-         *
-         * \param right The IpAddress to compare to this
-         *
-         * \return Return false if right and this are equal, false otherwise
-         *
-         */
-        bool operator!=(const IpAddress& right);
-
-        /*! \brief Check whether if the IpAddress can be used
-         *
-         * \return Return true if the IpAddress is valid, false otherwise
-         *
-         */
-        bool isValid() const;
-
-        /*! \brief Convert the IpAddress to a String
-         *
-         * \return Return the representation of the IpAddress as String
+         * \return The representation of the IpAddress as a String
          *
          */
         String toString() const;
 
-        /*! \brief Get the NetProtocol used by the IpAddres
+        /*! \brief Convert an IpAddress to an IpAddress:V4
          *
-         * \return Return the NetProtocol
+         * \return Thes equivalent IpAddress::V4 of the IpAddress
+         *
+         */
+        V4 toV4() const;
+
+        /*! \brief Convert an IpAddress to an IpAddress:V6
+         *
+         * \return The equivalent IpAddress::V6 of the IpAddress
+         *
+         */
+        V6 toV6() const;
+
+        /*! \brief Compare two IpAddress
+         *
+         * \param left The IpAddress to compare to this
+         *
+         * \return True if this and left are equal
+         *
+         */
+        bool operator==(const IpAddress& left);
+
+        /*! \brief Compare two IpAddress
+         *
+         * \param left The IpAddress to compare to this
+         *
+         * \return True if this and left are not equal
+         *
+         */
+        bool operator!=(const IpAddress& left);
+
+        /*! \brief Convert this IpAddress to an integer
+         *
+         * \return The equivalent Uint32 of the IpAddress
+         *
+         */
+        Uint32 toInteger() const;
+
+        /*! \brief Check whether the IpAddress is valid and can be used
+         *
+         * \return True if the IpAddress is valid
+         *
+         */
+        bool isValid() const;
+
+        /*! \brief Get the protocol used the IpAddress
+         *
+         * \return The protocol
          *
          */
         NetProtocol getProtocol() const;
@@ -149,11 +144,11 @@ namespace Bull
 
         union
         {
-            Ipv4 m_ipv4;
-            Ipv6 m_ipv6;
+            V4 m_ipv4;
+            V6 m_ipv6;
         };
 
-        bool        m_isValid;
+        bool        m_valid;
         NetProtocol m_protocol;
     };
 }

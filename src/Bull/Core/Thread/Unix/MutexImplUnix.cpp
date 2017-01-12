@@ -50,27 +50,5 @@ namespace Bull
         {
             pthread_mutex_unlock(&m_handler);
         }
-
-        /*! \brief Get the native handler
-         *
-         * \return Return the mutex native handler
-         *
-         */
-        MutexHandler MutexImplUnix::getSystemHandler() const
-        {
-            return m_handler;
-        }
-
-        /*! \brief Get a pointer to the handler
-         *
-         * Used only by ConditionalVariableImplUnix
-         *
-         * \return Return a pointer to the system handler
-         * \see ConditionalVariableImplUnix
-         */
-        MutexHandler* MutexImplUnix::getHandlerPointer()
-        {
-            return &m_handler;
-        }
     }
 }

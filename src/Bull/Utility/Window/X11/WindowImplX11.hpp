@@ -28,10 +28,9 @@ namespace Bull
              * \param mode The VideoMode to use to create the window
              * \param title The title of the window
              * \param style The style to use to create the window
-             * \param settings Parameters to create the OpenGL context
              *
              */
-            WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+            WindowImplX11(const VideoMode& mode, const String& title, Uint32 style);
 
             /*! \brief Destructor
              *
@@ -133,13 +132,10 @@ namespace Bull
 
             /*! \brief Enter or leave the fullscreen mode
              *
-             * \param mode The VideoMode to use
              * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
              *
-             * \return Return true if the switch was done successfully, false otherwise
-             *
              */
-            bool switchFullscreen(const VideoMode& mode, bool fullscreen) override;
+            void switchFullscreen(bool fullscreen) override;
 
             /*! \brief Show or hide the window
              *

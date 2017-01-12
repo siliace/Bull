@@ -56,14 +56,6 @@ namespace Bull
              */
             void release();
 
-            /*! \brief Get the system handler
-             *
-             * \return Return the native system semaphore handler
-             *
-             */
-            SemaphoreHandler getSystemHandler() const;
-
-
         private:
 
             sem_t m_handler;

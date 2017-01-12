@@ -64,15 +64,5 @@ namespace Bull
         {
             pthread_detach(m_handler);
         }
-
-        /*! \brief Get the system handler
-         *
-         * \return Return the native system thread handler
-         *
-         */
-        ThreadHandler ThreadImplUnix::getSystemHandler() const
-        {
-            return m_handler;
-        }
     }
 }
