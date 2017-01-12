@@ -1,7 +1,6 @@
 #ifndef BULL_TCPSOCKET_HPP
 #define BULL_TCPSOCKET_HPP
 
-#include <Bull/Core/IO/InOutStream.hpp>
 #include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
@@ -10,7 +9,7 @@
 
 namespace Bull
 {
-    class BULL_API TcpSocket : public Socket, public InOutStream
+    class BULL_API TcpSocket : public Socket
     {
     public:
 
@@ -50,48 +49,17 @@ namespace Bull
          */
         void reset(SocketHandler handler, const IpAddress& address, Uint16 port);
 
-        /*! \brief Read data from a stream
+        /*! \brief Receive the data available
          *
-         * \param data A pointer to the memory area to fill
-         * \param size The size of the memory area to fill
+         * \param buffer   The buffer to fill with received data
+         * \param size     The size of the buffer
+         * \param reveived A pointer to store how many bytes has been read
+         * \param error    A pointer to store the error
          *
-         * \return Return the number of read bytes
-         *
-         */
-        Uint64 read(void* data, Uint64 size);
-
-        /*! \brief Write data into a stream
-         *
-         * \param data A pointer to the memory area to write
-         * \param size The size of the memory area to write
-         *
-         * \return Return the number of written bytes
+         * \return The state of the socket
          *
          */
-        Uint64 write(const void* data, Uint64 size);
-
-        /*! \brief Set the reading position in the stream
-         *
-         * \param position The position to seek to
-         *
-         * \return Return the actual position
-         *
-         */
-        Uint64 setCursor(Uint64 position);
-
-        /*! \brief Get the reading position in the stream
-         *
-         * \return Return the current position
-         *
-         */
-        Uint64 getCursor() const;
-
-        /*! \brief Get the size of the stream
-         *
-         * \return The size of the stream
-         *
-         */
-        Uint64 getSize() const;
+        Socket::State receive(void* buffer, std::size_t size, std::size_t* received = nullptr, Socket::Error* error = nullptr);
 
         /*! \brief Get the peer port
          *

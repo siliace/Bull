@@ -85,6 +85,19 @@ namespace Bull
              */
             static int netProtocolToAF(NetProtocol protocol);
 
+            /*! \brief Receive the data available
+             *
+             * \param socket   The socket to read on
+             * \param buffer   The buffer to fill with received data
+             * \param size     The size of the buffer
+             * \param reveived A pointer to store how many bytes has been read
+             * \param error    A pointer to store the error
+             *
+             * \return The state of the socket
+             *
+             */
+            static Socket::State receive(SocketHandler socket, void* buffer, std::size_t size, std::size_t* received, Socket::Error* error);
+
             /*! \brief Convert a Bull::Socket::Type to a SOCK value
              *
              * \param type The type to convert

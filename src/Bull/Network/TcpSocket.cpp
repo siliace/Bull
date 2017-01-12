@@ -73,29 +73,16 @@ namespace Bull
         m_peerAddress = address;
     }
 
-    Uint64 TcpSocket::read(void* data, Uint64 size)
+    Socket::State TcpSocket::receive(void* buffer, std::size_t size, std::size_t* received, Socket::Error* error)
     {
-        return 0;
-    }
+        if(m_state == Socket::State::Connected && buffer && size)
+        {
+            m_state = prv::SocketImpl::receive(m_handler, buffer, size, received, error);
 
-    Uint64 TcpSocket::write(const void* data, Uint64 size)
-    {
-        return 0;
-    }
+            return m_state;
+        }
 
-    Uint64 TcpSocket::setCursor(Uint64 position)
-    {
-        return position;
-    }
-
-    Uint64 TcpSocket::getCursor() const
-    {
-        return 0;
-    }
-
-    Uint64 TcpSocket::getSize() const
-    {
-        return 0;
+        return Socket::State::NotConnected;
     }
 
     Uint16 TcpSocket::getPeerPort() const

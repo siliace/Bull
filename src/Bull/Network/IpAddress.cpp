@@ -101,10 +101,7 @@ namespace Bull
     {
         if(m_protocol == NetProtocol::Ipv4)
         {
-            return Uint32(m_ipv4[0]) << 24 |
-                   Uint32(m_ipv4[1]) << 16 |
-		           Uint32(m_ipv4[2]) << 8  |
-                   Uint32(m_ipv4[3]) << 0;
+            return Uint32(m_ipv4[0]) << 24 | Uint32(m_ipv4[1]) << 16 | Uint32(m_ipv4[2]) << 8 | Uint32(m_ipv4[3]) << 0;
         }
 
         return 0;
