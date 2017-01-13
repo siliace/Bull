@@ -86,7 +86,7 @@ namespace Bull
     {
         String string;
         unsigned int numberCount = 1;
-        int lastInsert;
+        int lastInsert = 0;
 
         if(number < 0)
         {
@@ -107,7 +107,6 @@ namespace Bull
             }
             else
             {
-
                 string += String::intToChar(number / numberCount - lastInsert * 10);
             }
 
@@ -303,7 +302,7 @@ namespace Bull
      * \return Return true if this string end with string, false otherwise
      *
      */
-    bool String::endWith(const String& string)
+    bool String::endsWith(const String& string)
     {
         return subString(getSize() - string.getSize()) == string;
     }

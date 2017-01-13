@@ -1,5 +1,3 @@
-#include <Bull/Render/Context/Glx/GlxContext.hpp>
-
 #include <Bull/Utility/Window/X11/WindowImplX11.hpp>
 
 #ifndef Button6
@@ -32,26 +30,13 @@ namespace Bull
                                     VisibilityChangeMask;                     /// Visibility change (internal uses only)
 
         }
-        /*! \brief Constructor
-         *
-         * \param mode The VideoMode to use to create the window
-         * \param title The title of the window
-         * \param style The style to use to create the window
-         * \param settings Parameters to create the OpenGL context
-         *
-         */
-        WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings) :
+
+        WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style) :
             m_display(Display::get()),
             m_handler(0),
             m_isMapped(false)
         {
             XSetWindowAttributes attribs;
-            XVisualInfo vi = GlxContext::getBestVisual(mode.bitsPerPixel, settings);
-
-            attribs.colormap         = XCreateColormap(m_display->getHandler(),
-                                                       m_display->getRootWindow(vi.screen),
-                                                       vi.visual,
-                                                       AllocNone);
             attribs.event_mask       = eventMasks;
             attribs.background_pixel = 0;
             attribs.border_pixel     = 0;
@@ -63,7 +48,7 @@ namespace Bull
                                       0,
                                       CopyFromParent,
                                       InputOutput,
-                                      vi.visual,
+                                      nullptr,
                                       CWBorderPixel | CWColormap | CWEventMask | CWBackPixel,
                                       &attribs);
 
@@ -77,9 +62,6 @@ namespace Bull
             m_display->flush();
         }
 
-        /*! \brief Destructor
-         *
-         */
         WindowImplX11::~WindowImplX11()
         {
             if(m_handler)
@@ -88,9 +70,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Start to process events to fill event queue
-         *
-         */
         void WindowImplX11::startProcessEvents()
         {
             XEvent e;
@@ -288,67 +267,36 @@ namespace Bull
             }
         }
 
-        /*! \brief Minimize a window
-         *
-         */
         void WindowImplX11::minimize()
         {
 
         }
 
-        /*! \brief Check if the window is minimized
-         *
-         * \return Return true if the window is minimized, false otherwise
-         *
-         */
         bool WindowImplX11::isMinimized() const
         {
             return false;
         }
 
-        /*! \brief Maximize a window
-         *
-         */
         void WindowImplX11::maximize()
         {
 
         }
 
-        /*! \brief Check if the window is maximized
-         *
-         * \return Return true if the window is maximized, false otherwise
-         *
-         */
         bool WindowImplX11::isMaximized() const
         {
             return false;
         }
 
-        /*! \brief Enable or disable the capture of the cursor inside the window
-         *
-         * \param enable The state of the capture
-         *
-         */
         void WindowImplX11::enableCaptureCursor(bool capture)
         {
 
         }
 
-        /*! \brief Hide or show the cursor
-         *
-         * \param enable The state of the cursor
-         *
-         */
         void WindowImplX11::showCursor(bool enable)
         {
 
         }
 
-        /*! \brief Set the size of the window
-         *
-         * \param size The new size of the window
-         *
-         */
         void WindowImplX11::setPosition(const Vector2I& position)
         {
             XMoveWindow(m_display->getHandler(), m_handler, position.x, position.y);
@@ -356,12 +304,6 @@ namespace Bull
             m_display->flush();
         }
 
-        /*! \brief Set the size of the window
-         *
-         * \param x The new width of the window
-         * \param y The new height of the window
-         *
-         */
         Vector2I WindowImplX11::getPosition() const
         {
             ::Window root, child;
@@ -374,11 +316,6 @@ namespace Bull
             return Vector2I(x, y);
         }
 
-        /*! \brief Set the size of the window
-         *
-         * \param size The new size of the window
-         *
-         */
         void WindowImplX11::setSize(const Vector2UI& size)
         {
             XResizeWindow(m_display->getHandler(), m_handler, size.x, size.y);
@@ -386,11 +323,6 @@ namespace Bull
             m_display->flush();
         }
 
-        /*! \brief Get the size of the window
-         *
-         * \return Return the size of the window
-         *
-         */
         Vector2UI WindowImplX11::getSize() const
         {
             XWindowAttributes attributes;
@@ -400,54 +332,26 @@ namespace Bull
             return Vector2UI(attributes.width, attributes.height);
         }
 
-        /*! \brief Set the title of the window
-         *
-         * \param title The title to set to the window
-         *
-         */
         void WindowImplX11::setTitle(const String& title)
         {
             XStoreName(m_display->getHandler(), m_handler, title);
         }
 
-        /*! \brief Get the title of the window
-         *
-         * \return Return the title of the window
-         *
-         */
         String WindowImplX11::getTitle() const
         {
             return "";
         }
 
-        /*! \brief Check if the window has the focus
-         *
-         * \param Return true if the window has the focus, false otherwise
-         *
-         */
         bool WindowImplX11::hasFocus() const
         {
             return false;
         }
 
-        /*! \brief Enter or leave the fullscreen mode
-         *
-         * \param mode The VideoMode to use
-         * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
-         *
-         * \return Return true if the switch was done successfully, false otherwise
-         *
-         */
-        bool WindowImplX11::switchFullscreen(const VideoMode& mode, bool fullscreen)
+        void WindowImplX11::switchFullscreen(bool fullscreen)
         {
             return false;
         }
 
-        /*! \brief Show or hide the window
-         *
-         * \param visible True to show the window, false to hide the window
-         *
-         */
         void WindowImplX11::setVisible(bool visible)
         {
             if(visible)
@@ -472,19 +376,11 @@ namespace Bull
             }
         }
 
-        /*! \brief Get the window system handler
-         *
-         * \return Return the native window system handler
-         *
-         */
         WindowHandler WindowImplX11::getSystemHandler() const
         {
             return m_handler;
         }
 
-        /*! \brief Set Window manager protocols supported
-         *
-         */
         void WindowImplX11::setProtocols()
         {
             Atom wmProtocols = m_display->getAtom("WM_PROTOCOLS");

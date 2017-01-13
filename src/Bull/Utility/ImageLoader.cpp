@@ -54,7 +54,7 @@ namespace Bull
         {
             String fullPath = path;
 
-            if(!fullPath.endWith(".bmp"))
+            if(!fullPath.endsWith(".bmp"))
             {
                 fullPath += ".bmp";
             }
@@ -66,7 +66,7 @@ namespace Bull
         {
             String fullPath = path;
 
-            if(!fullPath.endWith(".png"))
+            if(!fullPath.endsWith(".png"))
             {
                 fullPath += ".png";
             }
@@ -78,7 +78,7 @@ namespace Bull
         {
             String fullPath = path;
 
-            if(!fullPath.endWith(".tga"))
+            if(!fullPath.endsWith(".tga"))
             {
                 fullPath += ".tga";
             }

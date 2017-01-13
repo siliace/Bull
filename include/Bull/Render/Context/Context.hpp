@@ -8,6 +8,7 @@
 
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Context/ContextSettings.hpp>
+#include <Bull/Render/Context/ContextSettings.hpp>
 
 #include <Bull/Utility/Window/VideoMode.hpp>
 
@@ -77,9 +78,9 @@ namespace Bull
          */
         const ContextSettings& getSettings() const;
 
-    private:
+    protected:
 
-        std::unique_ptr<prv::GlContext> m_impl;
+        std::unique_ptr<prv::GlContext> m_context;
     };
 }
 

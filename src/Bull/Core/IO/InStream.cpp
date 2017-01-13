@@ -2,11 +2,6 @@
 
 namespace Bull
 {
-    /*! \brief Get all the content of the stream
-     *
-     * \return Return the content of the stream
-     *
-     */
     String InStream::readAll()
     {
         String content;

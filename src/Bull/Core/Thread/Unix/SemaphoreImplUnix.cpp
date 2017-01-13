@@ -6,39 +6,21 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Constructor
-         *
-         * \param count The initial count to set the semaphore
-         *
-         */
         SemaphoreImplUnix::SemaphoreImplUnix(unsigned int count)
         {
             sem_init(&m_handler, 0, count);
         }
 
-        /*! \brief Destructor
-         *
-         */
         SemaphoreImplUnix::~SemaphoreImplUnix()
         {
             sem_destroy(&m_handler);
         }
 
-        /*! \brief Wait until the current thread can continue
-         *
-         */
         void SemaphoreImplUnix::wait()
         {
             sem_wait(&m_handler);
         }
 
-        /*! \brief Wait until the current thread can continue
-         *
-         * \param timeout The maximum time to wait before fail
-         *
-         * \return Return true if the waiting time was less than the timeout, false otherwise
-         *
-         */
         bool SemaphoreImplUnix::wait(const Time& timeout)
         {
             struct timeval tv;
@@ -50,15 +32,9 @@ namespace Bull
             ts.tv_sec += ts.tv_nsec / (1000 * 1000 * 1000);
             ts.tv_nsec %= (1000 * 1000 * 1000);
 
-
             return sem_timedwait(&m_handler, &ts) != -1;
         }
 
-        /*! \brief Get the current count of the semaphore
-         *
-         * \return Return the current count of the semaphore
-         *
-         */
         unsigned int SemaphoreImplUnix::getCount() const
         {
             int count;
@@ -67,9 +43,6 @@ namespace Bull
             return count;
         }
 
-        /*! \brief Release semaphore's protection
-         *
-         */
         void SemaphoreImplUnix::release()
         {
             sem_post(&m_handler);

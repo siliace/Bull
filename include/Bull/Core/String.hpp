@@ -162,7 +162,7 @@ namespace Bull
          * \return Return true if this string end with string, false otherwise
          *
          */
-        bool endWith(const String& string);
+        bool endsWith(const String& string);
 
         /*! \brief Splits a string into others
          *
