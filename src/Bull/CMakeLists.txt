@@ -1,4 +1,8 @@
-set(LIBRARY_OUTPUT_PATH ${BIN_PATH}/bull)
+if(BUILD_SHARED_LIB)
+    set(LIBRARY_OUTPUT_PATH ${BIN_PATH}/Shared/bull)
+else()
+    set(LIBRARY_OUTPUT_PATH ${BIN_PATH}/Static/bull)
+endif()
 
 add_subdirectory(Core)
 add_subdirectory(Hardware)

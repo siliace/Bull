@@ -1,0 +1,7 @@
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+    set(BULL_OS_WINDOWS 1)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    set(BULL_OS_LINUX 1)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
+    set(BULL_OS_OSX 1)
+endif()

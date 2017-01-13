@@ -14,23 +14,28 @@
             #define NOMINMAX
         #endif
 
-        #if defined BULL_WINDOWS_8 || defined BULL_WINDOWS_BLUE
-            #define BULL_WINNT 0x0602
-        #elif defined BULL_WINDOWS_7
-            #define BULL_WINNT 0x0601
-        #elif defined BULL_WINDOWS_SERVER_2008 || defined BULL_WINDOWS_VISTA
-            #define BULL_WINNT 0x0600
+        #define BULL_WINDOWS_8     0x0602
+        #define BULL_WINDOWS_7     0x0601
+        #define BULL_WINDOWS_VISTA 0x0600
+        #define BULL_WINDOWS_XP    0x0501 // Defined but not planed to be used
+
+        #if defined BULL_BUILD_WINDOWS_8
+            #define BULL_WINDOWS_VERSION BULL_WINDOWS_8
+        #elif defined BULL_BUILD_WINDOWS_7
+            #define BULL_WINDOWS_VERSION BULL_WINDOWS_7
+        #elif defined BULL_BUILD_WINDOWS_VISTA
+            #define BULL_WINDOWS_VERSION BULL_WINDOWS_VISTA
         #else
-            #define BULL_WINNT 0x0501
+            #error Windows XP is not supported
         #endif
 
         #if defined _WIN32_WINNT
-            #if _WIN32_WINNT < BULL_WINNT
+            #if _WIN32_WINNT < BULL_WINDOWS_VERSION
                 #undef _WIN32_WINNT
                 #define _WIN32_WINNT BULL_WINNT
             #endif
         #else
-            #define _WIN32_WINNT BULL_WINNT
+            #define _WIN32_WINNT BULL_WINDOWS_VERSION
         #endif
     #endif // defined
 #elif defined __FreeBSD__
@@ -39,6 +44,12 @@
 #elif defined __gnu_linux__
     #define BULL_OS_GNU_LINUX
     #define BULL_OS_UNIX
+
+    #if defined BULL_BUILD_WAYLAND
+        #define BULL_WEYLAND
+    #else
+        #define BULL_X11
+    #endif
 #elif defined __APPLE__ && __MACH__
     #define BULL_OS_OSX
     #define BULL_OS_UNIX

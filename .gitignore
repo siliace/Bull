@@ -5,13 +5,13 @@ Bull.layout
 obj/
 
 #Clion
-.idea/Bull.iml
-.idea/modules.xml
-.idea/workspace.xml
+.idea/
 
 #CMake
-.idea/
 bin/
 build/
+cmake-build-release/
+cmake-build-debug/
 
 #Doxygen
+doxygen/

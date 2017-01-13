@@ -1,35 +1,43 @@
-set (INCROOT ${PROJECT_SOURCE_DIR}/include/Bull/Network)
-set (SRCROOT ${PROJECT_SOURCE_DIR}/src/Bull/Network)
+set (INC_ROOT ${PROJECT_SOURCE_DIR}/include/Bull/Network)
+set (SRC_ROOT ${PROJECT_SOURCE_DIR}/src/Bull/Network)
 
-set(SRC ${SRCROOT}/IpAddress.cpp
-        ${INCROOT}/IpAddress.hpp
-        ${SRCROOT}/IpAddressImpl.hpp
-        ${SRCROOT}/Socket.cpp
-        ${INCROOT}/Socket.hpp
-        ${SRCROOT}/SocketImpl.hpp
-        ${SRCROOT}/TcpListenner.cpp
-        ${INCROOT}/TcpListenner.hpp
-        ${SRCROOT}/TcpSocket.cpp
-        ${INCROOT}/TcpSocket.hpp)
+########################################################################################################################
+# Network files                                                                                                        #
+########################################################################################################################
+
+set(SRC ${SRC_ROOT}/IpAddress.cpp
+        ${INC_ROOT}/IpAddress.hpp
+        ${SRC_ROOT}/IpAddressImpl.hpp
+        ${SRC_ROOT}/Socket.cpp
+        ${INC_ROOT}/Socket.hpp
+        ${SRC_ROOT}/SocketImpl.hpp
+        ${SRC_ROOT}/TcpListenner.cpp
+        ${INC_ROOT}/TcpListenner.hpp
+        ${SRC_ROOT}/TcpSocket.cpp
+        ${INC_ROOT}/TcpSocket.hpp)
 
 if(BULL_OS_WINDOWS)
-    list(APPEND SRC ${SRCROOT}/Win32/SocketImpl.cpp)
-    list(APPEND SRC ${SRCROOT}/Win32/SocketImpl.hpp)
-    list(APPEND SRC ${SRCROOT}/Win32/IpAddressImpl.cpp)
-    list(APPEND SRC ${SRCROOT}/Win32/IpAddressImpl.hpp)
-    list(APPEND SRC ${SRCROOT}/Win32/SystemSocket.hpp)
+    list(APPEND SRC ${SRC_ROOT}/Win32/SocketImpl.cpp)
+    list(APPEND SRC ${SRC_ROOT}/Win32/SocketImpl.hpp)
+    list(APPEND SRC ${SRC_ROOT}/Win32/IpAddressImpl.cpp)
+    list(APPEND SRC ${SRC_ROOT}/Win32/IpAddressImpl.hpp)
+    list(APPEND SRC ${SRC_ROOT}/Win32/SystemSocket.hpp)
 else()
-    list(APPEND SRC ${SRCROOT}/Unix/SocketImpl.cpp)
-    list(APPEND SRC ${SRCROOT}/Unix/SocketImpl.hpp)
-    list(APPEND SRC ${SRCROOT}/Unix/IpAddressImpl.cpp)
-    list(APPEND SRC ${SRCROOT}/Unix/IpAddressImpl.hpp)
-    list(APPEND SRC ${SRCROOT}/Unix/SystemSocket.hpp)
+    list(APPEND SRC ${SRC_ROOT}/Unix/SocketImpl.cpp)
+    list(APPEND SRC ${SRC_ROOT}/Unix/SocketImpl.hpp)
+    list(APPEND SRC ${SRC_ROOT}/Unix/IpAddressImpl.cpp)
+    list(APPEND SRC ${SRC_ROOT}/Unix/IpAddressImpl.hpp)
+    list(APPEND SRC ${SRC_ROOT}/Unix/SystemSocket.hpp)
 endif()
 
-add_library(bull-network ${LIB_TYPE} ${SRC})
+source_group("" FILES ${SRC})
+
+set(EXTERNAL_LIBS)
 
 if(BULL_OS_WINDOWS)
-    target_link_libraries(bull-network ws2_32)
+    list(APPEND EXTERNAL_LIBS ws2_32)
 endif()
 
-target_link_libraries(bull-network bull-core)
+bull_add_library(bull-network SOURCES ${SRC}
+                              DEPENDS bull-core
+                              EXTERNALS ${EXTERNAL_LIBS})

@@ -105,7 +105,7 @@ namespace Bull
 
         Socket::State SocketImpl::receive(SocketHandler socket, void* buffer, std::size_t size, std::size_t* received, Socket::Error* error)
         {
-            int written = recv(socket, buffer, size, 0);
+            int written = recv(socket, static_cast<char*>(buffer), size, 0);
 
             if(written)
             {
