@@ -2,12 +2,8 @@
 #include <Bull/Core/Thread/ConditionVariableImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #if BULL_WINNT >= 0x0600
-        #include <Bull/Core/Thread/Win32/ConditionVariableImplWin32.hpp>
-        typedef Bull::prv::ConditionVariableImplWin32 ConditionVariableType;
-    #else
-        #error ConditonalVariable require Windows Vista or higher
-    #endif
+    #include <Bull/Core/Thread/Win32/ConditionVariableImplWin32.hpp>
+    typedef Bull::prv::ConditionVariableImplWin32 ConditionVariableType;
 #else
     #include <Bull/Core/Thread/Unix/ConditionVariableImplUnix.hpp>
     typedef Bull::prv::ConditionVariableImplUnix ConditionVariableType;

@@ -29,7 +29,7 @@ namespace Bull
 
         void ConditionVariableImplUnix::wait(MutexImpl* mutex)
         {
-            pthread_cond_wait(&m_handler, static_cast<MutexImplUnix*>(mutex)->getHandlerPointer());
+            pthread_cond_wait(&m_handler, &static_cast<MutexImplUnix*>(mutex)->m_handler);
         }
 
         bool ConditionVariableImplUnix::wait(MutexImpl* mutex, const Time& timeout)
@@ -43,7 +43,7 @@ namespace Bull
             ts.tv_sec += ts.tv_nsec / (1000 * 1000 * 1000);
             ts.tv_nsec %= (1000 * 1000 * 1000);
 
-            return pthread_cond_timedwait(&m_handler, static_cast<MutexImplUnix*>(mutex)->getHandlerPointer(), &ts) != 0;
+            return pthread_cond_timedwait(&m_handler, &static_cast<MutexImplUnix*>(mutex)->m_handler, &ts) != 0;
         }
     }
 }

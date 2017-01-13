@@ -349,7 +349,7 @@ namespace Bull
 
         void WindowImplX11::switchFullscreen(bool fullscreen)
         {
-            return false;
+
         }
 
         void WindowImplX11::setVisible(bool visible)

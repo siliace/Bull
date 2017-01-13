@@ -1,5 +1,17 @@
+#Code blocks
 Bull.cbp
 Bull.depend
 Bull.layout
 obj/
+
+#Clion
+.idea/
+
+#CMake
 bin/
+build/
+cmake-build-release/
+cmake-build-debug/
+
+#Doxygen
+doxygen/

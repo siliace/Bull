@@ -1,62 +1,83 @@
-#include <winsock2.h>
-#include <ws2tcpip.h>
-
 #include <Bull/Network/Win32/IpAddressImpl.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        struct WsaInitializer
+        IpAddress IpAddressImpl::fromSocketAddress(const sockaddr* socketAddress, Uint16& port)
         {
-            WsaInitializer()
+            switch(socketAddress->sa_family)
             {
-                WSADATA wsa;
-                WSAStartup(MAKEWORD(2, 2), &wsa);
+                case AF_INET:  return fromSocketAddress(reinterpret_cast<const sockaddr_in*>(socketAddress), port);
+                case AF_INET6: return fromSocketAddress(reinterpret_cast<const sockaddr_in6*>(socketAddress), port);
             }
+        }
 
-            ~WsaInitializer()
-            {
-                WSACleanup();
-            }
-        };
-
-        WsaInitializer init;
-
-        IpAddress IpAddressImpl::resolveIpv4(const String& hostname)
+        IpAddress IpAddressImpl::fromSocketAddress(const sockaddr_in* socketAddress, Uint16& port)
         {
-            Uint32 ip = inet_addr(hostname);
+            IpAddress::V4 ipv4;
 
-            if(ip != INADDR_NONE)
+            ipv4[0] = socketAddress->sin_addr.S_un.S_un_b.s_b1;
+            ipv4[1] = socketAddress->sin_addr.S_un.S_un_b.s_b2;
+            ipv4[2] = socketAddress->sin_addr.S_un.S_un_b.s_b3;
+            ipv4[3] = socketAddress->sin_addr.S_un.S_un_b.s_b4;
+
+            port = ntohs(socketAddress->sin_port);
+
+            return IpAddress(ipv4);
+        }
+
+        IpAddress IpAddressImpl::fromSocketAddress(const sockaddr_in6* socketAddress, Uint16& port)
+        {
+            IpAddress::V6 ipv6;
+
+            for(Uint16 i = 0; i < ipv6.size(); i++)
             {
-                return IpAddress(ip);
+                ipv6[i] = ntohs(socketAddress->sin6_addr.u.Word[i]);
             }
 
-            addrinfo hints;
-            addrinfo* result = nullptr;
-            ZeroMemory(&hints, sizeof(addrinfo));
-            hints.ai_family   = AF_UNSPEC;
-            hints.ai_socktype = SOCK_STREAM;
+            port = ntohs(socketAddress->sin6_port);
 
-            int error = getaddrinfo(hostname, nullptr, &hints, &result);
+            return IpAddress(ipv6);
+        }
 
-            if(error == 0)
+        socklen_t IpAddressImpl::toSocketAddress(const IpAddress& address, Uint16 port, void* buffer)
+        {
+            switch(address.getProtocol())
             {
-                if(result)
+                case NetProtocol::Ipv4:
                 {
-                    ip = reinterpret_cast<sockaddr_in*>(result->ai_addr)->sin_addr.s_addr;
-                    freeaddrinfo(result);
+                    sockaddr_in* socketAddress = reinterpret_cast<sockaddr_in*>(buffer);
 
-                    return IpAddress(ip);
+                    ZeroMemory(socketAddress, sizeof(sockaddr_in));
+
+                    socketAddress->sin_family      = AF_INET;
+                    socketAddress->sin_port        = htons(port);
+                    socketAddress->sin_addr.s_addr = htonl(address.toInteger());
+
+                    return sizeof(sockaddr_in);
+                }
+
+                case NetProtocol::Ipv6:
+                {
+                    IpAddress::V6 raw = address.toV6();
+                    sockaddr_in6* socketAddress = reinterpret_cast<sockaddr_in6*>(buffer);
+
+                    ZeroMemory(socketAddress, sizeof(sockaddr_in6));
+
+                    socketAddress->sin6_family = AF_INET6;
+                    socketAddress->sin6_port   = htons(port);
+
+                    for(Uint16 i = 0; i < raw.size(); i++)
+                    {
+                        socketAddress->sin6_addr.u.Word[i] = htons(raw[i]);
+                    }
+
+                    return sizeof(sockaddr_in6);
                 }
             }
 
-            return IpAddress::None;
-        }
-
-        IpAddress IpAddressImpl::resolveIpv6(const String& hostname)
-        {
-            return IpAddress::None;
+            return 0;
         }
     }
 }

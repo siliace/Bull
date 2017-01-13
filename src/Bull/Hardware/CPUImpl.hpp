@@ -3,5 +3,5 @@
 #if defined BULL_OS_WINDOWS
     #include <Bull/Hardware/Win32/CPUImpl.hpp>
 #else
-    #error lack of implementation : CPU
+    #include <Bull/Hardware/Unix/CPUImpl.hpp>
 #endif // defined

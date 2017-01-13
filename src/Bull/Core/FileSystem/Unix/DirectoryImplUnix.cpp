@@ -13,10 +13,5 @@ namespace Bull
         {
             return std::vector<Path>();
         }
-
-        DirectoryHandler DirectoryImplUnix::getSystemHandler() const
-        {
-            return nullptr;
-        }
     }
 }

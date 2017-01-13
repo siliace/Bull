@@ -3,5 +3,5 @@
 #if defined BULL_OS_WINDOWS
     #include <Bull/Hardware/Win32/KeyboardImpl.hpp>
 #else
-    #error lack of implementation : Keyboard
+    #include <Bull/Hardware/Unix/KeyboardImpl.hpp>
 #endif

@@ -56,13 +56,6 @@ namespace Bull
              */
             void stop() override;
 
-            /*! \brief Get the system handler
-             *
-             * \return Return the native system thread handler
-             *
-             */
-            ThreadHandler getSystemHandler() const override;
-
         private:
 
             pthread_t m_handler;
