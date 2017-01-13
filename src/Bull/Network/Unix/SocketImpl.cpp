@@ -99,6 +99,11 @@ namespace Bull
             }
         }
 
+        Socket::State SocketImpl::receive(SocketHandler socket, void* buffer, std::size_t size, std::size_t* received, Socket::Error* error)
+        {
+            return Socket::State::Connected;
+        }
+
         int SocketImpl::socketTypeToSock(Socket::Type type)
         {
             switch(type)
