@@ -11,12 +11,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
-         *
-         */
-        Lock() = delete;
-
-        /*! Constructor
+        /*! \brief Constructor
          *
          * Lock the mutex
          *
@@ -25,7 +20,7 @@ namespace Bull
          */
         Lock(Mutex& mutex);
 
-        /*! Destructor
+        /*! \brief Destructor
          *
          * Unlock the mutex
          *

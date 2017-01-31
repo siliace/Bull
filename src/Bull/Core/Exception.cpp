@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <Bull/Core/Exception.hpp>
 #include <Bull/Core/IO/StringStream.hpp>
 

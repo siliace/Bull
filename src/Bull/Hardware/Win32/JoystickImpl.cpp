@@ -1,5 +1,4 @@
 #include <bitset>
-#include <cmath>
 
 #include <Bull/Hardware/Win32/JoystickImpl.hpp>
 
