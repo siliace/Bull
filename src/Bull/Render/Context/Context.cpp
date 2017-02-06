@@ -19,7 +19,7 @@ namespace Bull
      *
      */
     Context::Context() :
-        m_impl(prv::GlContext::createInstance())
+        m_context(prv::GlContext::createInstance())
     {
         setActive();
     }
@@ -31,7 +31,7 @@ namespace Bull
      *
      */
     Context::Context(const VideoMode& mode, const ContextSettings& settings) :
-        m_impl(prv::GlContext::createInstance(mode, settings))
+        m_context(prv::GlContext::createInstance(mode, settings))
     {
         setActive();
     }
@@ -43,7 +43,7 @@ namespace Bull
      *
      */
     Context::Context(unsigned int bitsPerPixel, const ContextSettings& settings) :
-        m_impl(prv::GlContext::createInstance(bitsPerPixel, settings))
+        m_context(prv::GlContext::createInstance(bitsPerPixel, settings))
     {
         setActive();
     }
@@ -65,7 +65,7 @@ namespace Bull
      */
     bool Context::setActive(bool active)
     {
-        bool result = m_impl->setActive(active);
+        bool result = m_context->setActive(active);
 
         if(result)
         {
@@ -82,9 +82,9 @@ namespace Bull
      */
     const ContextSettings& Context::getSettings() const
     {
-        if(m_impl)
+        if(m_context)
         {
-            return m_impl->getSettings();
+            return m_context->getSettings();
         }
 
         return ContextSettings::Empty;

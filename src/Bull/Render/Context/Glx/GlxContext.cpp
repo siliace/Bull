@@ -29,23 +29,11 @@ namespace Bull
             }
         }
 
-        /*! \brief Get an OpenGL function
-         *
-         * \param function The function name
-         *
-         * \param Return the function, nullptr if the function is not available
-         *
-         */
         void* GlxContext::getFunction(const String& function)
         {
             return reinterpret_cast<void*>(glXGetProcAddressARB(reinterpret_cast<const unsigned char*>(static_cast<const char*>(function))));
         }
 
-        /*! \brief Set the list of extensions to load
-         *
-         * \param loader The instance of the extension loader to use
-         *
-         */
         void GlxContext::requireExtensions(const ExtensionsLoader::Instance& loader)
         {
             loader->require(GlxCreateContextARB);
@@ -68,20 +56,12 @@ namespace Bull
             }
         }
 
-        /*! \brief Determine the best XVisualInfo
-         *
-         * \param bitsPerPixel Number of bits per pixel
-         * \param settings     Settings to use to create the OpenGL context
-         *
-         * \return The XVisualInfo
-         *
-         */
         XVisualInfo GlxContext::getBestVisual(unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             int count;
+            XVisualInfo best          = XVisualInfo();
             Display::Instance display = Display::get();
-            XVisualInfo best = XVisualInfo();
-            XVisualInfo* visuals = XGetVisualInfo(display->getHandler(), 0, nullptr, &count);
+            XVisualInfo* visuals      = XGetVisualInfo(display->getHandler(), 0, nullptr, &count);
 
             if(visuals)
             {
@@ -136,11 +116,6 @@ namespace Bull
 
         }
 
-        /*! \brief Constructor
-         *
-         * \param shared The shared context
-         *
-         */
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared) :
             GlxContext(shared, VideoMode::getCurrent().bitsPerPixel, ContextSettings())
         {
@@ -153,16 +128,7 @@ namespace Bull
             m_render(0),
             m_ownWindow(false)
         {
-            /// Todo
-        }
-
-        GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings) :
-            GlContext(settings),
-            m_display(Display::get()),
-            m_render(0),
-            m_ownWindow(false)
-        {
-            createSurface(bitsPerPixel);
+            createSurface(mode.width, mode.height, mode.bitsPerPixel);
 
             if(m_window)
             {
@@ -170,21 +136,19 @@ namespace Bull
             }
         }
 
-        /*! \brief Constructor
-         *
-         * \param shared The shared context
-         * \param window The window to bind the created context
-         * \param bitsPerPixel The number of bits to use per pixel
-         * \param settings Parameters to create the OpenGL context
-         *
-         */
+        GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings) :
+            GlxContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
+        {
+            /// Nothing
+        }
+
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
             m_display(Display::get()),
             m_render(0),
             m_ownWindow(false)
         {
-            createSurface(window);
+            createSurface(window, bitsPerPixel);
 
             if(m_window)
             {
@@ -192,9 +156,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Destructor
-         *
-         */
         GlxContext::~GlxContext()
         {
             if(m_render)
@@ -213,9 +174,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Display what has been rendered so far
-         *
-         */
         void GlxContext::display()
         {
             if(m_window)
@@ -224,13 +182,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Activate or deactivate the vertical synchronization
-         *
-         * \param active True to activate, false to deactivate
-         *
-         * \return Return true if success, false otherwise
-         *
-         */
         void GlxContext::enableVsync(bool active)
         {
             if(isSupported(GlxSwapControlEXT))
@@ -247,42 +198,32 @@ namespace Bull
             }
         }
 
-        /*! \brief Get the render surface of the context
-         *
-         * \return Return the render context
-         *
-         */
         SurfaceHandler GlxContext::getSurfaceHandler() const
         {
             return Display::get()->getDefaultScreen();
         }
 
-        /*! \brief Make the context current
-         *
-         * \return Return true if the context is now active, false otherwise
-         *
-         */
         bool GlxContext::makeCurrent()
         {
-            return glXMakeCurrent(Display::get()->getHandler(), m_window, m_render);
+            return glXMakeCurrent(Display::get()->getHandler(), m_window, m_render) == True;
         }
 
-        /*! \brief Create the render surface
-         *
-         * \param handler The window to bind to this context
-         *
-         */
-        void GlxContext::createSurface(WindowHandler handler)
+        void GlxContext::createSurface(WindowHandler handler, unsigned int bitsPerPixel)
         {
+            XSetWindowAttributes attributes;
+            XVisualInfo vi = getBestVisual(bitsPerPixel, m_settings);
+
+            attributes.colormap = XCreateColormap(m_display->getHandler(),
+                                                  m_display->getRootWindow(),
+                                                  vi.visual,
+                                                  AllocNone);
+
+            XChangeWindowAttributes(m_display->getHandler(), handler, CWColormap, &attributes);
+
             m_window = handler;
         }
 
-        /*! \brief Create the render surface
-         *
-         * \param bitsPerPixel The number of bits per pixel to use
-         *
-         */
-        void GlxContext::createSurface(unsigned int bitsPerPixel)
+        void GlxContext::createSurface(unsigned int width, unsigned int height, unsigned int bitsPerPixel)
         {
             XSetWindowAttributes attributes;
             XVisualInfo vi = getBestVisual(bitsPerPixel, m_settings);
@@ -295,7 +236,7 @@ namespace Bull
             m_window = XCreateWindow(m_display->getHandler(),
                                      m_display->getRootWindow(),
                                      0, 0,
-                                     1, 1,
+                                     width, height,
                                      0,
                                      m_display->getDefaultDepth(),
                                      InputOutput,
@@ -306,11 +247,6 @@ namespace Bull
             m_ownWindow = true;
         }
 
-        /*! \brief Create the render context
-         *
-         * \param shared The shared context
-         *
-         */
         void GlxContext::createContext(const std::shared_ptr<GlxContext>& shared)
         {
             int count = 0;

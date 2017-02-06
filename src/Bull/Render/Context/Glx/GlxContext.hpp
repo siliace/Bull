@@ -121,17 +121,18 @@ namespace Bull
 
             /*! \brief Create the render surface
              *
-             * \param handler The window to bind to this context
+             * \param handler      The window to bind to this context
+             * \param bitsPerPixel The number of bits per pixel to use to create colors
              *
              */
-            void createSurface(WindowHandler hanlder);
+            void createSurface(WindowHandler hanlder, unsigned int bitsPerPixel);
 
             /*! \brief Create the render surface
              *
              * \param bitsPerPixel The number of bits per pixel to use
              *
              */
-            void createSurface(unsigned int bitsPerPixel);
+            void createSurface(unsigned int width, unsigned int height, unsigned int bitsPerPixel);
 
             /*! \brief Create the render context
              *

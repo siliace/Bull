@@ -25,7 +25,7 @@ public:                                                                         
 private:                                                                                                                 \
                                                                                                                          \
      ExceptionName() :                                                                                                   \
-         Bull::Exception(message, level)                                                                                    \
+         Bull::Exception(message, level)                                                                                 \
      {                                                                                                                   \
                                                                                                                          \
      }                                                                                                                   \

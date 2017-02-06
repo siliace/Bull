@@ -129,7 +129,7 @@ namespace Bull
         m_mode = mode;
         m_impl.reset(prv::FileImpl::createInstance(m_name, m_mode));
 
-        if(m_impl && mode & (OpeningMode::Read))
+        if(m_impl && (mode & OpeningMode::Read))
         {
             setCursor(0);
         }

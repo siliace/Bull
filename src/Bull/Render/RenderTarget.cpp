@@ -73,38 +73,6 @@ namespace Bull
         setViewport(getDefaultViewport());
     }
 
-    /*! \brief Activate or deactivate the context
-     *
-     * \param active True to activate, false to deactivate the context
-     *
-     * \return Return true if the context's status changed successfully, false otherwise
-     *
-     */
-    bool RenderTarget::setActive(bool active)
-    {
-        if(m_context)
-        {
-            return m_context->setActive(active);
-        }
-
-        return false;
-    }
-
-    /*! \brief Get ContextSettings used to create the context
-     *
-     * \return Return the ContextSettings
-     *
-     */
-    const ContextSettings& RenderTarget::getSettings() const
-    {
-        if(m_context)
-        {
-            return m_context->getSettings();
-        }
-
-        return ContextSettings::Empty;
-    }
-
     /*! \brief Default constructor
      *
      */
