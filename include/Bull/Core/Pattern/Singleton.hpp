@@ -48,7 +48,6 @@ namespace Bull
 
         static Mutex s_mutex;
         static std::unique_ptr<TChild> s_instance;
-
     };
 
     template <typename TChild>
