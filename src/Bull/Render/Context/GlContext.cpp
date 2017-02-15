@@ -1,6 +1,8 @@
 #include <memory>
 #include <set>
 
+#include <Bull/Core/System/Config.hpp>
+#include <Bull/Core/Thread/LocalPtr.hpp>
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
@@ -23,10 +25,11 @@ namespace Bull
         namespace
         {
             Mutex internalsMutex;
+            LocalPtr<GlContext> current(nullptr);
+
             Mutex sharedContextMutex;
             std::shared_ptr<ContextType> shared;
             std::set<std::shared_ptr<Context>> internals;
-            thread_local const GlContext* current(nullptr);
             thread_local std::shared_ptr<Context> internal(nullptr);
 
             std::shared_ptr<Context> getInternalContext()
