@@ -8,6 +8,9 @@
 namespace Bull
 {
     template<typename T>
+    class Rectangle;
+
+    template<typename T>
     struct BULL_API Polygon
     {
         /*! \brief Get a vertex form the polygon
@@ -24,7 +27,16 @@ namespace Bull
          *
          */
         virtual unsigned int getVertexCount() const = 0;
+
+        /*! \brief Get a rectangle representing bounds of the polygon
+         *
+         * \return Bounds of the polygon
+         *
+         */
+        Rectangle<T> getBounds() const;
     };
 }
+
+#include <Bull/Math/Polygon/Polygon.inl>
 
 #endif // BULL_POLYGON_HPP
