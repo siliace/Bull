@@ -120,8 +120,19 @@ namespace Bull
         template<typename U>
         Rectangle& set(const Rectangle<U>& rectangle);
 
+        /*! \brief Get a vertex form the polygon
+         *
+         * \param index The index of the vertex to get
+         *
+         * \return The vertex
+         */
         Vector2<T> getVertex(unsigned int index) const;
 
+        /*! \brief Get the number of vertex in the polygon
+         *
+         * \return The number of vertex
+         *
+         */
         unsigned int getVertexCount() const;
 
         T x, y, width, height;
