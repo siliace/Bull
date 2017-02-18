@@ -33,7 +33,7 @@ namespace Bull
     {
         m_context.reset(prv::GlContext::createInstance(VideoMode(size.x, size.y), settings));
 
-        if(setActive() && m_target.create(m_size))
+        if(m_context->setActive(true) && m_target.create(m_size))
         {
             m_impl.reset(new prv::RenderTextureImplDefault());
 
@@ -68,7 +68,7 @@ namespace Bull
      */
     void RenderTexture::display()
     {
-        if(m_impl && setActive())
+        if(m_impl && m_context->setActive(true))
         {
             m_impl->updateTarget();
         }

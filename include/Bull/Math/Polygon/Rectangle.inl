@@ -1,8 +1,5 @@
 namespace Bull
 {
-    /*! \brief Default constructor
-     *
-     */
     template<typename T>
     Rectangle<T>::Rectangle()
     {
@@ -11,14 +8,6 @@ namespace Bull
         set(0.0, 0.0, 0.0, 0.0);
     }
 
-    /*! \brief Constructor
-     *
-     * \param x      The x coordinate of the top-left corner
-     * \param y      The y coordinate of the top-left corner
-     * \param width  The width of the rectangle
-     * \param height The height of the rectangle
-     *
-     */
     template<typename T>
     template<typename U>
     Rectangle<T>::Rectangle(U x, U y, U width, U height)
@@ -28,11 +17,6 @@ namespace Bull
         set(x, y, width, height);
     }
 
-    /*! \brief Constructor
-     *
-     * \param size The size of the rectangle
-     *
-     */
     template<typename T>
     template<typename U>
     Rectangle<T>::Rectangle(const Vector2<U>& size)
@@ -42,13 +26,6 @@ namespace Bull
         set(size);
     }
 
-    /*! \brief Constructor
-     *
-     * \param topLeft Coordinates of the top left corner of rectangle
-     * \param width   The width of the rectangle
-     * \param height  The height of the rectangle
-     *
-     */
     template<typename T>
     template<typename U>
     Rectangle<T>::Rectangle(const Vector2<U>& topLeft, U width, U height)
@@ -58,12 +35,6 @@ namespace Bull
         set(topLeft, width, height);
     }
 
-    /*! \brief Constructor
-     *
-     * \param topLeft     Coordinates of the top left corner of rectangle
-     * \param bottomRight Coordinates of the top bottom right of rectangle
-     *
-     */
     template<typename T>
     template<typename U>
     Rectangle<T>::Rectangle(const Vector2<U>& topLeft, const Vector2<U>& bottomRight)
@@ -73,11 +44,6 @@ namespace Bull
         set(topLeft, bottomRight);
     }
 
-    /*! \brief Copy constructor
-     *
-     * \param rectangle The rectangle to copy
-     *
-     */
     template<typename T>
     template<typename U>
     Rectangle<T>::Rectangle(const Rectangle<U>& rectangle)
@@ -87,16 +53,6 @@ namespace Bull
         set(rectangle);
     }
 
-    /*! \brief Set the rectangle
-     *
-     * \param x      The x coordinate of the top-left corner
-     * \param y      The y coordinate of the top-left corner
-     * \param width  The width of the rectangle
-     * \param height The height of the rectangle
-     *
-     * \return Return this
-     *
-     */
     template<typename T>
     template<typename U>
     Rectangle<T>& Rectangle<T>::set(U x, U y, U width, U height)
@@ -109,13 +65,6 @@ namespace Bull
         return (*this);
     }
 
-    /*! \brief Set the rectangle
-     *
-     * \param size The size of the rectangle
-     *
-     * \return Return this
-     *
-     */
     template<typename T>
     template<typename U>
     Rectangle<T>& Rectangle<T>::set(const Vector2<U>& size)
@@ -128,15 +77,6 @@ namespace Bull
         return (*this);
     }
 
-    /*! \brief Set the rectangle
-     *
-     * \param topLeft Coordinates of the top left corner of rectangle
-     * \param width   The width of the rectangle
-     * \param height  The height of the rectangle
-     *
-     * \return Return this
-     *
-     */
     template<typename T>
     template<typename U>
     Rectangle<T>& Rectangle<T>::set(const Vector2<U>& topLeft, U width, U height)
@@ -144,14 +84,6 @@ namespace Bull
         return set(topLeft.x, topLeft.y, width, height);
     }
 
-    /*! \brief Set the rectangle
-     *
-     * \param topLeft     Coordinates of the top left corner of rectangle
-     * \param bottomRight Coordinates of the top bottom right of rectangle
-     *
-     * \return Return this
-     *
-     */
     template<typename T>
     template<typename U>
     Rectangle<T>& Rectangle<T>::set(const Vector2<U>& topLeft, const Vector2<U>& bottomRight)
@@ -159,17 +91,28 @@ namespace Bull
         return set(topLeft, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
     }
 
-    /*! \brief Set the rectangle
-     *
-     * \param rectangle The rectangle to copy
-     *
-     * \return Return this
-     *
-     */
     template<typename T>
     template<typename U>
     Rectangle<T>& Rectangle<T>::set(const Rectangle<U>& rectangle)
     {
         return set(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+    }
+
+    template<typename T>
+    Vector2<T> Rectangle<T>::getVertex(unsigned int index) const
+    {
+        switch(index)
+        {
+            case 0: return Vector2<T>(x, y);
+            case 1: return Vector2<T>(x + width, y);
+            case 2: return Vector2<T>(x + width, y + height);
+            case 3: return Vector2<T>(x, y + height);
+        }
+    }
+
+    template<typename T>
+    unsigned int Rectangle<T>::getVertexCount() const
+    {
+        return 4;
     }
 }

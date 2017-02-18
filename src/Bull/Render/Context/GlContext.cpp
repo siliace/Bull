@@ -2,6 +2,7 @@
 #include <set>
 
 #include <Bull/Core/System/Config.hpp>
+#include <Bull/Core/Thread/Local.hpp>
 #include <Bull/Core/Thread/LocalPtr.hpp>
 #include <Bull/Core/Thread/Lock.hpp>
 
@@ -29,14 +30,14 @@ namespace Bull
 
             Mutex sharedContextMutex;
             std::shared_ptr<ContextType> shared;
-            std::set<std::shared_ptr<Context>> internals;
-            thread_local std::shared_ptr<Context> internal(nullptr);
+            std::set<Context*> internals;
+            LocalPtr<Context> internal(nullptr);
 
-            std::shared_ptr<Context> getInternalContext()
+            Context* getInternalContext()
             {
                 if(internal == nullptr)
                 {
-                    internal = std::make_shared<Context>();
+                    internal = new Context();
 
                     Lock lock(internalsMutex);
                     internals.insert(internal);
@@ -67,14 +68,17 @@ namespace Bull
             shared->setActive(false);
         }
 
-         void GlContext::globalCleanup()
-         {
-             Lock lockInternals(internalsMutex);
-             internals.clear();
+        void GlContext::globalCleanup()
+        {
+            Lock lockInternals(internalsMutex);
+            internals.clear();
 
-             Lock lockShared(sharedContextMutex);
-             shared.reset();
-         }
+            Lock lockShared(sharedContextMutex);
+            for(Context* ctx : internals)
+            {
+                delete ctx;
+            }
+        }
 
         void GlContext::ensureContext()
         {

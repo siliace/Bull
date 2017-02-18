@@ -4,10 +4,11 @@
 #include <memory>
 
 #include <Bull/Core/Integer.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Render/Context/Context.hpp>
+#include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Color.hpp>
 #include <Bull/Render/Viewport.hpp>
 
@@ -21,7 +22,7 @@ namespace Bull
         class GlContext;
     }
 
-    class BULL_API RenderTarget : public Context
+    class BULL_API RenderTarget : public ContextResource, public NonCopyable
     {
     public:
 
@@ -46,6 +47,15 @@ namespace Bull
          *
          */
         void clear(const Color& color = Color::Black);
+
+        /*! \brief Activate or deactivate the context
+         *
+         * \param active True to activate, false to deactivate the context
+         *
+         * \return Return true if the context's status changed successfully, false otherwise
+         *
+         */
+        bool setActive(bool active = true);
 
         /*! \brief Change the viewport of the RenderTarget
          *
@@ -78,12 +88,21 @@ namespace Bull
          */
         virtual void display() = 0;
 
+        /*! \brief Get the ContextSettings of the context
+         *
+         * \return Return the ContextSettings
+         *
+         */
+        const ContextSettings& getSettings() const;
+
     protected:
 
         /*! \brief Default constructor
          *
          */
         RenderTarget();
+
+        std::unique_ptr<prv::GlContext> m_context;
 
     private:
 

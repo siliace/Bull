@@ -3,7 +3,7 @@
 
 namespace Bull
 {
-    thread_local Context* Context::s_active;
+    LocalPtr<Context> Context::s_active;
 
     /*! \brief Get the active context in this thread
      *

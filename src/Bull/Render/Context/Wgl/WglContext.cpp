@@ -16,13 +16,6 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Get an OpenGL function
-         *
-         * \param function The function name
-         *
-         * \param Return the function, nullptr if the function is not available
-         *
-         */
         void* WglContext::getFunction(const String& function)
         {
             void* functionProc = reinterpret_cast<void*>(wglGetProcAddress(function));
@@ -42,11 +35,6 @@ namespace Bull
             return reinterpret_cast<void*>(GetProcAddress(module, function));
         }
 
-        /*! \brief Set the list of extensions to load
-         *
-         * \param loader The instance of the extension loader to use
-         *
-         */
         void WglContext::requireExtensions(const ExtensionsLoader::Instance& loader)
         {
             loader->require(WglCreateContext);
@@ -55,15 +43,6 @@ namespace Bull
             loader->require(WglPbuffer);
         }
 
-        /*! \brief Get the best pixel format for a device handler
-         *
-         * \param device       The device handler
-         * \param bitsPerPixel The number of bits per pixel to use to create colors
-         * \param settings     Settings to use to create the OpenGL context
-         *
-         * \return Return the pixel format
-         *
-         */
         int WglContext::getBestPixelFormat(HDC device, unsigned int bitsPerPixel, const ContextSettings& settings, bool usePbuffer)
         {
             int bestPixelFormat = 0;
@@ -180,24 +159,12 @@ namespace Bull
             return bestPixelFormat;
         }
 
-        /*! \brief Constructor
-         *
-         * \param shared The shared context
-         *
-         */
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared) :
             WglContext(shared, VideoMode(1, 1), ContextSettings())
         {
             /// Nothing
         }
 
-        /*! \brief Constructor
-         *
-         * \param shared   The shared context
-         * \param mode     The VideoMode to use to create the context
-         * \param settings Settings to use to create the context
-         *
-         */
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared, const VideoMode& mode, const ContextSettings& settings) :
             GlContext(settings),
             m_device(0),
@@ -215,27 +182,12 @@ namespace Bull
             }
         }
 
-        /*! \brief Constructor
-         *
-         * \param shared The shared context
-         * \param bitsPerPixel The number of bits to use per pixel
-         * \param settings Parameters to create the OpenGL context
-         *
-         */
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings) :
             WglContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
         {
             /// Nothing
         }
 
-        /*! \brief Constructor
-         *
-         * \param shared The shared context
-         * \param window The window to bind the created context
-         * \param bitsPerPixel The number of bits to use per pixel
-         * \param settings Settings to use to create the OpenGL context
-         *
-         */
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
             m_device(0),
@@ -303,13 +255,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Activate or deactivate the vertical synchronization
-         *
-         * \param active True to activate, false to deactivate
-         *
-         * \return Return true if success, false otherwise
-         *
-         */
         void WglContext::enableVsync(bool active)
         {
             if(isLoaded(WglSwapControl))
@@ -318,21 +263,11 @@ namespace Bull
             }
         }
 
-        /*! \brief Make the context current
-         *
-         * \return Return true if the context is now active, false otherwise
-         *
-         */
         bool WglContext::makeCurrent()
         {
             return wglMakeCurrent(m_device, m_render);
         }
 
-        /*! \brief Create the render surface
-         *
-         * \param window The window to bind to the context
-         *
-         */
         void WglContext::createSurface(WindowHandler window)
         {
             m_window = window;
@@ -340,14 +275,6 @@ namespace Bull
             m_device = GetDC(m_window);
         }
 
-        /*! \brief Create the render surface
-         *
-         * \param shared       The shared render context
-         * \param width        The width of the surface
-         * \param height       The height of the surface
-         * \param bitsPerPixel Number of bits per pixel to use
-         *
-         */
         void WglContext::createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, unsigned int bitsPerPixel)
         {
             if(isLoaded(WglPbuffer) && shared)
@@ -387,11 +314,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Set the best pixel format
-         *
-         * \param bitsPerPixel Number of bits per pixel to use
-         *
-         */
         void WglContext::setPixelFormat(unsigned int bitsPerPixel)
         {
             PIXELFORMATDESCRIPTOR descriptor;
@@ -404,11 +326,6 @@ namespace Bull
             SetPixelFormat(m_device, bestFormat, &descriptor);
         }
 
-        /*! \brief Create the render context
-         *
-         * \param shared The shared render context
-         *
-         */
         void WglContext::createContext(const std::shared_ptr<WglContext>& shared)
         {
             HGLRC sharedHandler = shared ? shared->m_render : 0;
@@ -481,9 +398,6 @@ namespace Bull
             updateSettings();
         }
 
-        /*! \brief Update settings according to the pixel format
-         *
-         */
         void WglContext::updateSettings()
         {
             int pixelFormat = GetPixelFormat(m_device);

@@ -31,7 +31,7 @@ namespace Bull
 
     private:
 
-        static thread_local Context* s_active;
+        static LocalPtr<Context> s_active;
 
     public:
 

@@ -51,11 +51,6 @@ namespace Bull
     {
         unsigned int position = x * y * 4;
 
-        if(position > m_size.x * m_size.y * 4)
-        {
-            ThrowException(OutOfRange);
-        }
-
         m_pixels[position]     = color.red;
         m_pixels[position + 1] = color.green;
         m_pixels[position + 2] = color.blue;
@@ -65,11 +60,6 @@ namespace Bull
     Color Image::get(unsigned int x, unsigned int y) const
     {
         unsigned int position = x * y * 4;
-
-        if(position > m_size.x * m_size.y * 4)
-        {
-            ThrowException(OutOfRange);
-        }
 
         Uint8 red   = m_pixels[position];
         Uint8 green = m_pixels[position + 1];

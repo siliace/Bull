@@ -5,12 +5,13 @@
 
 #include <Bull/Core/System/Export.hpp>
 
+#include <Bull/Math/Polygon/Polygon.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {
     template<typename T>
-    struct BULL_API Rectangle
+    struct BULL_API Rectangle : public Polygon<T>
     {
         /*! \brief Default constructor
          *
@@ -109,7 +110,6 @@ namespace Bull
         template<typename U>
         Rectangle& set(const Vector2<U>& topLeft, const Vector2<U>& bottomRight);
 
-
         /*! \brief Set the rectangle
          *
          * \param rectangle The rectangle to copy
@@ -119,6 +119,10 @@ namespace Bull
          */
         template<typename U>
         Rectangle& set(const Rectangle<U>& rectangle);
+
+        Vector2<T> getVertex(unsigned int index) const;
+
+        unsigned int getVertexCount() const;
 
         T x, y, width, height;
     };

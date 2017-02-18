@@ -3,8 +3,6 @@
 
 #include <winsock2.h>
 
-#include <Bull/Core/Exception.hpp>
-
 namespace Bull
 {
     namespace prv

@@ -2,7 +2,6 @@
 #define Bull_FileLogger_hpp
 
 #include <Bull/Core/AbstractLogger.hpp>
-#include <Bull/Core/Exception.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 
 namespace Bull
@@ -22,8 +21,6 @@ namespace Bull
          *
          */
         FileLogger(const String& filename);
-
-        DeclarePublicException(FailToOpenLog, "The log file could not be created or opened", Log::Level::Critical);
 
     protected:
 

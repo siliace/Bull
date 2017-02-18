@@ -4,6 +4,7 @@
 #include <Bull/Core/Time/Clock.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
+#include <Bull/Render/Context/ContextSettings.hpp>
 #include <Bull/Render/RenderTarget.hpp>
 
 #include <Bull/Utility/Window/VideoMode.hpp>
@@ -64,8 +65,6 @@ namespace Bull
         /*! \brief Activate or deactivate the vertical synchronization
          *
          * \param active True to activate, false to deactivate
-         *
-         * \return Return true if success, false otherwise
          *
          */
         void enableVsync(bool active);

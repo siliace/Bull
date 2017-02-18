@@ -3,7 +3,6 @@
 
 #include <vector>
 
-#include <Bull/Core/Exception.hpp>
 #include <Bull/Core/Integer.hpp>
 #include <Bull/Core/System/Export.hpp>
 
@@ -123,8 +122,6 @@ namespace Bull
 
         std::vector<Uint8> m_pixels;
         Vector2UI          m_size;
-
-        DeclarePublicException(OutOfRange, "The given index is out of range", Log::Critical);
     };
 }
 

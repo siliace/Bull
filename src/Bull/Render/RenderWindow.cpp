@@ -7,22 +7,11 @@
 
 namespace Bull
 {
-    /*! \brief Default constructor
-     *
-     */
     RenderWindow::RenderWindow()
     {
         m_clock.start();
     }
 
-    /*! \brief Constructor
-     *
-     * \param mode     The VideoMode
-     * \param title    The title of the window
-     * \param style    The window decorations
-     * \param settings Settings to use to create the OpenGL context
-     *
-     */
     RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
         m_clock.start();
@@ -30,16 +19,6 @@ namespace Bull
         open(mode, title, style, settings);
     }
 
-    /*! \brief Open the window. If a window was already opened, its closed
-     *
-     * \param mode     The VideoMode
-     * \param title    The title of the window
-     * \param style    The window decorations
-     * \param settings Settings to use to create the OpenGL context
-     *
-     * \return Return true if the window was open successfully, false otherwise
-     *
-     */
     bool RenderWindow::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
         if(!Window::open(mode, title, style))
@@ -52,9 +31,6 @@ namespace Bull
         return true;
     }
 
-    /*! \brief Display what has been rendered so far
-     *
-     */
     void RenderWindow::display()
     {
         if(m_frameDelay != Time::Zero && m_frameDelay > m_clock.getElapsedTime())
@@ -70,11 +46,6 @@ namespace Bull
         m_clock.restart();
     }
 
-    /*! \brief Set the maximum framerate of the RenderWindow
-     *
-     * \param limit The maximum
-     *
-     */
     void RenderWindow::setFramerateLimit(unsigned int limit)
     {
         if(limit)
@@ -87,11 +58,6 @@ namespace Bull
         }
     }
 
-    /*! \brief Get the maximum framerate of the RenderWindow
-     *
-     * \param limit The maximum
-     *
-     */
     unsigned int RenderWindow::getFramerateLimit() const
     {
         if(m_frameDelay != Time::Zero)
@@ -102,13 +68,6 @@ namespace Bull
         return 0;
     }
 
-    /*! \brief Activate or deactivate the vertical synchronization
-     *
-     * \param active True to activate, false to deactivate
-     *
-     * \return Return true if success, false otherwise
-     *
-     */
     void RenderWindow::enableVsync(bool active)
     {
         if(setActive())
@@ -117,11 +76,6 @@ namespace Bull
         }
     }
 
-    /*! \brief Get the default viewport of the RenderTarget
-     *
-     * \return Return the viewport
-     *
-     */
     Viewport RenderWindow::getDefaultViewport() const
     {
         Viewport viewport;

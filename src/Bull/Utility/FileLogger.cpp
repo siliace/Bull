@@ -11,10 +11,7 @@ namespace Bull
     FileLogger::FileLogger(const String& filename) :
         m_logFile(filename, File::Truncate | File::Write)
     {
-        if(!m_logFile.isOpen())
-        {
-            ThrowException(FailToOpenLog);
-        }
+        /// Nothing
     }
 
     void FileLogger::write(const String& entry)
