@@ -1,5 +1,5 @@
-#ifndef BULL_CIRCULARPOLYGON_HPP
-#define BULL_CIRCULARPOLYGON_HPP
+#ifndef BULL_REGULARPOLYGON_HPP
+#define BULL_REGULARPOLYGON_HPP
 
 #include <array>
 
@@ -9,14 +9,14 @@
 namespace Bull
 {
     template<typename T, std::size_t S>
-    class CircularPolygon : public Polygon<T>
+    class RegularPolygon : public Polygon<T>
     {
     public:
 
         /*! \brief Default constructor
          *
          */
-        CircularPolygon();
+        RegularPolygon();
 
         /*! \brief Constructor
          *
@@ -26,7 +26,7 @@ namespace Bull
          *
          */
         template<typename U, typename V, typename W = T>
-        CircularPolygon(const Vector2<U>& center, V radius = 0.0, const Angle<W>& rotation = Angle<W>::Zero);
+        RegularPolygon(const Vector2<U>& center, V radius = 0.0, const Angle<W>& rotation = Angle<W>::Zero);
 
         /*! \brief Get a vertex form the polygon
          *
@@ -51,7 +51,7 @@ namespace Bull
          *
          */
         template<typename U>
-        CircularPolygon<T, S>& setCenter(const Vector2<U>& center);
+        RegularPolygon<T, S>& setCenter(const Vector2<U>& center);
 
         /*! \brief Get the center of the polygon
          *
@@ -59,6 +59,11 @@ namespace Bull
          *
          */
         Vector2<T> getCenter() const;
+
+        template<typename U>
+        RegularPolygon<T, S>& setRotation(const Angle<U>& rotation);
+
+        const Angle<T>& getAngle() const;
 
         /*! \brief Set the radius of the polygon
          *
@@ -68,7 +73,7 @@ namespace Bull
          *
          */
         template<typename U>
-        CircularPolygon<T, S>& setRadius(U radius);
+        RegularPolygon<T, S>& setRadius(U radius);
 
         /*! \brief Get the radius of the polygon
          *
@@ -91,6 +96,6 @@ namespace Bull
     };
 }
 
-#include <Bull/Math/Polygon/CircularPolygon.inl>
+#include <Bull/Math/Polygon/RegularPolygon.inl>
 
-#endif // BULL_CIRCULARPOLYGON_HPP
+#endif // BULL_REGULARPOLYGON_HPP

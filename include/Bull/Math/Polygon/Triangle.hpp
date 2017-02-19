@@ -2,12 +2,12 @@
 #define BULL_TRIANGLE_HPP
 
 #include <Bull/Math/Angle.hpp>
-#include <Bull/Math/Polygon/CircularPolygon.hpp>
+#include <Bull/Math/Polygon/RegularPolygon.hpp>
 
 namespace Bull
 {
     template<typename T>
-    struct Triangle : public CircularPolygon<T, 3>
+    struct Triangle : public RegularPolygon<T, 3>
     {
         /*! \brief Default constructor
          *
