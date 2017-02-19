@@ -7,6 +7,7 @@
 #include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
+#include <Bull/Render/OpenGL.hpp>
 
 namespace Bull
 {
@@ -16,15 +17,15 @@ namespace Bull
 
         enum Type
         {
-            Array   = 0x8892,
-            Element = 0x8893,
+            Array   = GL_ARRAY_BUFFER,
+            Element = GL_ELEMENT_ARRAY_BUFFER,
         };
 
         enum Usage
         {
-            StaticDraw  = 0x88E4,
-            DynamicDraw = 0x88E8,
-            StreamDraw  = 0x88E0,
+            StaticDraw  = GL_STATIC_DRAW,
+            DynamicDraw = GL_DYNAMIC_DRAW,
+            StreamDraw  = GL_STREAM_DRAW,
         };
 
         /*! \brief Bind a buffer

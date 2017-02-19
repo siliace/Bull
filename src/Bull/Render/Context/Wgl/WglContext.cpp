@@ -244,9 +244,6 @@ namespace Bull
             return m_device;
         }
 
-        /*! \brief Display what has been rendered so far
-         *
-         */
         void WglContext::display()
         {
             if(m_device && m_render)
@@ -343,7 +340,7 @@ namespace Bull
 
                     if(isSupported("WGL_ARB_create_context_profile"))
                     {
-                        int profile = (m_settings.flags & ContextSettings::Compatibility)  ? WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : WGL_CONTEXT_CORE_PROFILE_BIT_ARB;
+                        int profile = (m_settings.flags & ContextSettings::Compatibility) ? WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : WGL_CONTEXT_CORE_PROFILE_BIT_ARB;
                         int flags   = 0;
 
                         if(m_settings.flags & ContextSettings::Debug)
