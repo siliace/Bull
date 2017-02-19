@@ -1,6 +1,11 @@
 #ifndef Bull_Constants_hpp
 #define Bull_Constants_hpp
 
-#define Pi 3.14159265359
+#include <cmath>
+
+namespace Bull
+{
+    constexpr float Pi = std::acos(-1);
+}
 
 #endif // Bull_Constants_hpp

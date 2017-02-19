@@ -126,14 +126,14 @@ namespace Bull
          *
          * \return The vertex
          */
-        Vector2<T> getVertex(unsigned int index) const;
+        Vector2<T> getVertex(std::size_t index) const override;
 
         /*! \brief Get the number of vertex in the polygon
          *
          * \return The number of vertex
          *
          */
-        unsigned int getVertexCount() const;
+        std::size_t getVertexCount() const override;
 
         T x, y, width, height;
     };

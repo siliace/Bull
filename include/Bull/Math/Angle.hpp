@@ -35,7 +35,7 @@ namespace Bull
         template<typename U>
         static Angle<T> degree(U angle);
 
-        static constexpr Angle<T> Zero = Angle();
+        static Angle<T> Zero;
 
     public:
 
@@ -288,6 +288,9 @@ namespace Bull
     typedef Angle<float>        AngleF;
     typedef Angle<double>       AngleD;
     typedef Angle<unsigned int> AngleUI;
+
+    template<typename T>
+    Angle<T> Angle<T>::Zero = Angle<T>();
 }
 
 namespace std
