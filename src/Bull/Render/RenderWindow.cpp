@@ -7,20 +7,20 @@
 
 namespace Bull
 {
-    RenderWindow::RenderWindow()
+    RenderWindow::RenderWindow(const ContextSettings& settings)
     {
-        m_clock.start();
+        open(VideoMode::getCurrent(), "", Style::Fullscreen, settings);
     }
 
     RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
-        m_clock.start();
-
         open(mode, title, style, settings);
     }
 
     bool RenderWindow::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
+        m_clock.start();
+
         if(!Window::open(mode, title, style))
         {
             return false;

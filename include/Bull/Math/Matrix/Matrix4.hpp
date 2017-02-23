@@ -377,6 +377,7 @@ namespace Bull
 
     typedef Matrix4<int> Matrix4I;
     typedef Matrix4<float> Matrix4F;
+    typedef Matrix4<double> Matrix4D;
     typedef Matrix4<unsigned int> Matrix4UI;
 }
 

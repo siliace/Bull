@@ -19,7 +19,9 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        RenderWindow();
+        RenderWindow() = default;
+
+        RenderWindow(const ContextSettings& settings);
 
         /*! \brief Constructor
          *

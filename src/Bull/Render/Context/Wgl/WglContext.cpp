@@ -205,9 +205,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Destructor
-         *
-         */
         WglContext::~WglContext()
         {
             if(m_render)

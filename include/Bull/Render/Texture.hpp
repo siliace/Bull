@@ -8,7 +8,6 @@
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
-#include <Bull/Render/OpenGL.hpp>
 
 #include <Bull/Utility/Image.hpp>
 
@@ -23,7 +22,7 @@ namespace Bull
          * \param texture The texture to bind
          *
          */
-        static void bind(const Texture& texture);
+        static void bind(const Texture* texture);
 
         /*! \brief Unbind any texture
          *

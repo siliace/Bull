@@ -9,6 +9,7 @@
 
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Color.hpp>
+#include <Bull/Render/Texture.hpp>
 
 namespace Bull
 {
@@ -128,6 +129,8 @@ namespace Bull
          *
          */
         bool loadFromStream(InStream& stream, Type type, String* error = nullptr);
+
+        bool setUniform(const String& name, int uniform);
 
         /*! \brief Set an uniform variable
          *

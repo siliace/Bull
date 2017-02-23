@@ -23,7 +23,7 @@ namespace Bull
          */
         Clock();
 
-        /*!\brief == operator override
+        /*! \brief == operator override
          *
          * \param right The clock to test
          *
@@ -32,7 +32,7 @@ namespace Bull
          */
         bool operator==(const Clock& right) const;
 
-        /*!\brief != operator override
+        /*! \brief != operator override
          *
          * \param right The clock to test
          *
