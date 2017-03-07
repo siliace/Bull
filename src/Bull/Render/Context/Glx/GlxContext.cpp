@@ -56,7 +56,7 @@ namespace Bull
                 GLX_DEPTH_SIZE    , settings.depths,
                 GLX_STENCIL_SIZE  , settings.stencil,
                 GLX_DOUBLEBUFFER  , True,
-                GLX_SAMPLE_BUFFERS, settings.antialiasing == 0 ? 0 : 1,
+                GLX_SAMPLE_BUFFERS, settings.antialiasing ? 1 : 0,
                 GLX_SAMPLES       , settings.antialiasing,
                 0
             };
@@ -179,7 +179,18 @@ namespace Bull
 
         void GlxContext::enableVsync(bool active)
         {
-
+            if(isSupported(GlxSwapControlEXT))
+            {
+                ext::glXSwapInterval(m_display->getHandler(), m_window, active ? 1 : 0);
+            }
+            else if(isSupported(GlxSwapControlMESA))
+            {
+                mesa::glXSwapInterval(active ? 1 : 0);
+            }
+            else if(isSupported(GlxSwapControlSGI))
+            {
+                sgi::glXSwapInterval(active ? 1 : 0);
+            }
         }
 
         SurfaceHandler GlxContext::getSurfaceHandler() const
