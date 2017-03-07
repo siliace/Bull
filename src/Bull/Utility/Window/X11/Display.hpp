@@ -5,7 +5,6 @@
 
 #include <X11/Xlib.h>
 
-#include <Bull/Core/Exception.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
 #include <Bull/Core/String.hpp>
 
@@ -101,8 +100,6 @@ namespace Bull
 
             ::Display* m_display;
             std::map<String, Atom> m_atoms;
-
-            DeclarePublicException(FailToOpenDisplay, "Failed to open X11 display", Log::Critical);
         };
     }
 }

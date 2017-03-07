@@ -14,6 +14,8 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
+#include <Bull/Render/Context/ContextSettings.hpp>
+
 #include <Bull/Utility/Window/VideoMode.hpp>
 #include <Bull/Utility/Window/WindowHandler.hpp>
 
@@ -362,6 +364,22 @@ namespace Bull
          *
          */
         WindowHandler getSystemHandler() const;
+
+    protected:
+
+        /*! \brief Open a window
+         *
+         * This method takes a ContextSettings as parameter
+         * but this value is used only on X11 implementation
+         * that required to know the pixel format to be able
+         * to bind an OpenGL context on this window
+         *
+         * \param mode  The VideoMode
+         * \param title The title of the window
+         * \param style The window decorations
+         *
+         */
+        bool open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
 
     private:
 

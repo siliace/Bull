@@ -21,6 +21,13 @@ namespace Bull
          */
         RenderWindow() = default;
 
+        /*! \brief Constructor
+         *
+         * Create a fullscreen RenderWindow
+         *
+         * \param settings Settings to use to create the OpenGL context
+         *
+         */
         RenderWindow(const ContextSettings& settings);
 
         /*! \brief Constructor

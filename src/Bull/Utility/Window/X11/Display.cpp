@@ -10,10 +10,7 @@ namespace Bull
         Display::Display() :
             m_display(XOpenDisplay(nullptr))
         {
-            if(!m_display)
-            {
-                ThrowException(FailToOpenDisplay);
-            }
+            /// Nothing
         }
 
         /*! \brief Destructor

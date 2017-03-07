@@ -25,14 +25,14 @@ namespace Bull
 
             /*! \brief Create a OS specific WindowImpl instance
              *
-             * \param mode The VideoMode to use to create the window
+             * \param mode  The VideoMode to use to create the window
              * \param title The title of the window
              * \param style The style to use to create the window
              *
              * \return Return the created instance
              *
              */
-            static WindowImpl* createInstance(const VideoMode& mode, const String& title, Uint32 style);
+            static WindowImpl* createInstance(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
 
         public:
 

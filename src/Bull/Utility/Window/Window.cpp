@@ -17,24 +17,7 @@ namespace Bull
 
     bool Window::open(const VideoMode& mode, const String& title, Uint32 style)
     {
-        if(isOpen())
-        {
-            close();
-        }
-
-        if(style == Style::Fullscreen && m_fullscreen)
-        {
-            style = Style::Default;
-        }
-
-        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style));
-
-        if(style == Style::Fullscreen)
-        {
-            enableFullscreen();
-        }
-
-        return true;
+        return open(mode, title, style, ContextSettings::Worst);
     }
 
     Window::~Window()
@@ -271,5 +254,27 @@ namespace Bull
         }
 
         return 0;
+    }
+
+    bool Window::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+    {
+        if(isOpen())
+        {
+            close();
+        }
+
+        if(style == Style::Fullscreen && m_fullscreen)
+        {
+            style = Style::Default;
+        }
+
+        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style, settings));
+
+        if(style == Style::Fullscreen)
+        {
+            enableFullscreen();
+        }
+
+        return true;
     }
 }

@@ -21,7 +21,7 @@ namespace Bull
     {
         m_clock.start();
 
-        if(!Window::open(mode, title, style))
+        if(!Window::open(mode, title, style, settings))
         {
             return false;
         }

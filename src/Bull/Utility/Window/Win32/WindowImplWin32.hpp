@@ -64,7 +64,7 @@ namespace Bull
              * \param style The window decoration
              *
              */
-            WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style);
+            WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
 
             /*! \brief Destructor
              *

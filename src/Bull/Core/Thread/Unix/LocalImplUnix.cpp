@@ -40,15 +40,5 @@ namespace Bull
         {
             return pthread_getspecific(m_handler);
         }
-
-        /*! \brief Get the system native handler
-         *
-         * \return Return the system native handler
-         *
-         */
-        LocalHandler LocalImplUnix::getSystemHandler() const
-        {
-            return m_handler;
-        }
     }
 }

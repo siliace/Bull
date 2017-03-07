@@ -1,3 +1,6 @@
+#include <Bull/Render/Context/Glx/GlxContext.hpp>
+
+#include <Bull/Utility/Window/X11/ErrorHandler.hpp>
 #include <Bull/Utility/Window/X11/WindowImplX11.hpp>
 
 #ifndef Button6
@@ -31,35 +34,45 @@ namespace Bull
 
         }
 
-        WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style) :
+        WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings) :
             m_display(Display::get()),
             m_handler(0),
             m_isMapped(false)
         {
-            XSetWindowAttributes attribs;
-            attribs.event_mask       = eventMasks;
-            attribs.background_pixel = 0;
-            attribs.border_pixel     = 0;
+            XVisualInfo*         vi;
+            GLXFBConfig          config;
+            ErrorHandler         handler;
+            XSetWindowAttributes attributes;
+
+            config = GlxContext::chooseBestConfig(m_display, settings, mode.bitsPerPixel);
+
+            vi = glXGetVisualFromFBConfig(m_display->getHandler(), config);
+
+            m_colormap = XCreateColormap(m_display->getHandler(), m_display->getRootWindow(vi->screen), vi->visual, AllocNone);
+
+            attributes.event_mask        = eventMasks;
+            attributes.background_pixmap = 0;
+            attributes.border_pixel      = 0;
+            attributes.colormap          = m_colormap;
 
             m_handler = XCreateWindow(m_display->getHandler(),
-                                      m_display->getRootWindow(),
+                                      m_display->getRootWindow(vi->screen),
                                       0, 0,
                                       mode.width, mode.height,
                                       0,
-                                      CopyFromParent,
+                                      vi->depth,
                                       InputOutput,
-                                      nullptr,
-                                      CWBorderPixel | CWColormap | CWEventMask | CWBackPixel,
-                                      &attribs);
-
+                                      vi->visual,
+                                      CWBorderPixel | CWColormap | CWEventMask,
+                                      &attributes);
             setProtocols();
 
             setTitle(title);
+
             m_lastPosition = getPosition();
             m_lastSize     = getSize();
-            setVisible(true);
 
-            m_display->flush();
+            setVisible(true);
         }
 
         WindowImplX11::~WindowImplX11()
@@ -68,6 +81,8 @@ namespace Bull
             {
                 XDestroyWindow(m_display->getHandler(), m_handler);
             }
+
+            XFreeColormap(m_display->getHandler(), m_colormap);
         }
 
         void WindowImplX11::startProcessEvents()
@@ -383,13 +398,7 @@ namespace Bull
 
         void WindowImplX11::setProtocols()
         {
-            Atom wmProtocols = m_display->getAtom("WM_PROTOCOLS");
             Atom wmDeleteWindow = m_display->getAtom("WM_DELETE_WINDOW");
-
-            if(!wmProtocols)
-            {
-                ThrowException(FailToGetProtocolsAtom);
-            }
 
             XSetWMProtocols(m_display->getHandler(), m_handler, &wmDeleteWindow, 1);
         }

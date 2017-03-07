@@ -2,6 +2,8 @@
 
 #include <X11/extensions/Xrandr.h>
 
+#include <Bull/Core/Log.hpp>
+
 #include <Bull/Utility/Window/X11/Display.hpp>
 #include <Bull/Utility/Window/X11/VideoModeImpl.hpp>
 

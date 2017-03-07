@@ -1,6 +1,8 @@
 #ifndef Bull_LocalImplUnix_hpp
 #define Bull_LocalImplUnix_hpp
 
+#include <pthread.h>
+
 #include <Bull/Core/Thread/LocalImpl.hpp>
 
 namespace Bull
@@ -35,12 +37,6 @@ namespace Bull
              */
             void* get() const override;
 
-            /*! \brief Get the system native handler
-             *
-             * \return Return the system native handler
-             *
-             */
-            LocalHandler getSystemHandler() const override;
 
         private:
 

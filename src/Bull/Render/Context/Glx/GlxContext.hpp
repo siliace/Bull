@@ -4,8 +4,6 @@
 #include <GL/glx.h>
 #include <X11/Xlib.h>
 
-#include <Bull/Core/Exception.hpp>
-
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
 
@@ -35,15 +33,15 @@ namespace Bull
              */
             static void requireExtensions(const ExtensionsLoader::Instance& loader);
 
-            /*! \brief Determine the best XVisualInfo
+            /*! \brief Get the best config according to context settings
              *
-             * \param bitsPerPixel Number of bits per pixel
-             * \param settings     Settings to use to create the OpenGL context
+             * \param settings     Context settings
+             * \param bitsPerPixel The number of bits per pixel to use
              *
-             * \return The XVisualInfo
+             * \return The best config
              *
              */
-            static XVisualInfo getBestVisual(unsigned int bitsPerPixel, const ContextSettings& settings);
+            static GLXFBConfig chooseBestConfig(Display::Instance display, const ContextSettings& settings, unsigned int bitsPerPixel);
 
         public:
 
@@ -121,14 +119,15 @@ namespace Bull
 
             /*! \brief Create the render surface
              *
-             * \param handler      The window to bind to this context
-             * \param bitsPerPixel The number of bits per pixel to use to create colors
+             * \param handler The window to bind to this context
              *
              */
-            void createSurface(WindowHandler hanlder, unsigned int bitsPerPixel);
+            void createSurface(WindowHandler handler);
 
             /*! \brief Create the render surface
              *
+             * \param width        The width of the surface
+             * \param height       The height of the surface
              * \param bitsPerPixel The number of bits per pixel to use
              *
              */
@@ -141,9 +140,11 @@ namespace Bull
              */
             void createContext(const std::shared_ptr<GlxContext>& shared);
 
-            Display::Instance m_display;
-            WindowHandler     m_window;
+            Window            m_window;
             GLXContext        m_render;
+            GLXFBConfig       m_config;
+            Display::Instance m_display;
+            bool              m_isDirect;
             bool              m_ownWindow;
         };
     }

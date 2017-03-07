@@ -4,6 +4,7 @@
 #include <X11/Xlib.h>
 
 #include <Bull/Core/Thread/Lock.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Utility/Window/X11/Display.hpp>
 
@@ -11,7 +12,7 @@ namespace Bull
 {
     namespace prv
     {
-        class ErrorHandler : public Singleton<ErrorHandler>
+        class ErrorHandler : public NonCopyable
         {
         public:
 
@@ -41,6 +42,8 @@ namespace Bull
              */
             ~ErrorHandler();
 
+        private:
+
             /*! \brief Start to listen errors to handle
              *
              */
@@ -51,27 +54,9 @@ namespace Bull
              */
             void close();
 
-            /*! \brief Get the message associated to the last error
-             *
-             * \return Return the message
-             *
-             */
-            String getMessage() const;
-
-            /*! \brief Get the code of the last error
-             *
-             * \return Return the code
-             *
-             */
-            unsigned int getCode() const;
-
-        private:
-
             Lock          m_lock;
-            String        m_message;
-            unsigned int  m_code;
-            XErrorHandler m_previousHandler;
             bool          m_isBinded;
+            XErrorHandler m_previousHandler;
         };
     }
 }

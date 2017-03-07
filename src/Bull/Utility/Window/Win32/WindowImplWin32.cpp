@@ -40,11 +40,6 @@ namespace Bull
             unsigned int instanceCounter = 0;
         }
 
-        /*! \brief Register the window class
-         *
-         * \return Return true if the class was registered successfully, false otherwise
-         *
-         */
         bool WindowImplWin32::registerWindowClass()
         {
             WNDCLASSEXW winClass;
@@ -65,16 +60,6 @@ namespace Bull
             return RegisterClassExW(&winClass);
         }
 
-        /*! \brief Window callback event
-         *
-         * \param handler The window concerned by the event
-         * \param message The windows message
-         * \param wParam The WPARAM
-         * \param lParam The LPARAM
-         *
-         * \return Return 0 if the message was WM_CLOSE, a value to continue otherwise
-         *
-         */
         LRESULT CALLBACK WindowImplWin32::globalEvent(HWND handler, UINT message, WPARAM wParam, LPARAM lParam)
         {
             WindowImplWin32* windowImpl = reinterpret_cast<WindowImplWin32*>(GetWindowLong(handler, GWL_USERDATA));
@@ -92,13 +77,6 @@ namespace Bull
             return DefWindowProc(handler, message, wParam, lParam);
         }
 
-        /*! \brief Convert a windows key value to a Bull::Keyboard::Key
-         *
-         * \param vkey To VK to convert
-         *
-         * \return Return the Bull::Keyboard::Key equivalent
-         *
-         */
         Keyboard::Key WindowImplWin32::convertVKToBullkey(WPARAM vkey)
         {
             switch(vkey)
@@ -226,13 +204,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Convert a Bull::Window::Style to a WS
-         *
-         * \param style The Bull::Window::Style to convert
-         *
-         * \return Return the WS equivalent
-         *
-         */
         DWORD WindowImplWin32::computeStyle(Uint32 style)
         {
             DWORD windowStyle = 0;
@@ -265,14 +236,7 @@ namespace Bull
             return windowStyle;
         }
 
-        /*! \brief Constructor
-         *
-         * \param mode The VideoMode to use
-         * \param title The title to use in the window
-         * \param style The window decoration
-         *
-         */
-        WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style) :
+        WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& /*settings*/) :
             m_isResizing(false)
         {
             DWORD winStyle = computeStyle(style);
@@ -320,9 +284,6 @@ namespace Bull
             instanceCounter += 1;
         }
 
-        /*! \brief Destructor
-         *
-         */
         WindowImplWin32::~WindowImplWin32()
         {
             instanceCounter -= 1;
@@ -335,9 +296,6 @@ namespace Bull
             DestroyWindow(m_handler);
         }
 
-        /*! \brief Process events stacked so far
-         *
-         */
         void WindowImplWin32::startProcessEvents()
         {
             MSG message;
@@ -349,37 +307,21 @@ namespace Bull
             }
         }
 
-        /*! \brief Minimize a window
-         *
-         */
         void WindowImplWin32::minimize()
         {
             ShowWindow(m_handler, SW_SHOWMINIMIZED);
         }
 
-        /*! \brief Check if the window is minimized
-         *
-         * \return Return true if the window is minimized, false otherwise
-         *
-         */
         bool WindowImplWin32::isMinimized() const
         {
             return IsIconic(m_handler);
         }
 
-        /*! \brief Maximize a window
-         *
-         */
         void WindowImplWin32::maximize()
         {
             ShowWindow(m_handler, SW_SHOWMAXIMIZED);
         }
 
-        /*! \brief Check if the window is maximized
-         *
-         * \return Return true if the window is minimized, false otherwise
-         *
-         */
         bool WindowImplWin32::isMaximized() const
         {
             WINDOWPLACEMENT placement;
@@ -390,11 +332,6 @@ namespace Bull
             return placement.showCmd == SW_MAXIMIZE;
         }
 
-        /*! \brief Enable or disable the capture of the cursor inside the window
-         *
-         * \param enable The state of the capture
-         *
-         */
         void WindowImplWin32::enableCaptureCursor(bool capture)
         {
             if(capture)
@@ -411,31 +348,16 @@ namespace Bull
             }
         }
 
-        /*! \brief Hide or show the cursor
-         *
-         * \param enable The state of the cursor
-         *
-         */
         void WindowImplWin32::showCursor(bool enable)
         {
             ShowCursor(enable);
         }
 
-        /*! \brief Set the size of the window
-         *
-         * \param size The new size of the window
-         *
-         */
         void WindowImplWin32::setPosition(const Vector2I& position)
         {
             SetWindowPos(m_handler, 0, position.x, position.y, 0, 0, SWP_NOSIZE);
         }
 
-        /*! \brief Get the position in the screen of the window
-         *
-         * \return Return the window position
-         *
-         */
         Vector2I WindowImplWin32::getPosition() const
         {
             RECT r;
@@ -445,21 +367,11 @@ namespace Bull
             return Vector2I(r.left, r.top);
         }
 
-        /*! \brief Set the size of the window
-         *
-         * \param size The new size of the window
-         *
-         */
         void WindowImplWin32::setSize(const Vector2UI& size)
         {
             SetWindowPos(m_handler, 0, 0, 0, size.x, size.y, SWP_NOMOVE);
         }
 
-        /*! \brief Get the size of the window
-         *
-         * \return Return the size of the window
-         *
-         */
         Vector2UI WindowImplWin32::getSize() const
         {
             RECT r;
@@ -469,21 +381,11 @@ namespace Bull
             return Vector2UI(r.right - r.left, r.bottom - r.top);
         }
 
-        /*! \brief Set the title of the window
-         *
-         * \param title The title to set to the window
-         *
-         */
         void WindowImplWin32::setTitle(const String& title)
         {
             SetWindowTextW(m_handler, reinterpret_cast<LPCWSTR>(static_cast<const char*>(title)));
         }
 
-        /*! \brief Get the title of the window
-         *
-         * \return Return the title of the window
-         *
-         */
         String WindowImplWin32::getTitle() const
         {
             wchar_t* titleBuffer = new wchar_t[1024];
@@ -498,21 +400,11 @@ namespace Bull
             return title;
         }
 
-        /*! \brief Check if the window has the focus
-         *
-         * \param Return true if the window has the focus, false otherwise
-         *
-         */
         bool WindowImplWin32::hasFocus() const
         {
             return GetFocus() == m_handler;
         }
 
-        /*! \brief Enter or leave the fullscreen mode
-         *
-         * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
-         *
-         */
         void WindowImplWin32::switchFullscreen(bool fullscreen)
         {
             if(fullscreen)
@@ -551,33 +443,16 @@ namespace Bull
             }
         }
 
-        /*! \brief Show or hide the window
-         *
-         * \param visible True to show the window, false to hide the window
-         *
-         */
         void WindowImplWin32::setVisible(bool visible)
         {
             ShowWindow(m_handler, (visible) ? SW_SHOW : SW_HIDE);
         }
 
-        /*! \brief Get the window system handler
-         *
-         * \return Return the native window system handler
-         *
-         */
         WindowHandler WindowImplWin32::getSystemHandler() const
         {
             return m_handler;
         }
 
-        /*! \brief Process a single event
-         *
-         * \param message The windows message
-         * \param wParam The WPARAM
-         * \param lParam The LPARAM
-         *
-         */
         void WindowImplWin32::processEvent(UINT message, WPARAM wParam, LPARAM lParam)
         {
             switch(message)
