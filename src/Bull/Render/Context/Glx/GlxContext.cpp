@@ -250,23 +250,26 @@ namespace Bull
                     attribs.push_back(GLX_CONTEXT_MINOR_VERSION_ARB);
                     attribs.push_back(m_settings.minor);
 
-                    int flags   = 0;
-                    int profile = (m_settings.flags & ContextSettings::Compatibility) ? GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : GLX_CONTEXT_CORE_PROFILE_BIT_ARB;
-
-                    if(m_settings.flags & ContextSettings::Debug)
+                    if(isSupported("GLX_ARB_create_context_profile"))
                     {
-                        flags |= GLX_CONTEXT_DEBUG_BIT_ARB;
-                    }
+                        int flags   = 0;
+                        int profile = (m_settings.flags & ContextSettings::Compatibility) ? GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : GLX_CONTEXT_CORE_PROFILE_BIT_ARB;
 
-                    if(m_settings.flags & ContextSettings::ForwardCompatible)
-                    {
-                        flags |= GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
-                    }
+                        if(m_settings.flags & ContextSettings::Debug)
+                        {
+                            flags |= GLX_CONTEXT_DEBUG_BIT_ARB;
+                        }
 
-                    attribs.push_back(GLX_CONTEXT_PROFILE_MASK_ARB);
-                    attribs.push_back(profile);
-                    attribs.push_back(GLX_CONTEXT_FLAGS_ARB);
-                    attribs.push_back(flags);
+                        if(m_settings.flags & ContextSettings::ForwardCompatible)
+                        {
+                            flags |= GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
+                        }
+
+                        attribs.push_back(GLX_CONTEXT_PROFILE_MASK_ARB);
+                        attribs.push_back(profile);
+                        attribs.push_back(GLX_CONTEXT_FLAGS_ARB);
+                        attribs.push_back(flags);
+                    }
 
                     attribs.push_back(0);
 
