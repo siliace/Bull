@@ -5,13 +5,6 @@
 
 namespace Bull
 {
-    /*! \brief Convert a lowercase character to the uppercase equivalent character
-     *
-     * \param character the character to convert
-     *
-     * \return Return the uppercase equivalent of the character
-     *
-     */
     char String::toUpper(char character)
     {
         if(character >= 'a' && character <= 'z')
@@ -22,13 +15,6 @@ namespace Bull
         return character;
     }
 
-    /*! \brief Convert a uppercase character to the lowercase equivalent character
-     *
-     * \param character the character to convert
-     *
-     * \return Return the lowercase equivalent of the character
-     *
-     */
     char String::toLower(char character)
     {
         if(character >= 'A' && character <= 'Z')
@@ -39,49 +25,21 @@ namespace Bull
         return character;
     }
 
-    /*! \brief Convert a single number to its character equivalent
-     *
-     * \param integer The integer value to convert as a character
-     *
-     * \return Return the integer as a character
-     *
-     */
     char String::intToChar(int integer)
     {
         return integer + '0';
     }
 
-    /*! \brief Convert a character to its integer equivalent
-     *
-     * \param character The character value to convert as a integer
-     *
-     * \return Return the character as a integer
-     *
-     */
     int String::charToInt(char character)
     {
         return character - '0';
     }
 
-    /*! \brief Create a String from a boolean
-     *
-     * \param boolean The boolean to represent in the String
-     *
-     * \return Return a String representing the boolean
-     *
-     */
     String String::boolean(bool boolean)
     {
         return boolean ? String("true") : String("false");
     }
 
-    /*! \brief Create a String from a number
-     *
-     * \param number The number to represent in the string
-     *
-     * \return Return a string representing the number
-     *
-     */
     String String::number(int number)
     {
         String string;
@@ -117,11 +75,6 @@ namespace Bull
         return string;
     }
 
-    /*! \brief Get the instance of SharedString which corresponding to the empty string
-     *
-     * \return Return the empty SharedString
-     *
-     */
     const std::shared_ptr<String::SharedString>& String::getEmptyString()
     {
         static std::shared_ptr<String::SharedString> empty = std::make_shared<String::SharedString>();
@@ -129,20 +82,12 @@ namespace Bull
         return empty;
     }
 
-    /*! \brief Default constructor
-     *
-     */
     String::String() :
         m_sharedString(getEmptyString())
     {
         /// Nothing
     }
 
-    /*! \brief Constructor
-     *
-     * \param character The character to put in the string
-     *
-     */
     String::String(char character)
     {
         if(character != String::NullByte)
@@ -156,43 +101,21 @@ namespace Bull
         }
     }
 
-    /*! \brief Constructor
-     *
-     * \param string The string to copy
-     *
-     */
     String::String(const char* string)
     {
         set(string);
     }
 
-    /*! \brief Constructor
-     *
-     * \param string The string to copy
-     * \param size   The size of the string
-     *
-     */
     String::String(const char* string, std::size_t size)
     {
         set(string, size);
     }
 
-    /*! \brief Constructor
-     *
-     * \param string The string to copy
-     *
-     */
     void String::set(const char* string)
     {
         set(string, (string) ? std::strlen(string) : 0);
     }
 
-    /*! \brief Constructor
-     *
-     * \param string The string to copy
-     * \param size   The size of the string
-     *
-     */
     void String::set(const char* string, std::size_t size)
     {
         if(size > 0)
@@ -214,15 +137,6 @@ namespace Bull
         }
     }
 
-    /*! \brief Counts the occurrences of a character in the string
-     *
-     * \param character     The character to count
-     * \param start         The index to start
-     * \param caseSensitive True to be case sensitive, false otherwise
-     *
-     * \return Return the number of occurrences of the character in the string
-     *
-     */
     unsigned int String::count(char character, std::size_t start, bool caseSensitive) const
     {
         if(character == String::NullByte || m_sharedString->m_size == 0)
@@ -255,14 +169,6 @@ namespace Bull
         return count;
     }
 
-    /*! \brief Get a subpart of the string
-     *
-     * \param start The index where the substring begins
-     * \param stop  The index where the substring ends
-     *
-     * \return Return the substring created
-     *
-     */
     String String::subString(std::size_t start, std::size_t stop) const
     {
         if(stop == String::npos)
@@ -283,37 +189,16 @@ namespace Bull
         return substring;
     }
 
-    /*! \brief Check whether a String start with a specified string
-     *
-     * \param string The string to test
-     *
-     * \return Return true if this string start with string, false otherwise
-     *
-     */
     bool String::startWith(const String& string)
     {
         return subString(0, string.getSize() - 1) == string;
     }
 
-    /*! \brief Check whether a String end with a specified string
-     *
-     * \param string The string to test
-     *
-     * \return Return true if this string end with string, false otherwise
-     *
-     */
     bool String::endsWith(const String& string)
     {
         return subString(getSize() - string.getSize()) == string;
     }
 
-    /*! \brief Splits a string into others
-     *
-     * \param delimiter The character between two split strings
-     *
-     * \return Return the splits
-     *
-     */
     std::vector<String> String::explode(char delimiter) const
     {
         std::vector<String> tokens;
@@ -341,14 +226,6 @@ namespace Bull
         return tokens;
     }
 
-    /*! \brief Set the string in uppercase
-     *
-     * \param start The index to start to set characters in uppercase
-     * \param stop  The index to stop to set characters in uppercase
-     *
-     * \return Return the string after the transformation
-     *
-     */
     String& String::toUppercase(std::size_t start, std::size_t stop)
     {
         if(stop == String::npos)
@@ -364,14 +241,6 @@ namespace Bull
         return (*this);
     }
 
-    /*! \brief Set the string in lowercase
-     *
-     * \param start The index to start to set characters in lowercase
-     * \param stop  The index to stop to set characters in lowercase
-     *
-     * \return Return the string after the transformation
-     *
-     */
     String& String::toLowercase(std::size_t start, std::size_t stop)
     {
         if(stop == String::npos)
@@ -387,14 +256,6 @@ namespace Bull
         return (*this);
     }
 
-    /*! \brief Inset a String at the ith index
-     *
-     * \param toInsert The String to insert
-     * \param index    The index where the String must be inserted
-     *
-     * \return Return this after the insert
-     *
-     */
     String& String::insert(const String& toInsert, std::size_t index)
     {
         if(toInsert.getSize() == 0)
@@ -428,11 +289,6 @@ namespace Bull
         return (*this);
     }
 
-    /*! \brief Clear the string
-     *
-     * \param clearMemory True to reset capacity, false to keep
-     *
-     */
     void String::clear(bool clearMemory)
     {
         if(clearMemory)
@@ -447,11 +303,6 @@ namespace Bull
         }
     }
 
-    /*! \brief Set the size of the string
-     *
-     * \param size The new size of the string
-     *
-     */
     void String::setSize(std::size_t size)
     {
         std::shared_ptr<SharedString> string = std::make_shared<SharedString>(size);
@@ -465,21 +316,11 @@ namespace Bull
         m_sharedString = std::move(string);
     }
 
-    /*! \brief Get the size of the string
-     *
-     * \return Return the size of the string
-     *
-     */
     std::size_t String::getSize() const
     {
         return m_sharedString->m_size;
     }
 
-    /*! \brief Set the capacity of the string
-     *
-     * \param capacity Set the capacity of the string
-     *
-     */
     void String::reserve(std::size_t capacity)
     {
         std::size_t size = std::min<std::size_t>(getSize(), capacity);
@@ -494,65 +335,31 @@ namespace Bull
         m_sharedString = std::move(string);
     }
 
-    /*! \brief Get the capacity of the string
-     *
-     * \return Return the capacity of the string
-     *
-     */
     std::size_t String::getCapacity() const
     {
         return m_sharedString->m_capacity;
     }
 
-    /*! \brief Check whether the string is empty
-     *
-     * \return Return true if the string is empty, false otherwise
-     *
-     */
     bool String::isEmpty() const
     {
         return m_sharedString->m_size == 0;
     }
 
-    /*! \brief Casting operator override
-     *
-     * \return Return a constant pointer to the string
-     *
-     */
     String::operator const char*() const
     {
         return m_sharedString->m_string.get();
     }
 
-    /*! \brief Get the ith character of the string
-     *
-     * \param index The index of the character to get
-     *
-     * \return Return the character at the ith position
-     *
-     */
     char& String::operator[](std::size_t index)
     {
         return m_sharedString->m_string[index];
     }
 
-    /*! \brief Get the ith character of the string
-     *
-     * \param index The index of the character to get
-     *
-     * \return Return the character at the ith position
-     *
-     */
     const char& String::operator[](std::size_t index) const
     {
         return m_sharedString->m_string[index];
     }
 
-    /*! \brief Convert a string to an integer
-     *
-     * \return Return an integer representing the string
-     *
-     */
     int String::toInt() const
     {
         int number = 0;
@@ -575,104 +382,41 @@ namespace Bull
         return number;
     }
 
-    /*! \brief Compare two Strings
-     *
-     * \param left The first String to compare
-     * \param right The second String to compare
-     *
-     * \return Return true if left and right are equal, false otherwise
-     *
-     */
     bool operator==(const String& left, const String& right)
     {
         return left.getCapacity() && right.getCapacity() && strcmp(left, right) == 0;
     }
 
-    /*! \brief Compare two Strings
-     *
-     * \param left The first String to compare
-     * \param right The second String to compare
-     *
-     * \return Return true if left and right are equal, false otherwise
-     *
-     */
     bool operator==(const char* left, const String& right)
     {
         return left && right.getCapacity() && strcmp(left, right) == 0;
     }
 
-    /*! \brief Compare two Strings
-     *
-     * \param left The first String to compare
-     * \param right The second String to compare
-     *
-     * \return Return true if left and right are equal, false otherwise
-     *
-     */
     bool operator==(const String& left, const char* right)
     {
         return left && right && strcmp(left, right) == 0;
     }
 
-    /*! \brief Compare two Strings
-     *
-     * \param left The first String to compare
-     * \param right The second String to compare
-     *
-     * \return Return true if left and right are not equal, false otherwise
-     *
-     */
     bool operator!=(const String& left, const String& right)
     {
         return !(left == right);
     }
 
-    /*! \brief Compare two Strings
-     *
-     * \param left The first String to compare
-     * \param right The second String to compare
-     *
-     * \return Return true if left and right are not equal, false otherwise
-     *
-     */
     bool operator!=(const char* left, const String& right)
     {
         return !(left == right);
     }
 
-    /*! \brief Compare two Strings
-     *
-     * \param left The first String to compare
-     * \param right The second String to compare
-     *
-     * \return Return true if left and right are not equal, false otherwise
-     *
-     */
     bool operator!=(const String& left, const char* right)
     {
         return !(left == right);
     }
 
-    /*! \brief Concatenates two Strings
-     *
-     * \param left  The left part of the final String
-     * \param right The right part of the final String
-     *
-     * \return Return the concatenated String
-     *
-     */
     String operator+(const String& left, const String& right)
     {
         return String(left) += right;
     }
 
-    /*! \brief Concatenates a String at the end of the string
-     *
-     * \param right The String to add
-     *
-     * \return Return this after the concatenation
-     *
-     */
     String& String::operator+=(const String& right)
     {
         return insert(right, getSize());

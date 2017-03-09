@@ -85,6 +85,18 @@ namespace Bull
          */
         Viewport getDefaultViewport() const override;
 
+    protected:
+
+        /*! \brief Callback triggered when the window is open
+         *
+         */
+        virtual void onOpen() override;
+
+        /*! \brief Callback triggered when the window is closed
+         *
+         */
+        virtual void onClose() override;
+
     private:
 
         Time  m_frameDelay;

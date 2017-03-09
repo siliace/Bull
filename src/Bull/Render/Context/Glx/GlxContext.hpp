@@ -119,19 +119,21 @@ namespace Bull
 
             /*! \brief Create the render surface
              *
-             * \param handler The window to bind to this context
+             * \param handler      The window to bind to this context
+             * \param bitsPerPixel Number of bits per pixel to use
              *
              */
-            void createSurface(WindowHandler handler);
+            void createSurface(WindowHandler handler, unsigned int bitsPerPixel);
 
             /*! \brief Create the render surface
              *
+             * \param shared       The shared context
              * \param width        The width of the surface
              * \param height       The height of the surface
              * \param bitsPerPixel The number of bits per pixel to use
              *
              */
-            void createSurface(unsigned int width, unsigned int height, unsigned int bitsPerPixel);
+            void createSurface(const std::shared_ptr<GlxContext>& shared, unsigned int width, unsigned int height, unsigned int bitsPerPixel);
 
             /*! \brief Create the render context
              *
@@ -140,10 +142,17 @@ namespace Bull
              */
             void createContext(const std::shared_ptr<GlxContext>& shared);
 
+            /*! \brief Update the ContextSettings according to the created context
+             *
+             */
+            void updateSettings();
+
             Window            m_window;
             GLXContext        m_render;
             GLXFBConfig       m_config;
+            GLXPbuffer        m_pbuffer;
             Display::Instance m_display;
+            Colormap          m_colormap;
             bool              m_isDirect;
             bool              m_ownWindow;
         };

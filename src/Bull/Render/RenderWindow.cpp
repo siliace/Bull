@@ -19,8 +19,6 @@ namespace Bull
 
     bool RenderWindow::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
-        m_clock.start();
-
         if(!Window::open(mode, title, style, settings))
         {
             return false;
@@ -86,5 +84,15 @@ namespace Bull
         viewport.height = getSize().y;
 
         return viewport;
+    }
+
+    void RenderWindow::onOpen()
+    {
+        m_clock.start();
+    }
+
+    void RenderWindow::onClose()
+    {
+        m_context.reset();
     }
 }

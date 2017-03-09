@@ -50,10 +50,10 @@ namespace Bull
 
             m_colormap = XCreateColormap(m_display->getHandler(), m_display->getRootWindow(vi->screen), vi->visual, AllocNone);
 
-            attributes.event_mask        = eventMasks;
-            attributes.background_pixmap = 0;
-            attributes.border_pixel      = 0;
+            attributes.background_pixmap = 0L;
             attributes.colormap          = m_colormap;
+            attributes.border_pixel      = 0;
+            attributes.event_mask        = eventMasks;
 
             m_handler = XCreateWindow(m_display->getHandler(),
                                       m_display->getRootWindow(vi->screen),
@@ -63,7 +63,7 @@ namespace Bull
                                       vi->depth,
                                       InputOutput,
                                       vi->visual,
-                                      CWBorderPixel | CWColormap | CWEventMask,
+                                      CWColormap | CWEventMask | CWBorderPixel,
                                       &attributes);
             setProtocols();
 

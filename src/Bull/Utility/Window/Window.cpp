@@ -40,6 +40,8 @@ namespace Bull
         }
 
         m_impl.reset();
+
+        onClose();
     }
 
     bool Window::pollEvent(Event& e)

@@ -29,6 +29,7 @@ namespace Bull
         private:
 
             static Mutex s_mutex;
+            static bool  s_errorOccurred;
 
         public:
 
@@ -41,6 +42,18 @@ namespace Bull
              *
              */
             ~ErrorHandler();
+
+            /*! \brief Tell whether an error occurred
+             *
+             * \return True if an error occurred during the object life time
+             *
+             */
+            bool errorOccurred() const;
+
+            /*! \brief Reset the error
+             *
+             */
+            void resetError();
 
         private:
 

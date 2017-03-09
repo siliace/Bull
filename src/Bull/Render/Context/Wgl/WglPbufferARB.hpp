@@ -30,7 +30,7 @@ namespace Bull
             wglDestroyPbuffer   = reinterpret_cast<BOOL (WINAPI*)(HPBUFFER)>(GlContext::getFunction("wglDestroyPbufferARB"));
             wglQueryPbuffer     = reinterpret_cast<BOOL (WINAPI*)(HPBUFFER, int, int *)>(GlContext::getFunction("wglQueryPbufferARB"));
 
-            return true;
+            return wglCreatePbuffer && wglGetPbufferDC && wglReleasePbufferDC && wglDestroyPbuffer && wglQueryPbuffer;
         });
     }
 }

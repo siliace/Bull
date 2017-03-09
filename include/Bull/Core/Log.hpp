@@ -17,13 +17,14 @@ namespace Bull
 
         enum Level
         {
-            Info,
-            Notice,
-            Warning,
-            Error,
-            Critical,
-            Alert,
-            Emergency
+            Debug     = 0x0,
+            Info      = 0x1,
+            Notice    = 0x2,
+            Warning   = 0x4,
+            Error     = 0x8,
+            Critical  = 0x16,
+            Alert     = 0x32,
+            Emergency = 0x64,
         };
 
         typedef std::unique_ptr<AbstractLogger>& AbstractLoggerHandler;
@@ -47,13 +48,6 @@ namespace Bull
          *
          */
         virtual void write(const String& message, Level level);
-
-        /*! \brief Add an entry in every listener without formating
-         *
-         * \param message The message to log
-         *
-         */
-        void directWrite(const String& message);
 
     private:
 

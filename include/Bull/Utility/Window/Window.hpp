@@ -381,6 +381,16 @@ namespace Bull
          */
         bool open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
 
+        /*! \brief Callback triggered when the window is open
+         *
+         */
+        virtual void onOpen() {}
+
+        /*! \brief Callback triggered when the window is closed
+         *
+         */
+        virtual void onClose() {}
+
     private:
 
         std::unique_ptr<prv::WindowImpl> m_impl; /*!< The OS specific implementation of the window */
