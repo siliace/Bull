@@ -12,23 +12,12 @@ namespace Bull
     Color Color::White       = Color(255, 255, 255);
     Color Color::Transparent = Color(0,   0,   0,   255);
 
-    /*! \brief Default constructor
-     *
-     */
     Color::Color() :
         Color(Color::Black)
     {
         /// Nothing
     }
 
-    /*! \brief Constructor
-     *
-     * \param red   The red component of the color
-     * \param green The green component of the color
-     * \param blue  The blue component of the color
-     * \param alpha The alpha (opacity) component of the color
-     *
-     */
     Color::Color(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) :
         red(red),
         green(green),
@@ -38,11 +27,6 @@ namespace Bull
         /// Nothing
     }
 
-    /*! \brief Constructor
-     *
-     * \param hexa The hexadecimal representation of the color
-     *
-     */
     Color::Color(Uint32 hexa) :
         red  ((hexa & 0xff000000) >> 24),
         green((hexa & 0x0000ff00) >> 16),
@@ -52,13 +36,6 @@ namespace Bull
         /// Nothing
     }
 
-    /*! \brief Compare two colors
-     *
-     * \param right The color to compare to this one
-     *
-     * \return Return true if right and this are the same, false otherwise
-     *
-     */
     bool Color::operator==(const Color& right)
     {
         return (red == right.red)     &&
@@ -67,35 +44,16 @@ namespace Bull
                (alpha == right.alpha);
     }
 
-    /*! \brief Compare two colors
-     *
-     * \param right The color to compare to this one
-     *
-     * \return Return true if right and this are not the same, false otherwise
-     *
-     */
     bool Color::operator!=(const Color& right)
     {
         return !((*this) == right);
     }
 
-    /*! \brief Convert the color to an hexadecimal value
-     *
-     * \return Return the representation of the color as an hexadecimal value
-     *
-     */
     Uint32 Color::toHexa() const
     {
         return (red << 24) | (green << 16) | (blue << 8) | (alpha);
     }
 
-    /*! \brief Combine two colors
-     *
-     * \param right The color to compare to this
-     *
-     * \return Return the sum of right and this
-     *
-     */
     Color& Color::operator+=(const Color& right)
     {
         red   += right.red;
@@ -106,25 +64,11 @@ namespace Bull
         return (*this);
     }
 
-    /*! \brief Combine two colors
-     *
-     * \param right The color to compare to this
-     *
-     * \return Return the sum of right and this
-     *
-     */
     Color Color::operator+(const Color& right)
     {
         return Color(*this) += right;
     }
 
-    /*! \brief Combine two colors
-     *
-     * \param right The color to compare to this
-     *
-     * \return Return the subtract of right and this
-     *
-     */
     Color& Color::operator-=(const Color& right)
     {
         red   -= right.red;
@@ -135,13 +79,6 @@ namespace Bull
         return (*this);
     }
 
-    /*! \brief Combine two colors
-     *
-     * \param right The color to compare to this
-     *
-     * \return Return the subtract of right and this
-     *
-     */
     Color Color::operator-(const Color& right)
     {
         return Color(*this) -= right;

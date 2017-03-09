@@ -10,13 +10,6 @@ namespace Bull
         /// We need a extension to check if any extension is available (Seems logic...)
         const char* (WINAPI* wglGetExtensionsStringARB)(HDC hdc);
 
-        /*! \brief Get a list of supported extensions
-         *
-         * \param handler The surface to use to check whether an extension is supported
-         *
-         * \return Return the list
-         *
-         */
         std::vector<String> WglExtensionsLoader::getExtensions(SurfaceHandler handler)
         {
             std::vector<String> extensions;

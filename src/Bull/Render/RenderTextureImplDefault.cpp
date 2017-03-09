@@ -6,22 +6,12 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Default constructor
-         *
-         */
         RenderTextureImplDefault::RenderTextureImplDefault() :
             m_target(0)
         {
             /// Nothing
         }
 
-        /*! \brief Create the RenderTextureImpl
-         *
-         * \param target The target to use to render
-         *
-         * \return Return true if the RenderTextureImpl was created successfully, false otherwise
-         *
-         */
         bool RenderTextureImplDefault::create(const Vector2UI& size, unsigned int target)
         {
             if(target && size.x && size.y)
@@ -35,9 +25,6 @@ namespace Bull
             return false;
         }
 
-        /*! \brief Display what has been rendered so far into the target texture
-         *
-         */
         void RenderTextureImplDefault::updateTarget()
         {
             TextureStateSaver saver;

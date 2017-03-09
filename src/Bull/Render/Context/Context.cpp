@@ -5,64 +5,34 @@ namespace Bull
 {
     LocalPtr<Context> Context::s_active;
 
-    /*! \brief Get the active context in this thread
-     *
-     * \return Return the context is available, nullptr otherwise
-     *
-     */
     const Context* Context::getActive()
     {
         return s_active;
     }
 
-    /*! \brief Default constructor
-     *
-     */
     Context::Context() :
         m_context(prv::GlContext::createInstance())
     {
         setActive();
     }
 
-    /*! \brief Constructor
-     *
-     * \param mode     The VideoMode to use to create the context
-     * \param settings Settings to use to create the context
-     *
-     */
     Context::Context(const VideoMode& mode, const ContextSettings& settings) :
         m_context(prv::GlContext::createInstance(mode, settings))
     {
         setActive();
     }
 
-    /*! \brief Constructor
-     *
-     * \param bitsPerPixel Number of bits per pixel to use
-     * \param settings     Settings to use to create the context
-     *
-     */
     Context::Context(unsigned int bitsPerPixel, const ContextSettings& settings) :
         m_context(prv::GlContext::createInstance(bitsPerPixel, settings))
     {
         setActive();
     }
 
-    /*! \brief Destructor
-     *
-     */
     Context::~Context()
     {
         setActive(false);
     }
 
-    /*! \brief Activate or deactivate the context
-     *
-     * \param active True to activate, false to deactivate the context
-     *
-     * \return Return true if the context's status changed successfully, false otherwise
-     *
-     */
     bool Context::setActive(bool active)
     {
         bool result = m_context->setActive(active);
@@ -75,11 +45,6 @@ namespace Bull
         return result;
     }
 
-    /*! \brief Get the ContextSettings of the context
-     *
-     * \return Return the ContextSettings
-     *
-     */
     const ContextSettings& Context::getSettings() const
     {
         if(m_context)
