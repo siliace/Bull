@@ -6,8 +6,6 @@
 #include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Math/Angle.hpp>
-#include <Bull/Math/EulerAngles.hpp>
-#include <Bull/Math/Quaternion.hpp>
 #include <Bull/Math/Vector/Vector4.hpp>
 
 namespace Bull
@@ -47,66 +45,6 @@ namespace Bull
          */
         template<typename U>
         static Matrix4<T> createScale(U x, U y, U z);
-
-        /*! \brief Create a rotation matrix
-         *
-         * \param x The rotation on the x axis
-         * \param y The rotation on the y axis
-         * \param z The rotation on the z axis
-         *
-         * \return Return the matrix
-         *
-         */
-        template<typename U>
-        static Matrix4<T> createRotation(U x, U y, U z);
-
-        /*! \brief Create a rotation matrix
-         *
-         * \param angles Angles of rotations
-         *
-         * \return Return the matrix
-         *
-         */
-        template<typename U>
-        static Matrix4<T> createRotation(const EulerAngles<U>& angles);
-
-        /*! \brief Create a rotation matrix
-         *
-         * \param quaternion The quaternion representing a rotation
-         *
-         * \return Return the matrix
-         *
-         */
-        template<typename U>
-        static Matrix4<T> createRotation(const Quaternion<U>& quaternion);
-
-        /*! \brief Create an orthographic matrix
-         *
-         * \param left   The distance between center and left
-         * \param right  The distance between center and right
-         * \param top    The distance between center and top
-         * \param bottom The distance between center and bottom
-         * \param zNear  The distance where vision begins
-         * \param zFar   The distance where vision ends
-         *
-         * \return Return the created matrix
-         *
-         */
-        template<typename U>
-        static Matrix4<T> createOrtho(U left, U right, U top, U bottom, U zNear, U zfar);
-
-        /*! \brief Create a perspective matrix
-         *
-         * \param angle The angle of the perspective
-         * \param ratio The rendering ratio (16/9, 4/3, 16/10...)
-         * \param zNear The distance where vision begins
-         * \param zFar  The distance where vision ends
-         *
-         * \return Return the created matrix
-         *
-         */
-        template<typename U>
-        static Matrix4<T> createPersperctive(const Angle<U>& angle, U ratio, U zNear, U zFar);
 
     public:
 
