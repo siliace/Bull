@@ -1,12 +1,5 @@
 namespace Bull
 {
-    /*! \brief Create a logger
-     *
-     * \param args Arguments to use to create the logger
-     *
-     * \return Return a pointer to the created logger
-     *
-     */
     template<typename T, typename... Args>
     Log::AbstractLoggerHandler Log::createLogger(Args... args)
     {

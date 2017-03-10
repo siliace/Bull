@@ -17,14 +17,14 @@ namespace Bull
 
         enum Level
         {
-            Debug     = 0x0,
-            Info      = 0x1,
-            Notice    = 0x2,
-            Warning   = 0x4,
-            Error     = 0x8,
-            Critical  = 0x16,
-            Alert     = 0x32,
-            Emergency = 0x64,
+            Debug,
+            Info,
+            Notice,
+            Warning,
+            Error,
+            Critical,
+            Alert,
+            Emergency,
         };
 
         typedef std::unique_ptr<AbstractLogger>& AbstractLoggerHandler;
