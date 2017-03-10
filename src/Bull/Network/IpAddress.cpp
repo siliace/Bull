@@ -11,7 +11,6 @@ namespace Bull
     IpAddress IpAddress::LoopbackIpv6  = IpAddress(IpAddress::V6({0, 0, 0, 0, 0, 0, 0, 1}));
     IpAddress IpAddress::BroadcastIpv4 = IpAddress(IpAddress::V4({255, 255, 255, 255}));
 
-
     String IpAddress::toString(const V4& address)
     {
         StringStream ss;
