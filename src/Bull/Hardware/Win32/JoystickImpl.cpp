@@ -8,13 +8,6 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Check if a joystick is connected
-         *
-         * \param id The unique ID of the joystick
-         *
-         * \return Return true if the joystick is connected, false otherwise
-         *
-         */
         bool JoystickImpl::isConnected(Uint8 id)
         {
             JOYINFO joyInfo;
@@ -22,13 +15,6 @@ namespace Bull
             return joyGetPos(id, &joyInfo) == JOYERR_NOERROR;
         }
 
-        /*! \brief Check if a joystick is connected
-         *
-         * \param id The unique ID of the joystick
-         *
-         * \return Return the capabilities of the joystick
-         *
-         */
         Joystick::Capabilities JoystickImpl::getCapabilities(Uint8 id)
         {
             Joystick::Capabilities caps;
@@ -72,27 +58,11 @@ namespace Bull
             return caps;
         }
 
-        /*! \brief Check if a button is pressed on a joystick
-         *
-         * \param button The ID of the button to check
-         * \param joystick The unique ID of the joystick
-         *
-         * \param Return true if the button is pressed, false otherwise
-         *
-         */
         bool JoystickImpl::isButtonPressed(unsigned int button, Uint8 joystick)
         {
             return std::bitset<Joystick::CountButton>(getJoystickState(joystick).dwButtons).test(button);
         }
 
-        /*! \brief Get the state of an axis
-         *
-         * \param axis The axis to check
-         * \param joystick The joystick to check
-         *
-         * \return Return the position of the axis
-         *
-         */
         float JoystickImpl::getAxisPosition(Joystick::Axis axis, Uint8 joystick)
         {
             JOYINFOEX joystickState = getJoystickState(joystick);
@@ -112,14 +82,6 @@ namespace Bull
             return 0;
         }
 
-        /*! \brief Get the joystick state
-         *
-         * \param joystick The joystick to check
-         * \param flags The informations to get
-         *
-         * \return Return the joystick state
-         *
-         */
         JOYINFOEX JoystickImpl::getJoystickState(Uint8 joystick, DWORD flag)
         {
             JOYINFOEX joystickState;
