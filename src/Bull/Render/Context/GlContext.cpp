@@ -238,9 +238,6 @@ namespace Bull
                     }
                 }
 
-                gl::enable(GL_BLEND);
-                gl::blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);
-
                 m_settings.flags = ContextSettings::Default;
 
                 if(m_settings.major >= 3)
