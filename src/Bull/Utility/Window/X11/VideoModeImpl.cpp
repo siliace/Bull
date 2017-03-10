@@ -11,11 +11,6 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Get the current VideoMode of the main screen
-         *
-         * \return Return a VideoMode with the current width, height and the deepness of the main screen
-         *
-         */
         VideoMode VideoModeImpl::getCurrent()
         {
             Display::Instance display = Display::get();
@@ -30,6 +25,7 @@ namespace Bull
                     Rotation rotation;
                     int      sizesCount;
                     int      currentMode = XRRConfigCurrentConfiguration(config, &rotation);
+
                     XRRScreenSize* sizes = XRRConfigSizes(config, &sizesCount);
 
                     if(sizes && sizesCount > 0)
@@ -47,7 +43,6 @@ namespace Bull
                             desktopMode.height = sizes[currentMode].height;
                         }
                     }
-
                 }
                 else
                 {
@@ -62,11 +57,6 @@ namespace Bull
             return desktopMode;
         }
 
-        /*! \brief Get all available video modes
-         *
-         * \return Return all available video modes
-         *
-         */
         std::vector<VideoMode> VideoModeImpl::getAllAvailable()
         {
             Display::Instance display = Display::get();

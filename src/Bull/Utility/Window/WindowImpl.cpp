@@ -75,7 +75,10 @@ namespace Bull
 
         void WindowImpl::pushEvent(const Window::Event& e)
         {
-            m_events.push(e);
+            if(!((e.type == Window::Event::KeyDown || e.type == Window::Event::KeyUp) && e.key.code == Keyboard::Key::Unknown))
+            {
+                m_events.push(e);
+            }
         }
     }
 }

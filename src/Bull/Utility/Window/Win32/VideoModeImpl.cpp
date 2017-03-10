@@ -8,11 +8,6 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Get the current VideoMode of the main screen
-         *
-         * \return Return a VideoMode with the current width, height and the deepness of the main screen
-         *
-         */
         VideoMode VideoModeImpl::getCurrent()
         {
             DEVMODE mode;
@@ -22,11 +17,6 @@ namespace Bull
             return VideoMode(mode.dmPelsWidth, mode.dmPelsHeight, mode.dmBitsPerPel);
         }
 
-        /*! \brief Get all available video modes
-         *
-         * \return Return all available video modes
-         *
-         */
         std::vector<VideoMode> VideoModeImpl::getAllAvailable()
         {
             std::vector<VideoMode> modes;
