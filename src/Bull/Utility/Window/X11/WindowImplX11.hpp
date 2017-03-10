@@ -14,6 +14,17 @@ namespace Bull
     {
         class WindowImplX11 : public WindowImpl
         {
+        private:
+
+            /*! \brief Convert a Xlib key value to a Bull::Keyboard::Key
+             *
+             * \param xkey The Xlib keycode to convert
+             *
+             * \return Return the Bull::Keyboard::Key equivalent
+             *
+             */
+            static Keyboard::Key convertXKToBullkey(KeySym xkey);
+
         public:
 
             /*! \brief Default constructor

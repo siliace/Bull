@@ -59,6 +59,7 @@ namespace Bull
             NumPad8,
             NumPad9,
             NumPadDot,
+            NumPadEnter,
             Add,
             Substract,
             Multiply,
