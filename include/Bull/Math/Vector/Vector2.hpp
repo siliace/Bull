@@ -169,8 +169,9 @@ namespace Bull
     template<typename T>
     Vector2<T> operator-(const Vector2<T>& left, float right);
 
-    typedef Vector2<float> Vector2F;
     typedef Vector2<int> Vector2I;
+    typedef Vector2<float> Vector2F;
+    typedef Vector2<double> Vector2D;
     typedef Vector2<unsigned int> Vector2UI;
 }
 

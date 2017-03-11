@@ -180,8 +180,9 @@ namespace Bull
     template<typename T>
     Vector4<T> operator-(const Vector4<T>& left, float right);
 
-    typedef Vector4<float> Vector4F;
     typedef Vector4<int> Vector4I;
+    typedef Vector4<float> Vector4F;
+    typedef Vector4<double> Vector4D;
     typedef Vector4<unsigned int> Vector4UI;
 }
 

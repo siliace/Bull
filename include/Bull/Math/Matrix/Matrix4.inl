@@ -7,7 +7,7 @@ namespace Bull
 
         for(std::size_t i = 0; i < 4; i++)
         {
-            identity.set(1, i, i);
+            identity(i, i) = 1;
         }
 
         return identity;
@@ -182,8 +182,8 @@ namespace Bull
 
         for(std::size_t i = 0; i < 16; i++)
         {
-            std::array<T, 4> row, col;
             T sum = 0;
+            std::array<T, 4> row, col;
 
             row = getRow(i / 4);
             col = right.getColumn(i % 4);
