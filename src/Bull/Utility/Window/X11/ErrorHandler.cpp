@@ -12,8 +12,7 @@ namespace Bull
 
         int ErrorHandler::handle(::Display* display, XErrorEvent* error)
         {
-            String errorMessage;
-            errorMessage.reserve(256);
+            String errorMessage(nullptr, 256);
 
             XGetErrorText(display, error->error_code, &errorMessage[0], errorMessage.getCapacity());
 

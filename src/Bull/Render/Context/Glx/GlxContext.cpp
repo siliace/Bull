@@ -37,10 +37,6 @@ namespace Bull
             {
                 loader->require(GlxSwapControlSGI);
             }
-            else
-            {
-                Log::get()->write("VSync is not available on your system", Log::Level::Notice);
-            }
         }
 
         GLXFBConfig GlxContext::chooseBestConfig(Display::Instance display, const ContextSettings& settings, unsigned int bitsPerPixel)
@@ -227,6 +223,10 @@ namespace Bull
             {
                 sgi::glXSwapInterval(active ? 1 : 0);
             }
+            else
+            {
+                Log::get()->write("VSync is not available on your system", Log::Level::Notice);
+            }
         }
 
         SurfaceHandler GlxContext::getSurfaceHandler() const
@@ -366,6 +366,8 @@ namespace Bull
 
                     if(!m_render)
                     {
+                        Log::get()->write("Failed to create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), Log::Level::Debug);
+
                         if(m_settings.minor == 0)
                         {
                             m_settings.major -= 1;
