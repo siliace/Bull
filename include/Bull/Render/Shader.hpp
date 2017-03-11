@@ -19,8 +19,9 @@ namespace Bull
 
         enum Type
         {
-            Vertex   = 0x8B31,
-            Fragment = 0x8B30
+            Vertex   = GL_VERTEX_SHADER,
+            Fragment = GL_FRAGMENT_SHADER,
+            Geometry = GL_GEOMETRY_SHADER,
         };
 
         /*! \brief Bind a shader
@@ -87,10 +88,11 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param pathVertex   The path to the vertex shader source
-         * \param pathFragment The path to the vertex fragment source
+         * \param pathFragment The path to the fragment shader source
+         * \param pathGeometry The path to the geometry shader source
          *
          */
-        Shader(const String& pathVertex, const String& pathFragment);
+        Shader(const String& pathVertex, const String& pathFragment, const String& pathGeometry = "");
 
         /*! \brief Destructor
          *
@@ -130,6 +132,14 @@ namespace Bull
          */
         bool loadFromStream(InStream& stream, Type type, String* error = nullptr);
 
+        /*! \brief Set an uniform variable
+         *
+         * \param name    The name of the uniform variable in the shader
+         * \param uniform The value to set to the uniform variable
+         *
+         * \return Return true if the uniform variable was found, false otherwise
+         *
+         */
         bool setUniform(const String& name, int uniform);
 
         /*! \brief Set an uniform variable

@@ -4,11 +4,6 @@
 
 namespace Bull
 {
-    RenderTexture::RenderTexture()
-    {
-        /// Nothing
-    }
-
     RenderTexture::~RenderTexture()
     {
         /// Nothing

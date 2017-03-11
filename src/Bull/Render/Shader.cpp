@@ -88,11 +88,16 @@ namespace Bull
         /// Nothing
     }
 
-    Shader::Shader(const String& pathVertex, const String& pathFragment) :
+    Shader::Shader(const String& pathVertex, const String& pathFragment, const String& pathGeometry) :
         Shader()
     {
         loadFromPath(pathVertex,   Shader::Vertex);
         loadFromPath(pathFragment, Shader::Fragment);
+
+        if(pathGeometry.getSize())
+        {
+            loadFromPath(pathGeometry, Shader::Geometry);
+        }
     }
 
     Shader::~Shader()

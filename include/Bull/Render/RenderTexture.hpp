@@ -25,7 +25,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        RenderTexture();
+        RenderTexture() = default;
 
         /*! \brief Destructor
          *
@@ -78,9 +78,9 @@ namespace Bull
 
     private:
 
+        Vector2UI                               m_size;
         std::unique_ptr<prv::RenderTextureImpl> m_impl;
         Texture                                 m_target;
-        Vector2UI                               m_size;
     };
 }
 
