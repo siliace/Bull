@@ -25,7 +25,14 @@ namespace Bull
 
         bool FileImplUnix::exists(const String& name)
         {
-            return access(name, F_OK) != -1;
+            struct stat64 filestats;
+
+            if(stat64(name, &filestats) == -1)
+            {
+                return false;
+            }
+
+            return S_ISREG(filestats.st_mode);
         }
 
         bool FileImplUnix::copy(const String& path, const String& newPath)

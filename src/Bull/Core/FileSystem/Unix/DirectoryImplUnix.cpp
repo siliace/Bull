@@ -23,7 +23,7 @@ namespace Bull
                 return false;
             }
 
-            return S_ISDIR(filestats.st_mode) || S_ISREG(filestats.st_mode);
+            return S_ISDIR(filestats.st_mode);
         }
 
         bool DirectoryImplUnix::remove(const String& path)
