@@ -3,9 +3,9 @@
 
 #include <vector>
 
+#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Integer.hpp>
 #include <Bull/Core/System/Export.hpp>
-#include <Bull/Core/String.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -74,7 +74,7 @@ namespace Bull
          * \return Return true if the image was loaded successfully, false otherwise
          *
          */
-        bool load(const String& path);
+        bool loadFromPath(const Path& path);
 
         /*! \brief Set the color of a pixel
          *

@@ -67,11 +67,11 @@ namespace Bull
         return false;
     }
 
-    bool Texture::loadFromPath(const String& path)
+    bool Texture::loadFromPath(const Path& path)
     {
         Image img;
 
-        if(img.load(path))
+        if(img.loadFromPath(path))
         {
             return loadFromImage(img);
         }

@@ -1,6 +1,7 @@
 #ifndef Bull_Shader_hpp
 #define Bull_Shader_hpp
 
+#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/String.hpp>
@@ -29,7 +30,7 @@ namespace Bull
          * \param shader The shader to bind
          *
          */
-        static void bind(const Shader& shader);
+        static void bind(const Shader* shader);
 
         /*! \brief Unbind any shader
          *
@@ -87,12 +88,21 @@ namespace Bull
 
         /*! \brief Constructor
          *
+         * \param vertex   The source of the vertex shader
+         * \param fragment The source of the fragment shader
+         * \param geometry The source of the geometry shader
+         *
+         */
+        Shader(const String& vertex, const String& fragment, const String& geometry = String());
+
+        /*! \brief Constructor
+         *
          * \param pathVertex   The path to the vertex shader source
          * \param pathFragment The path to the fragment shader source
          * \param pathGeometry The path to the geometry shader source
          *
          */
-        Shader(const String& pathVertex, const String& pathFragment, const String& pathGeometry = "");
+        Shader(const Path& pathVertex, const Path& pathFragment, const Path& pathGeometry = Path());
 
         /*! \brief Destructor
          *
@@ -119,7 +129,7 @@ namespace Bull
          * \return Return true if the shader was loaded successfully, false otherwise
          *
          */
-        bool loadFromPath(const String& path, Type type, String* error = nullptr);
+        bool loadFromPath(const Path& path, Type type, String* error = nullptr);
 
         /*! \brief Load a shader from a stream
          *

@@ -8,9 +8,9 @@
 
 namespace Bull
 {
-    void Shader::bind(const Shader& shader)
+    void Shader::bind(const Shader* shader)
     {
-        gl::useProgram(shader.m_program);
+        gl::useProgram(shader->getSystemHandler());
     }
 
     void Shader::unbind()
@@ -88,16 +88,20 @@ namespace Bull
         /// Nothing
     }
 
-    Shader::Shader(const String& pathVertex, const String& pathFragment, const String& pathGeometry) :
+    Shader::Shader(const String& vertex, const String& fragment, const String& geometry) :
+        Shader()
+    {
+        loadFromSource(vertex, Shader::Vertex);
+        loadFromSource(fragment, Shader::Fragment);
+        loadFromSource(geometry, Shader::Geometry);
+    }
+
+    Shader::Shader(const Path& pathVertex, const Path& pathFragment, const Path& pathGeometry) :
         Shader()
     {
         loadFromPath(pathVertex,   Shader::Vertex);
         loadFromPath(pathFragment, Shader::Fragment);
-
-        if(pathGeometry.getSize())
-        {
-            loadFromPath(pathGeometry, Shader::Geometry);
-        }
+        loadFromPath(pathGeometry, Shader::Geometry);
     }
 
     Shader::~Shader()
@@ -123,16 +127,16 @@ namespace Bull
         return programHasError(m_program, GL_LINK_STATUS, error);
     }
 
-    bool Shader::loadFromPath(const String& path, Type type, String* error)
+    bool Shader::loadFromPath(const Path& path, Type type, String* error)
     {
         File shaderFile(path, File::Read);
 
-        if(!shaderFile.isOpen())
+        if(shaderFile)
         {
-            return false;
+            return loadFromStream(shaderFile, type, error);
         }
 
-        return loadFromStream(shaderFile, type, error);
+        return false;
     }
 
     bool Shader::loadFromStream(InStream& stream, Type type, String* error)

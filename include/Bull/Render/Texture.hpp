@@ -1,8 +1,8 @@
 #ifndef Bull_Texture_hpp
 #define Bull_Texture_hpp
 
+#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/String.hpp>
 
 #include <Bull/Math/Polygon/Rectangle.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
@@ -67,7 +67,7 @@ namespace Bull
          * \return Return true if the texture was loaded successfully, false otherwise
          *
          */
-        bool loadFromPath(const String& path);
+        bool loadFromPath(const Path& path);
 
         /*! \brief Load a texture form an image
          *

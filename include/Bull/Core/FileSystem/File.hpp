@@ -3,13 +3,9 @@
 
 #include <memory>
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InOutStream.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/String.hpp>
-#include <Bull/Core/System/Export.hpp>
-#include <Bull/Core/Thread/Mutex.hpp>
-#include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
 {
@@ -89,11 +85,11 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param name The name of the file to open
+         * \param path The path of the file to open
          * \param mode The opening mode of the file (read, write or both)
          *
          */
-        File(const String& name, Uint32 mode = OpeningMode::Read | OpeningMode::Write);
+        File(const Path& path, Uint32 mode = OpeningMode::Read | OpeningMode::Write);
 
         /*! \brief Destructor
          *
@@ -102,13 +98,13 @@ namespace Bull
 
         /*! \brief Open a file
          *
-         * \param name The name of the file to open
+         * \param path The path of the file to open
          * \param mode The opening mode of the file (read, write or both)
          *
          * \return Return true if the file was opened successfully, false otherwise
          *
          */
-        bool open(const String& name, Uint32 mode = OpeningMode::Read | OpeningMode::Write);
+        bool open(const Path& path, Uint32 mode = OpeningMode::Read | OpeningMode::Write);
 
         /*! \brief Check if a file is open
          *
@@ -206,12 +202,12 @@ namespace Bull
          */
         Uint64 setCursor(Uint64 offset);
 
-        /*! \brief Get the name of the file
+        /*! \brief Get the path of the file
          *
-         * \return Return the name of the file
+         * \return Return the path of the file
          *
          */
-        String getName() const;
+        String getPath() const;
 
         /*! \brief Get the size of the file
          *
@@ -248,17 +244,19 @@ namespace Bull
          */
         bool isAtEof() const;
 
+        /*! \brief Convert the file to a boolean
+         *
+         * \return True if the file is open
+         *
+         */
+        operator bool() const;
+
     private:
 
-        String m_name;
-
-        Uint32 m_mode;
-
+        bool                           m_eof;
+        Path                           m_path;
+        Uint32                         m_mode;
         std::unique_ptr<prv::FileImpl> m_impl;
-
-        bool m_eof;
-
-        mutable Mutex m_mutex;
     };
 }
 

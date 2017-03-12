@@ -37,9 +37,9 @@ namespace Bull
         }
     }
 
-    bool Image::load(const String& path)
+    bool Image::loadFromPath(const Path& path)
     {
-        if(File::exists(path))
+        if(path)
         {
             return prv::ImageLoader::load(path, m_pixels, m_size);
         }
