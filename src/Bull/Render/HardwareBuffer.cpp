@@ -4,10 +4,10 @@
 
 namespace Bull
 {
-    void HardwareBuffer::bind(const HardwareBuffer& buffer)
+    void HardwareBuffer::bind(const HardwareBuffer* buffer)
     {
         ensureContext();
-        gl::bindBuffer(buffer.m_type, buffer.m_id);
+        gl::bindBuffer(buffer->getType(), buffer->getSystemHandler());
     }
 
     void HardwareBuffer::unbind(Type type)
@@ -105,6 +105,11 @@ namespace Bull
 
             gl::deleteBuffers(1, &m_id);
         }
+    }
+
+    HardwareBuffer::Type HardwareBuffer::getType() const
+    {
+        return m_type;
     }
 
     unsigned int HardwareBuffer::getSystemHandler() const

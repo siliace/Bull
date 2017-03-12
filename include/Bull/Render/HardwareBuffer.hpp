@@ -33,7 +33,7 @@ namespace Bull
          * \param buffer The buffer to bind
          *
          */
-        static void bind(const HardwareBuffer& buffer);
+        static void bind(const HardwareBuffer* buffer);
 
         /*! \brief Unbind any buffer
          *
@@ -73,7 +73,7 @@ namespace Bull
          * \param offset  The offset of the data in the buffer
          * \param discard True to flush the buffer before fill it, false to keep the original content
          *
-         * \return Return true if the buffer was filled successfully, false otherwise
+         * \return True if the buffer was filled successfully
          *
          */
         bool fill(const void* data, std::size_t size, std::size_t offset = 0, bool discard = false);
@@ -90,9 +90,16 @@ namespace Bull
          */
         void destroy();
 
+        /*! \brief Get the type of the buffer
+         *
+         * \return The type
+         *
+         */
+        Type getType() const;
+
         /*! \brief Get the buffer system handler
          *
-         * \return Return the native buffer system handler
+         * \return The native buffer system handler
          *
          */
         unsigned int getSystemHandler() const;
