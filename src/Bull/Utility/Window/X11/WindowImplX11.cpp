@@ -356,6 +356,26 @@ namespace Bull
                     }
                     break;
 
+                    case FocusIn:
+                    {
+                        Window::Event event;
+
+                        event.type = Window::Event::GainFocus;
+
+                        pushEvent(event);
+                    }
+                    break;
+
+                    case FocusOut:
+                    {
+                        Window::Event event;
+
+                        event.type = Window::Event::LostFocus;
+
+                        pushEvent(event);
+                    }
+                    break;
+
                     case ConfigureNotify:
                     {
                         Window::Event event;
