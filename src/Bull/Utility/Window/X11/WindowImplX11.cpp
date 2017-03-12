@@ -1,5 +1,7 @@
 #include <X11/keysym.h>
 
+#include <Bull/Core/Thread/Thread.hpp>
+
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
 
 #include <Bull/Utility/Window/X11/ErrorHandler.hpp>
@@ -137,7 +139,8 @@ namespace Bull
         WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings) :
             m_display(Display::get()),
             m_handler(0),
-            m_isMapped(false)
+            m_isMapped(false),
+            m_captureCursor(false)
         {
             XVisualInfo*         vi;
             GLXFBConfig          config;
@@ -150,7 +153,7 @@ namespace Bull
 
             m_colormap = XCreateColormap(m_display->getHandler(), m_display->getRootWindow(vi->screen), vi->visual, AllocNone);
 
-            attributes.background_pixmap = 0L;
+            attributes.background_pixmap = XNone;
             attributes.colormap          = m_colormap;
             attributes.border_pixel      = 0;
             attributes.event_mask        = eventMasks;
@@ -362,6 +365,11 @@ namespace Bull
 
                         event.type = Window::Event::GainFocus;
 
+                        if(m_captureCursor)
+                        {
+                            enableCaptureCursor(true);
+                        }
+
                         pushEvent(event);
                     }
                     break;
@@ -446,9 +454,21 @@ namespace Bull
 
         void WindowImplX11::enableCaptureCursor(bool capture)
         {
-            if(capture)
+            m_captureCursor = capture;
+
+            if(m_captureCursor)
             {
-                XGrabPointer(m_display->getHandler(), m_handler, True, 0L, GrabModeAsync, GrabModeAsync, m_handler, 0L, CurrentTime);
+                bool grabbed = false;
+
+                do
+                {
+                    grabbed = XGrabPointer(m_display->getHandler(), m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
+
+                    if(!grabbed)
+                    {
+                        Thread::sleep(Time::milliseconds(10.f));
+                    }
+                }while(!grabbed);
             }
             else
             {

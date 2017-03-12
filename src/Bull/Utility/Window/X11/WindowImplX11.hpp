@@ -173,6 +173,7 @@ namespace Bull
             bool              m_isMapped;
             Colormap          m_colormap;
             Vector2I          m_lastPosition;
+            bool              m_captureCursor;
 
         };
     }

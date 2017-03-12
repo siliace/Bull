@@ -173,7 +173,7 @@ namespace Bull
             {
                 if(glXGetCurrentContext() == m_render)
                 {
-                    glXMakeCurrent(m_display->getHandler(), 0L, nullptr);
+                    glXMakeCurrent(m_display->getHandler(), XNone, nullptr);
                 }
 
                 glXDestroyContext(m_display->getHandler(), m_render);
@@ -294,7 +294,7 @@ namespace Bull
 
                 m_colormap = XCreateColormap(m_display->getHandler(), m_display->getRootWindow(vi->screen), vi->visual, AllocNone);
 
-                attributes.background_pixmap = 0L;
+                attributes.background_pixmap = XNone;
                 attributes.colormap          = m_colormap;
                 attributes.border_pixel      = 0;
                 attributes.event_mask        = StructureNotifyMask;

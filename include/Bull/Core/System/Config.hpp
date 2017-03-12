@@ -49,6 +49,9 @@
         #define BULL_WEYLAND
     #else
         #define BULL_X11
+
+        #undef None
+        #define XNone 0L
     #endif
 #elif defined __APPLE__ && __MACH__
     #define BULL_OS_OSX
