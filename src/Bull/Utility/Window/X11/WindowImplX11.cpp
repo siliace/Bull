@@ -29,12 +29,13 @@ namespace Bull
     {
         namespace
         {
-            const long eventMasks = KeyPressMask        | KeyReleaseMask    | /// Keyboard events
-                                    PointerMotionMask   | ButtonMotionMask  | /// Mouse move events
-                                    ButtonPressMask     | ButtonReleaseMask | /// Mouse buttons events
-                                    FocusChangeMask     |                     /// Focus events
-                                    StructureNotifyMask |                     /// Resize events
-                                    VisibilityChangeMask;                     /// Visibility change (internal uses only)
+            const long eventMasks = KeyPressMask         | KeyReleaseMask    | /// Keyboard events
+                                    PointerMotionMask    | ButtonMotionMask  | /// Mouse move events
+                                    ButtonPressMask      | ButtonReleaseMask | /// Mouse buttons events
+                                    FocusChangeMask      |                     /// Focus events
+                                    StructureNotifyMask  |                     /// Resize events
+                                    VisibilityChangeMask |                     /// Visibility change (internal uses only)
+                                    EnterWindowMask      | LeaveWindowMask;    /// Mouse Enter/Leave
 
         }
 
@@ -406,6 +407,26 @@ namespace Bull
 
                             m_lastPosition = position;
                         }
+
+                        pushEvent(event);
+                    }
+                    break;
+
+                    case EnterNotify:
+                    {
+                        Window::Event event;
+
+                        event.type = Window::Event::MouseEnter;
+
+                        pushEvent(event);
+                    }
+                    break;
+
+                    case LeaveNotify:
+                    {
+                        Window::Event event;
+
+                        event.type = Window::Event::MouseLeave;
 
                         pushEvent(event);
                     }

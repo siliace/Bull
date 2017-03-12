@@ -46,6 +46,8 @@ namespace Bull
                 Moved,
                 KeyDown,
                 KeyUp,
+                MouseEnter,
+                MouseLeave,
                 MouseMoved,
                 MouseButtonUp,
                 MouseButtonDown,
