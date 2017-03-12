@@ -446,7 +446,15 @@ namespace Bull
 
         void WindowImplX11::enableCaptureCursor(bool capture)
         {
-
+            if(capture)
+            {
+                XGrabPointer(m_display->getHandler(), m_handler, True, 0L, GrabModeAsync, GrabModeAsync, m_handler, 0L, CurrentTime);
+            }
+            else
+            {
+                XUngrabPointer(m_display->getHandler(), CurrentTime);
+                m_display->flush();
+            }
         }
 
         void WindowImplX11::showCursor(bool enable)
