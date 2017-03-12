@@ -368,7 +368,17 @@ namespace Bull
 
                         if(m_captureCursor)
                         {
-                            enableCaptureCursor(true);
+                            bool grabbed = false;
+
+                            do
+                            {
+                                grabbed = XGrabPointer(m_display->getHandler(), m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
+
+                                if(!grabbed)
+                                {
+                                    Thread::sleep(Time::milliseconds(10.f));
+                                }
+                            }while(!grabbed);
                         }
 
                         pushEvent(event);
@@ -380,6 +390,12 @@ namespace Bull
                         Window::Event event;
 
                         event.type = Window::Event::LostFocus;
+
+                        if(m_captureCursor)
+                        {
+                            XUndefineCursor(m_display->getHandler(), CurrentTime);
+                            m_display->flush();
+                        }
 
                         pushEvent(event);
                     }
