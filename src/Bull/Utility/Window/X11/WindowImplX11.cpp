@@ -561,7 +561,16 @@ namespace Bull
 
         String WindowImplX11::getTitle() const
         {
-            return "";
+            String title;
+            char* buffer = new char[256];
+
+            XFetchName(m_display->getHandler(), m_handler, &buffer);
+
+            title.set(buffer);
+
+            XFree(buffer);
+
+            return title;
         }
 
         bool WindowImplX11::hasFocus() const
