@@ -363,6 +363,8 @@ namespace Bull
 
                     if(!m_render)
                     {
+                        Log::get()->write("Failed to create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), Log::Level::Warning);
+
                         if(m_settings.minor == 0)
                         {
                             m_settings.major -= 1;
