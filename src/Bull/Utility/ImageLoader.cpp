@@ -1,10 +1,10 @@
 #include <cstring>
 
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb/stb_image.h>
+#include <stb_image.h>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#include <stb/stb_image_write.h>
+#include <stb_image_write.h>
 
 #include <Bull/Utility/ImageLoader.hpp>
 
@@ -12,7 +12,7 @@ namespace Bull
 {
     namespace prv
     {
-        bool ImageLoader::load(const String& path, std::vector<Uint8>& pixels, Vector2UI& size)
+        bool ImageLoader::load(const Path& path, std::vector<Uint8>& pixels, Vector2UI& size)
         {
             int width, height, channels;
             unsigned char* buffer = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
@@ -36,15 +36,18 @@ namespace Bull
             return false;
         }
 
-        bool ImageLoader::save(const String& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size)
+        bool ImageLoader::save(const Path& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size)
         {
-            switch(format)
+            if(!path.isValid())
             {
-                case Image::Bmp: return saveBmp(path, pixels, size);
-                case Image::Tga: return saveTga(path, pixels, size);
-                case Image::Png: return savePng(path, pixels, size);
-                case Image::Jpg:
-                case Image::Jpeg: return false;
+                switch(format)
+                {
+                    case Image::Bmp: return saveBmp(path, pixels, size);
+                    case Image::Tga: return saveTga(path, pixels, size);
+                    case Image::Png: return savePng(path, pixels, size);
+                    case Image::Jpg:
+                    case Image::Jpeg: return false;
+                }
             }
 
             return false;

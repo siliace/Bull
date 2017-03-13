@@ -71,7 +71,7 @@ namespace Bull
          *
          * \param path The path to the image to load
          *
-         * \return Return true if the image was loaded successfully, false otherwise
+         * \return True if the image was loaded successfully
          *
          */
         bool loadFromPath(const Path& path);
@@ -90,7 +90,7 @@ namespace Bull
          * \param x
          * \param y
          *
-         * \return Return the color
+         * \return The color
          *
          */
         Color get(unsigned int x, unsigned int y) const;

@@ -12,7 +12,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Font();
+        Font() = default;
 
         /*! \brief Load a font from a file
          *
@@ -22,10 +22,6 @@ namespace Bull
          *
          */
         bool loadFromPath(const Path& path);
-
-    private:
-
-
     };
 }
 

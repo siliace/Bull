@@ -50,7 +50,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            static bool saveBmp(const Path& path, const std::vector<Uint8>& pixels, const Vector2UI& size);
+            static bool saveBmp(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size);
 
             /*! \brief Save an image as .png file
              *
@@ -61,7 +61,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            static bool savePng(const Path& path, const std::vector<Uint8>& pixels, const Vector2UI& size);
+            static bool savePng(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size);
 
             /*! \brief Save an image as .tga file
              *
@@ -72,7 +72,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            static bool saveTga(const Path& path, const std::vector<Uint8>& pixels, const Vector2UI& size);
+            static bool saveTga(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size);
         };
     }
 }
