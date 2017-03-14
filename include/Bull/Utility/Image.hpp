@@ -39,7 +39,15 @@ namespace Bull
          * \param size   The size of the image
          *
          */
-        Image(const std::vector<Uint8>& pixels, const Vector2UI size);
+        Image(const std::vector<Uint8>& pixels, const Vector2UI& size);
+
+        /*! \brief Constructor
+         *
+         * \param data Buffer which contains row data
+         * \param size The size of the image
+         *
+         */
+        Image(const void* data, const Vector2UI& size);
 
         /*! \brief Constructor
          *
@@ -49,6 +57,15 @@ namespace Bull
          *
          */
         Image(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height);
+
+        /*! \brief Constructor
+         *
+         * \param data   Buffer which contains row data
+         * \param width  The width of the image to create
+         * \param height The height of the image to create
+         *
+         */
+        Image(const void* data, unsigned int width, unsigned int height);
 
         /*! \brief Constructor
          *
@@ -75,6 +92,27 @@ namespace Bull
          *
          */
         bool loadFromPath(const Path& path);
+
+        /*! \brief Load an image from a buffer
+         *
+         * \param data     Buffer which contains row data
+         * \param size     The size of the image
+         *
+         * \return True if the image was loaded successfully
+         *
+         */
+        bool loadFromBuffer(const void* data, const Vector2UI& size);
+
+        /*! \brief Load an image from a buffer
+         *
+         * \param data   Buffer which contains row data
+         * \param width  The width of the image to create
+         * \param height The height of the image to create
+         *
+         * \return True if the image was loaded successfully
+         *
+         */
+        bool loadFromBuffer(const void* data, unsigned int width, unsigned int height);
 
         /*! \brief Set the color of a pixel
          *
@@ -121,8 +159,8 @@ namespace Bull
 
     private:
 
-        std::vector<Uint8> m_pixels;
         Vector2UI          m_size;
+        std::vector<Uint8> m_pixels;
     };
 }
 

@@ -10,7 +10,7 @@ namespace Bull
     struct BULL_API Glyph
     {
         Image        image;
-        Rectangle2UI bounds;
+        RectangleUI  bounds;
         int          advance;
     };
 }

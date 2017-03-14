@@ -5,15 +5,26 @@
 
 namespace Bull
 {
-    Image::Image(const std::vector<Uint8>& pixels, const Vector2UI size) :
-        m_pixels(pixels),
-        m_size(size)
+    Image::Image(const std::vector<Uint8>& pixels, const Vector2UI& size) :
+        m_size(size),
+        m_pixels(pixels)
     {
         /// Nothing
     }
 
+    Image::Image(const void* data, const Vector2UI& size)
+    {
+        loadFromBuffer(data, size);
+    }
+
     Image::Image(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height) :
         Image(pixels, Vector2UI(width, height))
+    {
+        /// Nothing
+    }
+
+    Image::Image(const void* data, unsigned int width, unsigned int height) :
+        Image(data, Vector2UI(width, height))
     {
         /// Nothing
     }
@@ -25,8 +36,8 @@ namespace Bull
     }
 
     Image::Image(unsigned int width, unsigned int height, const Color& color) :
-        m_pixels(width * height * 4),
-        m_size(width, height)
+        m_size(width, height),
+        m_pixels(width * height * 4)
     {
         for(unsigned int i = 0; i < m_pixels.size(); i += 4)
         {
@@ -45,6 +56,24 @@ namespace Bull
         }
 
         return false;
+    }
+
+    bool Image::loadFromBuffer(const void* data, const Vector2UI& size)
+    {
+        if(data)
+        {
+            m_size   = size;
+            m_pixels = std::vector<Uint8>(static_cast<const Uint8*>(data), static_cast<const Uint8*>(data) + size.x * size.y * 4);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    bool Image::loadFromBuffer(const void* data, unsigned int width, unsigned int height)
+    {
+        return loadFromBuffer(data, Vector2UI(width, height));
     }
 
     void Image::set(unsigned int x, unsigned int y, const Color& color)
