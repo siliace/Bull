@@ -167,7 +167,7 @@ namespace Bull
              */
             void setProtocols();
 
-            Display::Instance m_display;
+            Display           m_display;
             ::Window          m_handler;
             Vector2UI         m_lastSize;
             bool              m_isMapped;

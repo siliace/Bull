@@ -138,7 +138,6 @@ namespace Bull
         }
 
         WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings) :
-            m_display(Display::get()),
             m_handler(0),
             m_isMapped(false),
             m_captureCursor(false)
@@ -150,17 +149,17 @@ namespace Bull
 
             config = GlxContext::chooseBestConfig(m_display, settings, mode.bitsPerPixel);
 
-            vi = glXGetVisualFromFBConfig(m_display->getHandler(), config);
+            vi = glXGetVisualFromFBConfig(m_display, config);
 
-            m_colormap = XCreateColormap(m_display->getHandler(), m_display->getRootWindow(vi->screen), vi->visual, AllocNone);
+            m_colormap = XCreateColormap(m_display, m_display.getRootWindow(vi->screen), vi->visual, AllocNone);
 
             attributes.background_pixmap = XNone;
             attributes.colormap          = m_colormap;
             attributes.border_pixel      = 0;
             attributes.event_mask        = eventMasks;
 
-            m_handler = XCreateWindow(m_display->getHandler(),
-                                      m_display->getRootWindow(vi->screen),
+            m_handler = XCreateWindow(m_display,
+                                      m_display.getRootWindow(vi->screen),
                                       0, 0,
                                       mode.width, mode.height,
                                       0,
@@ -183,25 +182,25 @@ namespace Bull
         {
             if(m_handler)
             {
-                XDestroyWindow(m_display->getHandler(), m_handler);
+                XDestroyWindow(m_display, m_handler);
             }
 
-            XFreeColormap(m_display->getHandler(), m_colormap);
+            XFreeColormap(m_display, m_colormap);
         }
 
         void WindowImplX11::startProcessEvents()
         {
             XEvent e;
-            while(XPending(m_display->getHandler()))
+            while(XPending(m_display))
             {
-                XNextEvent(m_display->getHandler(), &e);
+                XNextEvent(m_display, &e);
                 switch(e.type)
                 {
                     case ClientMessage:
                     {
-                        static Atom atomDelete = m_display->getAtom("WM_DELETE_WINDOW");
+                        static Atom atomDelete = m_display.getAtom("WM_DELETE_WINDOW");
 
-                        if(e.xclient.message_type == m_display->getAtom("WM_PROTOCOLS"))
+                        if(e.xclient.message_type == m_display.getAtom("WM_PROTOCOLS"))
                         {
                             if(e.xclient.data.l[0] == static_cast<long>(atomDelete))
                             {
@@ -372,7 +371,7 @@ namespace Bull
 
                             do
                             {
-                                grabbed = XGrabPointer(m_display->getHandler(), m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
+                                grabbed = XGrabPointer(m_display, m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
 
                                 if(!grabbed)
                                 {
@@ -393,8 +392,8 @@ namespace Bull
 
                         if(m_captureCursor)
                         {
-                            XUndefineCursor(m_display->getHandler(), CurrentTime);
-                            m_display->flush();
+                            XUndefineCursor(m_display, CurrentTime);
+                            m_display.flush();
                         }
 
                         pushEvent(event);
@@ -499,7 +498,7 @@ namespace Bull
 
                 do
                 {
-                    grabbed = XGrabPointer(m_display->getHandler(), m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
+                    grabbed = XGrabPointer(m_display, m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
 
                     if(!grabbed)
                     {
@@ -509,8 +508,8 @@ namespace Bull
             }
             else
             {
-                XUngrabPointer(m_display->getHandler(), CurrentTime);
-                m_display->flush();
+                XUngrabPointer(m_display, CurrentTime);
+                m_display.flush();
             }
         }
 
@@ -521,9 +520,9 @@ namespace Bull
 
         void WindowImplX11::setPosition(const Vector2I& position)
         {
-            XMoveWindow(m_display->getHandler(), m_handler, position.x, position.y);
+            XMoveWindow(m_display, m_handler, position.x, position.y);
             m_lastPosition = position;
-            m_display->flush();
+            m_display.flush();
         }
 
         Vector2I WindowImplX11::getPosition() const
@@ -532,31 +531,31 @@ namespace Bull
             int localX, localY, x, y;
             unsigned int width, height, border, depth;
 
-            XGetGeometry(m_display->getHandler(), m_handler, &root, &localX, &localY, &width, &height, &border, &depth);
-            XTranslateCoordinates(m_display->getHandler(), m_handler, root, localX, localY, &x, &y, &child);
+            XGetGeometry(m_display, m_handler, &root, &localX, &localY, &width, &height, &border, &depth);
+            XTranslateCoordinates(m_display, m_handler, root, localX, localY, &x, &y, &child);
 
             return Vector2I(x, y);
         }
 
         void WindowImplX11::setSize(const Vector2UI& size)
         {
-            XResizeWindow(m_display->getHandler(), m_handler, size.x, size.y);
+            XResizeWindow(m_display, m_handler, size.x, size.y);
             m_lastSize = size;
-            m_display->flush();
+            m_display.flush();
         }
 
         Vector2UI WindowImplX11::getSize() const
         {
             XWindowAttributes attributes;
 
-            XGetWindowAttributes(m_display->getHandler(), m_handler, &attributes);
+            XGetWindowAttributes(m_display, m_handler, &attributes);
 
             return Vector2UI(attributes.width, attributes.height);
         }
 
         void WindowImplX11::setTitle(const String& title)
         {
-            XStoreName(m_display->getHandler(), m_handler, title);
+            XStoreName(m_display, m_handler, title);
         }
 
         String WindowImplX11::getTitle() const
@@ -564,7 +563,7 @@ namespace Bull
             String title;
             char* buffer = new char[256];
 
-            XFetchName(m_display->getHandler(), m_handler, &buffer);
+            XFetchName(m_display, m_handler, &buffer);
 
             title.set(buffer);
 
@@ -587,8 +586,8 @@ namespace Bull
         {
             if(visible)
             {
-                XMapWindow(m_display->getHandler(), m_handler);
-                m_display->flush();
+                XMapWindow(m_display, m_handler);
+                m_display.flush();
 
                 while(!m_isMapped)
                 {
@@ -597,8 +596,8 @@ namespace Bull
             }
             else
             {
-                XUnmapWindow(m_display->getHandler(), m_handler);
-                m_display->flush();
+                XUnmapWindow(m_display, m_handler);
+                m_display.flush();
 
                 while(m_isMapped)
                 {
@@ -614,9 +613,9 @@ namespace Bull
 
         void WindowImplX11::setProtocols()
         {
-            Atom wmDeleteWindow = m_display->getAtom("WM_DELETE_WINDOW");
+            Atom wmDeleteWindow = m_display.getAtom("WM_DELETE_WINDOW");
 
-            XSetWMProtocols(m_display->getHandler(), m_handler, &wmDeleteWindow, 1);
+            XSetWMProtocols(m_display, m_handler, &wmDeleteWindow, 1);
         }
     }
 }

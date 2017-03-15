@@ -4,18 +4,13 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include <unordered_map>
-
-#include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/Pattern/Singleton.hpp>
-
-#include <Bull/Utility/Glyph.hpp>
+#include <Bull/Utility/AbstractFontLoader.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        class FontLoader : public Singleton<FontLoader>
+        class FontLoader : public AbstractFontLoader
         {
         public:
 
@@ -37,7 +32,7 @@ namespace Bull
              * \return True if glyphs were loaded successfully
              *
              */
-            bool loadFromPath(const Path& path, std::unordered_map<unsigned char, Glyph>& characterSet);
+            bool loadFromPath(const Path& path, std::unordered_map<unsigned char, Glyph>& characterSet) const override;
 
         private:
 
@@ -45,5 +40,6 @@ namespace Bull
         };
     }
 }
+
 
 #endif // BULL_FONTLOADER_HPP

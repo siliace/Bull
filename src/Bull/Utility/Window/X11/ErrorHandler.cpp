@@ -1,5 +1,4 @@
 #include <Bull/Core/Log.hpp>
-#include <Bull/Core/String.hpp>
 
 #include <Bull/Utility/Window/X11/ErrorHandler.hpp>
 
@@ -60,7 +59,7 @@ namespace Bull
         {
             if(m_isBinded)
             {
-                XSync(Display::get()->getHandler(), False);
+                XSync(Display(), False);
                 XSetErrorHandler(m_previousHandler);
                 m_isBinded = false;
             }

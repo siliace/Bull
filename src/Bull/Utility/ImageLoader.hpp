@@ -1,18 +1,13 @@
-#ifndef Bull_ImageLoader_hpp
-#define Bull_ImageLoader_hpp
+#ifndef BULL_IMAGELOADER_HPP
+#define BULL_IMAGELOADER_HPP
 
-#include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/Integer.hpp>
-
-#include <Bull/Math/Vector/Vector2.hpp>
-
-#include <Bull/Utility/Image.hpp>
+#include <Bull/Utility/AbstractImageLoader.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        class ImageLoader
+        class ImageLoader : public AbstractImageLoader
         {
         public:
 
@@ -25,7 +20,7 @@ namespace Bull
              * \return True if the image was loaded successfully
              *
              */
-            static bool load(const Path& path, std::vector<Uint8>& pixels, Vector2UI& size);
+            bool loadFromPath(const Path& path, std::vector<Uint8>& pixels, Vector2UI& size) const override;
 
             /*! \brief Save an image
              *
@@ -37,7 +32,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            static bool save(const Path& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size);
+            bool saveToPath(const Path& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
 
         private:
 
@@ -50,7 +45,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            static bool saveBmp(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size);
+            bool saveBmpToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .png file
              *
@@ -61,7 +56,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            static bool savePng(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size);
+            bool savePngToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .tga file
              *
@@ -72,9 +67,9 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            static bool saveTga(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size);
+            bool saveTgaToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
         };
     }
 }
 
-#endif // Bull_ImageLoader_hpp
+#endif // BULL_IMAGELOADER_HPP

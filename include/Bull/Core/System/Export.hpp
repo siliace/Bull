@@ -5,13 +5,21 @@
 
 #if defined BULL_DYNAMIC
     #if defined BULL_OS_WINDOWS
-        #if defined BULL_BUILD
-            #define BULL_API __declspec(dllexport)
-        #else
-            #define BULL_API __declspec(dllimport)
-        #endif
+        #define EXPORT_SYMBOL __declspec(dllexport)
+        #define IMPORT_SYMBOM __declspec(dllimport)
     #else
-        #error Lack of export to .so compilation
+        #if __GNUC__ >= 4
+            #define EXPORT_SYMBOL __attribute__ ((__visibility__ ("default")))
+            #define IMPORT_SYMBOM __attribute__ ((__visibility__ ("default")))
+        #else
+            #define EXPORT_SYMBOL
+            #define IMPORT_SYMBOM
+        #endif
+    #endif
+    #if defined BULL_BUILD
+        #define BULL_API EXPORT_SYMBOL
+    #else
+        #define BULL_API IMPORT_SYMBOM
     #endif
 #else
     #define BULL_API

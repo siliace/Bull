@@ -1,5 +1,5 @@
-#ifndef Bull_Image_hpp
-#define Bull_Image_hpp
+#ifndef BULL_UTILITY_IMAGE_HPP
+#define BULL_UTILITY_IMAGE_HPP
 
 #include <vector>
 
@@ -13,6 +13,8 @@
 
 namespace Bull
 {
+    class AbstractImageLoader;
+
     class BULL_API Image
     {
     public:
@@ -25,6 +27,8 @@ namespace Bull
             Png,
             Tga
         };
+
+        static std::unique_ptr<AbstractImageLoader> loader;
 
     public:
 
@@ -164,4 +168,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Image_hpp
+#endif // BULL_UTILITY_IMAGE_HPP

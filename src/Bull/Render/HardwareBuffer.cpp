@@ -51,7 +51,7 @@ namespace Bull
         {
             ensureContext();
 
-            gl::bindBuffer(m_type, m_id);
+            bind(this);
 
             /// It seems that glBufferSubData is more efficient than glMapBuffer with small buffers
             /// http://www.stevestreeting.com/2007/03/17/glmapbuffer-vs-glbuffersubdata-the-return/
@@ -85,7 +85,8 @@ namespace Bull
         {
             ensureContext();
 
-            gl::bindBuffer(m_type, m_id);
+            bind(this);
+
             if(!keepMemory)
             {
                 m_size = 0;

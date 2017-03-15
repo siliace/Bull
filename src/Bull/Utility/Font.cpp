@@ -1,5 +1,4 @@
 #include <Bull/Utility/Font.hpp>
-#include <Bull/Utility/FontLoader.hpp>
 
 namespace Bull
 {
@@ -10,7 +9,7 @@ namespace Bull
 
     bool Font::loadFromPath(const Path& path)
     {
-        return prv::FontLoader::get()->loadFromPath(path, m_characterSet);
+        return false;
     }
 
     bool Font::isValid() const

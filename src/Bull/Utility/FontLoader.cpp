@@ -1,5 +1,3 @@
-#include <Bull/Core/Log.hpp>
-
 #include <Bull/Utility/FontLoader.hpp>
 
 namespace Bull
@@ -17,14 +15,14 @@ namespace Bull
 
         FontLoader::~FontLoader()
         {
-            FT_Done_FreeType(m_library);
+            FT_Done_FreeType(static_cast<FT_Library>(m_library));
         }
 
-        bool FontLoader::loadFromPath(const Path& path, std::unordered_map<unsigned char, Glyph>& characterSet)
+        bool FontLoader::loadFromPath(const Path& path, std::unordered_map<unsigned char, Glyph>& characterSet) const
         {
             FT_Face face;
 
-            if(FT_New_Face(m_library, path, 0, &face) == FT_Err_Ok)
+            if(FT_New_Face(static_cast<FT_Library>(m_library), path, 0, &face) == FT_Err_Ok)
             {
                 characterSet.clear();
 

@@ -13,12 +13,12 @@ namespace Bull
     {
         VideoMode VideoModeImpl::getCurrent()
         {
-            Display::Instance display = Display::get();
+            Display display;
             VideoMode desktopMode;
 
-            if(display->isSupportedExtension("RANDR"))
+            if(display.isSupportedExtension("RANDR"))
             {
-                XRRScreenConfiguration* config = XRRGetScreenInfo(display->getHandler(), display->getRootWindow());
+                XRRScreenConfiguration* config = XRRGetScreenInfo(display, display.getRootWindow());
 
                 if(config)
                 {
@@ -30,7 +30,7 @@ namespace Bull
 
                     if(sizes && sizesCount > 0)
                     {
-                        desktopMode.bitsPerPixel = display->getDefaultDepth();
+                        desktopMode.bitsPerPixel = display.getDefaultDepth();
 
                         if(rotation == RR_Rotate_90 || RR_Rotate_270)
                         {
@@ -59,12 +59,12 @@ namespace Bull
 
         std::vector<VideoMode> VideoModeImpl::getAllAvailable()
         {
-            Display::Instance display = Display::get();
+            Display display;
             std::vector<VideoMode> modes;
 
-            if(display->isSupportedExtension("RANDR"))
+            if(display.isSupportedExtension("RANDR"))
             {
-                XRRScreenConfiguration* config = XRRGetScreenInfo(display->getHandler(), display->getRootWindow());
+                XRRScreenConfiguration* config = XRRGetScreenInfo(display, display.getRootWindow());
 
                 if(config)
                 {
@@ -72,7 +72,7 @@ namespace Bull
                     int depthsCount;
 
                     XRRScreenSize* sizes = XRRConfigSizes(config, &sizesCount);
-                    int* depths          = XListDepths(display->getHandler(), display->getDefaultScreen(), &depthsCount);
+                    int* depths          = XListDepths(display, display.getDefaultScreen(), &depthsCount);
 
                     if(sizes && sizesCount > 0 && depths && depthsCount > 0)
                     {

@@ -5,15 +5,24 @@
 
 #include <X11/Xlib.h>
 
-#include <Bull/Core/Pattern/Singleton.hpp>
 #include <Bull/Core/String.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        class Display : public Singleton<Display>
+        class Display
         {
+        public:
+
+            typedef ::Display* XDisplay;
+
+        private:
+
+            static std::map<String, Atom> s_atoms;
+            static XDisplay               s_display;
+            static unsigned int           s_instanceCounter;
+
         public:
 
             /*! \brief Default constructor
@@ -21,10 +30,26 @@ namespace Bull
              */
             Display();
 
+            /*! \brief Copy constructor
+             *
+             * \param copy The Display to copy
+             *
+             */
+            Display(const Display& copy);
+
             /*! \brief Destructor
              *
              */
             ~Display();
+
+            /*! \brief Basic assignment operator
+             *
+             * \param copy The Display to copy
+             *
+             * \return This
+             *
+             */
+            Display& operator=(const Display& copy);
 
             /*! \brief Flush the display
              *
@@ -89,17 +114,12 @@ namespace Bull
              */
             Atom getAtom(const String& name, bool mustExists = false);
 
-            /*! \brief Get the X11 display
+            /*! \brief Convert the display to a Xlib display
              *
-             * \return Return the X11 display
+             * \return
              *
              */
-            ::Display* getHandler();
-
-        private:
-
-            ::Display* m_display;
-            std::map<String, Atom> m_atoms;
+            operator XDisplay() const;
         };
     }
 }

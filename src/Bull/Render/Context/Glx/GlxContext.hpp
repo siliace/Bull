@@ -41,7 +41,7 @@ namespace Bull
              * \return The best config
              *
              */
-            static GLXFBConfig chooseBestConfig(Display::Instance display, const ContextSettings& settings, unsigned int bitsPerPixel);
+            static GLXFBConfig chooseBestConfig(Display display, const ContextSettings& settings, unsigned int bitsPerPixel);
 
         public:
 
@@ -151,7 +151,7 @@ namespace Bull
             GLXContext        m_render;
             GLXFBConfig       m_config;
             GLXPbuffer        m_pbuffer;
-            Display::Instance m_display;
+            Display           m_display;
             Colormap          m_colormap;
             bool              m_isDirect;
             bool              m_ownWindow;

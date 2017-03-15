@@ -2,7 +2,6 @@
 #include <Bull/Core/Log.hpp>
 
 #include <Bull/Render/Context/ShaderStateSaver.hpp>
-#include <Bull/Render/Context/TextureStateSaver.hpp>
 #include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Shader.hpp>
 
@@ -24,7 +23,7 @@ namespace Bull
 
         gl::getIntegerv(GL_MAX_VERTEX_ATTRIBS, &count);
 
-        return count;
+        return static_cast<unsigned int>(count);
     }
 
     GLuint Shader::createShader(const String& code, Type type, String* error)
@@ -64,7 +63,7 @@ namespace Bull
     bool Shader::programHasError(GLuint program, GLenum type, String* error)
     {
         GLint success;
-        gl::getProgramiv(program, GL_LINK_STATUS, &success);
+        gl::getProgramiv(program, type, &success);
 
         if(!success)
         {

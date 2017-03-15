@@ -5,6 +5,8 @@
 
 namespace Bull
 {
+    std::unique_ptr<AbstractImageLoader> Image::loader = std::make_unique<prv::ImageLoader>();
+
     Image::Image(const std::vector<Uint8>& pixels, const Vector2UI& size) :
         m_size(size),
         m_pixels(pixels)
@@ -52,7 +54,7 @@ namespace Bull
     {
         if(path)
         {
-            return prv::ImageLoader::load(path, m_pixels, m_size);
+            return loader->loadFromPath(path, m_pixels, m_size);
         }
 
         return false;
@@ -112,7 +114,7 @@ namespace Bull
     {
         if(!File::exists(path) && m_pixels.size() > 0)
         {
-            return prv::ImageLoader::save(path, format, m_pixels, m_size);
+            return loader->saveToPath(path, format, m_pixels, m_size);
         }
 
         return false;

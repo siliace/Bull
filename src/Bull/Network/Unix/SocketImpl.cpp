@@ -97,6 +97,8 @@ namespace Bull
                 case NetProtocol::Ipv4: return AF_INET;
                 case NetProtocol::Ipv6: return AF_INET6;
             }
+
+            return 0;
         }
 
         Socket::State SocketImpl::receive(SocketHandler socket, void* buffer, std::size_t size, std::size_t* received, Socket::Error* error)
@@ -112,6 +114,8 @@ namespace Bull
                 case Socket::Type::Udp: return SOCK_DGRAM;
                 case Socket::Type::Raw: return SOCK_RAW;
             }
+
+            return 0;
         }
     }
 }
