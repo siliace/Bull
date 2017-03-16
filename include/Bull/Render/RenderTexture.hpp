@@ -6,10 +6,11 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Export.hpp>
 
-#include <Bull/Render/Color.hpp>
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/RenderTarget.hpp>
 #include <Bull/Render/Texture.hpp>
+
+#include <Bull/Utility/Color.hpp>
 
 namespace Bull
 {

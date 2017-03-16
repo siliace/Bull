@@ -1,4 +1,4 @@
-#include <Bull/Render/Color.hpp>
+#include <Bull/Utility/Color.hpp>
 
 namespace Bull
 {

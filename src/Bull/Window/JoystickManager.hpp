@@ -10,7 +10,7 @@
 
 #include <Bull/Hardware/Joystick.hpp>
 
-#include <Bull/Utility/Window/Window.hpp>
+#include <Bull/Window/Window.hpp>
 
 namespace Bull
 {

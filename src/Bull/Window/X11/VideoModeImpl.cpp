@@ -4,8 +4,8 @@
 
 #include <Bull/Core/Log.hpp>
 
-#include <Bull/Utility/Window/X11/Display.hpp>
-#include <Bull/Utility/Window/X11/VideoModeImpl.hpp>
+#include <Bull/Window/X11/Display.hpp>
+#include <Bull/Window/X11/VideoModeImpl.hpp>
 
 namespace Bull
 {

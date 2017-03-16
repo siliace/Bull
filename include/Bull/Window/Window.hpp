@@ -14,13 +14,13 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Render/Context/ContextSettings.hpp>
-
-#include <Bull/Utility/Window/VideoMode.hpp>
-#include <Bull/Utility/Window/WindowHandler.hpp>
+#include <Bull/Window/VideoMode.hpp>
+#include <Bull/Window/WindowHandler.hpp>
 
 namespace Bull
 {
+    class ContextSettings;
+
     namespace prv
     {
         class WindowImpl;

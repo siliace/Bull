@@ -1,7 +1,10 @@
 #include <Bull/Utility/Font.hpp>
+#include <Bull/Utility/FontLoader.hpp>
 
 namespace Bull
 {
+    std::unique_ptr<AbstractFontLoader> Font::loader = std::make_unique<prv::FontLoader>();
+
     Font::Font(const Path& path)
     {
         loadFromPath(path);

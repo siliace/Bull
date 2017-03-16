@@ -1,9 +1,6 @@
 #ifndef BULL_FONTLOADER_HPP
 #define BULL_FONTLOADER_HPP
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
-
 #include <Bull/Utility/AbstractFontLoader.hpp>
 
 namespace Bull
@@ -33,13 +30,8 @@ namespace Bull
              *
              */
             bool loadFromPath(const Path& path, std::unordered_map<unsigned char, Glyph>& characterSet) const override;
-
-        private:
-
-            FT_Library m_library;
         };
     }
 }
-
 
 #endif // BULL_FONTLOADER_HPP

@@ -17,10 +17,11 @@ set(BULL_SRC ${BULL_ROOT}/src/Bull)
 
 link_directories(libs)
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BULL_ROOT}/bin/${CMAKE_BUILD_TYPE})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_ROOT}/libs)
 
 add_subdirectory(src/Bull/Core)
 add_subdirectory(src/Bull/Hardware)
 add_subdirectory(src/Bull/Render)
 add_subdirectory(src/Bull/Network)
 add_subdirectory(src/Bull/Utility)
+add_subdirectory(src/Bull/Window)

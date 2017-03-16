@@ -9,7 +9,7 @@
 #include <Bull/Render/Context/Glx/GlxSwapControlMESA.hpp>
 #include <Bull/Render/Context/Glx/GlxSwapControlSGI.hpp>
 
-#include <Bull/Utility/Window/X11/ErrorHandler.hpp>
+#include <Bull/Window/X11/ErrorHandler.hpp>
 
 namespace Bull
 {

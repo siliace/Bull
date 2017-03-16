@@ -6,13 +6,12 @@
 #include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
-#include <Bull/Render/Context/ContextSettings.hpp>
-#include <Bull/Render/Context/ContextSettings.hpp>
-
-#include <Bull/Utility/Window/VideoMode.hpp>
 
 namespace Bull
 {
+    class VideoMode;
+    class ContextSettings;
+
     namespace prv
     {
         class GlContext;

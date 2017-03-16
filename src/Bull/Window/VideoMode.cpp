@@ -1,7 +1,7 @@
 #include <algorithm>
 
-#include <Bull/Utility/Window/VideoMode.hpp>
-#include <Bull/Utility/Window/VideoModeImpl.hpp>
+#include <Bull/Window/VideoMode.hpp>
+#include <Bull/Window/VideoModeImpl.hpp>
 
 namespace Bull
 {

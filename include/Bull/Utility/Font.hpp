@@ -10,8 +10,14 @@
 
 namespace Bull
 {
+    class AbstractFontLoader;
+
     class BULL_API Font : public NonCopyable
     {
+    public:
+
+        static std::unique_ptr<AbstractFontLoader> loader;
+
     public:
 
         /*! \brief Default constructor

@@ -9,11 +9,11 @@
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
-#include <Bull/Render/Color.hpp>
 #include <Bull/Render/Viewport.hpp>
 
-#include <Bull/Utility/Window/VideoMode.hpp>
-#include <Bull/Utility/Window/WindowHandler.hpp>
+#include <Bull/Utility/Color.hpp>
+#include <Bull/Window/VideoMode.hpp>
+#include <Bull/Window/WindowHandler.hpp>
 
 namespace Bull
 {

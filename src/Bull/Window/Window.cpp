@@ -1,5 +1,5 @@
-#include <Bull/Utility/Window/Window.hpp>
-#include <Bull/Utility/Window/WindowImpl.hpp>
+#include <Bull/Window/Window.hpp>
+#include <Bull/Window/WindowImpl.hpp>
 
 namespace Bull
 {

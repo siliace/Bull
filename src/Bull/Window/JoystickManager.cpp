@@ -1,6 +1,6 @@
 #include <cmath>
 
-#include <Bull/Utility/Window/JoystickManager.hpp>
+#include <Bull/Window/JoystickManager.hpp>
 
 namespace Bull
 {
