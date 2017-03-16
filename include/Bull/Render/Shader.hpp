@@ -8,10 +8,11 @@
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
 
-#include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Texture.hpp>
 
 #include <Bull/Utility/Color.hpp>
+
+#include <Bull/Window/ContextResource.hpp>
 
 namespace Bull
 {

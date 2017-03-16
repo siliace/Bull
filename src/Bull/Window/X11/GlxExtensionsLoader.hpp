@@ -5,7 +5,7 @@
 
 #include <Bull/Core/String.hpp>
 
-#include <Bull/Render/Context/SurfaceHandler.hpp>
+#include <Bull/Window/SurfaceHandler.hpp>
 
 namespace Bull
 {

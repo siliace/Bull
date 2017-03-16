@@ -7,9 +7,9 @@
 #include <Bull/Math/Polygon/Rectangle.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Render/Context/ContextResource.hpp>
-
 #include <Bull/Utility/Image.hpp>
+
+#include <Bull/Window/ContextResource.hpp>
 
 namespace Bull
 {

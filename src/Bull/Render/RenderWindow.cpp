@@ -1,6 +1,6 @@
 #include <Bull/Core/Thread/Thread.hpp>
 
-#include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Window/GlContext.hpp>
 #include <Bull/Render/RenderWindow.hpp>
 
 #include <Bull/Window/WindowImpl.hpp>

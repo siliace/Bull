@@ -18,8 +18,8 @@ namespace Bull
 
             if(buffer)
             {
-                size.x = width;
-                size.y = height;
+                size.x = static_cast<unsigned int>(width);
+                size.y = static_cast<unsigned int>(height);
 
                 if(size.x && size.y)
                 {

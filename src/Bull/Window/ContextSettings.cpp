@@ -1,4 +1,4 @@
-#include <Bull/Render/Context/ContextSettings.hpp>
+#include <Bull/Window/ContextSettings.hpp>
 
 namespace Bull
 {

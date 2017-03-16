@@ -6,8 +6,9 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Export.hpp>
 
-#include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/OpenGL.hpp>
+
+#include <Bull/Window/ContextResource.hpp>
 
 namespace Bull
 {

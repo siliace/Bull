@@ -10,6 +10,11 @@ namespace Bull
         return m_fullscreen;
     }
 
+    Window::Window()
+    {
+        /// Nothing
+    }
+
     Window::Window(const VideoMode& mode, const String& title, Uint32 style)
     {
         open(mode, title, style);

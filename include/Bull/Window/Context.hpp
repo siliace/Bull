@@ -5,7 +5,7 @@
 #include <Bull/Core/Thread/LocalPtr.hpp>
 #include <Bull/Core/System/Export.hpp>
 
-#include <Bull/Render/Context/ContextResource.hpp>
+#include <Bull/Window/ContextResource.hpp>
 
 namespace Bull
 {

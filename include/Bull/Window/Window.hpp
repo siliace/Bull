@@ -165,7 +165,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Window() = default;
+        Window();
 
         /*! \brief Constructor
          *

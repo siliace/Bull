@@ -3,7 +3,7 @@
 
 #include <X11/Xlib.h>
 
-#include <Bull/Render/Context/ExtensionsLoader.hpp>
+#include <Bull/Window/ExtensionsLoader.hpp>
 
 #define GLX_SWAP_INTERVAL_EXT     0x20F1
 #define GLX_MAX_SWAP_INTERVAL_EXT 0x20F2

@@ -1,6 +1,5 @@
-#include <Bull/Render/Context/ContextResource.hpp>
-#include <Bull/Render/Context/GlContext.hpp>
-#include <Bull/Render/GlLoader.hpp>
+#include <Bull/Window/ContextResource.hpp>
+#include <Bull/Window/GlContext.hpp>
 
 namespace Bull
 {

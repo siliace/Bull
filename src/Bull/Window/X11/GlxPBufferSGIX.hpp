@@ -29,7 +29,7 @@
 
 #include <X11/Xlib.h>
 
-#include <Bull/Render/Context/ExtensionsLoader.hpp>
+#include <Bull/Window/ExtensionsLoader.hpp>
 
 namespace Bull
 {

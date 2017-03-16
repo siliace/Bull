@@ -1,4 +1,4 @@
-#include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Window/GlContext.hpp>
 #include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/RenderTarget.hpp>
 

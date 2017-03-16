@@ -2,12 +2,12 @@
 
 #include <Bull/Core/Log.hpp>
 
-#include <Bull/Render/Context/Glx/GlxContext.hpp>
-#include <Bull/Render/Context/Glx/GlxCreateContextARB.hpp>
-#include <Bull/Render/Context/Glx/GlxPBufferSGIX.hpp>
-#include <Bull/Render/Context/Glx/GlxSwapControlEXT.hpp>
-#include <Bull/Render/Context/Glx/GlxSwapControlMESA.hpp>
-#include <Bull/Render/Context/Glx/GlxSwapControlSGI.hpp>
+#include <Bull/Window/X11/GlxContext.hpp>
+#include <Bull/Window/X11/GlxCreateContextARB.hpp>
+#include <Bull/Window/X11/GlxPBufferSGIX.hpp>
+#include <Bull/Window/X11/GlxSwapControlEXT.hpp>
+#include <Bull/Window/X11/GlxSwapControlMESA.hpp>
+#include <Bull/Window/X11/GlxSwapControlSGI.hpp>
 
 #include <Bull/Window/X11/ErrorHandler.hpp>
 

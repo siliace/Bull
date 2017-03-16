@@ -1,5 +1,5 @@
-#include <Bull/Render/Context/Context.hpp>
-#include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Window/Context.hpp>
+#include <Bull/Window/GlContext.hpp>
 
 namespace Bull
 {

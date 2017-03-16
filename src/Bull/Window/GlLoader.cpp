@@ -1,5 +1,5 @@
-#include <Bull/Render/Context/GlContext.hpp>
-#include <Bull/Render/GlLoader.hpp>
+#include <Bull/Window/GlContext.hpp>
+#include <Bull/Window/GlLoader.hpp>
 #include <Bull/Render/OpenGL.hpp>
 
 namespace gl

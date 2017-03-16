@@ -3,13 +3,13 @@
 #include <Bull/Core/Log.hpp>
 #include <Bull/Core/System/Config.hpp>
 
-#include <Bull/Render/Context/ExtensionsLoader.hpp>
+#include <Bull/Window/ExtensionsLoader.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglExtensionsLoader.hpp>
     typedef Bull::prv::WglExtensionsLoader ExtensionsLoaderType;
 #else
-    #include <Bull/Render/Context/Glx/GlxExtensionsLoader.hpp>
+    #include <Bull/Window/X11/GlxExtensionsLoader.hpp>
     typedef Bull::prv::GlxExtensionsLoader ExtensionsLoaderType;
 #endif
 

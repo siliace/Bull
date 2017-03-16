@@ -2,7 +2,7 @@
 
 #include <Bull/Core/Thread/Thread.hpp>
 
-#include <Bull/Render/Context/Glx/GlxContext.hpp>
+#include <Bull/Window/X11/GlxContext.hpp>
 
 #include <Bull/Window/X11/ErrorHandler.hpp>
 #include <Bull/Window/X11/WindowImplX11.hpp>

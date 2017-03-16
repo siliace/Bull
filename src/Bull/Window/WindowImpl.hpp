@@ -9,8 +9,7 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Render/Context/ContextSettings.hpp>
-
+#include <Bull/Window/ContextSettings.hpp>
 #include <Bull/Window/VideoMode.hpp>
 #include <Bull/Window/Window.hpp>
 #include <Bull/Window/WindowHandler.hpp>

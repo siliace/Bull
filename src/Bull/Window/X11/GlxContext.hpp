@@ -4,8 +4,8 @@
 #include <GL/glx.h>
 #include <X11/Xlib.h>
 
-#include <Bull/Render/Context/ExtensionsLoader.hpp>
-#include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Window/ExtensionsLoader.hpp>
+#include <Bull/Window/GlContext.hpp>
 
 #include <Bull/Window/X11/Display.hpp>
 

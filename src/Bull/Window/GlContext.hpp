@@ -4,10 +4,9 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/String.hpp>
 
-#include <Bull/Render/Context/ContextSettings.hpp>
-#include <Bull/Render/Context/ExtensionsLoader.hpp>
-#include <Bull/Render/Context/SurfaceHandler.hpp>
-
+#include <Bull/Window/ContextSettings.hpp>
+#include <Bull/Window/ExtensionsLoader.hpp>
+#include <Bull/Window/SurfaceHandler.hpp>
 #include <Bull/Window/VideoMode.hpp>
 #include <Bull/Window/WindowHandler.hpp>
 

@@ -1,21 +1,21 @@
 #include <memory>
 #include <set>
 
-#include <Bull/Core/System/Config.hpp>
 #include <Bull/Core/Thread/Local.hpp>
 #include <Bull/Core/Thread/LocalPtr.hpp>
 #include <Bull/Core/Thread/Lock.hpp>
 
-#include <Bull/Render/Context/Context.hpp>
-#include <Bull/Render/Context/GlContext.hpp>
 #include <Bull/Render/OpenGL.hpp>
-#include <Bull/Render/GlLoader.hpp>
+
+#include <Bull/Window/Context.hpp>
+#include <Bull/Window/GlContext.hpp>
+#include <Bull/Window/GlLoader.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglContext.hpp>
     typedef Bull::prv::WglContext ContextType;
 #else
-    #include <Bull/Render/Context/Glx/GlxContext.hpp>
+    #include <Bull/Window/X11/GlxContext.hpp>
     typedef Bull::prv::GlxContext ContextType;
 #endif
 
