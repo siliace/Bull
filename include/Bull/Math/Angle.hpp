@@ -40,15 +40,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Angle();
-
-        /*! \brief Constructor
-         *
-         * \param angle    The value of the angle
-         * \param isRadian Whether the angle value is in radian
-         *
-         */
-        Angle(T value, bool isRadian = false);
+        Angle() = default;
 
         /*! \brief Set the value of the angle
          *
@@ -73,6 +65,13 @@ namespace Bull
          *
          */
         Angle<T> asRadian() const;
+
+        /*! \brief Normalize the angle
+         *
+         * @return This
+         *
+         */
+        Angle<T>& normalize();
 
         /*! \brief Addition two angles
          *
@@ -154,6 +153,14 @@ namespace Bull
         operator T() const;
 
     private:
+
+        /*! \brief Constructor
+         *
+         * \param angle    The value of the angle
+         * \param isRadian Whether the angle value is in radian
+         *
+         */
+        Angle(T value, bool isRadian = false);
 
         T    m_value;
         bool m_isRadian;
