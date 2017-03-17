@@ -58,6 +58,13 @@ namespace Bull
          */
         EulerAngles<T>& set(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw);
 
+        /*! \brief Normalize the angle of each rotation
+         *
+         * @return This
+         *
+         */
+        EulerAngles<T>& normalize();
+
         /*! \brief Compare two EulerAngles
          *
          * @param right The EulerAngles to compare

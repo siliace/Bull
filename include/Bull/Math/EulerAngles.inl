@@ -45,6 +45,16 @@ namespace Bull
     }
 
     template <typename T>
+    EulerAngles<T>& EulerAngles<T>::normalize()
+    {
+        roll.normalize();
+        pitch.normalize();
+        yaw.normalize();
+
+        return (*this);
+    }
+
+    template <typename T>
     bool EulerAngles<T>::operator==(const EulerAngles<T>& right)
     {
         return (roll  == right.roll)  &&
