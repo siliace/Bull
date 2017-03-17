@@ -1,35 +1,31 @@
 namespace Bull
 {
     template <typename T>
-    EulerAngles<T>::EulerAngles() :
+    EulerAngles<T>::EulerAngles()
     {
-        set(0.0, 0.0, 0.0);
+        set(Angle<T>::degree(0), Angle<T>::degree(0), Angle<T>::degree(0));
     }
 
     template <typename T>
-    template <typename U>
-    EulerAngles<T>::EulerAngles(const EulerAngles<U>& copy)
+    EulerAngles<T>::EulerAngles(const EulerAngles<T>& copy)
     {
         set(copy);
     }
 
     template <typename T>
-    template <typename U, typename V, typename W>
-    EulerAngles<T>::EulerAngles(const Angle<U>& roll, const Angle<V>& pitch, const Angle<W>& yaw)
+    EulerAngles<T>::EulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw)
     {
         set(roll, pitch, yaw);
     }
 
     template <typename T>
-    template <typename U>
-    EulerAngles<T>& operator=(const EulerAngles<U>& copy)
+    EulerAngles<T>& EulerAngles<T>::operator=(const EulerAngles<T>& copy)
     {
         return set(copy);
     }
 
     template <typename T>
-    template <typename U>
-    EulerAngles<T>& EulerAngles<T>::set(const EulerAngles<U>& copy)
+    EulerAngles<T>& EulerAngles<T>::set(const EulerAngles<T>& copy)
     {
         roll  = copy.roll;
         pitch = copy.pitch;
@@ -39,8 +35,7 @@ namespace Bull
     }
 
     template <typename T>
-    template <typename U, typename V, typename W>
-    EulerAngles<T>& EulerAngles<T>::set(const Angle<U>& roll, const Angle<V>& pitch, const Angle<W>& yaw)
+    EulerAngles<T>& EulerAngles<T>::set(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw)
     {
         this->roll  = roll;
         this->pitch = pitch;
@@ -50,8 +45,7 @@ namespace Bull
     }
 
     template <typename T>
-    template <typename U>
-    bool EulerAngles<T>::operator==(const EulerAngles<U>& right)
+    bool EulerAngles<T>::operator==(const EulerAngles<T>& right)
     {
         return (roll  == right.roll)  &&
                (pitch == right.pitch) &&
@@ -59,8 +53,7 @@ namespace Bull
     }
 
     template <typename T>
-    template <typename U>
-    bool EulerAngles<T>::operator!=(const EulerAngles<U>& right)
+    bool EulerAngles<T>::operator!=(const EulerAngles<T>& right)
     {
         return !((*this) == right);
     }

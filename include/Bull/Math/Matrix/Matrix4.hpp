@@ -31,8 +31,7 @@ namespace Bull
          * \return Return the matrix
          *
          */
-        template<typename U>
-        static Matrix4<T> createTranslation(U x, U y, U z);
+        static Matrix4<T> createTranslation(T x, T y, T z);
 
         /*! \brief Create a scale matrix
          *
@@ -43,8 +42,7 @@ namespace Bull
          * \return Return the matrix
          *
          */
-        template<typename U>
-        static Matrix4<T> createScale(U x, U y, U z);
+        static Matrix4<T> createScale(T x, T y, T z);
 
     public:
 
@@ -58,24 +56,21 @@ namespace Bull
          * \param value The value of every matrix cell
          *
          */
-        template<typename U>
-        Matrix4(U value);
+        Matrix4(T value);
 
         /*! \brief Constructor
          *
          * \param data The matrix content
          *
          */
-        template<typename U>
-        Matrix4(const std::array<U, 16>& data);
+        Matrix4(const std::array<T, 16>& data);
 
         /*! \brief Set the matrix content
          *
          * \param value The value of every matrix cell
          *
          */
-        template<typename U>
-        void set(U value);
+        void set(T value);
 
         /*! \brief The value of a cell of the matrix
          *
@@ -84,16 +79,14 @@ namespace Bull
          * \param y     The ordinate of the cell in the matrix
          *
          */
-        template<typename U>
-        void set(U value, std::size_t x, std::size_t y);
+        void set(T value, std::size_t x, std::size_t y);
 
         /*! \brief Set the matrix content
          *
          * \param data The matrix content
          *
          */
-        template<typename U>
-        void set(const std::array<U, 16>& data);
+        void set(const std::array<T, 16>& data);
 
         /*! \brief Get the value of a cell of the matrix
          *
@@ -150,8 +143,7 @@ namespace Bull
          * \return Return true if the two matrices are equal, false otherwise
          *
          */
-        template<typename U>
-        bool operator==(const Matrix4<U>& right);
+        bool operator==(const Matrix4<T>& right);
 
         /*! \brief Compare two matrices
          *
@@ -160,8 +152,7 @@ namespace Bull
          * \return Return true if the two matrices are not equal, false otherwise
          *
          */
-        template<typename U>
-        bool operator!=(const Matrix4<U>& right);
+        bool operator!=(const Matrix4<T>& right);
 
         /*! \brief Addition two matrices
          *
@@ -170,8 +161,7 @@ namespace Bull
          * \return Return the sum the addition of right and this
          *
          */
-        template<typename U>
-        Matrix4<T>& operator+=(const Matrix4<U>& right);
+        Matrix4<T>& operator+=(const Matrix4<T>& right);
 
         /*! \brief Addition two matrices
          *
@@ -180,8 +170,7 @@ namespace Bull
          * \return Return the sum of the addition between right and this
          *
          */
-        template<typename U>
-        Matrix4<T>& operator+=(U right);
+        Matrix4<T>& operator+=(T right);
 
         /*! \brief Subtract two matrices
          *
@@ -190,8 +179,7 @@ namespace Bull
          * \return Return the difference of the subtraction between right and this
          *
          */
-        template<typename U>
-        Matrix4<T>& operator-=(const Matrix4<U>& right);
+        Matrix4<T>& operator-=(const Matrix4<T>& right);
 
         /*! \brief Subtract a matrix with a scalar
          *
@@ -200,8 +188,7 @@ namespace Bull
          * \return Return the difference the subtraction between right and this
          *
          */
-        template<typename U>
-        Matrix4<T>& operator-=(U right);
+        Matrix4<T>& operator-=(T right);
 
         /*! \brief Multiply two matrices
          *
@@ -210,8 +197,7 @@ namespace Bull
          * \return Return the product of the multiplication between right and this
          *
          */
-        template<typename U>
-        Matrix4<T> operator*=(const Matrix4<U>& right);
+        Matrix4<T> operator*=(const Matrix4<T>& right);
 
         /*! \brief Get a pointer to the internal data
          *

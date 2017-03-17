@@ -14,8 +14,7 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T> Matrix4<T>::createTranslation(U x, U y, U z)
+    Matrix4<T> Matrix4<T>::createTranslation(T x, T y, T z)
     {
         Matrix4<T> translation = Matrix4<T>::createIdentity();
 
@@ -27,8 +26,7 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T> Matrix4<T>::createScale(U x, U y, U z)
+    Matrix4<T> Matrix4<T>::createScale(T x, T y, T z)
     {
         Matrix4<T> scale;
 
@@ -47,29 +45,25 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T>::Matrix4(U value)
+    Matrix4<T>::Matrix4(T value)
     {
         set(value);
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T>::Matrix4(const std::array<U, 16>& data)
+    Matrix4<T>::Matrix4(const std::array<T, 16>& data)
     {
         set(data);
     }
 
     template<typename T>
-    template<typename U>
-    void Matrix4<T>::set(U value)
+    void Matrix4<T>::set(T value)
     {
         m_data.fill(value);
     }
 
     template<typename T>
-    template<typename U>
-    void Matrix4<T>::set(U value, std::size_t x, std::size_t y)
+    void Matrix4<T>::set(T value, std::size_t x, std::size_t y)
     {
         if(x >= 4 || y >= 4)
         {
@@ -80,8 +74,7 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    void Matrix4<T>::set(const std::array<U, 16>& data)
+    void Matrix4<T>::set(const std::array<T, 16>& data)
     {
         m_data = data;
     }
@@ -151,41 +144,36 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    bool Matrix4<T>::operator==(const Matrix4<U>& right)
+    bool Matrix4<T>::operator==(const Matrix4<T>& right)
     {
         return m_data == right.m_data;
     }
 
     template<typename T>
-    template<typename U>
-    bool Matrix4<T>::operator!=(const Matrix4<U>& right)
+    bool Matrix4<T>::operator!=(const Matrix4<T>& right)
     {
         return m_data != right.m_data;
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T>& Matrix4<T>::operator+=(const Matrix4<U>& right)
+    Matrix4<T>& Matrix4<T>::operator+=(const Matrix4<T>& right)
     {
         for(std::size_t i = 0; i < 16; i++)
         {
-            m_data[i] += static_cast<U>(right.m_data[i]);
+            m_data[i] += static_cast<T>(right.m_data[i]);
         }
 
         return (*this);
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T>& Matrix4<T>::operator+=(U right)
+    Matrix4<T>& Matrix4<T>::operator+=(T right)
     {
-        return (*this) += Matrix4<U>(right);
+        return (*this) += Matrix4<T>(right);
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T>& Matrix4<T>::operator-=(const Matrix4<U>& right)
+    Matrix4<T>& Matrix4<T>::operator-=(const Matrix4<T>& right)
     {
         for(std::size_t i = 0; i < 16; i++)
         {
@@ -196,15 +184,13 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T>& Matrix4<T>::operator-=(U right)
+    Matrix4<T>& Matrix4<T>::operator-=(T right)
     {
-        return (*this) -= Matrix4<U>(right);
+        return (*this) -= Matrix4<T>(right);
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T> Matrix4<T>::operator*=(const Matrix4<U>& right)
+    Matrix4<T> Matrix4<T>::operator*=(const Matrix4<T>& right)
     {
         std::array<T, 16> product;
 

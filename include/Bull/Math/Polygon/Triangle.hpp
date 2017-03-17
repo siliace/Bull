@@ -21,8 +21,7 @@ namespace Bull
          * \param rotation The rotation of the polygon
          *
          */
-        template<typename U, typename V, typename W = T>
-        Triangle(const Vector2<U>& center, V radius = 0.0, const Angle<W>& rotation = Angle<W>::Zero);
+        Triangle(const Vector2<T>& center, T radius = 0, const Angle<T>& rotation = Angle<T>::Zero);
     };
 
     typedef Triangle<int> TriangleI;

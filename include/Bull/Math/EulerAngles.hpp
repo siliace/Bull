@@ -18,8 +18,7 @@ namespace Bull
          * @param copy The EulerAngles to copy
          *
          */
-        template <typename U>
-        EulerAngles(const EulerAngles<U>& copy);
+        EulerAngles(const EulerAngles<T>& copy);
 
         /*! \brief Constructor
          *
@@ -28,8 +27,7 @@ namespace Bull
          * @param yaw   the yaw of the angle
          *
          */
-        template <typename U, typename V, typename W>
-        EulerAngles(const Angle<U>& roll, const Angle<V>& pitch, const Angle<W>& yaw);
+        EulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw);
 
         /*! \brief Basic assignment operator
          *
@@ -38,8 +36,7 @@ namespace Bull
          * @return This
          *
          */
-        template <typename U>
-        EulerAngles<T>& operator=(const EulerAngles<U>& copy);
+        EulerAngles<T>& operator=(const EulerAngles<T>& copy);
 
         /*! \brief Set the angle
          *
@@ -48,8 +45,7 @@ namespace Bull
          * @return This
          *
          */
-        template <typename U>
-        EulerAngles<T>& set(const EulerAngles<U>& copy);
+        EulerAngles<T>& set(const EulerAngles<T>& copy);
 
         /*! \brief Set the angle
          *
@@ -60,8 +56,7 @@ namespace Bull
          * @return This
          *
          */
-        template <typename U, typename V, typename W>
-        EulerAngles<T>& set(const Angle<U>& roll, const Angle<V>& pitch, const Angle<W>& yaw);
+        EulerAngles<T>& set(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw);
 
         /*! \brief Compare two EulerAngles
          *
@@ -70,8 +65,7 @@ namespace Bull
          * @return True if right and this are equal
          *
          */
-        template <typename U>
-        bool operator==(const EulerAngles<U>& right);
+        bool operator==(const EulerAngles<T>& right);
 
         /*! \brief Compare two EulerAngles
          *
@@ -80,15 +74,14 @@ namespace Bull
          * @return True if right and this are not equal
          *
          */
-        template <typename U>
-        bool operator!=(const EulerAngles<U>& right);
+        bool operator!=(const EulerAngles<T>& right);
 
         Angle<T> roll, pitch, yaw;
     };
 
     typedef EulerAngles<int> EulerAnglesI;
     typedef EulerAngles<float> EulerAnglesF;
-    typedef EulerAngles<double> EulerAnglesF;
+    typedef EulerAngles<double> EulerAnglesD;
     typedef EulerAngles<unsigned int> EulerAnglesUI;
 }
 

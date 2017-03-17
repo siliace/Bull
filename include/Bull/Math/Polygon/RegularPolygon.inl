@@ -2,14 +2,13 @@ namespace Bull
 {
     template<typename T, std::size_t S>
     RegularPolygon<T, S>::RegularPolygon() :
-        m_radius(static_cast<T>(0.0))
+        m_radius(0)
     {
         /// Nothing
     }
 
     template<typename T, std::size_t S>
-    template<typename U, typename V, typename W>
-    RegularPolygon<T, S>::RegularPolygon(const Vector2<U>& center, V radius, const Angle<W>& rotation) :
+    RegularPolygon<T, S>::RegularPolygon(const Vector2<T>& center, T radius, const Angle<T>& rotation) :
         m_radius(static_cast<T>(radius)),
         m_rotation(static_cast<T>(rotation)),
         m_center(center)
@@ -17,9 +16,10 @@ namespace Bull
         update();
     }
 
-    template<typename T, std::size_t S>    Vector2<T> RegularPolygon<T, S>::getVertex(std::size_t index) const
+    template<typename T, std::size_t S>
+    Vector2<T> RegularPolygon<T, S>::getVertex(std::size_t index) const
     {
-        return m_vertices[index];
+        return m_vertices.at(index);
     }
 
     template<typename T, std::size_t S>
@@ -29,8 +29,7 @@ namespace Bull
     }
 
     template<typename T, std::size_t S>
-    template<typename U>
-    RegularPolygon<T, S>& RegularPolygon<T, S>::setCenter(const Vector2<U>& center)
+    RegularPolygon<T, S>& RegularPolygon<T, S>::setCenter(const Vector2<T>& center)
     {
         m_center = center;
 
@@ -46,8 +45,7 @@ namespace Bull
     }
 
     template<typename T, std::size_t S>
-    template<typename U>
-    RegularPolygon<T, S>& RegularPolygon<T, S>::setRotation(const Angle<U>& rotation)
+    RegularPolygon<T, S>& RegularPolygon<T, S>::setRotation(const Angle<T>& rotation)
     {
         m_rotation = rotation;
 
@@ -57,14 +55,13 @@ namespace Bull
     }
 
     template<typename T, std::size_t S>
-    const Angle<T>& RegularPolygon<T, S>::getAngle() const
+    const Angle<T>& RegularPolygon<T, S>::getRotation() const
     {
         return m_rotation;
     }
 
     template<typename T, std::size_t S>
-    template<typename U>
-    RegularPolygon<T, S>& RegularPolygon<T, S>::setRadius(U radius)
+    RegularPolygon<T, S>& RegularPolygon<T, S>::setRadius(T radius)
     {
         m_radius = static_cast<T>(radius);
 
