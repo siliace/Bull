@@ -46,12 +46,12 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param angle
-         * \param isRadian
+         * \param angle    The value of the angle
+         * \param isRadian Whether the angle is in radian
          *
          */
         template<typename U>
-        Angle(U value, bool isRadian = false);
+        Angle(U angle, bool isRadian = false);
 
         /*! \brief Copy constructor
          *
@@ -142,7 +142,8 @@ namespace Bull
          * \return Return the sum of this and right
          *
          */
-        template<typename U>        Angle<T>& operator+=(U right);
+        template<typename U>
+        Angle<T>& operator+=(U right);
 
         /*! \brief Addition two angles
          *
@@ -181,7 +182,8 @@ namespace Bull
          * \return Return the difference of this and right
          *
          */
-        template<typename U>        Angle<T>& operator-=(U right);
+        template<typename U>
+        Angle<T>& operator-=(U right);
 
         /*! \brief Subtract two angles
          *
@@ -220,7 +222,8 @@ namespace Bull
          * \return Return the product of this and right
          *
          */
-        template<typename U>        Angle<T>& operator*=(U right);
+        template<typename U>
+        Angle<T>& operator*=(U right);
 
         /*! \brief Multiply two angles
          *
@@ -259,7 +262,8 @@ namespace Bull
          * \return Return the quotient of this and right
          *
          */
-        template<typename U>        Angle<T>& operator/=(U right);
+        template<typename U>
+        Angle<T>& operator/=(U right);
 
         /*! \brief Divide two angles
          *
