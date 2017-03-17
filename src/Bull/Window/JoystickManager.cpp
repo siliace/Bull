@@ -122,7 +122,7 @@ namespace Bull
                     e.type = (state.buttons[i].first) ? Window::Event::JoystickButtonDown : Window::Event::JoystickButtonUp;
 
                     e.joystickButton.joystick = joystick;
-                    e.joystickButton.button   = i;
+                    e.joystickButton.button   = static_cast<Uint8>(i);
 
                     eventQueue.push(e);
 
@@ -144,7 +144,7 @@ namespace Bull
                     e.type = Window::Event::JoystickButtonDown;
 
                     e.joystickButton.joystick = joystick;
-                    e.joystickButton.button   = i;
+                    e.joystickButton.button   = static_cast<Uint8>(i);
 
                     eventQueue.push(e);
 
