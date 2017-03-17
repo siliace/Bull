@@ -18,17 +18,17 @@ namespace Bull
 
     bool Directory::copy(const String& path, const String& newPath)
     {
-        Directory target(path);
+        Directory target;
         bool success = true;
+
+        if(!target.open(Path(path)))
+        {
+            return false;
+        }
 
         if(!Directory::exists(newPath))
         {
             Directory::create(newPath);
-        }
-
-        if(!target.isOpen())
-        {
-            return false;
         }
 
         for(const Path& entity : target.getContent())
@@ -53,7 +53,7 @@ namespace Bull
     {
         if(exists(path) && !exists(newPath))
         {
-            return ::rename(path, newPath);
+            return std::rename(path, newPath) == 0;
         }
 
         return false;
@@ -69,7 +69,7 @@ namespace Bull
         /// Nothing
     }
 
-    Directory::Directory(const String& path)
+    Directory::Directory(const Path& path)
     {
         open(path);
     }
@@ -79,7 +79,7 @@ namespace Bull
         close();
     }
 
-    bool Directory::open(const String& path)
+    bool Directory::open(const Path& path)
     {
         m_path = path;
 
@@ -95,8 +95,8 @@ namespace Bull
 
     void Directory::close()
     {
-        m_path.clear();
         m_impl.reset();
+        m_path = Path::None;
     }
 
     std::vector<Path> Directory::getContent(Uint32 flags)
@@ -109,7 +109,7 @@ namespace Bull
         return std::vector<Path>();
     }
 
-    String Directory::getPath() const
+    const Path& Directory::getPath() const
     {
         return m_path;
     }
