@@ -110,7 +110,7 @@ namespace Bull
         return m_pixels;
     }
 
-    bool Image::save(const String& path, Format format)
+    bool Image::save(const Path& path, Format format)
     {
         if(!File::exists(path) && m_pixels.size() > 0)
         {

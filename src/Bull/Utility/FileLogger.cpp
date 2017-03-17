@@ -9,7 +9,7 @@ namespace Bull
     }
 
     FileLogger::FileLogger(const String& filename) :
-        m_logFile(filename, File::Truncate | File::Write)
+        m_logFile(Path(filename), File::Truncate | File::Write)
     {
         /// Nothing
     }

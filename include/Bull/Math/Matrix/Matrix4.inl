@@ -53,13 +53,15 @@ namespace Bull
         set(value);
     }
 
-    template<typename T>    template<typename U>
+    template<typename T>
+    template<typename U>
     Matrix4<T>::Matrix4(const std::array<U, 16>& data)
     {
         set(data);
     }
 
-    template<typename T>    template<typename U>
+    template<typename T>
+    template<typename U>
     void Matrix4<T>::set(U value)
     {
         m_data.fill(value);
@@ -69,6 +71,11 @@ namespace Bull
     template<typename U>
     void Matrix4<T>::set(U value, std::size_t x, std::size_t y)
     {
+        if(x >= 4 || y >= 4)
+        {
+            throw std::out_of_range("Requested value out of range");
+        }
+
         m_data[y * 4 + x] = static_cast<T>(value);
     }
 
@@ -88,6 +95,11 @@ namespace Bull
     template<typename T>
     std::array<T, 4> Matrix4<T>::getColumn(std::size_t column) const
     {
+        if(column >= 4)
+        {
+            throw std::out_of_range("Requested column out of range");
+        }
+
         std::array<T, 4> col;
 
         for(std::size_t i = 0; i < 4; i++)
@@ -98,8 +110,14 @@ namespace Bull
         return col;
     }
 
-    template<typename T>    std::array<T, 4> Matrix4<T>::getRow(std::size_t row) const
+    template<typename T>
+    std::array<T, 4> Matrix4<T>::getRow(std::size_t row) const
     {
+        if(row >= 4)
+        {
+            throw std::out_of_range("Requested row out of range");
+        }
+
         std::array<T, 4> r;
 
         for(std::size_t i = 0; i < 4; i++)
@@ -113,12 +131,22 @@ namespace Bull
     template<typename T>
     T& Matrix4<T>::operator()(std::size_t x, std::size_t y)
     {
+        if(x >= 4 || y >= 4)
+        {
+            throw std::out_of_range("Requested value out of range");
+        }
+
         return m_data[y * 4 + x];
     }
 
     template<typename T>
     const T& Matrix4<T>::operator()(std::size_t x, std::size_t y) const
     {
+        if(x >= 4 || y >= 4)
+        {
+            throw std::out_of_range("Requested value out of range");
+        }
+
         return m_data[y * 4 + x];
     }
 

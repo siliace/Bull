@@ -159,7 +159,7 @@ namespace Bull
          * \return Return
          *
          */
-        bool save(const String& path, Format format);
+        bool save(const Path& path, Format format);
 
     private:
 
