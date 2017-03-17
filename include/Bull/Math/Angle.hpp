@@ -11,7 +11,7 @@
 namespace Bull
 {
     template<typename T>
-    struct BULL_API Angle
+    struct Angle
     {
     public:
 

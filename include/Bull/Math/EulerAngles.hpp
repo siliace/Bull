@@ -6,7 +6,7 @@
 namespace Bull
 {
     template <typename T>
-    struct BULL_API EulerAngles
+    struct EulerAngles
     {
         /*! \brief Default constructor
          *

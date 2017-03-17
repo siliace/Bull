@@ -1,17 +1,13 @@
 #ifndef Bull_Rectangle_hpp
 #define Bull_Rectangle_hpp
 
-#include <functional>
-
-#include <Bull/Core/System/Export.hpp>
-
 #include <Bull/Math/Polygon/Polygon.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {
     template<typename T>
-    struct BULL_API Rectangle : public Polygon<T>
+    struct Rectangle : public Polygon<T>
     {
         /*! \brief Default constructor
          *

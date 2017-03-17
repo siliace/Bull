@@ -9,7 +9,7 @@
 namespace Bull
 {
     template<typename T, std::size_t S>
-    class BULL_API RegularPolygon : public Polygon<T>
+    class RegularPolygon : public Polygon<T>
     {
     public:
 
