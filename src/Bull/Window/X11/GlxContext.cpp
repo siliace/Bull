@@ -132,7 +132,7 @@ namespace Bull
 
             createSurface(shared, mode.width, mode.height, mode.bitsPerPixel);
 
-            if(m_window)
+            if(m_window || m_pbuffer)
             {
                 createContext(shared);
             }
@@ -157,7 +157,7 @@ namespace Bull
 
             createSurface(window, bitsPerPixel);
 
-            if(window)
+            if(m_window)
             {
                 createContext(shared);
             }
@@ -235,20 +235,21 @@ namespace Bull
         bool GlxContext::makeCurrent()
         {
             ErrorHandler handler;
+            bool success = false;
 
             if(m_render)
             {
                 if(m_window)
                 {
-                    return glXMakeCurrent(m_display, m_window, m_render) == True;
+                    success = glXMakeCurrent(m_display, m_window, m_render) == True;
                 }
                 else if(m_pbuffer)
                 {
-                    return glXMakeContextCurrent(m_display, m_pbuffer, m_pbuffer, m_render);
+                    success = glXMakeContextCurrent(m_display, m_pbuffer, m_pbuffer, m_render) == True;
                 }
             }
 
-            return false;
+            return success;
         }
 
         void GlxContext::createSurface(WindowHandler handler, unsigned int bitsPerPixel)
@@ -384,7 +385,7 @@ namespace Bull
                 m_render = glXCreateNewContext(m_display, m_config, GLX_RGBA_TYPE, sharedHandler, True);
             }
 
-            m_isDirect = glXIsDirect(m_display, m_render);
+            m_isDirect = glXIsDirect(m_display, m_render) == True;
 
             updateSettings();
         }
@@ -402,7 +403,7 @@ namespace Bull
 
             m_settings.depths       = static_cast<Uint8>(depths);
             m_settings.stencil      = static_cast<Uint8>(stencil);
-            m_settings.antialiasing = sampleBuffers > 0 ? static_cast<Uint8>(samples) : 0;
+            m_settings.antialiasing = static_cast<Uint8>(sampleBuffers > 0 ? samples : 0);
         }
     }
 }

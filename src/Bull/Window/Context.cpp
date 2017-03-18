@@ -3,7 +3,7 @@
 
 namespace Bull
 {
-    LocalPtr<Context> Context::s_active;
+    thread_local const Context* Context::s_active = nullptr;
 
     const Context* Context::getActive()
     {

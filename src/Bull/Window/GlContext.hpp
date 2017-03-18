@@ -23,11 +23,6 @@ namespace Bull
              */
             static void globalInit();
 
-            /*! \brief Perform internal cleanup
-             *
-             */
-            static void globalCleanup();
-
             /*! \brief Ensure there is an active OpenGL context in this thread
              *
              */

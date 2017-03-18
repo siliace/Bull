@@ -1,10 +1,6 @@
 #include <memory>
 #include <set>
 
-#include <Bull/Core/Thread/Local.hpp>
-#include <Bull/Core/Thread/LocalPtr.hpp>
-#include <Bull/Core/Thread/Lock.hpp>
-
 #include <Bull/Render/OpenGL.hpp>
 
 #include <Bull/Window/Context.hpp>
@@ -25,22 +21,24 @@ namespace Bull
     {
         namespace
         {
-            Mutex internalsMutex;
-            LocalPtr<GlContext> current(nullptr);
-
-            Mutex sharedContextMutex;
             std::shared_ptr<ContextType> shared;
-            std::set<Context*> internals;
-            LocalPtr<Context> internal(nullptr);
+            thread_local const GlContext* current = nullptr;
+            thread_local std::unique_ptr<Context> internal = nullptr;
+            const ContextSettings internalSettings = ContextSettings(0, 0, 0, 3, 3);
 
-            Context* getInternalContext()
+            std::unique_ptr<Context>& getInternalContext()
             {
-                if(internal == nullptr)
+                if(!internal)
                 {
-                    internal = new Context();
+                    ContextSettings realInternalSettings;
+                    internal = std::make_unique<Context>(VideoMode::getCurrent().bitsPerPixel, internalSettings);
 
-                    Lock lock(internalsMutex);
-                    internals.insert(internal);
+                    realInternalSettings = internal->getSettings();
+
+                    if(realInternalSettings.major < 3 || realInternalSettings.major == 3 && realInternalSettings.minor <= 2)
+                    {
+                        throw std::runtime_error("Bull needs OpenGL 3.3 or higher to work");
+                    }
                 }
 
                 return internal;
@@ -49,8 +47,6 @@ namespace Bull
 
         void GlContext::globalInit()
         {
-            Lock lock(sharedContextMutex);
-
             shared = std::make_shared<ContextType>(nullptr);
             shared->setActive(true);
 
@@ -68,21 +64,9 @@ namespace Bull
             shared->setActive(false);
         }
 
-        void GlContext::globalCleanup()
-        {
-            Lock lockInternals(internalsMutex);
-            internals.clear();
-
-            Lock lockShared(sharedContextMutex);
-            for(Context* ctx : internals)
-            {
-                delete ctx;
-            }
-        }
-
         void GlContext::ensureContext()
         {
-            if(Context::getActive() == nullptr)
+            if(current == nullptr)
             {
                 getInternalContext();
             }
@@ -219,8 +203,8 @@ namespace Bull
 
                 if(gl::getError() != GL_INVALID_ENUM)
                 {
-                    m_settings.major = static_cast<unsigned int>(majorVersion);
-                    m_settings.minor = static_cast<unsigned int>(minorVersion);
+                    m_settings.major = static_cast<Uint8>(majorVersion);
+                    m_settings.minor = static_cast<Uint8>(minorVersion);
                 }
                 else
                 {
@@ -228,8 +212,8 @@ namespace Bull
 
                     if (version)
                     {
-                        m_settings.major = String::intToChar(version[0]);
-                        m_settings.minor = String::intToChar(version[2]);
+                        m_settings.major = static_cast<Uint8>(String::charToInt(version[0]));
+                        m_settings.minor = static_cast<Uint8>(String::charToInt(version[2]));
                     }
                     else
                     {

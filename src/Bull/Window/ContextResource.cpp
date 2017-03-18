@@ -1,4 +1,4 @@
-#include <Bull/Window/ContextResource.hpp>
+#include <Bull/Window/Context.hpp>
 #include <Bull/Window/GlContext.hpp>
 
 namespace Bull
@@ -22,11 +22,6 @@ namespace Bull
 
     ContextResource::~ContextResource()
     {
-        s_instanceCount -= 1;
-
-        if(s_instanceCount == 1)
-        {
-            prv::GlContext::globalCleanup();
-        }
+        /// Nothing
     }
 }
