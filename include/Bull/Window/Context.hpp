@@ -1,16 +1,16 @@
 #ifndef Bull_Context_hpp
 #define Bull_Context_hpp
 
+#include <memory>
+
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Thread/LocalPtr.hpp>
-#include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Window/ContextResource.hpp>
+#include <Bull/Window/ContextSettings.hpp>
 
 namespace Bull
 {
     class VideoMode;
-    class ContextSettings;
 
     namespace prv
     {
@@ -30,7 +30,7 @@ namespace Bull
 
     private:
 
-        static LocalPtr<Context> s_active;
+        static thread_local const Context* s_active; /*!< The thread local pointer to the active context */
 
     public:
 
@@ -78,7 +78,7 @@ namespace Bull
 
     protected:
 
-        std::unique_ptr<prv::GlContext> m_context;
+        std::unique_ptr<prv::GlContext> m_context; /*!< The concrete implementation of the context */
     };
 }
 

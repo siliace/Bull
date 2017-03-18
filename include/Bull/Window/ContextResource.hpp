@@ -16,7 +16,7 @@ namespace Bull
 
     private:
 
-        static unsigned int s_instanceCount;
+        static unsigned int s_instanceCount; /*!< Count every instances to perform initialization and cleanup */
 
     protected:
 

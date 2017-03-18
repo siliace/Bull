@@ -52,7 +52,7 @@ namespace Bull
 
     bool Image::loadFromPath(const Path& path)
     {
-        if(path)
+        if(path.isFile())
         {
             return loader->loadFromPath(path, m_pixels, m_size);
         }
