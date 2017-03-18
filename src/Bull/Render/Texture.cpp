@@ -16,10 +16,11 @@ namespace Bull
 
     Texture::Texture() :
         m_id(0),
-        m_size(0, 0)
+        m_size(0, 0),
+        m_isSmooth(false),
+        m_isRepeated(false)
     {
-        enableRepeat(false);
-        enableSmooth(false);
+        /// Nothing
     }
 
     Texture::~Texture()
@@ -106,12 +107,18 @@ namespace Bull
 
     void Texture::enableRepeat(bool enable)
     {
-        TextureStateSaver saver;
         m_isRepeated = enable;
 
-        gl::bindTexture(GL_TEXTURE_2D, m_id);
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
+        if(m_id)
+        {
+            TextureStateSaver saver;
+
+            ensureContext();
+
+            gl::bindTexture(GL_TEXTURE_2D, m_id);
+            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
+            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
+        }
     }
 
     bool Texture::isEnableRepeat() const
@@ -121,12 +128,18 @@ namespace Bull
 
     void Texture::enableSmooth(bool enable)
     {
-        TextureStateSaver saver;
         m_isSmooth = enable;
 
-        gl::bindTexture(GL_TEXTURE_2D, m_id);
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
+        if(m_id)
+        {
+            TextureStateSaver saver;
+
+            ensureContext();
+
+            gl::bindTexture(GL_TEXTURE_2D, m_id);
+            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
+            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
+        }
     }
 
     bool Texture::isEnableSmooth() const
@@ -150,6 +163,8 @@ namespace Bull
         {
             TextureStateSaver saver;
             std::vector<Uint8> pixels(m_size.x * m_size.y * 4);
+
+            ensureContext();
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
             gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);

@@ -26,6 +26,8 @@ namespace Bull
 
         m_context.reset(prv::GlContext::createInstance(getSystemHandler(), mode.bitsPerPixel, settings));
 
+        setActive();
+
         return true;
     }
 

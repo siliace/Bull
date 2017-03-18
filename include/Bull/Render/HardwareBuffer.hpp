@@ -81,10 +81,8 @@ namespace Bull
 
         /*! \brief Flush the buffer
          *
-         * \param keepMemory True to keep the allocated memory, false otherwise
-         *
          */
-        void flush(bool keepMemory = true);
+        void flush();
 
         /*! \brief Destroy the buffer
          *
@@ -109,7 +107,6 @@ namespace Bull
 
         unsigned int m_id;
         Type         m_type;
-        std::size_t  m_size;
     };
 }
 

@@ -8,6 +8,8 @@
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
 
+#include <Bull/Render/OpenGL.hpp>
+
 #include <Bull/Utility/Color.hpp>
 
 #include <Bull/Window/ContextResource.hpp>

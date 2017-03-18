@@ -49,9 +49,12 @@ namespace Bull
     {
         if(m_id)
         {
-            ensureContext();
-
             bind(this);
+
+            if(discard)
+            {
+                flush();
+            }
 
             /// It seems that glBufferSubData is more efficient than glMapBuffer with small buffers
             /// http://www.stevestreeting.com/2007/03/17/glmapbuffer-vs-glbuffersubdata-the-return/
@@ -79,7 +82,7 @@ namespace Bull
         return false;
     }
 
-    void HardwareBuffer::flush(bool keepMemory)
+    void HardwareBuffer::flush()
     {
         if(m_id)
         {
@@ -87,14 +90,9 @@ namespace Bull
 
             bind(this);
 
-            if(!keepMemory)
-            {
-                m_size = 0;
-            }
-
             int usage;
             gl::getBufferParameteriv(m_id, GL_BUFFER_USAGE, &usage);
-            gl::bufferData(m_type, m_size, nullptr, usage);
+            gl::bufferData(m_type, 0, nullptr, static_cast<GLenum >(usage));
         }
     }
 
