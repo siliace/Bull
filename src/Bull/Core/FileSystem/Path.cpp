@@ -1,9 +1,10 @@
 #include <Bull/Core/FileSystem/Directory.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/FileSystem/Path.hpp>
 
 namespace Bull
 {
+    Path Path::None = Path();
+
     bool Path::exists(const String& path)
     {
         return File::exists(path) || Directory::exists(path);
