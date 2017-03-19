@@ -80,7 +80,7 @@ namespace Bull
          * \return Return the sum of this and right
          *
          */
-        Angle<T> operator+(const Angle<T>& right);
+        Angle<T> operator+(T right);
 
         /*! \brief Addition two angles
          *
@@ -89,7 +89,7 @@ namespace Bull
          * \return Return the sum of this and right
          *
          */
-        Angle<T>& operator+=(const Angle<T>& right);
+        Angle<T>& operator+=(T right);
 
         /*! \brief Subtract two angles
          *
@@ -98,7 +98,7 @@ namespace Bull
          * \return Return the difference of this and right
          *
          */
-        Angle<T> operator-(const Angle<T>& right);
+        Angle<T> operator-(T right);
 
         /*! \brief Subtract two angles
          *
@@ -107,7 +107,7 @@ namespace Bull
          * \return Return the difference of this and right
          *
          */
-        Angle<T>& operator-=(const Angle<T>& right);
+        Angle<T>& operator-=(T right);
 
         /*! \brief Multiply two angles
          *
@@ -116,7 +116,7 @@ namespace Bull
          * \return Return the product of this and right
          *
          */
-        Angle<T> operator*(const Angle<T>& right);
+        Angle<T> operator*(T right);
 
         /*! \brief Multiply two angles
          *
@@ -125,7 +125,7 @@ namespace Bull
          * \return Return the product of this and right
          *
          */
-        Angle<T>& operator*=(const Angle<T>& right);
+        Angle<T>& operator*=(T right);
 
         /*! \brief Divide two angles
          *
@@ -134,7 +134,7 @@ namespace Bull
          * \return Return the quotient of this and right
          *
          */
-        Angle<T> operator/(const Angle<T>& right);
+        Angle<T> operator/(T right);
 
         /*! \brief Divide two angles
          *
@@ -143,14 +143,14 @@ namespace Bull
          * \return Return the quotient of this and right
          *
          */
-        Angle<T>& operator/=(const Angle<T>& right);
+        Angle<T>& operator/=(T right);
 
         /*! \brief Convert the angle to a numeric value
          *
          * \return Return the value of the angle
          *
          */
-        operator T() const;
+        explicit operator T() const;
 
     private:
 
