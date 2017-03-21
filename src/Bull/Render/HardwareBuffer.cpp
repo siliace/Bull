@@ -18,6 +18,7 @@ namespace Bull
 
     HardwareBuffer::HardwareBuffer(Type type) :
         m_id(0),
+        m_size(0),
         m_type(type)
     {
         /// Nothing
@@ -25,8 +26,12 @@ namespace Bull
 
     HardwareBuffer::~HardwareBuffer()
     {
-        ensureContext();
         destroy();
+    }
+
+    bool HardwareBuffer::create(std::size_t size)
+    {
+        return create(size, HardwareBuffer::Usage::StaticDraw);
     }
 
     bool HardwareBuffer::create(std::size_t size, Usage usage)
@@ -38,9 +43,11 @@ namespace Bull
             destroy();
         }
 
+        m_size = size;
+
         gl::genBuffers(1, &m_id);
         gl::bindBuffer(m_type, m_id);
-        gl::bufferData(m_type, size, nullptr, usage);
+        gl::bufferData(m_type, m_size, nullptr, usage);
 
         return true;
     }
@@ -82,6 +89,37 @@ namespace Bull
         return false;
     }
 
+    void* HardwareBuffer::map()
+    {
+        if(m_id)
+        {
+            bind(this);
+            return gl::mapBuffer(m_type, GL_READ_WRITE);
+        }
+
+        return nullptr;
+    }
+
+    const void* HardwareBuffer::map() const
+    {
+        if(m_id)
+        {
+            bind(this);
+            return gl::mapBuffer(m_type, GL_READ_ONLY);
+        }
+
+        return nullptr;
+    }
+
+    void HardwareBuffer::unmap() const
+    {
+        if(m_id)
+        {
+            bind(this);
+            gl::unmapBuffer(m_type);
+        }
+    }
+
     void HardwareBuffer::flush()
     {
         if(m_id)
@@ -90,9 +128,11 @@ namespace Bull
 
             bind(this);
 
+            m_size = 0;
+
             int usage;
             gl::getBufferParameteriv(m_id, GL_BUFFER_USAGE, &usage);
-            gl::bufferData(m_type, 0, nullptr, static_cast<GLenum >(usage));
+            gl::bufferData(m_type, m_size, nullptr, static_cast<GLenum >(usage));
         }
     }
 
@@ -103,7 +143,15 @@ namespace Bull
             ensureContext();
 
             gl::deleteBuffers(1, &m_id);
+
+            m_id = 0;
+            m_size = 0;
         }
+    }
+
+    std::size_t HardwareBuffer::getSize() const
+    {
+        return m_size;
     }
 
     HardwareBuffer::Type HardwareBuffer::getType() const

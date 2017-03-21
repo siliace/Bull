@@ -3,6 +3,7 @@
 
 #include <utility>
 
+#include <Bull/Core/Buffer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Export.hpp>
 
@@ -12,7 +13,7 @@
 
 namespace Bull
 {
-    class HardwareBuffer : public NonCopyable, public ContextResource
+    class HardwareBuffer : public NonCopyable, public ContextResource, public Buffer
     {
     public:
 
@@ -59,13 +60,22 @@ namespace Bull
 
         /*! \brief Create the buffer in the VRAM
          *
+         * \param size The size of the buffer
+         *
+         * \return Return true if the buffer was created successfully, false otherwise
+         *
+         */
+        bool create(std::size_t size) override;
+
+        /*! \brief Create the buffer in the VRAM
+         *
          * \param size  The size of the buffer
          * \param usage The usage of the buffer
          *
          * \return Return true if the buffer was created successfully, false otherwise
          *
          */
-        bool create(std::size_t size, Usage usage = Usage::StaticDraw);
+        bool create(std::size_t size, Usage usage);
 
         /*! \brief Fill the buffer
          *
@@ -77,17 +87,43 @@ namespace Bull
          * \return True if the buffer was filled successfully
          *
          */
-        bool fill(const void* data, std::size_t size, std::size_t offset = 0, bool discard = false);
+        bool fill(const void* data, std::size_t size, std::size_t offset = 0, bool discard = false) override;
+
+        /*! \brief Map data to a pointer
+         *
+         * @return A pointer to data
+         *
+         */
+        void* map() override;
+
+        /*! \brief Map data to a pointer
+         *
+         * @return A pointer to data
+         *
+         */
+        const void* map() const override;
+
+        /*! \brief Unmap the buffer
+         *
+         */
+        void unmap() const;
 
         /*! \brief Flush the buffer
          *
          */
-        void flush();
+        void flush() override;
 
         /*! \brief Destroy the buffer
          *
          */
-        void destroy();
+        void destroy() override;
+
+        /*! \brief Get the size of the Buffer
+         *
+         * @return The size
+         *
+         */
+        std::size_t getSize() const;
 
         /*! \brief Get the type of the buffer
          *
@@ -106,6 +142,7 @@ namespace Bull
     private:
 
         unsigned int m_id;
+        std::size_t  m_size;
         Type         m_type;
     };
 }
