@@ -312,6 +312,10 @@ namespace Bull
             std::memcpy(&string->m_string[0], &m_sharedString->m_string[0], getSize());
             std::memset(&string->m_string[getSize()], 0, string->m_size - getSize());
         }
+        else
+        {
+            std::memcpy(&string->m_string[0], &m_sharedString->m_string[0], size);
+        }
 
         m_sharedString = std::move(string);
     }
