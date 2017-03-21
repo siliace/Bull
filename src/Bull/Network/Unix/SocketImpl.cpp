@@ -1,4 +1,4 @@
-#include <Bull/Core/Log.hpp>
+#include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Network/Unix/IpAddressImpl.hpp>
 #include <Bull/Network/Unix/SocketImpl.hpp>

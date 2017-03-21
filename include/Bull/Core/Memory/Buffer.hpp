@@ -1,6 +1,8 @@
 #ifndef BULL_BUFFER_HPP
 #define BULL_BUFFER_HPP
 
+#include <utility>
+
 #include <Bull/Core/System/Export.hpp>
 
 namespace Bull
@@ -11,12 +13,12 @@ namespace Bull
 
         /*! \brief Create the Buffer
          *
-         * @param size The size of the Buffer to create
+         * @param capacity The capacity of the Buffer to create
          *
          * @return True if the Buffer was created successfully
          *
          */
-        virtual bool create(std::size_t size) = 0;
+        virtual bool create(std::size_t capacity) = 0;
 
         /*! \brief Fill the buffer
          *
@@ -54,12 +56,12 @@ namespace Bull
          */
         virtual void destroy() = 0;
 
-        /*! \brief Get the size of the Buffer
+        /*! \brief Get the capacity of the Buffer
          *
          * @return The size
          *
          */
-        virtual std::size_t getSize() const = 0;
+        virtual std::size_t getCapacity() const = 0;
     };
 }
 

@@ -1,7 +1,7 @@
 #ifndef Bull_AbstractLogger_hpp
 #define Bull_AbstractLogger_hpp
 
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {

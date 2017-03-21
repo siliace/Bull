@@ -4,7 +4,7 @@
 #include <vector>
 
 #include <Bull/Core/System/Export.hpp>
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 
 namespace Bull
 {

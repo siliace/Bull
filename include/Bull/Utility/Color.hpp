@@ -1,7 +1,7 @@
 #ifndef Bull_Color_hpp
 #define Bull_Color_hpp
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/System/Export.hpp>
 
 namespace Bull

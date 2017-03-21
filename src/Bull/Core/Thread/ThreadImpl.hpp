@@ -1,7 +1,7 @@
 #ifndef Bull_ThreadImpl_hpp
 #define Bull_ThreadImpl_hpp
 
-#include <Bull/Core/Functor.hpp>
+#include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/Thread.hpp>
 #include <Bull/Core/Time/Time.hpp>

@@ -1,5 +1,5 @@
 #include <Bull/Core/IO/StringStream.hpp>
-#include <Bull/Core/Log.hpp>
+#include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
 namespace Bull

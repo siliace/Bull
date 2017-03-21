@@ -1,7 +1,7 @@
 #include <cmath>
 #include <cstring>
 
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {

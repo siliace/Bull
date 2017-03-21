@@ -1,4 +1,4 @@
-#include <Bull/Core/Log.hpp>
+#include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Window/X11/ErrorHandler.hpp>
 

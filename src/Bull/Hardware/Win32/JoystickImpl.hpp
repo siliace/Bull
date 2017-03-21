@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <mmsystem.h>
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 
 #include <Bull/Hardware/Joystick.hpp>
 

@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Window/SurfaceHandler.hpp>
 

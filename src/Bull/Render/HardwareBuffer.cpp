@@ -18,8 +18,8 @@ namespace Bull
 
     HardwareBuffer::HardwareBuffer(Type type) :
         m_id(0),
-        m_size(0),
-        m_type(type)
+        m_type(type),
+        m_capacity(0)
     {
         /// Nothing
     }
@@ -43,11 +43,11 @@ namespace Bull
             destroy();
         }
 
-        m_size = size;
+        m_capacity = size;
 
         gl::genBuffers(1, &m_id);
         gl::bindBuffer(m_type, m_id);
-        gl::bufferData(m_type, m_size, nullptr, usage);
+        gl::bufferData(m_type, m_capacity, nullptr, usage);
 
         return true;
     }
@@ -128,11 +128,11 @@ namespace Bull
 
             bind(this);
 
-            m_size = 0;
+            m_capacity = 0;
 
             int usage;
             gl::getBufferParameteriv(m_id, GL_BUFFER_USAGE, &usage);
-            gl::bufferData(m_type, m_size, nullptr, static_cast<GLenum >(usage));
+            gl::bufferData(m_type, m_capacity, nullptr, static_cast<GLenum >(usage));
         }
     }
 
@@ -145,13 +145,13 @@ namespace Bull
             gl::deleteBuffers(1, &m_id);
 
             m_id = 0;
-            m_size = 0;
+            m_capacity = 0;
         }
     }
 
-    std::size_t HardwareBuffer::getSize() const
+    std::size_t HardwareBuffer::getCapacity() const
     {
-        return m_size;
+        return m_capacity;
     }
 
     HardwareBuffer::Type HardwareBuffer::getType() const

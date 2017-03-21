@@ -104,6 +104,6 @@ namespace Bull
     };
 }
 
-#include <Bull/Core/Functor.inl>
+#include <Bull/Core/Functor/Functor.inl>
 
 #endif // Bull_Functor_hpp

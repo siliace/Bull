@@ -3,7 +3,7 @@
 
 #include <utility>
 
-#include <Bull/Core/Buffer.hpp>
+#include <Bull/Core/Memory/Buffer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Export.hpp>
 
@@ -60,17 +60,17 @@ namespace Bull
 
         /*! \brief Create the buffer in the VRAM
          *
-         * \param size The size of the buffer
+         * \param capacity The capacity of the buffer
          *
          * \return Return true if the buffer was created successfully, false otherwise
          *
          */
-        bool create(std::size_t size) override;
+        bool create(std::size_t capacity) override;
 
         /*! \brief Create the buffer in the VRAM
          *
-         * \param size  The size of the buffer
-         * \param usage The usage of the buffer
+         * \param capacity The capacity of the buffer
+         * \param usage    The usage of the buffer
          *
          * \return Return true if the buffer was created successfully, false otherwise
          *
@@ -118,12 +118,12 @@ namespace Bull
          */
         void destroy() override;
 
-        /*! \brief Get the size of the Buffer
+        /*! \brief Get the capacity of the HardwareBuffer
          *
-         * @return The size
+         * @return The capacity
          *
          */
-        std::size_t getSize() const;
+        std::size_t getCapacity() const;
 
         /*! \brief Get the type of the buffer
          *
@@ -142,8 +142,8 @@ namespace Bull
     private:
 
         unsigned int m_id;
-        std::size_t  m_size;
         Type         m_type;
+        std::size_t  m_capacity;
     };
 }
 

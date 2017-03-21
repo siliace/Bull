@@ -3,9 +3,9 @@
 
 #include <queue>
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 

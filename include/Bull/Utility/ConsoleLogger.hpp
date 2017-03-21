@@ -1,7 +1,7 @@
 #ifndef Bull_ConsoleLogger_hpp
 #define Bull_ConsoleLogger_hpp
 
-#include <Bull/Core/AbstractLogger.hpp>
+#include <Bull/Core/Log/AbstractLogger.hpp>
 
 namespace Bull
 {

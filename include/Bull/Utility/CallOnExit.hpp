@@ -1,7 +1,7 @@
 #ifndef Bull_CallOnExit_hpp
 #define Bull_CallOnExit_hpp
 
-#include <Bull/Core/Functor.hpp>
+#include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Export.hpp>
 

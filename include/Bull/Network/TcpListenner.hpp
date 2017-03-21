@@ -1,7 +1,7 @@
 #ifndef BULL_TCPLISTENNER_HPP
 #define BULL_TCPLISTENNER_HPP
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Network/IpAddress.hpp>

@@ -4,10 +4,10 @@
 #include <memory>
 #include <vector>
 
-#include <Bull/Core/AbstractLogger.hpp>
-#include <Bull/Core/Log.hpp>
+#include <Bull/Core/Log/AbstractLogger.hpp>
+#include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
-#include <Bull/Core/String.hpp>
 
 namespace Bull
 {
@@ -55,6 +55,6 @@ namespace Bull
     };
 }
 
-#include <Bull/Core/Log.inl>
+#include <Bull/Core/Log/Log.inl>
 
 #endif // Bull_Log_hpp

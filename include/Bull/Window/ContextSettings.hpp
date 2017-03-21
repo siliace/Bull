@@ -1,7 +1,7 @@
 #ifndef Bull_ContextSettings_hpp
 #define Bull_ContextSettings_hpp
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/System/Export.hpp>
 
 namespace Bull

@@ -5,8 +5,8 @@
 #include <vector>
 
 #include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/Integer.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/System/Integer.hpp>
 
 namespace Bull
 {

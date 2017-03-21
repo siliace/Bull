@@ -5,7 +5,7 @@
 
 #include <X11/Xlib.h>
 
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {

@@ -3,7 +3,7 @@
 #include <unistd.h>
 
 #include <Bull/Core/FileSystem/Unix/FileImplUnix.hpp>
-#include <Bull/Core/Log.hpp>
+#include <Bull/Core/Log/Log.hpp>
 
 namespace Bull
 {

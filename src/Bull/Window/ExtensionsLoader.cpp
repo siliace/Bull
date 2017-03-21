@@ -1,7 +1,6 @@
 #include <algorithm>
 
-#include <Bull/Core/Log.hpp>
-#include <Bull/Core/System/Config.hpp>
+#include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Window/ExtensionsLoader.hpp>
 

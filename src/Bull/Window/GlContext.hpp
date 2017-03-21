@@ -2,7 +2,7 @@
 #define Bull_GlContext_hpp
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Window/ContextSettings.hpp>
 #include <Bull/Window/ExtensionsLoader.hpp>

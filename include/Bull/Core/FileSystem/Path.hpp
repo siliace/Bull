@@ -1,8 +1,8 @@
 #ifndef Bull_Path_hpp
 #define Bull_Path_hpp
 
-#include <Bull/Core/Integer.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
 namespace Bull

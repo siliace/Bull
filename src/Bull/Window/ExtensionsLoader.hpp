@@ -3,9 +3,9 @@
 
 #include <vector>
 
-#include <Bull/Core/Functor.hpp>
+#include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Window/SurfaceHandler.hpp>
 
