@@ -1,5 +1,5 @@
-#ifndef MANO_QUATERNION_HPP
-#define MANO_QUATERNION_HPP
+#ifndef BULL_QUATERNION_HPP
+#define BULL_QUATERNION_HPP
 
 #include <cmath>
 
@@ -143,4 +143,4 @@ namespace Bull
 
 #include <Bull/Math/Quaternion.inl>
 
-#endif //MANO_QUATERNION_HPP
+#endif // BULL_QUATERNION_HPP
