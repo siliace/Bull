@@ -13,13 +13,6 @@ namespace Bull
          */
         EulerAngles();
 
-        /*! \brief Copy constructor
-         *
-         * @param copy The EulerAngles to copy
-         *
-         */
-        EulerAngles(const EulerAngles<T>& copy);
-
         /*! \brief Constructor
          *
          * @param roll  The roll of the angle
@@ -28,15 +21,6 @@ namespace Bull
          *
          */
         EulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw);
-
-        /*! \brief Basic assignment operator
-         *
-         * @param copy The EulerAngles to copy
-         *
-         * @return This
-         *
-         */
-        EulerAngles<T>& operator=(const EulerAngles<T>& copy);
 
         /*! \brief Set the angle
          *

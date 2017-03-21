@@ -7,21 +7,9 @@ namespace Bull
     }
 
     template <typename T>
-    EulerAngles<T>::EulerAngles(const EulerAngles<T>& copy)
-    {
-        set(copy);
-    }
-
-    template <typename T>
     EulerAngles<T>::EulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw)
     {
         set(roll, pitch, yaw);
-    }
-
-    template <typename T>
-    EulerAngles<T>& EulerAngles<T>::operator=(const EulerAngles<T>& copy)
-    {
-        return set(copy);
     }
 
     template <typename T>
