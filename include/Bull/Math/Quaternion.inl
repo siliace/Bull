@@ -64,7 +64,7 @@ namespace Bull
     template <typename T>
     Quaternion<T>& Quaternion<T>::normalize()
     {
-        float n = this->getSquareRootLenght(); /// We use this here to prevent GCC warning
+        T n = static_cast<T>(this->getSquareRootLenght()); /// We use this here to prevent GCC warning
 
         w /= n;
         x /= n;
