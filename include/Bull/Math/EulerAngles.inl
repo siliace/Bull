@@ -7,6 +7,12 @@ namespace Bull
     }
 
     template <typename T>
+    EulerAngles<T>::EulerAngles(const Quaternion<T>& quaternion)
+    {
+        set(quaternion);
+    }
+
+    template <typename T>
     EulerAngles<T>::EulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw)
     {
         set(roll, pitch, yaw);
@@ -18,6 +24,18 @@ namespace Bull
         roll  = copy.roll;
         pitch = copy.pitch;
         yaw   = copy.yaw;
+
+        return (*this);
+    }
+
+    template <typename T>
+    EulerAngles<T>& EulerAngles<T>::set(const Quaternion<T>& quaternion)
+    {
+        EulerAngles<T> representation = quaternion.toEulerAngles();
+
+        roll  = representation.roll;
+        pitch = representation.pitch;
+        yaw   = representation.yaw;
 
         return (*this);
     }
@@ -40,6 +58,12 @@ namespace Bull
         yaw.normalize();
 
         return (*this);
+    }
+
+    template <typename T>
+    Quaternion<T> EulerAngles<T>::toQuaternion() const
+    {
+        return Quaternion<T>((*this));
     }
 
     template <typename T>

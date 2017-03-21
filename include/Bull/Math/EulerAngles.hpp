@@ -5,6 +5,9 @@
 
 namespace Bull
 {
+    template <typename T>
+    class Quaternion;
+
     /*! \class EulerAngles
      * \brief Implement 3D rotation with EulerAngles
      *
@@ -20,14 +23,21 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * @param roll  The roll of the angle
-         * @param pitch the pitch of the angle
-         * @param yaw   the yaw of the angle
+         * @param quaternion The Quaternion to compute as an EulerAngles
+         *
+         */
+        EulerAngles(const Quaternion<T>& quaternion);
+
+        /*! \brief Constructor
+         *
+         * @param roll  The roll of the EulerAngles
+         * @param pitch the pitch of the EulerAngles
+         * @param yaw   the yaw of the EulerAngles
          *
          */
         EulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw);
 
-        /*! \brief Set the angle
+        /*! \brief Set the EulerAngles
          *
          * @param copy The EulerAngles to copy
          *
@@ -36,7 +46,16 @@ namespace Bull
          */
         EulerAngles<T>& set(const EulerAngles<T>& copy);
 
-        /*! \brief Set the angle
+        /*! \brief Set the EulerAngles
+         *
+         * @param quaternion The Quaternion to compute as an EulerAngles
+         *
+         * @return This
+         *
+         */
+        EulerAngles<T>& set(const Quaternion<T>& quaternion);
+
+        /*! \brief Set the EulerAngles
          *
          * @param roll  The roll of the angle
          * @param pitch the pitch of the angle
@@ -53,6 +72,13 @@ namespace Bull
          *
          */
         EulerAngles<T>& normalize();
+
+        /*! \brief Convert the EulerAngles as a Quaternion
+         *
+         * @return The Quaternion
+         *
+         */
+        Quaternion<T> toQuaternion() const;
 
         /*! \brief Compare two EulerAngles
          *
