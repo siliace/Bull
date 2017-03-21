@@ -1,6 +1,14 @@
 namespace Bull
 {
     template <typename T>
+    Quaternion<T> Quaternion<T>::conjugate(const Quaternion<T>& left, const Quaternion<T>& right)
+    {
+        Quaternion<T> copy = left;
+
+        return left.conjugate(right);
+    }
+
+    template <typename T>
     Quaternion<T>::Quaternion()
     {
         set(0, 0, 0, 0);
@@ -19,13 +27,13 @@ namespace Bull
     }
 
     template <typename T>
-    Quaternion& Quaternion<T>::set(const EulerAngles<T>& angles)
+    Quaternion<T>& Quaternion<T>::set(const EulerAngles<T>& angles)
     {
         return (*this);
     }
 
     template <typename T>
-    Quaternion& Quaternion<T>::set(T w, T x, T y, T z)
+    Quaternion<T>& Quaternion<T>::set(T w, T x, T y, T z)
     {
         this->w = w;
         this->x = x;
@@ -36,7 +44,7 @@ namespace Bull
     }
 
     template <typename T>
-    Quaternion& Quaternion<T>::set(const Quaternion& quaternion)
+    Quaternion<T>& Quaternion<T>::set(const Quaternion& quaternion)
     {
         return set(quaternion.w, quaternion.x, quaternion.y, quaternion.z);
     }
@@ -56,7 +64,7 @@ namespace Bull
     template <typename T>
     Quaternion<T>& Quaternion<T>::normalize()
     {
-        float n = getSquareRootLenght();
+        float n = this->getSquareRootLenght(); /// We use this here to prevent GCC warning
 
         w /= n;
         x /= n;
@@ -67,7 +75,7 @@ namespace Bull
     }
 
     template <typename T>
-    Quaternion<T>& conjugate(const Quaternion<T>& quaternion)
+    Quaternion<T>& Quaternion<T>::conjugate(const Quaternion<T>& quaternion)
     {
         w =  quaternion.w;
         x = -quaternion.x;

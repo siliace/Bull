@@ -1,6 +1,8 @@
 #ifndef MANO_QUATERNION_HPP
 #define MANO_QUATERNION_HPP
 
+#include <cmath>
+
 namespace Bull
 {
     template <typename T>
@@ -12,8 +14,18 @@ namespace Bull
      * @tparam T
      */
     template <typename T>
-    class Quaternion
+    struct Quaternion
     {
+        /*! \brief Compute the conjugate of the Quaternions
+         *
+         * @param left  The left Quaternion
+         * @param right The right Quaternion
+         *
+         * @return The conjugate
+         *
+         */
+        static Quaternion<T> conjugate(const Quaternion<T>& left, const Quaternion<T>& right);
+
         /*! \brief Default constructor
          *
          */
@@ -122,6 +134,13 @@ namespace Bull
 
         T w, x, y, z;
     };
+
+    typedef Quaternion<int> QuaternionI;
+    typedef Quaternion<float> QuaternionF;
+    typedef Quaternion<double> QuaternionD;
+    typedef Quaternion<unsigned int> QuaternionUI;
 }
+
+#include <Bull/Math/Quaternion.inl>
 
 #endif //MANO_QUATERNION_HPP
