@@ -356,11 +356,21 @@ namespace Bull
 
     char& String::operator[](std::size_t index)
     {
+        if(index >= getSize())
+        {
+            throw std::out_of_range("String::operator[] Index out of range");
+        }
+
         return m_sharedString->m_string[index];
     }
 
     const char& String::operator[](std::size_t index) const
     {
+        if(index >= getSize())
+        {
+            throw std::out_of_range("String::operator[] Index out of range");
+        }
+
         return m_sharedString->m_string[index];
     }
 
