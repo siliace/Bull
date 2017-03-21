@@ -5,6 +5,11 @@
 
 namespace Bull
 {
+    /*! \class EulerAngles
+     * \brief Implement 3D rotation with EulerAngles
+     *
+     * @tparam T The type of angles values
+     */
     template <typename T>
     struct EulerAngles
     {
@@ -67,7 +72,9 @@ namespace Bull
          */
         bool operator!=(const EulerAngles<T>& right);
 
-        Angle<T> roll, pitch, yaw;
+        Angle<T> roll;  /*!< The rotation around the X axis */
+        Angle<T> pitch; /*!< The rotation around the Y axis */
+        Angle<T> yaw;   /*!< The rotation around the Z axis */
     };
 
     typedef EulerAngles<int> EulerAnglesI;
