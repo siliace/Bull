@@ -18,10 +18,39 @@ namespace Bull
 
         /*! \brief Constructor
          *
+         * @param size
+         *
+         */
+        VertexArray(std::size_t size);
+
+        /*! \brief Constructor
+         *
          * @param vertices
          *
          */
         VertexArray(const std::vector<Vertex>& vertices);
+
+        /*! \brief Add a Vertex in the array
+         *
+         * @param vertex The vertex to add
+         *
+         */
+        void addVertex(const Vertex& vertex);
+
+        /*! \brief Remove a Vertex from the array
+         *
+         * @param index The index of the Vertex to remove
+         *
+         * @return The removed Vertex
+         *
+         */
+        Vertex removeVertex(std::size_t index);
+
+        /*! \brief Get the size of the array
+         *
+         * @return The size
+         */
+        std::size_t getSize() const;
 
         /*! \brief
          *

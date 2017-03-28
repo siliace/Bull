@@ -10,12 +10,6 @@ namespace Bull
         /// Nothing
     }
 
-    Vertex::Vertex(const Vector3F& position, const Color& color, const Vector2F& texCoord) :
-        Vertex(position, Vector4F(color.red, color.green, color.blue, color.alpha), texCoord)
-    {
-        /// Nothing
-    }
-
     bool Vertex::operator==(const Vertex& right)
     {
         return position == right.position &&

@@ -356,7 +356,7 @@ namespace Bull
 
     char& String::operator[](std::size_t index)
     {
-        if(index >= getSize())
+        if(index >= getCapacity())
         {
             throw std::out_of_range("String::operator[] Index out of range");
         }
@@ -366,7 +366,7 @@ namespace Bull
 
     const char& String::operator[](std::size_t index) const
     {
-        if(index >= getSize())
+        if(index >= getCapacity())
         {
             throw std::out_of_range("String::operator[] Index out of range");
         }

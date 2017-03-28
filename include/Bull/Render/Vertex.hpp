@@ -9,28 +9,15 @@
 
 namespace Bull
 {
-    class BULL_API Vertex
+    struct BULL_API Vertex
     {
-        /*! \brief Default constructor
-         *
-         */
-        Vertex() = default;
-
         /*! \brief Constructor
          *
          * @param position
          * @param color
          * @param texCoord
          */
-        Vertex(const Vector3F& position, const Vector4F& color, const Vector2F& texCoord);
-
-        /*! \brief Constructor
-         *
-         * @param position
-         * @param color
-         * @param texCoord
-         */
-        Vertex(const Vector3F& position, const Color& color, const Vector2F& texCoord);
+        Vertex(const Vector3F& position = Vector3F(), const Vector4F& color = Vector4F(), const Vector2F& texCoord = Vector2F());
 
         /*! \brief Compare two Vertex
          *
