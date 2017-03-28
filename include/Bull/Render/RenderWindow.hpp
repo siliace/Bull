@@ -91,6 +91,11 @@ namespace Bull
          */
         virtual void onOpen() override;
 
+        /*! \brief Callback triggered when the window is resized
+         *
+         */
+        virtual void onResize() override;
+
         /*! \brief Callback triggered when the window is closed
          *
          */

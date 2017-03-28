@@ -93,6 +93,11 @@ namespace Bull
         m_clock.start();
     }
 
+    void RenderWindow::onResize()
+    {
+        resetViewport();
+    }
+
     void RenderWindow::onClose()
     {
         m_context.reset();
