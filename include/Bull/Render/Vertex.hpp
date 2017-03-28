@@ -22,7 +22,7 @@ namespace Bull
          * @param color
          * @param texCoord
          */
-        Vertex(const Vertex3F& position, const Vertex4F& color, const Vector2F& texCoord);
+        Vertex(const Vector3F& position, const Vector4F& color, const Vector2F& texCoord);
 
         /*! \brief Constructor
          *
@@ -30,7 +30,7 @@ namespace Bull
          * @param color
          * @param texCoord
          */
-        Vertex(const Vertex3F& position, const Color& color, const Vector2F& texCoord);
+        Vertex(const Vector3F& position, const Color& color, const Vector2F& texCoord);
 
         /*! \brief Compare two Vertex
          *

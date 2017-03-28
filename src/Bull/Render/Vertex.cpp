@@ -2,7 +2,7 @@
 
 namespace Bull
 {
-    Vertex::Vertex(const Vertex3F& position, const Vertex4F& color, const Vector2F& texCoord) :
+    Vertex::Vertex(const Vector3F& position, const Vector4F& color, const Vector2F& texCoord) :
         position(position),
         color(color),
         texCoord(texCoord)
@@ -10,7 +10,7 @@ namespace Bull
         /// Nothing
     }
 
-    Vertex::Vertex(const Vertex3F& position, const Color& color, const Vector2F& texCoord) :
+    Vertex::Vertex(const Vector3F& position, const Color& color, const Vector2F& texCoord) :
         Vertex(position, Vector4F(color.red, color.green, color.blue, color.alpha), texCoord)
     {
         /// Nothing
