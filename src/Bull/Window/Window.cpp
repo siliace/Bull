@@ -55,6 +55,8 @@ namespace Bull
         {
             bool success = m_impl->popEvent(e, false);
 
+            filterEvent(e);
+
             return success;
         }
 
@@ -69,6 +71,8 @@ namespace Bull
         {
             m_impl->popEvent(e, true);
         }
+
+        filterEvent(e);
 
         return e;
     }
@@ -283,5 +287,13 @@ namespace Bull
         }
 
         return true;
+    }
+
+    void Window::filterEvent(const Event& e)
+    {
+        switch(e.type)
+        {
+            case Event::Resized: onResize(); break;
+        }
     }
 }

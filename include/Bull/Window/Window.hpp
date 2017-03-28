@@ -400,6 +400,13 @@ namespace Bull
 
     private:
 
+        /*! \brief Filter events to start callbacks
+         *
+         * @param e The event to filter
+         *
+         */
+        void filterEvent(const Event& e);
+
         std::unique_ptr<prv::WindowImpl> m_impl; /*!< The OS specific implementation of the window */
     };
 }
