@@ -381,12 +381,17 @@ namespace Bull
          * \param style The window decorations
          *
          */
-        bool open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+        virtual bool open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
 
         /*! \brief Callback triggered when the window is open
          *
          */
         virtual void onOpen() {}
+
+        /*! \brief Callback triggered the the window is resized
+         *
+         */
+        virtual void onResize() {}
 
         /*! \brief Callback triggered when the window is closed
          *
