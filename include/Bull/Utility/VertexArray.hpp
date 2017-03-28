@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <Bull/Render/Vertex.hpp>
+#include <Bull/Utility/Vertex.hpp>
 
 namespace Bull
 {

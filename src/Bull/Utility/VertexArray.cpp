@@ -1,4 +1,4 @@
-#include <Bull/Render/VertexArray.hpp>
+#include <Bull/Utility/VertexArray.hpp>
 
 namespace Bull
 {
