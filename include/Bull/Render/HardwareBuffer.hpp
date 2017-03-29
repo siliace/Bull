@@ -94,14 +94,14 @@ namespace Bull
          * @return A pointer to data
          *
          */
-        void* map() override;
+        void* map();
 
         /*! \brief Map data to a pointer
          *
          * @return A pointer to data
          *
          */
-        const void* map() const override;
+        const void* map() const;
 
         /*! \brief Unmap the buffer
          *

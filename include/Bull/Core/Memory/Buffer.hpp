@@ -7,10 +7,8 @@
 
 namespace Bull
 {
-    class BULL_API Buffer
+    struct BULL_API Buffer
     {
-    public:
-
         /*! \brief Create the Buffer
          *
          * @param capacity The capacity of the Buffer to create
@@ -31,20 +29,6 @@ namespace Bull
          *
          */
         virtual bool fill(const void* data, std::size_t size, std::size_t offset = 0, bool discard = false) = 0;
-
-        /*! \brief Map data to a pointer
-         *
-         * @return A pointer to data
-         *
-         */
-        virtual void* map() = 0;
-
-        /*! \brief Map data to a pointer
-         *
-         * @return A pointer to data
-         *
-         */
-        virtual const void* map() const = 0;
 
         /*! \brief Flush the Buffer
          *
