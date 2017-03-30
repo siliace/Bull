@@ -17,20 +17,6 @@ namespace Bull
     {
     public:
 
-        /*! \brief Bind a texture
-         *
-         * \param texture The texture to bind
-         *
-         */
-        static void bind(const Texture* texture);
-
-        /*! \brief Unbind any texture
-         *
-         */
-        static void unbind();
-
-    public:
-
         /*! \brief Default constructor
          *
          */
@@ -87,6 +73,13 @@ namespace Bull
          */
         bool loadFromPixels(const std::vector<Uint8>& pixels, const Vector2UI& size);
 
+        /*! \brief Bind the texture
+         *
+         * @param sampler The sampler to use to bind the buffer
+         *
+         */
+        void bind(Uint8 sampler = 0) const;
+
         /*! \brief Enable or disable the texture repeat
          *
          * \param enable True to enable, false to disable
@@ -138,9 +131,9 @@ namespace Bull
          */
         Image getImage(const RectangleUI& rectangle) const;
 
-        /*! \brief Get the system handler
+        /*! \brief Get the Texture system handler
          *
-         * \return Return the native system texture handler
+         * \return The native Texture system handler
          *
          */
         unsigned int getSystemHandler() const;

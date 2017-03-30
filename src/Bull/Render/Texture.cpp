@@ -4,16 +4,6 @@
 
 namespace Bull
 {
-    void Texture::bind(const Texture* texture)
-    {
-        gl::bindTexture(GL_TEXTURE_2D, texture->getSystemHandler());
-    }
-
-    void Texture::unbind()
-    {
-        gl::bindTexture(GL_TEXTURE_2D, 0);
-    }
-
     Texture::Texture() :
         m_id(0),
         m_size(0, 0),
@@ -103,6 +93,12 @@ namespace Bull
         }
 
         return false;
+    }
+
+    void Texture::bind(Uint8 sampler) const
+    {
+        gl::activeTexture(GL_TEXTURE0 + sampler);
+        gl::bindTexture(GL_TEXTURE_2D, m_id);
     }
 
     void Texture::enableRepeat(bool enable)
