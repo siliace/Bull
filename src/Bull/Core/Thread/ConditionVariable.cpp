@@ -3,26 +3,17 @@
 
 namespace Bull
 {
-    /*! \brief Default constructor
-     *
-     */
     ConditionVariable::ConditionVariable() :
         m_impl(prv::ConditionVariableImpl::createInstance())
     {
         ///Nothing
     }
 
-    /*! \brief Destructor
-     *
-     */
     ConditionVariable::~ConditionVariable()
     {
         /// Nothing
     }
 
-    /*! \brief Send a signal to a waiting thread
-     *
-     */
     void ConditionVariable::signalOne()
     {
         if(m_impl)
@@ -31,9 +22,6 @@ namespace Bull
         }
     }
 
-    /*! \brief Send a signal to all waiting thread
-     *
-     */
     void ConditionVariable::signalAll()
     {
         if(m_impl)
@@ -42,11 +30,6 @@ namespace Bull
         }
     }
 
-    /*! \brief Wait for a signal
-     *
-     * \param mutex The mutex to lock the resource
-     *
-     */
     void ConditionVariable::wait(Mutex& mutex)
     {
         if(m_impl)
@@ -55,14 +38,6 @@ namespace Bull
         }
     }
 
-    /*! \brief Wait for a signal
-     *
-     * \param mutex The mutex to lock the resource
-     * \param timeout The time to wait before failing
-     *
-     * \return Return false if timeout, else return true
-     *
-     */
     bool ConditionVariable::wait(Mutex& mutex, const Time& timeout)
     {
         if(m_impl)

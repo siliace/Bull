@@ -3,9 +3,6 @@
 
 namespace Bull
 {
-    /*! \brief Default constructor
-     *
-     */
     Mutex::Mutex() :
         m_impl(prv::MutexImpl::createInstance()),
         m_locked(false)
@@ -13,19 +10,11 @@ namespace Bull
         /// Nothing
     }
 
-    /*! \brief Destructor
-     *
-     */
     Mutex::~Mutex()
     {
-        m_impl.reset(nullptr);
+        /// Nothing
     }
 
-    /*! \brief Try to lock the mutex
-     *
-     * \return Return true if the mutex was locked successfully, else return false
-     *
-     */
     bool Mutex::tryLock()
     {
         if(m_impl)
@@ -38,9 +27,6 @@ namespace Bull
         return false;
     }
 
-    /*! \brief Lock the mutex
-     *
-     */
     void Mutex::lock()
     {
         if(m_impl)
@@ -51,19 +37,11 @@ namespace Bull
         }
     }
 
-    /*! \brief Check whether the mutex is locked
-     *
-     * \return Return true if the mutex is locked, false otherwise
-     *
-     */
     bool Mutex::isLocked() const
     {
         return m_locked;
     }
 
-    /*! \brief Unlock the mutex
-     *
-     */
     void Mutex::unlock()
     {
         if(m_impl)

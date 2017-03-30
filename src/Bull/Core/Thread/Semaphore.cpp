@@ -3,28 +3,17 @@
 
 namespace Bull
 {
-    /*! \brief Constructor
-     *
-     * \param count The initial count to set the semaphore
-     *
-     */
     Semaphore::Semaphore(unsigned int count) :
         m_impl(prv::SemaphoreImpl::createInstance(count))
     {
         /// Nothing
     }
 
-    /*! \brief Destructor
-     *
-     */
     Semaphore::~Semaphore()
     {
-        m_impl.reset();
+        /// Nothing
     }
 
-    /*! \brief Wait until the current thread can continue
-     *
-     */
     void Semaphore::wait()
     {
         if(m_impl)
@@ -33,13 +22,6 @@ namespace Bull
         }
     }
 
-    /*! \brief Wait until the current thread can continue
-     *
-     * \param timeout The maximum time to wait before fail
-     *
-     * \return Return true if the waiting time was less than the timeout, false otherwise
-     *
-     */
     bool Semaphore::wait(const Time& timeout)
     {
         if(m_impl)
@@ -50,11 +32,6 @@ namespace Bull
         return false;
     }
 
-    /*! \brief Get the current count of the semaphore
-     *
-     * \return Return the current count of the semaphore
-     *
-     */
     unsigned int Semaphore::getCount() const
     {
         if(m_impl)
@@ -65,9 +42,6 @@ namespace Bull
         return 0;
     }
 
-    /*! \brief Release semaphore's protection
-     *
-     */
     void Semaphore::release()
     {
         if(m_impl)
