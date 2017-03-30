@@ -30,20 +30,6 @@ namespace Bull
             StreamDraw  = GL_STREAM_DRAW,
         };
 
-        /*! \brief Bind a buffer
-         *
-         * \param buffer The buffer to bind
-         *
-         */
-        static void bind(const HardwareBuffer* buffer);
-
-        /*! \brief Unbind any buffer
-         *
-         * \param type The type of buffer to unbind
-         *
-         */
-        static void unbind(Type type);
-
     public:
 
         /*! \brief Constructor
@@ -138,6 +124,13 @@ namespace Bull
          *
          */
         unsigned int getSystemHandler() const;
+
+    protected:
+
+        /*! \brief Bind the buffer
+         *
+         */
+        void bind() const;
 
     private:
 

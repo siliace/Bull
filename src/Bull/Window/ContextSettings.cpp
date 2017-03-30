@@ -13,22 +13,24 @@ namespace Bull
     }
 
     ContextSettings::ContextSettings(Uint8 depths, Uint8 stencil, Uint8 antialiasing, Uint8 major, Uint8 minor) :
+        major(major),
+        minor(minor),
+        flags(Flag::Default),
         depths(depths),
         stencil(stencil),
-        antialiasing(antialiasing),
-        major(major),
-        minor(minor)
+        antialiasing(antialiasing)
     {
         /// Nothing
     }
 
     bool ContextSettings::operator==(const ContextSettings& right) const
     {
-        return (depths       == right.depths)       &&
-               (stencil      == right.stencil)      &&
-               (antialiasing == right.antialiasing) &&
-               (major        == right.major)        &&
-               (minor        == right.minor);
+        return major        == right.major        &&
+               minor        == right.minor        &&
+               flags        == right.flags        &&
+               depths       == right.depths       &&
+               stencil      == right.stencil      &&
+               antialiasing == right.antialiasing;
     }
 
     bool ContextSettings::operator!=(const ContextSettings& right) const

@@ -54,12 +54,12 @@ namespace Bull
          */
         bool operator!=(const ContextSettings& right) const;
 
+        Uint8 major;
+        Uint8 minor;
+        Uint8 flags;
         Uint8 depths;
         Uint8 stencil;
         Uint8 antialiasing;
-        Uint8 major;
-        Uint8 minor;
-        Uint8 flags = Flag::Default;
     };
 }
 
