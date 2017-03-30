@@ -18,18 +18,6 @@ namespace Bull
     {
     public:
 
-        /*! \brief Bind a shader
-         *
-         * \param shader The shader to bind
-         *
-         */
-        static void bind(const Shader* shader);
-
-        /*! \brief Unbind any shader
-         *
-         */
-        static void unbind();
-
         /*! \brief Get the maximum vertex attributes available
          *
          * \return Return the max
@@ -97,6 +85,13 @@ namespace Bull
          *
          */
         bool setUniform(const String& name, const Matrix4F& uniform);
+
+        /*! \brief Get the Shader system handler
+         *
+         * \return The native ShaderStage system handler
+         *
+         */
+        unsigned int getSystemHandler() const;
 
     protected:
 

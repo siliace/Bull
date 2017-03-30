@@ -2,13 +2,19 @@
 #include <Bull/Core/IO/StringStream.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
-#include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/ShaderStage.hpp>
 
 namespace Bull
 {
+    ShaderStage::ShaderStage() :
+        m_id(0),
+        m_isCompiled(false)
+    {
+        /// Nothing
+    }
+
     ShaderStage::ShaderStage(Type type) :
-        m_handler(0),
+        m_id(0),
         m_isCompiled(false)
     {
         create(type);
@@ -16,10 +22,10 @@ namespace Bull
 
     ShaderStage::ShaderStage(ShaderStage&& stage) :
         m_type(stage.m_type),
-        m_handler(stage.m_handler),
+        m_id(stage.m_id),
         m_isCompiled(stage.m_isCompiled)
     {
-        stage.m_handler = 0;
+        stage.m_id = 0;
         stage.m_isCompiled = false;
     }
 
@@ -31,10 +37,10 @@ namespace Bull
     ShaderStage& ShaderStage::operator=(ShaderStage&& stage)
     {
         m_type     = stage.m_type;
-        m_handler  = stage.m_handler;
+        m_id  = stage.m_id;
         m_isCompiled = stage.m_isCompiled;
 
-        stage.m_handler = 0;
+        stage.m_id = 0;
         stage.m_isCompiled = false;
 
         return (*this);
@@ -48,9 +54,9 @@ namespace Bull
         }
 
         m_type    = type;
-        m_handler = gl::createShader(type);
+        m_id = gl::createShader(type);
 
-        return m_handler != 0;
+        return m_id != 0;
     }
 
     bool ShaderStage::loadFromPath(const Path& path)
@@ -71,7 +77,7 @@ namespace Bull
         {
             const char* source = static_cast<const char*>(code);
 
-            gl::shaderSource(m_handler, 1, &source, nullptr);
+            gl::shaderSource(m_id, 1, &source, nullptr);
         }
 
         return false;
@@ -86,7 +92,7 @@ namespace Bull
     {
         if(isValid())
         {
-            gl::compileShader(m_handler);
+            gl::compileShader(m_id);
 
             if(hasError())
             {
@@ -111,7 +117,7 @@ namespace Bull
     {
         if(isValid())
         {
-            gl::deleteShader(m_handler);
+            gl::deleteShader(m_id);
         }
     }
 
@@ -122,12 +128,17 @@ namespace Bull
 
     bool ShaderStage::isValid() const
     {
-        return m_handler != 0;
+        return m_id != 0;
     }
 
     ShaderStage::Type ShaderStage::getType() const
     {
         return m_type;
+    }
+
+    unsigned int ShaderStage::getSystemHandler() const
+    {
+        return m_id;
     }
 
     bool ShaderStage::hasError() const
@@ -138,7 +149,7 @@ namespace Bull
     unsigned int ShaderStage::getErrorCode() const
     {
         int error = 0;
-        gl::getShaderiv(m_handler, GL_COMPILE_STATUS, &error);
+        gl::getShaderiv(m_id, GL_COMPILE_STATUS, &error);
 
         return static_cast<unsigned int>(error);
     }
@@ -150,20 +161,15 @@ namespace Bull
             int capacity;
             String message;
 
-            gl::getShaderiv(m_handler, GL_INFO_LOG_LENGTH, &capacity);
+            gl::getShaderiv(m_id, GL_INFO_LOG_LENGTH, &capacity);
 
             message.reserve(capacity);
 
-            gl::getShaderInfoLog(m_handler, capacity, nullptr, &message[0]);
+            gl::getShaderInfoLog(m_id, capacity, nullptr, &message[0]);
 
             return message;
         }
 
         return String();
-    }
-
-    unsigned int ShaderStage::getHandler() const
-    {
-        return m_handler;
     }
 }

@@ -34,7 +34,7 @@ namespace Bull
 
     void Shader::attach(const ShaderStage& stage)
     {
-        gl::attachShader(m_program, stage.getHandler());
+        gl::attachShader(m_program, stage.getSystemHandler());
     }
 
     bool Shader::link()
@@ -132,6 +132,11 @@ namespace Bull
         }
 
         return true;
+    }
+
+    unsigned int Shader::getSystemHandler() const
+    {
+        return m_program;
     }
 
     bool Shader::hasError() const

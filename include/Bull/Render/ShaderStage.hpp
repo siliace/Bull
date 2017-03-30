@@ -6,17 +6,15 @@
 #include <Bull/Core/Memory/MemoryBuffer.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
+#include <Bull/Render/OpenGL.hpp>
+
 #include <Bull/Window/ContextResource.hpp>
 
 namespace Bull
 {
-    class Shader;
-
     class BULL_API ShaderStage : public NonCopyable, public ContextResource
     {
     public:
-
-        friend class Shader;
 
         enum Type
         {
@@ -26,6 +24,11 @@ namespace Bull
         };
 
     public:
+
+        /*! \brief Default constructor
+         *
+         */
+        ShaderStage();
 
         /*! \brief Constructor
          *
@@ -124,6 +127,13 @@ namespace Bull
          */
         Type getType() const;
 
+        /*! \brief Get the ShaderStage system handler
+         *
+         * \return The native ShaderStage system handler
+         *
+         */
+        unsigned int getSystemHandler() const;
+
     protected:
 
         /*! \brief Check if the shader as an error
@@ -147,17 +157,10 @@ namespace Bull
          */
         String getErrorMessage() const;
 
-        /*! \brief Get the handler of the shader
-         *
-         * @return The handler
-         *
-         */
-        unsigned int getHandler() const;
-
     private:
 
-        Type         m_type;     /*!< The shader type */
-        unsigned int m_handler;  /*!< The OpenGL shader handler */
+        unsigned int m_id;         /*!< The OpenGL shader handler */
+        Type         m_type;       /*!< The shader type */
         bool         m_isCompiled; /*!< Does the shader is compiled? */
     };
 }
