@@ -4,11 +4,10 @@
 #include <Bull/Core/Time/Clock.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
-#include <Bull/Render/Context/ContextSettings.hpp>
 #include <Bull/Render/RenderTarget.hpp>
 
-#include <Bull/Utility/Window/VideoMode.hpp>
-#include <Bull/Utility/Window/Window.hpp>
+#include <Bull/Window/Window.hpp>
+#include <Bull/Window/VideoMode.hpp>
 
 namespace Bull
 {
@@ -91,6 +90,11 @@ namespace Bull
          *
          */
         virtual void onOpen() override;
+
+        /*! \brief Callback triggered when the window is resized
+         *
+         */
+        virtual void onResize() override;
 
         /*! \brief Callback triggered when the window is closed
          *

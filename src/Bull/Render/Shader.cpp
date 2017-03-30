@@ -1,8 +1,7 @@
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/Log.hpp>
+#include <Bull/Core/Log/Log.hpp>
 
-#include <Bull/Render/Context/ShaderStateSaver.hpp>
-#include <Bull/Render/Context/TextureStateSaver.hpp>
+#include <Bull/Render/ShaderStateSaver.hpp>
 #include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Shader.hpp>
 
@@ -10,11 +9,15 @@ namespace Bull
 {
     void Shader::bind(const Shader* shader)
     {
+        ensureContext();
+
         gl::useProgram(shader->getSystemHandler());
     }
 
     void Shader::unbind()
     {
+        ensureContext();
+
         gl::useProgram(0);
     }
 
@@ -22,9 +25,11 @@ namespace Bull
     {
         int count;
 
+        ensureContext();
+
         gl::getIntegerv(GL_MAX_VERTEX_ATTRIBS, &count);
 
-        return count;
+        return static_cast<unsigned int>(count);
     }
 
     GLuint Shader::createShader(const String& code, Type type, String* error)
@@ -32,6 +37,8 @@ namespace Bull
         GLuint shader = 0;
 
         const char* source = static_cast<const char*>(code);
+
+        ensureContext();
 
         shader = gl::createShader(type);
         gl::shaderSource(shader, 1, &source, nullptr);
@@ -43,6 +50,9 @@ namespace Bull
     bool Shader::shaderHasError(GLuint shader, GLenum type, String* error)
     {
         GLint success;
+
+        ensureContext();
+
         gl::getShaderiv(shader, type, &success);
 
         if(!success)
@@ -55,16 +65,19 @@ namespace Bull
                 error->set(info);
             }
 
-            Log::get()->write(info, Log::Level::Warning);
+            Log::get()->write(String(info), Log::Level::Warning);
         }
 
-        return success;
+        return success != 0;
     }
 
     bool Shader::programHasError(GLuint program, GLenum type, String* error)
     {
         GLint success;
-        gl::getProgramiv(program, GL_LINK_STATUS, &success);
+
+        ensureContext();
+
+        gl::getProgramiv(program, type, &success);
 
         if(!success)
         {
@@ -76,10 +89,10 @@ namespace Bull
                 error->set(info);
             }
 
-            Log::get()->write(info, Log::Level::Warning);
+            Log::get()->write(String(info), Log::Level::Warning);
         }
 
-        return success;
+        return success != 0;
     }
 
     Shader::Shader() :
@@ -106,6 +119,8 @@ namespace Bull
 
     Shader::~Shader()
     {
+        ensureContext();
+
         if(gl::isProgram(m_program))
         {
             gl::deleteProgram(m_program);
@@ -228,6 +243,8 @@ namespace Bull
 
     int Shader::getUniformLocation(const String& name)
     {
+        ensureContext();
+
         return gl::getUniformLocation(m_program, name);
     }
 }

@@ -1,7 +1,7 @@
 #ifndef Bull_JoystickImpl_hpp
 #define Bull_JoystickImpl_hpp
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 
 #include <Bull/Hardware/Joystick.hpp>
 

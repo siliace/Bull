@@ -1,3 +1,5 @@
+#include <sys/unistd.h>
+
 #include <Bull/Hardware/Unix/CPUImpl.hpp>
 
 namespace Bull
@@ -11,7 +13,7 @@ namespace Bull
          */
         unsigned int CPUImpl::getCount()
         {
-            return 0;
+            return static_cast<unsigned int>(sysconf(_SC_NPROCESSORS_ONLN));
         }
 
         /*! \brief Get the CPU architecture

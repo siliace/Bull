@@ -3,7 +3,7 @@
 
 #include <array>
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 
 #include <Bull/Network/IpAddress.hpp>
 #include <Bull/Network/Win32/SystemSocket.hpp>

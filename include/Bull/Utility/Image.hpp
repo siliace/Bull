@@ -1,18 +1,20 @@
-#ifndef Bull_Image_hpp
-#define Bull_Image_hpp
+#ifndef BULL_UTILITY_IMAGE_HPP
+#define BULL_UTILITY_IMAGE_HPP
 
 #include <vector>
 
 #include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Render/Color.hpp>
+#include <Bull/Utility/Color.hpp>
 
 namespace Bull
 {
+    class AbstractImageLoader;
+
     class BULL_API Image
     {
     public:
@@ -25,6 +27,8 @@ namespace Bull
             Png,
             Tga
         };
+
+        static std::unique_ptr<AbstractImageLoader> loader;
 
     public:
 
@@ -39,7 +43,15 @@ namespace Bull
          * \param size   The size of the image
          *
          */
-        Image(const std::vector<Uint8>& pixels, const Vector2UI size);
+        Image(const std::vector<Uint8>& pixels, const Vector2UI& size);
+
+        /*! \brief Constructor
+         *
+         * \param data Buffer which contains row data
+         * \param size The size of the image
+         *
+         */
+        Image(const void* data, const Vector2UI& size);
 
         /*! \brief Constructor
          *
@@ -49,6 +61,15 @@ namespace Bull
          *
          */
         Image(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height);
+
+        /*! \brief Constructor
+         *
+         * \param data   Buffer which contains row data
+         * \param width  The width of the image to create
+         * \param height The height of the image to create
+         *
+         */
+        Image(const void* data, unsigned int width, unsigned int height);
 
         /*! \brief Constructor
          *
@@ -71,10 +92,31 @@ namespace Bull
          *
          * \param path The path to the image to load
          *
-         * \return Return true if the image was loaded successfully, false otherwise
+         * \return True if the image was loaded successfully
          *
          */
         bool loadFromPath(const Path& path);
+
+        /*! \brief Load an image from a buffer
+         *
+         * \param data     Buffer which contains row data
+         * \param size     The size of the image
+         *
+         * \return True if the image was loaded successfully
+         *
+         */
+        bool loadFromBuffer(const void* data, const Vector2UI& size);
+
+        /*! \brief Load an image from a buffer
+         *
+         * \param data   Buffer which contains row data
+         * \param width  The width of the image to create
+         * \param height The height of the image to create
+         *
+         * \return True if the image was loaded successfully
+         *
+         */
+        bool loadFromBuffer(const void* data, unsigned int width, unsigned int height);
 
         /*! \brief Set the color of a pixel
          *
@@ -90,7 +132,7 @@ namespace Bull
          * \param x
          * \param y
          *
-         * \return Return the color
+         * \return The color
          *
          */
         Color get(unsigned int x, unsigned int y) const;
@@ -117,13 +159,13 @@ namespace Bull
          * \return Return
          *
          */
-        bool save(const String& path, Format format);
+        bool save(const Path& path, Format format);
 
     private:
 
-        std::vector<Uint8> m_pixels;
         Vector2UI          m_size;
+        std::vector<Uint8> m_pixels;
     };
 }
 
-#endif // Bull_Image_hpp
+#endif // BULL_UTILITY_IMAGE_HPP

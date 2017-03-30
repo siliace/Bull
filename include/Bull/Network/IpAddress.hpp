@@ -3,8 +3,8 @@
 
 #include <array>
 
-#include <Bull/Core/Integer.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Network/NetProtocol.hpp>

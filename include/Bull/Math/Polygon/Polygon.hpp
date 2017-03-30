@@ -1,8 +1,6 @@
 #ifndef BULL_POLYGON_HPP
 #define BULL_POLYGON_HPP
 
-#include <Bull/Core/System/Export.hpp>
-
 #include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
@@ -11,7 +9,7 @@ namespace Bull
     class Rectangle;
 
     template<typename T>
-    struct BULL_API Polygon
+    struct Polygon
     {
         /*! \brief Get a vertex form the polygon
          *

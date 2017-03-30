@@ -7,7 +7,7 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Render/Context/Context.hpp>
+#include <Bull/Window/Context.hpp>
 
 namespace Bull
 {

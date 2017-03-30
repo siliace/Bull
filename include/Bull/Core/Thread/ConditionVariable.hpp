@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/Mutex.hpp>
 #include <Bull/Core/Time/Time.hpp>

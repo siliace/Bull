@@ -13,6 +13,8 @@ namespace Bull
                 case AF_INET:  return fromSocketAddress(reinterpret_cast<const sockaddr_in*>(socketAddress), port);
                 case AF_INET6: return fromSocketAddress(reinterpret_cast<const sockaddr_in6*>(socketAddress), port);
             }
+
+            return IpAddress::None;
         }
 
         IpAddress IpAddressImpl::fromSocketAddress(const sockaddr_in* socketAddress, Uint16& port)

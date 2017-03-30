@@ -4,7 +4,7 @@
 #if defined _WIN32
     #define BULL_OS_WINDOWS
 
-    /// Prevent conflict with other libs which would redefined _WIN32_WINNT
+    /// Prevent conflict with other vendor which would redefined _WIN32_WINNT
     #if defined BULL_BUILD
         #ifndef WIN32_LEAN_AND_MEAN
             #define WIN32_LEAN_AND_MEAN 1

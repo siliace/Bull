@@ -114,7 +114,7 @@ namespace Bull
 
     Date& Date::operator+=(const Date& left)
     {
-
+        return (*this);
     }
 
     Date Date::operator+(const Date& left) const
@@ -124,7 +124,7 @@ namespace Bull
 
     Date& Date::operator-=(const Date& left)
     {
-
+        return (*this);
     }
 
     Date Date::operator-(const Date& left) const

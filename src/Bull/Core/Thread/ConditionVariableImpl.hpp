@@ -1,7 +1,7 @@
 #ifndef Bull_ConditionVariableImpl_hpp
 #define Bull_ConditionVariableImpl_hpp
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/MutexImpl.hpp>
 #include <Bull/Core/Time/Time.hpp>

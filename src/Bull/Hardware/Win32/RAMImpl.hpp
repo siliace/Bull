@@ -1,7 +1,7 @@
 #ifndef Bull_RAMImpl_hpp
 #define Bull_RAMImpl_hpp
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 
 namespace Bull
 {

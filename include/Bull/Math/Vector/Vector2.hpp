@@ -3,12 +3,10 @@
 
 #include <cmath>
 
-#include <Bull/Core/System/Export.hpp>
-
 namespace Bull
 {
     template<typename T>
-    struct BULL_API Vector2
+    struct Vector2
     {
         /*! \brief Calculate the dot(scalar) product of two Vector2
          *

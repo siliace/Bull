@@ -1,17 +1,13 @@
 #ifndef Bull_Rectangle_hpp
 #define Bull_Rectangle_hpp
 
-#include <functional>
-
-#include <Bull/Core/System/Export.hpp>
-
 #include <Bull/Math/Polygon/Polygon.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {
     template<typename T>
-    struct BULL_API Rectangle : public Polygon<T>
+    struct Rectangle : public Polygon<T>
     {
         /*! \brief Default constructor
          *
@@ -26,16 +22,14 @@ namespace Bull
          * \param height The height of the rectangle
          *
          */
-        template<typename U>
-        Rectangle(U x, U y, U width, U height);
+        Rectangle(T x, T y, T width, T height);
 
         /*! \brief Constructor
          *
          * \param size The size of the rectangle
          *
          */
-        template<typename U>
-        Rectangle(const Vector2<U>& size);
+        Rectangle(const Vector2<T>& size);
 
         /*! \brief Constructor
          *
@@ -44,8 +38,7 @@ namespace Bull
          * \param height  The height of the rectangle
          *
          */
-        template<typename U>
-        Rectangle(const Vector2<U>& topLeft, U width, U height);
+        Rectangle(const Vector2<T>& topLeft, T width, T height);
 
         /*! \brief Constructor
          *
@@ -53,16 +46,7 @@ namespace Bull
          * \param bottomRight Coordinates of the top bottom right of rectangle
          *
          */
-        template<typename U>
-        Rectangle(const Vector2<U>& topLeft, const Vector2<U>& bottomRight);
-
-        /*! \brief Copy constructor
-         *
-         * \param rectangle The rectangle to copy
-         *
-         */
-        template<typename U>
-        Rectangle(const Rectangle<U>& rectangle);
+        Rectangle(const Vector2<T>& topLeft, const Vector2<T>& bottomRight);
 
         /*! \brief Set the rectangle
          *
@@ -74,8 +58,7 @@ namespace Bull
          * \return Return this
          *
          */
-        template<typename U>
-        Rectangle& set(U x, U y, U width, U height);
+        Rectangle& set(T x, T y, T width, T height);
 
         /*! \brief Set the rectangle
          *
@@ -84,8 +67,7 @@ namespace Bull
          * \return Return this
          *
          */
-        template<typename U>
-        Rectangle& set(const Vector2<U>& size);
+        Rectangle& set(const Vector2<T>& size);
 
         /*! \brief Set the rectangle
          *
@@ -96,8 +78,7 @@ namespace Bull
          * \return Return this
          *
          */
-        template<typename U>
-        Rectangle& set(const Vector2<U>& topLeft, U width, U height);
+        Rectangle& set(const Vector2<T>& topLeft, T width, T height);
 
         /*! \brief Set the rectangle
          *
@@ -107,18 +88,7 @@ namespace Bull
          * \return Return this
          *
          */
-        template<typename U>
-        Rectangle& set(const Vector2<U>& topLeft, const Vector2<U>& bottomRight);
-
-        /*! \brief Set the rectangle
-         *
-         * \param rectangle The rectangle to copy
-         *
-         * \return Return this
-         *
-         */
-        template<typename U>
-        Rectangle& set(const Rectangle<U>& rectangle);
+        Rectangle& set(const Vector2<T>& topLeft, const Vector2<T>& bottomRight);
 
         /*! \brief Get a vertex form the polygon
          *

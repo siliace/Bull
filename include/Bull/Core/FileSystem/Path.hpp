@@ -1,8 +1,8 @@
 #ifndef Bull_Path_hpp
 #define Bull_Path_hpp
 
-#include <Bull/Core/Integer.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
@@ -27,10 +27,8 @@ namespace Bull
          * \param path
          * \param isFile
          * \param isDirectory
-         * \param size
-         * \param creation
-         * \param lastAccess
-         * \param lastWrite
+         *
+         * \return The created path
          *
          */
         static Path make(const String& path, bool isFile, bool isDirectory);
@@ -47,7 +45,7 @@ namespace Bull
          * \param path The path
          *
          */
-        Path(const String& path);
+        explicit Path(const String& path);
 
         /*! \brief Basic assignment operator
          *

@@ -5,8 +5,8 @@
 #include <vector>
 
 #include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/Integer.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/System/Integer.hpp>
 
 namespace Bull
 {
@@ -86,7 +86,7 @@ namespace Bull
          * \param path The path of the directory
          *
          */
-        Directory(const String& path);
+        Directory(const Path& path);
 
         /*! \brief Destructor
          *
@@ -100,7 +100,7 @@ namespace Bull
          * \return Return true is the directory was opened successfully, false otherwise
          *
          */
-        bool open(const String& path);
+        bool open(const Path& path);
 
         /*! \brief Check whether the directory is open
          *
@@ -128,12 +128,11 @@ namespace Bull
          * \return Return the path of the directory
          *
          */
-        String getPath() const;
+        const Path& getPath() const;
 
     private:
 
-        String m_path;
-
+        Path                                m_path;
         std::unique_ptr<prv::DirectoryImpl> m_impl;
     };
 }

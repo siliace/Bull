@@ -3,17 +3,19 @@
 
 #include <memory>
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Render/Context/ContextResource.hpp>
-#include <Bull/Render/Color.hpp>
 #include <Bull/Render/Viewport.hpp>
 
-#include <Bull/Utility/Window/VideoMode.hpp>
-#include <Bull/Utility/Window/WindowHandler.hpp>
+#include <Bull/Utility/Color.hpp>
+
+#include <Bull/Window/ContextResource.hpp>
+#include <Bull/Window/ContextSettings.hpp>
+#include <Bull/Window/VideoMode.hpp>
+#include <Bull/Window/WindowHandler.hpp>
 
 namespace Bull
 {
@@ -110,4 +112,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_RenderTarget_hp
+#endif // Bull_RenderTarget_hpp

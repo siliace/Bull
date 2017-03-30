@@ -4,8 +4,8 @@
 #include <array>
 
 #include <Bull/Core/System/Export.hpp>
-#include <Bull/Core/Integer.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 namespace Bull

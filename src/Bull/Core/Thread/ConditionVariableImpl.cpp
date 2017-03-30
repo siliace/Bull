@@ -1,4 +1,3 @@
-#include <Bull/Core/System/Config.hpp>
 #include <Bull/Core/Thread/ConditionVariableImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
@@ -13,19 +12,11 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Create a OS specific instance of ConditionVariableImpl
-         *
-         * \return Return the created instance
-         *
-         */
         ConditionVariableImpl* ConditionVariableImpl::createInstance()
         {
             return new ConditionVariableType();
         }
 
-        /*! \brief Destructor
-         *
-         */
         ConditionVariableImpl::~ConditionVariableImpl()
         {
             /// Nothing

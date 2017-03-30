@@ -14,8 +14,7 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T> Matrix4<T>::createTranslation(U x, U y, U z)
+    Matrix4<T> Matrix4<T>::createTranslation(T x, T y, T z)
     {
         Matrix4<T> translation = Matrix4<T>::createIdentity();
 
@@ -27,8 +26,7 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T> Matrix4<T>::createScale(U x, U y, U z)
+    Matrix4<T> Matrix4<T>::createScale(T x, T y, T z)
     {
         Matrix4<T> scale;
 
@@ -47,34 +45,36 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T>::Matrix4(U value)
+    Matrix4<T>::Matrix4(T value)
     {
         set(value);
     }
 
-    template<typename T>    template<typename U>
-    Matrix4<T>::Matrix4(const std::array<U, 16>& data)
+    template<typename T>
+    Matrix4<T>::Matrix4(const std::array<T, 16>& data)
     {
         set(data);
     }
 
-    template<typename T>    template<typename U>
-    void Matrix4<T>::set(U value)
+    template<typename T>
+    void Matrix4<T>::set(T value)
     {
         m_data.fill(value);
     }
 
     template<typename T>
-    template<typename U>
-    void Matrix4<T>::set(U value, std::size_t x, std::size_t y)
+    void Matrix4<T>::set(T value, std::size_t x, std::size_t y)
     {
+        if(x >= 4 || y >= 4)
+        {
+            throw std::out_of_range("Requested value out of range");
+        }
+
         m_data[y * 4 + x] = static_cast<T>(value);
     }
 
     template<typename T>
-    template<typename U>
-    void Matrix4<T>::set(const std::array<U, 16>& data)
+    void Matrix4<T>::set(const std::array<T, 16>& data)
     {
         m_data = data;
     }
@@ -88,6 +88,11 @@ namespace Bull
     template<typename T>
     std::array<T, 4> Matrix4<T>::getColumn(std::size_t column) const
     {
+        if(column >= 4)
+        {
+            throw std::out_of_range("Requested column out of range");
+        }
+
         std::array<T, 4> col;
 
         for(std::size_t i = 0; i < 4; i++)
@@ -98,8 +103,14 @@ namespace Bull
         return col;
     }
 
-    template<typename T>    std::array<T, 4> Matrix4<T>::getRow(std::size_t row) const
+    template<typename T>
+    std::array<T, 4> Matrix4<T>::getRow(std::size_t row) const
     {
+        if(row >= 4)
+        {
+            throw std::out_of_range("Requested row out of range");
+        }
+
         std::array<T, 4> r;
 
         for(std::size_t i = 0; i < 4; i++)
@@ -113,51 +124,56 @@ namespace Bull
     template<typename T>
     T& Matrix4<T>::operator()(std::size_t x, std::size_t y)
     {
+        if(x >= 4 || y >= 4)
+        {
+            throw std::out_of_range("Requested value out of range");
+        }
+
         return m_data[y * 4 + x];
     }
 
     template<typename T>
     const T& Matrix4<T>::operator()(std::size_t x, std::size_t y) const
     {
+        if(x >= 4 || y >= 4)
+        {
+            throw std::out_of_range("Requested value out of range");
+        }
+
         return m_data[y * 4 + x];
     }
 
     template<typename T>
-    template<typename U>
-    bool Matrix4<T>::operator==(const Matrix4<U>& right)
+    bool Matrix4<T>::operator==(const Matrix4<T>& right)
     {
         return m_data == right.m_data;
     }
 
     template<typename T>
-    template<typename U>
-    bool Matrix4<T>::operator!=(const Matrix4<U>& right)
+    bool Matrix4<T>::operator!=(const Matrix4<T>& right)
     {
         return m_data != right.m_data;
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T>& Matrix4<T>::operator+=(const Matrix4<U>& right)
+    Matrix4<T>& Matrix4<T>::operator+=(const Matrix4<T>& right)
     {
         for(std::size_t i = 0; i < 16; i++)
         {
-            m_data[i] += static_cast<U>(right.m_data[i]);
+            m_data[i] += static_cast<T>(right.m_data[i]);
         }
 
         return (*this);
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T>& Matrix4<T>::operator+=(U right)
+    Matrix4<T>& Matrix4<T>::operator+=(T right)
     {
-        return (*this) += Matrix4<U>(right);
+        return (*this) += Matrix4<T>(right);
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T>& Matrix4<T>::operator-=(const Matrix4<U>& right)
+    Matrix4<T>& Matrix4<T>::operator-=(const Matrix4<T>& right)
     {
         for(std::size_t i = 0; i < 16; i++)
         {
@@ -168,15 +184,13 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T>& Matrix4<T>::operator-=(U right)
+    Matrix4<T>& Matrix4<T>::operator-=(T right)
     {
-        return (*this) -= Matrix4<U>(right);
+        return (*this) -= Matrix4<T>(right);
     }
 
     template<typename T>
-    template<typename U>
-    Matrix4<T> Matrix4<T>::operator*=(const Matrix4<U>& right)
+    Matrix4<T> Matrix4<T>::operator*=(const Matrix4<T>& right)
     {
         std::array<T, 16> product;
 

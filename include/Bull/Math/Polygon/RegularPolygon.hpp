@@ -25,8 +25,7 @@ namespace Bull
          * \param rotation The rotation of the polygon
          *
          */
-        template<typename U, typename V, typename W = T>
-        RegularPolygon(const Vector2<U>& center, V radius = 0.0, const Angle<W>& rotation = Angle<W>::Zero);
+        RegularPolygon(const Vector2<T>& center, T radius = 0.0, const Angle<T>& rotation = Angle<T>::Zero);
 
         /*! \brief Get a vertex form the polygon
          *
@@ -50,8 +49,7 @@ namespace Bull
          * \return This
          *
          */
-        template<typename U>
-        RegularPolygon<T, S>& setCenter(const Vector2<U>& center);
+        RegularPolygon<T, S>& setCenter(const Vector2<T>& center);
 
         /*! \brief Get the center of the polygon
          *
@@ -60,10 +58,20 @@ namespace Bull
          */
         Vector2<T> getCenter() const;
 
-        template<typename U>
-        RegularPolygon<T, S>& setRotation(const Angle<U>& rotation);
-
-        const Angle<T>& getAngle() const;
+        /*! \brief Set the rotation of the polygon
+         * 
+         * @param rotation The new rotation
+         * 
+         * @return This 
+         */
+        RegularPolygon<T, S>& setRotation(const Angle<T>& rotation);
+        
+        /*! \brief Get the rotation of the polygon
+         * 
+         * @return The rotation 
+         * 
+         */
+        const Angle<T>& getRotation() const;
 
         /*! \brief Set the radius of the polygon
          *
@@ -72,8 +80,7 @@ namespace Bull
          * \return This
          *
          */
-        template<typename U>
-        RegularPolygon<T, S>& setRadius(U radius);
+        RegularPolygon<T, S>& setRadius(T radius);
 
         /*! \brief Get the radius of the polygon
          *

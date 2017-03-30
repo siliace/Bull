@@ -1,4 +1,4 @@
-#include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Window/GlContext.hpp>
 #include <Bull/Render/RenderTexture.hpp>
 #include <Bull/Render/RenderTextureImplDefault.hpp>
 

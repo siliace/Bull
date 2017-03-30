@@ -1,0 +1,22 @@
+set(HARDWARE_INC ${BULL_INCLUDE}/Hardware)
+set(HARDWARE_SRC ${BULL_SRC}/Hardware)
+
+#Headers
+file(GLOB_RECURSE HARDWARE_INCLUDE_FILES ${HARDWARE_INC}/*.hpp)
+
+#Source
+file(GLOB HARDWARE_SOURCE_FILES ${HARDWARE_SRC}/*.*)
+if(BULL_OS_WINDOWS)
+    file(GLOB HARDWARE_IMPL_SOURCE_FILES ${HARDWARE_SRC}/Win32/*)
+else()
+    file(GLOB HARDWARE_IMPL_SOURCE_FILES ${HARDWARE_SRC}/Unix/*)
+endif()
+list(APPEND HARDWARE_SOURCE_FILES ${HARDWARE_IMPL_SOURCE_FILES})
+
+if(BULL_OS_WINDOWS)
+    list(APPEND HARDWARE_EXT_LIBS winmm)
+endif()
+
+add_library(bull-hardware SHARED ${HARDWARE_INCLUDE_FILES} ${HARDWARE_SOURCE_FILES})
+target_link_libraries(bull-hardware bull-core)
+target_link_libraries(bull-hardware ${HARDWARE_EXT_LIBS})

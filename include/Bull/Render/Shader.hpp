@@ -4,13 +4,15 @@
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/IO/InStream.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
 
-#include <Bull/Render/Context/ContextResource.hpp>
-#include <Bull/Render/Color.hpp>
-#include <Bull/Render/Texture.hpp>
+#include <Bull/Render/OpenGL.hpp>
+
+#include <Bull/Utility/Color.hpp>
+
+#include <Bull/Window/ContextResource.hpp>
 
 namespace Bull
 {

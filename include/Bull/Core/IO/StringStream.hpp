@@ -5,7 +5,7 @@
 
 #include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/IO/InOutStream.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {

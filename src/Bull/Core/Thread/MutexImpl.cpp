@@ -1,4 +1,3 @@
-#include <Bull/Core/System/Config.hpp>
 #include <Bull/Core/Thread/Mutex.hpp>
 
 #if defined BULL_OS_WINDOWS
@@ -13,19 +12,11 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Create a OS specific instance of MutexImpl
-         *
-         * \return Return the created instance
-         *
-         */
         MutexImpl* MutexImpl::createInstance()
         {
             return new MutexImplType();
         }
 
-        /*! \brief Destructor
-         *
-         */
         MutexImpl::~MutexImpl()
         {
             /// Nothing

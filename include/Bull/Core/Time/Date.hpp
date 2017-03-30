@@ -1,7 +1,7 @@
 #ifndef Bull_Date_hpp
 #define Bull_Date_hpp
 
-#include <Bull/Core/Integer.hpp>
+#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Time/Time.hpp>
 #include <Bull/Core/System/Export.hpp>
 

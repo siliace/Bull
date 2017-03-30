@@ -1,8 +1,8 @@
 #ifndef Bull_InStream_hpp
 #define Bull_InStream_hpp
 
-#include <Bull/Core/Integer.hpp>
-#include <Bull/Core/String.hpp>
+#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/System/Export.hpp>
 
 namespace Bull

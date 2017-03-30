@@ -1,8 +1,8 @@
 #ifndef Bull_FileLogger_hpp
 #define Bull_FileLogger_hpp
 
-#include <Bull/Core/AbstractLogger.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
+#include <Bull/Core/Log/AbstractLogger.hpp>
 
 namespace Bull
 {

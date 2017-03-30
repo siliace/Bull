@@ -1,9 +1,9 @@
 #include <Bull/Core/Thread/Thread.hpp>
 
-#include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Window/GlContext.hpp>
 #include <Bull/Render/RenderWindow.hpp>
 
-#include <Bull/Utility/Window/WindowImpl.hpp>
+#include <Bull/Window/WindowImpl.hpp>
 
 namespace Bull
 {
@@ -25,6 +25,8 @@ namespace Bull
         }
 
         m_context.reset(prv::GlContext::createInstance(getSystemHandler(), mode.bitsPerPixel, settings));
+
+        setActive();
 
         return true;
     }
@@ -89,6 +91,11 @@ namespace Bull
     void RenderWindow::onOpen()
     {
         m_clock.start();
+    }
+
+    void RenderWindow::onResize()
+    {
+        resetViewport();
     }
 
     void RenderWindow::onClose()

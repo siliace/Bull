@@ -3,59 +3,35 @@ namespace Bull
     template<typename T>
     Rectangle<T>::Rectangle()
     {
-        static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
-
-        set(0.0, 0.0, 0.0, 0.0);
+        set(0, 0, 0, 0);
     }
 
     template<typename T>
-    template<typename U>
-    Rectangle<T>::Rectangle(U x, U y, U width, U height)
+    Rectangle<T>::Rectangle(T x, T y, T width, T height)
     {
-        static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
-
         set(x, y, width, height);
     }
 
     template<typename T>
-    template<typename U>
-    Rectangle<T>::Rectangle(const Vector2<U>& size)
+    Rectangle<T>::Rectangle(const Vector2<T>& size)
     {
-        static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
-
         set(size);
     }
 
     template<typename T>
-    template<typename U>
-    Rectangle<T>::Rectangle(const Vector2<U>& topLeft, U width, U height)
+    Rectangle<T>::Rectangle(const Vector2<T>& topLeft, T width, T height)
     {
-        static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
-
         set(topLeft, width, height);
     }
 
     template<typename T>
-    template<typename U>
-    Rectangle<T>::Rectangle(const Vector2<U>& topLeft, const Vector2<U>& bottomRight)
+    Rectangle<T>::Rectangle(const Vector2<T>& topLeft, const Vector2<T>& bottomRight)
     {
-        static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
-
         set(topLeft, bottomRight);
     }
 
     template<typename T>
-    template<typename U>
-    Rectangle<T>::Rectangle(const Rectangle<U>& rectangle)
-    {
-        static_assert(std::is_arithmetic<T>::value, "T must be a numeric type");
-
-        set(rectangle);
-    }
-
-    template<typename T>
-    template<typename U>
-    Rectangle<T>& Rectangle<T>::set(U x, U y, U width, U height)
+    Rectangle<T>& Rectangle<T>::set(T x, T y, T width, T height)
     {
         this->x      = static_cast<T>(x);
         this->y      = static_cast<T>(y);
@@ -66,8 +42,7 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    Rectangle<T>& Rectangle<T>::set(const Vector2<U>& size)
+    Rectangle<T>& Rectangle<T>::set(const Vector2<T>& size)
     {
         x      = static_cast<T>(0);
         y      = static_cast<T>(0);
@@ -78,24 +53,15 @@ namespace Bull
     }
 
     template<typename T>
-    template<typename U>
-    Rectangle<T>& Rectangle<T>::set(const Vector2<U>& topLeft, U width, U height)
+    Rectangle<T>& Rectangle<T>::set(const Vector2<T>& topLeft, T width, T height)
     {
         return set(topLeft.x, topLeft.y, width, height);
     }
 
     template<typename T>
-    template<typename U>
-    Rectangle<T>& Rectangle<T>::set(const Vector2<U>& topLeft, const Vector2<U>& bottomRight)
+    Rectangle<T>& Rectangle<T>::set(const Vector2<T>& topLeft, const Vector2<T>& bottomRight)
     {
         return set(topLeft, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
-    }
-
-    template<typename T>
-    template<typename U>
-    Rectangle<T>& Rectangle<T>::set(const Rectangle<U>& rectangle)
-    {
-        return set(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
     }
 
     template<typename T>

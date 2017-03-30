@@ -11,7 +11,7 @@
 namespace Bull
 {
     template<typename T>
-    struct BULL_API Angle
+    struct Angle
     {
     public:
 
@@ -22,8 +22,7 @@ namespace Bull
          * \return Return the created angle
          *
          */
-        template<typename U>
-        static Angle<T> radian(U angle);
+        static Angle<T> radian(T angle);
 
         /*! \brief Create an angle in degrees
          *
@@ -32,8 +31,7 @@ namespace Bull
          * \return Return the created angle
          *
          */
-        template<typename U>
-        static Angle<T> degree(U angle);
+        static Angle<T> degree(T angle);
 
         static Angle<T> Zero;
 
@@ -42,68 +40,21 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Angle();
-
-        /*! \brief Constructor
-         *
-         * \param angle
-         * \param isRadian
-         *
-         */
-        template<typename U>
-        Angle(U value, bool isRadian = false);
-
-        /*! \brief Copy constructor
-         *
-         * \param copy The angle to copy
-         *
-         */
-        template<typename U>
-        Angle(const Angle<U>& copy);
-
-        /*! \brief Basic assignment operator
-         *
-         * \param angle The value of the angle
-         *
-         * \return Return this
-         *
-         */
-        template<typename U>
-        Angle& operator=(Angle<U> angle);
-
-        /*! \brief Basic assignment operator
-         *
-         * \param angle The value of the angle
-         *
-         * \return Return this
-         *
-         */
-        template<typename U>
-        Angle& operator=(U angle);
+        Angle() = default;
 
         /*! \brief Set the value of the angle
          *
-         * \param angle The value of the angle
+         * \param angle    The value of the angle
+         * \param isRadian Whether the angle value is in radian
          *
-         * \return Return this
-         *
-         */
-        template<typename U>
-        Angle& set(Angle<U> angle);
-
-        /*! \brief Set the value of the angle
-         *
-         * \param angle The value of the angle
-         *
-         * \return Return this
+         * \return This
          *
          */
-        template<typename U>
-        Angle& set(U angle);
+        Angle& set(T angle, bool isRadian = false);
 
         /*! \brief Get the value of the angle in degrees
          *
-         * \return Return the value of the angle
+         * \return The value of the angle
          *
          */
         Angle<T> asDegree() const;
@@ -115,15 +66,12 @@ namespace Bull
          */
         Angle<T> asRadian() const;
 
-        /*! \brief Addition two angles
+        /*! \brief Normalize the angle
          *
-         * \param right The angle to add to this
-         *
-         * \return Return the sum of this and right
+         * @return This
          *
          */
-        template<typename U>
-        Angle<T> operator+(U right);
+        Angle<T>& normalize();
 
         /*! \brief Addition two angles
          *
@@ -132,8 +80,7 @@ namespace Bull
          * \return Return the sum of this and right
          *
          */
-        template<typename U>
-        Angle<T> operator+(const Angle<U>& right);
+        Angle<T> operator+(T right);
 
         /*! \brief Addition two angles
          *
@@ -142,17 +89,7 @@ namespace Bull
          * \return Return the sum of this and right
          *
          */
-        template<typename U>        Angle<T>& operator+=(U right);
-
-        /*! \brief Addition two angles
-         *
-         * \param right The angle to add to this
-         *
-         * \return Return the sum of this and right
-         *
-         */
-        template<typename U>
-        Angle<T>& operator+=(const Angle<U>& right);
+        Angle<T>& operator+=(T right);
 
         /*! \brief Subtract two angles
          *
@@ -161,8 +98,7 @@ namespace Bull
          * \return Return the difference of this and right
          *
          */
-        template<typename U>
-        Angle<T> operator-(U right);
+        Angle<T> operator-(T right);
 
         /*! \brief Subtract two angles
          *
@@ -171,27 +107,7 @@ namespace Bull
          * \return Return the difference of this and right
          *
          */
-        template<typename U>
-        Angle<T> operator-(const Angle<U>& right);
-
-        /*! \brief Subtract two angles
-         *
-         * \param right The angle to subtract to this
-         *
-         * \return Return the difference of this and right
-         *
-         */
-        template<typename U>        Angle<T>& operator-=(U right);
-
-        /*! \brief Subtract two angles
-         *
-         * \param right The angle to subtract to this
-         *
-         * \return Return the difference of this and right
-         *
-         */
-        template<typename U>
-        Angle<T>& operator-=(const Angle<U>& right);
+        Angle<T>& operator-=(T right);
 
         /*! \brief Multiply two angles
          *
@@ -200,8 +116,7 @@ namespace Bull
          * \return Return the product of this and right
          *
          */
-        template<typename U>
-        Angle<T> operator*(U right);
+        Angle<T> operator*(T right);
 
         /*! \brief Multiply two angles
          *
@@ -210,27 +125,7 @@ namespace Bull
          * \return Return the product of this and right
          *
          */
-        template<typename U>
-        Angle<T> operator*(const Angle<U>& right);
-
-        /*! \brief Multiply two angles
-         *
-         * \param right The angle to multiply to this
-         *
-         * \return Return the product of this and right
-         *
-         */
-        template<typename U>        Angle<T>& operator*=(U right);
-
-        /*! \brief Multiply two angles
-         *
-         * \param right The angle to multiply to this
-         *
-         * \return Return the product of this and right
-         *
-         */
-        template<typename U>
-        Angle<T>& operator*=(const Angle<U>& right);
+        Angle<T>& operator*=(T right);
 
         /*! \brief Divide two angles
          *
@@ -239,8 +134,7 @@ namespace Bull
          * \return Return the quotient of this and right
          *
          */
-        template<typename U>
-        Angle<T> operator/(U right);
+        Angle<T> operator/(T right);
 
         /*! \brief Divide two angles
          *
@@ -249,36 +143,24 @@ namespace Bull
          * \return Return the quotient of this and right
          *
          */
-        template<typename U>
-        Angle<T> operator/(const Angle<U>& right);
-
-        /*! \brief Divide two angles
-         *
-         * \param right The angle to divide to this
-         *
-         * \return Return the quotient of this and right
-         *
-         */
-        template<typename U>        Angle<T>& operator/=(U right);
-
-        /*! \brief Divide two angles
-         *
-         * \param right The angle to divide to this
-         *
-         * \return Return the quotient of this and right
-         *
-         */
-        template<typename U>
-        Angle<T>& operator/=(const Angle<U>& right);
+        Angle<T>& operator/=(T right);
 
         /*! \brief Convert the angle to a numeric value
          *
          * \return Return the value of the angle
          *
          */
-        operator T() const;
+        explicit operator T() const;
 
     private:
+
+        /*! \brief Constructor
+         *
+         * \param angle    The value of the angle
+         * \param isRadian Whether the angle value is in radian
+         *
+         */
+        Angle(T value, bool isRadian = false);
 
         T    m_value;
         bool m_isRadian;
