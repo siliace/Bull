@@ -1,15 +1,9 @@
 #include <Bull/Core/FileSystem/Directory.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
+#include <Bull/Core/IO/StringStream.hpp>
 
 namespace Bull
 {
-    Path Path::None = Path();
-
-    bool Path::exists(const String& path)
-    {
-        return File::exists(path) || Directory::exists(path);
-    }
-
     Path::Path() :
         m_isFile(false),
         m_isDirectory(false)
@@ -17,38 +11,30 @@ namespace Bull
         /// Nothing
     }
 
-    Path::Path(const String& path)
+    Path::Path(const String& path) :
+        m_path(path)
     {
-        set(path);
-    }
+        m_isFile      = File::exists(m_path);
+        m_isDirectory = Directory::exists(m_path);
 
-    Path& Path::operator=(const String& path)
-    {
-        return set(path);
-    }
+        if(!m_isFile && !m_isDirectory)
+        {
+            StringStream ss;
 
-    Path& Path::set(const String& path)
-    {
-        m_path        = path;
-        m_isFile      = File::exists(path);
-        m_isDirectory = Directory::exists(path);
+            ss << "The path " << m_path << " does not exists";
 
-        return (*this);
+            throw std::invalid_argument(ss.toString());
+        }
     }
 
     bool Path::operator==(const Path& right) const
     {
-        return m_path == right.getPathName();
+        return m_path == right.toString();
     }
 
     bool Path::operator!=(const Path& right) const
     {
-        return !((*this) == right);
-    }
-
-    const String& Path::getPathName() const
-    {
-        return m_path;
+        return m_path != right.toString();
     }
 
     bool Path::isFile() const
@@ -61,23 +47,8 @@ namespace Bull
         return m_isDirectory;
     }
 
-    bool Path::isValid() const
-    {
-        return m_isFile || m_isDirectory;
-    }
-
-    Path::operator String() const
+    String Path::toString() const
     {
         return m_path;
-    }
-
-    Path::operator const char*() const
-    {
-        return static_cast<const char*>(m_path);
-    }
-
-    Path::operator bool() const
-    {
-        return isValid();
     }
 }

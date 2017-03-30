@@ -33,15 +33,15 @@ namespace Bull
 
         for(const Path& entity : target.getContent())
         {
-            if(entity.getPathName() != "." && entity.getPathName() != "..")
+            if(entity.toString() != "." && entity.toString() != "..")
             {
                 if(entity.isDirectory())
                 {
-                    success &= Directory::copy(path + "/" + entity.getPathName(), newPath + "/" + entity.getPathName());
+                    success &= Directory::copy(path + "/" + entity.toString(), newPath + "/" + entity.toString());
                 }
                 else
                 {
-                    success &= File::copy(path + "/" + entity.getPathName(), newPath + "/" + entity.getPathName());
+                    success &= File::copy(path + "/" + entity.toString(), newPath + "/" + entity.toString());
                 }
             }
         }
@@ -83,7 +83,7 @@ namespace Bull
     {
         m_path = path;
 
-        m_impl.reset(prv::DirectoryImpl::createInstance(path));
+        m_impl.reset(prv::DirectoryImpl::createInstance(path.toString()));
 
         return true;
     }
@@ -96,7 +96,7 @@ namespace Bull
     void Directory::close()
     {
         m_impl.reset();
-        m_path = Path::None;
+        m_path = Path();
     }
 
     std::vector<Path> Directory::getContent(Uint32 flags)

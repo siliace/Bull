@@ -12,7 +12,7 @@ namespace Bull
         bool ImageLoader::loadFromPath(const Path& path, std::vector<Uint8>& pixels, Vector2UI& size) const
         {
             int width, height, channels;
-            unsigned char* buffer = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+            unsigned char* buffer = stbi_load(path.toString(), &width, &height, &channels, STBI_rgb_alpha);
 
             pixels.clear();
 
@@ -35,13 +35,13 @@ namespace Bull
 
         bool ImageLoader::saveToPath(const Path& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const
         {
-            if(!path.isValid())
+            if(!path.isFile())
             {
                 switch(format)
                 {
-                    case Image::Bmp: return saveBmpToPath(path, pixels, size);
-                    case Image::Tga: return saveTgaToPath(path, pixels, size);
-                    case Image::Png: return savePngToPath(path, pixels, size);
+                    case Image::Bmp: return saveBmpToPath(path.toString(), pixels, size);
+                    case Image::Tga: return saveTgaToPath(path.toString(), pixels, size);
+                    case Image::Png: return savePngToPath(path.toString(), pixels, size);
                     case Image::Jpg:
                     case Image::Jpeg: return false;
                 }

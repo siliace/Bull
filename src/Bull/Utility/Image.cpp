@@ -112,7 +112,7 @@ namespace Bull
 
     bool Image::save(const Path& path, Format format)
     {
-        if(!File::exists(path) && m_pixels.size() > 0)
+        if(m_pixels.size() > 0)
         {
             return loader->saveToPath(path, format, m_pixels, m_size);
         }

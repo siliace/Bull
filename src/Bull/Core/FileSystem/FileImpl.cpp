@@ -1,6 +1,5 @@
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/FileSystem/FileImpl.hpp>
-#include <Bull/Core/System/Config.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Core/FileSystem/Win32/FileImplWin32.hpp>
@@ -22,7 +21,7 @@ namespace Bull
          * \return Return the instance of the FileImpl if the file exist, nullptr otherwise
          *
          */
-        FileImpl* FileImpl::createInstance(const String& name, Uint32 mode)
+        FileImpl* FileImpl::createInstance(const Path& name, Uint32 mode)
         {
             FileImplType* impl = new FileImplType();
 
@@ -67,7 +66,7 @@ namespace Bull
          * \return Return true if the copy was successfully, false otherwise
          *
          */
-        bool FileImpl::copy(const String& path, const String& newPath)
+        bool FileImpl::copy(const Path& path, const String& newPath)
         {
             return FileImplType::copy(path, newPath);
         }
@@ -79,7 +78,7 @@ namespace Bull
          * \return Return true if the file was deleted successfully, false otherwise
          *
          */
-        bool FileImpl::remove(const String& name)
+        bool FileImpl::remove(const Path& name)
         {
             return FileImplType::remove(name);
         }
