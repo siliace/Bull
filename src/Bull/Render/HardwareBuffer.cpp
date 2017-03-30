@@ -143,6 +143,11 @@ namespace Bull
         return m_type;
     }
 
+    unsigned int HardwareBuffer::getSystemHandler() const
+    {
+        return m_id;
+    }
+
     void HardwareBuffer::bind() const
     {
         if(m_id)
