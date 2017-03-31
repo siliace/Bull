@@ -40,41 +40,6 @@ namespace Bull
         return boolean ? String("true") : String("false");
     }
 
-    String String::number(int number)
-    {
-        String string;
-        unsigned int numberCount = 1;
-        int lastInsert = 0;
-
-        if(number < 0)
-        {
-            string += '-';
-            number = std::abs(number);
-        }
-
-        while(number / numberCount > 10)
-        {
-            numberCount *= 10;
-        }
-
-        do
-        {
-            if(number / numberCount < 10)
-            {
-                string += String::intToChar(number / numberCount);
-            }
-            else
-            {
-                string += String::intToChar(number / numberCount - lastInsert * 10);
-            }
-
-            lastInsert = static_cast<int>(number / numberCount);
-            numberCount /= 10;
-        }while(numberCount >= 1);
-
-        return string;
-    }
-
     const std::shared_ptr<String::SharedString>& String::getEmptyString()
     {
         static std::shared_ptr<String::SharedString> empty = std::make_shared<String::SharedString>();

@@ -68,7 +68,8 @@ namespace Bull
          * \return Return a String representing the number
          *
          */
-        static String number(int number);
+        template <typename T, typename = std::enable_if_t<std::is_arithmetic<T>::value>>
+        static String number(T number);
 
     private:
 
@@ -372,5 +373,7 @@ namespace Bull
         std::shared_ptr<SharedString> m_sharedString;
     };
 }
+
+#include <Bull/Core/Memory/S>
 
 #endif // Bull_String_hpp

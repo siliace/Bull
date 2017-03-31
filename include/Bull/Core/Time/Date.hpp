@@ -9,7 +9,7 @@ namespace Bull
 {
     struct Date
     {
-        enum Day
+        enum class Day
         {
             Sunday    = 0,
             Monday    = 1,
@@ -20,7 +20,7 @@ namespace Bull
             Saturday  = 6
         };
 
-        enum Month
+        enum class Month
         {
             January   = 1,
             Febuary   = 2,
