@@ -68,7 +68,7 @@ namespace Bull
 
         /*! \brief Normalize the angle
          *
-         * @return This
+         * \return This
          *
          */
         Angle<T>& normalize();

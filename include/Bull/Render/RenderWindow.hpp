@@ -65,7 +65,7 @@ namespace Bull
 
         /*! \brief Get the maximum framerate of the RenderWindow
          *
-         * \param limit The maximum
+         * \return limit The maximum
          *
          */
         unsigned int getFramerateLimit() const;

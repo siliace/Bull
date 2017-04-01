@@ -75,7 +75,7 @@ namespace Bull
 
         /*! \brief Bind the texture
          *
-         * @param sampler The sampler to use to bind the buffer
+         * \param sampler The sampler to use to bind the buffer
          *
          */
         void bind(Uint8 sampler = 0) const;

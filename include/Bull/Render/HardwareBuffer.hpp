@@ -77,14 +77,14 @@ namespace Bull
 
         /*! \brief Map data to a pointer
          *
-         * @return A pointer to data
+         * \return A pointer to data
          *
          */
         void* map();
 
         /*! \brief Map data to a pointer
          *
-         * @return A pointer to data
+         * \return A pointer to data
          *
          */
         const void* map() const;
@@ -106,7 +106,7 @@ namespace Bull
 
         /*! \brief Get the capacity of the HardwareBuffer
          *
-         * @return The capacity
+         * \return The capacity
          *
          */
         std::size_t getCapacity() const;

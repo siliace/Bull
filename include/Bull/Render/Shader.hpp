@@ -39,14 +39,14 @@ namespace Bull
 
         /*! \brief Attach a ShaderStage to this Shader
          *
-         * @param stage The stage to attach to this Shader
+         * \param stage The stage to attach to this Shader
          *
          */
         void attach(const ShaderStage& stage);
 
         /*! \brief
          *
-         * @return
+         * \return
          *
          */
         bool link();
@@ -97,21 +97,21 @@ namespace Bull
 
         /*! \brief Check if the program as an error
          *
-         * @return True if the program has an error
+         * \return True if the program has an error
          *
          */
         bool hasError() const;
 
         /*! \brief Get the current error code of the program
          *
-         * @return The error code
+         * \return The error code
          *
          */
         unsigned int getErrorCode() const;
 
         /*! \brief Get the current error message of the program
          *
-         * @return The error message
+         * \return The error message
          *
          */
         String getErrorMessage() const;

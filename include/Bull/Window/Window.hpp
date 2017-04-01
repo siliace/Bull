@@ -402,7 +402,7 @@ namespace Bull
 
         /*! \brief Filter events to start callbacks
          *
-         * @param e The event to filter
+         * \param e The event to filter
          *
          */
         void filterEvent(const Event& e);
