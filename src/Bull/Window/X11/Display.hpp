@@ -25,98 +25,98 @@ namespace Bull
 
         public:
 
-            /*! \brief Default constructor
+            /*! @brief Default constructor
              *
              */
             Display();
 
-            /*! \brief Copy constructor
+            /*! @brief Copy constructor
              *
-             * \param copy The Display to copy
+             * @param copy The Display to copy
              *
              */
             Display(const Display& copy);
 
-            /*! \brief Destructor
+            /*! @brief Destructor
              *
              */
             ~Display();
 
-            /*! \brief Basic assignment operator
+            /*! @brief Basic assignment operator
              *
-             * \param copy The Display to copy
+             * @param copy The Display to copy
              *
-             * \return This
+             * @return This
              *
              */
             Display& operator=(const Display& copy);
 
-            /*! \brief Flush the display
+            /*! @brief Flush the display
              *
              */
             void flush();
 
-            /*! \brief Get the default screen
+            /*! @brief Get the default screen
              *
-             * \return Return the ID of the default render screen
+             * @return Return the ID of the default render screen
              *
              */
             int getDefaultScreen() const;
 
-            /*! \brief Get the root window the a screen
+            /*! @brief Get the root window the a screen
              *
-             * \return Return the root window of the default screen
+             * @return Return the root window of the default screen
              *
              */
             ::Window getRootWindow() const;
 
-            /*! \brief Get the root window the a screen
+            /*! @brief Get the root window the a screen
              *
-             * \param screen The screen
+             * @param screen The screen
              *
-             * \return Return the root window of the specified screen
+             * @return Return the root window of the specified screen
              *
              */
             ::Window getRootWindow(int screen) const;
 
-            /*! \brief Get the default color depth of the default screen
+            /*! @brief Get the default color depth of the default screen
              *
-             * \return Return the depth
+             * @return Return the depth
              *
              */
             int getDefaultDepth() const;
 
-            /*! \brief Get the default color depth of the specified screen
+            /*! @brief Get the default color depth of the specified screen
              *
-             * \param screen The screen
+             * @param screen The screen
              *
-             * \return Return the depth
+             * @return Return the depth
              *
              */
             int getDefaultDepth(int screen);
 
-            /*! \brief Check whether an extension is supported
+            /*! @brief Check whether an extension is supported
              *
-             * \param name The name of the extension
+             * @param name The name of the extension
              *
-             * \return Return true if the extension is supported, false otherwise
+             * @return Return true if the extension is supported, false otherwise
              *
              */
             bool isSupportedExtension(const String& name) const;
 
-            /*! \brief Get an atom
+            /*! @brief Get an atom
              *
-             * \param name The name of the atom
-             * \param mustExists If false and the atom does not exists, the atom is created
+             * @param name The name of the atom
+             * @param mustExists If false and the atom does not exists, the atom is created
              *
-             * \return Return the atom
+             * @return Return the atom
              *
              */
             Atom getAtom(const String& name, bool mustExists = false);
 
-            /*! \brief Convert the display to a Xlib display
+            /*! @brief Convert the display to a Xlib display
              *
-             * \return
+             * @return
              *
              */
             operator XDisplay() const;

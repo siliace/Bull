@@ -10,12 +10,12 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         TextureStateSaver();
 
-        /*! \brief Destructor
+        /*! @brief Destructor
          *
          */
         ~TextureStateSaver();

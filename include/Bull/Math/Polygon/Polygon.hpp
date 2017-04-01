@@ -11,24 +11,24 @@ namespace Bull
     template<typename T>
     struct Polygon
     {
-        /*! \brief Get a vertex form the polygon
+        /*! @brief Get a vertex form the polygon
          *
-         * \param index The index of the vertex to get
+         * @param index The index of the vertex to get
          *
-         * \return The vertex
+         * @return The vertex
          */
         virtual Vector2<T> getVertex(std::size_t index) const = 0;
 
-        /*! \brief Get the number of vertex in the polygon
+        /*! @brief Get the number of vertex in the polygon
          *
-         * \return The number of vertex
+         * @return The number of vertex
          *
          */
         virtual std::size_t getVertexCount() const = 0;
 
-        /*! \brief Get a rectangle representing bounds of the polygon
+        /*! @brief Get a rectangle representing bounds of the polygon
          *
-         * \return Bounds of the polygon
+         * @return Bounds of the polygon
          *
          */
         Rectangle<T> getBounds() const;

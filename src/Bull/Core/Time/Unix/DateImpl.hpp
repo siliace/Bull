@@ -9,9 +9,9 @@ namespace Bull
     {
         struct DateImpl
         {
-            /*! \brief Get the current date
+            /*! @brief Get the current date
              *
-             * \return Return the current date
+             * @return Return the current date
              *
              */
             static Date now();

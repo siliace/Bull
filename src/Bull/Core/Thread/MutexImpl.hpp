@@ -11,40 +11,40 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a OS specific instance of MutexImpl
+            /*! @brief Create a OS specific instance of MutexImpl
              *
-             * \return Return the created instance
+             * @return Return the created instance
              *
              */
             static MutexImpl* createInstance();
 
         public:
 
-            /*! \brief Destructor
+            /*! @brief Destructor
              *
              */
             virtual ~MutexImpl();
 
-            /*! \brief Try to lock the mutex
+            /*! @brief Try to lock the mutex
              *
-             * \return Return true if the mutex was locked successfully, false otherwise
+             * @return Return true if the mutex was locked successfully, false otherwise
              *
              */
             virtual bool tryLock() = 0;
 
-            /*! \brief Lock the mutex
+            /*! @brief Lock the mutex
              *
              */
             virtual void lock() = 0;
 
-            /*! \brief Unlock the mutex
+            /*! @brief Unlock the mutex
              *
              */
             virtual void unlock() = 0;
 
         protected:
 
-            /*! \brief Default constructor
+            /*! @brief Default constructor
              *
              */
             MutexImpl() = default;

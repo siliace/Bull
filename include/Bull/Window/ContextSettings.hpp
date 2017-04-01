@@ -20,36 +20,36 @@ namespace Bull
         static ContextSettings Worst;
         static ContextSettings Empty;
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         ContextSettings();
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param depths
-         * \param stencil
-         * \param antialiasing
-         * \param major
-         * \param minor
+         * @param depths
+         * @param stencil
+         * @param antialiasing
+         * @param major
+         * @param minor
          *
          */
         ContextSettings(Uint8 depths, Uint8 stencil, Uint8 antialiasing, Uint8 major, Uint8 minor);
 
-        /*! \brief Compare two ContextSettings
+        /*! @brief Compare two ContextSettings
          *
-         * \param right The ContextSettings to compare to this one
+         * @param right The ContextSettings to compare to this one
          *
-         * \return Return true if right and this are the same, false otherwise
+         * @return Return true if right and this are the same, false otherwise
          *
          */
         bool operator==(const ContextSettings& right) const;
 
-        /*! \brief Compare two ContextSettings
+        /*! @brief Compare two ContextSettings
          *
-         * \param right The ContextSettings to compare to this one
+         * @param right The ContextSettings to compare to this one
          *
-         * \return Return true if right and this are not the same, false otherwise
+         * @return Return true if right and this are not the same, false otherwise
          *
          */
         bool operator!=(const ContextSettings& right) const;

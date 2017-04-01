@@ -28,115 +28,115 @@ namespace Bull
             Inherit     = 7  /*!< Use the same priority as the creating thread */
         };
 
-        /*! \brief Asleep the current thread
+        /*! @brief Asleep the current thread
          *
-         * \param time The time to sleep (in microseconds)
+         * @param time The time to sleep (in microseconds)
          *
          */
         static void sleep(const Time& time);
 
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         Thread();
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param function The function to store
+         * @param function The function to store
          *
          */
         template<typename Function>
         Thread(Function function);
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param function The function to store
-         * \param args     Arguments of the function
+         * @param function The function to store
+         * @param args     Arguments of the function
          *
          */
         template<typename Function, typename... Args>
         Thread(Function function, Args... args);
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param instance The instance to store
-         * \param function The method of the instance to store
+         * @param instance The instance to store
+         * @param function The method of the instance to store
          *
          */
         template<typename Instance, typename Class>
         Thread(Instance& instance, void(Class::*member)());
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param instance The instance to store
-         * \param function The method of the instance to store
+         * @param instance The instance to store
+         * @param function The method of the instance to store
          *
          */
         template<typename Instance, typename Class>
         Thread(const Instance& instance, void(Class::*member)() const);
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param instance The instance to store
-         * \param function The method of the instance to store
-         * \param args     Arguments of the function
+         * @param instance The instance to store
+         * @param function The method of the instance to store
+         * @param args     Arguments of the function
          *
          */
         template<typename Instance, typename Class, typename... Args>
         Thread(Instance& instance, void(Class::*member)(Args...), Args... args);
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param instance The instance to store
-         * \param function The method of the instance to store
-         * \param args     Arguments of the function
+         * @param instance The instance to store
+         * @param function The method of the instance to store
+         * @param args     Arguments of the function
          *
          */
         template<typename Instance, typename Class, typename... Args>
         Thread(const Instance& instance, void(Class::*member)(Args...) const, Args... args);
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param function The function to run
-         * \param priority The priority of the thread (by default inherit form the parent thread)
+         * @param function The function to run
+         * @param priority The priority of the thread (by default inherit form the parent thread)
          *
          */
         Thread(const Functor<void>& function, Priority priority = Priority::Inherit);
 
-        /*! \brief Destructor
+        /*! @brief Destructor
          *
          */
         ~Thread();
 
-        /*! \brief Start the thread
+        /*! @brief Start the thread
          *
-         * \return Return true if the thread is started successfully, else return false
+         * @return Return true if the thread is started successfully, else return false
          *
          */
         bool start();
 
-        /*! \brief Check if a thread is running
+        /*! @brief Check if a thread is running
          *
-         * \return Return true if the thread is running, else return false
+         * @return Return true if the thread is running, else return false
          *
          */
         bool isRunning() const;
 
-        /*! \brief Wait the end of a thread
+        /*! @brief Wait the end of a thread
          *
          */
         void wait();
 
-        /*! \brief Stop the thread
+        /*! @brief Stop the thread
          *
          */
         void stop();
 
-        /*! \brief Get the priority of the thread
+        /*! @brief Get the priority of the thread
          *
-         * \return The thread priority
+         * @return The thread priority
          *
          */
         Thread::Priority getPriority() const;

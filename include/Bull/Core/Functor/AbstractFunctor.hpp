@@ -14,24 +14,24 @@ namespace Bull
         {
         public:
 
-            /*! \brief Call a function using a std::tuple as parameters
+            /*! @brief Call a function using a std::tuple as parameters
              *
-             * \param function The function to call
-             * \param params   Parameters of the function
+             * @param function The function to call
+             * @param params   Parameters of the function
              *
-             * \return Return what had been returned by the called function
+             * @return Return what had been returned by the called function
              *
              */
             template<typename Function, typename Tuple>
             static Return apply(Function&& function, Tuple&& params);
 
-            /*! \brief Call a method using a std::tuple as parameters
+            /*! @brief Call a method using a std::tuple as parameters
              *
-             * \param instance The instance to use to call the method
-             * \param method   The method to call
-             * \param params   Parameters of the method
+             * @param instance The instance to use to call the method
+             * @param method   The method to call
+             * @param params   Parameters of the method
              *
-             * \return Return what had been return by the called function
+             * @return Return what had been return by the called function
              *
              */
             template<typename Instance, typename Method, typename Tuple>
@@ -39,13 +39,13 @@ namespace Bull
 
         private:
 
-            /*! \brief Call a function
+            /*! @brief Call a function
              *
              */
             template<typename Function, typename Tuple, std::size_t... Size>
             static Return applyImplFunction(Function&& function, Tuple&& params, std::index_sequence<Size...>);
 
-            /*! \brief Call a method
+            /*! @brief Call a method
               *
               */
             template<typename Instance, typename Method, typename Tuple, std::size_t... Size>
@@ -53,14 +53,14 @@ namespace Bull
 
         public:
 
-            /*! \brief Destructor
+            /*! @brief Destructor
              *
              */
             virtual ~AbstractFunctor();
 
-            /*! \brief Call the function/method with its parameters
+            /*! @brief Call the function/method with its parameters
              *
-             * \return Return what had been returned by the called function
+             * @return Return what had been returned by the called function
              *
              */
             virtual Return run() = 0;

@@ -9,9 +9,9 @@ namespace Bull
     {
         struct Wsa
         {
-            /*! \brief Get the last WSA error
+            /*! @brief Get the last WSA error
              *
-             * \return Return the error
+             * @return Return the error
              *
              */
             static int getLastError();

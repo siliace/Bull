@@ -9,16 +9,16 @@ namespace Bull
     template<typename T>
     struct Triangle : public RegularPolygon<T, 3>
     {
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         Triangle() = default;
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param center   The center of the polygon
-         * \param radius   The radius of the polygon
-         * \param rotation The rotation of the polygon
+         * @param center   The center of the polygon
+         * @param radius   The radius of the polygon
+         * @param rotation The rotation of the polygon
          *
          */
         Triangle(const Vector2<T>& center, T radius = 0, const Angle<T>& rotation = Angle<T>::Zero);

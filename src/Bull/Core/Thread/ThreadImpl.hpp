@@ -14,43 +14,43 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a OS specific instance of ThreadImpl
+            /*! @brief Create a OS specific instance of ThreadImpl
              *
-             * \param function The function to run in the thread
-             * \param priority The priority of the thread
+             * @param function The function to run in the thread
+             * @param priority The priority of the thread
              *
-             * \return Return the created instance
+             * @return Return the created instance
              *
              */
             static ThreadImpl* createInstance(Functor<void>& function, Thread::Priority priority);
 
-            /*! \brief Asleep the current thread
+            /*! @brief Asleep the current thread
              *
-             * \param time The time to sleep
+             * @param time The time to sleep
              *
              */
             static void sleep(const Time& time);
 
         public:
 
-            /*! \brief Destructor
+            /*! @brief Destructor
              *
              */
             virtual ~ThreadImpl();
 
-            /*! \brief Wait the end of a thread
+            /*! @brief Wait the end of a thread
              *
              */
             virtual void wait() = 0;
 
-            /*! \brief Stop the thread
+            /*! @brief Stop the thread
              *
              */
             virtual void stop() = 0;
 
         protected:
 
-            /*! \brief Default constructor
+            /*! @brief Default constructor
              *
              */
             ThreadImpl() = default;

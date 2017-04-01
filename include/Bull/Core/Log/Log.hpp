@@ -31,20 +31,20 @@ namespace Bull
 
     public:
 
-        /*! \brief Create a logger
+        /*! @brief Create a logger
          *
-         * \param args Arguments to use to create the logger
+         * @param args Arguments to use to create the logger
          *
-         * \return Return a pointer to the created logger
+         * @return Return a pointer to the created logger
          *
          */
         template<typename T, typename... Args>
         AbstractLoggerHandler createLogger(Args... args);
 
-        /*! \brief Add an entry in every listener
+        /*! @brief Add an entry in every listener
          *
-         * \param message The message to log
-         * \param level   The message error level
+         * @param message The message to log
+         * @param level   The message error level
          *
          */
         virtual void write(const String& message, Level level);

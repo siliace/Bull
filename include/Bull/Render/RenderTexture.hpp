@@ -22,56 +22,56 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         RenderTexture() = default;
 
-        /*! \brief Destructor
+        /*! @brief Destructor
          *
          */
         virtual ~RenderTexture();
 
-        /*! \brief Create the RenderTexture
+        /*! @brief Create the RenderTexture
          *
-         * \param size  The size of the RenderTexture
-         * \param color The color to fill the RenderTexture
-         * \param settings Settings to use to create the RenderTexture
+         * @param size  The size of the RenderTexture
+         * @param color The color to fill the RenderTexture
+         * @param settings Settings to use to create the RenderTexture
          *
-         * \return Return true if the RenderTexture was created successfully, false otherwise
+         * @return Return true if the RenderTexture was created successfully, false otherwise
          *
          */
         bool create(const Vector2UI& size, Color color = Color::Black, const ContextSettings& settings = ContextSettings::Worst);
 
-        /*! \brief Get the default viewport of the RenderTarget
+        /*! @brief Get the default viewport of the RenderTarget
          *
-         * \return Return the viewport
+         * @return Return the viewport
          *
          */
         Viewport getDefaultViewport() const override;
 
-        /*! \brief Display what has been rendered so far into the target texture
+        /*! @brief Display what has been rendered so far into the target texture
          *
          */
         void display() override;
 
-        /*! \brief Get the size of the RenderTexture
+        /*! @brief Get the size of the RenderTexture
          *
-         * \return Return the size
+         * @return Return the size
          *
          */
         const Vector2UI& getSize() const;
 
-        /*! \brief Get the target texture
+        /*! @brief Get the target texture
          *
-         * \return Return the texture
+         * @return Return the texture
          *
          */
         const Texture& getTexture() const;
 
-        /*! \brief Convert the RenderTexture to a texture
+        /*! @brief Convert the RenderTexture to a texture
          *
-         * \return Return the texture
+         * @return Return the texture
          *
          */
         operator const Texture&() const;

@@ -12,22 +12,22 @@ namespace Bull
         {
         public:
 
-            /*! \brief Default constructor
+            /*! @brief Default constructor
              *
              */
             FunctorMethodConstWithoutArgs() = delete;
 
-            /*! \brief Constructor
+            /*! @brief Constructor
              *
-             * \param instance The instance to use to call the method
-             * \param method   The method to call
+             * @param instance The instance to use to call the method
+             * @param method   The method to call
              *
              */
             FunctorMethodConstWithoutArgs(const Instance& instance, Return(Class::*method)() const);
 
-            /*! \brief Call the stored function
+            /*! @brief Call the stored function
              *
-             * \return Return what the called function returned
+             * @return Return what the called function returned
              *
              */
             Return run();

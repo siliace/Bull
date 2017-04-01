@@ -11,50 +11,50 @@ namespace Bull
 
     struct BULL_API Mouse
     {
-        /*! \brief Set the position of the cursor on the screen
+        /*! @brief Set the position of the cursor on the screen
          *
-         * \param position The new position of the cursor on the screen
+         * @param position The new position of the cursor on the screen
          *
          */
         static void setPosition(const Vector2I& position);
 
-        /*! \brief Set the position of the cursor relatively to a window
+        /*! @brief Set the position of the cursor relatively to a window
          *
-         * \param position The new position of the cursor relatively to a window
-         * \param relativeTo The window
+         * @param position The new position of the cursor relatively to a window
+         * @param relativeTo The window
          *
          */
         static void setPosition(const Vector2I& position, const Window& relativeTo);
 
-        /*! \brief Set the position of the cursor on the screen
+        /*! @brief Set the position of the cursor on the screen
          *
-         * \param x The new x position of the cursor on the screen
-         * \param y The new y position of the cursor on the screen
+         * @param x The new x position of the cursor on the screen
+         * @param y The new y position of the cursor on the screen
          *
          */
         static void setPosition(int x, int y);
 
-        /*! \brief Set the position of the cursor relatively to a window
+        /*! @brief Set the position of the cursor relatively to a window
          *
-         * \param x The new x position of the cursor relatively to a window
-         * \param y The new t position of the cursor relatively to a window
-         * \param relativeTo The window
+         * @param x The new x position of the cursor relatively to a window
+         * @param y The new t position of the cursor relatively to a window
+         * @param relativeTo The window
          *
          */
         static void setPosition(int x, int y, const Window& relativeTo);
 
-        /*! \brief Get the cursor position on the screen
+        /*! @brief Get the cursor position on the screen
          *
-         * \return Return the cursor position of the screen
+         * @return Return the cursor position of the screen
          *
          */
         static Vector2I getPosition();
 
-        /*! \brief Get the cursor position relatively to a window
+        /*! @brief Get the cursor position relatively to a window
          *
-         * \param relativeTo The window
+         * @param relativeTo The window
          *
-         * \return Return the cursor position relatively to a window
+         * @return Return the cursor position relatively to a window
          *
          */
         static Vector2I getPosition(const Window& relativeTo);

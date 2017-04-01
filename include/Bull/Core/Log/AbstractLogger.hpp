@@ -13,9 +13,9 @@ namespace Bull
 
     protected:
 
-        /*! \brief Add a new entry in the log
+        /*! @brief Add a new entry in the log
          *
-         * \param message The entry to add in the log
+         * @param message The entry to add in the log
          *
          */
         virtual void write(const String& entry) = 0;

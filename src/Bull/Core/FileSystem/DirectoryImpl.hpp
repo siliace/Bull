@@ -14,70 +14,70 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a OS specific DirectoryImpl
+            /*! @brief Create a OS specific DirectoryImpl
              *
-             * \param path The path of the directory to open
+             * @param path The path of the directory to open
              *
-             * \return Return the instance of the DirectoryImpl if the file exist, nullptr otherwise
+             * @return Return the instance of the DirectoryImpl if the file exist, nullptr otherwise
              *
              */
             static DirectoryImpl* createInstance(const Path& path);
 
-            /*! \brief Create a directory
+            /*! @brief Create a directory
              *
-             * \param path The path of the directory to create
+             * @param path The path of the directory to create
              *
-             * \return Return true if the file was created successfully, else otherwise
+             * @return Return true if the file was created successfully, else otherwise
              *
              */
             static bool create(const String& path);
 
-            /*! \brief Check if a directory exists
+            /*! @brief Check if a directory exists
              *
-             * \param path The path of the directory to check
+             * @param path The path of the directory to check
              *
-             * \return Return true if the directory exists, false otherwise
+             * @return Return true if the directory exists, false otherwise
              *
              */
             static bool exists(const String& path);
 
-            /*! \brief Delete a directory
+            /*! @brief Delete a directory
              *
-             * \param path The path of the directory to delete
+             * @param path The path of the directory to delete
              *
-             * \return Return true if the directory was deleted successfully, false otherwise
+             * @return Return true if the directory was deleted successfully, false otherwise
              *
              */
             static bool remove(const Path& path);
 
         public:
 
-            /*! \brief Destructor
+            /*! @brief Destructor
              *
              */
             virtual ~DirectoryImpl();
 
-            /*! \brief Open a directory
+            /*! @brief Open a directory
              *
-             * \param path The path of the directory
+             * @param path The path of the directory
              *
-             * \return Return true is the directory was opened successfully, false otherwise
+             * @return Return true is the directory was opened successfully, false otherwise
              *
              */
             virtual bool open(const Path& path) = 0;
 
-            /*! \brief Get the content of this Directory
+            /*! @brief Get the content of this Directory
              *
-             * \param flags What we have to look for
+             * @param flags What we have to look for
              *
-             * \return Return the list of content entity
+             * @return Return the list of content entity
              *
              */
             virtual std::vector<Path> getContent(Uint32 flags) = 0;
 
         protected:
 
-            /*! \brief Default constructor
+            /*! @brief Default constructor
              *
              */
             DirectoryImpl() = default;

@@ -9,16 +9,16 @@ namespace Bull
     {
         struct MouseImpl
         {
-            /*! \brief Set the position of the cursor on the screen
+            /*! @brief Set the position of the cursor on the screen
              *
-             * \param position The new position of the cursor on the screen
+             * @param position The new position of the cursor on the screen
              *
              */
             static void setPosition(const Vector2I& position);
 
-            /*! \brief Get the cursor position
+            /*! @brief Get the cursor position
              *
-             * \return Return the cursor position
+             * @return Return the cursor position
              *
              */
             static Vector2I getPosition();

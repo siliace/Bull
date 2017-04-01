@@ -36,104 +36,104 @@ namespace Bull
             December  = 12
         };
 
-        /*! \brief Get the current date
+        /*! @brief Get the current date
          *
-         * \return Return the current date
+         * @return Return the current date
          *
          */
         static Date now();
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         Date();
 
-        /*! \brief Compare two dates
+        /*! @brief Compare two dates
          *
-         * \param left The Date to compare with this
+         * @param left The Date to compare with this
          *
-         * \return Return true if this and left are equal, false otherwise
+         * @return Return true if this and left are equal, false otherwise
          *
          */
         bool operator==(const Date& left) const;
 
-        /*! \brief Compare two dates
+        /*! @brief Compare two dates
          *
-         * \param left The Date to compare with this
+         * @param left The Date to compare with this
          *
-         * \return Return true if this and left are not equal, false otherwise
+         * @return Return true if this and left are not equal, false otherwise
          *
          */
         bool operator!=(const Date& left) const;
 
-        /*! \brief Compare two dates
+        /*! @brief Compare two dates
          *
-         * \param left The date to compare with this
+         * @param left The date to compare with this
          *
-         * \return Return true if this is superior or equal to left, false otherwise
+         * @return Return true if this is superior or equal to left, false otherwise
          *
          */
         bool operator>=(const Date& left) const;
 
-        /*! \brief Compare two dates
+        /*! @brief Compare two dates
          *
-         * \param left The date to compare with this
+         * @param left The date to compare with this
          *
-         * \return Return true if this is superior to left, false otherwise
+         * @return Return true if this is superior to left, false otherwise
          *
          */
         bool operator>(const Date& left) const;
 
-        /*! \brief Compare two dates
+        /*! @brief Compare two dates
          *
-         * \param left The date to compare with this
+         * @param left The date to compare with this
          *
-         * \return Return true if this is inferior or equal to left, false otherwise
+         * @return Return true if this is inferior or equal to left, false otherwise
          *
          */
         bool operator<=(const Date& left) const;
 
-        /*! \brief Compare two dates
+        /*! @brief Compare two dates
          *
-         * \param left The date to compare with this
+         * @param left The date to compare with this
          *
-         * \return Return true if this is inferior to left, false otherwise
+         * @return Return true if this is inferior to left, false otherwise
          *
          */
         bool operator<(const Date& left) const;
 
-        /*! \brief Add a date to this
+        /*! @brief Add a date to this
          *
-         * \param left The date to add to this
+         * @param left The date to add to this
          *
-         * \return Return this after the addition
+         * @return Return this after the addition
          *
          */
         Date& operator+=(const Date& left);
 
-        /*! \brief Addition of two dates
+        /*! @brief Addition of two dates
          *
-         * \param left The date to add to this
+         * @param left The date to add to this
          *
-         * \return Return the sum of this and left
+         * @return Return the sum of this and left
          *
          */
         Date operator+(const Date& left) const;
 
-        /*! \brief Subtract a date to this
+        /*! @brief Subtract a date to this
          *
-         * \param left The date to subtract to this
+         * @param left The date to subtract to this
          *
-         * \return Return this after the subtraction
+         * @return Return this after the subtraction
          *
          */
         Date& operator-=(const Date& left);
 
-        /*! \brief Subtraction  of two dates
+        /*! @brief Subtraction  of two dates
          *
-         * \param left The date to add to this
+         * @param left The date to add to this
          *
-         * \return Return the difference of this and left
+         * @return Return the difference of this and left
          *
          */
         Date operator-(const Date& left) const;

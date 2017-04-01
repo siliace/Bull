@@ -11,16 +11,16 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
          * Lock the mutex
          *
-         * \param mutex The mutex to lock
+         * @param mutex The mutex to lock
          *
          */
         Lock(Mutex& mutex);
 
-        /*! \brief Destructor
+        /*! @brief Destructor
          *
          * Unlock the mutex
          *

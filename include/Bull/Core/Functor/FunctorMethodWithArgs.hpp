@@ -14,23 +14,23 @@ namespace Bull
         {
         public:
 
-            /*! \brief Default constructor
+            /*! @brief Default constructor
              *
              */
             FunctorMethodWithArgs() = delete;
 
-            /*! \brief Constructor
+            /*! @brief Constructor
              *
-             * \param instance The instance to use to call the method
-             * \param method   The method to call
-             * \param args     Arguments of the method
+             * @param instance The instance to use to call the method
+             * @param method   The method to call
+             * @param args     Arguments of the method
              *
              */
             FunctorMethodWithArgs(Instance& instance, Return(Class::*method)(Args...), Args... args);
 
-            /*! \brief Call the stored function
+            /*! @brief Call the stored function
              *
-             * \return Return what the called function returned
+             * @return Return what the called function returned
              *
              */
             Return run();

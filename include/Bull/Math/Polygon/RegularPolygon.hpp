@@ -13,85 +13,85 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         RegularPolygon();
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param center   The center of the polygon
-         * \param radius   The radius of the polygon
-         * \param rotation The rotation of the polygon
+         * @param center   The center of the polygon
+         * @param radius   The radius of the polygon
+         * @param rotation The rotation of the polygon
          *
          */
         RegularPolygon(const Vector2<T>& center, T radius = 0.0, const Angle<T>& rotation = Angle<T>::Zero);
 
-        /*! \brief Get a vertex form the polygon
+        /*! @brief Get a vertex form the polygon
          *
-         * \param index The index of the vertex to get
+         * @param index The index of the vertex to get
          *
-         * \return The vertex
+         * @return The vertex
          */
         Vector2<T> getVertex(std::size_t index) const override;
 
-        /*! \brief Get the number of vertex in the polygon
+        /*! @brief Get the number of vertex in the polygon
          *
-         * \return The number of vertex
+         * @return The number of vertex
          *
          */
         std::size_t getVertexCount() const override;
 
-        /*! \brief Set the center of the polygon
+        /*! @brief Set the center of the polygon
          *
-         * \param center The new center
+         * @param center The new center
          *
-         * \return This
+         * @return This
          *
          */
         RegularPolygon<T, S>& setCenter(const Vector2<T>& center);
 
-        /*! \brief Get the center of the polygon
+        /*! @brief Get the center of the polygon
          *
-         * \return The center
+         * @return The center
          *
          */
         Vector2<T> getCenter() const;
 
-        /*! \brief Set the rotation of the polygon
+        /*! @brief Set the rotation of the polygon
          * 
-         * \param rotation The new rotation
+         * @param rotation The new rotation
          * 
-         * \return This
+         * @return This
          */
         RegularPolygon<T, S>& setRotation(const Angle<T>& rotation);
         
-        /*! \brief Get the rotation of the polygon
+        /*! @brief Get the rotation of the polygon
          * 
-         * \return The rotation
+         * @return The rotation
          * 
          */
         const Angle<T>& getRotation() const;
 
-        /*! \brief Set the radius of the polygon
+        /*! @brief Set the radius of the polygon
          *
-         * \param radius The new radius
+         * @param radius The new radius
          *
-         * \return This
+         * @return This
          *
          */
         RegularPolygon<T, S>& setRadius(T radius);
 
-        /*! \brief Get the radius of the polygon
+        /*! @brief Get the radius of the polygon
          *
-         * \return The radius
+         * @return The radius
          *
          */
         T getRadius() const;
 
     protected:
 
-        /*! \brief Update vertices
+        /*! @brief Update vertices
          *
          */
         void update();

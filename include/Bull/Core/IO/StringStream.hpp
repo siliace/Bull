@@ -13,78 +13,78 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         StringStream();
 
-        /*! \brief Empty the stream content
+        /*! @brief Empty the stream content
          *
          */
         void clear();
 
-        /*! \brief Get the size of the content of the stream
+        /*! @brief Get the size of the content of the stream
          *
-         * \return Return the size of the content of the stream
+         * @return Return the size of the content of the stream
          *
          */
         std::size_t getSize() const;
 
-        /*! \brief Get the content of the stream
+        /*! @brief Get the content of the stream
          *
-         * \return Return the content of the stream
+         * @return Return the content of the stream
          *
          */
         String toString() const;
 
-        /*! \brief Adds the representation of an integer
+        /*! @brief Adds the representation of an integer
          *
-         * \param right The integer to add
+         * @param right The integer to add
          *
-         * \return Return a reference to this
+         * @return Return a reference to this
          *
          */
         StringStream& operator<<(int right);
 
-        /*! \brief Adds the representation of a boolean
+        /*! @brief Adds the representation of a boolean
          *
-         * \param right The boolean to add
+         * @param right The boolean to add
          *
-         * \return Return a reference to this
+         * @return Return a reference to this
          *
          */
         StringStream& operator<<(bool right);
 
-        /*! \brief Adds the representation of an char
+        /*! @brief Adds the representation of an char
          *
-         * \param right The char to add
+         * @param right The char to add
          *
-         * \return Return a reference to this
+         * @return Return a reference to this
          *
          */
         StringStream& operator<<(char right);
 
-        /*! \brief Adds the representation of an char array
+        /*! @brief Adds the representation of an char array
          *
-         * \param right The char array to add
+         * @param right The char array to add
          *
-         * \return Return a reference to this
+         * @return Return a reference to this
          *
          */
         StringStream& operator<<(const char* right);
 
-        /*! \brief Adds the representation of a String
+        /*! @brief Adds the representation of a String
          *
-         * \param right The String to add
+         * @param right The String to add
          *
-         * \return Return a reference to this
+         * @return Return a reference to this
          *
          */
         StringStream& operator<<(const String& right);
 
-        /*! \brief Convert the StringStream to a String
+        /*! @brief Convert the StringStream to a String
          *
-         * \return Return the representation of this as a String
+         * @return Return the representation of this as a String
          *
          */
         operator String() const;

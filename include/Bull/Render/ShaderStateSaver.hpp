@@ -10,12 +10,12 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         ShaderStateSaver();
 
-        /*! \brief Destructor
+        /*! @brief Destructor
          *
          */
         ~ShaderStateSaver();

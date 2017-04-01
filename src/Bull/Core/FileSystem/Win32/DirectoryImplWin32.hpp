@@ -13,63 +13,63 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a directory
+            /*! @brief Create a directory
              *
-             * \param name The name of the directory to create
+             * @param name The name of the directory to create
              *
-             * \return Return true if the file was created successfully, else otherwise
+             * @return Return true if the file was created successfully, else otherwise
              *
              */
             static bool create(const String& name);
 
-            /*! \brief Check if a directory exists
+            /*! @brief Check if a directory exists
              *
-             * \param name The name of the directory to check
+             * @param name The name of the directory to check
              *
-             * \return Return true if the directory exists, false otherwise
+             * @return Return true if the directory exists, false otherwise
              *
              */
             static bool exists(const String& name);
 
-            /*! \brief Delete a directory
+            /*! @brief Delete a directory
              *
-             * \param name The name of the directory to delete
+             * @param name The name of the directory to delete
              *
-             * \return Return true if the directory was deleted successfully, false otherwise
+             * @return Return true if the directory was deleted successfully, false otherwise
              *
              */
             static bool remove(const String& name);
 
         private:
 
-            /*! \brief Convert a SYSTEMTIME to a Bull::Date
+            /*! @brief Convert a SYSTEMTIME to a Bull::Date
              *
-             * \param sysTime The SYSTEMTIME to convert
+             * @param sysTime The SYSTEMTIME to convert
              *
-             * \return Return the equivalent Bull::Date
+             * @return Return the equivalent Bull::Date
              *
              */
             static Date systemTimeToDate(SYSTEMTIME sysTime);
 
         public:
 
-            /*! \brief Destructor
+            /*! @brief Destructor
              *
              */
             ~DirectoryImplWin32();
 
-            /*! \brief Constructor
+            /*! @brief Constructor
              *
-             * \param name The name of the directory to open
+             * @param name The name of the directory to open
              *
              */
             bool open(const String& name) override;
 
-            /*! \brief Get the content of this Directory
+            /*! @brief Get the content of this Directory
              *
-             * \param flags What we have to look for
+             * @param flags What we have to look for
              *
-             * \return Return the list of content entity
+             * @return Return the list of content entity
              *
              */
             std::vector<Path> getContent(Uint32 flags) override;

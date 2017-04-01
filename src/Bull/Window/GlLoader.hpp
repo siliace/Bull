@@ -7,7 +7,7 @@ namespace Bull
     {
         struct GlLoader
         {
-            /*! \brief Load OpenGL functions
+            /*! @brief Load OpenGL functions
              *
              */
             static void load();

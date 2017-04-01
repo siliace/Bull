@@ -11,28 +11,28 @@ namespace Bull
 {
     struct BULL_API Vertex
     {
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param position
-         * \param color
-         * \param texCoord
+         * @param position
+         * @param color
+         * @param texCoord
          */
         Vertex(const Vector3F& position = Vector3F(), const Vector4F& color = Vector4F(), const Vector2F& texCoord = Vector2F());
 
-        /*! \brief Compare two Vertex
+        /*! @brief Compare two Vertex
          *
-         * \param right The Vertex to compare to this
+         * @param right The Vertex to compare to this
          *
-         * \return True is right and this are equal
+         * @return True is right and this are equal
          *
          */
         bool operator==(const Vertex& right);
 
-        /*! \brief Compare two Vertex
+        /*! @brief Compare two Vertex
          *
-         * \param right The Vertex to compare to this
+         * @param right The Vertex to compare to this
          *
-         * \return True is right and this are not equal
+         * @return True is right and this are not equal
          *
          */
         bool operator!=(const Vertex& right);

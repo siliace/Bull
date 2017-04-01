@@ -20,39 +20,39 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         Font() = default;
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param path The path of the font file
+         * @param path The path of the font file
          *
          */
         Font(const Path& path);
 
-        /*! \brief Load a font from a file
+        /*! @brief Load a font from a file
          *
-         * \param path The path of the font file
+         * @param path The path of the font file
          *
-         * \return True if the font was loaded successfully
+         * @return True if the font was loaded successfully
          *
          */
         bool loadFromPath(const Path& path);
 
-        /*! \brief Check whether a font is ready to use
+        /*! @brief Check whether a font is ready to use
          *
-         * \return True if the font is loaded
+         * @return True if the font is loaded
          *
          */
         bool isValid() const;
 
-        /*! \brief Get a glyph from the font
+        /*! @brief Get a glyph from the font
          *
-         * \param character The character wanted
+         * @param character The character wanted
          *
-         * \return The glyph
+         * @return The glyph
          *
          */
         const Glyph& getGlyph(unsigned char character) const;

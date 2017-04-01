@@ -13,11 +13,11 @@ namespace Bull
     {
         struct GlxExtensionsLoader
         {
-            /*! \brief Get a list of supported extensions
+            /*! @brief Get a list of supported extensions
              *
-             * \param handler The surface to use to check whether an extension is supported
+             * @param handler The surface to use to check whether an extension is supported
              *
-             * \return Return the list
+             * @return Return the list
              *
              */
             static std::vector<String> getExtensions(SurfaceHandler handler);

@@ -10,23 +10,23 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         FileLogger();
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param filename The name of the log file
+         * @param filename The name of the log file
          *
          */
         FileLogger(const String& filename);
 
     protected:
 
-        /*! \brief Add a new entry in the log
+        /*! @brief Add a new entry in the log
          *
-         * \param message The entry to add in the log
+         * @param message The entry to add in the log
          *
          */
         void write(const String& entry) override;

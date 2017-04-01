@@ -13,68 +13,68 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         BufferHandler();
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param capacity The capacity of the buffer
+         * @param capacity The capacity of the buffer
          *
          */
         BufferHandler(std::size_t capacity);
 
-        /*! \brief Fill the buffer with a value
+        /*! @brief Fill the buffer with a value
          *
-         * \param value The value to use the fill the buffer
+         * @param value The value to use the fill the buffer
          *
          */
         void memset(T value);
 
-        /*! \brief Copy a memory area into the buffer
+        /*! @brief Copy a memory area into the buffer
          *
-         * \param buffer Data to copy into the buffer
-         * \param size   The size of data to copy
-         * \param offset The offset of data into the buffer
+         * @param buffer Data to copy into the buffer
+         * @param size   The size of data to copy
+         * @param offset The offset of data into the buffer
          *
          */
         void memcpy(const T* data, std::size_t size, std::size_t offset = 0);
 
-        /*! \brief Get the value from the buffer
+        /*! @brief Get the value from the buffer
          *
-         * \param index The index of the value to get
+         * @param index The index of the value to get
          *
-         * \return The indexth value of the buffer
+         * @return The indexth value of the buffer
          *
-         * \throw std::out_of_range
+         * @throw std::out_of_range
          *
          */
         T& at(std::size_t index);
 
-        /*! \brief Get the value from the buffer
+        /*! @brief Get the value from the buffer
          *
-         * \param index The index of the value to get
+         * @param index The index of the value to get
          *
-         * \return The indexth value of the buffer
+         * @return The indexth value of the buffer
          *
-         * \throw std::out_of_range
+         * @throw std::out_of_range
          *
          */
         const T& at(std::size_t index) const;
 
-        /*! \brief Get the capacity of the Buffer
+        /*! @brief Get the capacity of the Buffer
          *
-         * \return The capacity
+         * @return The capacity
          *
          */
         std::size_t getCapacity();
 
     protected:
 
-        /*! \brief Change the capacity of the buffer
+        /*! @brief Change the capacity of the buffer
          *
-         * \param capacity The new capacity of the buffer
+         * @param capacity The new capacity of the buffer
          *
          */
         void realloc(std::size_t capacity);

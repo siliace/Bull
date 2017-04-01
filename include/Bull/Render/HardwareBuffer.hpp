@@ -32,102 +32,102 @@ namespace Bull
 
     public:
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param type The type the of OpenGL buffer to create
+         * @param type The type the of OpenGL buffer to create
          *
          */
         HardwareBuffer(Type type);
 
-        /*! \brief Destructor
+        /*! @brief Destructor
          *
          */
         ~HardwareBuffer();
 
-        /*! \brief Create the buffer in the VRAM
+        /*! @brief Create the buffer in the VRAM
          *
-         * \param capacity The capacity of the buffer
+         * @param capacity The capacity of the buffer
          *
-         * \return Return true if the buffer was created successfully, false otherwise
+         * @return Return true if the buffer was created successfully, false otherwise
          *
          */
         bool create(std::size_t capacity) override;
 
-        /*! \brief Create the buffer in the VRAM
+        /*! @brief Create the buffer in the VRAM
          *
-         * \param capacity The capacity of the buffer
-         * \param usage    The usage of the buffer
+         * @param capacity The capacity of the buffer
+         * @param usage    The usage of the buffer
          *
-         * \return Return true if the buffer was created successfully, false otherwise
+         * @return Return true if the buffer was created successfully, false otherwise
          *
          */
         bool create(std::size_t size, Usage usage);
 
-        /*! \brief Fill the buffer
+        /*! @brief Fill the buffer
          *
-         * \param data    Data to use to fill the buffer
-         * \param size    The size of data
-         * \param offset  The offset of the data in the buffer
-         * \param discard True to flush the buffer before fill it, false to keep the original content
+         * @param data    Data to use to fill the buffer
+         * @param size    The size of data
+         * @param offset  The offset of the data in the buffer
+         * @param discard True to flush the buffer before fill it, false to keep the original content
          *
-         * \return True if the buffer was filled successfully
+         * @return True if the buffer was filled successfully
          *
          */
         bool fill(const void* data, std::size_t size, std::size_t offset = 0, bool discard = false) override;
 
-        /*! \brief Map data to a pointer
+        /*! @brief Map data to a pointer
          *
-         * \return A pointer to data
+         * @return A pointer to data
          *
          */
         void* map();
 
-        /*! \brief Map data to a pointer
+        /*! @brief Map data to a pointer
          *
-         * \return A pointer to data
+         * @return A pointer to data
          *
          */
         const void* map() const;
 
-        /*! \brief Unmap the buffer
+        /*! @brief Unmap the buffer
          *
          */
         void unmap() const;
 
-        /*! \brief Flush the buffer
+        /*! @brief Flush the buffer
          *
          */
         void flush() override;
 
-        /*! \brief Destroy the buffer
+        /*! @brief Destroy the buffer
          *
          */
         void destroy() override;
 
-        /*! \brief Get the capacity of the HardwareBuffer
+        /*! @brief Get the capacity of the HardwareBuffer
          *
-         * \return The capacity
+         * @return The capacity
          *
          */
         std::size_t getCapacity() const;
 
-        /*! \brief Get the type of the buffer
+        /*! @brief Get the type of the buffer
          *
-         * \return The type
+         * @return The type
          *
          */
         Type getType() const;
 
-        /*! \brief Get the buffer system handler
+        /*! @brief Get the buffer system handler
          *
-         * \return The native buffer system handler
+         * @return The native buffer system handler
          *
          */
         unsigned int getSystemHandler() const;
 
     protected:
 
-        /*! \brief Bind the buffer
+        /*! @brief Bind the buffer
          *
          */
         void bind() const;

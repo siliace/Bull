@@ -21,9 +21,9 @@ namespace Bull
     {
     public:
 
-        /*! \brief Get the active context in this thread
+        /*! @brief Get the active context in this thread
          *
-         * \return Return the context is available, nullptr otherwise
+         * @return Return the context is available, nullptr otherwise
          *
          */
         static const Context* getActive();
@@ -34,44 +34,44 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         Context();
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param mode     The VideoMode to use to create the context
-         * \param settings Settings to use to create the context
+         * @param mode     The VideoMode to use to create the context
+         * @param settings Settings to use to create the context
          *
          */
         Context(const VideoMode& mode, const ContextSettings& settings);
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param bitsPerPixel Number of bits per pixel to use
-         * \param settings     Settings to use to create the context
+         * @param bitsPerPixel Number of bits per pixel to use
+         * @param settings     Settings to use to create the context
          *
          */
         Context(unsigned int bitsPerPixel, const ContextSettings& settings);
 
-        /*! \brief Destructor
+        /*! @brief Destructor
          *
          */
         ~Context();
 
-        /*! \brief Activate or deactivate the context
+        /*! @brief Activate or deactivate the context
          *
-         * \param active True to activate, false to deactivate the context
+         * @param active True to activate, false to deactivate the context
          *
-         * \return Return true if the context's status changed successfully, false otherwise
+         * @return Return true if the context's status changed successfully, false otherwise
          *
          */
         bool setActive(bool active = true);
 
-        /*! \brief Get the ContextSettings of the context
+        /*! @brief Get the ContextSettings of the context
          *
-         * \return Return the ContextSettings
+         * @return Return the ContextSettings
          *
          */
         const ContextSettings& getSettings() const;

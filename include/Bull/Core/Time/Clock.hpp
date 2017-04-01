@@ -9,70 +9,70 @@ namespace Bull
     {
     private:
 
-        /*! \brief Get the uptime
+        /*! @brief Get the uptime
          *
-         * \return Return the update
+         * @return Return the update
          *
          */
         static Time uptime();
 
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         Clock();
 
-        /*! \brief == operator override
+        /*! @brief == operator override
          *
-         * \param right The clock to test
+         * @param right The clock to test
          *
-         * \return Return true if this and right are equal, false otherwise
+         * @return Return true if this and right are equal, false otherwise
          *
          */
         bool operator==(const Clock& right) const;
 
-        /*! \brief != operator override
+        /*! @brief != operator override
          *
-         * \param right The clock to test
+         * @param right The clock to test
          *
-         * \return Return true if this and right are not equal, false otherwise
+         * @return Return true if this and right are not equal, false otherwise
          *
          */
         bool operator!=(const Clock& right) const;
 
-        /*! \brief Start the clock
+        /*! @brief Start the clock
          *
          */
         void start();
 
-        /*! \brief Stop the clock
+        /*! @brief Stop the clock
          *
          */
         void pause();
 
-        /*! \brief Resume the clock
+        /*! @brief Resume the clock
          *
          */
         void resume();
 
-        /*! \brief Get the elapsed time since the clock is started
+        /*! @brief Get the elapsed time since the clock is started
          *
-         * \return Return the time since the clock is started
+         * @return Return the time since the clock is started
          *
          */
         Time getElapsedTime() const;
 
-        /*! \brief Get the state of the clock
+        /*! @brief Get the state of the clock
          *
-         * \return Return true if the clock is running, else otherwise
+         * @return Return true if the clock is running, else otherwise
          *
          */
         bool isRunning() const;
 
-        /*! \brief Restart the clock
+        /*! @brief Restart the clock
          *
-         * \return Return the time since the clock is started before restart
+         * @return Return the time since the clock is started before restart
          *
          */
         Time restart();

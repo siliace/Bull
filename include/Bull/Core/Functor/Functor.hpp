@@ -18,82 +18,82 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /*! @brief Default constructor
          *
          */
         Functor();
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param function The function to store
+         * @param function The function to store
          *
          */
         template<typename Function>
         Functor(Function function);
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param function The function to store
-         * \param args     The arguments of the function
+         * @param function The function to store
+         * @param args     The arguments of the function
          *
          */
         template<typename Function, typename... Args>
         Functor(Function function, Args... args);
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param instance The instance to store
-         * \param function The method of the instance to store
+         * @param instance The instance to store
+         * @param function The method of the instance to store
          *
          */
         template<typename Instance, typename Class>
         Functor(Instance& instance, Return(Class::*member)());
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param instance The instance to store
-         * \param function The method of the instance to store
+         * @param instance The instance to store
+         * @param function The method of the instance to store
          *
          */
         template<typename Instance, typename Class>
         Functor(const Instance& instance, Return(Class::*member)() const);
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param instance The instance to store
-         * \param function The method of the instance to store
-         * \param args     Arguments of the method
+         * @param instance The instance to store
+         * @param function The method of the instance to store
+         * @param args     Arguments of the method
          *
          */
         template<typename Instance, typename Class, typename... Args>
         Functor(Instance& instance, Return(Class::*member)(Args...), Args... args);
 
 
-        /*! \brief Constructor
+        /*! @brief Constructor
          *
-         * \param instance The instance to store
-         * \param function The method of the instance to store
-         * \param args     Arguments of the method
+         * @param instance The instance to store
+         * @param function The method of the instance to store
+         * @param args     Arguments of the method
          *
          */
         template<typename Instance, typename Class, typename... Args>
         Functor(const Instance& instance, Return(Class::*member)(Args...) const, Args... args);
 
-        /*! \brief Destructor
+        /*! @brief Destructor
          *
          */
         ~Functor();
 
-        /*! \brief Call the stored function
+        /*! @brief Call the stored function
          *
-         * \return Return what the called function returned
+         * @return Return what the called function returned
          *
          */
         Return run() const;
 
-        /*! \brief () operator override
+        /*! @brief () operator override
          *
-         * \return Return what the called function returned
+         * @return Return what the called function returned
          *
          */
         Return operator()() const;

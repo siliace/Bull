@@ -9,7 +9,7 @@ namespace Bull
 {
     struct BULL_API InOutStream : public virtual InStream, public virtual OutStream
     {
-        /*! \brief Destructor
+        /*! @brief Destructor
          *
          */
         virtual ~InOutStream()

@@ -15,31 +15,31 @@ namespace Bull
 
         typedef std::unique_ptr<TChild>& Instance;
 
-        /*! \brief Get the instance of the singleton. Create the instance if needed
+        /*! @brief Get the instance of the singleton. Create the instance if needed
          *
-         * \param args Arguments to use to create the instance
+         * @param args Arguments to use to create the instance
          *
-         * \return Return the instance of the singleton
+         * @return Return the instance of the singleton
          *
          */
         template<typename... Args>
         static Instance get(Args... args);
 
-        /*! \brief Get the instance only if exists
+        /*! @brief Get the instance only if exists
          *
-         * \return Return the instance is exists, nullptr otherwise
+         * @return Return the instance is exists, nullptr otherwise
          *
          */
         static Instance getIfExists();
 
-        /*! \brief Check whether the instance is set
+        /*! @brief Check whether the instance is set
          *
-         * \param Return true if the instance is set, false otherwise
+         * @param Return true if the instance is set, false otherwise
          *
          */
         static bool isSet();
 
-        /*! \brief Destroy the instance
+        /*! @brief Destroy the instance
          *
          */
         static void destroy();
