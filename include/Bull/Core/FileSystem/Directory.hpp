@@ -53,7 +53,7 @@ namespace Bull
          * \return Return true if the copy was successfully, false otherwise
          *
          */
-        static bool copy(const String& path, const String& newPath);
+        static bool copy(const Path& path, const String& newPath);
 
         /*! \brief Rename a directory
          *
@@ -63,7 +63,7 @@ namespace Bull
          * \return Return true if the directory was renamed successfully, false otherwise
          *
          */
-        static bool rename(const String& path, const String& newPath);
+        static bool rename(const Path& path, const String& newPath);
 
         /*! \brief Delete a directory
          *
@@ -72,7 +72,7 @@ namespace Bull
          * \return Return true if the directory was deleted successfully, false otherwise
          *
          */
-        static bool remove(const String& path);
+        static bool remove(const Path& path);
 
     public:
 

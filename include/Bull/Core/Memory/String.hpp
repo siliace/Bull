@@ -374,6 +374,6 @@ namespace Bull
     };
 }
 
-#include <Bull/Core/Memory/S>
+#include <Bull/Core/Memory/String.inl>
 
 #endif // Bull_String_hpp

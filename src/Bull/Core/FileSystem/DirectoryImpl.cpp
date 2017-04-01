@@ -1,4 +1,4 @@
-#include <Bull/Core/System/Config.hpp>
+
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Core/FileSystem/Win32/DirectoryImplWin32.hpp>
@@ -12,7 +12,7 @@ namespace Bull
 {
     namespace prv
     {
-        DirectoryImpl* DirectoryImpl::createInstance(const String& name)
+        DirectoryImpl* DirectoryImpl::createInstance(const Path& name)
         {
             DirectoryImplType* impl = new DirectoryImplType();
 
@@ -35,7 +35,7 @@ namespace Bull
             return DirectoryImplType::exists(name);
         }
 
-        bool DirectoryImpl::remove(const String& name)
+        bool DirectoryImpl::remove(const Path& name)
         {
             return DirectoryImplType::remove(name);
         }
