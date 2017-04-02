@@ -3,7 +3,6 @@
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
-#include <Bull/Core/Memory/MemoryBuffer.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Render/OpenGL.hpp>

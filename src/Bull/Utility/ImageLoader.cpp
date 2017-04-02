@@ -33,16 +33,6 @@ namespace Bull
             return false;
         }
 
-        bool ImageLoader::loadFromMemory(const MemoryBuffer& buffer, std::vector<Uint8> &pixels, Vector2UI &size) const
-        {
-            return false;
-        }
-
-        bool ImageLoader::loadFromStream(InStream& stream, std::vector<Uint8> &pixels, Vector2UI &size) const
-        {
-            return false;
-        }
-
         bool ImageLoader::saveToPath(const Path& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const
         {
             if(!path.isFile())
@@ -57,16 +47,6 @@ namespace Bull
                 }
             }
 
-            return false;
-        }
-
-        bool ImageLoader::saveToMemory(MemoryBuffer& buffer, Image::Format format, const std::vector<Uint8> &pixels, const Vector2UI &size) const
-        {
-            return false;
-        }
-
-        bool ImageLoader::saveToStream(OutStream& stream, Image::Format format, const std::vector<Uint8> &pixels, const Vector2UI &size) const
-        {
             return false;
         }
 

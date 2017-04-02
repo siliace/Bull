@@ -22,10 +22,6 @@ namespace Bull
              */
             bool loadFromPath(const Path& path, std::vector<Uint8>& pixels, Vector2UI& size) const override;
 
-            bool loadFromMemory(const MemoryBuffer& buffer, std::vector<Uint8> &pixels, Vector2UI &size) const override;
-
-            bool loadFromStream(InStream& stream, std::vector<Uint8> &pixels, Vector2UI &size) const override;
-
             /*! @brief Save an image
              *
              * @param path   The path of the file to create to save the image
@@ -37,10 +33,6 @@ namespace Bull
              *
              */
             bool saveToPath(const Path& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
-
-            bool saveToMemory(MemoryBuffer& buffer, Image::Format format, const std::vector<Uint8> &pixels, const Vector2UI &size) const override;
-
-            bool saveToStream(OutStream& stream, Image::Format format, const std::vector<Uint8> &pixels, const Vector2UI &size) const override;
 
         private:
 
