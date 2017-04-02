@@ -1,4 +1,3 @@
-#include <cmath>
 #include <cstring>
 
 #include <Bull/Core/Memory/String.hpp>

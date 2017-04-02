@@ -92,7 +92,7 @@ namespace Bull
     private:
 
         std::vector<String> m_content;
-        std::size_t m_bufferSize;
+        std::size_t         m_bufferSize;
     };
 }
 
