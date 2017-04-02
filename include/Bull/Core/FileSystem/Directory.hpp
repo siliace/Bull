@@ -45,8 +45,6 @@ namespace Bull
          */
         static bool exists(const String& path);
 
-
-
         /*! @brief Copy a directory
          *
          * @param path The path (relative or absolute) of the directory to copy
