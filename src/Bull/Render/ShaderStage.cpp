@@ -21,11 +21,11 @@ namespace Bull
     }
 
     ShaderStage::ShaderStage(ShaderStage&& stage) :
-        m_type(stage.m_type),
         m_id(stage.m_id),
+        m_type(stage.m_type),
         m_isCompiled(stage.m_isCompiled)
     {
-        stage.m_id = 0;
+        stage.m_id         = 0;
         stage.m_isCompiled = false;
     }
 
@@ -36,11 +36,11 @@ namespace Bull
 
     ShaderStage& ShaderStage::operator=(ShaderStage&& stage)
     {
-        m_type     = stage.m_type;
-        m_id  = stage.m_id;
+        m_id         = stage.m_id;
+        m_type       = stage.m_type;
         m_isCompiled = stage.m_isCompiled;
 
-        stage.m_id = 0;
+        stage.m_id         = 0;
         stage.m_isCompiled = false;
 
         return (*this);
@@ -53,8 +53,8 @@ namespace Bull
             destroy();
         }
 
-        m_type    = type;
-        m_id = gl::createShader(type);
+        m_type = type;
+        m_id   = gl::createShader(type);
 
         return m_id != 0;
     }

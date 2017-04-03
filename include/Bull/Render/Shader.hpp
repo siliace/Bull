@@ -41,8 +41,10 @@ namespace Bull
          *
          * @param stage The stage to attach to this Shader
          *
+         * @return True if the stage was attached successfully
+         *
          */
-        void attach(const ShaderStage& stage);
+        bool attach(const ShaderStage& stage);
 
         /*! @brief
          *

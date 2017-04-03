@@ -32,9 +32,16 @@ namespace Bull
         gl::deleteProgram(m_program);
     }
 
-    void Shader::attach(const ShaderStage& stage)
+    bool Shader::attach(const ShaderStage& stage)
     {
-        gl::attachShader(m_program, stage.getSystemHandler());
+        if(stage.isValid() && stage.isCompiled())
+        {
+            gl::attachShader(m_program, stage.getSystemHandler());
+
+            return true;
+        }
+
+        return false;
     }
 
     bool Shader::link()
