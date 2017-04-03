@@ -19,9 +19,7 @@ namespace Bull
 
     MemoryStream::~MemoryStream()
     {
-        m_data   = nullptr;
-        m_size   = 0;
-        m_cursor = 0;
+        close();
     }
 
     bool MemoryStream::open(const void* data, std::size_t length)
@@ -35,6 +33,18 @@ namespace Bull
         }
 
         return false;
+    }
+
+    bool MemoryStream::isOpen() const
+    {
+        return m_data;
+    }
+
+    void MemoryStream::close()
+    {
+        m_data   = nullptr;
+        m_size   = 0;
+        m_cursor = 0;
     }
 
     Uint64 MemoryStream::read(void* data, Uint64 size)
@@ -64,5 +74,10 @@ namespace Bull
     Uint64 MemoryStream::getSize() const
     {
         return m_size;
+    }
+
+    MemoryStream::operator bool() const
+    {
+        return isOpen();
     }
 }
