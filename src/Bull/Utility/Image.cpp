@@ -7,6 +7,12 @@ namespace Bull
 {
     std::unique_ptr<AbstractImageLoader> Image::loader = std::make_unique<prv::ImageLoader>();
 
+    Image::Image(const Vector2UI& size, const Color& color) :
+        Image(size.x, size.y, color)
+    {
+        /// Nothing
+    }
+
     Image::Image(const std::vector<Uint8>& pixels, const Vector2UI& size) :
         m_size(size),
         m_pixels(pixels)
@@ -14,25 +20,8 @@ namespace Bull
         /// Nothing
     }
 
-    Image::Image(const void* data, const Vector2UI& size)
-    {
-        loadFromBuffer(data, size);
-    }
-
     Image::Image(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height) :
         Image(pixels, Vector2UI(width, height))
-    {
-        /// Nothing
-    }
-
-    Image::Image(const void* data, unsigned int width, unsigned int height) :
-        Image(data, Vector2UI(width, height))
-    {
-        /// Nothing
-    }
-
-    Image::Image(const Vector2UI& size, const Color& color) :
-        Image(size.x, size.y, color)
     {
         /// Nothing
     }
@@ -52,30 +41,17 @@ namespace Bull
 
     bool Image::loadFromPath(const Path& path)
     {
-        if(path.isFile())
-        {
-            return loader->loadFromPath(path, m_pixels, m_size);
-        }
-
-        return false;
+        return loader->loadFromPath(path, m_pixels, m_size);
     }
 
-    bool Image::loadFromBuffer(const void* data, const Vector2UI& size)
+    bool Image::loadFromMemory(const void* data, std::size_t dataSize)
     {
-        if(data)
-        {
-            m_size   = size;
-            m_pixels = std::vector<Uint8>(static_cast<const Uint8*>(data), static_cast<const Uint8*>(data) + size.x * size.y * 4);
-
-            return true;
-        }
-
-        return false;
+        return loader->loadFromMemory(data, dataSize, m_pixels, m_size);
     }
 
-    bool Image::loadFromBuffer(const void* data, unsigned int width, unsigned int height)
+    bool Image::loadFromStream(InStream& stream)
     {
-        return loadFromBuffer(data, Vector2UI(width, height));
+        return loader->loadFromStream(stream, m_pixels, m_size);
     }
 
     void Image::set(unsigned int x, unsigned int y, const Color& color)
@@ -110,13 +86,8 @@ namespace Bull
         return m_pixels;
     }
 
-    bool Image::save(const Path& path, Format format)
+    bool Image::saveToPath(const Path& path, Format format) const
     {
-        if(m_pixels.size() > 0)
-        {
-            return loader->saveToPath(path, format, m_pixels, m_size);
-        }
-
-        return false;
+        return loader->saveToPath(path, format, m_pixels, m_size);
     }
 }
