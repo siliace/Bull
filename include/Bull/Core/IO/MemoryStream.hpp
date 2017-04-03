@@ -37,6 +37,18 @@ namespace Bull
          */
         bool open(const void* data, std::size_t length);
 
+        /*! @brief Check if the stream is open
+         *
+         * @return True is the stream is open
+         *
+         */
+        bool isOpen() const;
+
+        /*! @brief Close the stream
+         *
+         */
+        void close();
+
         /*! @brief Read data from a stream
          *
          * @param data A pointer to the memory area to fill
@@ -69,6 +81,13 @@ namespace Bull
          *
          */
         Uint64 getSize() const override;
+
+        /*! @brief Check if the stream is open
+         *
+         * @return True is the stream is open
+         *
+         */
+        operator bool() const;
 
     private:
 
