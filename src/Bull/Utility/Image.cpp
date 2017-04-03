@@ -90,4 +90,14 @@ namespace Bull
     {
         return loader->saveToPath(path, format, m_pixels, m_size);
     }
+
+    bool Image::saveToMemory(OutStream& stream, Format format) const
+    {
+        return loader->saveToStream(stream, format, m_pixels, m_size);
+    }
+
+    bool Image::saveToSteam(void* data, std::size_t size, Format format) const
+    {
+        return loader->saveToMemory(data, size, format, m_pixels, m_size);
+    }
 }

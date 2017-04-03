@@ -11,6 +11,7 @@
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Utility/Color.hpp>
+#include <Bull/Core/IO/OutStream.hpp>
 
 namespace Bull
 {
@@ -142,6 +143,27 @@ namespace Bull
          *
          */
         bool saveToPath(const Path& path, Format format) const;
+
+        /*! @brief
+         *
+         * @param stream
+         * @param format
+         *
+         * @return
+         *
+         */
+        bool saveToMemory(OutStream& stream, Format format) const;
+
+        /*! @brief
+         *
+         * @param data
+         * @param size
+         * @param format
+         *
+         * @return
+         *
+         */
+        bool saveToSteam(void* data, std::size_t size, Format format) const;
 
     private:
 
