@@ -63,9 +63,9 @@ namespace Bull
          */
         bool isValid() const;
 
-        unsigned int width;  /*!< The width of the window */
-        unsigned int height; /*!< The height of the window */
-        Uint8        bitsPerPixel;  /*!< The the number of bits per pixel to create colors */
+        unsigned int width;        /*!< The width of the window */
+        unsigned int height;       /*!< The height of the window */
+        Uint8        bitsPerPixel; /*!< The the number of bits per pixel to create colors */
     };
 }
 

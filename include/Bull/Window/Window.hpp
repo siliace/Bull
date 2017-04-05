@@ -181,7 +181,7 @@ namespace Bull
          */
         virtual ~Window();
 
-        /*! @brief Open the window. If a window was already opened,current its closed
+        /*! @brief Open the window
          *
          * @param mode  The VideoMode
          * @param title The title of the window

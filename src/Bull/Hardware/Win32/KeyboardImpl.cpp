@@ -18,13 +18,6 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Check if a key is pressed
-         *
-         * \param key To key to check the state
-         *
-         * \return Return true if the key is down, false otherwise
-         *
-         */
         bool KeyboardImpl::isKeyPressed(Keyboard::Key key)
         {
             if(key == Keyboard::Key::Control)
@@ -43,13 +36,6 @@ namespace Bull
             return GetAsyncKeyState(convertBullkeyToVK(key));
         }
 
-        /*! \brief Convert a Bull::Keyboard::Key to a windows key value
-         *
-         * \param vkey To Bull::Keyboard::Key to convert
-         *
-         * \return Return the VK equivalent
-         *
-         */
         UINT KeyboardImpl::convertBullkeyToVK(Keyboard::Key key)
         {
             switch(key)

@@ -93,6 +93,7 @@ namespace Bull
         if(m_id)
         {
             bind();
+
             return gl::mapBuffer(m_type, GL_READ_ONLY);
         }
 

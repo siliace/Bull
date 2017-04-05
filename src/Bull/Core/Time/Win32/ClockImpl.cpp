@@ -6,11 +6,6 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Get the uptime
-         *
-         * \return Return the update
-         *
-         */
         Time ClockImpl::uptime()
         {
             return Time::milliseconds(GetTickCount());

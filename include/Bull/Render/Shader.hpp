@@ -46,9 +46,9 @@ namespace Bull
          */
         bool attach(const ShaderStage& stage);
 
-        /*! @brief
+        /*! @brief Link the shader
          *
-         * @return
+         * @return True if the shader was linked successfully
          *
          */
         bool link();

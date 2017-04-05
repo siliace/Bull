@@ -3,19 +3,11 @@
 
 namespace Bull
 {
-    /*! \brief Get the current date
-     *
-     * \return Return the current date
-     *
-     */
     Date Date::now()
     {
         return prv::DateImpl::now();
     }
 
-    /*! \brief Default constructor
-     *
-     */
     Date::Date() :
         year(1970),
         month(Month::January),
@@ -28,13 +20,6 @@ namespace Bull
         /// Nothing
     }
 
-    /*! \brief Compare two dates
-     *
-     * \param left The Date to compare with this
-     *
-     * \return Return true if this and left are equal, false otherwise
-     *
-     */
     bool Date::operator==(const Date& left) const
     {
         return (year   == left.year)   &&
@@ -45,13 +30,6 @@ namespace Bull
                (second == left.second);
     }
 
-    /*! \brief Compare two dates
-     *
-     * \param left The Date to compare with this
-     *
-     * \return Return true if this and left are not equal, false otherwise
-     *
-     */
     bool Date::operator!=(const Date& left) const
     {
         return !((*this) == left);

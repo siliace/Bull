@@ -155,7 +155,7 @@ namespace Bull
         {
             m_config = chooseBestConfig(m_display, m_settings, bitsPerPixel);
 
-            createSurface(window, bitsPerPixel);
+            createSurface(window);
 
             if(m_window)
             {
@@ -252,7 +252,7 @@ namespace Bull
             return success;
         }
 
-        void GlxContext::createSurface(WindowHandler handler, unsigned int bitsPerPixel)
+        void GlxContext::createSurface(WindowHandler handler)
         {
             m_window = handler;
         }
@@ -303,7 +303,7 @@ namespace Bull
                                          0, 0,
                                          width, height,
                                          0,
-                                         vi->depth,
+                                         bitsPerPixel,
                                          InputOutput,
                                          vi->visual,
                                          CWColormap | CWEventMask | CWBorderPixel,
