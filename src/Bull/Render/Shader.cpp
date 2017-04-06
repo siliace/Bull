@@ -135,7 +135,7 @@ namespace Bull
         return true;
     }
 
-    bool Shader::setUniform(const String& name, const Color& uniform)
+    bool Shader::setUniformColor(const String& name, const Color& uniform)
     {
         int location = getUniformLocation(name);
 
@@ -166,7 +166,7 @@ namespace Bull
         return true;
     }
 
-    bool Shader::setUniform(const String& name, const Matrix4F& uniform)
+    bool Shader::setUniformVector(const String& name, const Vector2F& uniform)
     {
         int location = getUniformLocation(name);
 
@@ -175,7 +175,76 @@ namespace Bull
             return false;
         }
 
-        if(gl::programUniform4f)
+        if(gl::programUniform2fv)
+        {
+            gl::programUniform2fv(m_program, location, 2, &uniform.x);
+        }
+        else
+        {
+            bind();
+
+            gl::uniform2fv(location, 1, &uniform.x);
+        }
+
+        return true;
+    }
+
+    bool Shader::setUniformVector(const String& name, const Vector3F& uniform)
+    {
+        int location = getUniformLocation(name);
+
+        if(location == -1)
+        {
+            return false;
+        }
+
+        if(gl::programUniform3fv)
+        {
+            gl::programUniform3fv(m_program, location, 3, &uniform.x);
+        }
+        else
+        {
+            bind();
+
+            gl::uniform3fv(location, 1, &uniform.x);
+        }
+
+        return true;
+    }
+
+    bool Shader::setUniformVector(const String& name, const Vector4F& uniform)
+    {
+        int location = getUniformLocation(name);
+
+        if(location == -1)
+        {
+            return false;
+        }
+
+        if(gl::programUniform4fv)
+        {
+            gl::programUniform4fv(m_program, location, 4, &uniform.x);
+        }
+        else
+        {
+            bind();
+
+            gl::uniform4fv(location, 1, &uniform.x);
+        }
+
+        return true;
+    }
+
+    bool Shader::setUniformMatrix(const String& name, const Matrix4F& uniform)
+    {
+        int location = getUniformLocation(name);
+
+        if(location == -1)
+        {
+            return false;
+        }
+
+        if(gl::programUniformMatrix4fv)
         {
             gl::programUniformMatrix4fv(m_program, location, 1, true, uniform);
         }
