@@ -42,8 +42,14 @@ namespace Bull
     Matrix4<T> Matrix4<T>::makeLookAt(const Vector3<T>& eye, const Vector3<T>& target, const Vector3<T> up)
     {
         Matrix4<T> lookAt;
+        Vector3<T> f = Vector3<T>::normalize(target - eye);
+        Vector3<T> s = Vector3<T>::normalize(f.crossProduct(up));
+        Vector3<T> u = s.crossProduct(f);
 
-
+        lookAt.setColumn(Vector4<T>(s, -s.dotProduct(eye)), 0);
+        lookAt.setColumn(Vector4<T>(u, -u.dotProduct(eye)), 1);
+        lookAt.setColumn(Vector4<T>(f, -f.dotProduct(eye)), 2);
+        lookAt.setColumn(Vector4<T>(0, 0, 0, 1), 3);
 
         return lookAt;
     }
@@ -93,6 +99,22 @@ namespace Bull
     T Matrix4<T>::get(std::size_t x, std::size_t y) const
     {
         return m_data[y * 4 + x];
+    }
+
+    template<typename T>
+    Matrix4<T>& Matrix4<T>::setColumn(const Vector4<T>& column, std::size_t position)
+    {
+        if(position >= 4)
+        {
+            throw std::out_of_range("Requested column out of range");
+        }
+
+        set(column.x, position, 0);
+        set(column.y, position, 1);
+        set(column.z, position, 2);
+        set(column.w, position, 3);
+
+        return (*this);
     }
 
     template<typename T>

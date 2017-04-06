@@ -53,7 +53,7 @@ namespace Bull
          * \return The look matrix
          *
          */
-        static Matrix4<T> makeLookAt(const Vector3<T>& eye, const Vector3<T>& target, const Vector3<T> up = Vector3<T>::Up);
+        static Matrix4<T> makeLookAt(const Vector3<T>& eye, const Vector3<T>& target, const Vector3<T> up = Vector3<T>::makeUp());
 
     public:
 
@@ -109,7 +109,17 @@ namespace Bull
          */
         T get(std::size_t x, std::size_t y) const;
 
-        /*! \brief Get a column a the matrix
+        /*! \brief Set a column of the Matrix4
+         *
+         * \param column   The column
+         * \param position The position of the column to set
+         *
+         * \return This
+         *
+         */
+        Matrix4<T>& setColumn(const Vector4<T>& column, std::size_t position);
+
+        /*! \brief Get a column a the Matrix4
          *
          * \param column The column to get
          *
