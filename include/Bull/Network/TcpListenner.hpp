@@ -19,70 +19,70 @@ namespace Bull
 
     public:
 
-        /*! @brief Default constructor
+        /*! \brief Default constructor
          *
          */
         TcpListenner();
 
-        /*! @brief Listen a port
+        /*! \brief Listen a port
          *
-         * @param protocol The protocol to listen
-         * @param port     The port to listen
-         * @param error    A pointer to store the error
+         * \param protocol The protocol to listen
+         * \param port     The port to listen
+         * \param error    A pointer to store the error
          *
-         * @return The new state of the TcpListenner
+         * \return The new state of the TcpListenner
          *
          */
         State listen(NetProtocol protocol, Uint16 port, Socket::Error* error = nullptr);
 
-        /*! @brief Listen a port
+        /*! \brief Listen a port
          *
-         * @param address The IpAddress to listen
-         * @param port    The port to listen
-         * @param error   A pointer to store the error
+         * \param address The IpAddress to listen
+         * \param port    The port to listen
+         * \param error   A pointer to store the error
          *
-         * @return The new state of the TcpListenner
+         * \return The new state of the TcpListenner
          *
          */
         State listen(const IpAddress& address, Uint16 port, Socket::Error* error = nullptr);
 
-        /*! @brief Listen a port
+        /*! \brief Listen a port
          *
-         * @param protocol    The protocol to listen
-         * @param port        The port to listen
-         * @param queueLength The maximum of connection accepted
-         * @param error       A pointer to store the error
+         * \param protocol    The protocol to listen
+         * \param port        The port to listen
+         * \param queueLength The maximum of connection accepted
+         * \param error       A pointer to store the error
          *
-         * @return The new state of the TcpListenner
+         * \return The new state of the TcpListenner
          *
          */
         State listen(NetProtocol protocol, Uint16 port, std::size_t queueLength, Socket::Error* error = nullptr);
 
-        /*! @brief Listen a port
+        /*! \brief Listen a port
          *
-         * @param address The IpAddress to listen
-         * @param port    The port to listen
-         * @param queueLength The maximum of connection accepted
-         * @param error   A pointer to store the error
+         * \param address The IpAddress to listen
+         * \param port    The port to listen
+         * \param queueLength The maximum of connection accepted
+         * \param error   A pointer to store the error
          *
-         * @return The new state of the TcpListenner
+         * \return The new state of the TcpListenner
          *
          */
         State listen(const IpAddress& address, Uint16 port, std::size_t queueLength, Socket::Error* error = nullptr);
 
-        /*! @brief Accept an incoming TCP connection
+        /*! \brief Accept an incoming TCP connection
          *
-         * @param client The client socket
-         * @param error  A pointer to store the error
+         * \param client The client socket
+         * \param error  A pointer to store the error
          *
-         * @return True if the client has been accepted
+         * \return True if the client has been accepted
          *
          */
         bool accept(TcpSocket* client, Socket::Error* error = nullptr);
 
-        /*! @brief Check whether the TcpListenner is listening
+        /*! \brief Check whether the TcpListenner is listening
          *
-         * @return True if listening
+         * \return True if listening
          *
          */
         bool isListening();

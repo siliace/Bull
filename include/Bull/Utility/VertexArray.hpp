@@ -11,61 +11,61 @@ namespace Bull
     {
     public:
 
-        /*! @brief Default constructor
+        /*! \brief Default constructor
          *
          */
         VertexArray() = default;
 
-        /*! @brief Constructor
+        /*! \brief Constructor
          *
-         * @param size
+         * \param size
          *
          */
         VertexArray(std::size_t size);
 
-        /*! @brief Constructor
+        /*! \brief Constructor
          *
-         * @param vertices
+         * \param vertices
          *
          */
         VertexArray(const std::vector<Vertex>& vertices);
 
-        /*! @brief Add a Vertex in the array
+        /*! \brief Add a Vertex in the array
          *
-         * @param vertex The vertex to add
+         * \param vertex The vertex to add
          *
          */
         void addVertex(const Vertex& vertex);
 
-        /*! @brief Remove a Vertex from the array
+        /*! \brief Remove a Vertex from the array
          *
-         * @param index The index of the Vertex to remove
+         * \param index The index of the Vertex to remove
          *
-         * @return The removed Vertex
+         * \return The removed Vertex
          *
          */
         Vertex removeVertex(std::size_t index);
 
-        /*! @brief Get the size of the array
+        /*! \brief Get the size of the array
          *
-         * @return The size
+         * \return The size
          */
         std::size_t getSize() const;
 
-        /*! @brief
+        /*! \brief
          *
-         * @param index
+         * \param index
          *
-         * @return
+         * \return
          *
          */
         Vertex& operator[](std::size_t index);
 
-        /*! @brief
+        /*! \brief
          *
-         * @param index
+         * \param index
          *
-         * @return
+         * \return
          *
          */
         const Vertex& operator[](std::size_t index) const;

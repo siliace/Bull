@@ -11,11 +11,11 @@ namespace Bull
         {
         public:
 
-            /*! @brief Check if a key is pressed
+            /*! \brief Check if a key is pressed
              *
-             * @param key To key to check the state
+             * \param key To key to check the state
              *
-             * @return Return true if the key is down, false otherwise
+             * \return Return true if the key is down, false otherwise
              *
              */
             static bool isKeyPressed(Keyboard::Key key);

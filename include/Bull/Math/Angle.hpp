@@ -15,20 +15,20 @@ namespace Bull
     {
     public:
 
-        /*! @brief Create an angle in radians
+        /*! \brief Create an angle in radians
          *
-         * @param angle The value in radians of the angle to create
+         * \param angle The value in radians of the angle to create
          *
-         * @return Return the created angle
+         * \return Return the created angle
          *
          */
         static Angle<T> radian(T angle);
 
-        /*! @brief Create an angle in degrees
+        /*! \brief Create an angle in degrees
          *
-         * @param angle The value in degrees of the angle to create
+         * \param angle The value in degrees of the angle to create
          *
-         * @return Return the created angle
+         * \return Return the created angle
          *
          */
         static Angle<T> degree(T angle);
@@ -37,127 +37,127 @@ namespace Bull
 
     public:
 
-        /*! @brief Default constructor
+        /*! \brief Default constructor
          *
          */
         Angle() = default;
 
-        /*! @brief Set the value of the angle
+        /*! \brief Set the value of the angle
          *
-         * @param angle    The value of the angle
-         * @param isRadian Whether the angle value is in radian
+         * \param angle    The value of the angle
+         * \param isRadian Whether the angle value is in radian
          *
-         * @return This
+         * \return This
          *
          */
         Angle& set(T angle, bool isRadian = false);
 
-        /*! @brief Get the value of the angle in degrees
+        /*! \brief Get the value of the angle in degrees
          *
-         * @return The value of the angle
+         * \return The value of the angle
          *
          */
         Angle<T> asDegree() const;
 
-        /*! @brief Get the value of the angle in radians
+        /*! \brief Get the value of the angle in radians
          *
-         * @return Return the value of the angle
+         * \return Return the value of the angle
          *
          */
         Angle<T> asRadian() const;
 
-        /*! @brief Normalize the angle
+        /*! \brief Normalize the angle
          *
-         * @return This
+         * \return This
          *
          */
         Angle<T>& normalize();
 
-        /*! @brief Addition two angles
+        /*! \brief Addition two angles
          *
-         * @param right The angle to add to this
+         * \param right The angle to add to this
          *
-         * @return Return the sum of this and right
+         * \return Return the sum of this and right
          *
          */
         Angle<T> operator+(T right);
 
-        /*! @brief Addition two angles
+        /*! \brief Addition two angles
          *
-         * @param right The angle to add to this
+         * \param right The angle to add to this
          *
-         * @return Return the sum of this and right
+         * \return Return the sum of this and right
          *
          */
         Angle<T>& operator+=(T right);
 
-        /*! @brief Subtract two angles
+        /*! \brief Subtract two angles
          *
-         * @param right The angle to subtract to this
+         * \param right The angle to subtract to this
          *
-         * @return Return the difference of this and right
+         * \return Return the difference of this and right
          *
          */
         Angle<T> operator-(T right);
 
-        /*! @brief Subtract two angles
+        /*! \brief Subtract two angles
          *
-         * @param right The angle to subtract to this
+         * \param right The angle to subtract to this
          *
-         * @return Return the difference of this and right
+         * \return Return the difference of this and right
          *
          */
         Angle<T>& operator-=(T right);
 
-        /*! @brief Multiply two angles
+        /*! \brief Multiply two angles
          *
-         * @param right The angle to multiply to this
+         * \param right The angle to multiply to this
          *
-         * @return Return the product of this and right
+         * \return Return the product of this and right
          *
          */
         Angle<T> operator*(T right);
 
-        /*! @brief Multiply two angles
+        /*! \brief Multiply two angles
          *
-         * @param right The angle to multiply to this
+         * \param right The angle to multiply to this
          *
-         * @return Return the product of this and right
+         * \return Return the product of this and right
          *
          */
         Angle<T>& operator*=(T right);
 
-        /*! @brief Divide two angles
+        /*! \brief Divide two angles
          *
-         * @param right The angle to divide to this
+         * \param right The angle to divide to this
          *
-         * @return Return the quotient of this and right
+         * \return Return the quotient of this and right
          *
          */
         Angle<T> operator/(T right);
 
-        /*! @brief Divide two angles
+        /*! \brief Divide two angles
          *
-         * @param right The angle to divide to this
+         * \param right The angle to divide to this
          *
-         * @return Return the quotient of this and right
+         * \return Return the quotient of this and right
          *
          */
         Angle<T>& operator/=(T right);
 
-        /*! @brief Convert the angle to a numeric value
+        /*! \brief Convert the angle to a numeric value
          *
-         * @return Return the value of the angle
+         * \return Return the value of the angle
          *
          */
         explicit operator T() const;
 
     private:
 
-        /*! @brief Constructor
+        /*! \brief Constructor
          *
-         * @param angle    The value of the angle
-         * @param isRadian Whether the angle value is in radian
+         * \param angle    The value of the angle
+         * \param isRadian Whether the angle value is in radian
          *
          */
         Angle(T value, bool isRadian = false);

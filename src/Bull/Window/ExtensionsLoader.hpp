@@ -19,10 +19,10 @@ namespace Bull
 
             struct Extension
             {
-                /*! @brief Constructor
+                /*! \brief Constructor
                  *
-                 * @param name The name of the extension
-                 * @param loader The function to call to load the extension
+                 * \param name The name of the extension
+                 * \param loader The function to call to load the extension
                  *
                  */
                 Extension(const String& name, Functor<bool> loader) :
@@ -39,62 +39,62 @@ namespace Bull
 
         public:
 
-            /*! @brief Default constructor
+            /*! \brief Default constructor
              *
              */
             ExtensionsLoader() = default;
 
-            /*! @brief Constructor
+            /*! \brief Constructor
              *
-             * @param handler The handler to use to get supported extensions
+             * \param handler The handler to use to get supported extensions
              *
              */
             ExtensionsLoader(SurfaceHandler handler);
 
-            /*! @brief Add an extension to load
+            /*! \brief Add an extension to load
              *
-             * @param extension The extension to load
+             * \param extension The extension to load
              *
              */
             void require(const Extension& extension);
 
-            /*! @brief Load required extensions
+            /*! \brief Load required extensions
              *
              */
             void load();
 
-            /*! @brief Check whether an OpenGL extension is loaded
+            /*! \brief Check whether an OpenGL extension is loaded
              *
-             * @param extension The extension
+             * \param extension The extension
              *
-             * @return Return true if loaded, false otherwise
+             * \return Return true if loaded, false otherwise
              *
              */
             bool isLoaded(const Extension& extension) const;
 
-            /*! @brief Check whether an OpenGL extension is loaded
+            /*! \brief Check whether an OpenGL extension is loaded
              *
-             * @param extension The name of the extension
+             * \param extension The name of the extension
              *
-             * @return Return true if loaded, false otherwise
+             * \return Return true if loaded, false otherwise
              *
              */
             bool isLoaded(const String& extension) const;
 
-            /*! @brief Check whether an OpenGL extension is supported
+            /*! \brief Check whether an OpenGL extension is supported
              *
-             * @param extension The extension
+             * \param extension The extension
              *
-             * @return Return true if supported, false otherwise
+             * \return Return true if supported, false otherwise
              *
              */
             bool isSupported(const Extension& extension) const;
 
-            /*! @brief Check whether an OpenGL extension is supported
+            /*! \brief Check whether an OpenGL extension is supported
              *
-             * @param extension The name of the extension
+             * \param extension The name of the extension
              *
-             * @return Return true if supported, false otherwise
+             * \return Return true if supported, false otherwise
              *
              */
             bool isSupported(const String& extension) const;

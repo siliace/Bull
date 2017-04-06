@@ -15,193 +15,193 @@ namespace Bull
     {
     public:
 
-        /*! @brief Create an identity matrix
+        /*! \brief Create an identity matrix
          *
-         * @return Return the matrix
+         * \return Return the matrix
          *
          */
-        static Matrix4<T> createIdentity();
+        static Matrix4<T> makeIdentity();
 
-        /*! @brief Create a translation matrix
+        /*! \brief Create a translation matrix
          *
-         * @param x The translation value on x axis
-         * @param y The translation value on y axis
-         * @param z The translation value on z axis
+         * \param x The translation value on x axis
+         * \param y The translation value on y axis
+         * \param z The translation value on z axis
          *
-         * @return Return the matrix
+         * \return Return the matrix
          *
          */
-        static Matrix4<T> createTranslation(T x, T y, T z);
+        static Matrix4<T> makeTranslation(T x, T y, T z);
 
-        /*! @brief Create a scale matrix
+        /*! \brief Create a scale matrix
          *
-         * @param x The scale value on x axis
-         * @param y The scale value on y axis
-         * @param z The scale value on z axis
+         * \param x The scale value on x axis
+         * \param y The scale value on y axis
+         * \param z The scale value on z axis
          *
-         * @return Return the matrix
+         * \return Return the matrix
          *
          */
-        static Matrix4<T> createScale(T x, T y, T z);
+        static Matrix4<T> makeScale(T x, T y, T z);
 
     public:
 
-        /*! @brief Default Constructor
+        /*! \brief Default Constructor
          *
          */
         Matrix4();
 
-        /*! @brief Constructor
+        /*! \brief Constructor
          *
-         * @param value The value of every matrix cell
+         * \param value The value of every matrix cell
          *
          */
         Matrix4(T value);
 
-        /*! @brief Constructor
+        /*! \brief Constructor
          *
-         * @param data The matrix content
+         * \param data The matrix content
          *
          */
         Matrix4(const std::array<T, 16>& data);
 
-        /*! @brief Set the matrix content
+        /*! \brief Set the matrix content
          *
-         * @param value The value of every matrix cell
+         * \param value The value of every matrix cell
          *
          */
         void set(T value);
 
-        /*! @brief The value of a cell of the matrix
+        /*! \brief The value of a cell of the matrix
          *
-         * @param value The value to set
-         * @param x     The abscissa of the cell in the matrix
-         * @param y     The ordinate of the cell in the matrix
+         * \param value The value to set
+         * \param x     The abscissa of the cell in the matrix
+         * \param y     The ordinate of the cell in the matrix
          *
          */
         void set(T value, std::size_t x, std::size_t y);
 
-        /*! @brief Set the matrix content
+        /*! \brief Set the matrix content
          *
-         * @param data The matrix content
+         * \param data The matrix content
          *
          */
         void set(const std::array<T, 16>& data);
 
-        /*! @brief Get the value of a cell of the matrix
+        /*! \brief Get the value of a cell of the matrix
          *
-         * @param x The abscissa of the cell to get in the matrix
-         * @param y The ordinate of the cell to get in the matrix
+         * \param x The abscissa of the cell to get in the matrix
+         * \param y The ordinate of the cell to get in the matrix
          *
-         * @return Return the value
+         * \return Return the value
          *
          */
         T get(std::size_t x, std::size_t y) const;
 
-        /*! @brief Get a column a the matrix
+        /*! \brief Get a column a the matrix
          *
-         * @param column The column to get
+         * \param column The column to get
          *
-         * @return Return the column
+         * \return Return the column
          *
          */
         std::array<T, 4> getColumn(std::size_t column) const;
 
-        /*! @brief Get a row a the matrix
+        /*! \brief Get a row a the matrix
          *
-         * @param row The row to get
+         * \param row The row to get
          *
-         * @return Return the row
+         * \return Return the row
          *
          */
         std::array<T, 4> getRow(std::size_t row) const;
 
-        /*! @brief
+        /*! \brief
          *
-         * @param
-         * @param
+         * \param
+         * \param
          *
-         * @return
+         * \return
          *
          */
         T& operator()(std::size_t x, std::size_t y);
 
-        /*! @brief
+        /*! \brief
          *
-         * @param
-         * @param
+         * \param
+         * \param
          *
-         * @return
+         * \return
          *
          */
         const T& operator()(std::size_t x, std::size_t y) const;
 
-        /*! @brief Compare two matrices
+        /*! \brief Compare two matrices
          *
-         * @param right The matrix to compare to this
+         * \param right The matrix to compare to this
          *
-         * @return Return true if the two matrices are equal, false otherwise
+         * \return Return true if the two matrices are equal, false otherwise
          *
          */
         bool operator==(const Matrix4<T>& right);
 
-        /*! @brief Compare two matrices
+        /*! \brief Compare two matrices
          *
-         * @param right The matrix to compare to this
+         * \param right The matrix to compare to this
          *
-         * @return Return true if the two matrices are not equal, false otherwise
+         * \return Return true if the two matrices are not equal, false otherwise
          *
          */
         bool operator!=(const Matrix4<T>& right);
 
-        /*! @brief Addition two matrices
+        /*! \brief Addition two matrices
          *
-         * @param right
+         * \param right
          *
-         * @return Return the sum the addition of right and this
+         * \return Return the sum the addition of right and this
          *
          */
         Matrix4<T>& operator+=(const Matrix4<T>& right);
 
-        /*! @brief Addition two matrices
+        /*! \brief Addition two matrices
          *
-         * @param right
+         * \param right
          *
-         * @return Return the sum of the addition between right and this
+         * \return Return the sum of the addition between right and this
          *
          */
         Matrix4<T>& operator+=(T right);
 
-        /*! @brief Subtract two matrices
+        /*! \brief Subtract two matrices
          *
-         * @param right
+         * \param right
          *
-         * @return Return the difference of the subtraction between right and this
+         * \return Return the difference of the subtraction between right and this
          *
          */
         Matrix4<T>& operator-=(const Matrix4<T>& right);
 
-        /*! @brief Subtract a matrix with a scalar
+        /*! \brief Subtract a matrix with a scalar
          *
-         * @param right
+         * \param right
          *
-         * @return Return the difference the subtraction between right and this
+         * \return Return the difference the subtraction between right and this
          *
          */
         Matrix4<T>& operator-=(T right);
 
-        /*! @brief Multiply two matrices
+        /*! \brief Multiply two matrices
          *
-         * @param right
+         * \param right
          *
-         * @return Return the product of the multiplication between right and this
+         * \return Return the product of the multiplication between right and this
          *
          */
         Matrix4<T> operator*=(const Matrix4<T>& right);
 
-        /*! @brief Get a pointer to the internal data
+        /*! \brief Get a pointer to the internal data
          *
-         * @return Return the pointer
+         * \return Return the pointer
          *
          */
         operator const T*() const;
@@ -211,89 +211,89 @@ namespace Bull
         std::array<T, 16> m_data;
     };
 
-    /*! @brief Addition two matrices
+    /*! \brief Addition two matrices
      *
-     * @param right
-     * @param left
+     * \param right
+     * \param left
      *
-     * @return Return the sum of the addition between right and left
+     * \return Return the sum of the addition between right and left
      *
      */
     template<typename T>
     Matrix4<T> operator+(const Matrix4<T>& left, const Matrix4<T>& right);
 
-    /*! @brief Addition two matrices
+    /*! \brief Addition two matrices
      *
-     * @param right
-     * @param left
+     * \param right
+     * \param left
      *
-     * @return Return the sum of the addition between right and left
+     * \return Return the sum of the addition between right and left
      *
      */
     template<typename T>
     Matrix4<T> operator+(T left, const Matrix4<T>& right);
 
-    /*! @brief Addition two matrices
+    /*! \brief Addition two matrices
      *
-     * @param right
-     * @param left
+     * \param right
+     * \param left
      *
-     * @return Return the sum of the addition between right and left
+     * \return Return the sum of the addition between right and left
      *
      */
     template<typename T>
     Matrix4<T> operator+(const Matrix4<T>& left, T right);
 
-    /*! @brief Subtract two matrices
+    /*! \brief Subtract two matrices
      *
-     * @param right
-     * @param left
+     * \param right
+     * \param left
      *
-     * @return Return the difference of the subtraction between right and left
+     * \return Return the difference of the subtraction between right and left
      *
      */
     template<typename T>
     Matrix4<T> operator-(const Matrix4<T>& left, const Matrix4<T>& right);
 
-    /*! @brief Subtract two matrices
+    /*! \brief Subtract two matrices
      *
-     * @param right
-     * @param left
+     * \param right
+     * \param left
      *
-     * @return Return the difference of the subtraction between right and left
+     * \return Return the difference of the subtraction between right and left
      *
      */
     template<typename T>
     Matrix4<T> operator-(T left, const Matrix4<T>& right);
 
-    /*! @brief Subtract two matrices
+    /*! \brief Subtract two matrices
      *
-     * @param right
-     * @param left
+     * \param right
+     * \param left
      *
-     * @return Return the difference of the subtraction between right and left
+     * \return Return the difference of the subtraction between right and left
      *
      */
     template<typename T>
     Matrix4<T> operator-(const Matrix4<T>& left, T right);
 
-    /*! @brief Multiply two matrices
+    /*! \brief Multiply two matrices
      *
-     * @param right
-     * @param left
+     * \param right
+     * \param left
      *
-     * @return Return the product of the multiplication between right and left
+     * \return Return the product of the multiplication between right and left
      *
      */
     template<typename T>
     Matrix4<T> operator*(const Matrix4<T>& left, const Matrix4<T>& right);
 
-    /*! @brief Multiply a matrix with a vector
+    /*! \brief Multiply a matrix with a vector
      *
-     * @param right
-     * @param left
+     * \param right
+     * \param left
      *
-     * @return Return the product of the multiplication between right and left
+     * \return Return the product of the multiplication between right and left
      *
      */
     template<typename T>

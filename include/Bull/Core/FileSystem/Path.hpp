@@ -9,53 +9,53 @@ namespace Bull
     {
     public:
 
-        /*! @brief Default constructor
+        /*! \brief Default constructor
          *
          */
         Path();
 
-        /*! @brief Constructor
+        /*! \brief Constructor
          *
-         * @param path The path
+         * \param path The path
          *
          */
         Path(const String& path);
 
-        /*! @brief Compare two Path
+        /*! \brief Compare two Path
          *
-         * @param right The Path to compare to this
+         * \param right The Path to compare to this
          *
-         * @return True if this and right are equal
+         * \return True if this and right are equal
          *
          */
         bool operator==(const Path& right) const;
 
-        /*! @brief Compare two Path
+        /*! \brief Compare two Path
          *
-         * @param right The Path to compare to this
+         * \param right The Path to compare to this
          *
-         * @return True if this and right are not equal
+         * \return True if this and right are not equal
          *
          */
         bool operator!=(const Path& right) const;
 
-        /*! @brief Check whether the path is a file
+        /*! \brief Check whether the path is a file
          *
-         * @return True if the file is a string
+         * \return True if the file is a string
          *
          */
         bool isFile() const;
 
-        /*! @brief Check whether the path is a directory
+        /*! \brief Check whether the path is a directory
          *
-         * @return True if the directory is a string
+         * \return True if the directory is a string
          *
          */
         bool isDirectory() const;
 
-        /*! @brief Convert the Path to a String
+        /*! \brief Convert the Path to a String
          *
-         * @return The Path as a String
+         * \return The Path as a String
          *
          */
         String toString() const;

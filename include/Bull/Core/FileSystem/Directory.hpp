@@ -27,105 +27,105 @@ namespace Bull
             All         = Files | Directories
         };
 
-        /*! @brief Create a directory
+        /*! \brief Create a directory
          *
-         * @param path The path of the directory to create
+         * \param path The path of the directory to create
          *
-         * @return Return true if the file was created successfully, else otherwise
+         * \return Return true if the file was created successfully, else otherwise
          *
          */
         static bool create(const String& path);
 
-        /*! @brief Check if a directory exists
+        /*! \brief Check if a directory exists
          *
-         * @param path The path of the directory to check
+         * \param path The path of the directory to check
          *
-         * @return Return true if the directory exists, false otherwise
+         * \return Return true if the directory exists, false otherwise
          *
          */
         static bool exists(const String& path);
 
-        /*! @brief Copy a directory
+        /*! \brief Copy a directory
          *
-         * @param path The path (relative or absolute) of the directory to copy
-         * @param path The new path (relative or absolute) of the directory
+         * \param path The path (relative or absolute) of the directory to copy
+         * \param path The new path (relative or absolute) of the directory
          *
-         * @return Return true if the copy was successfully, false otherwise
+         * \return Return true if the copy was successfully, false otherwise
          *
          */
         static bool copy(const Path& path, const String& newPath);
 
-        /*! @brief Rename a directory
+        /*! \brief Rename a directory
          *
-         * @param path The path of the directory to rename
-         * @param newPath The new path of the directory
+         * \param path The path of the directory to rename
+         * \param newPath The new path of the directory
          *
-         * @return Return true if the directory was renamed successfully, false otherwise
+         * \return Return true if the directory was renamed successfully, false otherwise
          *
          */
         static bool rename(const Path& path, const String& newPath);
 
-        /*! @brief Delete a directory
+        /*! \brief Delete a directory
          *
-         * @param path The path of the directory to delete
+         * \param path The path of the directory to delete
          *
-         * @return Return true if the directory was deleted successfully, false otherwise
+         * \return Return true if the directory was deleted successfully, false otherwise
          *
          */
         static bool remove(const Path& path);
 
     public:
 
-        /*! @brief Default constructor
+        /*! \brief Default constructor
          *
          */
         Directory();
 
-        /*! @brief Constructor
+        /*! \brief Constructor
          *
-         * @param path The path of the directory
+         * \param path The path of the directory
          *
          */
         Directory(const Path& path);
 
-        /*! @brief Destructor
+        /*! \brief Destructor
          *
          */
         ~Directory();
 
-        /*! @brief Open a directory
+        /*! \brief Open a directory
          *
-         * @param path The path of the directory
+         * \param path The path of the directory
          *
-         * @return Return true is the directory was opened successfully, false otherwise
+         * \return Return true is the directory was opened successfully, false otherwise
          *
          */
         bool open(const Path& path);
 
-        /*! @brief Check whether the directory is open
+        /*! \brief Check whether the directory is open
          *
-         * @return Return true if the directory is open, false otherwise
+         * \return Return true if the directory is open, false otherwise
          *
          */
         bool isOpen() const;
 
-        /*! @brief Close the directory
+        /*! \brief Close the directory
          *
          */
         void close();
 
-        /*! @brief Get the content of this Directory
+        /*! \brief Get the content of this Directory
          *
-         * @param flags What we have to look for
+         * \param flags What we have to look for
          *
-         * @return Return the list of content entity
+         * \return Return the list of content entity
          *
          */
         std::vector<Path> getContent(Uint32 flags = SearchFlag::All);
 
-        /*! @brief Get the path of the directory
+        /*! \brief Get the path of the directory
          *
-         * @return Return the path of the directory
+         * \return Return the path of the directory
          *
          */
         const Path& getPath() const;

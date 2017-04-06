@@ -15,17 +15,17 @@ namespace Bull
     {
         struct RenderTextureImpl : public NonCopyable
         {
-            /*! @brief Create the RenderTextureImpl
+            /*! \brief Create the RenderTextureImpl
              *
-             * @param size   The size of the rendering target
-             * @param target The rendering target
+             * \param size   The size of the rendering target
+             * \param target The rendering target
              *
-             * @return Return true if the RenderTextureImpl was created successfully, false otherwise
+             * \return Return true if the RenderTextureImpl was created successfully, false otherwise
              *
              */
             virtual bool create(const Vector2UI& size, unsigned int target) = 0;
 
-            /*! @brief Display what has been rendered so far into the target texture
+            /*! \brief Display what has been rendered so far into the target texture
              *
              */
             virtual void updateTarget() = 0;

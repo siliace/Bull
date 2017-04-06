@@ -9,19 +9,19 @@ namespace Bull
     {
     protected:
 
-        /*! @brief Default constructor
+        /*! \brief Default constructor
          *
          */
         NonCopyable() = default;
 
     private:
 
-        /*! @brief Copy constructor
+        /*! \brief Copy constructor
          *
          */
         NonCopyable(const NonCopyable& copy) = delete;
 
-        /*! @brief Basic assignment operator
+        /*! \brief Basic assignment operator
          *
          */
         NonCopyable& operator=(const NonCopyable& copy) = delete;

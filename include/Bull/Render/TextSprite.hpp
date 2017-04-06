@@ -19,34 +19,34 @@ namespace Bull
          */
         TextSprite() = default;
 
-        /*! @brief Constructor
+        /*! \brief Constructor
          *
-         * @param text The text to render
-         * @param font The font to use to render the text
+         * \param text The text to render
+         * \param font The font to use to render the text
          *
          */
         TextSprite(const String& text, const Font& font);
 
-        /*! @brief Create the TextSprite
+        /*! \brief Create the TextSprite
          *
-         * @param text The text to render
-         * @param font The font to use to render the text
+         * \param text The text to render
+         * \param font The font to use to render the text
          *
-         * @return True if the texture was created successfully
+         * \return True if the texture was created successfully
          *
          */
         bool create(const String& text, const Font& font);
 
-        /*! @brief Get the text rendered on the texture
+        /*! \brief Get the text rendered on the texture
          *
-         * @return The text
+         * \return The text
          *
          */
         const String& getText() const;
 
-        /*! @brief Get the texture with the rendered text
+        /*! \brief Get the texture with the rendered text
          *
-         * @return The texture
+         * \return The texture
          *
          */
         const Texture& getTexture() const;

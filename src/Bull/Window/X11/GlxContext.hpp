@@ -17,131 +17,131 @@ namespace Bull
         {
         public:
 
-            /*! @brief Get an OpenGL function
+            /*! \brief Get an OpenGL function
              *
-             * @param function The function name
+             * \param function The function name
              *
-             * @param Return the function, nullptr if the function is not available
+             * \param Return the function, nullptr if the function is not available
              *
              */
             static void* getFunction(const String& function);
 
-            /*! @brief Set the list of extensions to load
+            /*! \brief Set the list of extensions to load
              *
-             * @param loader The instance of the extension loader to use
+             * \param loader The instance of the extension loader to use
              *
              */
             static void requireExtensions(const ExtensionsLoader::Instance& loader);
 
-            /*! @brief Get the best config according to context settings
+            /*! \brief Get the best config according to context settings
              *
-             * @param settings     Context settings
-             * @param bitsPerPixel The number of bits per pixel to use
+             * \param settings     Context settings
+             * \param bitsPerPixel The number of bits per pixel to use
              *
-             * @return The best config
+             * \return The best config
              *
              */
             static GLXFBConfig chooseBestConfig(Display display, const ContextSettings& settings, unsigned int bitsPerPixel);
 
         public:
 
-            /*! @brief Constructor
+            /*! \brief Constructor
              *
-             * @param shared The shared context
+             * \param shared The shared context
              *
              */
             GlxContext(const std::shared_ptr<GlxContext>& shared);
 
-            /*! @brief Constructor
+            /*! \brief Constructor
              *
-             * @param shared   The shared context
-             * @param mode     The VideoMode to use to create the context
-             * @param settings Settings to use to create the context
+             * \param shared   The shared context
+             * \param mode     The VideoMode to use to create the context
+             * \param settings Settings to use to create the context
              *
              */
             GlxContext(const std::shared_ptr<GlxContext>& shared, const VideoMode& mode, const ContextSettings& settings);
 
-            /*! @brief Constructor
+            /*! \brief Constructor
              *
-             * @param shared The shared context
-             * @param bitsPerPixel The number of bits to use per pixel
-             * @param settings Parameters to create the OpenGL context
+             * \param shared The shared context
+             * \param bitsPerPixel The number of bits to use per pixel
+             * \param settings Parameters to create the OpenGL context
              *
              */
             GlxContext(const std::shared_ptr<GlxContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings);
 
-            /*! @brief Constructor
+            /*! \brief Constructor
              *
-             * @param shared The shared context
-             * @param window The window to bind the created context
-             * @param bitsPerPixel The number of bits to use per pixel
-             * @param settings Parameters to create the OpenGL context
+             * \param shared The shared context
+             * \param window The window to bind the created context
+             * \param bitsPerPixel The number of bits to use per pixel
+             * \param settings Parameters to create the OpenGL context
              *
              */
             GlxContext(const std::shared_ptr<GlxContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings);
 
-            /*! @brief Destructor
+            /*! \brief Destructor
              *
              */
             ~GlxContext();
 
-            /*! @brief Display what has been rendered so far
+            /*! \brief Display what has been rendered so far
              *
              */
             void display() override;
 
-            /*! @brief Activate or deactivate the vertical synchronization
+            /*! \brief Activate or deactivate the vertical synchronization
              *
-             * @param active True to activate, false to deactivate
+             * \param active True to activate, false to deactivate
              *
-             * @return Return true if success, false otherwise
+             * \return Return true if success, false otherwise
              *
              */
             void enableVsync(bool active) override;
 
-            /*! @brief Get the render surface of the context
+            /*! \brief Get the render surface of the context
              *
-             * @return Return the render context
+             * \return Return the render context
              *
              */
             SurfaceHandler getSurfaceHandler() const override;
 
         protected:
 
-            /*! @brief Make the context current
+            /*! \brief Make the context current
              *
-             * @return Return true if the context is now active, false otherwise
+             * \return Return true if the context is now active, false otherwise
              *
              */
             bool makeCurrent() override;
 
         private:
 
-            /*! @brief Create the render surface
+            /*! \brief Create the render surface
              *
-             * @param handler The window to bind to this context
+             * \param handler The window to bind to this context
              *
              */
             void createSurface(WindowHandler handler);
 
-            /*! @brief Create the render surface
+            /*! \brief Create the render surface
              *
-             * @param shared       The shared context
-             * @param width        The width of the surface
-             * @param height       The height of the surface
-             * @param bitsPerPixel The number of bits per pixel to use
+             * \param shared       The shared context
+             * \param width        The width of the surface
+             * \param height       The height of the surface
+             * \param bitsPerPixel The number of bits per pixel to use
              *
              */
             void createSurface(const std::shared_ptr<GlxContext>& shared, unsigned int width, unsigned int height, unsigned int bitsPerPixel);
 
-            /*! @brief Create the render context
+            /*! \brief Create the render context
              *
-             * @param shared The shared context
+             * \param shared The shared context
              *
              */
             void createContext(const std::shared_ptr<GlxContext>& shared);
 
-            /*! @brief Update the ContextSettings according to the created context
+            /*! \brief Update the ContextSettings according to the created context
              *
              */
             void updateSettings();

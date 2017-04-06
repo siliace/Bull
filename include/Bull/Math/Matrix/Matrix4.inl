@@ -1,7 +1,7 @@
 namespace Bull
 {
     template<typename T>
-    Matrix4<T> Matrix4<T>::createIdentity()
+    Matrix4<T> Matrix4<T>::makeIdentity()
     {
         Matrix4<T> identity;
 
@@ -14,7 +14,7 @@ namespace Bull
     }
 
     template<typename T>
-    Matrix4<T> Matrix4<T>::createTranslation(T x, T y, T z)
+    Matrix4<T> Matrix4<T>::makeTranslation(T x, T y, T z)
     {
         Matrix4<T> translation = Matrix4<T>::createIdentity();
 
@@ -26,7 +26,7 @@ namespace Bull
     }
 
     template<typename T>
-    Matrix4<T> Matrix4<T>::createScale(T x, T y, T z)
+    Matrix4<T> Matrix4<T>::makeScale(T x, T y, T z)
     {
         Matrix4<T> scale;
 

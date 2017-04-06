@@ -14,17 +14,17 @@ namespace Bull
         {
         public:
 
-            /*! @brief Constructor
+            /*! \brief Constructor
              *
-             * @param function The method to call
-             * @param args     Arguments of the method
+             * \param function The method to call
+             * \param args     Arguments of the method
              *
              */
             FunctorWithArgs(Function function, Args... args);
 
-            /*! @brief Call the stored function
+            /*! \brief Call the stored function
              *
-             * @return Return what the called function returned
+             * \return Return what the called function returned
              *
              */
             Return run();

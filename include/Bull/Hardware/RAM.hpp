@@ -8,9 +8,9 @@ namespace Bull
 {
     struct BULL_API RAM
     {
-        /*! @brief Retrieves the amount of RAM that is physically installed on the computer
+        /*! \brief Retrieves the amount of RAM that is physically installed on the computer
          *
-         * @return Return the amount of RAM
+         * \return Return the amount of RAM
          *
          */
         static Uint64 getSystemMemory();

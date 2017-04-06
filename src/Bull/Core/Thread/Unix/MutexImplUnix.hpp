@@ -17,29 +17,29 @@ namespace Bull
 
         public:
 
-            /*! @brief Default constructor
+            /*! \brief Default constructor
              *
              */
             MutexImplUnix();
 
-            /*! @brief Destructor
+            /*! \brief Destructor
              *
              */
             ~MutexImplUnix();
 
-            /*! @brief Try to lock the mutex
+            /*! \brief Try to lock the mutex
              *
-             * @return Return true if the mutex was locked successfully, else return false
+             * \return Return true if the mutex was locked successfully, else return false
              *
              */
             bool tryLock() override;
 
-            /*! @brief Lock the mutex
+            /*! \brief Lock the mutex
              *
              */
             void lock() override;
 
-            /*! @brief Unlock the mutex
+            /*! \brief Unlock the mutex
              *
              */
             void unlock() override;

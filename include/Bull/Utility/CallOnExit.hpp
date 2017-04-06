@@ -11,37 +11,37 @@ namespace Bull
     {
     public:
 
-        /*! @brief Constructor
+        /*! \brief Constructor
          *
-         * @param callback The function to call when the instance is destroyed
+         * \param callback The function to call when the instance is destroyed
          *
          */
         CallOnExit(Functor<void> callback);
 
-        /*! @brief Destructor
+        /*! \brief Destructor
          *
          * Call the callback if enable
          *
          */
         ~CallOnExit();
 
-        /*! @brief Change the callback
+        /*! \brief Change the callback
          *
-         * @param callback The new callback
+         * \param callback The new callback
          *
          */
         void reset(Functor<void> callback);
 
-        /*! @brief Enable or disable the callback
+        /*! \brief Enable or disable the callback
          *
-         * @param enable Is the callback is enable?
+         * \param enable Is the callback is enable?
          *
          */
         void enable(bool enable = true);
 
-        /*! @brief Check if the callback is enable
+        /*! \brief Check if the callback is enable
          *
-         * @return Return true if the callback is enable, false otherwise
+         * \return Return true if the callback is enable, false otherwise
          *
          */
         bool isEnable() const;

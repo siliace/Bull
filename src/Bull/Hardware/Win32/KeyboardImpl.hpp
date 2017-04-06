@@ -13,22 +13,22 @@ namespace Bull
         {
         public:
 
-            /*! @brief Check if a key is pressed
+            /*! \brief Check if a key is pressed
              *
-             * @param key To key to check the state
+             * \param key To key to check the state
              *
-             * @return Return true if the key is down, false otherwise
+             * \return Return true if the key is down, false otherwise
              *
              */
             static bool isKeyPressed(Keyboard::Key key);
 
         private:
 
-            /*! @brief Convert a Bull::Keyboard::Key to a windows key value
+            /*! \brief Convert a Bull::Keyboard::Key to a windows key value
              *
-             * @param vkey To Bull::Keyboard::Key to convert
+             * \param vkey To Bull::Keyboard::Key to convert
              *
-             * @return Return the VK equivalent
+             * \return Return the VK equivalent
              *
              */
             static UINT convertBullkeyToVK(Keyboard::Key key);

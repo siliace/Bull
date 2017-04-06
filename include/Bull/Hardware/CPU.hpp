@@ -16,16 +16,16 @@ namespace Bull
             Unknown
         };
 
-        /*! @brief Get the number of CPU
+        /*! \brief Get the number of CPU
          *
-         * @return Return the number of CPU
+         * \return Return the number of CPU
          *
          */
         static unsigned int getCount();
 
-        /*! @brief Get the CPU architecture
+        /*! \brief Get the CPU architecture
          *
-         * @return Return the CPU architecture
+         * \return Return the CPU architecture
          *
          */
         static Architecture getArchitecture();

@@ -14,50 +14,50 @@ namespace Bull
         {
         public:
 
-            /*! @brief Create a OS specific instance of ConditionVariableImpl
+            /*! \brief Create a OS specific instance of ConditionVariableImpl
              *
-             * @return Return the created instance
+             * \return Return the created instance
              *
              */
             static ConditionVariableImpl* createInstance();
 
         public:
 
-            /*! @brief Destructor
+            /*! \brief Destructor
              *
              */
             virtual ~ConditionVariableImpl();
 
-            /*! @brief Send a signal to a waiting thread
+            /*! \brief Send a signal to a waiting thread
              *
              */
             virtual void signalOne() = 0;
 
-            /*! @brief Send a signal to all waiting thread
+            /*! \brief Send a signal to all waiting thread
              *
              */
             virtual void signalAll() = 0;
 
-            /*! @brief Wait for a signal
+            /*! \brief Wait for a signal
              *
-             * @param mutex The mutex to lock the resource
+             * \param mutex The mutex to lock the resource
              *
              */
             virtual void wait(MutexImpl* mutex) = 0;
 
-            /*! @brief Wait for a signal
+            /*! \brief Wait for a signal
              *
-             * @param mutex The mutex to lock the resource
-             * @param timeout The time to wait before failing
+             * \param mutex The mutex to lock the resource
+             * \param timeout The time to wait before failing
              *
-             * @return Return false if timeout, else return true
+             * \return Return false if timeout, else return true
              *
              */
             virtual bool wait(MutexImpl* mutex, const Time& timeout) = 0;
 
         protected:
 
-            /*! @brief Default constructor
+            /*! \brief Default constructor
              *
              */
             ConditionVariableImpl() = default;

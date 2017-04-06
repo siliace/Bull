@@ -21,36 +21,36 @@ namespace Bull
 
     public:
 
-        /*! @brief Default constructor
+        /*! \brief Default constructor
          *
          */
         Mutex();
 
-        /*! @brief Destructor
+        /*! \brief Destructor
          *
          */
         ~Mutex();
 
-        /*! @brief Try to lock the mutex
+        /*! \brief Try to lock the mutex
          *
-         * @return Return true if the mutex was locked successfully, else return false
+         * \return Return true if the mutex was locked successfully, else return false
          *
          */
         bool tryLock();
 
-        /*! @brief Lock the mutex
+        /*! \brief Lock the mutex
          *
          */
         void lock();
 
-        /*! @brief Check whether the mutex is locked
+        /*! \brief Check whether the mutex is locked
          *
-         * @return Return true if the mutex is locked, false otherwise
+         * \return Return true if the mutex is locked, false otherwise
          *
          */
         bool isLocked() const;
 
-        /*! @brief Unlock the mutex
+        /*! \brief Unlock the mutex
          *
          */
         void unlock();

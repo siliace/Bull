@@ -11,22 +11,22 @@ namespace Bull
         {
         public:
 
-            /*! @brief Default constructor
+            /*! \brief Default constructor
              *
              */
             FontLoader();
 
-            /*! @brief Destructor
+            /*! \brief Destructor
              *
              */
             ~FontLoader();
 
-            /*! @brief Load glyphs from a font
+            /*! \brief Load glyphs from a font
              *
-             * @param path         The path of the font file
-             * @param characterSet The character set to fill
+             * \param path         The path of the font file
+             * \param characterSet The character set to fill
              *
-             * @return True if glyphs were loaded successfully
+             * \return True if glyphs were loaded successfully
              *
              */
             bool loadFromPath(const Path& path, std::unordered_map<unsigned char, Glyph>& characterSet) const override;

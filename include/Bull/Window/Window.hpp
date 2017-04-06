@@ -30,9 +30,9 @@ namespace Bull
     {
     public:
 
-        /*! @brief Get the fullscreen window
+        /*! \brief Get the fullscreen window
          *
-         * @return Return a pointer to the window in fullscreen
+         * \return Return a pointer to the window in fullscreen
          *
          */
         static const Window* getFullscreen();
@@ -162,247 +162,247 @@ namespace Bull
 
     public:
 
-        /*! @brief Default constructor
+        /*! \brief Default constructor
          *
          */
         Window();
 
-        /*! @brief Constructor
+        /*! \brief Constructor
          *
-         * @param mode  The VideoMode
-         * @param title The title of the window
-         * @param style The window decorations
+         * \param mode  The VideoMode
+         * \param title The title of the window
+         * \param style The window decorations
          *
          */
         Window(const VideoMode& mode, const String& title, Uint32 style = Style::Default);
 
-        /*! @brief Destructor
+        /*! \brief Destructor
          *
          */
         virtual ~Window();
 
-        /*! @brief Open the window
+        /*! \brief Open the window
          *
-         * @param mode  The VideoMode
-         * @param title The title of the window
-         * @param style The window decorations
+         * \param mode  The VideoMode
+         * \param title The title of the window
+         * \param style The window decorations
          *
-         * @return Return true if the window was open successfully, false otherwise
+         * \return Return true if the window was open successfully, false otherwise
          *
          */
         bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default);
 
-        /*! @brief Check if the window is open
+        /*! \brief Check if the window is open
          *
-         * @return Return true if the window is open, else return false
+         * \return Return true if the window is open, else return false
          *
          */
         bool isOpen() const;
 
-        /*! @brief Close the window
+        /*! \brief Close the window
          *
          */
         void close();
 
-        /*! @brief Get the first event on the stack without blocking the current thread
+        /*! \brief Get the first event on the stack without blocking the current thread
          *
-         * @param e An event to fill
+         * \param e An event to fill
          *
-         * @return Return true if the event stack was not empty, else return false
+         * \return Return true if the event stack was not empty, else return false
          *
          */
         bool pollEvent(Event& e);
 
-        /*! @brief Get the first event on the stack and blocking the current thread
+        /*! \brief Get the first event on the stack and blocking the current thread
          *
-         * @return Return the first event of the stack
+         * \return Return the first event of the stack
          *
          */
         Event nextEvent();
 
-        /*! @brief Enable or disable the capture of the cursor inside the window
+        /*! \brief Enable or disable the capture of the cursor inside the window
          *
-         * @param enable The state of the capture
+         * \param enable The state of the capture
          *
          */
         void enableCaptureCursor(bool enable = true);
 
-        /*! @brief Hide or the cursor
+        /*! \brief Hide or the cursor
          *
-         * @param enable The state of the cursor
+         * \param enable The state of the cursor
          *
          */
         void showCursor(bool enable = true);
 
-        /*! @brief Minimize a window
+        /*! \brief Minimize a window
          *
          */
         void minimize();
 
-        /*! @brief Check if the window is minimized
+        /*! \brief Check if the window is minimized
          *
-         * @return Return true if the window is minimized, false otherwise
+         * \return Return true if the window is minimized, false otherwise
          *
          */
         bool isMinimized() const;
 
-        /*! @brief Maximize a window
+        /*! \brief Maximize a window
          *
          */
         void maximize();
 
-        /*! @brief Check if the window is maximized
+        /*! \brief Check if the window is maximized
          *
-         * @return Return true if the window is maximized, false otherwise
+         * \return Return true if the window is maximized, false otherwise
          *
          */
         bool isMaximized() const;
 
-        /*! @brief Set the window position
+        /*! \brief Set the window position
          *
-         * @param position The new position of the window
+         * \param position The new position of the window
          *
          */
         void setPosition(const Vector2I& position);
 
-        /*! @brief Set the window position
+        /*! \brief Set the window position
          *
-         * @param x The new position of the left side of the window in the screen
-         * @param y The new position of the top of the window in the screen
+         * \param x The new position of the left side of the window in the screen
+         * \param y The new position of the top of the window in the screen
          *
          */
         void setPosition(int x, int y);
 
-        /*! @brief Get the position in the screen of the window
+        /*! \brief Get the position in the screen of the window
          *
-         * @return Return the window position
+         * \return Return the window position
          *
          */
         Vector2I getPosition() const;
 
-        /*! @brief Set the size of the window
+        /*! \brief Set the size of the window
          *
-         * @param size The new size of the window
+         * \param size The new size of the window
          *
          */
         void setSize(const Vector2UI& size);
 
-        /*! @brief Set the size of the window
+        /*! \brief Set the size of the window
          *
-         * @param x The new width of the window
-         * @param y The new height of the window
+         * \param x The new width of the window
+         * \param y The new height of the window
          *
          */
         void setSize(unsigned int x, unsigned int y);
 
-        /*! @brief Get the size of the window
+        /*! \brief Get the size of the window
          *
-         * @return Return the size of the window
+         * \return Return the size of the window
          *
          */
         Vector2UI getSize() const;
 
-        /*! @brief Set the title of the window
+        /*! \brief Set the title of the window
          *
-         * @param title The new title of the window
+         * \param title The new title of the window
          *
          */
         void setTitle(const String& title);
 
-        /*! @brief Get the title of the window
+        /*! \brief Get the title of the window
          *
-         * @return Return the title of the window
+         * \return Return the title of the window
          *
          */
         String getTitle() const;
 
-        /*! @brief Enable or disable the key repeat
+        /*! \brief Enable or disable the key repeat
          *
-         * @param enable The state of the key repeat
+         * \param enable The state of the key repeat
          *
          */
         void enableKeyRepeat(bool enable = true);
 
-        /*! @brief Get the state of the key repeat
+        /*! \brief Get the state of the key repeat
          *
-         * @param Return true if the key repeat is enable, false otherwise
+         * \param Return true if the key repeat is enable, false otherwise
          *
          */
         bool isKeyRepeatEnable() const;
 
-        /*! @brief Check if the window has the focus
+        /*! \brief Check if the window has the focus
          *
-         * @param Return true if the window has the focus, false otherwise
+         * \param Return true if the window has the focus, false otherwise
          *
          */
         bool hasFocus() const;
 
-        /*! @brief Show or hide the window
+        /*! \brief Show or hide the window
          *
-         * @param visible True to show the window, false to hide the window
+         * \param visible True to show the window, false to hide the window
          *
          */
         void setVisible(bool visible = true);
 
-        /*! @brief Enter or leave the fullscreen mode
+        /*! \brief Enter or leave the fullscreen mode
          *
-         * @param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
+         * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
          *
-         * @return Return true if the switch was done successfully, false otherwise
+         * \return Return true if the switch was done successfully, false otherwise
          *
          */
         bool enableFullscreen(bool enable = true);
 
-        /*! @brief Check if a window is in fullscreen
+        /*! \brief Check if a window is in fullscreen
          *
-         * @return Return true if the window is in fullscreen, false otherwise
+         * \return Return true if the window is in fullscreen, false otherwise
          *
          */
         bool isFullscreenEnable() const;
 
-        /*! @brief Get the window system handler
+        /*! \brief Get the window system handler
          *
-         * @return Return the native window system handler
+         * \return Return the native window system handler
          *
          */
         WindowHandler getSystemHandler() const;
 
     protected:
 
-        /*! @brief Open a window
+        /*! \brief Open a window
          *
          * This method takes a ContextSettings as parameter
          * but this value is used only on X11 implementation
          * that required to know the pixel format to be able
          * to bind an OpenGL context on this window
          *
-         * @param mode  The VideoMode
-         * @param title The title of the window
-         * @param style The window decorations
+         * \param mode  The VideoMode
+         * \param title The title of the window
+         * \param style The window decorations
          *
          */
         virtual bool open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
 
-        /*! @brief Callback triggered when the window is open
+        /*! \brief Callback triggered when the window is open
          *
          */
         virtual void onOpen() {}
 
-        /*! @brief Callback triggered the the window is resized
+        /*! \brief Callback triggered the the window is resized
          *
          */
         virtual void onResize() {}
 
-        /*! @brief Callback triggered when the window is closed
+        /*! \brief Callback triggered when the window is closed
          *
          */
         virtual void onClose() {}
 
     private:
 
-        /*! @brief Filter events to start callbacks
+        /*! \brief Filter events to start callbacks
          *
-         * @param e The event to filter
+         * \param e The event to filter
          *
          */
         void filterEvent(const Event& e);
