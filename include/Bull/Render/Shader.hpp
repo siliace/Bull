@@ -46,6 +46,36 @@ namespace Bull
          */
         bool attach(const ShaderStage& stage);
 
+        /*! @brief Load a ShaderStage from a file and attach to this Shader
+         *
+         * @param path The path of the file of the ShaderStage to load and attach
+         * @param type The type of the ShaderStage to load
+         *
+         * @return True if the stage was attached successfully
+         *
+         */
+        bool attachFromPath(const Path& path, ShaderStage::Type type);
+
+        /*! @brief Load a ShaderStage from its code and attach to this Shader
+         *
+         * @param path The source code of the ShaderStage to load
+         * @param type The type of the ShaderStage to load
+         *
+         * @return True if the stage was attached successfully
+         *
+         */
+        bool attachFromCode(const String& code, ShaderStage::Type type);
+
+        /*! @brief Load a ShaderStage from a stream and attach to this Shader
+         *
+         * @param path The stream to read to load the ShaderStage
+         * @param type The type of the ShaderStage to load
+         *
+         * @return True if the stage was attached successfully
+         *
+         */
+        bool attachFromStream(InStream& stream, ShaderStage::Type type);
+
         /*! @brief Link the shader
          *
          * @return True if the shader was linked successfully
@@ -57,6 +87,13 @@ namespace Bull
          *
          */
         void bind() const;
+
+        /*! @brief Check if the Shader is valid
+         *
+         * @return True if the Shader is valis
+         *
+         */
+        bool isValid() const;
 
         /*! @brief Set an uniform variable
          *

@@ -52,11 +52,6 @@ namespace Bull
 
         public:
 
-            /*! @brief Default constructor
-             *
-             */
-            WindowImplWin32() = delete;
-
             /*! @brief Constructor
              *
              * @param mode The VideoMode to use

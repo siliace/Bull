@@ -1,4 +1,3 @@
-#include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Texture.hpp>
 
 namespace Bull
@@ -6,6 +5,7 @@ namespace Bull
     Texture::Texture() :
         m_id(0),
         m_size(0, 0),
+        m_sampler(Sampler0),
         m_isSmooth(false),
         m_isRepeated(false)
     {
@@ -68,9 +68,33 @@ namespace Bull
         return false;
     }
 
+    bool Texture::loadFromStream(InStream &stream)
+    {
+        Image img;
+
+        if(img.loadFromStream(stream))
+        {
+            return loadFromImage(img);
+        }
+
+        return false;
+    }
+
     bool Texture::loadFromImage(const Image& image)
     {
         return loadFromPixels(image.getPixels(), image.getSize());
+    }
+
+    bool Texture::loadFromMemory(const void* data, std::size_t dataSize)
+    {
+        Image img;
+
+        if(img.loadFromMemory(data, dataSize))
+        {
+            return loadFromImage(img);
+        }
+
+        return false;
     }
 
     bool Texture::loadFromPixels(const std::vector<Uint8>& pixels, const Vector2UI& size)
@@ -92,10 +116,32 @@ namespace Bull
         return false;
     }
 
-    void Texture::bind(Sampler sampler) const
+    bool Texture::loadFromPixels(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height)
     {
-        gl::activeTexture(GL_TEXTURE0 + sampler);
-        gl::bindTexture(GL_TEXTURE_2D, m_id);
+        return loadFromPixels(pixels, Vector2UI(width, height));
+    }
+
+    void Texture::bind() const
+    {
+        if(m_id)
+        {
+            gl::bindTexture(GL_TEXTURE_2D, m_id);
+        }
+    }
+
+    void Texture::setSampler(Sampler sampler)
+    {
+        m_sampler = sampler;
+
+        if(m_id)
+        {
+            gl::activeTexture(GL_TEXTURE0 + sampler);
+        }
+    }
+
+    Texture::Sampler Texture::getSampler() const
+    {
+        return m_sampler;
     }
 
     void Texture::enableRepeat(bool enable)

@@ -21,15 +21,15 @@ namespace Bull
     Shader::Shader() :
         m_program(gl::createProgram())
     {
-        if(m_program == 0)
-        {
-            throw std::runtime_error("Failed to create program");
-        }
+        /// Nothing
     }
 
     Shader::~Shader()
     {
-        gl::deleteProgram(m_program);
+        if(isValid())
+        {
+            gl::deleteProgram(m_program);
+        }
     }
 
     bool Shader::attach(const ShaderStage& stage)
@@ -39,6 +39,43 @@ namespace Bull
             gl::attachShader(m_program, stage.getSystemHandler());
 
             return true;
+        }
+
+        return false;
+    }
+
+    bool Shader::attachFromPath(const Path& path, ShaderStage::Type type)
+    {
+        ShaderStage stage(path, type);
+
+        if(stage.compile())
+        {
+            return attach(stage);
+        }
+
+        return false;
+
+    }
+
+    bool Shader::attachFromCode(const String& code, ShaderStage::Type type)
+    {
+        ShaderStage stage(code, type);
+
+        if(stage.compile())
+        {
+            return attach(stage);
+        }
+
+        return false;
+    }
+
+    bool Shader::attachFromStream(InStream& stream, ShaderStage::Type type)
+    {
+        ShaderStage stage(stream, type);
+
+        if(stage.compile())
+        {
+            return attach(stage);
         }
 
         return false;
@@ -64,7 +101,15 @@ namespace Bull
 
     void Shader::bind() const
     {
-        gl::useProgram(m_program);
+        if(isValid())
+        {
+            gl::useProgram(m_program);
+        }
+    }
+
+    bool Shader::isValid() const
+    {
+        return gl::isProgram(m_program) != 0;
     }
 
     bool Shader::setUniform(const String& name, int uniform)
@@ -83,6 +128,7 @@ namespace Bull
         else
         {
             bind();
+
             gl::uniform1i(location, uniform);
         }
 
@@ -109,6 +155,7 @@ namespace Bull
         else
         {
             bind();
+
             gl::uniform4f(location,
                           static_cast<float>(uniform.red)   / 255.f,
                           static_cast<float>(uniform.green) / 255.f,
@@ -135,6 +182,7 @@ namespace Bull
         else
         {
             bind();
+
             gl::uniformMatrix4fv(location, 1, true, uniform);
         }
 
@@ -168,9 +216,8 @@ namespace Bull
 
             gl::getProgramiv(m_program, GL_INFO_LOG_LENGTH, &capacity);
 
-            message.reserve(capacity);
-
-            gl::getProgramInfoLog(m_program, capacity, nullptr, &message[0]);
+            message.reserve(static_cast<std::size_t>(capacity));
+            gl::getProgramInfoLog(m_program, static_cast<int>(message.getCapacity()), nullptr, &message[0]);
 
             return message;
         }

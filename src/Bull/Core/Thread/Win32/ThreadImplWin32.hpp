@@ -33,11 +33,6 @@ namespace Bull
 
         public:
 
-            /*! @brief Default constructor
-             *
-             */
-            ThreadImplWin32() = delete;
-
             /*! @brief Constructor
              *
              * @param function The function to run

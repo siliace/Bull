@@ -37,6 +37,12 @@ namespace Bull
          */
         ShaderStage(Type type);
 
+        ShaderStage(const Path& path, Type type);
+
+        ShaderStage(const String& code, Type type);
+
+        ShaderStage(InStream& stream, Type type);
+
         /*! @brief Constructor
          *
          * @param stage
@@ -119,6 +125,13 @@ namespace Bull
          *
          */
         bool isValid() const;
+
+        /*! @brief Get the source code of the shader
+         *
+         * @return The source code
+         *
+         */
+        String getSource() const;
 
         /*! @brief Get the type of the shader
          *

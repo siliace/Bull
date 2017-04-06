@@ -33,11 +33,6 @@ namespace Bull
 
         public:
 
-            /*! @brief Default constructor
-             *
-             */
-            ThreadImplUnix() = delete;
-
             /*! @brief Contructor
              *
              * @param function The function to run

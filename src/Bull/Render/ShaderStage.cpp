@@ -20,6 +20,24 @@ namespace Bull
         create(type);
     }
 
+    ShaderStage::ShaderStage(const Path& path, Type type)
+    {
+        create(type);
+        loadFromPath(path);
+    }
+
+    ShaderStage::ShaderStage(const String& code, Type type)
+    {
+        create(type);
+        loadFromCode(code);
+    }
+
+    ShaderStage::ShaderStage(InStream& stream, Type type)
+    {
+        create(type);
+        loadFromStream(stream);
+    }
+
     ShaderStage::ShaderStage(ShaderStage&& stage) :
         m_id(stage.m_id),
         m_type(stage.m_type),
@@ -129,6 +147,24 @@ namespace Bull
     bool ShaderStage::isValid() const
     {
         return m_id != 0;
+    }
+
+    String ShaderStage::getSource() const
+    {
+        if(isValid())
+        {
+            String code;
+            int size, capacity;
+
+            gl::getShaderiv(m_id, GL_SHADER_SOURCE_LENGTH, &capacity);
+
+            code.reserve(static_cast<std::size_t>(capacity));
+            gl::getShaderSource(m_id, static_cast<int>(code.getSize()), &size, &code[0]);
+
+            return code;
+        }
+
+        return String();
     }
 
     ShaderStage::Type ShaderStage::getType() const

@@ -13,19 +13,6 @@ namespace Bull
         /// Nothing
     }
 
-    Image::Image(const std::vector<Uint8>& pixels, const Vector2UI& size) :
-        m_size(size),
-        m_pixels(pixels)
-    {
-        /// Nothing
-    }
-
-    Image::Image(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height) :
-        Image(pixels, Vector2UI(width, height))
-    {
-        /// Nothing
-    }
-
     Image::Image(unsigned int width, unsigned int height, const Color& color) :
         m_size(width, height),
         m_pixels(width * height * 4)
@@ -39,9 +26,27 @@ namespace Bull
         }
     }
 
+    Image::Image(const std::vector<Uint8>& pixels, const Vector2UI& size) :
+        m_size(size),
+        m_pixels(pixels)
+    {
+        /// Nothing
+    }
+
+    Image::Image(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height) :
+        Image(pixels, Vector2UI(width, height))
+    {
+        /// Nothing
+    }
+
     bool Image::loadFromPath(const Path& path)
     {
         return loader->loadFromPath(path, m_pixels, m_size);
+    }
+
+    bool Image::loadFromStream(InStream& stream)
+    {
+        return loader->loadFromStream(stream, m_pixels, m_size);
     }
 
     bool Image::loadFromMemory(const void* data, std::size_t dataSize)
@@ -49,9 +54,17 @@ namespace Bull
         return loader->loadFromMemory(data, dataSize, m_pixels, m_size);
     }
 
-    bool Image::loadFromStream(InStream& stream)
+    bool Image::loadFromPixels(const std::vector<Uint8>& pixels, const Vector2UI& size)
     {
-        return loader->loadFromStream(stream, m_pixels, m_size);
+        m_size   = size;
+        m_pixels = pixels;
+
+        return true;
+    }
+
+    bool Image::loadFromPixels(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height)
+    {
+        return loadFromPixels(pixels, Vector2UI(width, height));
     }
 
     void Image::set(unsigned int x, unsigned int y, const Color& color)
