@@ -1,6 +1,5 @@
 #include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Texture.hpp>
-#include <Bull/Render/TextureStateSaver.hpp>
 
 namespace Bull
 {
@@ -30,7 +29,6 @@ namespace Bull
     {
         if(size.x > 0 && size.y > 0)
         {
-            TextureStateSaver saver;
             m_size = size;
 
             if(m_id == 0)
@@ -79,7 +77,6 @@ namespace Bull
     {
         if(create(size))
         {
-            TextureStateSaver saver;
             gl::bindTexture(GL_TEXTURE_2D, m_id);
 
             for(unsigned int i = 0; i < m_size.y; i++)
@@ -95,7 +92,7 @@ namespace Bull
         return false;
     }
 
-    void Texture::bind(Uint8 sampler) const
+    void Texture::bind(Sampler sampler) const
     {
         gl::activeTexture(GL_TEXTURE0 + sampler);
         gl::bindTexture(GL_TEXTURE_2D, m_id);
@@ -107,10 +104,6 @@ namespace Bull
 
         if(m_id)
         {
-            TextureStateSaver saver;
-
-            ensureContext();
-
             gl::bindTexture(GL_TEXTURE_2D, m_id);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
@@ -128,10 +121,6 @@ namespace Bull
 
         if(m_id)
         {
-            TextureStateSaver saver;
-
-            ensureContext();
-
             gl::bindTexture(GL_TEXTURE_2D, m_id);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
@@ -157,10 +146,7 @@ namespace Bull
     {
         if(m_id)
         {
-            TextureStateSaver saver;
             std::vector<Uint8> pixels(m_size.x * m_size.y * 4);
-
-            ensureContext();
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
             gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);

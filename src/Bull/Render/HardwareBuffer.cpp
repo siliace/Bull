@@ -105,6 +105,7 @@ namespace Bull
         if(m_id)
         {
             bind();
+
             gl::unmapBuffer(m_type);
         }
     }

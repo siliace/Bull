@@ -111,8 +111,29 @@ namespace Bull
              */
             bool saveToPath(const Path& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
 
+            /*! @brief Save an image
+             *
+             * @param outStream The stream to fill
+             * @param format    The format to use to save the image
+             * @param pixels    Pixels of the image to save
+             * @param size      The size of the image to save
+             *
+             * @return True if the image was saved successfully
+             *
+             */
             bool saveToStream(OutStream& outStream, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
 
+            /*! @brief Save an image
+             *
+             * @param data     Data to fill
+             * @param dataSize The size of data
+             * @param format   The format to use to save the image
+             * @param pixels   Pixels of the image to save
+             * @param size     The size of the image to save
+             *
+             * @return True if the image was saved successfully
+             *
+             */
             bool saveToMemory(void* data, std::size_t dataSize, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
 
         private:
@@ -128,8 +149,29 @@ namespace Bull
              */
             bool saveBmpToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
 
+            /*! @brief Save an image as .bmp stream
+             *
+             * @param outStream The stream to fill
+             * @param format    The format to use to save the image
+             * @param pixels    Pixels of the image to save
+             * @param size      The size of the image to save
+             *
+             * @return True if the image was saved successfully
+             *
+             */
             bool saveBmpToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
 
+            /*! @brief Save an image as .bmp to a memory area
+             *
+             * @param data     Data to fill
+             * @param dataSize The size of data
+             * @param format   The format to use to save the image
+             * @param pixels   Pixels of the image to save
+             * @param size     The size of the image to save
+             *
+             * @return True if the image was saved successfully
+             *
+             */
             bool saveBmpToMemory(void* data, std::size_t dataSize, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
 
             /*! @brief Save an image as .png file
@@ -143,8 +185,29 @@ namespace Bull
              */
             bool savePngToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
 
+            /*! @brief Save an image as .png stream
+             *
+             * @param outStream The stream to fill
+             * @param format    The format to use to save the image
+             * @param pixels    Pixels of the image to save
+             * @param size      The size of the image to save
+             *
+             * @return True if the image was saved successfully
+             *
+             */
             bool savePngToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
 
+            /*! @brief Save an image as .png to a memory area
+             *
+             * @param data     Data to fill
+             * @param dataSize The size of data
+             * @param format   The format to use to save the image
+             * @param pixels   Pixels of the image to save
+             * @param size     The size of the image to save
+             *
+             * @return True if the image was saved successfully
+             *
+             */
             bool savePngToMemory(void* data, std::size_t dataSize, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
 
             /*! @brief Save an image as .tga file
@@ -158,8 +221,29 @@ namespace Bull
              */
             bool saveTgaToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
 
+            /*! @brief Save an image as .tga stream
+             *
+             * @param outStream The stream to fill
+             * @param format    The format to use to save the image
+             * @param pixels    Pixels of the image to save
+             * @param size      The size of the image to save
+             *
+             * @return True if the image was saved successfully
+             *
+             */
             bool saveTgaToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
 
+            /*! @brief Save an image as .tga to a memory area
+             *
+             * @param data     Data to fill
+             * @param dataSize The size of data
+             * @param format   The format to use to save the image
+             * @param pixels   Pixels of the image to save
+             * @param size     The size of the image to save
+             *
+             * @return True if the image was saved successfully
+             *
+             */
             bool saveTgaToMemory(void* data, std::size_t dataSize, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
         };
     }

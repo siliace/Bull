@@ -61,8 +61,29 @@ namespace Bull
          */
         virtual bool saveToPath(const Path& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
 
+        /*! @brief Save an image
+         *
+         * @param outStream The stream to fill
+         * @param format    The format to use to save the image
+         * @param pixels    Pixels of the image to save
+         * @param size      The size of the image to save
+         *
+         * @return True if the image was saved successfully
+         *
+         */
         virtual bool saveToStream(OutStream& outStream, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
 
+        /*! @brief Save an image
+         *
+         * @param data     Data to fill
+         * @param dataSize The size of data
+         * @param format   The format to use to save the image
+         * @param pixels   Pixels of the image to save
+         * @param size     The size of the image to save
+         *
+         * @return True if the image was saved successfully
+         *
+         */
         virtual bool saveToMemory(void* data, std::size_t dataSize, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
     };
 }

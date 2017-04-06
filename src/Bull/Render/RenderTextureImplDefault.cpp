@@ -1,6 +1,5 @@
 #include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/RenderTextureImplDefault.hpp>
-#include <Bull/Render/TextureStateSaver.hpp>
 
 namespace Bull
 {
@@ -27,8 +26,6 @@ namespace Bull
 
         void RenderTextureImplDefault::updateTarget()
         {
-            TextureStateSaver saver;
-
             gl::bindTexture(GL_TEXTURE_2D, m_target);
             gl::copyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, m_size.x, m_size.y);
         }

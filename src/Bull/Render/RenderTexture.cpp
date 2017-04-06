@@ -9,7 +9,7 @@ namespace Bull
         /// Nothing
     }
 
-    bool RenderTexture::create(const Vector2UI& size, Color color, const ContextSettings& settings)
+    bool RenderTexture::create(const Vector2UI& size, const ContextSettings& settings)
     {
         m_context.reset(prv::GlContext::createInstance(VideoMode(size.x, size.y), settings));
 

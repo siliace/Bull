@@ -17,6 +17,44 @@ namespace Bull
     {
     public:
 
+        enum Sampler
+        {
+            Sampler0,
+            Sampler1,
+            Sampler2,
+            Sampler3,
+            Sampler4,
+            Sampler5,
+            Sampler6,
+            Sampler7,
+            Sampler8,
+            Sampler9,
+            Sampler10,
+            Sampler11,
+            Sampler12,
+            Sampler13,
+            Sampler14,
+            Sampler15,
+            Sampler16,
+            Sampler17,
+            Sampler18,
+            Sampler19,
+            Sampler20,
+            Sampler21,
+            Sampler22,
+            Sampler23,
+            Sampler24,
+            Sampler25,
+            Sampler26,
+            Sampler27,
+            Sampler28,
+            Sampler29,
+            Sampler30,
+            Sampler31,
+        };
+
+    public:
+
         /*! @brief Default constructor
          *
          */
@@ -78,7 +116,7 @@ namespace Bull
          * @param sampler The sampler to use to bind the buffer
          *
          */
-        void bind(Uint8 sampler = 0) const;
+        void bind(Sampler sampler = Sampler0) const;
 
         /*! @brief Enable or disable the texture repeat
          *

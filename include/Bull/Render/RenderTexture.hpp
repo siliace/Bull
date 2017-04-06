@@ -34,14 +34,13 @@ namespace Bull
 
         /*! @brief Create the RenderTexture
          *
-         * @param size  The size of the RenderTexture
-         * @param color The color to fill the RenderTexture
+         * @param size     The size of the RenderTexture
          * @param settings Settings to use to create the RenderTexture
          *
          * @return Return true if the RenderTexture was created successfully, false otherwise
          *
          */
-        bool create(const Vector2UI& size, Color color = Color::Black, const ContextSettings& settings = ContextSettings::Worst);
+        bool create(const Vector2UI& size, const ContextSettings& settings = ContextSettings::Worst);
 
         /*! @brief Get the default viewport of the RenderTarget
          *

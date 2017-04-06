@@ -4,7 +4,6 @@
 #include <unordered_map>
 
 #include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Utility/Glyph.hpp>
 
@@ -12,7 +11,7 @@ namespace Bull
 {
     class AbstractFontLoader;
 
-    class BULL_API Font : public NonCopyable
+    class BULL_API Font
     {
     public:
 
