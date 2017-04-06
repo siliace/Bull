@@ -14,6 +14,19 @@ namespace Bull
     }
 
     template<typename T>
+    Matrix4<T> Matrix4<T>::makeScale(T x, T y, T z)
+    {
+        Matrix4<T> scale;
+
+        scale(0, 0) = static_cast<T>(x);
+        scale(1, 1) = static_cast<T>(y);
+        scale(2, 2) = static_cast<T>(z);
+        scale(3, 3) = static_cast<T>(1.0);
+
+        return scale;
+    }
+
+    template<typename T>
     Matrix4<T> Matrix4<T>::makeTranslation(T x, T y, T z)
     {
         Matrix4<T> translation = Matrix4<T>::createIdentity();
@@ -26,16 +39,13 @@ namespace Bull
     }
 
     template<typename T>
-    Matrix4<T> Matrix4<T>::makeScale(T x, T y, T z)
+    Matrix4<T> Matrix4<T>::makeLookAt(const Vector3<T>& eye, const Vector3<T>& target, const Vector3<T> up)
     {
-        Matrix4<T> scale;
+        Matrix4<T> lookAt;
 
-        scale(0, 0) = static_cast<T>(x);
-        scale(1, 1) = static_cast<T>(y);
-        scale(2, 2) = static_cast<T>(z);
-        scale(3, 3) = static_cast<T>(1.0);
 
-        return scale;
+
+        return lookAt;
     }
 
     template<typename T>

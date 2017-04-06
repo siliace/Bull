@@ -12,6 +12,15 @@ namespace Bull
     template<typename T>
     struct BULL_API Vector4
     {
+        /*! \brief Get a normalized Vector4
+         *
+         * \param vector The Vector4 to normalize
+         *
+         * \return The normalized Vector4
+         *
+         */
+        static Vector4<T> normalize(const Vector4<T>& vector);
+
         /*! \brief Calculate the dot(scalar) product of two Vector4
          *
          * \param left  The left Vector4 of the product
@@ -58,6 +67,13 @@ namespace Bull
          *
          */
         float getLength() const;
+
+        /*! \brief Normalize the Vector4
+         *
+         * \return This
+         *
+         */
+        Vector4<T>& normalize();
 
         /*! \brief Calculate the dot(scalar) product of two vectors
          *

@@ -1,6 +1,12 @@
 namespace Bull
 {
     template<typename T>
+    Vector4<T> Vector4<T>::normalize(const Vector4<T>& vector)
+    {
+        return Vector4<T>(vector).normalize();
+    }
+
+    template<typename T>
     T Vector4<T>::dotProduct(const Vector4& left, const Vector4& right)
     {
         return (left.x * right.x) + (left.y * right.y) + (left.z * right.z) + (left.w * right.w);
@@ -50,6 +56,17 @@ namespace Bull
     float Vector4<T>::getLength() const
     {
         return std::sqrt(std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2) + std::pow(w, 2));
+    }
+
+    template<typename T>
+    Vector4<T>& Vector4<T>::normalize()
+    {
+        x /= w;
+        y /= w;
+        z /= w;
+        w  = 0.0;
+
+        return (*this);
     }
 
     template<typename T>

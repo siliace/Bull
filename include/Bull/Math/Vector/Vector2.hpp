@@ -8,6 +8,15 @@ namespace Bull
     template<typename T>
     struct Vector2
     {
+        /*! \brief Get a normalized Vector2
+         *
+         * \param vector The Vector2 to normalize
+         *
+         * \return The normalized Vector2
+         *
+         */
+        static Vector2<T> normalize(const Vector2<T>& vector);
+
         /*! \brief Calculate the dot(scalar) product of two Vector2
          *
          * \param left  The left Vector2 of the product
@@ -44,6 +53,13 @@ namespace Bull
          *
          */
         float getLength() const;
+
+        /*! \brief Normalize the Vector2
+         *
+         * \return This
+         *
+         */
+        Vector2<T>& normalize();
 
         /*! \brief Calculate the dot(scalar) product of two vectors
          *

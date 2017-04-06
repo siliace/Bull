@@ -15,12 +15,25 @@ namespace Bull
     {
     public:
 
+        static constexpr Matrix4<T> Zero = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; /*!< A Zero Matrix4 */
+
         /*! \brief Create an identity matrix
          *
-         * \return Return the matrix
+         * \return The identity matrix
          *
          */
         static Matrix4<T> makeIdentity();
+
+        /*! \brief Create a scaling matrix
+         *
+         * \param x The scale value on x axis
+         * \param y The scale value on y axis
+         * \param z The scale value on z axis
+         *
+         * \return The scaling matrix
+         *
+         */
+        static Matrix4<T> makeScale(T x, T y, T z);
 
         /*! \brief Create a translation matrix
          *
@@ -28,21 +41,21 @@ namespace Bull
          * \param y The translation value on y axis
          * \param z The translation value on z axis
          *
-         * \return Return the matrix
+         * \return The translation matrix
          *
          */
         static Matrix4<T> makeTranslation(T x, T y, T z);
 
-        /*! \brief Create a scale matrix
+        /*! \brief Create a look at matrix
          *
-         * \param x The scale value on x axis
-         * \param y The scale value on y axis
-         * \param z The scale value on z axis
+         * \param eye    The position of the eye (e.g camera)
+         * \param target The position of the point to look
+         * \param up     The up vector
          *
-         * \return Return the matrix
+         * \return The look matrix
          *
          */
-        static Matrix4<T> makeScale(T x, T y, T z);
+        static Matrix4<T> makeLookAt(const Vector3<T>& eye, const Vector3<T>& target, const Vector3<T> up = Vector3<T>::Up);
 
     public:
 

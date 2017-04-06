@@ -28,6 +28,15 @@ namespace Bull
         static constexpr Vector3<T> Forward  = {0.0, 0.0, 1.0};
         static constexpr Vector3<T> Backward = {0.0, 0.0, -1.0};
 
+        /*! \brief Get a normalized Vector3
+         *
+         * \param vector The Vector3 to normalize
+         *
+         * \return The normalized Vector3
+         *
+         */
+        static Vector3<T> normalize(const Vector3<T>& vector);
+
         /*! \brief Calculate the dot(scalar) product of two Vector3
          *
          * \param left  The left Vector3 of the product
@@ -73,6 +82,13 @@ namespace Bull
          *
          */
         float getLength() const;
+
+        /*! \brief Normalize the Vector3
+         *
+         * \return This
+         *
+         */
+        Vector3<T>& normalize();
 
         /*! \brief Calculate the dot(scalar) product of two vectors
          *
