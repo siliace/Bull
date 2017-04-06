@@ -45,7 +45,17 @@ namespace Bull
          * \return The value of the dot product of left and right
          *
          */
-        static T dotProduct(const Vector3& left, const Vector3& right);
+        static T dotProduct(const Vector3<T>& left, const Vector3<T>& right);
+
+        /*! \brief Compute the crossProduct of two Vector3
+         *
+         * \param left
+         * \param right
+         *
+         * \return The normal Vector3
+         *
+         */
+        static Vector3<T> crossProduct(const Vector3<T>& left, const Vector3<T>& right);
 
         /*! \brief Default constructor
          *
@@ -76,6 +86,14 @@ namespace Bull
          */
         Vector3(const Vector2<T>& copy, T z = 0);
 
+        Vector3<T>& set(T value);
+
+        Vector3<T>& set(T x, T y, T z);
+
+        Vector3<T>& set(const Vector3<T>& copy);
+
+        Vector3<T>& set(const Vector2<T>& copy, T z);
+
         /*! \brief Compute the length
          *
          * \return Return the length of the vector
@@ -90,14 +108,23 @@ namespace Bull
          */
         Vector3<T>& normalize();
 
-        /*! \brief Calculate the dot(scalar) product of two vectors
+        /*! \brief Compute the dot product of two Vector3
          *
-         * \param right The other to calculate the dot product with
+         * \param right The other Vector3 to computer the dot product with
          *
-         * \return The value of the dot product
+         * \return This
          *
          */
-        T dotProduct(const Vector3& right);
+        T dotProduct(const Vector3<T>& right);
+
+        /*! \brief Compute the cross product of two Vector3
+         *
+         * \param right The other Vector3 to compute the cross product with
+         *
+         * \return This
+         *
+         */
+        Vector3<T>& crossProduct(const Vector3<T>& right);
 
         /*! \brief == operator override
          *

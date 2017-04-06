@@ -29,7 +29,7 @@ namespace Bull
          * \return The value of the dot product of left and right
          *
          */
-        static T dotProduct(const Vector4& left, const Vector4& right);
+        static T dotProduct(const Vector4<T>& left, const Vector4<T>& right);
 
         /*! \brief Default constructor
          *

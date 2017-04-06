@@ -17,7 +17,7 @@ namespace Bull
          */
         static Vector2<T> normalize(const Vector2<T>& vector);
 
-        /*! \brief Calculate the dot(scalar) product of two Vector2
+        /*! \brief Computer the dot product of two Vector2
          *
          * \param left  The left Vector2 of the product
          * \param right The right Vector2 of the product
@@ -25,7 +25,7 @@ namespace Bull
          * \return The value of the dot product of left and right
          *
          */
-        static T dotProduct(const Vector2& left, const Vector2& right);
+        static T dotProduct(const Vector2<T>& left, const Vector2<T>& right);
 
         /*! \brief Default constructor
          *
