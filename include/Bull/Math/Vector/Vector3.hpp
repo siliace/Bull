@@ -12,21 +12,21 @@ namespace Bull
     template<typename T>
     struct BULL_API Vector3
     {
-        static constexpr Vector3<T> Zero = {0.0, 0.0, 0.0};
+        static Vector3<T> makeZero();
 
-        static constexpr Vector3<T> Unit  = {1.0, 1.0, 1.0};
-        static constexpr Vector3<T> UnitX = {1.0, 0.0, 0.0};
-        static constexpr Vector3<T> UnitY = {0.0, 1.0, 0.0};
-        static constexpr Vector3<T> UnitZ = {0.0, 0.0, 1.0};
+        static Vector3<T> makeUnit();
+        static Vector3<T> makeUnitX();
+        static Vector3<T> makeUnitY();
+        static Vector3<T> makeUnitZ();
 
-        static constexpr Vector3<T> Left  = {1.0, 0.0, 0.0};
-        static constexpr Vector3<T> Right = {-1.0, 0.0, 0.0};
+        static Vector3<T> makeLeft();
+        static Vector3<T> makeRight();
 
-        static constexpr Vector3<T> Up    = {0.0, 1.0, 0.0};
-        static constexpr Vector3<T> Down  = {0.0, -1.0, 0.0};
+        static Vector3<T> makeUp();
+        static Vector3<T> makeDown();
 
-        static constexpr Vector3<T> Forward  = {0.0, 0.0, 1.0};
-        static constexpr Vector3<T> Backward = {0.0, 0.0, -1.0};
+        static Vector3<T> makeForward();
+        static Vector3<T> makeBackward();
 
         /*! \brief Get a normalized Vector3
          *

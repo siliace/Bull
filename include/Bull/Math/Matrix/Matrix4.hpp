@@ -15,8 +15,6 @@ namespace Bull
     {
     public:
 
-        static constexpr Matrix4<T> Zero = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; /*!< A Zero Matrix4 */
-
         /*! \brief Create an identity matrix
          *
          * \return The identity matrix
