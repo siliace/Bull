@@ -3,9 +3,7 @@
 
 #include <array>
 
-#include <Bull/Core/System/Export.hpp>
-
-#include <Bull/Math/Angle.hpp>
+#include <Bull/Math/Polygon/Rectangle.hpp>
 #include <Bull/Math/Vector/Vector4.hpp>
 
 namespace Bull
@@ -43,6 +41,17 @@ namespace Bull
          *
          */
         static Matrix4<T> makeTranslation(T x, T y, T z);
+
+        /*! \brief Create an orthographic projection Matrix4
+         *
+         * \param plan The plan of view
+         * \param near
+         * \param far
+         *
+         * \return The orthographic projection Matrix4
+         *
+         */
+        static Matrix4<T> makeOrthographic(const Rectangle<T>& plan, T near, T far);
 
         /*! \brief Create a look at matrix
          *

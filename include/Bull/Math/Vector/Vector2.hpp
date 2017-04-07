@@ -47,6 +47,34 @@ namespace Bull
          */
         Vector2(T x, T y);
 
+        /*! \brief Set the Vector2
+         *
+         * \param value The value of all components
+         *
+         * \return This
+         *
+         */
+        Vector2<T>& set(T value);
+
+        /*! \brief Set the Vector2
+         *
+         * \param x The x component
+         * \param y The y component
+         *
+         * \return This
+         *
+         */
+        Vector2<T>& set(T x, T y);
+
+        /*! \brief Set the Vector2
+         *
+         * \param copy The Vector2 to copy
+         *
+         * \return This
+         *
+         */
+        Vector2<T>& set(const Vector2<T>& copy);
+
         /*! \brief Compute the length
          *
          * \return Return the length of the vector

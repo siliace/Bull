@@ -13,27 +13,47 @@ namespace Bull
     }
 
     template<typename T>
-    Vector2<T>::Vector2() :
-        x(0),
-        y(0)
+    Vector2<T>::Vector2()
     {
-        /// Nothing
+        set(0);
     }
 
     template<typename T>
-    Vector2<T>::Vector2(T value) :
-        x(value),
-        y(value)
+    Vector2<T>::Vector2(T value)
     {
-        /// Nothing
+        set(value);
     }
 
     template<typename T>
-    Vector2<T>::Vector2(T x, T y) :
-        x(x),
-        y(y)
+    Vector2<T>::Vector2(T x, T y)
     {
-        /// Nothing
+        set(x, y);
+    }
+
+    template<typename T>
+    Vector2<T>& Vector2<T>::set(T value)
+    {
+        x = y = value;
+
+        return (*this);
+    }
+
+    template<typename T>
+    Vector2<T>& Vector2<T>::set(T x, T y)
+    {
+        this->x = x;
+        this->y = y;
+
+        return (*this);
+    }
+
+    template<typename T>
+    Vector2<T>& Vector2<T>::set(const Vector2<T>& copy)
+    {
+        x = copy.x;
+        y = copy.y;
+
+        return (*this);
     }
 
     template<typename T>

@@ -12,20 +12,51 @@ namespace Bull
     template<typename T>
     struct BULL_API Vector3
     {
+        /*! \brief Make a zero Vector3 (0.0, 0.0, 0.0)
+         *
+         * \return The zero Vector3
+         *
+         */
         static Vector3<T> makeZero();
 
+        /*! \brief Make an unit Vector3 (1.0, 1.0, 1.0)
+         *
+         * \return The unit Vector3
+         *
+         */
         static Vector3<T> makeUnit();
+
+        /*! \brief Make a X unit Vector3 (1.0, 0.0, 0.0)
+         *
+         * \return The X unit Vector3
+         *
+         */
         static Vector3<T> makeUnitX();
+
+        /*! \brief Make a Y unit Vector3 (0.0, 1.0, 0.0)
+         *
+         * \return The Y unit Vector3
+         *
+         */
         static Vector3<T> makeUnitY();
+
+        /*! \brief Make a Z unit Vector3 (0.0, 0.0, 1.0)
+         *
+         * \return The Z unit Vector3
+         *
+         */
         static Vector3<T> makeUnitZ();
 
         static Vector3<T> makeLeft();
+
         static Vector3<T> makeRight();
 
         static Vector3<T> makeUp();
+
         static Vector3<T> makeDown();
 
         static Vector3<T> makeForward();
+
         static Vector3<T> makeBackward();
 
         /*! \brief Get a normalized Vector3
@@ -81,17 +112,48 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param copy The vector to copy
-         * \param z The z component
+         * \param z    The z component
          *
          */
         Vector3(const Vector2<T>& copy, T z = 0);
 
+        /*! \brief Set the Vector3
+         *
+         * \param value The value of all components
+         *
+         * \return This
+         *
+         */
         Vector3<T>& set(T value);
 
+        /*! \brief Set the Vector3
+         *
+         * \param x The x component
+         * \param y The y component
+         * \param z The z component
+         *
+         * \return This
+         *
+         */
         Vector3<T>& set(T x, T y, T z);
 
+        /*! \brief Set the Vector3
+         *
+         * \param copy The Vector3 to copy
+         *
+         * \return This
+         *
+         */
         Vector3<T>& set(const Vector3<T>& copy);
 
+        /*! \brief Set the Vector3
+         *
+         * \param copy The vector to copy
+         * \param z    The z component
+         *
+         * \return This
+         *
+         */
         Vector3<T>& set(const Vector2<T>& copy, T z);
 
         /*! \brief Compute the length
