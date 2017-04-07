@@ -3,6 +3,8 @@
 
 #include <array>
 
+#include <Bull/Math/Angle.hpp>
+#include <Bull/Math/Quaternion.hpp>
 #include <Bull/Math/Polygon/Rectangle.hpp>
 #include <Bull/Math/Vector/Vector4.hpp>
 
@@ -13,34 +15,55 @@ namespace Bull
     {
     public:
 
-        /*! \brief Create an identity matrix
+        /*! \brief Create an identity Matrix4
          *
-         * \return The identity matrix
+         * \return The identity Matrix4
          *
          */
         static Matrix4<T> makeIdentity();
 
-        /*! \brief Create a scaling matrix
+        /*! \brief Create a scaling Matrix4
          *
          * \param x The scale value on x axis
          * \param y The scale value on y axis
          * \param z The scale value on z axis
          *
-         * \return The scaling matrix
+         * \return The scaling Matrix4
          *
          */
         static Matrix4<T> makeScale(T x, T y, T z);
 
-        /*! \brief Create a translation matrix
+        /*! \brief Create a translation Matrix4
          *
          * \param x The translation value on x axis
          * \param y The translation value on y axis
          * \param z The translation value on z axis
          *
-         * \return The translation matrix
+         * \return The translation Matrix4
          *
          */
         static Matrix4<T> makeTranslation(T x, T y, T z);
+
+        /*! \brief Create a rotation Matrix4
+         *
+         * \param quaternion A Quaternion representing the rotation
+         *
+         * \return The rotation Matrix4
+         *
+         */
+        static Matrix4<T> makeRotation(const Quaternion<T>& quaternion);
+
+        /*! \brief Create a perspective Matrix4
+         *
+         * \param angle
+         * \param ratio
+         * \param near
+         * \param far
+         *
+         * \return
+         *
+         */
+        static Matrix4<T> makePerspective(const Angle<T>& angle, T ratio, T near, T far);
 
         /*! \brief Create an orthographic projection Matrix4
          *
@@ -51,15 +74,15 @@ namespace Bull
          * \return The orthographic projection Matrix4
          *
          */
-        static Matrix4<T> makeOrthographic(const Rectangle<T>& plan, T near, T far);
+        static Matrix4<T> makeOrthographic(const Rectangle<T>& plan, T near = -1.0, T far = 1.0);
 
-        /*! \brief Create a look at matrix
+        /*! \brief Create a look at Matrix4
          *
          * \param eye    The position of the eye (e.g camera)
          * \param target The position of the point to look
          * \param up     The up vector
          *
-         * \return The look matrix
+         * \return The look at Matrix4
          *
          */
         static Matrix4<T> makeLookAt(const Vector3<T>& eye, const Vector3<T>& target, const Vector3<T> up = Vector3<T>::makeUp());
@@ -73,7 +96,7 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param value The value of every matrix cell
+         * \param value The value of every cell of the Matrix4
          *
          */
         Matrix4(T value);
