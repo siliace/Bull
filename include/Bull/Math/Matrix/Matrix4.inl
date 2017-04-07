@@ -29,7 +29,7 @@ namespace Bull
     template<typename T>
     Matrix4<T> Matrix4<T>::makeTranslation(T x, T y, T z)
     {
-        Matrix4<T> translation = Matrix4<T>::createIdentity();
+        Matrix4<T> translation = Matrix4<T>::makeIdentity();
 
         translation(3, 0) = static_cast<T>(x);
         translation(3, 1) = static_cast<T>(y);
@@ -39,19 +39,69 @@ namespace Bull
     }
 
     template<typename T>
+    Matrix4<T> Matrix4<T>::makeRotation(const Quaternion<T>& quaternion)
+    {
+        Matrix4<T> rotation;
+
+        T tx  = quaternion.x + quaternion.x;
+        T ty  = quaternion.y + quaternion.y;
+        T tz  = quaternion.z + quaternion.z;
+        T twx = tx * quaternion.w;
+        T twy = ty * quaternion.w;
+        T twz = tz * quaternion.w;
+        T txx = tx * quaternion.x;
+        T txy = ty * quaternion.x;
+        T txz = tz * quaternion.x;
+        T tyy = ty * quaternion.y;
+        T tyz = tz * quaternion.y;
+        T tzz = tz * quaternion.z;
+
+        rotation.set(1.0 - (tyy + tzz), 0, 0);
+        rotation.set(txy + twz,         0, 1);
+        rotation.set(txz - twy,         0, 2);
+
+        rotation.set(txy - twz,         1, 0);
+        rotation.set(1.0 - (txx + tzz), 1, 1);
+        rotation.set(tyz + twx,         1, 2);
+
+        rotation.set(txz + twy,         2, 0);
+        rotation.set(tyz - twx,         2, 1);
+        rotation.set(1.0 - (txx + tyy), 2, 2);
+
+        rotation.set(1.0, 3, 3);
+
+        return rotation;
+    }
+
+    template<typename T>
+    Matrix4<T> Matrix4<T>::makePerspective(const Angle<T>& angle, T ratio, T near, T far)
+    {
+        Matrix4<T> perspective;
+        T yScale = std::tan(angle);
+
+        perspective.set(yScale / ratio,                     0, 0);
+        perspective.set(yScale,                             1, 1);
+        perspective.set(-(far + near) / (far - near),       2, 2);
+        perspective.set(static_cast<T>(-1.0),               3, 2);
+        perspective.set(-2.0 * (near * far) / (far - near), 2, 3);
+
+        return perspective;
+    }
+
+    template<typename T>
     Matrix4<T> Matrix4<T>::makeOrthographic(const Rectangle<T>& plan, T near, T far)
     {
-        Matrix4<T> ortho;
+        Matrix4<T> orthographic;
 
-        ortho.set(2.0 / plan.width  - plan.x,                      0, 0);
-        ortho.set(2.0 / plan.height - plan.y,                      1, 1);
-        ortho.set(1.0 / near - far,                                2, 2);
-        ortho.set((plan.x + plan.width) / (plan.x - plan.width),   0, 3);
-        ortho.set((plan.height + plan.y) / (plan.height - plan.y), 1, 3);
-        ortho.set(near / near - far,                               2, 3);
-        ortho.set(1.0,                                             3, 3);
+        orthographic.set(2.0 / plan.width  - plan.x,                      0, 0);
+        orthographic.set(2.0 / plan.height - plan.y,                      1, 1);
+        orthographic.set(1.0 / near - far,                                2, 2);
+        orthographic.set((plan.x + plan.width) / (plan.x - plan.width),   0, 3);
+        orthographic.set((plan.height + plan.y) / (plan.height - plan.y), 1, 3);
+        orthographic.set(near / near - far,                               2, 3);
+        orthographic.set(1.0,                                             3, 3);
 
-        return ortho;
+        return orthographic;
     }
 
     template<typename T>

@@ -107,13 +107,6 @@ namespace Bull
          */
         Quaternion<T>& conjugate(const Quaternion<T>& quaternion);
 
-        /*! \brief Convert the Quaternion as an EulerAngle
-         *
-         * \return The EulerAngles
-         *
-         */
-        EulerAngles<T> toEulerAngles() const;
-
         /*! \brief Compare two Quaternions
          *
          * \param right The Quaternion to compare to this
