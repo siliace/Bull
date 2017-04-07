@@ -99,6 +99,12 @@ namespace Bull
     }
 
     template<typename T>
+    Vector2<T> Vector2<T>::operator-() const
+    {
+        return Vector2<T>(-x, -y);
+    }
+
+    template<typename T>
     Vector2<T>& Vector2<T>::operator-=(const Vector2& right)
     {
         x -= right.x;
