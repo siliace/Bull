@@ -252,4 +252,52 @@ namespace Bull
     {
         return Vector3<T>(left) -= Vector3<T>(right);
     }
+
+    template<typename T>
+    Vector3<T> operator*(T left, const Vector3<T>& right)
+    {
+        Vector3<T> product = right;
+
+        product.x *= left;
+        product.x *= left;
+        product.z *= left;
+
+        return right;
+    }
+
+    template<typename T>
+    Vector3<T> operator*(const Vector3<T>& left, T right)
+    {
+        Vector3<T> product = left;
+
+        product.x *= right;
+        product.y *= right;
+        product.z *= right;
+
+        return left;
+    }
+
+    template<typename T>
+    Vector3<T> operator/(T left, const Vector3<T>& right)
+    {
+        Vector3<T> product = right;
+
+        product.x /= left;
+        product.y /= left;
+        product.z /= left;
+
+        return right;
+    }
+
+    template<typename T>
+    Vector3<T> operator/(const Vector3<T>& left, T right)
+    {
+        Vector3<T> product = left;
+
+        product.x /= right;
+        product.y /= right;
+        product.z /= right;
+
+        return left;
+    }
 }

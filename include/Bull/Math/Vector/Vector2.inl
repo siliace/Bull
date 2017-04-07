@@ -120,13 +120,13 @@ namespace Bull
     }
 
     template<typename T>
-    Vector2<T> operator+(float left, const Vector2<T>& right)
+    Vector2<T> operator+(T left, const Vector2<T>& right)
     {
         return Vector2<T>(left) += right;
     }
 
     template<typename T>
-    Vector2<T> operator+(const Vector2<T>& left, float right)
+    Vector2<T> operator+(const Vector2<T>& left, T right)
     {
         return Vector2<T>(left) += Vector2<T>(right);
     }
@@ -138,14 +138,58 @@ namespace Bull
     }
 
     template<typename T>
-    Vector2<T> operator-(float left, const Vector2<T>& right)
+    Vector2<T> operator-(T left, const Vector2<T>& right)
     {
         return Vector2<T>(left) -= right;
     }
 
     template<typename T>
-    Vector2<T> operator-(const Vector2<T>& left, float right)
+    Vector2<T> operator-(const Vector2<T>& left, T right)
     {
         return Vector2<T>(left) -= Vector2<T>(right);
+    }
+
+    template<typename T>
+    Vector2<T> operator*(T left, const Vector2<T>& right)
+    {
+        Vector2<T> product = right;
+
+        product.x *= left;
+        product.y *= left;
+
+        return right;
+    }
+
+    template<typename T>
+    Vector2<T> operator*(const Vector2<T>& left, T right)
+    {
+        Vector2<T> product = left;
+
+        product.x *= right;
+        product.y *= right;
+
+        return left;
+    }
+
+    template<typename T>
+    Vector2<T> operator/(T left, const Vector2<T>& right)
+    {
+        Vector2<T> product = right;
+
+        product.x /= left;
+        product.y /= left;
+
+        return right;
+    }
+
+    template<typename T>
+    Vector2<T> operator/(const Vector2<T>& left, T right)
+    {
+        Vector2<T> product = left;
+
+        product.x /= right;
+        product.y /= right;
+
+        return left;
     }
 }

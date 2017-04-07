@@ -254,7 +254,7 @@ namespace Bull
      *
      */
     template<typename T>
-    Vector3<T> operator+(float left, const Vector3<T>& right);
+    Vector3<T> operator+(T left, const Vector3<T>& right);
 
     /*! \brief Addition two Vector3
      *
@@ -265,7 +265,7 @@ namespace Bull
      *
      */
     template<typename T>
-    Vector3<T> operator+(const Vector3<T>& left, float right);
+    Vector3<T> operator+(const Vector3<T>& left, T right);
 
     /*! \brief Subtract two Vector3
      *
@@ -287,7 +287,7 @@ namespace Bull
      *
      */
     template<typename T>
-    Vector3<T> operator-(float left, const Vector3<T>& right);
+    Vector3<T> operator-(T left, const Vector3<T>& right);
 
     /*! \brief Subtract two Vector3
      *
@@ -298,7 +298,51 @@ namespace Bull
      *
      */
     template<typename T>
-    Vector3<T> operator-(const Vector3<T>& left, float right);
+    Vector3<T> operator-(const Vector3<T>& left, T right);
+
+    /*! \brief Multiply a scalar with a Vector3
+     *
+     * \param left  The number to subtract to right
+     * \param right The vector to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector3<T> operator*(T left, const Vector3<T>& right);
+
+    /*! \brief Multiply a scalar with a Vector3
+     *
+     * \param left  The vector to subtract to right
+     * \param right The number to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector3<T> operator*(const Vector3<T>& left, T right);
+
+    /*! \brief Divide a scalar with a Vector3
+     *
+     * \param left  The number to subtract to right
+     * \param right The vector to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector3<T> operator/(T left, const Vector3<T>& right);
+
+    /*! \brief Divide a scalar with a Vector3
+     *
+     * \param left  The vector to subtract to right
+     * \param right The number to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector3<T> operator/(const Vector3<T>& left, T right);
 
     typedef Vector3<int> Vector3I;
     typedef Vector3<float> Vector3F;

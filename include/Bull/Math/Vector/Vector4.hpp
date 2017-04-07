@@ -196,6 +196,50 @@ namespace Bull
     template<typename T>
     Vector4<T> operator-(const Vector4<T>& left, float right);
 
+    /*! \brief Multiply a scalar with a Vector4
+     *
+     * \param left  The number to subtract to right
+     * \param right The vector to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector4<T> operator*(T left, const Vector4<T>& right);
+
+    /*! \brief Multiply a scalar with a Vector4
+     *
+     * \param left  The vector to subtract to right
+     * \param right The number to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector4<T> operator*(const Vector4<T>& left, T right);
+
+    /*! \brief Divide a scalar with a Vector4
+     *
+     * \param left  The number to subtract to right
+     * \param right The vector to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector4<T> operator/(T left, const Vector4<T>& right);
+
+    /*! \brief Divide a scalar with a Vector4
+     *
+     * \param left  The vector to subtract to right
+     * \param right The number to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector4<T> operator/(const Vector4<T>& left, T right);
+
     typedef Vector4<int> Vector4I;
     typedef Vector4<float> Vector4F;
     typedef Vector4<double> Vector4D;
