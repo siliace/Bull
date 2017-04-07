@@ -39,6 +39,22 @@ namespace Bull
     }
 
     template<typename T>
+    Matrix4<T> Matrix4<T>::makeOrthographic(const Rectangle<T>& plan, T near, T far)
+    {
+        Matrix4<T> ortho;
+
+        ortho.set(2.0 / plan.width  - plan.x,                      0, 0);
+        ortho.set(2.0 / plan.height - plan.y,                      1, 1);
+        ortho.set(1.0 / near - far,                                2, 2);
+        ortho.set((plan.x + plan.width) / (plan.x - plan.width),   0, 3);
+        ortho.set((plan.height + plan.y) / (plan.height - plan.y), 1, 3);
+        ortho.set(near / near - far,                               2, 3);
+        ortho.set(1.0,                                             3, 3);
+
+        return ortho;
+    }
+
+    template<typename T>
     Matrix4<T> Matrix4<T>::makeLookAt(const Vector3<T>& eye, const Vector3<T>& target, const Vector3<T> up)
     {
         Matrix4<T> lookAt;
