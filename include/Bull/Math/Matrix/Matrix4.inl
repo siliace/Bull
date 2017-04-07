@@ -77,13 +77,14 @@ namespace Bull
     Matrix4<T> Matrix4<T>::makePerspective(const Angle<T>& angle, T ratio, T near, T far)
     {
         Matrix4<T> perspective;
-        T yScale = std::tan(angle);
+        Angle<T> fov = angle.asRadian() / 2.0;
+        T yScale = std::tan(static_cast<T>(Pi2) - static_cast<T>(angle));
 
         perspective.set(yScale / ratio,                     0, 0);
         perspective.set(yScale,                             1, 1);
         perspective.set(-(far + near) / (far - near),       2, 2);
-        perspective.set(static_cast<T>(-1.0),               3, 2);
-        perspective.set(-2.0 * (near * far) / (far - near), 2, 3);
+        perspective.set(-1.0,                               2, 3);
+        perspective.set(-2.0 * (near * far) / (far - near), 3, 2);
 
         return perspective;
     }
