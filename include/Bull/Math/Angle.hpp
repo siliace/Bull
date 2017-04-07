@@ -15,6 +15,8 @@ namespace Bull
     {
     public:
 
+        static Angle<T> Zero; /*!< A Zero angle */
+
         /*! \brief Create an angle in radians
          *
          * \param angle The value in radians of the angle to create
@@ -32,8 +34,6 @@ namespace Bull
          *
          */
         static Angle<T> degree(T angle);
-
-        static Angle<T> Zero;
 
     public:
 
