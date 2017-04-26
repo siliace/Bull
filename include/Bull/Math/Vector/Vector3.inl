@@ -1,36 +1,105 @@
 namespace Bull
 {
     template<typename T>
+    Vector3<T> Vector3<T>::makeZero()
+    {
+        return Vector3<T>(0.0, 0.0, 0.0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::makeUnit()
+    {
+        return Vector3<T>(1.0, 1.0, 1.0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::makeUnitX()
+    {
+        return Vector3<T>(1.0, 0.0, 0.0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::makeUnitY()
+    {
+        return Vector3<T>(0.0, 1.0, 0.0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::makeUnitZ()
+    {
+        return Vector3<T>(0.0, 0.0, 1.0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::makeLeft()
+    {
+        return Vector3<T>(1.0, 0.0, 0.0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::makeRight()
+    {
+        return Vector3<T>(-1.0, 0.0, 0.0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::makeUp()
+    {
+        return Vector3<T>(0.0, 1.0, 0.0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::makeDown()
+    {
+        return Vector3<T>(0.0, -1.0, 0.0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::makeForward()
+    {
+        return Vector3<T>(0.0, 0.0, 1.0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::makeBackward()
+    {
+        return Vector3<T>(0.0, 0.0, -1.0);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::normalize(const Vector3<T>& vector)
+    {
+        return Vector3<T>(vector).normalize();
+    }
+
+    template<typename T>
     T Vector3<T>::dotProduct(const Vector3& left, const Vector3& right)
     {
         return (left.x * right.x) + (left.y * right.y) + (left.z * right.z);
     }
 
     template<typename T>
-    Vector3<T>::Vector3() :
-        x(0),
-        y(0),
-        z(0)
+    Vector3<T> Vector3<T>::crossProduct(const Vector3<T>& left, const Vector3<T>& right)
     {
-        /// Nothing
+        return Vector3<T>(left).crossProduct(right);
     }
 
     template<typename T>
-    Vector3<T>::Vector3(T value) :
-        x(value),
-        y(value),
-        z(value)
+    Vector3<T>::Vector3()
     {
-        /// Nothing
+        set(0.0);
     }
 
     template<typename T>
-    Vector3<T>::Vector3(T x, T y, T z) :
-        x(x),
-        y(y),
-        z(z)
+    Vector3<T>::Vector3(T value)
     {
-        /// Nothing
+        set(value);
+    }
+
+    template<typename T>
+    Vector3<T>::Vector3(T x, T y, T z)
+    {
+        set(x, y, z);
     }
 
     template<typename T>
@@ -39,7 +108,45 @@ namespace Bull
         y(copy.y),
         z(z)
     {
-        /// Nothing
+        set(copy, z);
+    }
+
+    template<typename T>
+    Vector3<T>& Vector3<T>::set(T value)
+    {
+        x = y = z = value;
+
+        return (*this);
+    }
+
+    template<typename T>
+    Vector3<T>& Vector3<T>::set(T x, T y, T z)
+    {
+        this->x = x;
+        this->y = y;
+        this->z = z;
+
+        return (*this);
+    }
+
+    template<typename T>
+    Vector3<T>& Vector3<T>::set(const Vector3<T>& copy)
+    {
+        x = copy.x;
+        y = copy.y;
+        z = copy.z;
+
+        return (*this);
+    }
+
+    template<typename T>
+    Vector3<T>& Vector3<T>::set(const Vector2<T>& copy, T z)
+    {
+        x       = copy.x;
+        y       = copy.y;
+        this->z = z;
+
+        return (*this);
     }
 
     template<typename T>
@@ -49,9 +156,27 @@ namespace Bull
     }
 
     template<typename T>
+    Vector3<T>& Vector3<T>::normalize()
+    {
+        x /= getLength();
+        y /= getLength();
+        z /= getLength();
+
+        return (*this);
+    }
+
+    template<typename T>
     T Vector3<T>::dotProduct(const Vector3& right)
     {
         return (x * right.x) + (y * right.y) + (z * right.z);
+    }
+
+    template<typename T>
+    Vector3<T>& Vector3<T>::crossProduct(const Vector3<T>& right)
+    {
+        return set((y * right.z) - (z * right.y),
+                   (z * right.x) - (x * right.z),
+                   (x * right.y) - (y * right.x));
     }
 
     template<typename T>
@@ -126,5 +251,53 @@ namespace Bull
     Vector3<T> operator-(const Vector3<T>& left, float right)
     {
         return Vector3<T>(left) -= Vector3<T>(right);
+    }
+
+    template<typename T>
+    Vector3<T> operator*(T left, const Vector3<T>& right)
+    {
+        Vector3<T> product = right;
+
+        product.x *= left;
+        product.x *= left;
+        product.z *= left;
+
+        return right;
+    }
+
+    template<typename T>
+    Vector3<T> operator*(const Vector3<T>& left, T right)
+    {
+        Vector3<T> product = left;
+
+        product.x *= right;
+        product.y *= right;
+        product.z *= right;
+
+        return left;
+    }
+
+    template<typename T>
+    Vector3<T> operator/(T left, const Vector3<T>& right)
+    {
+        Vector3<T> product = right;
+
+        product.x /= left;
+        product.y /= left;
+        product.z /= left;
+
+        return right;
+    }
+
+    template<typename T>
+    Vector3<T> operator/(const Vector3<T>& left, T right)
+    {
+        Vector3<T> product = left;
+
+        product.x /= right;
+        product.y /= right;
+        product.z /= right;
+
+        return left;
     }
 }

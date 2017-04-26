@@ -16,7 +16,7 @@ namespace Bull
         return prv::DirectoryImpl::exists(path);
     }
 
-    bool Directory::copy(const String& path, const String& newPath)
+    bool Directory::copy(const Path& path, const String& newPath)
     {
         Directory target;
         bool success = true;
@@ -33,15 +33,15 @@ namespace Bull
 
         for(const Path& entity : target.getContent())
         {
-            if(entity.getPathName() != "." && entity.getPathName() != "..")
+            if(entity.toString() != "." && entity.toString() != "..")
             {
                 if(entity.isDirectory())
                 {
-                    success &= Directory::copy(path + "/" + entity.getPathName(), newPath + "/" + entity.getPathName());
+                    success &= Directory::copy(path.toString() + "/" + entity.toString(), newPath + "/" + entity.toString());
                 }
                 else
                 {
-                    success &= File::copy(path + "/" + entity.getPathName(), newPath + "/" + entity.getPathName());
+                    success &= File::copy(path.toString() + "/" + entity.toString(), newPath + "/" + entity.toString());
                 }
             }
         }
@@ -49,19 +49,19 @@ namespace Bull
         return success;
     }
 
-    bool Directory::rename(const String& path, const String& newPath)
+    bool Directory::rename(const Path& path, const String& newPath)
     {
-        if(exists(path) && !exists(newPath))
+        if(exists(path.toString()) && !exists(newPath))
         {
-            return std::rename(path, newPath) == 0;
+            return std::rename(path.toString(), newPath) == 0;
         }
 
         return false;
     }
 
-    bool Directory::remove(const String& path)
+    bool Directory::remove(const Path& path)
     {
-        return prv::DirectoryImpl::remove(path);
+        return prv::DirectoryImpl::remove(path.toString());
     }
 
     Directory::Directory()
@@ -96,7 +96,7 @@ namespace Bull
     void Directory::close()
     {
         m_impl.reset();
-        m_path = Path::None;
+        m_path = Path();
     }
 
     std::vector<Path> Directory::getContent(Uint32 flags)

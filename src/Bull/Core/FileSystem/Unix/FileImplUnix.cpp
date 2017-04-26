@@ -35,14 +35,14 @@ namespace Bull
             return S_ISREG(filestats.st_mode);
         }
 
-        bool FileImplUnix::copy(const String& path, const String& newPath)
+        bool FileImplUnix::copy(const Path& path, const String& newPath)
         {
             return false;
         }
 
-        bool FileImplUnix::remove(const String& name)
+        bool FileImplUnix::remove(const Path& name)
         {
-            return unlink(name) != -1;
+            return unlink(name.toString()) != -1;
         }
 
         FileImplUnix::~FileImplUnix()
@@ -50,7 +50,7 @@ namespace Bull
             close(m_handler);
         }
 
-        bool FileImplUnix::open(const String& name, Uint32 mode)
+        bool FileImplUnix::open(const Path& name, Uint32 mode)
         {
             int flags = 0;
 
@@ -80,7 +80,7 @@ namespace Bull
                 flags |= O_TRUNC;
             }
 
-            m_handler = ::open64(name, flags, S_IRWXU);
+            m_handler = ::open64(name.toString(), flags, S_IRWXU);
 
             return m_handler != -1;
         }

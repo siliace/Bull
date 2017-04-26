@@ -60,15 +60,15 @@ namespace Bull
 
         /*! \brief Set the rotation of the polygon
          * 
-         * @param rotation The new rotation
+         * \param rotation The new rotation
          * 
-         * @return This 
+         * \return This
          */
         RegularPolygon<T, S>& setRotation(const Angle<T>& rotation);
         
         /*! \brief Get the rotation of the polygon
          * 
-         * @return The rotation 
+         * \return The rotation
          * 
          */
         const Angle<T>& getRotation() const;

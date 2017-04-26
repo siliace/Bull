@@ -1,22 +1,22 @@
-set(HARDWARE_INC ${BULL_INCLUDE}/Hardware)
-set(HARDWARE_SRC ${BULL_SRC}/Hardware)
+add_library(bull-hardware SHARED "")
 
-#Headers
-file(GLOB_RECURSE HARDWARE_INCLUDE_FILES ${HARDWARE_INC}/*.hpp)
+target_sources(bull-hardware
+        PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/CPU.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Joystick.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Keyboard.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Mouse.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/RAM.cpp
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/CPUImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/KeyboardImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/MouseImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/RAMImpl.hpp
+        )
 
-#Source
-file(GLOB HARDWARE_SOURCE_FILES ${HARDWARE_SRC}/*.*)
 if(BULL_OS_WINDOWS)
-    file(GLOB HARDWARE_IMPL_SOURCE_FILES ${HARDWARE_SRC}/Win32/*)
+    add_subdirectory(Win32)
 else()
-    file(GLOB HARDWARE_IMPL_SOURCE_FILES ${HARDWARE_SRC}/Unix/*)
+    add_subdirectory(Unix)
 endif()
-list(APPEND HARDWARE_SOURCE_FILES ${HARDWARE_IMPL_SOURCE_FILES})
-
-if(BULL_OS_WINDOWS)
-    list(APPEND HARDWARE_EXT_LIBS winmm)
-endif()
-
-add_library(bull-hardware SHARED ${HARDWARE_INCLUDE_FILES} ${HARDWARE_SOURCE_FILES})
-target_link_libraries(bull-hardware bull-core)
-target_link_libraries(bull-hardware ${HARDWARE_EXT_LIBS})

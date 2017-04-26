@@ -1,17 +1,21 @@
-set(RENDER_INC ${BULL_INCLUDE}/Render)
-set(RENDER_SRC ${BULL_SRC}/Render)
+add_library(bull-render SHARED "")
 
-#Headers
-file(GLOB_RECURSE RENDER_INCLUDE_FILES ${RENDER_INC}/*.hpp)
+target_sources(bull-render
+        PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/HardwareBuffer.cpp
+        )
 
-#Source
-file(GLOB RENDER_SOURCE_FILES ${RENDER_SRC}/*.*)
-file(GLOB RENDER_CONTEXT_SOURCE_FILES ${RENDER_SRC}/Context/*.*)
+add_subdirectory(Context)
+add_subdirectory(Shader)
+add_subdirectory(Target)
+add_subdirectory(Texture)
 
-list(APPEND RENDER_SOURCE_FILES ${RENDER_CONTEXT_SOURCE_FILES})
+if(BULL_OS_WINDOWS)
+    target_link_libraries(bull-render opengl32 gdi32)
+else()
+    target_link_libraries(bull-render GL)
+endif()
 
-add_library(bull-render SHARED ${RENDER_INCLUDE_FILES} ${RENDER_SOURCE_FILES})
 target_link_libraries(bull-render bull-core)
-target_link_libraries(bull-render bull-utility)
+target_link_libraries(bull-render bull-hardware)
 target_link_libraries(bull-render bull-window)
-target_link_libraries(bull-render ${RENDER_EXT_LIBS})

@@ -1,7 +1,7 @@
 namespace Bull
 {
     template<typename T>
-    Matrix4<T> Matrix4<T>::createIdentity()
+    Matrix4<T> Matrix4<T>::makeIdentity()
     {
         Matrix4<T> identity;
 
@@ -14,19 +14,7 @@ namespace Bull
     }
 
     template<typename T>
-    Matrix4<T> Matrix4<T>::createTranslation(T x, T y, T z)
-    {
-        Matrix4<T> translation = Matrix4<T>::createIdentity();
-
-        translation(3, 0) = static_cast<T>(x);
-        translation(3, 1) = static_cast<T>(y);
-        translation(3, 2) = static_cast<T>(z);
-
-        return translation;
-    }
-
-    template<typename T>
-    Matrix4<T> Matrix4<T>::createScale(T x, T y, T z)
+    Matrix4<T> Matrix4<T>::makeScale(T x, T y, T z)
     {
         Matrix4<T> scale;
 
@@ -36,6 +24,101 @@ namespace Bull
         scale(3, 3) = static_cast<T>(1.0);
 
         return scale;
+    }
+
+    template<typename T>
+    Matrix4<T> Matrix4<T>::makeTranslation(T x, T y, T z)
+    {
+        Matrix4<T> translation = Matrix4<T>::makeIdentity();
+
+        translation(3, 0) = static_cast<T>(x);
+        translation(3, 1) = static_cast<T>(y);
+        translation(3, 2) = static_cast<T>(z);
+
+        return translation;
+    }
+
+    template<typename T>
+    Matrix4<T> Matrix4<T>::makeRotation(const Quaternion<T>& quaternion)
+    {
+        Matrix4<T> rotation;
+
+        T tx  = quaternion.x + quaternion.x;
+        T ty  = quaternion.y + quaternion.y;
+        T tz  = quaternion.z + quaternion.z;
+        T twx = tx * quaternion.w;
+        T twy = ty * quaternion.w;
+        T twz = tz * quaternion.w;
+        T txx = tx * quaternion.x;
+        T txy = ty * quaternion.x;
+        T txz = tz * quaternion.x;
+        T tyy = ty * quaternion.y;
+        T tyz = tz * quaternion.y;
+        T tzz = tz * quaternion.z;
+
+        rotation.set(1.0 - (tyy + tzz), 0, 0);
+        rotation.set(txy + twz,         0, 1);
+        rotation.set(txz - twy,         0, 2);
+
+        rotation.set(txy - twz,         1, 0);
+        rotation.set(1.0 - (txx + tzz), 1, 1);
+        rotation.set(tyz + twx,         1, 2);
+
+        rotation.set(txz + twy,         2, 0);
+        rotation.set(tyz - twx,         2, 1);
+        rotation.set(1.0 - (txx + tyy), 2, 2);
+
+        rotation.set(1.0, 3, 3);
+
+        return rotation;
+    }
+
+    template<typename T>
+    Matrix4<T> Matrix4<T>::makePerspective(const Angle<T>& angle, T ratio, T near, T far)
+    {
+        Matrix4<T> perspective;
+        Angle<T> fov = angle.asRadian() / 2.0;
+        T yScale = std::tan(static_cast<T>(Pi2) - static_cast<T>(angle));
+
+        perspective.set(yScale / ratio,                     0, 0);
+        perspective.set(yScale,                             1, 1);
+        perspective.set(-(far + near) / (far - near),       2, 2);
+        perspective.set(-1.0,                               2, 3);
+        perspective.set(-2.0 * (near * far) / (far - near), 3, 2);
+
+        return perspective;
+    }
+
+    template<typename T>
+    Matrix4<T> Matrix4<T>::makeOrthographic(const Rectangle<T>& plan, T near, T far)
+    {
+        Matrix4<T> orthographic;
+
+        orthographic.set(2.0 / plan.width  - plan.x,                      0, 0);
+        orthographic.set(2.0 / plan.height - plan.y,                      1, 1);
+        orthographic.set(1.0 / near - far,                                2, 2);
+        orthographic.set((plan.x + plan.width) / (plan.x - plan.width),   0, 3);
+        orthographic.set((plan.height + plan.y) / (plan.height - plan.y), 1, 3);
+        orthographic.set(near / near - far,                               2, 3);
+        orthographic.set(1.0,                                             3, 3);
+
+        return orthographic;
+    }
+
+    template<typename T>
+    Matrix4<T> Matrix4<T>::makeLookAt(const Vector3<T>& eye, const Vector3<T>& target, const Vector3<T> up)
+    {
+        Matrix4<T> lookAt;
+        Vector3<T> f = Vector3<T>::normalize(target - eye);
+        Vector3<T> s = Vector3<T>::normalize(f.crossProduct(up));
+        Vector3<T> u = s.crossProduct(f);
+
+        lookAt.setColumn(Vector4<T>(s, -s.dotProduct(eye)), 0);
+        lookAt.setColumn(Vector4<T>(u, -u.dotProduct(eye)), 1);
+        lookAt.setColumn(Vector4<T>(f, -f.dotProduct(eye)), 2);
+        lookAt.setColumn(Vector4<T>(0, 0, 0, 1), 3);
+
+        return lookAt;
     }
 
     template<typename T>
@@ -83,6 +166,22 @@ namespace Bull
     T Matrix4<T>::get(std::size_t x, std::size_t y) const
     {
         return m_data[y * 4 + x];
+    }
+
+    template<typename T>
+    Matrix4<T>& Matrix4<T>::setColumn(const Vector4<T>& column, std::size_t position)
+    {
+        if(position >= 4)
+        {
+            throw std::out_of_range("Requested column out of range");
+        }
+
+        set(column.x, position, 0);
+        set(column.y, position, 1);
+        set(column.z, position, 2);
+        set(column.w, position, 3);
+
+        return (*this);
     }
 
     template<typename T>

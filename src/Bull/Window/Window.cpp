@@ -3,11 +3,11 @@
 
 namespace Bull
 {
-    Window* Window::m_fullscreen = nullptr;
+    Window* Window::s_fullscreen = nullptr;
 
     const Window* Window::getFullscreen()
     {
-        return m_fullscreen;
+        return s_fullscreen;
     }
 
     Window::Window()
@@ -22,7 +22,24 @@ namespace Bull
 
     bool Window::open(const VideoMode& mode, const String& title, Uint32 style)
     {
-        return open(mode, title, style, ContextSettings::Worst);
+        if(isOpen())
+        {
+            close();
+        }
+
+        if(style == Style::Fullscreen && s_fullscreen)
+        {
+            style = Style::Default;
+        }
+
+        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style));
+
+        if(style == Style::Fullscreen)
+        {
+            enableFullscreen();
+        }
+
+        return true;
     }
 
     Window::~Window()
@@ -39,14 +56,12 @@ namespace Bull
     {
         enableCaptureCursor(false);
 
-        if(m_fullscreen == this)
+        if(s_fullscreen == this)
         {
-            m_fullscreen = nullptr;
+            s_fullscreen = nullptr;
         }
 
         m_impl.reset();
-
-        onClose();
     }
 
     bool Window::pollEvent(Event& e)
@@ -54,8 +69,6 @@ namespace Bull
         if(m_impl)
         {
             bool success = m_impl->popEvent(e, false);
-
-            filterEvent(e);
 
             return success;
         }
@@ -71,8 +84,6 @@ namespace Bull
         {
             m_impl->popEvent(e, true);
         }
-
-        filterEvent(e);
 
         return e;
     }
@@ -231,19 +242,19 @@ namespace Bull
 
     bool Window::enableFullscreen(bool fullscreen)
     {
-        if(m_impl && (!fullscreen || (fullscreen && !m_fullscreen)))
+        if(m_impl && (!fullscreen || (fullscreen && !s_fullscreen)))
         {
             m_impl->switchFullscreen(fullscreen);
 
             if(fullscreen)
             {
-                m_fullscreen = this;
+                s_fullscreen = this;
                 enableCaptureCursor();
             }
             else
             {
                 enableCaptureCursor(false);
-                m_fullscreen = nullptr;
+                s_fullscreen = nullptr;
             }
 
             return true;
@@ -254,7 +265,7 @@ namespace Bull
 
     bool Window::isFullscreenEnable() const
     {
-        return this == m_fullscreen;
+        return this == s_fullscreen;
     }
 
     WindowHandler Window::getSystemHandler() const
@@ -265,35 +276,5 @@ namespace Bull
         }
 
         return 0;
-    }
-
-    bool Window::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
-    {
-        if(isOpen())
-        {
-            close();
-        }
-
-        if(style == Style::Fullscreen && m_fullscreen)
-        {
-            style = Style::Default;
-        }
-
-        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style, settings));
-
-        if(style == Style::Fullscreen)
-        {
-            enableFullscreen();
-        }
-
-        return true;
-    }
-
-    void Window::filterEvent(const Event& e)
-    {
-        switch(e.type)
-        {
-            case Event::Resized: onResize(); break;
-        }
     }
 }

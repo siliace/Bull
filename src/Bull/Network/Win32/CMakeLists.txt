@@ -1,0 +1,10 @@
+target_sources(bull-network
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/IpAddressImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/IpAddressImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SocketImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SocketImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SystemSocket.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Wsa.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Wsa.hpp
+        )

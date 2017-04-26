@@ -36,7 +36,7 @@ namespace Bull
              * \return Return true if the directory was deleted successfully, false otherwise
              *
              */
-            static bool remove(const String& path);
+            static bool remove(const Path& path);
 
         public:
 
@@ -52,7 +52,7 @@ namespace Bull
              * \return Return true is the directory was opened successfully, false otherwise
              *
              */
-            bool open(const String& path) override;
+            bool open(const Path& path) override;
 
             /*! \brief Get the content of this Directory
              *

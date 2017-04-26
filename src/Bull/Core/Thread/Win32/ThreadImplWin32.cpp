@@ -4,23 +4,12 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Asleep the current thread
-         *
-         * \param time The time to sleep
-         *
-         */
+
         void ThreadImplWin32::sleep(const Time& time)
         {
             Sleep(time.asMilliseconds());
         }
 
-        /*! \brief Entry point for every Win32 threads
-         *
-         * \param data User data
-         *
-         * \return Return always 0
-         *
-         */
         DWORD WINAPI ThreadImplWin32::entryPoint(void* data)
         {
             Functor<void>* function = static_cast<Functor<void>*>(data);
@@ -30,12 +19,6 @@ namespace Bull
             return 0;
         }
 
-        /*! \brief Constructor
-         *
-         * \param function The function to run
-         * \param priority The priority of the thread (by default inherit form the parent thread)
-         *
-         */
         ThreadImplWin32::ThreadImplWin32(Functor<void>& function, Thread::Priority priority)
         {
             m_handler = CreateThread(nullptr,
@@ -85,9 +68,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Wait the end of a thread
-         *
-         */
         void ThreadImplWin32::wait()
         {
             if(GetCurrentThread() != m_handler)
@@ -96,9 +76,6 @@ namespace Bull
             }
         }
 
-        /*! \brief Stop the thread
-         *
-         */
         void ThreadImplWin32::stop()
         {
             CloseHandle(m_handler);

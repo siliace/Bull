@@ -1,0 +1,20 @@
+target_sources(bull-render
+        PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/Context.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ContextResource.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ContextSettings.cpp
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/ExtensionsLoader.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ExtensionsLoader.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/GlContext.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/GlContext.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/GlLoader.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/GlLoader.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SurfaceHandler.hpp
+        )
+
+if(BULL_OS_WINDOWS)
+    add_subdirectory(Wgl)
+else()
+    add_subdirectory(Glx)
+endif()

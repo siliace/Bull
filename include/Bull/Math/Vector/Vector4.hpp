@@ -12,6 +12,15 @@ namespace Bull
     template<typename T>
     struct BULL_API Vector4
     {
+        /*! \brief Get a normalized Vector4
+         *
+         * \param vector The Vector4 to normalize
+         *
+         * \return The normalized Vector4
+         *
+         */
+        static Vector4<T> normalize(const Vector4<T>& vector);
+
         /*! \brief Calculate the dot(scalar) product of two Vector4
          *
          * \param left  The left Vector4 of the product
@@ -20,7 +29,7 @@ namespace Bull
          * \return The value of the dot product of left and right
          *
          */
-        static T dotProduct(const Vector4& left, const Vector4& right);
+        static T dotProduct(const Vector4<T>& left, const Vector4<T>& right);
 
         /*! \brief Default constructor
          *
@@ -58,6 +67,13 @@ namespace Bull
          *
          */
         float getLength() const;
+
+        /*! \brief Normalize the Vector4
+         *
+         * \return This
+         *
+         */
+        Vector4<T>& normalize();
 
         /*! \brief Calculate the dot(scalar) product of two vectors
          *
@@ -179,6 +195,50 @@ namespace Bull
      */
     template<typename T>
     Vector4<T> operator-(const Vector4<T>& left, float right);
+
+    /*! \brief Multiply a scalar with a Vector4
+     *
+     * \param left  The number to subtract to right
+     * \param right The vector to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector4<T> operator*(T left, const Vector4<T>& right);
+
+    /*! \brief Multiply a scalar with a Vector4
+     *
+     * \param left  The vector to subtract to right
+     * \param right The number to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector4<T> operator*(const Vector4<T>& left, T right);
+
+    /*! \brief Divide a scalar with a Vector4
+     *
+     * \param left  The number to subtract to right
+     * \param right The vector to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector4<T> operator/(T left, const Vector4<T>& right);
+
+    /*! \brief Divide a scalar with a Vector4
+     *
+     * \param left  The vector to subtract to right
+     * \param right The number to subtract to left
+     *
+     * \return Return a vector resulting of an addition of this and right
+     *
+     */
+    template<typename T>
+    Vector4<T> operator/(const Vector4<T>& left, T right);
 
     typedef Vector4<int> Vector4I;
     typedef Vector4<float> Vector4F;

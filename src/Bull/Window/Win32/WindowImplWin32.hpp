@@ -52,11 +52,6 @@ namespace Bull
 
         public:
 
-            /*! \brief Default constructor
-             *
-             */
-            WindowImplWin32() = delete;
-
             /*! \brief Constructor
              *
              * \param mode The VideoMode to use
@@ -69,7 +64,7 @@ namespace Bull
             /*! \brief Destructor
              *
              */
-            ~WindowImplWin32();
+            virtual ~WindowImplWin32();
 
             /*! \brief Process events stacked so far
              *

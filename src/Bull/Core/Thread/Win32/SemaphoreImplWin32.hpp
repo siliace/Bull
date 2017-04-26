@@ -13,11 +13,6 @@ namespace Bull
         {
         public:
 
-            /*! \brief Default constructor
-             *
-             */
-            SemaphoreImplWin32() = delete;
-
             /*! \brief Constructor
              *
              * \param count The initial count to set the semaphore

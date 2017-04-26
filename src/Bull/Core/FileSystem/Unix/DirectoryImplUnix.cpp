@@ -1,6 +1,4 @@
 #include <unistd.h>
-#include <sys/param.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 
 #include <Bull/Core/FileSystem/Unix/DirectoryImplUnix.hpp>
@@ -26,9 +24,9 @@ namespace Bull
             return S_ISDIR(filestats.st_mode);
         }
 
-        bool DirectoryImplUnix::remove(const String& path)
+        bool DirectoryImplUnix::remove(const Path& path)
         {
-            return rmdir(path) != -1;
+            return rmdir(path.toString()) != -1;
         }
 
         DirectoryImplUnix::~DirectoryImplUnix()
@@ -36,7 +34,7 @@ namespace Bull
 
         }
 
-        bool DirectoryImplUnix::open(const String& path)
+        bool DirectoryImplUnix::open(const Path& path)
         {
 
         }

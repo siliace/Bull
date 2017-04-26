@@ -13,15 +13,13 @@ namespace Bull
         {
             "Debug",
             "Info",
-            "Notice",
             "Warning",
-            "Error",
-            "Critical",
-            "Alert",
-            "Emergency"
+            "Error"
         };
 
-        entry << "[" << String::number(now.year) << "/" << String::number(now.month)  << "/" << String::number(now.day);
+        entry << "[" << String::number(now.year) << "/";
+        entry << String::number(static_cast<unsigned int>(now.month))  << "/";
+        entry << String::number(static_cast<unsigned int>(now.day));
         entry << " ";
         entry << String::number(now.hour) << ":" << String::number(now.minute) << ":" << String::number(now.second.asSeconds()) << "]";
         entry << "[" << levelStrings[level] << "]";

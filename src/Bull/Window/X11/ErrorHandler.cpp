@@ -13,7 +13,7 @@ namespace Bull
         {
             String errorMessage(nullptr, 256);
 
-            XGetErrorText(display, error->error_code, &errorMessage[0], errorMessage.getCapacity());
+            XGetErrorText(display, error->error_code, &errorMessage[0], 256);
 
             s_errorOccurred = true;
 

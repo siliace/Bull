@@ -1,4 +1,3 @@
-#include <Bull/Core/System/Config.hpp>
 #include <Bull/Core/System/LibraryImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
@@ -13,13 +12,6 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Create a OS specific instance of LibraryImpl
-         *
-         * \param name The name or the path to the library to load
-         *
-         * \return Return the created instance
-         *
-         */
         LibraryImpl* LibraryImpl::createInstance(const String& name)
         {
             LibraryImpl* instance = new LibraryImplType();
@@ -34,9 +26,6 @@ namespace Bull
             return nullptr;
         }
 
-        /*! \brief Destructor
-         *
-         */
         LibraryImpl::~LibraryImpl()
         {
             /// Nothing

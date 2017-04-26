@@ -22,10 +22,16 @@ namespace Bull
 
         ThreadImplUnix::ThreadImplUnix(Functor<void>& function, Thread::Priority priority)
         {
+            pthread_attr_t attributes;
+            pthread_attr_init(&attributes);
+
+            pthread_attr_setschedpolicy(&attributes, (priority == Thread::Priority::Inherit) ? PTHREAD_INHERIT_SCHED : PTHREAD_EXPLICIT_SCHED);
+
             pthread_create(&m_handler,
-                           nullptr,
+                           &attributes,
                            &ThreadImplUnix::entryPoint,
                            &function);
+
         }
 
         void ThreadImplUnix::wait()

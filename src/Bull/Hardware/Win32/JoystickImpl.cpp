@@ -18,7 +18,7 @@ namespace Bull
         Joystick::Capabilities JoystickImpl::getCapabilities(Uint8 id)
         {
             Joystick::Capabilities caps;
-            JOYCAPS              infoCaps;
+            JOYCAPS                infoCaps;
 
             if(joyGetDevCaps(id, &infoCaps, sizeof(JOYCAPS)) == JOYERR_NOERROR)
             {

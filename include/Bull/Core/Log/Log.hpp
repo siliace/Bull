@@ -8,10 +8,11 @@
 #include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
+#include <Bull/Core/System/Integer.hpp>
 
 namespace Bull
 {
-    class Log : public Singleton<Log>
+    class BULL_API Log : public Singleton<Log>
     {
     public:
 
@@ -19,12 +20,8 @@ namespace Bull
         {
             Debug,
             Info,
-            Notice,
             Warning,
             Error,
-            Critical,
-            Alert,
-            Emergency,
         };
 
         typedef std::unique_ptr<AbstractLogger>& AbstractLoggerHandler;

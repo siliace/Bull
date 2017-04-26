@@ -4,18 +4,6 @@
 
 namespace Bull
 {
-    void HardwareBuffer::bind(const HardwareBuffer* buffer)
-    {
-        ensureContext();
-        gl::bindBuffer(buffer->getType(), buffer->getSystemHandler());
-    }
-
-    void HardwareBuffer::unbind(Type type)
-    {
-        ensureContext();
-        gl::bindBuffer(type, 0);
-    }
-
     HardwareBuffer::HardwareBuffer(Type type) :
         m_id(0),
         m_type(type),
@@ -36,8 +24,6 @@ namespace Bull
 
     bool HardwareBuffer::create(std::size_t size, Usage usage)
     {
-        ensureContext();
-
         if(m_id)
         {
             destroy();
@@ -45,6 +31,7 @@ namespace Bull
 
         m_capacity = size;
 
+        bind();
         gl::genBuffers(1, &m_id);
         gl::bindBuffer(m_type, m_id);
         gl::bufferData(m_type, m_capacity, nullptr, usage);
@@ -56,7 +43,7 @@ namespace Bull
     {
         if(m_id)
         {
-            bind(this);
+            bind();
 
             if(discard)
             {
@@ -93,7 +80,8 @@ namespace Bull
     {
         if(m_id)
         {
-            bind(this);
+            bind();
+
             return gl::mapBuffer(m_type, GL_READ_WRITE);
         }
 
@@ -104,7 +92,8 @@ namespace Bull
     {
         if(m_id)
         {
-            bind(this);
+            bind();
+
             return gl::mapBuffer(m_type, GL_READ_ONLY);
         }
 
@@ -115,7 +104,8 @@ namespace Bull
     {
         if(m_id)
         {
-            bind(this);
+            bind();
+
             gl::unmapBuffer(m_type);
         }
     }
@@ -124,9 +114,7 @@ namespace Bull
     {
         if(m_id)
         {
-            ensureContext();
-
-            bind(this);
+            bind();
 
             m_capacity = 0;
 
@@ -140,11 +128,9 @@ namespace Bull
     {
         if(m_id)
         {
-            ensureContext();
-
             gl::deleteBuffers(1, &m_id);
 
-            m_id = 0;
+            m_id       = 0;
             m_capacity = 0;
         }
     }
@@ -162,5 +148,13 @@ namespace Bull
     unsigned int HardwareBuffer::getSystemHandler() const
     {
         return m_id;
+    }
+
+    void HardwareBuffer::bind() const
+    {
+        if(m_id)
+        {
+            gl::bindBuffer(m_type, m_id);
+        }
     }
 }

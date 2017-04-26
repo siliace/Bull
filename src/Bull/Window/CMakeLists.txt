@@ -1,25 +1,23 @@
-set(WINDOW_INC ${BULL_INCLUDE}/Window)
-set(WINDOW_SRC ${BULL_SRC}/Window)
+add_library(bull-window SHARED "")
 
-#Headers
-file(GLOB_RECURSE WINDOW_INCLUDE_FILES ${WINDOW_INC}/*.hpp)
+target_sources(bull-window
+        PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/Window.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/VideoMode.cpp
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickManager.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickManager.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/VideoModeImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/WindowImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/WindowImpl.hpp
+        )
 
-#Source
-file(GLOB WINDOW_SOURCE_FILES ${WINDOW_SRC}/*.*)
 if(BULL_OS_WINDOWS)
-    file(GLOB WINDOW_IMPL_SOURCE_FILES ${WINDOW_SRC}/Win32/*)
+    add_subdirectory(Win32)
 else()
-    file(GLOB WINDOW_IMPL_SOURCE_FILES ${WINDOW_SRC}/X11/*)
-endif()
-list(APPEND WINDOW_SOURCE_FILES ${WINDOW_IMPL_SOURCE_FILES})
-
-if(BULL_OS_GNU_LINUX)
-    list(APPEND UTILITY_EXT_LIBS GL)
-    list(APPEND UTILITY_EXT_LIBS X11)
-    list(APPEND UTILITY_EXT_LIBS Xrandr)
+    add_subdirectory(X11)
+    target_link_libraries(bull-window X11)
+    target_link_libraries(bull-window Xrandr)
 endif()
 
-add_library(bull-window SHARED ${WINDOW_INCLUDE_FILES} ${WINDOW_SOURCE_FILES})
 target_link_libraries(bull-window bull-core)
-target_link_libraries(bull-window bull-hardware)
-target_link_libraries(bull-window ${UTILITY_EXT_LIBS})

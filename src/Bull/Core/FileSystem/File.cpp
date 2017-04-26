@@ -3,7 +3,6 @@
 
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/FileSystem/FileImpl.hpp>
-#include <Bull/Core/Thread/Lock.hpp>
 
 namespace Bull
 {
@@ -17,24 +16,24 @@ namespace Bull
         return prv::FileImpl::exists(name);
     }
 
-    bool File::copy(const String& path, const String& newPath)
+    bool File::copy(const Path& path, const String& newPath)
     {
-        return prv::FileImpl::copy(path, newPath);
+        return prv::FileImpl::copy(path.toString(), newPath);
     }
 
-    bool File::rename(const String& name, const String& newName)
+    bool File::rename(const Path& name, const String& newName)
     {
-        if(File::exists(name) && !File::exists(newName))
+        if(File::exists(name.toString()) && !File::exists(newName))
         {
-            return ::rename(name, newName);
+            return ::rename(name.toString(), newName);
         }
 
         return false;
     }
 
-    bool File::remove(const String& name)
+    bool File::remove(const Path& name)
     {
-        return prv::FileImpl::remove(name);
+        return prv::FileImpl::remove(name.toString());
     }
 
     File::File() :
@@ -66,7 +65,7 @@ namespace Bull
 
             m_path = path;
             m_mode = mode;
-            m_impl.reset(prv::FileImpl::createInstance(m_path.getPathName(), m_mode));
+            m_impl.reset(prv::FileImpl::createInstance(m_path.toString(), m_mode));
 
             if(m_impl && (mode & OpeningMode::Read))
             {
@@ -214,7 +213,7 @@ namespace Bull
         return 0;
     }
 
-    String File::getPath() const
+    const Path& File::getPath() const
     {
         return m_path;
     }

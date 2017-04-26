@@ -34,8 +34,8 @@ namespace Bull
 
                         if(rotation == RR_Rotate_90 || RR_Rotate_270)
                         {
-                            desktopMode.width  = sizes[currentMode].height;
                             desktopMode.height = sizes[currentMode].width;
+                            desktopMode.width  = sizes[currentMode].height;
                         }
                         else
                         {

@@ -6,6 +6,7 @@
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InOutStream.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
 {
@@ -55,7 +56,7 @@ namespace Bull
          * \return Return true if the copy was successfully, false otherwise
          *
          */
-        static bool copy(const String& path, const String& newPath);
+        static bool copy(const Path& path, const String& newPath);
 
         /*! \brief Rename a file
          *
@@ -65,7 +66,7 @@ namespace Bull
          * \return Return true if the file was renamed successfully, false otherwise
          *
          */
-        static bool rename(const String& name, const String& newName);
+        static bool rename(const Path& name, const String& newName);
 
         /*! \brief Delete a file
          *
@@ -74,7 +75,7 @@ namespace Bull
          * \return Return true if the file was deleted successfully, false otherwise
          *
          */
-        static bool remove(const String& name);
+        static bool remove(const Path& name);
 
     public:
 
@@ -207,7 +208,7 @@ namespace Bull
          * \return Return the path of the file
          *
          */
-        String getPath() const;
+        const Path& getPath() const;
 
         /*! \brief Get the size of the file
          *

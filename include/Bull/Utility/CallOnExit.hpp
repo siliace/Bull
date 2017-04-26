@@ -13,11 +13,6 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         */
-        CallOnExit() = delete;
-
-        /*! \brief Constructor
-         *
          * \param callback The function to call when the instance is destroyed
          *
          */

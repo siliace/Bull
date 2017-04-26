@@ -1,22 +1,18 @@
-set(NETWORK_INC ${BULL_INCLUDE}/Network)
-set(NETWORK_SRC ${BULL_SRC}/Network)
+add_library(bull-network SHARED "")
 
-#Headers
-file(GLOB_RECURSE NETWORK_INCLUDE_FILES ${NETWORK_INC}/*.hpp)
+target_sources(bull-network
+        PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/IpAddress.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Socket.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/TcpListenner.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/TcpSocket.cpp
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/IpAddressImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SocketImpl.hpp
+        )
 
-#Source
-file(GLOB NETWORK_SOURCE_FILES ${NETWORK_SRC}/*.*)
 if(BULL_OS_WINDOWS)
-    file(GLOB NETWORK_IMPL_SOURCE_FILES ${NETWORK_SRC}/Win32/*)
+    add_subdirectory(Win32)
 else()
-    file(GLOB NETWORK_IMPL_SOURCE_FILES ${NETWORK_SRC}/Unix/*)
+    add_subdirectory(Unix)
 endif()
-list(APPEND NETWORK_SOURCE_FILES ${NETWORK_IMPL_SOURCE_FILES})
-
-if(BULL_OS_WINDOW)
-    list(APPED NETWORK_EXT_LIBS ws2_32)
-endif()
-
-add_library(bull-network SHARED ${NETWORK_INCLUDE_FILES} ${NETWORK_SOURCE_FILES})
-target_link_libraries(bull-network bull-core)
-target_link_libraries(bull-network ${NETWORK_EXT_LIBS})

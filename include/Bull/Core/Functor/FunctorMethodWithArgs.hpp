@@ -14,11 +14,6 @@ namespace Bull
         {
         public:
 
-            /*! \brief Default constructor
-             *
-             */
-            FunctorMethodWithArgs() = delete;
-
             /*! \brief Constructor
              *
              * \param instance The instance to use to call the method

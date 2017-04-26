@@ -1,0 +1,7 @@
+target_sources(bull-core
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/ClockImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ClockImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/DateImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/DateImpl.hpp
+        )

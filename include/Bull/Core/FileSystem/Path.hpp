@@ -1,38 +1,12 @@
 #ifndef Bull_Path_hpp
 #define Bull_Path_hpp
 
-#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
 {
     struct BULL_API Path
     {
-    public:
-
-        static Path None;
-
-        /*! \brief Check whether if the path is exists
-         *
-         * \param path The path to check
-         *
-         * \return True if the path exists
-         *
-         */
-        static bool exists(const String& path);
-
-        /*! \brief Create a path
-         *
-         * \param path
-         * \param isFile
-         * \param isDirectory
-         *
-         * \return The created path
-         *
-         */
-        static Path make(const String& path, bool isFile, bool isDirectory);
-
     public:
 
         /*! \brief Default constructor
@@ -45,92 +19,46 @@ namespace Bull
          * \param path The path
          *
          */
-        explicit Path(const String& path);
+        Path(const String& path);
 
-        /*! \brief Basic assignment operator
+        /*! \brief Compare two Path
          *
-         * \param path The path
+         * \param right The Path to compare to this
          *
-         * \return This
-         *
-         */
-        Path& operator=(const String& path);
-
-        /*! \brief Set the path
-         *
-         * \param path The path
-         *
-         * \return This
-         *
-         */
-        Path& set(const String& path);
-
-        /*! \brief Compare two paths
-         *
-         * \param right The path to compare to this
-         *
-         * \return True if right and this are equal
+         * \return True if this and right are equal
          *
          */
         bool operator==(const Path& right) const;
 
-        /*! \brief Compare two paths
+        /*! \brief Compare two Path
          *
-         * \param right The path to compare to this
+         * \param right The Path to compare to this
          *
-         * \return True if right and this are not equal
+         * \return True if this and right are not equal
          *
          */
         bool operator!=(const Path& right) const;
 
-        /*! \brief Get the path
+        /*! \brief Check whether the path is a file
          *
-         * \return The path
-         *
-         */
-        const String& getPathName() const;
-
-        /*! \brief Check whether the path is corresponding to a file
-         *
-         * \return True if the path is a file
+         * \return True if the file is a string
          *
          */
         bool isFile() const;
 
-        /*! \brief Check whether the path is corresponding to a directory
+        /*! \brief Check whether the path is a directory
          *
-         * \return True if the path is a directory
+         * \return True if the directory is a string
          *
          */
         bool isDirectory() const;
 
-        /*! \brief Check if the path reach something
+        /*! \brief Convert the Path to a String
          *
-         * \return True if the path is valid
-         *
-         */
-        bool isValid() const;
-
-        /*! \brief Convert the path to a String
-         *
-         * \return The path as a string
+         * \return The Path as a String
          *
          */
-        operator String() const;
-
-        /*! \brief Convert the path to a const char* buffer
-         *
-         * \return The path as a const char* buffer
-         *
-         */
-        operator const char*() const;
-
-        /*! \brief Convert the path as a boolean
-         *
-         * \return True if the path is valid
-         *
-         */
-        operator bool() const;
+        String toString() const;
 
     private:
 

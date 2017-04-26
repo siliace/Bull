@@ -21,7 +21,7 @@ namespace Bull
              * \return Return the instance of the DirectoryImpl if the file exist, nullptr otherwise
              *
              */
-            static DirectoryImpl* createInstance(const String& path);
+            static DirectoryImpl* createInstance(const Path& path);
 
             /*! \brief Create a directory
              *
@@ -48,7 +48,7 @@ namespace Bull
              * \return Return true if the directory was deleted successfully, false otherwise
              *
              */
-            static bool remove(const String& path);
+            static bool remove(const Path& path);
 
         public:
 
@@ -64,7 +64,7 @@ namespace Bull
              * \return Return true is the directory was opened successfully, false otherwise
              *
              */
-            virtual bool open(const String& path) = 0;
+            virtual bool open(const Path& path) = 0;
 
             /*! \brief Get the content of this Directory
              *
