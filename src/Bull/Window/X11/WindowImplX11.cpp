@@ -125,46 +125,9 @@ namespace Bull
         }
 
         WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style) :
-            m_handler(0),
-            m_isMapped(false),
-            m_captureCursor(false)
+            WindowImplX11()
         {
-            ErrorHandler         handler;
-            XSetWindowAttributes attributes;
-            int                  screen     = m_display.getDefaultScreen();
-            Visual*              visual     = XDefaultVisual(m_display, screen);
-
-            m_colormap = XCreateColormap(m_display, m_display.getRootWindow(screen), visual, AllocNone);
-
-            attributes.background_pixmap = XNone;
-            attributes.colormap          = m_colormap;
-            attributes.border_pixel      = 0;
-            attributes.event_mask        = WindowImplX11::EventsMasks;
-
-            m_handler = XCreateWindow(m_display,
-                                      m_display.getRootWindow(screen),
-                                      0, 0,
-                                      mode.width, mode.height,
-                                      0,
-                                      mode.bitsPerPixel,
-                                      InputOutput,
-                                      visual,
-                                      CWColormap | CWEventMask | CWBorderPixel,
-                                      &attributes);
-            
-            if(m_handler == 0)
-            {
-                throw std::runtime_error("Failed to create window");
-            }
-
-            setProtocols();
-
-            setTitle(title);
-
-            m_lastPosition = getPosition();
-            m_lastSize     = getSize();
-
-            setVisible(true);
+            open(mode, title, style);
         }
 
         WindowImplX11::~WindowImplX11()
@@ -606,6 +569,85 @@ namespace Bull
             m_captureCursor(false)
         {
             /// Nothing
+        }
+
+        void WindowImplX11::open(const VideoMode& mode, const String& title, Uint32 style)
+        {
+            ErrorHandler         handler;
+            XSetWindowAttributes attributes;
+            int                  screen     = m_display.getDefaultScreen();
+            Visual*              visual     = XDefaultVisual(m_display, screen);
+
+            m_colormap = XCreateColormap(m_display, m_display.getRootWindow(screen), visual, AllocNone);
+
+            attributes.border_pixel      = 0;
+            attributes.background_pixmap = XNone;
+            attributes.colormap          = m_colormap;
+            attributes.event_mask        = WindowImplX11::EventsMasks;
+
+            m_handler = XCreateWindow(m_display,
+                                      m_display.getRootWindow(screen),
+                                      0, 0,
+                                      mode.width, mode.height,
+                                      0,
+                                      mode.bitsPerPixel,
+                                      InputOutput,
+                                      visual,
+                                      CWColormap | CWEventMask | CWBorderPixel,
+                                      &attributes);
+
+            if(m_handler == 0)
+            {
+                throw std::runtime_error("Failed to create window");
+            }
+
+            initialize(title);
+        }
+
+        void WindowImplX11::open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi)
+        {
+            ErrorHandler         handler;
+            XSetWindowAttributes attributes;
+
+            m_colormap = XCreateColormap(m_display,
+                                         m_display.getRootWindow(vi->screen),
+                                         vi->visual,
+                                         AllocNone);
+
+            attributes.border_pixel      = 0;
+            attributes.background_pixmap = XNone;
+            attributes.colormap          = m_colormap;
+            attributes.event_mask        = WindowImplX11::EventsMasks;
+
+            m_handler = XCreateWindow(m_display,
+                                      m_display.getRootWindow(vi->screen),
+                                      0, 0,
+                                      width, height,
+                                      0,
+                                      vi->depth,
+                                      InputOutput,
+                                      vi->visual,
+                                      CWColormap | CWEventMask | CWBorderPixel,
+                                      &attributes);
+
+            if(m_handler == 0)
+            {
+                throw std::runtime_error("Failed to create window");
+            }
+
+            initialize(title);
+        }
+
+        void WindowImplX11::initialize(const String& title)
+        {
+            setProtocols();
+
+            setTitle(title);
+
+            m_lastPosition = getPosition();
+            m_lastSize     = getSize();
+
+            setVisible(true);
         }
 
         void WindowImplX11::setProtocols()

@@ -173,6 +173,35 @@ namespace Bull
              */
             WindowImplX11();
 
+            /*! \brief Open the window
+             *
+             * \param mode
+             * \param title
+             * \param style
+             *
+             */
+            void open(const VideoMode& mode, const String& title, Uint32 style);
+
+            /*! \brief Open the window
+             *
+             * \param width
+             * \param height
+             * \param title
+             * \param style
+             * \param vi
+             *
+             */
+            void open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi);
+
+        private:
+
+            /*! \brief Perform internal intialization
+             *
+             * \param title The title of the window to create
+             *
+             */
+            void initialize(const String& title);
+
             /*! \brief Set Window manager protocols supported
              *
              */
