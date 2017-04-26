@@ -1,10 +1,10 @@
 #include <X11/keysym.h>
+#include <X11/Xutil.h>
 
 #include <Bull/Core/Thread/Thread.hpp>
 
 #include <Bull/Window/X11/ErrorHandler.hpp>
 #include <Bull/Window/X11/WindowImplX11.hpp>
-#include <X11/Xutil.h>
 
 #ifndef Button6
     #define Button6 6
@@ -151,6 +151,12 @@ namespace Bull
                                       visual,
                                       CWColormap | CWEventMask | CWBorderPixel,
                                       &attributes);
+            
+            if(m_handler == 0)
+            {
+                throw std::runtime_error("Failed to create window");
+            }
+
             setProtocols();
 
             setTitle(title);

@@ -10,7 +10,6 @@
 #include <Bull/Render/Context/Glx/GlxSwapControlSGI.hpp>
 
 #include <Bull/Window/X11/ErrorHandler.hpp>
-#include <X11/Xutil.h>
 
 namespace Bull
 {
@@ -115,7 +114,7 @@ namespace Bull
         }
 
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared) :
-            GlxContext(shared, VideoMode(1, 1), ContextSettings())
+            GlxContext(shared, VideoMode(1, 1), ContextSettings::Worst)
         {
             /// Nothing
         }
@@ -236,21 +235,20 @@ namespace Bull
         bool GlxContext::makeCurrent()
         {
             ErrorHandler handler;
-            bool success = false;
 
             if(m_render)
             {
                 if(m_window)
                 {
-                    success = glXMakeCurrent(m_display, m_window, m_render) == True;
+                    return glXMakeCurrent(m_display, m_window, m_render) == True;
                 }
                 else if(m_pbuffer)
                 {
-                    success = glXMakeContextCurrent(m_display, m_pbuffer, m_pbuffer, m_render) == True;
+                    return glXMakeContextCurrent(m_display, m_pbuffer, m_pbuffer, m_render) == True;
                 }
             }
 
-            return success;
+            return false;
         }
 
         void GlxContext::createSurface(WindowHandler handler)
@@ -391,7 +389,6 @@ namespace Bull
         void GlxContext::updateSettings()
         {
             int depths, stencil;
-            ErrorHandler handler;
             int sampleBuffers, samples;
 
             glXGetFBConfigAttrib(m_display, m_config, GLX_SAMPLE_BUFFERS, &sampleBuffers);

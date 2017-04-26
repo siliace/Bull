@@ -55,8 +55,6 @@ namespace Bull
              */
             void resetError();
 
-        private:
-
             /*! \brief Start to listen errors to handle
              *
              */
@@ -66,6 +64,8 @@ namespace Bull
              *
              */
             void close();
+
+        private:
 
             Lock          m_lock;
             bool          m_isBinded;

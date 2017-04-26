@@ -103,7 +103,7 @@ namespace Bull
 
             std::vector<Extension> m_extensions;
             std::vector<String>    m_allExtensions;
-            bool m_loaded = false;
+            bool                   m_loaded = false;
         };
     }
 }

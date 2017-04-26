@@ -190,7 +190,7 @@ namespace Bull
          * \return Return true if the window was open successfully, false otherwise
          *
          */
-        bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default);
+        virtual bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default);
 
         /*! \brief Check if the window is open
          *
@@ -202,7 +202,7 @@ namespace Bull
         /*! \brief Close the window
          *
          */
-        void close();
+        virtual void close();
 
         /*! \brief Get the first event on the stack without blocking the current thread
          *

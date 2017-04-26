@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     unsigned int vao;
     RenderWindow::Event e;
     HardwareBuffer vbo(HardwareBuffer::Array);
-    RenderWindow win(VideoMode(800, 600), "Bull Application", RenderWindow::Default, ContextSettings::Best);
+    RenderWindow win(VideoMode(800, 600), "Bull Application");
 
     float vertices[] = {
             0.5f, 0.5f, 0.f,

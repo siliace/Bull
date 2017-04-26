@@ -39,6 +39,11 @@ namespace Bull
                                       CWColormap | CWEventMask | CWBorderPixel,
                                       &attributes);
 
+            if(m_handler == 0)
+            {
+                throw std::runtime_error("Failed to create window");
+            }
+
             setProtocols();
 
             setTitle(title);

@@ -1,11 +1,10 @@
 #include <memory>
 #include <set>
 
-#include <Bull/Render/OpenGL.hpp>
-
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
 #include <Bull/Render/Context/GlLoader.hpp>
+#include <Bull/Render/OpenGL.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglContext.hpp>
@@ -52,9 +51,11 @@ namespace Bull
 
             /// We load OpenGL functions before initialize because this method uses OpenGL functions (glEnable, glGetIntegerv...)
             ExtensionsLoader::Instance loader = ExtensionsLoader::get(shared->getSurfaceHandler());
+
             ContextType::requireExtensions(loader);
-            GlLoader::load();
             loader->load();
+
+            GlLoader::load();
 
             shared->initialize();
 

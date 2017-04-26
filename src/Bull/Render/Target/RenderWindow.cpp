@@ -42,6 +42,12 @@ namespace Bull
         return true;
     }
 
+    void RenderWindow::close()
+    {
+        Window::close();
+        m_context.reset();
+    }
+
     void RenderWindow::display()
     {
         if(m_frameDelay != Time::Zero && m_frameDelay > m_clock.getElapsedTime())
