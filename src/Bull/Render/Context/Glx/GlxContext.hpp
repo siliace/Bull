@@ -126,13 +126,12 @@ namespace Bull
 
             /*! \brief Create the render surface
              *
-             * \param shared       The shared context
-             * \param width        The width of the surface
-             * \param height       The height of the surface
-             * \param bitsPerPixel The number of bits per pixel to use
+             * \param shared The shared context
+             * \param width  The width of the surface
+             * \param height The height of the surface
              *
              */
-            void createSurface(const std::shared_ptr<GlxContext>& shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel);
+            void createSurface(const std::shared_ptr<GlxContext>& shared, unsigned int width, unsigned int height);
 
             /*! \brief Create the render context
              *

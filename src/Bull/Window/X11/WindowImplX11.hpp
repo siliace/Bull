@@ -173,8 +173,6 @@ namespace Bull
              */
             WindowImplX11();
 
-        protected:
-
             /*! \brief Set Window manager protocols supported
              *
              */

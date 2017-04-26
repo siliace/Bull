@@ -10,6 +10,7 @@
 #include <Bull/Render/Context/Glx/GlxSwapControlSGI.hpp>
 
 #include <Bull/Window/X11/ErrorHandler.hpp>
+#include <X11/Xutil.h>
 
 namespace Bull
 {
@@ -130,7 +131,7 @@ namespace Bull
         {
             m_config = chooseBestConfig(m_display, m_settings, mode.bitsPerPixel);
 
-            createSurface(shared, mode.width, mode.height, mode.bitsPerPixel);
+            createSurface(shared, mode.width, mode.height);
 
             if(m_window || m_pbuffer)
             {
@@ -257,7 +258,7 @@ namespace Bull
             m_window = handler;
         }
 
-        void GlxContext::createSurface(const std::shared_ptr<GlxContext>& shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel)
+        void GlxContext::createSurface(const std::shared_ptr<GlxContext>& shared, unsigned int width, unsigned int height)
         {
             ErrorHandler handler;
 
@@ -302,7 +303,7 @@ namespace Bull
                                          0, 0,
                                          width, height,
                                          0,
-                                         bitsPerPixel,
+                                         vi->depth,
                                          InputOutput,
                                          vi->visual,
                                          CWColormap | CWEventMask | CWBorderPixel,

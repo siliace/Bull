@@ -1,5 +1,6 @@
 #include <Bull/Window/Window.hpp>
 #include <Bull/Window/WindowImpl.hpp>
+#include <Bull/Render/Context/ContextSettings.hpp>
 
 namespace Bull
 {
@@ -49,7 +50,7 @@ namespace Bull
 
     bool Window::isOpen() const
     {
-        return m_impl.get();
+        return bool(m_impl);
     }
 
     void Window::close()
