@@ -1,0 +1,23 @@
+target_sources(bull-core
+        PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariable.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Lock.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Mutex.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Semaphore.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Thread.cpp
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariableImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariableImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/MutexImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/MutexImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SemaphoreImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SemaphoreImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ThreadImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ThreadImpl.hpp
+        )
+
+if(BULL_OS_WINDOWS)
+    add_subdirectory(Win32)
+else()
+    add_subdirectory(Unix)
+endif()

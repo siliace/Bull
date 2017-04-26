@@ -2,6 +2,7 @@
 #define Bull_WindowImplX11_hpp
 
 #include <X11/Xlib.h>
+#include <X11/Xutil.h>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -14,6 +15,16 @@ namespace Bull
     {
         class WindowImplX11 : public WindowImpl
         {
+        protected:
+
+            static constexpr long EventsMasks = KeyPressMask         | KeyReleaseMask    | /// Keyboard events
+                                                PointerMotionMask    | ButtonMotionMask  | /// Mouse move events
+                                                ButtonPressMask      | ButtonReleaseMask | /// Mouse buttons events
+                                                FocusChangeMask      |                     /// Focus events
+                                                StructureNotifyMask  |                     /// Resize events
+                                                VisibilityChangeMask |                     /// Visibility change (internal uses only)
+                                                EnterWindowMask      | LeaveWindowMask;    /// Mouse Enter/Leave
+
         private:
 
             /*! \brief Convert a Xlib key value to a Bull::Keyboard::Key
@@ -34,12 +45,12 @@ namespace Bull
              * \param style The style to use to create the window
              *
              */
-            WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+            WindowImplX11(const VideoMode& mode, const String& title, Uint32 style);
 
             /*! \brief Destructor
              *
              */
-            ~WindowImplX11();
+            virtual ~WindowImplX11();
 
             /*! \brief Start to process events to fill event queue
              *
@@ -155,7 +166,14 @@ namespace Bull
              */
             WindowHandler getSystemHandler() const override;
 
-        private:
+        protected:
+
+            /*! \brief Default constructor
+             *
+             */
+            WindowImplX11();
+
+        protected:
 
             /*! \brief Set Window manager protocols supported
              *
@@ -169,7 +187,6 @@ namespace Bull
             Colormap          m_colormap;
             Vector2I          m_lastPosition;
             bool              m_captureCursor;
-
         };
     }
 }

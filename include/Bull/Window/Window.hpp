@@ -156,9 +156,9 @@ namespace Bull
             Default     = Visible | Closable | Minimizable | Maximizable | Resizable
         };
 
-    private:
+    protected:
 
-        static Window* m_fullscreen;
+        static Window* s_fullscreen;
 
     public:
 
@@ -368,44 +368,6 @@ namespace Bull
         WindowHandler getSystemHandler() const;
 
     protected:
-
-        /*! \brief Open a window
-         *
-         * This method takes a ContextSettings as parameter
-         * but this value is used only on X11 implementation
-         * that required to know the pixel format to be able
-         * to bind an OpenGL context on this window
-         *
-         * \param mode  The VideoMode
-         * \param title The title of the window
-         * \param style The window decorations
-         *
-         */
-        virtual bool open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
-
-        /*! \brief Callback triggered when the window is open
-         *
-         */
-        virtual void onOpen() {}
-
-        /*! \brief Callback triggered the the window is resized
-         *
-         */
-        virtual void onResize() {}
-
-        /*! \brief Callback triggered when the window is closed
-         *
-         */
-        virtual void onClose() {}
-
-    private:
-
-        /*! \brief Filter events to start callbacks
-         *
-         * \param e The event to filter
-         *
-         */
-        void filterEvent(const Event& e);
 
         std::unique_ptr<prv::WindowImpl> m_impl; /*!< The OS specific implementation of the window */
     };

@@ -1,0 +1,11 @@
+target_sources(bull-core
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariableImplWin32.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariableImplWin32.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/MutexImplWin32.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/MutexImplWin32.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SemaphoreImplWin32.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SemaphoreImplWin32.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ThreadImplWin32.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ThreadImplWin32.hpp
+        )

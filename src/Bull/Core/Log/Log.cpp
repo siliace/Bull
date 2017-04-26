@@ -13,12 +13,8 @@ namespace Bull
         {
             "Debug",
             "Info",
-            "Notice",
             "Warning",
-            "Error",
-            "Critical",
-            "Alert",
-            "Emergency"
+            "Error"
         };
 
         entry << "[" << String::number(now.year) << "/";

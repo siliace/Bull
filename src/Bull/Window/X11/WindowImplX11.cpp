@@ -2,10 +2,9 @@
 
 #include <Bull/Core/Thread/Thread.hpp>
 
-#include <Bull/Window/X11/GlxContext.hpp>
-
 #include <Bull/Window/X11/ErrorHandler.hpp>
 #include <Bull/Window/X11/WindowImplX11.hpp>
+#include <X11/Xutil.h>
 
 #ifndef Button6
     #define Button6 6
@@ -27,18 +26,6 @@ namespace Bull
 {
     namespace prv
     {
-        namespace
-        {
-            const long eventMasks = KeyPressMask         | KeyReleaseMask    | /// Keyboard events
-                                    PointerMotionMask    | ButtonMotionMask  | /// Mouse move events
-                                    ButtonPressMask      | ButtonReleaseMask | /// Mouse buttons events
-                                    FocusChangeMask      |                     /// Focus events
-                                    StructureNotifyMask  |                     /// Resize events
-                                    VisibilityChangeMask |                     /// Visibility change (internal uses only)
-                                    EnterWindowMask      | LeaveWindowMask;    /// Mouse Enter/Leave
-
-        }
-
         Keyboard::Key WindowImplX11::convertXKToBullkey(KeySym xkey)
         {
             switch(xkey)
@@ -137,35 +124,31 @@ namespace Bull
             }
         }
 
-        WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings) :
+        WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style) :
             m_handler(0),
             m_isMapped(false),
             m_captureCursor(false)
         {
-            XVisualInfo*         vi;
-            GLXFBConfig          config;
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
+            int                  screen     = m_display.getDefaultScreen();
+            Visual*              visual     = XDefaultVisual(m_display, screen);
 
-            config = GlxContext::chooseBestConfig(m_display, settings, mode.bitsPerPixel);
-
-            vi = glXGetVisualFromFBConfig(m_display, config);
-
-            m_colormap = XCreateColormap(m_display, m_display.getRootWindow(vi->screen), vi->visual, AllocNone);
+            m_colormap = XCreateColormap(m_display, m_display.getRootWindow(screen), visual, AllocNone);
 
             attributes.background_pixmap = XNone;
             attributes.colormap          = m_colormap;
             attributes.border_pixel      = 0;
-            attributes.event_mask        = eventMasks;
+            attributes.event_mask        = WindowImplX11::EventsMasks;
 
             m_handler = XCreateWindow(m_display,
-                                      m_display.getRootWindow(vi->screen),
+                                      m_display.getRootWindow(screen),
                                       0, 0,
                                       mode.width, mode.height,
                                       0,
-                                      vi->depth,
+                                      mode.bitsPerPixel,
                                       InputOutput,
-                                      vi->visual,
+                                      visual,
                                       CWColormap | CWEventMask | CWBorderPixel,
                                       &attributes);
             setProtocols();
@@ -609,6 +592,14 @@ namespace Bull
         WindowHandler WindowImplX11::getSystemHandler() const
         {
             return m_handler;
+        }
+
+        WindowImplX11::WindowImplX11() :
+            m_handler(0),
+            m_isMapped(false),
+            m_captureCursor(false)
+        {
+            /// Nothing
         }
 
         void WindowImplX11::setProtocols()

@@ -64,7 +64,7 @@ namespace Bull
             /*! \brief Destructor
              *
              */
-            ~WindowImplWin32();
+            virtual ~WindowImplWin32();
 
             /*! \brief Process events stacked so far
              *

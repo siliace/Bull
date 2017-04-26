@@ -9,7 +9,7 @@
 
 #include <Bull/Render/OpenGL.hpp>
 
-#include <Bull/Window/ContextResource.hpp>
+#include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull
 {

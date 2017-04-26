@@ -1,69 +1,12 @@
-set(CORE_INC ${BULL_INCLUDE}/Core)
-set(CORE_SRC ${BULL_SRC}/Core)
+add_library(bull-core SHARED "")
 
-#Headers
-file(GLOB_RECURSE CORE_INCLUDE_FILES ${CORE_INC}/*.hpp)
+add_subdirectory(FileSystem)
+add_subdirectory(IO)
+add_subdirectory(Log)
+add_subdirectory(Memory)
+add_subdirectory(System)
+add_subdirectory(Thread)
+add_subdirectory(Time)
 
-#Source
-file(GLOB CORE_SOURCE_FILES ${CORE_SRC}/*.*)
-
-#File System
-file(GLOB CORE_FILESYSTEM_SOURCE_FILES ${CORE_SRC}/FileSystem/*.*)
-if(BULL_OS_WINDOWS)
-    file(GLOB CORE_FILESYSTEM_IMPL_SOURCE_FILES ${CORE_SRC}/FileSystem/Win32/*)
-else()
-    file(GLOB CORE_FILESYSTEM_IMPL_SOURCE_FILES ${CORE_SRC}/FileSystem/Unix/*)
-endif()
-list(APPEND CORE_FILESYSTEM_SOURCE_FILES ${CORE_FILESYSTEM_IMPL_SOURCE_FILES})
-
-#IO
-file(GLOB CORE_IO_SOURCE_FILES ${CORE_SRC}/IO/*.*)
-
-#Log
-file(GLOB CORE_LOG_SOURCE_FILES ${CORE_SRC}/Log/*.*)
-
-#Memory
-file(GLOB CORE_MEMORY_SOURCE_FILES ${CORE_SRC}/Memory/*.*)
-
-#System
-file(GLOB CORE_SYSTEM_SOURCE_FILES ${CORE_SRC}/System/*.*)
-if(BULL_OS_WINDOWS)
-    file(GLOB CORE_SYSTEM_IMPL_SOURCE_FILES ${CORE_SRC}/System/Win32/*)
-else()
-    file(GLOB CORE_SYSTEM_IMPL_SOURCE_FILES ${CORE_SRC}/System/Unix/*)
-endif()
-list(APPEND CORE_SYSTEM_SOURCE_FILES ${CORE_SYSTEM_IMPL_SOURCE_FILES})
-
-#Thread
-file(GLOB CORE_THREAD_SOURCE_FILES ${CORE_SRC}/Thread/*.*)
-if(BULL_OS_WINDOWS)
-    file(GLOB CORE_THREAD_IMPL_SOURCE_FILES ${CORE_SRC}/Thread/Win32/*)
-else()
-    file(GLOB CORE_THREAD_IMPL_SOURCE_FILES ${CORE_SRC}/Thread/Unix/*)
-endif()
-list(APPEND CORE_THREAD_SOURCE_FILES ${CORE_THREAD_IMPL_SOURCE_FILES})
-
-#Time
-file(GLOB CORE_TIME_SOURCE_FILES ${CORE_SRC}/Time/*.*)
-if(BULL_OS_WINDOWS)
-    file(GLOB CORE_TIME_IMPL_SOURCE_FILES ${CORE_SRC}/Time/Win32/*)
-else()
-    file(GLOB CORE_TIME_IMPL_SOURCE_FILES ${CORE_SRC}/Time/Unix/*)
-endif()
-list(APPEND CORE_TIME_SOURCE_FILES ${CORE_TIME_IMPL_SOURCE_FILES})
-
-if(BULL_OS_GNU_LINUX)
-    list(APPEND CORE_EXT_LIBS dl)
-    list(APPEND CORE_EXT_LIBS pthread)
-endif()
-
-list(APPEND CORE_SOURCE_FILES ${CORE_FILESYSTEM_SOURCE_FILES})
-list(APPEND CORE_SOURCE_FILES ${CORE_IO_SOURCE_FILES})
-list(APPEND CORE_SOURCE_FILES ${CORE_LOG_SOURCE_FILES})
-list(APPEND CORE_SOURCE_FILES ${CORE_MEMORY_SOURCE_FILES})
-list(APPEND CORE_SOURCE_FILES ${CORE_SYSTEM_SOURCE_FILES})
-list(APPEND CORE_SOURCE_FILES ${CORE_THREAD_SOURCE_FILES})
-list(APPEND CORE_SOURCE_FILES ${CORE_TIME_SOURCE_FILES})
-
-add_library(bull-core SHARED ${CORE_INCLUDE_FILES} ${CORE_SOURCE_FILES})
-target_link_libraries(bull-core ${CORE_EXT_LIBS})
+target_link_libraries(bull-core pthread)
+target_link_libraries(bull-core dl)

@@ -1,17 +1,25 @@
-set(UTILITY_INC ${BULL_INCLUDE}/Utility)
-set(UTILITY_SRC ${BULL_SRC}/Utility)
+add_library(bull-utility SHARED "")
 
-#Headers
-file(GLOB_RECURSE UTILITY_INCLUDE_FILES ${UTILITY_INC}/*.hpp)
+target_sources(bull-utility
+        PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/CallOnExit.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Color.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ConsoleLogger.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/FileLogger.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Font.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Glyph.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Image.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Random.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Vertex.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/VertexArray.cpp
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/FontLoader.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/FontLoader.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ImageLoader.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ImageLoader.hpp
+        )
 
-#Source
-file(GLOB UTILITY_SOURCE_FILES ${UTILITY_SRC}/*.*)
-
-list(APPEND UTILITY_EXT_LIBS stb)
-list(APPEND UTILITY_EXT_LIBS freetype)
-
-add_library(bull-utility SHARED ${UTILITY_INCLUDE_FILES} ${UTILITY_SOURCE_FILES})
+target_link_libraries(bull-utility freetype)
+target_link_libraries(bull-utility stb)
 
 target_link_libraries(bull-utility bull-core)
-target_link_libraries(bull-utility bull-hardware)
-target_link_libraries(bull-utility ${UTILITY_EXT_LIBS})

@@ -9,7 +9,6 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Window/ContextSettings.hpp>
 #include <Bull/Window/VideoMode.hpp>
 #include <Bull/Window/Window.hpp>
 #include <Bull/Window/WindowHandler.hpp>
@@ -31,7 +30,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static WindowImpl* createInstance(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+            static WindowImpl* createInstance(const VideoMode& mode, const String& title, Uint32 style);
 
         public:
 
