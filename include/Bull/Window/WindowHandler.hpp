@@ -1,7 +1,7 @@
 #ifndef Bull_WindowHandler_hpp
 #define Bull_WindowHandler_hpp
 
-#include <Bull/Core/System/Config.hpp>
+#include <Bull/Core/System/OS.hpp>
 
 #if defined BULL_OS_WINDOWS
     struct HWND__;

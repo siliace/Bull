@@ -13,9 +13,9 @@ namespace Bull
 
     class BULL_API Font
     {
-    public:
+    private:
 
-        static std::unique_ptr<AbstractFontLoader> loader;
+        static std::unique_ptr<AbstractFontLoader> s_loader;
 
     public:
 

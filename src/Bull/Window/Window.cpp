@@ -1,6 +1,5 @@
 #include <Bull/Window/Window.hpp>
 #include <Bull/Window/WindowImpl.hpp>
-#include <Bull/Render/Context/ContextSettings.hpp>
 
 namespace Bull
 {

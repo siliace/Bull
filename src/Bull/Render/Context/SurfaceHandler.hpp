@@ -1,7 +1,7 @@
 #ifndef Bull_SurfaceHandler_hpp
 #define Bull_SurfaceHandler_hpp
 
-#include <Bull/Core/System/Config.hpp>
+#include <Bull/Core/System/OS.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <windows.h>

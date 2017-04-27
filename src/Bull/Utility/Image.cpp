@@ -1,12 +1,13 @@
 #include <Bull/Core/FileSystem/File.hpp>
+#include <Bull/Core/System/Config.hpp>
 
 #include <Bull/Utility/Image.hpp>
 #include <Bull/Utility/ImageLoader.hpp>
 
+std::unique_ptr<Bull::AbstractImageLoader> Bull::Image::loader = std::make_unique<IMAGE_LOADER>();
+
 namespace Bull
 {
-    std::unique_ptr<AbstractImageLoader> Image::loader = std::make_unique<prv::ImageLoader>();
-
     Image::Image(const Vector2UI& size, const Color& color) :
         Image(size.x, size.y, color)
     {

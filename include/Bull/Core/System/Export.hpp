@@ -1,7 +1,7 @@
 #ifndef Bull_Export_hpp
 #define Bull_Export_hpp
 
-#include <Bull/Core/System/Config.hpp>
+#include <Bull/Core/System/OS.hpp>
 
 #if defined BULL_DYNAMIC
     #if defined BULL_OS_WINDOWS
