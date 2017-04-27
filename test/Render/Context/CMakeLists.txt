@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5.0)
-project(test-core-time)
+project(test-render)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
 
@@ -8,7 +8,8 @@ include_directories(${BULL_ROOT}/include)
 
 link_directories(${BULL_ROOT}/bin/${CMAKE_BUILD_TYPE})
 
-add_executable(bull-test-core-time src/main.cpp)
-target_link_libraries(bull-test-core-time bull-core)
+add_executable(bull-test-render src/main.cpp)
+target_link_libraries(bull-test-render bull-core)
+target_link_libraries(bull-test-render bull-render)
 
-add_test(NAME core-time COMMAND bull-test-core-time)
+add_test(NAME render COMMAND bull-test-render)

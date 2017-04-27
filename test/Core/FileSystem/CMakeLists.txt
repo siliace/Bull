@@ -10,3 +10,5 @@ link_directories(${BULL_ROOT}/bin/${CMAKE_BUILD_TYPE})
 
 add_executable(test-core-fs src/main.cpp)
 target_link_libraries(test-core-fs bull-core)
+
+add_test(NAME core-fs COMMAND test-core-fs)
