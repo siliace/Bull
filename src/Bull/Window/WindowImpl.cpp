@@ -1,7 +1,7 @@
 
 #include <Bull/Core/Thread/Thread.hpp>
 
-#include <Bull/Window/JoystickManager.hpp>
+#include <Bull/Hardware/JoystickManager.hpp>
 #include <Bull/Window/WindowImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
