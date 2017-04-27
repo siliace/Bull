@@ -1,0 +1,6 @@
+add_subdirectory(Core)
+add_subdirectory(Hardware)
+add_subdirectory(Network)
+add_subdirectory(Render)
+add_subdirectory(Utility)
+add_subdirectory(Window)
