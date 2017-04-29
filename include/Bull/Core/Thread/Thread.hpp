@@ -143,13 +143,16 @@ namespace Bull
 
     private:
 
+        /*! \brief Reset the implementation
+         *
+         */
+        void reset();
+
         /// We do not use std::unique_ptr because
         /// in Thread.inl, prv::ThreadImpl
         /// would be an incomplete type
         prv::ThreadImpl* m_impl;
-
-        Functor<void> m_function;
-
+        Functor<void>    m_function;
         Thread::Priority m_priority;
     };
 }

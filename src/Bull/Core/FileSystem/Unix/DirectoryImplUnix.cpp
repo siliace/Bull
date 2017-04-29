@@ -29,19 +29,43 @@ namespace Bull
             return rmdir(path.toString()) != -1;
         }
 
+        DirectoryImplUnix::DirectoryImplUnix() :
+            m_handler(nullptr)
+        {
+            /// Nothing
+        }
+
         DirectoryImplUnix::~DirectoryImplUnix()
         {
-
+            if(m_handler)
+            {
+                closedir(m_handler);
+            }
         }
 
         bool DirectoryImplUnix::open(const Path& path)
         {
+            m_handler = opendir(path.toString());
 
+            return m_handler != nullptr;
         }
 
         std::vector<Path> DirectoryImplUnix::getContent(Uint32 flags)
         {
+            dirent64* result;
+            std::vector<Path> content;
 
+            while((result = readdir64(m_handler)))
+            {
+                Path p(result->d_name);
+
+                if((flags & (Directory::Directories) && p.isDirectory()) || (flags & (Directory::Files) && p.isFile()))
+                {
+                    content.push_back(p);
+                }
+            }
+
+            return content;
         }
     }
 }

@@ -50,8 +50,8 @@ namespace Bull
         if(m_impl)
         {
             m_impl->wait();
-            delete m_impl;
-            m_impl = nullptr;
+
+            reset();
         }
     }
 
@@ -60,13 +60,19 @@ namespace Bull
         if(m_impl)
         {
             m_impl->stop();
-            delete m_impl;
-            m_impl = nullptr;
+
+            reset();
         }
     }
 
     Thread::Priority Thread::getPriority() const
     {
         return m_priority;
+    }
+
+    void Thread::reset()
+    {
+        delete m_impl;
+        m_impl = nullptr;
     }
 }

@@ -1,6 +1,8 @@
 #ifndef Bull_DirectoryImplUnix_hpp
 #define Bull_DirectoryImplUnix_hpp
 
+#include <dirent.h>
+
 #include <Bull/Core/FileSystem/DirectoryImpl.hpp>
 
 namespace Bull
@@ -40,6 +42,11 @@ namespace Bull
 
         public:
 
+            /*! \brief Default constructor
+             * 
+             */
+            DirectoryImplUnix();
+
             /*! \brief Destructor
              *
              */
@@ -62,6 +69,10 @@ namespace Bull
              *
              */
             std::vector<Path> getContent(Uint32 flags) override;
+
+        private:
+
+            DIR* m_handler;
         };
     }
 }
