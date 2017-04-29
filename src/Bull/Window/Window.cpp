@@ -88,28 +88,34 @@ namespace Bull
         return e;
     }
 
-    void Window::enableCaptureCursor(bool enable)
+    Window& Window::enableCaptureCursor(bool enable)
     {
         if(m_impl)
         {
             m_impl->enableCaptureCursor(enable);
         }
+
+        return (*this);
     }
 
-    void Window::showCursor(bool enable)
+    Window& Window::showCursor(bool enable)
     {
         if(m_impl)
         {
             m_impl->showCursor(enable);
         }
+
+        return (*this);
     }
 
-    void Window::minimize()
+    Window& Window::minimize()
     {
         if(m_impl)
         {
             m_impl->minimize();
         }
+
+        return (*this);
     }
 
     bool Window::isMinimized() const
@@ -122,12 +128,14 @@ namespace Bull
         return false;
     }
 
-    void Window::maximize()
+    Window& Window::maximize()
     {
         if(m_impl)
         {
             m_impl->maximize();
         }
+
+        return (*this);
     }
 
     bool Window::isMaximized() const
@@ -140,17 +148,19 @@ namespace Bull
         return false;
     }
 
-    void Window::setPosition(const Vector2I& position)
+    Window& Window::setPosition(const Vector2I& position)
     {
         if(m_impl)
         {
             m_impl->setPosition(position);
         }
+
+        return (*this);
     }
 
-    void Window::setPosition(int x, int y)
+    Window& Window::setPosition(int x, int y)
     {
-        setPosition(Vector2I(x, y));
+        return setPosition(Vector2I(x, y));
     }
 
     Vector2I Window::getPosition() const
@@ -163,17 +173,69 @@ namespace Bull
         return Vector2I();
     }
 
-    void Window::setSize(const Vector2UI& size)
+    Window& Window::setMinSize(const Vector2UI& size)
+    {
+        if(m_impl)
+        {
+            m_impl->setMinSize(size);
+        }
+
+        return (*this);
+    }
+
+    Window& Window::setMinSize(unsigned int width, unsigned int height)
+    {
+        return setMinSize(Vector2UI(width, height));
+    }
+
+    Vector2UI Window::getMinSize() const
+    {
+        if(m_impl)
+        {
+            return m_impl->getMinSize();
+        }
+
+        return Vector2UI();
+    }
+
+    Window& Window::setMaxSize(const Vector2UI& size)
+    {
+        if(m_impl)
+        {
+            m_impl->setMaxSize(size);
+        }
+
+        return (*this);
+    }
+
+    Window& Window::setMaxSize(unsigned int width, unsigned int height)
+    {
+        return setMaxSize(Vector2UI(width, height));
+    }
+
+    Vector2UI Window::getMaxSize() const
+    {
+        if(m_impl)
+        {
+            return m_impl->getMinSize();
+        }
+
+        return Vector2UI();
+    }
+
+    Window& Window::setSize(const Vector2UI& size)
     {
         if(m_impl)
         {
             m_impl->setSize(size);
         }
+
+        return (*this);
     }
 
-    void Window::setSize(unsigned int x, unsigned int y)
+    Window& Window::setSize(unsigned int x, unsigned int y)
     {
-        m_impl->setSize(Vector2UI(x, y));
+        return setSize(Vector2UI(x, y));
     }
 
     Vector2UI Window::getSize() const
@@ -186,12 +248,14 @@ namespace Bull
         return Vector2UI();
     }
 
-    void Window::setTitle(const String& title)
+    Window& Window::setTitle(const String& title)
     {
         if(m_impl)
         {
             m_impl->setTitle(title);
         }
+
+        return (*this);
     }
 
     String Window::getTitle() const
@@ -204,12 +268,14 @@ namespace Bull
         return String();
     }
 
-    void Window::enableKeyRepeat(bool enable)
+    Window& Window::enableKeyRepeat(bool enable)
     {
         if(m_impl)
         {
             m_impl->enableKeyRepeat(enable);
         }
+
+        return (*this);
     }
 
     bool Window::isKeyRepeatEnable() const
@@ -232,12 +298,14 @@ namespace Bull
         return false;
     }
 
-    void Window::setVisible(bool visible)
+    Window& Window::setVisible(bool visible)
     {
         if(m_impl)
         {
             m_impl->setVisible(visible);
         }
+
+        return (*this);
     }
 
     bool Window::enableFullscreen(bool fullscreen)

@@ -489,6 +489,46 @@ namespace Bull
             return Vector2I(x, y);
         }
 
+        void WindowImplX11::setMinSize(const Vector2UI& size)
+        {
+            XSizeHints hints;
+
+            hints.min_width  = size.x;
+            hints.min_height = size.y;
+            hints.flags      = PMinSize;
+
+            XSetNormalHints(m_display, m_handler, &hints);
+        }
+
+        Vector2UI WindowImplX11::getMinSize() const
+        {
+            XSizeHints hints;
+
+            XGetNormalHints(m_display, m_handler, &hints);
+
+            return Vector2UI(hints.min_width, hints.min_height);
+        }
+
+        void WindowImplX11::setMaxSize(const Vector2UI& size)
+        {
+            XSizeHints hints;
+
+            hints.max_width  = size.x;
+            hints.max_height = size.y;
+            hints.flags      = PMaxSize;
+
+            XSetNormalHints(m_display, m_handler, &hints);
+        }
+
+        Vector2UI WindowImplX11::getMaxSize() const
+        {
+            XSizeHints hints;
+
+            XGetNormalHints(m_display, m_handler, &hints);
+
+            return Vector2UI(hints.max_width, hints.max_height);
+        }
+
         void WindowImplX11::setSize(const Vector2UI& size)
         {
             XResizeWindow(m_display, m_handler, size.x, size.y);
@@ -601,7 +641,7 @@ namespace Bull
                 throw std::runtime_error("Failed to create window");
             }
 
-            initialize(title);
+            initialize(title, style);
         }
 
         void WindowImplX11::open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi)
@@ -635,10 +675,10 @@ namespace Bull
                 throw std::runtime_error("Failed to create window");
             }
 
-            initialize(title);
+            initialize(title, style);
         }
 
-        void WindowImplX11::initialize(const String& title)
+        void WindowImplX11::initialize(const String& title, Uint32 style)
         {
             setProtocols();
 

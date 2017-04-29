@@ -110,6 +110,14 @@ namespace Bull
              */
             Vector2I getPosition() const override;
 
+            void setMinSize(const Vector2UI& size) override;
+
+            Vector2UI getMinSize() const override;
+
+            void setMaxSize(const Vector2UI& size) override;
+
+            Vector2UI getMaxSize() const override;
+
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window
@@ -198,9 +206,10 @@ namespace Bull
             /*! \brief Perform internal intialization
              *
              * \param title The title of the window to create
+             * \param style The decortation of the window
              *
              */
-            void initialize(const String& title);
+            void initialize(const String& title, Uint32 style);
 
             /*! \brief Set Window manager protocols supported
              *

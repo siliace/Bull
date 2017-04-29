@@ -1,8 +1,6 @@
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
 #include <Bull/Render/Target/X11/RenderWindowImplX11.hpp>
 
-#include <Bull/Window/X11/ErrorHandler.hpp>
-
 namespace Bull
 {
     namespace prv

@@ -107,6 +107,14 @@ namespace Bull
              */
             virtual Vector2I getPosition() const = 0;
 
+            virtual void setMinSize(const Vector2UI& size) = 0;
+
+            virtual Vector2UI getMinSize() const = 0;
+
+            virtual void setMaxSize(const Vector2UI& size) = 0;
+
+            virtual Vector2UI getMaxSize() const = 0;
+
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window
