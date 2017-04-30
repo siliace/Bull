@@ -1,14 +1,13 @@
-#ifndef Bull_JoystickManager_hpp
-#define Bull_JoystickManager_hpp
+#ifndef BULL_JOYSTICKMANAGER_HPP
+#define BULL_JOYSTICKMANAGER_HPP
 
 #include <array>
 #include <queue>
-#include <utility>
 
 #include <Bull/Core/Pattern/Singleton.hpp>
-#include <Bull/Core/Time/Clock.hpp>
 
 #include <Bull/Hardware/Joystick.hpp>
+#include <Bull/Window/JoystickState.hpp>
 
 #include <Bull/Window/Window.hpp>
 
@@ -84,52 +83,12 @@ namespace Bull
              */
             void processJoystick(Uint8 joystick, std::queue<Window::Event>& eventQueue);
 
-            struct JoystickState
-            {
-                /*! \brief Default constructor
-                 *
-                 */
-                JoystickState();
-
-                /*! \brief Default constructor
-                 *
-                 * \param joystick The ID of the joystick
-                 *
-                 */
-                JoystickState(Uint8 joystick);
-
-                /*! \brief == operator override
-                 *
-                 * \param right The JoystickState to compare
-                 *
-                 * \return Return true if this and right are equal, false otherwise
-                 *
-                 */
-                bool operator==(const JoystickState& right) const;
-
-                /*! \brief != operator override
-                 *
-                 * \param right The JoystickState to compare
-                 *
-                 * \return Return true if this and right are not equal, false otherwise
-                 *
-                 */
-                bool operator!=(const JoystickState& right) const;
-
-                std::array<std::pair<bool, Clock>, Joystick::CountButton> buttons;
-                std::array<float, Joystick::CountAxis> axes;
-                bool connected;
-            };
-
+            bool                                             m_keyrepeat;
+            float                                            m_threshold;
             std::array<JoystickState, Joystick::CountButton> m_stateCache;
-
-            bool m_keyrepeat;
-
-            float m_threshold;
-
-            Time m_repeatDelay;
+            Time                                             m_repeatDelay;
         };
     }
 }
 
-#endif // Bull_JoystickManager_hpp
+#endif // BULL_JOYSTICKMANAGER_HPP

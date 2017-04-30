@@ -35,15 +35,15 @@ namespace Bull
         {
             struct AxisCapabilites
             {
-                bool   exists;
                 Uint16 min;
                 Uint16 max;
+                bool   exists;
             };
 
             String                                           name;
             std::array<AxisCapabilites, Joystick::CountAxis> axes;
-            unsigned int                                     countButtons;
             unsigned int                                     countAxes;
+            unsigned int                                     countButtons;
         };
 
         /*! \brief Check whether a joystick is connected

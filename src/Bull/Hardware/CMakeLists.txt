@@ -10,8 +10,6 @@ target_sources(bull-hardware
         PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/CPUImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/JoystickImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickManager.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickManager.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/KeyboardImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/MouseImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/RAMImpl.hpp
