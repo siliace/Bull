@@ -1,8 +1,6 @@
 #include <Bull/Hardware/Mouse.hpp>
 #include <Bull/Hardware/MouseImpl.hpp>
 
-#include <Bull/Window/Window.hpp>
-
 namespace Bull
 {
     void Mouse::setPosition(const Vector2I& position)
@@ -18,5 +16,10 @@ namespace Bull
     Vector2I Mouse::getPosition()
     {
         return prv::MouseImpl::getPosition();
+    }
+
+    bool Mouse::isButtonPressed(Button button)
+    {
+        return prv::MouseImpl::isButtonPressed(button);
     }
 }

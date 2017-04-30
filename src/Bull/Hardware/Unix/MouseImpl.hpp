@@ -1,7 +1,7 @@
 #ifndef Bull_MouseImpl_hpp
 #define Bull_MouseImpl_hpp
 
-#include <Bull/Math/Vector/Vector2.hpp>
+#include <Bull/Hardware/Mouse.hpp>
 
 namespace Bull
 {
@@ -22,6 +22,15 @@ namespace Bull
              *
              */
             static Vector2I getPosition();
+
+            /*! \brief Check whether a button is pressed
+             *
+             * \param button The button to check
+             *
+             * \return True if the button is pressed
+             *
+             */
+            static bool isButtonPressed(Mouse::Button button);
         };
     }
 }

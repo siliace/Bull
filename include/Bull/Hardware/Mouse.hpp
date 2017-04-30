@@ -11,6 +11,21 @@ namespace Bull
 
     struct BULL_API Mouse
     {
+        enum Button
+        {
+            Right,
+            Middle,
+            Left,
+            Extra1,
+            Extra2
+        };
+
+        enum Wheel
+        {
+            Vertical,
+            Horizontal
+        };
+
         /*! \brief Set the position of the cursor on the screen
          *
          * \param position The new position of the cursor on the screen
@@ -33,20 +48,14 @@ namespace Bull
          */
         static Vector2I getPosition();
 
-        enum Button
-        {
-            Right,
-            Middle,
-            Left,
-            Extra1,
-            Extra2
-        };
-
-        enum Wheel
-        {
-            Vertical,
-            Horizontal
-        };
+        /*! \brief Check whether a button is pressed
+         *
+         * \param button The button to check
+         *
+         * \return True if the button is pressed
+         *
+         */
+        static bool isButtonPressed(Button button);
     };
 }
 
