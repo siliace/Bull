@@ -111,12 +111,32 @@ namespace Bull
              */
             Vector2I getPosition() const override;
 
+            /*! \brief Set the minimal size of the window
+             *
+             * \param size The minimal size of the window
+             *
+             */
             void setMinSize(const Vector2UI& size) override;
 
+            /*! \brief Get the minimal size of the window
+             *
+             * \return The minimal size
+             *
+             */
             Vector2UI getMinSize() const override;
 
+            /*! \brief Set the maximal size of the window
+             *
+             * \param size The maximal size of the window
+             *
+             */
             void setMaxSize(const Vector2UI& size) override;
 
+            /*! \brief Get the maximal size of the window
+             *
+             * \return The maximal size
+             *
+             */
             Vector2UI getMaxSize() const override;
 
             /*! \brief Set the size of the window

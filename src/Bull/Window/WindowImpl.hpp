@@ -107,12 +107,32 @@ namespace Bull
              */
             virtual Vector2I getPosition() const = 0;
 
+            /*! \brief Set the minimal size of the window
+             *
+             * \param size The minimal size of the window
+             *
+             */
             virtual void setMinSize(const Vector2UI& size) = 0;
 
+            /*! \brief Get the minimal size of the window
+             *
+             * \return The minimal size
+             *
+             */
             virtual Vector2UI getMinSize() const = 0;
 
+            /*! \brief Set the maximal size of the window
+             *
+             * \param size The maximal size of the window
+             *
+             */
             virtual void setMaxSize(const Vector2UI& size) = 0;
 
+            /*! \brief Get the maximal size of the window
+             *
+             * \return The maximal size
+             *
+             */
             virtual Vector2UI getMaxSize() const = 0;
 
             /*! \brief Set the size of the window
@@ -203,8 +223,8 @@ namespace Bull
 
         private:
 
-            std::queue<Window::Event> m_events; /*!< The event queue */
-            bool m_keyrepeat; /*!< Does the key repeat is enable? */
+            std::queue<Window::Event> m_events;    /*!< The event queue */
+            bool                      m_keyrepeat; /*!< Does the key repeat is enable? */
         };
     }
 }
