@@ -1,6 +1,7 @@
 #include <limits>
 
 #include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/Support/X11/ErrorHandler.hpp>
 
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
 #include <Bull/Render/Context/Glx/GlxCreateContextARB.hpp>
@@ -8,8 +9,6 @@
 #include <Bull/Render/Context/Glx/GlxSwapControlEXT.hpp>
 #include <Bull/Render/Context/Glx/GlxSwapControlMESA.hpp>
 #include <Bull/Render/Context/Glx/GlxSwapControlSGI.hpp>
-
-#include <Bull/Window/X11/ErrorHandler.hpp>
 
 namespace Bull
 {

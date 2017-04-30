@@ -1,6 +1,6 @@
-#include <Bull/Hardware/Unix/MouseImpl.hpp>
+#include <Bull/Core/Support/X11/Display.hpp>
 
-#include <Bull/Window/X11/Display.hpp>
+#include <Bull/Hardware/Unix/MouseImpl.hpp>
 
 namespace Bull
 {

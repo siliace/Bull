@@ -1,6 +1,6 @@
 #include <Bull/Core/Log/Log.hpp>
 
-#include <Bull/Window/X11/ErrorHandler.hpp>
+#include <Bull/Core/Support/X11/ErrorHandler.hpp>
 
 namespace Bull
 {

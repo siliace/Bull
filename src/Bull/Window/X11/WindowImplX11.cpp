@@ -1,9 +1,9 @@
 #include <X11/keysym.h>
 #include <X11/Xutil.h>
 
+#include <Bull/Core/Support/X11/ErrorHandler.hpp>
 #include <Bull/Core/Thread/Thread.hpp>
 
-#include <Bull/Window/X11/ErrorHandler.hpp>
 #include <Bull/Window/X11/WindowImplX11.hpp>
 
 #ifndef Button6

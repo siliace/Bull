@@ -1,8 +1,8 @@
 #include <GL/glx.h>
 
-#include <Bull/Render/Context/Glx/GlxExtensionsLoader.hpp>
+#include <Bull/Core/Support/X11/Display.hpp>
 
-#include <Bull/Window/X11/Display.hpp>
+#include <Bull/Render/Context/Glx/GlxExtensionsLoader.hpp>
 
 namespace Bull
 {

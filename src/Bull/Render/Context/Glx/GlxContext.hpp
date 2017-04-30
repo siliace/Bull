@@ -4,10 +4,11 @@
 #include <GL/glx.h>
 #include <X11/Xlib.h>
 
+#include <Bull/Core/Support/X11/Display.hpp>
+
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
 
-#include <Bull/Window/X11/Display.hpp>
 
 namespace Bull
 {

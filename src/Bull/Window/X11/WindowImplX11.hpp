@@ -4,10 +4,11 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
+#include <Bull/Core/Support/X11/Display.hpp>
+
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Window/WindowImpl.hpp>
-#include <Bull/Window/X11/Display.hpp>
 
 namespace Bull
 {
