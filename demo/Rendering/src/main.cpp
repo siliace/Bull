@@ -7,6 +7,7 @@
 #include <Bull/Render/Texture/Texture.hpp>
 
 #include <Bull/Utility/ConsoleLogger.hpp>
+#include <Bull/Utility/Transformation.hpp>
 
 using namespace Bull;
 
@@ -76,7 +77,7 @@ int main(int argc, char* argv[])
         t.bind();
         core.bind();
 
-        core.setUniformMatrix("modelMatrix", Matrix4F::makeIdentity());
+        core.setUniformMatrix("modelMatrix", Transformation::makeRotation(EulerAnglesF(AngleF::Zero, AngleF::Zero, AngleF::degree(45.f))).toMatrix());
         core.setUniformMatrix("viewMatrix", Matrix4F::makeIdentity());
         core.setUniformMatrix("projMatrix", Matrix4F::makeIdentity());
 

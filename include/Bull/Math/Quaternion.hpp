@@ -26,6 +26,17 @@ namespace Bull
          */
         static Quaternion<T> conjugate(const Quaternion<T>& left, const Quaternion<T>& right);
 
+        /*! \brief Create a quaternion from three angles
+         *
+         * \param roll
+         * \param pitch
+         * \param yaw
+         *
+         * \return
+         *
+         */
+        static Quaternion<T> fromEulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw);
+
         /*! \brief Default constructor
          *
          */

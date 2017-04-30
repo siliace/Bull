@@ -1,10 +1,11 @@
-#ifndef Bull_Matrix4_hpp
-#define Bull_Matrix4_hpp
+#ifndef BULL_MATRIX4_HPP
+#define BULL_MATRIX4_HPP
 
 #include <array>
 
 #include <Bull/Math/Angle.hpp>
 #include <Bull/Math/Quaternion.hpp>
+#include <Bull/Math/EulerAngles.hpp>
 #include <Bull/Math/Polygon/Rectangle.hpp>
 #include <Bull/Math/Vector/Vector4.hpp>
 
@@ -21,37 +22,6 @@ namespace Bull
          *
          */
         static Matrix4<T> makeIdentity();
-
-        /*! \brief Create a scaling Matrix4
-         *
-         * \param x The scale value on x axis
-         * \param y The scale value on y axis
-         * \param z The scale value on z axis
-         *
-         * \return The scaling Matrix4
-         *
-         */
-        static Matrix4<T> makeScale(T x, T y, T z);
-
-        /*! \brief Create a translation Matrix4
-         *
-         * \param x The translation value on x axis
-         * \param y The translation value on y axis
-         * \param z The translation value on z axis
-         *
-         * \return The translation Matrix4
-         *
-         */
-        static Matrix4<T> makeTranslation(T x, T y, T z);
-
-        /*! \brief Create a rotation Matrix4
-         *
-         * \param quaternion A Quaternion representing the rotation
-         *
-         * \return The rotation Matrix4
-         *
-         */
-        static Matrix4<T> makeRotation(const Quaternion<T>& quaternion);
 
         /*! \brief Create a perspective Matrix4
          *
@@ -115,15 +85,6 @@ namespace Bull
          */
         void set(T value);
 
-        /*! \brief The value of a cell of the matrix
-         *
-         * \param value The value to set
-         * \param x     The abscissa of the cell in the matrix
-         * \param y     The ordinate of the cell in the matrix
-         *
-         */
-        void set(T value, std::size_t x, std::size_t y);
-
         /*! \brief Set the matrix content
          *
          * \param data The matrix content
@@ -131,14 +92,6 @@ namespace Bull
          */
         void set(const std::array<T, 16>& data);
 
-        /*! \brief Get the value of a cell of the matrix
-         *
-         * \param x The abscissa of the cell to get in the matrix
-         * \param y The ordinate of the cell to get in the matrix
-         *
-         * \return Return the value
-         *
-         */
         T get(std::size_t x, std::size_t y) const;
 
         /*! \brief Set a column of the Matrix4
@@ -360,4 +313,4 @@ namespace Bull
 
 #include <Bull/Math/Matrix/Matrix4.inl>
 
-#endif // Bull_Matrix4_hpp
+#endif // BULL_MATRIX4_HPP

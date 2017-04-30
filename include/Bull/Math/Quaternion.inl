@@ -7,6 +7,12 @@ namespace Bull
     }
 
     template <typename T>
+    Quaternion<T> Quaternion<T>::fromEulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw)
+    {
+        return Quaternion<T>(EulerAngles<T>(roll, pitch, yaw));
+    }
+
+    template <typename T>
     Quaternion<T>::Quaternion()
     {
         set(0, 0, 0, 0);

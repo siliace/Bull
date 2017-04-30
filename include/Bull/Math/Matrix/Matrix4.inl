@@ -14,66 +14,6 @@ namespace Bull
     }
 
     template<typename T>
-    Matrix4<T> Matrix4<T>::makeScale(T x, T y, T z)
-    {
-        Matrix4<T> scale;
-
-        scale(0, 0) = static_cast<T>(x);
-        scale(1, 1) = static_cast<T>(y);
-        scale(2, 2) = static_cast<T>(z);
-        scale(3, 3) = static_cast<T>(1.0);
-
-        return scale;
-    }
-
-    template<typename T>
-    Matrix4<T> Matrix4<T>::makeTranslation(T x, T y, T z)
-    {
-        Matrix4<T> translation = Matrix4<T>::makeIdentity();
-
-        translation(3, 0) = static_cast<T>(x);
-        translation(3, 1) = static_cast<T>(y);
-        translation(3, 2) = static_cast<T>(z);
-
-        return translation;
-    }
-
-    template<typename T>
-    Matrix4<T> Matrix4<T>::makeRotation(const Quaternion<T>& quaternion)
-    {
-        Matrix4<T> rotation;
-
-        T tx  = quaternion.x + quaternion.x;
-        T ty  = quaternion.y + quaternion.y;
-        T tz  = quaternion.z + quaternion.z;
-        T twx = tx * quaternion.w;
-        T twy = ty * quaternion.w;
-        T twz = tz * quaternion.w;
-        T txx = tx * quaternion.x;
-        T txy = ty * quaternion.x;
-        T txz = tz * quaternion.x;
-        T tyy = ty * quaternion.y;
-        T tyz = tz * quaternion.y;
-        T tzz = tz * quaternion.z;
-
-        rotation.set(1.0 - (tyy + tzz), 0, 0);
-        rotation.set(txy + twz,         0, 1);
-        rotation.set(txz - twy,         0, 2);
-
-        rotation.set(txy - twz,         1, 0);
-        rotation.set(1.0 - (txx + tzz), 1, 1);
-        rotation.set(tyz + twx,         1, 2);
-
-        rotation.set(txz + twy,         2, 0);
-        rotation.set(tyz - twx,         2, 1);
-        rotation.set(1.0 - (txx + tyy), 2, 2);
-
-        rotation.set(1.0, 3, 3);
-
-        return rotation;
-    }
-
-    template<typename T>
     Matrix4<T> Matrix4<T>::makePerspective(const Angle<T>& angle, T ratio, T near, T far)
     {
         Matrix4<T> perspective;
@@ -146,17 +86,6 @@ namespace Bull
     }
 
     template<typename T>
-    void Matrix4<T>::set(T value, std::size_t x, std::size_t y)
-    {
-        if(x >= 4 || y >= 4)
-        {
-            throw std::out_of_range("Requested value out of range");
-        }
-
-        m_data[y * 4 + x] = static_cast<T>(value);
-    }
-
-    template<typename T>
     void Matrix4<T>::set(const std::array<T, 16>& data)
     {
         m_data = data;
@@ -165,6 +94,33 @@ namespace Bull
     template<typename T>
     T Matrix4<T>::get(std::size_t x, std::size_t y) const
     {
+        if(x >= 4 || y >= 4)
+        {
+            throw std::out_of_range("Requested value out of range");
+        }
+
+        return m_data[y * 4 + x];
+    }
+
+    template<typename T>
+    T& Matrix4<T>::operator()(std::size_t x, std::size_t y)
+    {
+        if(x >= 4 || y >= 4)
+        {
+            throw std::out_of_range("Requested value out of range");
+        }
+
+        return m_data[y * 4 + x];
+    }
+
+    template<typename T>
+    const T& Matrix4<T>::operator()(std::size_t x, std::size_t y) const
+    {
+        if(x >= 4 || y >= 4)
+        {
+            throw std::out_of_range("Requested value out of range");
+        }
+
         return m_data[y * 4 + x];
     }
 
@@ -218,28 +174,6 @@ namespace Bull
         }
 
         return r;
-    }
-
-    template<typename T>
-    T& Matrix4<T>::operator()(std::size_t x, std::size_t y)
-    {
-        if(x >= 4 || y >= 4)
-        {
-            throw std::out_of_range("Requested value out of range");
-        }
-
-        return m_data[y * 4 + x];
-    }
-
-    template<typename T>
-    const T& Matrix4<T>::operator()(std::size_t x, std::size_t y) const
-    {
-        if(x >= 4 || y >= 4)
-        {
-            throw std::out_of_range("Requested value out of range");
-        }
-
-        return m_data[y * 4 + x];
     }
 
     template<typename T>

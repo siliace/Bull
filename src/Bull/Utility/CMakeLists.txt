@@ -10,6 +10,7 @@ target_sources(bull-utility
             ${CMAKE_CURRENT_SOURCE_DIR}/Glyph.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Image.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Random.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Transformation.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Vertex.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/VertexArray.cpp
         PRIVATE
