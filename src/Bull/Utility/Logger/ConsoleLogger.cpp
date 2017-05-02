@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <Bull/Utility/ConsoleLogger.hpp>
+#include <Bull/Utility/Logger/ConsoleLogger.hpp>
 
 namespace Bull
 {

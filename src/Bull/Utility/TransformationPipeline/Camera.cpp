@@ -1,4 +1,4 @@
-#include <Bull/Utility/Camera.hpp>
+#include <Bull/Utility/TransformationPipeline/Camera.hpp>
 
 namespace Bull
 {

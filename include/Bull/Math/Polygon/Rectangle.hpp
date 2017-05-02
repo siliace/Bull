@@ -1,6 +1,8 @@
 #ifndef Bull_Rectangle_hpp
 #define Bull_Rectangle_hpp
 
+#include <stdexcept>
+
 #include <Bull/Math/Polygon/Polygon.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 

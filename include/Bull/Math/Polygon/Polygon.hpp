@@ -1,6 +1,8 @@
 #ifndef BULL_POLYGON_HPP
 #define BULL_POLYGON_HPP
 
+#include <algorithm>
+
 #include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull

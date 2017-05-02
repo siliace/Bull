@@ -1,5 +1,3 @@
-#include <limits>
-
 namespace Bull
 {
     template<typename T>

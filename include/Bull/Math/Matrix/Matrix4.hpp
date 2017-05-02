@@ -23,18 +23,6 @@ namespace Bull
          */
         static Matrix4<T> makeIdentity();
 
-        /*! \brief Create a perspective Matrix4
-         *
-         * \param angle
-         * \param ratio
-         * \param near
-         * \param far
-         *
-         * \return
-         *
-         */
-        static Matrix4<T> makePerspective(const Angle<T>& angle, T ratio, T near, T far);
-
         /*! \brief Create an orthographic projection Matrix4
          *
          * \param plan The plan of view

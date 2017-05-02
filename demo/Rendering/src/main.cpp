@@ -6,8 +6,9 @@
 #include <Bull/Render/Shader/Shader.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
 
-#include <Bull/Utility/Camera.hpp>
-#include <Bull/Utility/Transformation.hpp>
+#include <Bull/Utility/TransformationPipeline/Camera.hpp>
+#include <Bull/Utility/TransformationPipeline/PerspectiveProjection.hpp>
+#include <Bull/Utility/TransformationPipeline/Transformation.hpp>
 
 using namespace Bull;
 
@@ -156,7 +157,7 @@ int main(int argc, char* argv[])
 
         if(win.isOpen())
         {
-            Matrix4F proj = Matrix4F::makePerspective(AngleF::degree(90.f), win.getSize().getRatio(), 0.1f, 100.f);
+            PerspectiveProjection proj(AngleF::degree(90.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
             win.clear();
 
@@ -166,11 +167,11 @@ int main(int argc, char* argv[])
             gl::bindVertexArray(vao);
 
             core.setUniformMatrix("viewMatrix", camera.toMatrix());
-            core.setUniformMatrix("projMatrix", proj);
+            core.setUniformMatrix("projMatrix", proj.toMatrix());
 
             for(unsigned int i = 0; i < 10; i++)
             {
-                Matrix4F model = Transformation::makeTranslation(positions[i]).toMatrix();
+                Matrix4F model = Transformation::make(positions[i], rotations[i]).toMatrix();
                 core.setUniformMatrix("modelMatrix", model);
 
                 gl::drawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
