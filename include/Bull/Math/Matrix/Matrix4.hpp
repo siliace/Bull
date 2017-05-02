@@ -46,17 +46,6 @@ namespace Bull
          */
         static Matrix4<T> makeOrthographic(const Rectangle<T>& plan, T near = -1.0, T far = 1.0);
 
-        /*! \brief Create a look at Matrix4
-         *
-         * \param eye    The position of the eye (e.g camera)
-         * \param target The position of the point to look
-         * \param up     The up vector
-         *
-         * \return The look at Matrix4
-         *
-         */
-        static Matrix4<T> makeLookAt(const Vector3<T>& eye, const Vector3<T>& target, const Vector3<T> up = Vector3<T>::makeUp());
-
     public:
 
         /*! \brief Default Constructor

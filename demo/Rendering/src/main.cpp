@@ -84,9 +84,7 @@ int main(int argc, char* argv[])
     HardwareBuffer ebo(HardwareBuffer::Element);
     RenderWindow win(VideoMode(800, 600), "Bull Application");
 
-    Vector3F position(0.0f, 0.0f, 3.0f);
-    Vector3F front(0.0f, 0.0f, -1.0f);
-    Vector3F up = Vector3F::makeUp();
+    Camera camera(Vector3F(0.0f, 0.0f, 3.0f), Vector3F(0.0f, 0.0f, -1.0f));
     float speed = 0.5f;
 
     core.attachFromPath(Path("resources/shaders/core/core.vert"), ShaderStage::Vertex);
@@ -129,20 +127,29 @@ int main(int argc, char* argv[])
             {
                 if(e.key.code == Keyboard::Z)
                 {
-                    position += front * speed;
+                    camera.moveZ(speed);
                 }
                 else if(e.key.code == Keyboard::S)
                 {
-                    position -= front * speed;
+                    camera.moveZ(-speed);
+                }
+
+                if(e.key.code == Keyboard::A)
+                {
+                    camera.moveY(speed);
+                }
+                else if(e.key.code == Keyboard::E)
+                {
+                    camera.moveY(-speed);
                 }
 
                 if(e.key.code == Keyboard::D)
                 {
-                    position -= Vector3F::crossProduct(front, up).normalize() * speed;
+                    camera.moveX(-speed);
                 }
                 else if(e.key.code == Keyboard::Q)
                 {
-                    position += Vector3F::crossProduct(front, up).normalize() * speed;
+                    camera.moveX(speed);
                 }
             }
         }
@@ -158,14 +165,12 @@ int main(int argc, char* argv[])
 
             gl::bindVertexArray(vao);
 
-            core.setUniformMatrix("viewMatrix", Matrix4F::makeLookAt(position,
-                                                                     position + front,
-                                                                     up));
+            core.setUniformMatrix("viewMatrix", camera.toMatrix());
             core.setUniformMatrix("projMatrix", proj);
 
             for(unsigned int i = 0; i < 10; i++)
             {
-                Matrix4F model = Transformation::make(positions[i], rotations[i]).toMatrix();
+                Matrix4F model = Transformation::makeTranslation(positions[i]).toMatrix();
                 core.setUniformMatrix("modelMatrix", model);
 
                 gl::drawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);

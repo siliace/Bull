@@ -46,22 +46,6 @@ namespace Bull
     }
 
     template<typename T>
-    Matrix4<T> Matrix4<T>::makeLookAt(const Vector3<T>& eye, const Vector3<T>& target, const Vector3<T> up)
-    {
-        Matrix4<T> lookAt;
-        Vector3<T> f = Vector3<T>::normalize(target - eye);
-        Vector3<T> s = Vector3<T>::crossProduct(f, up).normalize();
-        Vector3<T> u = Vector3<T>::crossProduct(s, f);
-
-        lookAt.setColumn(Vector4<T>(s, -s.dotProduct(eye)), 0);
-        lookAt.setColumn(Vector4<T>(u, -u.dotProduct(eye)), 1);
-        lookAt.setColumn(Vector4<T>(-f, f.dotProduct(eye)), 2);
-        lookAt.setColumn(Vector4<T>(0.0, 0.0, 0.0, 1.0),    3);
-
-        return lookAt;
-    }
-
-    template<typename T>
     Matrix4<T>::Matrix4()
     {
         set(0.0);

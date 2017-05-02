@@ -15,7 +15,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Camera();
+        Camera() = default;
 
         /*! \brief Constructor
          *
@@ -25,6 +25,49 @@ namespace Bull
          *
          */
         Camera(const Vector3F& position, const Vector3F& front, const Vector3F& up = Vector3F::makeUp());
+
+        /*! \brief Move the Camera
+         *
+         * \param offset Offset to move the Camera
+         *
+         * \return This
+         *
+         */
+        Camera& move(const Vector3F& offset);
+
+        /*! \brief Move the Camera on the X axis
+         *
+         * \param offset The offset to move the Camera
+         *
+         * \return This
+         *
+         */
+        Camera& moveX(float offset);
+
+        /*! \brief Move the Camera on the Y axis
+         *
+         * \param offset The offset to move the Camera
+         *
+         * \return This
+         *
+         */
+        Camera& moveY(float offset);
+
+        /*! \brief Move the Camera on the Z axis
+         *
+         * \param offset The offset to move the Camera
+         *
+         * \return This
+         *
+         */
+        Camera& moveZ(float offset);
+
+        /*! \brief Get the target looked by the Camera
+         *
+         * \return The target
+         *
+         */
+        Vector3F getTarget() const;
 
         /*! \brief Convert the camera to a view matrix
          *
