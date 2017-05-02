@@ -14,7 +14,7 @@
 namespace Bull
 {
     template<typename Return = void>
-    class BULL_API Functor
+    class Functor
     {
     public:
 
