@@ -6,7 +6,6 @@ namespace Bull
         m_position(position),
         m_front(front),
         m_up(up)
-
     {
         /// Nothing
     }
@@ -50,10 +49,10 @@ namespace Bull
         Vector3F s = Vector3F::crossProduct(f, m_up).normalize();
         Vector3F u = Vector3F::crossProduct(s, f);
 
-        lookAt.setColumn(Vector4F(s, -s.dotProduct(m_position)), 0);
-        lookAt.setColumn(Vector4F(u, -u.dotProduct(m_position)), 1);
-        lookAt.setColumn(Vector4F(-f, f.dotProduct(m_position)), 2);
-        lookAt.setColumn(Vector4F(0.0, 0.0, 0.0, 1.0),    3);
+        lookAt.setColumn(Vector4F( s, -s.dotProduct(m_position)), 0);
+        lookAt.setColumn(Vector4F( u, -u.dotProduct(m_position)), 1);
+        lookAt.setColumn(Vector4F(-f,  f.dotProduct(m_position)), 2);
+        lookAt.setColumn(Vector4F(0.0, 0.0, 0.0, 1.0),            3);
 
         return lookAt;
     }

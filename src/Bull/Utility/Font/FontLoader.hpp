@@ -1,7 +1,7 @@
 #ifndef BULL_FONTLOADER_HPP
 #define BULL_FONTLOADER_HPP
 
-#include <Bull/Utility/AbstractFontLoader.hpp>
+#include <Bull/Utility/Font/AbstractFontLoader.hpp>
 
 namespace Bull
 {

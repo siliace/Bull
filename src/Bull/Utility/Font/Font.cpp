@@ -1,7 +1,7 @@
 #include <Bull/Core/System/Config.hpp>
 
-#include <Bull/Utility/Font.hpp>
-#include <Bull/Utility/FontLoader.hpp>
+#include <Bull/Utility/Font/Font.hpp>
+#include <Bull/Utility/Font/FontLoader.hpp>
 
 std::unique_ptr<Bull::AbstractFontLoader> Bull::Font::s_loader = std::make_unique<FONT_LOADER>();
 

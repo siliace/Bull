@@ -5,7 +5,7 @@
 
 #include <Bull/Core/FileSystem/Path.hpp>
 
-#include <Bull/Utility/Glyph.hpp>
+#include <Bull/Utility/Font/Glyph.hpp>
 
 namespace Bull
 {
