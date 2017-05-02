@@ -50,13 +50,13 @@ namespace Bull
     {
         Matrix4<T> lookAt;
         Vector3<T> f = Vector3<T>::normalize(target - eye);
-        Vector3<T> s = Vector3<T>::normalize(f.crossProduct(up));
-        Vector3<T> u = s.crossProduct(f);
+        Vector3<T> s = Vector3<T>::crossProduct(f, up).normalize();
+        Vector3<T> u = Vector3<T>::crossProduct(s, f);
 
         lookAt.setColumn(Vector4<T>(s, -s.dotProduct(eye)), 0);
         lookAt.setColumn(Vector4<T>(u, -u.dotProduct(eye)), 1);
-        lookAt.setColumn(Vector4<T>(f, -f.dotProduct(eye)), 2);
-        lookAt.setColumn(Vector4<T>(0, 0, 0, 1), 3);
+        lookAt.setColumn(Vector4<T>(-f, f.dotProduct(eye)), 2);
+        lookAt.setColumn(Vector4<T>(0.0, 0.0, 0.0, 1.0),    3);
 
         return lookAt;
     }
@@ -89,6 +89,17 @@ namespace Bull
     void Matrix4<T>::set(const std::array<T, 16>& data)
     {
         m_data = data;
+    }
+
+    template<typename T>
+    void Matrix4<T>::set(T value, std::size_t x, std::size_t y)
+    {
+        if(x >= 4 || y >= 4)
+        {
+            throw std::out_of_range("Requested value out of range");
+        }
+
+        m_data[y * 4 + x] = value;
     }
 
     template<typename T>
@@ -132,10 +143,10 @@ namespace Bull
             throw std::out_of_range("Requested column out of range");
         }
 
-        set(column.x, position, 0);
-        set(column.y, position, 1);
-        set(column.z, position, 2);
-        set(column.w, position, 3);
+        set(column.x, 0, position);
+        set(column.y, 1, position);
+        set(column.z, 2, position);
+        set(column.w, 3, position);
 
         return (*this);
     }
@@ -156,6 +167,22 @@ namespace Bull
         }
 
         return col;
+    }
+
+    template<typename T>
+    Matrix4<T>& Matrix4<T>::setRow(const Vector4<T>& row, std::size_t position)
+    {
+        if(position >= 4)
+        {
+            throw std::out_of_range("Requested column out of range");
+        }
+
+        set(row.w, position, 0);
+        set(row.x, position, 1);
+        set(row.y, position, 2);
+        set(row.z, position, 3);
+
+        return (*this);
     }
 
     template<typename T>

@@ -63,6 +63,12 @@ namespace Bull
     }
 
     template<typename T>
+    float Vector2<T>::getRatio() const
+    {
+        return x / y;
+    }
+
+    template<typename T>
     Vector2<T>& Vector2<T>::normalize()
     {
         x /= getLength();

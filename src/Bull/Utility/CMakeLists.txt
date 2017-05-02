@@ -3,6 +3,7 @@ add_library(bull-utility SHARED "")
 target_sources(bull-utility
         PUBLIC
             ${CMAKE_CURRENT_SOURCE_DIR}/CallOnExit.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Camera.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Color.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/ConsoleLogger.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/FileLogger.cpp

@@ -158,9 +158,14 @@ namespace Bull
     template<typename T>
     Vector3<T>& Vector3<T>::normalize()
     {
-        x /= getLength();
-        y /= getLength();
-        z /= getLength();
+        float lenght = getLength();
+
+        if(lenght > 1.f)
+        {
+            x /= getLength();
+            y /= getLength();
+            z /= getLength();
+        }
 
         return (*this);
     }
@@ -262,7 +267,7 @@ namespace Bull
         product.x *= left;
         product.z *= left;
 
-        return right;
+        return product;
     }
 
     template<typename T>
@@ -274,7 +279,7 @@ namespace Bull
         product.y *= right;
         product.z *= right;
 
-        return left;
+        return product;
     }
 
     template<typename T>
@@ -286,7 +291,7 @@ namespace Bull
         product.y /= left;
         product.z /= left;
 
-        return right;
+        return product;
     }
 
     template<typename T>
@@ -298,6 +303,6 @@ namespace Bull
         product.y /= right;
         product.z /= right;
 
-        return left;
+        return product;
     }
 }

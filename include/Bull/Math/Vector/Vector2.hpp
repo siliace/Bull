@@ -82,6 +82,13 @@ namespace Bull
          */
         float getLength() const;
 
+        /*! \brief Get the radio between x and y
+         *
+         * \return The ratio
+         *
+         */
+        float getRatio() const;
+
         /*! \brief Normalize the Vector2
          *
          * \return This

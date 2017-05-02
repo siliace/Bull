@@ -92,6 +92,8 @@ namespace Bull
          */
         void set(const std::array<T, 16>& data);
 
+        void set(T value, std::size_t x, std::size_t y);
+
         T get(std::size_t x, std::size_t y) const;
 
         /*! \brief Set a column of the Matrix4
@@ -112,6 +114,8 @@ namespace Bull
          *
          */
         std::array<T, 4> getColumn(std::size_t column) const;
+
+        Matrix4<T>& setRow(const Vector4<T>& row, std::size_t position);
 
         /*! \brief Get a row a the matrix
          *
