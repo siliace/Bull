@@ -1,35 +1,6 @@
 namespace Bull
 {
     template<typename T>
-    Matrix4<T> Matrix4<T>::makeIdentity()
-    {
-        Matrix4<T> identity;
-
-        for(std::size_t i = 0; i < 4; i++)
-        {
-            identity(i, i) = 1;
-        }
-
-        return identity;
-    }
-
-    template<typename T>
-    Matrix4<T> Matrix4<T>::makeOrthographic(const Rectangle<T>& plan, T near, T far)
-    {
-        Matrix4<T> orthographic;
-
-        orthographic.set(2.0 / plan.width  - plan.x,                      0, 0);
-        orthographic.set(2.0 / plan.height - plan.y,                      1, 1);
-        orthographic.set(1.0 / near - far,                                2, 2);
-        orthographic.set((plan.x + plan.width) / (plan.x - plan.width),   0, 3);
-        orthographic.set((plan.height + plan.y) / (plan.height - plan.y), 1, 3);
-        orthographic.set(near / near - far,                               2, 3);
-        orthographic.set(1.0,                                             3, 3);
-
-        return orthographic;
-    }
-
-    template<typename T>
     Matrix4<T>::Matrix4()
     {
         set(0.0);

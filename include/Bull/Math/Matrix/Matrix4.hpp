@@ -16,23 +16,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Create an identity Matrix4
-         *
-         * \return The identity Matrix4
-         *
-         */
-        static Matrix4<T> makeIdentity();
-
-        /*! \brief Create an orthographic projection Matrix4
-         *
-         * \param plan The plan of view
-         * \param near
-         * \param far
-         *
-         * \return The orthographic projection Matrix4
-         *
-         */
-        static Matrix4<T> makeOrthographic(const Rectangle<T>& plan, T near = -1.0, T far = 1.0);
+        static Matrix4<T> Identity;
 
     public:
 
@@ -197,6 +181,9 @@ namespace Bull
 
         std::array<T, 16> m_data;
     };
+
+    template<typename T>
+    Matrix4<T> Matrix4<T>::Identity({1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0});
 
     /*! \brief Addition two matrices
      *

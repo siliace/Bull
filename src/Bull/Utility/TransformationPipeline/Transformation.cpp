@@ -38,7 +38,7 @@ namespace Bull
     }
 
     Transformation::Transformation() :
-        m_matrix(Matrix4F::makeIdentity())
+        m_matrix(Matrix4F::Identity)
     {
         /// Nothing
     }
