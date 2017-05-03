@@ -12,12 +12,20 @@ namespace Bull
     {
         Matrix4F orthographic;
 
-        orthographic(0, 0) = 2.f / plan.width  - plan.x;
-        orthographic(1, 1) = 2.f / plan.height - plan.y;
-        orthographic(2, 2) = 1.f / zBounds.x - zBounds.y;
-        orthographic(0, 3) = (plan.x + plan.width) / (plan.x - plan.width);
-        orthographic(1, 3) = (plan.height + plan.y) / (plan.height - plan.y);
-        orthographic(2, 3) = zBounds.x / zBounds.x - zBounds.y;
+        float top    = plan.y;
+        float left   = plan.x;
+        float right  = plan.x + plan.width;
+        float bottom = plan.y + plan.height;
+
+        orthographic(0, 0) = 2.f / (right - left);
+
+        orthographic(1, 1) = 2.f / (top - bottom);
+
+        orthographic(2, 2) = 1.f / (zBounds.x - zBounds.y);
+
+        orthographic(3, 0) = (left + right) / (left - right);
+        orthographic(3, 1) = (top + bottom) / (bottom - top);
+        orthographic(3, 2) = zBounds.x / (zBounds.x - zBounds.y);
         orthographic(3, 3) = 1.f;
 
         return orthographic;

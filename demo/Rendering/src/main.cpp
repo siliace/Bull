@@ -8,6 +8,7 @@
 
 #include <Bull/Utility/TransformationPipeline/Camera.hpp>
 #include <Bull/Utility/TransformationPipeline/PerspectiveProjection.hpp>
+#include <Bull/Utility/TransformationPipeline/OrthographicProjection.hpp>
 #include <Bull/Utility/TransformationPipeline/Transformation.hpp>
 
 using namespace Bull;
@@ -85,6 +86,10 @@ int main(int argc, char* argv[])
     HardwareBuffer ebo(HardwareBuffer::Element);
     RenderWindow win(VideoMode(800, 600), "Bull Application");
 
+    PerspectiveProjection perspective;
+    OrthographicProjection orthographic;
+    Projection* projection = &perspective;
+
     Camera camera(Vector3F(0.0f, 0.0f, 3.0f), Vector3F(0.0f, 0.0f, -1.0f));
     float speed = 0.5f;
 
@@ -152,12 +157,25 @@ int main(int argc, char* argv[])
                 {
                     camera.moveX(speed);
                 }
+
+                if(e.key.code == Keyboard::F1)
+                {
+                    if(projection == &perspective)
+                    {
+                        projection = &orthographic;
+                    }
+                    else
+                    {
+                        projection = &perspective;
+                    }
+                }
             }
         }
 
         if(win.isOpen())
         {
-            PerspectiveProjection proj(AngleF::degree(90.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
+            perspective = PerspectiveProjection(AngleF::degree(90.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
+            orthographic = OrthographicProjection(RectangleF(-4.f, 4.f, 4.f, -4.f), Vector2F(0.1f, 100.f));
 
             win.clear();
 
@@ -167,7 +185,7 @@ int main(int argc, char* argv[])
             gl::bindVertexArray(vao);
 
             core.setUniformMatrix("viewMatrix", camera.toMatrix());
-            core.setUniformMatrix("projMatrix", proj.toMatrix());
+            core.setUniformMatrix("projMatrix", projection->toMatrix());
 
             for(unsigned int i = 0; i < 10; i++)
             {

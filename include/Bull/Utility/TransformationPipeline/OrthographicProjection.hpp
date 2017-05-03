@@ -14,10 +14,10 @@ namespace Bull
          */
         OrthographicProjection() = default;
 
-        /*! \brief Constructor
+        /*! \brief
          *
-         * \param plan    The plan of view
-         * \param zBounds Bounds of the view
+         * \param plan
+         * \param zBounds
          *
          */
         OrthographicProjection(const RectangleF& plan, const Vector2F& zBounds);
