@@ -1,4 +1,4 @@
-add_library(bull-utility SHARED "")
+bull_add_library(bull-utility)
 
 target_sources(bull-utility
         PUBLIC

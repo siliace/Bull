@@ -11,7 +11,7 @@
 
 namespace Bull
 {
-    class BULL_API RenderWindow : public Window, public RenderTarget
+    class BULL_RENDER_API RenderWindow : public Window, public RenderTarget
     {
     public:
 

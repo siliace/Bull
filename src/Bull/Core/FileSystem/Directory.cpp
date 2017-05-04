@@ -53,7 +53,7 @@ namespace Bull
     {
         if(exists(path.toString()) && !exists(newPath))
         {
-            return std::rename(path.toString(), newPath) == 0;
+            return std::rename(path.toString().getBuffer(), newPath.getBuffer()) == 0;
         }
 
         return false;

@@ -296,6 +296,6 @@ namespace Bull
 
     int Shader::getUniformLocation(const String& name)
     {
-        return gl::getUniformLocation(m_program, name);
+        return gl::getUniformLocation(m_program, name.getBuffer());
     }
 }

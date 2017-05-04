@@ -11,7 +11,7 @@ namespace Bull
 {
     class AbstractFontLoader;
 
-    class BULL_API Font
+    class BULL_UTILITY_API Font
     {
     private:
 

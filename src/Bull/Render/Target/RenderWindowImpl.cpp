@@ -3,7 +3,7 @@
 #include <Bull/Render/Target/RenderWindowImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #include <Bull/Render/Target/X11/RenderWindowImplWin32>
+    #include <Bull/Render/Target/Win32/RenderWindowImplWin32.hpp>
     typedef Bull::prv::RenderWindowImplWin32 RenderWindowImplType;
 #else
     #include <Bull/Render/Target/X11/RenderWindowImplX11.hpp>

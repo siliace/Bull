@@ -12,7 +12,7 @@
 namespace Bull
 {
     template<typename T>
-    class BULL_API Matrix4
+    class Matrix4
     {
     public:
 

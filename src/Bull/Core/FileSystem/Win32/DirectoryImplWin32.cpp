@@ -8,12 +8,12 @@ namespace Bull
     {
         bool DirectoryImplWin32::create(const String& name)
         {
-            return CreateDirectory(name, nullptr);
+            return CreateDirectory(name.getBuffer(), nullptr) == TRUE;
         }
 
         bool DirectoryImplWin32::exists(const String& name)
         {
-            DWORD attribs = GetFileAttributes(name);
+            DWORD attribs = GetFileAttributes(name.getBuffer());
 
             if(attribs == INVALID_FILE_ATTRIBUTES)
             {
@@ -23,9 +23,9 @@ namespace Bull
             return attribs & FILE_ATTRIBUTE_DIRECTORY;
         }
 
-        bool DirectoryImplWin32::remove(const String& name)
+        bool DirectoryImplWin32::remove(const Path& name)
         {
-            return RemoveDirectory(name);
+            return RemoveDirectory(name.toString().getBuffer()) == TRUE;
         }
 
         Date DirectoryImplWin32::systemTimeToDate(SYSTEMTIME sysTime)
@@ -48,9 +48,11 @@ namespace Bull
             FindClose(m_handler);
         }
 
-        bool DirectoryImplWin32::open(const String& name)
+        bool DirectoryImplWin32::open(const Path& name)
         {
-            m_handler = FindFirstFile(name + "\\*", &m_result);
+            String path = name.toString() + "\\*";
+
+            m_handler = FindFirstFile(path.getBuffer(), &m_result);
 
             return m_handler != INVALID_HANDLE_VALUE;
         }
@@ -63,9 +65,9 @@ namespace Bull
             {
                 Path p(m_result.cFileName);
 
-                if((flags & (Directory::Directories) && p.isDirectory) || (flags & (Directory::Files) && p.isFile))
+                if((flags & (Directory::Directories) && p.isDirectory()) || (flags & (Directory::Files) && p.isFile()))
                 {
-                    content.push_back(ent);
+                    content.push_back(p);
                 }
             }while(FindNextFile(m_handler, &m_result));
 

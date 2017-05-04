@@ -1,5 +1,6 @@
 #include <limits>
 
+#include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
@@ -10,15 +11,13 @@
 #include <Bull/Render/Context/Wgl/WglSwapControlEXT.hpp>
 #include <Bull/Render/OpenGL.hpp>
 
-#include <Bull/Utility/Window/VideoMode.hpp>
-
 namespace Bull
 {
     namespace prv
     {
         void* WglContext::getFunction(const String& function)
         {
-            void* functionProc = reinterpret_cast<void*>(wglGetProcAddress(function));
+            void* functionProc = reinterpret_cast<void*>(wglGetProcAddress(function.getBuffer()));
 
             if(functionProc)
             {
@@ -32,7 +31,7 @@ namespace Bull
                 return nullptr;
             }
 
-            return reinterpret_cast<void*>(GetProcAddress(module, function));
+            return reinterpret_cast<void*>(GetProcAddress(module, function.getBuffer()));
         }
 
         void WglContext::requireExtensions(const ExtensionsLoader::Instance& loader)

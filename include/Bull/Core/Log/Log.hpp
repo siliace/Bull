@@ -12,7 +12,7 @@
 
 namespace Bull
 {
-    class BULL_API Log : public Singleton<Log>
+    class BULL_CORE_API Log : public Singleton<Log>
     {
     public:
 

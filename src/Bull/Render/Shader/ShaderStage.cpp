@@ -93,7 +93,7 @@ namespace Bull
     {
         if(isValid())
         {
-            const char* source = static_cast<const char*>(code);
+            const char* source = code.getBuffer();
 
             gl::shaderSource(m_id, 1, &source, nullptr);
         }

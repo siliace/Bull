@@ -7,7 +7,7 @@
 
 namespace Bull
 {
-    class BULL_API VertexArray
+    class BULL_UTILITY_API VertexArray
     {
     public:
 

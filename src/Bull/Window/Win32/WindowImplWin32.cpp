@@ -1,4 +1,4 @@
-#include <Bull/Utility/Window/Win32/WindowImplWin32.hpp>
+#include <Bull/Window/Win32/WindowImplWin32.hpp>
 
 /// GCC missing define
 #ifndef WM_XBUTTONDOWN
@@ -236,7 +236,7 @@ namespace Bull
             return windowStyle;
         }
 
-        WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& /*settings*/) :
+        WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style) :
             m_isResizing(false)
         {
             DWORD winStyle = computeStyle(style);
@@ -265,7 +265,7 @@ namespace Bull
 
             m_handler = CreateWindowExW(0,
                                         windowClassName,
-                                        reinterpret_cast<LPCWSTR>(static_cast<const char*>(title)),
+                                        reinterpret_cast<LPCWSTR>(title.getBuffer()),
                                         winStyle,
                                         CW_USEDEFAULT, CW_USEDEFAULT,
                                         width, height,
@@ -367,6 +367,26 @@ namespace Bull
             return Vector2I(r.left, r.top);
         }
 
+        void WindowImplWin32::setMinSize(const Vector2UI& size)
+        {
+
+        }
+
+        Vector2UI WindowImplWin32::getMinSize() const
+        {
+            return Vector2UI();
+        }
+
+        void WindowImplWin32::setMaxSize(const Vector2UI& size)
+        {
+
+        }
+
+        Vector2UI WindowImplWin32::getMaxSize() const
+        {
+            return Vector2UI();
+        }
+
         void WindowImplWin32::setSize(const Vector2UI& size)
         {
             SetWindowPos(m_handler, 0, 0, 0, size.x, size.y, SWP_NOMOVE);
@@ -383,7 +403,7 @@ namespace Bull
 
         void WindowImplWin32::setTitle(const String& title)
         {
-            SetWindowTextW(m_handler, reinterpret_cast<LPCWSTR>(static_cast<const char*>(title)));
+            SetWindowTextW(m_handler, reinterpret_cast<LPCWSTR>(title.getBuffer()));
         }
 
         String WindowImplWin32::getTitle() const

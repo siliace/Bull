@@ -1,11 +1,11 @@
-#ifndef Bull_NonCopyable_hpp
-#define Bull_NonCopyable_hpp
+#ifndef BULL_NONCOPYABLE_HPP
+#define BULL_NONCOPYABLE_HPP
 
-#include <Bull/Core/System/Export.hpp>
+#include <Bull/Core/Export.hpp>
 
 namespace Bull
 {
-    class BULL_API NonCopyable
+    class BULL_CORE_API NonCopyable
     {
     protected:
 
@@ -28,4 +28,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_NonCopyable_hpp
+#endif // BULL_NONCOPYABLE_HPP

@@ -1,11 +1,11 @@
-#ifndef Bull_CPU_hpp
-#define Bull_CPU_hpp
+#ifndef BULL_CPU_HPP
+#define BULL_CPU_HPP
 
-#include <Bull/Core/System/Export.hpp>
+#include <Bull/Hardware/Export.hpp>
 
 namespace Bull
 {
-    struct BULL_API CPU
+    struct BULL_HARDWARE_API CPU
     {
         enum Architecture
         {
@@ -32,4 +32,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_CPU_hpp
+#endif // BULL_CPU_HPP

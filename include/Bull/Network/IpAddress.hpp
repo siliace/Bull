@@ -5,13 +5,13 @@
 
 #include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/System/Export.hpp>
 
+#include <Bull/Network/Export.hpp>
 #include <Bull/Network/NetProtocol.hpp>
 
 namespace Bull
 {
-    class BULL_API IpAddress
+    class BULL_NETWORK_API IpAddress
     {
     public:
 

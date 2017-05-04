@@ -1,13 +1,12 @@
 #ifndef Bull_InStream_hpp
 #define Bull_InStream_hpp
 
-#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/System/Export.hpp>
+#include <Bull/Core/System/Integer.hpp>
 
 namespace Bull
 {
-    struct BULL_API InStream
+    struct BULL_CORE_API InStream
     {
         /*! \brief Destructor
          *

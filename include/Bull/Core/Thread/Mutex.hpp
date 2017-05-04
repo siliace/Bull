@@ -4,7 +4,6 @@
 #include <memory>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/System/Export.hpp>
 
 namespace Bull
 {
@@ -15,7 +14,7 @@ namespace Bull
         class MutexImpl;
     }
 
-    class BULL_API Mutex : public NonCopyable
+    class BULL_CORE_API Mutex : public NonCopyable
     {
         friend class ConditionVariable;
 

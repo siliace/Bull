@@ -1,11 +1,11 @@
-#ifndef Bull_Keyboard_hpp
-#define Bull_Keyboard_hpp
+#ifndef BULL_KEYBOARD_HPP
+#define BULL_KEYBOARD_HPP
 
-#include <Bull/Core/System/Export.hpp>
+#include <Bull/Hardware/Export.hpp>
 
 namespace Bull
 {
-    class BULL_API Keyboard
+    class BULL_HARDWARE_API Keyboard
     {
     public:
 
@@ -146,4 +146,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Keyboard_hpp
+#endif // BULL_KEYBOARD_HPP

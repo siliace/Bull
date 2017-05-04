@@ -1,7 +1,6 @@
 #ifndef BULL_TCPSOCKET_HPP
 #define BULL_TCPSOCKET_HPP
 
-#include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 #include <Bull/Network/IpAddress.hpp>
@@ -9,7 +8,7 @@
 
 namespace Bull
 {
-    class BULL_API TcpSocket : public Socket
+    class BULL_NETWORK_API TcpSocket : public Socket
     {
     public:
 

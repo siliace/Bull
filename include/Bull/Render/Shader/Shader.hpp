@@ -1,23 +1,19 @@
-#ifndef Bull_Shader_hpp
-#define Bull_Shader_hpp
-
-#include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#ifndef BULL_SHADER_HPP
+#define BULL_SHADER_HPP
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
 #include <Bull/Math/Vector/Vector4.hpp>
 
+#include <Bull/Render/Export.hpp>
 #include <Bull/Render/Shader/ShaderStage.hpp>
 
 #include <Bull/Utility/Color.hpp>
 
-#include <Bull/Render/Context/ContextResource.hpp>
-
 namespace Bull
 {
-    class Shader : public NonCopyable, public ContextResource
+    class BULL_RENDER_API Shader : public NonCopyable, public ContextResource
     {
     public:
 
@@ -203,4 +199,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Shader_hpp
+#endif // BULL_SHADER_HPP

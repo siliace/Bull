@@ -2,11 +2,12 @@
 #define Bull_Color_hpp
 
 #include <Bull/Core/System/Integer.hpp>
-#include <Bull/Core/System/Export.hpp>
+
+#include <Bull/Utility/Export.hpp>
 
 namespace Bull
 {
-    struct BULL_API Color
+    struct BULL_UTILITY_API Color
     {
         static Color Red;
         static Color Green;

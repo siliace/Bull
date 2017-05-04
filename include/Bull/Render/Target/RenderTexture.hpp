@@ -18,7 +18,7 @@ namespace Bull
         class RenderTextureImpl;
     }
 
-    class BULL_API RenderTexture : public RenderTarget
+    class BULL_RENDER_API RenderTexture : public RenderTarget
     {
     public:
 

@@ -6,7 +6,6 @@
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/System/Integer.hpp>
-#include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -17,7 +16,7 @@ namespace Bull
 {
     class AbstractImageLoader;
 
-    class BULL_API Image
+    class BULL_UTILITY_API Image
     {
     public:
 

@@ -5,7 +5,7 @@
 
 namespace Bull
 {
-    class BULL_API Clock
+    class BULL_CORE_API Clock
     {
     private:
 

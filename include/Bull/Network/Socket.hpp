@@ -2,14 +2,14 @@
 #define BULL_SOCKET_HPP
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/System/Export.hpp>
 
+#include <Bull/Network/Export.hpp>
 #include <Bull/Network/NetProtocol.hpp>
 #include <Bull/Network/SocketHandler.hpp>
 
 namespace Bull
 {
-    class BULL_API Socket : public NonCopyable
+    class BULL_NETWORK_API Socket : public NonCopyable
     {
     public:
 

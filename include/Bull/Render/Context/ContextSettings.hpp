@@ -1,12 +1,13 @@
-#ifndef Bull_ContextSettings_hpp
-#define Bull_ContextSettings_hpp
+#ifndef BULL_CONTEXTSETTINGS_HPP
+#define BULL_CONTEXTSETTINGS_HPP
 
 #include <Bull/Core/System/Integer.hpp>
-#include <Bull/Core/System/Export.hpp>
+
+#include <Bull/Render/Export.hpp>
 
 namespace Bull
 {
-    struct BULL_API ContextSettings
+    struct BULL_RENDER_API ContextSettings
     {
         enum Flag
         {
@@ -63,4 +64,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_ContextSettings_hpp
+#endif // BULL_CONTEXTSETTINGS_HPP

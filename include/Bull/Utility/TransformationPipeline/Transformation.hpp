@@ -1,13 +1,13 @@
 #ifndef BULL_TRANSFORMATION_HPP
 #define BULL_TRANSFORMATION_HPP
 
-#include <Bull/Core/System/Export.hpp>
-
 #include <Bull/Math/Matrix/Matrix4.hpp>
+
+#include <Bull/Utility/Export.hpp>
 
 namespace Bull
 {
-    class BULL_API Transformation
+    class BULL_UTILITY_API Transformation
     {
     public:
 

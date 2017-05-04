@@ -1,5 +1,5 @@
-#ifndef Bull_Texture_hpp
-#define Bull_Texture_hpp
+#ifndef BULL_TEXTURE_HPP
+#define BULL_TEXTURE_HPP
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
@@ -7,15 +7,14 @@
 #include <Bull/Math/Polygon/Rectangle.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 
+#include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/OpenGL.hpp>
 
 #include <Bull/Utility/Image.hpp>
 
-#include <Bull/Render/Context/ContextResource.hpp>
-
 namespace Bull
 {
-    class Texture : public ContextResource, public NonCopyable
+    class BULL_RENDER_API Texture : public ContextResource, public NonCopyable
     {
     public:
 
@@ -231,4 +230,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Texture_hpp
+#endif // BULL_TEXTURE_HPP

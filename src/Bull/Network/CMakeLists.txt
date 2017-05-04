@@ -1,4 +1,4 @@
-add_library(bull-network SHARED "")
+bull_add_library(bull-network)
 
 target_sources(bull-network
         PUBLIC
@@ -13,6 +13,10 @@ target_sources(bull-network
 
 if(BULL_OS_WINDOWS)
     add_subdirectory(Win32)
+    target_link_libraries(bull-network ws2_32)
 else()
     add_subdirectory(Unix)
 endif()
+
+target_link_libraries(bull-network bull-core)
+target_link_libraries(bull-network bull-utility)

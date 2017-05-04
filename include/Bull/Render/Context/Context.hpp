@@ -1,5 +1,5 @@
-#ifndef Bull_Context_hpp
-#define Bull_Context_hpp
+#ifndef BULL_CONTEXT_HPP
+#define BULL_CONTEXT_HPP
 
 #include <memory>
 
@@ -17,7 +17,7 @@ namespace Bull
         class GlContext;
     }
 
-    class BULL_API Context : public ContextResource, public NonCopyable
+    class BULL_RENDER_API Context : public ContextResource, public NonCopyable
     {
     public:
 
@@ -82,4 +82,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Context_hpp
+#endif // BULL_CONTEXT_HPP

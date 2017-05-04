@@ -1,15 +1,13 @@
-#ifndef Bull_Mouse_hpp
-#define Bull_Mouse_hpp
+#ifndef BULL_MOUSE_HPP
+#define BULL_MOUSE_HPP
 
-#include <Bull/Core/System/Export.hpp>
+#include <Bull/Hardware/Export.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {
-    class Window;
-
-    struct BULL_API Mouse
+    struct BULL_HARDWARE_API Mouse
     {
         enum Button
         {
@@ -59,4 +57,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Mouse_hpp
+#endif // BULL_MOUSE_HPP

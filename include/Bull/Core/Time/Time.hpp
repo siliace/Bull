@@ -1,11 +1,11 @@
-#ifndef Bull_Time_hpp
-#define Bull_Time_hpp
+#ifndef BULL_TIME_HPP
+#define BULL_TIME_HPP
 
-#include <Bull/Core/System/Export.hpp>
+#include <Bull/Core/Export.hpp>
 
 namespace Bull
 {
-    class BULL_API Time
+    class BULL_CORE_API Time
     {
     public:
 
@@ -262,4 +262,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Time_hpp
+#endif // BULL_TIME_HPP
