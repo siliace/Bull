@@ -13,7 +13,7 @@ uniform mat4 projMatrix;
 
 void main()
 {
-    gl_Position = projMatrix * viewMatrix * modelMatrix * vec4(in_position, 1.f);
+    gl_Position = vec4(in_position, 1.f) * modelMatrix * viewMatrix * projMatrix;
 
     frag_color    = in_color;
     frag_texCoord = in_texCoord;
