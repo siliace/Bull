@@ -3,5 +3,5 @@ target_sources(bull-utility
             ${CMAKE_CURRENT_SOURCE_DIR}/Camera.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/OrthographicProjection.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/PerspectiveProjection.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Transformation.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Transformation3D.cpp
         )

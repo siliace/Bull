@@ -1,49 +1,49 @@
-#include <Bull/Utility/TransformationPipeline/Transformation.hpp>
+#include <Bull/Utility/TransformationPipeline/Transformation3D.hpp>
 
 namespace Bull
 {
-    Transformation Transformation::makeScale(const Vector3F& scale)
+    Transformation3D Transformation3D::makeScale(const Vector3F& scale)
     {
-        return Transformation().setScale(scale);
+        return Transformation3D().setScale(scale);
     }
 
-    Transformation Transformation::makeRotation(const EulerAnglesF& angles)
+    Transformation3D Transformation3D::makeRotation(const EulerAnglesF& angles)
     {
-        return Transformation().setRotation(angles);
+        return Transformation3D().setRotation(angles);
     }
 
-    Transformation Transformation::makeTranslation(const Vector3F& translation)
+    Transformation3D Transformation3D::makeTranslation(const Vector3F& translation)
     {
-        return Transformation().setTranslation(translation);
+        return Transformation3D().setTranslation(translation);
     }
 
-    Transformation Transformation::make(const EulerAnglesF& angles, const Vector3F& scale)
+    Transformation3D Transformation3D::make(const EulerAnglesF& angles, const Vector3F& scale)
     {
-        return Transformation::makeRotation(angles).applyScale(scale);
+        return Transformation3D::makeRotation(angles).applyScale(scale);
     }
 
-    Transformation Transformation::make(const Vector3F& translation, const Vector3F& scale)
+    Transformation3D Transformation3D::make(const Vector3F& translation, const Vector3F& scale)
     {
-        return Transformation::makeTranslation(translation).applyScale(scale);
+        return Transformation3D::makeTranslation(translation).applyScale(scale);
     }
 
-    Transformation Transformation::make(const Vector3F& translation, const EulerAnglesF& angles)
+    Transformation3D Transformation3D::make(const Vector3F& translation, const EulerAnglesF& angles)
     {
-        return Transformation::makeTranslation(translation).setRotation(angles);
+        return Transformation3D::makeTranslation(translation).setRotation(angles);
     }
 
-    Transformation Transformation::make(const Vector3F& translation, const EulerAnglesF& angles, const Vector3F& scale)
+    Transformation3D Transformation3D::make(const Vector3F& translation, const EulerAnglesF& angles, const Vector3F& scale)
     {
-        return Transformation::make(translation, angles).applyScale(scale);
+        return Transformation3D::make(translation, angles).applyScale(scale);
     }
 
-    Transformation::Transformation() :
+    Transformation3D::Transformation3D() :
         m_matrix(Matrix4F::Identity)
     {
         /// Nothing
     }
 
-    Transformation& Transformation::setScale(const Vector3F& scale)
+    Transformation3D& Transformation3D::setScale(const Vector3F& scale)
     {
         m_matrix(0, 0) = scale.x;
         m_matrix(1, 1) = scale.y;
@@ -52,12 +52,12 @@ namespace Bull
         return (*this);
     }
 
-    Vector3F Transformation::getScale() const
+    Vector3F Transformation3D::getScale() const
     {
         return Vector3F(m_matrix(0, 0), m_matrix(1, 1), m_matrix(2, 2));
     }
 
-    Transformation& Transformation::setRotation(const EulerAnglesF& angles)
+    Transformation3D& Transformation3D::setRotation(const EulerAnglesF& angles)
     {
         QuaternionF rotation(angles);
 
@@ -89,14 +89,14 @@ namespace Bull
         return (*this);
     }
 
-    EulerAnglesF Transformation::getRotation() const
+    EulerAnglesF Transformation3D::getRotation() const
     {
         /// Todo : Needs to be implemented
 
         return EulerAnglesF();
     }
 
-    Transformation& Transformation::setTranslation(const Vector3F& translation)
+    Transformation3D& Transformation3D::setTranslation(const Vector3F& translation)
     {
         m_matrix(3, 0) = translation.x;
         m_matrix(3, 1) = translation.y;
@@ -105,12 +105,12 @@ namespace Bull
         return (*this);
     }
 
-    Vector3F Transformation::getTranslation() const
+    Vector3F Transformation3D::getTranslation() const
     {
         return Vector3F(m_matrix(0, 3), m_matrix(1, 3), m_matrix(2, 3));
     }
 
-    Transformation& Transformation::applyScale(const Vector3F& scale)
+    Transformation3D& Transformation3D::applyScale(const Vector3F& scale)
     {
         m_matrix(0, 0) *= scale.x;
         m_matrix(1, 0) *= scale.x;
@@ -127,14 +127,14 @@ namespace Bull
         return (*this);
     }
 
-    Transformation& Transformation::applyRotation(const EulerAnglesF& angles)
+    Transformation3D& Transformation3D::applyRotation(const EulerAnglesF& angles)
     {
         /// Todo : Needs to be implemented
 
         return (*this);
     }
 
-    Transformation& Transformation::applyTranslation(const Vector3F& translation)
+    Transformation3D& Transformation3D::applyTranslation(const Vector3F& translation)
     {
         m_matrix(0, 3) += translation.x;
         m_matrix(1, 3) += translation.y;
@@ -143,7 +143,7 @@ namespace Bull
         return (*this);
     }
 
-    const Matrix4F& Transformation::toMatrix() const
+    Matrix4F Transformation3D::toMatrix() const
     {
         return m_matrix;
     }

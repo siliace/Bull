@@ -79,7 +79,7 @@ namespace Bull
         bool Display::isSupportedExtension(const String& name) const
         {
             int version;
-            return XQueryExtension(s_display, name, &version, &version, &version);
+            return XQueryExtension(s_display, name.getBuffer(), &version, &version, &version);
         }
 
         Atom Display::getAtom(const String& name, bool mustExists)
@@ -91,7 +91,7 @@ namespace Bull
                 return iterator->second;
             }
 
-            Atom atom = XInternAtom(s_display, name, mustExists ? True : False);
+            Atom atom = XInternAtom(s_display, name.getBuffer(), mustExists ? True : False);
 
             s_atoms[name] = atom;
 

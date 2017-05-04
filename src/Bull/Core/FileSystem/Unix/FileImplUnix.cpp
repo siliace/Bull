@@ -11,7 +11,7 @@ namespace Bull
     {
         bool FileImplUnix::create(const String& name)
         {
-            int handler = ::open(name, O_CREAT | O_TRUNC | O_EXCL, S_IRWXU);
+            int handler = ::open(name.getBuffer(), O_CREAT | O_TRUNC | O_EXCL, S_IRWXU);
 
             if(handler == -1)
             {
@@ -27,7 +27,7 @@ namespace Bull
         {
             struct stat64 filestats;
 
-            if(stat64(name, &filestats) == -1)
+            if(stat64(name.getBuffer(), &filestats) == -1)
             {
                 return false;
             }
@@ -42,7 +42,7 @@ namespace Bull
 
         bool FileImplUnix::remove(const Path& name)
         {
-            return unlink(name.toString()) != -1;
+            return unlink(name.toString().getBuffer()) != -1;
         }
 
         FileImplUnix::~FileImplUnix()
@@ -80,7 +80,7 @@ namespace Bull
                 flags |= O_TRUNC;
             }
 
-            m_handler = ::open64(name.toString(), flags, S_IRWXU);
+            m_handler = ::open64(name.toString().getBuffer(), flags, S_IRWXU);
 
             return m_handler != -1;
         }

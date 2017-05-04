@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <Bull/Utility/TransformationPipeline/Transformation.hpp>
+#include <Bull/Utility/TransformationPipeline/Transformation3D.hpp>
 
 using namespace Bull;
 

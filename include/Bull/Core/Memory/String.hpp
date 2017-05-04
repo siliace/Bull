@@ -342,6 +342,36 @@ namespace Bull
          */
         friend bool operator!=(const String& left, const char* right);
 
+        /*! \brief Compare two Strings
+         *
+         * \param left
+         * \param right
+         *
+         * \return
+         *
+         */
+        friend bool operator<(const String& left, const String& right);
+
+        /*! \brief Compare two Strings
+         *
+         * \param left
+         * \param right
+         *
+         * \return
+         *
+         */
+        friend bool operator<(const char* left, const String& right);
+
+        /*! \brief Compare two Strings
+         *
+         * \param left
+         * \param right
+         *
+         * \return
+         *
+         */
+        friend bool operator<(const String& left, const char* right);
+
         /*! \brief Concatenates two Strings
          *
          * \param left  The left part of the final String

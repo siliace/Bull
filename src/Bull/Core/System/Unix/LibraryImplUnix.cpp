@@ -19,14 +19,14 @@ namespace Bull
 
         bool LibraryImplUnix::load(const String& name)
         {
-            m_handler = dlopen(name, RTLD_LAZY);
+            m_handler = dlopen(name.getBuffer(), RTLD_LAZY);
 
             return m_handler == nullptr;
         }
 
         Library::LibFunction LibraryImplUnix::getFunction(const String& name)
         {
-            return reinterpret_cast<Library::LibFunction>(dlsym(m_handler, name));
+            return reinterpret_cast<Library::LibFunction>(dlsym(m_handler, name.getBuffer()));
         }
     }
 }

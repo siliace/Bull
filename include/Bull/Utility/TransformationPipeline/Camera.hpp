@@ -4,11 +4,11 @@
 #include <Bull/Math/Matrix/Matrix4.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
 
-#include <Bull/Utility/Export.hpp>
+#include <Bull/Utility/TransformationPipeline/Matrixable.hpp>
 
 namespace Bull
 {
-    class BULL_UTILITY_API Camera
+    class BULL_UTILITY_API Camera : public Matrixable
     {
     public:
 

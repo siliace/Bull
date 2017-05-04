@@ -3,19 +3,12 @@
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
 
-#include <Bull/Utility/Export.hpp>
+#include <Bull/Utility/TransformationPipeline/Matrixable.hpp>
 
 namespace Bull
 {
-    struct BULL_UTILITY_API Projection
+    struct BULL_UTILITY_API Projection : public Matrixable
     {
-        /*! \brief Convert the Projection to a Matrix4F
-         *
-         * \return The Matrix4F representing the projection
-         *
-         */
-        virtual Matrix4F toMatrix() const = 0;
-
         Vector2F zBounds;
     };
 }

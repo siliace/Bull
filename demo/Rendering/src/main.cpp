@@ -7,7 +7,7 @@
 #include <Bull/Utility/TransformationPipeline/Camera.hpp>
 #include <Bull/Utility/TransformationPipeline/PerspectiveProjection.hpp>
 #include <Bull/Utility/TransformationPipeline/OrthographicProjection.hpp>
-#include <Bull/Utility/TransformationPipeline/Transformation.hpp>
+#include <Bull/Utility/TransformationPipeline/Transformation3D.hpp>
 
 using namespace Bull;
 
@@ -187,7 +187,7 @@ int main(int argc, char* argv[])
 
             for(unsigned int i = 0; i < 10; i++)
             {
-                Matrix4F model = Transformation::make(positions[i], rotations[i]).toMatrix();
+                Matrix4F model = Transformation3D::make(positions[i], rotations[i]).toMatrix();
                 core.setUniformMatrix("modelMatrix", model);
 
                 gl::drawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);

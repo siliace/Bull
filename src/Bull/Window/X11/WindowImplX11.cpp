@@ -547,7 +547,7 @@ namespace Bull
 
         void WindowImplX11::setTitle(const String& title)
         {
-            XStoreName(m_display, m_handler, title);
+            XStoreName(m_display, m_handler, title.getBuffer());
         }
 
         String WindowImplX11::getTitle() const

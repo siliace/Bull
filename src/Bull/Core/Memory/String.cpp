@@ -390,6 +390,21 @@ namespace Bull
         return !(left == right);
     }
 
+    bool operator<(const String& left, const String& right)
+    {
+        return std::strcmp(left.getBuffer(), right.getBuffer()) < 0;
+    }
+
+    bool operator<(const String& left, const char* right)
+    {
+        return std::strcmp(left.getBuffer(), right) < 0;
+    }
+
+    bool operator<(const char* left, const String& right)
+    {
+        return std::strcmp(left, right.getBuffer()) < 0;
+    }
+
     String operator+(const String& left, const String& right)
     {
         return String(left) += right;

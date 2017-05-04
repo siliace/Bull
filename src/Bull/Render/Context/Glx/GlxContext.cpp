@@ -16,7 +16,7 @@ namespace Bull
     {
         void* GlxContext::getFunction(const String& function)
         {
-            return reinterpret_cast<void*>(glXGetProcAddressARB(reinterpret_cast<const unsigned char*>(static_cast<const char*>(function))));
+            return reinterpret_cast<void*>(glXGetProcAddressARB(reinterpret_cast<const unsigned char*>(function.getBuffer())));
         }
 
         void GlxContext::requireExtensions(const ExtensionsLoader::Instance& loader)
