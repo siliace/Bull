@@ -42,7 +42,7 @@ namespace Bull
         bool ImageLoader::loadFromPath(const Path& path, std::vector<Uint8>& pixels, Vector2UI& size) const
         {
             int width, height, channels;
-            unsigned char* buffer = stbi_load(path.toString(), &width, &height, &channels, STBI_rgb_alpha);
+            unsigned char* buffer = stbi_load(path.toString().getBuffer(), &width, &height, &channels, STBI_rgb_alpha);
 
             pixels.clear();
 
@@ -180,7 +180,7 @@ namespace Bull
                 fullPath += ".bmp";
             }
 
-            return stbi_write_bmp(fullPath, size.x, size.y, 4, &pixels[0]) != 0;
+            return stbi_write_bmp(fullPath.getBuffer(), size.x, size.y, 4, &pixels[0]) != 0;
         }
 
         bool ImageLoader::saveBmpToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const
@@ -206,7 +206,7 @@ namespace Bull
                 fullPath += ".png";
             }
 
-            return stbi_write_png(fullPath, size.x, size.y, 4, &pixels[0], 0) != 0;
+            return stbi_write_png(fullPath.getBuffer(), size.x, size.y, 4, &pixels[0], 0) != 0;
         }
 
         bool ImageLoader::savePngToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const
@@ -232,7 +232,7 @@ namespace Bull
                 fullPath += ".tga";
             }
 
-            return stbi_write_tga(fullPath, size.x, size.y, 4, &pixels[0]) != 0;
+            return stbi_write_tga(fullPath.getBuffer(), size.x, size.y, 4, &pixels[0]) != 0;
         }
 
         bool ImageLoader::saveTgaToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const

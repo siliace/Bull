@@ -1,5 +1,5 @@
-#ifndef Bull_HardwareBuffer_hpp
-#define Bull_HardwareBuffer_hpp
+#ifndef BULL_HARDWAREBUFFER_HPP
+#define BULL_HARDWAREBUFFER_HPP
 
 #include <utility>
 
@@ -8,12 +8,11 @@
 #include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Render/OpenGL.hpp>
-
 #include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull
 {
-    class HardwareBuffer : public NonCopyable, public ContextResource, public Buffer
+    class BULL_RENDER_API HardwareBuffer : public NonCopyable, public ContextResource, public Buffer
     {
     public:
 
@@ -140,4 +139,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_HardwareBuffer_hpp
+#endif // BULL_HARDWAREBUFFER_HPP

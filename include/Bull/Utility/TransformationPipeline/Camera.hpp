@@ -1,14 +1,14 @@
 #ifndef BULL_CAMERA_HPP
 #define BULL_CAMERA_HPP
 
-#include <Bull/Core/System/Export.hpp>
-
 #include <Bull/Math/Matrix/Matrix4.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
 
+#include <Bull/Utility/Export.hpp>
+
 namespace Bull
 {
-    class BULL_API Camera
+    class BULL_UTILITY_API Camera
     {
     public:
 

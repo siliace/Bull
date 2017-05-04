@@ -1,4 +1,4 @@
-add_library(bull-hardware SHARED "")
+bull_add_library(bull-hardware)
 
 target_sources(bull-hardware
         PUBLIC
@@ -17,6 +17,9 @@ target_sources(bull-hardware
 
 if(BULL_OS_WINDOWS)
     add_subdirectory(Win32)
+    target_link_libraries(bull-hardware winmm)
 else()
     add_subdirectory(Unix)
 endif()
+
+target_link_libraries(bull-hardware bull-core)

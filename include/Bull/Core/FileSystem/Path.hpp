@@ -5,7 +5,7 @@
 
 namespace Bull
 {
-    struct BULL_API Path
+    struct BULL_CORE_API Path
     {
     public:
 

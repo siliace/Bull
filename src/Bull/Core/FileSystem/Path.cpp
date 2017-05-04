@@ -23,7 +23,7 @@ namespace Bull
 
             ss << "The path " << m_path << " does not exists";
 
-            throw std::invalid_argument(ss.toString());
+            throw std::invalid_argument(ss.toString().getBuffer());
         }
     }
 

@@ -1,9 +1,13 @@
 #ifndef BULL_TEXTTEXTURE_HPP
 #define BULL_TEXTTEXTURE_HPP
 
+#include <Bull/Core/Pattern/NonCopyable.hpp>
+
+#include <Bull/Render/Export.hpp>
+
 namespace Bull
 {
-    class BULL_API TextTexture : public NonCopyable
+    class BULL_RENDER_API TextTexture : public NonCopyable
     {
 
     };

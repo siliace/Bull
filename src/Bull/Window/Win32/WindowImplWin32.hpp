@@ -1,9 +1,9 @@
-#ifndef Bull_WindowImplWin32_hpp
-#define Bull_WindowImplWin32_hpp
+#ifndef BULL_WINDOWIMPLWIN32_HPP
+#define BULL_WINDOWIMPLWIN32_HPP
 
 #include <windows.h>
 
-#include <Bull/Utility/Window/WindowImpl.hpp>
+#include <Bull/Window/WindowImpl.hpp>
 
 namespace Bull
 {
@@ -59,7 +59,7 @@ namespace Bull
              * \param style The window decoration
              *
              */
-            WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+            WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style);
 
             /*! \brief Destructor
              *
@@ -123,10 +123,38 @@ namespace Bull
              */
             Vector2I getPosition() const override;
 
+            /*! \brief Set the minimal size of the window
+             *
+             * \param size The minimal size of the window
+             *
+             */
+            void setMinSize(const Vector2UI& size) override;
+
+            /*! \brief Get the minimal size of the window
+             *
+             * \return The minimal size
+             *
+             */
+            Vector2UI getMinSize() const override;
+
+            /*! \brief Set the maximal size of the window
+             *
+             * \param size The maximal size of the window
+             *
+             */
+            void setMaxSize(const Vector2UI& size) override;
+
+            /*! \brief Get the maximal size of the window
+             *
+             * \return The maximal size
+             *
+             */
+            Vector2UI getMaxSize() const override;
+
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window
-             *
+             *!
              */
             void setSize(const Vector2UI& size) override;
 
@@ -207,4 +235,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_WindowImplWin32_hpp
+#endif // BULL_WINDOWIMPLWIN32_HPP

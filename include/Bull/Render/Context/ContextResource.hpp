@@ -1,11 +1,11 @@
-#ifndef Bull_ContextResource_hpp
-#define Bull_ContextResource_hpp
+#ifndef BULL_CONTEXTRESOURCE_HPP
+#define BULL_CONTEXTRESOURCE_HPP
 
-#include <Bull/Core/System/Export.hpp>
+#include <Bull/Render/Export.hpp>
 
 namespace Bull
 {
-    class BULL_API ContextResource
+    class BULL_RENDER_API ContextResource
     {
     protected:
 
@@ -36,4 +36,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_ContextResource_hpp
+#endif // BULL_CONTEXTRESOURCE_HPP

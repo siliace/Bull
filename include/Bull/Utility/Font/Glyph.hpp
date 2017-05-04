@@ -7,7 +7,7 @@
 
 namespace Bull
 {
-    struct BULL_API Glyph
+    struct BULL_UTILITY_API Glyph
     {
         Image        image;
         RectangleUI  bounds;

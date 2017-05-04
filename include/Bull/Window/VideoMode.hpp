@@ -1,14 +1,15 @@
-#ifndef Bull_VideoMode_hpp
-#define Bull_VideoMode_hpp
+#ifndef BULL_VIDEOMODE_IMPL
+#define BULL_VIDEOMODE_IMPL
 
 #include <vector>
 
-#include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/System/Integer.hpp>
+
+#include <Bull/Window/Export.hpp>
 
 namespace Bull
 {
-    struct BULL_API VideoMode
+    struct BULL_WINDOW_API VideoMode
     {
         /*! \brief Get the current VideoMode of the main screen
          *
@@ -69,4 +70,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_VideoMode_hpp
+#endif // BULL_VIDEOMODE_IMPL

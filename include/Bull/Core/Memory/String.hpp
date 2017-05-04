@@ -1,14 +1,15 @@
-#ifndef Bull_String_hpp
-#define Bull_String_hpp
+#ifndef BULL_STRING_HPP
+#define BULL_STRING_HPP
 
 #include <memory>
+#include <type_traits>
 #include <vector>
 
-#include <Bull/Core/System/Export.hpp>
+#include <Bull/Core/Export.hpp>
 
 namespace Bull
 {
-    class BULL_API String
+    class BULL_CORE_API String
     {
     public:
 
@@ -69,7 +70,10 @@ namespace Bull
          *
          */
         template <typename T, typename = std::enable_if_t<std::is_arithmetic<T>::value>>
-        static String number(T number);
+        static String number(T number)
+        {
+            return std::to_string(number).c_str();
+        };
 
     private:
 
@@ -251,7 +255,7 @@ namespace Bull
          * \return Return a constant pointer to the string
          *
          */
-        operator const char*() const;
+        const char* getBuffer() const;
 
         /*! \brief Get the ith character of the string
          *
@@ -374,6 +378,4 @@ namespace Bull
     };
 }
 
-#include <Bull/Core/Memory/String.inl>
-
-#endif // Bull_String_hpp
+#endif // BULL_STRING_HPP

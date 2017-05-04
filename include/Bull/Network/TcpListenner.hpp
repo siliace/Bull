@@ -2,7 +2,6 @@
 #define BULL_TCPLISTENNER_HPP
 
 #include <Bull/Core/System/Integer.hpp>
-#include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Network/IpAddress.hpp>
 #include <Bull/Network/Socket.hpp>
@@ -11,7 +10,7 @@ namespace Bull
 {
     class TcpSocket;
 
-    class BULL_API TcpListenner : public Socket
+    class BULL_NETWORK_API TcpListenner : public Socket
     {
     public:
 

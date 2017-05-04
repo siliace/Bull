@@ -12,7 +12,7 @@ namespace Bull
         class ThreadImpl;
     }
 
-    class BULL_API Thread : public NonCopyable
+    class BULL_CORE_API Thread : public NonCopyable
     {
     public:
 

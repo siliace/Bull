@@ -4,7 +4,7 @@
 #include <Bull/Window/WindowImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #include <Bull/Utility/Window/Win32/WindowImplWin32.hpp>
+    #include <Bull/Window/Win32/WindowImplWin32.hpp>
     typedef Bull::prv::WindowImplWin32 WindowImplType;
 #else
     #include <Bull/Window/X11/WindowImplX11.hpp>

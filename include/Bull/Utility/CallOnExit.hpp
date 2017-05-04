@@ -3,11 +3,12 @@
 
 #include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/System/Export.hpp>
+
+#include <Bull/Utility/Export.hpp>
 
 namespace Bull
 {
-    class BULL_API CallOnExit : public NonCopyable
+    class BULL_UTILITY_API CallOnExit : public NonCopyable
     {
     public:
 

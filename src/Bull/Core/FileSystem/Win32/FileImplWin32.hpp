@@ -39,7 +39,7 @@ namespace Bull
              * \return Return true if the copy was successfully, false otherwise
              *
              */
-            static bool copy(const String& path, const String& newPath);
+            static bool copy(const Path& path, const String& newPath);
 
             /*! \brief Delete a file
              *
@@ -48,7 +48,7 @@ namespace Bull
              * \return Return true if the file was deleted successfully, false otherwise
              *
              */
-            static bool remove(const String& name);
+            static bool remove(const Path& name);
 
         private:
 
@@ -76,7 +76,7 @@ namespace Bull
              * \return Return true if the file was open successfully, false otherwise
              *
              */
-            bool open(const String& name, Uint32 mode) override;
+            bool open(const Path& name, Uint32 mode) override;
 
             /*! \brief Read in a file
              *

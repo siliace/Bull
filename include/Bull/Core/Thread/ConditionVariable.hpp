@@ -15,7 +15,7 @@ namespace Bull
         class ConditionVariableImpl;
     }
 
-    class BULL_API ConditionVariable : public NonCopyable
+    class BULL_CORE_API ConditionVariable : public NonCopyable
     {
     public:
 

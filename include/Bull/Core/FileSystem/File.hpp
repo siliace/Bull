@@ -1,5 +1,5 @@
-#ifndef Bull_File_hpp
-#define Bull_File_hpp
+#ifndef BULL_FILE_HPP
+#define BULL_FILE_HPP
 
 #include <memory>
 
@@ -15,7 +15,7 @@ namespace Bull
         class FileImpl;
     }
 
-    class BULL_API File : public InOutStream, public NonCopyable
+    class BULL_CORE_API File : public InOutStream, public NonCopyable
     {
     public:
 
@@ -261,4 +261,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_File_hpp
+#endif // BULL_FILE_HPP

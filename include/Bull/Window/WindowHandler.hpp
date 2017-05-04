@@ -1,5 +1,5 @@
-#ifndef Bull_WindowHandler_hpp
-#define Bull_WindowHandler_hpp
+#ifndef BULL_WINDOWHANDLER_HPP
+#define BULL_WINDOWHANDLER_HPP
 
 #include <Bull/Core/System/OS.hpp>
 
@@ -16,4 +16,4 @@ namespace Bull
     #endif
 }
 
-#endif // Bull_WindowHandler_hpp
+#endif // BULL_WINDOWHANDLER_HPP

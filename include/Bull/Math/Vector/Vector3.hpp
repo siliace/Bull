@@ -1,16 +1,14 @@
-#ifndef Bull_Vector3_hpp
-#define Bull_Vector3_hpp
+#ifndef BULL_VECTOR3_HPP
+#define BULL_VECTOR3_HPP
 
 #include <cmath>
-
-#include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {
     template<typename T>
-    struct BULL_API Vector3
+    struct Vector3
     {
         /*! \brief Make a zero Vector3 (0.0, 0.0, 0.0)
          *
@@ -352,4 +350,4 @@ namespace Bull
 
 #include <Bull/Math/Vector/Vector3.inl>
 
-#endif // Bull_Vector3_hpp
+#endif // BULL_VECTOR3_HPP

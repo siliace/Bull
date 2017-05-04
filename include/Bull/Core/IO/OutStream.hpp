@@ -1,12 +1,12 @@
-#ifndef Bull_OutStream_hpp
-#define Bull_OutStream_hpp
+#ifndef BULL_OUTSTREAM_HPP
+#define BULL_OUTSTREAM_HPP
 
+#include <Bull/Core/Export.hpp>
 #include <Bull/Core/System/Integer.hpp>
-#include <Bull/Core/System/Export.hpp>
 
 namespace Bull
 {
-    struct BULL_API OutStream
+    struct BULL_CORE_API OutStream
     {
         /*! \brief Destructor
          *
@@ -51,4 +51,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_OutStream_hpp
+#endif // BULL_OUTSTREAM_HPP

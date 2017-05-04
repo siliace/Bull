@@ -6,6 +6,6 @@ namespace Bull
 {
     void ConsoleLogger::write(const String& entry)
     {
-        std::cout << entry << std::endl;
+        std::cout << entry.getBuffer() << std::endl;
     }
 }

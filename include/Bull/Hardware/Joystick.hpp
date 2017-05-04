@@ -1,16 +1,17 @@
-#ifndef Bull_Joystick_hpp
-#define Bull_Joystick_hpp
+#ifndef BULL_JOYSTICK_HPP
+#define BULL_JOYSTICK_HPP
 
 #include <array>
 
-#include <Bull/Core/System/Export.hpp>
-#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Time/Time.hpp>
+
+#include <Bull/Hardware/Export.hpp>
 
 namespace Bull
 {
-    struct BULL_API Joystick
+    struct BULL_HARDWARE_API Joystick
     {
         enum
         {
@@ -83,49 +84,7 @@ namespace Bull
          *
          */
         static float getAxisPosition(Joystick::Axis axis, Uint8 joystick);
-
-        /*! \brief Set the threshold of an axis movement to trigger an event
-         *
-         * \param threshold The threshold to use
-         *
-         */
-        static void setThreshold(float threshold);
-
-        /*! \brief Get the threshold of an axis movement to trigger an event
-         *
-         * \return threshold The threshold used
-         *
-         */
-        static float getThreshold();
-
-        /*! \brief Enable or disable the key repeat
-         *
-         * \param enable True to enable key repeat, false to disable it
-         *
-         */
-        static void enableKeyRepeat(bool enable = true);
-
-        /*! \brief Get the joystick key repeat state
-         *
-         * \return Return true if joystick key repeat is enable, false otherwise
-         *
-         */
-        static bool isEnableKeyRepeat();
-
-        /*! \brief Set the delay between two key repeat
-         *
-         * \param delay The delay between two key repeat
-         *
-         */
-        static void setRepeatDelay(const Time& delay);
-
-        /*! \brief Get the delay between two key repeat
-         *
-         * \return delay The delay between two key repeat
-         *
-         */
-        static const Time& getRepeatDelay();
     };
 }
 
-#endif // Bull_Joystick_hpp
+#endif // BULL_JOYSTICK_HPP

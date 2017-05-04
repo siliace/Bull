@@ -25,7 +25,7 @@ namespace Bull
     {
         if(File::exists(name.toString()) && !File::exists(newName))
         {
-            return ::rename(name.toString(), newName);
+            return ::rename(name.toString().getBuffer(), newName.getBuffer());
         }
 
         return false;

@@ -5,7 +5,7 @@
 
 namespace Bull
 {
-    class BULL_API MemoryStream : public InStream
+    class BULL_CORE_API MemoryStream : public InStream
     {
     public:
 

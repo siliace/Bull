@@ -1,29 +1,24 @@
-#ifndef Bull_Export_hpp
-#define Bull_Export_hpp
+#ifndef BULL_SYSTEMEXPORT_hpp
+#define BULL_SYSTEMEXPORT_hpp
 
 #include <Bull/Core/System/OS.hpp>
 
 #if defined BULL_DYNAMIC
     #if defined BULL_OS_WINDOWS
-        #define EXPORT_SYMBOL __declspec(dllexport)
-        #define IMPORT_SYMBOM __declspec(dllimport)
+        #define BULL_API_EXPORT __declspec(dllexport)
+        #define BULL_API_IMPORT __declspec(dllimport)
     #else
         #if __GNUC__ >= 4
-            #define EXPORT_SYMBOL __attribute__ ((__visibility__ ("default")))
-            #define IMPORT_SYMBOM __attribute__ ((__visibility__ ("default")))
+            #define BULL_API_EXPORT __attribute__ ((__visibility__ ("default")))
+            #define BULL_API_IMPORT __attribute__ ((__visibility__ ("default")))
         #else
-            #define EXPORT_SYMBOL
-            #define IMPORT_SYMBOM
+            #define BULL_API_EXPORT
+            #define BULL_API_IMPORT
         #endif
     #endif
-    #if defined BULL_BUILD
-        #define BULL_API EXPORT_SYMBOL
-    #else
-        #define BULL_API IMPORT_SYMBOM
-    #endif
 #else
-    #define BULL_API
+    #define BULL_CORE_API
 #endif
 
 
-#endif // Bull_Core_Export_hpp
+#endif // BULL_SYSTEMEXPORT_hpp

@@ -19,5 +19,12 @@ namespace Bull
 
             return Vector2I(p.x, p.y);
         }
+
+        bool MouseImpl::isButtonPressed(Mouse::Button button)
+        {
+            /// Todo : implementation
+
+            return false;
+        }
     }
 }

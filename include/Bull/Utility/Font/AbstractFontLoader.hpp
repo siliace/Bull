@@ -9,7 +9,7 @@
 
 namespace Bull
 {
-    struct BULL_API AbstractFontLoader
+    struct BULL_UTILITY_API AbstractFontLoader
     {
         /*! \brief Load glyphs from a font
          *

@@ -1,12 +1,13 @@
-#ifndef Bull_RAM_hpp
-#define Bull_RAM_hpp
+#ifndef BULL_RAM_HPP
+#define BULL_RAM_HPP
 
-#include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/System/Integer.hpp>
+
+#include <Bull/Hardware/Export.hpp>
 
 namespace Bull
 {
-    struct BULL_API RAM
+    struct BULL_HARDWARE_API RAM
     {
         /*! \brief Retrieves the amount of RAM that is physically installed on the computer
          *
@@ -17,4 +18,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_RAM_hpp
+#endif // BULL_RAM_HPP

@@ -24,7 +24,7 @@ namespace Bull
         class GlContext;
     }
 
-    class BULL_API RenderTarget : public ContextResource, public NonCopyable
+    class BULL_RENDER_API RenderTarget : public ContextResource, public NonCopyable
     {
     public:
 

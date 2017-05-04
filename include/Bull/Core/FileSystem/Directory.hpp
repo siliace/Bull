@@ -1,5 +1,5 @@
-#ifndef Bull_Directory_hpp
-#define Bull_Directory_hpp
+#ifndef BULL_DIRECTORY_HPP
+#define BULL_DIRECTORY_HPP
 
 #include <memory>
 #include <vector>
@@ -15,7 +15,7 @@ namespace Bull
         class DirectoryImpl;
     }
 
-    class BULL_API Directory
+    class BULL_CORE_API Directory
     {
     public:
 
@@ -137,4 +137,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Directory_hpp
+#endif // BULL_DIRECTORY_HPP

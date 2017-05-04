@@ -1,4 +1,4 @@
-add_library(bull-render SHARED "")
+bull_add_library(bull-render)
 
 target_sources(bull-render
         PUBLIC

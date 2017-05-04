@@ -1,16 +1,14 @@
-#ifndef Bull_Vector4_hpp
-#define Bull_Vector4_hpp
+#ifndef BULL_VECTOR4_HPP
+#define BULL_VECTOR4_HPP
 
 #include <cmath>
-
-#include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Math/Vector/Vector3.hpp>
 
 namespace Bull
 {
     template<typename T>
-    struct BULL_API Vector4
+    struct Vector4
     {
         /*! \brief Get a normalized Vector4
          *
@@ -248,4 +246,4 @@ namespace Bull
 
 #include <Bull/Math/Vector/Vector4.inl>
 
-#endif // Bull_Vector4_hpp
+#endif // BULL_VECTOR4_HPP

@@ -5,7 +5,7 @@
 
 namespace Bull
 {
-    struct BULL_API PerspectiveProjection : public Projection
+    struct BULL_UTILITY_API PerspectiveProjection : public Projection
     {
         /*! \brief Default constructor
          *

@@ -313,7 +313,7 @@ namespace Bull
         return m_sharedString->m_size == 0;
     }
 
-    String::operator const char*() const
+    const char* String::getBuffer() const
     {
         return m_sharedString->m_string.get();
     }
@@ -362,17 +362,17 @@ namespace Bull
 
     bool operator==(const String& left, const String& right)
     {
-        return left.getCapacity() && right.getCapacity() && strcmp(left, right) == 0;
+        return left.getCapacity() && right.getCapacity() && std::strcmp(left.getBuffer(), right.getBuffer()) == 0;
     }
 
     bool operator==(const char* left, const String& right)
     {
-        return left && right.getCapacity() && strcmp(left, right) == 0;
+        return left && right.getCapacity() && strcmp(left, right.getBuffer()) == 0;
     }
 
     bool operator==(const String& left, const char* right)
     {
-        return left && right && strcmp(left, right) == 0;
+        return left.getCapacity() && right && strcmp(left.getBuffer(), right) == 0;
     }
 
     bool operator!=(const String& left, const String& right)

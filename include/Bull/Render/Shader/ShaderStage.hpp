@@ -7,12 +7,11 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Render/OpenGL.hpp>
-
 #include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull
 {
-    class BULL_API ShaderStage : public NonCopyable, public ContextResource
+    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource
     {
     public:
 

@@ -6,7 +6,7 @@ namespace Bull
     {
         bool FileImplWin32::create(const String& name)
         {
-            HANDLE handler = CreateFile(name,
+            HANDLE handler = CreateFile(name.getBuffer(),
                                         GENERIC_READ | GENERIC_WRITE,
                                         FILE_SHARE_READ,
                                         nullptr,
@@ -26,19 +26,19 @@ namespace Bull
 
         bool FileImplWin32::exists(const String& name)
         {
-            DWORD attribs = GetFileAttributes(name);
+            DWORD attribs = GetFileAttributes(name.getBuffer());
 
             return (attribs != INVALID_FILE_ATTRIBUTES &&  !(attribs & FILE_ATTRIBUTE_DIRECTORY));
         }
 
-        bool FileImplWin32::copy(const String& path, const String& newPath)
+        bool FileImplWin32::copy(const Path& path, const String& newPath)
         {
-            return CopyFile(path, newPath, true);
+            return CopyFile(path.toString().getBuffer(), newPath.getBuffer(), true) == TRUE;
         }
 
-        bool FileImplWin32::remove(const String& name)
+        bool FileImplWin32::remove(const Path& name)
         {
-            return DeleteFile(name);
+            return DeleteFile(name.toString().getBuffer()) == TRUE;
         }
 
         Date FileImplWin32::systemTimeToDate(SYSTEMTIME sysTime)
@@ -61,7 +61,7 @@ namespace Bull
             CloseHandle(m_handler);
         }
 
-        bool FileImplWin32::open(const String& name, Uint32 mode)
+        bool FileImplWin32::open(const Path& name, Uint32 mode)
         {
             DWORD creationMode = 0;
             DWORD openingMode  = 0;
@@ -97,11 +97,11 @@ namespace Bull
                 }
                 else
                 {
-                    creationMode = exists(name) ? OPEN_EXISTING : CREATE_NEW;
+                    creationMode = exists(name.toString()) ? OPEN_EXISTING : CREATE_NEW;
                 }
             }
 
-            m_handler = CreateFile(name,
+            m_handler = CreateFile(name.toString().getBuffer(),
                                    openingMode,
                                    FILE_SHARE_READ,
                                    nullptr,

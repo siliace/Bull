@@ -4,6 +4,7 @@
 #include <windows.h>
 
 #include <Bull/Core/FileSystem/DirectoryImpl.hpp>
+#include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
 {
@@ -38,7 +39,7 @@ namespace Bull
              * \return Return true if the directory was deleted successfully, false otherwise
              *
              */
-            static bool remove(const String& name);
+            static bool remove(const Path& name);
 
         private:
 
@@ -63,7 +64,7 @@ namespace Bull
              * \param name The name of the directory to open
              *
              */
-            bool open(const String& name) override;
+            bool open(const Path& name) override;
 
             /*! \brief Get the content of this Directory
              *

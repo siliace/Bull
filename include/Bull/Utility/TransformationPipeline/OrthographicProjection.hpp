@@ -7,7 +7,7 @@
 
 namespace Bull
 {
-    struct BULL_API OrthographicProjection : public Projection
+    struct BULL_UTILITY_API OrthographicProjection : public Projection
     {
         /*! \brief Default constructor
          *

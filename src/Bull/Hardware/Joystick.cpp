@@ -1,8 +1,6 @@
 #include <Bull/Hardware/Joystick.hpp>
 #include <Bull/Hardware/JoystickImpl.hpp>
 
-#include <Bull/Window/JoystickManager.hpp>
-
 namespace Bull
 {
     bool Joystick::isConnected(Uint8 id)
@@ -23,35 +21,5 @@ namespace Bull
     float Joystick::getAxisPosition(Joystick::Axis axis, Uint8 joystick)
     {
         return prv::JoystickImpl::getAxisPosition(axis, joystick);
-    }
-
-    void Joystick::setThreshold(float threshold)
-    {
-        prv::JoystickManager::get()->setThreshold(threshold);
-    }
-
-    float Joystick::getThreshold()
-    {
-        return prv::JoystickManager::get()->getThreshold();
-    }
-
-    void Joystick::enableKeyRepeat(bool enable)
-    {
-        prv::JoystickManager::get()->enableKeyRepeat(enable);
-    }
-
-    bool Joystick::isEnableKeyRepeat()
-    {
-        return prv::JoystickManager::get()->isKeyRepeatEnable();
-    }
-
-    void Joystick::setRepeatDelay(const Time& delay)
-    {
-        prv::JoystickManager::get()->setRepeatDelay(delay);
-    }
-
-    const Time& Joystick::getRepeatDelay()
-    {
-        return prv::JoystickManager::get()->getRepeatDelay();
     }
 }

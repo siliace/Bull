@@ -3,11 +3,11 @@
 
 #include <utility>
 
-#include <Bull/Core/System/Export.hpp>
+#include <Bull/Core/Export.hpp>
 
 namespace Bull
 {
-    struct BULL_API Buffer
+    struct BULL_CORE_API Buffer
     {
         /*! \brief Create the Buffer
          *

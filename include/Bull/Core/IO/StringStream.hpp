@@ -3,13 +3,12 @@
 
 #include <vector>
 
-#include <Bull/Core/System/Export.hpp>
 #include <Bull/Core/IO/InOutStream.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
-    class BULL_API StringStream
+    class BULL_CORE_API StringStream
     {
     public:
 

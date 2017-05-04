@@ -1,14 +1,16 @@
-#ifndef Bull_Random_hpp
-#define Bull_Random_hpp
+#ifndef BULL_RANDOM_HPP
+#define BULL_RANDOM_HPP
 
 #include <ctime>
 
 #include <Bull/Core/Pattern/Singleton.hpp>
 #include <Bull/Core/System/Integer.hpp>
 
+#include <Bull/Utility/Export.hpp>
+
 namespace Bull
 {
-    class BULL_API Random : public Singleton<Random>
+    class BULL_UTILITY_API Random : public Singleton<Random>
     {
     public:
 
@@ -42,4 +44,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Random_hpp
+#endif // BULL_RANDOM_HPP

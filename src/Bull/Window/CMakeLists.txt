@@ -1,4 +1,4 @@
-add_library(bull-window SHARED "")
+bull_add_library(bull-window)
 
 target_sources(bull-window
         PUBLIC

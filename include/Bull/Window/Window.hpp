@@ -26,7 +26,7 @@ namespace Bull
         class WindowImpl;
     }
 
-    class BULL_API Window : public NonCopyable
+    class BULL_WINDOW_API Window : public NonCopyable
     {
     public:
 

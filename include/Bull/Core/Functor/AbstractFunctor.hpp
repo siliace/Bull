@@ -1,5 +1,5 @@
-#ifndef Bull_AbstractFunctor_hpp
-#define Bull_AbstractFunctor_hpp
+#ifndef BULL_ABSTRACTFUNCTOR_HPP
+#define BULL_ABSTRACTFUNCTOR_HPP
 
 #include <utility>
 
@@ -70,4 +70,4 @@ namespace Bull
 
 #include <Bull/Core/Functor/AbstractFunctor.inl>
 
-#endif // Bull_AbstractFunctor_hpp
+#endif // BULL_ABSTRACTFUNCTOR_HPP

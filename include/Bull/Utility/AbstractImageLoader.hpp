@@ -13,7 +13,7 @@
 
 namespace Bull
 {
-    struct BULL_API AbstractImageLoader
+    struct BULL_UTILITY_API AbstractImageLoader
     {
         /*! \brief Load an image
          *
