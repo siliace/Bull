@@ -149,11 +149,11 @@ int main(int argc, char* argv[])
 
                 if(e.key.code == Keyboard::D)
                 {
-                    camera.moveX(-speed);
+                    camera.moveX(speed);
                 }
                 else if(e.key.code == Keyboard::Q)
                 {
-                    camera.moveX(speed);
+                    camera.moveX(-speed);
                 }
 
                 if(e.key.code == Keyboard::F1)
@@ -172,7 +172,7 @@ int main(int argc, char* argv[])
 
         if(win.isOpen())
         {
-            perspective = PerspectiveProjection(AngleF::degree(90.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
+            perspective = PerspectiveProjection(AngleF::degree(45.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
             orthographic = OrthographicProjection(RectangleF(-4.f, 4.f, 4.f, -4.f), Vector2F(0.1f, 100.f));
 
             win.clear();

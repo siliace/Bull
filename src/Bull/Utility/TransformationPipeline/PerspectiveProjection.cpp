@@ -21,7 +21,7 @@ namespace Bull
     {
         Matrix4F perspective;
         AngleF fov = angle.asRadian() / 2.0;
-        float yScale = std::tan(Pi2 - static_cast<float>(angle));
+        float yScale = std::tan(Pi2 - static_cast<float>(fov));
 
         perspective(0, 0) = yScale / ratio;
         perspective(1, 1) = yScale;

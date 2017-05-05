@@ -35,7 +35,7 @@ namespace Bull
     template<typename T>
     Angle<T> Angle<T>::operator+(T right)
     {
-        return Angle<T>(m_value + right);
+        return Angle<T>(m_value + right, m_isRadian);
     }
 
     template<typename T>
@@ -49,7 +49,7 @@ namespace Bull
     template<typename T>
     Angle<T> Angle<T>::operator-(T right)
     {
-        return Angle<T>(m_value - right);
+        return Angle<T>(m_value - right, m_isRadian);
     }
 
     template<typename T>
@@ -63,7 +63,7 @@ namespace Bull
     template<typename T>
     Angle<T> Angle<T>::operator*(T right)
     {
-        return Angle<T>(m_value * right);
+        return Angle<T>(m_value * right, m_isRadian);
     }
 
     template<typename T>
@@ -77,7 +77,7 @@ namespace Bull
     template<typename T>
     Angle<T> Angle<T>::operator/(T right)
     {
-        return Angle<T>(m_value / right);
+        return Angle<T>(m_value / right, m_isRadian);
     }
 
     template<typename T>
