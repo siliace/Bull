@@ -1,192 +1,278 @@
-#ifndef Bull_Angle_hpp
-#define Bull_Angle_hpp
-
-#include <cmath>
-#include <functional>
-
-#include <Bull/Core/System/Export.hpp>
+#ifndef BULL_ANGLE_HPP
+#define BULL_ANGLE_HPP
 
 #include <Bull/Math/Constants.hpp>
 
 namespace Bull
 {
-    template<typename T>
-    struct Angle
+    template <typename T>
+    class Angle
     {
     public:
 
-        static Angle<T> Zero; /*!< A Zero angle */
+        static Angle<T> Zero;
 
-        /*! \brief Create an angle in radians
+        /*! \brief Create a Angle in degree
          *
-         * \param angle The value in radians of the angle to create
+         * \param value The value of the Angle
          *
-         * \return Return the created angle
+         * \return The Angle
          *
          */
-        static Angle<T> radian(T angle);
+        static Angle<T> degree(T value);
 
-        /*! \brief Create an angle in degrees
+        /*! \brief Create a Angle in radian
          *
-         * \param angle The value in degrees of the angle to create
+         * \param value The value of the Angle
          *
-         * \return Return the created angle
+         * \return The Angle
          *
          */
-        static Angle<T> degree(T angle);
+        static Angle<T> radian(T value);
+
+        /*! \brief
+         *
+         * \param angle
+         *
+         * \return
+         *
+         */
+        static Angle<T> toDegree(const Angle<T>& angle);
+
+        /*! \brief
+         *
+         * \param angle
+         *
+         * \return
+         *
+         */
+        static Angle<T> toRadian(const Angle<T>& angle);
+
+        /*! \brief
+         *
+         * \param angle
+         *
+         * \return
+         *
+         */
+        static Angle<T> normalize(const Angle<T>& angle);
 
     public:
 
         /*! \brief Default constructor
          *
          */
-        Angle() = default;
+        Angle();
 
-        /*! \brief Set the value of the angle
+        /*! \brief
          *
-         * \param angle    The value of the angle
-         * \param isRadian Whether the angle value is in radian
-         *
-         * \return This
+         * \return
          *
          */
-        Angle& set(T angle, bool isRadian = false);
+        Angle<T>& toRadian();
 
-        /*! \brief Get the value of the angle in degrees
+        /*! \brief
          *
-         * \return The value of the angle
+         * \return
          *
          */
-        Angle<T> asDegree() const;
+        Angle<T>& toDegree();
 
-        /*! \brief Get the value of the angle in radians
+        /*! \brief
          *
-         * \return Return the value of the angle
-         *
-         */
-        Angle<T> asRadian() const;
-
-        /*! \brief Normalize the angle
-         *
-         * \return This
+         * \return
          *
          */
         Angle<T>& normalize();
 
-        /*! \brief Addition two angles
+        /*! \brief Compare two Angles
          *
-         * \param right The angle to add to this
+         * \param left
+         * \param right
          *
-         * \return Return the sum of this and right
+         * \return True if left and right are equal
          *
          */
-        Angle<T> operator+(T right);
+        template <typename U>
+        friend bool operator==(const Angle<U>& left, const Angle<U>& right);
 
-        /*! \brief Addition two angles
+        /*! \brief Compare two Angles
          *
-         * \param right The angle to add to this
+         * \param left
+         * \param right
          *
-         * \return Return the sum of this and right
+         * \return True if left and right are equal
          *
          */
+        template <typename U>
+        friend bool operator==(U left, const Angle<U>& right);
+
+        /*! \brief Compare two Angles
+         *
+         * \param left
+         * \param right
+         *
+         * \return True if left and right are equal
+         *
+         */
+        template <typename U>
+        friend bool operator==(const Angle<U>& left, U right);
+
+        /*! \brief Compare two Angles
+         *
+         * \param left
+         * \param right
+         *
+         * \return True if left and right are not equal
+         *
+         */
+        template <typename U>
+        friend bool operator!=(const Angle<U>& left, const Angle<U>& right);
+
+        /*! \brief Compare two Angles
+         *
+         * \param left
+         * \param right
+         *
+         * \return True if left and right are not equal
+         *
+         */
+        template <typename U>
+        friend bool operator!=(U left, const Angle<U>& right);
+
+        /*! \brief Compare two Angles
+         *
+         * \param left
+         * \param right
+         *
+         * \return True if left and right are not equal
+         *
+         */
+        template <typename U>
+        friend bool operator!=(const Angle<U>& left, U right);
+
+        template <typename U>
+        friend bool operator<(const Angle<U>& left, const Angle<U>& right);
+
+        template <typename U>
+        friend bool operator<(U left, const Angle<U>& right);
+
+        template <typename U>
+        friend bool operator<(const Angle<U>& left, U right);
+
+        template <typename U>
+        friend bool operator<=(const Angle<U>& left, const Angle<U>& right);
+
+        template <typename U>
+        friend bool operator<=(U left, const Angle<U>& right);
+
+        template <typename U>
+        friend bool operator<=(const Angle<U>& left, U right);
+
+        template <typename U>
+        friend bool operator>(const Angle<U>& left, const Angle<U>& right);
+
+        template <typename U>
+        friend bool operator>(U left, const Angle<U>& right);
+
+        template <typename U>
+        friend bool operator>(const Angle<U>& left, U right);
+
+        template <typename U>
+        friend bool operator>=(const Angle<U>& left, const Angle<U>& right);
+
+        template <typename U>
+        friend bool operator>=(U left, const Angle<U>& right);
+
+        template <typename U>
+        friend bool operator>=(const Angle<U>& left, U right);
+
+        template <typename U>
+        friend Angle<U> operator+(const Angle<U>& left, const Angle<U>& right);
+
+        template <typename U>
+        friend Angle<U> operator+(U left, const Angle<U>& right);
+
+        template <typename U>
+        friend Angle<U> operator+(const Angle<U>& left, U right);
+
+        template <typename U>
+        friend Angle<U> operator-(const Angle<U>& left, const Angle<U>& right);
+
+        template <typename U>
+        friend Angle<U> operator-(U left, const Angle<U>& right);
+
+        template <typename U>
+        friend Angle<U> operator-(const Angle<U>& left, U right);
+
+        template <typename U>
+        friend Angle<U> operator*(const Angle<U>& left, const Angle<U>& right);
+
+        template <typename U>
+        friend Angle<U> operator*(U left, const Angle<U>& right);
+
+        template <typename U>
+        friend Angle<U> operator*(const Angle<U>& left, U right);
+
+        template <typename U>
+        friend Angle<U> operator/(const Angle<U>& left, const Angle<U>& right);
+
+        template <typename U>
+        friend Angle<U> operator/(U left, const Angle<U>& right);
+
+        template <typename U>
+        friend Angle<U> operator/(const Angle<U>& left, U right);
+
         Angle<T>& operator+=(T right);
 
-        /*! \brief Subtract two angles
-         *
-         * \param right The angle to subtract to this
-         *
-         * \return Return the difference of this and right
-         *
-         */
-        Angle<T> operator-(T right);
+        Angle<T>& operator+=(const Angle<T>& right);
 
-        /*! \brief Subtract two angles
-         *
-         * \param right The angle to subtract to this
-         *
-         * \return Return the difference of this and right
-         *
-         */
         Angle<T>& operator-=(T right);
 
-        /*! \brief Multiply two angles
-         *
-         * \param right The angle to multiply to this
-         *
-         * \return Return the product of this and right
-         *
-         */
-        Angle<T> operator*(T right);
+        Angle<T>& operator-=(const Angle<T>& right);
 
-        /*! \brief Multiply two angles
-         *
-         * \param right The angle to multiply to this
-         *
-         * \return Return the product of this and right
-         *
-         */
         Angle<T>& operator*=(T right);
 
-        /*! \brief Divide two angles
-         *
-         * \param right The angle to divide to this
-         *
-         * \return Return the quotient of this and right
-         *
-         */
-        Angle<T> operator/(T right);
+        Angle<T>& operator*=(const Angle<T>& right);
 
-        /*! \brief Divide two angles
-         *
-         * \param right The angle to divide to this
-         *
-         * \return Return the quotient of this and right
-         *
-         */
         Angle<T>& operator/=(T right);
 
-        /*! \brief Convert the angle to a numeric value
-         *
-         * \return Return the value of the angle
-         *
-         */
-        explicit operator T() const;
+        Angle<T>& operator/=(const Angle<T>& right);
 
-    private:
+        template <typename U>
+        friend float std::cos(const Angle<U>& angle);
+
+        template <typename U>
+        friend float std::sin(const Angle<U>& angle);
+
+        template <typename U>
+        friend float std::tan(const Angle<U>& angle);
+
+    protected:
 
         /*! \brief Constructor
          *
-         * \param angle    The value of the angle
-         * \param isRadian Whether the angle value is in radian
+         * \param value    The value of the Angle
+         * \param isRadian True if the Angle is in radian
          *
          */
-        Angle(T value, bool isRadian = false);
+        Angle(T value, bool isRadian);
 
-        T    m_value;
+    private:
+
+        T    m_angle;
         bool m_isRadian;
     };
 
-    typedef Angle<int>          AngleI;
-    typedef Angle<float>        AngleF;
-    typedef Angle<double>       AngleD;
-    typedef Angle<unsigned int> AngleUI;
-
-    template<typename T>
+    template <typename T>
     Angle<T> Angle<T>::Zero = Angle<T>();
-}
 
-namespace std
-{
-    template<typename T>
-    float cos(const Bull::Angle<T>& angle);
-
-    template<typename T>
-    float sin(const Bull::Angle<T>& angle);
-
-    template<typename T>
-    float tan(const Bull::Angle<T>& angle);
+    typedef Angle<int> AngleI;
+    typedef Angle<float> AngleF;
+    typedef Angle<double> AngleD;
+    typedef Angle<unsigned int> AngleUI;
 }
 
 #include <Bull/Math/Angle.inl>
 
-#endif // Bull_Angle_hpp
+#endif // BULL_ANGLE_HPP

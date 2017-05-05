@@ -20,8 +20,8 @@ namespace Bull
     Matrix4F PerspectiveProjection::toMatrix() const
     {
         Matrix4F perspective;
-        AngleF fov = angle.asRadian() / 2.0;
-        float yScale = std::tan(Pi2 - static_cast<float>(fov));
+        AngleF fov = AngleF::toRadian(angle) / 2.f;
+        float yScale = std::tan(Pi2 - fov);
 
         perspective(0, 0) = yScale / ratio;
         perspective(1, 1) = yScale;

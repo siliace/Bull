@@ -1,102 +1,322 @@
 namespace Bull
 {
-    template<typename T>
-    Angle<T> Angle<T>::radian(T angle)
+    template <typename T>
+    Angle<T> Angle<T>::degree(T value)
     {
-        return Angle<T>(angle, true);
+        return Angle<T>(value, false);
     }
 
-    template<typename T>
-    Angle<T> Angle<T>::degree(T angle)
+    template <typename T>
+    Angle<T> Angle<T>::radian(T value)
     {
-        return Angle<T>(angle, false);
+        return Angle<T>(value, true);
     }
 
-    template<typename T>
-    Angle<T> Angle<T>::asDegree() const
+    template <typename T>
+    Angle<T> Angle<T>::toDegree(const Angle<T>& angle)
     {
-        return Angle<T>(m_isRadian ? m_value * (180.0 / Pi) : m_value, false);
+        return Angle<T>(angle).toDegree();
     }
 
-    template<typename T>
-    Angle<T> Angle<T>::asRadian() const
+    template <typename T>
+    Angle<T> Angle<T>::toRadian(const Angle<T>& angle)
     {
-        return Angle<T>(m_isRadian ? m_value : m_value * (Pi / 180.0), true);
+        return Angle<T>(angle).toRadian();
+    }
+
+    template <typename T>
+    Angle<T> Angle<T>::normalize(const Angle<T>& angle)
+    {
+        return Angle<T>(angle).normalize();
+    }
+
+    template <typename T>
+    Angle<T>::Angle() :
+        m_angle(0.0),
+        m_isRadian(false)
+    {
+        /// Nothing
+    }
+
+    template <typename T>
+    Angle<T>& Angle<T>::toRadian()
+    {
+        if(!m_isRadian)
+        {
+            m_isRadian = true;
+            m_angle    = (m_angle * Pi) / 180.0;
+        }
+
+        return (*this);
+    }
+
+    template <typename T>
+    Angle<T>& Angle<T>::toDegree()
+    {
+        if(m_isRadian)
+        {
+            m_isRadian = true;
+            m_angle    = (m_angle * 180.0) / Pi;
+        }
+
+        return (*this);
     }
 
     template <typename T>
     Angle<T>& Angle<T>::normalize()
     {
-        m_value = std::fmod(m_value, (m_isRadian) ? Pi * 2 : 360);
+        m_angle /= m_isRadian ? 2 * Pi : 360.0;
 
         return (*this);
     }
 
-    template<typename T>
-    Angle<T> Angle<T>::operator+(T right)
+    template <typename U>
+    bool operator==(const Angle<U>& left, const Angle<U>& right)
     {
-        return Angle<T>(m_value + right, m_isRadian);
+        return Angle<U>::toDegree(left).m_angle == Angle<U>::toDegree().m_angle;
     }
 
-    template<typename T>
+    template <typename U>
+    bool operator==(U left, const Angle<U>& right)
+    {
+        return left == right.m_angle;
+    }
+
+    template <typename U>
+    bool operator==(const Angle<U>& left, U right)
+    {
+        return left.m_angle == right;
+    }
+
+    template <typename U>
+    bool operator!=(const Angle<U>& left, const Angle<U>& right)
+    {
+        return Angle<U>::toDegree(left).m_angle != Angle<U>::toDegree().m_angle;
+    }
+
+    template <typename U>
+    bool operator!=(U left, const Angle<U>& right)
+    {
+        return left != right.m_angle;
+    }
+
+    template <typename U>
+    bool operator!=(const Angle<U>& left, U right)
+    {
+        return left.m_angle != right;
+    }
+
+    template <typename U>
+    bool operator<(const Angle<U>& left, const Angle<U>& right)
+    {
+        return Angle<U>::toDegree(left).m_angle < Angle<U>::toDegree().m_angle;
+    }
+
+    template <typename U>
+    bool operator<(U left, const Angle<U>& right)
+    {
+        return left < right.m_angle;
+    }
+
+    template <typename U>
+    bool operator<(const Angle<U>& left, U right)
+    {
+        return left.m_angle < right;
+    }
+
+    template <typename U>
+    bool operator<=(const Angle<U>& left, const Angle<U>& right)
+    {
+        return Angle<U>::toDegree(left).m_angle <= Angle<U>::toDegree().m_angle;
+    }
+
+    template <typename U>
+    bool operator<=(U left, const Angle<U>& right)
+    {
+        return left <= right.m_angle;
+    }
+
+    template <typename U>
+    bool operator<=(const Angle<U>& left, U right)
+    {
+        return left.m_angle <= right;
+    }
+
+    template <typename U>
+    bool operator>(const Angle<U>& left, const Angle<U>& right)
+    {
+        return Angle<U>::toDegree(left).m_angle > Angle<U>::toDegree().m_angle;
+    }
+
+    template <typename U>
+    bool operator>(U left, const Angle<U>& right)
+    {
+        return left > right.m_angle;
+    }
+
+    template <typename U>
+    bool operator>(const Angle<U>& left, U right)
+    {
+        return left.m_angle > right;
+    }
+
+    template <typename U>
+    bool operator>=(const Angle<U>& left, const Angle<U>& right)
+    {
+        return Angle<U>::toDegree(left).m_angle >= Angle<U>::toDegree().m_angle;
+    }
+
+    template <typename U>
+    bool operator>=(U left, const Angle<U>& right)
+    {
+        return left >= right.m_angle;
+    }
+
+    template <typename U>
+    bool operator>=(const Angle<U>& left, U right)
+    {
+        return left.m_angle >= right;
+    }
+
+    template <typename U>
+    Angle<U> operator+(const Angle<U>& left, const Angle<U>& right)
+    {
+        return Angle<U>::degree(Angle<U>::toDegree(left).m_angle + Angle<U>::toDegree(right).m_angle);
+    }
+
+    template <typename U>
+    Angle<U> operator+(U left, const Angle<U>& right)
+    {
+        return Angle<U>(left + right.m_angle, right.m_isRadian);
+    }
+
+    template <typename U>
+    Angle<U> operator+(const Angle<U>& left, U right)
+    {
+        return Angle<U>(left.m_angle + right, right.m_isRadian);
+    }
+
+    template <typename U>
+    Angle<U> operator-(const Angle<U>& left, const Angle<U>& right)
+    {
+        return Angle<U>::degree(Angle<U>::toDegree(left).m_angle - Angle<U>::toDegree(right).m_angle);
+    }
+
+    template <typename U>
+    Angle<U> operator-(U left, const Angle<U>& right)
+    {
+        return Angle<U>(left - right.m_angle, right.m_isRadian);
+    }
+
+    template <typename U>
+    Angle<U> operator-(const Angle<U>& left, U right)
+    {
+        return Angle<U>(left.m_angle - right, right.m_isRadian);
+    }
+
+    template <typename U>
+    Angle<U> operator*(const Angle<U>& left, const Angle<U>& right)
+    {
+        return Angle<U>::degree(Angle<U>::toDegree(left).m_angle * Angle<U>::toDegree(right).m_angle);
+    }
+
+    template <typename U>
+    Angle<U> operator*(U left, const Angle<U>& right)
+    {
+        return Angle<U>(left * right.m_angle, right.m_isRadian);
+    }
+
+    template <typename U>
+    Angle<U> operator*(const Angle<U>& left, U right)
+    {
+        return Angle<U>(left.m_angle * right, left.m_isRadian);
+    }
+
+    template <typename U>
+    Angle<U> operator/(const Angle<U>& left, const Angle<U>& right)
+    {
+        return Angle<U>::degree(Angle<U>::toDegree(left).m_angle / Angle<U>::toDegree(right).m_angle);
+    }
+
+    template <typename U>
+    Angle<U> operator/(U left, const Angle<U>& right)
+    {
+        return Angle<U>(left / right.m_angle, right.m_isRadian);
+    }
+
+    template <typename U>
+    Angle<U> operator/(const Angle<U>& left, U right)
+    {
+        return Angle<U>(left.m_angle / right, left.m_isRadian);
+    }
+
+    template <typename T>
     Angle<T>& Angle<T>::operator+=(T right)
     {
-        m_value += m_isRadian ? right.asRadian() : right.asDegree();
+        m_angle += right;
 
         return (*this);
     }
 
-    template<typename T>
-    Angle<T> Angle<T>::operator-(T right)
+    template <typename T>
+    Angle<T>& Angle<T>::operator+=(const Angle<T>& right)
     {
-        return Angle<T>(m_value - right, m_isRadian);
+        m_angle += m_isRadian ? Angle<T>::toRadian(right).m_angle : Angle<T>::toDegree(right).m_angle;
+
+        return (*this);
     }
 
-    template<typename T>
+    template <typename T>
     Angle<T>& Angle<T>::operator-=(T right)
     {
-        m_value -= m_isRadian ? right.asRadian() : right.asDegree();
+        m_angle -= right;
 
         return (*this);
     }
 
-    template<typename T>
-    Angle<T> Angle<T>::operator*(T right)
+    template <typename T>
+    Angle<T>& Angle<T>::operator-=(const Angle<T>& right)
     {
-        return Angle<T>(m_value * right, m_isRadian);
+        m_angle -= m_isRadian ? Angle<T>::toRadian(right).m_angle : Angle<T>::toDegree(right).m_angle;
+
+        return (*this);
     }
 
-    template<typename T>
+    template <typename T>
     Angle<T>& Angle<T>::operator*=(T right)
     {
-        m_value *= m_isRadian ? right.asRadian() : right.asDegree();
+        m_angle *= right;
 
         return (*this);
     }
 
-    template<typename T>
-    Angle<T> Angle<T>::operator/(T right)
+    template <typename T>
+    Angle<T>& Angle<T>::operator*=(const Angle<T>& right)
     {
-        return Angle<T>(m_value / right, m_isRadian);
+        m_angle *= m_isRadian ? Angle<T>::toRadian(right).m_angle : Angle<T>::toDegree(right).m_angle;
+
+        return (*this);
     }
 
-    template<typename T>
+    template <typename T>
     Angle<T>& Angle<T>::operator/=(T right)
     {
-        m_value /= m_isRadian ? right.asRadian() : right.asDegree();
+        m_angle /= right;
 
         return (*this);
     }
 
-    template<typename T>
-    Angle<T>::operator T() const
+    template <typename T>
+    Angle<T>& Angle<T>::operator/=(const Angle<T>& right)
     {
-        return m_value;
+        m_angle /= m_isRadian ? Angle<T>::toRadian(right).m_angle : Angle<T>::toDegree(right).m_angle;
+
+        return (*this);
     }
 
-    template<typename T>
-    Angle<T>::Angle(T angle, bool isRadian) :
-        m_value(angle),
+    template <typename T>
+    Angle<T>::Angle(T value, bool isRadian) :
+        m_angle(value),
         m_isRadian(isRadian)
     {
         /// Nothing
@@ -105,21 +325,21 @@ namespace Bull
 
 namespace std
 {
-    template<typename T>
-    float cos(const Bull::Angle<T>& angle)
+    template <typename U>
+    float cos(const Bull::Angle<U>& angle)
     {
-        return std::cos(static_cast<T>(angle.asRadian()));
+        return std::cos(Bull::Angle<U>::toRadian(angle).m_angle);
     }
 
-    template<typename T>
-    float sin(const Bull::Angle<T>& angle)
+    template <typename U>
+    float sin(const Bull::Angle<U>& angle)
     {
-        return std::sin(static_cast<T>(angle.asRadian()));
+        return std::sin(Bull::Angle<U>::toRadian(angle).m_angle);
     }
 
-    template<typename T>
-    float tan(const Bull::Angle<T>& angle)
+    template <typename U>
+    float tan(const Bull::Angle<U>& angle)
     {
-        return std::tan(static_cast<T>(angle.asRadian()));
+        return std::tan(Bull::Angle<U>::toRadian(angle).m_angle);
     }
 }

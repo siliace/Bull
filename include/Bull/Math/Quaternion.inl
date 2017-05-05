@@ -33,12 +33,12 @@ namespace Bull
     template <typename T>
     Quaternion<T>& Quaternion<T>::set(const EulerAngles<T>& angles)
     {
-        T cy = std::cos(static_cast<T>(angles.yaw.asRadian())   * 0.5);
-        T sy = std::sin(static_cast<T>(angles.yaw.asRadian())   * 0.5);
-        T cr = std::cos(static_cast<T>(angles.roll.asRadian())  * 0.5);
-        T sr = std::sin(static_cast<T>(angles.roll.asRadian())  * 0.5);
-        T cp = std::cos(static_cast<T>(angles.pitch.asRadian()) * 0.5);
-        T sp = std::sin(static_cast<T>(angles.pitch.asRadian()) * 0.5);
+        T cy = std::cos(angles.yaw   * static_cast<T>(0.5));
+        T sy = std::sin(angles.yaw   * static_cast<T>(0.5));
+        T cr = std::cos(angles.roll  * static_cast<T>(0.5));
+        T sr = std::sin(angles.roll  * static_cast<T>(0.5));
+        T cp = std::cos(angles.pitch * static_cast<T>(0.5));
+        T sp = std::sin(angles.pitch * static_cast<T>(0.5));
 
         w = cy * cr * cp + sy * sr * sp;
         x = cy * sr * cp - sy * cr * sp;
