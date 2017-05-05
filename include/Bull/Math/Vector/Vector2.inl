@@ -65,7 +65,7 @@ namespace Bull
     template<typename T>
     float Vector2<T>::getRatio() const
     {
-        return x / y;
+        return static_cast<float>(x) / static_cast<float>(y);
     }
 
     template<typename T>
