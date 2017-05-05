@@ -1,6 +1,12 @@
 namespace Bull
 {
     template <typename T>
+    EulerAngles<T> normalize(const EulerAngles<T>& angles)
+    {
+        return EulerAngles<T>(angles).normalize();
+    }
+
+    template <typename T>
     EulerAngles<T>::EulerAngles()
     {
         set(Angle<T>::degree(0), Angle<T>::degree(0), Angle<T>::degree(0));
@@ -79,4 +85,38 @@ namespace Bull
     {
         return !((*this) == right);
     }
+
+    template <typename T>
+    EulerAngles<T> EulerAngles<T>::operator+(const EulerAngles<T>& right) const
+    {
+        return EulerAngles<T>((*this)) += right;
+    }
+
+    template <typename T>
+    EulerAngles<T>& EulerAngles<T>::operator+=(const EulerAngles<T>& right)
+    {
+        roll  += right.roll;
+        pitch += right.pitch;
+        yaw   += right.yaw;
+
+
+        return (*this);
+    }
+
+    template <typename T>
+    EulerAngles<T> EulerAngles<T>::operator-(const EulerAngles<T>& right) const
+    {
+        return EulerAngles<T>((*this)) -= right;
+    }
+
+    template <typename T>
+    EulerAngles<T>& EulerAngles<T>::operator-=(const EulerAngles<T>& right)
+    {
+        roll  -= right.roll;
+        pitch -= right.pitch;
+        yaw   -= right.yaw;
+
+        return (*this);
+    }
+
 }

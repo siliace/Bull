@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/HardwareBuffer.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
@@ -83,6 +85,7 @@ int main(int argc, char* argv[])
     HardwareBuffer vbo(HardwareBuffer::Array);
     HardwareBuffer ebo(HardwareBuffer::Element);
     RenderWindow win(VideoMode(800, 600), "Bull Application");
+    float fov = 45.f;
 
     PerspectiveProjection perspective;
     OrthographicProjection orthographic;
@@ -125,6 +128,18 @@ int main(int argc, char* argv[])
             if(e.type == RenderWindow::Event::Resized)
             {
                 win.resetViewport();
+            }
+
+            if(e.type == RenderWindow::Event::MouseWheel)
+            {
+                if(e.mouseWheel.up && fov > 1.f)
+                {
+                    fov--;
+                }
+                else if(!e.mouseWheel.up && fov < 45.f)
+                {
+                    fov++;
+                }
             }
 
             if(e.type == RenderWindow::Event::KeyDown)
@@ -172,7 +187,7 @@ int main(int argc, char* argv[])
 
         if(win.isOpen())
         {
-            perspective = PerspectiveProjection(AngleF::degree(45.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
+            perspective = PerspectiveProjection(AngleF::degree(fov), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
             orthographic = OrthographicProjection(RectangleF(-4.f, 4.f, 4.f, -4.f), Vector2F(0.1f, 100.f));
 
             win.clear();

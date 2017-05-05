@@ -16,6 +16,15 @@ namespace Bull
     template <typename T>
     struct EulerAngles
     {
+        /*! \brief Normalize an EulerAngles
+         *
+         * \param angles EulerAngles to normalize
+         *
+         * \return The normalized EulerAngles
+         *
+         */
+        static EulerAngles<T> normalize(const EulerAngles<T>& angles);
+
         /*! \brief Default constructor
          *
          */
@@ -97,6 +106,42 @@ namespace Bull
          *
          */
         bool operator!=(const EulerAngles<T>& right);
+
+        /*! \brief Addition two EulerAngles
+         *
+         * \param right The EulerAngles to addition to this
+         *
+         * \return This
+         *
+         */
+        EulerAngles<T> operator+(const EulerAngles<T>& right) const;
+
+        /*! \brief Addition two EulerAngles
+         *
+         * \param right The EulerAngles to addition to this
+         *
+         * \return The sum of this and right
+         *
+         */
+        EulerAngles<T>& operator+=(const EulerAngles<T>& right);
+
+        /*! \brief Subtract two EulerAngles
+         *
+         * \param right The EulerAngles to subtract to this
+         *
+         * \return This
+         *
+         */
+        EulerAngles<T> operator-(const EulerAngles<T>& right) const;
+
+        /*! \brief Addition two EulerAngles
+         *
+         * \param right The EulerAngles to subtract to this
+         *
+         * \return The difference of this and right
+         *
+         */
+        EulerAngles<T>& operator-=(const EulerAngles<T>& right);
 
         Angle<T> roll;  /*!< The rotation around the X axis */
         Angle<T> pitch; /*!< The rotation around the Y axis */
