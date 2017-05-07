@@ -128,6 +128,13 @@ int main(int argc, char* argv[])
                 win.close();
             }
 
+            if(e.type == RenderWindow::Event::MouseMoved)
+            {
+                std::cout << "=========" << std::endl;
+                std::cout << e.mouseMove.x << "/" << e.mouseMove.y << std::endl;
+                std::cout << e.mouseMove.xRel << "/" << e.mouseMove.yRel << std::endl;
+            }
+
             if(e.type == RenderWindow::Event::Resized)
             {
                 win.resetViewport();

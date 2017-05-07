@@ -4,6 +4,8 @@
 #include <Bull/Core/Support/X11/ErrorHandler.hpp>
 #include <Bull/Core/Thread/Thread.hpp>
 
+#include <Bull/Hardware/Mouse.hpp>
+
 #include <Bull/Window/X11/WindowImplX11.hpp>
 
 #ifndef Button6
@@ -212,9 +214,13 @@ namespace Bull
                     {
                         Window::Event event;
 
-                        event.type        = Window::Event::MouseMoved;
-                        event.mouseMove.x = e.xmotion.x;
-                        event.mouseMove.y = e.xmotion.y;
+                        event.type           = Window::Event::MouseMoved;
+                        event.mouseMove.x    = e.xmotion.x;
+                        event.mouseMove.y    = e.xmotion.y;
+                        event.mouseMove.xRel = event.mouseMove.x - m_cursorPosition.x;
+                        event.mouseMove.yRel = event.mouseMove.y - m_cursorPosition.y;
+
+                        m_cursorPosition = Vector2I(e.xbutton.x, e.xbutton.y);
 
                         pushEvent(event);
                     }
@@ -226,17 +232,24 @@ namespace Bull
 
                         if(e.xbutton.button <= Button3 || e.xbutton.button >= Button8)
                         {
-                            event.type          = Window::Event::MouseButtonDown;
-                            event.mouseButton.x = e.xbutton.x;
-                            event.mouseButton.y = e.xbutton.y;
+                            event.type = Window::Event::MouseButtonDown;
 
+                            event.mouseButton.x    = e.xbutton.x;
+                            event.mouseButton.y    = e.xbutton.y;
+                            event.mouseButton.xRel = event.mouseButton.x - m_cursorPosition.x;
+                            event.mouseButton.yRel = event.mouseButton.y - m_cursorPosition.y;
                         }
                         else
                         {
-                            event.type         = Window::Event::MouseWheel;
-                            event.mouseWheel.x = e.xbutton.x;
-                            event.mouseWheel.y = e.xbutton.y;
+                            event.type = Window::Event::MouseWheel;
+
+                            event.mouseWheel.x    = e.xbutton.x;
+                            event.mouseWheel.y    = e.xbutton.y;
+                            event.mouseWheel.xRel = event.mouseWheel.x - m_cursorPosition.x;
+                            event.mouseWheel.yRel = event.mouseWheel.y - m_cursorPosition.y;
                         }
+
+                        m_cursorPosition = Vector2I(e.xbutton.x, e.xbutton.y);
 
                         switch(e.xbutton.button)
                         {
@@ -303,8 +316,12 @@ namespace Bull
                                 break;
                             }
 
-                            event.mouseButton.x = e.xbutton.x;
-                            event.mouseButton.y = e.xbutton.y;
+                            event.mouseButton.x  = e.xbutton.x;
+                            event.mouseButton.y  = e.xbutton.y;
+                            event.mouseButton.xRel = event.mouseButton.x - m_cursorPosition.x;
+                            event.mouseButton.yRel = event.mouseButton.y - m_cursorPosition.y;
+
+                            m_cursorPosition = Mouse::getPosition();
 
                             pushEvent(event);
                         }
@@ -371,8 +388,6 @@ namespace Bull
                             event.type         = Window::Event::Moved;
                             event.windowMove.x = position.x;
                             event.windowMove.y = position.y;
-
-                            m_lastPosition = position;
                         }
 
                         pushEvent(event);
@@ -473,7 +488,6 @@ namespace Bull
         void WindowImplX11::setPosition(const Vector2I& position)
         {
             XMoveWindow(m_display, m_handler, position.x, position.y);
-            m_lastPosition = position;
             m_display.flush();
         }
 
@@ -606,7 +620,8 @@ namespace Bull
         WindowImplX11::WindowImplX11() :
             m_handler(0),
             m_isMapped(false),
-            m_captureCursor(false)
+            m_captureCursor(false),
+            m_cursorPosition(Mouse::getPosition())
         {
             /// Nothing
         }
@@ -684,8 +699,7 @@ namespace Bull
 
             setTitle(title);
 
-            m_lastPosition = getPosition();
-            m_lastSize     = getSize();
+            m_lastSize = getSize();
 
             setVisible(true);
         }

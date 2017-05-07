@@ -69,8 +69,8 @@ namespace Bull
 
             struct WindowMovedEvent
             {
-                int x;
-                int y;
+                int x, y;
+                int xRel, yRel;
             };
 
             struct KeyEvent
@@ -84,16 +84,16 @@ namespace Bull
 
             struct MouseMoveEvent
             {
-                int x;
-                int y;
+                int x, y;
+                int xRel, yRel;
             };
 
             struct MouseButtonEvent
             {
                 Mouse::Button button;
 
-                int x;
-                int y;
+                int x, y;
+                int xRel, yRel;
             };
 
             struct MouseWheelEvent
@@ -102,8 +102,8 @@ namespace Bull
 
                 bool up;
 
-                int x;
-                int y;
+                int x, y;
+                int xRel, yRel;
             };
 
             struct JoystickConnectionEvent
