@@ -171,7 +171,7 @@ namespace Bull
     }
 
     template<typename T>
-    T Vector3<T>::dotProduct(const Vector3& right)
+    T Vector3<T>::dotProduct(const Vector3& right) const
     {
         return (x * right.x) + (y * right.y) + (z * right.z);
     }
@@ -207,12 +207,6 @@ namespace Bull
     }
 
     template<typename T>
-    Vector3<T> Vector3<T>::operator-() const
-    {
-        return Vector3<T>(-x, -y, -z);
-    }
-
-    template<typename T>
     Vector3<T>& Vector3<T>::operator-=(const Vector3& right)
     {
         x -= right.x;
@@ -220,6 +214,32 @@ namespace Bull
         z -= right.z;
 
         return (*this);
+    }
+
+    template<typename T>
+    Vector3<T>& Vector3<T>::operator*=(const Vector3& right)
+    {
+        x *= right.x;
+        y *= right.y;
+        z *= right.z;
+
+        return (*this);
+    }
+
+    template<typename T>
+    Vector3<T>& Vector3<T>::operator/=(const Vector3& right)
+    {
+        x /= right.x;
+        y /= right.y;
+        z /= right.z;
+
+        return (*this);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::operator-() const
+    {
+        return Vector3<T>(-x, -y, -z);
     }
 
     template<typename T>
@@ -264,7 +284,7 @@ namespace Bull
         Vector3<T> product = right;
 
         product.x *= left;
-        product.x *= left;
+        product.y *= left;
         product.z *= left;
 
         return product;

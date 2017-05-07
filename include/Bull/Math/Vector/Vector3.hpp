@@ -175,7 +175,7 @@ namespace Bull
          * \return This
          *
          */
-        T dotProduct(const Vector3<T>& right);
+        T dotProduct(const Vector3<T>& right) const;
 
         /*! \brief Compute the cross product of two Vector3
          *
@@ -213,21 +213,18 @@ namespace Bull
          */
         Vector3& operator+=(const Vector3& right);
 
+        Vector3& operator-=(const Vector3& right);
+
+        Vector3& operator*=(const Vector3& right);
+
+        Vector3& operator/=(const Vector3& right);
+
         /*! \brief Negation operator
          *
          * \return Return the opposite of this Vector
          *
          */
         Vector3 operator-() const;
-
-        /*! \brief -= operator override
-         *
-         * \param right The vector to subtract
-         *
-         * \return Return this after subtraction
-         *
-         */
-        Vector3& operator-=(const Vector3& right);
 
         T x, y, z;
     };

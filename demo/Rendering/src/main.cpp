@@ -91,7 +91,10 @@ int main(int argc, char* argv[])
     OrthographicProjection orthographic;
     Projection* projection = &perspective;
 
-    Camera camera(Vector3F(0.0f, 0.0f, 3.0f), Vector3F(0.0f, 0.0f, -1.0f));
+    Camera camera;
+
+    camera.move(Vector3F(0, 0, -3));
+
     float speed = 0.5f;
 
     core.attachFromPath(Path("resources/shaders/core/core.vert"), ShaderStage::Vertex);
@@ -144,32 +147,27 @@ int main(int argc, char* argv[])
 
             if(e.type == RenderWindow::Event::KeyDown)
             {
+                Vector3F offset;
+
                 if(e.key.code == Keyboard::Z)
                 {
-                    camera.moveZ(speed);
+                    offset.z = 0.05f;
                 }
                 else if(e.key.code == Keyboard::S)
                 {
-                    camera.moveZ(-speed);
+                    offset.z = -0.05f;
                 }
 
-                if(e.key.code == Keyboard::A)
+                if(e.key.code == Keyboard::Q)
                 {
-                    camera.moveY(speed);
+                    offset.x = -0.05f;
                 }
-                else if(e.key.code == Keyboard::E)
+                else if(e.key.code == Keyboard::D)
                 {
-                    camera.moveY(-speed);
+                    offset.x = 0.05f;
                 }
 
-                if(e.key.code == Keyboard::D)
-                {
-                    camera.moveX(speed);
-                }
-                else if(e.key.code == Keyboard::Q)
-                {
-                    camera.moveX(-speed);
-                }
+                camera.move(offset);
 
                 if(e.key.code == Keyboard::F1)
                 {

@@ -15,16 +15,15 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Camera() = default;
+        Camera();
 
         /*! \brief Constructor
          *
-         * \param position The position of the Camera
-         * \param front    The front position of the camera
-         * \param up       The up vector of the camera
+         * \param position The initial position of the Camera
+         * \param rotation The initial rotation of the Camera
          *
          */
-        Camera(const Vector3F& position, const Vector3F& front, const Vector3F& up = Vector3F::makeUp());
+        Camera(const Vector3F& position);
 
         /*! \brief Move the Camera
          *
@@ -35,52 +34,19 @@ namespace Bull
          */
         Camera& move(const Vector3F& offset);
 
-        /*! \brief Move the Camera on the X axis
+        /*! \brief Convert to a Matrix4F
          *
-         * \param offset The offset to move the Camera
-         *
-         * \return This
+         * \return The Matrix4F
          *
          */
-        Camera& moveX(float offset);
-
-        /*! \brief Move the Camera on the Y axis
-         *
-         * \param offset The offset to move the Camera
-         *
-         * \return This
-         *
-         */
-        Camera& moveY(float offset);
-
-        /*! \brief Move the Camera on the Z axis
-         *
-         * \param offset The offset to move the Camera
-         *
-         * \return This
-         *
-         */
-        Camera& moveZ(float offset);
-
-        /*! \brief Get the target looked by the Camera
-         *
-         * \return The target
-         *
-         */
-        Vector3F getTarget() const;
-
-        /*! \brief Convert the camera to a view matrix
-         *
-         * \return The view matrix
-         *
-         */
-        Matrix4F toMatrix() const;
+        Matrix4F toMatrix() const override;
 
     private:
 
-        Vector3F m_position;
-        Vector3F m_front;
         Vector3F m_up;
+        Vector3F m_right;
+        Vector3F m_forward;
+        Vector3F m_position;
     };
 }
 
