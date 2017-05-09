@@ -1,6 +1,6 @@
-#include <Bull/Core/Support/X11/Display.hpp>
+#include <Bull/Core/Support/Xlib/Display.hpp>
 
-#include <Bull/Hardware/Unix/MouseImpl.hpp>
+#include <Bull/Hardware/Xlib/MouseImpl.hpp>
 
 namespace Bull
 {
@@ -10,7 +10,7 @@ namespace Bull
         {
             Display display;
 
-            XWarpPointer(display, XNone, display.getRootWindow(), 0, 0, 0, 0, position.x, position.y);
+            XWarpPointer(display, None, display.getRootWindow(), 0, 0, 0, 0, position.x, position.y);
             display.flush();
         }
 

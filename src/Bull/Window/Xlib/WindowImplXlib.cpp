@@ -1,12 +1,12 @@
 #include <X11/keysym.h>
 #include <X11/Xutil.h>
 
-#include <Bull/Core/Support/X11/ErrorHandler.hpp>
+#include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 #include <Bull/Core/Thread/Thread.hpp>
 
 #include <Bull/Hardware/Mouse.hpp>
 
-#include <Bull/Window/X11/WindowImplX11.hpp>
+#include <Bull/Window/Xlib/WindowImplXlib.hpp>
 
 #ifndef Button6
     #define Button6 6
@@ -28,7 +28,7 @@ namespace Bull
 {
     namespace prv
     {
-        Keyboard::Key WindowImplX11::convertXKToBullkey(KeySym xkey)
+        Keyboard::Key WindowImplXlib::convertXKToBullkey(KeySym xkey)
         {
             switch(xkey)
             {
@@ -126,13 +126,13 @@ namespace Bull
             }
         }
 
-        WindowImplX11::WindowImplX11(const VideoMode& mode, const String& title, Uint32 style) :
-            WindowImplX11()
+        WindowImplXlib::WindowImplXlib(const VideoMode& mode, const String& title, Uint32 style) :
+            WindowImplXlib()
         {
             open(mode, title, style);
         }
 
-        WindowImplX11::~WindowImplX11()
+        WindowImplXlib::~WindowImplXlib()
         {
             if(m_handler)
             {
@@ -142,7 +142,7 @@ namespace Bull
             XFreeColormap(m_display, m_colormap);
         }
 
-        void WindowImplX11::startProcessEvents()
+        void WindowImplXlib::startProcessEvents()
         {
             XEvent e;
             while(XPending(m_display))
@@ -340,7 +340,7 @@ namespace Bull
 
                             do
                             {
-                                grabbed = XGrabPointer(m_display, m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
+                                grabbed = XGrabPointer(m_display, m_handler, True, None, GrabModeAsync, GrabModeAsync, m_handler, None, CurrentTime) != GrabSuccess;
 
                                 if(!grabbed)
                                 {
@@ -435,27 +435,27 @@ namespace Bull
             }
         }
 
-        void WindowImplX11::minimize()
+        void WindowImplXlib::minimize()
         {
 
         }
 
-        bool WindowImplX11::isMinimized() const
-        {
-            return false;
-        }
-
-        void WindowImplX11::maximize()
-        {
-
-        }
-
-        bool WindowImplX11::isMaximized() const
+        bool WindowImplXlib::isMinimized() const
         {
             return false;
         }
 
-        void WindowImplX11::enableCaptureCursor(bool capture)
+        void WindowImplXlib::maximize()
+        {
+
+        }
+
+        bool WindowImplXlib::isMaximized() const
+        {
+            return false;
+        }
+
+        void WindowImplXlib::enableCaptureCursor(bool capture)
         {
             m_captureCursor = capture;
 
@@ -465,7 +465,7 @@ namespace Bull
 
                 do
                 {
-                    grabbed = XGrabPointer(m_display, m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
+                    grabbed = XGrabPointer(m_display, m_handler, True, None, GrabModeAsync, GrabModeAsync, m_handler, None, CurrentTime) != GrabSuccess;
 
                     if(!grabbed)
                     {
@@ -480,18 +480,18 @@ namespace Bull
             }
         }
 
-        void WindowImplX11::showCursor(bool enable)
+        void WindowImplXlib::showCursor(bool enable)
         {
 
         }
 
-        void WindowImplX11::setPosition(const Vector2I& position)
+        void WindowImplXlib::setPosition(const Vector2I& position)
         {
             XMoveWindow(m_display, m_handler, position.x, position.y);
             m_display.flush();
         }
 
-        Vector2I WindowImplX11::getPosition() const
+        Vector2I WindowImplXlib::getPosition() const
         {
             ::Window root, child;
             int localX, localY, x, y;
@@ -503,7 +503,7 @@ namespace Bull
             return Vector2I(x, y);
         }
 
-        void WindowImplX11::setMinSize(const Vector2UI& size)
+        void WindowImplXlib::setMinSize(const Vector2UI& size)
         {
             XSizeHints hints;
 
@@ -514,7 +514,7 @@ namespace Bull
             XSetNormalHints(m_display, m_handler, &hints);
         }
 
-        Vector2UI WindowImplX11::getMinSize() const
+        Vector2UI WindowImplXlib::getMinSize() const
         {
             XSizeHints hints;
 
@@ -523,7 +523,7 @@ namespace Bull
             return Vector2UI(hints.min_width, hints.min_height);
         }
 
-        void WindowImplX11::setMaxSize(const Vector2UI& size)
+        void WindowImplXlib::setMaxSize(const Vector2UI& size)
         {
             XSizeHints hints;
 
@@ -534,7 +534,7 @@ namespace Bull
             XSetNormalHints(m_display, m_handler, &hints);
         }
 
-        Vector2UI WindowImplX11::getMaxSize() const
+        Vector2UI WindowImplXlib::getMaxSize() const
         {
             XSizeHints hints;
 
@@ -543,14 +543,14 @@ namespace Bull
             return Vector2UI(hints.max_width, hints.max_height);
         }
 
-        void WindowImplX11::setSize(const Vector2UI& size)
+        void WindowImplXlib::setSize(const Vector2UI& size)
         {
             XResizeWindow(m_display, m_handler, size.x, size.y);
             m_lastSize = size;
             m_display.flush();
         }
 
-        Vector2UI WindowImplX11::getSize() const
+        Vector2UI WindowImplXlib::getSize() const
         {
             XWindowAttributes attributes;
 
@@ -559,12 +559,12 @@ namespace Bull
             return Vector2UI(attributes.width, attributes.height);
         }
 
-        void WindowImplX11::setTitle(const String& title)
+        void WindowImplXlib::setTitle(const String& title)
         {
             XStoreName(m_display, m_handler, title.getBuffer());
         }
 
-        String WindowImplX11::getTitle() const
+        String WindowImplXlib::getTitle() const
         {
             String title;
             char* buffer = new char[256];
@@ -578,17 +578,17 @@ namespace Bull
             return title;
         }
 
-        bool WindowImplX11::hasFocus() const
+        bool WindowImplXlib::hasFocus() const
         {
             return false;
         }
 
-        void WindowImplX11::switchFullscreen(bool fullscreen)
+        void WindowImplXlib::switchFullscreen(bool fullscreen)
         {
 
         }
 
-        void WindowImplX11::setVisible(bool visible)
+        void WindowImplXlib::setVisible(bool visible)
         {
             if(visible)
             {
@@ -612,12 +612,12 @@ namespace Bull
             }
         }
 
-        WindowHandler WindowImplX11::getSystemHandler() const
+        WindowHandler WindowImplXlib::getSystemHandler() const
         {
             return m_handler;
         }
 
-        WindowImplX11::WindowImplX11() :
+        WindowImplXlib::WindowImplXlib() :
             m_handler(0),
             m_isMapped(false),
             m_captureCursor(false),
@@ -626,7 +626,7 @@ namespace Bull
             /// Nothing
         }
 
-        void WindowImplX11::open(const VideoMode& mode, const String& title, Uint32 style)
+        void WindowImplXlib::open(const VideoMode& mode, const String& title, Uint32 style)
         {
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
@@ -636,9 +636,9 @@ namespace Bull
             m_colormap = XCreateColormap(m_display, m_display.getRootWindow(screen), visual, AllocNone);
 
             attributes.border_pixel      = 0;
-            attributes.background_pixmap = XNone;
+            attributes.background_pixmap = None;
             attributes.colormap          = m_colormap;
-            attributes.event_mask        = WindowImplX11::EventsMasks;
+            attributes.event_mask        = WindowImplXlib::EventsMasks;
 
             m_handler = XCreateWindow(m_display,
                                       m_display.getRootWindow(screen),
@@ -659,7 +659,7 @@ namespace Bull
             initialize(title, style);
         }
 
-        void WindowImplX11::open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi)
+        void WindowImplXlib::open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi)
         {
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
@@ -670,9 +670,9 @@ namespace Bull
                                          AllocNone);
 
             attributes.border_pixel      = 0;
-            attributes.background_pixmap = XNone;
+            attributes.background_pixmap = None;
             attributes.colormap          = m_colormap;
-            attributes.event_mask        = WindowImplX11::EventsMasks;
+            attributes.event_mask        = WindowImplXlib::EventsMasks;
 
             m_handler = XCreateWindow(m_display,
                                       m_display.getRootWindow(vi->screen),
@@ -693,7 +693,7 @@ namespace Bull
             initialize(title, style);
         }
 
-        void WindowImplX11::initialize(const String& title, Uint32 style)
+        void WindowImplXlib::initialize(const String& title, Uint32 style)
         {
             setProtocols();
 
@@ -704,7 +704,7 @@ namespace Bull
             setVisible(true);
         }
 
-        void WindowImplX11::setProtocols()
+        void WindowImplXlib::setProtocols()
         {
             Atom wmDeleteWindow = m_display.getAtom("WM_DELETE_WINDOW");
 

@@ -3,9 +3,9 @@
 #include <X11/extensions/Xrandr.h>
 
 #include <Bull/Core/Log/Log.hpp>
-#include <Bull/Core/Support/X11/Display.hpp>
+#include <Bull/Core/Support/Xlib/Display.hpp>
 
-#include <Bull/Window/X11/VideoModeImpl.hpp>
+#include <Bull/Window/Xlib/VideoModeImpl.hpp>
 
 namespace Bull
 {

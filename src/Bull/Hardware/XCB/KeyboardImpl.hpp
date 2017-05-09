@@ -1,5 +1,5 @@
-#ifndef Bull_KeyboardImpl_hpp
-#define Bull_KeyboardImpl_hpp
+#ifndef BULL_KEYBOARDIMPL_HPP
+#define BULL_KEYBOARDIMPL_HPP
 
 #include <Bull/Hardware/Keyboard.hpp>
 
@@ -7,10 +7,8 @@ namespace Bull
 {
     namespace prv
     {
-        class KeyboardImpl
+        struct KeyboardImpl
         {
-        public:
-
             /*! \brief Check if a key is pressed
              *
              * \param key To key to check the state
@@ -23,5 +21,5 @@ namespace Bull
     }
 }
 
-#endif // Bull_KeyboardImpl_hpp
+#endif // BULL_KEYBOARDIMPL_HPP
 

@@ -1,10 +1,10 @@
-#ifndef Bull_GlxContext_hpp
-#define Bull_GlxContext_hpp
+#ifndef BULL_GLXCONTEXT_HPP
+#define BULL_GLXCONTEXT_HPP
 
 #include <GL/glx.h>
 #include <X11/Xlib.h>
 
-#include <Bull/Core/Support/X11/Display.hpp>
+#include <Bull/Core/Support/Xlib/Display.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
@@ -146,7 +146,7 @@ namespace Bull
              */
             void updateSettings();
 
-            Window            m_window;
+            ::Window          m_window;
             GLXContext        m_render;
             GLXFBConfig       m_config;
             GLXPbuffer        m_pbuffer;
@@ -157,4 +157,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_GlxContext_hpp
+#endif // BULL_GLXCONTEXT_HPP

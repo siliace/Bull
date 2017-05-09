@@ -62,7 +62,7 @@ FT_BEGIN_HEADER
   /*   values are `TrueType', `Type~1', `BDF', `PCF', `Type~42',           */
   /*   `CID~Type~1', `CFF', `PFR', and `Windows~FNT'.                      */
   /*                                                                       */
-  /*   The return value is suitable to be used as an X11 FONT_PROPERTY.    */
+  /*   The return value is suitable to be used as an Xlib FONT_PROPERTY.    */
   /*                                                                       */
   /* <Input>                                                               */
   /*   face ::                                                             */

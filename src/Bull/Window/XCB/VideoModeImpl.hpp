@@ -1,5 +1,5 @@
-#ifndef Bull_VideoModeImpl_hpp
-#define Bull_VideoModeImpl_hpp
+#ifndef BULL_VIDEOMODEIMPL_HPP
+#define BULL_VIDEOMODEIMPL_HPP
 
 #include <vector>
 
@@ -28,4 +28,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_VideoModeImpl_hpp
+#endif // BULL_VIDEOMODEIMPL_HPP

@@ -1,7 +1,7 @@
 #include <limits>
 
 #include <Bull/Core/Log/Log.hpp>
-#include <Bull/Core/Support/X11/ErrorHandler.hpp>
+#include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
 #include <Bull/Render/Context/Glx/GlxCreateContextARB.hpp>
@@ -170,7 +170,7 @@ namespace Bull
             {
                 if(glXGetCurrentContext() == m_render)
                 {
-                    glXMakeCurrent(m_display, XNone, nullptr);
+                    glXMakeCurrent(m_display, None, nullptr);
                 }
 
                 glXDestroyContext(m_display, m_render);
@@ -291,7 +291,7 @@ namespace Bull
                 m_colormap = XCreateColormap(m_display, m_display.getRootWindow(vi->screen), vi->visual, AllocNone);
 
                 attributes.border_pixel      = 0;
-                attributes.background_pixmap = XNone;
+                attributes.background_pixmap = None;
                 attributes.colormap          = m_colormap;
                 attributes.event_mask        = StructureNotifyMask;
 

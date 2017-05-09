@@ -3,5 +3,11 @@
 #if defined BULL_OS_WINDOWS
     #include <Bull/Window/Win32/VideoModeImpl.hpp>
 #else
-    #include <Bull/Window/X11/VideoModeImpl.hpp>
+    #if defined BULL_XLIB
+        #include <Bull/Window/Xlib/VideoModeImpl.hpp>
+    #elif defined BULL_XCB
+        #include <Bull/Window/XCB/VideoModeImpl.hpp>
+    #else
+        #error
+    #endif
 #endif

@@ -1,6 +1,6 @@
 #include <GL/glx.h>
 
-#include <Bull/Core/Support/X11/Display.hpp>
+#include <Bull/Core/Support/Xlib/Display.hpp>
 
 #include <Bull/Render/Context/Glx/GlxExtensionsLoader.hpp>
 

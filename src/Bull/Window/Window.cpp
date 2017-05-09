@@ -335,14 +335,4 @@ namespace Bull
     {
         return this == s_fullscreen;
     }
-
-    WindowHandler Window::getSystemHandler() const
-    {
-        if(m_impl)
-        {
-            return m_impl->getSystemHandler();
-        }
-
-        return 0;
-    }
 }

@@ -6,8 +6,15 @@
     #include <Bull/Render/Target/Win32/RenderWindowImplWin32.hpp>
     typedef Bull::prv::RenderWindowImplWin32 RenderWindowImplType;
 #else
-    #include <Bull/Render/Target/X11/RenderWindowImplX11.hpp>
-    typedef Bull::prv::RenderWindowImplX11 RenderWindowImplType;
+    #if defined BULL_XLIB
+        #include <Bull/Render/Target/Xlib/RenderWindowImplXlib.hpp>
+        typedef Bull::prv::RenderWindowImplXlib RenderWindowImplType;
+    #elif defined BULL_XCB
+        #include <Bull/Render/Target/XCB/RenderWindowImplXCB.hpp>
+        typedef Bull::prv::RenderWindowImplXCB RenderWindowImplType;
+    #elif defined BULL_WAYLAND
+        #error Todo
+    #endif
 #endif
 
 namespace Bull

@@ -6,9 +6,18 @@
 #if defined BULL_OS_WINDOWS
     #include <Bull/Window/Win32/WindowImplWin32.hpp>
     typedef Bull::prv::WindowImplWin32 WindowImplType;
+#elif defined BULL_OS_GNU_LINUX
+    #if defined BULL_XLIB
+        #include <Bull/Window/Xlib/WindowImplXlib.hpp>
+        typedef Bull::prv::WindowImplXlib WindowImplType;
+    #elif defined BULL_XCB
+        #include <Bull/Window/XCB/WindowImplXCB.hpp>
+        typedef Bull::prv::WindowImplXCB WindowImplType;
+    #elif defined BULL_WAYLAND
+        #error Todo
+    #endif
 #else
-    #include <Bull/Window/X11/WindowImplX11.hpp>
-    typedef Bull::prv::WindowImplX11 WindowImplType;
+    #error System not supported
 #endif
 
 namespace Bull

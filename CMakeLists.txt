@@ -1,17 +1,24 @@
 cmake_minimum_required(VERSION 3.5.0)
 project(Bull)
 
-option(BUILD_SHARED_LIBS "Build Shared Libraries" OFF)
-
 include(cmake/Macro.cmake)
 include(cmake/Config.cmake)
 include(cmake/Platform.cmake)
 
 add_definitions(-DBULL_BUILD)
+
+if(BULL_OS_WINDOWS)
+    option(WINDOWS_BUILD_VERSION "The version of Windows targeted" BULL_BUILD_WINDOWS_VISTA)
+else()
+    option(WINDOW_LIBRARY "The library to use to manage windowing" BULL_BUILD_XCB)
+endif()
+
 add_definitions(-DBULL_DYNAMIC)
 
 if(BULL_OS_WINDOWS)
-    add_definitions(-DBULL_BUILD_WINDOWS_8)
+    add_definitions("-D${WINDOWS_BUILD_VERSION}")
+else()
+    add_definitions("-D${WINDOW_LIBRARY}")
 endif()
 
 include_directories(libs/include)

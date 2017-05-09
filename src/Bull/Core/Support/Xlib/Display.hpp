@@ -1,5 +1,5 @@
-#ifndef Bull_Display_hpp
-#define Bull_Display_hpp
+#ifndef BULL_DISPLAY_HPP
+#define BULL_DISPLAY_HPP
 
 #include <map>
 
@@ -124,4 +124,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_Display_hpp
+#endif // BULL_DISPLAY_HPP

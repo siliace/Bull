@@ -1,5 +1,5 @@
-#ifndef Bull_MouseImpl_hpp
-#define Bull_MouseImpl_hpp
+#ifndef BULL_MOUSEIMPL_HPP
+#define BULL_MOUSEIMPL_HPP
 
 #include <Bull/Hardware/Mouse.hpp>
 
@@ -35,5 +35,5 @@ namespace Bull
     }
 }
 
-#endif // Bull_MouseImpl_hpp
+#endif // BULL_MOUSEIMPL_HPP
 

@@ -6,7 +6,7 @@
 #include <Bull/Core/Thread/Lock.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
-#include <Bull/Core/Support/X11/Display.hpp>
+#include <Bull/Core/Support/Xlib/Display.hpp>
 
 namespace Bull
 {

@@ -42,16 +42,17 @@
     #define BULL_OS_FREEBSD
     #define BULL_OS_UNIX
 #elif defined __gnu_linux__
-    #define BULL_OS_GNU_LINUX
     #define BULL_OS_UNIX
+    #define BULL_OS_GNU_LINUX
 
     #if defined BULL_BUILD_WAYLAND
         #define BULL_WEYLAND
+    #elif defined BULL_BUILD_XLIB
+        #define BULL_XLIB
+    #elif defined BULL_BUILD_XCB
+        #define BULL_XCB
     #else
-        #define BULL_X11
-
-        #undef None
-        #define XNone 0L
+        #error No Window library defined
     #endif
 #elif defined __APPLE__ && __MACH__
     #define BULL_OS_OSX

@@ -1,12 +1,5 @@
-#ifndef Bull_WindowImplX11_hpp
-#define Bull_WindowImplX11_hpp
-
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-
-#include <Bull/Core/Support/X11/Display.hpp>
-
-#include <Bull/Math/Vector/Vector2.hpp>
+#ifndef BULL_WINDOWIMPLXCB_HPP
+#define BULL_WINDOWIMPLXCB_HPP
 
 #include <Bull/Window/WindowImpl.hpp>
 
@@ -14,44 +7,23 @@ namespace Bull
 {
     namespace prv
     {
-        class WindowImplX11 : public WindowImpl
+        class WindowImplXCB : public WindowImpl
         {
-        protected:
-
-            static constexpr long EventsMasks = KeyPressMask         | KeyReleaseMask    | /// Keyboard events
-                                                PointerMotionMask    | ButtonMotionMask  | /// Mouse move events
-                                                ButtonPressMask      | ButtonReleaseMask | /// Mouse buttons events
-                                                FocusChangeMask      |                     /// Focus events
-                                                StructureNotifyMask  |                     /// Resize events
-                                                VisibilityChangeMask |                     /// Visibility change (internal uses only)
-                                                EnterWindowMask      | LeaveWindowMask;    /// Mouse Enter/Leave
-
-        private:
-
-            /*! \brief Convert a Xlib key value to a Bull::Keyboard::Key
-             *
-             * \param xkey The Xlib keycode to convert
-             *
-             * \return Return the Bull::Keyboard::Key equivalent
-             *
-             */
-            static Keyboard::Key convertXKToBullkey(KeySym xkey);
-
         public:
 
             /*! \brief Constructor
              *
-             * \param mode The VideoMode to use to create the window
-             * \param title The title of the window
-             * \param style The style to use to create the window
+             * \param mode
+             * \param title
+             * \param style
              *
              */
-            WindowImplX11(const VideoMode& mode, const String& title, Uint32 style);
+            WindowImplXCB(const VideoMode& mode, const String& title, Uint32 style);
 
             /*! \brief Destructor
              *
              */
-            virtual ~WindowImplX11();
+            ~WindowImplXCB();
 
             /*! \brief Start to process events to fill event queue
              *
@@ -197,55 +169,15 @@ namespace Bull
 
         protected:
 
-            /*! \brief Default constructor
-             *
-             */
-            WindowImplX11();
-
-            /*! \brief Open the window
-             *
-             * \param mode
-             * \param title
-             * \param style
-             *
-             */
-            void open(const VideoMode& mode, const String& title, Uint32 style);
-
-            /*! \brief Open the window
-             *
-             * \param width
-             * \param height
-             * \param title
-             * \param style
-             * \param vi
-             *
-             */
-            void open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi);
+            WindowImplXCB() = default;
 
         private:
 
-            /*! \brief Perform internal intialization
-             *
-             * \param title The title of the window to create
-             * \param style The decortation of the window
-             *
-             */
-            void initialize(const String& title, Uint32 style);
-
-            /*! \brief Set Window manager protocols supported
-             *
-             */
-            void setProtocols();
-
-            Display   m_display;
-            ::Window  m_handler;
-            Vector2UI m_lastSize;
-            bool      m_isMapped;
-            Colormap  m_colormap;
-            bool      m_captureCursor;
-            Vector2I  m_cursorPosition;
+            xcb_window_t      m_window;
+            xcb_screen_t*     m_screen;
+            xcb_connection_t* m_connection;
         };
     }
 }
 
-#endif // Bull_WindowImplX11_hpp
+#endif //BULL_WINDOWIMPLXCB_HPP

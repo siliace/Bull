@@ -1,5 +1,5 @@
-#ifndef Bull_GlContext_hpp
-#define Bull_GlContext_hpp
+#ifndef BULL_GLCONTEXT_HPP
+#define BULL_GLCONTEXT_HPP
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Memory/String.hpp>
@@ -9,7 +9,7 @@
 #include <Bull/Render/Context/SurfaceHandler.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
-#include <Bull/Window/WindowHandler.hpp>
+#include <Bull/Window/WindowImpl.hpp>
 
 namespace Bull
 {
@@ -207,4 +207,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_GlContext_hpp
+#endif // BULL_GLCONTEXT_HPP

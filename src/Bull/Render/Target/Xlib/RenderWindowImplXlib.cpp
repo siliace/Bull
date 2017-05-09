@@ -1,11 +1,11 @@
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
-#include <Bull/Render/Target/X11/RenderWindowImplX11.hpp>
+#include <Bull/Render/Target/Xlib/RenderWindowImplXlib.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        RenderWindowImplX11::RenderWindowImplX11(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+        RenderWindowImplXlib::RenderWindowImplXlib(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
         {
             XVisualInfo* vi;
             GLXFBConfig  config;

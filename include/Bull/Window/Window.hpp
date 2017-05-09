@@ -412,13 +412,6 @@ namespace Bull
          */
         bool isFullscreenEnable() const;
 
-        /*! \brief Get the window system handler
-         *
-         * \return Return the native window system handler
-         *
-         */
-        WindowHandler getSystemHandler() const;
-
     protected:
 
         std::unique_ptr<prv::WindowImpl> m_impl; /*!< The OS specific implementation of the window */
