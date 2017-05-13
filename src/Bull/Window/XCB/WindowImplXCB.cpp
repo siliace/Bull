@@ -4,9 +4,30 @@ namespace Bull
 {
     namespace prv
     {
-        WindowImplXCB::WindowImplXCB(const VideoMode &mode, const String &title, Uint32 style)
+        WindowImplXCB::WindowImplXCB(const VideoMode &mode, const String &title, Uint32 style) :
+            m_window(0)
         {
+            Uint32 parameters[2];
+            xcb_screen_iterator_t iterator;
+            xcb_screen_t* screen = xcb_setup_roots_iterator(xcb_get_setup(m_connection)).data;
 
+            m_window = xcb_generate_id(m_connection);
+
+            xcb_create_window(m_connection,
+                              XCB_COPY_FROM_PARENT,
+                              m_window,
+                              screen->root,
+                              0, 0,
+                              mode.width, mode.height,
+                              0,
+                              XCB_WINDOW_CLASS_INPUT_OUTPUT,
+                              screen->root_visual,
+                              XCB_CW_EVENT_MASK,
+                              nullptr);
+
+            xcb_map_window(m_connection, m_window);
+
+            xcb_flush(m_connection);
         }
 
         WindowImplXCB::~WindowImplXCB()

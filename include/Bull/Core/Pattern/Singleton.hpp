@@ -4,7 +4,7 @@
 #include <memory>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Thread/Mutex.hpp>
+#include <Bull/Core/Thread/Lock.hpp>
 
 namespace Bull
 {
@@ -13,7 +13,7 @@ namespace Bull
     {
     public:
 
-        typedef std::unique_ptr<TChild>& Instance;
+        typedef TChild* Instance;
 
         /*! \brief Get the instance of the singleton. Create the instance if needed
          *
@@ -47,14 +47,14 @@ namespace Bull
     private:
 
         static Mutex s_mutex;
-        static std::unique_ptr<TChild> s_instance;
+        static Instance s_instance;
     };
 
     template <typename TChild>
     Mutex Singleton<TChild>::s_mutex;
 
     template <typename TChild>
-    std::unique_ptr<TChild> Singleton<TChild>::s_instance = std::unique_ptr<TChild>(nullptr);
+    TChild* Singleton<TChild>::s_instance = nullptr;
 }
 
 #include <Bull/Core/Pattern/Singleton.inl>

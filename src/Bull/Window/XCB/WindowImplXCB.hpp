@@ -1,6 +1,10 @@
 #ifndef BULL_WINDOWIMPLXCB_HPP
 #define BULL_WINDOWIMPLXCB_HPP
 
+#include <xcb/xcb.h>
+
+#include <Bull/Core/Support/XCB/XCBConnection.hpp>
+
 #include <Bull/Window/WindowImpl.hpp>
 
 namespace Bull
@@ -9,6 +13,10 @@ namespace Bull
     {
         class WindowImplXCB : public WindowImpl
         {
+        protected:
+
+            static constexpr Uint32 EventsMaks = XCB_EVENT_MASK_BUTTON_PRESS | XCB_EVENT_MASK_BUTTON_RELEASE;
+
         public:
 
             /*! \brief Constructor
@@ -174,8 +182,7 @@ namespace Bull
         private:
 
             xcb_window_t      m_window;
-            xcb_screen_t*     m_screen;
-            xcb_connection_t* m_connection;
+            XCBConnection     m_connection;
         };
     }
 }

@@ -2,25 +2,23 @@ namespace Bull
 {
     template<typename TChild>
     template<typename... Args>
-    std::unique_ptr<TChild>& Singleton<TChild>::get(Args... args)
+    TChild* Singleton<TChild>::get(Args... args)
     {
-        if(!s_instance.get())
+        if(!s_instance)
         {
-            s_mutex.lock();
+            Lock lock(s_mutex);
 
-            if(!s_instance.get())
+            if(!s_instance)
             {
-                s_instance = std::make_unique<TChild>(args...);
+                s_instance = new TChild(args...);
             }
-
-            s_mutex.unlock();
         }
 
         return s_instance;
     }
 
     template<typename TChild>
-    std::unique_ptr<TChild>& Singleton<TChild>::getIfExists()
+    TChild* Singleton<TChild>::getIfExists()
     {
         return isSet() ? s_instance : nullptr;
     }
@@ -28,12 +26,13 @@ namespace Bull
     template <typename TChild>
     bool Singleton<TChild>::isSet()
     {
-        return s_instance.get() != nullptr;
+        return s_instance != nullptr;
     }
 
     template <typename TChild>
     void Singleton<TChild>::destroy()
     {
-        s_instance.reset(nullptr);
+        delete s_instance;
+        s_instance = nullptr;
     }
 }
