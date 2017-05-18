@@ -23,7 +23,7 @@ namespace Bull
          * \param rotation The initial rotation of the Camera
          *
          */
-        Camera(const Vector3F& position);
+        Camera(const Vector3F& position, const EulerAnglesF& rotation = EulerAnglesF());
 
         /*! \brief Move the Camera
          *
@@ -33,6 +33,15 @@ namespace Bull
          *
          */
         Camera& move(const Vector3F& offset);
+
+        /*! \brief Rotate the Camera
+         *
+         * \param rotation Angles to rotate the Camera
+         *
+         * \return This
+         *
+         */
+        Camera& rotate(const EulerAnglesF& rotation);
 
         /*! \brief Convert to a Matrix4F
          *

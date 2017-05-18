@@ -8,12 +8,12 @@ namespace Bull
         /// Nothing
     }
 
-    Camera::Camera(const Vector3F& position) :
+    Camera::Camera(const Vector3F& position, const EulerAnglesF& rotation) :
         m_up(Vector3F::makeUp()),
         m_right(-Vector3F::makeRight()),
         m_forward(-Vector3F::makeForward())
     {
-        move(-position);
+        move(-position).rotate(rotation);
     }
 
     Camera& Camera::move(const Vector3F& offset)
@@ -22,6 +22,11 @@ namespace Bull
         m_position += offset.x * m_right;
         m_position += offset.z * m_forward;
 
+        return (*this);
+    }
+
+    Camera& Camera::rotate(const EulerAnglesF& rotation)
+    {
         return (*this);
     }
 

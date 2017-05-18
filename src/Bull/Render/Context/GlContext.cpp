@@ -225,6 +225,7 @@ namespace Bull
 
                 m_settings.flags = ContextSettings::Default;
 
+                gl::enable(GL_CULL_FACE);
                 gl::enable(GL_DEPTH_TEST);
 
                 if(m_settings.major >= 3)

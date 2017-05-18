@@ -95,8 +95,6 @@ int main(int argc, char* argv[])
 
     camera.move(Vector3F(0, 0, -3));
 
-    float speed = 0.5f;
-
     core.attachFromPath(Path("resources/shaders/core/core.vert"), ShaderStage::Vertex);
     core.attachFromPath(Path("resources/shaders/core/core.frag"), ShaderStage::Fragment);
     core.link();
@@ -165,6 +163,15 @@ int main(int argc, char* argv[])
                     offset.z = -0.05f;
                 }
 
+                if(e.key.code == Keyboard::A)
+                {
+                    offset.y = 0.05f;
+                }
+                else if(e.key.code == Keyboard::E)
+                {
+                    offset.y = -0.05f;
+                }
+
                 if(e.key.code == Keyboard::Q)
                 {
                     offset.x = -0.05f;
@@ -186,6 +193,11 @@ int main(int argc, char* argv[])
                     {
                         projection = &perspective;
                     }
+                }
+
+                if(e.key.code == Keyboard::F2)
+                {
+                    t.enableSmooth(!t.isEnableSmooth());
                 }
             }
         }
