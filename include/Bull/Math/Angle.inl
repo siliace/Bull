@@ -109,7 +109,7 @@ namespace Bull
     template <typename U>
     bool operator<(const Angle<U>& left, const Angle<U>& right)
     {
-        return Angle<U>::toDegree(left).m_angle < Angle<U>::toDegree().m_angle;
+        return Angle<U>::toDegree(left).m_angle < Angle<U>::toDegree(right).m_angle;
     }
 
     template <typename U>
@@ -127,7 +127,7 @@ namespace Bull
     template <typename U>
     bool operator<=(const Angle<U>& left, const Angle<U>& right)
     {
-        return Angle<U>::toDegree(left).m_angle <= Angle<U>::toDegree().m_angle;
+        return Angle<U>::toDegree(left).m_angle <= Angle<U>::toDegree(right).m_angle;
     }
 
     template <typename U>
@@ -145,7 +145,7 @@ namespace Bull
     template <typename U>
     bool operator>(const Angle<U>& left, const Angle<U>& right)
     {
-        return Angle<U>::toDegree(left).m_angle > Angle<U>::toDegree().m_angle;
+        return Angle<U>::toDegree(left).m_angle > Angle<U>::toDegree(right).m_angle;
     }
 
     template <typename U>
@@ -163,7 +163,7 @@ namespace Bull
     template <typename U>
     bool operator>=(const Angle<U>& left, const Angle<U>& right)
     {
-        return Angle<U>::toDegree(left).m_angle >= Angle<U>::toDegree().m_angle;
+        return Angle<U>::toDegree(left).m_angle >= Angle<U>::toDegree(right).m_angle;
     }
 
     template <typename U>

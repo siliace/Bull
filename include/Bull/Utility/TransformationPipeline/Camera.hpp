@@ -43,6 +43,10 @@ namespace Bull
          */
         Camera& rotate(const EulerAnglesF& rotation);
 
+        const Vector3F& getPosition() const;
+
+        const EulerAnglesF& getRotation() const;
+
         /*! \brief Convert to a Matrix4F
          *
          * \return The Matrix4F
@@ -52,10 +56,13 @@ namespace Bull
 
     private:
 
-        Vector3F m_up;
-        Vector3F m_right;
-        Vector3F m_forward;
-        Vector3F m_position;
+        void update();
+
+        Vector3F     m_up;
+        Vector3F     m_right;
+        Vector3F     m_forward;
+        Vector3F     m_position;
+        EulerAnglesF m_rotation;
     };
 }
 

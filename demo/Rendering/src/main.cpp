@@ -94,6 +94,7 @@ int main(int argc, char* argv[])
     Camera camera;
 
     camera.move(Vector3F(0, 0, -3));
+    camera.rotate(EulerAnglesF(AngleF::Zero, AngleF::Zero, AngleF::Zero));
 
     core.attachFromPath(Path("resources/shaders/core/core.vert"), ShaderStage::Vertex);
     core.attachFromPath(Path("resources/shaders/core/core.frag"), ShaderStage::Fragment);
@@ -126,13 +127,6 @@ int main(int argc, char* argv[])
                 win.close();
             }
 
-            if(e.type == RenderWindow::Event::MouseMoved)
-            {
-                std::cout << "=========" << std::endl;
-                std::cout << e.mouseMove.x << "/" << e.mouseMove.y << std::endl;
-                std::cout << e.mouseMove.xRel << "/" << e.mouseMove.yRel << std::endl;
-            }
-
             if(e.type == RenderWindow::Event::Resized)
             {
                 win.resetViewport();
@@ -148,6 +142,31 @@ int main(int argc, char* argv[])
                 {
                     fov++;
                 }
+            }
+
+            if(e.type == RenderWindow::Event::MouseMoved)
+            {
+                EulerAnglesF rotation;
+
+                if(e.mouseMove.yRel < 0)
+                {
+                    rotation.pitch = AngleF::degree(-1.f);
+                }
+                else if(e.mouseMove.yRel > 0)
+                {
+                    rotation.pitch = AngleF::degree(1.f);
+                }
+
+                if(e.mouseMove.xRel < 0)
+                {
+                    rotation.yaw = AngleF::degree(-1.f);
+                }
+                else if(e.mouseMove.xRel > 0)
+                {
+                    rotation.yaw = AngleF::degree(1.f);
+                }
+
+                camera.rotate(rotation);
             }
 
             if(e.type == RenderWindow::Event::KeyDown)
