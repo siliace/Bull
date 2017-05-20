@@ -6,11 +6,6 @@
 
 namespace Bull
 {
-    RenderWindow::RenderWindow(const ContextSettings& settings)
-    {
-        open(VideoMode::getCurrent(), "", Style::Fullscreen, settings);
-    }
-
     RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
         open(mode, title, style, settings);

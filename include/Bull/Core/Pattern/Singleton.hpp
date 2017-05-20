@@ -1,5 +1,5 @@
-#ifndef Bull_Singleton_hpp
-#define Bull_Singleton_hpp
+#ifndef BULL_SINGLETON_HPP
+#define BULL_SINGLETON_HPP
 
 #include <memory>
 
@@ -23,26 +23,49 @@ namespace Bull
          *
          */
         template<typename... Args>
-        static Instance get(Args... args);
+        static Instance get(Args... args)
+        {
+            if(!s_instance)
+            {
+                Lock lock(s_mutex);
+
+                if(!s_instance)
+                {
+                    s_instance = new TChild(args...);
+                }
+            }
+
+            return s_instance;
+        }
 
         /*! \brief Get the instance only if exists
          *
          * \return Return the instance is exists, nullptr otherwise
          *
          */
-        static Instance getIfExists();
+        static Instance getIfExists()
+        {
+            return isSet() ? s_instance : nullptr;
+        }
 
         /*! \brief Check whether the instance is set
          *
          * \param Return true if the instance is set, false otherwise
          *
          */
-        static bool isSet();
+        static bool isSet()
+        {
+            return s_instance != nullptr;
+        }
 
         /*! \brief Destroy the instance
          *
          */
-        static void destroy();
+        static void destroy()
+        {
+            delete s_instance;
+            s_instance = nullptr;
+        }
 
     private:
 
@@ -57,6 +80,4 @@ namespace Bull
     TChild* Singleton<TChild>::s_instance = nullptr;
 }
 
-#include <Bull/Core/Pattern/Singleton.inl>
-
-#endif // Bull_Singleton_hpp
+#endif // BULL_SINGLETON_HPP

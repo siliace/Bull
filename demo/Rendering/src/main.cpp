@@ -150,11 +150,11 @@ int main(int argc, char* argv[])
 
                 if(e.mouseMove.yRel < 0)
                 {
-                    rotation.pitch = AngleF::degree(-1.f);
+                    rotation.pitch = AngleF::degree(1.f);
                 }
                 else if(e.mouseMove.yRel > 0)
                 {
-                    rotation.pitch = AngleF::degree(1.f);
+                    rotation.pitch = AngleF::degree(-1.f);
                 }
 
                 if(e.mouseMove.xRel < 0)

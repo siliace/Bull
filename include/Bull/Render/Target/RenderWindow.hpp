@@ -22,15 +22,6 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * Create a fullscreen RenderWindow
-         *
-         * \param settings Settings to use to create the OpenGL context
-         *
-         */
-        RenderWindow(const ContextSettings& settings);
-
-        /*! \brief Constructor
-         *
          * \param mode     The VideoMode
          * \param title    The title of the window
          * \param style    The window decorations
@@ -51,6 +42,9 @@ namespace Bull
          */
         bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default, const ContextSettings& settings = ContextSettings::Best);
 
+        /*! \brief Close the RenderWindow
+         *
+         */
         void close() override;
 
         /*! \brief Display what has been rendered so far
