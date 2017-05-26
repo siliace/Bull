@@ -21,12 +21,12 @@ int main(int argc, char* argv[])
 {
     Vector3F scale;
     Vector3F translation;
-    Transformation transformation;
+    Transformation3D transformation;
 
     scale = Vector3F(3.f, 3.f, 3.f);
     translation = Vector3F(2.f, 2.f, -3.f);
 
-    transformation = Transformation::make(translation, EulerAnglesF(AngleF::Zero, AngleF::Zero, AngleF::degree(90.f)), scale);
+    transformation = Transformation3D::make(translation, EulerAnglesF(AngleF::Zero, AngleF::Zero, AngleF::degree(90.f)), scale);
 
     showMatrix(transformation.toMatrix());
 

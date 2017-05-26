@@ -1,5 +1,5 @@
-#ifndef Bull_AbstractLogger_hpp
-#define Bull_AbstractLogger_hpp
+#ifndef BULL_ABSTRACTLOGGER_HPP
+#define BULL_ABSTRACTLOGGER_HPP
 
 #include <Bull/Core/Memory/String.hpp>
 
@@ -22,4 +22,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_AbstractLogger_hpp
+#endif // BULL_ABSTRACTLOGGER_HPP

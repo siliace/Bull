@@ -8,9 +8,9 @@ include(cmake/Platform.cmake)
 add_definitions(-DBULL_BUILD)
 
 if(BULL_OS_WINDOWS)
-    option(WINDOWS_BUILD_VERSION "The version of Windows targeted" BULL_BUILD_WINDOWS_VISTA)
+    set(WINDOWS_BUILD_VERSION "BULL_BUILD_WINDOWS_VISTA")
 else()
-    option(WINDOW_LIBRARY "The library to use to manage windowing" BULL_BUILD_XCB)
+    option(WINDOW_LIBRARY "The library to use to manage windowing" "BULL_BUILD_XCB")
 endif()
 
 add_definitions(-DBULL_DYNAMIC)

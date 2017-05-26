@@ -44,7 +44,7 @@ namespace Bull
              * \return Return the pixel format
              *
              */
-            static int getBestPixelFormat(HDC device, unsigned int bitsPerPixel, const ContextSettings& settings, bool usePbuffer = false);
+            static int getBestPixelFormat(HDC device, Uint8 bitsPerPixel, const ContextSettings& settings, bool usePbuffer = false);
 
         public:
 
@@ -71,7 +71,7 @@ namespace Bull
              * \param settings     Parameters to create the OpenGL context
              *
              */
-            WglContext(const std::shared_ptr<WglContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings);
+            WglContext(const std::shared_ptr<WglContext>& shared, Uint8 bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Constructor
              *
@@ -81,7 +81,7 @@ namespace Bull
              * \param settings Settings to use to create the OpenGL context
              *
              */
-            WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings);
+            WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, Uint8 bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Destructor
              *
@@ -135,14 +135,14 @@ namespace Bull
              * \param bitsPerPixel Number of bits per pixel to use
              *
              */
-            void createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, unsigned int bitsPerPixel);
+            void createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel);
 
             /*! \brief Set the best pixel format
              *
              * \param bitsPerPixel Number of bits per pixel to use
              *
              */
-            void setPixelFormat(unsigned int bitsPerPixel);
+            void setPixelFormat(Uint8 bitsPerPixel);
 
             /*! \brief Create the render context
              *

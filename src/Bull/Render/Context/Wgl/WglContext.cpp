@@ -42,7 +42,7 @@ namespace Bull
             loader->require(WglPbuffer);
         }
 
-        int WglContext::getBestPixelFormat(HDC device, unsigned int bitsPerPixel, const ContextSettings& settings, bool usePbuffer)
+        int WglContext::getBestPixelFormat(HDC device, Uint8 bitsPerPixel, const ContextSettings& settings, bool usePbuffer)
         {
             int bestPixelFormat = 0;
 
@@ -181,13 +181,13 @@ namespace Bull
             }
         }
 
-        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, unsigned int bitsPerPixel, const ContextSettings& settings) :
+        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
             WglContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
         {
             /// Nothing
         }
 
-        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings) :
+        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, Uint8 bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
             m_device(0),
             m_render(0),
@@ -258,7 +258,7 @@ namespace Bull
 
         bool WglContext::makeCurrent()
         {
-            return wglMakeCurrent(m_device, m_render);
+            return wglMakeCurrent(m_device, m_render) == TRUE;
         }
 
         void WglContext::createSurface(WindowHandler window)
@@ -268,7 +268,7 @@ namespace Bull
             m_device = GetDC(m_window);
         }
 
-        void WglContext::createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, unsigned int bitsPerPixel)
+        void WglContext::createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel)
         {
             if(isLoaded(WglPbuffer) && shared)
             {
@@ -307,7 +307,7 @@ namespace Bull
             }
         }
 
-        void WglContext::setPixelFormat(unsigned int bitsPerPixel)
+        void WglContext::setPixelFormat(Uint8 bitsPerPixel)
         {
             PIXELFORMATDESCRIPTOR descriptor;
             int bestFormat = getBestPixelFormat(m_device, bitsPerPixel, m_settings);

@@ -1,3 +1,4 @@
+add_subdirectory(Clipboard)
 add_subdirectory(Events)
 add_subdirectory(FileSystem)
 add_subdirectory(Maths)

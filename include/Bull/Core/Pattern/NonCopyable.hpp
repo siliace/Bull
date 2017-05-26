@@ -5,16 +5,12 @@
 
 namespace Bull
 {
-    class BULL_CORE_API NonCopyable
+    struct BULL_CORE_API NonCopyable
     {
-    protected:
-
         /*! \brief Default constructor
          *
          */
         NonCopyable() = default;
-
-    private:
 
         /*! \brief Copy constructor
          *

@@ -88,11 +88,11 @@ namespace Bull
 
             if(string)
             {
-                std::memcpy(m_sharedString->m_string.get(), string, size);
+                std::memcpy(&m_sharedString->m_string[0], string, size);
             }
             else
             {
-                std::memset(m_sharedString->m_string.get(), 0, size);
+                std::memset(&m_sharedString->m_string[0], 0, size);
             }
         }
         else
@@ -148,7 +148,7 @@ namespace Bull
         String substring;
 
         substring.m_sharedString = std::make_shared<SharedString>(stop - (start - 1));
-        std::memcpy(substring.m_sharedString->m_string.get(), &m_sharedString->m_string[start], substring.getSize());
+        std::memcpy(&substring.m_sharedString->m_string[0], &m_sharedString->m_string[start], substring.getSize());
 
         return substring;
     }
@@ -315,7 +315,7 @@ namespace Bull
 
     const char* String::getBuffer() const
     {
-        return m_sharedString->m_string.get();
+        return &m_sharedString->m_string[0];
     }
 
     char& String::operator[](std::size_t index)

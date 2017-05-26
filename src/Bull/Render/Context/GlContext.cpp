@@ -1,5 +1,4 @@
 #include <memory>
-#include <set>
 
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
@@ -20,8 +19,13 @@ namespace Bull
     {
         namespace
         {
+            /// The context shared with all others
             std::shared_ptr<ContextType> shared;
+
+            /// The context activate in this thread
             thread_local const GlContext* current = nullptr;
+
+            /// The internal context of this thread
             thread_local std::unique_ptr<Context> internal = nullptr;
             const ContextSettings internalSettings = ContextSettings(0, 0, 0, 3, 3);
 
@@ -60,7 +64,7 @@ namespace Bull
             shared->initialize();
 
             /// Ensure two things:
-            /// + The shared context is disabled
+            /// + The shared context is disabled (and should always be)
             /// + The internal context is enable
             shared->setActive(false);
         }
