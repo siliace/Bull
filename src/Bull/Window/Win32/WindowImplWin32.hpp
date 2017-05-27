@@ -2,6 +2,7 @@
 #define BULL_WINDOWIMPLWIN32_HPP
 
 #include <windows.h>
+#include <windowsx.h>
 
 #include <Bull/Window/WindowImpl.hpp>
 

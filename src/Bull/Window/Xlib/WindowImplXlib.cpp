@@ -4,7 +4,6 @@
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 #include <Bull/Core/Thread/Thread.hpp>
 
-#include <Bull/Hardware/Mouse.hpp>
 
 #include <Bull/Window/Xlib/WindowImplXlib.hpp>
 
@@ -217,8 +216,8 @@ namespace Bull
                         event.type           = Window::Event::MouseMoved;
                         event.mouseMove.x    = e.xmotion.x;
                         event.mouseMove.y    = e.xmotion.y;
-                        event.mouseMove.xRel = event.mouseMove.x - m_cursorPosition.x;
-                        event.mouseMove.yRel = event.mouseMove.y - m_cursorPosition.y;
+                        event.mouseMove.xRel = event.mouseMove.x - getCursorPosition().x;
+                        event.mouseMove.yRel = event.mouseMove.y - getCursorPosition().y;
 
                         m_cursorPosition = Vector2I(e.xbutton.x, e.xbutton.y);
 
@@ -236,8 +235,8 @@ namespace Bull
 
                             event.mouseButton.x    = e.xbutton.x;
                             event.mouseButton.y    = e.xbutton.y;
-                            event.mouseButton.xRel = event.mouseButton.x - m_cursorPosition.x;
-                            event.mouseButton.yRel = event.mouseButton.y - m_cursorPosition.y;
+                            event.mouseButton.xRel = event.mouseButton.x - getCursorPosition().x;
+                            event.mouseButton.yRel = event.mouseButton.y - getCursorPosition().y;
                         }
                         else
                         {
@@ -245,8 +244,8 @@ namespace Bull
 
                             event.mouseWheel.x    = e.xbutton.x;
                             event.mouseWheel.y    = e.xbutton.y;
-                            event.mouseWheel.xRel = event.mouseWheel.x - m_cursorPosition.x;
-                            event.mouseWheel.yRel = event.mouseWheel.y - m_cursorPosition.y;
+                            event.mouseWheel.xRel = event.mouseWheel.x - getCursorPosition().x;
+                            event.mouseWheel.yRel = event.mouseWheel.y - getCursorPosition().y;
                         }
 
                         m_cursorPosition = Vector2I(e.xbutton.x, e.xbutton.y);
@@ -318,10 +317,8 @@ namespace Bull
 
                             event.mouseButton.x  = e.xbutton.x;
                             event.mouseButton.y  = e.xbutton.y;
-                            event.mouseButton.xRel = event.mouseButton.x - m_cursorPosition.x;
-                            event.mouseButton.yRel = event.mouseButton.y - m_cursorPosition.y;
-
-                            m_cursorPosition = Mouse::getPosition();
+                            event.mouseButton.xRel = event.mouseButton.x - getCursorPosition().x;
+                            event.mouseButton.yRel = event.mouseButton.y - getCursorPosition().y;
 
                             pushEvent(event);
                         }
@@ -620,8 +617,7 @@ namespace Bull
         WindowImplXlib::WindowImplXlib() :
             m_handler(0),
             m_isMapped(false),
-            m_captureCursor(false),
-            m_cursorPosition(Mouse::getPosition())
+            m_captureCursor(false)
         {
             /// Nothing
         }
@@ -633,7 +629,10 @@ namespace Bull
             int                  screen     = m_display.getDefaultScreen();
             Visual*              visual     = XDefaultVisual(m_display, screen);
 
-            m_colormap = XCreateColormap(m_display, m_display.getRootWindow(screen), visual, AllocNone);
+            m_colormap = XCreateColormap(m_display,
+                                         m_display.getRootWindow(screen),
+                                         visual,
+                                         AllocNone);
 
             attributes.border_pixel      = 0;
             attributes.background_pixmap = None;

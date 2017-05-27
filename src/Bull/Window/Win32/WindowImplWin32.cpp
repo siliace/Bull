@@ -239,8 +239,8 @@ namespace Bull
         WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style) :
             m_isResizing(false)
         {
-            DWORD winStyle = computeStyle(style);
             unsigned int width, height;
+            DWORD winStyle = computeStyle(style);
 
             if(instanceCounter == 0)
             {
@@ -598,9 +598,11 @@ namespace Bull
                 {
                     Window::Event e;
 
-                    e.type        = Window::Event::MouseMoved;
-                    e.mouseMove.x = LOWORD(lParam);
-                    e.mouseMove.y = HIWORD(lParam);
+                    e.type           = Window::Event::MouseMoved;
+                    e.mouseMove.x    = GET_X_LPARAM(lParam);
+                    e.mouseMove.y    = GET_Y_LPARAM(lParam);
+                    e.mouseMove.xRel = e.mouseMove.x - getCursorPosition().x;
+                    e.mouseMove.yRel = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
@@ -612,8 +614,10 @@ namespace Bull
 
                     e.type               = Window::Event::MouseButtonDown;
                     e.mouseButton.button = Mouse::Button::Left;
-                    e.mouseButton.x      = LOWORD(lParam);
-                    e.mouseButton.y      = HIWORD(lParam);
+                    e.mouseButton.x      = GET_X_LPARAM(lParam);
+                    e.mouseButton.y      = GET_Y_LPARAM(lParam);
+                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
+                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
@@ -625,8 +629,10 @@ namespace Bull
 
                     e.type               = Window::Event::MouseButtonUp;
                     e.mouseButton.button = Mouse::Button::Left;
-                    e.mouseButton.x      = LOWORD(lParam);
-                    e.mouseButton.y      = HIWORD(lParam);
+                    e.mouseButton.x      = GET_X_LPARAM(lParam);
+                    e.mouseButton.y      = GET_Y_LPARAM(lParam);
+                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
+                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
@@ -638,8 +644,10 @@ namespace Bull
 
                     e.type               = Window::Event::MouseButtonDown;
                     e.mouseButton.button = Mouse::Button::Middle;
-                    e.mouseButton.x      = LOWORD(lParam);
-                    e.mouseButton.y      = HIWORD(lParam);
+                    e.mouseButton.x      = GET_X_LPARAM(lParam);
+                    e.mouseButton.y      = GET_Y_LPARAM(lParam);
+                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
+                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
@@ -651,8 +659,10 @@ namespace Bull
 
                     e.type               = Window::Event::MouseButtonUp;
                     e.mouseButton.button = Mouse::Button::Middle;
-                    e.mouseButton.x      = LOWORD(lParam);
-                    e.mouseButton.y      = HIWORD(lParam);
+                    e.mouseButton.x      = GET_X_LPARAM(lParam);
+                    e.mouseButton.y      = GET_Y_LPARAM(lParam);
+                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
+                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
@@ -664,8 +674,10 @@ namespace Bull
 
                     e.type               = Window::Event::MouseButtonDown;
                     e.mouseButton.button = Mouse::Button::Right;
-                    e.mouseButton.x      = LOWORD(lParam);
-                    e.mouseButton.y      = HIWORD(lParam);
+                    e.mouseButton.x      = GET_X_LPARAM(lParam);
+                    e.mouseButton.y      = GET_Y_LPARAM(lParam);
+                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
+                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
@@ -677,8 +689,10 @@ namespace Bull
 
                     e.type               = Window::Event::MouseButtonUp;
                     e.mouseButton.button = Mouse::Button::Right;
-                    e.mouseButton.x      = LOWORD(lParam);
-                    e.mouseButton.y      = HIWORD(lParam);
+                    e.mouseButton.x      = GET_X_LPARAM(lParam);
+                    e.mouseButton.y      = GET_Y_LPARAM(lParam);
+                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
+                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
@@ -690,8 +704,10 @@ namespace Bull
 
                     e.type               = Window::Event::MouseButtonDown;
                     e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? Mouse::Button::Extra1 : Mouse::Button::Extra2;
-                    e.mouseButton.x      = LOWORD(lParam);
-                    e.mouseButton.y      = HIWORD(lParam);
+                    e.mouseButton.x      = GET_X_LPARAM(lParam);
+                    e.mouseButton.y      = GET_Y_LPARAM(lParam);
+                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
+                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
@@ -703,8 +719,10 @@ namespace Bull
 
                     e.type               = Window::Event::MouseButtonUp;
                     e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? Mouse::Button::Extra1 : Mouse::Button::Extra2;
-                    e.mouseButton.x      = LOWORD(lParam);
-                    e.mouseButton.y      = HIWORD(lParam);
+                    e.mouseButton.x      = GET_X_LPARAM(lParam);
+                    e.mouseButton.y      = GET_Y_LPARAM(lParam);
+                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
+                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
@@ -717,8 +735,10 @@ namespace Bull
                     e.type              = Window::Event::MouseWheel;
                     e.mouseWheel.wheel  = Mouse::Wheel::Vertical;
                     e.mouseWheel.up     = (HIWORD(wParam) == 120);
-                    e.mouseWheel.x      = LOWORD(lParam);
-                    e.mouseWheel.y      = HIWORD(lParam);
+                    e.mouseWheel.x      = GET_X_LPARAM(lParam);
+                    e.mouseWheel.y      = GET_Y_LPARAM(lParam);
+                    e.mouseMove.xRel    = e.mouseMove.x - getCursorPosition().x;
+                    e.mouseMove.yRel    = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }

@@ -1,5 +1,7 @@
 #include <Bull/Core/Thread/Thread.hpp>
 
+#include <Bull/Hardware/Mouse.hpp>
+
 #include <Bull/Window/JoystickManager.hpp>
 #include <Bull/Window/WindowImpl.hpp>
 
@@ -76,17 +78,37 @@ namespace Bull
         }
 
         WindowImpl::WindowImpl() :
-            m_keyrepeat(true)
+            m_keyrepeat(true),
+            m_cursorPosition(Mouse::getPosition())
         {
             /// Nothing
         }
 
         void WindowImpl::pushEvent(const Window::Event& e)
         {
-            if(!((e.type == Window::Event::KeyDown || e.type == Window::Event::KeyUp) && e.key.code == Keyboard::Key::Unknown))
+            if((e.type == Window::Event::KeyDown || e.type == Window::Event::KeyUp) && e.key.code == Keyboard::Unknown)
             {
-                m_events.push(e);
+                return;
             }
+            else if(e.type == Window::Event::MouseMoved)
+            {
+                m_cursorPosition = Vector2I(e.mouseMove.x, e.mouseMove.y);
+            }
+            else if(e.type == Window::Event::MouseButtonUp || e.type == Window::Event::MouseButtonDown)
+            {
+                m_cursorPosition = Vector2I(e.mouseButton.x, e.mouseButton.y);
+            }
+            else if(e.type == Window::Event::MouseWheel)
+            {
+                m_cursorPosition = Vector2I(e.mouseWheel.x, e.mouseWheel.y);
+            }
+
+            m_events.push(e);
+        }
+
+        const Vector2I& WindowImpl::getCursorPosition() const
+        {
+            return m_cursorPosition;
         }
     }
 }

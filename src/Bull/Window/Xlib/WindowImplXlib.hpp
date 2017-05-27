@@ -243,7 +243,6 @@ namespace Bull
             bool      m_isMapped;
             Colormap  m_colormap;
             bool      m_captureCursor;
-            Vector2I  m_cursorPosition;
         };
     }
 }

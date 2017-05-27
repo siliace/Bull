@@ -221,10 +221,17 @@ namespace Bull
              */
             void pushEvent(const Window::Event& e);
 
+            /*! \brief Get the position of the cursor in the Window
+             *
+             * \return The position of the cursor
+             */
+            const Vector2I& getCursorPosition() const;
+
         private:
 
-            std::queue<Window::Event> m_events;    /*!< The event queue */
-            bool                      m_keyrepeat; /*!< Does the key repeat is enable? */
+            std::queue<Window::Event> m_events;        /*!< The event queue */
+            bool                      m_keyrepeat;     /*!< Does the key repeat is enable? */
+            Vector2I                 m_cursorPosition; /*!< The position of the cursor in the window */
         };
     }
 }
