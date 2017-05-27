@@ -219,8 +219,6 @@ namespace Bull
                         event.mouseMove.xRel = event.mouseMove.x - getCursorPosition().x;
                         event.mouseMove.yRel = event.mouseMove.y - getCursorPosition().y;
 
-                        m_cursorPosition = Vector2I(e.xbutton.x, e.xbutton.y);
-
                         pushEvent(event);
                     }
                     break;
@@ -247,8 +245,6 @@ namespace Bull
                             event.mouseWheel.xRel = event.mouseWheel.x - getCursorPosition().x;
                             event.mouseWheel.yRel = event.mouseWheel.y - getCursorPosition().y;
                         }
-
-                        m_cursorPosition = Vector2I(e.xbutton.x, e.xbutton.y);
 
                         switch(e.xbutton.button)
                         {
