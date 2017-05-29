@@ -1,5 +1,5 @@
-#ifndef Bull_RenderWindow_hpp
-#define Bull_RenderWindow_hpp
+#ifndef BULL_RENDERWINDOW_HPP
+#define BULL_RENDERWINDOW_HPP
 
 #include <Bull/Core/Time/Clock.hpp>
 #include <Bull/Core/Time/Time.hpp>
@@ -71,7 +71,7 @@ namespace Bull
          * \param active True to activate, false to deactivate
          *
          */
-        void enableVsync(bool active);
+        void enableVsync(bool active = true);
 
         /*! \brief Get the default viewport of the RenderTarget
          *
@@ -87,4 +87,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_RenderWindow_hpp
+#endif // BULL_RENDERWINDOW_HPP

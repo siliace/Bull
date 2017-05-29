@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/System/Integer.hpp>
 
@@ -15,7 +16,7 @@ namespace Bull
         class DirectoryImpl;
     }
 
-    class BULL_CORE_API Directory
+    class BULL_CORE_API Directory : public NonCopyable
     {
     public:
 
