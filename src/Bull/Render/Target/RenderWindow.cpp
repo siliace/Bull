@@ -25,7 +25,7 @@ namespace Bull
 
         m_clock.start();
         m_impl.reset(prv::RenderWindowImpl::createInstance(mode, title, style, settings));
-        m_context.reset(prv::GlContext::createInstance(m_impl->getSystemHandler(), mode.bitsPerPixel, settings));
+        m_context.reset(prv::GlContext::createInstance(m_impl, mode.bitsPerPixel, settings));
 
         if(style == Style::Fullscreen)
         {

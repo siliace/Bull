@@ -1,12 +1,11 @@
-#ifndef Bull_Window_hpp
-#define Bull_Window_hpp
+#ifndef BULL_WINDOW_HPP
+#define BULL_WINDOW_HPP
 
 #include <memory>
 
 #include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/System/Export.hpp>
 
 #include <Bull/Hardware/Joystick.hpp>
 #include <Bull/Hardware/Keyboard.hpp>
@@ -15,7 +14,6 @@
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Window/VideoMode.hpp>
-#include <Bull/Window/WindowHandler.hpp>
 
 namespace Bull
 {
@@ -418,4 +416,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Window_hpp
+#endif // BULL_WINDOW_HPP

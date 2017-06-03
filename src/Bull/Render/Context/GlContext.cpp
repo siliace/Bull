@@ -101,7 +101,7 @@ namespace Bull
             return context;
         }
 
-        GlContext* GlContext::createInstance(WindowHandler window, unsigned int bitsPerPixel, const ContextSettings& settings)
+        GlContext* GlContext::createInstance(std::unique_ptr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             ContextType* context = new ContextType(shared, window, bitsPerPixel, settings);
             context->initialize(settings);
