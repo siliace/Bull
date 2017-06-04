@@ -2,6 +2,7 @@
 #define Bull_WindowImpl_hpp
 
 #include <queue>
+#include <memory>
 
 #include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
@@ -9,6 +10,7 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
+#include <Bull/Window/CursorImpl.hpp>
 #include <Bull/Window/VideoMode.hpp>
 #include <Bull/Window/Window.hpp>
 #include <Bull/Window/WindowHandler.hpp>
@@ -197,6 +199,27 @@ namespace Bull
              *
              */
             virtual void setVisible(bool visible) = 0;
+
+            /*! \brief Set the mouse cursor of the Window
+             *
+             * \param cursor The cursor
+             *
+             */
+            virtual void setMouseCursor(const std::unique_ptr<CursorImpl>& cursor) = 0;
+
+            /*! \brief Toggle cursor visibility
+             *
+             * \param visible True to show the cursor, false to hide
+             *
+             */
+            virtual void setMouseCursorVisible(bool visible = false) = 0;
+
+            /*! \brief Check whether the mouse cursor is visible
+             *
+             * \return True if the mouse cursor is visible
+             *
+             */
+            virtual bool isMouseCursorVisible() const = 0;
 
             /*! \brief Get the window system handler
              *

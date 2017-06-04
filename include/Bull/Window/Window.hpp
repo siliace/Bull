@@ -13,6 +13,7 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
+#include <Bull/Window/Cursor.hpp>
 #include <Bull/Window/VideoMode.hpp>
 
 namespace Bull
@@ -393,6 +394,31 @@ namespace Bull
          *
          */
         Window& setVisible(bool visible = true);
+
+        /*! \brief Set the mouse cursor of the Window
+         *
+         * \param cursor The cursor
+         *
+         * \return This
+         *
+         */
+        Window& setMouseCursor(const Cursor& cursor);
+
+        /*! \brief Toggle cursor visibility
+         *
+         * \param visible True to show the cursor, false to hide
+         *
+         * \return This
+         *
+         */
+        Window& setMouseCursorVisible(bool visible = false);
+
+        /*! \brief Check whether the mouse cursor is visible
+         *
+         * \return True if the mouse cursor is visible
+         *
+         */
+        bool isMouseCursorVisible() const;
 
         /*! \brief Enter or leave the fullscreen mode
          *

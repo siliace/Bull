@@ -2,9 +2,13 @@ bull_add_library(bull-window)
 
 target_sources(bull-window
         PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/Cursor.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Window.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/VideoMode.cpp
         PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/CursorHandler.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/CursorImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/CursorImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/JoystickManager.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/JoystickManager.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/JoystickState.cpp
@@ -32,3 +36,4 @@ endif()
 
 target_link_libraries(bull-window bull-core)
 target_link_libraries(bull-window bull-hardware)
+target_link_libraries(bull-window bull-utility)

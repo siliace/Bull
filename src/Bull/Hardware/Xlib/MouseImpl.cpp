@@ -10,7 +10,7 @@ namespace Bull
         {
             Display display;
 
-            XWarpPointer(display, None, display.getRootWindow(), 0, 0, 0, 0, position.x, position.y);
+            XWarpPointer(display, XNone, display.getRootWindow(), 0, 0, 0, 0, position.x, position.y);
             display.flush();
         }
 

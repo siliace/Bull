@@ -308,6 +308,36 @@ namespace Bull
         return (*this);
     }
 
+    Window& Window::setMouseCursor(const Cursor& cursor)
+    {
+        if(m_impl)
+        {
+            m_impl->setMouseCursor(cursor.getImpl());
+        }
+
+        return (*this);
+    }
+
+    Window& Window::setMouseCursorVisible(bool visible)
+    {
+        if(m_impl)
+        {
+            m_impl->setMouseCursorVisible(visible);
+        }
+
+        return (*this);
+    }
+
+    bool Window::isMouseCursorVisible() const
+    {
+        if(m_impl)
+        {
+            return m_impl->isMouseCursorVisible();
+        }
+
+        return false;
+    }
+
     bool Window::enableFullscreen(bool fullscreen)
     {
         if(m_impl && (!fullscreen || (fullscreen && !s_fullscreen)))

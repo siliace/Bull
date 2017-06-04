@@ -4,7 +4,6 @@
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 #include <Bull/Core/Thread/Thread.hpp>
 
-
 #include <Bull/Window/Xlib/WindowImplXlib.hpp>
 
 #ifndef Button6
@@ -333,7 +332,7 @@ namespace Bull
 
                             do
                             {
-                                grabbed = XGrabPointer(m_display, m_handler, True, None, GrabModeAsync, GrabModeAsync, m_handler, None, CurrentTime) != GrabSuccess;
+                                grabbed = XGrabPointer(m_display, m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
 
                                 if(!grabbed)
                                 {
@@ -458,7 +457,7 @@ namespace Bull
 
                 do
                 {
-                    grabbed = XGrabPointer(m_display, m_handler, True, None, GrabModeAsync, GrabModeAsync, m_handler, None, CurrentTime) != GrabSuccess;
+                    grabbed = XGrabPointer(m_display, m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
 
                     if(!grabbed)
                     {
@@ -605,6 +604,21 @@ namespace Bull
             }
         }
 
+        void WindowImplXlib::setMouseCursor(const std::unique_ptr<CursorImpl>& cursor)
+        {
+            XDefineCursor(m_display, m_handler, cursor->getSystemHandler());
+        }
+
+        void WindowImplXlib::setMouseCursorVisible(bool visible)
+        {
+
+        }
+
+        bool WindowImplXlib::isMouseCursorVisible() const
+        {
+            return false;
+        }
+
         WindowHandler WindowImplXlib::getSystemHandler() const
         {
             return m_handler;
@@ -631,7 +645,7 @@ namespace Bull
                                          AllocNone);
 
             attributes.border_pixel      = 0;
-            attributes.background_pixmap = None;
+            attributes.background_pixmap = XNone;
             attributes.colormap          = m_colormap;
             attributes.event_mask        = WindowImplXlib::EventsMasks;
 
@@ -665,7 +679,7 @@ namespace Bull
                                          AllocNone);
 
             attributes.border_pixel      = 0;
-            attributes.background_pixmap = None;
+            attributes.background_pixmap = XNone;
             attributes.colormap          = m_colormap;
             attributes.event_mask        = WindowImplXlib::EventsMasks;
 

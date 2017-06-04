@@ -49,6 +49,11 @@
         #define BULL_WEYLAND
     #elif defined BULL_BUILD_XLIB
         #define BULL_XLIB
+
+        #if defined None
+            #define XNone 0L
+            #undef None
+        #endif
     #elif defined BULL_BUILD_XCB
         #define BULL_XCB
     #else
