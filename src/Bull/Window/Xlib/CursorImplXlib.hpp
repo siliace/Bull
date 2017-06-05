@@ -1,7 +1,7 @@
 #ifndef BULL_CURSORIMPLXLIB_HPP
 #define BULL_CURSORIMPLXLIB_HPP
 
-#include <X11/cursorfont.h>
+#include <X11/Xlib.h>
 
 #include <Bull/Core/Support/Xlib/Display.hpp>
 

@@ -1,3 +1,6 @@
+#include <X11/cursorfont.h>
+#include <X11/Xutil.h>
+
 #include <Bull/Window/Xlib/CursorImplXlib.hpp>
 
 namespace Bull
@@ -49,9 +52,9 @@ namespace Bull
             return true;
         }
 
-        bool CursorImplXlib::loadFromImage(const Image &cursor, const Vector2UI &hotSpot)
+        bool CursorImplXlib::loadFromImage(const Image& cursor, const Vector2UI& hotSpot)
         {
-            destroy();
+            // Todo
 
             return false;
         }
