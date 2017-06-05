@@ -1,9 +1,6 @@
 #ifndef BULL_WINDOWIMPLXLIB_HPP
 #define BULL_WINDOWIMPLXLIB_HPP
 
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-
 #include <Bull/Core/Support/Xlib/Display.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>

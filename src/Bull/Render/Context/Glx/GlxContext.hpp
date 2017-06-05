@@ -2,13 +2,11 @@
 #define BULL_GLXCONTEXT_HPP
 
 #include <GL/glx.h>
-#include <X11/Xlib.h>
 
 #include <Bull/Core/Support/Xlib/Display.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
-
 
 namespace Bull
 {

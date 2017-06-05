@@ -1,7 +1,5 @@
-#ifndef Bull_ErrorHandler_hpp
-#define Bull_ErrorHandler_hpp
-
-#include <X11/Xlib.h>
+#ifndef BULL_ERRORHANDLER_HPP
+#define BULL_ERRORHANDLER_HPP
 
 #include <Bull/Core/Thread/Lock.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
@@ -74,5 +72,5 @@ namespace Bull
     }
 }
 
-#endif // Bull_ErrorHandler_hpp
+#endif // BULL_ERRORHANDLER_HPP
 

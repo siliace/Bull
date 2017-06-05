@@ -27,7 +27,7 @@
 #define GLX_ACCUM_BUFFER_BIT_SGIX		0x00000080
 #define GLX_SAMPLE_BUFFERS_BIT_SGIX		0x00000100
 
-#include <X11/Xlib.h>
+#include <Bull/Core/Support/Xlib/Xlib.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 

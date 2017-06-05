@@ -1,7 +1,7 @@
-#ifndef Bull_GlxCreateContextARB_hpp
-#define Bull_GlxCreateContextARB_hpp
+#ifndef BULL_GLXCREATECONTEXTARB_HPP
+#define BULL_GLXCREATECONTEXTARB_HPP
 
-#include <X11/Xlib.h>
+#include <Bull/Core/Support/Xlib/Xlib.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 
@@ -27,5 +27,5 @@ namespace Bull
     }
 }
 
-#endif // Bull_GlxCreateContextARB_hpp
+#endif // BULL_GLXCREATECONTEXTARB_HPP
 

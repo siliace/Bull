@@ -1,7 +1,7 @@
-#ifndef Bull_GlxSwapControlGLI_hpp
-#define Bull_GlxSwapControlGLI_hpp
+#ifndef Bull_GLXSWAPCONTROLGLI_hpp
+#define Bull_GLXSWAPCONTROLGLI_hpp
 
-#include <X11/Xlib.h>
+#include <Bull/Core/Support/Xlib/Xlib.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 
@@ -23,4 +23,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_GlxSwapControlGLI_hpp
+#endif // Bull_GLXSWAPCONTROLGLI_hpp

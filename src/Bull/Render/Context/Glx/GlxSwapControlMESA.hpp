@@ -1,7 +1,7 @@
-#ifndef Bull_GlxSwapControlMESA_hpp
-#define Bull_GlxSwapControlMESA_hpp
+#ifndef BULL_GLXSWAPCONTROLMESA_HPP
+#define BULL_GLXSWAPCONTROLMESA_HPP
 
-#include <X11/Xlib.h>
+#include <Bull/Core/Support/Xlib/Xlib.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 
@@ -25,5 +25,5 @@ namespace Bull
     }
 }
 
-#endif // Bull_GlxSwapControlMESA_hpp
+#endif // BULL_GLXSWAPCONTROLMESA_HPP
 
