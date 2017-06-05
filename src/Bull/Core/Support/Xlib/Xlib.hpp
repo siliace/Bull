@@ -15,10 +15,11 @@ namespace Bull
 {
     namespace prv
     {
-        typedef ::Atom    XAtom;
-        typedef ::Cursor  XCursor;
-        typedef ::Window  XWindow;
-        typedef ::Display XDisplay;
+        typedef ::Atom     XAtom;
+        typedef ::Cursor   XCursor;
+        typedef ::Window   XWindow;
+        typedef ::Display  XDisplay;
+        typedef ::Colormap XColormap;
     }
 }
 

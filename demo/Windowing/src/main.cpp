@@ -6,16 +6,10 @@ using namespace Bull;
 int main(int argc, char* argv[])
 {
     Cursor c;
-    Image img;
     Window::Event e;
     Window win(VideoMode(800, 600), "Bull Application");
 
-    if(!img.loadFromPath(Path("cursor.jpg")))
-    {
-        return -1;
-    }
-
-    c.loadFromImage(img, Vector2UI());
+    c.loadFromSystem(Cursor::Help);
 
     win.setMouseCursor(c);
 

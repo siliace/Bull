@@ -19,7 +19,7 @@ namespace Bull
             int x, y;
             Display display;
             int rootX, rootY;
-            ::Window root, child;
+            XWindow root, child;
             unsigned int buttons;
 
             if(XQueryPointer(display, display.getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))
@@ -35,7 +35,7 @@ namespace Bull
             int x, y;
             Display display;
             int rootX, rootY;
-            ::Window root, child;
+            XWindow root, child;
             unsigned int buttons;
 
             if(XQueryPointer(display, display.getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))

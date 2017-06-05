@@ -1,8 +1,6 @@
 #ifndef BULL_CURSORIMPLXLIB_HPP
 #define BULL_CURSORIMPLXLIB_HPP
 
-#include <X11/Xlib.h>
-
 #include <Bull/Core/Support/Xlib/Display.hpp>
 
 #include <Bull/Window/CursorImpl.hpp>
@@ -58,7 +56,7 @@ namespace Bull
              */
             void destroy();
 
-            ::Cursor m_cursor;
+            XCursor  m_cursor;
             Display  m_display;
         };
     }

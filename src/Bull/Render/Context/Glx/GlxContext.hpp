@@ -146,12 +146,12 @@ namespace Bull
              */
             void updateSettings();
 
-            ::Window    m_window;
+            XWindow     m_window;
             GLXContext  m_render;
             GLXFBConfig m_config;
             GLXPbuffer  m_pbuffer;
             Display     m_display;
-            Colormap    m_colormap;
+            XColormap   m_colormap;
             bool        m_ownWindow;
         };
     }

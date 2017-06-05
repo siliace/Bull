@@ -258,12 +258,12 @@ namespace Bull
              */
             void setProtocols();
 
-            Display   m_display;
-            ::Window  m_handler;
-            Vector2UI m_lastSize;
-            bool      m_isMapped;
-            Colormap  m_colormap;
-            bool      m_captureCursor;
+            Display    m_display;
+            XWindow    m_handler;
+            Vector2UI  m_lastSize;
+            bool       m_isMapped;
+            XColormap  m_colormap;
+            bool       m_captureCursor;
         };
     }
 }
