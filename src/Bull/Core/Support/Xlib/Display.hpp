@@ -3,9 +3,8 @@
 
 #include <map>
 
-#include <X11/Xlib.h>
-
 #include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Support/Xlib/Xlib.hpp>
 
 namespace Bull
 {
@@ -13,15 +12,11 @@ namespace Bull
     {
         class Display
         {
-        public:
-
-            typedef ::Display* XDisplay;
-
         private:
 
-            static std::map<String, Atom> s_atoms;
-            static XDisplay               s_display;
-            static unsigned int           s_instanceCounter;
+            static std::map<String, XAtom> s_atoms;
+            static XDisplay*               s_display;
+            static unsigned int            s_instanceCounter;
 
         public:
 
@@ -68,7 +63,7 @@ namespace Bull
              * \return Return the root window of the default screen
              *
              */
-            ::Window getRootWindow() const;
+            Window getRootWindow() const;
 
             /*! \brief Get the root window the a screen
              *
@@ -77,7 +72,7 @@ namespace Bull
              * \return Return the root window of the specified screen
              *
              */
-            ::Window getRootWindow(int screen) const;
+            Window getRootWindow(int screen) const;
 
             /*! \brief Get the default color depth of the default screen
              *
@@ -119,7 +114,7 @@ namespace Bull
              * \return
              *
              */
-            operator XDisplay() const;
+            operator XDisplay*() const;
         };
     }
 }

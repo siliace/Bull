@@ -4,9 +4,9 @@ namespace Bull
 {
     namespace prv
     {
-        std::map<String, Atom> Display::s_atoms;
-        Display::XDisplay      Display::s_display = nullptr;
-        unsigned int           Display::s_instanceCounter = 0;
+        std::map<String, XAtom> Display::s_atoms;
+        XDisplay*               Display::s_display = nullptr;
+        unsigned int            Display::s_instanceCounter = 0;
 
         Display::Display()
         {
@@ -56,12 +56,12 @@ namespace Bull
             return DefaultScreen(s_display);
         }
 
-        ::Window Display::getRootWindow() const
+        Window Display::getRootWindow() const
         {
             return RootWindow(s_display, getDefaultScreen());
         }
 
-        ::Window Display::getRootWindow(int screen) const
+        Window Display::getRootWindow(int screen) const
         {
             return RootWindow(s_display, screen);
         }
@@ -79,26 +79,26 @@ namespace Bull
         bool Display::isSupportedExtension(const String& name) const
         {
             int version;
-            return XQueryExtension(s_display, name.getBuffer(), &version, &version, &version);
+            return XQueryExtension(s_display, name.getBuffer(), &version, &version, &version) == True;
         }
 
         Atom Display::getAtom(const String& name, bool mustExists)
         {
-            std::map<String, Atom>::const_iterator iterator = s_atoms.find(name);
+            std::map<String, XAtom>::const_iterator iterator = s_atoms.find(name);
 
             if(iterator != s_atoms.end())
             {
                 return iterator->second;
             }
 
-            Atom atom = XInternAtom(s_display, name.getBuffer(), mustExists ? True : False);
+            XAtom atom = XInternAtom(s_display, name.getBuffer(), mustExists ? True : False);
 
             s_atoms[name] = atom;
 
             return atom;
         }
 
-        Display::operator Display::XDisplay() const
+        Display::operator XDisplay*() const
         {
             return s_display;
         }

@@ -7,7 +7,7 @@
     #include <windows.h>
 #elif defined BULL_OS_GNU_LINUX
     #if defined BULL_XLIB
-        #include <X11/Xlib.h>
+        #include <Bull/Core/Support/Xlib/Xlib.hpp>
     #elif defined BULL_XCB
         #include <xcb/xcb.h>
     #elif defined BULL_WEYLAND
@@ -24,7 +24,7 @@ namespace Bull
             typedef HWND__* WindowHandler;
         #elif defined BULL_OS_GNU_LINUX
             #if defined BULL_XLIB
-                typedef ::Window WindowHandler;
+                typedef XWindow WindowHandler;
             #elif defined BULL_XCB
                 typedef xcb_window_t WindowHandler;
             #elif defined BULL_WEYLAND

@@ -1,6 +1,3 @@
-#include <X11/keysym.h>
-#include <X11/Xutil.h>
-
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 #include <Bull/Core/Thread/Thread.hpp>
 
