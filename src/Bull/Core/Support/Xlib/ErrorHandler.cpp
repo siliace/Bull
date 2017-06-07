@@ -59,7 +59,7 @@ namespace Bull
         {
             if(m_isBinded)
             {
-                XSync(Display(), False);
+                XSync(Display::get()->getHandler(), False);
                 XSetErrorHandler(m_previousHandler);
                 m_isBinded = false;
             }

@@ -8,7 +8,8 @@ namespace Bull
     namespace prv
     {
         CursorImplXlib::CursorImplXlib() :
-            m_cursor(XNone)
+            m_cursor(XNone),
+            m_display(Display::get())
         {
             /// Nothing
         }
@@ -47,7 +48,7 @@ namespace Bull
                 default: return false;
             }
 
-            m_cursor = XCreateFontCursor(m_display, shape);
+            m_cursor = XCreateFontCursor(m_display->getHandler(), shape);
 
             return true;
         }
@@ -68,7 +69,7 @@ namespace Bull
         {
             if(m_cursor != XNone)
             {
-                XFreeCursor(m_display, m_cursor);
+                XFreeCursor(m_display->getHandler(), m_cursor);
                 m_cursor = XNone;
             }
         }

@@ -8,21 +8,21 @@ namespace Bull
     {
         void MouseImpl::setPosition(const Vector2I& position)
         {
-            Display display;
+            Display::Instance display = Display::get();
 
-            XWarpPointer(display, XNone, display.getRootWindow(), 0, 0, 0, 0, position.x, position.y);
-            display.flush();
+            XWarpPointer(display->getHandler(), XNone, display->getRootWindow(), 0, 0, 0, 0, position.x, position.y);
+            display->flush();
         }
 
         Vector2I MouseImpl::getPosition()
         {
             int x, y;
-            Display display;
             int rootX, rootY;
             XWindow root, child;
             unsigned int buttons;
+            Display::Instance display = Display::get();
 
-            if(XQueryPointer(display, display.getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))
+            if(XQueryPointer(display->getHandler(), display->getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))
             {
                 return Vector2I(x, y);
             }
@@ -33,12 +33,12 @@ namespace Bull
         bool MouseImpl::isButtonPressed(Mouse::Button button)
         {
             int x, y;
-            Display display;
             int rootX, rootY;
             XWindow root, child;
             unsigned int buttons;
+            Display::Instance display = Display::get();
 
-            if(XQueryPointer(display, display.getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))
+            if(XQueryPointer(display->getHandler(), display->getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))
             {
                 switch(button)
                 {

@@ -40,7 +40,7 @@ namespace Bull
              * \return The best config
              *
              */
-            static GLXFBConfig chooseBestConfig(Display display, const ContextSettings& settings, Uint8 bitsPerPixel);
+            static GLXFBConfig chooseBestConfig(Display::Instance display, const ContextSettings& settings, Uint8 bitsPerPixel);
 
         public:
 
@@ -144,13 +144,13 @@ namespace Bull
              */
             void updateSettings();
 
-            XWindow     m_window;
-            GLXContext  m_render;
-            GLXFBConfig m_config;
-            GLXPbuffer  m_pbuffer;
-            Display     m_display;
-            XColormap   m_colormap;
-            bool        m_ownWindow;
+            XWindow           m_window;
+            GLXContext        m_render;
+            GLXFBConfig       m_config;
+            GLXPbuffer        m_pbuffer;
+            Display::Instance m_display;
+            XColormap         m_colormap;
+            bool              m_ownWindow;
         };
     }
 }

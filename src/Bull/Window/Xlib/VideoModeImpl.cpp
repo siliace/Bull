@@ -13,12 +13,12 @@ namespace Bull
     {
         VideoMode VideoModeImpl::getCurrent()
         {
-            Display display;
             VideoMode desktopMode;
+            Display::Instance display = Display::get();
 
-            if(display.isSupportedExtension("RANDR"))
+            if(display->isSupportedExtension("RANDR"))
             {
-                XRRScreenConfiguration* config = XRRGetScreenInfo(display, display.getRootWindow());
+                XRRScreenConfiguration* config = XRRGetScreenInfo(display->getHandler(), display->getRootWindow());
 
                 if(config)
                 {
@@ -30,7 +30,7 @@ namespace Bull
 
                     if(sizes && sizesCount > 0)
                     {
-                        desktopMode.bitsPerPixel = display.getDefaultDepth();
+                        desktopMode.bitsPerPixel = display->getDefaultDepth();
 
                         if(rotation == RR_Rotate_90 || RR_Rotate_270)
                         {
@@ -64,7 +64,7 @@ namespace Bull
 
             if(display.isSupportedExtension("RANDR"))
             {
-                XRRScreenConfiguration* config = XRRGetScreenInfo(display, display.getRootWindow());
+                XRRScreenConfiguration* config = XRRGetScreenInfo(display.getHandler(), display.getRootWindow());
 
                 if(config)
                 {
@@ -72,7 +72,7 @@ namespace Bull
                     int depthsCount;
 
                     XRRScreenSize* sizes = XRRConfigSizes(config, &sizesCount);
-                    int* depths          = XListDepths(display, display.getDefaultScreen(), &depthsCount);
+                    int* depths          = XListDepths(display.getHandler(), display.getDefaultScreen(), &depthsCount);
 
                     if(sizes && sizesCount > 0 && depths && depthsCount > 0)
                     {

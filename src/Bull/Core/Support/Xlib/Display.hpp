@@ -4,20 +4,15 @@
 #include <map>
 
 #include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Pattern/Singleton.hpp>
 #include <Bull/Core/Support/Xlib/Xlib.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        class Display
+        class Display : public Singleton<Display>
         {
-        private:
-
-            static std::map<String, XAtom> s_atoms;
-            static XDisplay*               s_display;
-            static unsigned int            s_instanceCounter;
-
         public:
 
             /*! \brief Default constructor
@@ -25,26 +20,10 @@ namespace Bull
              */
             Display();
 
-            /*! \brief Copy constructor
-             *
-             * \param copy The Display to copy
-             *
-             */
-            Display(const Display& copy);
-
             /*! \brief Destructor
              *
              */
             ~Display();
-
-            /*! \brief Basic assignment operator
-             *
-             * \param copy The Display to copy
-             *
-             * \return This
-             *
-             */
-            Display& operator=(const Display& copy);
 
             /*! \brief Flush the display
              *
@@ -63,7 +42,7 @@ namespace Bull
              * \return Return the root window of the default screen
              *
              */
-            Window getRootWindow() const;
+            XWindow getRootWindow() const;
 
             /*! \brief Get the root window the a screen
              *
@@ -72,7 +51,7 @@ namespace Bull
              * \return Return the root window of the specified screen
              *
              */
-            Window getRootWindow(int screen) const;
+            XWindow getRootWindow(int screen) const;
 
             /*! \brief Get the default color depth of the default screen
              *
@@ -114,7 +93,12 @@ namespace Bull
              * \return
              *
              */
-            operator XDisplay*() const;
+            XDisplay* getHandler();
+
+        private:
+
+            std::map<String, XAtom> m_atoms;
+            XDisplay*               m_display;
         };
     }
 }

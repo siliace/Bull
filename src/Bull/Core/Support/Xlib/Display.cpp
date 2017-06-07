@@ -4,103 +4,76 @@ namespace Bull
 {
     namespace prv
     {
-        std::map<String, XAtom> Display::s_atoms;
-        XDisplay*               Display::s_display = nullptr;
-        unsigned int            Display::s_instanceCounter = 0;
-
         Display::Display()
         {
-            if(s_instanceCounter == 0)
+            m_display = XOpenDisplay(nullptr);
+
+            if(!m_display)
             {
-                s_display = XOpenDisplay(nullptr);
-
-                if(!s_display)
-                {
-                    throw std::runtime_error("Failed to open display");
-                }
+                throw std::runtime_error("Failed to open display");
             }
-
-            s_instanceCounter += 1;
-        }
-
-        Display::Display(const Display& copy) :
-            Display()
-        {
-            /// Nothing
         }
 
         Display::~Display()
         {
-            s_instanceCounter -= 1;
-
-            if(s_instanceCounter == 0)
-            {
-                XCloseDisplay(s_display);
-            }
-        }
-
-        Display& Display::operator=(const Display& copy)
-        {
-            s_instanceCounter += 1;
-
-            return (*this);
+            XCloseDisplay(m_display);
         }
 
         void Display::flush()
         {
-            XFlush(s_display);
+            XFlush(m_display);
         }
 
         int Display::getDefaultScreen() const
         {
-            return DefaultScreen(s_display);
+            return DefaultScreen(m_display);
         }
 
-        Window Display::getRootWindow() const
+        XWindow Display::getRootWindow() const
         {
-            return RootWindow(s_display, getDefaultScreen());
+            return RootWindow(m_display, getDefaultScreen());
         }
 
-        Window Display::getRootWindow(int screen) const
+        XWindow Display::getRootWindow(int screen) const
         {
-            return RootWindow(s_display, screen);
+            return RootWindow(m_display, screen);
         }
 
         int Display::getDefaultDepth() const
         {
-            return DefaultDepth(s_display, getDefaultScreen());
+            return DefaultDepth(m_display, getDefaultScreen());
         }
 
         int Display::getDefaultDepth(int screen)
         {
-            return DefaultDepth(s_display, screen);
+            return DefaultDepth(m_display, screen);
         }
 
         bool Display::isSupportedExtension(const String& name) const
         {
             int version;
-            return XQueryExtension(s_display, name.getBuffer(), &version, &version, &version) == True;
+            return XQueryExtension(m_display, name.getBuffer(), &version, &version, &version) == True;
         }
 
         Atom Display::getAtom(const String& name, bool mustExists)
         {
-            std::map<String, XAtom>::const_iterator iterator = s_atoms.find(name);
+            std::map<String, XAtom>::const_iterator iterator = m_atoms.find(name);
 
-            if(iterator != s_atoms.end())
+            if(iterator != m_atoms.end())
             {
                 return iterator->second;
             }
 
-            XAtom atom = XInternAtom(s_display, name.getBuffer(), mustExists ? True : False);
+            XAtom atom = XInternAtom(m_display, name.getBuffer(), mustExists ? True : False);
 
-            s_atoms[name] = atom;
+            m_atoms[name] = atom;
 
             return atom;
         }
 
-        Display::operator XDisplay*() const
+        XDisplay* Display::getHandler()
         {
-            return s_display;
+            return m_display;
         }
     }
 }
