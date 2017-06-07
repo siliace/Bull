@@ -142,7 +142,7 @@ namespace Bull
 
         enum Style
         {
-            Empty       = 0x0,  /*!< The Window do not have any decoration */
+            None        = 0x0,  /*!< The Window do not have any decoration */
 
             Visible     = 0x1,  /*!< The Window is visible */
             Closable    = 0x2,  /*!< The Window has a exit button */
