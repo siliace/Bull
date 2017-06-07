@@ -1,10 +1,10 @@
 #ifndef BULL_ERRORHANDLER_HPP
 #define BULL_ERRORHANDLER_HPP
 
-#include <Bull/Core/Thread/Lock.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-
 #include <Bull/Core/Support/Xlib/Display.hpp>
+#include <Bull/Core/Thread/Lock.hpp>
+
 
 namespace Bull
 {
@@ -22,7 +22,7 @@ namespace Bull
              * \return Return always 0
              *
              */
-            static int handle(::Display* display, XErrorEvent* error);
+            static int handle(XDisplay* display, XErrorEvent* error);
 
         private:
 

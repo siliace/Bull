@@ -14,7 +14,7 @@ namespace Bull
 
     Texture::~Texture()
     {
-        if(m_id == 0)
+        if(m_id != 0)
         {
             gl::deleteTextures(1, &m_id);
         }
@@ -31,13 +31,11 @@ namespace Bull
         {
             m_size = size;
 
-            if(m_id == 0)
+            if(!m_id)
             {
-                GLuint texture = 0;
-                gl::genTextures(1, &texture);
-                m_id = static_cast<unsigned int>(texture);
+                gl::genTextures(1, &m_id);
 
-                if(m_id == 0)
+                if(!m_id)
                 {
                     return false;
                 }
