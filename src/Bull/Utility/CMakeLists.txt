@@ -9,12 +9,10 @@ target_sources(bull-utility
             ${CMAKE_CURRENT_SOURCE_DIR}/VertexArray.cpp
         )
 
-add_subdirectory(Font)
 add_subdirectory(Image)
 add_subdirectory(Logger)
 add_subdirectory(TransformationPipeline)
 
-target_link_libraries(bull-utility freetype)
 target_link_libraries(bull-utility stb)
 
 target_link_libraries(bull-utility bull-core)

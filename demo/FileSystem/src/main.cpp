@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
     {
         for(const Path& p : current.getContent(Directory::Directories))
         {
-            std::cout << p.toString() << std::endl;
+            std::cout << p.toString().getBuffer() << std::endl;
         }
 
         return 1;
