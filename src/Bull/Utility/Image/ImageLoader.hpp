@@ -1,13 +1,13 @@
 #ifndef BULL_IMAGELOADER_HPP
 #define BULL_IMAGELOADER_HPP
 
-#include <Bull/Utility/AbstractImageLoader.hpp>
+#include <Bull/Utility/Image/AbstractImageLoader.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        class ImageLoader : public AbstractImageLoader
+        class ImageLoader : public AbstractImageLoader, public Singleton<ImageLoader>
         {
         private:
 
@@ -109,7 +109,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveToPath(const Path& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
+            bool saveToPath(const Path& path, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
 
             /*! \brief Save an image
              *
@@ -121,7 +121,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveToStream(OutStream& outStream, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
+            bool saveToStream(OutStream& outStream, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
 
             /*! \brief Save an image
              *
@@ -134,7 +134,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveToMemory(void* data, std::size_t dataSize, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
+            bool saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
 
         private:
 

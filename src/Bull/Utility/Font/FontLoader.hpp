@@ -1,13 +1,15 @@
 #ifndef BULL_FONTLOADER_HPP
 #define BULL_FONTLOADER_HPP
 
+#include <Bull/Core/Pattern/Singleton.hpp>
+
 #include <Bull/Utility/Font/AbstractFontLoader.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        class FontLoader : public AbstractFontLoader
+        class FontLoader : public AbstractFontLoader, public Singleton<FontLoader>
         {
         public:
 

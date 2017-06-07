@@ -1,13 +1,15 @@
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/System/Config.hpp>
 
-#include <Bull/Utility/Image.hpp>
-#include <Bull/Utility/ImageLoader.hpp>
-
-std::unique_ptr<Bull::AbstractImageLoader> Bull::Image::loader = std::make_unique<IMAGE_LOADER>();
+#include <Bull/Utility/Image/Image.hpp>
+#include <Bull/Utility/Image/ImageLoader.hpp>
 
 namespace Bull
 {
+    Image::Image()
+    {
+        /// Nothing
+    }
+
     Image::Image(const Vector2UI& size, const Color& color) :
         Image(size.x, size.y, color)
     {
@@ -42,17 +44,17 @@ namespace Bull
 
     bool Image::loadFromPath(const Path& path)
     {
-        return loader->loadFromPath(path, m_pixels, m_size);
+        return prv::ImageLoader::get()->loadFromPath(path, m_pixels, m_size);
     }
 
     bool Image::loadFromStream(InStream& stream)
     {
-        return loader->loadFromStream(stream, m_pixels, m_size);
+        return prv::ImageLoader::get()->loadFromStream(stream, m_pixels, m_size);
     }
 
     bool Image::loadFromMemory(const void* data, std::size_t dataSize)
     {
-        return loader->loadFromMemory(data, dataSize, m_pixels, m_size);
+        return prv::ImageLoader::get()->loadFromMemory(data, dataSize, m_pixels, m_size);
     }
 
     bool Image::loadFromPixels(const std::vector<Uint8>& pixels, const Vector2UI& size)
@@ -100,18 +102,18 @@ namespace Bull
         return m_pixels;
     }
 
-    bool Image::saveToPath(const Path& path, Format format) const
+    bool Image::saveToPath(const Path& path, ImageFormat format) const
     {
-        return loader->saveToPath(path, format, m_pixels, m_size);
+        return prv::ImageLoader::get()->saveToPath(path, format, m_pixels, m_size);
     }
 
-    bool Image::saveToMemory(OutStream& stream, Format format) const
+    bool Image::saveToMemory(OutStream& stream, ImageFormat format) const
     {
-        return loader->saveToStream(stream, format, m_pixels, m_size);
+        return prv::ImageLoader::get()->saveToStream(stream, format, m_pixels, m_size);
     }
 
-    bool Image::saveToSteam(void* data, std::size_t size, Format format) const
+    bool Image::saveToSteam(void* data, std::size_t size, ImageFormat format) const
     {
-        return loader->saveToMemory(data, size, format, m_pixels, m_size);
+        return prv::ImageLoader::get()->saveToMemory(data, size, format, m_pixels, m_size);
     }
 }

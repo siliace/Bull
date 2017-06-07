@@ -7,7 +7,7 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Utility/Image.hpp>
+#include <Bull/Utility/Image/Image.hpp>
 
 #include <Bull/Window/Export.hpp>
 

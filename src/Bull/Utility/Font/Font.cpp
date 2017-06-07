@@ -1,9 +1,5 @@
-#include <Bull/Core/System/Config.hpp>
-
 #include <Bull/Utility/Font/Font.hpp>
 #include <Bull/Utility/Font/FontLoader.hpp>
-
-std::unique_ptr<Bull::AbstractFontLoader> Bull::Font::s_loader = std::make_unique<FONT_LOADER>();
 
 namespace Bull
 {
@@ -14,7 +10,7 @@ namespace Bull
 
     bool Font::loadFromPath(const Path& path)
     {
-        return false;
+        return prv::FontLoader::get()->loadFromPath(path, m_characterSet);
     }
 
     bool Font::isValid() const

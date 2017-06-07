@@ -16,7 +16,7 @@ namespace Bull
 
         bool FontLoader::loadFromPath(const Path& path, std::unordered_map<unsigned char, Glyph>& characterSet) const
         {
-
+            return false;
         }
     }
 }

@@ -3,7 +3,7 @@
 #include <stb_image/stb_image.h>
 #include <stb_image/stb_image_write.h>
 
-#include <Bull/Utility/ImageLoader.hpp>
+#include <Bull/Utility/Image/ImageLoader.hpp>
 
 namespace Bull
 {
@@ -129,43 +129,43 @@ namespace Bull
             return false;
         }
 
-        bool ImageLoader::saveToPath(const Path& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveToPath(const Path& path, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const
         {
             switch(format)
             {
-                case Image::Bmp: return saveBmpToPath(path.toString(), pixels, size);
-                case Image::Tga: return saveTgaToPath(path.toString(), pixels, size);
-                case Image::Png: return savePngToPath(path.toString(), pixels, size);
-                case Image::Jpg:
-                case Image::Jpeg: return false;
+                case ImageFormat::Bmp: return saveBmpToPath(path.toString(), pixels, size);
+                case ImageFormat::Tga: return saveTgaToPath(path.toString(), pixels, size);
+                case ImageFormat::Png: return savePngToPath(path.toString(), pixels, size);
+                case ImageFormat::Jpg:
+                case ImageFormat::Jpeg: return false;
             }
 
             return false;
         }
 
-        bool ImageLoader::saveToStream(OutStream& outStream, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveToStream(OutStream& outStream, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const
         {
             switch(format)
             {
-                case Image::Bmp: return saveBmpToStream(outStream, pixels, size);
-                case Image::Tga: return saveTgaToStream(outStream, pixels, size);
-                case Image::Png: return savePngToStream(outStream, pixels, size);
-                case Image::Jpg:
-                case Image::Jpeg: return false;
+                case ImageFormat::Bmp: return saveBmpToStream(outStream, pixels, size);
+                case ImageFormat::Tga: return saveTgaToStream(outStream, pixels, size);
+                case ImageFormat::Png: return savePngToStream(outStream, pixels, size);
+                case ImageFormat::Jpg:
+                case ImageFormat::Jpeg: return false;
             }
 
             return false;
         }
 
-        bool ImageLoader::saveToMemory(void* data, std::size_t dataSize, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const
         {
             switch(format)
             {
-                case Image::Bmp: return saveBmpToMemory(data, dataSize, pixels, size);
-                case Image::Tga: return saveTgaToMemory(data, dataSize, pixels, size);
-                case Image::Png: return savePngToMemory(data, dataSize, pixels, size);
-                case Image::Jpg:
-                case Image::Jpeg: return false;
+                case ImageFormat::Bmp: return saveBmpToMemory(data, dataSize, pixels, size);
+                case ImageFormat::Tga: return saveTgaToMemory(data, dataSize, pixels, size);
+                case ImageFormat::Png: return savePngToMemory(data, dataSize, pixels, size);
+                case ImageFormat::Jpg:
+                case ImageFormat::Jpeg: return false;
             }
 
             return false;

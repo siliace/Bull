@@ -4,7 +4,6 @@ target_sources(bull-core
             ${CMAKE_CURRENT_SOURCE_DIR}/Clipboard.cpp
         PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/ClipboardImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Config.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/LibraryImpl.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/LibraryImpl.hpp
         )

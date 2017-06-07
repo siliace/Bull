@@ -1,15 +1,17 @@
-#ifndef BULL_ABSTRACTIMAGELOADER_HPP
-#define BULL_ABSTRACTIMAGELOADER_HPP
+#ifndef BULL_UTILITY_IMAGE_ABSTRACTIMAGELOADER_HPP
+#define BULL_UTILITY_IMAGE_ABSTRACTIMAGELOADER_HPP
 
 #include <vector>
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
+#include <Bull/Core/Pattern/Singleton.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
-#include <Bull/Utility/Image.hpp>
+#include <Bull/Utility/Export.hpp>
+#include <Bull/Utility/Image/ImageFormat.hpp>
 
 namespace Bull
 {
@@ -59,7 +61,7 @@ namespace Bull
          * \return True if the image was saved successfully
          *
          */
-        virtual bool saveToPath(const Path& path, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
+        virtual bool saveToPath(const Path& path, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
 
         /*! \brief Save an image
          *
@@ -71,7 +73,7 @@ namespace Bull
          * \return True if the image was saved successfully
          *
          */
-        virtual bool saveToStream(OutStream& outStream, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
+        virtual bool saveToStream(OutStream& outStream, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
 
         /*! \brief Save an image
          *
@@ -84,8 +86,8 @@ namespace Bull
          * \return True if the image was saved successfully
          *
          */
-        virtual bool saveToMemory(void* data, std::size_t dataSize, Image::Format format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
+        virtual bool saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
     };
 }
 
-#endif // BULL_ABSTRACTIMAGELOADER_HPP
+#endif // BULL_UTILITY_IMAGE_ABSTRACTIMAGELOADER_HPP

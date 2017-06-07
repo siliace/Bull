@@ -9,14 +9,8 @@
 
 namespace Bull
 {
-    class AbstractFontLoader;
-
     class BULL_UTILITY_API Font
     {
-    private:
-
-        static std::unique_ptr<AbstractFontLoader> s_loader;
-
     public:
 
         /*! \brief Default constructor

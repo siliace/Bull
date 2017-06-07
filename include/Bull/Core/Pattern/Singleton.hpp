@@ -13,7 +13,7 @@ namespace Bull
     {
     public:
 
-        typedef TChild* Instance;
+        typedef std::unique_ptr<TChild>& Instance;
 
         /*! \brief Get the instance of the singleton. Create the instance if needed
          *
@@ -31,7 +31,7 @@ namespace Bull
 
                 if(!s_instance)
                 {
-                    s_instance = new TChild(args...);
+                    s_instance = std::make_unique<TChild>(args...);
                 }
             }
 
@@ -58,26 +58,17 @@ namespace Bull
             return s_instance != nullptr;
         }
 
-        /*! \brief Destroy the instance
-         *
-         */
-        static void destroy()
-        {
-            delete s_instance;
-            s_instance = nullptr;
-        }
-
     private:
 
-        static Mutex s_mutex;
-        static Instance s_instance;
+        static Mutex                   s_mutex;
+        static std::unique_ptr<TChild> s_instance;
     };
 
     template <typename TChild>
     Mutex Singleton<TChild>::s_mutex;
 
     template <typename TChild>
-    TChild* Singleton<TChild>::s_instance = nullptr;
+    std::unique_ptr<TChild> Singleton<TChild>::s_instance;
 }
 
 #endif // BULL_SINGLETON_HPP

@@ -3,7 +3,7 @@
 
 #include <Bull/Math/Polygon/Rectangle.hpp>
 
-#include <Bull/Utility/Image.hpp>
+#include <Bull/Utility/Image/Image.hpp>
 
 namespace Bull
 {

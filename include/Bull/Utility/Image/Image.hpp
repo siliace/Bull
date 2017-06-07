@@ -1,42 +1,29 @@
-#ifndef BULL_UTILITY_IMAGE_HPP
-#define BULL_UTILITY_IMAGE_HPP
+#ifndef BULL_UTILITY_IMAGE_IMAGE_HPP
+#define BULL_UTILITY_IMAGE_IMAGE_HPP
 
 #include <vector>
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
+#include <Bull/Core/IO/OutStream.hpp>
 #include <Bull/Core/System/Integer.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Utility/Color.hpp>
-#include <Bull/Core/IO/OutStream.hpp>
+#include <Bull/Utility/Image/AbstractImageLoader.hpp>
+#include <Bull/Utility/Image/ImageFormat.hpp>
 
 namespace Bull
 {
-    class AbstractImageLoader;
-
     class BULL_UTILITY_API Image
     {
-    public:
-
-        enum Format
-        {
-            Bmp,
-            Jpg,
-            Jpeg,
-            Png,
-            Tga
-        };
-
-        static std::unique_ptr<AbstractImageLoader> loader;
-
     public:
 
         /*! \brief Default constructor
          *
          */
-        Image() = default;
+        Image();
 
         /*! \brief Constructor
          *
@@ -162,7 +149,7 @@ namespace Bull
          * \return Return
          *
          */
-        bool saveToPath(const Path& path, Format format) const;
+        bool saveToPath(const Path& path, ImageFormat format) const;
 
         /*! \brief
          *
@@ -172,7 +159,7 @@ namespace Bull
          * \return
          *
          */
-        bool saveToMemory(OutStream& stream, Format format) const;
+        bool saveToMemory(OutStream& stream, ImageFormat format) const;
 
         /*! \brief
          *
@@ -183,13 +170,13 @@ namespace Bull
          * \return
          *
          */
-        bool saveToSteam(void* data, std::size_t size, Format format) const;
+        bool saveToSteam(void* data, std::size_t size, ImageFormat format) const;
 
     private:
 
-        Vector2UI          m_size;
-        std::vector<Uint8> m_pixels;
+        Vector2UI            m_size;
+        std::vector<Uint8>   m_pixels;
     };
 }
 
-#endif // BULL_UTILITY_IMAGE_HPP
+#endif // BULL_UTILITY_IMAGE_IMAGE_HPP
