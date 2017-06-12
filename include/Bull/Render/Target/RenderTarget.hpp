@@ -8,14 +8,13 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
+#include <Bull/Render/Context/ContextResource.hpp>
+#include <Bull/Render/Context/ContextSettings.hpp>
 #include <Bull/Render/Target/Viewport.hpp>
 
 #include <Bull/Utility/Color.hpp>
 
-#include <Bull/Render/Context/ContextResource.hpp>
-#include <Bull/Render/Context/ContextSettings.hpp>
 #include <Bull/Window/VideoMode.hpp>
-#include <Bull/Window/WindowHandler.hpp>
 
 namespace Bull
 {

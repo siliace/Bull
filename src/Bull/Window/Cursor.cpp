@@ -16,7 +16,7 @@ namespace Bull
 
     bool Cursor::loadFromSystem(Type cursor)
     {
-        m_impl->loadFromSystem(cursor);
+        return m_impl->loadFromSystem(cursor);
     }
 
     bool Cursor::loadFromImage(const Image& image, const Vector2UI& hotSpot)

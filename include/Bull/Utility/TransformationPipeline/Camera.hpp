@@ -20,10 +20,25 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param position The initial position of the Camera
-         * \param rotation The initial rotation of the Camera
          *
          */
-        Camera(const Vector3F& position, const EulerAnglesF& rotation = EulerAnglesF());
+        Camera(const Vector3F& position);
+
+        /*! \brief Set the forward vector of the Camera
+         *
+         * \param forward The forward vector
+         *
+         * \return This
+         *
+         */
+        Camera& setForward(const Vector3F& forward);
+
+        /*! \brief Get the forward vector of the Camera
+         *
+         * \return The forward vector
+         *
+         */
+        const Vector3F& getForward() const;
 
         /*! \brief Move the Camera
          *
@@ -34,19 +49,6 @@ namespace Bull
          */
         Camera& move(const Vector3F& offset);
 
-        /*! \brief Rotate the Camera
-         *
-         * \param rotation Angles to rotate the Camera
-         *
-         * \return This
-         *
-         */
-        Camera& rotate(const EulerAnglesF& rotation);
-
-        const Vector3F& getPosition() const;
-
-        const EulerAnglesF& getRotation() const;
-
         /*! \brief Convert to a Matrix4F
          *
          * \return The Matrix4F
@@ -56,13 +58,15 @@ namespace Bull
 
     private:
 
+        /*! \brief Update Camera's vectors
+         *
+         */
         void update();
 
-        Vector3F     m_up;
-        Vector3F     m_right;
-        Vector3F     m_forward;
-        Vector3F     m_position;
-        EulerAnglesF m_rotation;
+        Vector3F m_up;
+        Vector3F m_right;
+        Vector3F m_forward;
+        Vector3F m_position;
     };
 }
 

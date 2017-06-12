@@ -6,7 +6,6 @@
 
 #include <Bull/Utility/TransformationPipeline/Camera.hpp>
 #include <Bull/Utility/TransformationPipeline/PerspectiveProjection.hpp>
-#include <Bull/Utility/TransformationPipeline/OrthographicProjection.hpp>
 #include <Bull/Utility/TransformationPipeline/Transformation3D.hpp>
 
 using namespace Bull;
@@ -49,50 +48,21 @@ unsigned int indices[] = {
     6, 7, 3,
 };
 
-std::vector<Vector3F> positions = {
-    Vector3F( 0.0f,  0.0f,  0.0f),
-    Vector3F( 2.0f,  5.0f, -15.0f),
-    Vector3F(-1.5f, -2.2f, -2.5f),
-    Vector3F(-3.8f, -2.0f, -12.3f),
-    Vector3F( 2.4f, -0.4f, -3.5f),
-    Vector3F(-1.7f,  3.0f, -7.5f),
-    Vector3F( 1.3f, -2.0f, -2.5f),
-    Vector3F( 1.5f,  2.0f, -2.5f),
-    Vector3F( 1.5f,  0.2f, -1.5f),
-    Vector3F(-1.3f,  1.0f, -1.5f)
-};
-
-std::vector<EulerAnglesF> rotations = {
-    EulerAnglesF(AngleF::Zero, AngleF::Zero, AngleF::degree(45.f)),
-    EulerAnglesF(AngleF::degree(17.f), AngleF::degree(198.f), AngleF::Zero),
-    EulerAnglesF(AngleF::Zero, AngleF::degree(55.f), AngleF::radian(3.f)),
-    EulerAnglesF(AngleF::Zero, AngleF::Zero, AngleF::degree(45.f)),
-    EulerAnglesF(AngleF::degree(17.f), AngleF::degree(198.f), AngleF::Zero),
-    EulerAnglesF(AngleF::Zero, AngleF::degree(55.f), AngleF::radian(3.f)),
-    EulerAnglesF(AngleF::Zero, AngleF::Zero, AngleF::degree(45.f)),
-    EulerAnglesF(AngleF::degree(17.f), AngleF::degree(198.f), AngleF::Zero),
-    EulerAnglesF(AngleF::Zero, AngleF::degree(55.f), AngleF::radian(3.f)),
-};
-
 int main(int argc, char* argv[])
 {
     Texture t;
     Shader core;
+    Camera camera;
+    float fov = 45.f;
     unsigned int vao;
     RenderWindow::Event e;
+    EulerAnglesF rotation;
+    PerspectiveProjection perspective;
     HardwareBuffer vbo(HardwareBuffer::Array);
     HardwareBuffer ebo(HardwareBuffer::Element);
-    RenderWindow win(VideoMode(800, 600), "Bull Application", RenderWindow::Style::Closable | RenderWindow::Style::Visible);
-    float fov = 45.f;
-
-    PerspectiveProjection perspective;
-    OrthographicProjection orthographic;
-    Projection* projection = &perspective;
-
-    Camera camera;
+    RenderWindow win(VideoMode(1920, 1080), "Bull Application");
 
     camera.move(Vector3F(0, 0, -3));
-    camera.rotate(EulerAnglesF(AngleF::Zero, AngleF::Zero, AngleF::Zero));
 
     core.attachFromPath(Path("resources/shaders/core/core.vert"), ShaderStage::Vertex);
     core.attachFromPath(Path("resources/shaders/core/core.frag"), ShaderStage::Fragment);
@@ -100,8 +70,6 @@ int main(int argc, char* argv[])
 
     t.loadFromPath(Path("resources/textures/wall.jpg"));
     t.enableSmooth();
-
-    win.setMouseCursorVisible(false);
 
     gl::genVertexArrays(1, &vao);
 
@@ -144,29 +112,51 @@ int main(int argc, char* argv[])
                 }
             }
 
+            if(e.type == RenderWindow::Event::MouseButtonDown)
+            {
+                if(e.mouseButton.button == Mouse::Left)
+                {
+                    Cursor c;
+                    c.loadFromSystem(Cursor::Hand);
+                    win.setMouseCursor(c);
+                }
+            }
+
+            if(e.type == RenderWindow::Event::MouseButtonUp)
+            {
+                if(e.mouseButton.button == Mouse::Left)
+                {
+                    Cursor c;
+                    win.setMouseCursor(c);
+                }
+            }
+
             if(e.type == RenderWindow::Event::MouseMoved)
             {
-                EulerAnglesF rotation;
+                if(Mouse::isButtonPressed(Mouse::Left))
+                {
+                    if(e.mouseMove.xRel > 0)
+                    {
+                        rotation.pitch += 0.5f;
+                    }
+                    else if(e.mouseMove.xRel < 0)
+                    {
+                        rotation.pitch -= 0.5f;
+                    }
 
-                if(e.mouseMove.yRel < 0)
-                {
-                    rotation.pitch = AngleF::degree(1.f);
+                    if(e.mouseMove.yRel > 0)
+                    {
+                        rotation.roll += 0.5f;
+                    }
+                    else if(e.mouseMove.yRel < 0)
+                    {
+                        rotation.roll -= 0.5f;
+                    }
                 }
-                else if(e.mouseMove.yRel > 0)
+                else
                 {
-                    rotation.pitch = AngleF::degree(-1.f);
-                }
 
-                if(e.mouseMove.xRel < 0)
-                {
-                    rotation.yaw = AngleF::degree(-1.f);
                 }
-                else if(e.mouseMove.xRel > 0)
-                {
-                    rotation.yaw = AngleF::degree(1.f);
-                }
-
-                camera.rotate(rotation);
             }
 
             if(e.type == RenderWindow::Event::KeyDown)
@@ -201,53 +191,27 @@ int main(int argc, char* argv[])
                 }
 
                 camera.move(offset);
-
-                if(e.key.code == Keyboard::F1)
-                {
-                    if(projection == &perspective)
-                    {
-                        projection = &orthographic;
-                    }
-                    else
-                    {
-                        projection = &perspective;
-                    }
-                }
-
-                if(e.key.code == Keyboard::F2)
-                {
-                    t.enableSmooth(!t.isEnableSmooth());
-                }
             }
         }
 
-        if(win.isOpen())
-        {
-            perspective = PerspectiveProjection(AngleF::degree(fov), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
-            orthographic = OrthographicProjection(RectangleF(-4.f, 4.f, 4.f, -4.f), Vector2F(0.1f, 100.f));
+        perspective = PerspectiveProjection(AngleF::degree(fov), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
-            win.clear();
+        win.clear();
 
-            t.bind();
-            core.bind();
+        t.bind();
+        core.bind();
 
-            gl::bindVertexArray(vao);
+        gl::bindVertexArray(vao);
 
-            core.setUniformMatrix("viewMatrix", camera.toMatrix());
-            core.setUniformMatrix("projMatrix", projection->toMatrix());
+        core.setUniformMatrix("modelMatrix", Transformation3D::makeRotation(rotation).toMatrix());
+        core.setUniformMatrix("viewMatrix", camera.toMatrix());
+        core.setUniformMatrix("projMatrix", perspective.toMatrix());
 
-            for(unsigned int i = 0; i < 10; i++)
-            {
-                Matrix4F model = Transformation3D::make(positions[i], rotations[i]).toMatrix();
-                core.setUniformMatrix("modelMatrix", model);
+        gl::drawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
 
-                gl::drawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
-            }
+        gl::bindVertexArray(0);
 
-            gl::bindVertexArray(0);
-
-            win.display();
-        }
+        win.display();
     }
 
     return 0;
