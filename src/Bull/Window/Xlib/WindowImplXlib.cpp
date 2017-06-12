@@ -122,6 +122,25 @@ namespace Bull
             }
         }
 
+        XCursor WindowImplXlib::createHiddenCursor(Display::Instance display, XWindow window)
+        {
+            Pixmap cursorPixmap = XCreatePixmap(display->getHandler(), window, 1, 1, 1);
+            GC graphicsContext = XCreateGC(display->getHandler(), cursorPixmap, 0, nullptr);
+            XDrawPoint(display->getHandler(), cursorPixmap, graphicsContext, 0, 0);
+            XFreeGC(display->getHandler(), graphicsContext);
+
+            // Create the cursor, using the pixmap as both the shape and the mask of the cursor
+            XColor color;
+            color.flags = DoRed | DoGreen | DoBlue;
+            color.red = color.blue = color.green = 0;
+            XCursor hidden = XCreatePixmapCursor(display->getHandler(), cursorPixmap, cursorPixmap, &color, &color, 0, 0);
+
+            // We don't need the pixmap any longer, free it
+            XFreePixmap(display->getHandler(), cursorPixmap);
+
+            return hidden;
+        }
+
         WindowImplXlib::WindowImplXlib(const VideoMode& mode, const String& title, Uint32 style) :
             WindowImplXlib()
         {
@@ -130,9 +149,15 @@ namespace Bull
 
         WindowImplXlib::~WindowImplXlib()
         {
+            if(m_hiddenCursor)
+            {
+                XFreeCursor(m_display->getHandler(), m_hiddenCursor);
+            }
+
             if(m_handler)
             {
                 XDestroyWindow(m_display->getHandler(), m_handler);
+                m_display->flush();
             }
 
             XFreeColormap(m_display->getHandler(), m_colormap);
@@ -609,7 +634,13 @@ namespace Bull
 
         void WindowImplXlib::setMouseCursorVisible(bool visible)
         {
+            if(m_hiddenCursor == 0 && !visible)
+            {
+                m_hiddenCursor = createHiddenCursor(m_display, m_handler);
+            }
 
+            XDefineCursor(m_display->getHandler(), m_handler, visible ? XNone : m_hiddenCursor);
+            m_display->flush();
         }
 
         bool WindowImplXlib::isMouseCursorVisible() const
@@ -626,6 +657,7 @@ namespace Bull
             m_display(Display::get()),
             m_handler(0),
             m_isMapped(false),
+            m_hiddenCursor(0),
             m_captureCursor(false)
         {
             /// Nothing

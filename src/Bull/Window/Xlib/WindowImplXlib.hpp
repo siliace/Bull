@@ -34,6 +34,16 @@ namespace Bull
              */
             static Keyboard::Key convertXKToBullkey(KeySym xkey);
 
+            /*! \brief Create an hidden cursor
+             *
+             * \param display A display connection
+             * \param window  The window related to the cursor to create
+             *
+             * \return The hidden cursor
+             *
+             */
+            static XCursor createHiddenCursor(Display::Instance display, XWindow window);
+
         public:
 
             /*! \brief Constructor
@@ -260,6 +270,7 @@ namespace Bull
             Vector2UI         m_lastSize;
             bool              m_isMapped;
             XColormap         m_colormap;
+            XCursor           m_hiddenCursor;
             bool              m_captureCursor;
         };
     }

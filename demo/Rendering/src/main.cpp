@@ -101,6 +101,8 @@ int main(int argc, char* argv[])
     t.loadFromPath(Path("resources/textures/wall.jpg"));
     t.enableSmooth();
 
+    win.setMouseCursorVisible(false);
+
     gl::genVertexArrays(1, &vao);
 
     gl::bindVertexArray(vao);
