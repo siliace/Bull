@@ -147,6 +147,11 @@ namespace Bull
 
         WindowImplXlib::~WindowImplXlib()
         {
+            if(m_colormap)
+            {
+                XFreeColormap(m_display->getHandler(), m_colormap);
+            }
+
             if(m_hiddenCursor)
             {
                 XFreeCursor(m_display->getHandler(), m_hiddenCursor);
@@ -157,8 +162,6 @@ namespace Bull
                 XDestroyWindow(m_display->getHandler(), m_handler);
                 m_display->flush();
             }
-
-            XFreeColormap(m_display->getHandler(), m_colormap);
         }
 
         void WindowImplXlib::startProcessEvents()
