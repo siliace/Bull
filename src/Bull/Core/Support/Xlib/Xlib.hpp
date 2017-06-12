@@ -2,6 +2,7 @@
 #define BULL_XLIB_HPP
 
 #include <X11/Xlib.h>
+#include <X11/Xatom.h>
 #include <X11/keysym.h>
 #include <X11/Xutil.h>
 
@@ -15,6 +16,7 @@ namespace Bull
 {
     namespace prv
     {
+        typedef ::GC       XGC;
         typedef ::Atom     XAtom;
         typedef ::Font     XFont;
         typedef ::Mask     XMask;
@@ -25,6 +27,7 @@ namespace Bull
         typedef ::Display  XDisplay;
         typedef ::Colormap XColormap;
         typedef ::Drawable XDrawable;
+        typedef ::GContext XGContext;
     }
 }
 

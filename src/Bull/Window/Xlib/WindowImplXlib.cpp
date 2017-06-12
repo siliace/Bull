@@ -124,18 +124,16 @@ namespace Bull
 
         XCursor WindowImplXlib::createHiddenCursor(Display::Instance display, XWindow window)
         {
-            Pixmap cursorPixmap = XCreatePixmap(display->getHandler(), window, 1, 1, 1);
-            GC graphicsContext = XCreateGC(display->getHandler(), cursorPixmap, 0, nullptr);
+            XPixmap cursorPixmap = XCreatePixmap(display->getHandler(), window, 1, 1, 1);
+            XGC graphicsContext = XCreateGC(display->getHandler(), cursorPixmap, 0, nullptr);
             XDrawPoint(display->getHandler(), cursorPixmap, graphicsContext, 0, 0);
             XFreeGC(display->getHandler(), graphicsContext);
 
-            // Create the cursor, using the pixmap as both the shape and the mask of the cursor
             XColor color;
             color.flags = DoRed | DoGreen | DoBlue;
             color.red = color.blue = color.green = 0;
             XCursor hidden = XCreatePixmapCursor(display->getHandler(), cursorPixmap, cursorPixmap, &color, &color, 0, 0);
 
-            // We don't need the pixmap any longer, free it
             XFreePixmap(display->getHandler(), cursorPixmap);
 
             return hidden;
