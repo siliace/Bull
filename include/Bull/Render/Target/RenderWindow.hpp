@@ -42,11 +42,6 @@ namespace Bull
          */
         bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default, const ContextSettings& settings = ContextSettings::Best);
 
-        /*! \brief Close the RenderWindow
-         *
-         */
-        void close() override;
-
         /*! \brief Display what has been rendered so far
          *
          */
@@ -79,6 +74,13 @@ namespace Bull
          *
          */
         Viewport getDefaultViewport() const override;
+
+    protected:
+
+        /*! \brief Function called on Window close
+         *
+         */
+        void onClose() override;
 
     private:
 

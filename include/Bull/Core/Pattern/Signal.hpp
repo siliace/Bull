@@ -117,7 +117,7 @@ namespace Bull
          * \param args Arguments to send to slots
          *
          */
-        void emit(Args... args)
+        void operator()(Args... args)
         {
             for(const SlotPtr& slot : m_slots)
             {

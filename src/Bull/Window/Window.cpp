@@ -34,6 +34,8 @@ namespace Bull
             enableFullscreen();
         }
 
+        onOpen();
+
         return true;
     }
 
@@ -57,6 +59,8 @@ namespace Bull
         }
 
         m_impl.reset();
+
+        onClose();
     }
 
     bool Window::pollEvent(Event& e)

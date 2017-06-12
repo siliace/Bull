@@ -5,6 +5,7 @@
 
 #include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/Signal.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Hardware/Joystick.hpp>
@@ -201,7 +202,7 @@ namespace Bull
         /*! \brief Close the window
          *
          */
-        virtual void close();
+        void close();
 
         /*! \brief Get the first event on the stack without blocking the current thread
          *
@@ -430,6 +431,16 @@ namespace Bull
         bool isFullscreenEnable() const;
 
     protected:
+
+        /*! \brief Function called on Window open
+         *
+         */
+        virtual void onOpen() {}
+
+        /*! \brief Function called on Window close
+         *
+         */
+        virtual void onClose() {}
 
         std::unique_ptr<prv::WindowImpl> m_impl; /*!< The OS specific implementation of the window */
     };

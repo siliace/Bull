@@ -34,13 +34,9 @@ namespace Bull
 
         setActive();
 
-        return true;
-    }
+        onOpen();
 
-    void RenderWindow::close()
-    {
-        Window::close();
-        m_context.reset();
+        return true;
     }
 
     void RenderWindow::display()
@@ -98,5 +94,10 @@ namespace Bull
         viewport.height = getSize().y;
 
         return viewport;
+    }
+
+    void RenderWindow::onClose()
+    {
+        m_context.reset();
     }
 }
