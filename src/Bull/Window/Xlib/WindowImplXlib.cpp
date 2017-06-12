@@ -495,11 +495,6 @@ namespace Bull
             }
         }
 
-        void WindowImplXlib::showCursor(bool enable)
-        {
-
-        }
-
         void WindowImplXlib::setPosition(const Vector2I& position)
         {
             XMoveWindow(m_display->getHandler(), m_handler, position.x, position.y);
@@ -641,11 +636,13 @@ namespace Bull
 
             XDefineCursor(m_display->getHandler(), m_handler, visible ? XNone : m_hiddenCursor);
             m_display->flush();
+
+            m_cursorVisible = visible;
         }
 
         bool WindowImplXlib::isMouseCursorVisible() const
         {
-            return false;
+            return m_cursorVisible;
         }
 
         WindowHandler WindowImplXlib::getSystemHandler() const
@@ -658,6 +655,7 @@ namespace Bull
             m_handler(0),
             m_isMapped(false),
             m_hiddenCursor(0),
+            m_cursorVisible(true),
             m_captureCursor(false)
         {
             /// Nothing

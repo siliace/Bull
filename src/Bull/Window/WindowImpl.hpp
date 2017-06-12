@@ -87,13 +87,6 @@ namespace Bull
              */
             virtual void enableCaptureCursor(bool capture) = 0;
 
-            /*! \brief Hide or show the cursor
-             *
-             * \param enable The state of the cursor
-             *
-             */
-            virtual void showCursor(bool enable = true) = 0;
-
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window

@@ -226,13 +226,6 @@ namespace Bull
          */
         Window& enableCaptureCursor(bool enable = true);
 
-        /*! \brief Hide or the cursor
-         *
-         * \param enable The state of the cursor
-         *
-         */
-        Window& showCursor(bool enable = true);
-
         /*! \brief Minimize a window
          *
          */

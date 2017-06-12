@@ -93,16 +93,6 @@ namespace Bull
         return (*this);
     }
 
-    Window& Window::showCursor(bool enable)
-    {
-        if(m_impl)
-        {
-            m_impl->showCursor(enable);
-        }
-
-        return (*this);
-    }
-
     Window& Window::minimize()
     {
         if(m_impl)

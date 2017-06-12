@@ -96,13 +96,6 @@ namespace Bull
              */
             void enableCaptureCursor(bool capture) override;
 
-            /*! \brief Hide or show the cursor
-             *
-             * \param enable The state of the cursor
-             *
-             */
-            void showCursor(bool enable = true) override;
-
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window
@@ -271,6 +264,7 @@ namespace Bull
             bool              m_isMapped;
             XColormap         m_colormap;
             XCursor           m_hiddenCursor;
+            bool              m_cursorVisible;
             bool              m_captureCursor;
         };
     }
