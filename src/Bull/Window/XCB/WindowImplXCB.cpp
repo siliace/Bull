@@ -135,6 +135,21 @@ namespace Bull
 
         }
 
+        void WindowImplXCB::setMouseCursor(const std::unique_ptr<CursorImpl>& cursor)
+        {
+
+        }
+
+        void WindowImplXCB::setMouseCursorVisible(bool visible)
+        {
+
+        }
+
+        bool WindowImplXCB::isMouseCursorVisible() const
+        {
+            return false;
+        }
+
         WindowHandler WindowImplXCB::getSystemHandler() const
         {
             return m_window;

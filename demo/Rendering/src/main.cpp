@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
     RenderWindow::Event e;
     HardwareBuffer vbo(HardwareBuffer::Array);
     HardwareBuffer ebo(HardwareBuffer::Element);
-    RenderWindow win(VideoMode(800, 600), "Bull Application");
+    RenderWindow win(VideoMode(800, 600), "Bull Application", RenderWindow::Style::Closable | RenderWindow::Style::Visible);
     float fov = 45.f;
 
     PerspectiveProjection perspective;

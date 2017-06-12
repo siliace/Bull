@@ -1,4 +1,5 @@
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
+#include <Bull/Core/Support/Xlib/WMHints.hpp>
 #include <Bull/Core/Thread/Thread.hpp>
 
 #include <Bull/Window/Xlib/WindowImplXlib.hpp>
@@ -706,9 +707,57 @@ namespace Bull
 
             setTitle(title);
 
+            if(style != Window::Style::Fullscreen)
+            {
+                XAtom hintsAtom = m_display->getAtom("_MOTIF_WM_HINTS", false);
+                if(hintsAtom)
+                {
+                    WMHints hints;
+
+                    if(style != Window::Style::None)
+                    {
+                        hints.decorations |= WMHints::Decor_Menu | WMHints::Decor_Title;
+                        hints.functions   |= WMHints::Function_Move;
+                    }
+
+                    if(style & Window::Style::Resizable)
+                    {
+                        hints.decorations |= WMHints::Decor_ResizeH;
+                        hints.functions   |= WMHints::Function_Resize;
+                    }
+
+                    if(style & Window::Style::Minimizable)
+                    {
+                        hints.decorations |= WMHints::Decor_Minimize;
+                        hints.functions   |= WMHints::Function_Minimize;
+                    }
+
+                    if(style & Window::Style::Maximizable)
+                    {
+                        hints.decorations |= WMHints::Decor_Maximize;
+                        hints.functions   |= WMHints::Function_Maximize;
+                    }
+
+                    if(style & Window::Style::Closable)
+                    {
+                        hints.decorations |= 0;
+                        hints.functions   |= WMHints::Function_Close;
+                    }
+
+                    XChangeProperty(m_display->getHandler(),
+                                    m_handler,
+                                    hintsAtom,
+                                    hintsAtom,
+                                    32,
+                                    PropModeReplace,
+                                    reinterpret_cast<const unsigned char*>(&hints),
+                                    5);
+                }
+            }
+
             m_lastSize = getSize();
 
-            setVisible(true);
+            setVisible(style & Window::Style::Visible);
         }
 
         void WindowImplXlib::setProtocols()

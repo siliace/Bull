@@ -168,6 +168,27 @@ namespace Bull
              */
             void setVisible(bool visible) override;
 
+            /*! \brief Set the mouse cursor of the Window
+             *
+             * \param cursor The cursor
+             *
+             */
+            void setMouseCursor(const std::unique_ptr<CursorImpl>& cursor) override;
+
+            /*! \brief Toggle cursor visibility
+             *
+             * \param visible True to show the cursor, false to hide
+             *
+             */
+            void setMouseCursorVisible(bool visible = false) override;
+
+            /*! \brief Check whether the mouse cursor is visible
+             *
+             * \return True if the mouse cursor is visible
+             *
+             */
+            bool isMouseCursorVisible() const override;
+
             /*! \brief Get the window system handler
              *
              * \return Return the native window system handler
@@ -177,6 +198,9 @@ namespace Bull
 
         protected:
 
+            /*! \brief Default constructor
+             *
+             */
             WindowImplXCB() = default;
 
         private:

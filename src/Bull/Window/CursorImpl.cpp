@@ -10,7 +10,8 @@
     #if defined BULL_WEYLAND
         #error Lack of implementation : Cursor
     #elif defined BULL_XCB
-        #error Lack of implementation : Cursor
+        #include <Bull/Window/XCB/CursorImplXCB.hpp>
+        typedef Bull::prv::CursorImplXCB CursorImplType;
     #elif defined BULL_XLIB
         #include <Bull/Window/Xlib/CursorImplXlib.hpp>
         typedef Bull::prv::CursorImplXlib CursorImplType;
