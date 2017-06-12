@@ -8,7 +8,7 @@ namespace Bull
     {
         void ThreadImplUnix::sleep(const Time& time)
         {
-            usleep(time.asMicroseconds());
+            usleep(static_cast<__useconds_t>(time.asMicroseconds()));
         }
 
         void* ThreadImplUnix::entryPoint(void* data)
@@ -24,14 +24,14 @@ namespace Bull
         {
             pthread_attr_t attributes;
             pthread_attr_init(&attributes);
+            pthread_attr_setdetachstate(&attributes, PTHREAD_CREATE_DETACHED);
 
-            pthread_attr_setschedpolicy(&attributes, (priority == Thread::Priority::Inherit) ? PTHREAD_INHERIT_SCHED : PTHREAD_EXPLICIT_SCHED);
+            if(priority == Thread::Priority::Inherit)
+            {
+                pthread_attr_setinheritsched(&attributes, PTHREAD_INHERIT_SCHED);
+            }
 
-            pthread_create(&m_handler,
-                           &attributes,
-                           &ThreadImplUnix::entryPoint,
-                           &function);
-
+            pthread_create(&m_handler, &attributes, &ThreadImplUnix::entryPoint, &function);
         }
 
         void ThreadImplUnix::wait()

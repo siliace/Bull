@@ -174,7 +174,7 @@ namespace Bull
                 {
                     case ClientMessage:
                     {
-                        static Atom atomDelete = m_display->getAtom("WM_DELETE_WINDOW");
+                        static XAtom atomDelete = m_display->getAtom("WM_DELETE_WINDOW");
 
                         if(e.xclient.message_type == m_display->getAtom("WM_PROTOCOLS"))
                         {
