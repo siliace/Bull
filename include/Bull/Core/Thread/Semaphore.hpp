@@ -1,5 +1,5 @@
-#ifndef Bull_Semaphore_hpp
-#define Bull_Semaphore_hpp
+#ifndef BULL_CORE_THREAD_SEMAPHORE_HPP
+#define BULL_CORE_THREAD_SEMAPHORE_HPP
 
 #include <memory>
 
@@ -61,4 +61,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Semaphore_hpp
+#endif // BULL_CORE_THREAD_SEMAPHORE_HPP

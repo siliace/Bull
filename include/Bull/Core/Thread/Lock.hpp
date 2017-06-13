@@ -1,5 +1,5 @@
-#ifndef Bull_Lock_hpp
-#define Bull_Lock_hpp
+#ifndef BULL_CORE_THREAD_LOCK_HPP
+#define BULL_CORE_THREAD_LOCK_HPP
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/Mutex.hpp>
@@ -32,4 +32,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Lock_hpp
+#endif // BULL_CORE_THREAD_LOCK_HPP

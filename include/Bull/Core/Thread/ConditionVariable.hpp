@@ -1,10 +1,10 @@
-#ifndef Bull_ConditionVariable_hpp
-#define Bull_ConditionVariable_hpp
+#ifndef BULL_CORE_THREAD_CONDITIONVARIABLE_HPP
+#define BULL_CORE_THREAD_CONDITIONVARIABLE_HPP
 
 #include <memory>
 
-#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Thread/Mutex.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
@@ -62,4 +62,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_ConditionVariable_hpp
+#endif // BULL_CORE_THREAD_CONDITIONVARIABLE_HPP

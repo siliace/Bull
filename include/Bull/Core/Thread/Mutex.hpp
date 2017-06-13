@@ -1,5 +1,5 @@
-#ifndef Bull_Mutex_hpp
-#define Bull_Mutex_hpp
+#ifndef BULL_CORE_THREAD_MUTEX_HPP
+#define BULL_CORE_THREAD_MUTEX_HPP
 
 #include <memory>
 
@@ -16,8 +16,6 @@ namespace Bull
 
     class BULL_CORE_API Mutex : public NonCopyable
     {
-        friend class ConditionVariable;
-
     public:
 
         /*! \brief Default constructor
@@ -56,9 +54,11 @@ namespace Bull
 
     private:
 
+        friend class ConditionVariable;
+
         std::unique_ptr<prv::MutexImpl> m_impl;
-        bool m_locked;
+        bool                            m_locked;
     };
 }
 
-#endif // Bull_Mutex_hpp
+#endif // BULL_CORE_THREAD_MUTEX_HPP
