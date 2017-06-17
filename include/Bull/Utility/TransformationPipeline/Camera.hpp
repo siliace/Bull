@@ -1,6 +1,7 @@
 #ifndef BULL_CAMERA_HPP
 #define BULL_CAMERA_HPP
 
+#include <Bull/Math/EulerAngles.hpp>
 #include <Bull/Math/Matrix/Matrix4.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
 
@@ -12,33 +13,13 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
-         *
-         */
-        Camera();
-
         /*! \brief Constructor
          *
          * \param position The initial position of the Camera
+         * \param rotation The initial rotation of the Camera
          *
          */
-        Camera(const Vector3F& position);
-
-        /*! \brief Set the forward vector of the Camera
-         *
-         * \param forward The forward vector
-         *
-         * \return This
-         *
-         */
-        Camera& setForward(const Vector3F& forward);
-
-        /*! \brief Get the forward vector of the Camera
-         *
-         * \return The forward vector
-         *
-         */
-        const Vector3F& getForward() const;
+        Camera(const Vector3F& position = Vector3F::makeZero(), const EulerAnglesF& rotation = EulerAnglesF::Zero);
 
         /*! \brief Move the Camera
          *
@@ -48,6 +29,15 @@ namespace Bull
          *
          */
         Camera& move(const Vector3F& offset);
+
+        /*! \brief Rotate the Camera
+         *
+         * \param rotation Angles to rotate the Camera
+         *
+         * \return This
+         *
+         */
+        Camera& rotate(const EulerAnglesF& rotation);
 
         /*! \brief Convert to a Matrix4F
          *
@@ -63,10 +53,12 @@ namespace Bull
          */
         void update();
 
-        Vector3F m_up;
-        Vector3F m_right;
-        Vector3F m_forward;
-        Vector3F m_position;
+        Vector3F     m_up;
+        Vector3F     m_right;
+        Vector3F     m_target;
+        Vector3F     m_forward;
+        Vector3F     m_position;
+        EulerAnglesF m_rotation;
     };
 }
 
