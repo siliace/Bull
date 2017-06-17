@@ -11,15 +11,15 @@
 using namespace Bull;
 
 float vertices[] = {
-    -0.5f, -0.5f,  0.5f,  1.f, 1.f, 1.f, 1.f,  0.f, 0.f,
-     0.5f, -0.5f,  0.5f,  1.f, 1.f, 1.f, 1.f,  1.f, 0.f,
-     0.5f,  0.5f,  0.5f,  1.f, 1.f, 1.f, 1.f,  1.f, 1.f,
-    -0.5f,  0.5f,  0.5f,  1.f, 1.f, 1.f, 1.f,  0.f, 1.f,
+    -0.5f, -0.5f,  0.5f,  0.f, 0.f, 1.f, 1.f,  0.f, 0.f,
+     0.5f, -0.5f,  0.5f,  1.f, 0.f, 1.f, 1.f,  1.f, 0.f,
+     0.5f,  0.5f,  0.5f,  1.f, 0.f, 1.f, 1.f,  1.f, 1.f,
+    -0.5f,  0.5f,  0.5f,  0.f, 1.f, 1.f, 1.f,  0.f, 1.f,
 
-    -0.5f, -0.5f, -0.5f,  1.f, 1.f, 1.f, 1.f,  0.f, 0.f,
-     0.5f, -0.5f, -0.5f,  1.f, 1.f, 1.f, 1.f,  1.f, 0.f,
-     0.5f,  0.5f, -0.5f,  1.f, 1.f, 1.f, 1.f,  1.f, 1.f,
-    -0.5f,  0.5f, -0.5f,  1.f, 1.f, 1.f, 1.f,  0.f, 1.f,
+    -0.5f, -0.5f, -0.5f,  0.f, 0.f, 0.f, 1.f,  0.f, 0.f,
+     0.5f, -0.5f, -0.5f,  1.f, 0.f, 0.f, 1.f,  1.f, 0.f,
+     0.5f,  0.5f, -0.5f,  1.f, 1.f, 0.f, 1.f,  1.f, 1.f,
+    -0.5f,  0.5f, -0.5f,  0.f, 1.f, 0.f, 1.f,  0.f, 1.f,
 };
 
 unsigned int indices[] = {
@@ -55,6 +55,7 @@ int main(int argc, char* argv[])
     Camera camera;
     float fov = 45.f;
     unsigned int vao;
+    EulerAnglesF angles;
     RenderWindow::Event e;
     EulerAnglesF rotation;
     PerspectiveProjection perspective;
@@ -62,7 +63,8 @@ int main(int argc, char* argv[])
     HardwareBuffer ebo(HardwareBuffer::Element);
     RenderWindow win(VideoMode(1920, 1080), "Bull Application");
 
-    camera.move(Vector3F(0, 0, -3));
+    camera.move(Vector3F(0.f, 0.f, 3.f));
+    camera.rotate(EulerAnglesF(AngleF::Zero, AngleF::Zero, AngleF::Zero));
 
     core.attachFromPath(Path("resources/shaders/core/core.vert"), ShaderStage::Vertex);
     core.attachFromPath(Path("resources/shaders/core/core.frag"), ShaderStage::Fragment);
@@ -112,53 +114,6 @@ int main(int argc, char* argv[])
                 }
             }
 
-            if(e.type == RenderWindow::Event::MouseButtonDown)
-            {
-                if(e.mouseButton.button == Mouse::Left)
-                {
-                    Cursor c;
-                    c.loadFromSystem(Cursor::Hand);
-                    win.setMouseCursor(c);
-                }
-            }
-
-            if(e.type == RenderWindow::Event::MouseButtonUp)
-            {
-                if(e.mouseButton.button == Mouse::Left)
-                {
-                    Cursor c;
-                    win.setMouseCursor(c);
-                }
-            }
-
-            if(e.type == RenderWindow::Event::MouseMoved)
-            {
-                if(Mouse::isButtonPressed(Mouse::Left))
-                {
-                    if(e.mouseMove.xRel > 0)
-                    {
-                        rotation.pitch += 0.5f;
-                    }
-                    else if(e.mouseMove.xRel < 0)
-                    {
-                        rotation.pitch -= 0.5f;
-                    }
-
-                    if(e.mouseMove.yRel > 0)
-                    {
-                        rotation.roll += 0.5f;
-                    }
-                    else if(e.mouseMove.yRel < 0)
-                    {
-                        rotation.roll -= 0.5f;
-                    }
-                }
-                else
-                {
-
-                }
-            }
-
             if(e.type == RenderWindow::Event::KeyDown)
             {
                 Vector3F offset;
@@ -203,7 +158,7 @@ int main(int argc, char* argv[])
 
         gl::bindVertexArray(vao);
 
-        core.setUniformMatrix("modelMatrix", Transformation3D::makeRotation(rotation).toMatrix());
+        core.setUniformMatrix("modelMatrix", Matrix4F::Identity);
         core.setUniformMatrix("viewMatrix", camera.toMatrix());
         core.setUniformMatrix("projMatrix", perspective.toMatrix());
 

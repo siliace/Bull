@@ -1,6 +1,1 @@
-add_subdirectory(Clipboard)
-add_subdirectory(Events)
-add_subdirectory(FileSystem)
-add_subdirectory(Maths)
 add_subdirectory(Rendering)
-add_subdirectory(Windowing)
