@@ -7,12 +7,6 @@ namespace Bull
     }
 
     template <typename T>
-    EulerAngles<T>::EulerAngles()
-    {
-        set(Angle<T>::degree(0), Angle<T>::degree(0), Angle<T>::degree(0));
-    }
-
-    template <typename T>
     EulerAngles<T>::EulerAngles(const Quaternion<T>& quaternion)
     {
         set(quaternion);

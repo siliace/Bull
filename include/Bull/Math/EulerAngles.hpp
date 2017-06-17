@@ -16,6 +16,8 @@ namespace Bull
     template <typename T>
     struct EulerAngles
     {
+        static EulerAngles<T> Zero;
+
         /*! \brief Normalize an EulerAngles
          *
          * \param angles EulerAngles to normalize
@@ -24,11 +26,6 @@ namespace Bull
          *
          */
         static EulerAngles<T> normalize(const EulerAngles<T>& angles);
-
-        /*! \brief Default constructor
-         *
-         */
-        EulerAngles();
 
         /*! \brief Constructor
          *
@@ -44,7 +41,7 @@ namespace Bull
          * \param yaw   the yaw of the EulerAngles
          *
          */
-        EulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw);
+        EulerAngles(const Angle<T>& roll = Angle<T>::Zero, const Angle<T>& pitch = Angle<T>::Zero, const Angle<T>& yaw = Angle<T>::Zero);
 
         /*! \brief Set the EulerAngles
          *
@@ -152,6 +149,9 @@ namespace Bull
     typedef EulerAngles<float> EulerAnglesF;
     typedef EulerAngles<double> EulerAnglesD;
     typedef EulerAngles<unsigned int> EulerAnglesUI;
+
+    template <typename T>
+    EulerAngles<T> EulerAngles<T>::Zero = EulerAngles<T>();
 }
 
 #include <Bull/Math/EulerAngles.inl>
