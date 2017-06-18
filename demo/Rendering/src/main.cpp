@@ -4,9 +4,8 @@
 #include <Bull/Render/Shader/Shader.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
 
-#include <Bull/Utility/TransformationPipeline/Camera.hpp>
-#include <Bull/Utility/TransformationPipeline/PerspectiveProjection.hpp>
-#include <Bull/Utility/TransformationPipeline/Transformation3D.hpp>
+#include <Bull/Math/TransformationPipeline/Camera.hpp>
+#include <Bull/Math/TransformationPipeline/PerspectiveProjection.hpp>
 
 using namespace Bull;
 
@@ -52,19 +51,16 @@ int main(int argc, char* argv[])
 {
     Texture t;
     Shader core;
-    Camera camera;
     float fov = 45.f;
     unsigned int vao;
     EulerAnglesF angles;
     RenderWindow::Event e;
     EulerAnglesF rotation;
-    PerspectiveProjection perspective;
     HardwareBuffer vbo(HardwareBuffer::Array);
     HardwareBuffer ebo(HardwareBuffer::Element);
     RenderWindow win(VideoMode(1920, 1080), "Bull Application");
-
-    camera.move(Vector3F(0.f, 0.f, 3.f));
-    camera.rotate(EulerAnglesF(AngleF::Zero, AngleF::Zero, AngleF::Zero));
+    CameraF camera(Vector3F(0, 0, 3), Vector3F::Zero, Vector3F::Up);
+    PerspectiveProjectionF perspective(AngleF::degree(60.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
     core.attachFromPath(Path("resources/shaders/core/core.vert"), ShaderStage::Vertex);
     core.attachFromPath(Path("resources/shaders/core/core.frag"), ShaderStage::Fragment);
@@ -100,56 +96,9 @@ int main(int argc, char* argv[])
             if(e.type == RenderWindow::Event::Resized)
             {
                 win.resetViewport();
-            }
-
-            if(e.type == RenderWindow::Event::MouseWheel)
-            {
-                if(e.mouseWheel.up && fov > 1.f)
-                {
-                    fov--;
-                }
-                else if(!e.mouseWheel.up && fov < 45.f)
-                {
-                    fov++;
-                }
-            }
-
-            if(e.type == RenderWindow::Event::KeyDown)
-            {
-                Vector3F offset;
-
-                if(e.key.code == Keyboard::Z)
-                {
-                    offset.z = 0.05f;
-                }
-                else if(e.key.code == Keyboard::S)
-                {
-                    offset.z = -0.05f;
-                }
-
-                if(e.key.code == Keyboard::A)
-                {
-                    offset.y = 0.05f;
-                }
-                else if(e.key.code == Keyboard::E)
-                {
-                    offset.y = -0.05f;
-                }
-
-                if(e.key.code == Keyboard::Q)
-                {
-                    offset.x = -0.05f;
-                }
-                else if(e.key.code == Keyboard::D)
-                {
-                    offset.x = 0.05f;
-                }
-
-                camera.move(offset);
+                perspective.setRatio(win.getSize().getRatio());
             }
         }
-
-        perspective = PerspectiveProjection(AngleF::degree(fov), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
         win.clear();
 
@@ -159,8 +108,8 @@ int main(int argc, char* argv[])
         gl::bindVertexArray(vao);
 
         core.setUniformMatrix("modelMatrix", Matrix4F::Identity);
-        core.setUniformMatrix("viewMatrix", camera.toMatrix());
-        core.setUniformMatrix("projMatrix", perspective.toMatrix());
+        core.setUniformMatrix("viewMatrix", camera.getMatrix());
+        core.setUniformMatrix("projMatrix", perspective.getMatrix());
 
         gl::drawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
 

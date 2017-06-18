@@ -3,11 +3,10 @@
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
 
-#include <Bull/Utility/TransformationPipeline/Matrixable.hpp>
-
 namespace Bull
 {
-    class BULL_UTILITY_API Transformation3D : public Matrixable
+    template <typename T>
+    class Transformation3D
     {
     public:
 
@@ -18,7 +17,7 @@ namespace Bull
          * \return The Transformation3D
          *
          */
-        static Transformation3D makeScale(const Vector3F& scale);
+        static Transformation3D makeScale(const Vector3<T>& scale);
 
         /*! \brief Create a rotation Transformation3D
          *
@@ -36,7 +35,7 @@ namespace Bull
          * \return The Transformation3D
          *
          */
-        static Transformation3D makeTranslation(const Vector3F& translation);
+        static Transformation3D makeTranslation(const Vector3<T>& translation);
 
         /*! \brief Create a Transformation3D
          *
@@ -46,7 +45,7 @@ namespace Bull
          * \return The Transformation3D
          *
          */
-        static Transformation3D make(const EulerAnglesF& angles, const Vector3F& scale);
+        static Transformation3D make(const EulerAnglesF& angles, const Vector3<T>& scale);
 
         /*! \brief Create a Transformation3D
          *
@@ -56,7 +55,7 @@ namespace Bull
          * \return The Transformation3D
          *
          */
-        static Transformation3D make(const Vector3F& translation, const Vector3F& scale);
+        static Transformation3D make(const Vector3<T>& translation, const Vector3<T>& scale);
 
         /*! \brief Create a Transformation3D
          *
@@ -66,7 +65,7 @@ namespace Bull
          * \return The Transformation3D
          *
          */
-        static Transformation3D make(const Vector3F& translation, const EulerAnglesF& angles);
+        static Transformation3D make(const Vector3<T>& translation, const EulerAnglesF& angles);
 
         /*! \brief Create a Transformation3D
          *
@@ -77,7 +76,7 @@ namespace Bull
          * \return The Transformation3D
          *
          */
-        static Transformation3D make(const Vector3F& translation, const EulerAnglesF& angles, const Vector3F& scale);
+        static Transformation3D make(const Vector3<T>& translation, const EulerAnglesF& angles, const Vector3<T>& scale);
 
     public:
 
@@ -93,14 +92,14 @@ namespace Bull
          * \return This
          *
          */
-        Transformation3D& setScale(const Vector3F& scale);
+        Transformation3D& setScale(const Vector3<T>& scale);
 
         /*! \brief Get the scale vector of this Transformation3D
          *
          * \return The scale vector
          *
          */
-        Vector3F getScale() const;
+        Vector3<T> getScale() const;
 
         /*! \brief Set the rotation of the Transformation3D
          *
@@ -124,14 +123,14 @@ namespace Bull
          * \return This
          *
          */
-        Transformation3D& setTranslation(const Vector3F& translation);
+        Transformation3D& setTranslation(const Vector3<T>& translation);
 
         /*! \brief Get the translation vector of this Transformation3D
          *
          * \return The translation vector
          *
          */
-        Vector3F getTranslation() const;
+        Vector3<T> getTranslation() const;
 
         /*! \brief Apply a scaling to the current Transformation3D
          *
@@ -140,7 +139,7 @@ namespace Bull
          * \return This
          *
          */
-        Transformation3D& applyScale(const Vector3F& scale);
+        Transformation3D& applyScale(const Vector3<T>& scale);
 
         /*! \brief Apply a rotation to the current Transformation3D
          *
@@ -158,19 +157,26 @@ namespace Bull
          * \return This
          *
          */
-        Transformation3D& applyTranslation(const Vector3F& translation);
+        Transformation3D& applyTranslation(const Vector3<T>& translation);
 
         /*! \brief Convert the Transformation3D to a Matrix4F
          *
-         * \return The Matrix4F
+         * \return The Matrix
          *
          */
-        Matrix4F toMatrix() const override;
+        const Matrix4F& getMatrix() const;
 
     private:
 
-        Matrix4F m_matrix; /*!< The Transformation3D matrix */
+        Matrix4<T> m_matrix; /*!< The Transformation3D matrix */
     };
+
+    typedef Transformation3D<int>          Transformation3DI;
+    typedef Transformation3D<float>        Transformation3DF;
+    typedef Transformation3D<double>       Transformation3DD;
+    typedef Transformation3D<unsigned int> Transformation3DUI;
 }
+
+#include <Bull/Math/TransformationPipeline/Transformation3D.inl>
 
 #endif //BULL_TRANSFORMATION3D_HPP

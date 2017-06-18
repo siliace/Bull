@@ -10,52 +10,21 @@ namespace Bull
     template<typename T>
     struct Vector3
     {
-        /*! \brief Make a zero Vector3 (0.0, 0.0, 0.0)
-         *
-         * \return The zero Vector3
-         *
-         */
-        static Vector3<T> makeZero();
+        static Vector3<T> Zero;
 
-        /*! \brief Make an unit Vector3 (1.0, 1.0, 1.0)
-         *
-         * \return The unit Vector3
-         *
-         */
-        static Vector3<T> makeUnit();
+        static Vector3<T> Unit;
+        static Vector3<T> UnitX;
+        static Vector3<T> UnitY;
+        static Vector3<T> UnitZ;
 
-        /*! \brief Make a X unit Vector3 (1.0, 0.0, 0.0)
-         *
-         * \return The X unit Vector3
-         *
-         */
-        static Vector3<T> makeUnitX();
+        static Vector3<T> Left;
+        static Vector3<T> Right;
 
-        /*! \brief Make a Y unit Vector3 (0.0, 1.0, 0.0)
-         *
-         * \return The Y unit Vector3
-         *
-         */
-        static Vector3<T> makeUnitY();
+        static Vector3<T> Up;
+        static Vector3<T> Down;
 
-        /*! \brief Make a Z unit Vector3 (0.0, 0.0, 1.0)
-         *
-         * \return The Z unit Vector3
-         *
-         */
-        static Vector3<T> makeUnitZ();
-
-        static Vector3<T> makeLeft();
-
-        static Vector3<T> makeRight();
-
-        static Vector3<T> makeUp();
-
-        static Vector3<T> makeDown();
-
-        static Vector3<T> makeForward();
-
-        static Vector3<T> makeBackward();
+        static Vector3<T> Forward;
+        static Vector3<T> Backward;
 
         /*! \brief Get a normalized Vector3
          *
@@ -228,6 +197,39 @@ namespace Bull
 
         T x, y, z;
     };
+
+    template<typename T>
+    Vector3<T> Vector3<T>::Zero = Vector3<T>(0, 0, 0);
+
+    template<typename T>
+    Vector3<T> Vector3<T>::Unit  = Vector3<T>(1, 1, 1);
+
+    template<typename T>
+    Vector3<T> Vector3<T>::UnitX = Vector3<T>(1, 0, 0);
+
+    template<typename T>
+    Vector3<T> Vector3<T>::UnitY = Vector3<T>(0, 1, 0);
+
+    template<typename T>
+    Vector3<T> Vector3<T>::UnitZ = Vector3<T>(0, 0, 1);
+
+    template<typename T>
+    Vector3<T> Vector3<T>::Left  = Vector3<T>(-1, 0, 0);
+
+    template<typename T>
+    Vector3<T> Vector3<T>::Right = Vector3<T>(1, 0, 0);
+
+    template<typename T>
+    Vector3<T> Vector3<T>::Up   = Vector3<T>(0, 1, 0);
+
+    template<typename T>
+    Vector3<T> Vector3<T>::Down = Vector3<T>(0, -1, 0);
+
+    template<typename T>
+    Vector3<T> Vector3<T>::Forward  = Vector3<T>(0, 0, 1);
+
+    template<typename T>
+    Vector3<T> Vector3<T>::Backward = Vector3<T>(0, 0, -1);
 
     /*! \brief Addition two Vector3
      *

@@ -1,5 +1,5 @@
-#ifndef Bull_Vector2_hpp
-#define Bull_Vector2_hpp
+#ifndef BULL_MATH_VECTOR_VECTOR2_HPP
+#define BULL_MATH_VECTOR_VECTOR2_HPP
 
 #include <cmath>
 
@@ -8,6 +8,8 @@ namespace Bull
     template<typename T>
     struct Vector2
     {
+        static Vector2<T> Zero;
+
         /*! \brief Get a normalized Vector2
          *
          * \param vector The Vector2 to normalize
@@ -152,6 +154,9 @@ namespace Bull
 
     };
 
+    template<typename T>
+    Vector2<T> Vector2<T>::Zero = Vector2<T>(0, 0);
+
     /*! \brief Addition two Vector2
      *
      * \param left  The vector to add to right
@@ -270,4 +275,4 @@ namespace Bull
 
 #include <Bull/Math/Vector/Vector2.inl>
 
-#endif // Bull_Vector2_hpp
+#endif // BULL_MATH_VECTOR_VECTOR2_HPP
