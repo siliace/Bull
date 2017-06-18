@@ -3,10 +3,6 @@
 
 #include <array>
 
-#include <Bull/Math/Angle.hpp>
-#include <Bull/Math/Quaternion.hpp>
-#include <Bull/Math/EulerAngles.hpp>
-#include <Bull/Math/Polygon/Rectangle.hpp>
 #include <Bull/Math/Vector/Vector4.hpp>
 
 namespace Bull

@@ -1,6 +1,10 @@
 #ifndef BULL_MATH_TRANSFORMATIONPIPLELINE_PERSPECTIVEPROJECTION_HPP
 #define BULL_MATH_TRANSFORMATIONPIPLELINE_PERSPECTIVEPROJECTION_HPP
 
+#include <Bull/Math/Angle.hpp>
+#include <Bull/Math/Matrix/Matrix4.hpp>
+#include <Bull/Math/Polygon/Rectangle.hpp>
+
 namespace Bull
 {
     template <typename T>

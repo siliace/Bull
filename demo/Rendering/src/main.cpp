@@ -52,12 +52,10 @@ int main(int argc, char* argv[])
     Shader core;
     unsigned int vao;
     AngleF pitch, yaw;
-    EulerAnglesF angles;
     RenderWindow::Event e;
-    EulerAnglesF rotation;
     HardwareBuffer vbo(HardwareBuffer::Array);
     HardwareBuffer ebo(HardwareBuffer::Element);
-    RenderWindow win(VideoMode(1920 / 4, 1080 / 4), "Bull Application");
+    RenderWindow win(VideoMode(800, 600), "Bull Application");
     CameraF camera(Vector3F(0, 0, 3), Vector3F::Zero, Vector3F::Up);
     PerspectiveProjectionF perspective(AngleF::degree(60.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
