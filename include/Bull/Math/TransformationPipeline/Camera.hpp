@@ -36,6 +36,15 @@ namespace Bull
          */
         const Vector3<T>& getPosition() const;
 
+        /*! \brief Move the Camero
+         *
+         * \param offset Offsets to move the Camera
+         *
+         * \return This
+         *
+         */
+        Camera<T>& move(const Vector3<T>& offset);
+
         /*! \brief Set the target of the Camera
          *
          * \param target The new target

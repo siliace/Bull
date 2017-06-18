@@ -1,4 +1,3 @@
-#include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/HardwareBuffer.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
@@ -51,14 +50,14 @@ int main(int argc, char* argv[])
 {
     Texture t;
     Shader core;
-    float fov = 45.f;
     unsigned int vao;
+    AngleF pitch, yaw;
     EulerAnglesF angles;
     RenderWindow::Event e;
     EulerAnglesF rotation;
     HardwareBuffer vbo(HardwareBuffer::Array);
     HardwareBuffer ebo(HardwareBuffer::Element);
-    RenderWindow win(VideoMode(1920, 1080), "Bull Application");
+    RenderWindow win(VideoMode(1920 / 4, 1080 / 4), "Bull Application");
     CameraF camera(Vector3F(0, 0, 3), Vector3F::Zero, Vector3F::Up);
     PerspectiveProjectionF perspective(AngleF::degree(60.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
@@ -97,6 +96,31 @@ int main(int argc, char* argv[])
             {
                 win.resetViewport();
                 perspective.setRatio(win.getSize().getRatio());
+            }
+
+            if(e.type == RenderWindow::Event::KeyDown)
+            {
+                Vector3F offsets;
+
+                if(e.key.code == Keyboard::Z)
+                {
+                    offsets.z = 0.05f;
+                }
+                else if(e.key.code == Keyboard::S)
+                {
+                    offsets.z = -0.05f;
+                }
+
+                if(e.key.code == Keyboard::Q)
+                {
+                    offsets.x = -0.05f;
+                }
+                else if(e.key.code == Keyboard::D)
+                {
+                    offsets.x = 0.05f;
+                }
+
+                camera.move(offsets);
             }
         }
 

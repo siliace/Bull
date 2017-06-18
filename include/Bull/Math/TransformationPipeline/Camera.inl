@@ -22,9 +22,19 @@ namespace Bull
     }
 
     template <typename T>
+    Camera<T>& Camera<T>::move(const Vector3<T>& offset)
+    {
+        m_position += offset.y * m_up;
+        m_position += offset.x * m_right;
+        m_position += offset.z * m_forward;
+
+        return (*this);
+    }
+
+    template <typename T>
     Camera<T>& Camera<T>::setTarget(const Vector3<T>& target)
     {
-        m_target = target;
+        m_target = Vector3<T>::normalize(target);
 
         updateVectors();
 
