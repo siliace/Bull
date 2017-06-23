@@ -22,9 +22,19 @@ namespace Bull
 
         bool MouseImpl::isButtonPressed(Mouse::Button button)
         {
-            /// Todo : implementation
+            return (GetAsyncKeyState(convertBullbuttonToVK(button)) & 0x8000) != FALSE;
+        }
 
-            return false;
+        int MouseImpl::convertBullbuttonToVK(Mouse::Button button)
+        {
+            switch(button)
+            {
+                case Mouse::Button::Left:   return VK_LBUTTON;
+                case Mouse::Button::Middle: return VK_MBUTTON;
+                case Mouse::Button::Right:  return VK_RBUTTON;
+                case Mouse::Button::Extra1: return VK_XBUTTON1;
+                case Mouse::Button::Extra2: return VK_XBUTTON2;
+            }
         }
     }
 }
