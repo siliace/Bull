@@ -348,11 +348,6 @@ namespace Bull
             }
         }
 
-        void WindowImplWin32::showCursor(bool enable)
-        {
-            ShowCursor(enable);
-        }
-
         void WindowImplWin32::setPosition(const Vector2I& position)
         {
             SetWindowPos(m_handler, 0, position.x, position.y, 0, 0, SWP_NOSIZE);
@@ -466,6 +461,21 @@ namespace Bull
         void WindowImplWin32::setVisible(bool visible)
         {
             ShowWindow(m_handler, (visible) ? SW_SHOW : SW_HIDE);
+        }
+
+        void WindowImplWin32::setMouseCursor(const std::unique_ptr<CursorImpl> &cursor)
+        {
+
+        }
+
+        void WindowImplWin32::setMouseCursorVisible(bool visible)
+        {
+
+        }
+
+        bool WindowImplWin32::isMouseCursorVisible() const
+        {
+            return false;
         }
 
         WindowHandler WindowImplWin32::getSystemHandler() const

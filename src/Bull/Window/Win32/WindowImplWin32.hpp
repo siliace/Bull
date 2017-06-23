@@ -103,13 +103,6 @@ namespace Bull
              */
             void enableCaptureCursor(bool capture) override;
 
-            /*! \brief Hide or show the cursor
-             *
-             * \param enable The state of the cursor
-             *
-             */
-            void showCursor(bool enable) override;
-
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window
@@ -200,6 +193,27 @@ namespace Bull
              *
              */
             void setVisible(bool visible);
+
+            /*! \brief Set the mouse cursor of the Window
+             *
+             * \param cursor The cursor
+             *
+             */
+            void setMouseCursor(const std::unique_ptr<CursorImpl> &cursor) override;
+
+            /*! \brief Toggle cursor visibility
+             *
+             * \param visible True to show the cursor, false to hide
+             *
+             */
+            void setMouseCursorVisible(bool visible) override;
+
+            /*! \brief Check whether the mouse cursor is visible
+             *
+             * \return True if the mouse cursor is visible
+             *
+             */
+            bool isMouseCursorVisible() const override;
 
             /*! \brief Get the window system handler
              *

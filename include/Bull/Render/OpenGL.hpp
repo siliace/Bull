@@ -108,6 +108,7 @@ namespace gl
     extern PFNGLINVALIDATEBUFFERDATAPROC     BULL_RENDER_API invalidateBufferData;
     extern PFNGLISENABLEDPROC                BULL_RENDER_API isEnabled;
     extern PFNGLISPROGRAMPROC                BULL_RENDER_API isProgram;
+    extern PFNGLISSHADERPROC                 BULL_RENDER_API isShader;
     extern PFNGLLINEWIDTHPROC                BULL_RENDER_API lineWidth;
     extern PFNGLLINKPROGRAMPROC              BULL_RENDER_API linkProgram;
     extern PFNGLMAPBUFFERPROC                BULL_RENDER_API mapBuffer;

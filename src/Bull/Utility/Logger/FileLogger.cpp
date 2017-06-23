@@ -8,10 +8,14 @@ namespace Bull
         /// Nothing
     }
 
-    FileLogger::FileLogger(const String& filename) :
-        m_logFile(Path(filename), File::Truncate | File::Write)
+    FileLogger::FileLogger(const String& filename)
     {
-        /// Nothing
+        if(!File::exists(filename))
+        {
+            File::create(filename);
+        }
+
+        m_logFile.open(Path(filename), File::Truncate | File::Write);
     }
 
     void FileLogger::write(const String& entry)

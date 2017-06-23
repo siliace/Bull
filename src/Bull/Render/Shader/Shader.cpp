@@ -85,13 +85,9 @@ namespace Bull
     {
         gl::linkProgram(m_program);
 
-        if(hasError())
+        if(!isLinked())
         {
-            StringStream ss;
-
-            ss << String::number(getErrorCode()) << getErrorMessage();
-
-            Log::get()->write(ss.toString(), Log::Level::Error);
+            Log::get()->write(getErrorMessage(), Log::Level::Error);
 
             return false;
         }
@@ -109,7 +105,15 @@ namespace Bull
 
     bool Shader::isValid() const
     {
-        return gl::isProgram(m_program) != 0;
+        return gl::isProgram(m_program) == GL_TRUE;
+    }
+
+    bool Shader::isLinked() const
+    {
+        int status = 0;
+        gl::getProgramiv(m_program, GL_LINK_STATUS, &status);
+
+        return status == GL_TRUE;
     }
 
     bool Shader::setUniform(const String& name, int uniform)
@@ -263,35 +267,20 @@ namespace Bull
         return m_program;
     }
 
-    bool Shader::hasError() const
-    {
-        return getErrorCode() == 0;
-    }
-
-    unsigned int Shader::getErrorCode() const
-    {
-        int code = 0;
-        gl::getProgramiv(m_program, GL_LINK_STATUS, &code);
-
-        return static_cast<unsigned int>(code);
-    }
-
     String Shader::getErrorMessage() const
     {
-        if(hasError())
+        int capacity;
+        String message;
+
+        gl::getProgramiv(m_program, GL_INFO_LOG_LENGTH, &capacity);
+
+        if(capacity)
         {
-            int capacity;
-            String message;
-
-            gl::getProgramiv(m_program, GL_INFO_LOG_LENGTH, &capacity);
-
-            message.reserve(static_cast<std::size_t>(capacity));
-            gl::getProgramInfoLog(m_program, static_cast<int>(message.getCapacity()), nullptr, &message[0]);
-
-            return message;
+            message.setSize(static_cast<std::size_t>(capacity));
+            gl::getProgramInfoLog(m_program, capacity, nullptr, &message[0]);
         }
 
-        return String();
+        return message;
     }
 
     int Shader::getUniformLocation(const String& name)

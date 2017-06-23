@@ -89,10 +89,17 @@ namespace Bull
 
         /*! \brief Check if the Shader is valid
          *
-         * \return True if the Shader is valis
+         * \return True if the Shader is valid
          *
          */
         bool isValid() const;
+
+        /*! \brief Check whether the Shader is linked
+         *
+         * \return True if the Shader is linked
+         *
+         */
+        bool isLinked() const;
 
         /*! \brief Set an uniform variable
          *
@@ -162,20 +169,6 @@ namespace Bull
         unsigned int getSystemHandler() const;
 
     protected:
-
-        /*! \brief Check if the program as an error
-         *
-         * \return True if the program has an error
-         *
-         */
-        bool hasError() const;
-
-        /*! \brief Get the current error code of the program
-         *
-         * \return The error code
-         *
-         */
-        unsigned int getErrorCode() const;
 
         /*! \brief Get the current error message of the program
          *

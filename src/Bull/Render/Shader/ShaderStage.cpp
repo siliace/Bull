@@ -17,51 +17,45 @@ namespace Bull
         m_id(0),
         m_isCompiled(false)
     {
-        create(type);
+        if(!create(type))
+        {
+            throw std::runtime_error("Failed to create shader");
+        }
     }
 
     ShaderStage::ShaderStage(const Path& path, Type type)
     {
-        create(type);
+        if(!create(type))
+        {
+            throw std::runtime_error("Failed to create shader");
+        }
+
         loadFromPath(path);
     }
 
     ShaderStage::ShaderStage(const String& code, Type type)
     {
-        create(type);
+        if(!create(type))
+        {
+            throw std::runtime_error("Failed to create shader");
+        }
+
         loadFromCode(code);
     }
 
     ShaderStage::ShaderStage(InStream& stream, Type type)
     {
-        create(type);
-        loadFromStream(stream);
-    }
+        if(!create(type))
+        {
+            throw std::runtime_error("Failed to create shader");
+        }
 
-    ShaderStage::ShaderStage(ShaderStage&& stage) :
-        m_id(stage.m_id),
-        m_type(stage.m_type),
-        m_isCompiled(stage.m_isCompiled)
-    {
-        stage.m_id         = 0;
-        stage.m_isCompiled = false;
+        loadFromStream(stream);
     }
 
     ShaderStage::~ShaderStage()
     {
         destroy();
-    }
-
-    ShaderStage& ShaderStage::operator=(ShaderStage&& stage)
-    {
-        m_id         = stage.m_id;
-        m_type       = stage.m_type;
-        m_isCompiled = stage.m_isCompiled;
-
-        stage.m_id         = 0;
-        stage.m_isCompiled = false;
-
-        return (*this);
     }
 
     bool ShaderStage::create(Type type)
@@ -112,13 +106,9 @@ namespace Bull
         {
             gl::compileShader(m_id);
 
-            if(hasError())
+            if(!isCompiled())
             {
-                StringStream ss;
-
-                ss << String::number(getErrorCode()) << getErrorMessage();
-
-                Log::get()->write(ss.toString(), Log::Level::Error);
+                Log::get()->write(getErrorMessage(), Log::Level::Error);
 
                 return false;
             }
@@ -141,12 +131,15 @@ namespace Bull
 
     bool ShaderStage::isCompiled() const
     {
-        return m_isCompiled;
+        int error = 0;
+        gl::getShaderiv(m_id, GL_COMPILE_STATUS, &error);
+
+        return error == GL_TRUE;
     }
 
     bool ShaderStage::isValid() const
     {
-        return m_id != 0;
+        return gl::isShader(m_id);
     }
 
     String ShaderStage::getSource() const
@@ -177,35 +170,19 @@ namespace Bull
         return m_id;
     }
 
-    bool ShaderStage::hasError() const
-    {
-        return getErrorCode() == 0;
-    }
-
-    unsigned int ShaderStage::getErrorCode() const
-    {
-        int error = 0;
-        gl::getShaderiv(m_id, GL_COMPILE_STATUS, &error);
-
-        return static_cast<unsigned int>(error);
-    }
-
     String ShaderStage::getErrorMessage() const
     {
-        if(hasError())
+        int capacity;
+        String message;
+
+        gl::getShaderiv(m_id, GL_INFO_LOG_LENGTH, &capacity);
+
+        if(capacity)
         {
-            int capacity;
-            String message;
-
-            gl::getShaderiv(m_id, GL_INFO_LOG_LENGTH, &capacity);
-
-            message.reserve(capacity);
-
+            message.setSize(static_cast<std::size_t>(capacity));
             gl::getShaderInfoLog(m_id, capacity, nullptr, &message[0]);
-
-            return message;
         }
 
-        return String();
+        return message;
     }
 }

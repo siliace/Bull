@@ -81,7 +81,7 @@ namespace Bull
              * \param settings Settings to use to create the OpenGL context
              *
              */
-            WglContext(const std::shared_ptr<WglContext>& shared, WindowHandler window, Uint8 bitsPerPixel, const ContextSettings& settings);
+            WglContext(const std::shared_ptr<WglContext>& shared, std::unique_ptr<WindowImpl>& window, Uint8 bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Destructor
              *
@@ -125,7 +125,7 @@ namespace Bull
              * \param window The window to bind to the context
              *
              */
-            void createSurface(WindowHandler window);
+            void createSurface(std::unique_ptr<WindowImpl>& window);
 
             /*! \brief Create the render surface
              *

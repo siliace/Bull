@@ -1,5 +1,5 @@
-#ifndef BULL_SHADERSTAGE_HPP
-#define BULL_SHADERSTAGE_HPP
+#ifndef BULL_RENDER_SHADER_SHADERSTAGE_HPP
+#define BULL_RENDER_SHADER_SHADERSTAGE_HPP
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
@@ -36,32 +36,32 @@ namespace Bull
          */
         ShaderStage(Type type);
 
+        /*! \brief Constructor
+         *
+         * \param path The path to the shader
+         * \param type The type of the shader
+         *
+         */
         ShaderStage(const Path& path, Type type);
-
-        ShaderStage(const String& code, Type type);
-
-        ShaderStage(InStream& stream, Type type);
 
         /*! \brief Constructor
          *
-         * \param stage
-         *
+         * \param code The code of the shader
+         * \param type The type of the shader
          */
-        ShaderStage(ShaderStage&& stage);
+        ShaderStage(const String& code, Type type);
+
+        /*! \brief Constructor
+         *
+         * \param stream The stream to read to load the shader
+         * \param type   The type of the shader
+         */
+        ShaderStage(InStream& stream, Type type);
 
         /*! \brief Destructor
          *
          */
         ~ShaderStage();
-
-        /*! \brief Basic assignment operator
-         *
-         * \param stage
-         *
-         * \return This
-         *
-         */
-        ShaderStage& operator=(ShaderStage&& stage);
 
         /*! \brief Create the shader
          *
@@ -148,20 +148,6 @@ namespace Bull
 
     protected:
 
-        /*! \brief Check if the shader as an error
-         *
-         * \return True if the shader has an error
-         *
-         */
-        bool hasError() const;
-
-        /*! \brief Get the current error code of the shader
-         *
-         * \return The error code
-         *
-         */
-        unsigned int getErrorCode() const;
-
         /*! \brief Get the current error message of the shader
          *
          * \return The error message
@@ -177,4 +163,4 @@ namespace Bull
     };
 }
 
-#endif //BULL_SHADERSTAGE_HPP
+#endif // BULL_RENDER_SHADER_SHADERSTAGE_HPP

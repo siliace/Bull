@@ -4,12 +4,16 @@
 #include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/System/OS.hpp>
 
+#if defined BULL_OS_WINDOWS
+    #include <windows.h>
+#endif
+
 namespace Bull
 {
     namespace prv
     {
         #if defined BULL_OS_WINDOWS
-            #error Lack of implementation : CursorHandler
+            typedef HCURSOR CursorHandler;
         #elif defined BULL_OS_OSX
             #error Lack of implementation : CursorHandler
         #elif defined BULL_OS_GNU_LINUX
