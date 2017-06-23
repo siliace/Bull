@@ -1,47 +1,56 @@
 namespace Bull
 {
-    Transformation3D Transformation3D::makeScale(const Vector3<T>& scale)
+    template <typename T>
+    Transformation3D<T> Transformation3D<T>::makeScale(const Vector3<T>& scale)
     {
         return Transformation3D().setScale(scale);
     }
 
-    Transformation3D Transformation3D::makeRotation(const EulerAnglesF& angles)
+    template <typename T>
+    Transformation3D<T> Transformation3D<T>::makeRotation(const EulerAnglesF& angles)
     {
         return Transformation3D().setRotation(angles);
     }
 
-    Transformation3D Transformation3D::makeTranslation(const Vector3<T>& translation)
+    template <typename T>
+    Transformation3D<T> Transformation3D<T>::makeTranslation(const Vector3<T>& translation)
     {
         return Transformation3D().setTranslation(translation);
     }
 
-    Transformation3D Transformation3D::make(const EulerAnglesF& angles, const Vector3<T>& scale)
+    template <typename T>
+    Transformation3D<T> Transformation3D<T>::make(const EulerAnglesF& angles, const Vector3<T>& scale)
     {
-        return Transformation3D::makeRotation(angles).applyScale(scale);
+        return Transformation3D<T>::makeRotation(angles).applyScale(scale);
     }
 
-    Transformation3D Transformation3D::make(const Vector3<T>& translation, const Vector3<T>& scale)
+    template <typename T>
+    Transformation3D<T> Transformation3D<T>::make(const Vector3<T>& translation, const Vector3<T>& scale)
     {
-        return Transformation3D::makeTranslation(translation).applyScale(scale);
+        return Transformation3D<T>::makeTranslation(translation).applyScale(scale);
     }
 
-    Transformation3D Transformation3D::make(const Vector3<T>& translation, const EulerAnglesF& angles)
+    template <typename T>
+    Transformation3D<T> Transformation3D<T>::make(const Vector3<T>& translation, const EulerAnglesF& angles)
     {
-        return Transformation3D::makeTranslation(translation).setRotation(angles);
+        return Transformation3D<T>::makeTranslation(translation).setRotation(angles);
     }
 
-    Transformation3D Transformation3D::make(const Vector3<T>& translation, const EulerAnglesF& angles, const Vector3<T>& scale)
+    template <typename T>
+    Transformation3D<T> Transformation3D<T>::make(const Vector3<T>& translation, const EulerAnglesF& angles, const Vector3<T>& scale)
     {
-        return Transformation3D::make(translation, angles).applyScale(scale);
+        return Transformation3D<T>::make(translation, angles).applyScale(scale);
     }
 
-    Transformation3D::Transformation3D() :
+    template <typename T>
+    Transformation3D<T>::Transformation3D() :
         m_matrix(Matrix4<T>::Identity)
     {
         /// Nothing
     }
 
-    Transformation3D& Transformation3D::setScale(const Vector3<T>& scale)
+    template <typename T>
+    Transformation3D<T>& Transformation3D<T>::setScale(const Vector3<T>& scale)
     {
         m_matrix(0, 0) = scale.x;
         m_matrix(1, 1) = scale.y;
@@ -50,14 +59,16 @@ namespace Bull
         return (*this);
     }
 
-    Vector3<T> Transformation3D::getScale() const
+    template <typename T>
+    Vector3<T> Transformation3D<T>::getScale() const
     {
         return Vector3<T>(m_matrix(0, 0), m_matrix(1, 1), m_matrix(2, 2));
     }
 
-    Transformation3D& Transformation3D::setRotation(const EulerAnglesF& angles)
+    template <typename T>
+    Transformation3D<T>& Transformation3D<T>::setRotation(const EulerAngles<T>& angles)
     {
-        QuaternionF rotation(angles);
+        Quaternion<T> rotation(angles);
 
         T tx  = rotation.x + rotation.x;
         T ty  = rotation.y + rotation.y;
@@ -87,14 +98,16 @@ namespace Bull
         return (*this);
     }
 
-    EulerAnglesF Transformation3D::getRotation() const
+    template <typename T>
+    EulerAnglesF Transformation3D<T>::getRotation() const
     {
         /// Todo : Needs to be implemented
 
         return EulerAnglesF();
     }
 
-    Transformation3D& Transformation3D::setTranslation(const Vector3<T>& translation)
+    template <typename T>
+    Transformation3D<T>& Transformation3D<T>::setTranslation(const Vector3<T>& translation)
     {
         m_matrix(3, 0) = translation.x;
         m_matrix(3, 1) = translation.y;
@@ -103,12 +116,14 @@ namespace Bull
         return (*this);
     }
 
-    Vector3<T> Transformation3D::getTranslation() const
+    template <typename T>
+    Vector3<T> Transformation3D<T>::getTranslation() const
     {
         return Vector3<T>(m_matrix(0, 3), m_matrix(1, 3), m_matrix(2, 3));
     }
 
-    Transformation3D& Transformation3D::applyScale(const Vector3<T>& scale)
+    template <typename T>
+    Transformation3D<T>& Transformation3D<T>::applyScale(const Vector3<T>& scale)
     {
         m_matrix(0, 0) *= scale.x;
         m_matrix(1, 0) *= scale.x;
@@ -125,14 +140,16 @@ namespace Bull
         return (*this);
     }
 
-    Transformation3D& Transformation3D::applyRotation(const EulerAnglesF& angles)
+    template <typename T>
+    Transformation3D<T>& Transformation3D<T>::applyRotation(const EulerAnglesF& angles)
     {
         /// Todo : Needs to be implemented
 
         return (*this);
     }
 
-    Transformation3D& Transformation3D::applyTranslation(const Vector3<T>& translation)
+    template <typename T>
+    Transformation3D<T>& Transformation3D<T>::applyTranslation(const Vector3<T>& translation)
     {
         m_matrix(0, 3) += translation.x;
         m_matrix(1, 3) += translation.y;
@@ -141,7 +158,8 @@ namespace Bull
         return (*this);
     }
 
-    Matrix4F Transformation3D::toMatrix() const
+    template <typename T>
+    const Matrix4<T>& Transformation3D<T>::getMatrix() const
     {
         return m_matrix;
     }

@@ -1,7 +1,10 @@
 #ifndef BULL_TRANSFORMATION3D_HPP
 #define BULL_TRANSFORMATION3D_HPP
 
+#include <Bull/Math/EulerAngles.hpp>
+#include <Bull/Math/Quaternion.hpp>
 #include <Bull/Math/Matrix/Matrix4.hpp>
+#include <Bull/Math/Vector/Vector3.hpp>
 
 namespace Bull
 {
@@ -92,7 +95,7 @@ namespace Bull
          * \return This
          *
          */
-        Transformation3D& setScale(const Vector3<T>& scale);
+        Transformation3D<T>& setScale(const Vector3<T>& scale);
 
         /*! \brief Get the scale vector of this Transformation3D
          *
@@ -108,7 +111,7 @@ namespace Bull
          * \return This
          *
          */
-        Transformation3D& setRotation(const EulerAnglesF& angles);
+        Transformation3D<T>& setRotation(const EulerAngles<T>& angles);
 
         /*! \brief Get the rotation of the Transformation3D
          *
@@ -123,7 +126,7 @@ namespace Bull
          * \return This
          *
          */
-        Transformation3D& setTranslation(const Vector3<T>& translation);
+        Transformation3D<T>& setTranslation(const Vector3<T>& translation);
 
         /*! \brief Get the translation vector of this Transformation3D
          *
@@ -139,7 +142,7 @@ namespace Bull
          * \return This
          *
          */
-        Transformation3D& applyScale(const Vector3<T>& scale);
+        Transformation3D<T>& applyScale(const Vector3<T>& scale);
 
         /*! \brief Apply a rotation to the current Transformation3D
          *
@@ -148,7 +151,7 @@ namespace Bull
          * \return This
          *
          */
-        Transformation3D& applyRotation(const EulerAnglesF& angles);
+        Transformation3D<T>& applyRotation(const EulerAnglesF& angles);
 
         /*! \brief Apply a translation to the current Transformation3D
          *
@@ -157,14 +160,14 @@ namespace Bull
          * \return This
          *
          */
-        Transformation3D& applyTranslation(const Vector3<T>& translation);
+        Transformation3D<T>& applyTranslation(const Vector3<T>& translation);
 
         /*! \brief Convert the Transformation3D to a Matrix4F
          *
          * \return The Matrix
          *
          */
-        const Matrix4F& getMatrix() const;
+        const Matrix4<T>& getMatrix() const;
 
     private:
 
