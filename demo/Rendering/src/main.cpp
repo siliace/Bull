@@ -3,8 +3,10 @@
 #include <Bull/Render/Shader/Shader.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
 
+#include <Bull/Math/EulerAngles.hpp>
 #include <Bull/Math/TransformationPipeline/Camera.hpp>
 #include <Bull/Math/TransformationPipeline/PerspectiveProjection.hpp>
+#include <Bull/Math/TransformationPipeline/Transformation3D.hpp>
 
 using namespace Bull;
 
@@ -52,6 +54,7 @@ int main(int argc, char* argv[])
     Shader core;
     unsigned int vao;
     AngleF pitch, yaw;
+    EulerAnglesF rotation;
     RenderWindow::Event e;
     HardwareBuffer vbo(HardwareBuffer::Array);
     HardwareBuffer ebo(HardwareBuffer::Element);
@@ -96,6 +99,12 @@ int main(int argc, char* argv[])
                 perspective.setRatio(win.getSize().getRatio());
             }
 
+            if(e.type == RenderWindow::Event::MouseMoved && Mouse::isButtonPressed(Mouse::Left))
+            {
+                rotation.pitch += e.mouseMove.xRel;
+                rotation.roll  += e.mouseMove.yRel;
+            }
+
             if(e.type == RenderWindow::Event::KeyDown)
             {
                 Vector3F offsets;
@@ -129,7 +138,7 @@ int main(int argc, char* argv[])
 
         gl::bindVertexArray(vao);
 
-        core.setUniformMatrix("modelMatrix", Matrix4F::Identity);
+        core.setUniformMatrix("modelMatrix", Transformation3DF::makeRotation(rotation).getMatrix());
         core.setUniformMatrix("viewMatrix", camera.getMatrix());
         core.setUniformMatrix("projMatrix", perspective.getMatrix());
 
