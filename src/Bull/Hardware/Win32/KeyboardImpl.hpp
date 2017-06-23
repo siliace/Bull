@@ -1,8 +1,6 @@
 #ifndef Bull_KeyboardImpl_hpp
 #define Bull_KeyboardImpl_hpp
 
-#include <windows.h>
-
 #include <Bull/Hardware/Keyboard.hpp>
 
 namespace Bull
@@ -31,7 +29,7 @@ namespace Bull
              * \return Return the VK equivalent
              *
              */
-            static UINT convertBullkeyToVK(Keyboard::Key key);
+            static int convertBullkeyToVK(Keyboard::Key key);
         };
     }
 }

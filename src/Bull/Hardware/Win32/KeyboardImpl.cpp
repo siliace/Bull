@@ -1,3 +1,5 @@
+#include <windows.h>
+
 #include <Bull/Hardware/Win32/KeyboardImpl.hpp>
 
 /// GCC missing define
@@ -33,10 +35,10 @@ namespace Bull
                 return Keyboard::isKeyPressed(Keyboard::LeftSystem) || Keyboard::isKeyPressed(Keyboard::RightSystem);
             }
 
-            return GetAsyncKeyState(convertBullkeyToVK(key));
+            return (GetAsyncKeyState(convertBullkeyToVK(key)) & 0x8000) != FALSE;
         }
 
-        UINT KeyboardImpl::convertBullkeyToVK(Keyboard::Key key)
+        int KeyboardImpl::convertBullkeyToVK(Keyboard::Key key)
         {
             switch(key)
             {
@@ -156,7 +158,6 @@ namespace Bull
                 case Keyboard::Key::Pause:        return VK_PAUSE;
                 case Keyboard::Key::ScreenShot:   return VK_SNAPSHOT;
                 case Keyboard::Key::Scroll:       return VK_SCROLL;
-                default:                          return 0;
             }
 
             return 0;
