@@ -235,8 +235,8 @@ namespace Bull
             /*! \brief Process a single event
              *
              * \param message The windows message
-             * \param wParam The WPARAM
-             * \param lParam The LPARAM
+             * \param wParam  The WPARAM
+             * \param lParam  The LPARAM
              *
              */
             void processEvent(UINT message, WPARAM wParam, LPARAM lParam);
@@ -246,6 +246,7 @@ namespace Bull
             SavedWindowInfo m_savedInfo;
             bool            m_isResizing;
             Vector2I        m_lastPosition;
+            bool            m_cursorVisible;
         };
     }
 }

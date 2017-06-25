@@ -44,6 +44,7 @@ namespace Bull
             ResizeW,
             Text,
             Wait,
+            NotAllowed,
         };
 
     public:

@@ -99,6 +99,19 @@ int main(int argc, char* argv[])
                 perspective.setRatio(win.getSize().getRatio());
             }
 
+            if(e.type == RenderWindow::Event::MouseButtonDown)
+            {
+                Cursor cursor;
+                cursor.loadFromSystem(Cursor::Hand);
+                win.setMouseCursor(cursor);
+            }
+
+            if(e.type == RenderWindow::Event::MouseButtonUp)
+            {
+                Cursor cursor;
+                win.setMouseCursor(cursor);
+            }
+
             if(e.type == RenderWindow::Event::MouseMoved && Mouse::isButtonPressed(Mouse::Left))
             {
                 rotation.pitch += e.mouseMove.xRel;

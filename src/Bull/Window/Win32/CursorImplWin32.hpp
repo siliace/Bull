@@ -51,6 +51,11 @@ namespace Bull
 
         private:
 
+            /*! \brief Destroy the cursor
+             *
+             */
+            void destroy();
+
             HCURSOR m_handler;
         };
     }

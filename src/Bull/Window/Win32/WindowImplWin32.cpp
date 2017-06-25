@@ -237,7 +237,8 @@ namespace Bull
         }
 
         WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style) :
-            m_isResizing(false)
+            m_isResizing(false),
+            m_cursorVisible(true)
         {
             unsigned int width, height;
             DWORD winStyle = computeStyle(style);
@@ -463,19 +464,23 @@ namespace Bull
             ShowWindow(m_handler, (visible) ? SW_SHOW : SW_HIDE);
         }
 
-        void WindowImplWin32::setMouseCursor(const std::unique_ptr<CursorImpl> &cursor)
+        void WindowImplWin32::setMouseCursor(const std::unique_ptr<CursorImpl>& cursor)
         {
-
+            SetCursor(cursor->getSystemHandler());
         }
 
         void WindowImplWin32::setMouseCursorVisible(bool visible)
         {
-
+            if(visible != m_cursorVisible)
+            {
+                m_cursorVisible = visible;
+                ShowCursor(visible);
+            }
         }
 
         bool WindowImplWin32::isMouseCursorVisible() const
         {
-            return false;
+            return m_cursorVisible;
         }
 
         WindowHandler WindowImplWin32::getSystemHandler() const
