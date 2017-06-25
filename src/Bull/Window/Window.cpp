@@ -36,6 +36,13 @@ namespace Bull
 
         onOpen();
 
+        setTitle(title);
+        setVisible(true);
+        setMinSize(-1, -1);
+        setMinSize(-1, -1);
+        enableKeyRepeat(true);
+        setMouseCursorVisible(true);
+
         return true;
     }
 
@@ -162,7 +169,7 @@ namespace Bull
         return Vector2I();
     }
 
-    Window& Window::setMinSize(const Vector2UI& size)
+    Window& Window::setMinSize(const Vector2I& size)
     {
         if(m_impl)
         {
@@ -172,22 +179,22 @@ namespace Bull
         return (*this);
     }
 
-    Window& Window::setMinSize(unsigned int width, unsigned int height)
+    Window& Window::setMinSize(int width, int height)
     {
-        return setMinSize(Vector2UI(width, height));
+        return setMinSize(Vector2I(width, height));
     }
 
-    Vector2UI Window::getMinSize() const
+    Vector2I Window::getMinSize() const
     {
         if(m_impl)
         {
             return m_impl->getMinSize();
         }
 
-        return Vector2UI();
+        return Vector2I();
     }
 
-    Window& Window::setMaxSize(const Vector2UI& size)
+    Window& Window::setMaxSize(const Vector2I& size)
     {
         if(m_impl)
         {
@@ -197,19 +204,19 @@ namespace Bull
         return (*this);
     }
 
-    Window& Window::setMaxSize(unsigned int width, unsigned int height)
+    Window& Window::setMaxSize(int width, int height)
     {
-        return setMaxSize(Vector2UI(width, height));
+        return setMaxSize(Vector2I(width, height));
     }
 
-    Vector2UI Window::getMaxSize() const
+    Vector2I Window::getMaxSize() const
     {
         if(m_impl)
         {
             return m_impl->getMinSize();
         }
 
-        return Vector2UI();
+        return Vector2I();
     }
 
     Window& Window::setSize(const Vector2UI& size)

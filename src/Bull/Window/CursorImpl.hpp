@@ -1,5 +1,5 @@
-#ifndef BULL_CURSORIMPL_HPP
-#define BULL_CURSORIMPL_HPP
+#ifndef BULL_WINDOW_CURSORIMPL_HPP
+#define BULL_WINDOW_CURSORIMPL_HPP
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
@@ -64,4 +64,4 @@ namespace Bull
     }
 }
 
-#endif //BULL_CURSORIMPL_HPP
+#endif // BULL_WINDOW_CURSORIMPL_HPP

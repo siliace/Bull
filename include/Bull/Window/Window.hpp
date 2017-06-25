@@ -280,7 +280,7 @@ namespace Bull
          * \return This
          *
          */
-        Window& setMinSize(const Vector2UI& size);
+        Window& setMinSize(const Vector2I& size);
 
         /*! \brief Set the minimal size of the window
          *
@@ -290,14 +290,14 @@ namespace Bull
          * \return This
          *
          */
-        Window& setMinSize(unsigned int width, unsigned int height);
+        Window& setMinSize(int width, int height);
 
         /*! \brief Get the minimal size of the window
          *
          * \return The minimal size
          *
          */
-        Vector2UI getMinSize() const;
+        Vector2I getMinSize() const;
 
         /*! \brief Set the maximal size of the window
          *
@@ -306,7 +306,7 @@ namespace Bull
          * \return This
          *
          */
-        Window& setMaxSize(const Vector2UI& size);
+        Window& setMaxSize(const Vector2I& size);
 
         /*! \brief Set the maximal size of the window
          *
@@ -316,14 +316,14 @@ namespace Bull
          * \return This
          *
          */
-        Window& setMaxSize(unsigned int width, unsigned int height);
+        Window& setMaxSize(int width, int height);
 
         /*! \brief Get the maximal size of the window
          *
          * \return The maximal size
          *
          */
-        Vector2UI getMaxSize() const;
+        Vector2I getMaxSize() const;
 
         /*! \brief Set the size of the window
          *

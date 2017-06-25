@@ -99,16 +99,17 @@ int main(int argc, char* argv[])
                 perspective.setRatio(win.getSize().getRatio());
             }
 
-            if(e.type == RenderWindow::Event::MouseButtonDown)
+            if(e.type == RenderWindow::Event::MouseButtonDown && e.mouseButton.button == Mouse::Left)
             {
                 Cursor cursor;
                 cursor.loadFromSystem(Cursor::Hand);
                 win.setMouseCursor(cursor);
             }
 
-            if(e.type == RenderWindow::Event::MouseButtonUp)
+            if(e.type == RenderWindow::Event::MouseButtonUp && e.mouseButton.button == Mouse::Left)
             {
                 Cursor cursor;
+                cursor.loadFromSystem(Cursor::Default);
                 win.setMouseCursor(cursor);
             }
 

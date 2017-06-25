@@ -122,28 +122,28 @@ namespace Bull
              * \param size The minimal size of the window
              *
              */
-            void setMinSize(const Vector2UI& size) override;
+            void setMinSize(const Vector2I& size) override;
 
             /*! \brief Get the minimal size of the window
              *
              * \return The minimal size
              *
              */
-            Vector2UI getMinSize() const override;
+            Vector2I getMinSize() const override;
 
             /*! \brief Set the maximal size of the window
              *
              * \param size The maximal size of the window
              *
              */
-            void setMaxSize(const Vector2UI& size) override;
+            void setMaxSize(const Vector2I& size) override;
 
             /*! \brief Get the maximal size of the window
              *
              * \return The maximal size
              *
              */
-            Vector2UI getMaxSize() const override;
+            Vector2I getMaxSize() const override;
 
             /*! \brief Set the size of the window
              *
@@ -241,7 +241,10 @@ namespace Bull
              */
             void processEvent(UINT message, WPARAM wParam, LPARAM lParam);
 
+            HCURSOR         m_cursor;
             HWND            m_handler;
+            Vector2I        m_maxSize;
+            Vector2I        m_minSize;
             Vector2UI       m_lastSize;
             SavedWindowInfo m_savedInfo;
             bool            m_isResizing;

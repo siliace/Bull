@@ -1,5 +1,5 @@
-#ifndef BULL_CURSOR_HPP
-#define BULL_CURSOR_HPP
+#ifndef BULL_WINDOW_CURSOR_HPP
+#define BULL_WINDOW_CURSOR_HPP
 
 #include <memory>
 
@@ -95,4 +95,4 @@ namespace Bull
     };
 }
 
-#endif //BULL_CURSOR_HPP
+#endif // BULL_WINDOW_CURSOR_HPP

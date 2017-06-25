@@ -237,6 +237,7 @@ namespace Bull
         }
 
         WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style) :
+            m_cursor(LoadCursor(NULL, IDC_ARROW)),
             m_isResizing(false),
             m_cursorVisible(true)
         {
@@ -363,24 +364,24 @@ namespace Bull
             return Vector2I(r.left, r.top);
         }
 
-        void WindowImplWin32::setMinSize(const Vector2UI& size)
+        void WindowImplWin32::setMinSize(const Vector2I& size)
         {
 
         }
 
-        Vector2UI WindowImplWin32::getMinSize() const
+        Vector2I WindowImplWin32::getMinSize() const
         {
-            return Vector2UI();
+            return m_minSize;
         }
 
-        void WindowImplWin32::setMaxSize(const Vector2UI& size)
+        void WindowImplWin32::setMaxSize(const Vector2I& size)
         {
 
         }
 
-        Vector2UI WindowImplWin32::getMaxSize() const
+        Vector2I WindowImplWin32::getMaxSize() const
         {
-            return Vector2UI();
+            return m_maxSize;
         }
 
         void WindowImplWin32::setSize(const Vector2UI& size)
@@ -466,7 +467,8 @@ namespace Bull
 
         void WindowImplWin32::setMouseCursor(const std::unique_ptr<CursorImpl>& cursor)
         {
-            SetCursor(cursor->getSystemHandler());
+            m_cursor = cursor->getSystemHandler();
+            SetCursor(m_cursor);
         }
 
         void WindowImplWin32::setMouseCursorVisible(bool visible)
@@ -499,6 +501,15 @@ namespace Bull
                     e.type = Window::Event::Closed;
 
                     pushEvent(e);
+                }
+                break;
+
+                case WM_SETCURSOR:
+                {
+                    if(LOWORD(lParam) == HTCLIENT)
+                    {
+                        SetCursor(m_cursor);
+                    }
                 }
                 break;
 
@@ -560,6 +571,7 @@ namespace Bull
 
                         pushEvent(e);
                     }
+
                     if(getPosition() != m_lastPosition)
                     {
                         Window::Event e;
