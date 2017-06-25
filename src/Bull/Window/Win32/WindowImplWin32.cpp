@@ -57,12 +57,12 @@ namespace Bull
             winClass.lpszClassName = windowClassName;
             winClass.hIconSm       = nullptr;
 
-            return RegisterClassExW(&winClass);
+            return RegisterClassExW(&winClass) == TRUE;
         }
 
         LRESULT CALLBACK WindowImplWin32::globalEvent(HWND handler, UINT message, WPARAM wParam, LPARAM lParam)
         {
-            WindowImplWin32* windowImpl = reinterpret_cast<WindowImplWin32*>(GetWindowLong(handler, GWL_USERDATA));
+            WindowImplWin32* windowImpl = reinterpret_cast<WindowImplWin32*>(GetWindowLongPtrW(handler, GWL_USERDATA));
 
             if(windowImpl)
             {
@@ -276,7 +276,7 @@ namespace Bull
                                         instance,
                                         nullptr);
 
-            SetWindowLong(m_handler, GWL_USERDATA, (LONG_PTR)this);
+            SetWindowLongPtrW(m_handler, GWL_USERDATA, (LONG_PTR)this);
 
             UpdateWindow(m_handler);
 
@@ -316,7 +316,7 @@ namespace Bull
 
         bool WindowImplWin32::isMinimized() const
         {
-            return IsIconic(m_handler);
+            return IsIconic(m_handler) == TRUE;
         }
 
         void WindowImplWin32::maximize()
