@@ -51,7 +51,7 @@ namespace Bull
             winClass.cbWndExtra    = 0;
             winClass.hInstance     = instance;
             winClass.hIcon         = LoadIcon(instance, IDI_APPLICATION);
-            winClass.hCursor       = LoadCursor(nullptr, IDC_ARROW);
+            winClass.hCursor       = nullptr;
             winClass.hbrBackground = nullptr;
             winClass.lpszMenuName  = nullptr;
             winClass.lpszClassName = windowClassName;
