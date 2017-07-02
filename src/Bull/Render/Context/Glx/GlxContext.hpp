@@ -77,7 +77,7 @@ namespace Bull
              * \param settings Parameters to create the OpenGL context
              *
              */
-            GlxContext(const std::shared_ptr<GlxContext>& shared, std::unique_ptr<WindowImpl>& window, Uint8 bitsPerPixel, const ContextSettings& settings);
+            GlxContext(const std::shared_ptr<GlxContext>& shared, const std::unique_ptr<WindowImpl>& window, Uint8 bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Destructor
              *
@@ -121,7 +121,7 @@ namespace Bull
              * \param handler The window to bind to this context
              *
              */
-            void createSurface(std::unique_ptr<WindowImpl>& window);
+            void createSurface(const std::unique_ptr<WindowImpl>& window);
 
             /*! \brief Create the render surface
              *

@@ -187,7 +187,7 @@ namespace Bull
             /// Nothing
         }
 
-        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, std::unique_ptr<WindowImpl>& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
+        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, const std::unique_ptr<WindowImpl>& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
             m_device(0),
             m_render(0),
@@ -261,7 +261,7 @@ namespace Bull
             return wglMakeCurrent(m_device, m_render) == TRUE;
         }
 
-        void WglContext::createSurface( std::unique_ptr<WindowImpl>& window)
+        void WglContext::createSurface(const std::unique_ptr<WindowImpl>& window)
         {
             m_window = window->getSystemHandler();
 
