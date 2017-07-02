@@ -25,9 +25,13 @@ int main(int argc, char* argv[])
         {
             std::cout << "Waiting for client" << std::endl;
 
-            if(server.accept(client) == Socket::Ready)
+            if(server.accept(client, Time::seconds(5.f)) == Socket::Ready)
             {
                 std::cout << "Client found" << std::endl;
+            }
+            else
+            {
+                std::cout << "Accept timeout" << std::endl;
             }
         }
     }

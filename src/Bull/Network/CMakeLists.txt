@@ -17,3 +17,4 @@ if(BULL_OS_WINDOWS)
 endif()
 
 target_link_libraries(bull-network bull-core)
+target_link_libraries(bull-network bull-utility)

@@ -1,6 +1,11 @@
+#include <Bull/Core/Time/Clock.hpp>
+#include <Bull/Core/Thread/Thread.hpp>
+
 #include <Bull/Network/SocketImpl.hpp>
 #include <Bull/Network/TcpListener.hpp>
 #include <Bull/Network/TcpSocket.hpp>
+
+#include <Bull/Utility/CallOnExit.hpp>
 
 namespace Bull
 {
@@ -55,6 +60,29 @@ namespace Bull
         }
 
         return Socket::Disconnected;
+    }
+
+    Socket::State TcpListener::accept(TcpSocket& client, const Time& timeout)
+    {
+        Clock timer;
+        Socket::State state;
+        bool blockingMode = isEnableBlocking();
+
+        // We need to use the non blocking mode of the Socket
+        CallOnExit resetBlockingMode([this, blockingMode](){
+            enableBlocking(blockingMode);
+        });
+
+        enableBlocking(false);
+
+        timer.start();
+        do
+        {
+            Thread::sleep(Time::milliseconds(10.f));
+            state = accept(client);
+        }while(timer.getElapsedTime() < timeout && state == Disconnected);
+
+        return state;
     }
 
     Socket::Port TcpListener::getListeningPort() const

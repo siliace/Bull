@@ -1,6 +1,8 @@
 #ifndef BULL_NETWORK_TCPLISTENER_HPP
 #define BULL_NETWORK_TCPLISTENER_HPP
 
+#include <Bull/Core/Time/Time.hpp>
+
 #include <Bull/Network/Socket.hpp>
 #include <Bull/Network/IpAddress.hpp>
 
@@ -44,6 +46,16 @@ namespace Bull
          *
          */
         State accept(TcpSocket& client);
+
+        /*! \brief Accept an incoming connection
+         *
+         * \param client
+         * \param timeout
+         *
+         * \return
+         *
+         */
+        State accept(TcpSocket& client, const Time& timeout);
 
         /*! \brief Get the local that the TcpListener is listening
          *

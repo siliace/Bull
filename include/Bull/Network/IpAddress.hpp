@@ -34,20 +34,20 @@ namespace Bull
          */
         static IpAddress resolve(const String& hostname);
 
-        /*! \brief
+        /*! \brief Convert an IpV4 to a String
          *
-         * \param ip
+         * \param ip The IpV4 address to convert
          *
-         * \return
+         * \return The representation of the IpV4 as a String
          *
          */
         static String toString(const V4& ip);
 
-        /*! \brief
+        /*! \brief Convert an IpV6 to a String
          *
-         * \param ip
+         * \param ip The IpV6 address to convert
          *
-         * \return
+         * \return The representation of the IpV6 as a String
          *
          */
         static String toString(const V6& ip);
@@ -75,10 +75,10 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param a
-         * \param b
-         * \param c
-         * \param d
+         * \param a The first byte of the IpAddress
+         * \param b The second byte of the IpAddress
+         * \param c The third byte of the IpAddress
+         * \param d The forth byte of the IpAddress
          *
          */
         IpAddress(Uint8 a, Uint8 b, Uint8 c, Uint8 d);
@@ -108,23 +108,23 @@ namespace Bull
          */
         String toString() const;
 
-        /*! \brief
+        /*! \brief Convert the IpAddress to a 32 bits integer
          *
-         * \return
+         * \return The IpAddres as a 32 bits integer
          *
          */
         Uint32 toUint32() const;
 
-        /*! \brief
+        /*! \brief Check whether the IpAddress is valid
          *
-         * \return
+         * \return True if the IpAddress is valid
          *
          */
         bool isValid() const;
 
-        /*! \brief
+        /*! \brief Check whether the IpAddress is valid
          *
-         * \return
+         * \return True if the IpAddress is valid
          *
          */
         operator bool() const;
