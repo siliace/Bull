@@ -12,4 +12,5 @@ link_directories(${BULL_ROOT}/bin/${CMAKE_BUILD_TYPE})
 
 add_executable(demo-network-server src/main.cpp)
 target_link_libraries(demo-network-server bull-core)
+target_link_libraries(demo-network-server bull-hardware)
 target_link_libraries(demo-network-server bull-network)
