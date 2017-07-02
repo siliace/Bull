@@ -75,6 +75,18 @@ namespace Bull
     private:
 
         friend class TcpListener;
+
+        /*! \brief Create a Socket from an handler
+         *
+         * \param handler The handler to use
+         *
+         */
+        void reset(SocketHandler handler, const IpAddress& address, Socket::Port port);
+
+    private:
+
+        Port      m_remotePort;
+        IpAddress m_remoteAddress;
     };
 }
 

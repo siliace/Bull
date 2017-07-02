@@ -6,7 +6,9 @@
 namespace Bull
 {
     TcpSocket::TcpSocket() :
-        Socket(Tcp)
+        Socket(Tcp),
+        m_remotePort(AnyPort),
+        m_remoteAddress(IpAddress::None)
     {
         /// Nothing
     }
@@ -23,7 +25,7 @@ namespace Bull
 
     bool TcpSocket::isConnected() const
     {
-        return false;
+        return m_remoteAddress.isValid() && m_remotePort != AnyPort;
     }
 
     void TcpSocket::disconnect()
@@ -39,5 +41,13 @@ namespace Bull
     Socket::State TcpSocket::receive(void* data, std::size_t length)
     {
         return Disconnected;
+    }
+
+    void TcpSocket::reset(SocketHandler handler, const IpAddress& address, Socket::Port port)
+    {
+        Socket::reset(handler);
+
+        m_remotePort    = port;
+        m_remoteAddress = address;
     }
 }

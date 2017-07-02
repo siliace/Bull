@@ -76,12 +76,12 @@ namespace Bull
          */
         void create(NetProtocol protocol);
 
-        /*! \brief Create a Socket from an handler
+        /*! \brief Reset the SocketHandler
          *
          * \param handler The handler to use
          *
          */
-        void create(SocketHandler handler);
+        void reset(SocketHandler handler);
 
         /*! \brief Get the SocketHandler
          *

@@ -10,8 +10,10 @@ namespace Bull
 {
     class TcpSocket;
 
-    struct BULL_NETWORK_API TcpListener : public Socket
+    class BULL_NETWORK_API TcpListener : public Socket
     {
+    public:
+
         /*! \brief Default constructor
          *
          */
@@ -57,12 +59,16 @@ namespace Bull
          */
         State accept(TcpSocket& client, const Time& timeout);
 
-        /*! \brief Get the local that the TcpListener is listening
+        /*! \brief Get the local port bound to this TcpListener
          *
          * \return The port
          *
          */
         Port getListeningPort() const;
+
+    private:
+
+        Port m_listeningPort;
     };
 }
 

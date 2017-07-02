@@ -53,11 +53,11 @@ namespace Bull
                 throw std::runtime_error("Failed to create the socket");
             }
 
-            create(handler);
+            reset(handler);
         }
     }
 
-    void Socket::create(SocketHandler handler)
+    void Socket::reset(SocketHandler handler)
     {
         if(m_handler == prv::SocketImpl::InvalidHandler)
         {

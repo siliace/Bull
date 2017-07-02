@@ -10,7 +10,8 @@
 namespace Bull
 {
     TcpListener::TcpListener() :
-        Socket(Tcp)
+        Socket(Tcp),
+        m_listeningPort(AnyPort)
     {
         /// Nothing
     }
@@ -35,6 +36,10 @@ namespace Bull
             {
                 return Socket::Error;
             }
+
+            m_listeningPort = port;
+
+            return Socket::Ready;
         }
 
         return Socket::Error;
@@ -54,7 +59,7 @@ namespace Bull
                 return Socket::Disconnected;
             }
 
-            client.create(clientHandler);
+            client.reset(clientHandler, ip, port);
 
             return Socket::Ready;
         }
@@ -87,6 +92,6 @@ namespace Bull
 
     Socket::Port TcpListener::getListeningPort() const
     {
-        return Socket::AnyPort;
+        return m_listeningPort;
     }
 }
