@@ -8,6 +8,7 @@ target_sources(bull-core
         PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariableImpl.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariableImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/MutexHandler.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/MutexImpl.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/MutexImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/SemaphoreImpl.cpp

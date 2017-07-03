@@ -1,0 +1,45 @@
+#include <iostream>
+
+#include <Bull/Hardware/Keyboard.hpp>
+
+#include <Bull/Network/TcpListener.hpp>
+#include <Bull/Network/TcpSocket.hpp>
+
+using namespace Bull;
+
+int main(int argc, char* argv[])
+{
+    TcpSocket client;
+    TcpListener server;
+    String message("Hello world");
+
+    if(server.listen(6969) != TcpListener::State::Ready)
+    {
+        std::cout << "Failed to listen the port" << std::endl;
+
+        return -1;
+    }
+
+    while(!Keyboard::isKeyPressed(Keyboard::Escape))
+    {
+        if(client.isConnected())
+        {
+            client.send(message.getBuffer(), message.getSize());
+        }
+        else
+        {
+            std::cout << "Waiting for client" << std::endl;
+
+            if(server.accept(client, Time::seconds(1.f)) == Socket::Ready)
+            {
+                std::cout << "Client found" << std::endl;
+            }
+            else
+            {
+                std::cout << "Accept timeout" << std::endl;
+            }
+        }
+    }
+
+    return 0;
+}

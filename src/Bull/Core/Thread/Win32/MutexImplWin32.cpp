@@ -16,7 +16,7 @@ namespace Bull
 
         bool MutexImplWin32::tryLock()
         {
-            return TryEnterCriticalSection(&m_handler);
+            return TryEnterCriticalSection(&m_handler) == TRUE;
         }
 
         void MutexImplWin32::lock()
@@ -27,6 +27,11 @@ namespace Bull
         void MutexImplWin32::unlock()
         {
             LeaveCriticalSection(&m_handler);
+        }
+
+        MutexHandler* MutexImplWin32::getHandler()
+        {
+            return &m_handler;
         }
     }
 }

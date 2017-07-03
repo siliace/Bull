@@ -1,6 +1,8 @@
 #ifndef Bull_ConditionVariableImpl_hpp
 #define Bull_ConditionVariableImpl_hpp
 
+#include <memory>
+
 #include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/MutexImpl.hpp>
@@ -43,7 +45,7 @@ namespace Bull
              * \param mutex The mutex to lock the resource
              *
              */
-            virtual void wait(MutexImpl* mutex) = 0;
+            virtual void wait(const std::unique_ptr<MutexImpl>& mutex) = 0;
 
             /*! \brief Wait for a signal
              *
@@ -53,7 +55,7 @@ namespace Bull
              * \return Return false if timeout, else return true
              *
              */
-            virtual bool wait(MutexImpl* mutex, const Time& timeout) = 0;
+            virtual bool wait(const std::unique_ptr<MutexImpl>& mutex, const Time& timeout) = 0;
 
         protected:
 
