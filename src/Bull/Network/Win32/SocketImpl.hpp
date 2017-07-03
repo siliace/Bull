@@ -39,6 +39,24 @@ namespace Bull
              */
             static bool bind(SocketHandler handler, const IpAddress& address, Socket::Port port);
 
+            /*! \brief Close a socket
+             *
+             * \param handler The socket to close
+             *
+             */
+            static void close(SocketHandler handler);
+
+            /*! \brief Connect the socket to a remote host
+             *
+             * \param handler The socket to connect
+             * \param address The address of the remote host to connect
+             * \param port    The port of the remote host to use
+             *
+             * \return True if the socket is connected
+             *
+             */
+            static bool connect(SocketHandler handler, const IpAddress& address, Socket::Port port);
+
             /*! \brief Create a SocketHandler
              *
              * \param protocol The protocol to used by the socket
@@ -48,13 +66,6 @@ namespace Bull
              *
              */
             static SocketHandler create(NetProtocol protocol, Socket::Type type);
-
-            /*! \brief Close a socket
-             *
-             * \param handler The socket to close
-             *
-             */
-            static void close(SocketHandler handler);
 
             /*! \brief Start to listen the bound port
              *

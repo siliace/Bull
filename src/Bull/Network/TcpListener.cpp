@@ -74,13 +74,13 @@ namespace Bull
         bool blockingMode = isEnableBlocking();
 
         // We need to use the non blocking mode of the Socket
+        enableBlocking(false);
         CallOnExit resetBlockingMode([this, blockingMode](){
             enableBlocking(blockingMode);
         });
 
-        enableBlocking(false);
-
         timer.start();
+
         do
         {
             Thread::sleep(Time::milliseconds(10.f));

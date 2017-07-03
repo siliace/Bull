@@ -1,6 +1,8 @@
 #ifndef BULL_NETWORK_TCPSOCKET_HPP
 #define BULL_NETWORK_TCPSOCKET_HPP
 
+#include <Bull/Core/Time/Time.hpp>
+
 #include <Bull/Network/Socket.hpp>
 
 namespace Bull

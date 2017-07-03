@@ -13,7 +13,12 @@ int main(int argc, char* argv[])
     TcpListener server;
     String message("Hello world");
 
-    server.listen(6969);
+    if(server.listen(6969) != TcpListener::State::Ready)
+    {
+        std::cout << "Failed to listen the port" << std::endl;
+
+        return -1;
+    }
 
     while(!Keyboard::isKeyPressed(Keyboard::Escape))
     {
@@ -25,7 +30,7 @@ int main(int argc, char* argv[])
         {
             std::cout << "Waiting for client" << std::endl;
 
-            if(server.accept(client, Time::seconds(5.f)) == Socket::Ready)
+            if(server.accept(client, Time::seconds(1.f)) == Socket::Ready)
             {
                 std::cout << "Client found" << std::endl;
             }

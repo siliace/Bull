@@ -44,7 +44,7 @@ namespace Bull
 
         bool SocketImpl::bind(SocketHandler handler, const IpAddress& address, Socket::Port port)
         {
-            if(handler != InvalidHandler && address.isValid())
+            if(handler != InvalidHandler && address.isValid() && port != Socket::AnyPort)
             {
                 IpAddressImpl::SockAddrBuffer addrBuffer;
                 IpAddressImpl::SockAddrLenght length = IpAddressImpl::toSockAddr(address, port, &addrBuffer);
@@ -55,17 +55,30 @@ namespace Bull
             return false;
         }
 
-        SocketHandler SocketImpl::create(NetProtocol protocol, Socket::Type type)
-        {
-            return socket(translateProtocol(protocol), translateSocketType(type), 0);
-        }
-
         void SocketImpl::close(SocketHandler handler)
         {
             if(handler != InvalidHandler)
             {
                 closesocket(handler);
             }
+        }
+
+        bool SocketImpl::connect(SocketHandler handler, const IpAddress& address, Socket::Port port)
+        {
+            if(handler != InvalidHandler && address.isValid() && port != Socket::AnyPort)
+            {
+                IpAddressImpl::SockAddrBuffer addrBuffer;
+                IpAddressImpl::SockAddrLenght length = IpAddressImpl::toSockAddr(address, port, &addrBuffer);
+
+                return ::connect(handler, reinterpret_cast<sockaddr*>(&addrBuffer), length) != SOCKET_ERROR;
+            }
+
+            return false;
+        }
+
+        SocketHandler SocketImpl::create(NetProtocol protocol, Socket::Type type)
+        {
+            return socket(translateProtocol(protocol), translateSocketType(type), 0);
         }
 
         bool SocketImpl::listen(SocketHandler handler, unsigned int limit)
