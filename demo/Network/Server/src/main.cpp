@@ -22,9 +22,9 @@ int main(int argc, char* argv[])
 
     while(!Keyboard::isKeyPressed(Keyboard::Escape))
     {
-        if(client.isConnected())
+        if(client.send(message.getBuffer(), message.getSize()) == TcpSocket::Ready)
         {
-            client.send(message.getBuffer(), message.getSize());
+            std::cout << "Sent" << std::endl;
         }
         else
         {

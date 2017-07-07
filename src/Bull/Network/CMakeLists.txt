@@ -2,6 +2,8 @@ bull_add_library(bull-network)
 
 target_sources(bull-network
         PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/Icmp.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/IcmpImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/IpAddress.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Socket.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/TcpListener.cpp
@@ -13,7 +15,9 @@ target_sources(bull-network
 
 if(BULL_OS_WINDOWS)
     add_subdirectory(Win32)
+    target_link_libraries(bull-network icmp)
     target_link_libraries(bull-network ws2_32)
+    target_link_libraries(bull-network iphlpapi)
 endif()
 
 target_link_libraries(bull-network bull-core)

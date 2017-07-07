@@ -41,13 +41,6 @@ namespace Bull
          */
         State connect(const IpAddress& address, Port port, const Time& timeout);
 
-        /*! \brief Check whether the TcpSocket is connected to a remote host
-         *
-         * \return True if the TcpSocket is connected
-         *
-         */
-        bool isConnected() const;
-
         /*! \brief Disconnect the TcpSocket from the remote host
          *
          */

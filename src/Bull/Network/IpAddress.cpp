@@ -97,12 +97,12 @@ namespace Bull
 
     Uint32 IpAddress::toUint32() const
     {
-        if(isValid() && m_protocol == NetProtocol_IpV4)
+        if(isValid() && m_protocol != NetProtocol_IpV4)
         {
-            return Uint32(m_v4[0]) << 24 | Uint32(m_v4[1]) << 16 | Uint32(m_v4[2]) << 8 | Uint32(m_v4[3]) << 0;
+            throw std::logic_error("The Ip is not valid or not Ipv4");
         }
 
-        return 0;
+        return Uint32(m_v4[0]) << 24 | Uint32(m_v4[1]) << 16 | Uint32(m_v4[2]) << 8 | Uint32(m_v4[3]) << 0;
     }
 
     bool IpAddress::isValid() const

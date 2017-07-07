@@ -37,14 +37,16 @@ namespace Bull
                     {
                         sockaddr_in* addr = reinterpret_cast<sockaddr_in*>(buffer);
                         ZeroMemory(addr, sizeof(sockaddr_in));
-                        addr->sin_port        = htons(port);
                         addr->sin_family      = AF_INET;
-                        addr->sin_addr.s_addr = ip.toUint32();
+                        addr->sin_port        = htons(port);
+                        addr->sin_addr.s_addr = htonl(ip.toUint32());
 
                         return sizeof(sockaddr_in);
                     }
                 }
             }
+
+            return 0;
         }
     }
 }

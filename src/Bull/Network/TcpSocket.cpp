@@ -17,10 +17,12 @@ namespace Bull
 
     Socket::State TcpSocket::connect(const IpAddress& address, Port port)
     {
-        if(isConnected())
+        if(getHandler() != prv::SocketImpl::InvalidHandler)
         {
             disconnect();
         }
+
+        create(address.getProtocol());
 
         if(prv::SocketImpl::connect(getHandler(), address, port))
         {
@@ -49,11 +51,6 @@ namespace Bull
         return state;
     }
 
-    bool TcpSocket::isConnected() const
-    {
-        return m_remoteAddress.isValid() && m_remotePort != AnyPort;
-    }
-
     void TcpSocket::disconnect()
     {
         close();
@@ -74,7 +71,7 @@ namespace Bull
 
     void TcpSocket::reset(SocketHandler handler, const IpAddress& address, Socket::Port port)
     {
-        if(isConnected())
+        if(getHandler() != prv::SocketImpl::InvalidHandler)
         {
             disconnect();
         }
