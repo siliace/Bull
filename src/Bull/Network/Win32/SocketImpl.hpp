@@ -3,7 +3,6 @@
 
 #include <winsock2.h>
 
-#include <Bull/Network/NetProtocol.hpp>
 #include <Bull/Network/IpAddress.hpp>
 #include <Bull/Network/Socket.hpp>
 
@@ -65,7 +64,7 @@ namespace Bull
              * \return The created SocketHandler
              *
              */
-            static SocketHandler create(NetProtocol protocol, Socket::Type type);
+            static SocketHandler create(IpAddress::NetProtocol protocol, Socket::Type type);
 
             /*! \brief Start to listen the bound port
              *
@@ -89,7 +88,7 @@ namespace Bull
 
             static int translateSocketType(Socket::Type type);
 
-            static int translateProtocol(NetProtocol protocol);
+            static int translateProtocol(IpAddress::NetProtocol protocol);
         };
     }
 }

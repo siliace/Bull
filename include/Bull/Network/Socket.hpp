@@ -4,7 +4,7 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Network/Export.hpp>
-#include <Bull/Network/NetProtocol.hpp>
+#include <Bull/Network/IpAddress.hpp>
 #include <Bull/Network/SocketHandler.hpp>
 
 namespace Bull
@@ -74,7 +74,7 @@ namespace Bull
          * \param protocol The protocol to use in the Socket
          *
          */
-        void create(NetProtocol protocol);
+        void create(IpAddress::NetProtocol protocol);
 
         /*! \brief Reset the SocketHandler
          *
@@ -92,10 +92,10 @@ namespace Bull
 
     private:
 
-        Type          m_type;
-        SocketHandler m_handler;
-        NetProtocol   m_protocol;
-        bool          m_isBlocking;
+        Type                   m_type;
+        SocketHandler          m_handler;
+        IpAddress::NetProtocol m_protocol;
+        bool                   m_isBlocking;
     };
 }
 

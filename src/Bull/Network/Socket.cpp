@@ -40,7 +40,7 @@ namespace Bull
         }
     }
 
-    void Socket::create(NetProtocol protocol)
+    void Socket::create(IpAddress::NetProtocol protocol)
     {
         if(m_handler == prv::SocketImpl::InvalidHandler)
         {

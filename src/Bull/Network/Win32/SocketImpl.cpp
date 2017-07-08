@@ -76,7 +76,7 @@ namespace Bull
             return false;
         }
 
-        SocketHandler SocketImpl::create(NetProtocol protocol, Socket::Type type)
+        SocketHandler SocketImpl::create(IpAddress::NetProtocol protocol, Socket::Type type)
         {
             return socket(translateProtocol(protocol), translateSocketType(type), 0);
         }
@@ -112,14 +112,14 @@ namespace Bull
             return -1;
         }
 
-        int SocketImpl::translateProtocol(NetProtocol protocol)
+        int SocketImpl::translateProtocol(IpAddress::NetProtocol protocol)
         {
             switch(protocol)
             {
-                case NetProtocol_Any:     return -1;
-                case NetProtocol_IpV4:    return AF_INET;
-                case NetProtocol_IpV6:    return AF_INET6;
-                case NetProtocol_Unknown: return AF_UNSPEC;
+                case IpAddress::Any:     return -1;
+                case IpAddress::IpV4:    return AF_INET;
+                case IpAddress::IpV6:    return AF_INET6;
+                case IpAddress::Unknown: return AF_UNSPEC;
             }
 
             return -1;
