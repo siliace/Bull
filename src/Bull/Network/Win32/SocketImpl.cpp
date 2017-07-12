@@ -81,6 +81,23 @@ namespace Bull
             return socket(translateProtocol(protocol), translateSocketType(type), 0);
         }
 
+        Socket::State SocketImpl::lastError()
+        {
+            switch (WSAGetLastError())
+            {
+                case WSAEWOULDBLOCK:   return Socket::NotReady;
+                case WSAEALREADY:      return Socket::NotReady;
+                case WSAECONNABORTED:  return Socket::Disconnected;
+                case WSAECONNRESET:    return Socket::Disconnected;
+                case WSAETIMEDOUT:     return Socket::Disconnected;
+                case WSAENETRESET:     return Socket::Disconnected;
+                case WSAENOTCONN:      return Socket::Disconnected;
+                case WSAEISCONN:       return Socket::Ready;
+                case WSAEADDRNOTAVAIL: return Socket::ConnectionRefused;
+                default:               return Socket::Error;
+            }
+        }
+
         bool SocketImpl::listen(SocketHandler handler, unsigned int limit)
         {
             if(handler != InvalidHandler)
@@ -89,6 +106,26 @@ namespace Bull
             }
 
             return false;
+        }
+
+        std::size_t SocketImpl::reveive(SocketHandler handler, void* data, std::size_t length)
+        {
+            if(handler != InvalidHandler)
+            {
+                return ::recv(handler, static_cast<char*>(data), length, 0);
+            }
+
+            return 0;
+        }
+
+        std::size_t SocketImpl::send(SocketHandler handler, const void* data, std::size_t length)
+        {
+            if(handler != InvalidHandler)
+            {
+                return ::send(handler, static_cast<const char*>(data), static_cast<int>(length), 0);
+            }
+
+            return 0;
         }
 
         void SocketImpl::setBlocking(SocketHandler handler, bool blocking)

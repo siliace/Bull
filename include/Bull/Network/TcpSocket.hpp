@@ -46,6 +46,13 @@ namespace Bull
          */
         void disconnect();
 
+        /*! \brief Check whether the TcpSocket is connected to a remote host
+         *
+         * \return True if the TcpSocket is connected
+         * 
+         */
+        bool isConnected() const;
+
         /*! \brief Send data to the remote host
          *
          * \param data   Data to send
@@ -55,17 +62,18 @@ namespace Bull
          * \return The new State of the TcpSocket
          *
          */
-        State send(const void* data, std::size_t length, std::size_t* sent = nullptr);
+        State send(const void* data, std::size_t length, std::size_t& sent);
 
         /*! \brief Send data to the remote host
          *
-         * \param data   The buffer to fill
-         * \param length The length of the buffer to fill
+         * \param data     The buffer to fill
+         * \param length   The length of the buffer to fill
+         * \param received The amount of bytes received througth the socket
          *
          * \return The new State of the TcpSocket
          *
          */
-        State receive(void* data, std::size_t length);
+        State receive(void* data, std::size_t length, std::size_t& received);
 
     private:
 
@@ -80,6 +88,15 @@ namespace Bull
 
     private:
 
+        /*! \brief Update the state of the TcpSocket
+         *
+         * \param state The new state of the TcpSocket
+         *
+         * \return This
+         */
+        TcpSocket& updateState(Socket::State state);
+
+        State     m_state;
         Port      m_remotePort;
         IpAddress m_remoteAddress;
     };

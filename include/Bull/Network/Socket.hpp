@@ -26,6 +26,7 @@ namespace Bull
             NotReady,
             Partial,
             Disconnected,
+            ConnectionRefused,
             Error,
         };
 

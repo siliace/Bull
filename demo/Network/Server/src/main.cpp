@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
     TcpListener server;
     String message("Hello world");
 
-    if(server.listen(6969) != TcpListener::State::Ready)
+    if(server.listen(6969) != Socket::Ready)
     {
         std::cout << "Failed to listen the port" << std::endl;
 
@@ -22,9 +22,11 @@ int main(int argc, char* argv[])
 
     while(!Keyboard::isKeyPressed(Keyboard::Escape))
     {
-        if(client.send(message.getBuffer(), message.getSize()) == TcpSocket::Ready)
+        std::size_t sent = 0;
+
+        if(client.send(message.getBuffer(), message.getSize(), sent) == Socket::Ready)
         {
-            std::cout << "Sent" << std::endl;
+            std::cout << sent << " bytes sent" << std::endl;
         }
         else
         {

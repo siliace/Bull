@@ -59,14 +59,69 @@ namespace Bull
         m_remoteAddress = IpAddress::None;
     }
 
-    Socket::State TcpSocket::send(const void* data, std::size_t length, std::size_t* sent)
+    bool TcpSocket::isConnected() const
     {
-        return Disconnected;
+        return getHandler() != prv::SocketImpl::InvalidHandler;
     }
 
-    Socket::State TcpSocket::receive(void* data, std::size_t length)
+    Socket::State TcpSocket::send(const void* data, std::size_t length, std::size_t& sent)
     {
-        return Disconnected;
+        if(data && length)
+        {
+            State state;
+            std::size_t result = 0;
+            for(sent = 0; sent < length; sent += result)
+            {
+                result = prv::SocketImpl::send(getHandler(), data, length);
+
+                if(result <= 0)
+                {
+                    state = prv::SocketImpl::lastError();
+
+                    if(state == NotReady && sent > 0)
+                    {
+                        return Partial;
+                    }
+
+                    return state;
+                }
+            }
+
+            return Ready;
+        }
+        else
+        {
+            updateState(Error);
+        }
+
+        return m_state;
+    }
+
+    Socket::State TcpSocket::receive(void* data, std::size_t length, std::size_t& received)
+    {
+        received = 0;
+
+        if(!data || length)
+        {
+            std::size_t result = prv::SocketImpl::reveive(getHandler(), data, length);
+
+            if(result > 0)
+            {
+                received = result;
+
+                updateState(Ready);
+            }
+            else if(result == 0)
+            {
+                updateState(Disconnected);
+            }
+            else
+            {
+                updateState(prv::SocketImpl::lastError());
+            }
+        }
+
+        return m_state;
     }
 
     void TcpSocket::reset(SocketHandler handler, const IpAddress& address, Socket::Port port)
@@ -79,6 +134,14 @@ namespace Bull
         Socket::reset(handler);
 
         m_remotePort    = port;
+        m_state         = Ready;
         m_remoteAddress = address;
+    }
+
+    TcpSocket& TcpSocket::updateState(Socket::State state)
+    {
+        m_state = state;
+
+        return (*this);
     }
 }

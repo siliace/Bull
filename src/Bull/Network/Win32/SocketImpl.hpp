@@ -66,6 +66,13 @@ namespace Bull
              */
             static SocketHandler create(IpAddress::NetProtocol protocol, Socket::Type type);
 
+            /*! \brief
+             *
+             * \return
+             *
+             */
+            static Socket::State lastError();
+
             /*! \brief Start to listen the bound port
              *
              * \param handler The SocketHandler start to listen
@@ -75,6 +82,19 @@ namespace Bull
              *
              */
             static bool listen(SocketHandler handler, unsigned int limit);
+
+            static std::size_t reveive(SocketHandler handler, void* data, std::size_t length);
+
+            /*! \brief
+             *
+             * \param handler
+             * \param data
+             * \param length
+             *
+             * \return
+             *
+             */
+            static std::size_t send(SocketHandler handler, const void* data, std::size_t length);
 
             /*! \brief Set the blocking mode of a socket
              *
@@ -86,8 +106,22 @@ namespace Bull
 
         private:
 
+            /*! \brief
+             *
+             * \param type
+             *
+             * \return
+             *
+             */
             static int translateSocketType(Socket::Type type);
 
+            /*! \brief
+             *
+             * \param type
+             *
+             * \return
+             *
+             */
             static int translateProtocol(IpAddress::NetProtocol protocol);
         };
     }
