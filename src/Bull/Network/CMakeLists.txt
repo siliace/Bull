@@ -8,6 +8,7 @@ target_sources(bull-network
             ${CMAKE_CURRENT_SOURCE_DIR}/Socket.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/TcpListener.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/TcpSocket.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/UdpSocket.cpp
         PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/IpAddressImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/SocketImpl.hpp

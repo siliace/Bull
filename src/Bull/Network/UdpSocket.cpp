@@ -60,7 +60,7 @@ namespace Bull
             return Error;
         }
 
-        std::size_t sent = prv::SocketImpl::send(getHandler(), remoteAddress, remotePort, data, length);
+        std::size_t sent = prv::SocketImpl::sendTo(getHandler(), remoteAddress, remotePort, data, length);
 
         if(sent < 0)
         {

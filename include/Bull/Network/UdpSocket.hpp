@@ -39,7 +39,7 @@ namespace Bull
          * \return
          *
          */
-        State receive(void* data, std::size_t length, std::size_t& received, IpAddress remoteAddress, Socket::Port& remotePort);
+        State receive(void* data, std::size_t length, std::size_t& received, IpAddress& remoteAddress, Socket::Port& remotePort);
 
         /*! \brief
          *
