@@ -83,7 +83,29 @@ namespace Bull
              */
             static bool listen(SocketHandler handler, unsigned int limit);
 
-            static std::size_t reveive(SocketHandler handler, void* data, std::size_t length);
+            /*! \brief
+             *
+             * \param handler
+             * \param data
+             * \param length
+             *
+             * \return
+             *
+             */
+            static std::size_t receive(SocketHandler handler, void* data, std::size_t length);
+
+            /*! \brief
+             *
+             * \param handler
+             * \param from
+             * \param port
+             * \param data
+             * \param length
+             *
+             * \return
+             *
+             */
+            static std::size_t receiveFrom(SocketHandler handler, void* data, std::size_t length, IpAddress& from, Socket::Port& port);
 
             /*! \brief
              *
@@ -95,6 +117,18 @@ namespace Bull
              *
              */
             static std::size_t send(SocketHandler handler, const void* data, std::size_t length);
+
+            /*! \brief
+             *
+             * \param handler
+             * \param host
+             * \param data
+             * \param length
+             *
+             * \return
+             *
+             */
+            static std::size_t sendTo(SocketHandler handler, const IpAddress& to, Socket::Port port, const void* data, std::size_t length);
 
             /*! \brief Set the blocking mode of a socket
              *

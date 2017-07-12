@@ -103,7 +103,7 @@ namespace Bull
 
         if(!data || length)
         {
-            std::size_t result = prv::SocketImpl::reveive(getHandler(), data, length);
+            std::size_t result = prv::SocketImpl::receive(getHandler(), data, length);
 
             if(result > 0)
             {

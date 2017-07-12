@@ -83,7 +83,7 @@ namespace Bull
 
         Socket::State SocketImpl::lastError()
         {
-            switch (WSAGetLastError())
+            switch(WSAGetLastError())
             {
                 case WSAEWOULDBLOCK:   return Socket::NotReady;
                 case WSAEALREADY:      return Socket::NotReady;
@@ -108,11 +108,28 @@ namespace Bull
             return false;
         }
 
-        std::size_t SocketImpl::reveive(SocketHandler handler, void* data, std::size_t length)
+        std::size_t SocketImpl::receive(SocketHandler handler, void* data, std::size_t length)
         {
-            if(handler != InvalidHandler)
+            if(handler != InvalidHandler && data && length)
             {
                 return ::recv(handler, static_cast<char*>(data), length, 0);
+            }
+
+            return 0;
+        }
+
+        std::size_t SocketImpl::receiveFrom(SocketHandler handler, void* data, std::size_t length, IpAddress& from, Socket::Port& port)
+        {
+            if(handler != InvalidHandler && from.isValid() && port != Socket::AnyPort && data && length)
+            {
+                IpAddressImpl::SockAddrBuffer addrBuffer;
+                IpAddressImpl::SockAddrLenght addrLenght;
+
+                std::size_t received = ::recvfrom(handler, static_cast<char*>(data), length, 0, reinterpret_cast<sockaddr*>(&addrBuffer), &addrLenght);
+
+                from = IpAddressImpl::fromSockAddr(reinterpret_cast<sockaddr*>(&addrBuffer), port);
+
+                return received;
             }
 
             return 0;
@@ -123,6 +140,19 @@ namespace Bull
             if(handler != InvalidHandler)
             {
                 return ::send(handler, static_cast<const char*>(data), static_cast<int>(length), 0);
+            }
+
+            return 0;
+        }
+
+        std::size_t SocketImpl::sendTo(SocketHandler handler, const IpAddress& to, Socket::Port port, const void* data, std::size_t length)
+        {
+            if(handler != InvalidHandler && to.isValid() && port != Socket::AnyPort && data && length)
+            {
+                IpAddressImpl::SockAddrBuffer addrBuffer;
+                IpAddressImpl::SockAddrLenght addrLenght = IpAddressImpl::toSockAddr(to, port, &addrBuffer);
+
+                return ::sendto(handler, static_cast<const char*>(data), length, 0, reinterpret_cast<const sockaddr*>(&addrBuffer), addrLenght);
             }
 
             return 0;
