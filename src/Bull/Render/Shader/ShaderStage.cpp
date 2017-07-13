@@ -1,5 +1,5 @@
+#include <Bull/Core/Exception/RuntimeError.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/IO/StringStream.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Render/Shader/ShaderStage.hpp>
@@ -19,7 +19,7 @@ namespace Bull
     {
         if(!create(type))
         {
-            throw std::runtime_error("Failed to create shader");
+            throw RuntimeError("Failed to create shader");
         }
     }
 
@@ -27,7 +27,7 @@ namespace Bull
     {
         if(!create(type))
         {
-            throw std::runtime_error("Failed to create shader");
+            throw RuntimeError("Failed to create shader");
         }
 
         loadFromPath(path);
@@ -37,7 +37,7 @@ namespace Bull
     {
         if(!create(type))
         {
-            throw std::runtime_error("Failed to create shader");
+            throw RuntimeError("Failed to create shader");
         }
 
         loadFromCode(code);
@@ -47,7 +47,7 @@ namespace Bull
     {
         if(!create(type))
         {
-            throw std::runtime_error("Failed to create shader");
+            throw RuntimeError("Failed to create shader");
         }
 
         loadFromStream(stream);

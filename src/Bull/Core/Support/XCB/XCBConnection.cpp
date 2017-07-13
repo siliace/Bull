@@ -15,7 +15,7 @@ namespace Bull
         {
             if(!m_connection)
             {
-                throw std::runtime_error("Failed to create XCBConnection");
+                throw RuntimeError("Failed to create XCBConnection");
             }
         }
 

@@ -1,6 +1,7 @@
+#include <Bull/Core/Exception/RuntimeError.hpp>
+
 #include <Bull/Network/Socket.hpp>
 #include <Bull/Network/SocketImpl.hpp>
-#include <stdexcept>
 
 namespace Bull
 {
@@ -50,7 +51,7 @@ namespace Bull
 
             if(handler == prv::SocketImpl::InvalidHandler)
             {
-                throw std::runtime_error("Failed to create the socket");
+                throw RuntimeError("Failed to create the socket");
             }
 
             reset(handler);

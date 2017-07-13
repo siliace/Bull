@@ -3,6 +3,8 @@
 
 #include <array>
 
+#include <Bull/Core/Exception/OutOfRange.hpp>
+
 #include <Bull/Math/Vector/Vector4.hpp>
 
 namespace Bull

@@ -1,5 +1,6 @@
 #include <cstring>
 
+#include <Bull/Core/Exception/OutOfRange.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
@@ -322,7 +323,7 @@ namespace Bull
     {
         if(index >= getCapacity())
         {
-            throw std::out_of_range("String::operator[] Index out of range");
+            throw OutOfRange("String::operator[] Index out of range", 0, getCapacity(), index);
         }
 
         return m_sharedString->m_string[index];
@@ -332,7 +333,7 @@ namespace Bull
     {
         if(index >= getCapacity())
         {
-            throw std::out_of_range("String::operator[] Index out of range");
+            throw OutOfRange("String::operator[] Index out of range", 0, getCapacity(), index);
         }
 
         return m_sharedString->m_string[index];

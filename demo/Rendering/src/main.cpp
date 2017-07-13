@@ -1,3 +1,5 @@
+#include <Bull/Core/Log/Log.hpp>
+
 #include <Bull/Render/HardwareBuffer.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
@@ -7,6 +9,9 @@
 #include <Bull/Math/TransformationPipeline/Camera.hpp>
 #include <Bull/Math/TransformationPipeline/PerspectiveProjection.hpp>
 #include <Bull/Math/TransformationPipeline/Transformation3D.hpp>
+
+#include <Bull/Utility/Logger/ConsoleLogger.hpp>
+#include <Bull/Utility/Logger/FileLogger.hpp>
 
 using namespace Bull;
 
@@ -50,6 +55,9 @@ unsigned int indices[] = {
 
 int main(int argc, char* argv[])
 {
+    Log::get()->createLogger<ConsoleLogger>();
+    Log::get()->createLogger<FileLogger>();
+
     Texture t;
     Shader core;
     unsigned int vao;

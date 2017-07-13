@@ -10,7 +10,7 @@ namespace Bull
 
             if(!m_display)
             {
-                throw std::runtime_error("Failed to open display");
+                throw RuntimeError("Failed to open display");
             }
         }
 

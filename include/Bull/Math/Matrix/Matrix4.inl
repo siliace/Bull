@@ -35,7 +35,7 @@ namespace Bull
     {
         if(x >= 4 || y >= 4)
         {
-            throw std::out_of_range("Requested value out of range");
+            throw OutOfRange("Requested value out of range");
         }
 
         m_data[y * 4 + x] = value;
@@ -46,7 +46,7 @@ namespace Bull
     {
         if(x >= 4 || y >= 4)
         {
-            throw std::out_of_range("Requested value out of range");
+            throw OutOfRange("Requested value out of range");
         }
 
         return m_data[y * 4 + x];
@@ -57,7 +57,7 @@ namespace Bull
     {
         if(x >= 4 || y >= 4)
         {
-            throw std::out_of_range("Requested value out of range");
+            throw OutOfRange("Requested value out of range");
         }
 
         return m_data[y * 4 + x];
@@ -68,7 +68,7 @@ namespace Bull
     {
         if(x >= 4 || y >= 4)
         {
-            throw std::out_of_range("Requested value out of range");
+            throw OutOfRange("Requested value out of range");
         }
 
         return m_data[y * 4 + x];
@@ -79,7 +79,7 @@ namespace Bull
     {
         if(position >= 4)
         {
-            throw std::out_of_range("Requested column out of range");
+            throw OutOfRange("Requested column out of range");
         }
 
         set(column.x, 0, position);
@@ -95,7 +95,7 @@ namespace Bull
     {
         if(column >= 4)
         {
-            throw std::out_of_range("Requested column out of range");
+            throw OutOfRange("Requested column out of range");
         }
 
         std::array<T, 4> col;
@@ -113,7 +113,7 @@ namespace Bull
     {
         if(position >= 4)
         {
-            throw std::out_of_range("Requested column out of range");
+            throw OutOfRange("Requested column out of range");
         }
 
         set(row.w, position, 0);
@@ -129,7 +129,7 @@ namespace Bull
     {
         if(row >= 4)
         {
-            throw std::out_of_range("Requested row out of range");
+            throw OutOfRange("Requested row out of range");
         }
 
         std::array<T, 4> r;

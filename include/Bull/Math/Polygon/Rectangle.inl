@@ -75,7 +75,7 @@ namespace Bull
             case 3: return Vector2<T>(x, y + height);
         }
 
-        throw std::out_of_range("Rectangle<T>::getVertex() : index is out of range");
+        throw OutOfRange("Rectangle<T>::getVertex() : index is out of range", 0, 3, index);
     }
 
     template<typename T>

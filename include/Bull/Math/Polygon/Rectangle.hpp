@@ -1,7 +1,7 @@
-#ifndef Bull_Rectangle_hpp
-#define Bull_Rectangle_hpp
+#ifndef Bull_MATH_POLYGON_RECTANGLE_HPP
+#define Bull_MATH_POLYGON_RECTANGLE_HPP
 
-#include <stdexcept>
+#include <Bull/Core/Exception/OutOfRange.hpp>
 
 #include <Bull/Math/Polygon/Polygon.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
@@ -118,4 +118,4 @@ namespace Bull
 
 #include <Bull/Math/Polygon/Rectangle.inl>
 
-#endif // Bull_Rectangle_hpp
+#endif // Bull_MATH_POLYGON_RECTANGLE_HPP

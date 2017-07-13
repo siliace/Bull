@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/LogicError.hpp>
 #include <Bull/Core/IO/StringStream.hpp>
 
 #include <Bull/Network/IpAddress.hpp>
@@ -99,7 +100,7 @@ namespace Bull
     {
         if(isValid() && m_protocol != IpAddress::IpV4)
         {
-            throw std::logic_error("The Ip is not valid or not Ipv4");
+            throw LogicError("The Ip is not valid or not Ipv4");
         }
 
         return Uint32(m_v4[0]) << 24 | Uint32(m_v4[1]) << 16 | Uint32(m_v4[2]) << 8 | Uint32(m_v4[3]) << 0;

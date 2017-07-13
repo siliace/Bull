@@ -9,7 +9,7 @@ namespace Bull
     {
         StringStream ss;
 
-        ss << "[" << getExceptionType() << "] : " << getLogMessage();
+        ss << getExceptionType() << " - " << getLogMessage();
 
         Log::get()->write(ss.toString(), Log::Level::Error);
     }

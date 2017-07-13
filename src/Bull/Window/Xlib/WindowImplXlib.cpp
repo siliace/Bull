@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/RuntimeError.hpp>
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 #include <Bull/Core/Support/Xlib/WMHints.hpp>
 #include <Bull/Core/Thread/Thread.hpp>
@@ -692,7 +693,7 @@ namespace Bull
 
             if(m_handler == 0)
             {
-                throw std::runtime_error("Failed to create window");
+                throw RuntimeError("Failed to create window");
             }
 
             initialize(title, style);
@@ -726,7 +727,7 @@ namespace Bull
 
             if(m_handler == 0)
             {
-                throw std::runtime_error("Failed to create window");
+                throw RuntimeError("Failed to create window");
             }
 
             initialize(title, style);
