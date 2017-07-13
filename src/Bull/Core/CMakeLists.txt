@@ -1,5 +1,6 @@
 bull_add_library(bull-core)
 
+add_subdirectory(Exception)
 add_subdirectory(FileSystem)
 add_subdirectory(IO)
 add_subdirectory(Log)

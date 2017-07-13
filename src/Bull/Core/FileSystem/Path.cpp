@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/InvalidArgument.hpp>
 #include <Bull/Core/FileSystem/Directory.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/IO/StringStream.hpp>
@@ -19,11 +20,13 @@ namespace Bull
 
         if(!m_isFile && !m_isDirectory)
         {
+            std::current_exception();
+
             StringStream ss;
 
             ss << "The path " << m_path << " does not exists";
 
-            throw std::invalid_argument(ss.toString().getBuffer());
+            throw InvalidArgument(ss.toString().getBuffer(), "An existing path to a directory");
         }
     }
 
