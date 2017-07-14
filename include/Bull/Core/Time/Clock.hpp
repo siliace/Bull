@@ -7,15 +7,6 @@ namespace Bull
 {
     class BULL_CORE_API Clock
     {
-    private:
-
-        /*! \brief Get the uptime
-         *
-         * \return Return the update
-         *
-         */
-        static Time uptime();
-
     public:
 
         /*! \brief Default constructor
