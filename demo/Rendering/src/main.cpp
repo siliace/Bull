@@ -70,11 +70,11 @@ int main(int argc, char* argv[])
     CameraF camera(Vector3F(0, 0, 3), Vector3F::Zero, Vector3F::Up);
     PerspectiveProjectionF perspective(AngleF::degree(60.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
-    core.attachFromPath(Path("resources/shaders/core/core.vert"), ShaderStage::Vertex);
-    core.attachFromPath(Path("resources/shaders/core/core.frag"), ShaderStage::Fragment);
+    core.attachFromPath(Path("../resources/shaders/core/core.vert"), ShaderStage::Vertex);
+    core.attachFromPath(Path("../resources/shaders/core/core.frag"), ShaderStage::Fragment);
     core.link();
 
-    t.loadFromPath(Path("resources/textures/wall.jpg"));
+    t.loadFromPath(Path("../resources/textures/wall.jpg"));
     t.enableSmooth();
 
     gl::genVertexArrays(1, &vao);
@@ -160,9 +160,9 @@ int main(int argc, char* argv[])
 
         gl::bindVertexArray(vao);
 
-        core.setUniformMatrix("modelMatrix", Transformation3DF::makeRotation(rotation).getMatrix());
-        core.setUniformMatrix("viewMatrix", camera.getMatrix());
-        core.setUniformMatrix("projMatrix", perspective.getMatrix());
+        core.setUniformMatrix("model", Transformation3DF::makeRotation(rotation).getMatrix());
+        core.setUniformMatrix("view", camera.getMatrix());
+        core.setUniformMatrix("proj", perspective.getMatrix());
 
         gl::drawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
 

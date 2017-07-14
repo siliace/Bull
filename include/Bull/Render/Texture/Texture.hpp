@@ -68,6 +68,15 @@ namespace Bull
 
         /*! \brief Create an empty texture
          *
+         * \param size The size of the texture to create
+         *
+         * \return Return true if the texture was created successfully, false otherwise
+         *
+         */
+        bool create(const Vector2UI& size);
+
+        /*! \brief Create an empty texture
+         *
          * \param width  The width of the texture to create
          * \param height The height of the texture to create
          *
@@ -75,15 +84,6 @@ namespace Bull
          *
          */
         bool create(unsigned int width, unsigned int height);
-
-        /*! \brief Create an empty texture
-         *
-         * \param size The size of the texture to create
-         *
-         * \return Return true if the texture was created successfully, false otherwise
-         *
-         */
-        bool create(const Vector2UI& size);
 
         /*! \brief Load a texture form a file
          *
@@ -224,7 +224,7 @@ namespace Bull
 
         unsigned int m_id;
         Vector2UI    m_size;
-        mutable Sampler m_sampler;
+        Sampler      m_sampler;
         bool         m_isSmooth;
         bool         m_isRepeated;
     };
