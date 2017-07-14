@@ -45,9 +45,4 @@ namespace Bull
 
         return ss.toString();
     }
-
-    String OutOfRange::getExceptionType() const
-    {
-        return "Out of range";
-    }
 }

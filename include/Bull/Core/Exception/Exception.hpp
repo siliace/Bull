@@ -37,13 +37,6 @@ namespace Bull
          */
         virtual String getLogMessage() const;
 
-        /*! \brief Get the type of the Exception
-         *
-         * \return The type
-         *
-         */
-        virtual String getExceptionType() const;
-
     private:
 
         String m_message;

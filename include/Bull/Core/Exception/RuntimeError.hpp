@@ -20,15 +20,6 @@ namespace Bull
          *
          */
         RuntimeError(const String& message);
-
-    protected:
-
-        /*! \brief Get the type of the Exception
-         *
-         * \return The type
-         *
-         */
-        virtual String getExceptionType() const override;
     };
 }
 

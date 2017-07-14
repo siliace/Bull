@@ -13,9 +13,4 @@ namespace Bull
     {
         /// Nothing
     }
-
-    String InvalidArgument::getExceptionType() const
-    {
-        return "Invalid Argument";
-    }
 }

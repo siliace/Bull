@@ -43,13 +43,6 @@ namespace Bull
          */
         virtual String getLogMessage() const override;
 
-        /*! \brief Get the type of the Exception
-         *
-         * \return The type
-         *
-         */
-        virtual String getExceptionType() const override;
-
     private:
 
         bool m_hasIndex;

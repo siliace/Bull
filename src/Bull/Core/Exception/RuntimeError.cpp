@@ -7,9 +7,4 @@ namespace Bull
     {
         /// Nothing
     }
-
-    String RuntimeError::getExceptionType() const
-    {
-        return "Runtime Error";
-    }
 }

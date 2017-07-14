@@ -28,15 +28,6 @@ namespace Bull
          *
          */
         InvalidArgument(const String& message, const String& expected);
-
-    protected:
-
-        /*! \brief Get the type of the Exception
-         *
-         * \return The type
-         *
-         */
-        virtual String getExceptionType() const override;
     };
 }
 

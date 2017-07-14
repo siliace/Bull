@@ -34,9 +34,4 @@ namespace Bull
 
         return ss.toString();
     }
-
-    String LogicError::getExceptionType() const
-    {
-        return "Logic Error";
-    }
 }
