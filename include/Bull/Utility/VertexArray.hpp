@@ -49,6 +49,7 @@ namespace Bull
         /*! \brief Get the size of the array
          *
          * \return The size
+         *
          */
         std::size_t getSize() const;
 

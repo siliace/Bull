@@ -10,6 +10,8 @@ namespace Bull
     template<typename T>
     struct Vector4
     {
+        static Vector4<T> Zero;
+
         /*! \brief Get a normalized Vector4
          *
          * \param vector The Vector4 to normalize
@@ -127,6 +129,9 @@ namespace Bull
 
         T x, y, z, w;
     };
+
+    template<typename T>
+    Vector4<T> Vector4<T>::Zero = Vector4<T>(0, 0, 0, 0);
 
     /*! \brief Addition two Vector4
      *

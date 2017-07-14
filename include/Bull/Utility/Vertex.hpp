@@ -16,8 +16,9 @@ namespace Bull
          * \param position
          * \param color
          * \param texCoord
+         *
          */
-        Vertex(const Vector3F& position = Vector3F(), const Vector4F& color = Vector4F(), const Vector2F& texCoord = Vector2F());
+        Vertex(const Vector3F& position = Vector3F::Zero, const Vector4F& color = Vector4F::Zero, const Vector2F& texCoord = Vector2F::Zero);
 
         /*! \brief Compare two Vertex
          *

@@ -1,4 +1,5 @@
 #include <Bull/Render/HardwareBuffer.hpp>
+#include <Bull/Render/Mesh.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
@@ -10,19 +11,7 @@
 
 using namespace Bull;
 
-float vertices[] = {
-    -0.5f, -0.5f,  0.5f,  0.f, 0.f, 1.f, 1.f,  0.f, 0.f,
-     0.5f, -0.5f,  0.5f,  1.f, 0.f, 1.f, 1.f,  1.f, 0.f,
-     0.5f,  0.5f,  0.5f,  1.f, 0.f, 1.f, 1.f,  1.f, 1.f,
-    -0.5f,  0.5f,  0.5f,  0.f, 1.f, 1.f, 1.f,  0.f, 1.f,
-
-    -0.5f, -0.5f, -0.5f,  0.f, 0.f, 0.f, 1.f,  0.f, 0.f,
-     0.5f, -0.5f, -0.5f,  1.f, 0.f, 0.f, 1.f,  1.f, 0.f,
-     0.5f,  0.5f, -0.5f,  1.f, 1.f, 0.f, 1.f,  1.f, 1.f,
-    -0.5f,  0.5f, -0.5f,  0.f, 1.f, 0.f, 1.f,  0.f, 1.f,
-};
-
-unsigned int indices[] = {
+std::vector<unsigned int> indices = {
     // front
     0, 1, 2,
     2, 3, 0,
@@ -52,7 +41,7 @@ int main(int argc, char* argv[])
 {
     Texture t;
     Shader core;
-    unsigned int vao;
+    VertexArray va;
     AngleF pitch, yaw;
     EulerAnglesF rotation;
     RenderWindow::Event e;
@@ -62,27 +51,25 @@ int main(int argc, char* argv[])
     CameraF camera(Vector3F(0, 0, 3), Vector3F::Zero, Vector3F::Up);
     PerspectiveProjectionF perspective(AngleF::degree(60.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
+    Mesh mesh;
+
+    va.addVertex(Vertex(Vector3F(-0.5f, -0.5f,  0.5f), Vector4F(0.f, 0.f, 1.f, 1.f), Vector2F(0.f, 0.f)));
+    va.addVertex(Vertex(Vector3F( 0.5f, -0.5f,  0.5f), Vector4F(1.f, 0.f, 1.f, 1.f), Vector2F(1.f, 0.f)));
+    va.addVertex(Vertex(Vector3F( 0.5f,  0.5f,  0.5f), Vector4F(1.f, 0.f, 1.f, 1.f), Vector2F(1.f, 1.f)));
+    va.addVertex(Vertex(Vector3F(-0.5f,  0.5f,  0.5f), Vector4F(0.f, 1.f, 1.f, 1.f), Vector2F(0.f, 1.f)));
+    va.addVertex(Vertex(Vector3F(-0.5f, -0.5f, -0.5f), Vector4F(0.f, 0.f, 0.f, 1.f), Vector2F(0.f, 0.f)));
+    va.addVertex(Vertex(Vector3F( 0.5f, -0.5f, -0.5f), Vector4F(1.f, 0.f, 0.f, 1.f), Vector2F(1.f, 0.f)));
+    va.addVertex(Vertex(Vector3F( 0.5f,  0.5f, -0.5f), Vector4F(1.f, 1.f, 0.f, 1.f), Vector2F(1.f, 1.f)));
+    va.addVertex(Vertex(Vector3F(-0.5f,  0.5f, -0.5f), Vector4F(0.f, 1.f, 0.f, 1.f), Vector2F(0.f, 1.f)));
+
+    mesh.create(va, indices);
+
     core.attachFromPath(Path("../resources/shaders/core/core.vert"), ShaderStage::Vertex);
     core.attachFromPath(Path("../resources/shaders/core/core.frag"), ShaderStage::Fragment);
     core.link();
 
     t.loadFromPath(Path("../resources/textures/wall.jpg"));
     t.enableSmooth();
-
-    gl::genVertexArrays(1, &vao);
-
-    gl::bindVertexArray(vao);
-        vbo.create(sizeof(vertices));
-        vbo.fill(vertices, sizeof(vertices));
-        ebo.create(sizeof(indices));
-        ebo.fill(indices, sizeof(indices));
-        gl::enableVertexAttribArray(0);
-        gl::vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), nullptr);
-        gl::enableVertexAttribArray(1);
-        gl::vertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(sizeof(float) * 3));
-        gl::enableVertexAttribArray(2);
-        gl::vertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(sizeof(float) * 7));
-    gl::bindVertexArray(0);
 
     while(win.isOpen())
     {
@@ -112,17 +99,10 @@ int main(int argc, char* argv[])
                 win.setMouseCursor(cursor);
             }
 
-            if(e.type == RenderWindow::Event::MouseMoved)
+            if(e.type == RenderWindow::Event::MouseMoved && Mouse::isButtonPressed(Mouse::Left))
             {
-                if(Mouse::isButtonPressed(Mouse::Left))
-                {
-                    rotation.pitch += e.mouseMove.xRel;
-                    rotation.roll  += e.mouseMove.yRel;
-                }
-                else
-                {
-
-                }
+                rotation.pitch += e.mouseMove.xRel;
+                rotation.roll  += e.mouseMove.yRel;
             }
 
             if(e.type == RenderWindow::Event::KeyDown)
@@ -156,15 +136,11 @@ int main(int argc, char* argv[])
         t.bind();
         core.bind();
 
-        gl::bindVertexArray(vao);
-
         core.setUniformMatrix("model", Transformation3DF::makeRotation(rotation).getMatrix());
         core.setUniformMatrix("view", camera.getMatrix());
         core.setUniformMatrix("proj", perspective.getMatrix());
 
-        gl::drawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
-
-        gl::bindVertexArray(0);
+        mesh.render(Mesh::Triangles);
 
         win.display();
     }
