@@ -34,8 +34,6 @@ namespace Bull
             enableFullscreen();
         }
 
-        onOpen();
-
         setTitle(title);
         setVisible(true);
         setMinSize(-1, -1);
@@ -43,17 +41,21 @@ namespace Bull
         enableKeyRepeat(true);
         setMouseCursorVisible(true);
 
+        onOpen();
+
         return true;
     }
 
     Window::~Window()
     {
+        onClose();
+
         close();
     }
 
     bool Window::isOpen() const
     {
-        return bool(m_impl);
+        return m_impl != nullptr;
     }
 
     void Window::close()
@@ -66,8 +68,6 @@ namespace Bull
         }
 
         m_impl.reset();
-
-        onClose();
     }
 
     bool Window::pollEvent(Event& e)
@@ -75,6 +75,11 @@ namespace Bull
         if(m_impl)
         {
             bool success = m_impl->popEvent(e, false);
+
+            if(success)
+            {
+                filterEvent(e);
+            }
 
             return success;
         }
@@ -89,6 +94,8 @@ namespace Bull
         if(m_impl)
         {
             m_impl->popEvent(e, true);
+
+            filterEvent(e);
         }
 
         return e;
@@ -360,5 +367,18 @@ namespace Bull
     bool Window::isFullscreenEnable() const
     {
         return this == s_fullscreen;
+    }
+
+    const std::unique_ptr<prv::WindowImpl>& Window::getImpl() const
+    {
+        return m_impl;
+    }
+
+    void Window::filterEvent(const Event& e)
+    {
+        if(e.type == Event::Resized)
+        {
+            onResize();
+        }
     }
 }

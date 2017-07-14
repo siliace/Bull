@@ -13,30 +13,12 @@ namespace Bull
 
     bool RenderWindow::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
-        if(isOpen())
+        if(Window::open(mode, title, style))
         {
-            close();
+            m_context.reset(prv::GlContext::createInstance(getImpl(), mode.bitsPerPixel, settings));
         }
 
-        if(style == Style::Fullscreen && s_fullscreen)
-        {
-            style = Style::Default;
-        }
-
-        m_clock.start();
-        m_impl.reset(prv::RenderWindowImpl::createInstance(mode, title, style, settings));
-        m_context.reset(prv::GlContext::createInstance(m_impl, mode.bitsPerPixel, settings));
-
-        if(style == Style::Fullscreen)
-        {
-            enableFullscreen();
-        }
-
-        setActive();
-
-        onOpen();
-
-        return true;
+        return false;
     }
 
     void RenderWindow::display()
@@ -94,6 +76,16 @@ namespace Bull
         viewport.height = getSize().y;
 
         return viewport;
+    }
+
+    void RenderWindow::onOpen()
+    {
+        m_clock.start();
+    }
+
+    void RenderWindow::onResize()
+    {
+        resetViewport();
     }
 
     void RenderWindow::onClose()

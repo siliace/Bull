@@ -45,7 +45,7 @@ namespace Bull
             WNDCLASSEXW winClass;
 
             winClass.cbSize        = sizeof(WNDCLASSEXW);
-            winClass.style         = 0;
+            winClass.style         = CS_DBLCLKS;
             winClass.lpfnWndProc   = WindowImplWin32::globalEvent;
             winClass.cbClsExtra    = 0;
             winClass.cbWndExtra    = 0;
@@ -621,6 +621,17 @@ namespace Bull
                 }
                 break;
 
+                case WM_CHAR:
+                {
+                    Window::Event e;
+
+                    e.type = Window::Event::Character;
+                    e.character = static_cast<Uint32>(wParam);
+
+                    pushEvent(e);
+                }
+                break;
+
                 case WM_MOUSEMOVE:
                 {
                     Window::Event e;
@@ -636,17 +647,23 @@ namespace Bull
                 break;
 
                 case WM_LBUTTONDOWN:
+                case WM_LBUTTONDBLCLK:
                 {
                     Window::Event e;
 
                     e.type               = Window::Event::MouseButtonDown;
                     e.mouseButton.button = Mouse::Button::Left;
-                    e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
-                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
-                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
+                    e.mouseButton.x      = GET_X_LPARAM(lParam);
 
                     pushEvent(e);
+
+                    if(message == WM_LBUTTONDBLCLK)
+                    {
+                        e.type = Window::Event::MouseButtonDoubleClicked;
+
+                        pushEvent(e);
+                    }
                 }
                 break;
 
@@ -658,14 +675,13 @@ namespace Bull
                     e.mouseButton.button = Mouse::Button::Left;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
-                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
-                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
                 break;
 
                 case WM_MBUTTONDOWN:
+                case WM_MBUTTONDBLCLK:
                 {
                     Window::Event e;
 
@@ -673,10 +689,15 @@ namespace Bull
                     e.mouseButton.button = Mouse::Button::Middle;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
-                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
-                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
+
+                    if(message == WM_MBUTTONDBLCLK)
+                    {
+                        e.type = Window::Event::MouseButtonDoubleClicked;
+
+                        pushEvent(e);
+                    }
                 }
                 break;
 
@@ -688,14 +709,13 @@ namespace Bull
                     e.mouseButton.button = Mouse::Button::Middle;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
-                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
-                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
                 break;
 
                 case WM_RBUTTONDOWN:
+                case WM_RBUTTONDBLCLK:
                 {
                     Window::Event e;
 
@@ -703,10 +723,15 @@ namespace Bull
                     e.mouseButton.button = Mouse::Button::Right;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
-                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
-                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
+
+                    if(message == WM_RBUTTONDBLCLK)
+                    {
+                        e.type = Window::Event::MouseButtonDoubleClicked;
+
+                        pushEvent(e);
+                    }
                 }
                 break;
 
@@ -718,14 +743,13 @@ namespace Bull
                     e.mouseButton.button = Mouse::Button::Right;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
-                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
-                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
                 break;
 
                 case WM_XBUTTONDOWN:
+                case WM_XBUTTONDBLCLK:
                 {
                     Window::Event e;
 
@@ -733,10 +757,15 @@ namespace Bull
                     e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? Mouse::Button::Extra1 : Mouse::Button::Extra2;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
-                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
-                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
+
+                    if(message == WM_XBUTTONDBLCLK)
+                    {
+                        e.type = Window::Event::MouseButtonDoubleClicked;
+
+                        pushEvent(e);
+                    }
                 }
                 break;
 
@@ -748,8 +777,6 @@ namespace Bull
                     e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? Mouse::Button::Extra1 : Mouse::Button::Extra2;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
-                    e.mouseMove.xRel     = e.mouseMove.x - getCursorPosition().x;
-                    e.mouseMove.yRel     = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }
@@ -764,8 +791,6 @@ namespace Bull
                     e.mouseWheel.up     = (HIWORD(wParam) == 120);
                     e.mouseWheel.x      = GET_X_LPARAM(lParam);
                     e.mouseWheel.y      = GET_Y_LPARAM(lParam);
-                    e.mouseMove.xRel    = e.mouseMove.x - getCursorPosition().x;
-                    e.mouseMove.yRel    = e.mouseMove.y - getCursorPosition().y;
 
                     pushEvent(e);
                 }

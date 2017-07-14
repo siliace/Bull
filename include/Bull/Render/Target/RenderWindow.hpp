@@ -77,7 +77,17 @@ namespace Bull
 
     protected:
 
-        /*! \brief Function called on Window close
+        /*! \brief Function called when the Window is opened
+         *
+         */
+        void onOpen() override;
+
+        /*! \brief Function called when the Window is resized
+         *
+         */
+        void onResize() override;
+
+        /*! \brief Function called when the Window is closed
          *
          */
         void onClose() override;

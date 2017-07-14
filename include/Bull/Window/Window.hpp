@@ -1,11 +1,10 @@
-#ifndef BULL_WINDOW_HPP
-#define BULL_WINDOW_HPP
+#ifndef BULL_WINDOW_WINDOW_HPP
+#define BULL_WINDOW_WINDOW_HPP
 
 #include <memory>
 
 #include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Pattern/Signal.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Hardware/Joystick.hpp>
@@ -44,13 +43,15 @@ namespace Bull
                 Closed,
                 Resized,
                 Moved,
-                KeyDown,
                 KeyUp,
+                KeyDown,
+                Character,
                 MouseEnter,
                 MouseLeave,
                 MouseMoved,
                 MouseButtonUp,
                 MouseButtonDown,
+                MouseButtonDoubleClicked,
                 MouseWheel,
                 LostFocus,
                 GainFocus,
@@ -90,20 +91,15 @@ namespace Bull
 
             struct MouseButtonEvent
             {
-                Mouse::Button button;
-
                 int x, y;
-                int xRel, yRel;
+                Mouse::Button button;
             };
 
             struct MouseWheelEvent
             {
-                Mouse::Wheel wheel;
-
                 bool up;
-
                 int x, y;
-                int xRel, yRel;
+                Mouse::Wheel wheel;
             };
 
             struct JoystickConnectionEvent
@@ -114,9 +110,9 @@ namespace Bull
             struct JoystickMovedEvent
             {
                 Uint8 joystick;
-                Joystick::Axis axis;
                 float position;
                 float relative;
+                Joystick::Axis axis;
             };
 
             struct JoystickButtonEvent
@@ -130,6 +126,7 @@ namespace Bull
                 WindowResizedEvent      windowResize;
                 WindowMovedEvent        windowMove;
                 KeyEvent                key;
+                Uint32                  character;
                 MouseMoveEvent          mouseMove;
                 MouseButtonEvent        mouseButton;
                 MouseWheelEvent         mouseWheel;
@@ -432,18 +429,39 @@ namespace Bull
 
     protected:
 
-        /*! \brief Function called on Window open
+        /*! \brief Function called when the Window is opened
          *
          */
         virtual void onOpen() {}
 
-        /*! \brief Function called on Window close
+        /*! \brief Function called when the Window is resized
+         *
+         */
+        virtual void onResize() {}
+
+        /*! \brief Function called when the Window is closed
          *
          */
         virtual void onClose() {}
+
+        /*! \brief Get the implementation of the Window
+         *
+         * \return The implementation
+         *
+         */
+        const std::unique_ptr<prv::WindowImpl>& getImpl() const;
+
+    private:
+
+        /*! \brief Filter events to start callbacks
+         *
+         * \param e The event to filter
+         *
+         */
+        void filterEvent(const Event& e);
 
         std::unique_ptr<prv::WindowImpl> m_impl; /*!< The OS specific implementation of the window */
     };
 }
 
-#endif // BULL_WINDOW_HPP
+#endif // BULL_WINDOW_WINDOW_HPP
