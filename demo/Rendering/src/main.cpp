@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <Bull/Render/HardwareBuffer.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
