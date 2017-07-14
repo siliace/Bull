@@ -12,6 +12,8 @@ namespace Bull
     {
         m_position = position;
 
+        recomputeMatrix();
+
         return (*this);
     }
 
@@ -28,6 +30,8 @@ namespace Bull
         m_position += offset.x * m_right;
         m_position += offset.z * m_forward;
 
+        recomputeMatrix();
+
         return (*this);
     }
 
@@ -37,6 +41,7 @@ namespace Bull
         m_target = Vector3<T>::normalize(target);
 
         updateVectors();
+        recomputeMatrix();
 
         return (*this);
     }
@@ -50,25 +55,19 @@ namespace Bull
     template <typename T>
     const Matrix4<T>& Camera<T>::getMatrix() const
     {
-        if(!m_isValid)
-        {
-            recomputeMatrix();
-        }
-
         return m_view;
     }
 
     template <typename T>
     void Camera<T>::updateVectors()
     {
-        m_isValid = false;
         m_forward = Vector3F::normalize(m_target - m_position);
         m_right   = Vector3F::crossProduct(m_forward, m_up).normalize();
         m_up      = Vector3F::crossProduct(m_right, m_forward);
     }
 
     template <typename T>
-    void Camera<T>::recomputeMatrix() const
+    void Camera<T>::recomputeMatrix()
     {
         m_view.setColumn(Vector4F(m_right, -m_right.dotProduct(m_position)),     0);
         m_view.setColumn(Vector4F(m_up, -m_up.dotProduct(m_position)),           1);

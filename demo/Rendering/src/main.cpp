@@ -112,10 +112,17 @@ int main(int argc, char* argv[])
                 win.setMouseCursor(cursor);
             }
 
-            if(e.type == RenderWindow::Event::MouseMoved && Mouse::isButtonPressed(Mouse::Left))
+            if(e.type == RenderWindow::Event::MouseMoved)
             {
-                rotation.pitch += e.mouseMove.xRel;
-                rotation.roll  += e.mouseMove.yRel;
+                if(Mouse::isButtonPressed(Mouse::Left))
+                {
+                    rotation.pitch += e.mouseMove.xRel;
+                    rotation.roll  += e.mouseMove.yRel;
+                }
+                else
+                {
+
+                }
             }
 
             if(e.type == RenderWindow::Event::KeyDown)

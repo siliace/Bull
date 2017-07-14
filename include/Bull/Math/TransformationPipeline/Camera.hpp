@@ -78,15 +78,14 @@ namespace Bull
         /*! \brief Recompute the view matrix
          *
          */
-        void recomputeMatrix() const;
+        void recomputeMatrix();
 
-        Vector3<T>         m_up;       /*!< The up vector */
-        mutable Matrix4<T> m_view;     /*!< The view matrix */
-        Vector3<T>         m_right;    /*!< The right vector */
-        Vector3<T>         m_target;   /*!< The target to look at */
-        Vector3<T>         m_forward;  /*!< The forward vector */
-        bool               m_isValid;  /*!< Is the view matrix is valid */
-        Vector3<T>         m_position; /*!< The position of the Camera */
+        Vector3<T> m_up;       /*!< The up vector */
+        Matrix4<T> m_view;     /*!< The view matrix */
+        Vector3<T> m_right;    /*!< The right vector */
+        Vector3<T> m_target;   /*!< The target to look at */
+        Vector3<T> m_forward;  /*!< The forward vector */
+        Vector3<T> m_position; /*!< The position of the Camera */
     };
 
     typedef Camera<int>          CameraI;

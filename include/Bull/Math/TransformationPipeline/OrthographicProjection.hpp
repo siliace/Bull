@@ -14,7 +14,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        OrthographicProjection();
+        OrthographicProjection() = default;
 
         /*! \brief Constructor
          *
@@ -68,12 +68,11 @@ namespace Bull
         /*! \brief Update the projection matrix
          *
          */
-        void updateProjection() const;
+        void updateProjection();
 
-        Rectangle<T>       m_plan;
-        bool               m_isValid;
-        Vector2<T>         m_zBounds;
-        mutable Matrix4<T> m_projection;
+        Rectangle<T> m_plan;
+        Vector2<T>   m_zBounds;
+        Matrix4<T>   m_projection;
     };
 
     typedef OrthographicProjection<int>          OrthographicProjectionI;

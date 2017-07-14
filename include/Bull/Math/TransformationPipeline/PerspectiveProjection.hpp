@@ -86,13 +86,12 @@ namespace Bull
         /*! \brief Update the projection
          *
          */
-        void updateProjection() const;
+        void updateProjection();
 
-        AngleF             m_angle;
-        float              m_ratio;
-        bool               m_isValid;
-        Vector2<T>         m_zBounds;
-        mutable Matrix4<T> m_projection;
+        AngleF     m_angle;
+        float      m_ratio;
+        Vector2<T> m_zBounds;
+        Matrix4<T> m_projection;
     };
 
     typedef PerspectiveProjection<int>          PerspectiveProjectionI;

@@ -16,8 +16,9 @@ namespace Bull
     template <typename T>
     PerspectiveProjection<T>& PerspectiveProjection<T>::setAngle(const Angle<T>& angle)
     {
-        m_angle   = angle;
-        m_isValid = false;
+        m_angle = angle;
+
+        updateProjection();
 
         return (*this);
     }
@@ -31,8 +32,9 @@ namespace Bull
     template <typename T>
     PerspectiveProjection<T>& PerspectiveProjection<T>::setRatio(float ratio)
     {
-        m_ratio   = ratio;
-        m_isValid = false;
+        m_ratio = ratio;
+
+        updateProjection();
 
         return (*this);
     }
@@ -46,8 +48,9 @@ namespace Bull
     template <typename T>
     PerspectiveProjection<T>& PerspectiveProjection<T>::setZBounds(const Vector2<T>& zBounds)
     {
-        m_isValid = false;
         m_zBounds = zBounds;
+
+        updateProjection();
 
         return (*this);
     }
@@ -61,16 +64,11 @@ namespace Bull
     template <typename T>
     const Matrix4<T>& PerspectiveProjection<T>::getMatrix() const
     {
-        if(!m_isValid)
-        {
-            updateProjection();
-        }
-
         return m_projection;
     }
 
     template <typename T>
-    void PerspectiveProjection<T>::updateProjection() const
+    void PerspectiveProjection<T>::updateProjection()
     {
         Angle<T> fov = Angle<T>::toRadian(m_angle) / static_cast<T>(2);
         float yScale = std::tan(Pi2 - fov);

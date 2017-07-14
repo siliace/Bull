@@ -1,16 +1,8 @@
 namespace Bull
 {
     template <typename T>
-    OrthographicProjection<T>::OrthographicProjection() :
-        m_isValid(false)
-    {
-        /// Nothing
-    }
-
-    template <typename T>
     OrthographicProjection<T>::OrthographicProjection(const Rectangle<T>& plan, const Vector2<T>& zBounds) :
         m_plan(plan),
-        m_isValid(false),
         m_zBounds(zBounds)
     {
         /// Nothing
@@ -19,8 +11,9 @@ namespace Bull
     template <typename T>
     OrthographicProjection<T>& OrthographicProjection<T>::setPlan(const Rectangle<T>& plan)
     {
-        m_plan    = plan;
-        m_isValid = false;
+        m_plan = plan;
+
+        updateProjection();
 
         return (*this);
     }
@@ -34,8 +27,9 @@ namespace Bull
     template <typename T>
     OrthographicProjection<T>& OrthographicProjection<T>::setZBounds(const Vector2<T>& zBounds)
     {
-        m_isValid = false;
         m_zBounds = zBounds;
+
+        updateProjection();
 
         return (*this);
     }
@@ -49,11 +43,6 @@ namespace Bull
     template <typename T>
     const Matrix4<T>& OrthographicProjection<T>::getMatrix() const
     {
-        if(!m_isValid)
-        {
-            updateProjection();
-        }
-
         return m_projection;
     }
 
