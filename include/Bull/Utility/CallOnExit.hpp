@@ -1,5 +1,5 @@
-#ifndef Bull_CallOnExit_hpp
-#define Bull_CallOnExit_hpp
+#ifndef BULL_UTILITY_CALLONEXIT_HPP
+#define BULL_UTILITY_CALLONEXIT_HPP
 
 #include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
@@ -11,6 +11,11 @@ namespace Bull
     class BULL_UTILITY_API CallOnExit : public NonCopyable
     {
     public:
+
+        /*! \brief Default constructor
+         *
+         */
+        CallOnExit() = default;
 
         /*! \brief Constructor
          *
@@ -49,10 +54,9 @@ namespace Bull
 
     private:
 
+        bool          m_enable;
         Functor<void> m_callback;
-
-        bool m_enable;
     };
 }
 
-#endif // Bull_CallOnExit_hpp
+#endif // BULL_UTILITY_CALLONEXIT_HPP
