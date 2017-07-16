@@ -27,14 +27,15 @@ namespace Bull
                  */
                 Extension(const String& name, Functor<bool> loader) :
                     name(name),
-                    loader(loader)
+                    loader(loader),
+                    loaded(false)
                 {
                     /// Nothing
                 }
 
                 String        name;
                 Functor<bool> loader;
-                bool          loaded = false;
+                bool          loaded;
             };
 
         public:

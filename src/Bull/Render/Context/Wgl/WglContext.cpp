@@ -1,7 +1,6 @@
 #include <limits>
 
 #include <Bull/Core/Log/Log.hpp>
-#include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
 #include <Bull/Render/Context/Wgl/WglCreateContextARB.hpp>
@@ -414,8 +413,8 @@ namespace Bull
 
                 if(wglGetPixelFormatAttribiv(m_device, pixelFormat, PFD_MAIN_PLANE, 2, formatAttribs, format))
                 {
-                    m_settings.depths  = format[0];
-                    m_settings.stencil = format[1];
+                    m_settings.depths  = static_cast<Uint8>(format[0]);
+                    m_settings.stencil = static_cast<Uint8>(format[1]);
                 }
                 else
                 {
