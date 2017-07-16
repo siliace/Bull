@@ -42,7 +42,14 @@ namespace Bull
          */
         Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
 
-        /*! \brief Set the Mesh
+        /*! \brief Create the Mesh
+         *
+         * \param vertices
+         *
+         */
+        void create(const std::vector<Vertex>& vertices);
+
+        /*! \brief Create the Mesh
          *
          * \param vertices
          * \param indices
@@ -62,6 +69,7 @@ namespace Bull
         VertexArrayObject m_vao;
         ArrayBuffer       m_vbo;
         ElementBuffer     m_ebo;
+        bool              m_hasIndex;
     };
 }
 
