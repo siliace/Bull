@@ -1,17 +1,11 @@
 #include <cstring>
 
-#include <Bull/Render/HardwareBuffer.hpp>
+#include <Bull/Render/Buffer/HardwareBuffer.hpp>
+
+#include <iostream>
 
 namespace Bull
 {
-    HardwareBuffer::HardwareBuffer(Type type) :
-        m_id(0),
-        m_type(type),
-        m_capacity(0)
-    {
-        /// Nothing
-    }
-
     HardwareBuffer::~HardwareBuffer()
     {
         destroy();
@@ -24,24 +18,21 @@ namespace Bull
 
     bool HardwareBuffer::create(std::size_t size, Usage usage)
     {
-        if(m_id)
+        if(gl::isBuffer(m_id))
         {
             destroy();
         }
 
-        m_capacity = size;
-
-        bind();
         gl::genBuffers(1, &m_id);
         gl::bindBuffer(m_type, m_id);
-        gl::bufferData(m_type, m_capacity, nullptr, usage);
+        gl::bufferData(m_type, size, nullptr, usage);
 
         return true;
     }
 
     bool HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset, bool discard)
     {
-        if(m_id)
+        if(gl::isBuffer(m_id))
         {
             bind();
 
@@ -78,7 +69,7 @@ namespace Bull
 
     void* HardwareBuffer::map()
     {
-        if(m_id)
+        if(gl::isBuffer(m_id))
         {
             bind();
 
@@ -90,7 +81,7 @@ namespace Bull
 
     const void* HardwareBuffer::map() const
     {
-        if(m_id)
+        if(gl::isBuffer(m_id))
         {
             bind();
 
@@ -102,7 +93,7 @@ namespace Bull
 
     void HardwareBuffer::unmap() const
     {
-        if(m_id)
+        if(gl::isBuffer(m_id))
         {
             bind();
 
@@ -112,49 +103,57 @@ namespace Bull
 
     void HardwareBuffer::flush()
     {
-        if(m_id)
+        if(gl::isBuffer(m_id))
         {
             bind();
 
-            m_capacity = 0;
-
             int usage;
-            gl::getBufferParameteriv(m_id, GL_BUFFER_USAGE, &usage);
-            gl::bufferData(m_type, m_capacity, nullptr, static_cast<GLenum >(usage));
+            gl::getBufferParameteriv(m_type, GL_BUFFER_USAGE, &usage);
+            gl::bufferData(m_type, getCapacity(), nullptr, static_cast<GLenum >(usage));
         }
     }
 
     void HardwareBuffer::destroy()
     {
-        if(m_id)
+        if(gl::isBuffer(m_id))
         {
             gl::deleteBuffers(1, &m_id);
-
-            m_id       = 0;
-            m_capacity = 0;
         }
     }
 
     std::size_t HardwareBuffer::getCapacity() const
     {
-        return m_capacity;
+        if(gl::isBuffer(m_id))
+        {
+            bind();
+
+            int capacity;
+            gl::getBufferParameteriv(m_type, GL_BUFFER_SIZE, &capacity);
+
+            return static_cast<std::size_t>(capacity);
+        }
+
+        return 0;
     }
 
-    HardwareBuffer::Type HardwareBuffer::getType() const
+    HardwareBuffer::HardwareBuffer(Type type) :
+        m_id(0),
+        m_type(type)
     {
-        return m_type;
+        /// Nothing
+    }
+
+
+    void HardwareBuffer::bind() const
+    {
+        if(gl::isBuffer(m_id))
+        {
+            gl::bindBuffer(m_type, m_id);
+        }
     }
 
     unsigned int HardwareBuffer::getSystemHandler() const
     {
         return m_id;
-    }
-
-    void HardwareBuffer::bind() const
-    {
-        if(m_id)
-        {
-            gl::bindBuffer(m_type, m_id);
-        }
     }
 }

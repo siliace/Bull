@@ -6,7 +6,6 @@ target_sources(bull-utility
             ${CMAKE_CURRENT_SOURCE_DIR}/Color.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Random.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Vertex.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/VertexArray.cpp
         )
 
 add_subdirectory(Image)

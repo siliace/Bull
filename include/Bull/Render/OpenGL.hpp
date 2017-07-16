@@ -106,6 +106,7 @@ namespace gl
     extern PFNGLGETTEXPARAMETERIVPROC        BULL_RENDER_API getTexParameteriv;
     extern PFNGLGETUNIFORMLOCATIONPROC       BULL_RENDER_API getUniformLocation;
     extern PFNGLINVALIDATEBUFFERDATAPROC     BULL_RENDER_API invalidateBufferData;
+    extern PFNGLISBUFFERPROC                 BULL_RENDER_API isBuffer;
     extern PFNGLISENABLEDPROC                BULL_RENDER_API isEnabled;
     extern PFNGLISPROGRAMPROC                BULL_RENDER_API isProgram;
     extern PFNGLISSHADERPROC                 BULL_RENDER_API isShader;

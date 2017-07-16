@@ -2,10 +2,10 @@ bull_add_library(bull-render)
 
 target_sources(bull-render
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/HardwareBuffer.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Mesh.cpp
         )
 
+add_subdirectory(Buffer)
 add_subdirectory(Context)
 add_subdirectory(Shader)
 add_subdirectory(Target)

@@ -1,10 +1,9 @@
 #ifndef BULL_GRAPHICS_MESH_HPP
 #define BULL_GRAPHICS_MESH_HPP
 
-#include <Bull/Render/HardwareBuffer.hpp>
+#include <Bull/Render/Buffer/ArrayBuffer.hpp>
+#include <Bull/Render/Buffer/ElementBuffer.hpp>
 #include <Bull/Render/OpenGL.hpp>
-
-#include <Bull/Utility/VertexArray.hpp>
 
 namespace Bull
 {
@@ -40,7 +39,7 @@ namespace Bull
          * \param indices
          *
          */
-        Mesh(const VertexArray& vertices, const std::vector<unsigned int>& indices);
+        Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
 
         /*! \brief Destructor
          *
@@ -53,7 +52,7 @@ namespace Bull
          * \param indices
          *
          */
-        void create(const VertexArray& vertices, const std::vector<unsigned int>& indices);
+        void create(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
 
         /*! \brief Render the Mesh
          *
@@ -64,8 +63,9 @@ namespace Bull
 
     private:
 
-        unsigned int   m_vao;
-        HardwareBuffer m_vbo, m_ebo;
+        unsigned int  m_vao;
+        ArrayBuffer   m_vbo;
+        ElementBuffer m_ebo;
     };
 }
 

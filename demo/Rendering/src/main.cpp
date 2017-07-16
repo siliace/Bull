@@ -1,13 +1,16 @@
-#include <Bull/Render/HardwareBuffer.hpp>
+#include <vector>
+
 #include <Bull/Render/Mesh.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
-#include <Bull/Render/Shader/Shader.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
+#include <Bull/Render/Shader/Shader.hpp>
 
 #include <Bull/Math/EulerAngles.hpp>
 #include <Bull/Math/TransformationPipeline/Camera.hpp>
 #include <Bull/Math/TransformationPipeline/PerspectiveProjection.hpp>
 #include <Bull/Math/TransformationPipeline/Transformation3D.hpp>
+
+#include <Bull/Utility/Vertex.hpp>
 
 using namespace Bull;
 
@@ -41,26 +44,24 @@ int main(int argc, char* argv[])
 {
     Texture t;
     Shader core;
-    VertexArray va;
     AngleF pitch, yaw;
     EulerAnglesF rotation;
     RenderWindow::Event e;
-    HardwareBuffer vbo(HardwareBuffer::Array);
-    HardwareBuffer ebo(HardwareBuffer::Element);
+    std::vector<Vertex> va;
     RenderWindow win(VideoMode(800, 600), "Bull Application");
     CameraF camera(Vector3F(0, 0, 3), Vector3F::Zero, Vector3F::Up);
     PerspectiveProjectionF perspective(AngleF::degree(60.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
     Mesh mesh;
 
-    va.addVertex(Vertex(Vector3F(-0.5f, -0.5f,  0.5f), Vector4F(0.f, 0.f, 1.f, 1.f), Vector2F(0.f, 0.f)));
-    va.addVertex(Vertex(Vector3F( 0.5f, -0.5f,  0.5f), Vector4F(1.f, 0.f, 1.f, 1.f), Vector2F(1.f, 0.f)));
-    va.addVertex(Vertex(Vector3F( 0.5f,  0.5f,  0.5f), Vector4F(1.f, 0.f, 1.f, 1.f), Vector2F(1.f, 1.f)));
-    va.addVertex(Vertex(Vector3F(-0.5f,  0.5f,  0.5f), Vector4F(0.f, 1.f, 1.f, 1.f), Vector2F(0.f, 1.f)));
-    va.addVertex(Vertex(Vector3F(-0.5f, -0.5f, -0.5f), Vector4F(0.f, 0.f, 0.f, 1.f), Vector2F(0.f, 0.f)));
-    va.addVertex(Vertex(Vector3F( 0.5f, -0.5f, -0.5f), Vector4F(1.f, 0.f, 0.f, 1.f), Vector2F(1.f, 0.f)));
-    va.addVertex(Vertex(Vector3F( 0.5f,  0.5f, -0.5f), Vector4F(1.f, 1.f, 0.f, 1.f), Vector2F(1.f, 1.f)));
-    va.addVertex(Vertex(Vector3F(-0.5f,  0.5f, -0.5f), Vector4F(0.f, 1.f, 0.f, 1.f), Vector2F(0.f, 1.f)));
+    va.push_back(Vertex(Vector3F(-0.5f, -0.5f,  0.5f), Vector4F(0.f, 0.f, 1.f, 1.f), Vector2F(0.f, 0.f)));
+    va.push_back(Vertex(Vector3F( 0.5f, -0.5f,  0.5f), Vector4F(1.f, 0.f, 1.f, 1.f), Vector2F(1.f, 0.f)));
+    va.push_back(Vertex(Vector3F( 0.5f,  0.5f,  0.5f), Vector4F(1.f, 0.f, 1.f, 1.f), Vector2F(1.f, 1.f)));
+    va.push_back(Vertex(Vector3F(-0.5f,  0.5f,  0.5f), Vector4F(0.f, 1.f, 1.f, 1.f), Vector2F(0.f, 1.f)));
+    va.push_back(Vertex(Vector3F(-0.5f, -0.5f, -0.5f), Vector4F(0.f, 0.f, 0.f, 1.f), Vector2F(0.f, 0.f)));
+    va.push_back(Vertex(Vector3F( 0.5f, -0.5f, -0.5f), Vector4F(1.f, 0.f, 0.f, 1.f), Vector2F(1.f, 0.f)));
+    va.push_back(Vertex(Vector3F( 0.5f,  0.5f, -0.5f), Vector4F(1.f, 1.f, 0.f, 1.f), Vector2F(1.f, 1.f)));
+    va.push_back(Vertex(Vector3F(-0.5f,  0.5f, -0.5f), Vector4F(0.f, 1.f, 0.f, 1.f), Vector2F(0.f, 1.f)));
 
     mesh.create(va, indices);
 

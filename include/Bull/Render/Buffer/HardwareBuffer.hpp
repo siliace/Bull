@@ -16,12 +16,6 @@ namespace Bull
     {
     public:
 
-        enum Type
-        {
-            Array   = GL_ARRAY_BUFFER,
-            Element = GL_ELEMENT_ARRAY_BUFFER,
-        };
-
         enum Usage
         {
             StaticDraw  = GL_STATIC_DRAW,
@@ -29,14 +23,15 @@ namespace Bull
             StreamDraw  = GL_STREAM_DRAW,
         };
 
-    public:
+    protected:
 
-        /*! \brief Constructor
-         *
-         * \param type The type the of OpenGL buffer to create
-         *
-         */
-        HardwareBuffer(Type type);
+        enum Type
+        {
+            Array   = GL_ARRAY_BUFFER,
+            Element = GL_ELEMENT_ARRAY_BUFFER,
+        };
+
+    public:
 
         /*! \brief Destructor
          *
@@ -110,12 +105,19 @@ namespace Bull
          */
         std::size_t getCapacity() const;
 
-        /*! \brief Get the type of the buffer
+    protected:
+
+        /*! \brief Constructor
          *
-         * \return The type
+         * \param type The type the of OpenGL buffer to create
          *
          */
-        Type getType() const;
+        HardwareBuffer(Type type);
+
+        /*! \brief Bind the buffer
+         *
+         */
+        void bind() const;
 
         /*! \brief Get the buffer system handler
          *
@@ -124,18 +126,10 @@ namespace Bull
          */
         unsigned int getSystemHandler() const;
 
-    protected:
-
-        /*! \brief Bind the buffer
-         *
-         */
-        void bind() const;
-
     private:
 
         unsigned int m_id;
         Type         m_type;
-        std::size_t  m_capacity;
     };
 }
 

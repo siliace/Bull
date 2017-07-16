@@ -103,6 +103,7 @@ namespace gl
     PFNGLGETTEXPARAMETERIVPROC        getTexParameteriv        = nullptr;
     PFNGLGETUNIFORMLOCATIONPROC       getUniformLocation       = nullptr;
     PFNGLINVALIDATEBUFFERDATAPROC     invalidateBufferData     = nullptr;
+    PFNGLISBUFFERPROC                 isBuffer                 = nullptr;
     PFNGLISENABLEDPROC                isEnabled                = nullptr;
     PFNGLISPROGRAMPROC                isProgram                = nullptr;
     PFNGLISSHADERPROC                 isShader                 = nullptr;
@@ -299,6 +300,7 @@ namespace Bull
                 gl::getTexParameterfv        = reinterpret_cast<PFNGLGETTEXPARAMETERFVPROC>(GlContext::getFunction("glGetTexParameterfv"));
                 gl::getTexParameteriv        = reinterpret_cast<PFNGLGETTEXPARAMETERIVPROC>(GlContext::getFunction("glGetTexParameteriv"));
                 gl::getUniformLocation       = reinterpret_cast<PFNGLGETUNIFORMLOCATIONPROC>(GlContext::getFunction("glGetUniformLocation"));
+                gl::isBuffer                 = reinterpret_cast<PFNGLISBUFFERPROC>(GlContext::getFunction("glIsBuffer"));
                 gl::isEnabled                = reinterpret_cast<PFNGLISENABLEDPROC>(GlContext::getFunction("glIsEnabled"));
                 gl::isProgram                = reinterpret_cast<PFNGLISPROGRAMPROC>(GlContext::getFunction("glIsProgram"));
                 gl::isShader                 = reinterpret_cast<PFNGLISSHADERPROC>(GlContext::getFunction("glIsShader"));
