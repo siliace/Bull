@@ -12,6 +12,8 @@ namespace Bull
     {
         static Vector4<T> Zero;
 
+        static Vector4<T> Unit;
+
         /*! \brief Get a normalized Vector4
          *
          * \param vector The Vector4 to normalize
@@ -132,6 +134,9 @@ namespace Bull
 
     template<typename T>
     Vector4<T> Vector4<T>::Zero = Vector4<T>(0, 0, 0, 0);
+
+    template<typename T>
+    Vector4<T> Vector4<T>::Unit = Vector4<T>(1, 1, 1, 1);
 
     /*! \brief Addition two Vector4
      *

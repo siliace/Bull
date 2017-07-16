@@ -34,6 +34,14 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param position The position of the Vertex
+         * \param normal   The normal of the Vertex
+         *
+         */
+        Vertex(const Vector3F& position, const Vector3F& normal);
+
+        /*! \brief Constructor
+         *
+         * \param position The position of the Vertex
          * \param texCoord The texture coordinate of the Vertex
          * \param normal   The normal of the Vertex
          *

@@ -3,22 +3,25 @@
 namespace Bull
 {
     Vertex::Vertex(const Vector3F& position) :
-        position(position)
+        Vertex(position, Vector4F::Unit, Vector2F::Zero, Vector3F::Zero)
     {
         /// Nothing
     }
 
     Vertex::Vertex(const Vector3F& position, const Vector2F& texCoord) :
-        position(position),
-        texCoord(texCoord)
+        Vertex(position, Vector4F::Unit, texCoord, Vector3F::Zero)
+    {
+        /// Nothing
+    }
+
+    Vertex::Vertex(const Vector3F& position, const Vector3F& normal) :
+        Vertex(position, Vector4F::Unit, Vector2F::Zero, normal)
     {
         /// Nothing
     }
 
     Vertex::Vertex(const Vector3F& position, const Vector2F& texCoord, const Vector3F& normal) :
-        position(position),
-        texCoord(texCoord),
-        normal(normal)
+        Vertex(position, Vector4F::Unit, texCoord, normal)
     {
         /// Nothing
     }

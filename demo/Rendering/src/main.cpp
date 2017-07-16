@@ -43,33 +43,45 @@ std::vector<unsigned int> indices = {
 
 int main(int argc, char* argv[])
 {
-    Log::get()->createLogger<ConsoleLogger>();
+    Log::Instance log = Log::get();
 
-    Shader core;
-    AngleF pitch, yaw;
+    log->createLogger<ConsoleLogger>();
+
     EulerAnglesF rotation;
     RenderWindow::Event e;
     std::vector<Vertex> va;
+    Shader lightShader, cubeShader;
     CameraF camera(Vector3F(0, 0, 3));
     RenderWindow win(VideoMode(800, 600), "Bull Application");
     PerspectiveProjectionF perspective(AngleF::degree(60.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
-    Mesh mesh;
+    Mesh cube, light;
 
-    va.push_back(Vertex(Vector3F(-0.5f, -0.5f,  0.5f)));
-    va.push_back(Vertex(Vector3F( 0.5f, -0.5f,  0.5f)));
-    va.push_back(Vertex(Vector3F( 0.5f,  0.5f,  0.5f)));
-    va.push_back(Vertex(Vector3F(-0.5f,  0.5f,  0.5f)));
-    va.push_back(Vertex(Vector3F(-0.5f, -0.5f, -0.5f)));
-    va.push_back(Vertex(Vector3F( 0.5f, -0.5f, -0.5f)));
-    va.push_back(Vertex(Vector3F( 0.5f,  0.5f, -0.5f)));
-    va.push_back(Vertex(Vector3F(-0.5f,  0.5f, -0.5f)));
+    va.push_back(Vertex(Vector3F(-0.5f, -0.5f,  0.5f), Vector3F(0.0f, 0.0f, 0.0f)));
+    va.push_back(Vertex(Vector3F( 0.5f, -0.5f,  0.5f), Vector3F(0.0f, 0.0f, 0.0f)));
+    va.push_back(Vertex(Vector3F( 0.5f,  0.5f,  0.5f), Vector3F(0.0f, 0.0f, 0.0f)));
+    va.push_back(Vertex(Vector3F(-0.5f,  0.5f,  0.5f), Vector3F(0.0f, 0.0f, 0.0f)));
+    va.push_back(Vertex(Vector3F(-0.5f, -0.5f, -0.5f), Vector3F(0.0f, 0.0f, 0.0f)));
+    va.push_back(Vertex(Vector3F( 0.5f, -0.5f, -0.5f), Vector3F(0.0f, 0.0f, 0.0f)));
+    va.push_back(Vertex(Vector3F( 0.5f,  0.5f, -0.5f), Vector3F(0.0f, 0.0f, 0.0f)));
+    va.push_back(Vertex(Vector3F(-0.5f,  0.5f, -0.5f), Vector3F(0.0f, 0.0f, 0.0f)));
 
-    mesh.create(va, indices);
+    light.create(va, indices);
 
-    core.attachFromPath(Path("../resources/shaders/core/core.vert"), ShaderStage::Vertex);
-    core.attachFromPath(Path("../resources/shaders/core/core.frag"), ShaderStage::Fragment);
-    core.link();
+    for(unsigned int i = 0; i < va.size(); i++)
+    {
+        va[i].color = Vector4F(1.0f, 0.5f, 0.31f, 1.0f);
+    }
+
+    cube.create(va, indices);
+
+    lightShader.attachFromPath(Path("../resources/shaders/light/light.vert"), ShaderStage::Vertex);
+    lightShader.attachFromPath(Path("../resources/shaders/light/light.frag"), ShaderStage::Fragment);
+    lightShader.link();
+
+    cubeShader.attachFromPath(Path("../resources/shaders/object/object.vert"), ShaderStage::Vertex);
+    cubeShader.attachFromPath(Path("../resources/shaders/object/object.frag"), ShaderStage::Fragment);
+    cubeShader.link();
 
     while(win.isOpen())
     {
@@ -119,19 +131,18 @@ int main(int argc, char* argv[])
 
         win.clear();
 
-        core.bind();
+        cubeShader.bind();
+        cubeShader.setUniformColor("light", Color::Red);
+        cubeShader.setUniformMatrix("view", camera.getMatrix());
+        cubeShader.setUniformMatrix("proj", perspective.getMatrix());
+        cubeShader.setUniformMatrix("model", Transformation3DF::makeRotation(rotation).getMatrix());
+        cube.render(Mesh::Triangles);
 
-        core.setUniformColor("light", Color::White);
-
-        core.setUniformMatrix("model", Transformation3DF::makeRotation(rotation).getMatrix());
-        core.setUniformMatrix("view", camera.getMatrix());
-        core.setUniformMatrix("proj", perspective.getMatrix());
-        core.setUniformColor("color", Color::Green);
-        mesh.render(Mesh::Triangles);
-
-        core.setUniformMatrix("model", Transformation3DF::makeTranslation(Vector3F(1.2f, 1.0f, -2.0f)).getMatrix());
-        core.setUniformColor("color", Color::White);
-        mesh.render(Mesh::Triangles);
+        lightShader.bind();
+        lightShader.setUniformMatrix("view", camera.getMatrix());
+        lightShader.setUniformMatrix("proj", perspective.getMatrix());
+        lightShader.setUniformMatrix("model", Transformation3DF::make(Vector3F(2.2f, 0.5f, -2.f), Vector3F(0.5f, 0.5f, 0.5f)).getMatrix());
+        light.render(Mesh::Triangles);
 
         win.display();
     }
