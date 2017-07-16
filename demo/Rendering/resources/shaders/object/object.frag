@@ -8,6 +8,7 @@ in vec3 frag_normal;
 out vec4 color;
 
 uniform vec4 light;
+uniform vec3 viewPosition;
 uniform vec3 lightPosition;
 
 void main()
@@ -22,5 +23,12 @@ void main()
     float diff = max(dot(normal, lightDirection), 0);
     vec4 diffuse = diff * light;
 
-    color = (ambiant + diffuse) * frag_color;
+    // Specular
+    float specularStrength = 0.5f;
+    vec3 viewDir = normalize(viewPosition - frag_position);
+    vec3 reflectDir = reflect(-lightDirection, normal);
+    float spec = pow(max(dot(viewDir, reflectDir), 0), 256);
+    vec4 specular = specularStrength * spec * light;
+
+    color = (ambiant + diffuse + specular) * frag_color;
 }

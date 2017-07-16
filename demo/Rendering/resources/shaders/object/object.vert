@@ -21,5 +21,5 @@ void main()
     frag_position = vec3(vec4(in_position, 1) * model);
     frag_color    = in_color;
     frag_texCoord = in_texCoord;
-    frag_normal   = in_normal;
+    frag_normal   = vec3(vec4(in_normal, 0) * model);
 }

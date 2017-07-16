@@ -134,11 +134,12 @@ int main(int argc, char* argv[])
         win.clear();
 
         cubeShader.bind();
-        cubeShader.setUniformColor("light", Color::Red);
+        cubeShader.setUniformColor("light", Color::White);
+        cubeShader.setUniformVector("viewPosition", camera.getPosition());
         cubeShader.setUniformVector("lightPosition", Vector3F::Zero);
         cubeShader.setUniformMatrix("view", camera.getMatrix());
         cubeShader.setUniformMatrix("proj", perspective.getMatrix());
-        cubeShader.setUniformMatrix("model", Transformation3DF::makeTranslation(Vector3F::UnitX * 3.f).getMatrix());
+        cubeShader.setUniformMatrix("model", Transformation3DF::make(Vector3F::UnitX * 3.f, rotation).getMatrix());
         cube.render(Mesh::Triangles);
 
 
