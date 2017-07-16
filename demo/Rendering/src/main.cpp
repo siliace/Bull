@@ -10,8 +10,6 @@
 #include <Bull/Math/TransformationPipeline/PerspectiveProjection.hpp>
 #include <Bull/Math/TransformationPipeline/Transformation3D.hpp>
 
-#include <Bull/Utility/Vertex.hpp>
-
 using namespace Bull;
 
 std::vector<unsigned int> indices = {
@@ -48,8 +46,8 @@ int main(int argc, char* argv[])
     EulerAnglesF rotation;
     RenderWindow::Event e;
     std::vector<Vertex> va;
+    CameraF camera(Vector3F(0, 0, 3));
     RenderWindow win(VideoMode(800, 600), "Bull Application");
-    CameraF camera(Vector3F(0, 0, 3), Vector3F::Zero, Vector3F::Up);
     PerspectiveProjectionF perspective(AngleF::degree(60.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
     Mesh mesh;

@@ -3,6 +3,7 @@
 
 #include <Bull/Render/Buffer/ArrayBuffer.hpp>
 #include <Bull/Render/Buffer/ElementBuffer.hpp>
+#include <Bull/Render/Buffer/VertexArrayObject.hpp>
 #include <Bull/Render/OpenGL.hpp>
 
 namespace Bull
@@ -31,7 +32,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Mesh();
+        Mesh() = default;
 
         /*! \brief Constructor
          *
@@ -40,11 +41,6 @@ namespace Bull
          *
          */
         Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
-
-        /*! \brief Destructor
-         *
-         */
-        ~Mesh();
 
         /*! \brief Set the Mesh
          *
@@ -63,9 +59,9 @@ namespace Bull
 
     private:
 
-        unsigned int  m_vao;
-        ArrayBuffer   m_vbo;
-        ElementBuffer m_ebo;
+        VertexArrayObject m_vao;
+        ArrayBuffer       m_vbo;
+        ElementBuffer     m_ebo;
     };
 }
 
