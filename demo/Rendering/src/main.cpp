@@ -1,7 +1,5 @@
 #include <vector>
 
-#include <Bull/Core/Log/Log.hpp>
-
 #include <Bull/Render/Mesh.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
@@ -11,21 +9,15 @@
 #include <Bull/Math/TransformationPipeline/PerspectiveProjection.hpp>
 #include <Bull/Math/TransformationPipeline/Transformation3D.hpp>
 
-#include <Bull/Utility/Logger/ConsoleLogger.hpp>
-
 using namespace Bull;
 
 int main(int argc, char* argv[])
 {
-    Log::Instance log = Log::get();
-
-    log->createLogger<ConsoleLogger>();
-
     EulerAnglesF rotation;
     RenderWindow::Event e;
     std::vector<Vertex> va;
     Shader lightShader, cubeShader;
-    CameraF camera(Vector3F(0, 0, 6));
+    CameraF camera(Vector3F(0, 0, 6), Vector3F::Zero);
     RenderWindow win(VideoMode(800, 600), "Bull Application");
     PerspectiveProjectionF perspective(AngleF::degree(60.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
@@ -99,35 +91,42 @@ int main(int argc, char* argv[])
                 perspective.setRatio(win.getSize().getRatio());
             }
 
-            if(e.type == RenderWindow::Event::MouseMoved && Mouse::isButtonPressed(Mouse::Left))
+            if(e.type == RenderWindow::Event::MouseMoved)
             {
-                rotation.pitch += e.mouseMove.xRel;
-                rotation.roll  += e.mouseMove.yRel;
+                if(Mouse::isButtonPressed(Mouse::Left))
+                {
+                    rotation.pitch += e.mouseMove.xRel;
+                    rotation.roll  += e.mouseMove.yRel;
+                }
+                else if(Mouse::isButtonPressed(Mouse::Left))
+                {
+
+                }
             }
 
             if(e.type == RenderWindow::Event::KeyDown)
             {
-                Vector3F offsets;
+                Vector3F position = camera.getEye();
 
                 if(e.key.code == Keyboard::Z)
                 {
-                    offsets.z = 0.05f;
+                    position.z -= 0.05f;
                 }
                 else if(e.key.code == Keyboard::S)
                 {
-                    offsets.z = -0.05f;
+                    position.z += 0.05f;
                 }
 
                 if(e.key.code == Keyboard::Q)
                 {
-                    offsets.x = -0.05f;
+                    position.x -= 0.05f;
                 }
                 else if(e.key.code == Keyboard::D)
                 {
-                    offsets.x = 0.05f;
+                    position.x += 0.05f;
                 }
 
-                camera.move(offsets);
+                camera.setEye(position);
             }
         }
 
@@ -135,13 +134,12 @@ int main(int argc, char* argv[])
 
         cubeShader.bind();
         cubeShader.setUniformColor("light", Color::White);
-        cubeShader.setUniformVector("viewPosition", camera.getPosition());
+        cubeShader.setUniformVector("viewPosition", camera.getEye());
         cubeShader.setUniformVector("lightPosition", Vector3F::Zero);
         cubeShader.setUniformMatrix("view", camera.getMatrix());
         cubeShader.setUniformMatrix("proj", perspective.getMatrix());
         cubeShader.setUniformMatrix("model", Transformation3DF::make(Vector3F::UnitX * 3.f, rotation).getMatrix());
         cube.render(Mesh::Triangles);
-
 
         lightShader.bind();
         lightShader.setUniformMatrix("view", camera.getMatrix());

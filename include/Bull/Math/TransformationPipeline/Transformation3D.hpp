@@ -48,7 +48,7 @@ namespace Bull
          * \return The Transformation3D
          *
          */
-        static Transformation3D make(const EulerAnglesF& angles, const Vector3<T>& scale);
+        static Transformation3D make(const EulerAngles<T>& angles, const Vector3<T>& scale);
 
         /*! \brief Create a Transformation3D
          *
@@ -68,7 +68,7 @@ namespace Bull
          * \return The Transformation3D
          *
          */
-        static Transformation3D make(const Vector3<T>& translation, const EulerAnglesF& angles);
+        static Transformation3D make(const Vector3<T>& translation, const EulerAngles<T>& angles);
 
         /*! \brief Create a Transformation3D
          *
@@ -79,7 +79,7 @@ namespace Bull
          * \return The Transformation3D
          *
          */
-        static Transformation3D make(const Vector3<T>& translation, const EulerAnglesF& angles, const Vector3<T>& scale);
+        static Transformation3D make(const Vector3<T>& translation, const EulerAngles<T>& angles, const Vector3<T>& scale);
 
     public:
 
@@ -151,7 +151,7 @@ namespace Bull
          * \return This
          *
          */
-        Transformation3D<T>& applyRotation(const EulerAnglesF& angles);
+        Transformation3D<T>& applyRotation(const EulerAngles<T>& angles);
 
         /*! \brief Apply a translation to the current Transformation3D
          *

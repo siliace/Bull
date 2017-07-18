@@ -19,7 +19,7 @@ namespace Bull
     }
 
     template <typename T>
-    Transformation3D<T> Transformation3D<T>::make(const EulerAnglesF& angles, const Vector3<T>& scale)
+    Transformation3D<T> Transformation3D<T>::make(const EulerAngles<T>& angles, const Vector3<T>& scale)
     {
         return Transformation3D<T>::makeRotation(angles).applyScale(scale);
     }
@@ -31,13 +31,13 @@ namespace Bull
     }
 
     template <typename T>
-    Transformation3D<T> Transformation3D<T>::make(const Vector3<T>& translation, const EulerAnglesF& angles)
+    Transformation3D<T> Transformation3D<T>::make(const Vector3<T>& translation, const EulerAngles<T>& angles)
     {
         return Transformation3D<T>::makeTranslation(translation).setRotation(angles);
     }
 
     template <typename T>
-    Transformation3D<T> Transformation3D<T>::make(const Vector3<T>& translation, const EulerAnglesF& angles, const Vector3<T>& scale)
+    Transformation3D<T> Transformation3D<T>::make(const Vector3<T>& translation, const EulerAngles<T>& angles, const Vector3<T>& scale)
     {
         return Transformation3D<T>::make(translation, angles).applyScale(scale);
     }
@@ -141,7 +141,7 @@ namespace Bull
     }
 
     template <typename T>
-    Transformation3D<T>& Transformation3D<T>::applyRotation(const EulerAnglesF& angles)
+    Transformation3D<T>& Transformation3D<T>::applyRotation(const EulerAngles<T>& angles)
     {
         /// Todo : Needs to be implemented
 
