@@ -17,6 +17,8 @@ int main(int argc, char* argv[])
     RenderWindow::Event e;
     std::vector<Vertex> va;
     Shader lightShader, cubeShader;
+    AngleF yaw   = AngleF::degree(0);
+    AngleF pitch = AngleF::degree(0);
     CameraF camera(Vector3F(0, 0, 6), Vector3F::Zero);
     RenderWindow win(VideoMode(800, 600), "Bull Application");
     PerspectiveProjectionF perspective(AngleF::degree(60.f), win.getSize().getRatio(), Vector2F(0.1f, 100.f));
@@ -98,15 +100,30 @@ int main(int argc, char* argv[])
                     rotation.pitch += e.mouseMove.xRel;
                     rotation.roll  += e.mouseMove.yRel;
                 }
-                else if(Mouse::isButtonPressed(Mouse::Left))
+                else if(Mouse::isButtonPressed(Mouse::Right))
                 {
+                    yaw   += e.mouseMove.xRel;
+                    pitch += e.mouseMove.yRel;
 
+                    if(pitch > 89.0f)
+                        pitch = AngleF::degree(89.0f);
+                    if(pitch < -89.0f)
+                        pitch = AngleF::degree(-89.0f);
+
+                    Vector3F target = camera.getTarget();
+
+                    target.x = std::cos(yaw) * std::cos(pitch);
+                    target.y = std::sin(pitch);
+                    target.z = std::sin(yaw) * std::cos(pitch);
+
+                    camera.setTarget(target);
                 }
             }
 
             if(e.type == RenderWindow::Event::KeyDown)
             {
                 Vector3F position = camera.getEye();
+                Vector3F target   = camera.getTarget();
 
                 if(e.key.code == Keyboard::Z)
                 {
@@ -126,7 +143,7 @@ int main(int argc, char* argv[])
                     position.x += 0.05f;
                 }
 
-                camera.setEye(position);
+                camera.setEye(position).setTarget(target);
             }
         }
 
