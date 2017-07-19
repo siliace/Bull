@@ -57,6 +57,17 @@ namespace Bull
          */
         static Angle<T> normalize(const Angle<T>& angle);
 
+        /*! \brief
+         *
+         * \param angle
+         * \param min
+         * \param max
+         *
+         * \return
+         *
+         */
+        static Angle<T> clamp(const Angle<T>& angle, const Angle<T>& min, const Angle<T>& max);
+
     public:
 
         /*! \brief Default constructor

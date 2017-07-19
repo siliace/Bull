@@ -31,6 +31,21 @@ namespace Bull
     }
 
     template <typename T>
+    Angle<T> clamp(const Angle<T>& angle, const Angle<T>& min, const Angle<T>& max)
+    {
+        if(angle < min)
+        {
+            return min;
+        }
+        else if(angle > max)
+        {
+            return max;
+        }
+
+        return angle;
+    }
+
+    template <typename T>
     Angle<T>::Angle() :
         m_angle(0.0),
         m_isRadian(false)

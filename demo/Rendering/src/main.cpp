@@ -122,8 +122,8 @@ int main(int argc, char* argv[])
 
             if(e.type == RenderWindow::Event::KeyDown)
             {
-                Vector3F position = camera.getEye();
                 Vector3F target   = camera.getTarget();
+                Vector3F position = camera.getPosition();
 
                 if(e.key.code == Keyboard::Z)
                 {
@@ -143,7 +143,7 @@ int main(int argc, char* argv[])
                     position.x += 0.05f;
                 }
 
-                camera.setEye(position).setTarget(target);
+                camera.setPosition(position).setTarget(target);
             }
         }
 
@@ -151,7 +151,7 @@ int main(int argc, char* argv[])
 
         cubeShader.bind();
         cubeShader.setUniformColor("light", Color::White);
-        cubeShader.setUniformVector("viewPosition", camera.getEye());
+        cubeShader.setUniformVector("viewPosition", camera.getPosition());
         cubeShader.setUniformVector("lightPosition", Vector3F::Zero);
         cubeShader.setUniformMatrix("view", camera.getMatrix());
         cubeShader.setUniformMatrix("proj", perspective.getMatrix());
