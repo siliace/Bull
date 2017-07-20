@@ -1,16 +1,22 @@
+set(BULL_INC_RENDER_CONTEXT ${BULL_INC_RENDER}/Context)
+set(BULL_SRC_RENDER_CONTEXT ${BULL_SRC_RENDER}/Context)
+
 target_sources(bull-render
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/Context.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/ContextResource.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/ContextSettings.cpp
+            ${BULL_INC_RENDER_CONTEXT}/Context.hpp
+            ${BULL_SRC_RENDER_CONTEXT}/Context.cpp
+            ${BULL_INC_RENDER_CONTEXT}/ContextResource.hpp
+            ${BULL_SRC_RENDER_CONTEXT}/ContextResource.cpp
+            ${BULL_INC_RENDER_CONTEXT}/ContextSettings.hpp
+            ${BULL_SRC_RENDER_CONTEXT}/ContextSettings.cpp
         PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/ExtensionsLoader.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/ExtensionsLoader.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/GlContext.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/GlContext.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/GlLoader.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/GlLoader.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/SurfaceHandler.hpp
+            ${BULL_SRC_RENDER_CONTEXT}/ExtensionsLoader.cpp
+            ${BULL_SRC_RENDER_CONTEXT}/ExtensionsLoader.hpp
+            ${BULL_SRC_RENDER_CONTEXT}/GlContext.cpp
+            ${BULL_SRC_RENDER_CONTEXT}/GlContext.hpp
+            ${BULL_SRC_RENDER_CONTEXT}/GlLoader.cpp
+            ${BULL_SRC_RENDER_CONTEXT}/GlLoader.hpp
+            ${BULL_SRC_RENDER_CONTEXT}/SurfaceHandler.hpp
         )
 
 if(BULL_OS_WINDOWS)

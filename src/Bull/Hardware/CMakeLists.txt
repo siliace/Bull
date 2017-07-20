@@ -1,18 +1,27 @@
+set(BULL_INC_HARDWARE ${BULL_INC}/Hardware)
+set(BULL_SRC_HARDWARE ${BULL_SRC}/Hardware)
+
 bull_add_library(bull-hardware)
 
 target_sources(bull-hardware
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/CPU.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Joystick.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Keyboard.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Mouse.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/RAM.cpp
+            ${BULL_INC_HARDWARE}/CPU.hpp
+            ${BULL_SRC_HARDWARE}/CPU.cpp
+            ${BULL_INC_HARDWARE}/Export.hpp
+            ${BULL_INC_HARDWARE}/Joystick.hpp
+            ${BULL_SRC_HARDWARE}/Joystick.cpp
+            ${BULL_INC_HARDWARE}/Keyboard.hpp
+            ${BULL_SRC_HARDWARE}/Keyboard.cpp
+            ${BULL_INC_HARDWARE}/Mouse.hpp
+            ${BULL_SRC_HARDWARE}/Mouse.cpp
+            ${BULL_INC_HARDWARE}/RAM.hpp
+            ${BULL_SRC_HARDWARE}/RAM.cpp
         PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/CPUImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/KeyboardImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/MouseImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/RAMImpl.hpp
+            ${BULL_SRC_HARDWARE}/CPUImpl.hpp
+            ${BULL_SRC_HARDWARE}/JoystickImpl.hpp
+            ${BULL_SRC_HARDWARE}/KeyboardImpl.hpp
+            ${BULL_SRC_HARDWARE}/MouseImpl.hpp
+            ${BULL_SRC_HARDWARE}/RAMImpl.hpp
         )
 
 if(BULL_OS_WINDOWS)

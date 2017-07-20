@@ -1,22 +1,29 @@
+set(BULL_INC_WINDOW ${BULL_INC}/Window)
+set(BULL_SRC_WINDOW ${BULL_SRC}/Window)
+
 bull_add_library(bull-window)
 
 target_sources(bull-window
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/Cursor.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Window.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/VideoMode.cpp
+            ${BULL_INC_WINDOW}/Export.hpp
+            ${BULL_INC_WINDOW}/Cursor.hpp
+            ${BULL_SRC_WINDOW}/Cursor.cpp
+            ${BULL_INC_WINDOW}/VideoMode.hpp
+            ${BULL_SRC_WINDOW}/VideoMode.cpp
+            ${BULL_INC_WINDOW}/Window.hpp
+            ${BULL_SRC_WINDOW}/Window.cpp
         PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/CursorHandler.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/CursorImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/CursorImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickManager.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickManager.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickState.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickState.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/VideoModeImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/WindowHandler.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/WindowImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/WindowImpl.hpp
+            ${BULL_SRC_WINDOW}/CursorHandler.hpp
+            ${BULL_SRC_WINDOW}/CursorImpl.cpp
+            ${BULL_SRC_WINDOW}/CursorImpl.hpp
+            ${BULL_SRC_WINDOW}/JoystickManager.cpp
+            ${BULL_SRC_WINDOW}/JoystickManager.hpp
+            ${BULL_SRC_WINDOW}/JoystickState.cpp
+            ${BULL_SRC_WINDOW}/JoystickState.hpp
+            ${BULL_SRC_WINDOW}/VideoModeImpl.hpp
+            ${BULL_SRC_WINDOW}/WindowHandler.hpp
+            ${BULL_SRC_WINDOW}/WindowImpl.cpp
+            ${BULL_SRC_WINDOW}/WindowImpl.hpp
         )
 
 if(BULL_OS_WINDOWS)

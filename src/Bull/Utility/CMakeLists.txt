@@ -1,11 +1,19 @@
+set(BULL_INC_UTILITY ${BULL_INC}/Utility)
+set(BULL_SRC_UTILITY ${BULL_SRC}/Utility)
+
 bull_add_library(bull-utility)
 
 target_sources(bull-utility
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/CallOnExit.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Color.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Random.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Vertex.cpp
+            ${BULL_INC_UTILITY}/CallOnExit.hpp
+            ${BULL_SRC_UTILITY}/CallOnExit.cpp
+            ${BULL_INC_UTILITY}/Color.hpp
+            ${BULL_SRC_UTILITY}/Color.cpp
+            ${BULL_INC_UTILITY}/Export.hpp
+            ${BULL_INC_UTILITY}/Random.hpp
+            ${BULL_SRC_UTILITY}/Random.cpp
+            ${BULL_INC_UTILITY}/Vertex.hpp
+            ${BULL_SRC_UTILITY}/Vertex.cpp
         )
 
 add_subdirectory(Image)

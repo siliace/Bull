@@ -1,20 +1,29 @@
+set(BULL_INC_CORE_THREAD ${BULL_INC_CORE}/Thread)
+set(BULL_SRC_CORE_THREAD ${BULL_SRC_CORE}/Thread)
+
 target_sources(bull-core
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariable.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Lock.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Mutex.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Semaphore.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Thread.cpp
+            ${BULL_INC_CORE_THREAD}/ConditionVariable.hpp
+            ${BULL_SRC_CORE_THREAD}/ConditionVariable.cpp
+            ${BULL_INC_CORE_THREAD}/Lock.hpp
+            ${BULL_SRC_CORE_THREAD}/Lock.cpp
+            ${BULL_INC_CORE_THREAD}/Mutex.hpp
+            ${BULL_SRC_CORE_THREAD}/Mutex.cpp
+            ${BULL_INC_CORE_THREAD}/Semaphore.hpp
+            ${BULL_SRC_CORE_THREAD}/Semaphore.cpp
+            ${BULL_INC_CORE_THREAD}/Thread.hpp
+            ${BULL_INC_CORE_THREAD}/Thread.inl
+            ${BULL_SRC_CORE_THREAD}/Thread.cpp
         PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariableImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariableImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/MutexHandler.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/MutexImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/MutexImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/SemaphoreImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/SemaphoreImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/ThreadImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/ThreadImpl.hpp
+            ${BULL_SRC_CORE_THREAD}/ConditionVariableImpl.cpp
+            ${BULL_SRC_CORE_THREAD}/ConditionVariableImpl.hpp
+            ${BULL_SRC_CORE_THREAD}/MutexHandler.hpp
+            ${BULL_SRC_CORE_THREAD}/MutexImpl.cpp
+            ${BULL_SRC_CORE_THREAD}/MutexImpl.hpp
+            ${BULL_SRC_CORE_THREAD}/SemaphoreImpl.cpp
+            ${BULL_SRC_CORE_THREAD}/SemaphoreImpl.hpp
+            ${BULL_SRC_CORE_THREAD}/ThreadImpl.cpp
+            ${BULL_SRC_CORE_THREAD}/ThreadImpl.hpp
         )
 
 if(BULL_OS_WINDOWS)

@@ -1,17 +1,28 @@
+set(BULL_INC_NETWORK ${BULL_INC}/Network)
+set(BULL_SRC_NETWORK ${BULL_SRC}/Network)
+
 bull_add_library(bull-network)
 
 target_sources(bull-network
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/Icmp.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/IcmpImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/IpAddress.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Socket.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/TcpListener.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/TcpSocket.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/UdpSocket.cpp
+            ${BULL_INC_NETWORK}/Export.hpp
+            ${BULL_INC_NETWORK}/Icmp.hpp
+            ${BULL_SRC_NETWORK}/Icmp.cpp
+            ${BULL_SRC_NETWORK}/IcmpImpl.hpp
+            ${BULL_INC_NETWORK}/IpAddress.hpp
+            ${BULL_SRC_NETWORK}/IpAddress.cpp
+            ${BULL_INC_NETWORK}/Socket.hpp
+            ${BULL_SRC_NETWORK}/Socket.cpp
+            ${BULL_INC_NETWORK}/SocketHandler.hpp
+            ${BULL_INC_NETWORK}/TcpListener.hpp
+            ${BULL_SRC_NETWORK}/TcpListener.cpp
+            ${BULL_INC_NETWORK}/TcpSocket.hpp
+            ${BULL_SRC_NETWORK}/TcpSocket.cpp
+            ${BULL_INC_NETWORK}/UdpSocket.hpp
+            ${BULL_SRC_NETWORK}/UdpSocket.cpp
         PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/IpAddressImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/SocketImpl.hpp
+            ${BULL_SRC_NETWORK}/IpAddressImpl.hpp
+            ${BULL_SRC_NETWORK}/SocketImpl.hpp
         )
 
 if(BULL_OS_WINDOWS)

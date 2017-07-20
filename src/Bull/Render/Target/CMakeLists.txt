@@ -1,15 +1,22 @@
+set(BULL_INC_RENDER_TARGET ${BULL_INC_RENDER}/Target)
+set(BULL_SRC_RENDER_TARGET ${BULL_SRC_RENDER}/Target)
+
 target_sources(bull-render
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/RenderTarget.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/RenderTexture.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/RenderWindow.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Viewport.cpp
+            ${BULL_INC_RENDER_TARGET}/RenderTarget.hpp
+            ${BULL_SRC_RENDER_TARGET}/RenderTarget.cpp
+            ${BULL_INC_RENDER_TARGET}/RenderTexture.hpp
+            ${BULL_SRC_RENDER_TARGET}/RenderTexture.cpp
+            ${BULL_INC_RENDER_TARGET}/RenderWindow.hpp
+            ${BULL_SRC_RENDER_TARGET}/RenderWindow.cpp
+            ${BULL_INC_RENDER_TARGET}/Viewport.hpp
+            ${BULL_SRC_RENDER_TARGET}/Viewport.cpp
         PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/RenderTextureImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/RenderTextureImplDefault.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/RenderTextureImplDefault.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/RenderWindowImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/RenderWindowImpl.hpp
+            ${BULL_SRC_RENDER_TARGET}/RenderTextureImpl.hpp
+            ${BULL_SRC_RENDER_TARGET}/RenderTextureImplDefault.cpp
+            ${BULL_SRC_RENDER_TARGET}/RenderTextureImplDefault.hpp
+            ${BULL_SRC_RENDER_TARGET}/RenderWindowImpl.cpp
+            ${BULL_SRC_RENDER_TARGET}/RenderWindowImpl.hpp
         )
 
 if(BULL_OS_WINDOWS)

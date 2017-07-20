@@ -1,13 +1,19 @@
+set(BULL_INC_CORE_FILESYSTEM ${BULL_INC_CORE}/FileSystem)
+set(BULL_SRC_CORE_FILESYSTEM ${BULL_SRC_CORE}/FileSystem)
+
 target_sources(bull-core
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/Directory.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/File.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Path.cpp
+            ${BULL_INC_CORE_FILESYSTEM}/Directory.hpp
+            ${BULL_SRC_CORE_FILESYSTEM}/Directory.cpp
+            ${BULL_INC_CORE_FILESYSTEM}/File.hpp
+            ${BULL_SRC_CORE_FILESYSTEM}/File.cpp
+            ${BULL_INC_CORE_FILESYSTEM}/Path.hpp
+            ${BULL_SRC_CORE_FILESYSTEM}/Path.cpp
         PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/DirectoryImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/DirectoryImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/FileImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/FileImpl.hpp
+            ${BULL_SRC_CORE_FILESYSTEM}/DirectoryImpl.cpp
+            ${BULL_SRC_CORE_FILESYSTEM}/DirectoryImpl.hpp
+            ${BULL_SRC_CORE_FILESYSTEM}/FileImpl.cpp
+            ${BULL_SRC_CORE_FILESYSTEM}/FileImpl.hpp
         )
 
 if(BULL_OS_WINDOWS)

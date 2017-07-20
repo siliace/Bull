@@ -1,11 +1,17 @@
+set(BULL_INC_CORE_TIME ${BULL_INC_CORE}/Time)
+set(BULL_SRC_CORE_TIME ${BULL_SRC_CORE}/Time)
+
 target_sources(bull-core
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/Clock.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Date.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/Time.cpp
+            ${BULL_INC_CORE_TIME}/Clock.hpp
+            ${BULL_SRC_CORE_TIME}/Clock.cpp
+            ${BULL_INC_CORE_TIME}/Date.hpp
+            ${BULL_SRC_CORE_TIME}/Date.cpp
+            ${BULL_INC_CORE_TIME}/Time.hpp
+            ${BULL_SRC_CORE_TIME}/Time.cpp
         PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/ClockImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/DateImpl.hpp
+            ${BULL_SRC_CORE_TIME}/ClockImpl.hpp
+            ${BULL_SRC_CORE_TIME}/DateImpl.hpp
         )
 
 if(BULL_OS_WINDOWS)

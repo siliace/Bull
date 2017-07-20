@@ -1,8 +1,14 @@
+set(BULL_INC_RENDER ${BULL_INC}/Render)
+set(BULL_SRC_RENDER ${BULL_SRC}/Render)
+
 bull_add_library(bull-render)
 
 target_sources(bull-render
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/Mesh.cpp
+            ${BULL_INC_RENDER}/Export.hpp
+            ${BULL_INC_RENDER}/Mesh.hpp
+            ${BULL_SRC_RENDER}/Mesh.cpp
+            ${BULL_INC_RENDER}/OpenGL.hpp
         )
 
 add_subdirectory(Buffer)
