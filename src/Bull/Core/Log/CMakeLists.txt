@@ -5,5 +5,6 @@ target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE_LOG}/AbstractLogger.hpp
             ${BULL_INC_CORE_LOG}/Log.hpp
+            ${BULL_INC_CORE_LOG}/Log.inl
             ${BULL_SRC_CORE_LOG}/Log.cpp
         )
