@@ -19,7 +19,7 @@ namespace Bull
          * \param message The Exception's message
          *
          */
-        InvalidArgument(const String& message);
+        explicit InvalidArgument(const String& message);
 
         /*! \brief Constructor
          *

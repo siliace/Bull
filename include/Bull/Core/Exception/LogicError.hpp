@@ -19,7 +19,7 @@ namespace Bull
          * \param message The Exception's message
          *
          */
-        LogicError(const String& message);
+        explicit LogicError(const String& message);
 
         /*! \brief Constructor
          *

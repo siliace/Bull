@@ -19,7 +19,7 @@ namespace Bull
          * \param message The Exception's message
          *
          */
-        Exception(const String& message);
+        explicit Exception(const String& message);
 
         /*! \brief Get the Exception's message
          *

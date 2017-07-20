@@ -19,7 +19,7 @@ namespace Bull
          * \param message
          *
          */
-        OutOfRange(const String& message);
+        explicit OutOfRange(const String& message);
 
         /*! \brief Constructor
          *
@@ -41,7 +41,7 @@ namespace Bull
          * \return The log message
          *
          */
-        virtual String getLogMessage() const override;
+        String getLogMessage() const override;
 
     private:
 

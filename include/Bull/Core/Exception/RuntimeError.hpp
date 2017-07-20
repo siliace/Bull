@@ -19,7 +19,7 @@ namespace Bull
          * \param message The Exception's message
          *
          */
-        RuntimeError(const String& message);
+        explicit RuntimeError(const String& message);
     };
 }
 
