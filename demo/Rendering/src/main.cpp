@@ -105,10 +105,7 @@ int main(int argc, char* argv[])
                     yaw   += e.mouseMove.xRel;
                     pitch += e.mouseMove.yRel;
 
-                    if(pitch > 89.0f)
-                        pitch = AngleF::degree(89.0f);
-                    if(pitch < -89.0f)
-                        pitch = AngleF::degree(-89.0f);
+                    pitch = AngleF::clamp(pitch, AngleF::degree(-89.0f), AngleF::degree(89.0f));
 
                     Vector3F target = camera.getTarget();
 
