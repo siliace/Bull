@@ -255,19 +255,15 @@ namespace Bull
                         {
                             event.type = Window::Event::MouseButtonDown;
 
-                            event.mouseButton.x    = e.xbutton.x;
-                            event.mouseButton.y    = e.xbutton.y;
-                            event.mouseButton.xRel = event.mouseButton.x - getCursorPosition().x;
-                            event.mouseButton.yRel = event.mouseButton.y - getCursorPosition().y;
+                            event.mouseButton.x = e.xbutton.x;
+                            event.mouseButton.y = e.xbutton.y;
                         }
                         else
                         {
                             event.type = Window::Event::MouseWheel;
 
-                            event.mouseWheel.x    = e.xbutton.x;
-                            event.mouseWheel.y    = e.xbutton.y;
-                            event.mouseWheel.xRel = event.mouseWheel.x - getCursorPosition().x;
-                            event.mouseWheel.yRel = event.mouseWheel.y - getCursorPosition().y;
+                            event.mouseWheel.x = e.xbutton.x;
+                            event.mouseWheel.y = e.xbutton.y;
                         }
 
                         switch(e.xbutton.button)
@@ -335,10 +331,8 @@ namespace Bull
                                 break;
                             }
 
-                            event.mouseButton.x  = e.xbutton.x;
-                            event.mouseButton.y  = e.xbutton.y;
-                            event.mouseButton.xRel = event.mouseButton.x - getCursorPosition().x;
-                            event.mouseButton.yRel = event.mouseButton.y - getCursorPosition().y;
+                            event.mouseButton.x = e.xbutton.x;
+                            event.mouseButton.y = e.xbutton.y;
 
                             pushEvent(event);
                         }
@@ -515,7 +509,7 @@ namespace Bull
             return Vector2I(x, y);
         }
 
-        void WindowImplXlib::setMinSize(const Vector2UI& size)
+        void WindowImplXlib::setMinSize(const Vector2I& size)
         {
             XSizeHints hints;
 
@@ -526,16 +520,16 @@ namespace Bull
             XSetNormalHints(m_display->getHandler(), m_handler, &hints);
         }
 
-        Vector2UI WindowImplXlib::getMinSize() const
+        Vector2I WindowImplXlib::getMinSize() const
         {
             XSizeHints hints;
 
             XGetNormalHints(m_display->getHandler(), m_handler, &hints);
 
-            return Vector2UI(hints.min_width, hints.min_height);
+            return Vector2I(hints.min_width, hints.min_height);
         }
 
-        void WindowImplXlib::setMaxSize(const Vector2UI& size)
+        void WindowImplXlib::setMaxSize(const Vector2I& size)
         {
             XSizeHints hints;
 
@@ -546,13 +540,13 @@ namespace Bull
             XSetNormalHints(m_display->getHandler(), m_handler, &hints);
         }
 
-        Vector2UI WindowImplXlib::getMaxSize() const
+        Vector2I WindowImplXlib::getMaxSize() const
         {
             XSizeHints hints;
 
             XGetNormalHints(m_display->getHandler(), m_handler, &hints);
 
-            return Vector2UI(hints.max_width, hints.max_height);
+            return Vector2I(hints.max_width, hints.max_height);
         }
 
         void WindowImplXlib::setSize(const Vector2UI& size)

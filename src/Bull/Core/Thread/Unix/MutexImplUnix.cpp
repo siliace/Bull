@@ -33,5 +33,10 @@ namespace Bull
         {
             pthread_mutex_unlock(&m_handler);
         }
+
+        MutexHandler* MutexImplUnix::getHandler()
+        {
+            return &m_handler;
+        }
     }
 }

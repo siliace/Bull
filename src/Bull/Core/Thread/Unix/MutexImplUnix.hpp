@@ -44,6 +44,13 @@ namespace Bull
              */
             void unlock() override;
 
+            /*! \brief Get the mutex handler
+             *
+             * \return The handler
+             *
+             */
+            MutexHandler* getHandler() override;
+
         private:
 
             pthread_mutex_t m_handler;

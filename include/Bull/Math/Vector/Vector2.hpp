@@ -39,7 +39,7 @@ namespace Bull
          * \param value The value of all components
          *
          */
-        Vector2(T value);
+        explicit Vector2(T value);
 
         /*! \brief Constructor
          *

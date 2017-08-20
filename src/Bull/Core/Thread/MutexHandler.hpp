@@ -14,7 +14,7 @@ namespace Bull
         #if defined BULL_OS_WINDOWS
             typedef CRITICAL_SECTION MutexHandler;
         #else
-            #error Lack of implementation : MutexHandler
+            typedef pthread_mutex_t MutexHandler;
         #endif
     }
 }

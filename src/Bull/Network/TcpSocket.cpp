@@ -3,7 +3,7 @@
 
 #include <Bull/Network/IpAddress.hpp>
 #include <Bull/Network/TcpSocket.hpp>
-#include <Bull/Network/Win32/SocketImpl.hpp>
+#include <Bull/Network/SocketImpl.hpp>
 
 namespace Bull
 {

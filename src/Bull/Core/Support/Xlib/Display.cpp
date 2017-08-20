@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/RuntimeError.hpp>
 #include <Bull/Core/Support/Xlib/Display.hpp>
 
 namespace Bull

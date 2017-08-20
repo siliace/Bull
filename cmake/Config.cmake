@@ -1,4 +1,4 @@
-set(CMAKE_CXX_FLAGS "-std=c++14 -static")
+set(CMAKE_CXX_FLAGS "-std=c++14")
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "bin/${CMAKE_BUILD_TYPE}")
 
