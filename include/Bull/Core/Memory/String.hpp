@@ -2,6 +2,7 @@
 #define BULL_STRING_HPP
 
 #include <memory>
+#include <limits>
 #include <type_traits>
 #include <vector>
 
@@ -15,7 +16,7 @@ namespace Bull
 
         static constexpr char NullByte = '\0';
 
-        static constexpr std::size_t npos = -1;
+        static constexpr std::size_t npos = std::numeric_limits<std::size_t>::max();
 
         /*! \brief Convert a lowercase character to the uppercase equivalent character
          *

@@ -97,13 +97,13 @@ int main(int argc, char* argv[])
             {
                 if(Mouse::isButtonPressed(Mouse::Left))
                 {
-                    rotation.pitch += e.mouseMove.xRel;
-                    rotation.roll  += e.mouseMove.yRel;
+                    rotation.pitch += AngleF::degree(e.mouseMove.xRel);
+                    rotation.roll  += AngleF::degree(e.mouseMove.yRel);
                 }
                 else if(Mouse::isButtonPressed(Mouse::Right))
                 {
-                    yaw   += e.mouseMove.xRel;
-                    pitch += e.mouseMove.yRel;
+                    yaw   += AngleF::degree(e.mouseMove.xRel);
+                    pitch += AngleF::degree(e.mouseMove.yRel);
 
                     pitch = AngleF::clamp(pitch, AngleF::degree(-89.0f), AngleF::degree(89.0f));
 

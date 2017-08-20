@@ -30,40 +30,22 @@ namespace Bull
          */
         static Angle<T> radian(T value);
 
-        /*! \brief
+        /*! \brief Normalize an Angle
          *
-         * \param angle
+         * \param angle The Angle to normalize
          *
-         * \return
-         *
-         */
-        static Angle<T> toDegree(const Angle<T>& angle);
-
-        /*! \brief
-         *
-         * \param angle
-         *
-         * \return
-         *
-         */
-        static Angle<T> toRadian(const Angle<T>& angle);
-
-        /*! \brief
-         *
-         * \param angle
-         *
-         * \return
+         * \return The normalized Angle
          *
          */
         static Angle<T> normalize(const Angle<T>& angle);
 
-        /*! \brief
+        /*! \brief Clamp an Angle
          *
-         * \param angle
-         * \param min
-         * \param max
+         * \param angle The Angle to clamp
+         * \param min   The min value of the Angle
+         * \param max   The max value of the Angle
          *
-         * \return
+         * \return The clamped Angle
          *
          */
         static Angle<T> clamp(const Angle<T>& angle, const Angle<T>& min, const Angle<T>& max);
@@ -75,48 +57,22 @@ namespace Bull
          */
         Angle();
 
-        /*! \brief
+        /*! \brief Normalize the Angle
          *
-         * \return
-         *
-         */
-        Angle<T>& toRadian();
-
-        /*! \brief
-         *
-         * \return
-         *
-         */
-        Angle<T>& toDegree();
-
-        /*! \brief
-         *
-         * \return
+         * \return This
          *
          */
         Angle<T>& normalize();
 
-        /*! \brief Compare two Angles
+        /*! \brief Clamp the Angle
          *
-         * \param left
-         * \param right
+         * \param min The min value of the Angle
+         * \param max The max value of the Angle
          *
-         * \return True if left and right are equal
-         *
-         */
-        template <typename U>
-        friend bool operator==(const Angle<U>& left, const Angle<U>& right);
-
-        /*! \brief Compare two Angles
-         *
-         * \param left
-         * \param right
-         *
-         * \return True if left and right are equal
+         * \return This
          *
          */
-        template <typename U>
-        friend bool operator==(U left, const Angle<U>& right);
+        Angle<T>& clamp(const Angle<T>& min, const Angle<T>& max);
 
         /*! \brief Compare two Angles
          *
@@ -126,8 +82,7 @@ namespace Bull
          * \return True if left and right are equal
          *
          */
-        template <typename U>
-        friend bool operator==(const Angle<U>& left, U right);
+        bool operator==(const Angle<T>& right);
 
         /*! \brief Compare two Angles
          *
@@ -137,87 +92,19 @@ namespace Bull
          * \return True if left and right are not equal
          *
          */
-        template <typename U>
-        friend bool operator!=(const Angle<U>& left, const Angle<U>& right);
+        bool operator!=(const Angle<T>& right);
 
-        /*! \brief Compare two Angles
-         *
-         * \param left
-         * \param right
-         *
-         * \return True if left and right are not equal
-         *
-         */
-        template <typename U>
-        friend bool operator!=(U left, const Angle<U>& right);
+        bool operator<(const Angle<T>& right);
 
-        /*! \brief Compare two Angles
-         *
-         * \param left
-         * \param right
-         *
-         * \return True if left and right are not equal
-         *
-         */
-        template <typename U>
-        friend bool operator!=(const Angle<U>& left, U right);
+        bool operator<=(const Angle<T>& right);
 
-        template <typename U>
-        friend bool operator<(const Angle<U>& left, const Angle<U>& right);
+        bool operator>(const Angle<T>& right);
 
-        template <typename U>
-        friend bool operator<(U left, const Angle<U>& right);
+        bool operator>=(const Angle<T>& right);
 
-        template <typename U>
-        friend bool operator<(const Angle<U>& left, U right);
+        Angle<T> operator+(const Angle<T>& right);
 
-        template <typename U>
-        friend bool operator<=(const Angle<U>& left, const Angle<U>& right);
-
-        template <typename U>
-        friend bool operator<=(U left, const Angle<U>& right);
-
-        template <typename U>
-        friend bool operator<=(const Angle<U>& left, U right);
-
-        template <typename U>
-        friend bool operator>(const Angle<U>& left, const Angle<U>& right);
-
-        template <typename U>
-        friend bool operator>(U left, const Angle<U>& right);
-
-        template <typename U>
-        friend bool operator>(const Angle<U>& left, U right);
-
-        template <typename U>
-        friend bool operator>=(const Angle<U>& left, const Angle<U>& right);
-
-        template <typename U>
-        friend bool operator>=(U left, const Angle<U>& right);
-
-        template <typename U>
-        friend bool operator>=(const Angle<U>& left, U right);
-
-        template <typename U>
-        friend Angle<U> operator+(const Angle<U>& left, const Angle<U>& right);
-
-        template <typename U>
-        friend Angle<U> operator+(U left, const Angle<U>& right);
-
-        template <typename U>
-        friend Angle<U> operator+(const Angle<U>& left, U right);
-
-        template <typename U>
-        friend Angle<U> operator-(const Angle<U>& left, const Angle<U>& right);
-
-        template <typename U>
-        friend Angle<U> operator-(U left, const Angle<U>& right);
-
-        template <typename U>
-        friend Angle<U> operator-(const Angle<U>& left, U right);
-
-        template <typename U>
-        friend Angle<U> operator*(const Angle<U>& left, const Angle<U>& right);
+        Angle<T> operator-(const Angle<T>& right);
 
         template <typename U>
         friend Angle<U> operator*(U left, const Angle<U>& right);
@@ -226,53 +113,48 @@ namespace Bull
         friend Angle<U> operator*(const Angle<U>& left, U right);
 
         template <typename U>
-        friend Angle<U> operator/(const Angle<U>& left, const Angle<U>& right);
-
-        template <typename U>
         friend Angle<U> operator/(U left, const Angle<U>& right);
 
         template <typename U>
         friend Angle<U> operator/(const Angle<U>& left, U right);
 
-        Angle<T>& operator+=(T right);
-
         Angle<T>& operator+=(const Angle<T>& right);
-
-        Angle<T>& operator-=(T right);
 
         Angle<T>& operator-=(const Angle<T>& right);
 
         Angle<T>& operator*=(T right);
 
-        Angle<T>& operator*=(const Angle<T>& right);
-
         Angle<T>& operator/=(T right);
-
-        Angle<T>& operator/=(const Angle<T>& right);
 
         template <typename U>
         friend float std::cos(const Angle<U>& angle);
 
         template <typename U>
+        friend float std::acos(const Angle<U>& angle);
+
+        template <typename U>
         friend float std::sin(const Angle<U>& angle);
+
+        template <typename U>
+        friend float std::asin(const Angle<U>& angle);
 
         template <typename U>
         friend float std::tan(const Angle<U>& angle);
 
-    protected:
-
-        /*! \brief Constructor
-         *
-         * \param value    The value of the Angle
-         * \param isRadian True if the Angle is in radian
-         *
-         */
-        Angle(T value, bool isRadian);
+        template <typename U>
+        friend float std::atan(const Angle<U>& angle);
 
     private:
 
-        T    m_angle;
-        bool m_isRadian;
+        /*! \brief Constructor
+         *
+         * \param value   The value of the Angle
+         * \param convert True if the value needs to be converted in radian
+         *
+         */
+        Angle(T value, bool convert = false);
+
+        T m_value;
     };
 
     template <typename T>
