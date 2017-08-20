@@ -126,7 +126,7 @@ namespace Bull
     template <typename U>
     Angle<U> operator/(const Angle<U>& left, U right)
     {
-        return Angle<U>(left.m_value * right);
+        return Angle<U>(left.m_value / right);
     }
 
     template <typename T>
