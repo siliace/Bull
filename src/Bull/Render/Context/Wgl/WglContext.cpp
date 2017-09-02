@@ -295,8 +295,8 @@ namespace Bull
                                          WS_DISABLED | WS_POPUP,
                                          0, 0,
                                          width, height,
-                                         0,
-                                         0,
+                                         nullptr,
+                                         nullptr,
                                          GetModuleHandle(nullptr),
                                          nullptr);
 
@@ -376,7 +376,7 @@ namespace Bull
                 }while(!m_render && m_settings.major >= 1);
             }
 
-            if(m_render == 0)
+            if(m_render == nullptr)
             {
                 m_render = wglCreateContext(m_device);
 
