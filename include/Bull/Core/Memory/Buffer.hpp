@@ -28,7 +28,7 @@ namespace Bull
          * \return True if the buffer was filled successfully
          *
          */
-        virtual bool fill(const void* data, std::size_t size, std::size_t offset = 0, bool discard = false) = 0;
+        virtual bool fill(const void* data, std::size_t size, std::size_t offset, bool discard) = 0;
 
         /*! \brief Flush the Buffer
          *

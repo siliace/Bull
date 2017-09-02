@@ -103,7 +103,7 @@ namespace Bull
          * \return The capacity
          *
          */
-        std::size_t getCapacity() const;
+        std::size_t getCapacity() const override;
 
     protected:
 
