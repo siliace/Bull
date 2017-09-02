@@ -165,9 +165,9 @@ namespace Bull
 
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared, const VideoMode& mode, const ContextSettings& settings) :
             GlContext(settings),
-            m_device(0),
-            m_render(0),
-            m_pbuffer(0),
+            m_device(nullptr),
+            m_render(nullptr),
+            m_pbuffer(nullptr),
             m_ownWindow(false)
         {
             createSurface(shared, mode.width, mode.height, mode.bitsPerPixel);
@@ -188,9 +188,9 @@ namespace Bull
 
         WglContext::WglContext(const std::shared_ptr<WglContext>& shared, const std::unique_ptr<WindowImpl>& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
-            m_device(0),
-            m_render(0),
-            m_pbuffer(0),
+            m_device(nullptr),
+            m_render(nullptr),
+            m_pbuffer(nullptr),
             m_ownWindow(false)
         {
             createSurface(window);
@@ -209,7 +209,7 @@ namespace Bull
             {
                 if(wglGetCurrentContext() == m_render)
                 {
-                    wglMakeCurrent(0, 0);
+                    wglMakeCurrent(nullptr, nullptr);
                 }
 
                 wglDeleteContext(m_render);
@@ -320,7 +320,7 @@ namespace Bull
 
         void WglContext::createContext(const std::shared_ptr<WglContext>& shared)
         {
-            HGLRC sharedHandler = shared ? shared->m_render : 0;
+            HGLRC sharedHandler = shared ? shared->m_render : nullptr;
 
             if(isLoaded(WglCreateContext))
             {
@@ -361,7 +361,7 @@ namespace Bull
 
                     if(!m_render)
                     {
-                        Log::get()->write("Failed to create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), Log::Level::Warning);
+                        Log::get()->write("Failed to create WglContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), Log::Level::Warning);
 
                         if(m_settings.minor == 0)
                         {
