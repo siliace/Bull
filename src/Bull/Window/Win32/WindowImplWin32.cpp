@@ -237,7 +237,7 @@ namespace Bull
         }
 
         WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style) :
-            m_cursor(LoadCursor(NULL, IDC_ARROW)),
+            m_cursor(LoadCursor(nullptr, IDC_ARROW)),
             m_isResizing(false),
             m_cursorVisible(true)
         {
@@ -271,8 +271,8 @@ namespace Bull
                                         winStyle,
                                         CW_USEDEFAULT, CW_USEDEFAULT,
                                         width, height,
-                                        0,
-                                        0,
+                                        nullptr,
+                                        nullptr,
                                         instance,
                                         nullptr);
 
@@ -352,7 +352,7 @@ namespace Bull
 
         void WindowImplWin32::setPosition(const Vector2I& position)
         {
-            SetWindowPos(m_handler, 0, position.x, position.y, 0, 0, SWP_NOSIZE);
+            SetWindowPos(m_handler, nullptr, position.x, position.y, 0, 0, SWP_NOSIZE);
         }
 
         Vector2I WindowImplWin32::getPosition() const
@@ -386,7 +386,7 @@ namespace Bull
 
         void WindowImplWin32::setSize(const Vector2UI& size)
         {
-            SetWindowPos(m_handler, 0, 0, 0, size.x, size.y, SWP_NOMOVE);
+            SetWindowPos(m_handler, nullptr, 0, 0, size.x, size.y, SWP_NOMOVE);
         }
 
         Vector2UI WindowImplWin32::getSize() const
