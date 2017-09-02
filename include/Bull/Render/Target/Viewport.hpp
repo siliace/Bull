@@ -1,5 +1,5 @@
-#ifndef Bull_Viewport_hpp
-#define Bull_Viewport_hpp
+#ifndef BULL_RENDER_TARGET_VIEWPORT_HPP
+#define BULL_RENDER_TARGET_VIEWPORT_HPP
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -68,4 +68,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Viewport_hpp
+#endif // BULL_RENDER_TARGET_VIEWPORT_HPP

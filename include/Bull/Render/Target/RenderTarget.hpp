@@ -1,5 +1,5 @@
-#ifndef Bull_RenderTarget_hpp
-#define Bull_RenderTarget_hpp
+#ifndef BULL_RENDER_TARGET_RENDERTARGET_HPP
+#define BULL_RENDER_TARGET_RENDERTARGET_HPP
 
 #include <memory>
 
@@ -101,7 +101,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        RenderTarget();
+        RenderTarget() = default;
 
         std::unique_ptr<prv::GlContext> m_context;
 
@@ -111,4 +111,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_RenderTarget_hpp
+#endif // BULL_RENDER_TARGET_RENDERTARGET_HPP

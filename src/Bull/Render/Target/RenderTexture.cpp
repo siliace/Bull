@@ -4,10 +4,7 @@
 
 namespace Bull
 {
-    RenderTexture::~RenderTexture()
-    {
-        /// Nothing
-    }
+    RenderTexture::~RenderTexture() = default;
 
     bool RenderTexture::create(const Vector2UI& size, const ContextSettings& settings)
     {

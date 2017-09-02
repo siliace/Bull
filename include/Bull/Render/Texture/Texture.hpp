@@ -1,5 +1,5 @@
-#ifndef BULL_TEXTURE_HPP
-#define BULL_TEXTURE_HPP
+#ifndef BULL_RENDER_TEXTURE_TEXTURE_HPP
+#define BULL_RENDER_TEXTURE_TEXTURE_HPP
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
@@ -230,4 +230,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_TEXTURE_HPP
+#endif // BULL_RENDER_TEXTURE_TEXTURE_HPP

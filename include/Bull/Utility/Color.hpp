@@ -1,5 +1,5 @@
-#ifndef Bull_Color_hpp
-#define Bull_Color_hpp
+#ifndef BULL_UTILITY_COLOR_HPP
+#define BULL_UTILITY_COLOR_HPP
 
 #include <Bull/Core/System/Integer.hpp>
 
@@ -109,4 +109,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Color_hpp
+#endif // BULL_UTILITY_COLOR_HPP

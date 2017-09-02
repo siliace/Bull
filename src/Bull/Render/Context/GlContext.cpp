@@ -153,10 +153,7 @@ namespace Bull
             return score;
         }
 
-        GlContext::~GlContext()
-        {
-            /// Nothing
-        }
+        GlContext::~GlContext() = default;
 
         bool GlContext::setActive(bool active)
         {

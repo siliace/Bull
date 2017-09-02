@@ -1,5 +1,5 @@
-#ifndef Bull_RenderTextureImplDefault_hpp
-#define Bull_RenderTextureImplDefault_hpp
+#ifndef BULL_RENDER_TARGET_RENDERTEXTUREIMPLDEFAULT_HPP
+#define BULL_RENDER_TARGET_RENDERTEXTUREIMPLDEFAULT_HPP
 
 #include <Bull/Render/Target/RenderTextureImpl.hpp>
 
@@ -33,10 +33,10 @@ namespace Bull
 
         private:
 
-            unsigned int m_target;
             Vector2UI    m_size;
+            unsigned int m_target;
         };
     }
 }
 
-#endif // Bull_RenderTextureImplDefault_hpp
+#endif // BULL_RENDER_TARGET_RENDERTEXTUREIMPLDEFAULT_HPP

@@ -1,5 +1,5 @@
-#ifndef Bull_RenderTexture_hpp
-#define Bull_RenderTexture_hpp
+#ifndef BULL_RENDER_TARGET_RENDERTEXTURE_HPP
+#define BULL_RENDER_TARGET_RENDERTEXTURE_HPP
 
 #include <memory>
 
@@ -83,4 +83,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_RenderTexture_hpp
+#endif // BULL_RENDER_TARGET_RENDERTEXTURE_HPP

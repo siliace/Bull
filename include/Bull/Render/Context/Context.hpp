@@ -1,5 +1,5 @@
-#ifndef BULL_CONTEXT_HPP
-#define BULL_CONTEXT_HPP
+#ifndef BULL_RENDER_CONTEXT_CONTEXT_HPP
+#define BULL_RENDER_CONTEXT_CONTEXT_HPP
 
 #include <memory>
 
@@ -82,4 +82,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CONTEXT_HPP
+#endif // BULL_RENDER_CONTEXT_CONTEXT_HPP

@@ -1,5 +1,5 @@
-#ifndef BULL_RANDOM_HPP
-#define BULL_RANDOM_HPP
+#ifndef BULL_UTILITY_RANDOM_HPP
+#define BULL_UTILITY_RANDOM_HPP
 
 #include <ctime>
 
@@ -44,4 +44,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_RANDOM_HPP
+#endif // BULL_UTILITY_RANDOM_HPP

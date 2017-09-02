@@ -4,10 +4,7 @@
 
 namespace Bull
 {
-    RenderTarget::~RenderTarget()
-    {
-        /// Nothing
-    }
+    RenderTarget::~RenderTarget() = default;
 
     void RenderTarget::clear(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
     {
@@ -65,10 +62,5 @@ namespace Bull
         }
 
         return ContextSettings::Empty;
-    }
-
-    RenderTarget::RenderTarget()
-    {
-        /// Nothing
     }
 }

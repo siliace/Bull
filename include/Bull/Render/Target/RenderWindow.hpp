@@ -1,5 +1,5 @@
-#ifndef BULL_RENDERWINDOW_HPP
-#define BULL_RENDERWINDOW_HPP
+#ifndef BULL_RENDER_TARGET_RENDERWINDOW_HPP
+#define BULL_RENDER_TARGET_RENDERWINDOW_HPP
 
 #include <Bull/Core/Time/Clock.hpp>
 #include <Bull/Core/Time/Time.hpp>
@@ -99,4 +99,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_RENDERWINDOW_HPP
+#endif // BULL_RENDER_TARGET_RENDERWINDOW_HPP

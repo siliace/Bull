@@ -1,5 +1,5 @@
-#ifndef BULL_SHADER_HPP
-#define BULL_SHADER_HPP
+#ifndef BULL_RENDER_SHADER_SHADER_HPP
+#define BULL_RENDER_SHADER_SHADER_HPP
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
@@ -192,4 +192,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_SHADER_HPP
+#endif // BULL_RENDER_SHADER_SHADER_HPP
