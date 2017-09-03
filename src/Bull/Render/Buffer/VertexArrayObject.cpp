@@ -1,3 +1,5 @@
+#include <Bull/Core/Exception/RuntimeError.hpp>
+
 #include <Bull/Render/Buffer/VertexArrayObject.hpp>
 #include <Bull/Render/OpenGL.hpp>
 
@@ -7,6 +9,11 @@ namespace Bull
         m_vao(0)
     {
         gl::genVertexArrays(1, &m_vao);
+
+        if(!gl::isVertexArray(m_vao))
+        {
+            throw RuntimeError("Failed to create VAO");
+        }
     }
 
     VertexArrayObject::~VertexArrayObject()

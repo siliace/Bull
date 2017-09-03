@@ -107,6 +107,7 @@ namespace gl
     PFNGLISENABLEDPROC                isEnabled                = nullptr;
     PFNGLISPROGRAMPROC                isProgram                = nullptr;
     PFNGLISSHADERPROC                 isShader                 = nullptr;
+    PFNGLISVERTEXARRAYPROC            isVertexArray            = nullptr;
     PFNGLLINEWIDTHPROC                lineWidth                = nullptr;
     PFNGLLINKPROGRAMPROC              linkProgram              = nullptr;
     PFNGLMAPBUFFERPROC                mapBuffer                = nullptr;
@@ -304,6 +305,7 @@ namespace Bull
                 gl::isEnabled                = reinterpret_cast<PFNGLISENABLEDPROC>(GlContext::getFunction("glIsEnabled"));
                 gl::isProgram                = reinterpret_cast<PFNGLISPROGRAMPROC>(GlContext::getFunction("glIsProgram"));
                 gl::isShader                 = reinterpret_cast<PFNGLISSHADERPROC>(GlContext::getFunction("glIsShader"));
+                gl::isVertexArray            = reinterpret_cast<PFNGLISVERTEXARRAYPROC>(GlContext::getFunction("glIsVertexArray"));
                 gl::lineWidth                = reinterpret_cast<PFNGLLINEWIDTHPROC>(GlContext::getFunction("glLineWidth"));
                 gl::linkProgram              = reinterpret_cast<PFNGLLINKPROGRAMPROC>(GlContext::getFunction("glLinkProgram"));
                 gl::mapBuffer                = reinterpret_cast<PFNGLMAPBUFFERPROC>(GlContext::getFunction("glMapBuffer"));
