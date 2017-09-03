@@ -90,7 +90,7 @@ namespace Bull
 
     bool Directory::isOpen() const
     {
-        return m_impl.get() != nullptr;
+        return m_impl != nullptr;
     }
 
     void Directory::close()

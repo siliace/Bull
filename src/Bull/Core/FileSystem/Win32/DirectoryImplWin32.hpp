@@ -1,5 +1,5 @@
-#ifndef Bull_DirectoryImplWin32_hpp
-#define Bull_DirectoryImplWin32_hpp
+#ifndef BULL_CORE_FILESYSTEM_DIRECTORYIMPLWIN32_HPP
+#define BULL_CORE_FILESYSTEM_DIRECTORYIMPLWIN32_HPP
 
 #include <windows.h>
 
@@ -41,17 +41,6 @@ namespace Bull
              */
             static bool remove(const Path& name);
 
-        private:
-
-            /*! \brief Convert a SYSTEMTIME to a Bull::Date
-             *
-             * \param sysTime The SYSTEMTIME to convert
-             *
-             * \return Return the equivalent Bull::Date
-             *
-             */
-            static Date systemTimeToDate(SYSTEMTIME sysTime);
-
         public:
 
             /*! \brief Destructor
@@ -77,12 +66,12 @@ namespace Bull
 
         private:
 
-            HANDLE m_handler;
             WIN32_FIND_DATA m_result;
+            HANDLE          m_handler;
         };
     }
 }
 
-#endif // Bull_DirectoryImplWin32_hpp
+#endif // BULL_CORE_FILESYSTEM_DIRECTORYIMPLWIN32_HPP
 
 

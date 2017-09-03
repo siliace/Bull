@@ -7,7 +7,7 @@
 #else
     #include <Bull/Core/FileSystem/Unix/FileImplUnix.hpp>
     typedef Bull::prv::FileImplUnix FileImplType;
-#endif // defined
+#endif
 
 namespace Bull
 {
@@ -86,9 +86,6 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        FileImpl::~FileImpl()
-        {
-            /// Nothing
-        }
+        FileImpl::~FileImpl() = default;
     }
 }

@@ -1,4 +1,5 @@
 #include <Bull/Core/FileSystem/Win32/FileImplWin32.hpp>
+#include <Bull/Core/Support/Win32/DateHelper.hpp>
 
 namespace Bull
 {
@@ -39,21 +40,6 @@ namespace Bull
         bool FileImplWin32::remove(const Path& name)
         {
             return DeleteFile(name.toString().getBuffer()) == TRUE;
-        }
-
-        Date FileImplWin32::systemTimeToDate(SYSTEMTIME sysTime)
-        {
-            Date date;
-
-            date.year      = sysTime.wYear;
-            date.month     = Date::Month(sysTime.wMonth);
-            date.day       = sysTime.wDay;
-            date.dayOfWeek = Date::Day(sysTime.wDayOfWeek);
-            date.hour      = sysTime.wHour;
-            date.minute    = sysTime.wMinute;
-            date.second    = Time::seconds(sysTime.wSecond) + Time::milliseconds(sysTime.wMilliseconds);
-
-            return date;
         }
 
         FileImplWin32::~FileImplWin32()

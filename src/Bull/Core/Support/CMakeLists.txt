@@ -1,4 +1,6 @@
-if(NOT BULL_OS_WINDOWS)
+if(BULL_OS_WINDOWS)
+    add_subdirectory(Win32)
+else()
     add_subdirectory(XCB)
     add_subdirectory(Xlib)
 endif()

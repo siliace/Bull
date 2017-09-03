@@ -1,5 +1,5 @@
-#ifndef Bull_FileImplWin32_hpp
-#define Bull_FileImplWin32_hpp
+#ifndef BULL_CORE_FILESYSTEM_FILEIMPLWIN32_HPP
+#define BULL_CORE_FILESYSTEM_FILEIMPLWIN32_HPP
 
 #include <windows.h>
 
@@ -49,17 +49,6 @@ namespace Bull
              *
              */
             static bool remove(const Path& name);
-
-        private:
-
-            /*! \brief Convert a SYSTEMTIME to a Bull::Date
-             *
-             * \param sysTime The SYSTEMTIME to convert
-             *
-             * \return Return the equivalent Bull::Date
-             *
-             */
-            static Date systemTimeToDate(SYSTEMTIME sysTime);
 
         public:
 
@@ -155,4 +144,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_FileImplWin32_hpp
+#endif // BULL_CORE_FILESYSTEM_FILEIMPLWIN32_HPP

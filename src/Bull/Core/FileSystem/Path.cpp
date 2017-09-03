@@ -20,8 +20,6 @@ namespace Bull
 
         if(!m_isFile && !m_isDirectory)
         {
-            std::current_exception();
-
             StringStream ss;
 
             ss << "The path " << m_path << " does not exists";
