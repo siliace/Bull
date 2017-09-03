@@ -7,14 +7,12 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
-#include <Bull/Hardware/Joystick.hpp>
-#include <Bull/Hardware/Keyboard.hpp>
-#include <Bull/Hardware/Mouse.hpp>
-
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Window/Cursor.hpp>
 #include <Bull/Window/VideoMode.hpp>
+#include <Bull/Window/WindowEvent.hpp>
+#include <Bull/Window/WindowStyle.hpp>
 
 namespace Bull
 {
@@ -36,123 +34,6 @@ namespace Bull
          */
         static const Window* getFullscreen();
 
-        struct Event
-        {
-            enum Type
-            {
-                Closed,
-                Resized,
-                Moved,
-                KeyUp,
-                KeyDown,
-                Character,
-                MouseEnter,
-                MouseLeave,
-                MouseMoved,
-                MouseButtonUp,
-                MouseButtonDown,
-                MouseButtonDoubleClicked,
-                MouseWheel,
-                LostFocus,
-                GainFocus,
-                JoystickButtonUp,
-                JoystickButtonDown,
-                JoystickMoved,
-                JoystickConnected,
-                JoystickDisconnected,
-            };
-
-            struct WindowResizedEvent
-            {
-                unsigned int width;
-                unsigned int height;
-            };
-
-            struct WindowMovedEvent
-            {
-                int x, y;
-                int xRel, yRel;
-            };
-
-            struct KeyEvent
-            {
-                Keyboard::Key code;
-                bool          alt;
-                bool          control;
-                bool          shift;
-                bool          system;
-            };
-
-            struct MouseMoveEvent
-            {
-                int x, y;
-                int xRel, yRel;
-            };
-
-            struct MouseButtonEvent
-            {
-                int x, y;
-                Mouse::Button button;
-            };
-
-            struct MouseWheelEvent
-            {
-                bool up;
-                int x, y;
-                Mouse::Wheel wheel;
-            };
-
-            struct JoystickConnectionEvent
-            {
-                Uint8 joystick;
-            };
-
-            struct JoystickMovedEvent
-            {
-                Uint8 joystick;
-                float position;
-                float relative;
-                Joystick::Axis axis;
-            };
-
-            struct JoystickButtonEvent
-            {
-                Uint8 joystick;
-                Uint8 button;
-            };
-
-            union
-            {
-                WindowResizedEvent      windowResize;
-                WindowMovedEvent        windowMove;
-                KeyEvent                key;
-                Uint32                  character;
-                MouseMoveEvent          mouseMove;
-                MouseButtonEvent        mouseButton;
-                MouseWheelEvent         mouseWheel;
-                JoystickConnectionEvent joystickConnection;
-                JoystickMovedEvent      joystickMoved;
-                JoystickButtonEvent     joystickButton;
-            };
-
-            Type type;
-        };
-
-        enum Style
-        {
-            None        = 0x0,  /*!< The Window do not have any decoration */
-
-            Visible     = 0x1,  /*!< The Window is visible */
-            Closable    = 0x2,  /*!< The Window has a exit button */
-            Minimizable = 0x4,  /*!< The Window has a minimize button */
-            Maximizable = 0x8,  /*!< The Window has a maximize button */
-            Resizable   = 0x16, /*!< The Window is resizable with drag&drop */
-
-            Fullscreen  = 0x32, /*!< The Window is in full screen */
-
-            Default     = Visible | Closable | Minimizable | Maximizable | Resizable
-        };
-
     protected:
 
         static Window* s_fullscreen;
@@ -168,10 +49,10 @@ namespace Bull
          *
          * \param mode  The VideoMode
          * \param title The title of the window
-         * \param style The window decorations
+         * \param WindowStyle The window decorations
          *
          */
-        Window(const VideoMode& mode, const String& title, Uint32 style = Style::Default);
+        Window(const VideoMode& mode, const String& title, Uint32 style = WindowStyle::Default);
 
         /*! \brief Destructor
          *
@@ -182,12 +63,12 @@ namespace Bull
          *
          * \param mode  The VideoMode
          * \param title The title of the window
-         * \param style The window decorations
+         * \param WindowStyle The window decorations
          *
          * \return Return true if the window was open successfully, false otherwise
          *
          */
-        virtual bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default);
+        virtual bool open(const VideoMode& mode, const String& title, Uint32 style = WindowStyle::Default);
 
         /*! \brief Check if the window is open
          *
@@ -208,14 +89,14 @@ namespace Bull
          * \return Return true if the event stack was not empty, else return false
          *
          */
-        bool pollEvent(Event& e);
+        bool pollEvent(WindowEvent& e);
 
         /*! \brief Get the first event on the stack and blocking the current thread
          *
          * \return Return the first event of the stack
          *
          */
-        Event nextEvent();
+        WindowEvent nextEvent();
 
         /*! \brief Enable or disable the capture of the cursor inside the window
          *
@@ -458,7 +339,7 @@ namespace Bull
          * \param e The event to filter
          *
          */
-        void filterEvent(const Event& e);
+        void filterEvent(const WindowEvent& e);
 
         std::unique_ptr<prv::WindowImpl> m_impl; /*!< The OS specific implementation of the window */
     };

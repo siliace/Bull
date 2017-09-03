@@ -6,14 +6,14 @@
 
 namespace Bull
 {
-    RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+    RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 WindowStyle, const ContextSettings& settings)
     {
-        open(mode, title, style, settings);
+        open(mode, title, WindowStyle, settings);
     }
 
-    bool RenderWindow::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+    bool RenderWindow::open(const VideoMode& mode, const String& title, Uint32 WindowStyle, const ContextSettings& settings)
     {
-        if(Window::open(mode, title, style))
+        if(Window::open(mode, title, WindowStyle))
         {
             m_context.reset(prv::GlContext::createInstance(getImpl(), mode.bitsPerPixel, settings));
         }

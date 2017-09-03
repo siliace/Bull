@@ -27,12 +27,12 @@ namespace Bull
              *
              * \param mode  The VideoMode to use to create the window
              * \param title The title of the window
-             * \param style The style to use to create the window
+             * \param WindowStyle The WindowStyle to use to create the window
              *
              * \return Return the created instance
              *
              */
-            static WindowImpl* createInstance(const VideoMode& mode, const String& title, Uint32 style);
+            static WindowImpl* createInstance(const VideoMode& mode, const String& title, Uint32 WindowStyle);
 
         public:
 
@@ -54,7 +54,7 @@ namespace Bull
              * \return Return true if the event is usable, otherwise false (if block is true, always return true)
              *
              */
-            bool popEvent(Window::Event& e, bool block);
+            bool popEvent(WindowEvent& e, bool block);
 
             /*! \brief Minimize a window
              *
@@ -235,7 +235,7 @@ namespace Bull
              * \param e The event to add at the end of the event queue
              *
              */
-            void pushEvent(const Window::Event& e);
+            void pushEvent(const WindowEvent& e);
 
             /*! \brief Get the position of the cursor in the Window
              *
@@ -245,7 +245,7 @@ namespace Bull
 
         private:
 
-            std::queue<Window::Event> m_events;         /*!< The event queue */
+            std::queue<WindowEvent> m_events;         /*!< The event queue */
             bool                      m_keyrepeat;      /*!< Does the key repeat is enable? */
             Vector2I                  m_cursorPosition; /*!< The position of the cursor in the window */
         };

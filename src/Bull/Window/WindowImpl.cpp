@@ -26,9 +26,9 @@ namespace Bull
 {
     namespace prv
     {
-        WindowImpl* WindowImpl::createInstance(const VideoMode& mode, const String& title, Uint32 style)
+        WindowImpl* WindowImpl::createInstance(const VideoMode& mode, const String& title, Uint32 WindowStyle)
         {
-            return new WindowImplType(mode, title, style);
+            return new WindowImplType(mode, title, WindowStyle);
         }
 
         WindowImpl::~WindowImpl()
@@ -36,7 +36,7 @@ namespace Bull
             /// Nothing
         }
 
-        bool WindowImpl::popEvent(Window::Event& e, bool block)
+        bool WindowImpl::popEvent(WindowEvent& e, bool block)
         {
             JoystickManager::Instance manager = JoystickManager::get();
 
@@ -84,9 +84,9 @@ namespace Bull
             /// Nothing
         }
 
-        void WindowImpl::pushEvent(const Window::Event& e)
+        void WindowImpl::pushEvent(const WindowEvent& e)
         {
-            if(e.type == Window::Event::MouseMoved)
+            if(e.type == WindowEvent::MouseMoved)
             {
                 m_cursorPosition = Vector2I(e.mouseMove.x, e.mouseMove.y);
             }

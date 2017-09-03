@@ -204,58 +204,58 @@ namespace Bull
             }
         }
 
-        DWORD WindowImplWin32::computeStyle(Uint32 style)
+        DWORD WindowImplWin32::computeWindowStyle(Uint32 WindowStyle)
         {
-            DWORD windowStyle = 0;
+            DWORD windowWindowStyle = 0;
 
-            if(style & (Window::Style::Visible) || style & (Window::Style::Fullscreen))
+            if(WindowStyle & (WindowStyle::Visible) || WindowStyle & (WindowStyle::Fullscreen))
             {
-                windowStyle |= WS_VISIBLE;
+                windowWindowStyle |= WS_VISIBLE;
             }
 
-            if(style & (Window::Style::Closable))
+            if(WindowStyle & (WindowStyle::Closable))
             {
-                windowStyle |= WS_SYSMENU;
+                windowWindowStyle |= WS_SYSMENU;
             }
 
-            if(style & (Window::Style::Maximizable))
+            if(WindowStyle & (WindowStyle::Maximizable))
             {
-                windowStyle |= WS_MAXIMIZEBOX;
+                windowWindowStyle |= WS_MAXIMIZEBOX;
             }
 
-            if(style & (Window::Style::Minimizable))
+            if(WindowStyle & (WindowStyle::Minimizable))
             {
-                windowStyle |= WS_MINIMIZEBOX;
+                windowWindowStyle |= WS_MINIMIZEBOX;
             }
 
-            if(style & (Window::Style::Resizable))
+            if(WindowStyle & (WindowStyle::Resizable))
             {
-                windowStyle |= WS_THICKFRAME;
+                windowWindowStyle |= WS_THICKFRAME;
             }
 
-            return windowStyle;
+            return windowWindowStyle;
         }
 
-        WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style) :
+        WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 WindowStyle) :
             m_cursor(LoadCursor(nullptr, IDC_ARROW)),
             m_isResizing(false),
             m_cursorVisible(true)
         {
             unsigned int width, height;
-            DWORD winStyle = computeStyle(style);
+            DWORD winWindowStyle = computeWindowStyle(WindowStyle);
 
             if(instanceCounter == 0)
             {
                 registerWindowClass();
             }
 
-            if(!(style & Window::Style::Fullscreen))
+            if(!(WindowStyle & WindowStyle::Fullscreen))
             {
                 RECT rectangle = {0, 0,
                                   static_cast<LONG>(mode.width),
                                   static_cast<LONG>(mode.height)};
 
-                AdjustWindowRect(&rectangle, winStyle, false);
+                AdjustWindowRect(&rectangle, winWindowStyle, false);
                 width  = rectangle.right - rectangle.left;
                 height = rectangle.bottom - rectangle.top;
             }
@@ -268,7 +268,7 @@ namespace Bull
             m_handler = CreateWindowExW(0,
                                         windowClassName,
                                         reinterpret_cast<LPCWSTR>(title.getBuffer()),
-                                        winStyle,
+                                        winWindowStyle,
                                         CW_USEDEFAULT, CW_USEDEFAULT,
                                         width, height,
                                         nullptr,
@@ -496,9 +496,9 @@ namespace Bull
             {
                 case WM_CLOSE:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type = Window::Event::Closed;
+                    e.type = WindowEvent::Closed;
 
                     pushEvent(e);
                 }
@@ -517,9 +517,9 @@ namespace Bull
                 {
                     if(!m_isResizing && m_lastSize != getSize())
                     {
-                        Window::Event e;
+                        WindowEvent e;
 
-                        e.type                = Window::Event::Resized;
+                        e.type                = WindowEvent::Resized;
                         e.windowResize.width  = LOWORD(lParam);
                         e.windowResize.height = HIWORD(lParam);
 
@@ -532,9 +532,9 @@ namespace Bull
 
                 case WM_KILLFOCUS:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type = Window::Event::LostFocus;
+                    e.type = WindowEvent::LostFocus;
 
                     pushEvent(e);
                 }
@@ -542,9 +542,9 @@ namespace Bull
 
                 case WM_SETFOCUS:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type = Window::Event::GainFocus;
+                    e.type = WindowEvent::GainFocus;
 
                     pushEvent(e);
                 }
@@ -562,10 +562,10 @@ namespace Bull
 
                     if(getSize() != m_lastSize)
                     {
-                        Window::Event e;
+                        WindowEvent e;
                         m_lastSize = getSize();
 
-                        e.type                = Window::Event::Resized;
+                        e.type                = WindowEvent::Resized;
                         e.windowResize.width  = m_lastSize.x;
                         e.windowResize.height = m_lastSize.y;
 
@@ -574,10 +574,10 @@ namespace Bull
 
                     if(getPosition() != m_lastPosition)
                     {
-                        Window::Event e;
+                        WindowEvent e;
                         m_lastPosition = getPosition();
 
-                        e.type         = Window::Event::Moved;
+                        e.type         = WindowEvent::Moved;
                         e.windowMove.x = getPosition().x;
                         e.windowMove.y = getPosition().y;
 
@@ -591,9 +591,9 @@ namespace Bull
                 {
                     if(isKeyRepeatEnable() || ((HIWORD(lParam) & KF_REPEAT) == 0))
                     {
-                        Window::Event e;
+                        WindowEvent e;
 
-                        e.type        = Window::Event::KeyDown;
+                        e.type        = WindowEvent::KeyDown;
                         e.key.code    = convertVKToBullkey(wParam);
                         e.key.alt     = Keyboard::isKeyPressed(Keyboard::Key::Alt);
                         e.key.control = Keyboard::isKeyPressed(Keyboard::Key::Control);
@@ -608,9 +608,9 @@ namespace Bull
                 case WM_KEYUP:
                 case WM_SYSKEYUP:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type        = Window::Event::KeyUp;
+                    e.type        = WindowEvent::KeyUp;
                     e.key.code    = convertVKToBullkey(wParam);
                     e.key.alt     = Keyboard::isKeyPressed(Keyboard::Key::Alt);
                     e.key.control = Keyboard::isKeyPressed(Keyboard::Key::Control);
@@ -623,9 +623,9 @@ namespace Bull
 
                 case WM_CHAR:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type = Window::Event::Character;
+                    e.type = WindowEvent::Character;
                     e.character = static_cast<Uint32>(wParam);
 
                     pushEvent(e);
@@ -634,9 +634,9 @@ namespace Bull
 
                 case WM_MOUSEMOVE:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type           = Window::Event::MouseMoved;
+                    e.type           = WindowEvent::MouseMoved;
                     e.mouseMove.x    = GET_X_LPARAM(lParam);
                     e.mouseMove.y    = GET_Y_LPARAM(lParam);
                     e.mouseMove.xRel = e.mouseMove.x - getCursorPosition().x;
@@ -649,9 +649,9 @@ namespace Bull
                 case WM_LBUTTONDOWN:
                 case WM_LBUTTONDBLCLK:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type               = Window::Event::MouseButtonDown;
+                    e.type               = WindowEvent::MouseButtonDown;
                     e.mouseButton.button = Mouse::Button::Left;
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
@@ -660,7 +660,7 @@ namespace Bull
 
                     if(message == WM_LBUTTONDBLCLK)
                     {
-                        e.type = Window::Event::MouseButtonDoubleClicked;
+                        e.type = WindowEvent::MouseButtonDoubleClicked;
 
                         pushEvent(e);
                     }
@@ -669,9 +669,9 @@ namespace Bull
 
                 case WM_LBUTTONUP:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type               = Window::Event::MouseButtonUp;
+                    e.type               = WindowEvent::MouseButtonUp;
                     e.mouseButton.button = Mouse::Button::Left;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -683,9 +683,9 @@ namespace Bull
                 case WM_MBUTTONDOWN:
                 case WM_MBUTTONDBLCLK:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type               = Window::Event::MouseButtonDown;
+                    e.type               = WindowEvent::MouseButtonDown;
                     e.mouseButton.button = Mouse::Button::Middle;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -694,7 +694,7 @@ namespace Bull
 
                     if(message == WM_MBUTTONDBLCLK)
                     {
-                        e.type = Window::Event::MouseButtonDoubleClicked;
+                        e.type = WindowEvent::MouseButtonDoubleClicked;
 
                         pushEvent(e);
                     }
@@ -703,9 +703,9 @@ namespace Bull
 
                 case WM_MBUTTONUP:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type               = Window::Event::MouseButtonUp;
+                    e.type               = WindowEvent::MouseButtonUp;
                     e.mouseButton.button = Mouse::Button::Middle;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -717,9 +717,9 @@ namespace Bull
                 case WM_RBUTTONDOWN:
                 case WM_RBUTTONDBLCLK:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type               = Window::Event::MouseButtonDown;
+                    e.type               = WindowEvent::MouseButtonDown;
                     e.mouseButton.button = Mouse::Button::Right;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -728,7 +728,7 @@ namespace Bull
 
                     if(message == WM_RBUTTONDBLCLK)
                     {
-                        e.type = Window::Event::MouseButtonDoubleClicked;
+                        e.type = WindowEvent::MouseButtonDoubleClicked;
 
                         pushEvent(e);
                     }
@@ -737,9 +737,9 @@ namespace Bull
 
                 case WM_RBUTTONUP:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type               = Window::Event::MouseButtonUp;
+                    e.type               = WindowEvent::MouseButtonUp;
                     e.mouseButton.button = Mouse::Button::Right;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -751,9 +751,9 @@ namespace Bull
                 case WM_XBUTTONDOWN:
                 case WM_XBUTTONDBLCLK:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type               = Window::Event::MouseButtonDown;
+                    e.type               = WindowEvent::MouseButtonDown;
                     e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? Mouse::Button::Extra1 : Mouse::Button::Extra2;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -762,7 +762,7 @@ namespace Bull
 
                     if(message == WM_XBUTTONDBLCLK)
                     {
-                        e.type = Window::Event::MouseButtonDoubleClicked;
+                        e.type = WindowEvent::MouseButtonDoubleClicked;
 
                         pushEvent(e);
                     }
@@ -771,9 +771,9 @@ namespace Bull
 
                 case WM_XBUTTONUP:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type               = Window::Event::MouseButtonUp;
+                    e.type               = WindowEvent::MouseButtonUp;
                     e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? Mouse::Button::Extra1 : Mouse::Button::Extra2;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -784,9 +784,9 @@ namespace Bull
 
                 case WM_MOUSEWHEEL:
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type              = Window::Event::MouseWheel;
+                    e.type              = WindowEvent::MouseWheel;
                     e.mouseWheel.wheel  = Mouse::Wheel::Vertical;
                     e.mouseWheel.up     = (HIWORD(wParam) == 120);
                     e.mouseWheel.x      = GET_X_LPARAM(lParam);

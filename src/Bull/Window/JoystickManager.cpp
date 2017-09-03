@@ -14,7 +14,7 @@ namespace Bull
             /// Nothing
         }
 
-        void JoystickManager::processEvents(std::queue<Window::Event>& eventQueue)
+        void JoystickManager::processEvents(std::queue<WindowEvent>& eventQueue)
         {
             for(unsigned int i = 0; i < Joystick::Count; i++)
             {
@@ -52,7 +52,7 @@ namespace Bull
             return m_repeatDelay;
         }
 
-        void JoystickManager::processJoystick(Uint8 joystick, std::queue<Window::Event>& eventQueue)
+        void JoystickManager::processJoystick(Uint8 joystick, std::queue<WindowEvent>& eventQueue)
         {
             JoystickState state(joystick);
             JoystickState cached = m_stateCache[joystick];
@@ -64,9 +64,9 @@ namespace Bull
 
             if(state.connected != cached.connected)
             {
-                Window::Event e;
+                WindowEvent e;
 
-                e.type = (state.connected) ? Window::Event::JoystickConnected : Window::Event::JoystickDisconnected;
+                e.type = (state.connected) ? WindowEvent::JoystickConnected : WindowEvent::JoystickDisconnected;
 
                 e.joystickConnection.joystick = joystick;
 
@@ -82,15 +82,15 @@ namespace Bull
 
                 if(state.buttons[i].first != cached.buttons[i].first)
                 {
-                    Window::Event e;
-                    e.type = (state.buttons[i].first) ? Window::Event::JoystickButtonDown : Window::Event::JoystickButtonUp;
+                    WindowEvent e;
+                    e.type = (state.buttons[i].first) ? WindowEvent::JoystickButtonDown : WindowEvent::JoystickButtonUp;
 
                     e.joystickButton.joystick = joystick;
                     e.joystickButton.button   = static_cast<Uint8>(i);
 
                     eventQueue.push(e);
 
-                    if(e.type == Window::Event::JoystickButtonDown)
+                    if(e.type == WindowEvent::JoystickButtonDown)
                     {
                         state.buttons[i].second.start();
                     }
@@ -104,8 +104,8 @@ namespace Bull
                         m_keyrepeat &&
                         cached.buttons[i].second.getElapsedTime() > m_repeatDelay)
                 {
-                    Window::Event e;
-                    e.type = Window::Event::JoystickButtonDown;
+                    WindowEvent e;
+                    e.type = WindowEvent::JoystickButtonDown;
 
                     e.joystickButton.joystick = joystick;
                     e.joystickButton.button   = static_cast<Uint8>(i);
@@ -122,9 +122,9 @@ namespace Bull
 
                 if(state.axes[i] != cached.axes[i] && std::abs(relative) > m_threshold)
                 {
-                    Window::Event e;
+                    WindowEvent e;
 
-                    e.type = Window::Event::JoystickMoved;
+                    e.type = WindowEvent::JoystickMoved;
 
                     e.joystickMoved.joystick = joystick;
                     e.joystickMoved.axis     = static_cast<Joystick::Axis>(i);

@@ -11,7 +11,7 @@ namespace Bull
         {
         public:
 
-            RenderWindowImplXCB(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+            RenderWindowImplXCB(const VideoMode& mode, const String& title, Uint32 WindowStyle, const ContextSettings& settings);
         };
     }
 }

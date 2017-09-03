@@ -50,10 +50,10 @@ namespace Bull
              *
              * \param mode The VideoMode to use to create the window
              * \param title The title of the window
-             * \param style The style to use to create the window
+             * \param WindowStyle The WindowStyle to use to create the window
              *
              */
-            WindowImplXlib(const VideoMode& mode, const String& title, Uint32 style);
+            WindowImplXlib(const VideoMode& mode, const String& title, Uint32 WindowStyle);
 
             /*! \brief Destructor
              *
@@ -227,31 +227,31 @@ namespace Bull
              *
              * \param mode
              * \param title
-             * \param style
+             * \param WindowStyle
              *
              */
-            void open(const VideoMode& mode, const String& title, Uint32 style);
+            void open(const VideoMode& mode, const String& title, Uint32 WindowStyle);
 
             /*! \brief Open the window
              *
              * \param width
              * \param height
              * \param title
-             * \param style
+             * \param WindowStyle
              * \param vi
              *
              */
-            void open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi);
+            void open(unsigned int width, unsigned int height, const String& title, Uint32 WindowStyle, XVisualInfo* vi);
 
         private:
 
             /*! \brief Perform internal intialization
              *
              * \param title The title of the window to create
-             * \param style The decortation of the window
+             * \param WindowStyle The decortation of the window
              *
              */
-            void initialize(const String& title, Uint32 style);
+            void initialize(const String& title, Uint32 WindowStyle);
 
             /*! \brief Set Window manager protocols supported
              *

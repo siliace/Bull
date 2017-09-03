@@ -140,10 +140,10 @@ namespace Bull
             return hidden;
         }
 
-        WindowImplXlib::WindowImplXlib(const VideoMode& mode, const String& title, Uint32 style) :
+        WindowImplXlib::WindowImplXlib(const VideoMode& mode, const String& title, Uint32 WindowStyle) :
             WindowImplXlib()
         {
-            open(mode, title, style);
+            open(mode, title, WindowStyle);
         }
 
         WindowImplXlib::~WindowImplXlib()
@@ -181,9 +181,9 @@ namespace Bull
                         {
                             if(e.xclient.data.l[0] == static_cast<long>(atomDelete))
                             {
-                                Window::Event e;
+                                WindowEvent e;
 
-                                e.type = Window::Event::Closed;
+                                e.type = WindowEvent::Closed;
 
                                 pushEvent(e);
                             }
@@ -193,7 +193,7 @@ namespace Bull
 
                     case KeyPress:
                     {
-                        Window::Event event;
+                        WindowEvent event;
                         Keyboard::Key key = Keyboard::Key::Unknown;
 
                         for(int i = 0; i < 4 && key == Keyboard::Key::Unknown; i++)
@@ -201,7 +201,7 @@ namespace Bull
                             key = convertXKToBullkey(XLookupKeysym(&e.xkey, i));
                         }
 
-                        event.type        = Window::Event::KeyDown;
+                        event.type        = WindowEvent::KeyDown;
                         event.key.code    = key;
                         event.key.alt     = e.xkey.state & Mod1Mask;
                         event.key.control = e.xkey.state & ControlMask;
@@ -214,7 +214,7 @@ namespace Bull
 
                     case KeyRelease:
                     {
-                        Window::Event event;
+                        WindowEvent event;
                         Keyboard::Key key = Keyboard::Key::Unknown;
 
                         for(int i = 0; i < 4 && key == Keyboard::Key::Unknown; i++)
@@ -222,7 +222,7 @@ namespace Bull
                             key = convertXKToBullkey(XLookupKeysym(&e.xkey, i));
                         }
 
-                        event.type        = Window::Event::KeyUp;
+                        event.type        = WindowEvent::KeyUp;
                         event.key.code    = key;
                         event.key.alt     = e.xkey.state & Mod1Mask;
                         event.key.control = e.xkey.state & ControlMask;
@@ -235,9 +235,9 @@ namespace Bull
 
                     case MotionNotify:
                     {
-                        Window::Event event;
+                        WindowEvent event;
 
-                        event.type           = Window::Event::MouseMoved;
+                        event.type           = WindowEvent::MouseMoved;
                         event.mouseMove.x    = e.xmotion.x;
                         event.mouseMove.y    = e.xmotion.y;
                         event.mouseMove.xRel = event.mouseMove.x - getCursorPosition().x;
@@ -249,18 +249,18 @@ namespace Bull
 
                     case ButtonPress:
                     {
-                        Window::Event event;
+                        WindowEvent event;
 
                         if(e.xbutton.button <= Button3 || e.xbutton.button >= Button8)
                         {
-                            event.type = Window::Event::MouseButtonDown;
+                            event.type = WindowEvent::MouseButtonDown;
 
                             event.mouseButton.x = e.xbutton.x;
                             event.mouseButton.y = e.xbutton.y;
                         }
                         else
                         {
-                            event.type = Window::Event::MouseWheel;
+                            event.type = WindowEvent::MouseWheel;
 
                             event.mouseWheel.x = e.xbutton.x;
                             event.mouseWheel.y = e.xbutton.y;
@@ -309,8 +309,8 @@ namespace Bull
                     {
                         if(e.xbutton.button <= Button3 || e.xbutton.button >= Button8)
                         {
-                            Window::Event event;
-                            event.type = Window::Event::MouseButtonUp;
+                            WindowEvent event;
+                            event.type = WindowEvent::MouseButtonUp;
 
                             switch(e.xbutton.button)
                             {
@@ -341,9 +341,9 @@ namespace Bull
 
                     case FocusIn:
                     {
-                        Window::Event event;
+                        WindowEvent event;
 
-                        event.type = Window::Event::GainFocus;
+                        event.type = WindowEvent::GainFocus;
 
                         if(m_captureCursor)
                         {
@@ -366,9 +366,9 @@ namespace Bull
 
                     case FocusOut:
                     {
-                        Window::Event event;
+                        WindowEvent event;
 
-                        event.type = Window::Event::LostFocus;
+                        event.type = WindowEvent::LostFocus;
 
                         if(m_captureCursor)
                         {
@@ -382,13 +382,13 @@ namespace Bull
 
                     case ConfigureNotify:
                     {
-                        Window::Event event;
+                        WindowEvent event;
                         Vector2UI size(e.xconfigure.width, e.xconfigure.height);
                         Vector2I  position(e.xconfigure.x, e.xconfigure.y);
 
                         if(size != m_lastSize)
                         {
-                            event.type                = Window::Event::Resized;
+                            event.type                = WindowEvent::Resized;
                             event.windowResize.width  = size.x;
                             event.windowResize.height = size.y;
 
@@ -396,7 +396,7 @@ namespace Bull
                         }
                         else
                         {
-                            event.type         = Window::Event::Moved;
+                            event.type         = WindowEvent::Moved;
                             event.windowMove.x = position.x;
                             event.windowMove.y = position.y;
                         }
@@ -407,9 +407,9 @@ namespace Bull
 
                     case EnterNotify:
                     {
-                        Window::Event event;
+                        WindowEvent event;
 
-                        event.type = Window::Event::MouseEnter;
+                        event.type = WindowEvent::MouseEnter;
 
                         pushEvent(event);
                     }
@@ -417,9 +417,9 @@ namespace Bull
 
                     case LeaveNotify:
                     {
-                        Window::Event event;
+                        WindowEvent event;
 
-                        event.type = Window::Event::MouseLeave;
+                        event.type = WindowEvent::MouseLeave;
 
                         pushEvent(event);
                     }
@@ -657,7 +657,7 @@ namespace Bull
             /// Nothing
         }
 
-        void WindowImplXlib::open(const VideoMode& mode, const String& title, Uint32 style)
+        void WindowImplXlib::open(const VideoMode& mode, const String& title, Uint32 WindowStyle)
         {
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
@@ -690,10 +690,10 @@ namespace Bull
                 throw RuntimeError("Failed to create window");
             }
 
-            initialize(title, style);
+            initialize(title, WindowStyle);
         }
 
-        void WindowImplXlib::open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi)
+        void WindowImplXlib::open(unsigned int width, unsigned int height, const String& title, Uint32 WindowStyle, XVisualInfo* vi)
         {
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
@@ -724,47 +724,47 @@ namespace Bull
                 throw RuntimeError("Failed to create window");
             }
 
-            initialize(title, style);
+            initialize(title, WindowStyle);
         }
 
-        void WindowImplXlib::initialize(const String& title, Uint32 style)
+        void WindowImplXlib::initialize(const String& title, Uint32 WindowStyle)
         {
             setProtocols();
 
             setTitle(title);
 
-            if(style != Window::Style::Fullscreen)
+            if(WindowStyle != Window::WindowStyle::Fullscreen)
             {
                 XAtom hintsAtom = m_display->getAtom("_MOTIF_WM_HINTS", false);
                 if(hintsAtom)
                 {
                     WMHints hints;
 
-                    if(style != Window::Style::None)
+                    if(WindowStyle != Window::WindowStyle::None)
                     {
                         hints.decorations |= WMHints::Decor_Menu | WMHints::Decor_Title;
                         hints.functions   |= WMHints::Function_Move;
                     }
 
-                    if(style & Window::Style::Resizable)
+                    if(WindowStyle & Window::WindowStyle::Resizable)
                     {
                         hints.decorations |= WMHints::Decor_ResizeH;
                         hints.functions   |= WMHints::Function_Resize;
                     }
 
-                    if(style & Window::Style::Minimizable)
+                    if(WindowStyle & Window::WindowStyle::Minimizable)
                     {
                         hints.decorations |= WMHints::Decor_Minimize;
                         hints.functions   |= WMHints::Function_Minimize;
                     }
 
-                    if(style & Window::Style::Maximizable)
+                    if(WindowStyle & Window::WindowStyle::Maximizable)
                     {
                         hints.decorations |= WMHints::Decor_Maximize;
                         hints.functions   |= WMHints::Function_Maximize;
                     }
 
-                    if(style & Window::Style::Closable)
+                    if(WindowStyle & Window::WindowStyle::Closable)
                     {
                         hints.decorations |= 0;
                         hints.functions   |= WMHints::Function_Close;
@@ -783,7 +783,7 @@ namespace Bull
 
             m_lastSize = getSize();
 
-            setVisible(style & Window::Style::Visible);
+            setVisible(WindowStyle & Window::WindowStyle::Visible);
         }
 
         void WindowImplXlib::setProtocols()

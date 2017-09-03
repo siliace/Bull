@@ -13,11 +13,11 @@ namespace Bull
              *
              * \param mode
              * \param title
-             * \param style
+             * \param WindowStyle
              * \param settings
              *
              */
-            RenderWindowImplWin32(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+            RenderWindowImplWin32(const VideoMode& mode, const String& title, Uint32 WindowStyle, const ContextSettings& settings);
         };
     }
 }

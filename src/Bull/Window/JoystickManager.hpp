@@ -29,7 +29,7 @@ namespace Bull
              * \param eventQueue The event queue to fill
              *
              */
-            void processEvents(std::queue<Window::Event>& eventQueue);
+            void processEvents(std::queue<WindowEvent>& eventQueue);
 
             /*! \brief Enable or disable the key repeat
              *
@@ -81,7 +81,7 @@ namespace Bull
              * \param eventQueue The event queue to fill
              *
              */
-            void processJoystick(Uint8 joystick, std::queue<Window::Event>& eventQueue);
+            void processJoystick(Uint8 joystick, std::queue<WindowEvent>& eventQueue);
 
             bool                                             m_keyrepeat;
             float                                            m_threshold;

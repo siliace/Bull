@@ -23,10 +23,10 @@ namespace Bull
              *
              * \param mode
              * \param title
-             * \param style
+             * \param WindowStyle
              *
              */
-            WindowImplXCB(const VideoMode& mode, const String& title, Uint32 style);
+            WindowImplXCB(const VideoMode& mode, const String& title, Uint32 WindowStyle);
 
             /*! \brief Destructor
              *

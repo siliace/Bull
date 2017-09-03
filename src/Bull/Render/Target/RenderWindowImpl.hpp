@@ -15,13 +15,13 @@ namespace Bull
              *
              * \param mode     The VideoMode to use to create the window
              * \param title    The title of the window
-             * \param style    The style to use to create the window
+             * \param WindowStyle    The WindowStyle to use to create the window
              * \param settings Settings to use to create the OpenGL context
              *
              * \return Return the created instance
              *
              */
-            static WindowImpl* createInstance(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+            static WindowImpl* createInstance(const VideoMode& mode, const String& title, Uint32 WindowStyle, const ContextSettings& settings);
 
             /*! \brief Destructor
              *

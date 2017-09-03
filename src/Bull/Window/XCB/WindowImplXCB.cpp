@@ -4,7 +4,7 @@ namespace Bull
 {
     namespace prv
     {
-        WindowImplXCB::WindowImplXCB(const VideoMode &mode, const String &title, Uint32 style) :
+        WindowImplXCB::WindowImplXCB(const VideoMode &mode, const String &title, Uint32 WindowStyle) :
             m_window(0)
         {
             Uint32 parameters[2];

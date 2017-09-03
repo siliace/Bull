@@ -24,23 +24,23 @@ namespace Bull
          *
          * \param mode     The VideoMode
          * \param title    The title of the window
-         * \param style    The window decorations
+         * \param WindowStyle    The window decorations
          * \param settings Settings to use to create the OpenGL context
          *
          */
-        RenderWindow(const VideoMode& mode, const String& title, Uint32 style = Style::Default, const ContextSettings& settings = ContextSettings::Best);
+        RenderWindow(const VideoMode& mode, const String& title, Uint32 WindowStyle = WindowStyle::Default, const ContextSettings& settings = ContextSettings::Best);
 
         /*! \brief Open the window. If a window was already opened, its closed
          *
          * \param mode     The VideoMode
          * \param title    The title of the window
-         * \param style    The window decorations
+         * \param WindowStyle    The window decorations
          * \param settings Settings to use to create the OpenGL context
          *
          * \return Return true if the window was open successfully, false otherwise
          *
          */
-        bool open(const VideoMode& mode, const String& title, Uint32 style = Style::Default, const ContextSettings& settings = ContextSettings::Best);
+        bool open(const VideoMode& mode, const String& title, Uint32 WindowStyle = WindowStyle::Default, const ContextSettings& settings = ContextSettings::Best);
 
         /*! \brief Display what has been rendered so far
          *

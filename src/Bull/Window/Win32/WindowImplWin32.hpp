@@ -42,14 +42,14 @@ namespace Bull
              */
             static Keyboard::Key convertVKToBullkey(WPARAM vkey);
 
-            /*! \brief Convert a Bull::VideoStyle to a WS
+            /*! \brief Convert a Bull::VideoWindowStyle to a WS
              *
-             * \param style The Bull::VideoStyle to convert
+             * \param WindowStyle The Bull::VideoWindowStyle to convert
              *
              * \return Return the WS equivalent
              *
              */
-            static DWORD computeStyle(Uint32 style);
+            static DWORD computeWindowStyle(Uint32 WindowStyle);
 
         public:
 
@@ -57,10 +57,10 @@ namespace Bull
              *
              * \param mode The VideoMode to use
              * \param title The title to use in the window
-             * \param style The window decoration
+             * \param WindowStyle The window decoration
              *
              */
-            WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style);
+            WindowImplWin32(const VideoMode& mode, const String& title, Uint32 WindowStyle);
 
             /*! \brief Destructor
              *

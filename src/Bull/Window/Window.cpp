@@ -10,26 +10,26 @@ namespace Bull
         return s_fullscreen;
     }
 
-    Window::Window(const VideoMode& mode, const String& title, Uint32 style)
+    Window::Window(const VideoMode& mode, const String& title, Uint32 WindowStyle)
     {
-        open(mode, title, style);
+        open(mode, title, WindowStyle);
     }
 
-    bool Window::open(const VideoMode& mode, const String& title, Uint32 style)
+    bool Window::open(const VideoMode& mode, const String& title, Uint32 WindowStyle)
     {
         if(isOpen())
         {
             close();
         }
 
-        if(style == Style::Fullscreen && s_fullscreen)
+        if(WindowStyle == WindowStyle::Fullscreen && s_fullscreen)
         {
-            style = Style::Default;
+            WindowStyle = WindowStyle::Default;
         }
 
-        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style));
+        m_impl.reset(prv::WindowImpl::createInstance(mode, title, WindowStyle));
 
-        if(style == Style::Fullscreen)
+        if(WindowStyle == WindowStyle::Fullscreen)
         {
             enableFullscreen();
         }
@@ -70,7 +70,7 @@ namespace Bull
         m_impl.reset();
     }
 
-    bool Window::pollEvent(Event& e)
+    bool Window::pollEvent(WindowEvent& e)
     {
         if(m_impl)
         {
@@ -87,9 +87,9 @@ namespace Bull
         return false;
     }
 
-    Window::Event Window::nextEvent()
+    WindowEvent Window::nextEvent()
     {
-        Window::Event e;
+        WindowEvent e;
 
         if(m_impl)
         {
@@ -374,9 +374,9 @@ namespace Bull
         return m_impl;
     }
 
-    void Window::filterEvent(const Event& e)
+    void Window::filterEvent(const WindowEvent& e)
     {
-        if(e.type == Event::Resized)
+        if(e.type == WindowEvent::Resized)
         {
             onResize();
         }

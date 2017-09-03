@@ -12,6 +12,8 @@ target_sources(bull-window
             ${BULL_SRC_WINDOW}/VideoMode.cpp
             ${BULL_INC_WINDOW}/Window.hpp
             ${BULL_SRC_WINDOW}/Window.cpp
+            ${BULL_INC_WINDOW}/WindowEvent.hpp
+            ${BULL_INC_WINDOW}/WindowStyle.hpp
         PRIVATE
             ${BULL_SRC_WINDOW}/CursorHandler.hpp
             ${BULL_SRC_WINDOW}/CursorImpl.cpp

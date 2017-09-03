@@ -5,7 +5,7 @@ namespace Bull
 {
     namespace prv
     {
-        RenderWindowImplXlib::RenderWindowImplXlib(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+        RenderWindowImplXlib::RenderWindowImplXlib(const VideoMode& mode, const String& title, Uint32 WindowStyle, const ContextSettings& settings)
         {
             XVisualInfo*      vi;
             GLXFBConfig       config;
@@ -15,7 +15,7 @@ namespace Bull
 
             vi = glXGetVisualFromFBConfig(display->getHandler(), config);
 
-            open(mode.width, mode.height, title, style, vi);
+            open(mode.width, mode.height, title, WindowStyle, vi);
         }
     }
 }
