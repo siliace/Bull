@@ -1,6 +1,7 @@
 if(BULL_OS_WINDOWS)
     add_subdirectory(Win32)
 else()
+    add_subdirectory(Unix)
     add_subdirectory(XCB)
     add_subdirectory(Xlib)
 endif()

@@ -4,6 +4,7 @@
 
 #include <Bull/Core/FileSystem/Unix/FileImplUnix.hpp>
 #include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/Support/Unix/DateHelper.hpp>
 
 namespace Bull
 {
@@ -11,7 +12,7 @@ namespace Bull
     {
         bool FileImplUnix::create(const String& name)
         {
-            int handler = ::open(name.getBuffer(), O_CREAT | O_TRUNC | O_EXCL, S_IRWXU);
+            int handler = ::open64(name.getBuffer(), O_CREAT | O_TRUNC | O_EXCL, S_IRWXU);
 
             if(handler == -1)
             {
@@ -112,42 +113,20 @@ namespace Bull
 
         Date FileImplUnix::getLastAccessDate() const
         {
-            Date   lastAccess;
             struct stat64 info;
-            struct tm* sysDate;
 
             fstat64(m_handler, &info);
-            sysDate = localtime(&info.st_atim.tv_sec);
 
-            lastAccess.second    = sysDate->tm_sec;
-            lastAccess.minute    = sysDate->tm_min;
-            lastAccess.hour      = sysDate->tm_hour;
-            lastAccess.day       = sysDate->tm_mday;
-            lastAccess.dayOfWeek = Date::Day(sysDate->tm_wday);
-            lastAccess.month     = Date::Month(sysDate->tm_mon);
-            lastAccess.year      = 1900 + sysDate->tm_year;
-
-            return lastAccess;
+            return systemTimeToDate(localtime(&info.st_atim.tv_sec));
         }
 
         Date FileImplUnix::getLastWriteDate() const
         {
-            Date   lastWrite;
             struct stat64 info;
-            struct tm* sysDate;
 
             fstat64(m_handler, &info);
-            sysDate = localtime(&info.st_mtim.tv_sec);
 
-            lastWrite.second    = sysDate->tm_sec;
-            lastWrite.minute    = sysDate->tm_min;
-            lastWrite.hour      = sysDate->tm_hour;
-            lastWrite.day       = sysDate->tm_mday;
-            lastWrite.dayOfWeek = Date::Day(sysDate->tm_wday);
-            lastWrite.month     = Date::Month(sysDate->tm_mon);
-            lastWrite.year      = 1900 + sysDate->tm_year;
-
-            return lastWrite;
+            return systemTimeToDate(localtime(&info.st_mtim.tv_sec));
         }
 
         Uint64 FileImplUnix::getCursor() const

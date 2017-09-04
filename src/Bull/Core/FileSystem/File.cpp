@@ -80,7 +80,7 @@ namespace Bull
 
     bool File::isOpen() const
     {
-        return m_impl.get() != nullptr;
+        return m_impl != nullptr;
     }
 
     void File::close()

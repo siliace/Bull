@@ -472,7 +472,7 @@ namespace Bull
 
             if(m_captureCursor)
             {
-                bool grabbed = false;
+                bool grabbed;
 
                 do
                 {
