@@ -347,7 +347,7 @@ namespace Bull
 
                         if(m_captureCursor)
                         {
-                            bool grabbed = false;
+                            bool grabbed;
 
                             do
                             {
@@ -499,7 +499,7 @@ namespace Bull
 
         Vector2I WindowImplXlib::getPosition() const
         {
-            ::Window root, child;
+            XWindow root, child;
             int localX, localY, x, y;
             unsigned int width, height, border, depth;
 
@@ -727,44 +727,44 @@ namespace Bull
             initialize(title, WindowStyle);
         }
 
-        void WindowImplXlib::initialize(const String& title, Uint32 WindowStyle)
+        void WindowImplXlib::initialize(const String& title, Uint32 style)
         {
             setProtocols();
 
             setTitle(title);
 
-            if(WindowStyle != Window::WindowStyle::Fullscreen)
+            if(style != WindowStyle::Fullscreen)
             {
                 XAtom hintsAtom = m_display->getAtom("_MOTIF_WM_HINTS", false);
                 if(hintsAtom)
                 {
                     WMHints hints;
 
-                    if(WindowStyle != Window::WindowStyle::None)
+                    if(style != WindowStyle::None)
                     {
                         hints.decorations |= WMHints::Decor_Menu | WMHints::Decor_Title;
                         hints.functions   |= WMHints::Function_Move;
                     }
 
-                    if(WindowStyle & Window::WindowStyle::Resizable)
+                    if(style & WindowStyle::Resizable)
                     {
                         hints.decorations |= WMHints::Decor_ResizeH;
                         hints.functions   |= WMHints::Function_Resize;
                     }
 
-                    if(WindowStyle & Window::WindowStyle::Minimizable)
+                    if(style & WindowStyle::Minimizable)
                     {
                         hints.decorations |= WMHints::Decor_Minimize;
                         hints.functions   |= WMHints::Function_Minimize;
                     }
 
-                    if(WindowStyle & Window::WindowStyle::Maximizable)
+                    if(style & WindowStyle::Maximizable)
                     {
                         hints.decorations |= WMHints::Decor_Maximize;
                         hints.functions   |= WMHints::Function_Maximize;
                     }
 
-                    if(WindowStyle & Window::WindowStyle::Closable)
+                    if(style & WindowStyle::Closable)
                     {
                         hints.decorations |= 0;
                         hints.functions   |= WMHints::Function_Close;
@@ -783,7 +783,7 @@ namespace Bull
 
             m_lastSize = getSize();
 
-            setVisible(WindowStyle & Window::WindowStyle::Visible);
+            setVisible(style & WindowStyle::Visible);
         }
 
         void WindowImplXlib::setProtocols()
