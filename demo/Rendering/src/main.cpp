@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
             }
         }
 
-        window.clear();
+        window.clear(Color::Red);
 
         window.display();
     }
