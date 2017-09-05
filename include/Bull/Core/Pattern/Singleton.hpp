@@ -4,12 +4,13 @@
 #include <memory>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/NonMovable.hpp>
 #include <Bull/Core/Thread/Lock.hpp>
 
 namespace Bull
 {
     template<typename TChild>
-    class Singleton : public NonCopyable
+    class Singleton : public NonCopyable, public NonMovable
     {
     public:
 

@@ -20,7 +20,8 @@ namespace Bull
             {
                 for(unsigned int i = 0; i < Joystick::getCapabilities(joystick).countButtons; i++)
                 {
-                    buttons[i] = std::make_pair(Joystick::isButtonPressed(i, joystick), Clock());
+                    buttons[i].first = Joystick::isButtonPressed(i, joystick);
+                    buttons[i].second.restart();
                 }
 
                 for(unsigned int i = 0; i < Joystick::getCapabilities(joystick).countAxes; i++)

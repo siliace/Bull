@@ -24,7 +24,7 @@ namespace Bull
              * \param joystick The ID of the joystick
              *
              */
-            JoystickState(Uint8 joystick);
+            explicit JoystickState(Uint8 joystick);
 
             /*! \brief == operator override
              *

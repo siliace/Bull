@@ -6,6 +6,7 @@
 
 #include <Bull/Core/System/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/NonMovable.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
@@ -19,7 +20,7 @@ namespace Bull
 {
     namespace prv
     {
-        class WindowImpl : public NonCopyable
+        class WindowImpl : public NonCopyable, public NonMovable
         {
         public:
 
@@ -205,7 +206,7 @@ namespace Bull
              * \param visible True to show the cursor, false to hide
              *
              */
-            virtual void setMouseCursorVisible(bool visible = false) = 0;
+            virtual void setMouseCursorVisible(bool visible) = 0;
 
             /*! \brief Check whether the mouse cursor is visible
              *
@@ -246,8 +247,8 @@ namespace Bull
         private:
 
             std::queue<WindowEvent> m_events;         /*!< The event queue */
-            bool                      m_keyrepeat;      /*!< Does the key repeat is enable? */
-            Vector2I                  m_cursorPosition; /*!< The position of the cursor in the window */
+            bool                    m_keyrepeat;      /*!< Does the key repeat is enable? */
+            Vector2I                m_cursorPosition; /*!< The position of the cursor in the window */
         };
     }
 }
