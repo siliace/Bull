@@ -16,7 +16,7 @@ namespace Bull
 
         void JoystickManager::processEvents(std::queue<WindowEvent>& eventQueue)
         {
-            for(unsigned int i = 0; i < Joystick::Count; i++)
+            for(Uint8 i = 0; i < Joystick::Count; i++)
             {
                 processJoystick(i, eventQueue);
             }
