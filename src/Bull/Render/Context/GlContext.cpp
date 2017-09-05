@@ -235,12 +235,12 @@ namespace Bull
                     int flags;
                     gl::getIntegerv(GL_CONTEXT_FLAGS, &flags);
 
-                    if(flags && GL_CONTEXT_FLAG_DEBUG_BIT)
+                    if(flags & GL_CONTEXT_FLAG_DEBUG_BIT)
                     {
                         m_settings.flags |= ContextSettings::Debug;
                     }
 
-                    if(flags && GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT)
+                    if(flags & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT)
                     {
                         m_settings.flags |= ContextSettings::ForwardCompatible;
                     }
