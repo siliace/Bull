@@ -1,5 +1,5 @@
-#ifndef BULL_BUFFER_HPP
-#define BULL_BUFFER_HPP
+#ifndef BULL_CORE_MEMORY_ABSTRACTBUFFER_HPP
+#define BULL_CORE_MEMORY_ABSTRACTBUFFER_HPP
 
 #include <utility>
 
@@ -7,7 +7,7 @@
 
 namespace Bull
 {
-    struct BULL_CORE_API Buffer
+    struct BULL_CORE_API AbstractBuffer
     {
         /*! \brief Create the Buffer
          *
@@ -20,15 +20,14 @@ namespace Bull
 
         /*! \brief Fill the buffer
          *
-         * \param data    Data to insert in the Buffer
-         * \param size    The length of data
-         * \param offset  The offset of the data in the Buffer
-         * \param discard True to flush the Buffer before fill it
+         * \param data   Data to insert in the Buffer
+         * \param size   The length of data
+         * \param offset The offset of the data in the Buffer
          *
          * \return True if the buffer was filled successfully
          *
          */
-        virtual bool fill(const void* data, std::size_t size, std::size_t offset, bool discard) = 0;
+        virtual bool fill(const void* data, std::size_t size, std::size_t offset) = 0;
 
         /*! \brief Flush the Buffer
          *
@@ -49,4 +48,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_BUFFER_HPP
+#endif // BULL_CORE_MEMORY_ABSTRACTBUFFER_HPP

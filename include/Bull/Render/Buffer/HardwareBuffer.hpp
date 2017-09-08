@@ -3,7 +3,7 @@
 
 #include <utility>
 
-#include <Bull/Core/Memory/Buffer.hpp>
+#include <Bull/Core/Memory/AbstractBuffer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Export.hpp>
 
@@ -12,7 +12,7 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API HardwareBuffer : public NonCopyable, public ContextResource, public Buffer
+    class BULL_RENDER_API HardwareBuffer : public NonCopyable, public ContextResource, public AbstractBuffer
     {
     public:
 
@@ -59,15 +59,14 @@ namespace Bull
 
         /*! \brief Fill the buffer
          *
-         * \param data    Data to use to fill the buffer
-         * \param size    The size of data
-         * \param offset  The offset of the data in the buffer
-         * \param discard True to flush the buffer before fill it, false to keep the original content
+         * \param data   Data to use to fill the buffer
+         * \param size   The size of data
+         * \param offset The offset of the data in the buffer
          *
          * \return True if the buffer was filled successfully
          *
          */
-        bool fill(const void* data, std::size_t size, std::size_t offset = 0, bool discard = false) override;
+        bool fill(const void* data, std::size_t size, std::size_t offset = 0) override;
 
         /*! \brief Map data to a pointer
          *

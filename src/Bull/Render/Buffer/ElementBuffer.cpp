@@ -18,7 +18,7 @@ namespace Bull
     {
         if(HardwareBuffer::create(indices.size() * sizeof(unsigned int), usage))
         {
-            return fill(&indices[0], indices.size() * sizeof(unsigned int), 0, true);
+            return fill(&indices[0], indices.size() * sizeof(unsigned int), 0);
         }
 
         return false;

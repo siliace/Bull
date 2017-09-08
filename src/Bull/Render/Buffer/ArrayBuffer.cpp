@@ -18,7 +18,7 @@ namespace Bull
     {
         if(HardwareBuffer::create(vertices.size() * sizeof(Vertex), usage))
         {
-            return fill(&vertices[0], getCapacity(), 0, true);
+            return fill(&vertices[0], getCapacity(), 0);
         }
 
         return false;
