@@ -20,7 +20,7 @@ namespace Bull
         m_size(width, height),
         m_pixels(width * height * 4)
     {
-        for(unsigned int i = 0; i < m_pixels.size(); i += 4)
+        for(unsigned int i = 0; i < m_pixels.getSize(); i += 4)
         {
             m_pixels[i]     = color.red;
             m_pixels[i + 1] = color.green;
@@ -29,14 +29,14 @@ namespace Bull
         }
     }
 
-    Image::Image(const std::vector<Uint8>& pixels, const Vector2UI& size) :
+    Image::Image(const ByteArray& pixels, const Vector2UI& size) :
         m_size(size),
         m_pixels(pixels)
     {
         /// Nothing
     }
 
-    Image::Image(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height) :
+    Image::Image(const ByteArray& pixels, unsigned int width, unsigned int height) :
         Image(pixels, Vector2UI(width, height))
     {
         /// Nothing
@@ -52,12 +52,12 @@ namespace Bull
         return prv::ImageLoader::get()->loadFromStream(stream, m_pixels, m_size);
     }
 
-    bool Image::loadFromMemory(const void* data, std::size_t dataSize)
+    bool Image::loadFromMemory(const void* data, std::size_t length)
     {
-        return prv::ImageLoader::get()->loadFromMemory(data, dataSize, m_pixels, m_size);
+        return prv::ImageLoader::get()->loadFromMemory(data, length, m_pixels, m_size);
     }
 
-    bool Image::loadFromPixels(const std::vector<Uint8>& pixels, const Vector2UI& size)
+    bool Image::loadFromPixels(const ByteArray& pixels, const Vector2UI& size)
     {
         m_size   = size;
         m_pixels = pixels;
@@ -65,7 +65,7 @@ namespace Bull
         return true;
     }
 
-    bool Image::loadFromPixels(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height)
+    bool Image::loadFromPixels(const ByteArray& pixels, unsigned int width, unsigned int height)
     {
         return loadFromPixels(pixels, Vector2UI(width, height));
     }
@@ -97,7 +97,7 @@ namespace Bull
         return m_size;
     }
 
-    const std::vector<Uint8>& Image::getPixels() const
+    const ByteArray& Image::getPixels() const
     {
         return m_pixels;
     }
@@ -112,8 +112,8 @@ namespace Bull
         return prv::ImageLoader::get()->saveToStream(stream, format, m_pixels, m_size);
     }
 
-    bool Image::saveToSteam(void* data, std::size_t size, ImageFormat format) const
+    bool Image::saveToSteam(void* data, std::size_t length, ImageFormat format) const
     {
-        return prv::ImageLoader::get()->saveToMemory(data, size, format, m_pixels, m_size);
+        return prv::ImageLoader::get()->saveToMemory(data, length, format, m_pixels, m_size);
     }
 }

@@ -123,7 +123,7 @@ namespace Bull
                 {
                     if(byte != '\n')
                     {
-                        line += static_cast<char>(byte);
+                        line += String(static_cast<char>(byte));
                     }
                 }
                 else

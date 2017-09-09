@@ -39,7 +39,7 @@ namespace Bull
             std::memcpy(data, buffer->data, buffer->size);
         }
 
-        bool ImageLoader::loadFromPath(const Path& path, std::vector<Uint8>& pixels, Vector2UI& size) const
+        bool ImageLoader::loadFromPath(const Path& path, ByteArray& pixels, Vector2UI& size) const
         {
             int width, height, channels;
             unsigned char* buffer = stbi_load(path.toString().getBuffer(), &width, &height, &channels, STBI_rgb_alpha);
@@ -54,7 +54,7 @@ namespace Bull
                 if(size.x && size.y)
                 {
                     pixels.resize(size.x * size.y * 4);
-                    std::memcpy(&pixels[0], buffer, pixels.size());
+                    std::memcpy(&pixels[0], buffer, pixels.getSize());
                 }
 
                 stbi_image_free(buffer);
@@ -65,7 +65,7 @@ namespace Bull
             return false;
         }
 
-        bool ImageLoader::loadFromStream(InStream& stream, std::vector<Uint8>& pixels, Vector2UI& size) const
+        bool ImageLoader::loadFromStream(InStream& stream, ByteArray& pixels, Vector2UI& size) const
         {
             int width, height, channels;
             stbi_io_callbacks callbacks;
@@ -86,8 +86,8 @@ namespace Bull
 
                 if(size.x && size.y)
                 {
-                    pixels.reserve(size.x * size.y * 4);
-                    std::memcpy(&pixels[0], buffer, pixels.capacity());
+                    pixels.resize(size.x * size.y * 4);
+                    std::memcpy(&pixels[0], buffer, pixels.getSize());
                 }
 
                 stbi_image_free(buffer);
@@ -98,7 +98,7 @@ namespace Bull
             return false;
         }
 
-        bool ImageLoader::loadFromMemory(const void* data, std::size_t dataSize, std::vector<Uint8>& pixels, Vector2UI& size) const
+        bool ImageLoader::loadFromMemory(const void* data, std::size_t dataSize, ByteArray& pixels, Vector2UI& size) const
         {
             if(data && dataSize)
             {
@@ -114,8 +114,8 @@ namespace Bull
 
                     if(size.x && size.y)
                     {
-                        pixels.reserve(size.x * size.y * 4);
-                        std::memcpy(&pixels[0], buffer, pixels.capacity());
+                        pixels.resize(size.x * size.y * 4);
+                        std::memcpy(&pixels[0], buffer, pixels.getSize());
                     }
 
                     stbi_image_free(buffer);
@@ -129,7 +129,7 @@ namespace Bull
             return false;
         }
 
-        bool ImageLoader::saveToPath(const Path& path, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveToPath(const Path& path, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const
         {
             switch(format)
             {
@@ -143,7 +143,7 @@ namespace Bull
             return false;
         }
 
-        bool ImageLoader::saveToStream(OutStream& outStream, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveToStream(OutStream& outStream, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const
         {
             switch(format)
             {
@@ -157,7 +157,7 @@ namespace Bull
             return false;
         }
 
-        bool ImageLoader::saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const
         {
             switch(format)
             {
@@ -171,7 +171,7 @@ namespace Bull
             return false;
         }
 
-        bool ImageLoader::saveBmpToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveBmpToPath(const String& path, const ByteArray& pixels, const Vector2UI& size) const
         {
             String fullPath = path;
 
@@ -183,12 +183,12 @@ namespace Bull
             return stbi_write_bmp(fullPath.getBuffer(), size.x, size.y, 4, &pixels[0]) != 0;
         }
 
-        bool ImageLoader::saveBmpToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveBmpToStream(OutStream& stream, const ByteArray& pixels, const Vector2UI& size) const
         {
             return stbi_write_bmp_to_func(&ImageLoader::writeToStream, &stream, size.x, size.y, 4, &pixels[0]) != 0;
         }
 
-        bool ImageLoader::saveBmpToMemory(void* data, std::size_t dataSize, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveBmpToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const
         {
             Buffer buffer;
             buffer.data = data;
@@ -197,7 +197,7 @@ namespace Bull
             return stbi_write_bmp_to_func(&ImageLoader::writeToMemory, &buffer, size.x, size.y, 4, &pixels[0]) != 0;
         }
 
-        bool ImageLoader::savePngToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::savePngToPath(const String& path, const ByteArray& pixels, const Vector2UI& size) const
         {
             String fullPath = path;
 
@@ -209,12 +209,12 @@ namespace Bull
             return stbi_write_png(fullPath.getBuffer(), size.x, size.y, 4, &pixels[0], 0) != 0;
         }
 
-        bool ImageLoader::savePngToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::savePngToStream(OutStream& stream, const ByteArray& pixels, const Vector2UI& size) const
         {
             return stbi_write_png_to_func(&ImageLoader::writeToStream, &stream, size.x, size.y, 4, &pixels[0], 0) != 0;
         }
 
-        bool ImageLoader::savePngToMemory(void* data, std::size_t dataSize, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::savePngToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const
         {
             Buffer buffer;
             buffer.data = data;
@@ -223,7 +223,7 @@ namespace Bull
             return stbi_write_png_to_func(&ImageLoader::writeToMemory, &buffer, size.x, size.y, 4, &pixels[0], 0) != 0;
         }
 
-        bool ImageLoader::saveTgaToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveTgaToPath(const String& path, const ByteArray& pixels, const Vector2UI& size) const
         {
             String fullPath = path;
 
@@ -235,12 +235,12 @@ namespace Bull
             return stbi_write_tga(fullPath.getBuffer(), size.x, size.y, 4, &pixels[0]) != 0;
         }
 
-        bool ImageLoader::saveTgaToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveTgaToStream(OutStream& stream, const ByteArray& pixels, const Vector2UI& size) const
         {
             return stbi_write_tga_to_func(&ImageLoader::writeToStream, &stream, size.x, size.y, 4, &pixels[0]) != 0;
         }
 
-        bool ImageLoader::saveTgaToMemory(void* data, std::size_t dataSize, const std::vector<Uint8>& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveTgaToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const
         {
             Buffer buffer;
             buffer.data = data;

@@ -1,6 +1,8 @@
 #ifndef BULL_IMAGELOADER_HPP
 #define BULL_IMAGELOADER_HPP
 
+#include <Bull/Core/Pattern/Singleton.hpp>
+
 #include <Bull/Utility/Image/AbstractImageLoader.hpp>
 
 namespace Bull
@@ -74,7 +76,7 @@ namespace Bull
              * \return True if the image was loaded successfully
              *
              */
-            bool loadFromPath(const Path& path, std::vector<Uint8>& pixels, Vector2UI& size) const override;
+            bool loadFromPath(const Path& path, ByteArray& pixels, Vector2UI& size) const override;
 
             /*! \brief Load an image
              *
@@ -85,7 +87,7 @@ namespace Bull
              * \return True if the image was loaded successfully
              *
              */
-            bool loadFromStream(InStream& stream, std::vector<Uint8>& pixels, Vector2UI& size) const override;
+            bool loadFromStream(InStream& stream, ByteArray& pixels, Vector2UI& size) const override;
 
             /*! \brief Load an image
              *
@@ -97,7 +99,7 @@ namespace Bull
              * \return True if the image was loaded successfully
              *
              */
-            bool loadFromMemory(const void* data, std::size_t dataSize, std::vector<Uint8>& pixels, Vector2UI& size) const override;
+            bool loadFromMemory(const void* data, std::size_t dataSize, ByteArray& pixels, Vector2UI& size) const override;
 
             /*! \brief Save an image
              *
@@ -109,7 +111,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveToPath(const Path& path, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
+            bool saveToPath(const Path& path, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const override;
 
             /*! \brief Save an image
              *
@@ -121,7 +123,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveToStream(OutStream& outStream, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
+            bool saveToStream(OutStream& outStream, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const override;
 
             /*! \brief Save an image
              *
@@ -134,7 +136,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const override;
+            bool saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const override;
 
         private:
 
@@ -147,7 +149,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveBmpToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
+            bool saveBmpToPath(const String& path, const ByteArray& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .bmp stream
              *
@@ -159,7 +161,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveBmpToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
+            bool saveBmpToStream(OutStream& stream, const ByteArray& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .bmp to a memory area
              *
@@ -172,7 +174,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveBmpToMemory(void* data, std::size_t dataSize, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
+            bool saveBmpToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .png file
              *
@@ -183,7 +185,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool savePngToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
+            bool savePngToPath(const String& path, const ByteArray& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .png stream
              *
@@ -195,7 +197,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool savePngToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
+            bool savePngToStream(OutStream& stream, const ByteArray& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .png to a memory area
              *
@@ -208,7 +210,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool savePngToMemory(void* data, std::size_t dataSize, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
+            bool savePngToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .tga file
              *
@@ -219,7 +221,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveTgaToPath(const String& path, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
+            bool saveTgaToPath(const String& path, const ByteArray& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .tga stream
              *
@@ -231,7 +233,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveTgaToStream(OutStream& stream, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
+            bool saveTgaToStream(OutStream& stream, const ByteArray& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .tga to a memory area
              *
@@ -244,7 +246,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveTgaToMemory(void* data, std::size_t dataSize, const std::vector<Uint8>& pixels, const Vector2UI& size) const;
+            bool saveTgaToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const;
         };
     }
 }

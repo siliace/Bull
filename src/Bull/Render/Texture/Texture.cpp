@@ -95,7 +95,7 @@ namespace Bull
         return false;
     }
 
-    bool Texture::loadFromPixels(const std::vector<Uint8>& pixels, const Vector2UI& size)
+    bool Texture::loadFromPixels(const ByteArray& pixels, const Vector2UI& size)
     {
         if(create(size))
         {
@@ -112,7 +112,7 @@ namespace Bull
         return false;
     }
 
-    bool Texture::loadFromPixels(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height)
+    bool Texture::loadFromPixels(const ByteArray& pixels, unsigned int width, unsigned int height)
     {
         return loadFromPixels(pixels, Vector2UI(width, height));
     }
@@ -188,7 +188,7 @@ namespace Bull
     {
         if(m_id)
         {
-            std::vector<Uint8> pixels(m_size.x * m_size.y * 4);
+            ByteArray pixels(m_size.x * m_size.y * 4);
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
             gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);

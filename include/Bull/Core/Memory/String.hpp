@@ -73,7 +73,7 @@ namespace Bull
         template <typename T, typename = std::enable_if_t<std::is_arithmetic<T>::value>>
         static String number(T number)
         {
-            return std::to_string(number).c_str();
+            return String(std::to_string(number).c_str());
         };
 
     private:
@@ -99,7 +99,7 @@ namespace Bull
          * \param character The character to put in the string
          *
          */
-        String(char character);
+        explicit String(char character);
 
         /*! \brief Constructor
          *
@@ -211,10 +211,10 @@ namespace Bull
 
         /*! \brief Clear the string
          *
-         * \param clearMemory True to reset capacity, false to keep
+         * \param keepMemory True to reset capacity, false to keep
          *
          */
-        void clear(bool clearMemory = false);
+        void clear(bool keepMemory = false);
 
         /*! \brief Set the size of the string
          *

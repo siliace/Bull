@@ -1,7 +1,7 @@
 #include <cstring>
 
 #include <Bull/Core/Exception/OutOfRange.hpp>
-#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Memory/RangeCheck.hpp>
 
 namespace Bull
 {
@@ -27,7 +27,7 @@ namespace Bull
 
     char String::intToChar(int integer)
     {
-        return integer + '0';
+        return static_cast<char>(integer) + '0';
     }
 
     int String::charToInt(char character)
@@ -179,7 +179,7 @@ namespace Bull
             }
             else
             {
-                word += m_sharedString->m_string[i];
+                word += String(m_sharedString->m_string[i]);
             }
         }
 
@@ -254,9 +254,9 @@ namespace Bull
         return (*this);
     }
 
-    void String::clear(bool clearMemory)
+    void String::clear(bool keepMemory)
     {
-        if(clearMemory)
+        if(keepMemory)
         {
             std::memset(&m_sharedString->m_string[0], 0, getCapacity());
             m_sharedString->m_size = m_sharedString->m_capacity;
@@ -321,20 +321,14 @@ namespace Bull
 
     char& String::operator[](std::size_t index)
     {
-        if(index >= getCapacity())
-        {
-            throw OutOfRange("String::operator[] Index out of range", 0, getCapacity(), index);
-        }
+        RangeCheck(index, getCapacity());
 
         return m_sharedString->m_string[index];
     }
 
     const char& String::operator[](std::size_t index) const
     {
-        if(index >= getCapacity())
-        {
-            throw OutOfRange("String::operator[] Index out of range", 0, getCapacity(), index);
-        }
+        RangeCheck(index, getCapacity());
 
         return m_sharedString->m_string[index];
     }

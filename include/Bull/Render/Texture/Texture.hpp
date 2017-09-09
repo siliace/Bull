@@ -130,7 +130,7 @@ namespace Bull
          * \return Return true if the texture was loaded successfully, false otherwise
          *
          */
-        bool loadFromPixels(const std::vector<Uint8>& pixels, const Vector2UI& size);
+        bool loadFromPixels(const ByteArray& pixels, const Vector2UI& size);
 
         /*! \brief Load a texture form a pixels array
          *
@@ -141,7 +141,7 @@ namespace Bull
          * \return Return true if the texture was loaded successfully, false otherwise
          *
          */
-        bool loadFromPixels(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height);
+        bool loadFromPixels(const ByteArray& pixels, unsigned int width, unsigned int height);
 
         /*! \brief Bind the texture
          *

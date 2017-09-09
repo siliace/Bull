@@ -6,6 +6,7 @@
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
+#include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/System/Integer.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
@@ -31,7 +32,7 @@ namespace Bull
          * \param color The color to fill the Image
          *
          */
-        Image(const Vector2UI& size, const Color& color = Color::Black);
+        explicit Image(const Vector2UI& size, const Color& color = Color::Black);
 
         /*! \brief Constructor
          *
@@ -48,7 +49,7 @@ namespace Bull
          * \param size   The size of the Image
          *
          */
-        Image(const std::vector<Uint8>& pixels, const Vector2UI& size);
+        Image(const ByteArray& pixels, const Vector2UI& size);
 
         /*! \brief Constructor
          *
@@ -57,7 +58,7 @@ namespace Bull
          * \param height The height of the Image to create
          *
          */
-        Image(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height);
+        Image(const ByteArray& pixels, unsigned int width, unsigned int height);
 
         /*! \brief Load an Image from a file
          *
@@ -95,7 +96,7 @@ namespace Bull
          * \return True if the Image was loaded successfully
          *
          */
-        bool loadFromPixels(const std::vector<Uint8>& pixels, const Vector2UI& size);
+        bool loadFromPixels(const ByteArray& pixels, const Vector2UI& size);
 
         /*! \brief Load an Image from pixels
          *
@@ -106,7 +107,7 @@ namespace Bull
          * \return True if the Image was loaded successfully
          *
          */
-        bool loadFromPixels(const std::vector<Uint8>& pixels, unsigned int width, unsigned int height);
+        bool loadFromPixels(const ByteArray& pixels, unsigned int width, unsigned int height);
 
         /*! \brief Set the color of a pixel
          *
@@ -139,7 +140,7 @@ namespace Bull
          * \return Return pixels
          *
          */
-        const std::vector<Uint8>& getPixels() const;
+        const ByteArray& getPixels() const;
 
         /*! \brief Save the Image
          *
@@ -174,8 +175,8 @@ namespace Bull
 
     private:
 
-        Vector2UI            m_size;
-        std::vector<Uint8>   m_pixels;
+        Vector2UI m_size;
+        ByteArray m_pixels;
     };
 }
 

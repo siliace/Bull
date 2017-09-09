@@ -6,7 +6,7 @@
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
-#include <Bull/Core/Pattern/Singleton.hpp>
+#include <Bull/Core/Memory/ByteArray.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -26,7 +26,7 @@ namespace Bull
          * \return True if the image was loaded successfully
          *
          */
-        virtual bool loadFromPath(const Path& path, std::vector<Uint8>& pixels, Vector2UI& size) const = 0;
+        virtual bool loadFromPath(const Path& path, ByteArray& pixels, Vector2UI& size) const = 0;
 
         /*! \brief Load an image
          *
@@ -37,7 +37,7 @@ namespace Bull
          * \return True if the image was loaded successfully
          *
          */
-        virtual bool loadFromStream(InStream& stream, std::vector<Uint8>& pixels, Vector2UI& size) const = 0;
+        virtual bool loadFromStream(InStream& stream, ByteArray& pixels, Vector2UI& size) const = 0;
 
         /*! \brief Load an image
          *
@@ -49,7 +49,7 @@ namespace Bull
          * \return True if the image was loaded successfully
          *
          */
-        virtual bool loadFromMemory(const void* data, std::size_t dataSize, std::vector<Uint8>& pixels, Vector2UI& size) const = 0;
+        virtual bool loadFromMemory(const void* data, std::size_t dataSize, ByteArray& pixels, Vector2UI& size) const = 0;
 
         /*! \brief Save an image
          *
@@ -61,7 +61,7 @@ namespace Bull
          * \return True if the image was saved successfully
          *
          */
-        virtual bool saveToPath(const Path& path, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
+        virtual bool saveToPath(const Path& path, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const = 0;
 
         /*! \brief Save an image
          *
@@ -73,7 +73,7 @@ namespace Bull
          * \return True if the image was saved successfully
          *
          */
-        virtual bool saveToStream(OutStream& outStream, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
+        virtual bool saveToStream(OutStream& outStream, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const = 0;
 
         /*! \brief Save an image
          *
@@ -86,7 +86,7 @@ namespace Bull
          * \return True if the image was saved successfully
          *
          */
-        virtual bool saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const std::vector<Uint8>& pixels, const Vector2UI& size) const = 0;
+        virtual bool saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const = 0;
     };
 }
 
