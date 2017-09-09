@@ -4,12 +4,13 @@
 #include <vector>
 
 #include <Bull/Core/Export.hpp>
+#include <Bull/Core/Memory/AbstractBuffer.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/System/Integer.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API ByteArray
+    class BULL_CORE_API ByteArray : public AbstractBuffer
     {
         using Container = std::vector<Uint8>;
 
@@ -35,6 +36,26 @@ namespace Bull
          */
         ByteArray(std::size_t size, Uint8 value);
 
+        /*! \brief Create the ByteArray
+         *
+         * \param capacity The capacity of the ByteArray to create
+         *
+         * \return True if the ByteArray was created successfully
+         *
+         */
+        bool create(Index capacity) override;
+
+        /*! \brief Fill the buffer
+         *
+         * \param data   Data to insert in the Buffer
+         * \param size   The length of data
+         * \param offset The offset of the data in the Buffer
+         *
+         * \return True if the buffer was filled successfully
+         *
+         */
+        bool fill(const void* data, Index size, Index offset) override;
+
         /*! \brief Resize the ByteArray
          *
          * \param size The size
@@ -44,14 +65,15 @@ namespace Bull
          */
         ByteArray& resize(std::size_t size);
 
-        /*! \brief Clear the array
-         *
-         * \param keepMemory True to delete the memory
-         *
-         * \return This
+        /*! \brief Flush the Buffer
          *
          */
-        ByteArray& clear(bool keepMemory = false);
+        void flush() override;
+
+        /*! \brief Destroy the Buffer
+         *
+         */
+        void destroy() override;
 
         /*! \brief Tell whether the ByteArray is empty
          *
@@ -60,12 +82,12 @@ namespace Bull
          */
         bool isEmpty() const;
 
-        /*! \brief Get the size of the ByteArray
+        /*! \brief Get the capacity of the ByteArray
          *
-         * \return The size
+         * \return The capacity
          *
          */
-        std::size_t getSize() const;
+        Index getCapacity() const override;
 
         /*! \brief Compare two ByteArray
          *

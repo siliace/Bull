@@ -44,7 +44,7 @@ namespace Bull
             int width, height, channels;
             unsigned char* buffer = stbi_load(path.toString().getBuffer(), &width, &height, &channels, STBI_rgb_alpha);
 
-            pixels.clear();
+            pixels.destroy();
 
             if(buffer)
             {
@@ -54,7 +54,7 @@ namespace Bull
                 if(size.x && size.y)
                 {
                     pixels.resize(size.x * size.y * 4);
-                    std::memcpy(&pixels[0], buffer, pixels.getSize());
+                    std::memcpy(&pixels[0], buffer, pixels.getCapacity());
                 }
 
                 stbi_image_free(buffer);
@@ -73,7 +73,7 @@ namespace Bull
             callbacks.skip = &ImageLoader::skip;
             callbacks.eof  = &ImageLoader::eof;
 
-            pixels.clear();
+            pixels.destroy();
 
             stream.setCursor(0);
 
@@ -87,7 +87,7 @@ namespace Bull
                 if(size.x && size.y)
                 {
                     pixels.resize(size.x * size.y * 4);
-                    std::memcpy(&pixels[0], buffer, pixels.getSize());
+                    std::memcpy(&pixels[0], buffer, pixels.getCapacity());
                 }
 
                 stbi_image_free(buffer);
@@ -105,7 +105,7 @@ namespace Bull
                 int width, height, channels;
                 unsigned char* buffer = stbi_load_from_memory(static_cast<const unsigned char*>(data), dataSize, &width, &height, &channels, STBI_rgb_alpha);
 
-                pixels.clear();
+                pixels.destroy();
 
                 if(buffer)
                 {
@@ -115,7 +115,7 @@ namespace Bull
                     if(size.x && size.y)
                     {
                         pixels.resize(size.x * size.y * 4);
-                        std::memcpy(&pixels[0], buffer, pixels.getSize());
+                        std::memcpy(&pixels[0], buffer, pixels.getCapacity());
                     }
 
                     stbi_image_free(buffer);

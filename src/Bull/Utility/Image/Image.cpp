@@ -20,7 +20,7 @@ namespace Bull
         m_size(width, height),
         m_pixels(width * height * 4)
     {
-        for(unsigned int i = 0; i < m_pixels.getSize(); i += 4)
+        for(unsigned int i = 0; i < m_pixels.getCapacity(); i += 4)
         {
             m_pixels[i]     = color.red;
             m_pixels[i + 1] = color.green;
