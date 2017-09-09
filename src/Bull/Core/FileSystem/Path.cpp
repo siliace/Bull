@@ -38,6 +38,51 @@ namespace Bull
         return m_path != right.toString();
     }
 
+    String Path::getPath() const
+    {
+        if(isFile())
+        {
+            int index = toString().last(Separator);
+
+            if(index)
+            {
+                return toString().subString(0, static_cast<Index>(index));
+            }
+        }
+
+        return toString();
+    }
+
+    String Path::getFileName() const
+    {
+        if(isFile())
+        {
+            int index = toString().last(Separator);
+
+            if(index)
+            {
+                return toString().subString(static_cast<Index>(index));
+            }
+        }
+
+        return toString();
+    }
+
+    String Path::getExtension() const
+    {
+        if(isFile())
+        {
+            int index = toString().last('.');
+
+            if(index)
+            {
+                return toString().subString(static_cast<Index>(index));
+            }
+        }
+
+        return toString();
+    }
+
     bool Path::isFile() const
     {
         return m_isFile;

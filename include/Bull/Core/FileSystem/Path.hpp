@@ -9,6 +9,14 @@ namespace Bull
     {
     public:
 
+        #ifdef BULL_OS_WINDOWS
+            static constexpr char Separator = '\\';
+        #else
+            static constexpr char Separator = '/';
+        #endif
+
+    public:
+
         /*! \brief Default constructor
          *
          */
@@ -19,7 +27,7 @@ namespace Bull
          * \param path The path
          *
          */
-        Path(const String& path);
+        explicit Path(const String& path);
 
         /*! \brief Compare two Path
          *
@@ -38,6 +46,27 @@ namespace Bull
          *
          */
         bool operator!=(const Path& right) const;
+
+        /*! \brief Get the path without the filename
+         *
+         * \return The path
+         *
+         */
+        String getPath() const;
+
+        /*! \brief Get the filename in the path
+         *
+         * \return The filename
+         *
+         */
+        String getFileName() const;
+
+        /*! \brief Get the extension of the file
+         *
+         * \return The extension
+         *
+         */
+        String getExtension() const;
 
         /*! \brief Check whether the path is a file
          *

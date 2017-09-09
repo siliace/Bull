@@ -156,12 +156,32 @@ namespace Bull
          *
          * \param character     The character to count
          * \param start         The index to start
-         * \param caseSensitive True to be case sensitive, false otherwise
+         * \param caseSensitive True to be case sensitive
          *
-         * \return Return the number of occurrences of the character in the string
+         * \return The number of occurrences of the character in the string
          *
          */
         unsigned int count(char character, Index start = 0, bool caseSensitive = true) const;
+
+        /*! \brief Get the index of the first iteration of a character
+         *
+         * \param c             The character
+         * \param caseSensitive True to be case sensitive, false otherwise
+         *
+         * \return The index or -1 if the character was not found
+         *
+         */
+        int first(char c, bool caseSensitive = true) const;
+
+        /*! \brief Get the index of the last iteration of a character
+         *
+         * \param c             The character
+         * \param caseSensitive True to be case sensitive, false otherwiseX
+         *
+         * \return The index or -1 if the character was not found
+         *
+         */
+        int last(char c, bool caseSensitive = true) const;
 
         /*! \brief Get a subpart of the string
          *

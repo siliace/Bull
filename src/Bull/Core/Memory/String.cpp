@@ -153,6 +153,32 @@ namespace Bull
         return count;
     }
 
+    int String::first(char c, bool caseSensitive) const
+    {
+        for(Index i = 0; i < getSize(); i++)
+        {
+            if(m_sharedString->string[i] == c || (!caseSensitive && String::toUpper(m_sharedString->string[i]) == String::toUpper(c)))
+            {
+                return static_cast<int>(i);
+            }
+        }
+
+        return -1;
+    }
+
+    int String::last(char c, bool caseSensitive) const
+    {
+        for(Index i = getSize(); i >= 0; i--)
+        {
+            if(m_sharedString->string[i] == c || (!caseSensitive && String::toUpper(m_sharedString->string[i]) == String::toUpper(c)))
+            {
+                return static_cast<int>(i);
+            }
+        }
+
+        return -1;
+    }
+
     String String::subString(Index start, Index stop) const
     {
         if(stop == String::npos)
