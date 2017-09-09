@@ -1,5 +1,5 @@
-#ifndef BULL_OUTSTREAM_HPP
-#define BULL_OUTSTREAM_HPP
+#ifndef BULL_CORE_IO_OUTSTREAM_HPP
+#define BULL_CORE_IO_OUTSTREAM_HPP
 
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/System/Integer.hpp>
@@ -51,4 +51,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_OUTSTREAM_HPP
+#endif // BULL_CORE_IO_OUTSTREAM_HPP

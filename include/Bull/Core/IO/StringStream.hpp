@@ -1,5 +1,5 @@
-#ifndef Bull_StringStream_hpp
-#define Bull_StringStream_hpp
+#ifndef BULL_CORE_IO_STRINGSTREAM_HPP
+#define BULL_CORE_IO_STRINGSTREAM_HPP
 
 #include <vector>
 
@@ -95,4 +95,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_StringStream_hpp
+#endif // BULL_CORE_IO_STRINGSTREAM_HPP

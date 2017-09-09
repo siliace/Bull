@@ -1,5 +1,5 @@
-#ifndef Bull_InStream_hpp
-#define Bull_InStream_hpp
+#ifndef BULL_CORE_IO_INSTREAM_HPP
+#define BULL_CORE_IO_INSTREAM_HPP
 
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/System/Integer.hpp>
@@ -58,4 +58,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_InStream_hpp
+#endif // BULL_CORE_IO_INSTREAM_HPP

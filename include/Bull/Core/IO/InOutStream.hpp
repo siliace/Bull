@@ -1,5 +1,5 @@
-#ifndef Bull_InOutStream_hpp
-#define Bull_InOutStream_hpp
+#ifndef BULL_CORE_IO_INOUTSTREAM_HPP
+#define BULL_CORE_IO_INOUTSTREAM_HPP
 
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
@@ -18,4 +18,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_InOutStream_hpp
+#endif // BULL_CORE_IO_INOUTSTREAM_HPP
