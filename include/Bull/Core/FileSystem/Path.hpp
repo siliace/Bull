@@ -1,5 +1,5 @@
-#ifndef Bull_Path_hpp
-#define Bull_Path_hpp
+#ifndef BULL_CORE_FILESYSTEM_PATH_HPP
+#define BULL_CORE_FILESYSTEM_PATH_HPP
 
 #include <Bull/Core/Memory/String.hpp>
 
@@ -97,4 +97,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Path_hpp
+#endif // BULL_CORE_FILESYSTEM_PATH_HPP
