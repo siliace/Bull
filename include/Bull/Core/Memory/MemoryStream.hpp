@@ -92,8 +92,8 @@ namespace Bull
     private:
 
         const void* m_data;   /*!< Data to stream */
-        Index m_size;   /*!< Size of data to stream */
-        Index m_cursor; /*!< The internal cursor */
+        Index       m_size;   /*!< Size of data to stream */
+        Index       m_cursor; /*!< The internal cursor */
     };
 }
 

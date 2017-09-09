@@ -18,7 +18,7 @@ namespace Bull
 
     bool File::copy(const Path& path, const String& newPath)
     {
-        return prv::FileImpl::copy(path.toString(), newPath);
+        return prv::FileImpl::copy(path, newPath);
     }
 
     bool File::rename(const Path& name, const String& newName)
@@ -33,7 +33,7 @@ namespace Bull
 
     bool File::remove(const Path& name)
     {
-        return prv::FileImpl::remove(name.toString());
+        return prv::FileImpl::remove(name);
     }
 
     File::File() :
@@ -65,7 +65,7 @@ namespace Bull
 
             m_path = path;
             m_mode = mode;
-            m_impl.reset(prv::FileImpl::createInstance(m_path.toString(), m_mode));
+            m_impl.reset(prv::FileImpl::createInstance(m_path, m_mode));
 
             if(m_impl && (mode & OpeningMode::Read))
             {

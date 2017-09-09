@@ -21,7 +21,7 @@ namespace Bull
         Directory target;
         bool success = true;
 
-        if(!target.open(Path(path)))
+        if(!target.open(path))
         {
             return false;
         }
@@ -37,11 +37,11 @@ namespace Bull
             {
                 if(entity.isDirectory())
                 {
-                    success &= Directory::copy(path.toString() + "/" + entity.toString(), newPath + "/" + entity.toString());
+                    success &= Directory::copy(Path(path.toString() + "/" + entity.toString()), newPath + "/" + entity.toString());
                 }
                 else
                 {
-                    success &= File::copy(path.toString() + "/" + entity.toString(), newPath + "/" + entity.toString());
+                    success &= File::copy(Path(path.toString() + "/" + entity.toString()), newPath + "/" + entity.toString());
                 }
             }
         }
@@ -61,13 +61,10 @@ namespace Bull
 
     bool Directory::remove(const Path& path)
     {
-        return prv::DirectoryImpl::remove(path.toString());
+        return prv::DirectoryImpl::remove(path);
     }
 
-    Directory::Directory()
-    {
-        /// Nothing
-    }
+    Directory::Directory() = default;
 
     Directory::Directory(const Path& path)
     {

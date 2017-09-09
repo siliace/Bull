@@ -18,11 +18,11 @@ namespace Bull
         m_isFile      = File::exists(m_path);
         m_isDirectory = Directory::exists(m_path);
 
-        if(!m_isFile && !m_isDirectory)
+        if(!isFile() && !isDirectory())
         {
             StringStream ss;
 
-            ss << "The path " << m_path << " does not exists";
+            ss << "The path " << toString() << " does not exists";
 
             throw InvalidArgument(ss.toString().getBuffer(), "An existing path to a directory");
         }
