@@ -22,7 +22,7 @@ namespace Bull
         /// Nothing
     }
 
-    OutOfRange::OutOfRange(const String& message, std::size_t min, std::size_t max, std::size_t index) :
+    OutOfRange::OutOfRange(const String& message, Index min, Index max, Index index) :
         RuntimeError(message),
         min(min),
         max(max),

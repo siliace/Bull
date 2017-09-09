@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 
     while(connected)
     {
-        std::size_t received = 0;
+        Index received = 0;
 
         if(socket.receive(&buffer[0], buffer.getCapacity(), received) == Socket::Ready)
         {

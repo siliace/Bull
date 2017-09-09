@@ -24,7 +24,7 @@ namespace Bull
         return false;
     }
 
-    ArrayBuffer& ArrayBuffer::setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride, std::size_t start)
+    ArrayBuffer& ArrayBuffer::setAttribPointer(unsigned int attrib, Index size, Index stride, Index start)
     {
         if(gl::isBuffer(getSystemHandler()))
         {

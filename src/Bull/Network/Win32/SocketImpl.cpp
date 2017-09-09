@@ -108,7 +108,7 @@ namespace Bull
             return false;
         }
 
-        std::size_t SocketImpl::receive(SocketHandler handler, void* data, std::size_t length)
+        Index SocketImpl::receive(SocketHandler handler, void* data, Index length)
         {
             if(handler != InvalidHandler && data && length)
             {
@@ -118,14 +118,14 @@ namespace Bull
             return 0;
         }
 
-        std::size_t SocketImpl::receiveFrom(SocketHandler handler, void* data, std::size_t length, IpAddress& from, Socket::Port& port)
+        Index SocketImpl::receiveFrom(SocketHandler handler, void* data, Index length, IpAddress& from, Socket::Port& port)
         {
             if(handler != InvalidHandler && from.isValid() && port != Socket::AnyPort && data && length)
             {
                 IpAddressImpl::SockAddrBuffer addrBuffer;
                 IpAddressImpl::SockAddrLenght addrLenght;
 
-                std::size_t received = ::recvfrom(handler, static_cast<char*>(data), length, 0, reinterpret_cast<sockaddr*>(&addrBuffer), &addrLenght);
+                Index received = ::recvfrom(handler, static_cast<char*>(data), length, 0, reinterpret_cast<sockaddr*>(&addrBuffer), &addrLenght);
 
                 from = IpAddressImpl::fromSockAddr(reinterpret_cast<sockaddr*>(&addrBuffer), port);
 
@@ -135,7 +135,7 @@ namespace Bull
             return 0;
         }
 
-        std::size_t SocketImpl::send(SocketHandler handler, const void* data, std::size_t length)
+        Index SocketImpl::send(SocketHandler handler, const void* data, Index length)
         {
             if(handler != InvalidHandler)
             {
@@ -145,7 +145,7 @@ namespace Bull
             return 0;
         }
 
-        std::size_t SocketImpl::sendTo(SocketHandler handler, const IpAddress& to, Socket::Port port, const void* data, std::size_t length)
+        Index SocketImpl::sendTo(SocketHandler handler, const IpAddress& to, Socket::Port port, const void* data, Index length)
         {
             if(handler != InvalidHandler && to.isValid() && port != Socket::AnyPort && data && length)
             {

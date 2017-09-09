@@ -4,6 +4,7 @@
 #include <utility>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/System/Integer.hpp>
 
 namespace Bull
 {
@@ -42,13 +43,13 @@ namespace Bull
             /*! \brief Call a function
              *
              */
-            template<typename Function, typename Tuple, std::size_t... Size>
+            template<typename Function, typename Tuple, Index... Size>
             static Return applyImplFunction(Function&& function, Tuple&& params, std::index_sequence<Size...>);
 
             /*! \brief Call a method
               *
               */
-            template<typename Instance, typename Method, typename Tuple, std::size_t... Size>
+            template<typename Instance, typename Method, typename Tuple, Index... Size>
             static Return applyImplMethod(Instance& instance, Method&& method, Tuple&& params, std::index_sequence<Size...>);
 
         public:

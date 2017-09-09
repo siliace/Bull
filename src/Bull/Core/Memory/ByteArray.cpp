@@ -5,13 +5,13 @@
 
 namespace Bull
 {
-    ByteArray::ByteArray(std::size_t size) :
+    ByteArray::ByteArray(Index size) :
         ByteArray(size, 0)
     {
         /// Nothing
     }
 
-    ByteArray::ByteArray(std::size_t size, Uint8 value) :
+    ByteArray::ByteArray(Index size, Uint8 value) :
         m_array(size, value)
     {
         /// Nothing
@@ -46,7 +46,7 @@ namespace Bull
         return false;
     }
 
-    ByteArray& ByteArray::resize(std::size_t size)
+    ByteArray& ByteArray::resize(Index size)
     {
         m_array.resize(size);
 
@@ -68,7 +68,7 @@ namespace Bull
         return getCapacity() == 0;
     }
 
-    std::size_t ByteArray::getCapacity() const
+    Index ByteArray::getCapacity() const
     {
         return m_array.size();
     }
@@ -93,14 +93,14 @@ namespace Bull
 
     }
 
-    Uint8& ByteArray::operator[](std::size_t index)
+    Uint8& ByteArray::operator[](Index index)
     {
         RangeCheck(index, getCapacity());
 
         return m_array[index];
     }
 
-    const Uint8& ByteArray::operator[](std::size_t index) const
+    const Uint8& ByteArray::operator[](Index index) const
     {
         RangeCheck(index, getCapacity());
 

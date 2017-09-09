@@ -276,7 +276,7 @@ namespace Bull
 
         if(capacity)
         {
-            message.setSize(static_cast<std::size_t>(capacity));
+            message.setSize(static_cast<Index>(capacity));
             gl::getProgramInfoLog(m_program, capacity, nullptr, &message[0]);
         }
 

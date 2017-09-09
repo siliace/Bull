@@ -3,19 +3,19 @@
 
 namespace Bull
 {
-    RangeCheck::RangeCheck(std::size_t max) :
+    RangeCheck::RangeCheck(Index max) :
         m_max(max)
     {
         /// Nothing
     }
 
-    RangeCheck::RangeCheck(std::size_t index, std::size_t max) :
+    RangeCheck::RangeCheck(Index index, Index max) :
         RangeCheck(max)
     {
         apply(index);
     }
 
-    RangeCheck& RangeCheck::apply(std::size_t index)
+    RangeCheck& RangeCheck::apply(Index index)
     {
         if(index >= m_max)
         {

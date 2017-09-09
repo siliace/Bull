@@ -14,7 +14,7 @@ namespace Bull
         m_bufferSize = 0;
     }
 
-    std::size_t StringStream::getSize() const
+    Index StringStream::getSize() const
     {
         return m_bufferSize;
     }

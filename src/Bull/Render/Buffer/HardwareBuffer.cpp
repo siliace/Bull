@@ -11,12 +11,12 @@ namespace Bull
         destroy();
     }
 
-    bool HardwareBuffer::create(std::size_t size)
+    bool HardwareBuffer::create(Index size)
     {
         return create(size, HardwareBuffer::Usage::StaticDraw);
     }
 
-    bool HardwareBuffer::create(std::size_t size, Usage usage)
+    bool HardwareBuffer::create(Index size, Usage usage)
     {
         if(gl::isBuffer(m_id))
         {
@@ -30,7 +30,7 @@ namespace Bull
         return true;
     }
 
-    bool HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
+    bool HardwareBuffer::fill(const void* data, Index size, Index offset)
     {
         if(gl::isBuffer(m_id))
         {
@@ -116,7 +116,7 @@ namespace Bull
         }
     }
 
-    std::size_t HardwareBuffer::getCapacity() const
+    Index HardwareBuffer::getCapacity() const
     {
         if(gl::isBuffer(m_id))
         {
@@ -125,7 +125,7 @@ namespace Bull
             int capacity;
             gl::getBufferParameteriv(m_type, GL_BUFFER_SIZE, &capacity);
 
-            return static_cast<std::size_t>(capacity);
+            return static_cast<Index>(capacity);
         }
 
         return 0;

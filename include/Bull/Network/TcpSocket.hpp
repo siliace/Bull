@@ -62,7 +62,7 @@ namespace Bull
          * \return The new State of the TcpSocket
          *
          */
-        State send(const void* data, std::size_t length, std::size_t& sent);
+        State send(const void* data, Index length, Index& sent);
 
         /*! \brief Send data to the remote host
          *
@@ -73,7 +73,7 @@ namespace Bull
          * \return The new State of the TcpSocket
          *
          */
-        State receive(void* data, std::size_t length, std::size_t& received);
+        State receive(void* data, Index length, Index& received);
 
     private:
 

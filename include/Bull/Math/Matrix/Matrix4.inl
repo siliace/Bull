@@ -31,7 +31,7 @@ namespace Bull
     }
 
     template<typename T>
-    void Matrix4<T>::set(T value, std::size_t x, std::size_t y)
+    void Matrix4<T>::set(T value, Index x, Index y)
     {
         if(x >= 4 || y >= 4)
         {
@@ -42,7 +42,7 @@ namespace Bull
     }
 
     template<typename T>
-    T Matrix4<T>::get(std::size_t x, std::size_t y) const
+    T Matrix4<T>::get(Index x, Index y) const
     {
         if(x >= 4 || y >= 4)
         {
@@ -53,7 +53,7 @@ namespace Bull
     }
 
     template<typename T>
-    T& Matrix4<T>::operator()(std::size_t x, std::size_t y)
+    T& Matrix4<T>::operator()(Index x, Index y)
     {
         if(x >= 4 || y >= 4)
         {
@@ -64,7 +64,7 @@ namespace Bull
     }
 
     template<typename T>
-    const T& Matrix4<T>::operator()(std::size_t x, std::size_t y) const
+    const T& Matrix4<T>::operator()(Index x, Index y) const
     {
         if(x >= 4 || y >= 4)
         {
@@ -75,7 +75,7 @@ namespace Bull
     }
 
     template<typename T>
-    Matrix4<T>& Matrix4<T>::setColumn(const Vector4<T>& column, std::size_t position)
+    Matrix4<T>& Matrix4<T>::setColumn(const Vector4<T>& column, Index position)
     {
         if(position >= 4)
         {
@@ -91,7 +91,7 @@ namespace Bull
     }
 
     template<typename T>
-    std::array<T, 4> Matrix4<T>::getColumn(std::size_t column) const
+    std::array<T, 4> Matrix4<T>::getColumn(Index column) const
     {
         if(column >= 4)
         {
@@ -100,7 +100,7 @@ namespace Bull
 
         std::array<T, 4> col;
 
-        for(std::size_t i = 0; i < 4; i++)
+        for(Index i = 0; i < 4; i++)
         {
             col[i] = get(column, i);
         }
@@ -109,7 +109,7 @@ namespace Bull
     }
 
     template<typename T>
-    Matrix4<T>& Matrix4<T>::setRow(const Vector4<T>& row, std::size_t position)
+    Matrix4<T>& Matrix4<T>::setRow(const Vector4<T>& row, Index position)
     {
         if(position >= 4)
         {
@@ -125,7 +125,7 @@ namespace Bull
     }
 
     template<typename T>
-    std::array<T, 4> Matrix4<T>::getRow(std::size_t row) const
+    std::array<T, 4> Matrix4<T>::getRow(Index row) const
     {
         if(row >= 4)
         {
@@ -134,7 +134,7 @@ namespace Bull
 
         std::array<T, 4> r;
 
-        for(std::size_t i = 0; i < 4; i++)
+        for(Index i = 0; i < 4; i++)
         {
             r[i] = get(i, row);
         }
@@ -157,7 +157,7 @@ namespace Bull
     template<typename T>
     Matrix4<T>& Matrix4<T>::operator+=(const Matrix4<T>& right)
     {
-        for(std::size_t i = 0; i < 16; i++)
+        for(Index i = 0; i < 16; i++)
         {
             m_data[i] += static_cast<T>(right.m_data[i]);
         }
@@ -174,7 +174,7 @@ namespace Bull
     template<typename T>
     Matrix4<T>& Matrix4<T>::operator-=(const Matrix4<T>& right)
     {
-        for(std::size_t i = 0; i < 16; i++)
+        for(Index i = 0; i < 16; i++)
         {
             m_data[i] -= static_cast<T>(right.m_data[i]);
         }
@@ -193,7 +193,7 @@ namespace Bull
     {
         std::array<T, 16> product;
 
-        for(std::size_t i = 0; i < 16; i++)
+        for(Index i = 0; i < 16; i++)
         {
             T sum = 0;
             std::array<T, 4> row, col;
@@ -201,7 +201,7 @@ namespace Bull
             row = getRow(i / 4);
             col = right.getColumn(i % 4);
 
-            for(std::size_t j = 0; j < 4; j++)
+            for(Index j = 0; j < 4; j++)
             {
                 sum += row[j] * col[j];
             }

@@ -12,7 +12,7 @@ namespace Bull
         /// Nothing
     }
 
-    MemoryStream::MemoryStream(const void* data, std::size_t length)
+    MemoryStream::MemoryStream(const void* data, Index length)
     {
         open(data, length);
     }
@@ -22,7 +22,7 @@ namespace Bull
         close();
     }
 
-    bool MemoryStream::open(const void* data, std::size_t length)
+    bool MemoryStream::open(const void* data, Index length)
     {
         if(data && length)
         {
@@ -51,8 +51,8 @@ namespace Bull
     {
         if(m_data && m_size)
         {
-            Uint64 count = std::min(static_cast<std::size_t>(size), m_size - m_cursor);
-            std::memcpy(data, &reinterpret_cast<const unsigned char*>(m_data)[m_cursor], static_cast<std::size_t>(count));
+            Uint64 count = std::min(static_cast<Index>(size), m_size - m_cursor);
+            std::memcpy(data, &reinterpret_cast<const unsigned char*>(m_data)[m_cursor], static_cast<Index>(count));
             m_cursor += count;
 
             return count;
@@ -63,7 +63,7 @@ namespace Bull
 
     Uint64 MemoryStream::setCursor(Uint64 position)
     {
-        return m_cursor = std::min(static_cast<std::size_t>(position), m_size);
+        return m_cursor = std::min(static_cast<Index>(position), m_size);
     }
 
     Uint64 MemoryStream::getCursor() const

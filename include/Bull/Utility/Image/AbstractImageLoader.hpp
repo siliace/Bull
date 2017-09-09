@@ -49,7 +49,7 @@ namespace Bull
          * \return True if the image was loaded successfully
          *
          */
-        virtual bool loadFromMemory(const void* data, std::size_t dataSize, ByteArray& pixels, Vector2UI& size) const = 0;
+        virtual bool loadFromMemory(const void* data, Index dataSize, ByteArray& pixels, Vector2UI& size) const = 0;
 
         /*! \brief Save an image
          *
@@ -86,7 +86,7 @@ namespace Bull
          * \return True if the image was saved successfully
          *
          */
-        virtual bool saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const = 0;
+        virtual bool saveToMemory(void* data, Index dataSize, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const = 0;
     };
 }
 

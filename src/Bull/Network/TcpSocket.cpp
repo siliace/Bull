@@ -64,12 +64,12 @@ namespace Bull
         return getHandler() != prv::SocketImpl::InvalidHandler;
     }
 
-    Socket::State TcpSocket::send(const void* data, std::size_t length, std::size_t& sent)
+    Socket::State TcpSocket::send(const void* data, Index length, Index& sent)
     {
         if(data && length)
         {
             State state;
-            std::size_t result = 0;
+            Index result = 0;
             for(sent = 0; sent < length; sent += result)
             {
                 result = prv::SocketImpl::send(getHandler(), data, length);
@@ -97,13 +97,13 @@ namespace Bull
         return m_state;
     }
 
-    Socket::State TcpSocket::receive(void* data, std::size_t length, std::size_t& received)
+    Socket::State TcpSocket::receive(void* data, Index length, Index& received)
     {
         received = 0;
 
         if(!data || length)
         {
-            std::size_t result = prv::SocketImpl::receive(getHandler(), data, length);
+            Index result = prv::SocketImpl::receive(getHandler(), data, length);
 
             if(result > 0)
             {

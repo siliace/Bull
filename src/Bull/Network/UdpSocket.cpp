@@ -31,7 +31,7 @@ namespace Bull
         close();
     }
 
-    Socket::State UdpSocket::receive(void* data, std::size_t length, std::size_t& received, IpAddress& remoteAddress, Socket::Port& remotePort)
+    Socket::State UdpSocket::receive(void* data, Index length, Index& received, IpAddress& remoteAddress, Socket::Port& remotePort)
     {
         received      = 0;
         remotePort    = Socket::AnyPort;
@@ -39,7 +39,7 @@ namespace Bull
 
         create(remoteAddress.getProtocol());
 
-        std::size_t result = prv::SocketImpl::receiveFrom(getHandler(), data, length, remoteAddress, remotePort);
+        Index result = prv::SocketImpl::receiveFrom(getHandler(), data, length, remoteAddress, remotePort);
 
         if(result < 0)
         {
@@ -51,7 +51,7 @@ namespace Bull
         return Ready;
     }
 
-    Socket::State UdpSocket::send(const IpAddress& remoteAddress, Socket::Port remotePort, const void* data, std::size_t length)
+    Socket::State UdpSocket::send(const IpAddress& remoteAddress, Socket::Port remotePort, const void* data, Index length)
     {
         create(remoteAddress.getProtocol());
 
@@ -60,7 +60,7 @@ namespace Bull
             return Error;
         }
 
-        std::size_t sent = prv::SocketImpl::sendTo(getHandler(), remoteAddress, remotePort, data, length);
+        Index sent = prv::SocketImpl::sendTo(getHandler(), remoteAddress, remotePort, data, length);
 
         if(sent < 0)
         {

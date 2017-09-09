@@ -29,10 +29,10 @@ namespace Bull
          * \param index
          *
          */
-        OutOfRange(const String& message, std::size_t min, std::size_t max, std::size_t index);
+        OutOfRange(const String& message, Index min, Index max, Index index);
 
-        std::size_t index;
-        std::size_t min, max;
+        Index index;
+        Index min, max;
 
     protected:
 

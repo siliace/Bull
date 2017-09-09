@@ -62,7 +62,7 @@ namespace Bull
             struct Buffer
             {
                 void* data;
-                std::size_t size;
+                Index size;
             };
 
         public:
@@ -99,7 +99,7 @@ namespace Bull
              * \return True if the image was loaded successfully
              *
              */
-            bool loadFromMemory(const void* data, std::size_t dataSize, ByteArray& pixels, Vector2UI& size) const override;
+            bool loadFromMemory(const void* data, Index dataSize, ByteArray& pixels, Vector2UI& size) const override;
 
             /*! \brief Save an image
              *
@@ -136,7 +136,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const override;
+            bool saveToMemory(void* data, Index dataSize, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const override;
 
         private:
 
@@ -174,7 +174,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveBmpToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const;
+            bool saveBmpToMemory(void* data, Index dataSize, const ByteArray& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .png file
              *
@@ -210,7 +210,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool savePngToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const;
+            bool savePngToMemory(void* data, Index dataSize, const ByteArray& pixels, const Vector2UI& size) const;
 
             /*! \brief Save an image as .tga file
              *
@@ -246,7 +246,7 @@ namespace Bull
              * \return True if the image was saved successfully
              *
              */
-            bool saveTgaToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const;
+            bool saveTgaToMemory(void* data, Index dataSize, const ByteArray& pixels, const Vector2UI& size) const;
         };
     }
 }

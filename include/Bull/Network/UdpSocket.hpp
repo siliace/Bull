@@ -39,7 +39,7 @@ namespace Bull
          * \return
          *
          */
-        State receive(void* data, std::size_t length, std::size_t& received, IpAddress& remoteAddress, Socket::Port& remotePort);
+        State receive(void* data, Index length, Index& received, IpAddress& remoteAddress, Socket::Port& remotePort);
 
         /*! \brief
          *
@@ -51,7 +51,7 @@ namespace Bull
          * \return
          *
          */
-        State send(const IpAddress& remoteAddress, Socket::Port remotePort, const void* data, std::size_t length);
+        State send(const IpAddress& remoteAddress, Socket::Port remotePort, const void* data, Index length);
     };
 }
 

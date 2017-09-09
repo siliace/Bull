@@ -14,7 +14,7 @@ namespace Bull
         template<typename Function, typename Tuple>
         Return AbstractFunctor<Return>::apply(Function&& function, Tuple&& params)
         {
-            constexpr std::size_t size = std::tuple_size<typename std::remove_reference<Tuple>::type>::value;
+            constexpr Index size = std::tuple_size<typename std::remove_reference<Tuple>::type>::value;
 
             if(!std::is_same<Return, void>::value)
             {
@@ -37,7 +37,7 @@ namespace Bull
         template<typename Instance, typename Method, typename Tuple>
         Return AbstractFunctor<Return>::apply(Instance& instance, Method&& method, Tuple&& params)
         {
-            constexpr std::size_t size = std::tuple_size<typename std::remove_reference<Tuple>::type>::value;
+            constexpr Index size = std::tuple_size<typename std::remove_reference<Tuple>::type>::value;
 
             if(!std::is_same<Return, void>::value)
             {
@@ -66,7 +66,7 @@ namespace Bull
           *
           */
         template<typename Return>
-        template<typename Instance, typename Method, typename Tuple, std::size_t... Size>
+        template<typename Instance, typename Method, typename Tuple, Index... Size>
         Return AbstractFunctor<Return>::applyImplMethod(Instance& instance, Method&& method, Tuple&& params, std::index_sequence<Size...>)
         {
             if(!std::is_same<Return, void>::value)

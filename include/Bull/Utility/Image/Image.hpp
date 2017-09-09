@@ -86,7 +86,7 @@ namespace Bull
          * \return True if the Image was loaded successfully
          *
          */
-        bool loadFromMemory(const void* data, std::size_t dataSize);
+        bool loadFromMemory(const void* data, Index dataSize);
 
         /*! \brief Load an Image from pixels
          *
@@ -171,7 +171,7 @@ namespace Bull
          * \return
          *
          */
-        bool saveToSteam(void* data, std::size_t size, ImageFormat format) const;
+        bool saveToSteam(void* data, Index size, ImageFormat format) const;
 
     private:
 

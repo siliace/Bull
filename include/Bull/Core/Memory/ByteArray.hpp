@@ -26,7 +26,7 @@ namespace Bull
          * \param size The size of the array
          *
          */
-        explicit ByteArray(std::size_t size);
+        explicit ByteArray(Index size);
 
         /*! \brief Constructor
          *
@@ -34,7 +34,7 @@ namespace Bull
          * \param value The value to the array
          *
          */
-        ByteArray(std::size_t size, Uint8 value);
+        ByteArray(Index size, Uint8 value);
 
         /*! \brief Create the ByteArray
          *
@@ -63,7 +63,7 @@ namespace Bull
          * \return This
          *
          */
-        ByteArray& resize(std::size_t size);
+        ByteArray& resize(Index size);
 
         /*! \brief Flush the Buffer
          *
@@ -132,7 +132,7 @@ namespace Bull
          * \return The byte
          *
          */
-        Uint8& operator[](std::size_t index);
+        Uint8& operator[](Index index);
 
         /*! \brief Access operator
          *
@@ -141,7 +141,7 @@ namespace Bull
          * \return The byte
          *
          */
-        const Uint8& operator[](std::size_t index) const;
+        const Uint8& operator[](Index index) const;
 
         /*! \brief Convert the byte array to a String
          *

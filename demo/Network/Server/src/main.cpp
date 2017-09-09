@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 
     while(!Keyboard::isKeyPressed(Keyboard::Escape))
     {
-        std::size_t sent = 0;
+        Index sent = 0;
 
         if(client.send(message.getBuffer(), message.getSize(), sent) == Socket::Ready)
         {

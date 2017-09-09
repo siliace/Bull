@@ -52,7 +52,7 @@ namespace Bull
         return prv::ImageLoader::get()->loadFromStream(stream, m_pixels, m_size);
     }
 
-    bool Image::loadFromMemory(const void* data, std::size_t length)
+    bool Image::loadFromMemory(const void* data, Index length)
     {
         return prv::ImageLoader::get()->loadFromMemory(data, length, m_pixels, m_size);
     }
@@ -112,7 +112,7 @@ namespace Bull
         return prv::ImageLoader::get()->saveToStream(stream, format, m_pixels, m_size);
     }
 
-    bool Image::saveToSteam(void* data, std::size_t length, ImageFormat format) const
+    bool Image::saveToSteam(void* data, Index length, ImageFormat format) const
     {
         return prv::ImageLoader::get()->saveToMemory(data, length, format, m_pixels, m_size);
     }

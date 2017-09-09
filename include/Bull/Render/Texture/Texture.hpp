@@ -120,7 +120,7 @@ namespace Bull
          * \return True if the Texture was loaded successfully
          *
          */
-        bool loadFromMemory(const void* data, std::size_t dataSize);
+        bool loadFromMemory(const void* data, Index dataSize);
 
         /*! \brief Load a texture form a pixels array
          *

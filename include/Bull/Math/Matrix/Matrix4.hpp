@@ -51,9 +51,9 @@ namespace Bull
          */
         void set(const std::array<T, 16>& data);
 
-        void set(T value, std::size_t x, std::size_t y);
+        void set(T value, Index x, Index y);
 
-        T get(std::size_t x, std::size_t y) const;
+        T get(Index x, Index y) const;
 
         /*! \brief Set a column of the Matrix4
          *
@@ -63,7 +63,7 @@ namespace Bull
          * \return This
          *
          */
-        Matrix4<T>& setColumn(const Vector4<T>& column, std::size_t position);
+        Matrix4<T>& setColumn(const Vector4<T>& column, Index position);
 
         /*! \brief Get a column a the Matrix4
          *
@@ -72,9 +72,9 @@ namespace Bull
          * \return Return the column
          *
          */
-        std::array<T, 4> getColumn(std::size_t column) const;
+        std::array<T, 4> getColumn(Index column) const;
 
-        Matrix4<T>& setRow(const Vector4<T>& row, std::size_t position);
+        Matrix4<T>& setRow(const Vector4<T>& row, Index position);
 
         /*! \brief Get a row a the matrix
          *
@@ -83,7 +83,7 @@ namespace Bull
          * \return Return the row
          *
          */
-        std::array<T, 4> getRow(std::size_t row) const;
+        std::array<T, 4> getRow(Index row) const;
 
         /*! \brief
          *
@@ -93,7 +93,7 @@ namespace Bull
          * \return
          *
          */
-        T& operator()(std::size_t x, std::size_t y);
+        T& operator()(Index x, Index y);
 
         /*! \brief
          *
@@ -103,7 +103,7 @@ namespace Bull
          * \return
          *
          */
-        const T& operator()(std::size_t x, std::size_t y) const;
+        const T& operator()(Index x, Index y) const;
 
         /*! \brief Compare two matrices
          *

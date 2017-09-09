@@ -44,7 +44,7 @@ namespace Bull
          * \return This
          *
          */
-        ArrayBuffer& setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride = 0, std::size_t start = 0);
+        ArrayBuffer& setAttribPointer(unsigned int attrib, Index size, Index stride = 0, Index start = 0);
     };
 }
 

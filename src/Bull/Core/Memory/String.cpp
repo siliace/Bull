@@ -90,7 +90,7 @@ namespace Bull
         set(string);
     }
 
-    String::String(const char* string, std::size_t size)
+    String::String(const char* string, Index size)
     {
         set(string, size);
     }
@@ -100,7 +100,7 @@ namespace Bull
         set(string, (string) ? std::strlen(string) : 0);
     }
 
-    void String::set(const char* string, std::size_t size)
+    void String::set(const char* string, Index size)
     {
         if(size > 0)
         {
@@ -121,7 +121,7 @@ namespace Bull
         }
     }
 
-    unsigned int String::count(char character, std::size_t start, bool caseSensitive) const
+    unsigned int String::count(char character, Index start, bool caseSensitive) const
     {
         if(character == String::NullByte || m_sharedString->size == 0)
         {
@@ -135,7 +135,7 @@ namespace Bull
 
         unsigned int count = 0;
 
-        for(std::size_t i = start; i < getSize(); i++)
+        for(Index i = start; i < getSize(); i++)
         {
             char toTest = m_sharedString->string[i];
 
@@ -153,7 +153,7 @@ namespace Bull
         return count;
     }
 
-    String String::subString(std::size_t start, std::size_t stop) const
+    String String::subString(Index start, Index stop) const
     {
         if(stop == String::npos)
         {
@@ -187,7 +187,7 @@ namespace Bull
         std::vector<String> tokens;
         String word;
 
-        for(std::size_t i = 0; i < getSize(); i++)
+        for(Index i = 0; i < getSize(); i++)
         {
             if(m_sharedString->string[i] == delimiter)
             {
@@ -209,14 +209,14 @@ namespace Bull
         return tokens;
     }
 
-    String& String::toUppercase(std::size_t start, std::size_t stop)
+    String& String::toUppercase(Index start, Index stop)
     {
         if(stop == String::npos)
         {
             stop = getSize() - 1;
         }
 
-        for(std::size_t i = start; i <= stop; i++)
+        for(Index i = start; i <= stop; i++)
         {
             m_sharedString->string[i] = String::toUpper(m_sharedString->string[i]);
         }
@@ -224,14 +224,14 @@ namespace Bull
         return (*this);
     }
 
-    String& String::toLowercase(std::size_t start, std::size_t stop)
+    String& String::toLowercase(Index start, Index stop)
     {
         if(stop == String::npos)
         {
             stop = getSize() - 1;
         }
 
-        for(std::size_t i = start; i <= stop; i++)
+        for(Index i = start; i <= stop; i++)
         {
             m_sharedString->string[i] = String::toLower(m_sharedString->string[i]);
         }
@@ -239,14 +239,14 @@ namespace Bull
         return (*this);
     }
 
-    String& String::insert(const String& toInsert, std::size_t index)
+    String& String::insert(const String& toInsert, Index index)
     {
         if(toInsert.getSize() == 0)
         {
             return (*this);
         }
 
-        std::size_t start = std::min<std::size_t>(index, getSize());
+        Index start = std::min<Index>(index, getSize());
 
         if(getCapacity() >= getSize() + toInsert.getSize())
         {
@@ -286,7 +286,7 @@ namespace Bull
         }
     }
 
-    void String::setSize(std::size_t size)
+    void String::setSize(Index size)
     {
         SharedString sharedBuffer = std::make_shared<prv::StringBuffer>(size);
 
@@ -303,14 +303,14 @@ namespace Bull
         m_sharedString = std::move(sharedBuffer);
     }
 
-    std::size_t String::getSize() const
+    Index String::getSize() const
     {
         return m_sharedString->size;
     }
 
-    void String::reserve(std::size_t capacity)
+    void String::reserve(Index capacity)
     {
-        Index          size = std::min<std::size_t>(getSize(), capacity);
+        Index          size = std::min<Index>(getSize(), capacity);
         SharedString string = std::make_shared<prv::StringBuffer>(size, capacity);
 
         if(size >= getSize())
@@ -322,7 +322,7 @@ namespace Bull
         m_sharedString = std::move(string);
     }
 
-    std::size_t String::getCapacity() const
+    Index String::getCapacity() const
     {
         return m_sharedString->capacity;
     }
@@ -337,14 +337,14 @@ namespace Bull
         return &m_sharedString->string[0];
     }
 
-    char& String::operator[](std::size_t index)
+    char& String::operator[](Index index)
     {
         RangeCheck(index, getCapacity());
 
         return m_sharedString->string[index];
     }
 
-    const char& String::operator[](std::size_t index) const
+    const char& String::operator[](Index index) const
     {
         RangeCheck(index, getCapacity());
 
@@ -355,7 +355,7 @@ namespace Bull
     {
         int number = 0;
         bool isNegatif = m_sharedString->string[0] == '-';
-        std::size_t i = isNegatif ? 1 : 0;
+        Index i = isNegatif ? 1 : 0;
 
         while(i < getSize() && m_sharedString->string[i] >= '0' && m_sharedString->string[i] <= '9')
         {

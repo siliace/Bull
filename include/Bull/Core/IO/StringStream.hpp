@@ -27,7 +27,7 @@ namespace Bull
          * \return Return the size of the content of the stream
          *
          */
-        std::size_t getSize() const;
+        Index getSize() const;
 
         /*! \brief Get the content of the stream
          *
@@ -91,7 +91,7 @@ namespace Bull
     private:
 
         std::vector<String> m_content;
-        std::size_t         m_bufferSize;
+        Index         m_bufferSize;
     };
 }
 

@@ -98,7 +98,7 @@ namespace Bull
             return false;
         }
 
-        bool ImageLoader::loadFromMemory(const void* data, std::size_t dataSize, ByteArray& pixels, Vector2UI& size) const
+        bool ImageLoader::loadFromMemory(const void* data, Index dataSize, ByteArray& pixels, Vector2UI& size) const
         {
             if(data && dataSize)
             {
@@ -157,7 +157,7 @@ namespace Bull
             return false;
         }
 
-        bool ImageLoader::saveToMemory(void* data, std::size_t dataSize, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveToMemory(void* data, Index dataSize, ImageFormat format, const ByteArray& pixels, const Vector2UI& size) const
         {
             switch(format)
             {
@@ -188,7 +188,7 @@ namespace Bull
             return stbi_write_bmp_to_func(&ImageLoader::writeToStream, &stream, size.x, size.y, 4, &pixels[0]) != 0;
         }
 
-        bool ImageLoader::saveBmpToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveBmpToMemory(void* data, Index dataSize, const ByteArray& pixels, const Vector2UI& size) const
         {
             Buffer buffer;
             buffer.data = data;
@@ -214,7 +214,7 @@ namespace Bull
             return stbi_write_png_to_func(&ImageLoader::writeToStream, &stream, size.x, size.y, 4, &pixels[0], 0) != 0;
         }
 
-        bool ImageLoader::savePngToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const
+        bool ImageLoader::savePngToMemory(void* data, Index dataSize, const ByteArray& pixels, const Vector2UI& size) const
         {
             Buffer buffer;
             buffer.data = data;
@@ -240,7 +240,7 @@ namespace Bull
             return stbi_write_tga_to_func(&ImageLoader::writeToStream, &stream, size.x, size.y, 4, &pixels[0]) != 0;
         }
 
-        bool ImageLoader::saveTgaToMemory(void* data, std::size_t dataSize, const ByteArray& pixels, const Vector2UI& size) const
+        bool ImageLoader::saveTgaToMemory(void* data, Index dataSize, const ByteArray& pixels, const Vector2UI& size) const
         {
             Buffer buffer;
             buffer.data = data;

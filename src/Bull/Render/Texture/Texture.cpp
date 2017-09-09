@@ -83,7 +83,7 @@ namespace Bull
         return loadFromPixels(image.getPixels(), image.getSize());
     }
 
-    bool Texture::loadFromMemory(const void* data, std::size_t dataSize)
+    bool Texture::loadFromMemory(const void* data, Index dataSize)
     {
         Image img;
 

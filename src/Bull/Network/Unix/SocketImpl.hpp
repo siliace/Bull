@@ -90,7 +90,7 @@ namespace Bull
              * \return
              *
              */
-            static std::size_t receive(SocketHandler handler, void* data, std::size_t length);
+            static Index receive(SocketHandler handler, void* data, Index length);
 
             /*! \brief
              *
@@ -103,7 +103,7 @@ namespace Bull
              * \return
              *
              */
-            static std::size_t receiveFrom(SocketHandler handler, void* data, std::size_t length, IpAddress& from, Socket::Port& port);
+            static Index receiveFrom(SocketHandler handler, void* data, Index length, IpAddress& from, Socket::Port& port);
 
             /*! \brief
              *
@@ -114,7 +114,7 @@ namespace Bull
              * \return
              *
              */
-            static std::size_t send(SocketHandler handler, const void* data, std::size_t length);
+            static Index send(SocketHandler handler, const void* data, Index length);
 
             /*! \brief
              *
@@ -126,7 +126,7 @@ namespace Bull
              * \return
              *
              */
-            static std::size_t sendTo(SocketHandler handler, const IpAddress& to, Socket::Port port, const void* data, std::size_t length);
+            static Index sendTo(SocketHandler handler, const IpAddress& to, Socket::Port port, const void* data, Index length);
 
             /*! \brief Set the blocking mode of a socket
              *
