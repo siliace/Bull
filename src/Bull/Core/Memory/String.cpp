@@ -1,7 +1,8 @@
 #include <cstring>
 
-#include <Bull/Core/Exception/OutOfRange.hpp>
 #include <Bull/Core/Memory/RangeCheck.hpp>
+#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Memory/StringBuffer.hpp>
 
 namespace Bull
 {
@@ -40,9 +41,9 @@ namespace Bull
         return boolean ? String("true") : String("false");
     }
 
-    const std::shared_ptr<String::SharedString>& String::getEmptyString()
+    const String::SharedString& String::getEmptyString()
     {
-        static std::shared_ptr<String::SharedString> empty = std::make_shared<String::SharedString>();
+        static SharedString empty = std::make_shared<prv::StringBuffer>();
 
         return empty;
     }
@@ -53,12 +54,30 @@ namespace Bull
         /// Nothing
     }
 
+    String::String(Index size) :
+        String(size, size)
+    {
+        /// Nothing
+    }
+
+    String::String(Index size, Index capacity)
+    {
+        if(capacity)
+        {
+            m_sharedString = std::make_shared<prv::StringBuffer>(size, capacity);
+        }
+        else
+        {
+            m_sharedString = getEmptyString();
+        }
+    }
+
     String::String(char character)
     {
         if(character != String::NullByte)
         {
-            m_sharedString = std::make_shared<SharedString>(1);
-            m_sharedString->m_string[0] = character;
+            m_sharedString = std::make_shared<prv::StringBuffer>(1);
+            m_sharedString->string[0] = character;
         }
         else
         {
@@ -85,15 +104,15 @@ namespace Bull
     {
         if(size > 0)
         {
-            m_sharedString = std::make_shared<SharedString>(size);
+            m_sharedString = std::make_shared<prv::StringBuffer>(size);
 
             if(string)
             {
-                std::memcpy(&m_sharedString->m_string[0], string, size);
+                std::memcpy(&m_sharedString->string[0], string, size);
             }
             else
             {
-                std::memset(&m_sharedString->m_string[0], 0, size);
+                std::memset(&m_sharedString->string[0], 0, size);
             }
         }
         else
@@ -104,7 +123,7 @@ namespace Bull
 
     unsigned int String::count(char character, std::size_t start, bool caseSensitive) const
     {
-        if(character == String::NullByte || m_sharedString->m_size == 0)
+        if(character == String::NullByte || m_sharedString->size == 0)
         {
             return 0;
         }
@@ -118,7 +137,7 @@ namespace Bull
 
         for(std::size_t i = start; i < getSize(); i++)
         {
-            char toTest = m_sharedString->m_string[i];
+            char toTest = m_sharedString->string[i];
 
             if(!caseSensitive)
             {
@@ -146,10 +165,9 @@ namespace Bull
             return "";
         }
 
-        String substring;
+        String substring(stop - (start - 1));
 
-        substring.m_sharedString = std::make_shared<SharedString>(stop - (start - 1));
-        std::memcpy(&substring.m_sharedString->m_string[0], &m_sharedString->m_string[start], substring.getSize());
+        std::memcpy(&substring.m_sharedString->string[0], &m_sharedString->string[start], substring.getSize());
 
         return substring;
     }
@@ -171,7 +189,7 @@ namespace Bull
 
         for(std::size_t i = 0; i < getSize(); i++)
         {
-            if(m_sharedString->m_string[i] == delimiter)
+            if(m_sharedString->string[i] == delimiter)
             {
                 tokens.push_back(word);
 
@@ -179,7 +197,7 @@ namespace Bull
             }
             else
             {
-                word += String(m_sharedString->m_string[i]);
+                word += String(m_sharedString->string[i]);
             }
         }
 
@@ -200,7 +218,7 @@ namespace Bull
 
         for(std::size_t i = start; i <= stop; i++)
         {
-            m_sharedString->m_string[i] = String::toUpper(m_sharedString->m_string[i]);
+            m_sharedString->string[i] = String::toUpper(m_sharedString->string[i]);
         }
 
         return (*this);
@@ -215,7 +233,7 @@ namespace Bull
 
         for(std::size_t i = start; i <= stop; i++)
         {
-            m_sharedString->m_string[i] = String::toLower(m_sharedString->m_string[i]);
+            m_sharedString->string[i] = String::toLower(m_sharedString->string[i]);
         }
 
         return (*this);
@@ -232,23 +250,23 @@ namespace Bull
 
         if(getCapacity() >= getSize() + toInsert.getSize())
         {
-            std::memmove(&m_sharedString->m_string[start + toInsert.getSize()], &m_sharedString->m_string[start], getSize() - start);
-            std::memcpy(&m_sharedString->m_string[start], &toInsert[0], toInsert.getSize());
+            std::memmove(&m_sharedString->string[start + toInsert.getSize()], &m_sharedString->string[start], getSize() - start);
+            std::memcpy(&m_sharedString->string[start], &toInsert[0], toInsert.getSize());
 
-            m_sharedString->m_size += toInsert.getSize();
-            m_sharedString->m_string[m_sharedString->m_size] = String::NullByte;
+            m_sharedString->size += toInsert.getSize();
+            m_sharedString->string[m_sharedString->size] = String::NullByte;
         }
         else
         {
-            std::shared_ptr<SharedString> newSharedString = std::make_shared<SharedString>(getSize() + toInsert.getSize());
+            SharedString sharedBuffer = std::make_shared<prv::StringBuffer>(getSize() + toInsert.getSize());
 
-            std::memcpy(&newSharedString->m_string[0], &m_sharedString->m_string[0], start);
-            std::memcpy(&newSharedString->m_string[start], &toInsert.m_sharedString->m_string[0], toInsert.getSize());
-            std::memcpy(&newSharedString->m_string[start + toInsert.getSize()], &m_sharedString->m_string[start], getSize() - start);
+            std::memcpy(&sharedBuffer->string[0], &m_sharedString->string[0], start);
+            std::memcpy(&sharedBuffer->string[start], &toInsert.m_sharedString->string[0], toInsert.getSize());
+            std::memcpy(&sharedBuffer->string[start + toInsert.getSize()], &m_sharedString->string[start], getSize() - start);
 
-            newSharedString->m_string[newSharedString->m_size] = String::NullByte;
+            sharedBuffer->string[sharedBuffer->size] = String::NullByte;
 
-            m_sharedString = std::move(newSharedString);
+            m_sharedString = std::move(sharedBuffer);
         }
 
         return (*this);
@@ -258,9 +276,9 @@ namespace Bull
     {
         if(keepMemory)
         {
-            std::memset(&m_sharedString->m_string[0], 0, getCapacity());
-            m_sharedString->m_size = m_sharedString->m_capacity;
-            m_sharedString->m_string[getSize()] = '\0';
+            std::memset(&m_sharedString->string[0], 0, getCapacity());
+            m_sharedString->size = m_sharedString->capacity;
+            m_sharedString->string[getSize()] = '\0';
         }
         else
         {
@@ -270,35 +288,35 @@ namespace Bull
 
     void String::setSize(std::size_t size)
     {
-        std::shared_ptr<SharedString> string = std::make_shared<SharedString>(size);
+        SharedString sharedBuffer = std::make_shared<prv::StringBuffer>(size);
 
         if(size >= getSize())
         {
-            std::memcpy(&string->m_string[0], &m_sharedString->m_string[0], getSize());
-            std::memset(&string->m_string[getSize()], 0, string->m_size - getSize());
+            std::memcpy(&sharedBuffer->string[0], &m_sharedString->string[0], getSize());
+            std::memset(&sharedBuffer->string[getSize()], 0, sharedBuffer->size - getSize());
         }
         else
         {
-            std::memcpy(&string->m_string[0], &m_sharedString->m_string[0], size);
+            std::memcpy(&sharedBuffer->string[0], &m_sharedString->string[0], size);
         }
 
-        m_sharedString = std::move(string);
+        m_sharedString = std::move(sharedBuffer);
     }
 
     std::size_t String::getSize() const
     {
-        return m_sharedString->m_size;
+        return m_sharedString->size;
     }
 
     void String::reserve(std::size_t capacity)
     {
-        std::size_t size = std::min<std::size_t>(getSize(), capacity);
-        std::shared_ptr<SharedString> string = std::make_shared<SharedString>(size, capacity);
+        Index          size = std::min<std::size_t>(getSize(), capacity);
+        SharedString string = std::make_shared<prv::StringBuffer>(size, capacity);
 
         if(size >= getSize())
         {
-            std::memcpy(&string->m_string[0], &m_sharedString->m_string[0], getSize());
-            std::memset(&string->m_string[getSize()], 0, string->m_size - getSize());
+            std::memcpy(&string->string[0], &m_sharedString->string[0], getSize());
+            std::memset(&string->string[getSize()], 0, string->size - getSize());
         }
 
         m_sharedString = std::move(string);
@@ -306,43 +324,43 @@ namespace Bull
 
     std::size_t String::getCapacity() const
     {
-        return m_sharedString->m_capacity;
+        return m_sharedString->capacity;
     }
 
     bool String::isEmpty() const
     {
-        return m_sharedString->m_size == 0;
+        return m_sharedString->size == 0;
     }
 
     const char* String::getBuffer() const
     {
-        return &m_sharedString->m_string[0];
+        return &m_sharedString->string[0];
     }
 
     char& String::operator[](std::size_t index)
     {
         RangeCheck(index, getCapacity());
 
-        return m_sharedString->m_string[index];
+        return m_sharedString->string[index];
     }
 
     const char& String::operator[](std::size_t index) const
     {
         RangeCheck(index, getCapacity());
 
-        return m_sharedString->m_string[index];
+        return m_sharedString->string[index];
     }
 
     int String::toInt() const
     {
         int number = 0;
-        bool isNegatif = m_sharedString->m_string[0] == '-';
+        bool isNegatif = m_sharedString->string[0] == '-';
         std::size_t i = isNegatif ? 1 : 0;
 
-        while(i < getSize() && m_sharedString->m_string[i] >= '0' && m_sharedString->m_string[i] <= '9')
+        while(i < getSize() && m_sharedString->string[i] >= '0' && m_sharedString->string[i] <= '9')
         {
             number *= 10;
-            number += String::charToInt(m_sharedString->m_string[i]);
+            number += String::charToInt(m_sharedString->string[i]);
 
             i += 1;
         }
@@ -408,28 +426,5 @@ namespace Bull
     String& String::operator+=(const String& right)
     {
         return insert(right, getSize());
-    }
-
-    String::SharedString::SharedString() :
-        m_size(0),
-        m_capacity(0)
-    {
-        /// Nothing
-    }
-
-    String::SharedString::SharedString(std::size_t size) :
-        m_size(size),
-        m_capacity(size),
-        m_string(new char[size + 1])
-    {
-        m_string[m_size] = String::NullByte;
-    }
-
-    String::SharedString::SharedString(std::size_t size, std::size_t capacity) :
-        m_size(size),
-        m_capacity(capacity),
-        m_string(new char[capacity + 1])
-    {
-        m_string[m_size] = String::NullByte;
     }
 }

@@ -12,4 +12,7 @@ target_sources(bull-core
             ${BULL_SRC_CORE_MEMORY}/RangeCheck.cpp
             ${BULL_INC_CORE_MEMORY}/String.hpp
             ${BULL_SRC_CORE_MEMORY}/String.cpp
+        PRIVATE
+            ${BULL_SRC_CORE_MEMORY}/StringBuffer.hpp
+            ${BULL_SRC_CORE_MEMORY}/StringBuffer.cpp
         )

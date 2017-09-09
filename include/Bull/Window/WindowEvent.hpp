@@ -13,6 +13,7 @@ namespace Bull
     {
         enum Type
         {
+            None,
             Closed,
             Resized,
             Moved,
@@ -107,6 +108,11 @@ namespace Bull
             JoystickMovedEvent      joystickMoved;
             JoystickButtonEvent     joystickButton;
         };
+
+        /*! \brief Default constructor
+         *
+         */
+        WindowEvent();
 
         Type type;
     };

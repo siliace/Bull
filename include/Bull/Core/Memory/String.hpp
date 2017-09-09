@@ -1,5 +1,5 @@
-#ifndef BULL_STRING_HPP
-#define BULL_STRING_HPP
+#ifndef BULL_CORE_MEMORY_STRING_HPP
+#define BULL_CORE_MEMORY_STRING_HPP
 
 #include <memory>
 #include <limits>
@@ -7,16 +7,22 @@
 #include <vector>
 
 #include <Bull/Core/Export.hpp>
+#include <Bull/Core/System/Integer.hpp>
 
 namespace Bull
 {
+    namespace prv
+    {
+        struct StringBuffer;
+    }
+
     class BULL_CORE_API String
     {
     public:
 
         static constexpr char NullByte = '\0';
 
-        static constexpr std::size_t npos = std::numeric_limits<std::size_t>::max();
+        static constexpr Index npos = std::numeric_limits<Index>::max();
 
         /*! \brief Convert a lowercase character to the uppercase equivalent character
          *
@@ -78,14 +84,14 @@ namespace Bull
 
     private:
 
-        struct SharedString;
+        using SharedString = std::shared_ptr<prv::StringBuffer>;
 
         /*! \brief Get the instance of SharedString which corresponding to the empty string
          *
          * \return Return the empty SharedString
          *
          */
-        static const std::shared_ptr<SharedString>& getEmptyString();
+        static const SharedString& getEmptyString();
 
     public:
 
@@ -94,6 +100,21 @@ namespace Bull
          */
         String();
 
+        /*! \brief Constructor
+         *
+         * \param size The size of the String
+         *
+         */
+        explicit String(Index size);
+
+        /*! \brief Constructor
+         *
+         * \param size     The size of the String
+         * \param capacity The capacity of the String
+         *
+         */
+        String(Index size, Index capacity);
+        
         /*! \brief Constructor
          *
          * \param character The character to put in the string
@@ -114,8 +135,8 @@ namespace Bull
          * \param size   The size of the string
          *
          */
-        String(const char* string, std::size_t size);
-
+        String(const char* string, Index size);
+        
         /*! \brief Constructor
          *
          * \param string The string to copy
@@ -129,7 +150,7 @@ namespace Bull
          * \param size   The size of the string
          *
          */
-        void set(const char* string, std::size_t size);
+        void set(const char* string, Index size);
 
         /*! \brief Counts occurrences of a character in the string
          *
@@ -140,7 +161,7 @@ namespace Bull
          * \return Return the number of occurrences of the character in the string
          *
          */
-        unsigned int count(char character, std::size_t start = 0, bool caseSensitive = true) const;
+        unsigned int count(char character, Index start = 0, bool caseSensitive = true) const;
 
         /*! \brief Get a subpart of the string
          *
@@ -150,7 +171,7 @@ namespace Bull
          * \return Return the substring created
          *
          */
-        String subString(std::size_t start, std::size_t stop = String::npos) const;
+        String subString(Index start, Index stop = String::npos) const;
 
         /*! \brief Check whether a String start with a specified string
          *
@@ -187,7 +208,7 @@ namespace Bull
          * \return Return the string after the transformation
          *
          */
-        String& toUppercase(std::size_t start = 0, std::size_t stop = String::npos);
+        String& toUppercase(Index start = 0, Index stop = String::npos);
 
         /*! \brief Set the string in lowercase
          *
@@ -197,7 +218,7 @@ namespace Bull
          * \return Return the string after the transformation
          *
          */
-        String& toLowercase(std::size_t start = 0, std::size_t stop = String::npos);
+        String& toLowercase(Index start = 0, Index stop = String::npos);
 
         /*! \brief Inset a String at the ith index
          *
@@ -207,7 +228,7 @@ namespace Bull
          * \return Return this after the insert
          *
          */
-        String& insert(const String& toInsert, std::size_t index);
+        String& insert(const String& toInsert, Index index);
 
         /*! \brief Clear the string
          *
@@ -221,28 +242,28 @@ namespace Bull
          * \param size The new size of the string
          *
          */
-        void setSize(std::size_t size);
+        void setSize(Index size);
 
         /*! \brief Get the size of the string
          *
          * \return Return the size of the string
          *
          */
-        std::size_t getSize() const;
+        Index getSize() const;
 
         /*! \brief Set the capacity of the string
          *
          * \param capacity Set the capacity of the string
          *
          */
-        void reserve(std::size_t capacity);
+        void reserve(Index capacity);
 
         /*! \brief Get the capacity of the string
          *
          * \return Return the capacity of the string
          *
          */
-        std::size_t getCapacity() const;
+        Index getCapacity() const;
 
         /*! \brief Check whether the string is empty
          *
@@ -265,7 +286,7 @@ namespace Bull
          * \return Return the character at the ith position
          *
          */
-        char& operator[](std::size_t index);
+        char& operator[](Index index);
 
         /*! \brief Get the ith character of the string
          *
@@ -274,7 +295,7 @@ namespace Bull
          * \return Return the character at the ith position
          *
          */
-        const char& operator[](std::size_t index) const;
+        const char& operator[](Index index) const;
 
         /*! \brief Convert a string to an integer
          *
@@ -394,19 +415,8 @@ namespace Bull
 
     private:
 
-        struct SharedString
-        {
-            SharedString();
-            SharedString(std::size_t size);
-            SharedString(std::size_t size, std::size_t capacity);
-
-            std::size_t             m_size;
-            std::size_t             m_capacity;
-            std::unique_ptr<char[]> m_string;
-        };
-
-        std::shared_ptr<SharedString> m_sharedString;
+        SharedString m_sharedString;
     };
 }
 
-#endif // BULL_STRING_HPP
+#endif // BULL_CORE_MEMORY_STRING_HPP
