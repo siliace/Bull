@@ -100,14 +100,15 @@ namespace Bull
 
         Uint64 FileImplWin32::read(void* data, Uint64 size)
         {
+            DWORD read;
             LARGE_INTEGER cursor;
             cursor.QuadPart = getCursor();
 
             LockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(size), 0);
-            DWORD read = ReadFile(m_handler, data, size, &read, nullptr);
+            ReadFile(m_handler, data, size, &read, nullptr);
             UnlockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(size), 0);
 
-            return 0;
+            return read;
         }
 
         Uint64 FileImplWin32::write(const void* data, Uint64 size)
@@ -178,7 +179,7 @@ namespace Bull
                 return 0;
             }
 
-            return position.QuadPart;
+            return static_cast<Uint64>(position.QuadPart);
         }
 
         Uint64 FileImplWin32::moveCursor(Int64 offset)
@@ -192,7 +193,7 @@ namespace Bull
                 return 0;
             }
 
-            return position.QuadPart;
+            return static_cast<Uint64>(position.QuadPart);
         }
 
         Uint64 FileImplWin32::setCursor(Uint64 offset)
@@ -206,7 +207,7 @@ namespace Bull
                 return 0;
             }
 
-            return position.QuadPart;
+            return static_cast<Uint64>(position.QuadPart);
         }
 
         Uint64 FileImplWin32::getSize() const
@@ -215,7 +216,7 @@ namespace Bull
 
             GetFileSizeEx(m_handler, &size);
 
-            return size.QuadPart;
+            return static_cast<Uint64>(size.QuadPart);
         }
     }
 }
