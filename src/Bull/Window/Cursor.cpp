@@ -9,10 +9,7 @@ namespace Bull
         /// Nothing
     }
 
-    Cursor::~Cursor()
-    {
-        /// Nothing
-    }
+    Cursor::~Cursor() = default;
 
     bool Cursor::loadFromSystem(Type cursor)
     {

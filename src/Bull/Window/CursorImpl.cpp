@@ -30,9 +30,6 @@ namespace Bull
             return new CursorImplType();
         }
 
-        CursorImpl::~CursorImpl()
-        {
-            /// Nothing
-        }
+        CursorImpl::~CursorImpl() = default;
     }
 }
