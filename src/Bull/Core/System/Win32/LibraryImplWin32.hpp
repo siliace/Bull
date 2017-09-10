@@ -1,5 +1,5 @@
-#ifndef Bull_LibraryImplWin32_hpp
-#define Bull_LibraryImplWin32_hpp
+#ifndef BULL_CORE_SYSTEM_WIN32_LIBRARYIMPLWIN32_HPP
+#define BULL_CORE_SYSTEM_WIN32_LIBRARYIMPLWIN32_HPP
 
 #include <windows.h>
 
@@ -48,4 +48,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_LibraryImplWin32_hpp
+#endif // BULL_CORE_SYSTEM_WIN32_LIBRARYIMPLWIN32_HPP

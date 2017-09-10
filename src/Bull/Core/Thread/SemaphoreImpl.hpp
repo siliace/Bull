@@ -1,5 +1,5 @@
-#ifndef Bull_SemaphoreImpl_hpp
-#define Bull_SemaphoreImpl_hpp
+#ifndef BULL_CORE_THREAD_SEMAPHOREIMPL_HPP
+#define BULL_CORE_THREAD_SEMAPHOREIMPL_HPP
 
 #include <Bull/Core/Pattern/Singleton.hpp>
 #include <Bull/Core/Time/Time.hpp>
@@ -64,4 +64,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_SemaphoreImpl_hpp
+#endif // BULL_CORE_THREAD_SEMAPHOREIMPL_HPP

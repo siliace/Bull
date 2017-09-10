@@ -26,9 +26,6 @@ namespace Bull
             return nullptr;
         }
 
-        LibraryImpl::~LibraryImpl()
-        {
-            /// Nothing
-        }
+        LibraryImpl::~LibraryImpl() = default;
     }
 }

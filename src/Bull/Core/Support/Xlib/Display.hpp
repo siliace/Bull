@@ -1,5 +1,5 @@
-#ifndef BULL_DISPLAY_HPP
-#define BULL_DISPLAY_HPP
+#ifndef BULL_CORE_SUPPORT_XLIB_DISPLAY_HPP
+#define BULL_CORE_SUPPORT_XLIB_DISPLAY_HPP
 
 #include <map>
 
@@ -103,4 +103,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_DISPLAY_HPP
+#endif // BULL_CORE_SUPPORT_XLIB_DISPLAY_HPP

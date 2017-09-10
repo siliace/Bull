@@ -6,7 +6,7 @@
 #else
     #include <Bull/Core/FileSystem/Unix/DirectoryImplUnix.hpp>
     typedef Bull::prv::DirectoryImplUnix DirectoryImplType;
-#endif // defined
+#endif
 
 namespace Bull
 {

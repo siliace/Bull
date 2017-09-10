@@ -17,9 +17,6 @@ namespace Bull
             return new SemaphoreImplType(count);
         }
 
-        SemaphoreImpl::~SemaphoreImpl()
-        {
-            /// Nothing
-        }
+        SemaphoreImpl::~SemaphoreImpl() = default;
     }
 }

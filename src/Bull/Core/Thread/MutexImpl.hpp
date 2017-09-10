@@ -1,5 +1,5 @@
-#ifndef Bull_MutexImpl_hpp
-#define Bull_MutexImpl_hpp
+#ifndef BULL_CORE_THREAD_MUTEXIMPL_HPP
+#define BULL_CORE_THREAD_MUTEXIMPL_HPP
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/MutexHandler.hpp>
@@ -60,4 +60,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_MutexImpl_hpp
+#endif // BULL_CORE_THREAD_MUTEXIMPL_HPP

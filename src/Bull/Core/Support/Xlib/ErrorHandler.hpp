@@ -1,5 +1,5 @@
-#ifndef BULL_ERRORHANDLER_HPP
-#define BULL_ERRORHANDLER_HPP
+#ifndef BULL_CORE_SUPPORT_XLIB_ERRORHANDLER_HPP
+#define BULL_CORE_SUPPORT_XLIB_ERRORHANDLER_HPP
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Support/Xlib/Display.hpp>
@@ -66,11 +66,11 @@ namespace Bull
         private:
 
             Lock          m_lock;
-            bool          m_isBinded;
+            bool          m_isBound;
             XErrorHandler m_previousHandler;
         };
     }
 }
 
-#endif // BULL_ERRORHANDLER_HPP
+#endif // BULL_CORE_SUPPORT_XLIB_ERRORHANDLER_HPP
 

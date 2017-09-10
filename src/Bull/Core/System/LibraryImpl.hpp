@@ -1,5 +1,5 @@
-#ifndef Bull_LibraryImpl_hpp
-#define Bull_LibraryImpl_hpp
+#ifndef BULL_CORE_SYSTEM_LIBRARYIMPL_HPP
+#define BULL_CORE_SYSTEM_LIBRARYIMPL_HPP
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/Library.hpp>
@@ -56,4 +56,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_LibraryImpl_hpp
+#endif // BULL_CORE_SYSTEM_LIBRARYIMPL_HPP

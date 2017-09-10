@@ -17,9 +17,6 @@ namespace Bull
             return new MutexImplType();
         }
 
-        MutexImpl::~MutexImpl()
-        {
-            /// Nothing
-        }
+        MutexImpl::~MutexImpl() = default;
     }
 }

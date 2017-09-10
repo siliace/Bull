@@ -9,10 +9,7 @@ namespace Bull
         /// Nothing
     }
 
-    Semaphore::~Semaphore()
-    {
-        /// Nothing
-    }
+    Semaphore::~Semaphore() = default;
 
     void Semaphore::wait()
     {

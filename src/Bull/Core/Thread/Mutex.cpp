@@ -10,10 +10,7 @@ namespace Bull
         /// Nothing
     }
 
-    Mutex::~Mutex()
-    {
-        /// Nothing
-    }
+    Mutex::~Mutex() = default;
 
     bool Mutex::tryLock()
     {

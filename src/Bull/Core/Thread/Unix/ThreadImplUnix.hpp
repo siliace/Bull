@@ -1,5 +1,5 @@
-#ifndef Bull_ThreadImplUnix_hpp
-#define Bull_ThreadImplUnix_hpp
+#ifndef BULL_CORE_THREAD_UNIX_THREADIMPLUNIX_HPP
+#define BULL_CORE_THREAD_UNIX_THREADIMPLUNIX_HPP
 
 #include <pthread.h>
 
@@ -58,5 +58,5 @@ namespace Bull
     }
 }
 
-#endif // Bull_ThreadImplUnix_hpp
+#endif // BULL_CORE_THREAD_UNIX_THREADIMPLUNIX_HPP
 

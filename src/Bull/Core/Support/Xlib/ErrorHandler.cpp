@@ -9,7 +9,7 @@ namespace Bull
         Mutex ErrorHandler::s_mutex;
         bool ErrorHandler::s_errorOccurred = false;
 
-        int ErrorHandler::handle(::Display* display, XErrorEvent* error)
+        int ErrorHandler::handle(XDisplay* display, XErrorEvent* error)
         {
             String errorMessage(nullptr, 256);
 
@@ -24,7 +24,7 @@ namespace Bull
 
         ErrorHandler::ErrorHandler() :
             m_lock(s_mutex),
-            m_isBinded(false)
+            m_isBound(false)
         {
             s_errorOccurred = false;
 
@@ -51,7 +51,7 @@ namespace Bull
             if(!m_isBinded)
             {
                 m_previousHandler = XSetErrorHandler(&ErrorHandler::handle);
-                m_isBinded = true;
+                m_isBound = true;
             }
         }
 
@@ -61,7 +61,7 @@ namespace Bull
             {
                 XSync(Display::get()->getHandler(), False);
                 XSetErrorHandler(m_previousHandler);
-                m_isBinded = false;
+                m_isBound = false;
             }
         }
     }

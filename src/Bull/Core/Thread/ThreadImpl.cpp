@@ -22,9 +22,6 @@ namespace Bull
             ThreadImplType::sleep(time);
         }
 
-        ThreadImpl::~ThreadImpl()
-        {
-            /// Nothing
-        }
+        ThreadImpl::~ThreadImpl() = default;
     }
 }

@@ -1,5 +1,5 @@
-#ifndef Bull_ConditionVariableImplUnix_hpp
-#define Bull_ConditionVariableImplUnix_hpp
+#ifndef BULL_CORE_THREAD_UNIX_CONDITIONVARIABLEIMPLUNIX_HPP
+#define BULL_CORE_THREAD_UNIX_CONDITIONVARIABLEIMPLUNIX_HPP
 
 #include <pthread.h>
 
@@ -57,6 +57,6 @@ namespace Bull
     }
 }
 
-#endif // Bull_ConditionVariableImplUnix_hpp
+#endif // BULL_CORE_THREAD_UNIX_CONDITIONVARIABLEIMPLUNIX_HPP
 
 

@@ -1,5 +1,5 @@
-#ifndef BULL_WMHINTS_HPP
-#define BULL_WMHINTS_HPP
+#ifndef BULL_CORE_SUPPORT_XLIB_WMHINTS_HPP
+#define BULL_CORE_SUPPORT_XLIB_WMHINTS_HPP
 
 namespace Bull
 {
@@ -48,4 +48,4 @@ namespace Bull
     }
 }
 
-#endif //BULL_WMHINTS_HPP
+#endif // BULL_CORE_SUPPORT_XLIB_WMHINTS_HPP

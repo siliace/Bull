@@ -9,10 +9,7 @@ namespace Bull
         ///Nothing
     }
 
-    ConditionVariable::~ConditionVariable()
-    {
-        /// Nothing
-    }
+    ConditionVariable::~ConditionVariable() = default;
 
     void ConditionVariable::signalOne()
     {

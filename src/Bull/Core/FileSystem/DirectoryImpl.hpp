@@ -1,5 +1,5 @@
-#ifndef Bull_DirectoryImpl_hpp
-#define Bull_DirectoryImpl_hpp
+#ifndef BULL_CORE_FILESYSTEM_DIRECTORYIMPL_HPP
+#define BULL_CORE_FILESYSTEM_DIRECTORYIMPL_HPP
 
 #include <vector>
 
@@ -85,5 +85,5 @@ namespace Bull
     }
 }
 
-#endif // Bull_DirectoryImpl_hpp
+#endif // BULL_CORE_FILESYSTEM_DIRECTORYIMPL_HPP
 

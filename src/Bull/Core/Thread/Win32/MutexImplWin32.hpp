@@ -1,5 +1,5 @@
-#ifndef Bull_MutexImplWin32_hpp
-#define Bull_MutexImplWin32_hpp
+#ifndef BULL_CORE_THREAD_WIN32_MUTEXIMPLWIN32_HPP
+#define BULL_CORE_THREAD_WIN32_MUTEXIMPLWIN32_HPP
 
 #include <windows.h>
 
@@ -58,4 +58,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_MutexImplWin32_hpp
+#endif // BULL_CORE_THREAD_WIN32_MUTEXIMPLWIN32_HPP

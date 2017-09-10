@@ -1,5 +1,5 @@
-#ifndef Bull_ConditionVariableImplWin32_hpp
-#define Bull_ConditionVariableImplWin32_hpp
+#ifndef BULL_CORE_THREAD_WIN32_CONDITIONVARIABLEIMPLWIN32_HPP
+#define BULL_CORE_THREAD_WIN32_CONDITIONVARIABLEIMPLWIN32_HPP
 
 #include <Bull/Core/System/OS.hpp>
 #include <windows.h>
@@ -53,4 +53,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_ConditionVariableImplWin32_hpp
+#endif // BULL_CORE_THREAD_WIN32_CONDITIONVARIABLEIMPLWIN32_HPP

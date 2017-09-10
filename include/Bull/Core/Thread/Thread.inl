@@ -18,7 +18,7 @@ namespace Bull
         /// Nothing
     }
 
-     template<typename Instance, typename Class>
+    template<typename Instance, typename Class>
     Thread::Thread(Instance& instance, void(Class::*member)()) :
         m_impl(nullptr),
         m_function(instance, member),

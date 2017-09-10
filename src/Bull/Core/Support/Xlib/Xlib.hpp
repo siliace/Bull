@@ -1,5 +1,5 @@
-#ifndef BULL_XLIB_HPP
-#define BULL_XLIB_HPP
+#ifndef BULL_CORE_SUPPORT_XLIB_XLIB_HPP
+#define BULL_CORE_SUPPORT_XLIB_XLIB_HPP
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
@@ -31,4 +31,4 @@ namespace Bull
     }
 }
 
-#endif //BULL_XLIB_HPP
+#endif // BULL_CORE_SUPPORT_XLIB_XLIB_HPP

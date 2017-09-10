@@ -1,5 +1,5 @@
-#ifndef Bull_ThreadImpl_hpp
-#define Bull_ThreadImpl_hpp
+#ifndef BULL_CORE_THREAD_THREADIMPL_HPP
+#define BULL_CORE_THREAD_THREADIMPL_HPP
 
 #include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
@@ -58,4 +58,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_ThreadImpl_hpp
+#endif // BULL_CORE_THREAD_THREADIMPL_HPP

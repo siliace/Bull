@@ -1,5 +1,5 @@
-#ifndef Bull_DirectoryImplUnix_hpp
-#define Bull_DirectoryImplUnix_hpp
+#ifndef BULL_CORE_FILESYSTEM_DIRECTORYIMPLUNIX_HPP
+#define BULL_CORE_FILESYSTEM_DIRECTORYIMPLUNIX_HPP
 
 #include <dirent.h>
 
@@ -77,4 +77,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_DirectoryImplUnix_hpp
+#endif // BULL_CORE_FILESYSTEM_DIRECTORYIMPLUNIX_HPP

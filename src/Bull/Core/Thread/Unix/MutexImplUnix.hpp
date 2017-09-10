@@ -1,5 +1,5 @@
-#ifndef Bull_MutexImplUnix_hpp
-#define Bull_MutexImplUnix_hpp
+#ifndef BULL_CORE_THREAD_UNIX_MUTEXIMPLUNIX_HPP
+#define BULL_CORE_THREAD_UNIX_MUTEXIMPLUNIX_HPP
 
 #include <pthread.h>
 
@@ -58,4 +58,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_MutexImplUnix_hpp
+#endif // BULL_CORE_THREAD_UNIX_MUTEXIMPLUNIX_HPP

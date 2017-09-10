@@ -1,5 +1,5 @@
-#ifndef Bull_ConditionVariableImpl_hpp
-#define Bull_ConditionVariableImpl_hpp
+#ifndef BULL_CORE_THREAD_CONDITIONVARIABLEIMPL_HPP
+#define BULL_CORE_THREAD_CONDITIONVARIABLEIMPL_HPP
 
 #include <memory>
 
@@ -67,5 +67,5 @@ namespace Bull
     }
 }
 
-#endif // Bull_ConditionVariableImpl_hpp
+#endif // BULL_CORE_THREAD_CONDITIONVARIABLEIMPL_HPP
 

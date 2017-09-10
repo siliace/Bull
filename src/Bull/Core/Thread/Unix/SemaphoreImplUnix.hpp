@@ -1,5 +1,5 @@
-#ifndef Bull_SemaphoreImplUnix_hpp
-#define Bull_SemaphoreImplUnix_hpp
+#ifndef BULL_CORE_THREAD_UNIX_SEMAPHOREIMPLUNIX_HPP
+#define BULL_CORE_THREAD_UNIX_SEMAPHOREIMPLUNIX_HPP
 
 #include <semaphore.h>
 
@@ -58,4 +58,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_SemaphoreImplUnix_hpp
+#endif // BULL_CORE_THREAD_UNIX_SEMAPHOREIMPLUNIX_HPP

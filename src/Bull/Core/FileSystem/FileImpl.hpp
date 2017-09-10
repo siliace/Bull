@@ -1,5 +1,5 @@
-#ifndef Bull_FileImpl_hpp
-#define Bull_FileImpl_hpp
+#ifndef BULL_CORE_FILESYSTEM_FILEIMPL_HPP
+#define BULL_CORE_FILESYSTEM_FILEIMPL_HPP
 
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
@@ -158,4 +158,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_FileImpl_hpp
+#endif // BULL_CORE_FILESYSTEM_FILEIMPL_HPP

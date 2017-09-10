@@ -17,9 +17,6 @@ namespace Bull
             return new ConditionVariableType();
         }
 
-        ConditionVariableImpl::~ConditionVariableImpl()
-        {
-            /// Nothing
-        }
+        ConditionVariableImpl::~ConditionVariableImpl() = default;
     }
 }

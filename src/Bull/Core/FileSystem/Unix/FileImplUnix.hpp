@@ -1,5 +1,5 @@
-#ifndef Bull_FileImplUnix_hpp
-#define Bull_FileImplUnix_hpp
+#ifndef BULL_CORE_FILESYSTEM_FILEIMPLUNIX_HPP
+#define BULL_CORE_FILESYSTEM_FILEIMPLUNIX_HPP
 
 #include <Bull/Core/FileSystem/FileImpl.hpp>
 
@@ -135,7 +135,6 @@ namespace Bull
              */
             Uint64 getSize() const override;
 
-
         private:
 
             int m_handler;
@@ -143,4 +142,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_FileImplUnix_hpp
+#endif // BULL_CORE_FILESYSTEM_FILEIMPLUNIX_HPP
