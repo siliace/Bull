@@ -104,12 +104,14 @@ namespace Bull
 
     ByteArray& ByteArray::operator+=(const ByteArray& right)
     {
+        m_array.insert(m_array.end(), right.m_array.begin(), right.m_array.end());
+
         return (*this);
     }
 
     ByteArray ByteArray::operator+(const ByteArray& right) const
     {
-
+        return ByteArray((*this)) += right;
     }
 
     Uint8& ByteArray::operator[](Index index)
