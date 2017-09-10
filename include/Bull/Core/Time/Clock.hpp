@@ -1,5 +1,5 @@
-#ifndef Bull_Clock_hpp
-#define Bull_Clock_hpp
+#ifndef BULL_CORE_TIME_CLOCK
+#define BULL_CORE_TIME_CLOCK
 
 #include <Bull/Core/Time/Time.hpp>
 
@@ -78,4 +78,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Clock_hpp
+#endif // BULL_CORE_TIME_CLOCK

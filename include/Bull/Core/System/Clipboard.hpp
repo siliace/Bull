@@ -1,5 +1,5 @@
-#ifndef BULL_CLIPBOARD_HPP
-#define BULL_CLIPBOARD_HPP
+#ifndef BULL_CORE_SYSTEM_CLIPBOARD_HPP
+#define BULL_CORE_SYSTEM_CLIPBOARD_HPP
 
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/Memory/String.hpp>
@@ -29,4 +29,4 @@ namespace Bull
     };
 }
 
-#endif //BULL_CLIPBOARD_HPP
+#endif // BULL_CORE_SYSTEM_CLIPBOARD_HPP

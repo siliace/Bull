@@ -15,31 +15,31 @@ namespace Bull
         open(mode, title, WindowStyle);
     }
 
-    bool Window::open(const VideoMode& mode, const String& title, Uint32 WindowStyle)
+    bool Window::open(const VideoMode& mode, const String& title, Uint32 style)
     {
         if(isOpen())
         {
             close();
         }
 
-        if(WindowStyle == WindowStyle::Fullscreen && s_fullscreen)
+        if(style == WindowStyle::Fullscreen && s_fullscreen)
         {
-            WindowStyle = WindowStyle::Default;
+            style = WindowStyle::Default;
         }
 
-        m_impl.reset(prv::WindowImpl::createInstance(mode, title, WindowStyle));
+        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style));
 
-        if(WindowStyle == WindowStyle::Fullscreen)
+        if(style == WindowStyle::Fullscreen)
         {
             enableFullscreen();
         }
 
         setTitle(title);
-        setVisible(true);
         setMinSize(-1, -1);
-        setMinSize(-1, -1);
+        setMaxSize(-1, -1);
         enableKeyRepeat(true);
         setMouseCursorVisible(true);
+        setVisible(style & WindowStyle::Visible);
 
         onOpen();
 

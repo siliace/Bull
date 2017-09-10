@@ -1,5 +1,5 @@
-#ifndef Bull_Functor_hpp
-#define Bull_Functor_hpp
+#ifndef BULL_CORE_FUNCTOR_HPP
+#define BULL_CORE_FUNCTOR_HPP
 
 #include <memory>
 
@@ -21,7 +21,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Functor();
+        Functor() = default;
 
         /*! \brief Constructor
          *
@@ -106,4 +106,4 @@ namespace Bull
 
 #include <Bull/Core/Functor/Functor.inl>
 
-#endif // Bull_Functor_hpp
+#endif // BULL_CORE_FUNCTOR_HPP

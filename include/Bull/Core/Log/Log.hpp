@@ -1,5 +1,5 @@
-#ifndef Bull_Log_hpp
-#define Bull_Log_hpp
+#ifndef BULL_CORE_LOG_LOG_HPP
+#define BULL_CORE_LOG_LOG_HPP
 
 #include <memory>
 #include <vector>
@@ -54,4 +54,4 @@ namespace Bull
 
 #include <Bull/Core/Log/Log.inl>
 
-#endif // Bull_Log_hpp
+#endif // BULL_CORE_LOG_LOG_HPP

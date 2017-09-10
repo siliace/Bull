@@ -1,5 +1,5 @@
-#ifndef BULL_SYSTEMEXPORT_hpp
-#define BULL_SYSTEMEXPORT_hpp
+#ifndef BULL_CORE_SYSTEM_EXPORT_hpp
+#define BULL_CORE_SYSTEM_EXPORT_hpp
 
 #include <Bull/Core/System/OS.hpp>
 
@@ -21,4 +21,4 @@
 #endif
 
 
-#endif // BULL_SYSTEMEXPORT_hpp
+#endif // BULL_CORE_SYSTEM_EXPORT_hpp

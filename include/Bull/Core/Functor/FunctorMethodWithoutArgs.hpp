@@ -1,5 +1,5 @@
-#ifndef Bull_FunctorMethodWithoutArgs_hpp
-#define Bull_FunctorMethodWithoutArgs_hpp
+#ifndef BULL_CORE_FUNCTORMETHODTWITHOUT_HPP
+#define BULL_CORE_FUNCTORMETHODTWITHOUT_HPP
 
 #include <Bull/Core/Functor/AbstractFunctor.hpp>
 
@@ -37,6 +37,6 @@ namespace Bull
 
 #include <Bull/Core/Functor/FunctorMethodWithoutArgs.inl>
 
-#endif // Bull_FunctorMethodWithoutArgs_hpp
+#endif // BULL_CORE_FUNCTORMETHODTWITHOUT_HPP
 
 

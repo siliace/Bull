@@ -1,5 +1,5 @@
-#ifndef BULL_TIME_HPP
-#define BULL_TIME_HPP
+#ifndef BULL_CORE_TIME_TIME_HPP
+#define BULL_CORE_TIME_TIME_HPP
 
 #include <Bull/Core/Export.hpp>
 
@@ -79,7 +79,7 @@ namespace Bull
          * \param time The number of seconds
          *
          */
-        Time(float time);
+        explicit Time(float time);
 
         /*! \brief Convert a time to nanoseconds
          *
@@ -262,4 +262,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_TIME_HPP
+#endif // BULL_CORE_TIME_TIME_HPP

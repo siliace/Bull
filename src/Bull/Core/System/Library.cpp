@@ -3,11 +3,6 @@
 
 namespace Bull
 {
-    Library::Library()
-    {
-        /// Nothing
-    }
-
     Library::Library(const String& name)
     {
         load(name);
@@ -32,7 +27,7 @@ namespace Bull
 
     bool Library::isLoaded() const
     {
-        return m_impl.get() != nullptr;
+        return m_impl != nullptr;
     }
 
     Library::LibFunction Library::getFunction(const String& name)
@@ -47,6 +42,6 @@ namespace Bull
 
     void Library::free()
     {
-        m_impl.reset(nullptr);
+        m_impl.reset();
     }
 }

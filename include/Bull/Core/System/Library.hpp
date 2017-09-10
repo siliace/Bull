@@ -1,7 +1,6 @@
-#ifndef Bull_Library_hpp
-#define Bull_Library_hpp
+#ifndef BULL_CORE_SYSTEM_LIBRARY_HPP
+#define BULL_CORE_SYSTEM_LIBRARY_HPP
 
-#include <functional>
 #include <memory>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
@@ -25,14 +24,14 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Library();
+        Library() = default;
 
         /*! \brief Constructor
          *
          * \param name The name or the path to the library to load
          *
          */
-        Library(const String& name);
+        explicit Library(const String& name);
 
         /*! \brief Destructor
          *
@@ -75,4 +74,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_Library_hpp
+#endif // BULL_CORE_SYSTEM_LIBRARY_HPP

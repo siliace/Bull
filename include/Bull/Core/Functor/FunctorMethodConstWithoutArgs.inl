@@ -2,12 +2,6 @@ namespace Bull
 {
     namespace prv
     {
-        /*! \brief Constructor
-         *
-         * \param instance The instance to use to call the method
-         * \param method   The method to call
-         *
-         */
         template<typename Instance, typename Class, typename Return>
         FunctorMethodConstWithoutArgs<Instance, Class, Return>::FunctorMethodConstWithoutArgs(const Instance& instance, Return(Class::*method)() const) :
             m_instance(instance),
@@ -16,11 +10,6 @@ namespace Bull
             /// Nothing
         }
 
-        /*! \brief Call the stored function
-         *
-         * \return Return what the called function returned
-         *
-         */
         template<typename Instance, typename Class, typename Return>
         Return FunctorMethodConstWithoutArgs<Instance, Class, Return>::run()
         {

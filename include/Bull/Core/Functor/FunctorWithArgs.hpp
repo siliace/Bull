@@ -1,5 +1,5 @@
-#ifndef Bull_FunctorWithArgs_hpp
-#define Bull_FunctorWithArgs_hpp
+#ifndef BULL_CORE_FUNCTORWITHARGS_HPP
+#define BULL_CORE_FUNCTORWITHARGS_HPP
 
 #include <tuple>
 

@@ -1,5 +1,5 @@
-#ifndef Bull_Integer_hpp
-#define Bull_Integer_hpp
+#ifndef BULL_CORE_SYSTEM_INTEGER_HPP
+#define BULL_CORE_SYSTEM_INTEGER_HPP
 
 #include <cstdint>
 
@@ -18,4 +18,4 @@ namespace Bull
     typedef std::size_t Index;
 }
 
-#endif // Bull_Integer_hpp
+#endif // BULL_CORE_SYSTEM_INTEGER_HPP

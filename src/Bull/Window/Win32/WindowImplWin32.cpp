@@ -67,11 +67,31 @@ namespace Bull
             if(windowImpl)
             {
                 windowImpl->processEvent(message, wParam, lParam);
-            }
 
-            if(message == WM_CLOSE)
-            {
-                return 0;
+                switch(message)
+                {
+                    case WM_CLOSE:
+                    {
+                        return 0;
+                    }
+                    break;
+
+                    case WM_GETMINMAXINFO:
+                    {
+                        Vector2I min           = windowImpl->getMinSize();
+                        Vector2I max           = windowImpl->getMaxSize();
+                        MINMAXINFO* minmaxinfo = reinterpret_cast<MINMAXINFO*>(lParam);
+
+                        minmaxinfo->ptMaxSize.x = std::numeric_limits<LONG>::max();
+                        minmaxinfo->ptMaxSize.y = std::numeric_limits<LONG>::max();
+
+                        minmaxinfo->ptMinTrackSize.x = min.x;
+                        minmaxinfo->ptMinTrackSize.y = min.y;
+                        minmaxinfo->ptMaxTrackSize.x = max.x;
+                        minmaxinfo->ptMaxTrackSize.y = max.y;
+                    }
+                    break;
+                }
             }
 
             return DefWindowProc(handler, message, wParam, lParam);
@@ -208,7 +228,7 @@ namespace Bull
         {
             DWORD windowWindowStyle = 0;
 
-            if(WindowStyle & (WindowStyle::Visible) || WindowStyle & (WindowStyle::Fullscreen))
+            if(WindowStyle & (WindowStyle::Visible) || WindowStyle == WindowStyle::Fullscreen)
             {
                 windowWindowStyle |= WS_VISIBLE;
             }
@@ -236,28 +256,30 @@ namespace Bull
             return windowWindowStyle;
         }
 
-        WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 WindowStyle) :
+        WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style) :
             m_cursor(LoadCursor(nullptr, IDC_ARROW)),
             m_isResizing(false),
+            m_minSize(-1, -1),
+            m_maxSize(-1, -1),
             m_cursorVisible(true)
         {
             unsigned int width, height;
-            DWORD winWindowStyle = computeWindowStyle(WindowStyle);
+            DWORD winWindowStyle = computeWindowStyle(style);
 
             if(instanceCounter == 0)
             {
                 registerWindowClass();
             }
 
-            if(!(WindowStyle & WindowStyle::Fullscreen))
+            if(!(style & WindowStyle::Fullscreen))
             {
                 RECT rectangle = {0, 0,
                                   static_cast<LONG>(mode.width),
                                   static_cast<LONG>(mode.height)};
 
                 AdjustWindowRect(&rectangle, winWindowStyle, false);
-                width  = rectangle.right - rectangle.left;
-                height = rectangle.bottom - rectangle.top;
+                width  = static_cast<unsigned int>(rectangle.right - rectangle.left);
+                height = static_cast<unsigned int>(rectangle.bottom - rectangle.top);
             }
             else
             {
@@ -274,9 +296,9 @@ namespace Bull
                                         nullptr,
                                         nullptr,
                                         instance,
-                                        nullptr);
+                                        this);
 
-            SetWindowLongPtrW(m_handler, GWL_USERDATA, (LONG_PTR)this);
+            SetWindowLongPtrW(m_handler, GWLP_USERDATA, (LONG_PTR)this);
 
             UpdateWindow(m_handler);
 
@@ -338,7 +360,7 @@ namespace Bull
         {
             if(capture)
             {
-                RECT winRect;
+                RECT winRect = {0, 0, 0, 0};
 
                 GetClientRect(m_handler, &winRect);
 
@@ -357,7 +379,7 @@ namespace Bull
 
         Vector2I WindowImplWin32::getPosition() const
         {
-            RECT r;
+            RECT r = {0, 0, 0, 0};
 
             GetWindowRect(m_handler, &r);
 
@@ -366,7 +388,14 @@ namespace Bull
 
         void WindowImplWin32::setMinSize(const Vector2I& size)
         {
+            RECT r = {0, 0,
+                      size.x,
+                      size.y,
+            };
+            AdjustWindowRect(&r, static_cast<DWORD>(GetWindowLongPtr(m_handler, GWL_STYLE)), false);
 
+            m_minSize.x = (size.x != -1) ? r.right  - r.left : -1;
+            m_minSize.y = (size.y != -1) ? r.bottom - r.top  : -1;
         }
 
         Vector2I WindowImplWin32::getMinSize() const
@@ -376,7 +405,14 @@ namespace Bull
 
         void WindowImplWin32::setMaxSize(const Vector2I& size)
         {
+            RECT r = {0, 0,
+                      size.x,
+                      size.y,
+            };
+            AdjustWindowRect(&r, static_cast<DWORD>(GetWindowLongPtr(m_handler, GWL_STYLE)), false);
 
+            m_maxSize.x = (size.x != -1) ? r.right  - r.left : -1;
+            m_maxSize.y = (size.y != -1) ? r.bottom - r.top  : -1;
         }
 
         Vector2I WindowImplWin32::getMaxSize() const
@@ -386,16 +422,21 @@ namespace Bull
 
         void WindowImplWin32::setSize(const Vector2UI& size)
         {
-            SetWindowPos(m_handler, nullptr, 0, 0, size.x, size.y, SWP_NOMOVE);
+            RECT r = {0, 0,
+                      static_cast<LONG>(size.x),
+                      static_cast<LONG>(size.y),
+            };
+            AdjustWindowRect(&r, static_cast<DWORD>(GetWindowLongPtr(m_handler, GWL_STYLE)), false);
+            SetWindowPos(m_handler, nullptr, 0, 0, r.right - r.left, r.bottom - r.top, SWP_NOMOVE);
         }
 
         Vector2UI WindowImplWin32::getSize() const
         {
-            RECT r;
+            RECT r = {0, 0, 0, 0};
 
             GetClientRect(m_handler, &r);
 
-            return Vector2UI(r.right - r.left, r.bottom - r.top);
+            return Vector2UI(static_cast<unsigned int>(r.right - r.left), static_cast<unsigned int>(r.bottom - r.top));
         }
 
         void WindowImplWin32::setTitle(const String& title)

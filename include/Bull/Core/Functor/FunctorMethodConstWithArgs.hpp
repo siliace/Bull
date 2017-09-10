@@ -1,5 +1,5 @@
-#ifndef Bull_FunctorMethodConstWithArgs_hpp
-#define Bull_FunctorMethodConstWithArgs_hpp
+#ifndef BULL_CORE_FUNCTORMETHODCONSTWITHARGS_HPP
+#define BULL_CORE_FUNCTORMETHODCONSTWITHARGS_HPP
 
 #include <tuple>
 
@@ -42,5 +42,5 @@ namespace Bull
 
 #include <Bull/Core/Functor/FunctorMethodConstWithArgs.inl>
 
-#endif // Bull_FunctorMethodConstWithArgs_hpp
+#endif // BULL_CORE_FUNCTORMETHODCONSTWITHARGS_HPP
 
