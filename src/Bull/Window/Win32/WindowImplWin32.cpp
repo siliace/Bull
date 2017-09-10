@@ -66,11 +66,11 @@ namespace Bull
 
         LRESULT CALLBACK WindowImplWin32::globalEvent(HWND handler, UINT message, WPARAM wParam, LPARAM lParam)
         {
-            WindowImplWin32* windowImpl = reinterpret_cast<WindowImplWin32*>(GetWindowLongPtrW(handler, GWL_USERDATA));
+            WindowImplWin32* window = reinterpret_cast<WindowImplWin32*>(GetWindowLongPtrW(handler, GWL_USERDATA));
 
-            if(windowImpl)
+            if(window)
             {
-                windowImpl->processEvent(message, wParam, lParam);
+                window->processEvent(message, wParam, lParam);
 
                 switch(message)
                 {
@@ -80,10 +80,18 @@ namespace Bull
                     }
                     break;
 
+                    case WM_CREATE:
+                    {
+                        WindowImpl* createdImpl  = static_cast<WindowImpl*>(reinterpret_cast<CREATESTRUCT*>(lParam)->lpCreateParams);
+
+                        SetWindowLongPtr(handler, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(createdImpl));
+                    }
+                    break;
+
                     case WM_GETMINMAXINFO:
                     {
-                        Vector2I min           = windowImpl->getMinSize();
-                        Vector2I max           = windowImpl->getMaxSize();
+                        Vector2I min           = window->getMinSize();
+                        Vector2I max           = window->getMaxSize();
                         MINMAXINFO* minmaxinfo = reinterpret_cast<MINMAXINFO*>(lParam);
 
                         minmaxinfo->ptMaxSize.x = std::numeric_limits<LONG>::max();
@@ -317,8 +325,6 @@ namespace Bull
                                         nullptr,
                                         instance,
                                         this);
-
-            SetWindowLongPtrW(m_handler, GWLP_USERDATA, (LONG_PTR)this);
 
             UpdateWindow(m_handler);
 
