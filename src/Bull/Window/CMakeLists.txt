@@ -16,6 +16,8 @@ target_sources(bull-window
             ${BULL_SRC_WINDOW}/WindowEvent.cpp
             ${BULL_INC_WINDOW}/WindowStyle.hpp
         PRIVATE
+            ${BULL_SRC_WINDOW}/AbstractInputManager.hpp
+            ${BULL_SRC_WINDOW}/AbstractJoystickManager.hpp
             ${BULL_SRC_WINDOW}/CursorHandler.hpp
             ${BULL_SRC_WINDOW}/CursorImpl.cpp
             ${BULL_SRC_WINDOW}/CursorImpl.hpp

@@ -31,10 +31,7 @@ namespace Bull
             return new WindowImplType(mode, title, WindowStyle);
         }
 
-        WindowImpl::~WindowImpl()
-        {
-            /// Nothing
-        }
+        WindowImpl::~WindowImpl() = default;
 
         bool WindowImpl::popEvent(WindowEvent& e, bool block)
         {
