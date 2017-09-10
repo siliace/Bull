@@ -194,6 +194,13 @@ namespace Bull
              */
             virtual void setVisible(bool visible) = 0;
 
+            /*! \brief Set the icon of the Window
+             *
+             * \param icon The icon
+             *
+             */
+            virtual void setIcon(const Image& icon) = 0;
+
             /*! \brief Set the mouse cursor of the Window
              *
              * \param cursor The cursor

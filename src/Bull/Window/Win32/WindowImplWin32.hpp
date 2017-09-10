@@ -194,6 +194,13 @@ namespace Bull
              */
             void setVisible(bool visible);
 
+            /*! \brief Set the icon of the Window
+             *
+             * \param icon The icon
+             *
+             */
+            void setIcon(const Image& icon) override;
+
             /*! \brief Set the mouse cursor of the Window
              *
              * \param cursor The cursor
@@ -241,6 +248,7 @@ namespace Bull
              */
             void processEvent(UINT message, WPARAM wParam, LPARAM lParam);
 
+            HICON           m_icon;
             HCURSOR         m_cursor;
             HWND            m_handler;
             Vector2I        m_maxSize;

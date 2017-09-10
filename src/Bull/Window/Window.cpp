@@ -311,6 +311,16 @@ namespace Bull
         return (*this);
     }
 
+    Window& Window::setIcon(const Image& icon)
+    {
+        if(m_impl)
+        {
+            m_impl->setIcon(icon);
+        }
+
+        return (*this);
+    }
+
     Window& Window::setMouseCursor(const Cursor& cursor)
     {
         if(m_impl)

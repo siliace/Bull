@@ -46,6 +46,20 @@ namespace Bull
         return false;
     }
 
+    Uint8& ByteArray::at(Index index)
+    {
+        RangeCheck(index, getCapacity());
+
+        return m_array[index];
+    }
+
+    const Uint8& ByteArray::at(Index index) const
+    {
+        RangeCheck(index, getCapacity());
+
+        return m_array[index];
+    }
+
     ByteArray& ByteArray::resize(Index size)
     {
         m_array.resize(size);
@@ -66,6 +80,11 @@ namespace Bull
     bool ByteArray::isEmpty() const
     {
         return getCapacity() == 0;
+    }
+
+    const Uint8* ByteArray::getBuffer() const
+    {
+        return m_array.data();
     }
 
     Index ByteArray::getCapacity() const
@@ -95,16 +114,12 @@ namespace Bull
 
     Uint8& ByteArray::operator[](Index index)
     {
-        RangeCheck(index, getCapacity());
-
-        return m_array[index];
+        return at(index);
     }
 
     const Uint8& ByteArray::operator[](Index index) const
     {
-        RangeCheck(index, getCapacity());
-
-        return m_array[index];
+        return at(index);
     }
 
     String ByteArray::toString() const

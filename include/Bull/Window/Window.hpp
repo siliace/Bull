@@ -267,6 +267,15 @@ namespace Bull
          */
         Window& setVisible(bool visible = true);
 
+        /*! \brief Set the icon of the Window
+         *
+         * \param icon The icon
+         *
+         * \return This
+         *
+         */
+        Window& setIcon(const Image& icon);
+
         /*! \brief Set the mouse cursor of the Window
          *
          * \param cursor The cursor

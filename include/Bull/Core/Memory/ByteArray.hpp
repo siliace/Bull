@@ -56,6 +56,24 @@ namespace Bull
          */
         bool fill(const void* data, Index size, Index offset) override;
 
+        /*! \brief Access operator
+         *
+         * \param index The byte to get from the ByteArray
+         *
+         * \return The byte
+         *
+         */
+        Uint8& at(Index index);
+
+        /*! \brief Access operator
+         *
+         * \param index The byte to get from the ByteArray
+         *
+         * \return The byte
+         *
+         */
+        const Uint8& at(Index index) const;
+
         /*! \brief Resize the ByteArray
          *
          * \param size The size
@@ -81,6 +99,13 @@ namespace Bull
          *
          */
         bool isEmpty() const;
+
+        /*! \brief Get a pointer to the array
+         *
+         * \return The pointer
+         *
+         */
+        const Uint8* getBuffer() const;
 
         /*! \brief Get the capacity of the ByteArray
          *

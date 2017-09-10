@@ -1,3 +1,5 @@
+#include <Bull/Core/Exception/RuntimeError.hpp>
+
 #include <Bull/Window/Win32/WindowImplWin32.hpp>
 
 /// GCC missing define
@@ -85,10 +87,25 @@ namespace Bull
                         minmaxinfo->ptMaxSize.x = std::numeric_limits<LONG>::max();
                         minmaxinfo->ptMaxSize.y = std::numeric_limits<LONG>::max();
 
-                        minmaxinfo->ptMinTrackSize.x = min.x;
-                        minmaxinfo->ptMinTrackSize.y = min.y;
-                        minmaxinfo->ptMaxTrackSize.x = max.x;
-                        minmaxinfo->ptMaxTrackSize.y = max.y;
+                        if(min.x > -1)
+                        {
+                            minmaxinfo->ptMinTrackSize.x = min.x;
+                        }
+
+                        if(min.y > -1)
+                        {
+                            minmaxinfo->ptMinTrackSize.y = min.y;
+                        }
+
+                        if(max.x > -1)
+                        {
+                            minmaxinfo->ptMaxTrackSize.x = max.x;
+                        }
+
+                        if(max.y > -1)
+                        {
+                            minmaxinfo->ptMaxTrackSize.y = max.y;
+                        }
                     }
                     break;
                 }
@@ -257,6 +274,7 @@ namespace Bull
         }
 
         WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style) :
+            m_icon(nullptr),
             m_cursor(LoadCursor(nullptr, IDC_ARROW)),
             m_isResizing(false),
             m_minSize(-1, -1),
@@ -311,6 +329,11 @@ namespace Bull
         WindowImplWin32::~WindowImplWin32()
         {
             instanceCounter -= 1;
+
+            if(m_icon)
+            {
+                DestroyIcon(m_icon);
+            }
 
             if(instanceCounter == 0)
             {
@@ -504,6 +527,36 @@ namespace Bull
         void WindowImplWin32::setVisible(bool visible)
         {
             ShowWindow(m_handler, (visible) ? SW_SHOW : SW_HIDE);
+        }
+
+        void WindowImplWin32::setIcon(const Image& icon)
+        {
+            ByteArray pixels(icon.getSize().x * icon.getSize().y * 4);
+
+            for(Index i = 0; i < pixels.getCapacity() / 4; i += 4)
+            {
+                pixels.at(i * 4 + 0) = icon.getPixels().at(i * 4 + 2);
+                pixels.at(i * 4 + 1) = icon.getPixels().at(i * 4 + 1);
+                pixels.at(i * 4 + 2) = icon.getPixels().at(i * 4 + 0);
+                pixels.at(i * 4 + 3) = icon.getPixels().at(i * 4 + 3);
+            }
+
+            if(m_icon)
+            {
+                DestroyIcon(m_icon);
+            }
+
+            m_icon = CreateIcon(instance, icon.getSize().x, icon.getSize().y, 1, 32, nullptr, pixels.getBuffer());
+
+            if(m_icon)
+            {
+                SendMessageW(m_handler, WM_SETICON, ICON_BIG,   (LPARAM)m_icon);
+                SendMessageW(m_handler, WM_SETICON, ICON_SMALL, (LPARAM)m_icon);
+            }
+            else
+            {
+                throw RuntimeError("Failed to set window's icon");
+            }
         }
 
         void WindowImplWin32::setMouseCursor(const std::unique_ptr<CursorImpl>& cursor)
