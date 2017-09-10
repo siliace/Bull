@@ -1,8 +1,7 @@
-#ifndef BULL_WINDOWIMPLWIN32_HPP
-#define BULL_WINDOWIMPLWIN32_HPP
+#ifndef BULL_WINDOW_WIN32_WINDOWIMPLWIN32_HPP
+#define BULL_WINDOW_WIN32_WINDOWIMPLWIN32_HPP
 
 #include <windows.h>
-#include <windowsx.h>
 
 #include <Bull/Window/WindowImpl.hpp>
 
@@ -185,14 +184,14 @@ namespace Bull
              * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
              *
              */
-            void switchFullscreen(bool fullscreen);
+            void switchFullscreen(bool fullscreen) override;
 
             /*! \brief Show or hide the window
              *
              * \param visible True to show the window, false to hide the window
              *
              */
-            void setVisible(bool visible);
+            void setVisible(bool visible) override;
 
             /*! \brief Set the icon of the Window
              *
@@ -262,4 +261,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_WINDOWIMPLWIN32_HPP
+#endif // BULL_WINDOW_WIN32_WINDOWIMPLWIN32_HPP

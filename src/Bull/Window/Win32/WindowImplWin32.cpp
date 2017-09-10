@@ -1,3 +1,5 @@
+#include <windowsx.h>
+
 #include <Bull/Core/Exception/RuntimeError.hpp>
 
 #include <Bull/Window/Win32/WindowImplWin32.hpp>
