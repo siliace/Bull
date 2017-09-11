@@ -66,59 +66,23 @@ namespace Bull
 
         LRESULT CALLBACK WindowImplWin32::globalEvent(HWND handler, UINT message, WPARAM wParam, LPARAM lParam)
         {
+            if(message == WM_CREATE)
+            {
+                WindowImplWin32* createdImpl  = static_cast<WindowImplWin32*>(reinterpret_cast<CREATESTRUCT*>(lParam)->lpCreateParams);
+
+                SetWindowLongPtr(handler, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(createdImpl));
+            }
+
             WindowImplWin32* window = reinterpret_cast<WindowImplWin32*>(GetWindowLongPtrW(handler, GWL_USERDATA));
 
             if(window)
             {
                 window->processEvent(message, wParam, lParam);
+            }
 
-                switch(message)
-                {
-                    case WM_CLOSE:
-                    {
-                        return 0;
-                    }
-                    break;
-
-                    case WM_CREATE:
-                    {
-                        WindowImpl* createdImpl  = static_cast<WindowImpl*>(reinterpret_cast<CREATESTRUCT*>(lParam)->lpCreateParams);
-
-                        SetWindowLongPtr(handler, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(createdImpl));
-                    }
-                    break;
-
-                    case WM_GETMINMAXINFO:
-                    {
-                        Vector2I min           = window->getMinSize();
-                        Vector2I max           = window->getMaxSize();
-                        MINMAXINFO* minmaxinfo = reinterpret_cast<MINMAXINFO*>(lParam);
-
-                        minmaxinfo->ptMaxSize.x = std::numeric_limits<LONG>::max();
-                        minmaxinfo->ptMaxSize.y = std::numeric_limits<LONG>::max();
-
-                        if(min.x > -1)
-                        {
-                            minmaxinfo->ptMinTrackSize.x = min.x;
-                        }
-
-                        if(min.y > -1)
-                        {
-                            minmaxinfo->ptMinTrackSize.y = min.y;
-                        }
-
-                        if(max.x > -1)
-                        {
-                            minmaxinfo->ptMaxTrackSize.x = max.x;
-                        }
-
-                        if(max.y > -1)
-                        {
-                            minmaxinfo->ptMaxTrackSize.y = max.y;
-                        }
-                    }
-                    break;
-                }
+            if(message == WM_CLOSE)
+            {
+                return 0;
             }
 
             return DefWindowProc(handler, message, wParam, lParam);
@@ -895,6 +859,37 @@ namespace Bull
                     e.mouseWheel.y      = GET_Y_LPARAM(lParam);
 
                     pushEvent(e);
+                }
+                break;
+
+                case WM_GETMINMAXINFO:
+                {
+                    Vector2I min           = getMinSize();
+                    Vector2I max           = getMaxSize();
+                    MINMAXINFO* minmaxinfo = reinterpret_cast<MINMAXINFO*>(lParam);
+
+                    minmaxinfo->ptMaxSize.x = std::numeric_limits<LONG>::max();
+                    minmaxinfo->ptMaxSize.y = std::numeric_limits<LONG>::max();
+
+                    if(min.x > -1)
+                    {
+                        minmaxinfo->ptMinTrackSize.x = min.x;
+                    }
+
+                    if(min.y > -1)
+                    {
+                        minmaxinfo->ptMinTrackSize.y = min.y;
+                    }
+
+                    if(max.x > -1)
+                    {
+                        minmaxinfo->ptMaxTrackSize.x = max.x;
+                    }
+
+                    if(max.y > -1)
+                    {
+                        minmaxinfo->ptMaxTrackSize.y = max.y;
+                    }
                 }
                 break;
             }
