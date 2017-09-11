@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/InvalidArgument.hpp>
 #include <Bull/Core/Loader/Resource.hpp>
 
 namespace Bull
@@ -6,6 +7,11 @@ namespace Bull
 
     Resource& Resource::setFilePath(const Path& filePath)
     {
+        if(!filePath.isFile())
+        {
+            throw InvalidArgument("File path must be a file");
+        }
+
         m_path = filePath;
 
         return (*this);
