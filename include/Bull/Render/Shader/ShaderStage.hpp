@@ -68,37 +68,47 @@ namespace Bull
          *
          * \param type The type of shader to create
          *
-         * \return True if the shader was created successfully
+         * \return True if the ShaderStage was created successfully
          *
          */
         bool create(Type type);
-
-        /*! \brief Load a shader from a file
-         *
-         * \param path The path to the file
-         *
-         * \return True if the shader was loaded successfully
-         *
-         */
-        bool loadFromPath(const Path& path);
 
         /*! \brief Load a shader from a String
          *
          * \param code The code of the shader
          *
-         * \return True if the shader was loaded successfully
+         * \return True if the ShaderStage was loaded successfully
          *
          */
         bool loadFromCode(const String& code);
+
+        /*! \brief Load a shader from a file
+         *
+         * \param path The path to the file
+         *
+         * \return True if the ShaderStage was loaded successfully
+         *
+         */
+        bool loadFromPath(const Path& path) override;
 
         /*! \brief Load a shader from an InStream
          *
          * \param code The InStream which contains the code
          *
-         * \return True if the shader was loaded successfully
+         * \return True if the ShaderStage was loaded successfully
          *
          */
-        bool loadFromStream(InStream& stream);
+        bool loadFromStream(InStream& stream) override;
+
+        /*! \brief Load the ShaderStage from the memory
+         *
+         * \param data   The memory to load
+         * \param length The length of the memory
+         *
+         * \return True if the ShaderStage was loaded successfully
+         *
+         */
+        bool loadFromMemory(const void* data, Index length) override;
 
         /*! \brief Compile the shader
          *

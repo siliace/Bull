@@ -68,7 +68,7 @@ namespace Bull
          * \return True if the Image was loaded successfully
          *
          */
-        bool loadFromPath(const Path& path);
+        bool loadFromPath(const Path& path) override;
 
         /*! \brief Load an Image from a stream
          *
@@ -77,17 +77,17 @@ namespace Bull
          * \return True if the Image was created successfully
          *
          */
-        bool loadFromStream(InStream& stream);
+        bool loadFromStream(InStream& stream) override;
 
         /*! \brief Load an Image from memory
          *
-         * \param data     Buffer which contains row data
-         * \param dataSize The size of data
+         * \param data   Buffer which contains row data
+         * \param length The length of data
          *
          * \return True if the Image was loaded successfully
          *
          */
-        bool loadFromMemory(const void* data, Index dataSize);
+        bool loadFromMemory(const void* data, Index length) override;
 
         /*! \brief Load an Image from pixels
          *

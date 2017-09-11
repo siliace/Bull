@@ -2,6 +2,7 @@
 #define BULL_CORE_LOADER_RESOURCE_HPP
 
 #include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/IO/InStream.hpp>
 
 namespace Bull
 {
@@ -29,6 +30,34 @@ namespace Bull
          *
          */
         const Path& getFilePath() const;
+
+        /*! \brief Load the Resource from a file
+         *
+         * \param path The path to this file
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        virtual bool loadFromPath(const Path& path) = 0;
+
+        /*! \brief Load the Resource from a stream
+         *
+         * \param path The stream
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        virtual bool loadFromStream(InStream& stream) = 0;
+
+        /*! \brief Load the Resource from the memory
+         *
+         * \param data   The memory to load
+         * \param length The length of the memory
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        virtual bool loadFromMemory(const void* data, Index length) = 0;
 
     private:
 

@@ -100,6 +100,11 @@ namespace Bull
         return loadFromCode(stream.readAll());
     }
 
+    bool ShaderStage::loadFromMemory(const void* data, Index length)
+    {
+        return loadFromCode(String(static_cast<const char*>(data), length));
+    }
+
     bool ShaderStage::compile()
     {
         if(isValid())
