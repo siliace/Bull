@@ -6,6 +6,7 @@
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
+#include <Bull/Core/Loader/Resource.hpp>
 #include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/System/Integer.hpp>
 
@@ -17,7 +18,7 @@
 
 namespace Bull
 {
-    class BULL_UTILITY_API Image
+    class BULL_UTILITY_API Image : public Resource
     {
     public:
 
