@@ -28,7 +28,7 @@ namespace Bull
          * \return True if the Resource was loaded successfully
          *
          */
-        virtual bool loadFromPixels(std::unique_ptr<Image>& resource, const ByteArray& pixels, const Vector2UI& size) const = 0;
+        virtual bool loadFromPixels(std::unique_ptr<Image>& resource, const ByteArray& pixels, const Vector2UI& size, const ParameterBag& parameters) const = 0;
     };
 }
 

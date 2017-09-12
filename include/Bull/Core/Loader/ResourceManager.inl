@@ -30,7 +30,28 @@ namespace Bull
     }
 
     template <typename T, typename Saver, typename Loader>
-    T& ResourceManager<T, Saver, Loader>::loadFromPath(const Path& path, const String& name)
+    T& ResourceManager<T, Saver, Loader>::loadFromPath(const Path& path, const String& name, const ParameterBag& parameters)
+    {
+        std::unique_ptr<T> resource = std::make_unique<T>();
+
+        if(getLoader()->isSupportedExtension(path.getExtension()))
+        {
+            if(hasResource(name))
+            {
+                return getResource(name);
+            }
+
+            if(getLoader()->loadFromPath(resource, path, parameters))
+            {
+                return pushResource(name, resource);
+            }
+        }
+
+        throw FailedToLoad<T>(name, castToReference(resource));
+    }
+
+    template <typename T, typename Saver, typename Loader>
+    T& ResourceManager<T, Saver, Loader>::loadFromStream(InStream& stream, const String& name, const ParameterBag& parameters)
     {
         std::unique_ptr<T> resource = std::make_unique<T>();
 
@@ -39,7 +60,7 @@ namespace Bull
             return getResource(name);
         }
 
-        if(getLoader()->loadFromPath(resource, path))
+        if(getLoader()->loadFromStream(resource, stream, parameters))
         {
             return pushResource(name, resource);
         }
@@ -48,7 +69,7 @@ namespace Bull
     }
 
     template <typename T, typename Saver, typename Loader>
-    T& ResourceManager<T, Saver, Loader>::loadFromStream(InStream& stream, const String& name)
+    T& ResourceManager<T, Saver, Loader>::loadFromMemory(const void* data, Index length, const String& name, const ParameterBag& parameters)
     {
         std::unique_ptr<T> resource = std::make_unique<T>();
 
@@ -57,25 +78,7 @@ namespace Bull
             return getResource(name);
         }
 
-        if(getLoader()->loadFromStream(resource, stream))
-        {
-            return pushResource(name, resource);
-        }
-
-        throw FailedToLoad<T>(name, castToReference(resource));
-    }
-
-    template <typename T, typename Saver, typename Loader>
-    T& ResourceManager<T, Saver, Loader>::loadFromMemory(const void* data, Index length, const String& name)
-    {
-        std::unique_ptr<T> resource = std::make_unique<T>();
-
-        if(hasResource(name))
-        {
-            return getResource(name);
-        }
-
-        if(getLoader()->loadFromMemory(resource, data, length))
+        if(getLoader()->loadFromMemory(resource, data, length, parameters))
         {
             return pushResource(name, resource);
         }

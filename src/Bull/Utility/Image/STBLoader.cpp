@@ -30,7 +30,7 @@ namespace Bull
             return std::find(supportedExtensions.begin(), supportedExtensions.end(), extension) != supportedExtensions.end();
         }
 
-        bool STBLoader::loadFromPath(std::unique_ptr<Image>& resource, const Path& path) const
+        bool STBLoader::loadFromPath(std::unique_ptr<Image>& resource, const Path& path, const ParameterBag& parameters) const
         {
             if(isSupportedExtension(path.getExtension()))
             {
@@ -49,7 +49,7 @@ namespace Bull
 
                     if(pixels.fill(buffer, w * h * 4))
                     {
-                        return loadFromPixels(resource, pixels, Vector2UI(w, h));
+                        return loadFromPixels(resource, pixels, Vector2UI(w, h), parameters);
                     }
                 }
             }
@@ -57,17 +57,17 @@ namespace Bull
             return false;
         }
 
-        bool STBLoader::loadFromStream(std::unique_ptr<Image>& resource, InStream& stream) const
+        bool STBLoader::loadFromStream(std::unique_ptr<Image>& resource, InStream& stream, const ParameterBag& parameters) const
         {
             return false;
         }
 
-        bool STBLoader::loadFromMemory(std::unique_ptr<Image>& resource, const void* data, Index length) const
+        bool STBLoader::loadFromMemory(std::unique_ptr<Image>& resource, const void* data, Index length, const ParameterBag& parameters) const
         {
             return false;
         }
 
-        bool STBLoader::loadFromPixels(std::unique_ptr<Image>& resource, const ByteArray& pixels, const Vector2UI& size) const
+        bool STBLoader::loadFromPixels(std::unique_ptr<Image>& resource, const ByteArray& pixels, const Vector2UI& size, const ParameterBag& parameters) const
         {
             return resource->create(pixels, size);
         }

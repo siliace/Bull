@@ -35,7 +35,7 @@ namespace Bull
              * \return True if the Resource was loaded successfully
              *
              */
-            bool loadFromPath(std::unique_ptr<Image>& resource, const Path& path) const override;
+            bool loadFromPath(std::unique_ptr<Image>& resource, const Path& path, const ParameterBag& parameters) const override;
 
             /*! \brief Load a Resource from a Path
              *
@@ -45,7 +45,7 @@ namespace Bull
              * \return True if the Resource was loaded successfully
              *
              */
-            bool loadFromStream(std::unique_ptr<Image>& resource, InStream& stream) const override;
+            bool loadFromStream(std::unique_ptr<Image>& resource, InStream& stream, const ParameterBag& parameters) const override;
 
             /*! \brief Load a Resource from a memory area
              *
@@ -56,7 +56,7 @@ namespace Bull
              * \return True if the Resource was loaded successfully
              *
              */
-            bool loadFromMemory(std::unique_ptr<Image>& resource, const void* data, Index length) const override;
+            bool loadFromMemory(std::unique_ptr<Image>& resource, const void* data, Index length, const ParameterBag& parameters) const override;
 
             /*! \brief Load an Image from pixels
              *
@@ -67,7 +67,7 @@ namespace Bull
              * \return True if the Resource was loaded successfully
              *
              */
-            bool loadFromPixels(std::unique_ptr<Image>& resource, const ByteArray& pixels, const Vector2UI& size) const override;
+            bool loadFromPixels(std::unique_ptr<Image>& resource, const ByteArray& pixels, const Vector2UI& size, const ParameterBag& parameters) const override;
         };
     }
 }

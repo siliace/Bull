@@ -15,7 +15,7 @@ namespace Bull
     {
     public:
 
-        enum Type
+        enum Type : unsigned int
         {
             Vertex   = GL_VERTEX_SHADER,
             Fragment = GL_FRAGMENT_SHADER,
@@ -50,21 +50,14 @@ namespace Bull
          */
         bool create(Type type);
 
-        /*! \brief Load a shader from a String
+        /*! \brief Compile the ShaderStage
          *
-         * \param code The code of the shader
-         *
-         * \return True if the ShaderStage was loaded successfully
-         *
-         */
-        bool loadFromCode(const String& code);
-
-        /*! \brief Compile the shader
+         * \param code The code of the ShaderStage
          *
          * \return True if the shader was compiled successfully
          *
          */
-        bool compile();
+        bool compile(const String& code);
 
         /*! \brief Destroy the shader
          *

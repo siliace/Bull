@@ -10,12 +10,6 @@
 
 namespace Bull
 {
-    namespace prv
-    {
-        class STBSaver;
-        class STBLoader;
-    }
-
     class BULL_UTILITY_API ImageManager : public ResourceManager<Image, AbstractImageSaver, AbstractImageLoader>, public Singleton<ImageManager>
     {
     public:
@@ -27,14 +21,15 @@ namespace Bull
 
         /*! \brief Load an Image from its pixels
          *
-         * \param pixels Pixels of the Image
-         * \param size   The size of the Image
-         * \param name   The name of the image
+         * \param pixels     Pixels of the Image
+         * \param size       The size of the Image
+         * \param name       The name of the Image
+         * \param parameters Parameters to create the Image
          *
          * \return The image
          *
          */
-        Image& loadFromPixels(const ByteArray& pixels, const Vector2UI& size, const String& name);
+        Image& loadFromPixels(const ByteArray& pixels, const Vector2UI& size, const String& name, ParameterBag parameters);
 
     protected:
 

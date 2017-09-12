@@ -6,10 +6,11 @@
 #include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Loader/AbstractResourceLoader.hpp>
 #include <Bull/Core/Loader/AbstractResourceSaver.hpp>
+#include <Bull/Core/Loader/ParameterBag.hpp>
 
 namespace Bull
 {
-    template <typename T, typename Saver = AbstractResourceSaver<T>, typename Loader = AbstractResourceLoader<T>>
+    template <typename T, typename Saver, typename Loader>
     class BULL_CORE_API ResourceManager
     {
     protected:
@@ -46,34 +47,37 @@ namespace Bull
 
         /*! \brief Load a Resource from a Path
          *
-         * \param path The path
-         * \param name The name of the Resource
+         * \param path       The path
+         * \param name       The name of the Resource
+         * \param parameters Parameters to create the resource
          *
          * \return The Resource
          *
          */
-        T& loadFromPath(const Path& path, const String& name);
+        T& loadFromPath(const Path& path, const String& name, const ParameterBag& parameters = ParameterBag());
 
         /*! \brief Load a Resource from a Stream
          *
-         * \param stream The stream
-         * \param name   The name of the Resource
+         * \param stream     The stream
+         * \param name       The name of the Resource
+         * \param parameters Parameters to create the resource
          *
          * \return The Resource
          *
          */
-        T& loadFromStream(InStream& stream, const String& name);
+        T& loadFromStream(InStream& stream, const String& name, const ParameterBag& parameters = ParameterBag());
 
         /*! \brief Load a Resource from a memory area
          *
-         * \param data   The memory
-         * \param length The length of data
-         * \param name   The name of the Resource
+         * \param data       The memory
+         * \param length     The length of data
+         * \param name       The name of the Resource
+         * \param parameters Parameters to create the resource
          *
          * \return The Resource
          *
          */
-        T& loadFromMemory(const void* data, Index length, const String& name);
+        T& loadFromMemory(const void* data, Index length, const String& name, const ParameterBag& parameters = ParameterBag());
 
         /*! \brief Get or create a Resource by its name
          *
