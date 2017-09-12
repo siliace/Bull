@@ -16,6 +16,7 @@ namespace Bull
                 case ImageFormat::Bmp: return true;
                 case ImageFormat::Png: return true;
                 case ImageFormat::Tga: return true;
+                case ImageFormat::Jpg: return true;
                 default:               return false;
             }
         }
@@ -23,7 +24,7 @@ namespace Bull
         bool STBLoader::isSupportedExtension(const String& extension) const
         {
             static std::vector<String> supportedExtensions = {
-                    "bmp", "png", "tga"
+                    "bmp", "png", "tga", "jpg", "jpeg"
             };
 
             return std::find(supportedExtensions.begin(), supportedExtensions.end(), extension) != supportedExtensions.end();
@@ -31,22 +32,25 @@ namespace Bull
 
         bool STBLoader::loadFromPath(std::unique_ptr<Image>& resource, const Path& path) const
         {
-            int w, h;
-            int channels;
-
-            unsigned char* buffer = stbi_load(path.toString().getBuffer(), &w, &h, &channels, STBI_rgb_alpha);
-
-            if(buffer && w && h)
+            if(isSupportedExtension(path.getExtension()))
             {
-                CallOnExit atExit([buffer](){
-                    stbi_image_free(buffer);
-                });
+                int w, h;
+                int channels;
 
-                ByteArray pixels;
+                unsigned char* buffer = stbi_load(path.toString().getBuffer(), &w, &h, &channels, STBI_rgb_alpha);
 
-                if(pixels.fill(buffer, w * h * 4))
+                if(buffer && w && h)
                 {
-                    return loadFromPixels(resource, pixels, Vector2UI(w, h));
+                    CallOnExit atExit([buffer](){
+                        stbi_image_free(buffer);
+                    });
+
+                    ByteArray pixels;
+
+                    if(pixels.fill(buffer, w * h * 4))
+                    {
+                        return loadFromPixels(resource, pixels, Vector2UI(w, h));
+                    }
                 }
             }
 

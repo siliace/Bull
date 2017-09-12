@@ -93,7 +93,7 @@ namespace Bull
 
             if(index)
             {
-                return toString().subString(static_cast<Index>(index));
+                return toString().subString(static_cast<Index>(index) + 1);
             }
         }
 

@@ -12,7 +12,7 @@ namespace Bull
 
         if(m_context->setActive(true) && m_target.create(m_size))
         {
-            m_impl.reset(new prv::RenderTextureImplDefault());
+            m_impl = std::make_unique<prv::RenderTextureImplDefault>();
 
             if(m_impl)
             {

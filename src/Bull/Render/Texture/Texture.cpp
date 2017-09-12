@@ -20,11 +20,6 @@ namespace Bull
         }
     }
 
-    bool Texture::create(unsigned int width, unsigned int height)
-    {
-        return create(Vector2UI(width, height));
-    }
-
     bool Texture::create(const Vector2UI& size)
     {
         if(size.x > 0 && size.y > 0)
@@ -74,11 +69,6 @@ namespace Bull
         }
 
         return false;
-    }
-
-    bool Texture::loadFromPixels(const ByteArray& pixels, unsigned int width, unsigned int height)
-    {
-        return loadFromPixels(pixels, Vector2UI(width, height));
     }
 
     void Texture::bind() const

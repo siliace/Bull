@@ -75,16 +75,6 @@ namespace Bull
          */
         bool create(const Vector2UI& size);
 
-        /*! \brief Create an empty texture
-         *
-         * \param width  The width of the texture to create
-         * \param height The height of the texture to create
-         *
-         * \return Return true if the texture was created successfully, false otherwise
-         *
-         */
-        bool create(unsigned int width, unsigned int height);
-
         /*! \brief Load a texture form an image
          *
          * \param path The image to load
@@ -103,17 +93,6 @@ namespace Bull
          *
          */
         bool loadFromPixels(const ByteArray& pixels, const Vector2UI& size);
-
-        /*! \brief Load a texture form a pixels array
-         *
-         * \param path   The pixels array to load
-         * \param width  The width of the texture
-         * \param height The height of the texture
-         *
-         * \return Return true if the texture was loaded successfully, false otherwise
-         *
-         */
-        bool loadFromPixels(const ByteArray& pixels, unsigned int width, unsigned int height);
 
         /*! \brief Bind the texture
          *
