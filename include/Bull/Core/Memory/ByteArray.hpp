@@ -54,7 +54,7 @@ namespace Bull
          * \return True if the buffer was filled successfully
          *
          */
-        bool fill(const void* data, Index size, Index offset) override;
+        bool fill(const void* data, Index size, Index offset = 0) override;
 
         /*! \brief Access operator
          *

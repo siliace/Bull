@@ -54,45 +54,9 @@ namespace Bull
         return false;
     }
 
-    bool Texture::loadFromPath(const Path& path)
-    {
-        Image img;
-
-        if(img.loadFromPath(path))
-        {
-            return loadFromImage(img);
-        }
-
-        return false;
-    }
-
-    bool Texture::loadFromStream(InStream &stream)
-    {
-        Image img;
-
-        if(img.loadFromStream(stream))
-        {
-            return loadFromImage(img);
-        }
-
-        return false;
-    }
-
     bool Texture::loadFromImage(const Image& image)
     {
         return loadFromPixels(image.getPixels(), image.getSize());
-    }
-
-    bool Texture::loadFromMemory(const void* data, Index dataSize)
-    {
-        Image img;
-
-        if(img.loadFromMemory(data, dataSize))
-        {
-            return loadFromImage(img);
-        }
-
-        return false;
     }
 
     bool Texture::loadFromPixels(const ByteArray& pixels, const Vector2UI& size)
@@ -188,12 +152,16 @@ namespace Bull
     {
         if(m_id)
         {
+            Image image;
             ByteArray pixels(m_size.x * m_size.y * 4);
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
             gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);
 
-            return Image(pixels, m_size);
+            if(image.create(pixels, m_size))
+            {
+                return image;
+            }
         }
 
         return Image();

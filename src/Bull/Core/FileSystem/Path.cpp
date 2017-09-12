@@ -28,6 +28,11 @@ namespace Bull
         }
     }
 
+    bool Path::isValid() const
+    {
+        return !m_path.isEmpty();
+    }
+
     bool Path::operator==(const Path& right) const
     {
         return m_path == right.toString();
@@ -63,6 +68,18 @@ namespace Bull
             {
                 return toString().subString(static_cast<Index>(index));
             }
+        }
+
+        return toString();
+    }
+
+    String Path::getFileNameWithoutExtension() const
+    {
+        if(isFile())
+        {
+            String filename = getFileName();
+
+            return filename.subString(0, static_cast<Index>(filename.last('.')));
         }
 
         return toString();

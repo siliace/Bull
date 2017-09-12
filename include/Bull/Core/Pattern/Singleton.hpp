@@ -10,7 +10,7 @@
 namespace Bull
 {
     template<typename TChild>
-    class Singleton : public NonCopyable, public NonMovable
+    class BULL_CORE_API Singleton : public NonCopyable, public NonMovable
     {
     public:
 

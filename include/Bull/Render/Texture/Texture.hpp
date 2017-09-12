@@ -85,24 +85,6 @@ namespace Bull
          */
         bool create(unsigned int width, unsigned int height);
 
-        /*! \brief Load a texture form a file
-         *
-         * \param path The path to the image to load
-         *
-         * \return Return true if the texture was loaded successfully, false otherwise
-         *
-         */
-        bool loadFromPath(const Path& path);
-
-        /*! \brief Load a Texture from a stream
-         *
-         * \param stream The stream to read to load the Texture
-         *
-         * \return True if the Texture was created successfully
-         *
-         */
-        bool loadFromStream(InStream& stream);
-
         /*! \brief Load a texture form an image
          *
          * \param path The image to load
@@ -111,16 +93,6 @@ namespace Bull
          *
          */
         bool loadFromImage(const Image& image);
-
-        /*! \brief Load a Textyre from the memory
-         *
-         * \param data     Buffer which contains row data
-         * \param dataSize The size of data
-         *
-         * \return True if the Texture was loaded successfully
-         *
-         */
-        bool loadFromMemory(const void* data, Index dataSize);
 
         /*! \brief Load a texture form a pixels array
          *

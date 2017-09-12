@@ -29,6 +29,13 @@ namespace Bull
          */
         explicit Path(const String& path);
 
+        /*! \brief Tell whether the Path is valid
+         *
+         * \return True if the path is valid
+         *
+         */
+        bool isValid() const;
+
         /*! \brief Compare two Path
          *
          * \param right The Path to compare to this
@@ -60,6 +67,13 @@ namespace Bull
          *
          */
         String getFileName() const;
+
+        /*! \brief Get the filename without its extension in the path
+         *
+         * \return The filename without extension
+         *
+         */
+        String getFileNameWithoutExtension() const;
 
         /*! \brief Get the extension of the file
          *

@@ -44,43 +44,6 @@ namespace Bull
         return false;
     }
 
-    bool Shader::attachFromPath(const Path& path, ShaderStage::Type type)
-    {
-        ShaderStage stage(path, type);
-
-        if(stage.compile())
-        {
-            return attach(stage);
-        }
-
-        return false;
-
-    }
-
-    bool Shader::attachFromCode(const String& code, ShaderStage::Type type)
-    {
-        ShaderStage stage(code, type);
-
-        if(stage.compile())
-        {
-            return attach(stage);
-        }
-
-        return false;
-    }
-
-    bool Shader::attachFromStream(InStream& stream, ShaderStage::Type type)
-    {
-        ShaderStage stage(stream, type);
-
-        if(stage.compile())
-        {
-            return attach(stage);
-        }
-
-        return false;
-    }
-
     bool Shader::link()
     {
         gl::linkProgram(m_program);

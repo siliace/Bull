@@ -7,9 +7,9 @@ namespace Bull
     {
         Bmp,
         Jpg,
-        Jpeg,
         Png,
-        Tga
+        Tga,
+        Gif
     };
 }
 

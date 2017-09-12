@@ -3,7 +3,6 @@
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
-#include <Bull/Core/Loader/Resource.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
@@ -12,7 +11,7 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource, public Resource
+    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource
     {
     public:
 
@@ -37,28 +36,6 @@ namespace Bull
          */
         explicit ShaderStage(Type type);
 
-        /*! \brief Constructor
-         *
-         * \param path The path to the shader
-         * \param type The type of the shader
-         *
-         */
-        ShaderStage(const Path& path, Type type);
-
-        /*! \brief Constructor
-         *
-         * \param code The code of the shader
-         * \param type The type of the shader
-         */
-        ShaderStage(const String& code, Type type);
-
-        /*! \brief Constructor
-         *
-         * \param stream The stream to read to load the shader
-         * \param type   The type of the shader
-         */
-        ShaderStage(InStream& stream, Type type);
-
         /*! \brief Destructor
          *
          */
@@ -81,34 +58,6 @@ namespace Bull
          *
          */
         bool loadFromCode(const String& code);
-
-        /*! \brief Load a shader from a file
-         *
-         * \param path The path to the file
-         *
-         * \return True if the ShaderStage was loaded successfully
-         *
-         */
-        bool loadFromPath(const Path& path) override;
-
-        /*! \brief Load a shader from an InStream
-         *
-         * \param code The InStream which contains the code
-         *
-         * \return True if the ShaderStage was loaded successfully
-         *
-         */
-        bool loadFromStream(InStream& stream) override;
-
-        /*! \brief Load the ShaderStage from the memory
-         *
-         * \param data   The memory to load
-         * \param length The length of the memory
-         *
-         * \return True if the ShaderStage was loaded successfully
-         *
-         */
-        bool loadFromMemory(const void* data, Index length) override;
 
         /*! \brief Compile the shader
          *

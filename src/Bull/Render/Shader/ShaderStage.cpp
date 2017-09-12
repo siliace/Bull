@@ -23,36 +23,6 @@ namespace Bull
         }
     }
 
-    ShaderStage::ShaderStage(const Path& path, Type type)
-    {
-        if(!create(type))
-        {
-            throw RuntimeError("Failed to create shader");
-        }
-
-        loadFromPath(path);
-    }
-
-    ShaderStage::ShaderStage(const String& code, Type type)
-    {
-        if(!create(type))
-        {
-            throw RuntimeError("Failed to create shader");
-        }
-
-        loadFromCode(code);
-    }
-
-    ShaderStage::ShaderStage(InStream& stream, Type type)
-    {
-        if(!create(type))
-        {
-            throw RuntimeError("Failed to create shader");
-        }
-
-        loadFromStream(stream);
-    }
-
     ShaderStage::~ShaderStage()
     {
         destroy();
@@ -68,19 +38,7 @@ namespace Bull
         m_type = type;
         m_id   = gl::createShader(type);
 
-        return m_id != 0;
-    }
-
-    bool ShaderStage::loadFromPath(const Path& path)
-    {
-        File file(path);
-
-        if(file.isOpen())
-        {
-            return loadFromStream(file);
-        }
-
-        return false;
+        return gl::isShader(m_id);
     }
 
     bool ShaderStage::loadFromCode(const String& code)
@@ -93,16 +51,6 @@ namespace Bull
         }
 
         return false;
-    }
-
-    bool ShaderStage::loadFromStream(InStream& stream)
-    {
-        return loadFromCode(stream.readAll());
-    }
-
-    bool ShaderStage::loadFromMemory(const void* data, Index length)
-    {
-        return loadFromCode(String(static_cast<const char*>(data), length));
     }
 
     bool ShaderStage::compile()
