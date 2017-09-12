@@ -25,13 +25,13 @@ namespace Bull
          */
         ImageManager() = default;
 
-        /*! \brief
+        /*! \brief Load an Image from its pixels
          *
-         * \param pixels
-         * \param size
-         * \param name
+         * \param pixels Pixels of the Image
+         * \param size   The size of the Image
+         * \param name   The name of the image
          *
-         * \return
+         * \return The image
          *
          */
         Image& loadFromPixels(const ByteArray& pixels, const Vector2UI& size, const String& name);

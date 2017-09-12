@@ -8,6 +8,11 @@ namespace Bull
     {
         std::unique_ptr<Image> resource = std::make_unique<Image>();
 
+        if(hasResource(name))
+        {
+            return getResource(name);
+        }
+
         if(getLoader()->loadFromPixels(resource, pixels, size))
         {
             return pushResource(name, resource);

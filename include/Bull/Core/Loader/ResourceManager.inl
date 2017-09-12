@@ -34,6 +34,11 @@ namespace Bull
     {
         std::unique_ptr<T> resource = std::make_unique<T>();
 
+        if(hasResource(name))
+        {
+            return getResource(name);
+        }
+
         if(getLoader()->loadFromPath(resource, path))
         {
             return pushResource(name, resource);
@@ -47,6 +52,11 @@ namespace Bull
     {
         std::unique_ptr<T> resource = std::make_unique<T>();
 
+        if(hasResource(name))
+        {
+            return getResource(name);
+        }
+
         if(getLoader()->loadFromStream(resource, stream))
         {
             return pushResource(name, resource);
@@ -59,6 +69,11 @@ namespace Bull
     T& ResourceManager<T, Saver, Loader>::loadFromMemory(const void* data, Index length, const String& name)
     {
         std::unique_ptr<T> resource = std::make_unique<T>();
+
+        if(hasResource(name))
+        {
+            return getResource(name);
+        }
 
         if(getLoader()->loadFromMemory(resource, data, length))
         {
