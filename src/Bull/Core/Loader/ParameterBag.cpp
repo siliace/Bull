@@ -21,6 +21,18 @@ namespace Bull
         return (*this);
     }
 
+    ParameterBag& ParameterBag::setParameter(const String& name, bool value)
+    {
+        Parameter parameter;
+
+        parameter.boolValue = value;
+        parameter.type      = Parameter::BooleanType;
+
+        m_parameters[name] = parameter;
+
+        return (*this);
+    }
+
     ParameterBag& ParameterBag::setParameter(const String& name, char value)
     {
         Parameter parameter;
@@ -125,6 +137,21 @@ namespace Bull
             if(m_parameters.at(name).type == Parameter::IntType)
             {
                 value = m_parameters.at(name).intValue;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool ParameterBag::getParameter(const String& name, bool& value) const
+    {
+        if(hasParameter(name))
+        {
+            if(m_parameters.at(name).type == Parameter::BooleanType)
+            {
+                value = m_parameters.at(name).boolValue;
 
                 return true;
             }

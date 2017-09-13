@@ -41,6 +41,16 @@ namespace Bull
          * \return This
          *
          */
+        ParameterBag& setParameter(const String& name, bool value);
+
+        /*! \brief Set a parameter in the ParameterBag
+         *
+         * \param name  The name of the parameter to set
+         * \param value The value of the parameter to set
+         *
+         * \return This
+         *
+         */
         ParameterBag& setParameter(const String& name, char value);
 
         /*! \brief Set a parameter in the ParameterBag
@@ -122,6 +132,16 @@ namespace Bull
          *
          */
         bool getParameter(const String& name, int& value) const;
+
+        /*! \brief Get a parameter from the ParameterBag
+         *
+         * \param name  The name of the parameter to get
+         * \param value A pointer to get the value
+         *
+         * \return True if the requested parameter exists
+         *
+         */
+        bool getParameter(const String& name, bool& value) const;
 
         /*! \brief Get a parameter from the ParameterBag
          *
@@ -239,6 +259,7 @@ namespace Bull
                 DoubleType,
                 StringType,
                 PointerType,
+                BooleanType,
                 UnsignedIntType,
                 UnsignedCharType,
             };
@@ -259,6 +280,7 @@ namespace Bull
 
             ///TODO: use an union
             int           intValue;
+            bool          boolValue;
             char          charValue;
             long          longValue;
             float         floatValue;
