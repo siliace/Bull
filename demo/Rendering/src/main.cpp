@@ -1,9 +1,6 @@
 #include <Bull/Core/Log/Log.hpp>
 
-#include <Bull/Render/Shader/ShaderStage.hpp>
-#include <Bull/Render/Shader/ShaderStageManager.hpp>
-#include <Bull/Render/Shader/ShaderStageParameters.hpp>
-#include <Bull/Render/Target/RenderWindow.hpp>
+#include <Bull/Utility/Image/ImageManager.hpp>
 
 #include <Bull/Utility/Logger/ConsoleLogger.hpp>
 
@@ -16,9 +13,9 @@ int main()
     int count = 0;
     Directory shaders;
 
-    if(shaders.open(Path("../resources/shaders")))
+    if(shaders.open(Path("../resources")))
     {
-        ShaderStageManager::Instance manager = ShaderStageManager::get();
+        ImageManager::Instance manager = ImageManager::get();
 
         count = manager->loadFromDirectory(shaders);
     }

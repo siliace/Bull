@@ -38,7 +38,7 @@ namespace Bull
 
             for(const Path& path : directory.getContent())
             {
-                if(path.isFile())
+                if(path.isFile() && getLoader()->isSupportedExtension(path.getExtension()))
                 {
                     String name = path.getFileName();
                     name.replace('.', '_');
