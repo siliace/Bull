@@ -18,26 +18,26 @@ namespace Bull
             return std::find(extensionsSupported.begin(), extensionsSupported.end(), extension) != extensionsSupported.end();
         }
 
-        bool BaseShaderStageSaver::saveToPath(const ShaderStage& resource, const Path& path) const
+        bool BaseShaderStageSaver::saveToPath(const ShaderStage& resource, const Path& path, const ShaderStageParameters& parameters) const
         {
             File file(path);
 
             if(file.isOpen())
             {
-                return saveToStream(resource, file);
+                return saveToStream(resource, file, parameters);
             }
 
             return false;
         }
 
-        bool BaseShaderStageSaver::saveToStream(const ShaderStage& resource, OutStream& stream) const
+        bool BaseShaderStageSaver::saveToStream(const ShaderStage& resource, OutStream& stream, const ShaderStageParameters& parameters) const
         {
             String code = resource.getSource();
 
             return stream.write(code.getBuffer(), code.getSize()) == code.getSize();
         }
 
-        bool BaseShaderStageSaver::saveToMemory(const ShaderStage& resource, void* data, Index length) const
+        bool BaseShaderStageSaver::saveToMemory(const ShaderStage& resource, void* data, Index length, const ShaderStageParameters& parameters) const
         {
             String code = resource.getSource();
 
