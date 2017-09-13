@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_LOADER_RESOURCEMANAGER_HPP
-#define BULL_CORE_LOADER_RESOURCEMANAGER_HPP
+#ifndef BULL_CORE_LOADER_ABSTRACTRESOURCEMANAGER_HPP
+#define BULL_CORE_LOADER_ABSTRACTRESOURCEMANAGER_HPP
 
 #include <map>
 
@@ -12,7 +12,7 @@
 namespace Bull
 {
     template <typename T, typename S, typename L, typename P = ParameterBag>
-    class BULL_CORE_API ResourceManager
+    class BULL_CORE_API AbstractResourceManager
     {
     protected:
 
@@ -215,6 +215,6 @@ namespace Bull
     };
 }
 
-#include <Bull/Core/Loader/ResourceManager.inl>
+#include <Bull/Core/Loader/AbstractResourceManager.inl>
 
-#endif // BULL_CORE_LOADER_RESOURCEMANAGER_HPP
+#endif // BULL_CORE_LOADER_ABSTRACTRESOURCEMANAGER_HPP

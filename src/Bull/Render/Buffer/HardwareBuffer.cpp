@@ -2,8 +2,6 @@
 
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
 
-#include <iostream>
-
 namespace Bull
 {
     HardwareBuffer::~HardwareBuffer()

@@ -1,7 +1,7 @@
 #ifndef BULL_UTILITY_IMAGE_IMAGEMANAGER_HPP
 #define BULL_UTILITY_IMAGE_IMAGEMANAGER_HPP
 
-#include <Bull/Core/Loader/ResourceManager.hpp>
+#include <Bull/Core/Loader/AbstractResourceManager.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
 
 #include <Bull/Utility/Image/AbstractImageSaver.hpp>
@@ -10,7 +10,7 @@
 
 namespace Bull
 {
-    class BULL_UTILITY_API ImageManager : public ResourceManager<Image, AbstractImageSaver, AbstractImageLoader>, public Singleton<ImageManager>
+    class BULL_UTILITY_API ImageManager : public AbstractResourceManager<Image, AbstractImageSaver, AbstractImageLoader>, public Singleton<ImageManager>
     {
     public:
 

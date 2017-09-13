@@ -3,13 +3,13 @@
 namespace Bull
 {
     template <typename T, typename S, typename L, typename P>
-    T& ResourceManager<T, S, L, P>::castToReference(std::unique_ptr<T>& resource)
+    T& AbstractResourceManager<T, S, L, P>::castToReference(std::unique_ptr<T>& resource)
     {
         return static_cast<T&>(*resource.get());
     }
 
     template <typename T, typename S, typename L, typename P>
-    bool ResourceManager<T, S, L, P>::registerResource(T* resource, const String& name)
+    bool AbstractResourceManager<T, S, L, P>::registerResource(T* resource, const String& name)
     {
         if(!hasResource(name))
         {
@@ -24,13 +24,13 @@ namespace Bull
     }
 
     template <typename T, typename S, typename L, typename P>
-    bool ResourceManager<T, S, L, P>::hasResource(const String& name) const
+    bool AbstractResourceManager<T, S, L, P>::hasResource(const String& name) const
     {
         return m_resources.find(name) != m_resources.end();
     }
 
     template <typename T, typename S, typename L, typename P>
-    Index ResourceManager<T, S, L, P>::loadFromDirectory(Directory& directory, bool recursively, const P& parameters)
+    Index AbstractResourceManager<T, S, L, P>::loadFromDirectory(Directory& directory, bool recursively, const P& parameters)
     {
         if(directory.isOpen())
         {
@@ -63,7 +63,7 @@ namespace Bull
     }
 
     template <typename T, typename S, typename L, typename P>
-    T& ResourceManager<T, S, L, P>::loadFromPath(const Path& path, const String& name, const P& parameters)
+    T& AbstractResourceManager<T, S, L, P>::loadFromPath(const Path& path, const String& name, const P& parameters)
     {
         std::unique_ptr<T> resource = std::make_unique<T>();
 
@@ -89,7 +89,7 @@ namespace Bull
     }
 
     template <typename T, typename S, typename L, typename P>
-    T& ResourceManager<T, S, L, P>::loadFromStream(InStream& stream, const String& name, const P& parameters)
+    T& AbstractResourceManager<T, S, L, P>::loadFromStream(InStream& stream, const String& name, const P& parameters)
     {
         std::unique_ptr<T> resource = std::make_unique<T>();
 
@@ -116,7 +116,7 @@ namespace Bull
     }
 
     template <typename T, typename S, typename L, typename P>
-    T& ResourceManager<T, S, L, P>::loadFromMemory(const void* data, Index length, const String& name, const P& parameters)
+    T& AbstractResourceManager<T, S, L, P>::loadFromMemory(const void* data, Index length, const String& name, const P& parameters)
     {
         std::unique_ptr<T> resource = std::make_unique<T>();
 
@@ -139,7 +139,7 @@ namespace Bull
     }
 
     template <typename T, typename S, typename L, typename P>
-    T& ResourceManager<T, S, L, P>::getResource(const String& name)
+    T& AbstractResourceManager<T, S, L, P>::getResource(const String& name)
     {
         if(!hasResource(name))
         {
@@ -152,55 +152,55 @@ namespace Bull
     }
 
     template <typename T, typename S, typename L, typename P>
-    bool ResourceManager<T, S, L, P>::saveToPath(const T& resource, const Path& path)
+    bool AbstractResourceManager<T, S, L, P>::saveToPath(const T& resource, const Path& path)
     {
         return getSaver()->saveToPath(resource, path);
     }
 
     template <typename T, typename S, typename L, typename P>
-    bool ResourceManager<T, S, L, P>::saveToStream(const T& resource, OutStream& stream)
+    bool AbstractResourceManager<T, S, L, P>::saveToStream(const T& resource, OutStream& stream)
     {
         return getSaver()->saveToStream(resource, stream);
     }
 
     template <typename T, typename S, typename L, typename P>
-    bool ResourceManager<T, S, L, P>::saveToMemory(const T& resource, void* data, Index length)
+    bool AbstractResourceManager<T, S, L, P>::saveToMemory(const T& resource, void* data, Index length)
     {
         return getSaver()->saveToMemory(resource, data, length);
     }
 
     template <typename T, typename S, typename L, typename P>
-    T* ResourceManager<T, S, L, P>::unregisterResource(const String& name)
+    T* AbstractResourceManager<T, S, L, P>::unregisterResource(const String& name)
     {
         m_resources.erase(name);
     }
 
     template <typename T, typename S, typename L, typename P>
-    void ResourceManager<T, S, L, P>::purge()
+    void AbstractResourceManager<T, S, L, P>::purge()
     {
         m_resources.clear();
     }
 
     template <typename T, typename S, typename L, typename P>
-    bool ResourceManager<T, S, L, P>::resolveParameters(P* parameters, const Path& path) const
+    bool AbstractResourceManager<T, S, L, P>::resolveParameters(P* parameters, const Path& path) const
     {
         return true;
     }
 
     template <typename T, typename S, typename L, typename P>
-    bool ResourceManager<T, S, L, P>::resolveParameters(P* parameters, InStream& stream) const
+    bool AbstractResourceManager<T, S, L, P>::resolveParameters(P* parameters, InStream& stream) const
     {
         return true;
     }
 
     template <typename T, typename S, typename L, typename P>
-    bool ResourceManager<T, S, L, P>::resolveParameters(P* parameters, const void* data, Index length) const
+    bool AbstractResourceManager<T, S, L, P>::resolveParameters(P* parameters, const void* data, Index length) const
     {
         return true;
     }
 
     template <typename T, typename S, typename L, typename P>
-    T& ResourceManager<T, S, L, P>::pushResource(const String& name, std::unique_ptr<T>& resource)
+    T& AbstractResourceManager<T, S, L, P>::pushResource(const String& name, std::unique_ptr<T>& resource)
     {
         m_resources[name] = std::move(resource);
 

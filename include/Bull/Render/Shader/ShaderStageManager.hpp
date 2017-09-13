@@ -1,7 +1,7 @@
 #ifndef BULL_RENDER_SHADER_SHADERSTAGEMANAGER_HPP
 #define BULL_RENDER_SHADER_SHADERSTAGEMANAGER_HPP
 
-#include <Bull/Core/Loader/ResourceManager.hpp>
+#include <Bull/Core/Loader/AbstractResourceManager.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
 
 #include <Bull/Render/Shader/AbstractShaderStageLoader.hpp>
@@ -11,7 +11,7 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API ShaderStageManager : public ResourceManager<ShaderStage, AbstractShaderStageSaver, AbstractShaderStageLoader, ShaderStageParameters>, public Singleton<ShaderStageManager>
+    class BULL_RENDER_API ShaderStageManager : public AbstractResourceManager<ShaderStage, AbstractShaderStageSaver, AbstractShaderStageLoader, ShaderStageParameters>, public Singleton<ShaderStageManager>
     {
     protected:
 

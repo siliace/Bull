@@ -2,8 +2,6 @@
 #include <Bull/Render/Shader/BaseShaderStageSaver.hpp>
 #include <Bull/Render/Shader/ShaderStageManager.hpp>
 
-#include <iostream>
-
 namespace Bull
 {
     std::unique_ptr<AbstractShaderStageSaver>& ShaderStageManager::getSaver()
