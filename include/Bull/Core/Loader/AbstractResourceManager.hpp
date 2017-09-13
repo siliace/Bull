@@ -2,6 +2,7 @@
 #define BULL_CORE_LOADER_ABSTRACTRESOURCEMANAGER_HPP
 
 #include <map>
+#include <vector>
 
 #include <Bull/Core/FileSystem/Directory.hpp>
 #include <Bull/Core/Functor/Functor.hpp>
@@ -90,6 +91,13 @@ namespace Bull
          *
          */
         T& loadFromMemory(const void* data, Index length, const String& name, const P& parameters = P());
+
+        /*! \brief Get a list of loaded resource
+         *
+         * \return The list
+         *
+         */
+        std::vector<String> getResourceList() const;
 
         /*! \brief Get or create a Resource by its name
          *

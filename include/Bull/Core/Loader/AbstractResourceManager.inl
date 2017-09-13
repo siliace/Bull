@@ -142,6 +142,19 @@ namespace Bull
     }
 
     template <typename T, typename S, typename L, typename P>
+    std::vector<String> AbstractResourceManager<T, S, L, P>::getResourceList() const
+    {
+        std::vector<String> keys;
+
+        for(auto& resource : m_resources)
+        {
+            keys.emplace_back(resource.first);
+        }
+
+        return keys;
+    }
+
+    template <typename T, typename S, typename L, typename P>
     T& AbstractResourceManager<T, S, L, P>::getResource(const String& name)
     {
         if(!hasResource(name))
