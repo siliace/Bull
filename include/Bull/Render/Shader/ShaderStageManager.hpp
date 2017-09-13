@@ -46,7 +46,7 @@ namespace Bull
          * \return True if the ParameterBag was resolved successfully
          *
          */
-        bool resolveParameters(ShaderStageParameters* parameters, const Path& path) const;
+        bool resolveParameters(ShaderStageParameters* parameters, const Path& path) const override;
 
     private:
 

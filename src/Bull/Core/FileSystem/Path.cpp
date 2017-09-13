@@ -105,6 +105,21 @@ namespace Bull
         return toString();
     }
 
+    String Path::getCurrentDirectory() const
+    {
+        if(isDirectory())
+        {
+            int index = toString().last(Separator) + 1;
+
+            if(index)
+            {
+                return toString().subString(static_cast<Index>(index));
+            }
+        }
+
+        return toString();
+    }
+
     Path& Path::setBasePath(const Path& base)
     {
         String fullPath = base.toString();

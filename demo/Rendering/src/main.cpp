@@ -16,7 +16,7 @@ int main()
     int count = 0;
     Directory shaders;
 
-    if(shaders.open(Path("../resources/shaders/core")))
+    if(shaders.open(Path("../resources/shaders")))
     {
         ShaderStageManager::Instance manager = ShaderStageManager::get();
 

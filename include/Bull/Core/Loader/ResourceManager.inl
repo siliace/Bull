@@ -1,7 +1,5 @@
 #include <Bull/Core/Loader/FailedToLoad.hpp>
 
-#include <iostream>
-
 namespace Bull
 {
     template <typename T, typename S, typename L, typename P>
@@ -32,7 +30,7 @@ namespace Bull
     }
 
     template <typename T, typename S, typename L, typename P>
-    Index ResourceManager<T, S, L, P>::loadFromDirectory(Directory& directory, const P& parameters)
+    Index ResourceManager<T, S, L, P>::loadFromDirectory(Directory& directory, bool recursively, const P& parameters)
     {
         if(directory.isOpen())
         {
@@ -46,6 +44,15 @@ namespace Bull
                     name.replace('.', '_');
 
                     loadFromPath(path, name, parameters);
+                }
+                else if(recursively && path.getCurrentDirectory() != "." && path.getCurrentDirectory() != "..")
+                {
+                    Directory subdir(path);
+
+                    if(subdir.isOpen())
+                    {
+                        loadFromDirectory(subdir);
+                    }
                 }
             }
 
@@ -196,8 +203,6 @@ namespace Bull
     T& ResourceManager<T, S, L, P>::pushResource(const String& name, std::unique_ptr<T>& resource)
     {
         m_resources[name] = std::move(resource);
-
-        std::cout << "Pushed resource : " << name.getBuffer() << std::endl;
 
         return castToReference(m_resources[name]);
     }

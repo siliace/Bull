@@ -48,13 +48,14 @@ namespace Bull
 
         /*! \brief Load every Resource from a Directory
          *
-         * \param directory  The Directory
-         * \param parameters Parameters to create resources
+         * \param directory   The Directory
+         * \param recursively True to load every resources in subdirectories
+         * \param parameters  Parameters to create resources
          *
          * \return The count of loaded Resource
          *
          */
-        Index loadFromDirectory(Directory& directory, const P& parameters = P());
+        Index loadFromDirectory(Directory& directory, bool recursively = true, const P& parameters = P());
 
         /*! \brief Load a Resource from a Path
          *

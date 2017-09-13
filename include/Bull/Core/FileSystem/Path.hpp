@@ -9,11 +9,7 @@ namespace Bull
     {
     public:
 
-        #ifdef BULL_OS_WINDOWS
-            static constexpr char Separator = '\\';
-        #else
-            static constexpr char Separator = '/';
-        #endif
+        static constexpr char Separator = '/';
 
     public:
 
@@ -90,6 +86,13 @@ namespace Bull
          *
          */
         String getExtension() const;
+
+        /*! \brief Get the current director name of the Path
+         *
+         * \return The name
+         *
+         */
+        String getCurrentDirectory() const;
 
         /*! \brief Set the base Path
          *
