@@ -29,6 +29,15 @@ namespace Bull
          */
         explicit Path(const String& path);
 
+        /*! \brief Open the Path
+         *
+         * \param path The path to open
+         *
+         * \return This
+         *
+         */
+        Path& open(const String& path);
+
         /*! \brief Tell whether the Path is valid
          *
          * \return True if the path is valid
@@ -81,6 +90,15 @@ namespace Bull
          *
          */
         String getExtension() const;
+
+        /*! \brief Set the base Path
+         *
+         * \param base The base Path
+         *
+         * \return This
+         *
+         */
+        Path& setBasePath(const Path& base);
 
         /*! \brief Check whether the path is a file
          *

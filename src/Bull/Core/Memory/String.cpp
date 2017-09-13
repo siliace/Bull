@@ -179,6 +179,24 @@ namespace Bull
         return -1;
     }
 
+    String& String::replace(char toReplace, char other, Index start, Index stop, bool caseSensitive)
+    {
+        if(caseSensitive)
+        {
+            toReplace = toUpper(toReplace);
+        }
+
+        for(Index i = start; i < std::min(getSize(), stop); i++)
+        {
+            if((caseSensitive && toReplace == toUpper(m_sharedString->string[i])) || toReplace == m_sharedString->string[i])
+            {
+                m_sharedString->string[i] = other;
+            }
+        }
+
+        return (*this);
+    }
+
     String String::subString(Index start, Index stop) const
     {
         if(stop == String::npos)

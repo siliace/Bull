@@ -12,9 +12,14 @@ namespace Bull
         /// Nothing
     }
 
-    Path::Path(const String& path) :
-        m_path(path)
+    Path::Path(const String& path)
     {
+        open(path);
+    }
+
+    Path& Path::open(const String& path)
+    {
+        m_path        = path;
         m_isFile      = File::exists(m_path);
         m_isDirectory = Directory::exists(m_path);
 
@@ -62,7 +67,7 @@ namespace Bull
     {
         if(isFile())
         {
-            int index = toString().last(Separator);
+            int index = toString().last('/') + 1;
 
             if(index)
             {
@@ -98,6 +103,20 @@ namespace Bull
         }
 
         return toString();
+    }
+
+    Path& Path::setBasePath(const Path& base)
+    {
+        String fullPath = base.toString();
+
+        if(!fullPath.endsWith(Separator) || !toString().startWith(Separator))
+        {
+            fullPath += Separator;
+        }
+
+        fullPath += toString();
+
+        return open(fullPath);
     }
 
     bool Path::isFile() const

@@ -1,15 +1,17 @@
 #include <Bull/Core/Loader/FailedToLoad.hpp>
 
+#include <iostream>
+
 namespace Bull
 {
-    template <typename T, typename Saver, typename Loader>
-    T& ResourceManager<T, Saver, Loader>::castToReference(std::unique_ptr<T>& resource)
+    template <typename T, typename S, typename L, typename P>
+    T& ResourceManager<T, S, L, P>::castToReference(std::unique_ptr<T>& resource)
     {
         return static_cast<T&>(*resource.get());
     }
 
-    template <typename T, typename Saver, typename Loader>
-    bool ResourceManager<T, Saver, Loader>::registerResource(T* resource, const String& name)
+    template <typename T, typename S, typename L, typename P>
+    bool ResourceManager<T, S, L, P>::registerResource(T* resource, const String& name)
     {
         if(!hasResource(name))
         {
@@ -23,25 +25,81 @@ namespace Bull
         return false;
     }
 
-    template <typename T, typename Saver, typename Loader>
-    bool ResourceManager<T, Saver, Loader>::hasResource(const String& name) const
+    template <typename T, typename S, typename L, typename P>
+    bool ResourceManager<T, S, L, P>::hasResource(const String& name) const
     {
         return m_resources.find(name) != m_resources.end();
     }
 
-    template <typename T, typename Saver, typename Loader>
-    T& ResourceManager<T, Saver, Loader>::loadFromPath(const Path& path, const String& name, const ParameterBag& parameters)
+    template <typename T, typename S, typename L, typename P>
+    Index ResourceManager<T, S, L, P>::loadFromDirectory(Directory& directory, const P& parameters)
+    {
+        if(directory.isOpen())
+        {
+            Index oldSize = m_resources.size();
+
+            for(const Path& path : directory.getContent())
+            {
+                if(path.isFile())
+                {
+                    String name = path.getFileName();
+                    name.replace('.', '_');
+
+                    loadFromPath(path, name, parameters);
+                }
+            }
+
+            return m_resources.size() - oldSize;
+        }
+
+        return 0;
+    }
+
+    template <typename T, typename S, typename L, typename P>
+    T& ResourceManager<T, S, L, P>::loadFromPath(const Path& path, const String& name, const P& parameters)
     {
         std::unique_ptr<T> resource = std::make_unique<T>();
 
-        if(getLoader()->isSupportedExtension(path.getExtension()))
+        if(path.isFile() && getLoader()->isSupportedExtension(path.getExtension()))
         {
             if(hasResource(name))
             {
                 return getResource(name);
             }
 
-            if(getLoader()->loadFromPath(resource, path, parameters))
+            P resolvedParameters = parameters;
+
+            if(resolveParameters(&resolvedParameters, path))
+            {
+                if(getLoader()->loadFromPath(resource, path, resolvedParameters))
+                {
+                    return pushResource(name, resource);
+                }
+            }
+        }
+
+        throw FailedToLoad<T>(name, castToReference(resource));
+    }
+
+    template <typename T, typename S, typename L, typename P>
+    T& ResourceManager<T, S, L, P>::loadFromStream(InStream& stream, const String& name, const P& parameters)
+    {
+        std::unique_ptr<T> resource = std::make_unique<T>();
+
+        if(hasResource(name))
+        {
+            return getResource(name);
+        }
+
+        P resolvedParameters = parameters;
+
+        Uint64 oldCursor = stream.getCursor();
+
+        if(resolveParameters(&resolvedParameters, stream))
+        {
+            stream.setCursor(oldCursor); /// The resolver could read from the stream without reset the cursor
+
+            if(getLoader()->loadFromStream(resource, stream, resolvedParameters))
             {
                 return pushResource(name, resource);
             }
@@ -50,8 +108,8 @@ namespace Bull
         throw FailedToLoad<T>(name, castToReference(resource));
     }
 
-    template <typename T, typename Saver, typename Loader>
-    T& ResourceManager<T, Saver, Loader>::loadFromStream(InStream& stream, const String& name, const ParameterBag& parameters)
+    template <typename T, typename S, typename L, typename P>
+    T& ResourceManager<T, S, L, P>::loadFromMemory(const void* data, Index length, const String& name, const P& parameters)
     {
         std::unique_ptr<T> resource = std::make_unique<T>();
 
@@ -60,34 +118,21 @@ namespace Bull
             return getResource(name);
         }
 
-        if(getLoader()->loadFromStream(resource, stream, parameters))
+        P resolvedParameters = parameters;
+
+        if(resolveParameters(&resolvedParameters, data, length))
         {
-            return pushResource(name, resource);
+            if(getLoader()->loadFromMemory(resource, data, length, resolvedParameters))
+            {
+                return pushResource(name, resource);
+            }
         }
 
         throw FailedToLoad<T>(name, castToReference(resource));
     }
 
-    template <typename T, typename Saver, typename Loader>
-    T& ResourceManager<T, Saver, Loader>::loadFromMemory(const void* data, Index length, const String& name, const ParameterBag& parameters)
-    {
-        std::unique_ptr<T> resource = std::make_unique<T>();
-
-        if(hasResource(name))
-        {
-            return getResource(name);
-        }
-
-        if(getLoader()->loadFromMemory(resource, data, length, parameters))
-        {
-            return pushResource(name, resource);
-        }
-
-        throw FailedToLoad<T>(name, castToReference(resource));
-    }
-
-    template <typename T, typename Saver, typename Loader>
-    T& ResourceManager<T, Saver, Loader>::getResource(const String& name)
+    template <typename T, typename S, typename L, typename P>
+    T& ResourceManager<T, S, L, P>::getResource(const String& name)
     {
         if(!hasResource(name))
         {
@@ -99,40 +144,60 @@ namespace Bull
         return castToReference(m_resources[name]);
     }
 
-    template <typename T, typename Saver, typename Loader>
-    bool ResourceManager<T, Saver, Loader>::saveToPath(const T& resource, const Path& path)
+    template <typename T, typename S, typename L, typename P>
+    bool ResourceManager<T, S, L, P>::saveToPath(const T& resource, const Path& path)
     {
         return getSaver()->saveToPath(resource, path);
     }
 
-    template <typename T, typename Saver, typename Loader>
-    bool ResourceManager<T, Saver, Loader>::saveToStream(const T& resource, OutStream& stream)
+    template <typename T, typename S, typename L, typename P>
+    bool ResourceManager<T, S, L, P>::saveToStream(const T& resource, OutStream& stream)
     {
         return getSaver()->saveToStream(resource, stream);
     }
 
-    template <typename T, typename Saver, typename Loader>
-    bool ResourceManager<T, Saver, Loader>::saveToMemory(const T& resource, void* data, Index length)
+    template <typename T, typename S, typename L, typename P>
+    bool ResourceManager<T, S, L, P>::saveToMemory(const T& resource, void* data, Index length)
     {
         return getSaver()->saveToMemory(resource, data, length);
     }
 
-    template <typename T, typename Saver, typename Loader>
-    T* ResourceManager<T, Saver, Loader>::unregisterResource(const String& name)
+    template <typename T, typename S, typename L, typename P>
+    T* ResourceManager<T, S, L, P>::unregisterResource(const String& name)
     {
         m_resources.erase(name);
     }
 
-    template <typename T, typename Saver, typename Loader>
-    void ResourceManager<T, Saver, Loader>::purge()
+    template <typename T, typename S, typename L, typename P>
+    void ResourceManager<T, S, L, P>::purge()
     {
         m_resources.clear();
     }
 
-    template <typename T, typename Saver, typename Loader>
-    T& ResourceManager<T, Saver, Loader>::pushResource(const String& name, std::unique_ptr<T>& resource)
+    template <typename T, typename S, typename L, typename P>
+    bool ResourceManager<T, S, L, P>::resolveParameters(P* parameters, const Path& path) const
+    {
+        return true;
+    }
+
+    template <typename T, typename S, typename L, typename P>
+    bool ResourceManager<T, S, L, P>::resolveParameters(P* parameters, InStream& stream) const
+    {
+        return true;
+    }
+
+    template <typename T, typename S, typename L, typename P>
+    bool ResourceManager<T, S, L, P>::resolveParameters(P* parameters, const void* data, Index length) const
+    {
+        return true;
+    }
+
+    template <typename T, typename S, typename L, typename P>
+    T& ResourceManager<T, S, L, P>::pushResource(const String& name, std::unique_ptr<T>& resource)
     {
         m_resources[name] = std::move(resource);
+
+        std::cout << "Pushed resource : " << name.getBuffer() << std::endl;
 
         return castToReference(m_resources[name]);
     }

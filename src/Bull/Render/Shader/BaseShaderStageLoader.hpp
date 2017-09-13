@@ -27,7 +27,7 @@ namespace Bull
              * \return True if the ShaderStage was loaded successfully
              *
              */
-            bool loadFromPath(std::unique_ptr<ShaderStage>& resource, const Path& path, const ParameterBag& parameters) const override;
+            bool loadFromPath(std::unique_ptr<ShaderStage>& resource, const Path& path, const ShaderStageParameters& parameters) const override;
 
             /*! \brief Load a ShaderStage from a Path
              *
@@ -38,7 +38,7 @@ namespace Bull
              * \return True if the ShaderStage was loaded successfully
              *
              */
-            bool loadFromStream(std::unique_ptr<ShaderStage>& resource, InStream& stream, const ParameterBag& parameters) const override;
+            bool loadFromStream(std::unique_ptr<ShaderStage>& resource, InStream& stream, const ShaderStageParameters& parameters) const override;
 
             /*! \brief Load a ShaderStage from a memory area
              *
@@ -50,7 +50,7 @@ namespace Bull
              * \return True if the ShaderStage was loaded successfully
              *
              */
-            bool loadFromMemory(std::unique_ptr<ShaderStage>& resource, const void* data, Index length, const ParameterBag& parameters) const override;
+            bool loadFromMemory(std::unique_ptr<ShaderStage>& resource, const void* data, Index length, const ShaderStageParameters& parameters) const override;
         };
     }
 }

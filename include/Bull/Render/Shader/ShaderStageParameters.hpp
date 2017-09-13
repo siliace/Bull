@@ -7,8 +7,13 @@
 
 namespace Bull
 {
-    struct BULL_RENDER_API ShaderStageParameters : ParameterBag
+    struct BULL_RENDER_API ShaderStageParameters : public ParameterBag
     {
+        /*! \brief Default constructor
+         *
+         */
+        ShaderStageParameters() = default;
+
         /*! \brief Constructor
          *
          * \param type The type of the shader to load

@@ -66,6 +66,7 @@ namespace Bull
 
         private:
 
+            Path            m_base;
             WIN32_FIND_DATA m_result;
             HANDLE          m_handler;
         };

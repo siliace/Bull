@@ -35,6 +35,8 @@ namespace Bull
 
         bool DirectoryImplWin32::open(const Path& name)
         {
+            m_base = name;
+
             String path = name.toString() + "\\*";
 
             m_handler = FindFirstFile(path.getBuffer(), &m_result);
@@ -48,7 +50,7 @@ namespace Bull
 
             do
             {
-                Path p(m_result.cFileName);
+                Path p(m_base.toString() + "/" + m_result.cFileName);
 
                 if((flags & (Directory::Directories) && p.isDirectory()) || (flags & (Directory::Files) && p.isFile()))
                 {

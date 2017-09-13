@@ -3,6 +3,7 @@
 
 #include <map>
 
+#include <Bull/Core/FileSystem/Directory.hpp>
 #include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Loader/AbstractResourceLoader.hpp>
 #include <Bull/Core/Loader/AbstractResourceSaver.hpp>
@@ -10,7 +11,7 @@
 
 namespace Bull
 {
-    template <typename T, typename Saver, typename Loader>
+    template <typename T, typename S, typename L, typename P = ParameterBag>
     class BULL_CORE_API ResourceManager
     {
     protected:
@@ -45,6 +46,16 @@ namespace Bull
          */
         bool hasResource(const String& name) const;
 
+        /*! \brief Load every Resource from a Directory
+         *
+         * \param directory  The Directory
+         * \param parameters Parameters to create resources
+         *
+         * \return The count of loaded Resource
+         *
+         */
+        Index loadFromDirectory(Directory& directory, const P& parameters = P());
+
         /*! \brief Load a Resource from a Path
          *
          * \param path       The path
@@ -54,7 +65,7 @@ namespace Bull
          * \return The Resource
          *
          */
-        T& loadFromPath(const Path& path, const String& name, const ParameterBag& parameters = ParameterBag());
+        T& loadFromPath(const Path& path, const String& name, const P& parameters = P());
 
         /*! \brief Load a Resource from a Stream
          *
@@ -65,7 +76,7 @@ namespace Bull
          * \return The Resource
          *
          */
-        T& loadFromStream(InStream& stream, const String& name, const ParameterBag& parameters = ParameterBag());
+        T& loadFromStream(InStream& stream, const String& name, const P& parameters = P());
 
         /*! \brief Load a Resource from a memory area
          *
@@ -77,7 +88,7 @@ namespace Bull
          * \return The Resource
          *
          */
-        T& loadFromMemory(const void* data, Index length, const String& name, const ParameterBag& parameters = ParameterBag());
+        T& loadFromMemory(const void* data, Index length, const String& name, const P& parameters = P());
 
         /*! \brief Get or create a Resource by its name
          *
@@ -135,19 +146,50 @@ namespace Bull
 
     protected:
 
+        /*! \brief Resolve the ParameterBag for a given Path
+         *
+         * \param parameters Parameters to resolve
+         * \param path       The path to load
+         *
+         * \return True if the ParameterBag was resolved successfully
+         *
+         */
+        virtual bool resolveParameters(P* parameters, const Path& path) const;
+
+        /*! \brief Resolve the ParameterBag for a given stream
+         *
+         * \param parameters Parameters to resolve
+         * \param stream     The stream to load
+         *
+         * \return True if the ParameterBag was resolved successfully
+         *
+         */
+        virtual bool resolveParameters(P* parameters, InStream& stream) const;
+
+        /*! \brief Resolve the ParameterBag for a given memory area
+         *
+         * \param parameters Parameters to resolve
+         * \param data       The data to load
+         * \param length     Length of the data
+         *
+         * \return True if the ParameterBag was resolved successfully
+         *
+         */
+        virtual bool resolveParameters(P* parameters, const void* data, Index length) const;
+
         /*! \brief Get the ResourceSaver for the Resource
          *
          * \return The ResourceSaver
          *
          */
-        virtual std::unique_ptr<Saver>& getSaver() = 0;
+        virtual std::unique_ptr<S>& getSaver() = 0;
 
         /*! \brief Get the ResourceLoader for the Resource
          *
          * \return The ResourceLoader
          *
          */
-        virtual std::unique_ptr<Loader>& getLoader() = 0;
+        virtual std::unique_ptr<L>& getLoader() = 0;
 
         /*! \brief Get an empty Resource
          *

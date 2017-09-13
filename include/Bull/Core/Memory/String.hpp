@@ -120,7 +120,7 @@ namespace Bull
          * \param character The character to put in the string
          *
          */
-        explicit String(char character);
+        String(char character);
 
         /*! \brief Constructor
          *
@@ -182,6 +182,19 @@ namespace Bull
          *
          */
         int last(char c, bool caseSensitive = true) const;
+
+        /*! \brief Replace every a character of the String by another one
+         *
+         * \param toReplace     The character to replace
+         * \param other         The use to replace
+         * \param start         The starting index to replace
+         * \parma stop          The index to stop to replace
+         * \param caseSensitive True to be case sensitive, false otherwise
+         *
+         * \return This
+         *
+         */
+        String& replace(char toReplace, char other, Index start = 0, Index stop = npos, bool caseSensitive = true);
 
         /*! \brief Get a subpart of the string
          *

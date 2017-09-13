@@ -3,6 +3,7 @@
 #include <Bull/Render/Shader/ShaderStage.hpp>
 #include <Bull/Render/Shader/ShaderStageManager.hpp>
 #include <Bull/Render/Shader/ShaderStageParameters.hpp>
+#include <Bull/Render/Target/RenderWindow.hpp>
 
 #include <Bull/Utility/Logger/ConsoleLogger.hpp>
 
@@ -12,9 +13,15 @@ int main()
 {
     Log::get()->createLogger<ConsoleLogger>();
 
-    ShaderStageManager::Instance manager = ShaderStageManager::get();
+    int count = 0;
+    Directory shaders;
 
-    ShaderStage& vertex = manager->loadFromPath(Path("../resources/shaders/core/core.vert"), "core_vertex", ShaderStageParameters(ShaderStage::Vertex));
+    if(shaders.open(Path("../resources/shaders/core")))
+    {
+        ShaderStageManager::Instance manager = ShaderStageManager::get();
 
-    return 0;
+        count = manager->loadFromDirectory(shaders);
+    }
+
+    return count;
 }

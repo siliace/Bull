@@ -98,12 +98,14 @@ namespace Bull
 
     std::vector<Path> Directory::getContent(Uint32 flags)
     {
+        std::vector<Path> entities;
+
         if(m_impl)
         {
-            return m_impl->getContent(flags);
+            entities = m_impl->getContent(flags);
         }
 
-        return std::vector<Path>();
+        return entities;
     }
 
     const Path& Directory::getPath() const

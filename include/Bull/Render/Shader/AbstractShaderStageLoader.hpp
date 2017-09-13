@@ -4,10 +4,11 @@
 #include <Bull/Core/Loader/AbstractResourceLoader.hpp>
 
 #include <Bull/Render/Shader/ShaderStage.hpp>
+#include <Bull/Render/Shader/ShaderStageParameters.hpp>
 
 namespace Bull
 {
-    struct BULL_RENDER_API AbstractShaderStageLoader : public AbstractResourceLoader<ShaderStage>
+    struct BULL_RENDER_API AbstractShaderStageLoader : public AbstractResourceLoader<ShaderStage, ShaderStageParameters>
     {
         /*! \brief Tell whether a file extension is supported
          *
@@ -27,7 +28,7 @@ namespace Bull
          * \return True if the ShaderStage was loaded successfully
          *
          */
-        virtual bool loadFromPath(std::unique_ptr<ShaderStage>& resource, const Path& path, const ParameterBag& parameters) const = 0;
+        virtual bool loadFromPath(std::unique_ptr<ShaderStage>& resource, const Path& path, const ShaderStageParameters& parameters) const = 0;
 
         /*! \brief Load a ShaderStage from a Path
          *
@@ -38,7 +39,7 @@ namespace Bull
          * \return True if the ShaderStage was loaded successfully
          *
          */
-        virtual bool loadFromStream(std::unique_ptr<ShaderStage>& resource, InStream& stream, const ParameterBag& parameters) const = 0;
+        virtual bool loadFromStream(std::unique_ptr<ShaderStage>& resource, InStream& stream, const ShaderStageParameters& parameters) const = 0;
 
         /*! \brief Load a ShaderStage from a memory area
          *
@@ -50,7 +51,7 @@ namespace Bull
          * \return True if the ShaderStage was loaded successfully
          *
          */
-        virtual bool loadFromMemory(std::unique_ptr<ShaderStage>& resource, const void* data, Index length, const ParameterBag& parameters) const = 0;
+        virtual bool loadFromMemory(std::unique_ptr<ShaderStage>& resource, const void* data, Index length, const ShaderStageParameters& parameters) const = 0;
     };
 }
 

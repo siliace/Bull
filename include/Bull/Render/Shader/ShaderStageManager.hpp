@@ -7,10 +7,11 @@
 #include <Bull/Render/Shader/AbstractShaderStageLoader.hpp>
 #include <Bull/Render/Shader/AbstractShaderStageSaver.hpp>
 #include <Bull/Render/Shader/ShaderStage.hpp>
+#include <Bull/Render/Shader/ShaderStageParameters.hpp>
 
 namespace Bull
 {
-    class BULL_RENDER_API ShaderStageManager : public ResourceManager<ShaderStage, AbstractShaderStageSaver, AbstractShaderStageLoader>, public Singleton<ShaderStageManager>
+    class BULL_RENDER_API ShaderStageManager : public ResourceManager<ShaderStage, AbstractShaderStageSaver, AbstractShaderStageLoader, ShaderStageParameters>, public Singleton<ShaderStageManager>
     {
     protected:
 
@@ -34,6 +35,18 @@ namespace Bull
          *
          */
         ShaderStage* getEmptyResource() const override;
+
+    protected:
+
+        /*! \brief Resolve the ParameterBag for a given Path
+         *
+         * \param parameters Parameters to resolve
+         * \param path       The path to load
+         *
+         * \return True if the ParameterBag was resolved successfully
+         *
+         */
+        bool resolveParameters(ShaderStageParameters* parameters, const Path& path) const;
 
     private:
 

@@ -12,13 +12,13 @@ namespace Bull
         bool BaseShaderStageLoader::isSupportedExtension(const String& extension) const
         {
             static std::vector<String> extensionsSupported = {
-                    "frag", "vert"
+                    "vert", "frag",
             };
 
             return std::find(extensionsSupported.begin(), extensionsSupported.end(), extension) != extensionsSupported.end();
         }
 
-        bool BaseShaderStageLoader::loadFromPath(std::unique_ptr<ShaderStage>& resource, const Path& path, const ParameterBag& parameters) const
+        bool BaseShaderStageLoader::loadFromPath(std::unique_ptr<ShaderStage>& resource, const Path& path, const ShaderStageParameters& parameters) const
         {
             File resourceFile(path);
 
@@ -30,20 +30,14 @@ namespace Bull
             return false;
         }
 
-        bool BaseShaderStageLoader::loadFromStream(std::unique_ptr<ShaderStage>& resource, InStream& stream, const ParameterBag& parameters) const
+        bool BaseShaderStageLoader::loadFromStream(std::unique_ptr<ShaderStage>& resource, InStream& stream, const ShaderStageParameters& parameters) const
         {
-            unsigned int type;
+            resource->create(ShaderStage::Type(parameters.getType()));
 
-            if(parameters.getParameter("type", type))
-            {
-                resource->create(ShaderStage::Type(type));
-                return resource->compile(stream.readAll());
-            }
-
-            return false;
+            return resource->compile(stream.readAll());
         }
 
-        bool BaseShaderStageLoader::loadFromMemory(std::unique_ptr<ShaderStage>& resource, const void* data, Index length, const ParameterBag& parameters) const
+        bool BaseShaderStageLoader::loadFromMemory(std::unique_ptr<ShaderStage>& resource, const void* data, Index length, const ShaderStageParameters& parameters) const
         {
             MemoryStream stream(data, length);
 

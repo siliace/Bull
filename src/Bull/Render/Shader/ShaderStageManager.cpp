@@ -2,6 +2,8 @@
 #include <Bull/Render/Shader/BaseShaderStageSaver.hpp>
 #include <Bull/Render/Shader/ShaderStageManager.hpp>
 
+#include <iostream>
+
 namespace Bull
 {
     std::unique_ptr<AbstractShaderStageSaver>& ShaderStageManager::getSaver()
@@ -27,5 +29,28 @@ namespace Bull
     ShaderStage* ShaderStageManager::getEmptyResource() const
     {
         return new ShaderStage();
+    }
+
+    bool ShaderStageManager::resolveParameters(ShaderStageParameters* parameters, const Path& path) const
+    {
+        if(!parameters->hasParameter("type"))
+        {
+            String extension = path.getExtension();
+
+            if(extension == "vert")
+            {
+                parameters->setType(ShaderStage::Vertex);
+            }
+            else if(extension == "frag")
+            {
+                parameters->setType(ShaderStage::Fragment);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
