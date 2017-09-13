@@ -30,6 +30,20 @@ namespace Bull
     }
 
     template <typename T, typename S, typename L, typename P>
+    bool AbstractResourceManager<T, S, L, P>::isLoaded(const Path& path) const
+    {
+        for(const auto& resource : m_resources)
+        {
+            if(resource.second->getPath().toString() == path.toString())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    template <typename T, typename S, typename L, typename P>
     Index AbstractResourceManager<T, S, L, P>::loadFromDirectory(Directory& directory, bool recursively, const P& parameters)
     {
         if(directory.isOpen())
@@ -69,7 +83,7 @@ namespace Bull
 
         if(path.isFile() && getLoader()->isSupportedExtension(path.getExtension()))
         {
-            if(hasResource(name))
+            if(hasResource(name) || isLoaded(path))
             {
                 return getResource(name);
             }
@@ -166,6 +180,12 @@ namespace Bull
 
         return castToReference(m_resources[name]);
     }
+
+    template <typename T, typename S, typename L, typename P>
+    bool AbstractResourceManager<T, S, L, P>::saveToPath(const T& resource, const P& parameters)
+    {
+        return saveToPath(resource, resource.getPath(), parameters);
+    };
 
     template <typename T, typename S, typename L, typename P>
     bool AbstractResourceManager<T, S, L, P>::saveToPath(const T& resource, const Path& path, const P& parameters)

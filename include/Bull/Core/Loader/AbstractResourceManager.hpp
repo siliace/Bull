@@ -38,6 +38,15 @@ namespace Bull
          */
         bool registerResource(T* resource, const String& name);
 
+        /*! \brief Tell whether a path has been loaded
+         *
+         * \param path The path to test
+         *
+         * \return True if the path was loaded
+         *
+         */
+        bool isLoaded(const Path& path) const;
+
         /*! \brief Tell whether a Resource exists
          *
          * \param name The name of the Resource
@@ -107,6 +116,16 @@ namespace Bull
          *
          */
         T& getResource(const String& name);
+
+        /*! \brief Save a Resource to a file
+         *
+         * \param resource   The Resource to save
+         * \param parameters Parameters to save the resource
+         *
+         * \return True if the Resource was saved successfully
+         *
+         */
+        bool saveToPath(const T& resource, const P& parameters = P());
 
         /*! \brief Save a Resource to a file
          *

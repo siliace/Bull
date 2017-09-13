@@ -1,6 +1,7 @@
 #ifndef BULL_UTILITY_IMAGE_IMAGE_HPP
 #define BULL_UTILITY_IMAGE_IMAGE_HPP
 
+#include <Bull/Core/Loader/Resource.hpp>
 #include <Bull/Core/Memory/ByteArray.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
@@ -9,7 +10,7 @@
 
 namespace Bull
 {
-    class BULL_UTILITY_API Image
+    class BULL_UTILITY_API Image : public Resource
     {
     public:
 

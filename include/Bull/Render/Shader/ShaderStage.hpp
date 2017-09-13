@@ -3,6 +3,7 @@
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
+#include <Bull/Core/Loader/Resource.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
@@ -11,11 +12,11 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource
+    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource, public Resource
     {
     public:
 
-        enum Type : unsigned int
+        enum Type
         {
             Vertex   = GL_VERTEX_SHADER,
             Fragment = GL_FRAGMENT_SHADER,
