@@ -16,7 +16,7 @@ namespace Bull
 
     ShaderStage::Type ShaderStageParameters::getType() const
     {
-        unsigned int type;
+        unsigned int type = 0;
 
         getParameter("type", type);
 

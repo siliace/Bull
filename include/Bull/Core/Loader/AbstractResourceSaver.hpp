@@ -3,10 +3,11 @@
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
+#include <Bull/Core/Loader/ParameterBag.hpp>
 
 namespace Bull
 {
-    template <typename T>
+    template <typename T, typename P = ParameterBag>
     struct BULL_CORE_API AbstractResourceSaver
     {
         /*! \brief Tell whether a file extension is supported
@@ -26,7 +27,7 @@ namespace Bull
          * \return True if the Resource was saved successfully
          *
          */
-        virtual bool saveToPath(const T& resource, const Path& path) const = 0;
+        virtual bool saveToPath(const T& resource, const Path& path, const P& parameters) const = 0;
 
         /*! \brief Save a Resource to a stream
          *
@@ -36,7 +37,7 @@ namespace Bull
          * \return True if the Resource was saved successfully
          *
          */
-        virtual bool saveToStream(const T& resource, OutStream& stream) const = 0;
+        virtual bool saveToStream(const T& resource, OutStream& stream, const P& parameters) const = 0;
 
         /*! \brief Save a Resource to a memory area
          *
@@ -46,7 +47,7 @@ namespace Bull
          * \return True if the Resource was saved successfully
          *
          */
-        virtual bool saveToMemory(const T& resource, void* data, Index length) const = 0;
+        virtual bool saveToMemory(const T& resource, void* data, Index length, const P& parameters) const = 0;
     };
 }
 

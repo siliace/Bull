@@ -155,21 +155,26 @@ namespace Bull
     }
 
     template <typename T, typename S, typename L, typename P>
-    bool AbstractResourceManager<T, S, L, P>::saveToPath(const T& resource, const Path& path)
+    bool AbstractResourceManager<T, S, L, P>::saveToPath(const T& resource, const Path& path, const P& parameters)
     {
-        return getSaver()->saveToPath(resource, path);
+        if(getSaver()->isSupportedExtension(path.getExtension()))
+        {
+            return getSaver()->saveToPath(resource, path, parameters);
+        }
+
+        return false;
     }
 
     template <typename T, typename S, typename L, typename P>
-    bool AbstractResourceManager<T, S, L, P>::saveToStream(const T& resource, OutStream& stream)
+    bool AbstractResourceManager<T, S, L, P>::saveToStream(const T& resource, OutStream& stream, const P& parameters)
     {
-        return getSaver()->saveToStream(resource, stream);
+        return getSaver()->saveToStream(resource, stream, parameters);
     }
 
     template <typename T, typename S, typename L, typename P>
-    bool AbstractResourceManager<T, S, L, P>::saveToMemory(const T& resource, void* data, Index length)
+    bool AbstractResourceManager<T, S, L, P>::saveToMemory(const T& resource, void* data, Index length, const P& parameters)
     {
-        return getSaver()->saveToMemory(resource, data, length);
+        return getSaver()->saveToMemory(resource, data, length, parameters);
     }
 
     template <typename T, typename S, typename L, typename P>

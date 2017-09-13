@@ -102,34 +102,37 @@ namespace Bull
 
         /*! \brief Save a Resource to a file
          *
-         * \param resource The Resource to save
-         * \param path     The Path to save the Resource
+         * \param resource   The Resource to save
+         * \param path       The Path to save the Resource
+         * \param parameters Parameters to save the resource
          *
          * \return True if the Resource was saved successfully
          *
          */
-        bool saveToPath(const T& resource, const Path& path);
+        bool saveToPath(const T& resource, const Path& path, const P& parameters = P());
 
         /*! \brief Save a Resource to a stream
          *
-         * \param resource The Resource to save
-         * \param stream
+         * \param resource   The Resource to save
+         * \param stream     The stream to write to save the resource
+         * \param parameters Parameters to save the resource
          *
          * \return True if the Resource was saved successfully
          *
          */
-        bool saveToStream(const T& resource, OutStream& stream);
+        bool saveToStream(const T& resource, OutStream& stream, const P& parameters = P());
 
         /*! \brief Save a Resource to a memory area
          *
-         * \param resource The Resource to save
-         * \param data     The memory area to save the Resource
-         * \param length   The length of data
+         * \param resource   The Resource to save
+         * \param data       The memory area to save the Resource
+         * \param length     The length of data
+         * \param parameters Parameters to save the resource
          *
          * \return True if the Resource was saved successfully
          *
          */
-        bool saveToMemory(const T& resource, void* data, Index length);
+        bool saveToMemory(const T& resource, void* data, Index length, const P& parameters = P());
 
         /*! \brief Unregister a Resource
          *

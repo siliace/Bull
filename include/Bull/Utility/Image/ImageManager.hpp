@@ -7,10 +7,11 @@
 #include <Bull/Utility/Image/AbstractImageSaver.hpp>
 #include <Bull/Utility/Image/AbstractImageLoader.hpp>
 #include <Bull/Utility/Image/Image.hpp>
+#include <Bull/Utility/Image/ImageParameters.hpp>
 
 namespace Bull
 {
-    class BULL_UTILITY_API ImageManager : public AbstractResourceManager<Image, AbstractImageSaver, AbstractImageLoader>, public Singleton<ImageManager>
+    class BULL_UTILITY_API ImageManager : public AbstractResourceManager<Image, AbstractImageSaver, AbstractImageLoader, ImageParameters>, public Singleton<ImageManager>
     {
     public:
 
@@ -29,9 +30,20 @@ namespace Bull
          * \return The image
          *
          */
-        Image& loadFromPixels(const ByteArray& pixels, const Vector2UI& size, const String& name, ParameterBag parameters);
+        Image& loadFromPixels(const ByteArray& pixels, const Vector2UI& size, const String& name, const ImageParameters& parameters);
 
     protected:
+
+        /*! \brief Resolve the ParameterBag for pixels
+         *
+         * \param parameters Parameters to resolve
+         * \param pixels     The pixels of the Image
+         * \param size       The size of Image
+         *
+         * \return True if the ParameterBag was resolved successfully
+         *
+         */
+        virtual bool resolveParameters(ImageParameters* parameters, const ByteArray& pixels, const Vector2UI& size) const;
 
         /*! \brief Get the ResourceSaver for the Resource
          *

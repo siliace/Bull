@@ -4,7 +4,7 @@
 
 namespace Bull
 {
-    Image& ImageManager::loadFromPixels(const ByteArray& pixels, const Vector2UI& size, const String& name, ParameterBag parameters)
+    Image& ImageManager::loadFromPixels(const ByteArray& pixels, const Vector2UI& size, const String& name, const ImageParameters& parameters)
     {
         std::unique_ptr<Image> resource = std::make_unique<Image>();
 
@@ -13,12 +13,22 @@ namespace Bull
             return getResource(name);
         }
 
-        if(getLoader()->loadFromPixels(resource, pixels, size, parameters))
+        ImageParameters resolvedParameters = parameters;
+
+        if(resolveParameters(&resolvedParameters, pixels, size))
         {
-            return pushResource(name, resource);
+            if(getLoader()->loadFromPixels(resource, pixels, size, resolvedParameters))
+            {
+                return pushResource(name, resource);
+            }
         }
 
         throw FailedToLoad<Image>(name, castToReference(resource));
+    }
+
+    bool ImageManager::resolveParameters(ImageParameters* parameters, const ByteArray& pixels, const Vector2UI& size) const
+    {
+        return true;
     }
 
     std::unique_ptr<AbstractImageSaver>& ImageManager::getSaver()

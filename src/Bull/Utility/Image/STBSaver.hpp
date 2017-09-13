@@ -35,7 +35,7 @@ namespace Bull
              * \return True if the Image was saved successfully
              *
              */
-            bool saveToPath(const Image& resource, const Path& path) const override;
+            bool saveToPath(const Image& resource, const Path& path, const ImageParameters& parameters) const override;
 
             /*! \brief Save a Image to a stream
              *
@@ -45,7 +45,7 @@ namespace Bull
              * \return True if the Image was saved successfully
              *
              */
-            bool saveToStream(const Image& resource, OutStream& stream) const override;
+            bool saveToStream(const Image& resource, OutStream& stream, const ImageParameters& parameters) const override;
 
             /*! \brief Save a Image to a memory area
              *
@@ -56,7 +56,7 @@ namespace Bull
              * \return True if the Image was saved successfully
              *
              */
-            bool saveToMemory(const Image& resource, void* data, Index length) const override;
+            bool saveToMemory(const Image& resource, void* data, Index length, const ImageParameters& parameters) const override;
         };
     }
 }

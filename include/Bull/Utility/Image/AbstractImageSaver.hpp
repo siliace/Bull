@@ -5,10 +5,11 @@
 
 #include <Bull/Utility/Image/Image.hpp>
 #include <Bull/Utility/Image/ImageFormat.hpp>
+#include <Bull/Utility/Image/ImageParameters.hpp>
 
 namespace Bull
 {
-    struct BULL_UTILITY_API AbstractImageSaver : public AbstractResourceSaver<Image>
+    struct BULL_UTILITY_API AbstractImageSaver : public AbstractResourceSaver<Image, ImageParameters>
     {
         /*! \brief Tell whether an ImageFormat is supported
          *
