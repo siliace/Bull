@@ -120,18 +120,21 @@ namespace Bull
     {
         std::unique_ptr<T> resource = std::make_unique<T>();
 
-        if(hasResource(name))
+        if(data && length)
         {
-            return getResource(name);
-        }
-
-        P resolvedParameters = parameters;
-
-        if(resolveParameters(&resolvedParameters, data, length))
-        {
-            if(getLoader()->loadFromMemory(resource, data, length, resolvedParameters))
+            if(hasResource(name))
             {
-                return pushResource(name, resource);
+                return getResource(name);
+            }
+
+            P resolvedParameters = parameters;
+
+            if(resolveParameters(&resolvedParameters, data, length))
+            {
+                if(getLoader()->loadFromMemory(resource, data, length, resolvedParameters))
+                {
+                    return pushResource(name, resource);
+                }
             }
         }
 

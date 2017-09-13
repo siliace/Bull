@@ -5,11 +5,15 @@ namespace Bull
 {
     enum ImageFormat
     {
-        Bmp,
         Jpg,
         Png,
+        Bmp,
+        Psd,
         Tga,
-        Gif
+        Gif,
+        Hdr,
+        Pic,
+        Pnm
     };
 }
 

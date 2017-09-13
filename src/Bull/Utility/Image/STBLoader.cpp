@@ -1,5 +1,9 @@
 #include <algorithm>
 
+#ifndef STBI_NO_STDIO
+    #define STBI_NO_STDIO
+#endif
+
 #include <stb_image/stb_image.h>
 
 #include <Bull/Utility/CallOnExit.hpp>
@@ -9,6 +13,24 @@ namespace Bull
 {
     namespace prv
     {
+        int STBLoader::read(void* user, char* data, int size)
+        {
+            InStream* stream = reinterpret_cast<InStream*>(user);
+            return static_cast<int>(stream->read(data, size));
+        }
+
+        void STBLoader::skip(void *user, int n)
+        {
+            InStream* stream = reinterpret_cast<InStream*>(user);
+            stream->setCursor(stream->getCursor() + n);
+        }
+
+        int STBLoader::eof(void* user)
+        {
+            InStream* stream = reinterpret_cast<InStream*>(user);
+            return stream->getCursor() == stream->getSize();
+        }
+
         bool STBLoader::isSupportedFormat(ImageFormat format) const
         {
             switch(format)
@@ -32,25 +54,22 @@ namespace Bull
 
         bool STBLoader::loadFromPath(std::unique_ptr<Image>& resource, const Path& path, const ParameterBag& parameters) const
         {
-            if(isSupportedExtension(path.getExtension()))
+            int w, h;
+            int channels;
+
+            unsigned char* buffer = stbi_load(path.toString().getBuffer(), &w, &h, &channels, STBI_rgb_alpha);
+
+            if(buffer && w && h)
             {
-                int w, h;
-                int channels;
+                CallOnExit atExit([buffer](){
+                    stbi_image_free(buffer);
+                });
 
-                unsigned char* buffer = stbi_load(path.toString().getBuffer(), &w, &h, &channels, STBI_rgb_alpha);
+                ByteArray pixels;
 
-                if(buffer && w && h)
+                if(pixels.fill(buffer, w * h * 4))
                 {
-                    CallOnExit atExit([buffer](){
-                        stbi_image_free(buffer);
-                    });
-
-                    ByteArray pixels;
-
-                    if(pixels.fill(buffer, w * h * 4))
-                    {
-                        return loadFromPixels(resource, pixels, Vector2UI(w, h), parameters);
-                    }
+                    return loadFromPixels(resource, pixels, Vector2UI(w, h), parameters);
                 }
             }
 
@@ -59,11 +78,54 @@ namespace Bull
 
         bool STBLoader::loadFromStream(std::unique_ptr<Image>& resource, InStream& stream, const ParameterBag& parameters) const
         {
+            int w, h;
+            int channels;
+            stbi_io_callbacks callbacks;
+
+            callbacks.read = &read;
+            callbacks.skip = &skip;
+            callbacks.eof  = &eof;
+
+            unsigned char* buffer = stbi_load_from_callbacks(&callbacks, &stream, &w, &h, &channels, STBI_rgb_alpha);
+
+            if(buffer && w && h)
+            {
+                CallOnExit atExit([buffer](){
+                    stbi_image_free(buffer);
+                });
+
+                ByteArray pixels;
+
+                if(pixels.fill(buffer, w * h * 4))
+                {
+                    return loadFromPixels(resource, pixels, Vector2UI(w, h), parameters);
+                }
+            }
+
             return false;
         }
 
         bool STBLoader::loadFromMemory(std::unique_ptr<Image>& resource, const void* data, Index length, const ParameterBag& parameters) const
         {
+            int w, h;
+            int channels;
+
+            unsigned char* buffer = stbi_load_from_memory(reinterpret_cast<const unsigned char*>(data), length, &w, &h, &channels, STBI_rgb_alpha);
+
+            if(buffer && w && h)
+            {
+                CallOnExit atExit([buffer](){
+                    stbi_image_free(buffer);
+                });
+
+                ByteArray pixels;
+
+                if(pixels.fill(buffer, w * h * 4))
+                {
+                    return loadFromPixels(resource, pixels, Vector2UI(w, h), parameters);
+                }
+            }
+
             return false;
         }
 

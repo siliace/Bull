@@ -7,8 +7,40 @@ namespace Bull
 {
     namespace prv
     {
-        struct STBLoader : public AbstractImageLoader
+        class STBLoader : public AbstractImageLoader
         {
+        private:
+
+            /*! \brief Read data from an user stream
+             *
+             * \param user The user stream
+             * \param data The memory to fill
+             * \param size How many bytes should be read from the stream
+             *
+             * \return The number of byte actually read
+             *
+             */
+            static int read(void* user, char* data, int size);
+
+            /*! \brief Skip byte from an user stream
+             *
+             * \param user The user stream
+             * \param n    How many bytes should be skipped
+             *
+             */
+            static void skip(void* user, int n);
+
+            /*! \brief Tell whether an user stream is at the end
+             *
+             * \param user The user stream
+             *
+             * \return Nonzero if the stream if at the end
+             *
+             */
+            static int eof(void* user);
+
+        public:
+
             /*! \brief Tell whether an ImageFormat is support
              *
              * \param format The format to test
