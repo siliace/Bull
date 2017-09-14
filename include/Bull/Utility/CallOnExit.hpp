@@ -3,26 +3,27 @@
 
 #include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/NonMovable.hpp>
 
 #include <Bull/Utility/Export.hpp>
 
 namespace Bull
 {
-    class BULL_UTILITY_API CallOnExit : public NonCopyable
+    class BULL_UTILITY_API CallOnExit : public NonCopyable, public NonMovable
     {
     public:
 
         /*! \brief Default constructor
          *
          */
-        CallOnExit() = default;
+        CallOnExit();
 
         /*! \brief Constructor
          *
          * \param callback The function to call when the instance is destroyed
          *
          */
-        CallOnExit(Functor<void> callback);
+        explicit CallOnExit(Functor<void> callback);
 
         /*! \brief Destructor
          *

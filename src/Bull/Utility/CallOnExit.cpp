@@ -2,6 +2,12 @@
 
 namespace Bull
 {
+    CallOnExit::CallOnExit() :
+        m_enable(false)
+    {
+        /// Nothing
+    }
+
     CallOnExit::CallOnExit(Functor<void> callback) :
         m_callback(callback),
         m_enable(true)
