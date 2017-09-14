@@ -49,15 +49,12 @@ namespace Bull
         return false;
     }
 
-    bool Texture::loadFromImage(const Image& image)
+    bool Texture::create(const Image& image)
     {
-        return loadFromPixels(image.getPixels(), image.getSize());
-    }
-
-    bool Texture::loadFromPixels(const ByteArray& pixels, const Vector2UI& size)
-    {
-        if(create(size))
+        if(create(image.getSize()))
         {
+            ByteArray pixels = image.getPixels();
+
             gl::bindTexture(GL_TEXTURE_2D, m_id);
 
             for(unsigned int i = 0; i < m_size.y; i++)

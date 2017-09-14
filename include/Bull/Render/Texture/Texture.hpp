@@ -82,17 +82,7 @@ namespace Bull
          * \return Return true if the texture was loaded successfully, false otherwise
          *
          */
-        bool loadFromImage(const Image& image);
-
-        /*! \brief Load a texture form a pixels array
-         *
-         * \param path The pixels array to load
-         * \param size The size of the texture
-         *
-         * \return Return true if the texture was loaded successfully, false otherwise
-         *
-         */
-        bool loadFromPixels(const ByteArray& pixels, const Vector2UI& size);
+        bool create(const Image& image);
 
         /*! \brief Bind the texture
          *
