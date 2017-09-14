@@ -53,7 +53,7 @@ namespace Bull
     {
         if(create(image.getSize()))
         {
-            ByteArray pixels = image.getPixels();
+            const ByteArray& pixels = image.getPixels();
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
 

@@ -216,13 +216,13 @@ namespace Bull
 
         if(gl::programUniformMatrix4fv)
         {
-            gl::programUniformMatrix4fv(m_program, location, 1, GL_FALSE, uniform);
+            gl::programUniformMatrix4fv(m_program, location, 1, true, uniform);
         }
         else
         {
             bind();
 
-            gl::uniformMatrix4fv(location, 1, GL_FALSE, uniform);
+            gl::uniformMatrix4fv(location, 1, true, uniform);
         }
 
         return true;

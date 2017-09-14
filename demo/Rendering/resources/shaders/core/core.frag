@@ -6,7 +6,9 @@ in vec3 frag_normal;
 
 out vec4 pixel;
 
+uniform sampler2D tex_wall;
+
 void main()
 {
-    pixel = frag_color;
+    pixel = texture(tex_wall, frag_texCoord) * frag_color;
 }
