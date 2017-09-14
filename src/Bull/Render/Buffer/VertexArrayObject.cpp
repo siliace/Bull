@@ -10,7 +10,7 @@ namespace Bull
     {
         gl::genVertexArrays(1, &m_vao);
 
-        if(!gl::isVertexArray(m_vao))
+        if(!m_vao)
         {
             throw RuntimeError("Failed to create VAO");
         }
