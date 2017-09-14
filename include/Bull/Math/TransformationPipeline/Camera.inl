@@ -1,61 +1,66 @@
 namespace Bull
 {
     template <typename T>
-    Camera<T>::Camera() :
-        Camera(Vector3<T>::Zero, Vector3<T>::Zero)
+    Camera<T>::Camera()  :
+        m_up(Vector3<T>::Up),
+        m_right(Vector3<T>::right),
+        m_view(Matrix4<T>::Identity),
+        m_forward(Vector3<T>::forward)
     {
         /// Nothing
     }
 
     template <typename T>
-    Camera<T>::Camera(const Vector3<T>& position, const Vector3<T>& target, const Vector3<T> up) :
+    Camera<T>::Camera(const Vector3<T>& eye, const Vector3<T>& center, const Vector3<T>& up) :
         m_up(up),
-        m_target(target),
-        m_position(position)
+        m_right(Vector3<T>::Right),
+        m_forward(Vector3<T>::Forward)
     {
-        recomputeMatrix();
+        setPosition(eye).setTarget(center);
     }
 
     template <typename T>
-    Camera<T>& Camera<T>::setPosition(const Vector3<T>& position)
+    Camera<T>& Camera<T>::setPosition(const Vector3<T>& eye)
     {
-        m_position = position;
+        m_eye = eye;
 
-        recomputeMatrix();
+        updateMatrix();
 
         return (*this);
     }
 
     template <typename T>
-    const Vector3<T>& Camera<T>::getPosition() const
+    const Vector3<T> Camera<T>::getPosition() const
     {
-        return m_position;
+        return m_eye;
     }
 
     template <typename T>
-    Camera<T>& Camera<T>::setTarget(const Vector3<T>& target)
+    Camera<T>& Camera<T>::move(const Vector3<T>& offset)
     {
-        m_target = target;
+        m_eye += m_right   * offset.x;
+        m_eye += m_up      * offset.y;
+        m_eye += m_forward * offset.z;
 
-        recomputeMatrix();
+        updateMatrix();
 
         return (*this);
     }
 
     template <typename T>
-    const Vector3<T>& Camera<T>::getTarget() const
+    Camera<T>& Camera<T>::setTarget(const Vector3<T>& center)
     {
-        return m_target;
+        m_center = center;
+
+        updateMatrix();
+
+        return (*this);
     }
 
     template <typename T>
-    Camera<T>& Camera<T>::setUp(const Vector3<T>& up)
+    const Vector3<T> Camera<T>::getTarget() const
     {
-        m_up = up;
-
-        recomputeMatrix();
-
-        return (*this);
+        return m_center;
     }
 
     template <typename T>
@@ -65,22 +70,33 @@ namespace Bull
     }
 
     template <typename T>
+    const Vector3<T>& Camera<T>::getRight() const
+    {
+        return m_right;
+    }
+
+    template <typename T>
+    const Vector3<T>& Camera<T>::getForward() const
+    {
+        return m_forward;
+    }
+
+    template <typename T>
     const Matrix4<T>& Camera<T>::getMatrix() const
     {
         return m_view;
     }
 
     template <typename T>
-    void Camera<T>::recomputeMatrix()
+    void Camera<T>::updateMatrix()
     {
-        Vector3<T> u = Vector3<T>::normalize(m_up);
-        Vector3<T> f = Vector3<T>::normalize(m_target - m_position);
-        Vector3<T> s = Vector3<T>::crossProduct(f, u).normalize();
-        u            = Vector3<T>::crossProduct(s, f);
+        m_forward = Vector3<T>::normalize(m_center - m_eye);
+        m_right   = Vector3<T>::crossProduct(m_forward, m_up).normalize();
+        m_up      = Vector3<T>::crossProduct(m_right, m_forward).normalize();
 
-        m_view.setColumn(Vector4<T>( s, -s.dotProduct(m_position)), 0);
-        m_view.setColumn(Vector4<T>( u, -u.dotProduct(m_position)), 1);
-        m_view.setColumn(Vector4<T>(-f,  f.dotProduct(m_position)), 2);
-        m_view.setColumn(Vector4<T>(0.f, 0.f, 0.f, 1.f),            3);
+        m_view.setColumn(Vector4<T>( m_right,  -m_right.dotProduct(m_eye)),   0);
+        m_view.setColumn(Vector4<T>( m_up,     -m_up.dotProduct(m_eye)),      1);
+        m_view.setColumn(Vector4<T>(-m_forward, m_forward.dotProduct(m_eye)), 2);
+        m_view.setColumn(Vector4<T>(0.f, 0.f, 0.f, 1.f),                      3);
     }
 }

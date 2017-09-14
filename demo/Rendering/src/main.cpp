@@ -1,5 +1,6 @@
 #include <Bull/Core/Log/Log.hpp>
 
+#include <Bull/Math/Clamp.hpp>
 #include <Bull/Math/TransformationPipeline/Camera.hpp>
 #include <Bull/Math/TransformationPipeline/PerspectiveProjection.hpp>
 #include <Bull/Math/TransformationPipeline/Transformation3D.hpp>
@@ -48,14 +49,14 @@ int main()
     Log::get()->createLogger<ConsoleLogger>();
 
     WindowEvent event;
-    RenderWindow window(VideoMode(800, 600), "Bull Application");
+    RenderWindow window(VideoMode(800, 600), "OpenGL");
 
     Mesh mesh;
     Shader core;
     Texture wall;
     EulerAnglesF rotation;
+    CameraF camera(Vector3F(0.f, 0.f, 5.f));
     ImageManager::Instance imageManager = ImageManager::get();
-    CameraF camera(Vector3F(0.f, 0.f, 5.f), Vector3F(0.f, 0.f, 1.f));
     ShaderStageManager::Instance shaderManager = ShaderStageManager::get();
     PerspectiveProjectionF projection(AngleF::degree(45.f), window.getSize().getRatio(), Vector2F(0.1f, 10.f));
 
@@ -84,25 +85,48 @@ int main()
                 projection.setRatio(window.getSize().getRatio());
             }
 
-            if(event.type == WindowEvent::MouseMoved && Mouse::isButtonPressed(Mouse::Left))
+            if(event.type == WindowEvent::MouseMoved)
             {
-                rotation.pitch += AngleF::degree(event.mouseMove.xRel);
-                rotation.roll  += AngleF::degree(event.mouseMove.yRel);
+                if(Mouse::isButtonPressed(Mouse::Left))
+                {
+                    rotation.pitch += AngleF::degree(event.mouseMove.xRel);
+                    rotation.roll  += AngleF::degree(event.mouseMove.yRel);
+                }
+                else
+                {
+
+                }
             }
 
             if(event.type == WindowEvent::KeyDown)
             {
-                Vector3F position = camera.getPosition();
+                Vector3F offset;
 
                 switch(event.key.code)
                 {
-                    case Keyboard::Z: position.z -= 0.05f; break;
-                    case Keyboard::S: position.z += 0.05f; break;
-                    case Keyboard::Q: position.x -= 0.05f; break;
-                    case Keyboard::D: position.x -= 0.05f; break;
+                    case Keyboard::Z: offset.z =  0.05f; break;
+                    case Keyboard::S: offset.z = -0.05f; break;
+                    case Keyboard::D: offset.x =  0.05f; break;
+                    case Keyboard::Q: offset.x = -0.05f; break;
                 }
 
-                camera.setPosition(position);
+                camera.move(offset).setTarget(camera.getTarget() + offset);
+            }
+
+            if(event.type == WindowEvent::MouseWheel)
+            {
+                AngleF fov = projection.getAngle();
+
+                if(event.mouseWheel.up)
+                {
+                    fov = clamp(fov - AngleF::degree(1.f), AngleF::degree(1.f), AngleF::degree(45.f));
+                }
+                else
+                {
+                    fov = clamp(fov + AngleF::degree(1.f), AngleF::degree(1.f), AngleF::degree(45.f));
+                }
+
+                projection.setAngle(fov);
             }
         }
 
