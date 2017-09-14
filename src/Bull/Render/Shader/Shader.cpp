@@ -46,13 +46,16 @@ namespace Bull
 
     bool Shader::link()
     {
-        gl::linkProgram(m_program);
-
-        if(!isLinked())
+        if(isValid())
         {
-            Log::get()->write(getErrorMessage(), Log::Level::Error);
+            gl::linkProgram(m_program);
 
-            return false;
+            if(!isLinked())
+            {
+                Log::get()->write(getErrorMessage(), Log::Level::Error);
+
+                return false;
+            }
         }
 
         return true;
