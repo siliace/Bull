@@ -17,7 +17,7 @@ namespace Bull
             destroy();
         }
 
-        bool CursorImplWin32::loadFromSystem(Cursor::Type cursor)
+        bool CursorImplWin32::create(Cursor::Type cursor)
         {
             LPCSTR shape;
 
@@ -57,7 +57,7 @@ namespace Bull
             return true;
         }
 
-        bool CursorImplWin32::loadFromImage(const Image& cursor, const Vector2UI& hotSpot)
+        bool CursorImplWin32::create(const Image& cursor, const Vector2UI& hotSpot)
         {
             return false;
         }

@@ -66,7 +66,7 @@ namespace Bull
          * \return True if the cursor was created successfully
          *
          */
-        bool loadFromSystem(Type cursor);
+        bool create(Type cursor);
 
         /*! \brief Create a Cursor from an image
          *
@@ -76,7 +76,7 @@ namespace Bull
          * \return True if the cursor was created successfully
          *
          */
-        bool loadFromImage(const Image& image, const Vector2UI& hotSpot);
+        bool create(const Image& image, const Vector2UI& hotSpot);
 
     private:
 

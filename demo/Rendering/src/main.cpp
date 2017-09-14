@@ -1,24 +1,26 @@
-#include <Bull/Core/Log/Log.hpp>
-
-#include <Bull/Utility/Image/ImageManager.hpp>
-
-#include <Bull/Utility/Logger/ConsoleLogger.hpp>
+#include <Bull/Render/Target/RenderWindow.hpp>
 
 using namespace Bull;
 
 int main()
 {
-    Log::get()->createLogger<ConsoleLogger>();
+    WindowEvent event;
+    RenderWindow window(VideoMode(800, 600), "Bull Application");
 
-    int count = 0;
-    Directory shaders;
-
-    if(shaders.open(Path("../resources")))
+    while(window.isOpen())
     {
-        ImageManager::Instance manager = ImageManager::get();
+        while(window.pollEvent(event))
+        {
+            if(event.type == WindowEvent::Closed)
+            {
+                window.close();
+            }
+        }
 
-        count = manager->loadFromDirectory(shaders);
+        window.clear();
+
+        window.display();
     }
 
-    return count;
+    return 0;
 }

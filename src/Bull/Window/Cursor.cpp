@@ -11,19 +11,19 @@ namespace Bull
 
     Cursor::~Cursor() = default;
 
-    bool Cursor::loadFromSystem(Type cursor)
+    bool Cursor::create(Type cursor)
     {
-        return m_impl->loadFromSystem(cursor);
+        return m_impl->create(cursor);
     }
 
-    bool Cursor::loadFromImage(const Image& image, const Vector2UI& hotSpot)
+    bool Cursor::create(const Image& image, const Vector2UI& hotSpot)
     {
         if(image.getSize().x == 0 || image.getSize().y == 0)
         {
             return false;
         }
 
-        return m_impl->loadFromImage(image, hotSpot);
+        return m_impl->create(image, hotSpot);
     }
 
     const std::unique_ptr<prv::CursorImpl>& Cursor::getImpl() const
