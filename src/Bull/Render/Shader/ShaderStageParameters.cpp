@@ -9,7 +9,7 @@ namespace Bull
 
     ShaderStageParameters& ShaderStageParameters::setType(ShaderStage::Type type)
     {
-        setParameter("type", type);
+        setParameter("type", static_cast<unsigned int>(type));
 
         return (*this);
     }
