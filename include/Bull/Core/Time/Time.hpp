@@ -173,7 +173,7 @@ namespace Bull
          * \return Return the time multiplied
          *
          */
-        Time operator*(const Time& rhs) const;
+        Time operator*(float right) const;
 
         /*! \brief Override *= operator
          *
@@ -182,7 +182,7 @@ namespace Bull
          * \return Return the time multiplied
          *
          */
-        Time& operator*=(const Time& rhs);
+        Time& operator*=(float right);
 
         /*! \brief Override / operator
          *
@@ -191,7 +191,7 @@ namespace Bull
          * \return Return the time divided
          *
          */
-        Time operator/(const Time& rhs) const;
+        Time operator/(float right) const;
 
         /*! \brief Override /= operator
          *
@@ -200,7 +200,7 @@ namespace Bull
          * \return Return the time divided
          *
          */
-        Time& operator/=(const Time& rhs);
+        Time& operator/=(float right);
 
         /*! \brief Override == operator
          *

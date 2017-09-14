@@ -118,34 +118,34 @@ namespace Bull
         return (*this);
     }
 
-    Time Time::operator*(const Time& rhs) const
+    Time Time::operator*(float right) const
     {
         Time t(m_time);
 
-        t *= rhs;
+        t *= right;
 
         return t;
     }
 
-    Time& Time::operator*=(const Time& rhs)
+    Time& Time::operator*=(float right)
     {
-        m_time *= rhs.m_time;
+        m_time *= right;
 
         return (*this);
     }
 
-    Time Time::operator/(const Time& rhs) const
+    Time Time::operator/(float right) const
     {
         Time t(m_time);
 
-        t /= rhs;
+        t /= right;
 
         return t;
     }
 
-    Time& Time::operator/=(const Time& rhs)
+    Time& Time::operator/=(float right)
     {
-        m_time /= rhs.m_time;
+        m_time /= right;
 
         return (*this);
     }
