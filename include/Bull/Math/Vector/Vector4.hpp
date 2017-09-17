@@ -53,7 +53,7 @@ namespace Bull
          * \param w The w component
          *
          */
-        Vector4(T x, T y, T z, T w);
+        Vector4(T x, T y, T z, T w = 0.0);
 
         /*! \brief Constructor
          *

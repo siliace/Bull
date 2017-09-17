@@ -21,7 +21,7 @@ namespace Bull
          * \param position The position of the Vertex
          *
          */
-        Vertex(const Vector3F& position);
+        explicit Vertex(const Vector3F& position);
 
         /*! \brief Constructor
          *
@@ -56,7 +56,7 @@ namespace Bull
          * \param normal   The normal of the Vertex
          *
          */
-        Vertex(const Vector3F& position, const Vector4F& color, const Vector2F& texCoord, const Vector3F& normal);
+        Vertex(const Vector3F& position, const Vector4F& color, const Vector2F& texCoord = Vector2F::Zero, const Vector3F& normal = Vector3F::Zero);
 
         /*! \brief Compare a Vertex to this
          *

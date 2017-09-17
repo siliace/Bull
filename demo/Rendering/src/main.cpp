@@ -1,6 +1,5 @@
 #include <Bull/Core/Log/Log.hpp>
 
-#include <Bull/Math/Clamp.hpp>
 #include <Bull/Math/TransformationPipeline/Camera.hpp>
 #include <Bull/Math/TransformationPipeline/PerspectiveProjection.hpp>
 #include <Bull/Math/TransformationPipeline/Transformation3D.hpp>
@@ -13,63 +12,89 @@
 
 #include <Bull/Utility/Image/ImageManager.hpp>
 #include <Bull/Utility/Logger/ConsoleLogger.hpp>
-#include <Bull/Utility/Logger/FileLogger.hpp>
 
 using namespace Bull;
 
 std::vector<Vertex> vertices = {
-        Vertex(Vector3F(-0.5f, -0.5f,  0.5f), Vector2F(0.f, 0.f)),
-        Vertex(Vector3F( 0.5f, -0.5f,  0.5f), Vector2F(1.f, 0.f)),
-        Vertex(Vector3F( 0.5f,  0.5f,  0.5f), Vector2F(1.f, 1.f)),
-        Vertex(Vector3F(-0.5f,  0.5f,  0.5f), Vector2F(0.f, 1.f)),
-        Vertex(Vector3F(-0.5f, -0.5f, -0.5f), Vector2F(0.f, 0.f)),
-        Vertex(Vector3F( 0.5f, -0.5f, -0.5f), Vector2F(1.f, 0.f)),
-        Vertex(Vector3F( 0.5f,  0.5f, -0.5f), Vector2F(1.f, 1.f)),
-        Vertex(Vector3F(-0.5f,  0.5f, -0.5f), Vector2F(0.f, 1.f)),
+        /// front
+        Vertex(Vector3F( 0.5f,  0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 1.f), Vector3F::Forward), /// 0
+        Vertex(Vector3F(-0.5f,  0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 1.f), Vector3F::Forward), /// 1
+        Vertex(Vector3F( 0.5f, -0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 0.f), Vector3F::Forward), /// 2
+        Vertex(Vector3F(-0.5f, -0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 0.f), Vector3F::Forward), /// 3
+
+        /// back
+        Vertex(Vector3F( 0.5f,  0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 1.f), Vector3F::Backward), /// 4
+        Vertex(Vector3F(-0.5f,  0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 1.f), Vector3F::Backward), /// 5
+        Vertex(Vector3F( 0.5f, -0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 0.f), Vector3F::Backward), /// 6
+        Vertex(Vector3F(-0.5f, -0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 0.f), Vector3F::Backward), /// 7
+
+        /// right
+        Vertex(Vector3F( 0.5f,  0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 1.f), Vector3F::Right), /// 8
+        Vertex(Vector3F( 0.5f, -0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 0.f), Vector3F::Right), /// 9
+        Vertex(Vector3F( 0.5f,  0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 1.f), Vector3F::Right), /// 10
+        Vertex(Vector3F( 0.5f, -0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 0.f), Vector3F::Right), /// 11
+
+        /// left
+        Vertex(Vector3F(-0.5f,  0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 1.f), Vector3F::Left), /// 12
+        Vertex(Vector3F(-0.5f, -0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 0.f), Vector3F::Left), /// 13
+        Vertex(Vector3F(-0.5f,  0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 1.f), Vector3F::Left), /// 14
+        Vertex(Vector3F(-0.5f, -0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 0.f), Vector3F::Left), /// 15
+
+        /// top
+        Vertex(Vector3F(-0.5f,  0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 0.f), Vector3F::Up), /// 16
+        Vertex(Vector3F( 0.5f,  0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 0.f), Vector3F::Up), /// 17
+        Vertex(Vector3F(-0.5f,  0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 1.f), Vector3F::Up), /// 18
+        Vertex(Vector3F( 0.5f,  0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 1.f), Vector3F::Up), /// 19
+
+        /// bottom
+        Vertex(Vector3F( 0.5f, -0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 0.f), Vector3F::Down), /// 20
+        Vertex(Vector3F(-0.5f, -0.5f,  0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 0.f), Vector3F::Down), /// 21
+        Vertex(Vector3F( 0.5f, -0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(0.f, 1.f), Vector3F::Down), /// 22
+        Vertex(Vector3F(-0.5f, -0.5f, -0.5f), Vector4F(1.f, 1.f, 1.f, 0.f), Vector2F(1.f, 1.f), Vector3F::Down), /// 23
 };
 
 std::vector<unsigned int> indices = {
         0, 1, 2,
-        2, 3, 0,
-        1, 5, 6,
-        6, 2, 1,
-        7, 6, 5,
-        5, 4, 7,
-        4, 0, 3,
-        3, 7, 4,
-        4, 5, 1,
-        1, 0, 4,
-        3, 2, 6,
-        6, 7, 3,
+        1, 2, 3,
+
+        4, 5, 6,
+        5, 6, 7,
+
+        8, 9, 10,
+        9, 10, 11,
+
+        12, 13, 14,
+        13, 14, 15,
+
+        16, 17, 18,
+        17, 18, 19,
+
+        20, 21, 22,
+        21, 22, 23
 };
 
-int main()
+int main(int argc, char* argv[])
 {
-    Log::get()->createLogger<FileLogger>();
     Log::get()->createLogger<ConsoleLogger>();
 
-    WindowEvent event;
-    RenderWindow window(VideoMode(800, 600), "OpenGL");
-
-    Mesh mesh;
-    Shader core;
     Texture wall;
+    Shader phong;
+    WindowEvent event;
     EulerAnglesF rotation;
-    CameraF camera(Vector3F(0.f, 0.f, 5.f));
-    ImageManager::Instance imageManager = ImageManager::get();
-    ShaderStageManager::Instance shaderManager = ShaderStageManager::get();
-    PerspectiveProjectionF projection(AngleF::degree(45.f), window.getSize().getRatio(), Vector2F(0.1f, 10.f));
+    CameraF camera(Vector3F(2.f, 1.f, 5.f));
+    RenderWindow window(VideoMode(800, 600), "Bull Application");
+    PerspectiveProjectionF projection(AngleF::degree(45.f), window.getSize().getRatio(), Vector2F(0.1f, 100.f));
+    Mesh square;
 
-    mesh.create(vertices, indices);
+    square.create(vertices, indices);
 
-    window.setIcon(imageManager->loadFromPath(Path("../resources/icon/heart.png"), "window_icon"));
+    phong.attach(ShaderStageManager::get()->loadFromPath(Path("../resources/shaders/phong/phong.vert"), "object_vert"));
+    phong.attach(ShaderStageManager::get()->loadFromPath(Path("../resources/shaders/phong/phong.frag"), "object_frag"));
+    phong.link();
 
-    wall.create(imageManager->loadFromPath(Path("../resources/textures/wall.jpg"), "texture_wall"));
+    wall.create(ImageManager::get()->loadFromPath(Path("../resources/textures/wall.jpg"), "tex_wall"));
+    wall.setSampler(Texture::Sampler0);
     wall.enableSmooth();
-
-    core.attach(shaderManager->loadFromPath(Path("../resources/shaders/core/core.vert"), "core_vert"));
-    core.attach(shaderManager->loadFromPath(Path("../resources/shaders/core/core.frag"), "core_frag"));
-    core.link();
 
     while(window.isOpen())
     {
@@ -85,61 +110,28 @@ int main()
                 projection.setRatio(window.getSize().getRatio());
             }
 
-            if(event.type == WindowEvent::MouseMoved)
+            if(event.type == WindowEvent::MouseMoved && Mouse::isButtonPressed(Mouse::Left))
             {
-                if(Mouse::isButtonPressed(Mouse::Left))
-                {
-                    rotation.pitch += AngleF::degree(event.mouseMove.xRel);
-                    rotation.roll  += AngleF::degree(event.mouseMove.yRel);
-                }
-                else
-                {
-
-                }
-            }
-
-            if(event.type == WindowEvent::KeyDown)
-            {
-                Vector3F offset;
-
-                switch(event.key.code)
-                {
-                    case Keyboard::Z: offset.z =  0.05f; break;
-                    case Keyboard::S: offset.z = -0.05f; break;
-                    case Keyboard::D: offset.x =  0.05f; break;
-                    case Keyboard::Q: offset.x = -0.05f; break;
-                }
-
-                camera.move(offset).setTarget(camera.getTarget() + offset);
-            }
-
-            if(event.type == WindowEvent::MouseWheel)
-            {
-                AngleF fov = projection.getAngle();
-
-                if(event.mouseWheel.up)
-                {
-                    fov = clamp(fov - AngleF::degree(1.f), AngleF::degree(1.f), AngleF::degree(45.f));
-                }
-                else
-                {
-                    fov = clamp(fov + AngleF::degree(1.f), AngleF::degree(1.f), AngleF::degree(45.f));
-                }
-
-                projection.setAngle(fov);
+                rotation.roll  += AngleF::degree(event.mouseMove.yRel);
+                rotation.pitch += AngleF::degree(event.mouseMove.xRel);
             }
         }
 
-        core.bind();
-        wall.bind();
-
-        core.setUniformMatrix("view", camera.getMatrix());
-        core.setUniformMatrix("projection", projection.getMatrix());
-        core.setUniformMatrix("model", Transformation3DF::makeRotation(rotation).getMatrix());
-
         window.clear();
 
-        mesh.render(Mesh::Triangles);
+        phong.bind();
+        phong.setUniform("ambient_strength", 0.1f);
+        phong.setUniform("specular_strength", 3.f);
+        phong.setUniform("specular_shininess", 1024.f);
+        phong.setUniform("tex_wall", wall.getSampler());
+        phong.setUniformColor("light_color", Color::White);
+        phong.setUniformMatrix("view", camera.getMatrix());
+        phong.setUniformVector("light_position", Vector3F::UnitX * 3.f);
+        phong.setUniformMatrix("projection", projection.getMatrix());
+        phong.setUniformVector("camera_position", camera.getPosition());
+        phong.setUniformMatrix("model", Transformation3DF::makeRotation(rotation).getMatrix());
+
+        square.render(Mesh::Triangles);
 
         window.display();
     }

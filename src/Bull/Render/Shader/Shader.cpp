@@ -105,6 +105,29 @@ namespace Bull
         return true;
     }
 
+    bool Shader::setUniform(const String& name, float uniform)
+    {
+        int location = getUniformLocation(name);
+
+        if(location == -1)
+        {
+            return false;
+        }
+
+        if(gl::programUniform1i)
+        {
+            gl::programUniform1f(m_program, location, uniform);
+        }
+        else
+        {
+            bind();
+
+            gl::uniform1f(location, uniform);
+        }
+
+        return true;
+    }
+
     bool Shader::setUniformColor(const String& name, const Color& uniform)
     {
         int location = getUniformLocation(name);
@@ -168,15 +191,15 @@ namespace Bull
             return false;
         }
 
-        if(gl::programUniform3fv)
+        if(gl::programUniform3f)
         {
-            gl::programUniform3fv(m_program, location, 3, &uniform.x);
+            gl::programUniform3f(m_program, location, uniform.x, uniform.y, uniform.z);
         }
         else
         {
             bind();
 
-            gl::uniform3fv(location, 1, &uniform.x);
+            gl::uniform3f(location, uniform.x, uniform.y, uniform.z);
         }
 
         return true;
