@@ -81,7 +81,7 @@ int main(int argc, char* argv[])
     Shader phong;
     WindowEvent event;
     EulerAnglesF rotation;
-    CameraF camera(Vector3F(0.f, 0.f, 5.f));
+    CameraF camera(Vector3F(3.f, 1.f, 5.f));
     RenderWindow window(VideoMode(800, 600), "Bull Application");
     PerspectiveProjectionF projection(AngleF::degree(45.f), window.getSize().getRatio(), Vector2F(0.1f, 100.f));
     Mesh square;
