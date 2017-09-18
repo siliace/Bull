@@ -1,4 +1,6 @@
 #include <Bull/Utility/Image/Image.hpp>
+#include <Bull/Utility/Image/STBLoader.hpp>
+#include <Bull/Utility/Image/STBSaver.hpp>
 
 namespace Bull
 {
@@ -26,6 +28,36 @@ namespace Bull
         }
 
         return false;
+    }
+    
+    bool Image::loadFromPath(const Path& path, const ImageParameterBag& parameters)
+    {
+        return getLoader()->loadFromPath(this, path, parameters);
+    }
+    
+    bool Image::loadFromStream(InStream& stream, const ImageParameterBag& parameters)
+    {
+        return getLoader()->loadFromStream(this, stream, parameters);
+    }
+
+    bool Image::loadFromMemory(const void* data, Index length, const ImageParameterBag& parameters)
+    {
+        return getLoader()->loadFromMemory(this, data, length, parameters);
+    }
+    
+    bool Image::saveToPath(const Path& path, const ImageParameterBag& parameters) const
+    {
+        return getSaver()->saveToPath(this, path, parameters);
+    }
+
+    bool Image::saveToStream(OutStream& stream, const ImageParameterBag& parameters) const
+    {
+        return getSaver()->saveToStream(this, stream, parameters);
+    }
+    
+    bool Image::saveToMemory(void* data, Index length, const ImageParameterBag& parameters) const
+    {
+        return getSaver()->saveToMemory(this, data, length, parameters);
     }
 
     const Vector2UI& Image::getSize() const

@@ -68,6 +68,27 @@ namespace Bull
         return false;
     }
 
+    bool Texture::loadFromPath(const Path& path, const ImageParameterBag& parameters)
+    {
+        Image image;
+
+        return image.loadFromPath(path, parameters) && create(image);
+    }
+
+    bool Texture::loadFromStream(InStream& stream, const ImageParameterBag& parameters)
+    {
+        Image image;
+
+        return image.loadFromStream(stream, parameters) && create(image);
+    }
+
+    bool Texture::loadFromMemory(const void* data, Index length, const ImageParameterBag& parameters)
+    {
+        Image image;
+
+        return image.loadFromMemory(data, length, parameters) && create(image);
+    }
+
     void Texture::bind() const
     {
         if(m_id)

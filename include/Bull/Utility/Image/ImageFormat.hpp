@@ -3,7 +3,7 @@
 
 namespace Bull
 {
-    enum ImageFormat
+    enum ImageFormat : unsigned int
     {
         Jpg,
         Png,

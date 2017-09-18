@@ -1,7 +1,4 @@
-#include <algorithm>
-
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/Memory/MemoryStream.hpp>
 
 #include <Bull/Render/Shader/BaseShaderStageLoader.hpp>
 
@@ -9,44 +6,21 @@ namespace Bull
 {
     namespace prv
     {
-        bool BaseShaderStageLoader::isSupportedExtension(const String& extension) const
+        bool BaseShaderStageLoader::loadFromPath(ShaderStage* shaderStage, const Path& path, const ShaderStageParameterBag& parameters) const
         {
-            static std::vector<String> extensionsSupported = {
-                    "vert", "frag",
-            };
+            File file;
 
-            return std::find(extensionsSupported.begin(), extensionsSupported.end(), extension) != extensionsSupported.end();
+            return file.open(path, File::Read) && loadFromStream(shaderStage, file, parameters);
         }
 
-        bool BaseShaderStageLoader::loadFromPath(std::unique_ptr<ShaderStage>& resource, const Path& path, const ShaderStageParameters& parameters) const
+        bool BaseShaderStageLoader::loadFromStream(ShaderStage* shaderStage, InStream& stream, const ShaderStageParameterBag& parameters) const
         {
-            File resourceFile(path);
-
-            if(resourceFile.isOpen())
-            {
-                return loadFromStream(resource, resourceFile, parameters);
-            }
-
-            return false;
+            return shaderStage->create(parameters.getShaderStageType()) && shaderStage->compile(stream.readAll());
         }
 
-        bool BaseShaderStageLoader::loadFromStream(std::unique_ptr<ShaderStage>& resource, InStream& stream, const ShaderStageParameters& parameters) const
+        bool BaseShaderStageLoader::loadFromMemory(ShaderStage* shaderStage, const void* data, Index length, const ShaderStageParameterBag& parameters) const
         {
-            resource->create(ShaderStage::Type(parameters.getType()));
-
-            return resource->compile(stream.readAll());
-        }
-
-        bool BaseShaderStageLoader::loadFromMemory(std::unique_ptr<ShaderStage>& resource, const void* data, Index length, const ShaderStageParameters& parameters) const
-        {
-            MemoryStream stream(data, length);
-
-            if(stream.isOpen())
-            {
-                return loadFromStream(resource, stream, parameters);
-            }
-
-            return false;
+            return shaderStage->create(parameters.getShaderStageType()) && shaderStage->compile(String(reinterpret_cast<const char*>(data), length));
         }
     }
 }

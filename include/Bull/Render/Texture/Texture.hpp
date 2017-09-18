@@ -84,6 +84,37 @@ namespace Bull
          */
         bool create(const Image& image);
 
+        /*! \brief Load a Resource from a Path
+         *
+         * \param path       The path
+         * \param parameters Parameters to create the resource
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        bool loadFromPath(const Path& path, const ImageParameterBag& parameters = ImageParameterBag());
+
+        /*! \brief Load a Resource from a Path
+         *
+         * \param stream     The stream to read to load
+         * \param parameters Parameters to create the resource
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        bool loadFromStream(InStream& stream, const ImageParameterBag& parameters = ImageParameterBag());
+
+        /*! \brief Load a Resource from a memory area
+         *
+         * \param data       The memory
+         * \param length     The length of data
+         * \param parameters Parameters to create the resource
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        bool loadFromMemory(const void* data, Index length, const ImageParameterBag& parameters = ImageParameterBag());
+
         /*! \brief Bind the texture
          *
          */

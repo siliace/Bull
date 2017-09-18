@@ -45,6 +45,33 @@ namespace Bull
          */
         bool attach(const ShaderStage& stage);
 
+        /*! \brief Attach a ShaderStage loaded from a Path to this Shader
+         *
+         * \param stage The stage to attach to this Shader
+         *
+         * \return True if the stage was attached successfully
+         *
+         */
+        bool attachFromPath(const Path& path, const ShaderStageParameterBag& parameters = ShaderStageParameterBag());
+
+        /*! \brief Attach a ShaderStage loaded from a stream to this Shader
+         *
+         * \param stage The stage to attach to this Shader
+         *
+         * \return True if the stage was attached successfully
+         *
+         */
+        bool attachFromStream(InStream& stream, const ShaderStageParameterBag& parameters = ShaderStageParameterBag());
+
+        /*! \brief Attach a ShaderStage loaded from memory to this Shader
+         *
+         * \param stage The stage to attach to this Shader
+         *
+         * \return True if the stage was attached successfully
+         *
+         */
+        bool attachFromMemory(const void* data, Index length, const ShaderStageParameterBag& parameters = ShaderStageParameterBag());
+
         /*! \brief Link the shader
          *
          * \return True if the shader was linked successfully

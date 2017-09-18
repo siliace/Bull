@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <cstring>
 
 #include <Bull/Core/FileSystem/File.hpp>
@@ -9,41 +8,27 @@ namespace Bull
 {
     namespace prv
     {
-        bool BaseShaderStageSaver::isSupportedExtension(const String& extension) const
+        bool BaseShaderStageSaver::saveToPath(const ShaderStage* shaderStage, const Path& path, const ShaderStageParameterBag& parameters) const
         {
-            static std::vector<String> extensionsSupported = {
-                    "vert", "frag",
-            };
+            File file;
 
-            return std::find(extensionsSupported.begin(), extensionsSupported.end(), extension) != extensionsSupported.end();
+            return file.open(path, File::Write) && saveToStream(shaderStage, file, parameters);
         }
 
-        bool BaseShaderStageSaver::saveToPath(const ShaderStage& resource, const Path& path, const ShaderStageParameters& parameters) const
+        bool BaseShaderStageSaver::saveToStream(const ShaderStage* shaderStage, OutStream& stream, const ShaderStageParameterBag& parameters) const
         {
-            File file(path);
+            String code = shaderStage->getSource();
 
-            if(file.isOpen())
+            stream.write(code.getBuffer(), code.getCapacity());
+
+            return true;
+        }
+
+        bool BaseShaderStageSaver::saveToMemory(const ShaderStage* shaderStage, void* data, Index length, const ShaderStageParameterBag& parameters) const
+        {
+            if(data && length)
             {
-                return saveToStream(resource, file, parameters);
-            }
-
-            return false;
-        }
-
-        bool BaseShaderStageSaver::saveToStream(const ShaderStage& resource, OutStream& stream, const ShaderStageParameters& parameters) const
-        {
-            String code = resource.getSource();
-
-            return stream.write(code.getBuffer(), code.getSize()) == code.getSize();
-        }
-
-        bool BaseShaderStageSaver::saveToMemory(const ShaderStage& resource, void* data, Index length, const ShaderStageParameters& parameters) const
-        {
-            String code = resource.getSource();
-
-            if(data && length >= code.getSize())
-            {
-                std::memcpy(data, code.getBuffer(), code.getSize());
+                std::memcpy(data, shaderStage->getSource().getBuffer(), length);
 
                 return true;
             }

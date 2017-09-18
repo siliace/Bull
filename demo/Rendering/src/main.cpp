@@ -6,11 +6,9 @@
 
 #include <Bull/Render/Mesh.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
-#include <Bull/Render/Shader/ShaderStageManager.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
 
-#include <Bull/Utility/Image/ImageManager.hpp>
 #include <Bull/Utility/Logger/ConsoleLogger.hpp>
 
 using namespace Bull;
@@ -88,11 +86,11 @@ int main(int argc, char* argv[])
 
     square.create(vertices, indices);
 
-    phong.attach(ShaderStageManager::get()->loadFromPath(Path("../resources/shaders/phong/phong.vert"), "object_vert"));
-    phong.attach(ShaderStageManager::get()->loadFromPath(Path("../resources/shaders/phong/phong.frag"), "object_frag"));
+    phong.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType::Vertex);
+    phong.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType::Fragment);
     phong.link();
 
-    wall.create(ImageManager::get()->loadFromPath(Path("../resources/textures/wall.jpg"), "tex_wall"));
+    wall.loadFromPath(Path("../resources/textures/wall.jpg"));
     wall.setSampler(Texture::Sampler0);
     wall.enableSmooth();
 

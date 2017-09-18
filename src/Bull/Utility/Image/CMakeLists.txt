@@ -8,10 +8,9 @@ target_sources(bull-utility
             ${BULL_INC_UTILITY_IMAGE}/Image.hpp
             ${BULL_SRC_UTILITY_IMAGE}/Image.cpp
             ${BULL_INC_UTILITY_IMAGE}/ImageFormat.hpp
-            ${BULL_INC_UTILITY_IMAGE}/ImageManager.hpp
-            ${BULL_SRC_UTILITY_IMAGE}/ImageManager.cpp
-            ${BULL_INC_UTILITY_IMAGE}/ImageParameters.hpp
-            ${BULL_SRC_UTILITY_IMAGE}/ImageParameters.cpp
+            ${BULL_INC_UTILITY_IMAGE}/ImageParameterBag.hpp
+            ${BULL_SRC_UTILITY_IMAGE}/ImageParameterBag.cpp
+
         PRIVATE
             ${BULL_SRC_UTILITY_IMAGE}/STBLoader.hpp
             ${BULL_SRC_UTILITY_IMAGE}/STBLoader.cpp

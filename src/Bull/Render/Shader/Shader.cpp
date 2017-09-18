@@ -1,5 +1,4 @@
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/IO/StringStream.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Render/OpenGL.hpp>
@@ -42,6 +41,27 @@ namespace Bull
         }
 
         return false;
+    }
+
+    bool Shader::attachFromPath(const Path& path, const ShaderStageParameterBag& parameters)
+    {
+        ShaderStage stage;
+
+        return stage.loadFromPath(path, parameters) && attach(stage);
+    }
+
+    bool Shader::attachFromStream(InStream& stream, const ShaderStageParameterBag& parameters)
+    {
+        ShaderStage stage;
+
+        return stage.loadFromStream(stream, parameters) && attach(stage);
+    }
+
+    bool Shader::attachFromMemory(const void* data, Index length, const ShaderStageParameterBag& parameters)
+    {
+        ShaderStage stage;
+
+        return stage.loadFromMemory(data, length, parameters) && attach(stage);
     }
 
     bool Shader::link()

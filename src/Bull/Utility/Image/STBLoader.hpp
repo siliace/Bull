@@ -7,99 +7,56 @@ namespace Bull
 {
     namespace prv
     {
-        class STBLoader : public AbstractImageLoader
+        struct STBLoader : public AbstractImageLoader
         {
-        private:
+            static int read(void *user, char *data, int size);
 
-            /*! \brief Read data from an user stream
-             *
-             * \param user The user stream
-             * \param data The memory to fill
-             * \param size How many bytes should be read from the stream
-             *
-             * \return The number of byte actually read
-             *
-             */
-            static int read(void* user, char* data, int size);
+            static void skip(void *user, int n);
 
-            /*! \brief Skip byte from an user stream
-             *
-             * \param user The user stream
-             * \param n    How many bytes should be skipped
-             *
-             */
-            static void skip(void* user, int n);
+            static int eof(void *user);
 
-            /*! \brief Tell whether an user stream is at the end
+            /*! \brief Tell whether an ImageFormat is supported
              *
-             * \param user The user stream
+             * \param format The ImageFormat to test
              *
-             * \return Nonzero if the stream if at the end
-             *
-             */
-            static int eof(void* user);
-
-        public:
-
-            /*! \brief Tell whether an ImageFormat is support
-             *
-             * \param format The format to test
-             *
-             * \return True if the format is supported by the loader
+             * \return True if the ImageFormat is supported
              *
              */
             bool isSupportedFormat(ImageFormat format) const override;
 
-            /*! \brief Tell whether a file extension is supported
+            /*! \brief Load a Image from a Path
              *
-             * \param extension The extension
+             * \param image      The Image to load
+             * \param path       The path
+             * \param parameters Parameters to create the Image
              *
-             * \return True if the extension is supported
+             * \return True if the Image was loaded successfully
              *
              */
-            bool isSupportedExtension(const String& extension) const override;
+            bool loadFromPath(Image* image, const Path& path, const ImageParameterBag& parameters) const override;
 
-            /*! \brief Load a Resource from a Path
+            /*! \brief Load a Image from a Path
              *
-             * \param resource The Resource to load
-             * \param path     The path
+             * \param image      The Image to load
+             * \param stream     The stream to read to load
+             * \param parameters Parameters to create the Image
              *
-             * \return True if the Resource was loaded successfully
+             * \return True if the Image was loaded successfully
              *
              */
-            bool loadFromPath(std::unique_ptr<Image>& resource, const Path& path, const ParameterBag& parameters) const override;
+            bool loadFromStream(Image* image, InStream& stream, const ImageParameterBag& parameters) const override;
 
-            /*! \brief Load a Resource from a Path
+            /*! \brief Load a Image from a memory area
              *
-             * \param resource The Resource to load
-             * \param stream   The stream to read to load
+             * \param image      The Image to load
+             * \param data       The memory
+             * \param length     The length of data
+             * \param parameters Parameters to create the Image
              *
-             * \return True if the Resource was loaded successfully
-             *
-             */
-            bool loadFromStream(std::unique_ptr<Image>& resource, InStream& stream, const ParameterBag& parameters) const override;
-
-            /*! \brief Load a Resource from a memory area
-             *
-             * \param resource The Resource to load
-             * \param data     The memory
-             * \param length   The length of data
-             *
-             * \return True if the Resource was loaded successfully
+             * \return True if the Image was loaded successfully
              *
              */
-            bool loadFromMemory(std::unique_ptr<Image>& resource, const void* data, Index length, const ParameterBag& parameters) const override;
-
-            /*! \brief Load an Image from pixels
-             *
-             * \param resource The Resource to load
-             * \param pixels   Pixels of the Image
-             * \param size     The size of the Image
-             *
-             * \return True if the Resource was loaded successfully
-             *
-             */
-            bool loadFromPixels(std::unique_ptr<Image>& resource, const ByteArray& pixels, const Vector2UI& size, const ParameterBag& parameters) const override;
+            bool loadFromMemory(Image* image, const void* data, Index length, const ImageParameterBag& parameters) const override;
         };
     }
 }

@@ -10,15 +10,6 @@ namespace Bull
     template <typename T, typename Parameters = ParameterBag>
     struct BULL_CORE_API AbstractResourceLoader
     {
-        /*! \brief Tell whether a file extension is supported
-         *
-         * \param extension The extension
-         *
-         * \return True if the extension is supported
-         *
-         */
-        virtual bool isSupportedExtension(const String& extension) const = 0;
-
         /*! \brief Load a Resource from a Path
          *
          * \param resource   The Resource to load
@@ -28,7 +19,7 @@ namespace Bull
          * \return True if the Resource was loaded successfully
          *
          */
-        virtual bool loadFromPath(std::unique_ptr<T>& resource, const Path& path, const Parameters& parameters) const = 0;
+        virtual bool loadFromPath(T* resource, const Path& path, const Parameters& parameters) const = 0;
 
         /*! \brief Load a Resource from a Path
          *
@@ -39,7 +30,7 @@ namespace Bull
          * \return True if the Resource was loaded successfully
          *
          */
-        virtual bool loadFromStream(std::unique_ptr<T>& resource, InStream& stream, const Parameters& parameters) const = 0;
+        virtual bool loadFromStream(T* resource, InStream& stream, const Parameters& parameters) const = 0;
 
         /*! \brief Load a Resource from a memory area
          *
@@ -51,7 +42,7 @@ namespace Bull
          * \return True if the Resource was loaded successfully
          *
          */
-        virtual bool loadFromMemory(std::unique_ptr<T>& resource, const void* data, Index length, const Parameters& parameters) const = 0;
+        virtual bool loadFromMemory(T* resource, const void* data, Index length, const Parameters& parameters) const = 0;
     };
 }
 

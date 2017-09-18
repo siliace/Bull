@@ -38,7 +38,7 @@ namespace Bull
                 resize(size + offset);
             }
 
-            std::memcpy(&m_array[offset] + offset, data, size);
+            std::memcpy(&m_array[offset], data, size);
 
             return true;
         }

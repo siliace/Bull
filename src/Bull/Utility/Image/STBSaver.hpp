@@ -11,52 +11,46 @@ namespace Bull
         {
             /*! \brief Tell whether an ImageFormat is supported
              *
-             * \param format The format to test
+             * \param format The ImageFormat to test
              *
-             * \return True if the format is supported
+             * \return True if the ImageFormat is supported
              *
              */
             bool isSupportedFormat(ImageFormat format) const override;
 
-            /*! \brief Tell whether a file extension is supported
+            /*! \brief Save a Resource to a file
              *
-             * \param extension The extension
+             * \param resource   The Resource to save
+             * \param path       The Path to save the Resource
+             * \param parameters Parameters to save the Resource
              *
-             * \return True if the extension is supported
+             * \return True if the Resource was saved successfully
              *
              */
-            bool isSupportedExtension(const String& extension) const override;
+            bool saveToPath(const Image* resource, const Path& path, const ImageParameterBag& parameters) const override;
 
-            /*! \brief Save a Image to a file
+            /*! \brief Save a Resource to a stream
              *
-             * \param resource The Image to save
-             * \param path     The Path to save the Image
+             * \param resource   The Resource to save
+             * \param stream     The stream to write
+             * \param parameters Parameters to save the Resource
              *
-             * \return True if the Image was saved successfully
+             * \return True if the Resource was saved successfully
              *
              */
-            bool saveToPath(const Image& resource, const Path& path, const ImageParameters& parameters) const override;
+            bool saveToStream(const Image* resource, OutStream& stream, const ImageParameterBag& parameters) const override;
 
-            /*! \brief Save a Image to a stream
+            /*! \brief Save a Resource to a memory area
              *
-             * \param resource The Image to save
-             * \param stream   The stream to write
+             * \param resource   The Resource to save
+             * \param data       Memory to write to save the Resource
+             * \param length     The length of the memory
+             * \param parameters Parameters to save the Resource
              *
-             * \return True if the Image was saved successfully
-             *
-             */
-            bool saveToStream(const Image& resource, OutStream& stream, const ImageParameters& parameters) const override;
-
-            /*! \brief Save a Image to a memory area
-             *
-             * \param resource The Image to save
-             * \param data     Data to save the Image
-             * \param length   The length of data
-             *
-             * \return True if the Image was saved successfully
+             * \return True if the Resource was saved successfully
              *
              */
-            bool saveToMemory(const Image& resource, void* data, Index length, const ImageParameters& parameters) const override;
+            bool saveToMemory(const Image* resource, void* data, Index length, const ImageParameterBag& parameters) const override;
         };
     }
 }

@@ -7,35 +7,27 @@
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
-#include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/Export.hpp>
 #include <Bull/Render/Context/ContextResource.hpp>
+#include <Bull/Render/Shader/ShaderStageParameterBag.hpp>
+#include <Bull/Render/Shader/ShaderStageType.hpp>
 
 namespace Bull
 {
-    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource, public Resource
+    namespace prv
     {
-    public:
+        class BaseShaderStageSaver;
+        class BaseShaderStageLoader;
+    }
 
-        enum Type
-        {
-            Vertex   = GL_VERTEX_SHADER,
-            Fragment = GL_FRAGMENT_SHADER,
-            Geometry = GL_GEOMETRY_SHADER,
-        };
-
+    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource, public Resource<ShaderStage, prv::BaseShaderStageSaver, prv::BaseShaderStageLoader, ShaderStageParameterBag>
+    {
     public:
 
         /*! \brief Default constructor
          *
          */
         ShaderStage();
-
-        /*! \brief Constructor
-         *
-         * \param type The type of shader to create
-         *
-         */
-        explicit ShaderStage(Type type);
 
         /*! \brief Destructor
          *
@@ -49,7 +41,69 @@ namespace Bull
          * \return True if the ShaderStage was created successfully
          *
          */
-        bool create(Type type);
+        bool create(ShaderStageType::ShaderStageType type);
+
+        /*! \brief Load a ShaderStage from a Path
+         *
+         * \param path       The path
+         * \param parameters Parameters to create the ShaderStage
+         *
+         * \return True if the ShaderStage was loaded successfully
+         *
+         */
+        bool loadFromPath(const Path& path, const ShaderStageParameterBag& parameters = ShaderStageParameterBag()) override;
+
+        /*! \brief Load a ShaderStage from a Path
+         *
+         * \param stream     The stream to read to load
+         * \param parameters Parameters to create the ShaderStage
+         *
+         * \return True if the ShaderStage was loaded successfully
+         *
+         */
+        bool loadFromStream(InStream& stream, const ShaderStageParameterBag& parameters = ShaderStageParameterBag()) override;
+
+        /*! \brief Load a ShaderStage from a memory area
+         *
+         * \param data       The memory
+         * \param length     The length of data
+         * \param parameters Parameters to create the ShaderStage
+         *
+         * \return True if the ShaderStage was loaded successfully
+         *
+         */
+        bool loadFromMemory(const void* data, Index length, const ShaderStageParameterBag& parameters = ShaderStageParameterBag()) override;
+
+        /*! \brief Save a ShaderStage to a file
+         *
+         * \param path       The Path to save the ShaderStage
+         * \param parameters Parameters to save the ShaderStage
+         *
+         * \return True if the ShaderStage was saved successfully
+         *
+         */
+        bool saveToPath(const Path& path, const ShaderStageParameterBag& parameters = ShaderStageParameterBag()) const override;
+
+        /*! \brief Save a ShaderStage to a stream
+         *
+         * \param stream     The stream to write
+         * \param parameters Parameters to save the ShaderStage
+         *
+         * \return True if the ShaderStage was saved successfully
+         *
+         */
+        bool saveToStream(OutStream& stream, const ShaderStageParameterBag& parameters = ShaderStageParameterBag()) const override;
+
+        /*! \brief Save a ShaderStage to a memory area
+         *
+         * \param data       Memory to write to save the ShaderStage
+         * \param length     The length of the memory
+         * \param parameters Parameters to save the ShaderStage
+         *
+         * \return True if the ShaderStage was saved successfully
+         *
+         */
+        bool saveToMemory(void* data, Index length, const ShaderStageParameterBag& parameters = ShaderStageParameterBag()) const override;
 
         /*! \brief Compile the ShaderStage
          *
@@ -91,7 +145,7 @@ namespace Bull
          * \return The type
          *
          */
-        Type getType() const;
+        ShaderStageType::ShaderStageType getType() const;
 
         /*! \brief Get the ShaderStage system handler
          *
@@ -111,9 +165,9 @@ namespace Bull
 
     private:
 
-        unsigned int m_id;         /*!< The OpenGL shader handler */
-        Type         m_type;       /*!< The shader type */
-        bool         m_isCompiled; /*!< Does the shader is compiled? */
+        unsigned int                     m_id;         /*!< The OpenGL shader handler */
+        ShaderStageType::ShaderStageType m_type;       /*!< The shader type */
+        bool                             m_isCompiled; /*!< Does the shader is compiled? */
     };
 }
 
