@@ -8,6 +8,7 @@
 
 #include <Bull/Render/Export.hpp>
 #include <Bull/Render/Shader/ShaderStage.hpp>
+#include <Bull/Render/Shader/Uniformable.hpp>
 
 #include <Bull/Utility/Color.hpp>
 
@@ -116,7 +117,27 @@ namespace Bull
          * \return Return true if the uniform variable was found, false otherwise
          *
          */
+        bool setUniform(const String& name, unsigned int uniform);
+
+        /*! \brief Set an uniform variable
+         *
+         * \param name    The name of the uniform variable in the shader
+         * \param uniform The value to set to the uniform variable
+         *
+         * \return Return true if the uniform variable was found, false otherwise
+         *
+         */
         bool setUniform(const String& name, float uniform);
+
+        /*! \brief Set an uniform variable
+         *
+         * \param name    The name of the uniform variable in the shader
+         * \param uniform The value to set to the uniform variable
+         *
+         * \return Return true if the uniform variable was found, false otherwise
+         *
+         */
+        bool setUniform(const String& name, const Uniformable& uniform);
 
         /*! \brief Set an uniform variable
          *

@@ -18,7 +18,7 @@ namespace Bull
     {
     public:
 
-        enum Sampler
+        enum Sampler : unsigned int
         {
             Sampler0  = 0,
             Sampler1  = 1,

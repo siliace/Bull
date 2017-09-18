@@ -75,24 +75,29 @@ int main(int argc, char* argv[])
 {
     Log::get()->createLogger<ConsoleLogger>();
 
-    Texture wall;
     Shader phong;
     WindowEvent event;
     EulerAnglesF rotation;
-    CameraF camera(Vector3F(3.f, 1.f, 5.f));
+    Texture diffuse, specular, emission;
+    CameraF camera(Vector3F(0.f, 0.f, 5.f));
     RenderWindow window(VideoMode(800, 600), "Bull Application");
     PerspectiveProjectionF projection(AngleF::degree(45.f), window.getSize().getRatio(), Vector2F(0.1f, 100.f));
     Mesh square;
 
     square.create(vertices, indices);
 
+    diffuse.loadFromPath(Path("../resources/textures/container.png"));
+    diffuse.enableSmooth();
+
+    specular.loadFromPath(Path("../resources/textures/container_specular.png"));
+    specular.enableSmooth();
+
+    emission.loadFromPath(Path("../resources/textures/emission_map.jpg"));
+    emission.enableSmooth();
+
     phong.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType::Vertex);
     phong.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType::Fragment);
     phong.link();
-
-    wall.loadFromPath(Path("../resources/textures/wall.jpg"));
-    wall.setSampler(Texture::Sampler0);
-    wall.enableSmooth();
 
     while(window.isOpen())
     {
@@ -118,16 +123,31 @@ int main(int argc, char* argv[])
         window.clear();
 
         phong.bind();
-        phong.setUniform("ambient_strength", 0.1f);
-        phong.setUniform("specular_strength", 3.f);
-        phong.setUniform("specular_shininess", 1024.f);
-        phong.setUniform("tex_wall", wall.getSampler());
-        phong.setUniformColor("light_color", Color::White);
-        phong.setUniformMatrix("view", camera.getMatrix());
-        phong.setUniformVector("light_position", Vector3F::UnitX * 3.f);
-        phong.setUniformMatrix("projection", projection.getMatrix());
-        phong.setUniformVector("camera_position", camera.getPosition());
+
         phong.setUniformMatrix("model", Transformation3DF::makeRotation(rotation).getMatrix());
+        phong.setUniformMatrix("view", camera.getMatrix());
+        phong.setUniformMatrix("projection", projection.getMatrix());
+
+        phong.setUniform("material.shininess", 64.f);
+
+        diffuse.setSampler(Texture::Sampler0);
+        diffuse.bind();
+        phong.setUniform("material.diffuse", diffuse.getSampler());
+
+        specular.setSampler(Texture::Sampler1);
+        specular.bind();
+        phong.setUniform("material.specular", specular.getSampler());
+
+        emission.setSampler(Texture::Sampler2);
+        emission.bind();
+        phong.setUniform("emission_map", emission.getSampler());
+
+        phong.setUniformVector("light.position", Vector3F::UnitX * 3.f);
+        phong.setUniformVector("light.ambient", Vector4F::Unit / 5.f);
+        phong.setUniformVector("light.diffuse", Vector4F::Unit / 2.f);
+        phong.setUniformVector("light.specular", Vector4F(1.f, 1.f, 1.f, 0.f));
+
+        phong.setUniformVector("camera_position", camera.getPosition());
 
         square.render(Mesh::Triangles);
 

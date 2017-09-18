@@ -125,6 +125,29 @@ namespace Bull
         return true;
     }
 
+    bool  Shader::setUniform(const String& name, unsigned int uniform)
+    {
+        int location = getUniformLocation(name);
+
+        if(location == -1)
+        {
+            return false;
+        }
+
+        if(gl::programUniform1i)
+        {
+            gl::programUniform1i(m_program, location, uniform);
+        }
+        else
+        {
+            bind();
+
+            gl::uniform1i(location, uniform);
+        }
+
+        return true;
+    }
+
     bool Shader::setUniform(const String& name, float uniform)
     {
         int location = getUniformLocation(name);
@@ -144,6 +167,20 @@ namespace Bull
 
             gl::uniform1f(location, uniform);
         }
+
+        return true;
+    }
+
+    bool Shader::setUniform(const String& name, const Uniformable& uniform)
+    {
+        int location = getUniformLocation(name);
+
+        if(location == -1)
+        {
+            return false;
+        }
+
+        uniform.setUniform(this, name, location);
 
         return true;
     }
@@ -188,15 +225,15 @@ namespace Bull
             return false;
         }
 
-        if(gl::programUniform2fv)
+        if(gl::programUniform2f)
         {
-            gl::programUniform2fv(m_program, location, 2, &uniform.x);
+            gl::programUniform2f(m_program, location, uniform.x, uniform.y);
         }
         else
         {
             bind();
 
-            gl::uniform2fv(location, 1, &uniform.x);
+            gl::uniform2f(location, uniform.x, uniform.y);
         }
 
         return true;
@@ -234,15 +271,15 @@ namespace Bull
             return false;
         }
 
-        if(gl::programUniform4fv)
+        if(gl::programUniform4f)
         {
-            gl::programUniform4fv(m_program, location, 4, &uniform.x);
+            gl::programUniform4f(m_program, location, uniform.x, uniform.y, uniform.z, uniform.w);
         }
         else
         {
             bind();
 
-            gl::uniform4fv(location, 1, &uniform.x);
+            gl::uniform4f(location, uniform.x, uniform.y, uniform.z, uniform.w);
         }
 
         return true;

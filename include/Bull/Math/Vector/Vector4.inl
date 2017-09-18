@@ -167,7 +167,7 @@ namespace Bull
     template<typename T>
     Vector4<T> operator*(const Vector4<T>& left, T right)
     {
-        Vector3<T> product = left;
+        Vector4<T> product = left;
 
         product.x *= right;
         product.y *= right;
@@ -180,7 +180,7 @@ namespace Bull
     template<typename T>
     Vector4<T> operator/(T left, const Vector4<T>& right)
     {
-        Vector3<T> product = right;
+        Vector4<T> product = right;
 
         product.x /= left;
         product.y /= left;
