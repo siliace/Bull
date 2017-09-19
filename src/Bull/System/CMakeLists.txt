@@ -58,3 +58,5 @@ if(BULL_OS_WINDOWS)
 
     target_link_libraries(bull-system winmm)
 endif()
+
+target_link_libraries(bull-system bull-core)
