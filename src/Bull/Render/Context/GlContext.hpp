@@ -8,8 +8,8 @@
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/SurfaceHandler.hpp>
 
-#include <Bull/Window/VideoMode.hpp>
-#include <Bull/Window/WindowImpl.hpp>
+#include <Bull/System/VideoMode.hpp>
+#include <Bull/System/WindowImpl.hpp>
 
 namespace Bull
 {

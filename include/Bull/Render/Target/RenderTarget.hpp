@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
@@ -14,7 +14,7 @@
 
 #include <Bull/Utility/Color.hpp>
 
-#include <Bull/Window/VideoMode.hpp>
+#include <Bull/System/VideoMode.hpp>
 
 namespace Bull
 {

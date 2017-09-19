@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_THREAD_MUTEXHANDLER_HPP
 #define BULL_CORE_THREAD_MUTEXHANDLER_HPP
 
-#include <Bull/Core/System/OS.hpp>
+#include <Bull/Core/Configuration/OS.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <windows.h>

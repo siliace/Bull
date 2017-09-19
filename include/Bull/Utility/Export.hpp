@@ -1,7 +1,7 @@
 #ifndef BULL_UTILITY_EXPORT_HPP
 #define BULL_UTILITY_EXPORT_HPP
 
-#include <Bull/Core/System/Export.hpp>
+#include <Bull/Core/Configuration/Export.hpp>
 
 #if defined BULL_BUILD
     #define BULL_UTILITY_API BULL_API_EXPORT

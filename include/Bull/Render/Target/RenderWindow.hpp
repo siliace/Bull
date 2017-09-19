@@ -6,8 +6,8 @@
 
 #include <Bull/Render/Target/RenderTarget.hpp>
 
-#include <Bull/Window/Window.hpp>
-#include <Bull/Window/VideoMode.hpp>
+#include <Bull/System/Window.hpp>
+#include <Bull/System/VideoMode.hpp>
 
 namespace Bull
 {

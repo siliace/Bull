@@ -3,7 +3,7 @@
 
 #include <Bull/Render/Context/ContextSettings.hpp>
 
-#include <Bull/Window/WindowImpl.hpp>
+#include <Bull/System/WindowImpl.hpp>
 
 namespace Bull
 {

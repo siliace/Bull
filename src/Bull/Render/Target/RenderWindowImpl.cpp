@@ -1,4 +1,4 @@
-#include <Bull/Core/System/OS.hpp>
+#include <Bull/Core/Configuration/OS.hpp>
 
 #include <Bull/Render/Target/RenderWindowImpl.hpp>
 

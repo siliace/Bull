@@ -2,7 +2,7 @@
 #define BULL_CORE_IO_INSTREAM_HPP
 
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 
 namespace Bull
 {

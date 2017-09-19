@@ -4,10 +4,10 @@
 #include <memory>
 #include <vector>
 
+#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/System/Integer.hpp>
 
 namespace Bull
 {

@@ -4,7 +4,7 @@
 #include <memory>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/System/Export.hpp>
+#include <Bull/Core/Configuration/Export.hpp>
 
 #include <Bull/Render/Target/RenderTarget.hpp>
 #include <Bull/Render/Texture/Texture.hpp>

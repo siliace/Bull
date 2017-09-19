@@ -1,7 +1,7 @@
 #ifndef BULL_RENDER_CONTEXT_CONTEXTSETTINGS_HPP
 #define BULL_RENDER_CONTEXT_CONTEXTSETTINGS_HPP
 
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 
 #include <Bull/Render/Export.hpp>
 

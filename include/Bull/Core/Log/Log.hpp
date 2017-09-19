@@ -8,7 +8,7 @@
 #include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 
 namespace Bull
 {

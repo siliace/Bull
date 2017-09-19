@@ -24,5 +24,4 @@ else()
 endif()
 
 target_link_libraries(bull-render bull-core)
-target_link_libraries(bull-render bull-hardware)
-target_link_libraries(bull-render bull-window)
+target_link_libraries(bull-render bull-system)

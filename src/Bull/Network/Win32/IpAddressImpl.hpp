@@ -6,7 +6,7 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 
 #include <Bull/Network/IpAddress.hpp>
 #include <Bull/Network/Socket.hpp>

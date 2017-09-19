@@ -4,7 +4,7 @@
 #include <ctime>
 
 #include <Bull/Core/Pattern/Singleton.hpp>
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 
 #include <Bull/Utility/Export.hpp>
 

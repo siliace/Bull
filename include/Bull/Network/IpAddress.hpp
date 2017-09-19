@@ -4,7 +4,7 @@
 #include <array>
 
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 
 #include <Bull/Network/Export.hpp>
 

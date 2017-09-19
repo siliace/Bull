@@ -1,9 +1,0 @@
-target_sources(bull-hardware
-        PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/CPUImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/CPUImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/JoystickImpl.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/RAMImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/RAMImpl.hpp
-        )

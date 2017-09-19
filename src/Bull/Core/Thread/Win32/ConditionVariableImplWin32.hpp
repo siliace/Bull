@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_THREAD_WIN32_CONDITIONVARIABLEIMPLWIN32_HPP
 #define BULL_CORE_THREAD_WIN32_CONDITIONVARIABLEIMPLWIN32_HPP
 
-#include <Bull/Core/System/OS.hpp>
+#include <Bull/Core/Configuration/OS.hpp>
 #include <windows.h>
 
 #include <Bull/Core/Thread/ConditionVariableImpl.hpp>

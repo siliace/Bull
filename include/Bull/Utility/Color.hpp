@@ -1,7 +1,7 @@
 #ifndef BULL_UTILITY_COLOR_HPP
 #define BULL_UTILITY_COLOR_HPP
 
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 
 #include <Bull/Utility/Export.hpp>
 

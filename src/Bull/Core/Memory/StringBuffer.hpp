@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 
 namespace Bull
 {

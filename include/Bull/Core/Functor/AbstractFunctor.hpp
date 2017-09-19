@@ -4,7 +4,7 @@
 #include <utility>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 
 namespace Bull
 {

@@ -1,7 +1,7 @@
 #ifndef BULL_NETWORK_SOCKETHANDLER_HPP
 #define BULL_NETWORK_SOCKETHANDLER_HPP
 
-#include <Bull/Core/System/OS.hpp>
+#include <Bull/Core/Configuration/OS.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <basetsd.h>

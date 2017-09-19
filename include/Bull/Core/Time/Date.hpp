@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_DATE_CLOCK
 #define BULL_CORE_DATE_CLOCK
 
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 namespace Bull

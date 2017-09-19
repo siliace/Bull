@@ -1,0 +1,9 @@
+target_sources(bull-window
+        PRIVATE
+        CursorImplXCB.cpp
+        CursorImplXCB.hpp
+        VideoModeImpl.cpp
+        VideoModeImpl.hpp
+        WindowImplXCB.cpp
+        WindowImplXCB.hpp
+        )

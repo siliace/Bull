@@ -6,7 +6,7 @@
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/Memory/AbstractBuffer.hpp>
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/System/Integer.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 
 namespace Bull
 {
