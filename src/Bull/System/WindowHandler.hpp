@@ -4,7 +4,7 @@
 #include <Bull/Core/Configuration/OS.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #include <windows.h>
+    #include <Bull/Core/Support/Win32/Windows.hpp>
 #elif defined BULL_OS_GNU_LINUX
     #if defined BULL_XLIB
         #include <Bull/Core/Support/Xlib/Xlib.hpp>

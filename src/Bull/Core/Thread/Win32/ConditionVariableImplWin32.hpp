@@ -1,9 +1,7 @@
 #ifndef BULL_CORE_THREAD_WIN32_CONDITIONVARIABLEIMPLWIN32_HPP
 #define BULL_CORE_THREAD_WIN32_CONDITIONVARIABLEIMPLWIN32_HPP
 
-#include <Bull/Core/Configuration/OS.hpp>
-#include <windows.h>
-
+#include <Bull/Core/Support/Win32/Windows.hpp>
 #include <Bull/Core/Thread/ConditionVariableImpl.hpp>
 
 namespace Bull

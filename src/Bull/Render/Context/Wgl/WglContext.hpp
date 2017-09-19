@@ -1,7 +1,7 @@
 #ifndef Bull_WglContext_hpp
 #define Bull_WglContext_hpp
 
-#include <windows.h>
+#include <Bull/Core/Support/Win32/Windows.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>

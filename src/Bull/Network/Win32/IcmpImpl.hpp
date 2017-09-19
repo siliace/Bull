@@ -3,10 +3,10 @@
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
-#include <windows.h>
 #include <iphlpapi.h>
 #include <icmpapi.h>
 
+#include <Bull/Core/Support/Win32/Windows.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 #include <Bull/Network/IpAddress.hpp>

@@ -1,4 +1,4 @@
-#include <windows.h>
+#include <Bull/Core/Support/Win32/Windows.hpp>
 
 #include <Bull/Render/Context/GlContext.hpp>
 #include <Bull/Render/Context/Wgl/WglExtensionsLoader.hpp>

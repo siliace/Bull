@@ -4,7 +4,7 @@
 #include <Bull/Core/Configuration/OS.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #include <windows.h>
+    #include <Bull/Core/Support/Win32/Windows.hpp>
 #endif
 
 namespace Bull

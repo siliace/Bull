@@ -1,8 +1,7 @@
 #ifndef BULL_CORE_SUPPORT_DATEHELPER_HPP
 #define BULL_CORE_SUPPORT_DATEHELPER_HPP
 
-#include <windows.h>
-
+#include <Bull/Core/Support/Win32/Windows.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
 namespace Bull

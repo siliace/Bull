@@ -1,8 +1,7 @@
 #ifndef BULL_CORE_THREAD_WIN32_SEMAPHOREIMPLWIN32_HPP
 #define BULL_CORE_THREAD_WIN32_SEMAPHOREIMPLWIN32_HPP
 
-#include <windows.h>
-
+#include <Bull/Core/Support/Win32/Windows.hpp>
 #include <Bull/Core/Thread/SemaphoreImpl.hpp>
 
 namespace Bull

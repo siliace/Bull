@@ -1,6 +1,4 @@
-#include <Bull/Core/Configuration/OS.hpp>
-
-#include <windows.h>
+#include <Bull/Core/Support/Win32/Windows.hpp>
 
 #include <Bull/System/Win32/RAMImpl.hpp>
 

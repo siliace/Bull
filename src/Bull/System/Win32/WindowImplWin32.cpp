@@ -1,5 +1,3 @@
-#include <windowsx.h>
-
 #include <Bull/Core/Exception/RuntimeError.hpp>
 
 #include <Bull/System/Win32/WindowImplWin32.hpp>
@@ -861,6 +859,19 @@ namespace Bull
                     pushEvent(e);
                 }
                 break;
+
+                case WM_MOUSEHWHEEL:
+                {
+                    WindowEvent e;
+
+                    e.type              = WindowEvent::MouseWheel;
+                    e.mouseWheel.wheel  = Mouse::Wheel::Horizontal;
+                    e.mouseWheel.up     = (HIWORD(wParam) == 120);
+                    e.mouseWheel.x      = GET_X_LPARAM(lParam);
+                    e.mouseWheel.y      = GET_Y_LPARAM(lParam);
+
+                    pushEvent(e);
+                }
 
                 case WM_GETMINMAXINFO:
                 {

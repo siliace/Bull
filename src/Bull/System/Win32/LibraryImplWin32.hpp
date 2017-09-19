@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_SYSTEM_WIN32_LIBRARYIMPLWIN32_HPP
 #define BULL_CORE_SYSTEM_WIN32_LIBRARYIMPLWIN32_HPP
 
-#include <windows.h>
+#include <Bull/Core/Support/Win32/Windows.hpp>
 
 #include <Bull/System/LibraryImpl.hpp>
 

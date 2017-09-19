@@ -1,6 +1,5 @@
-#include <windows.h>
-
 #include <Bull/Core/FileSystem/Win32/DirectoryImplWin32.hpp>
+#include <Bull/Core/Support/Win32/Windows.hpp>
 
 namespace Bull
 {

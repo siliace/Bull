@@ -1,8 +1,8 @@
 #include <cstring>
 
-#include <windows.h>
-
 #include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/Support/Win32/Windows.hpp>
+
 #include <Bull/System/Win32/ClipboardImpl.hpp>
 
 namespace Bull

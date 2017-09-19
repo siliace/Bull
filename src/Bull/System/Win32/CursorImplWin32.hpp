@@ -1,7 +1,7 @@
 #ifndef BULL_SYSTEMWIN32_CURSORIMPLWIN32_HPP
 #define BULL_SYSTEMWIN32_CURSORIMPLWIN32_HPP
 
-#include <windows.h>
+#include <Bull/Core/Support/Win32/Windows.hpp>
 
 #include <Bull/System/CursorImpl.hpp>
 

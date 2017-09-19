@@ -1,4 +1,4 @@
-#include <windows.h>
+#include <Bull/Core/Support/Win32/Windows.hpp>
 
 #include <Bull/System/Win32/CPUImpl.hpp>
 

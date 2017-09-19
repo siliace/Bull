@@ -1,20 +1,6 @@
-#include <windows.h>
+#include <Bull/Core/Support/Win32/Windows.hpp>
 
 #include <Bull/System/Win32/KeyboardImpl.hpp>
-
-/// GCC missing define
-#ifndef VK_OEM_PLUS
-    #define VK_OEM_PLUS 0xBB
-#endif
-#ifndef VK_OEM_COMMA
-    #define VK_OEM_COMMA 0xBC
-#endif
-#ifndef VK_OEM_PERIOD
-    #define VK_OEM_PERIOD 0xBE
-#endif
-#ifndef VK_OEM_102
-    #define VK_OEM_102 0xE2
-#endif
 
 namespace Bull
 {

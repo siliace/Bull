@@ -1,9 +1,8 @@
 #ifndef BULL_CORE_FILESYSTEM_DIRECTORYIMPLWIN32_HPP
 #define BULL_CORE_FILESYSTEM_DIRECTORYIMPLWIN32_HPP
 
-#include <windows.h>
-
 #include <Bull/Core/FileSystem/DirectoryImpl.hpp>
+#include <Bull/Core/Support/Win32/Windows.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
 namespace Bull

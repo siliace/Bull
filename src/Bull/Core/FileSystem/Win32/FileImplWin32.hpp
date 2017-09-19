@@ -1,9 +1,8 @@
 #ifndef BULL_CORE_FILESYSTEM_FILEIMPLWIN32_HPP
 #define BULL_CORE_FILESYSTEM_FILEIMPLWIN32_HPP
 
-#include <windows.h>
-
 #include <Bull/Core/FileSystem/FileImpl.hpp>
+#include <Bull/Core/Support/Win32/Windows.hpp>
 
 namespace Bull
 {

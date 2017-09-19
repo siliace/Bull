@@ -1,10 +1,8 @@
-#ifndef Bull_JoystickImpl_hpp
-#define Bull_JoystickImpl_hpp
-
-#include <windows.h>
-#include <mmsystem.h>
+#ifndef BULL_SYSTEM_WIN32_JOYSTICKIMPL_HPP
+#define BULL_SYSTEM_WIN32_JOYSTICKIMPL_HPP
 
 #include <Bull/Core/Configuration/Integer.hpp>
+#include <Bull/Core/Support/Win32/Windows.hpp>
 
 #include <Bull/System/Joystick.hpp>
 
@@ -69,5 +67,5 @@ namespace Bull
     }
 }
 
-#endif // Bull_JoystickImpl_hpp
+#endif // BULL_SYSTEM_WIN32_JOYSTICKIMPL_HPP
 
