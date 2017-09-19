@@ -84,6 +84,48 @@ namespace Bull
          *
          */
         static float getAxisPosition(Joystick::Axis axis, Uint8 joystick);
+
+        /*! \brief Enable or disable the key repeat
+         *
+         * \param enable The state of the key repeat
+         *
+         */
+        static void enableKeyRepeat(bool enable);
+
+        /*! \brief Get the state of the key repeat
+         *
+         * \param Return true if the key repeat is enable, false otherwise
+         *
+         */
+        static bool isKeyRepeatEnable();
+
+        /*! \brief Set the threshold of an axis movement to trigger an event
+         *
+         * \param threshold The threshold to use
+         *
+         */
+        static void setThreshold(float threshold);
+
+        /*! \brief Get the threshold of an axis movement to trigger an event
+         *
+         * \return threshold The threshold used
+         *
+         */
+        static float getThreshold();
+
+        /*! \brief Set the delay between two key repeat
+         *
+         * \param delay The delay between two key repeat
+         *
+         */
+        static void setRepeatDelay(const Time& delay);
+
+        /*! \brief Get the delay between two key repeat
+         *
+         * \return delay The delay between two key repeat
+         *
+         */
+        static const Time& getRepeatDelay();
     };
 }
 
