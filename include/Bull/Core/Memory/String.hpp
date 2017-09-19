@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <limits>
-#include <type_traits>
 #include <vector>
 
 #include <Bull/Core/Export.hpp>
