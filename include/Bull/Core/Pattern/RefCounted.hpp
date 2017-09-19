@@ -38,12 +38,13 @@ namespace Bull
 
         /*! \brief Set the persistence of the object
          *
-         * \param persistence The persistence
+         * \param persistence    The persistence
+         * \param checkReference Delete the object if it is no more persistent and don't have references
          *
          * \return True if the object have been deleted
          *
          */
-        bool setPersistence(bool persistence = true);
+        bool setPersistent(bool persistence = true, bool checkReference = false);
 
         /*! \brief Tell whether the reference is persistent
          *

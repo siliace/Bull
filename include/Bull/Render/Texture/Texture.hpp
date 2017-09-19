@@ -3,6 +3,7 @@
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/ObjectRef.hpp>
 
 #include <Bull/Math/Polygon/Rectangle.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
@@ -14,45 +15,24 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API Texture : public ContextResource, public NonCopyable
+    class Texture;
+
+    using TextureRef = ObjectRef<Texture>;
+    using TexureConstRef = ObjectRef<const Texture>;
+
+    class BULL_RENDER_API Texture : public ContextResource, public RefCounted
     {
     public:
 
-        enum Sampler : unsigned int
-        {
-            Sampler0  = 0,
-            Sampler1  = 1,
-            Sampler2  = 2,
-            Sampler3  = 3,
-            Sampler4  = 4,
-            Sampler5  = 5,
-            Sampler6  = 6,
-            Sampler7  = 7,
-            Sampler8  = 8,
-            Sampler9  = 9,
-            Sampler10 = 10,
-            Sampler11 = 11,
-            Sampler12 = 12,
-            Sampler13 = 13,
-            Sampler14 = 14,
-            Sampler15 = 15,
-            Sampler16 = 16,
-            Sampler17 = 17,
-            Sampler18 = 18,
-            Sampler19 = 19,
-            Sampler20 = 20,
-            Sampler21 = 21,
-            Sampler22 = 22,
-            Sampler23 = 23,
-            Sampler24 = 24,
-            Sampler25 = 25,
-            Sampler26 = 26,
-            Sampler27 = 27,
-            Sampler28 = 28,
-            Sampler29 = 29,
-            Sampler30 = 30,
-            Sampler31 = 31,
-        };
+        /*! \brief Make a new Texture
+         *
+         * \param args Arguments to create the Texture
+         *
+         * \return A reference to the new Texture
+         *
+         */
+        template <typename... Args>
+        static TextureRef make(Args&&... args);
 
     public:
 
@@ -120,20 +100,6 @@ namespace Bull
          */
         void bind() const;
 
-        /*! \brief Set the Sampler of the Texture
-         *
-         * \param sampler The Sampler to use
-         *
-         */
-        void setSampler(Sampler sampler);
-
-        /*! \brief Get the Sampler used by the texture
-         *
-         * \return The Sampler
-         *
-         */
-        Sampler getSampler() const;
-
         /*! \brief Enable or disable the texture repeat
          *
          * \param enable True to enable, false to disable
@@ -146,7 +112,7 @@ namespace Bull
          * \return Return true if the texture repeat is enable, false otherwise
          *
          */
-        bool isEnableRepeat() const;
+        inline bool isEnableRepeat() const;
 
         /*! \brief Enable or disable the texture smooth
          *
@@ -160,14 +126,14 @@ namespace Bull
          * \return Return true if the texture smooth is enable, false otherwise
          *
          */
-        bool isEnableSmooth() const;
+        inline bool isEnableSmooth() const;
 
         /*! \brief Get the size of the texture
          *
          * \return Return the size of the texture
          *
          */
-        const Vector2UI& getSize() const;
+        inline const Vector2UI& getSize() const;
 
         /*! \brief Download the texture from the VRAM
          *
@@ -190,16 +156,17 @@ namespace Bull
          * \return The native Texture system handler
          *
          */
-        unsigned int getSystemHandler() const;
+        inline unsigned int getSystemHandler() const;
 
     private:
 
         unsigned int m_id;
         Vector2UI    m_size;
-        Sampler      m_sampler;
         bool         m_isSmooth;
         bool         m_isRepeated;
     };
 }
+
+#include <Bull/Render/Texture/Texture.inl>
 
 #endif // BULL_RENDER_TEXTURE_TEXTURE_HPP

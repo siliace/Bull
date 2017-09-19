@@ -12,6 +12,7 @@ link_directories(${BULL_ROOT}/bin/${CMAKE_BUILD_TYPE})
 
 add_executable(demo-rendering src/main.cpp)
 target_link_libraries(demo-rendering bull-core)
+target_link_libraries(demo-rendering bull-graphics)
 target_link_libraries(demo-rendering bull-hardware)
 target_link_libraries(demo-rendering bull-render)
 target_link_libraries(demo-rendering bull-utility)

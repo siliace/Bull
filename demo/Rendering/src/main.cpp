@@ -1,5 +1,7 @@
 #include <Bull/Core/Log/Log.hpp>
 
+#include <Bull/Graphics/Material.hpp>
+
 #include <Bull/Math/TransformationPipeline/Camera.hpp>
 #include <Bull/Math/TransformationPipeline/PerspectiveProjection.hpp>
 #include <Bull/Math/TransformationPipeline/Transformation3D.hpp>
@@ -79,7 +81,7 @@ int main(int argc, char* argv[])
     WindowEvent event;
     EulerAnglesF rotation;
     Texture diffuse, specular, emission;
-    CameraF camera(Vector3F(0.f, 0.f, 5.f));
+    CameraF camera(Vector3F(2.f, 1.f, 3.f));
     RenderWindow window(VideoMode(800, 600), "Bull Application");
     PerspectiveProjectionF projection(AngleF::degree(45.f), window.getSize().getRatio(), Vector2F(0.1f, 100.f));
     Mesh square;
@@ -92,7 +94,7 @@ int main(int argc, char* argv[])
     specular.loadFromPath(Path("../resources/textures/container_specular.png"));
     specular.enableSmooth();
 
-    emission.loadFromPath(Path("../resources/textures/emission_map.jpg"));
+    emission.loadFromPath(Path("../resources/textures/container_emission.png"));
     emission.enableSmooth();
 
     phong.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType::Vertex);
@@ -130,17 +132,17 @@ int main(int argc, char* argv[])
 
         phong.setUniform("material.shininess", 64.f);
 
-        diffuse.setSampler(Texture::Sampler0);
+        gl::activeTexture(GL_TEXTURE0);
         diffuse.bind();
-        phong.setUniform("material.diffuse", diffuse.getSampler());
+        phong.setUniform("material.diffuse", 0);
 
-        specular.setSampler(Texture::Sampler1);
+        gl::activeTexture(GL_TEXTURE1);
         specular.bind();
-        phong.setUniform("material.specular", specular.getSampler());
+        phong.setUniform("material.specular", 1);
 
-        emission.setSampler(Texture::Sampler2);
+        gl::activeTexture(GL_TEXTURE2);
         emission.bind();
-        phong.setUniform("emission_map", emission.getSampler());
+        phong.setUniform("material.emission", 2);
 
         phong.setUniformVector("light.position", Vector3F::UnitX * 3.f);
         phong.setUniformVector("light.ambient", Vector4F::Unit / 5.f);

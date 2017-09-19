@@ -2,9 +2,10 @@
 
 struct Material
 {
-    sampler2D diffuse;
-    sampler2D specular;
     float shininess;
+    sampler2D diffuse;
+    sampler2D emission;
+    sampler2D specular;
 };
 
 struct Light
@@ -25,7 +26,6 @@ out vec4 pixel;
 uniform Light light;
 uniform Material material;
 uniform vec3 camera_position;
-uniform sampler2D emission_map;
 
 vec3 normal = normalize(frag_normal);
 vec3 lightDirection = normalize(light.position - frag_position);
@@ -45,10 +45,9 @@ float getSpecularity()
 
 void main()
 {
-    vec4 emission = texture(emission_map, frag_texCoord);
     vec4 ambient  = texture(material.diffuse, frag_texCoord) * light.ambient;
     vec4 diffuse  = texture(material.diffuse, frag_texCoord) * getDiffusion() * light.diffuse;
     vec4 specular = texture(material.specular, frag_texCoord) * getSpecularity() * light.specular;
 
-    pixel = (ambient + diffuse + specular + emission) * frag_color;
+    pixel = (ambient + diffuse + specular) * frag_color;
 }

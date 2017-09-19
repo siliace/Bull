@@ -5,7 +5,6 @@ namespace Bull
     Texture::Texture() :
         m_id(0),
         m_size(0, 0),
-        m_sampler(Sampler0),
         m_isSmooth(false),
         m_isRepeated(false)
     {
@@ -97,21 +96,6 @@ namespace Bull
         }
     }
 
-    void Texture::setSampler(Sampler sampler)
-    {
-        m_sampler = sampler;
-
-        if(m_id)
-        {
-            gl::activeTexture(GL_TEXTURE0 + sampler);
-        }
-    }
-
-    Texture::Sampler Texture::getSampler() const
-    {
-        return m_sampler;
-    }
-
     void Texture::enableRepeat(bool enable)
     {
         m_isRepeated = enable;
@@ -124,11 +108,6 @@ namespace Bull
         }
     }
 
-    bool Texture::isEnableRepeat() const
-    {
-        return m_isRepeated;
-    }
-
     void Texture::enableSmooth(bool enable)
     {
         m_isSmooth = enable;
@@ -139,16 +118,6 @@ namespace Bull
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
         }
-    }
-
-    bool Texture::isEnableSmooth() const
-    {
-        return m_isSmooth;
-    }
-
-    const Vector2UI& Texture::getSize() const
-    {
-        return m_size;
     }
 
     Image Texture::getImage() const
@@ -173,10 +142,5 @@ namespace Bull
         }
 
         return Image();
-    }
-
-    unsigned int Texture::getSystemHandler() const
-    {
-        return m_id;
     }
 }

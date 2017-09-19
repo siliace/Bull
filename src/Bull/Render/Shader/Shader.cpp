@@ -171,20 +171,6 @@ namespace Bull
         return true;
     }
 
-    bool Shader::setUniform(const String& name, const Uniformable& uniform)
-    {
-        int location = getUniformLocation(name);
-
-        if(location == -1)
-        {
-            return false;
-        }
-
-        uniform.setUniform(this, name, location);
-
-        return true;
-    }
-
     bool Shader::setUniformColor(const String& name, const Color& uniform)
     {
         int location = getUniformLocation(name);
