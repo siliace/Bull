@@ -8,6 +8,7 @@ target_sources(bull-core
             ${BULL_INC_CORE}/Export.hpp
         )
 
+add_subdirectory(Configuration)
 add_subdirectory(Exception)
 add_subdirectory(FileSystem)
 add_subdirectory(Functor)
