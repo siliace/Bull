@@ -64,6 +64,16 @@ namespace Bull
         return stage.loadFromMemory(data, length, parameters) && attach(stage);
     }
 
+    bool Shader::loadFromBinary(const ShaderBinary& binary)
+    {
+        if(binary.isValid())
+        {
+            gl::programBinary(m_program, binary.format, binary.getBuffer(), binary.getCapacity());
+        }
+
+        return false;
+    }
+
     bool Shader::link()
     {
         if(isValid())
@@ -309,6 +319,11 @@ namespace Bull
                 binary.create(length);
 
                 gl::getProgramBinary(getSystemHandler(), length, nullptr, &binary.format, &binary[0]);
+
+                if(!binary.isValid())
+                {
+                    throw RuntimeError("Failed to download program binary");
+                }
             }
         }
 

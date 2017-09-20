@@ -77,8 +77,8 @@ int main(int argc, char* argv[])
 {
     Log::get()->createLogger<ConsoleLogger>();
 
-    Shader phong;
     WindowEvent event;
+    Shader phong, dummy;
     EulerAnglesF rotation;
     Texture diffuse, specular, emission;
     CameraF camera(Vector3F(2.f, 1.f, 3.f));
@@ -97,9 +97,9 @@ int main(int argc, char* argv[])
     emission.loadFromPath(Path("../resources/textures/container_emission.png"));
     emission.enableSmooth();
 
-    phong.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType::Vertex);
-    phong.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType::Fragment);
-    phong.link();
+    dummy.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType::Vertex);
+    dummy.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType::Fragment);
+    dummy.link();
 
     while(window.isOpen())
     {

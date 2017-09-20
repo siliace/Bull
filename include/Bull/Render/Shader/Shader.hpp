@@ -39,6 +39,15 @@ namespace Bull
          */
         ~Shader();
 
+        /*! \brief Create a Shader from a ShaderBinary
+         *
+         * \param binary The binary of the Shader
+         *
+         * \return True if the Shader was created successfully
+         *
+         */
+        bool create(const ShaderBinary& binary);
+
         /*! \brief Attach a ShaderStage to this Shader
          *
          * \param stage The stage to attach to this Shader
@@ -74,6 +83,15 @@ namespace Bull
          *
          */
         bool attachFromMemory(const void* data, Index length, const ShaderStageParameterBag& parameters = ShaderStageParameterBag());
+
+        /*! \brief Load the Shader from a binary form
+         *
+         * \param binary The binary
+         *
+         * \return True if the Shader was loaded successfully
+         *
+         */
+        bool loadFromBinary(const ShaderBinary& binary);
 
         /*! \brief Link the shader
          *

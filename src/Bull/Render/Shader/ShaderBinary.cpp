@@ -7,16 +7,16 @@ namespace Bull
 {
     std::vector<int> ShaderBinary::getSupportedFormats()
     {
-        int count;
+        int lenght;
         std::vector<int> formats;
 
         ensureContext();
 
-        gl::getIntegerv(GL_NUM_PROGRAM_BINARY_FORMATS, &count);
+        gl::getIntegerv(GL_NUM_PROGRAM_BINARY_FORMATS, &lenght);
 
-        formats.resize(count);
+        formats.resize(lenght, 0);
 
-        gl::getIntegeri_v(GL_PROGRAM_BINARY_FORMATS, 1, &formats[0]);
+        gl::getIntegerv(GL_PROGRAM_BINARY_FORMATS, &formats[0]);
 
         return formats;
     }
@@ -29,8 +29,13 @@ namespace Bull
 
     bool ShaderBinary::isValid() const
     {
-        std::vector<int> formats = getSupportedFormats();
+        if(!isEmpty() && format)
+        {
+            std::vector<int> formats = getSupportedFormats();
 
-        return std::find(formats.begin(), formats.end(), format) != formats.end();
+            return std::find(formats.begin(), formats.end(), format) != formats.end();
+        }
+
+        return false;
     }
 }
