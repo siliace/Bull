@@ -84,6 +84,7 @@ namespace gl
     PFNGLGETDEBUGMESSAGELOGPROC       getDebugMessageLog       = nullptr;
     PFNGLGETERRORPROC                 getError                 = nullptr;
     PFNGLGETFLOATVPROC                getFloatv                = nullptr;
+    PFNGLGETINTEGERI_VPROC            getIntegeri_v            = nullptr;
     PFNGLGETINTEGERVPROC              getIntegerv              = nullptr;
     PFNGLGETPROGRAMBINARYPROC         getProgramBinary         = nullptr;
     PFNGLGETPROGRAMIVPROC             getProgramiv             = nullptr;
@@ -285,10 +286,12 @@ namespace Bull
                 gl::getBufferParameteriv     = reinterpret_cast<PFNGLGETBUFFERPARAMETERIVPROC>(GlContext::getFunction("glGetBufferParameteriv"));
                 gl::getError                 = reinterpret_cast<PFNGLGETERRORPROC>(GlContext::getFunction("glGetError"));
                 gl::getFloatv                = reinterpret_cast<PFNGLGETFLOATVPROC>(GlContext::getFunction("glGetFloatv"));
+                gl::getIntegeri_v            = reinterpret_cast<PFNGLGETINTEGERI_VPROC>(GlContext::getFunction("glGetIntegeri_v"));
                 gl::getIntegerv              = reinterpret_cast<PFNGLGETINTEGERVPROC>(GlContext::getFunction("glGetIntegerv"));
                 gl::getQueryiv               = reinterpret_cast<PFNGLGETQUERYIVPROC>(GlContext::getFunction("glGetQueryiv"));
                 gl::getQueryObjectiv         = reinterpret_cast<PFNGLGETQUERYOBJECTIVPROC>(GlContext::getFunction("glGetQueryObjectiv"));
                 gl::getQueryObjectuiv        = reinterpret_cast<PFNGLGETQUERYOBJECTUIVPROC>(GlContext::getFunction("glGetQueryObjectuiv"));
+                gl::getProgramBinary         = reinterpret_cast<PFNGLGETPROGRAMBINARYPROC>(GlContext::getFunction("glGetProgramBinary"));
                 gl::getProgramiv             = reinterpret_cast<PFNGLGETPROGRAMIVPROC>(GlContext::getFunction("glGetProgramiv"));
                 gl::getProgramInfoLog        = reinterpret_cast<PFNGLGETPROGRAMINFOLOGPROC>(GlContext::getFunction("glGetProgramInfoLog"));
                 gl::getShaderInfoLog         = reinterpret_cast<PFNGLGETSHADERINFOLOGPROC>(GlContext::getFunction("glGetShaderInfoLog"));

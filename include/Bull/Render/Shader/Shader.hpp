@@ -1,12 +1,15 @@
 #ifndef BULL_RENDER_SHADER_SHADER_HPP
 #define BULL_RENDER_SHADER_SHADER_HPP
 
+#include <Bull/Core/Memory/ByteArray.hpp>
+
 #include <Bull/Math/Matrix/Matrix4.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
 #include <Bull/Math/Vector/Vector4.hpp>
 
 #include <Bull/Render/Export.hpp>
+#include <Bull/Render/Shader/ShaderBinary.hpp>
 #include <Bull/Render/Shader/ShaderStage.hpp>
 
 #include <Bull/Utility/Color.hpp>
@@ -177,6 +180,13 @@ namespace Bull
          *
          */
         bool setUniformMatrix(const String& name, const Matrix4F& uniform);
+
+        /*! \brief Get the program as a binary format
+         *
+         * \return The binary format
+         *
+         */
+        ShaderBinary getBinary() const;
 
         /*! \brief Get the Shader system handler
          *

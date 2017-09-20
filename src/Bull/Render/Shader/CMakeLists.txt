@@ -7,6 +7,8 @@ target_sources(bull-render
             ${BULL_INC_RENDER_SHADER}/AbstractShaderStageSaver.hpp
             ${BULL_INC_RENDER_SHADER}/Shader.hpp
             ${BULL_SRC_RENDER_SHADER}/Shader.cpp
+            ${BULL_INC_RENDER_SHADER}/ShaderBinary.hpp
+            ${BULL_SRC_RENDER_SHADER}/ShaderBinary.cpp
             ${BULL_INC_RENDER_SHADER}/ShaderStage.hpp
             ${BULL_SRC_RENDER_SHADER}/ShaderStage.cpp
             ${BULL_INC_RENDER_SHADER}/ShaderStageParameterBag.hpp

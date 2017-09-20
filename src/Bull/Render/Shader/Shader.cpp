@@ -294,6 +294,27 @@ namespace Bull
         return true;
     }
 
+    ShaderBinary Shader::getBinary() const
+    {
+        ShaderBinary binary;
+
+        if(isValid() && isLinked())
+        {
+            int length;
+
+            gl::getProgramiv(m_program,  GL_PROGRAM_BINARY_LENGTH, &length);
+
+            if(length)
+            {
+                binary.create(length);
+
+                gl::getProgramBinary(getSystemHandler(), length, nullptr, &binary.format, &binary[0]);
+            }
+        }
+
+        return binary;
+    }
+
     unsigned int Shader::getSystemHandler() const
     {
         return m_program;

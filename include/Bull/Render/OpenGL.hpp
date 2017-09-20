@@ -87,6 +87,7 @@ namespace gl
     extern PFNGLGETDEBUGMESSAGELOGPROC       BULL_RENDER_API getDebugMessageLog;
     extern PFNGLGETERRORPROC                 BULL_RENDER_API getError;
     extern PFNGLGETFLOATVPROC                BULL_RENDER_API getFloatv;
+    extern PFNGLGETINTEGERI_VPROC            BULL_RENDER_API getIntegeri_v;
     extern PFNGLGETINTEGERVPROC              BULL_RENDER_API getIntegerv;
     extern PFNGLGETPROGRAMBINARYPROC         BULL_RENDER_API getProgramBinary;
     extern PFNGLGETPROGRAMIVPROC             BULL_RENDER_API getProgramiv;
