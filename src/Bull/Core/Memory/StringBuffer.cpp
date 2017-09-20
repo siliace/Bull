@@ -1,3 +1,5 @@
+#include <cstring>
+
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Memory/StringBuffer.hpp>
 
@@ -23,7 +25,7 @@ namespace Bull
             capacity(capacity),
             string(new char[capacity + 1])
         {
-            string[size] = String::NullByte;
+            std::memset(string.get(), String::NullByte, capacity + 1);
         }
     }
 }
