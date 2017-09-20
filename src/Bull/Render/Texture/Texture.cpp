@@ -1,3 +1,4 @@
+#include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
 
 namespace Bull

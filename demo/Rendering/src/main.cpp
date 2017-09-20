@@ -7,9 +7,9 @@
 #include <Bull/Math/TransformationPipeline/Transformation3D.hpp>
 
 #include <Bull/Render/Mesh.hpp>
+#include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
-#include <Bull/Render/Texture/Texture.hpp>
 
 #include <Bull/Utility/Logger/ConsoleLogger.hpp>
 

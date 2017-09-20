@@ -9,7 +9,6 @@
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
-#include <Bull/Render/OpenGL.hpp>
 
 #include <Bull/Utility/Image/Image.hpp>
 

@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include <Bull/Render/Export.hpp>
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
 
 #include <Bull/Utility/Vertex.hpp>

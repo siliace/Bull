@@ -1,9 +1,16 @@
 #include <cstring>
 
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
+#include <Bull/Render/OpenGL.hpp>
 
 namespace Bull
 {
+    namespace
+    {
+        constexpr unsigned int BufferType[]  = {GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER};
+        constexpr unsigned int BufferUsage[] = {GL_STATIC_DRAW, GL_DYNAMIC_DRAW, GL_STREAM_DRAW};
+    }
+
     HardwareBuffer::~HardwareBuffer()
     {
         destroy();
@@ -22,8 +29,8 @@ namespace Bull
         }
 
         gl::genBuffers(1, &m_id);
-        gl::bindBuffer(m_type, m_id);
-        gl::bufferData(m_type, size, nullptr, usage);
+        gl::bindBuffer(BufferType[m_type], m_id);
+        gl::bufferData(BufferType[m_type], size, nullptr, BufferUsage[usage]);
 
         return true;
     }
@@ -38,11 +45,11 @@ namespace Bull
             /// http://www.stevestreeting.com/2007/03/17/glmapbuffer-vs-glbuffersubdata-the-return/
             if(size < 32 * 1024)
             {
-                gl::bufferSubData(m_type, offset, size, data);
+                gl::bufferSubData(BufferType[m_type], offset, size, data);
             }
             else
             {
-                unsigned char* ptr = reinterpret_cast<unsigned char*>(gl::mapBuffer(m_type, GL_WRITE_ONLY));
+                unsigned char* ptr = reinterpret_cast<unsigned char*>(gl::mapBuffer(BufferType[m_type], GL_WRITE_ONLY));
 
                 if(!ptr)
                 {
@@ -51,7 +58,7 @@ namespace Bull
 
                 std::memcpy(ptr + offset, data, size);
 
-                gl::unmapBuffer(m_type);
+                gl::unmapBuffer(BufferType[m_type]);
             }
 
             return true;
@@ -66,7 +73,7 @@ namespace Bull
         {
             bind();
 
-            return gl::mapBuffer(m_type, GL_READ_WRITE);
+            return gl::mapBuffer(BufferType[m_type], GL_READ_WRITE);
         }
 
         return nullptr;
@@ -78,7 +85,7 @@ namespace Bull
         {
             bind();
 
-            return gl::mapBuffer(m_type, GL_READ_ONLY);
+            return gl::mapBuffer(BufferType[m_type], GL_READ_ONLY);
         }
 
         return nullptr;
@@ -90,7 +97,7 @@ namespace Bull
         {
             bind();
 
-            gl::unmapBuffer(m_type);
+            gl::unmapBuffer(BufferType[m_type]);
         }
     }
 
@@ -101,8 +108,8 @@ namespace Bull
             bind();
 
             int usage;
-            gl::getBufferParameteriv(m_type, GL_BUFFER_USAGE, &usage);
-            gl::bufferData(m_type, getCapacity(), nullptr, static_cast<GLenum >(usage));
+            gl::getBufferParameteriv(BufferType[m_type], GL_BUFFER_USAGE, &usage);
+            gl::bufferData(BufferType[m_type], getCapacity(), nullptr, static_cast<unsigned int>(usage));
         }
     }
 
@@ -121,7 +128,7 @@ namespace Bull
             bind();
 
             int capacity;
-            gl::getBufferParameteriv(m_type, GL_BUFFER_SIZE, &capacity);
+            gl::getBufferParameteriv(BufferType[m_type], GL_BUFFER_SIZE, &capacity);
 
             return static_cast<Index>(capacity);
         }
@@ -141,7 +148,7 @@ namespace Bull
     {
         if(gl::isBuffer(m_id))
         {
-            gl::bindBuffer(m_type, m_id);
+            gl::bindBuffer(BufferType[m_type], m_id);
         }
     }
 

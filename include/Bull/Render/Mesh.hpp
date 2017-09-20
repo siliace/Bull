@@ -4,7 +4,6 @@
 #include <Bull/Render/Buffer/ArrayBuffer.hpp>
 #include <Bull/Render/Buffer/ElementBuffer.hpp>
 #include <Bull/Render/Buffer/VertexArrayObject.hpp>
-#include <Bull/Render/OpenGL.hpp>
 
 namespace Bull
 {
@@ -14,17 +13,17 @@ namespace Bull
 
         enum Primitive
         {
-            Points                 = GL_POINTS,
-            Lines                  = GL_LINES,
-            LineLoop               = GL_LINE_LOOP,
-            LineStrip              = GL_LINE_STRIP,
-            Triangles              = GL_TRIANGLES,
-            TriangleFan            = GL_TRIANGLE_FAN,
-            TriangleStrip          = GL_TRIANGLE_STRIP,
-            LinesAdjacency         = GL_LINES_ADJACENCY,
-            LineStripAdjacency     = GL_LINE_STRIP_ADJACENCY,
-            TrianglesAdjacency     = GL_TRIANGLES_ADJACENCY,
-            TriangleStripAdjacency = GL_TRIANGLE_STRIP_ADJACENCY,
+            Points,
+            Lines,
+            LineLoop,
+            LineStrip,
+            Triangles,
+            TriangleFan ,
+            TriangleStrip,
+            LinesAdjacency,
+            LineStripAdjacency,
+            TrianglesAdjacency,
+            TriangleStripAdjacency,
         };
 
     public:

@@ -1,7 +1,25 @@
 #include <Bull/Render/Mesh.hpp>
+#include <Bull/Render/OpenGL.hpp>
 
 namespace Bull
 {
+    namespace
+    {
+        constexpr unsigned int Primitives[] = {
+            GL_POINTS,
+            GL_LINES,
+            GL_LINE_LOOP,
+            GL_LINE_STRIP,
+            GL_TRIANGLES,
+            GL_TRIANGLE_FAN,
+            GL_TRIANGLE_STRIP,
+            GL_LINES_ADJACENCY,
+            GL_LINE_STRIP_ADJACENCY,
+            GL_TRIANGLES_ADJACENCY,
+            GL_TRIANGLE_STRIP_ADJACENCY,
+        };
+    }
+
     Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
     {
         create(vertices, indices);
@@ -39,11 +57,11 @@ namespace Bull
         m_vao.runBound([this, primitive](){
             if(m_hasIndex)
             {
-                gl::drawElements(primitive, static_cast<GLsizei>(m_ebo.getCapacity()), GL_UNSIGNED_INT, nullptr);
+                gl::drawElements(Primitives[primitive], static_cast<GLsizei>(m_ebo.getCapacity()), GL_UNSIGNED_INT, nullptr);
             }
             else
             {
-                gl::drawArrays(primitive, 0, static_cast<GLsizei>(m_vbo.getCapacity()));
+                gl::drawArrays(Primitives[primitive], 0, static_cast<GLsizei>(m_vbo.getCapacity()));
             }
         });
     }

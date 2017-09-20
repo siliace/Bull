@@ -5,9 +5,8 @@
 
 #include <Bull/Core/Memory/AbstractBuffer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Configuration/Export.hpp>
 
-#include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/Export.hpp>
 #include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull
@@ -18,17 +17,17 @@ namespace Bull
 
         enum Usage
         {
-            StaticDraw  = GL_STATIC_DRAW,
-            DynamicDraw = GL_DYNAMIC_DRAW,
-            StreamDraw  = GL_STREAM_DRAW,
+            StaticDraw,
+            DynamicDraw,
+            StreamDraw,
         };
 
     protected:
 
         enum Type
         {
-            Array   = GL_ARRAY_BUFFER,
-            Element = GL_ELEMENT_ARRAY_BUFFER,
+            Array,
+            Element
         };
 
     public:
@@ -111,7 +110,7 @@ namespace Bull
          * \param type The type the of OpenGL buffer to create
          *
          */
-        HardwareBuffer(Type type);
+        explicit HardwareBuffer(Type type);
 
         /*! \brief Bind the buffer
          *
