@@ -16,14 +16,14 @@ namespace Bull
 
         /*! \brief Set the content of the Clipboard
          *
-         * @param content The String inside the clipboard
+         * \param content The String inside the clipboard
          *
          */
         static void setContent(const String& content);
 
         /*! \brief Get the content of the Clipboard
          *
-         * @return The String inside the Clipboard
+         * \return The String inside the Clipboard
          *
          */
         static String getContent();
