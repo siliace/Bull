@@ -98,7 +98,7 @@ namespace Bull
 
     Uint32 IpAddress::toUint32() const
     {
-        if(isValid() && m_protocol != IpAddress::IpV4)
+        if(isValid() || m_protocol != IpAddress::IpV4)
         {
             throw LogicError("The Ip is not valid or not Ipv4");
         }
