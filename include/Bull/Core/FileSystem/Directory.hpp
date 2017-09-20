@@ -87,7 +87,7 @@ namespace Bull
          * \param path The path of the directory
          *
          */
-        Directory(const Path& path);
+        explicit Directory(const Path& path);
 
         /*! \brief Destructor
          *

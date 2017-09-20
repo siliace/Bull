@@ -90,7 +90,7 @@ namespace Bull
          * \param mode The opening mode of the file (read, write or both)
          *
          */
-        File(const Path& path, Uint32 mode = OpeningMode::Read | OpeningMode::Write);
+        explicit File(const Path& path, Uint32 mode = OpeningMode::Read | OpeningMode::Write);
 
         /*! \brief Destructor
          *
