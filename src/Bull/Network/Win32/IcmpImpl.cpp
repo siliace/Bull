@@ -1,3 +1,5 @@
+#include <Bull/Core/Memory/ByteArray.hpp>
+
 #include <Bull/Network/Win32/IcmpImpl.hpp>
 #include <Bull/Network/Win32/IpAddressImpl.hpp>
 
@@ -31,7 +33,26 @@ namespace Bull
 
         Time IcmpImpl::ping(Uint32 host, const Time& timeout)
         {
-            return Time::Zero;
+            IPAddr addr = host;
+            ByteArray requestBuffer(32);
+            ByteArray responseBuffer(1024); /// Let's be generous
+            HANDLE icmp = IcmpCreateFile();
+            Time responseTime = Time::Zero;
+
+            DWORD responseCount = IcmpSendEcho(icmp, addr,
+                                               &requestBuffer[0], static_cast<WORD>(requestBuffer.getCapacity()),
+                                               nullptr,
+                                               &responseBuffer[0], static_cast<WORD>(responseBuffer.getCapacity()),
+                                               static_cast<DWORD>(timeout.asMilliseconds()));
+
+            if(responseCount)
+            {
+                const icmp_echo_reply* reply = reinterpret_cast<const icmp_echo_reply*>(responseBuffer.getBuffer());
+
+                responseTime = Time::milliseconds(reply->RoundTripTime);
+            }
+
+            return responseTime;
         }
 
         Time IcmpImpl::ping(const sockaddr_in6* host, const Time& timeout)
