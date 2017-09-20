@@ -3,8 +3,8 @@
 
 #include <array>
 
-#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Configuration/Integer.hpp>
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 #include <Bull/System/Export.hpp>
