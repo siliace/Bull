@@ -71,14 +71,14 @@ namespace Bull
          * \param v4 The IPV4 address
          *
          */
-        IpAddress(const V4& v4);
+        explicit IpAddress(const V4& v4);
 
         /*! \brief Constructor
          *
          * \param v6 The IPV6 address
          *
          */
-        IpAddress(const V6& v6);
+        explicit IpAddress(const V6& v6);
 
         /*! \brief Constructor
          *
