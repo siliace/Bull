@@ -50,6 +50,26 @@ namespace Bull
              */
             static IpAddress fromSockAddr(const sockaddr_in6* address, Socket::Port& port);
 
+            /*! \brief Get information about an host
+             *
+             * \param hostname The host to resolve
+             * \param The IpAddress to the host
+             *
+             * \return True if the host was resolved successfully
+             *
+             */
+            static bool getAddressInfo(const String& hostname, IpAddress& address);
+
+            /*! \brief Get information about an host
+             *
+             * \param hostname The host to resolve
+             * \param Each IpAddress of the host
+             *
+             * \return True if the host was resolved successfully
+             *
+             */
+            static bool getAddressInfo(const String& hostname, std::vector<IpAddress>& addresses);
+
             /*! \brief Convert an IpAddress to a sockaddr
              *
              * \param ip     The IpAddress to use in the sockaddr
