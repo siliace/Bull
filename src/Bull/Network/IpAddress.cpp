@@ -2,6 +2,7 @@
 #include <Bull/Core/IO/StringStream.hpp>
 
 #include <Bull/Network/IpAddress.hpp>
+#include <Bull/Network/Win32/IpAddressImpl.hpp>
 
 namespace Bull
 {
@@ -14,7 +15,14 @@ namespace Bull
 
     IpAddress IpAddress::resolve(const String& hostname)
     {
+        IpAddress address;
 
+        if(prv::IpAddressImpl::getAddressInfo(hostname, address))
+        {
+            return address;
+        }
+
+        return None;
     }
 
     String IpAddress::toString(const V4& ip)

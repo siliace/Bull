@@ -27,6 +27,45 @@ namespace Bull
 
         }
 
+        bool IpAddressImpl::getAddressInfo(const String& hostname, IpAddress& address)
+        {
+            std::vector<IpAddress> addresses;
+
+            if(getAddressInfo(hostname, addresses))
+            {
+                address = addresses.front();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        bool IpAddressImpl::getAddressInfo(const String& hostname, std::vector<IpAddress>& addresses)
+        {
+            addresses.clear();
+            addrinfo* list = nullptr;
+
+            if(getaddrinfo(hostname.getBuffer(), nullptr, nullptr, &list) == 0)
+            {
+                addrinfo* current = list;
+
+                while(current)
+                {
+                    Socket::Port port = Socket::AnyPort;
+                    IpAddress address = fromSockAddr(current->ai_addr, port);
+
+                    addresses.emplace_back(address);
+
+                    current = current->ai_next;
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
         IpAddressImpl::SockAddrLenght IpAddressImpl::toSockAddr(const IpAddress& ip, Socket::Port port, void* buffer)
         {
             if(ip.isValid())
