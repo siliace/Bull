@@ -18,7 +18,7 @@ namespace Bull
 
     bool Cursor::create(const Image& image, const Vector2UI& hotSpot)
     {
-        if(image.getSize().x == 0 || image.getSize().y == 0)
+        if(image.getSize().x() == 0 || image.getSize().y() == 0)
         {
             return false;
         }

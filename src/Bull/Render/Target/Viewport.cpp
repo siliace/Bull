@@ -18,10 +18,10 @@ namespace Bull
     }
 
     Viewport::Viewport(const Vector2I& position, const Vector2I& size) :
-        x(position.x),
-        y(position.y),
-        width(size.x),
-        height(size.y)
+        x(position.x()),
+        y(position.y()),
+        width(size.x()),
+        height(size.y())
     {
         /// Nothing
     }
@@ -41,8 +41,8 @@ namespace Bull
 
     void Viewport::move(const Vector2I& offset)
     {
-        x += offset.x;
-        y += offset.y;
+        x += offset.x();
+        y += offset.y();
     }
 
     void Viewport::move(int x, int y)

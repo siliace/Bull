@@ -82,10 +82,10 @@ namespace Bull
             throw OutOfRange("Requested column out of range");
         }
 
-        set(column.x, 0, position);
-        set(column.y, 1, position);
-        set(column.z, 2, position);
-        set(column.w, 3, position);
+        set(column.x(), 0, position);
+        set(column.y(), 1, position);
+        set(column.z(), 2, position);
+        set(column.w(), 3, position);
 
         return (*this);
     }
@@ -116,10 +116,10 @@ namespace Bull
             throw OutOfRange("Requested column out of range");
         }
 
-        set(row.w, position, 0);
-        set(row.x, position, 1);
-        set(row.y, position, 2);
-        set(row.z, position, 3);
+        set(row.w(), position, 0);
+        set(row.x(), position, 1);
+        set(row.y(), position, 2);
+        set(row.z(), position, 3);
 
         return (*this);
     }

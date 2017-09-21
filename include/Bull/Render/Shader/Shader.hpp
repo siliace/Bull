@@ -4,9 +4,7 @@
 #include <Bull/Core/Memory/ByteArray.hpp>
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
-#include <Bull/Math/Vector/Vector2.hpp>
-#include <Bull/Math/Vector/Vector3.hpp>
-#include <Bull/Math/Vector/Vector4.hpp>
+#include <Bull/Math/Vector/Vector.hpp>
 
 #include <Bull/Render/Export.hpp>
 #include <Bull/Render/Shader/ShaderBinary.hpp>
@@ -167,7 +165,7 @@ namespace Bull
          * \return Return true if the uniform variable was found, false otherwise
          *
          */
-        bool setUniformVector(const String& name, const Vector2F& uniform);
+        bool setUniformVector(const String& name, const Vector<float, 2>& uniform);
 
         /*! \brief Set an uniform variable
          *
@@ -177,7 +175,7 @@ namespace Bull
          * \return Return true if the uniform variable was found, false otherwise
          *
          */
-        bool setUniformVector(const String& name, const Vector3F& uniform);
+        bool setUniformVector(const String& name, const Vector<float, 3>& uniform);
 
         /*! \brief Set an uniform variable
          *
@@ -187,7 +185,7 @@ namespace Bull
          * \return Return true if the uniform variable was found, false otherwise
          *
          */
-        bool setUniformVector(const String& name, const Vector4F& uniform);
+        bool setUniformVector(const String& name, const Vector<float, 4>& uniform);
 
         /*! \brief Set an uniform variable
          *

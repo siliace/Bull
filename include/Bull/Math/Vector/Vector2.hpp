@@ -1,271 +1,84 @@
 #ifndef BULL_MATH_VECTOR_VECTOR2_HPP
 #define BULL_MATH_VECTOR_VECTOR2_HPP
 
-#include <cmath>
+#include <Bull/Math/Vector/Vector.hpp>
 
 namespace Bull
 {
-    template<typename T>
-    struct Vector2
+    template <typename T>
+    struct Vector2 : public Vector<T, 2>
     {
         static Vector2<T> Zero;
-
-        /*! \brief Get a normalized Vector2
-         *
-         * \param vector The Vector2 to normalize
-         *
-         * \return The normalized Vector2
-         *
-         */
-        static Vector2<T> normalize(const Vector2<T>& vector);
-
-        /*! \brief Computer the dot product of two Vector2
-         *
-         * \param left  The left Vector2 of the product
-         * \param right The right Vector2 of the product
-         *
-         * \return The value of the dot product of left and right
-         *
-         */
-        static T dotProduct(const Vector2<T>& left, const Vector2<T>& right);
 
         /*! \brief Default constructor
          *
          */
-        Vector2();
+        Vector2() = default;
 
         /*! \brief Constructor
          *
-         * \param value The value of all components
-         *
-         */
-        explicit Vector2(T value);
-
-        /*! \brief Constructor
-         *
-         * \param x The x component
-         * \param y The y component
+         * \param x The X component
+         * \param y The Y component
          *
          */
         Vector2(T x, T y);
 
-        /*! \brief Set the Vector2
+        /*! \brief Copy constructor
          *
-         * \param value The value of all components
-         *
-         * \return This
+         * \param copy The Vector to copy
          *
          */
-        Vector2<T>& set(T value);
+        template <typename U, Index US>
+        Vector2(const Vector<U, US>& copy);
 
         /*! \brief Set the Vector2
          *
-         * \param x The x component
-         * \param y The y component
+         * \param x The X component
+         * \param y The Y component
          *
          * \return This
          *
          */
         Vector2<T>& set(T x, T y);
 
-        /*! \brief Set the Vector2
-         *
-         * \param copy The Vector2 to copy
-         *
-         * \return This
-         *
-         */
-        Vector2<T>& set(const Vector2<T>& copy);
-
-        /*! \brief Compute the length
-         *
-         * \return Return the length of the vector
-         *
-         */
-        float getLength() const;
-
-        /*! \brief Get the radio between x and y
+        /*! \brief Get the ratio of the Vector
          *
          * \return The ratio
          *
          */
         float getRatio() const;
 
-        /*! \brief Normalize the Vector2
+        /*! \brief Get the X component
          *
-         * \return This
-         *
-         */
-        Vector2<T>& normalize();
-
-        /*! \brief Calculate the dot(scalar) product of two vectors
-         *
-         * \param right The other to calculate the dot product with
-         *
-         * \return The value of the dot product
+         * \return The component
          *
          */
-        T dotProduct(const Vector2& right);
+        T& x();
 
-        /*! \brief == operator override
+        /*! \brief Get the X component
          *
-         * \param right The vector to compare
-         *
-         * \return Return true if this and right are equal, else return false
+         * \return The component
          *
          */
-        bool operator==(const Vector2& right) const;
+        const T& x() const;
 
-        /*! \brief != operator override
+        /*! \brief Get the X component
          *
-         * \param right The vector to compare
-         *
-         * \return Return true if this and right are not equal, else return false
+         * \return The component
          *
          */
-        bool operator!=(const Vector2& right) const;
+        T& y();
 
-        /*! \brief += operator override
+        /*! \brief Get the X component
          *
-         * \param right The vector to add
-         *
-         * \return Return this after addition
+         * \return The component
          *
          */
-        Vector2& operator+=(const Vector2& right);
-
-        /*! \brief Negation operator
-         *
-         * \return Return the opposite of this Vector
-         *
-         */
-        Vector2 operator-() const;
-
-        /*! \brief -= operator override
-         *
-         * \param right The vector to subtract
-         *
-         * \return Return this after subtraction
-         *
-         */
-        Vector2& operator-=(const Vector2& right);
-
-        T x, y;
-
+        const T& y() const;
     };
 
-    template<typename T>
-    Vector2<T> Vector2<T>::Zero = Vector2<T>(0, 0);
-
-    /*! \brief Addition two Vector2
-     *
-     * \param left  The vector to add to right
-     * \param right The vector to add to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector2<T> operator+(const Vector2<T>& left, const Vector2<T>& right);
-
-    /*! \brief Addition a scalar with a Vector2
-     *
-     * \param left  The number to add to right
-     * \param right The vector to add to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector2<T> operator+(T left, const Vector2<T>& right);
-
-    /*! \brief Addition a scalar with a Vector2
-     *
-     * \param left  The vector to add to right
-     * \param right The number to add to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector2<T> operator+(const Vector2<T>& left, T right);
-
-    /*! \brief Subtract two Vector2
-     *
-     * \param left  The vector to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of a subtraction of this and right
-     *
-     */
-    template<typename T>
-    Vector2<T> operator-(const Vector2<T>& left, const Vector2<T>& right);
-
-    /*! \brief Subtract a scalar with a Vector2
-     *
-     * \param left  The number to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector2<T> operator-(T left, const Vector2<T>& right);
-
-    /*! \brief Subtract a scalar with a Vector2
-     *
-     * \param left  The vector to subtract to right
-     * \param right The number to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector2<T> operator-(const Vector2<T>& left, T right);
-
-    /*! \brief Multiply a scalar with a Vector2
-     *
-     * \param left  The number to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector2<T> operator*(T left, const Vector2<T>& right);
-
-    /*! \brief Multiply a scalar with a Vector2
-     *
-     * \param left  The vector to subtract to right
-     * \param right The number to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector2<T> operator*(const Vector2<T>& left, T right);
-
-    /*! \brief Divide a scalar with a Vector2
-     *
-     * \param left  The number to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector2<T> operator/(T left, const Vector2<T>& right);
-
-    /*! \brief Divide a scalar with a Vector2
-     *
-     * \param left  The vector to subtract to right
-     * \param right The number to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector2<T> operator/(const Vector2<T>& left, T right);
+    template <typename T>
+    Vector2<T> Vector2<T>::Zero = Vector2<T>();
 
     typedef Vector2<int> Vector2I;
     typedef Vector2<float> Vector2F;

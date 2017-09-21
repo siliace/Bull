@@ -367,7 +367,7 @@ namespace Bull
 
         void WindowImplWin32::setPosition(const Vector2I& position)
         {
-            SetWindowPos(m_handler, nullptr, position.x, position.y, 0, 0, SWP_NOSIZE);
+            SetWindowPos(m_handler, nullptr, position.x(), position.y(), 0, 0, SWP_NOSIZE);
         }
 
         Vector2I WindowImplWin32::getPosition() const
@@ -382,13 +382,13 @@ namespace Bull
         void WindowImplWin32::setMinSize(const Vector2I& size)
         {
             RECT r = {0, 0,
-                      size.x,
-                      size.y,
+                      size.x(),
+                      size.y(),
             };
             AdjustWindowRect(&r, static_cast<DWORD>(GetWindowLongPtr(m_handler, GWL_STYLE)), false);
 
-            m_minSize.x = (size.x != -1) ? r.right  - r.left : -1;
-            m_minSize.y = (size.y != -1) ? r.bottom - r.top  : -1;
+            m_minSize.x() = (size.x() != -1) ? r.right  - r.left : -1;
+            m_minSize.y() = (size.y() != -1) ? r.bottom - r.top  : -1;
         }
 
         Vector2I WindowImplWin32::getMinSize() const
@@ -399,13 +399,13 @@ namespace Bull
         void WindowImplWin32::setMaxSize(const Vector2I& size)
         {
             RECT r = {0, 0,
-                      size.x,
-                      size.y,
+                      size.x(),
+                      size.y(),
             };
             AdjustWindowRect(&r, static_cast<DWORD>(GetWindowLongPtr(m_handler, GWL_STYLE)), false);
 
-            m_maxSize.x = (size.x != -1) ? r.right  - r.left : -1;
-            m_maxSize.y = (size.y != -1) ? r.bottom - r.top  : -1;
+            m_maxSize.x() = (size.x() != -1) ? r.right  - r.left : -1;
+            m_maxSize.y() = (size.y() != -1) ? r.bottom - r.top  : -1;
         }
 
         Vector2I WindowImplWin32::getMaxSize() const
@@ -416,8 +416,8 @@ namespace Bull
         void WindowImplWin32::setSize(const Vector2UI& size)
         {
             RECT r = {0, 0,
-                      static_cast<LONG>(size.x),
-                      static_cast<LONG>(size.y),
+                      static_cast<LONG>(size.x()),
+                      static_cast<LONG>(size.y()),
             };
             AdjustWindowRect(&r, static_cast<DWORD>(GetWindowLongPtr(m_handler, GWL_STYLE)), false);
             SetWindowPos(m_handler, nullptr, 0, 0, r.right - r.left, r.bottom - r.top, SWP_NOMOVE);
@@ -501,7 +501,7 @@ namespace Bull
 
         void WindowImplWin32::setIcon(const Image& icon)
         {
-            ByteArray pixels(icon.getSize().x * icon.getSize().y * 4);
+            ByteArray pixels(icon.getSize().x() * icon.getSize().y() * 4);
 
             for(Index i = 0; i < pixels.getCapacity() / 4; i += 4)
             {
@@ -516,7 +516,7 @@ namespace Bull
                 DestroyIcon(m_icon);
             }
 
-            m_icon = CreateIcon(instance, icon.getSize().x, icon.getSize().y, 1, 32, nullptr, pixels.getBuffer());
+            m_icon = CreateIcon(instance, icon.getSize().x(), icon.getSize().y(), 1, 32, nullptr, pixels.getBuffer());
 
             if(m_icon)
             {
@@ -630,8 +630,8 @@ namespace Bull
                         m_lastSize = getSize();
 
                         e.type                = WindowEvent::Resized;
-                        e.windowResize.width  = m_lastSize.x;
-                        e.windowResize.height = m_lastSize.y;
+                        e.windowResize.width  = m_lastSize.x();
+                        e.windowResize.height = m_lastSize.y();
 
                         pushEvent(e);
                     }
@@ -642,8 +642,8 @@ namespace Bull
                         m_lastPosition = getPosition();
 
                         e.type         = WindowEvent::Moved;
-                        e.windowMove.x = getPosition().x;
-                        e.windowMove.y = getPosition().y;
+                        e.windowMove.x = getPosition().x();
+                        e.windowMove.y = getPosition().y();
 
                         pushEvent(e);
                     }
@@ -703,8 +703,8 @@ namespace Bull
                     e.type           = WindowEvent::MouseMoved;
                     e.mouseMove.x    = GET_X_LPARAM(lParam);
                     e.mouseMove.y    = GET_Y_LPARAM(lParam);
-                    e.mouseMove.xRel = e.mouseMove.x - getCursorPosition().x;
-                    e.mouseMove.yRel = e.mouseMove.y - getCursorPosition().y;
+                    e.mouseMove.xRel = e.mouseMove.x - getCursorPosition().x();
+                    e.mouseMove.yRel = e.mouseMove.y - getCursorPosition().y();
 
                     pushEvent(e);
                 }
@@ -882,24 +882,24 @@ namespace Bull
                     minmaxinfo->ptMaxSize.x = std::numeric_limits<LONG>::max();
                     minmaxinfo->ptMaxSize.y = std::numeric_limits<LONG>::max();
 
-                    if(min.x > -1)
+                    if(min.x() > -1)
                     {
-                        minmaxinfo->ptMinTrackSize.x = min.x;
+                        minmaxinfo->ptMinTrackSize.x = min.x();
                     }
 
-                    if(min.y > -1)
+                    if(min.y() > -1)
                     {
-                        minmaxinfo->ptMinTrackSize.y = min.y;
+                        minmaxinfo->ptMinTrackSize.y = min.y();
                     }
 
-                    if(max.x > -1)
+                    if(max.x() > -1)
                     {
-                        minmaxinfo->ptMaxTrackSize.x = max.x;
+                        minmaxinfo->ptMaxTrackSize.x = max.x();
                     }
 
-                    if(max.y > -1)
+                    if(max.y() > -1)
                     {
-                        minmaxinfo->ptMaxTrackSize.y = max.y;
+                        minmaxinfo->ptMaxTrackSize.y = max.y();
                     }
                 }
                 break;

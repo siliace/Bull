@@ -1,14 +1,13 @@
-#ifndef BULL_VECTOR3_HPP
-#define BULL_VECTOR3_HPP
+#ifndef BULL_MATH_VECTOR_VECTOR3_HPP
+#define BULL_MATH_VECTOR_VECTOR3_HPP
 
-#include <cmath>
-
+#include <Bull/Math/Vector/Vector.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {
     template<typename T>
-    struct Vector3
+    struct Vector3 : public Vector<T, 3>
     {
         static Vector3<T> Zero;
 
@@ -26,25 +25,6 @@ namespace Bull
         static Vector3<T> Forward;
         static Vector3<T> Backward;
 
-        /*! \brief Get a normalized Vector3
-         *
-         * \param vector The Vector3 to normalize
-         *
-         * \return The normalized Vector3
-         *
-         */
-        static Vector3<T> normalize(const Vector3<T>& vector);
-
-        /*! \brief Calculate the dot(scalar) product of two Vector3
-         *
-         * \param left  The left Vector3 of the product
-         * \param right The right Vector3 of the product
-         *
-         * \return The value of the dot product of left and right
-         *
-         */
-        static T dotProduct(const Vector3<T>& left, const Vector3<T>& right);
-
         /*! \brief Compute the crossProduct of two Vector3
          *
          * \param left
@@ -58,7 +38,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Vector3();
+        Vector3() = default;
 
         /*! \brief Constructor
          *
@@ -76,75 +56,24 @@ namespace Bull
          */
         Vector3(T x, T y, T z);
 
-        /*! \brief Constructor
+        /*! \brief Copy constructor
          *
-         * \param copy The vector to copy
-         * \param z    The z component
+         * \param copy The Vector to copy
          *
          */
-        Vector3(const Vector2<T>& copy, T z = 0);
+        template <typename U, Index US>
+        Vector3(const Vector<U, US>& copy);
 
         /*! \brief Set the Vector3
          *
-         * \param value The value of all components
-         *
-         * \return This
-         *
-         */
-        Vector3<T>& set(T value);
-
-        /*! \brief Set the Vector3
-         *
-         * \param x The x component
-         * \param y The y component
-         * \param z The z component
+         * \param x The X component
+         * \param y The Y component
+         * \param y The Z component
          *
          * \return This
          *
          */
         Vector3<T>& set(T x, T y, T z);
-
-        /*! \brief Set the Vector3
-         *
-         * \param copy The Vector3 to copy
-         *
-         * \return This
-         *
-         */
-        Vector3<T>& set(const Vector3<T>& copy);
-
-        /*! \brief Set the Vector3
-         *
-         * \param copy The vector to copy
-         * \param z    The z component
-         *
-         * \return This
-         *
-         */
-        Vector3<T>& set(const Vector2<T>& copy, T z);
-
-        /*! \brief Compute the length
-         *
-         * \return Return the length of the vector
-         *
-         */
-        float getLength() const;
-
-        /*! \brief Normalize the Vector3
-         *
-         * \return This
-         *
-         */
-        Vector3<T>& normalize();
-
-        /*! \brief Compute the dot product of two Vector3
-         *
-         * \param right The other Vector3 to computer the dot product with
-         *
-         * \return This
-         *
-         */
-        T dotProduct(const Vector3<T>& right) const;
 
         /*! \brief Compute the cross product of two Vector3
          *
@@ -155,47 +84,47 @@ namespace Bull
          */
         Vector3<T>& crossProduct(const Vector3<T>& right);
 
-        /*! \brief == operator override
+        /*! \brief Get the X component
          *
-         * \param right The vector to compare
-         *
-         * \return Return true if this and right are equal, else return false
+         * \return The component
          *
          */
-        bool operator==(const Vector3& right) const;
+        T& x();
 
-        /*! \brief != operator override
+        /*! \brief Get the X component
          *
-         * \param right The vector to compare
-         *
-         * \return Return true if this and right are not equal, else return false
+         * \return The component
          *
          */
-        bool operator!=(const Vector3& right) const;
+        const T& x() const;
 
-        /*! \brief += operator override
+        /*! \brief Get the X component
          *
-         * \param right The vector to add
-         *
-         * \return Return this after addition
+         * \return The component
          *
          */
-        Vector3& operator+=(const Vector3& right);
+        T& y();
 
-        Vector3& operator-=(const Vector3& right);
-
-        Vector3& operator*=(const Vector3& right);
-
-        Vector3& operator/=(const Vector3& right);
-
-        /*! \brief Negation operator
+        /*! \brief Get the X component
          *
-         * \return Return the opposite of this Vector
+         * \return The component
          *
          */
-        Vector3 operator-() const;
+        const T& y() const;
 
-        T x, y, z;
+        /*! \brief Get the Z component
+         *
+         * \return The component
+         *
+         */
+        T& z();
+
+        /*! \brief Get the Z component
+         *
+         * \return The component
+         *
+         */
+        const T& z() const;
     };
 
     template<typename T>
@@ -231,116 +160,6 @@ namespace Bull
     template<typename T>
     Vector3<T> Vector3<T>::Backward = Vector3<T>(0, 0, -1);
 
-    /*! \brief Addition two Vector3
-     *
-     * \param left  The vector to add to right
-     * \param right The vector to add to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector3<T> operator+(const Vector3<T>& left, const Vector3<T>& right);
-
-    /*! \brief Addition two Vector3
-     *
-     * \param left  The number to add to right
-     * \param right The vector to add to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector3<T> operator+(T left, const Vector3<T>& right);
-
-    /*! \brief Addition two Vector3
-     *
-     * \param left  The vector to add to right
-     * \param right The number to add to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector3<T> operator+(const Vector3<T>& left, T right);
-
-    /*! \brief Subtract two Vector3
-     *
-     * \param left  The vector to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of a subtraction of this and right
-     *
-     */
-    template<typename T>
-    Vector3<T> operator-(const Vector3<T>& left, const Vector3<T>& right);
-
-    /*! \brief Subtract two Vector3
-     *
-     * \param left  The number to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector3<T> operator-(T left, const Vector3<T>& right);
-
-    /*! \brief Subtract two Vector3
-     *
-     * \param left  The vector to subtract to right
-     * \param right The number to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector3<T> operator-(const Vector3<T>& left, T right);
-
-    /*! \brief Multiply a scalar with a Vector3
-     *
-     * \param left  The number to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector3<T> operator*(T left, const Vector3<T>& right);
-
-    /*! \brief Multiply a scalar with a Vector3
-     *
-     * \param left  The vector to subtract to right
-     * \param right The number to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector3<T> operator*(const Vector3<T>& left, T right);
-
-    /*! \brief Divide a scalar with a Vector3
-     *
-     * \param left  The number to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector3<T> operator/(T left, const Vector3<T>& right);
-
-    /*! \brief Divide a scalar with a Vector3
-     *
-     * \param left  The vector to subtract to right
-     * \param right The number to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector3<T> operator/(const Vector3<T>& left, T right);
-
     typedef Vector3<int> Vector3I;
     typedef Vector3<float> Vector3F;
     typedef Vector3<double> Vector3D;
@@ -349,4 +168,4 @@ namespace Bull
 
 #include <Bull/Math/Vector/Vector3.inl>
 
-#endif // BULL_VECTOR3_HPP
+#endif // BULL_MATH_VECTOR_VECTOR3_HPP

@@ -8,7 +8,7 @@ namespace Bull
 
     bool RenderTexture::create(const Vector2UI& size, const ContextSettings& settings)
     {
-        m_context.reset(prv::GlContext::createInstance(VideoMode(size.x, size.y), settings));
+        m_context.reset(prv::GlContext::createInstance(VideoMode(size.x(), size.y()), settings));
 
         if(m_context->setActive(true) && m_target.create(m_size))
         {
@@ -29,8 +29,8 @@ namespace Bull
 
         viewport.x      = 0;
         viewport.y      = 0;
-        viewport.width  = m_target.getSize().x;
-        viewport.height = m_target.getSize().y;
+        viewport.width  = m_target.getSize().x();
+        viewport.height = m_target.getSize().y();
 
         return viewport;
     }

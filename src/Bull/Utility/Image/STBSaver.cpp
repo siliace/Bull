@@ -16,9 +16,9 @@ namespace Bull
         {
             switch(parameters.getImageFormat())
             {
-                case ImageFormat::Png: return stbi_write_png(path.toString().getBuffer(), image->getSize().x, image->getSize().y, 4, image->getPixels().getBuffer(), 0) != 0;
-                case ImageFormat::Bmp: return stbi_write_bmp(path.toString().getBuffer(), image->getSize().x, image->getSize().y, 4, image->getPixels().getBuffer()) != 0;
-                case ImageFormat::Tga: return stbi_write_tga(path.toString().getBuffer(), image->getSize().x, image->getSize().y, 4, image->getPixels().getBuffer()) != 0;
+                case ImageFormat::Png: return stbi_write_png(path.toString().getBuffer(), image->getSize().x(), image->getSize().y(), 4, image->getPixels().getBuffer(), 0) != 0;
+                case ImageFormat::Bmp: return stbi_write_bmp(path.toString().getBuffer(), image->getSize().x(), image->getSize().y(), 4, image->getPixels().getBuffer()) != 0;
+                case ImageFormat::Tga: return stbi_write_tga(path.toString().getBuffer(), image->getSize().x(), image->getSize().y(), 4, image->getPixels().getBuffer()) != 0;
             }
 
             return false;

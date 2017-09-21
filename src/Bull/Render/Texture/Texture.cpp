@@ -22,7 +22,7 @@ namespace Bull
 
     bool Texture::create(const Vector2UI& size)
     {
-        if(size.x > 0 && size.y > 0)
+        if(size.x()  > 0 && size.y()  > 0)
         {
             m_size = size;
 
@@ -37,7 +37,7 @@ namespace Bull
             }
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
-            gl::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.x, m_size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+            gl::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.x() , m_size.y() , 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
@@ -57,9 +57,9 @@ namespace Bull
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
 
-            for(unsigned int i = 0; i < m_size.y; i++)
+            for(unsigned int i = 0; i < m_size.y() ; i++)
             {
-                gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, m_size.x, 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[m_size.x * (m_size.y - i - 1) * 4]);
+                gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, m_size.x() , 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[m_size.x()  * (m_size.y()  - i - 1) * 4]);
             }
 
             return true;
@@ -131,7 +131,7 @@ namespace Bull
         if(m_id)
         {
             Image image;
-            ByteArray pixels(m_size.x * m_size.y * 4);
+            ByteArray pixels(m_size.x()  * m_size.y()  * 4);
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
             gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);

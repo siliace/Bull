@@ -13,7 +13,7 @@ namespace Bull
 
         bool RenderTextureImplDefault::create(const Vector2UI& size, unsigned int target)
         {
-            if(target && size.x && size.y)
+            if(target && size.x() && size.y())
             {
                 m_size   = size;
                 m_target = target;
@@ -27,7 +27,7 @@ namespace Bull
         void RenderTextureImplDefault::updateTarget()
         {
             gl::bindTexture(GL_TEXTURE_2D, m_target);
-            gl::copyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, m_size.x, m_size.y);
+            gl::copyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, m_size.x(), m_size.y());
         }
     }
 }

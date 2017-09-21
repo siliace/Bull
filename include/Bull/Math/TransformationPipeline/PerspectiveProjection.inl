@@ -8,9 +8,12 @@ namespace Bull
     }
 
     template <typename T>
-    PerspectiveProjection<T>::PerspectiveProjection(const Angle<T>& angle, float ratio, const Vector2<T>& zBounds)
+    PerspectiveProjection<T>::PerspectiveProjection(const Angle<T>& angle, float ratio, const Vector2<T>& zBounds) :
+        m_angle(angle),
+        m_ratio(ratio),
+        m_zBounds(zBounds)
     {
-        setAngle(angle).setRatio(ratio).setZBounds(zBounds);
+        updateProjection();
     }
 
     template <typename T>
@@ -75,8 +78,8 @@ namespace Bull
         float yScale = std::tan(Angle<T>::radian(Pi2) - fov);
         m_projection(0, 0) = yScale / m_ratio;
         m_projection(1, 1) = yScale;
-        m_projection(2, 2) = -(m_zBounds.y + m_zBounds.x) / (m_zBounds.y - m_zBounds.x);
+        m_projection(2, 2) = -(m_zBounds.y() + m_zBounds.x()) / (m_zBounds.y() - m_zBounds.x());
         m_projection(2, 3) = -1;
-        m_projection(3, 2) = -2 * (m_zBounds.x * m_zBounds.y) / (m_zBounds.y - m_zBounds.x);
+        m_projection(3, 2) = -2 * (m_zBounds.x() * m_zBounds.y()) / (m_zBounds.y() - m_zBounds.x());
     }
 }

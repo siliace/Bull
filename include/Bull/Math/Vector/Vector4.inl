@@ -1,205 +1,86 @@
 namespace Bull
 {
-    template<typename T>
-    Vector4<T> Vector4<T>::normalize(const Vector4<T>& vector)
+    template <typename T>
+    Vector4<T>::Vector4(T value)
     {
-        return Vector4<T>(vector).normalize();
+        set(value);
     }
 
-    template<typename T>
-    T Vector4<T>::dotProduct(const Vector4& left, const Vector4& right)
+    template <typename T>
+    Vector4<T>::Vector4(T x, T y, T z, T w)
     {
-        return (left.x * right.x) + (left.y * right.y) + (left.z * right.z) + (left.w * right.w);
+        set(x, y, z, w);
     }
 
-    template<typename T>
-    Vector4<T>::Vector4() :
-        x(0),
-        y(0),
-        z(0),
-        w(0)
-    {
-        /// Nothing
-    }
-
-    template<typename T>
-    Vector4<T>::Vector4(T value) :
-        x(value),
-        y(value),
-        z(value),
-        w(value)
-    {
-        /// Nothing
-    }
-
-    template<typename T>
-    Vector4<T>::Vector4(T x, T y, T z, T w) :
-        x(x),
-        y(y),
-        z(z),
-        w(w)
-    {
-        /// Nothing
-    }
-
-    template<typename T>
+    template <typename T>
     Vector4<T>::Vector4(const Vector3<T>& copy, T w) :
-        x(copy.x),
-        y(copy.y),
-        z(copy.z),
-        w(w)
+        Vector<T, 4>(copy)
+    {
+        this->w() = w;
+    }
+
+    template <typename T>
+    template <typename U, Index US>
+    Vector4<T>::Vector4(const Vector<U, US>& copy) :
+        Vector<T, 4>(copy)
     {
         /// Nothing
     }
 
-    template<typename T>
-    float Vector4<T>::getLength() const
+    template <typename T>
+    Vector4<T>& Vector4<T>::set(T x, T y, T z, T w)
     {
-        return std::sqrt(std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2) + std::pow(w, 2));
+        this->x() = x;
+        this->y() = y;
+        this->z() = z;
+        this->w() = w;
     }
 
-    template<typename T>
-    Vector4<T>& Vector4<T>::normalize()
+    template <typename T>
+    T& Vector4<T>::x()
     {
-        x /= w;
-        y /= w;
-        z /= w;
-        w  = 0.0;
-
-        return (*this);
+        return Vector<T, 4>::at(0);
     }
 
-    template<typename T>
-    T Vector4<T>::dotProduct(const Vector4& right)
+    template <typename T>
+    const T& Vector4<T>::x() const
     {
-        return (x * right.x) + (y * right.y) + (z * right.z) + (w * right.w);
+        return Vector<T, 4>::at(0);
     }
 
-    template<typename T>
-    bool Vector4<T>::operator==(const Vector4& right) const
+    template <typename T>
+    T& Vector4<T>::y()
     {
-        return (x == right.x) && (y == right.y) && (z == right.z) && (w == right.w);
+        return Vector<T, 4>::at(1);
     }
 
-    template<typename T>
-    bool Vector4<T>::operator!=(const Vector4& right) const
+    template <typename T>
+    const T& Vector4<T>::y() const
     {
-        return !((*this) == right);
+        return Vector<T, 4>::at(1);
     }
 
-    template<typename T>
-    Vector4<T>& Vector4<T>::operator+=(const Vector4& right)
+    template <typename T>
+    T& Vector4<T>::z()
     {
-        x += right.x;
-        y += right.y;
-        z += right.z;
-        w += right.w;
-
-        return (*this);
+        return Vector<T, 4>::at(2);
     }
 
-    template<typename T>
-    Vector4<T> Vector4<T>::operator-() const
+    template <typename T>
+    const T& Vector4<T>::z() const
     {
-        return Vector4<T>(-x, -y, -z, -w);
+        return Vector<T, 4>::at(2);
     }
 
-    template<typename T>
-    Vector4<T>& Vector4<T>::operator-=(const Vector4& right)
+    template <typename T>
+    T& Vector4<T>::w()
     {
-        x -= right.x;
-        y -= right.y;
-        z -= right.z;
-        w -= right.w;
-
-        return (*this);
+        return Vector<T, 4>::at(3);
     }
 
-    template<typename T>
-    Vector4<T> operator+(const Vector4<T>& left, const Vector4<T>& right)
+    template <typename T>
+    const T& Vector4<T>::w() const
     {
-        return Vector4<T>(left) += right;
-    }
-
-    template<typename T>
-    Vector4<T> operator+(float left, const Vector4<T>& right)
-    {
-        return Vector4<T>(left) += right;
-    }
-
-    template<typename T>
-    Vector4<T> operator+(const Vector4<T>& left, float right)
-    {
-        return Vector4<T>(left) += Vector4<T>(right);
-    }
-
-    template<typename T>
-    Vector4<T> operator-(const Vector4<T>& left, const Vector4<T>& right)
-    {
-        return Vector4<T>(left) -= right;
-    }
-
-    template<typename T>
-    Vector4<T> operator-(float left, const Vector4<T>& right)
-    {
-        return Vector4<T>(left) -= right;
-    }
-
-    template<typename T>
-    Vector4<T> operator-(const Vector4<T>& left, float right)
-    {
-        return Vector4<T>(left) -= Vector4<T>(right);
-    }
-
-    template<typename T>
-    Vector4<T> operator*(T left, const Vector4<T>& right)
-    {
-        Vector3<T> product = right;
-
-        product.x *= left;
-        product.x *= left;
-        product.z *= left;
-        product.w *= left;
-
-        return right;
-    }
-
-    template<typename T>
-    Vector4<T> operator*(const Vector4<T>& left, T right)
-    {
-        Vector4<T> product = left;
-
-        product.x *= right;
-        product.y *= right;
-        product.z *= right;
-        product.w *= right;
-
-        return left;
-    }
-
-    template<typename T>
-    Vector4<T> operator/(T left, const Vector4<T>& right)
-    {
-        Vector4<T> product = right;
-
-        product.x /= left;
-        product.y /= left;
-        product.z /= left;
-        product.w /= left;
-
-        return right;
-    }
-
-    template<typename T>
-    Vector4<T> operator/(const Vector4<T>& left, T right)
-    {
-        Vector4<T> product = left;
-
-        product.x /= right;
-        product.y /= right;
-        product.z /= right;
-        product.w /= right;
-
-        return left;
+        return Vector<T, 4>::at(3);
     }
 }

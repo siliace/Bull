@@ -1,42 +1,22 @@
-#ifndef BULL_VECTOR4_HPP
-#define BULL_VECTOR4_HPP
+#ifndef BULL_MATH_VECTOR_VECTOR4_HPP
+#define BULL_MATH_VECTOR_VECTOR4_HPP
 
-#include <cmath>
-
+#include <Bull/Math/Vector/Vector.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
 
 namespace Bull
 {
-    template<typename T>
-    struct Vector4
+    template <typename T>
+    struct Vector4 : public Vector<T, 4>
     {
         static Vector4<T> Zero;
 
         static Vector4<T> Unit;
 
-        /*! \brief Get a normalized Vector4
-         *
-         * \param vector The Vector4 to normalize
-         *
-         * \return The normalized Vector4
-         *
-         */
-        static Vector4<T> normalize(const Vector4<T>& vector);
-
-        /*! \brief Calculate the dot(scalar) product of two Vector4
-         *
-         * \param left  The left Vector4 of the product
-         * \param right The right Vector4 of the product
-         *
-         * \return The value of the dot product of left and right
-         *
-         */
-        static T dotProduct(const Vector4<T>& left, const Vector4<T>& right);
-
         /*! \brief Default constructor
          *
          */
-        Vector4();
+        Vector4() = default;
 
         /*! \brief Constructor
          *
@@ -53,83 +33,90 @@ namespace Bull
          * \param w The w component
          *
          */
-        Vector4(T x, T y, T z, T w = 0.0);
+        Vector4(T x, T y, T z, T w = 0);
 
         /*! \brief Constructor
          *
-         * \param copy The vector to copy
-         * \param w The w component
+         * \param copy The X/Y/W components
+         * \param w    The W component
+         */
+        Vector4(const Vector3<T>& copy, T w);
+
+        /*! \brief Copy constructor
+         *
+         * \param copy The Vector to copy
          *
          */
-        Vector4(const Vector3<T>& copy, T w = 0);
+        template <typename U, Index US>
+        Vector4(const Vector<U, US>& copy);
 
-        /*! \brief Compute the length
+        /*! \brief Set the Vector3
          *
-         * \return Return the length of the vector
-         *
-         */
-        float getLength() const;
-
-        /*! \brief Normalize the Vector4
+         * \param x The X component
+         * \param y The Y component
+         * \param y The Z component
+         * \param y The W component
          *
          * \return This
          *
          */
-        Vector4<T>& normalize();
+        Vector4<T>& set(T x, T y, T z, T w = 0);
 
-        /*! \brief Calculate the dot(scalar) product of two vectors
+        /*! \brief Get the X component
          *
-         * \param right The other to calculate the dot product with
-         *
-         * \return The value of the dot product
+         * \return The component
          *
          */
-        T dotProduct(const Vector4& right);
+        T& x();
 
-        /*! \brief Compare two Vector4
+        /*! \brief Get the X component
          *
-         * \param right The vector to compare
-         *
-         * \return Return true if this and right are equal, else return false
+         * \return The component
          *
          */
-        bool operator==(const Vector4& right) const;
+        const T& x() const;
 
-        /*! \brief Compare two Vector4
+        /*! \brief Get the X component
          *
-         * \param right The vector to compare
-         *
-         * \return Return true if this and right are not equal, else return false
+         * \return The component
          *
          */
-        bool operator!=(const Vector4& right) const;
+        T& y();
 
-        /*! \brief Add a vector to this one
+        /*! \brief Get the X component
          *
-         * \param right The vector to add
-         *
-         * \return Return this after addition
+         * \return The component
          *
          */
-        Vector4& operator+=(const Vector4& right);
+        const T& y() const;
 
-        /*! \brief Negation operator
+        /*! \brief Get the Z component
          *
-         * \return Return the opposite of this Vector4
+         * \return The component
          *
          */
-        Vector4 operator-() const;
+        T& z();
 
-        /*! \brief Subtract a vector to this one
+        /*! \brief Get the Z component
          *
-         * \param right The vector to subtract
-         *
-         * \return Return this after subtraction
+         * \return The component
          *
          */
-        Vector4& operator-=(const Vector4& right);
+        const T& z() const;
 
-        T x, y, z, w;
+        /*! \brief Get the W component
+         *
+         * \return The component
+         *
+         */
+        T& w();
+
+        /*! \brief Get the W component
+         *
+         * \return The component
+         *
+         */
+        const T& w() const;
     };
 
     template<typename T>
@@ -137,116 +124,6 @@ namespace Bull
 
     template<typename T>
     Vector4<T> Vector4<T>::Unit = Vector4<T>(1, 1, 1, 1);
-
-    /*! \brief Addition two Vector4
-     *
-     * \param left  The vector to add to right
-     * \param right The vector to add to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector4<T> operator+(const Vector4<T>& left, const Vector4<T>& right);
-
-    /*! \brief Addition two Vector4
-     *
-     * \param left  The number to add to right
-     * \param right The vector to add to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector4<T> operator+(float left, const Vector4<T>& right);
-
-    /*! \brief Addition two Vector4
-     *
-     * \param left  The vector to add to right
-     * \param right The number to add to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector4<T> operator+(const Vector4<T>& left, float right);
-
-    /*! \brief Subtract two Vector4
-     *
-     * \param left  The vector to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of a subtraction of this and right
-     *
-     */
-    template<typename T>
-    Vector4<T> operator-(const Vector4<T>& left, const Vector4<T>& right);
-
-    /*! \brief Subtract two Vector4
-     *
-     * \param left  The number to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector4<T> operator-(float left, const Vector4<T>& right);
-
-    /*! \brief Subtract two Vector4
-     *
-     * \param left  The vector to subtract to right
-     * \param right The number to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector4<T> operator-(const Vector4<T>& left, float right);
-
-    /*! \brief Multiply a scalar with a Vector4
-     *
-     * \param left  The number to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector4<T> operator*(T left, const Vector4<T>& right);
-
-    /*! \brief Multiply a scalar with a Vector4
-     *
-     * \param left  The vector to subtract to right
-     * \param right The number to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector4<T> operator*(const Vector4<T>& left, T right);
-
-    /*! \brief Divide a scalar with a Vector4
-     *
-     * \param left  The number to subtract to right
-     * \param right The vector to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector4<T> operator/(T left, const Vector4<T>& right);
-
-    /*! \brief Divide a scalar with a Vector4
-     *
-     * \param left  The vector to subtract to right
-     * \param right The number to subtract to left
-     *
-     * \return Return a vector resulting of an addition of this and right
-     *
-     */
-    template<typename T>
-    Vector4<T> operator/(const Vector4<T>& left, T right);
 
     typedef Vector4<int> Vector4I;
     typedef Vector4<float> Vector4F;
@@ -256,4 +133,4 @@ namespace Bull
 
 #include <Bull/Math/Vector/Vector4.inl>
 
-#endif // BULL_VECTOR4_HPP
+#endif // BULL_MATH_VECTOR_VECTOR4_HPP

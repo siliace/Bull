@@ -212,7 +212,7 @@ namespace Bull
         return true;
     }
 
-    bool Shader::setUniformVector(const String& name, const Vector2F& uniform)
+    bool Shader::setUniformVector(const String& name, const Vector<float, 2>& uniform)
     {
         int location = getUniformLocation(name);
 
@@ -223,19 +223,19 @@ namespace Bull
 
         if(gl::programUniform2f)
         {
-            gl::programUniform2f(m_program, location, uniform.x, uniform.y);
+            gl::programUniform2f(m_program, location, uniform.at(0), uniform.at(1));
         }
         else
         {
             bind();
 
-            gl::uniform2f(location, uniform.x, uniform.y);
+            gl::uniform2f(location, uniform.at(0), uniform.at(1));
         }
 
         return true;
     }
 
-    bool Shader::setUniformVector(const String& name, const Vector3F& uniform)
+    bool Shader::setUniformVector(const String& name, const Vector<float, 3>& uniform)
     {
         int location = getUniformLocation(name);
 
@@ -246,19 +246,19 @@ namespace Bull
 
         if(gl::programUniform3f)
         {
-            gl::programUniform3f(m_program, location, uniform.x, uniform.y, uniform.z);
+            gl::programUniform3f(m_program, location, uniform.at(0), uniform.at(1), uniform.at(2));
         }
         else
         {
             bind();
 
-            gl::uniform3f(location, uniform.x, uniform.y, uniform.z);
+            gl::uniform3f(location, uniform.at(0), uniform.at(1), uniform.at(2));
         }
 
         return true;
     }
 
-    bool Shader::setUniformVector(const String& name, const Vector4F& uniform)
+    bool Shader::setUniformVector(const String& name, const Vector<float, 4>& uniform)
     {
         int location = getUniformLocation(name);
 
@@ -269,13 +269,13 @@ namespace Bull
 
         if(gl::programUniform4f)
         {
-            gl::programUniform4f(m_program, location, uniform.x, uniform.y, uniform.z, uniform.w);
+            gl::programUniform4f(m_program, location, uniform.at(0), uniform.at(1), uniform.at(2), uniform.at(3));
         }
         else
         {
             bind();
 
-            gl::uniform4f(location, uniform.x, uniform.y, uniform.z, uniform.w);
+            gl::uniform4f(location, uniform.at(0), uniform.at(1), uniform.at(2), uniform.at(3));
         }
 
         return true;

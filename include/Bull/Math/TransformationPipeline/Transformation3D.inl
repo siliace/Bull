@@ -52,9 +52,9 @@ namespace Bull
     template <typename T>
     Transformation3D<T>& Transformation3D<T>::setScale(const Vector3<T>& scale)
     {
-        m_matrix(0, 0) = scale.x;
-        m_matrix(1, 1) = scale.y;
-        m_matrix(2, 2) = scale.z;
+        m_matrix(0, 0) = scale.x();
+        m_matrix(1, 1) = scale.y();
+        m_matrix(2, 2) = scale.z();
 
         return (*this);
     }
@@ -109,9 +109,9 @@ namespace Bull
     template <typename T>
     Transformation3D<T>& Transformation3D<T>::setTranslation(const Vector3<T>& translation)
     {
-        m_matrix(3, 0) = translation.x;
-        m_matrix(3, 1) = translation.y;
-        m_matrix(3, 2) = translation.z;
+        m_matrix(3, 0) = translation.x();
+        m_matrix(3, 1) = translation.y();
+        m_matrix(3, 2) = translation.z();
 
         return (*this);
     }
@@ -125,17 +125,17 @@ namespace Bull
     template <typename T>
     Transformation3D<T>& Transformation3D<T>::applyScale(const Vector3<T>& scale)
     {
-        m_matrix(0, 0) *= scale.x;
-        m_matrix(1, 0) *= scale.x;
-        m_matrix(1, 0) *= scale.x;
+        m_matrix(0, 0) *= scale.x();
+        m_matrix(1, 0) *= scale.x();
+        m_matrix(1, 0) *= scale.x();
 
-        m_matrix(0, 1) *= scale.y;
-        m_matrix(1, 1) *= scale.y;
-        m_matrix(2, 1) *= scale.y;
+        m_matrix(0, 1) *= scale.y();
+        m_matrix(1, 1) *= scale.y();
+        m_matrix(2, 1) *= scale.y();
 
-        m_matrix(0, 2) *= scale.z;
-        m_matrix(1, 2) *= scale.z;
-        m_matrix(2, 2) *= scale.z;
+        m_matrix(0, 2) *= scale.z();
+        m_matrix(1, 2) *= scale.z();
+        m_matrix(2, 2) *= scale.z();
 
         return (*this);
     }
@@ -151,9 +151,9 @@ namespace Bull
     template <typename T>
     Transformation3D<T>& Transformation3D<T>::applyTranslation(const Vector3<T>& translation)
     {
-        m_matrix(0, 3) += translation.x;
-        m_matrix(1, 3) += translation.y;
-        m_matrix(2, 3) += translation.z;
+        m_matrix(0, 3) += translation.x();
+        m_matrix(1, 3) += translation.y();
+        m_matrix(2, 3) += translation.z();
 
         return (*this);
     }

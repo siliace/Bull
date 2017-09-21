@@ -8,7 +8,7 @@ namespace Bull
     {
         void MouseImpl::setPosition(const Vector2I& position)
         {
-            SetCursorPos(position.x, position.y);
+            SetCursorPos(position.x(), position.y());
         }
 
         Vector2I MouseImpl::getPosition()

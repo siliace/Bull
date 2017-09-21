@@ -46,8 +46,8 @@ namespace Bull
     {
         x      = static_cast<T>(0);
         y      = static_cast<T>(0);
-        width  = static_cast<T>(size.x);
-        height = static_cast<T>(size.y);
+        width  = static_cast<T>(size.x());
+        height = static_cast<T>(size.y());
 
         return (*this);
     }
