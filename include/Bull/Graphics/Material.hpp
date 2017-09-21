@@ -4,7 +4,6 @@
 #include <array>
 
 #include <Bull/Graphics/Export.hpp>
-#include <Bull/Graphics/TextureType.hpp>
 
 #include <Bull/Render/Texture/Texture.hpp>
 
@@ -12,6 +11,16 @@ namespace Bull
 {
     class BULL_GRAPHICS_API Material
     {
+    public:
+
+        enum TextureType : unsigned int
+        {
+            Ambient,
+            Diffuse,
+            Emission,
+            Specular,
+        };
+
     public:
 
         /*! \brief Default constructor
@@ -43,7 +52,7 @@ namespace Bull
          * \return This
          *
          */
-        Material& setTexture(TextureRef texture, TextureType::TextureType type);
+        Material& setTexture(TextureRef texture, TextureType type);
 
         /*! \brief Get a Texture
          *
@@ -52,7 +61,7 @@ namespace Bull
          * \return The texture
          *
          */
-        const TextureRef& getTexture(TextureType::TextureType type) const;
+        const TextureRef& getTexture(TextureType type) const;
 
     private:
 

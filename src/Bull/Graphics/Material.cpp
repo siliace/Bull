@@ -20,14 +20,14 @@ namespace Bull
         return m_shininess;
     }
 
-    Material& Material::setTexture(TextureRef texture, TextureType::TextureType type)
+    Material& Material::setTexture(TextureRef texture, TextureType type)
     {
         m_textures[type] = std::move(texture);
 
         return (*this);
     }
 
-    const TextureRef& Material::getTexture(TextureType::TextureType type) const
+    const TextureRef& Material::getTexture(TextureType type) const
     {
         return m_textures[type];
     }
