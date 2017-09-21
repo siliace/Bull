@@ -96,7 +96,7 @@ namespace Bull
 
         for(Index i = 0; i < S; i++)
         {
-            sum += at(i) + right.at(i);
+            sum += at(i) * right.at(i);
         }
 
         return sum;
