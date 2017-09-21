@@ -35,6 +35,17 @@ namespace Bull
         template <typename U, Index WU, Index HU>
         SquareMatrix(const Matrix<U, WU, HU>& copy);
     };
+
+    /*! \brief Multiplicate two Matrix
+     *
+     * \param left  The left Matrix
+     * \param right The right Matrix
+     *
+     * \return The product of left and right
+     *
+     */
+    template <typename T, Index S>
+    SquareMatrix<T, S> operator*(const SquareMatrix<T, S>& left, const SquareMatrix<T, S>& right);
 }
 
 #include <Bull/Math/Matrix/SquareMatrix.inl>

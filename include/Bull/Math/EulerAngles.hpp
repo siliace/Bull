@@ -2,16 +2,16 @@
 #define BULL_EULERANGLES_HPP
 
 #include <Bull/Math/Angle.hpp>
+#include <Bull/Math/Quaternion.hpp>
 
 namespace Bull
 {
-    template <typename T>
-    class Quaternion;
-
     /*! \class EulerAngles
+     *
      * \brief Implement 3D rotation with EulerAngles
      *
      * \tparam T The type of angles values
+     *
      */
     template <typename T>
     struct EulerAngles

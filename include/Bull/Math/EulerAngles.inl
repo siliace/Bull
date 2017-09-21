@@ -1,7 +1,7 @@
 namespace Bull
 {
     template <typename T>
-    EulerAngles<T> normalize(const EulerAngles<T>& angles)
+    EulerAngles<T> EulerAngles<T>::normalize(const EulerAngles<T>& angles)
     {
         return EulerAngles<T>(angles).normalize();
     }

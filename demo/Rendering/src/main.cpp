@@ -1,10 +1,13 @@
+#include <iostream>
+
 #include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Graphics/Material.hpp>
 
-#include <Bull/Math/TransformationPipeline/Camera.hpp>
-#include <Bull/Math/TransformationPipeline/PerspectiveProjection.hpp>
-#include <Bull/Math/TransformationPipeline/Transformation3D.hpp>
+#include <Bull/Math/EulerAngles.hpp>
+#include <Bull/Math/Matrix/Matrix4.hpp>
+#include <Bull/Math/Matrix/Matrix3.hpp>
+#include <Bull/Math/Matrix/Matrix2.hpp>
 
 #include <Bull/Render/Mesh.hpp>
 #include <Bull/Render/OpenGL.hpp>
@@ -73,6 +76,19 @@ std::vector<unsigned int> indices = {
         21, 22, 23
 };
 
+void show(const Matrix4F& mat)
+{
+    for(Index j = 0; j < 4; j++)
+    {
+        for(Index i = 0; i < 4; i++)
+        {
+            std::cout << mat.at(i, j);
+        }
+
+        std::cout << std::endl;
+    }
+}
+
 int main(int argc, char* argv[])
 {
     Log::get()->createLogger<ConsoleLogger>();
@@ -81,9 +97,8 @@ int main(int argc, char* argv[])
     WindowEvent event;
     EulerAnglesF rotation;
     Texture diffuse, specular, emission;
-    CameraF camera(Vector3F(2.f, 1.f, 3.f));
     RenderWindow window(VideoMode(800, 600), "Bull Application");
-    PerspectiveProjectionF projection(AngleF::degree(45.f), window.getSize().getRatio(), Vector2F(0.1f, 100.f));
+    Matrix4F camera = Matrix4F::makeLookAt(Vector3F(2.f, 1.f, 3.f), Vector3F::Zero);
     Mesh square;
 
     square.create(vertices, indices);
@@ -110,11 +125,6 @@ int main(int argc, char* argv[])
                 window.close();
             }
 
-            if(event.type == WindowEvent::Resized)
-            {
-                projection.setRatio(window.getSize().getRatio());
-            }
-
             if(event.type == WindowEvent::MouseMoved && Mouse::isButtonPressed(Mouse::Left))
             {
                 rotation.roll  += AngleF::degree(event.mouseMove.yRel);
@@ -122,13 +132,21 @@ int main(int argc, char* argv[])
             }
         }
 
+        if(!window.isOpen())
+        {
+            break;
+        }
+
         window.clear();
 
         phong.bind();
 
-        phong.setUniformMatrix("model", Transformation3DF::makeRotation(rotation).getMatrix());
-        phong.setUniformMatrix("view", camera.getMatrix());
-        phong.setUniformMatrix("projection", projection.getMatrix());
+        Matrix4F projection = Matrix4F::makePerspective(AngleF::degree(45.f), window.getSize().getRatio(), Vector2F(0.1f, 100.f));
+        QuaternionF quat(EulerAnglesF::normalize(rotation));
+
+        phong.setUniformMatrix("model", Matrix4F::makeTranslation(Vector3F(1.f, 0.f, 0.f)) * Matrix4F::makeRotation(quat) * Matrix4F::makeScale(Vector3F::Unit));
+        phong.setUniformMatrix("view", camera);
+        phong.setUniformMatrix("projection", projection);
 
         phong.setUniform("material.shininess", 64.f);
 
@@ -149,7 +167,7 @@ int main(int argc, char* argv[])
         phong.setUniformVector("light.diffuse", Vector4F::Unit / 2.f);
         phong.setUniformVector("light.specular", Vector4F(1.f, 1.f, 1.f, 0.f));
 
-        phong.setUniformVector("camera_position", camera.getPosition());
+        phong.setUniformVector("camera_position", Vector3F(2.f, 1.f, 3.f));
 
         square.render(Mesh::Triangles);
 
