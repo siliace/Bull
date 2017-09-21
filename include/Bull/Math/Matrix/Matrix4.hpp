@@ -1,275 +1,40 @@
-#ifndef BULL_MATRIX4_HPP
-#define BULL_MATRIX4_HPP
+#ifndef BULL_MATH_MATRIX_MATRIX4_HPP
+#define BULL_MATH_MATRIX_MATRIX4_HPP
 
 #include <array>
 
-#include <Bull/Core/Exception/OutOfRange.hpp>
-
-#include <Bull/Math/Vector/Vector4.hpp>
+#include <Bull/Math/Matrix/SquareMatrix.hpp>
 
 namespace Bull
 {
     template<typename T>
-    class Matrix4
+    struct Matrix4 : public SquareMatrix<T, 4>
     {
-    public:
-
         static Matrix4<T> Identity;
 
-    public:
-
-        /*! \brief Default Constructor
+        /*! \brief Default constructor
          *
          */
-        Matrix4();
+        Matrix4() = default;
 
         /*! \brief Constructor
          *
-         * \param value The value of every cell of the Matrix4
+         * \param value The value to use to fill the Matrix
          *
          */
         Matrix4(T value);
 
-        /*! \brief Constructor
+        /*! \brief Copy constructor
          *
-         * \param data The matrix content
-         *
-         */
-        Matrix4(const std::array<T, 16>& data);
-
-        /*! \brief Set the matrix content
-         *
-         * \param value The value of every matrix cell
+         * \param copy The Matrix to copy
          *
          */
-        void set(T value);
-
-        /*! \brief Set the matrix content
-         *
-         * \param data The matrix content
-         *
-         */
-        void set(const std::array<T, 16>& data);
-
-        void set(T value, Index x, Index y);
-
-        T get(Index x, Index y) const;
-
-        /*! \brief Set a column of the Matrix4
-         *
-         * \param column   The column
-         * \param position The position of the column to set
-         *
-         * \return This
-         *
-         */
-        Matrix4<T>& setColumn(const Vector4<T>& column, Index position);
-
-        /*! \brief Get a column a the Matrix4
-         *
-         * \param column The column to get
-         *
-         * \return Return the column
-         *
-         */
-        std::array<T, 4> getColumn(Index column) const;
-
-        Matrix4<T>& setRow(const Vector4<T>& row, Index position);
-
-        /*! \brief Get a row a the matrix
-         *
-         * \param row The row to get
-         *
-         * \return Return the row
-         *
-         */
-        std::array<T, 4> getRow(Index row) const;
-
-        /*! \brief
-         *
-         * \param
-         * \param
-         *
-         * \return
-         *
-         */
-        T& operator()(Index x, Index y);
-
-        /*! \brief
-         *
-         * \param
-         * \param
-         *
-         * \return
-         *
-         */
-        const T& operator()(Index x, Index y) const;
-
-        /*! \brief Compare two matrices
-         *
-         * \param right The matrix to compare to this
-         *
-         * \return Return true if the two matrices are equal, false otherwise
-         *
-         */
-        bool operator==(const Matrix4<T>& right);
-
-        /*! \brief Compare two matrices
-         *
-         * \param right The matrix to compare to this
-         *
-         * \return Return true if the two matrices are not equal, false otherwise
-         *
-         */
-        bool operator!=(const Matrix4<T>& right);
-
-        /*! \brief Addition two matrices
-         *
-         * \param right
-         *
-         * \return Return the sum the addition of right and this
-         *
-         */
-        Matrix4<T>& operator+=(const Matrix4<T>& right);
-
-        /*! \brief Addition two matrices
-         *
-         * \param right
-         *
-         * \return Return the sum of the addition between right and this
-         *
-         */
-        Matrix4<T>& operator+=(T right);
-
-        /*! \brief Subtract two matrices
-         *
-         * \param right
-         *
-         * \return Return the difference of the subtraction between right and this
-         *
-         */
-        Matrix4<T>& operator-=(const Matrix4<T>& right);
-
-        /*! \brief Subtract a matrix with a scalar
-         *
-         * \param right
-         *
-         * \return Return the difference the subtraction between right and this
-         *
-         */
-        Matrix4<T>& operator-=(T right);
-
-        /*! \brief Multiply two matrices
-         *
-         * \param right
-         *
-         * \return Return the product of the multiplication between right and this
-         *
-         */
-        Matrix4<T> operator*=(const Matrix4<T>& right);
-
-        /*! \brief Get a pointer to the internal data
-         *
-         * \return Return the pointer
-         *
-         */
-        operator const T*() const;
-
-    private:
-
-        std::array<T, 16> m_data;
+        template <typename U, Index WU, Index HU>
+        Matrix4(const Matrix<U, WU, HU>& copy);
     };
 
     template<typename T>
-    Matrix4<T> Matrix4<T>::Identity({1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0});
-
-    /*! \brief Addition two matrices
-     *
-     * \param right
-     * \param left
-     *
-     * \return Return the sum of the addition between right and left
-     *
-     */
-    template<typename T>
-    Matrix4<T> operator+(const Matrix4<T>& left, const Matrix4<T>& right);
-
-    /*! \brief Addition two matrices
-     *
-     * \param right
-     * \param left
-     *
-     * \return Return the sum of the addition between right and left
-     *
-     */
-    template<typename T>
-    Matrix4<T> operator+(T left, const Matrix4<T>& right);
-
-    /*! \brief Addition two matrices
-     *
-     * \param right
-     * \param left
-     *
-     * \return Return the sum of the addition between right and left
-     *
-     */
-    template<typename T>
-    Matrix4<T> operator+(const Matrix4<T>& left, T right);
-
-    /*! \brief Subtract two matrices
-     *
-     * \param right
-     * \param left
-     *
-     * \return Return the difference of the subtraction between right and left
-     *
-     */
-    template<typename T>
-    Matrix4<T> operator-(const Matrix4<T>& left, const Matrix4<T>& right);
-
-    /*! \brief Subtract two matrices
-     *
-     * \param right
-     * \param left
-     *
-     * \return Return the difference of the subtraction between right and left
-     *
-     */
-    template<typename T>
-    Matrix4<T> operator-(T left, const Matrix4<T>& right);
-
-    /*! \brief Subtract two matrices
-     *
-     * \param right
-     * \param left
-     *
-     * \return Return the difference of the subtraction between right and left
-     *
-     */
-    template<typename T>
-    Matrix4<T> operator-(const Matrix4<T>& left, T right);
-
-    /*! \brief Multiply two matrices
-     *
-     * \param right
-     * \param left
-     *
-     * \return Return the product of the multiplication between right and left
-     *
-     */
-    template<typename T>
-    Matrix4<T> operator*(const Matrix4<T>& left, const Matrix4<T>& right);
-
-    /*! \brief Multiply a matrix with a vector
-     *
-     * \param right
-     * \param left
-     *
-     * \return Return the product of the multiplication between right and left
-     *
-     */
-    template<typename T>
-    Vector4<T> operator*(const Matrix4<T>& left, const Vector4<T>& right);
+    Matrix4<T> Matrix4<T>::Identity = Matrix4<T>::makeIdentity();
 
     typedef Matrix4<int> Matrix4I;
     typedef Matrix4<float> Matrix4F;

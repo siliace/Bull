@@ -1,3 +1,5 @@
+#include <Bull/Math/Vector/Vector4.hpp>
+
 namespace Bull
 {
     template <typename T>

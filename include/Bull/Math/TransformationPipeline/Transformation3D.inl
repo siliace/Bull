@@ -83,17 +83,17 @@ namespace Bull
         T tyz = tz * rotation.y;
         T tzz = tz * rotation.z;
 
-        m_matrix(0, 0) = 1.f - (tyy + tzz);
-        m_matrix(0, 1) = txy + twz;
-        m_matrix(0, 2) = txz - twy;
+        m_matrix.at(0, 0) = 1.f - (tyy + tzz);
+        m_matrix.at(0, 1) = txy + twz;
+        m_matrix.at(0, 2) = txz - twy;
 
-        m_matrix(1, 0) = txy - twz;
-        m_matrix(1, 1) = 1.f - (txx + tzz);
-        m_matrix(1, 2) = tyz + twx;
+        m_matrix.at(1, 0) = txy - twz;
+        m_matrix.at(1, 1) = 1.f - (txx + tzz);
+        m_matrix.at(1, 2) = tyz + twx;
 
-        m_matrix(2, 0) = txz + twy;
-        m_matrix(2, 1) = tyz - twx;
-        m_matrix(2, 2) = 1.f - (txx + tyy);
+        m_matrix.at(2, 0) = txz + twy;
+        m_matrix.at(2, 1) = tyz - twx;
+        m_matrix.at(2, 2) = 1.f - (txx + tyy);
 
         return (*this);
     }
@@ -109,9 +109,9 @@ namespace Bull
     template <typename T>
     Transformation3D<T>& Transformation3D<T>::setTranslation(const Vector3<T>& translation)
     {
-        m_matrix(3, 0) = translation.x();
-        m_matrix(3, 1) = translation.y();
-        m_matrix(3, 2) = translation.z();
+        m_matrix.at(3, 0) = translation.x();
+        m_matrix.at(3, 1) = translation.y();
+        m_matrix.at(3, 2) = translation.z();
 
         return (*this);
     }
@@ -125,17 +125,17 @@ namespace Bull
     template <typename T>
     Transformation3D<T>& Transformation3D<T>::applyScale(const Vector3<T>& scale)
     {
-        m_matrix(0, 0) *= scale.x();
-        m_matrix(1, 0) *= scale.x();
-        m_matrix(1, 0) *= scale.x();
+        m_matrix.at(0, 0) *= scale.x();
+        m_matrix.at(1, 0) *= scale.x();
+        m_matrix.at(1, 0) *= scale.x();
 
-        m_matrix(0, 1) *= scale.y();
-        m_matrix(1, 1) *= scale.y();
-        m_matrix(2, 1) *= scale.y();
+        m_matrix.at(0, 1) *= scale.y();
+        m_matrix.at(1, 1) *= scale.y();
+        m_matrix.at(2, 1) *= scale.y();
 
-        m_matrix(0, 2) *= scale.z();
-        m_matrix(1, 2) *= scale.z();
-        m_matrix(2, 2) *= scale.z();
+        m_matrix.at(0, 2) *= scale.z();
+        m_matrix.at(1, 2) *= scale.z();
+        m_matrix.at(2, 2) *= scale.z();
 
         return (*this);
     }
@@ -151,9 +151,9 @@ namespace Bull
     template <typename T>
     Transformation3D<T>& Transformation3D<T>::applyTranslation(const Vector3<T>& translation)
     {
-        m_matrix(0, 3) += translation.x();
-        m_matrix(1, 3) += translation.y();
-        m_matrix(2, 3) += translation.z();
+        m_matrix.at(0, 3) += translation.x();
+        m_matrix.at(1, 3) += translation.y();
+        m_matrix.at(2, 3) += translation.z();
 
         return (*this);
     }

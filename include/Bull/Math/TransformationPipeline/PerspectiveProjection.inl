@@ -76,10 +76,10 @@ namespace Bull
         Angle<T> fov = m_angle / static_cast<T>(2);
 
         float yScale = std::tan(Angle<T>::radian(Pi2) - fov);
-        m_projection(0, 0) = yScale / m_ratio;
-        m_projection(1, 1) = yScale;
-        m_projection(2, 2) = -(m_zBounds.y() + m_zBounds.x()) / (m_zBounds.y() - m_zBounds.x());
-        m_projection(2, 3) = -1;
-        m_projection(3, 2) = -2 * (m_zBounds.x() * m_zBounds.y()) / (m_zBounds.y() - m_zBounds.x());
+        m_projection.at(0, 0) = yScale / m_ratio;
+        m_projection.at(1, 1) = yScale;
+        m_projection.at(2, 2) = -(m_zBounds.y() + m_zBounds.x()) / (m_zBounds.y() - m_zBounds.x());
+        m_projection.at(2, 3) = -1;
+        m_projection.at(3, 2) = -2 * (m_zBounds.x() * m_zBounds.y()) / (m_zBounds.y() - m_zBounds.x());
     }
 }

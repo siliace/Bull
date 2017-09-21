@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/RuntimeError.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
@@ -292,13 +293,13 @@ namespace Bull
 
         if(gl::programUniformMatrix4fv)
         {
-            gl::programUniformMatrix4fv(m_program, location, 1, true, uniform);
+            gl::programUniformMatrix4fv(m_program, location, 1, true, uniform.getPtr());
         }
         else
         {
             bind();
 
-            gl::uniformMatrix4fv(location, 1, true, uniform);
+            gl::uniformMatrix4fv(location, 1, true, uniform.getPtr());
         }
 
         return true;
