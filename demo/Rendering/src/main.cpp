@@ -6,8 +6,6 @@
 
 #include <Bull/Math/EulerAngles.hpp>
 #include <Bull/Math/Matrix/Matrix4.hpp>
-#include <Bull/Math/Matrix/Matrix3.hpp>
-#include <Bull/Math/Matrix/Matrix2.hpp>
 
 #include <Bull/Render/Mesh.hpp>
 #include <Bull/Render/OpenGL.hpp>
