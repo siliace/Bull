@@ -7,6 +7,8 @@
 
 #include <Bull/Render/Texture/Texture.hpp>
 
+#include <Bull/Utility/Color.hpp>
+
 namespace Bull
 {
     class BULL_GRAPHICS_API Material
@@ -15,6 +17,9 @@ namespace Bull
 
         enum TextureType : unsigned int
         {
+            Alpha,
+            Height,
+            Normal,
             Ambient,
             Diffuse,
             Emission,
@@ -65,8 +70,12 @@ namespace Bull
 
     private:
 
-        std::array<TextureRef, 4> m_textures;
+        std::array<TextureRef, 7> m_textures;
         float                     m_shininess;
+        Color                     m_ambientColor;
+        Color                     m_diffuseColor;
+        Color                     m_specularColor;
+        float                     m_alphaThreshold;
     };
 }
 
