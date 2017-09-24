@@ -1,15 +1,18 @@
-#include <Bull/Core/Exception/InvalidArgument.hpp>
 #include <Bull/Core/FileSystem/Directory.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/IO/StringStream.hpp>
+#include <Bull/Core/FileSystem/InvalidPathException.hpp>
+#include <Bull/Core/FileSystem/PathImpl.hpp>
 
 namespace Bull
 {
-    Path::Path() :
-        m_isFile(false),
-        m_isDirectory(false)
+    Path Path::canonical(const String& path)
     {
-        /// Nothing
+        return Path(prv::PathImpl::realPath(path));
+    }
+
+    Path Path::canonical(const Path& path)
+    {
+        return canonical(path.toString());
     }
 
     Path::Path(const String& path)
@@ -19,132 +22,47 @@ namespace Bull
 
     Path& Path::open(const String& path)
     {
-        m_path        = path;
-        m_isFile      = File::exists(m_path);
-        m_isDirectory = Directory::exists(m_path);
-
-        if(!isFile() && !isDirectory())
+        if(!File::exists(path) && !Directory::exists(path))
         {
-            StringStream ss;
-
-            ss << "The path " << toString() << " does not exists";
-
-            throw InvalidArgument(ss.toString().getBuffer(), "An existing path to a directory");
+            throw InvalidPathException(path);
         }
-    }
 
-    bool Path::isValid() const
-    {
-        return !m_path.isEmpty();
+        m_path = path;
+
+        return (*this);
     }
 
     bool Path::operator==(const Path& right) const
     {
-        return m_path == right.toString();
+        return toString() == right.toString();
     }
 
     bool Path::operator!=(const Path& right) const
     {
-        return m_path != right.toString();
+        return toString() != right.toString();
     }
 
-    String Path::getPath() const
+    Path Path::getParent() const
     {
-        if(isFile())
-        {
-            int index = toString().last(Separator);
-
-            if(index)
-            {
-                return toString().subString(0, static_cast<Index>(index));
-            }
-        }
-
-        return toString();
+        return Path(toString().subString(0, static_cast<Index>(toString().last(Separator))).subString(static_cast<Index>(toString().first(Separator))));
     }
 
-    String Path::getFileName() const
+    Path Path::getChild(const String& child) const
     {
-        if(isFile())
-        {
-            int index = toString().last('/') + 1;
-
-            if(index)
-            {
-                return toString().subString(static_cast<Index>(index));
-            }
-        }
-
-        return toString();
-    }
-
-    String Path::getFileNameWithoutExtension() const
-    {
-        if(isFile())
-        {
-            String filename = getFileName();
-
-            return filename.subString(0, static_cast<Index>(filename.last('.')));
-        }
-
-        return toString();
-    }
-
-    String Path::getExtension() const
-    {
-        if(isFile())
-        {
-            int index = toString().last('.');
-
-            if(index)
-            {
-                return toString().subString(static_cast<Index>(index) + 1);
-            }
-        }
-
-        return toString();
-    }
-
-    String Path::getCurrentDirectory() const
-    {
-        if(isDirectory())
-        {
-            int index = toString().last(Separator) + 1;
-
-            if(index)
-            {
-                return toString().subString(static_cast<Index>(index));
-            }
-        }
-
-        return toString();
-    }
-
-    Path& Path::setBasePath(const Path& base)
-    {
-        String fullPath = base.toString();
-
-        if(!fullPath.endsWith(Separator) || !toString().startWith(Separator))
-        {
-            fullPath += Separator;
-        }
-
-        fullPath += toString();
-
-        return open(fullPath);
+        return Path(toString() + Separator + child);
     }
 
     bool Path::isFile() const
     {
-        return m_isFile;
+        return File::exists(toString());
     }
 
     bool Path::isDirectory() const
     {
-        return m_isDirectory;
+        return Directory::exists(toString());
     }
 
-    String Path::toString() const
+    const String& Path::toString() const
     {
         return m_path;
     }

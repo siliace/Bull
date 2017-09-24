@@ -7,13 +7,16 @@ target_sources(bull-core
             ${BULL_SRC_CORE_FILESYSTEM}/Directory.cpp
             ${BULL_INC_CORE_FILESYSTEM}/File.hpp
             ${BULL_SRC_CORE_FILESYSTEM}/File.cpp
+            ${BULL_INC_CORE_FILESYSTEM}/InvalidPathException.hpp
+            ${BULL_SRC_CORE_FILESYSTEM}/InvalidPathException.cpp
             ${BULL_INC_CORE_FILESYSTEM}/Path.hpp
             ${BULL_SRC_CORE_FILESYSTEM}/Path.cpp
         PRIVATE
-            ${BULL_SRC_CORE_FILESYSTEM}/DirectoryImpl.cpp
             ${BULL_SRC_CORE_FILESYSTEM}/DirectoryImpl.hpp
-            ${BULL_SRC_CORE_FILESYSTEM}/FileImpl.cpp
+            ${BULL_SRC_CORE_FILESYSTEM}/DirectoryImpl.cpp
             ${BULL_SRC_CORE_FILESYSTEM}/FileImpl.hpp
+            ${BULL_SRC_CORE_FILESYSTEM}/FileImpl.cpp
+            ${BULL_SRC_CORE_FILESYSTEM}/PathImpl.hpp
         )
 
 if(BULL_OS_WINDOWS)
