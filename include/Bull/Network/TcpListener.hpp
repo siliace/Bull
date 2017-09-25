@@ -44,7 +44,7 @@ namespace Bull
          *
          * \param client The client to accept
          *
-         * \return The new State of the TcpListenner
+         * \return The new State of the TcpListener
          *
          */
         State accept(TcpSocket& client);
