@@ -4,7 +4,7 @@
     #include <Bull/System/Win32/VideoModeImpl.hpp>
 #else
     #if defined BULL_XLIB
-        #include <Bull/Window/Xlib/VideoModeImpl.hpp>
+        #include <Bull/System/Xlib/VideoModeImpl.hpp>
     #elif defined BULL_XCB
         #include <Bull/Window/XCB/VideoModeImpl.hpp>
     #else

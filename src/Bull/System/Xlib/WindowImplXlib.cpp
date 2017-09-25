@@ -4,6 +4,8 @@
 #include <Bull/Core/Thread/Thread.hpp>
 
 #include <Bull/System/Xlib/WindowImplXlib.hpp>
+#include <X11/Xutil.h>
+#include <X11/Xlib.h>
 
 #ifndef Button6
     #define Button6 6
@@ -240,8 +242,8 @@ namespace Bull
                         event.type           = WindowEvent::MouseMoved;
                         event.mouseMove.x    = e.xmotion.x;
                         event.mouseMove.y    = e.xmotion.y;
-                        event.mouseMove.xRel = event.mouseMove.x - getCursorPosition().x;
-                        event.mouseMove.yRel = event.mouseMove.y - getCursorPosition().y;
+                        event.mouseMove.xRel = event.mouseMove.x - getCursorPosition().x();
+                        event.mouseMove.yRel = event.mouseMove.y - getCursorPosition().y();
 
                         pushEvent(event);
                     }
@@ -389,16 +391,16 @@ namespace Bull
                         if(size != m_lastSize)
                         {
                             event.type                = WindowEvent::Resized;
-                            event.windowResize.width  = size.x;
-                            event.windowResize.height = size.y;
+                            event.windowResize.width  = size.x();
+                            event.windowResize.height = size.y();
 
                             m_lastSize = size;
                         }
                         else
                         {
                             event.type         = WindowEvent::Moved;
-                            event.windowMove.x = position.x;
-                            event.windowMove.y = position.y;
+                            event.windowMove.x = position.x();
+                            event.windowMove.y = position.y();
                         }
 
                         pushEvent(event);
@@ -493,7 +495,7 @@ namespace Bull
 
         void WindowImplXlib::setPosition(const Vector2I& position)
         {
-            XMoveWindow(m_display->getHandler(), m_handler, position.x, position.y);
+            XMoveWindow(m_display->getHandler(), m_handler, position.x(), position.y());
             m_display->flush();
         }
 
@@ -513,8 +515,8 @@ namespace Bull
         {
             XSizeHints hints;
 
-            hints.min_width  = size.x;
-            hints.min_height = size.y;
+            hints.max_width  = (size.x() > 0) ? size.x() : 0;
+            hints.max_height = (size.y() > 0) ? size.y() : 0;
             hints.flags      = PMinSize;
 
             XSetNormalHints(m_display->getHandler(), m_handler, &hints);
@@ -533,8 +535,8 @@ namespace Bull
         {
             XSizeHints hints;
 
-            hints.max_width  = size.x;
-            hints.max_height = size.y;
+            hints.max_width  = (size.x() > 0) ? size.x() : m_screen.width;
+            hints.max_height = (size.y() > 0) ? size.y() : m_screen.height;
             hints.flags      = PMaxSize;
 
             XSetNormalHints(m_display->getHandler(), m_handler, &hints);
@@ -551,7 +553,7 @@ namespace Bull
 
         void WindowImplXlib::setSize(const Vector2UI& size)
         {
-            XResizeWindow(m_display->getHandler(), m_handler, size.x, size.y);
+            XResizeWindow(m_display->getHandler(), m_handler, size.x(), size.y());
             m_lastSize = size;
             m_display->flush();
         }
@@ -616,6 +618,11 @@ namespace Bull
                     startProcessEvents();
                 }
             }
+        }
+
+        void WindowImplXlib::setIcon(const Image& icon)
+        {
+            /// Nothing
         }
 
         void WindowImplXlib::setMouseCursor(const std::unique_ptr<CursorImpl>& cursor)

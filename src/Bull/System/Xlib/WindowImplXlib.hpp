@@ -188,6 +188,13 @@ namespace Bull
              */
             void setVisible(bool visible) override;
 
+            /*! \brief Set the icon of the Window
+             *
+             * \param icon The icon
+             *
+             */
+            void setIcon(const Image& icon) override;
+
             /*! \brief Set the mouse cursor of the Window
              *
              * \param cursor The cursor
@@ -258,6 +265,7 @@ namespace Bull
              */
             void setProtocols();
 
+            XScreen           m_screen;
             Display::Instance m_display;
             XWindow           m_handler;
             Vector2UI         m_lastSize;

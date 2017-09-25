@@ -19,7 +19,7 @@ namespace Bull
             destroy();
         }
 
-        bool CursorImplXlib::loadFromSystem(Cursor::Type cursor)
+        bool CursorImplXlib::create(Cursor::Type cursor)
         {
             unsigned int shape;
 
@@ -53,7 +53,7 @@ namespace Bull
             return true;
         }
 
-        bool CursorImplXlib::loadFromImage(const Image& cursor, const Vector2UI& hotSpot)
+        bool CursorImplXlib::create(const Image& cursor, const Vector2UI& hotSpot)
         {
             // Todo
 

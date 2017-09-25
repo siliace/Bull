@@ -30,7 +30,7 @@ namespace Bull
              * \return True if the cursor was created successfully
              *
              */
-            bool loadFromSystem(Cursor::Type cursor) override;
+            bool create(Cursor::Type cursor) override;
 
             /*! \brief Create a Cursor from an image
              *
@@ -40,7 +40,7 @@ namespace Bull
              * \return True if the cursor was created successfully
              *
              */
-            bool loadFromImage(const Image& cursor, const Vector2UI& hotSpot) override;
+            bool create(const Image& cursor, const Vector2UI& hotSpot) override;
 
             /*! \brief Get the native system handler of the cursor
              *

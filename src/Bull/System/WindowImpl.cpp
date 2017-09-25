@@ -10,7 +10,7 @@
     typedef Bull::prv::WindowImplWin32 WindowImplType;
 #elif defined BULL_OS_GNU_LINUX
     #if defined BULL_XLIB
-        #include <Bull/Window/Xlib/WindowImplXlib.hpp>
+        #include <Bull/System/Xlib/WindowImplXlib.hpp>
         typedef Bull::prv::WindowImplXlib WindowImplType;
     #elif defined BULL_XCB
         #include <Bull/Window/XCB/WindowImplXCB.hpp>

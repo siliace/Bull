@@ -57,6 +57,13 @@ if(BULL_OS_WINDOWS)
     add_subdirectory(Win32)
 
     target_link_libraries(bull-system winmm)
+else()
+    add_subdirectory(Xlib)
+    add_subdirectory(Unix)
+
+    target_link_libraries(bull-system dl)
+    target_link_libraries(bull-system X11)
+    target_link_libraries(bull-system Xrandr)
 endif()
 
 target_link_libraries(bull-system bull-core)
