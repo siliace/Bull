@@ -2,6 +2,7 @@ target_sources(bull-render
         PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/GlxContext.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/GlxContext.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/GlxContextNoError.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/GlxCreateContextARB.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/GlxExtensionsLoader.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/GlxExtensionsLoader.hpp

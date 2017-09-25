@@ -4,6 +4,7 @@
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
+#include <Bull/Render/Context/Glx/GlxContextNoError.hpp>
 #include <Bull/Render/Context/Glx/GlxCreateContextARB.hpp>
 #include <Bull/Render/Context/Glx/GlxPBufferSGIX.hpp>
 #include <Bull/Render/Context/Glx/GlxSwapControlEXT.hpp>
@@ -336,6 +337,7 @@ namespace Bull
                     if(isSupported("GLX_ARB_create_context_profile"))
                     {
                         int flags   = 0;
+                        int noError = 0;
                         int profile = (m_settings.flags & ContextSettings::Compatibility) ? GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : GLX_CONTEXT_CORE_PROFILE_BIT_ARB;
 
                         if(m_settings.flags & ContextSettings::Debug)
@@ -352,6 +354,20 @@ namespace Bull
                         attribs.push_back(profile);
                         attribs.push_back(GLX_CONTEXT_FLAGS_ARB);
                         attribs.push_back(flags);
+
+                        if(m_settings.flags & ContextSettings::NoError)
+                        {
+                            if(isSupported("GLX_CONTEXT_OPENGL_NO_ERROR_ARB"))
+                            {
+                                attribs.push_back(GLX_CONTEXT_OPENGL_NO_ERROR_ARB);
+                                attribs.push_back(1);
+                            }
+                            else
+                            {
+                                m_settings.flags &= ~GLX_CONTEXT_OPENGL_NO_ERROR_ARB;
+                                Log::get()->write("GLX_CONTEXT_OPENGL_NO_ERROR_ARB is not available", Log::Level::Warning);
+                            }
+                        }
                     }
                     else
                     {

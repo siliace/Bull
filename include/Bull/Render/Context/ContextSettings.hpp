@@ -15,6 +15,7 @@ namespace Bull
             ForwardCompatible = 0x1,
             Debug             = 0x2,
             Compatibility     = 0x4,
+            NoError           = 0x8,
         };
 
         static ContextSettings Best;

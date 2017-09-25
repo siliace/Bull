@@ -91,11 +91,14 @@ int main(int argc, char* argv[])
 {
     Log::get()->createLogger<ConsoleLogger>();
 
+    ContextSettings settings = ContextSettings::Best;
+    settings.flags |= ContextSettings::NoError;
+
     Shader phong;
     WindowEvent event;
     EulerAnglesF rotation;
     Texture diffuse, specular, emission;
-    RenderWindow window(VideoMode(800, 600), "Bull Application");
+    RenderWindow window(VideoMode(800, 600), "Bull Application", WindowStyle::Default, settings);
     Matrix4F camera = Matrix4F::makeLookAt(Vector3F(2.f, 1.f, 3.f), Vector3F::Zero);
     Mesh square;
 

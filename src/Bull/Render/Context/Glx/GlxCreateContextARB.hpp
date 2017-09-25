@@ -16,11 +16,11 @@ namespace Bull
 {
     namespace prv
     {
-        GLXContext (*glXCreateContextAttribs)(::Display* dpy, GLXFBConfig config, GLXContext share_context, Bool direct, const int* attrib_list) = nullptr;
+        GLXContext (*glXCreateContextAttribs)(XDisplay* dpy, GLXFBConfig config, GLXContext share_context, Bool direct, const int* attrib_list) = nullptr;
 
         ExtensionsLoader::Extension GlxCreateContextARB("GLX_ARB_create_context", []
         {
-            glXCreateContextAttribs = reinterpret_cast<GLXContext (*)(::Display*, GLXFBConfig, GLXContext, Bool, const int*)>(GlContext::getFunction("glXCreateContextAttribsARB"));
+            glXCreateContextAttribs = reinterpret_cast<GLXContext (*)(XDisplay*, GLXFBConfig, GLXContext, Bool, const int*)>(GlContext::getFunction("glXCreateContextAttribsARB"));
 
             return glXCreateContextAttribs;
         });
