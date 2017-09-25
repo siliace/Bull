@@ -1,5 +1,5 @@
-#ifndef BULL_FILE_HPP
-#define BULL_FILE_HPP
+#ifndef BULL_CORE_FILESYSTEM_FILE_HPP
+#define BULL_CORE_FILESYSTEM_FILE_HPP
 
 #include <memory>
 
@@ -261,4 +261,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_FILE_HPP
+#endif // BULL_CORE_FILESYSTEM_FILE_HPP

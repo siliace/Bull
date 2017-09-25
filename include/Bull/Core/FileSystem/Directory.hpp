@@ -1,5 +1,5 @@
-#ifndef BULL_DIRECTORY_HPP
-#define BULL_DIRECTORY_HPP
+#ifndef BULL_CORE_FILESYSTEM_DIRECTORY_HPP
+#define BULL_CORE_FILESYSTEM_DIRECTORY_HPP
 
 #include <memory>
 #include <vector>
@@ -138,4 +138,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_DIRECTORY_HPP
+#endif // BULL_CORE_FILESYSTEM_DIRECTORY_HPP
