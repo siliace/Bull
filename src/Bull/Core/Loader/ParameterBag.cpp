@@ -282,12 +282,14 @@ namespace Bull
 
     bool ParameterBag::hasParameter(const String& name) const
     {
-        m_parameters.find(name) != m_parameters.end();
+        return m_parameters.find(name) != m_parameters.end();
     }
 
     ParameterBag& ParameterBag::removeParameter(const String& name)
     {
         m_parameters.erase(name);
+
+		return (*this);
     }
 
     void ParameterBag::clear()

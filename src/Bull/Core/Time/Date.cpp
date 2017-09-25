@@ -82,12 +82,7 @@ namespace Bull
             return true;
         }
 
-        if(second < left.second)
-        {
-            return true;
-        }
-
-        return false;
+        return second < left.second;
     }
 
     Date& Date::operator+=(const Date& left)

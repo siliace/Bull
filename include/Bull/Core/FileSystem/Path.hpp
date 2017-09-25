@@ -1,31 +1,53 @@
 #ifndef BULL_CORE_FILESYSTEM_PATH_HPP
 #define BULL_CORE_FILESYSTEM_PATH_HPP
 
+#include <Bull/Core/Configuration/OS.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
-    struct BULL_CORE_API Path
+    class BULL_CORE_API Path
     {
     public:
 
-        static constexpr char Separator = '/';
+        #ifdef BULL_OS_WINDOWS
+            static constexpr char Separator = '\\';
+        #else
+            static constexpr char Separator = '/';
+        #endif
+
+        /*! \brief Create a canonical Path
+         *
+         * \param path The relative path
+         *
+         * \return The canonical Path
+         *
+         */
+        static Path canonical(const String& path);
+
+        /*! \brief Create a canonical Path
+         *
+         * \param path The relative path
+         *
+         * \return The canonical Path
+         *
+         */
+        static Path canonical(const Path& path);
 
     public:
 
         /*! \brief Default constructor
          *
          */
-        Path();
+        Path() = default;
 
         /*! \brief Constructor
          *
-         * \param path The path
-         *
+         * \param path The path to open
          */
         explicit Path(const String& path);
 
-        /*! \brief Open the Path
+        /*! \brief Open a Path
          *
          * \param path The path to open
          *
@@ -33,13 +55,6 @@ namespace Bull
          *
          */
         Path& open(const String& path);
-
-        /*! \brief Tell whether the Path is valid
-         *
-         * \return True if the path is valid
-         *
-         */
-        bool isValid() const;
 
         /*! \brief Compare two Path
          *
@@ -59,60 +74,32 @@ namespace Bull
          */
         bool operator!=(const Path& right) const;
 
-        /*! \brief Get the path without the filename
+        /*! \brief Get the parent directory of this Path
          *
-         * \return The path
-         *
-         */
-        String getPath() const;
-
-        /*! \brief Get the filename in the path
-         *
-         * \return The filename
+         * \return The parent path
          *
          */
-        String getFileName() const;
+        Path getParent() const;
 
-        /*! \brief Get the filename without its extension in the path
+        /*! \brief Get a child Path of this Path
          *
-         * \return The filename without extension
+         * \param child The name of the child
+         *
+         * \return The child Path
          *
          */
-        String getFileNameWithoutExtension() const;
+        Path getChild(const String& child) const;
 
-        /*! \brief Get the extension of the file
+        /*! \brief Tell whether the Path is a file
          *
-         * \return The extension
-         *
-         */
-        String getExtension() const;
-
-        /*! \brief Get the current director name of the Path
-         *
-         * \return The name
-         *
-         */
-        String getCurrentDirectory() const;
-
-        /*! \brief Set the base Path
-         *
-         * \param base The base Path
-         *
-         * \return This
-         *
-         */
-        Path& setBasePath(const Path& base);
-
-        /*! \brief Check whether the path is a file
-         *
-         * \return True if the file is a string
+         * \return True if the Path is a file
          *
          */
         bool isFile() const;
 
-        /*! \brief Check whether the path is a directory
+        /*! \brief Tell whether the Path is a directory
          *
-         * \return True if the directory is a string
+         * \return True if the Path is a directory
          *
          */
         bool isDirectory() const;
@@ -122,13 +109,11 @@ namespace Bull
          * \return The Path as a String
          *
          */
-        String toString() const;
+        const String& toString() const;
 
     private:
 
         String m_path;
-        bool   m_isFile;
-        bool   m_isDirectory;
     };
 }
 
