@@ -48,7 +48,7 @@ namespace Bull
 
         void ErrorHandler::listen()
         {
-            if(!m_isBinded)
+            if(!m_isBound)
             {
                 m_previousHandler = XSetErrorHandler(&ErrorHandler::handle);
                 m_isBound = true;
@@ -57,7 +57,7 @@ namespace Bull
 
         void ErrorHandler::close()
         {
-            if(m_isBinded)
+            if(m_isBound)
             {
                 XSync(Display::get()->getHandler(), False);
                 XSetErrorHandler(m_previousHandler);

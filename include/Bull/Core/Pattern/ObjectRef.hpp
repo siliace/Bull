@@ -1,6 +1,8 @@
 #ifndef BULL_CORE_PATTERN_OBJECTREF_HPP
 #define BULL_CORE_PATTERN_OBJECTREF_HPP
 
+#include <utility>
+
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/Pattern/RefCounted.hpp>
 

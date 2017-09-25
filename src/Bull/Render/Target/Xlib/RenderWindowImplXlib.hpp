@@ -1,7 +1,7 @@
 #ifndef BULL_RENDERWINDOWIMPLXLIB_HPP
 #define BULL_RENDERWINDOWIMPLXLIB_HPP
 
-#include <Bull/Window/Xlib/WindowImplXlib.hpp>
+#include <Bull/System/Xlib/WindowImplXlib.hpp>
 
 namespace Bull
 {

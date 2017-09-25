@@ -10,7 +10,7 @@ namespace Bull
         {
             Date date;
 
-            date.second    = sysDate->tm_sec;
+            date.second    = Time(sysDate->tm_sec);
             date.minute    = sysDate->tm_min;
             date.hour      = sysDate->tm_hour;
             date.day       = sysDate->tm_mday;
