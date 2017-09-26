@@ -4,4 +4,6 @@ target_sources(bull-core
             ${CMAKE_CURRENT_SOURCE_DIR}/DirectoryImplUnix.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/FileImplUnix.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/FileImplUnix.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/PathImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/PathImpl.cpp
         )
