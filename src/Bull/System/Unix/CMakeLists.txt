@@ -8,6 +8,8 @@ target_sources(bull-system
             ${CMAKE_CURRENT_SOURCE_DIR}/JoystickImpl.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/LibraryImplUnix.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/LibraryImplUnix.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ProcessImplUnix.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ProcessImplUnix.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/RAMImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/RAMImpl.cpp
         )
