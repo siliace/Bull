@@ -3,12 +3,12 @@
 #include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
+#include <Bull/Render/Context/Wgl/WglContextNoError.hpp>
 #include <Bull/Render/Context/Wgl/WglCreateContextARB.hpp>
 #include <Bull/Render/Context/Wgl/WglMultisampleARB.hpp>
 #include <Bull/Render/Context/Wgl/WglPbufferARB.hpp>
 #include <Bull/Render/Context/Wgl/WglPixelFormatARB.hpp>
 #include <Bull/Render/Context/Wgl/WglSwapControlEXT.hpp>
-#include <Bull/Render/OpenGL.hpp>
 
 namespace Bull
 {
@@ -49,9 +49,9 @@ namespace Bull
             {
                 static const int attribs[] =
                 {
-                    WGL_DRAW_TO_WINDOW_ARB, GL_TRUE,
-                    WGL_SUPPORT_OPENGL_ARB, GL_TRUE,
-                    WGL_DOUBLE_BUFFER_ARB,  GL_TRUE,
+                    WGL_DRAW_TO_WINDOW_ARB, 1,
+                    WGL_SUPPORT_OPENGL_ARB, 1,
+                    WGL_DOUBLE_BUFFER_ARB,  1,
                     WGL_PIXEL_TYPE_ARB,     WGL_TYPE_RGBA_ARB,
                     0
                 };
@@ -110,7 +110,7 @@ namespace Bull
                             {
                                 break;
                             }
-                            else if(pbuffer != GL_TRUE)
+                            else if(pbuffer != 1)
                             {
                                 continue;
                             }
@@ -352,6 +352,19 @@ namespace Bull
                         attribs.push_back(profile);
                         attribs.push_back(WGL_CONTEXT_FLAGS_ARB);
                         attribs.push_back(flags);
+                    }
+
+                    if(m_settings.flags & ContextSettings::NoError)
+                    {
+                        if(isSupported("WGL_ARB_create_context_no_error"))
+                        {
+                            attribs.push_back(WGL_CONTEXT_OPENGL_NO_ERROR_ARB);
+                            attribs.push_back(1);
+                        }
+                        else
+                        {   m_settings.flags &= ~WGL_CONTEXT_OPENGL_NO_ERROR_ARB;
+                            Log::get()->write("WGL_CONTEXT_OPENGL_NO_ERROR_ARB is not available", Log::Level::Warning);
+                        }
                     }
 
                     attribs.push_back(0);
