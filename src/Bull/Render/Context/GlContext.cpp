@@ -118,22 +118,22 @@ namespace Bull
 
         bool GlContext::isLoaded(const String& extension)
         {
-            return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isLoaded(extension) : false;
+            return ExtensionsLoader::isSet() && ExtensionsLoader::get()->isLoaded(extension);
         }
 
         bool GlContext::isLoaded(const ExtensionsLoader::Extension& extension)
         {
-            return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isLoaded(extension) : false;
+            return ExtensionsLoader::isSet() && ExtensionsLoader::get()->isLoaded(extension);
         }
 
         bool GlContext::isSupported(const String& extension)
         {
-            return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isSupported(extension) : false;
+            return ExtensionsLoader::isSet() && ExtensionsLoader::get()->isSupported(extension);
         }
 
         bool GlContext::isSupported(const ExtensionsLoader::Extension& extension)
         {
-            return ExtensionsLoader::isSet() ? ExtensionsLoader::get()->isSupported(extension) : false;
+            return ExtensionsLoader::isSet() && ExtensionsLoader::get()->isSupported(extension);
         }
 
         int GlContext::evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int antialiasing, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted)

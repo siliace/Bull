@@ -3,6 +3,7 @@
 #include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 
+#include <Bull/Render/Context/GlKhrNoError.hpp>
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
 #include <Bull/Render/Context/Glx/GlxContextNoError.hpp>
 #include <Bull/Render/Context/Glx/GlxCreateContextARB.hpp>
@@ -360,6 +361,11 @@ namespace Bull
                             if(isSupported("GLX_CONTEXT_OPENGL_NO_ERROR_ARB"))
                             {
                                 attribs.push_back(GLX_CONTEXT_OPENGL_NO_ERROR_ARB);
+                                attribs.push_back(1);
+                            }
+                            else if(isSupported("GL_KHR_no_error"))
+                            {
+                                attribs.push_back(CONTEXT_FLAG_NO_ERROR_BIT_KHR);
                                 attribs.push_back(1);
                             }
                             else

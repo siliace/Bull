@@ -32,7 +32,7 @@ namespace Bull
                     {
                         desktopMode.bitsPerPixel = display->getDefaultDepth();
 
-                        if(rotation == RR_Rotate_90 || RR_Rotate_270)
+                        if(rotation == RR_Rotate_90 || rotation == RR_Rotate_270)
                         {
                             desktopMode.height = sizes[currentMode].width;
                             desktopMode.width  = sizes[currentMode].height;

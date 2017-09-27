@@ -1,4 +1,4 @@
-#include <Bull/Core/Configuration/OS.hpp>
+#include <memory>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Core/FileSystem/Win32/DirectoryImplWin32.hpp>
@@ -14,15 +14,9 @@ namespace Bull
     {
         DirectoryImpl* DirectoryImpl::createInstance(const Path& name)
         {
-            DirectoryImplType* impl = new DirectoryImplType();
-
-            if(impl->open(name))
-            {
-                return impl;
-            }
-
-            delete impl;
-            return nullptr;
+            std::unique_ptr<DirectoryImplType> instance = std::make_unique<DirectoryImplType>();
+            instance->open(name);
+            return instance.release();
         }
 
         bool DirectoryImpl::create(const String& name)

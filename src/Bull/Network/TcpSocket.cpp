@@ -9,6 +9,7 @@ namespace Bull
 {
     TcpSocket::TcpSocket() :
         Socket(Tcp),
+        m_state(Disconnected),
         m_remotePort(AnyPort),
         m_remoteAddress(IpAddress::None)
     {

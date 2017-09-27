@@ -183,11 +183,11 @@ namespace Bull
                         {
                             if(e.xclient.data.l[0] == static_cast<long>(atomDelete))
                             {
-                                WindowEvent e;
+                                WindowEvent event;
 
-                                e.type = WindowEvent::Closed;
+                                event.type = WindowEvent::Closed;
 
-                                pushEvent(e);
+                                pushEvent(event);
                             }
                         }
                     }

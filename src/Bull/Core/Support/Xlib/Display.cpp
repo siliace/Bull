@@ -5,9 +5,9 @@ namespace Bull
 {
     namespace prv
     {
-        Display::Display()
+        Display::Display() :
+            m_display(XOpenDisplay(nullptr))
         {
-            m_display = XOpenDisplay(nullptr);
 
             if(!m_display)
             {

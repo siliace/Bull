@@ -18,12 +18,12 @@ namespace Bull
 
     bool Cursor::create(const Image& image, const Vector2UI& hotSpot)
     {
-        if(image.getSize().x() == 0 || image.getSize().y() == 0)
+        if(image.getSize().x() && image.getSize().y())
         {
-            return false;
+            return m_impl->create(image, hotSpot);
         }
 
-        return m_impl->create(image, hotSpot);
+        return false;
     }
 
     const std::unique_ptr<prv::CursorImpl>& Cursor::getImpl() const

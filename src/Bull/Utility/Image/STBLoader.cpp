@@ -25,7 +25,7 @@ namespace Bull
         int STBLoader::eof(void *user)
         {
             InStream* stream = reinterpret_cast<InStream*>(user);
-            stream->getCursor() == stream->getSize();
+            return stream->getCursor() == stream->getSize();
         }
 
         bool STBLoader::isSupportedFormat(ImageFormat format) const
