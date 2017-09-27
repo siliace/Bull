@@ -1,5 +1,5 @@
-#ifndef BULL_SYSTEMCURSOR_HPP
-#define BULL_SYSTEMCURSOR_HPP
+#ifndef BULL_SYSTEM_CURSOR_HPP
+#define BULL_SYSTEM_CURSOR_HPP
 
 #include <memory>
 
@@ -95,4 +95,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_SYSTEMCURSOR_HPP
+#endif // BULL_SYSTEM_CURSOR_HPP

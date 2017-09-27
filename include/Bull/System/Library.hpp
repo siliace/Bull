@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_SYSTEM_LIBRARY_HPP
-#define BULL_CORE_SYSTEM_LIBRARY_HPP
+#ifndef BULL_SYSTEM_LIBRARY_HPP
+#define BULL_SYSTEM_LIBRARY_HPP
 
 #include <memory>
 
@@ -13,7 +13,7 @@ namespace Bull
         class LibraryImpl;
     }
 
-    class BULL_CORE_API Library : public NonCopyable
+    class BULL_API Library : public NonCopyable
     {
     public:
 
@@ -74,4 +74,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_SYSTEM_LIBRARY_HPP
+#endif // BULL_SYSTEM_LIBRARY_HPP

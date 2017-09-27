@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Configuration/Integer.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/Mutex.hpp>
 #include <Bull/Core/Time/Time.hpp>
 

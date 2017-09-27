@@ -29,7 +29,7 @@ namespace Bull
          */
         bool isValid() const;
 
-        unsigned int format;    /*!< The binary format */
+        unsigned int format; /*!< The binary format */
     };
 }
 

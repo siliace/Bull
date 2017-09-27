@@ -1,5 +1,5 @@
-#ifndef BULL_JOYSTICK_HPP
-#define BULL_JOYSTICK_HPP
+#ifndef BULL_SYSTEM_JOYSTICK_HPP
+#define BULL_SYSTEM_JOYSTICK_HPP
 
 #include <array>
 
@@ -129,4 +129,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_JOYSTICK_HPP
+#endif // BULL_SYSTEM_JOYSTICK_HPP
