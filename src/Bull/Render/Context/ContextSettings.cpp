@@ -15,8 +15,9 @@ namespace Bull
     ContextSettings::ContextSettings(Uint8 depths, Uint8 stencil, Uint8 antialiasing, Uint8 major, Uint8 minor) :
         major(major),
         minor(minor),
-        flags(Flag::Default),
+        type(Type ::Default),
         depths(depths),
+        profile(Profile::Core),
         stencil(stencil),
         antialiasing(antialiasing)
     {
@@ -25,10 +26,11 @@ namespace Bull
 
     bool ContextSettings::operator==(const ContextSettings& right) const
     {
-        return major        == right.major        &&
+        return type         == right.type         &&
+               major        == right.major        &&
                minor        == right.minor        &&
-               flags        == right.flags        &&
                depths       == right.depths       &&
+               profile      == right.profile      &&
                stencil      == right.stencil      &&
                antialiasing == right.antialiasing;
     }

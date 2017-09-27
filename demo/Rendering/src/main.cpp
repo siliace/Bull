@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
     Log::get()->createLogger<ConsoleLogger>();
 
     ContextSettings settings = ContextSettings::Best;
-    settings.flags |= ContextSettings::NoError;
+    settings.type |= ContextSettings::NoError;
 
     Shader phong;
     WindowEvent event;

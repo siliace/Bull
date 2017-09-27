@@ -226,7 +226,7 @@ namespace Bull
                     }
                 }
 
-                m_settings.flags = ContextSettings::Default;
+                m_settings.type = ContextSettings::Default;
 
                 gl::enable(GL_DEPTH_TEST);
 
@@ -237,17 +237,17 @@ namespace Bull
 
                     if(flags & GL_CONTEXT_FLAG_DEBUG_BIT)
                     {
-                        m_settings.flags |= ContextSettings::Debug;
+                        m_settings.type |= ContextSettings::Debug;
                     }
 
                     if(flags & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT)
                     {
-                        m_settings.flags |= ContextSettings::ForwardCompatible;
+                        m_settings.type |= ContextSettings::ForwardCompatible;
                     }
 
                     if(m_settings.major == 3 && m_settings.minor == 1 && isSupported("GL_ARB_compatibility"))
                     {
-                        m_settings.flags |= ContextSettings::Compatibility;
+                        m_settings.type |= ContextSettings::Compatibility;
                     }
                 }
 

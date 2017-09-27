@@ -338,15 +338,14 @@ namespace Bull
                     if(isSupported("GLX_ARB_create_context_profile"))
                     {
                         int flags   = 0;
-                        int noError = 0;
-                        int profile = (m_settings.flags & ContextSettings::Compatibility) ? GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : GLX_CONTEXT_CORE_PROFILE_BIT_ARB;
+                        int profile = (m_settings.profile & ContextSettings::Compatibility) ? GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : GLX_CONTEXT_CORE_PROFILE_BIT_ARB;
 
-                        if(m_settings.flags & ContextSettings::Debug)
+                        if(m_settings.type & ContextSettings::Debug)
                         {
                             flags |= GLX_CONTEXT_DEBUG_BIT_ARB;
                         }
 
-                        if(m_settings.flags & ContextSettings::ForwardCompatible)
+                        if(m_settings.type & ContextSettings::ForwardCompatible)
                         {
                             flags |= GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
                         }
@@ -356,7 +355,7 @@ namespace Bull
                         attribs.push_back(GLX_CONTEXT_FLAGS_ARB);
                         attribs.push_back(flags);
 
-                        if(m_settings.flags & ContextSettings::NoError)
+                        if(m_settings.type & ContextSettings::NoError)
                         {
                             if(isSupported("GLX_CONTEXT_OPENGL_NO_ERROR_ARB"))
                             {
@@ -370,14 +369,14 @@ namespace Bull
                             }
                             else
                             {
-                                m_settings.flags &= ~GLX_CONTEXT_OPENGL_NO_ERROR_ARB;
+                                m_settings.type &= ~ContextSettings::NoError;
                                 Log::get()->write("GLX_CONTEXT_OPENGL_NO_ERROR_ARB is not available", Log::Level::Warning);
                             }
                         }
                     }
                     else
                     {
-                        m_settings.flags = ContextSettings::Default;
+                        m_settings.type = ContextSettings::Default;
                     }
 
                     attribs.push_back(0);
