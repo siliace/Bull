@@ -2,6 +2,7 @@
 #define BULL_CORE_SYSTEM_LIBRARYIMPL_HPP
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+
 #include <Bull/System/Library.hpp>
 
 namespace Bull

@@ -1,5 +1,5 @@
-#ifndef Bull_FileLogger_hpp
-#define Bull_FileLogger_hpp
+#ifndef BULL_UTILITY_LOGGER_FILELOGGER_HPP
+#define BULL_UTILITY_LOGGER_FILELOGGER_HPP
 
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Log/AbstractLogger.hpp>
@@ -37,4 +37,4 @@ namespace Bull
     };
 }
 
-#endif // Bull_FileLogger_hpp
+#endif // BULL_UTILITY_LOGGER_FILELOGGER_HPP

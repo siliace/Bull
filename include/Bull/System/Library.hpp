@@ -3,8 +3,10 @@
 
 #include <memory>
 
-#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
+
+#include <Bull/System/Export.hpp>
 
 namespace Bull
 {
@@ -13,7 +15,7 @@ namespace Bull
         class LibraryImpl;
     }
 
-    class BULL_API Library : public NonCopyable
+    class BULL_SYSTEM_API Library : public NonCopyable
     {
     public:
 

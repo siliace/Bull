@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_FUNCTORWITHARGS_HPP
-#define BULL_CORE_FUNCTORWITHARGS_HPP
+#ifndef BULL_CORE_FUNCTOR_FUNCTORWITHARGS_HPP
+#define BULL_CORE_FUNCTOR_FUNCTORWITHARGS_HPP
 
 #include <tuple>
 
@@ -39,6 +39,6 @@ namespace Bull
 
 #include <Bull/Core/Functor/FunctorWithArgs.inl>
 
-#endif // Bull_FunctorWithoutArgs_hpp
+#endif // BULL_CORE_FUNCTOR_FUNCTORWITHARGS_HPP
 
 
