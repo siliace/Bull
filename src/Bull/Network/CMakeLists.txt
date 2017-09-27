@@ -8,7 +8,6 @@ target_sources(bull-network
             ${BULL_INC_NETWORK}/Export.hpp
             ${BULL_INC_NETWORK}/Icmp.hpp
             ${BULL_SRC_NETWORK}/Icmp.cpp
-            ${BULL_SRC_NETWORK}/IcmpImpl.hpp
             ${BULL_INC_NETWORK}/IpAddress.hpp
             ${BULL_SRC_NETWORK}/IpAddress.cpp
             ${BULL_INC_NETWORK}/Socket.hpp
@@ -21,6 +20,7 @@ target_sources(bull-network
             ${BULL_INC_NETWORK}/UdpSocket.hpp
             ${BULL_SRC_NETWORK}/UdpSocket.cpp
         PRIVATE
+            ${BULL_SRC_NETWORK}/IcmpImpl.hpp
             ${BULL_SRC_NETWORK}/IpAddressImpl.hpp
             ${BULL_SRC_NETWORK}/SocketImpl.hpp
         )
