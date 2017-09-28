@@ -93,10 +93,7 @@ namespace Bull
 
             ptrArgs[args.size()] = nullptr;
 
-            if(execvp(commandLine.getBuffer(), (char* const*)ptrArgs) == -1)
-            {
-                throw RuntimeError("Failed to create process");
-            }
+            execvp(commandLine.getBuffer(), (char* const*)ptrArgs);
         }
     }
 }
