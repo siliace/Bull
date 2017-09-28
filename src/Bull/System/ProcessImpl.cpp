@@ -11,14 +11,19 @@ namespace Bull
 {
     namespace prv
     {
-        Process::Id ProcessImpl::getPid()
+        Process::Id ProcessImpl::getCurrentPid()
         {
-            return ProcessImplType::getPid();
+            return ProcessImplType::getCurrentPid();
         }
 
-        Process::Id ProcessImpl::getParentPid()
+        Process::Id ProcessImpl::getCurrentParentPid()
         {
-            return ProcessImplType::getParentPid();
+            return ProcessImplType::getCurrentParentPid();
+        }
+
+        ProcessImpl* ProcessImpl::createInstance(const String& commandLine, const Path& workingDirectory, const std::vector<String>& args)
+        {
+            return new ProcessImplType(commandLine, workingDirectory, args);
         }
     }
 }
