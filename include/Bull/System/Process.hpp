@@ -32,8 +32,8 @@ namespace Bull
         enum ExitCode
         {
             None         = -1,
-            Ok           = 0,
-            GeneralError = 1,
+            Ok           =  0,
+            GeneralError =  1,
         };
 
         /*! \brief Get the PID of the current process
