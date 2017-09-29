@@ -4,8 +4,6 @@
 #include <Bull/Core/Thread/Thread.hpp>
 
 #include <Bull/System/Xlib/WindowImplXlib.hpp>
-#include <X11/Xutil.h>
-#include <X11/Xlib.h>
 
 #ifndef Button6
     #define Button6 6
