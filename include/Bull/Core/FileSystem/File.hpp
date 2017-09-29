@@ -6,16 +6,22 @@
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InOutStream.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/ObjectRef.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
 {
+    class File;
+
     namespace prv
     {
         class FileImpl;
     }
 
-    class BULL_CORE_API File : public InOutStream, public NonCopyable
+    using FileRef = ObjectRef<File>;
+    using FileConstRef = ObjectRef<const File>;
+
+    class BULL_CORE_API File : public InOutStream, public RefCounted
     {
     public:
 
@@ -76,6 +82,16 @@ namespace Bull
          *
          */
         static bool remove(const Path& name);
+
+        /*! \brief Make a File
+         *
+         * \param args Arguments to use to construct the File
+         *
+         * \return The created File
+         *
+         */
+        template <typename... Args>
+        static FileRef make(Args&&... args);
 
     public:
 
@@ -208,7 +224,7 @@ namespace Bull
          * \return Return the path of the file
          *
          */
-        const Path& getPath() const;
+        inline const Path& getPath() const;
 
         /*! \brief Get the size of the file
          *
@@ -222,28 +238,28 @@ namespace Bull
          * \return Return the opening mode of the file
          *
          */
-        Uint32 getOpeningMode() const;
+        inline Uint32 getOpeningMode() const;
 
         /*! \brief Check if this file is open with read permission
          *
          * \return Return true if this file is open with read permission, false otherwise
          *
          */
-        bool canRead() const;
+        inline bool canRead() const;
 
         /*! \brief Check if this file is open with write permission
          *
          * \return Return true if this file is open with write permission, false otherwise
          *
          */
-        bool canWrite() const;
+        inline bool canWrite() const;
 
         /*! \brief Check if the cursor is at the end of the file
          *
          * \param Return true if the cursor is at end of file, false otherwise
          *
          */
-        bool isAtEof() const;
+        inline bool isAtEof() const;
 
         /*! \brief Convert the file to a boolean
          *
@@ -260,5 +276,7 @@ namespace Bull
         std::unique_ptr<prv::FileImpl> m_impl;
     };
 }
+
+#include <Bull/Core/FileSystem/File.inl>
 
 #endif // BULL_CORE_FILESYSTEM_FILE_HPP

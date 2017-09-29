@@ -10,6 +10,11 @@ namespace Bull
         return prv::FileSystemImpl::getRoot();
     }
 
+    Path FileSystem::getTempPath()
+    {
+        return prv::FileSystemImpl::getTempPath();
+    }
+
     bool FileSystem::setCurrentDirectory(const Path& path)
     {
         return prv::FileSystemImpl::setCurrentDirectory(path);

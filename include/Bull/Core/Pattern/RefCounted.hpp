@@ -14,7 +14,7 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param persistent
+         * \param persistents
          *
          */
         explicit RefCounted(bool persistent = true);

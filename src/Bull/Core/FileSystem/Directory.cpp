@@ -37,11 +37,11 @@ namespace Bull
             {
                 if(entity.isDirectory())
                 {
-                    success &= Directory::copy(Path(path.toString() + "/" + entity.toString()), newPath + "/" + entity.toString());
+                    success &= Directory::copy(Path(path.toString() + Path::Separator + entity.toString()), newPath + Path::Separator + entity.toString());
                 }
                 else
                 {
-                    success &= File::copy(Path(path.toString() + "/" + entity.toString()), newPath + "/" + entity.toString());
+                    success &= File::copy(Path(path.toString() + Path::Separator + entity.toString()), newPath + Path::Separator + entity.toString());
                 }
             }
         }

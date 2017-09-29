@@ -50,7 +50,7 @@ namespace Bull
             /*! \brief Destructor
              *
              */
-            virtual ~DirectoryImplUnix();
+            ~DirectoryImplUnix();
 
             /*! \brief Open a directory
              *
@@ -72,6 +72,7 @@ namespace Bull
 
         private:
 
+            Path m_path;
             DIR* m_handler;
         };
     }

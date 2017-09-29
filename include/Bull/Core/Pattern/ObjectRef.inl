@@ -1,3 +1,5 @@
+#include <Bull/Core/Exception/RuntimeError.hpp>
+
 namespace Bull
 {
     template <typename T>
@@ -127,6 +129,11 @@ namespace Bull
     template <typename T>
     T* ObjectRef<T>::operator->() const
     {
+        if(!isValid())
+        {
+            throw RuntimeError("Null reference error");
+        }
+
         return get();
     }
 

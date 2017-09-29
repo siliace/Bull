@@ -7,16 +7,22 @@
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/ObjectRef.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
+    class Directory;
+
     namespace prv
     {
         class DirectoryImpl;
     }
 
-    class BULL_CORE_API Directory : public NonCopyable
+    using DirectoryRef = ObjectRef<Directory>;
+    using DirectoryConstRef = ObjectRef<const Directory>;
+
+    class BULL_CORE_API Directory : public RefCounted
     {
     public:
 
@@ -74,6 +80,16 @@ namespace Bull
          *
          */
         static bool remove(const Path& path);
+
+        /*! \brief Make a Directory
+         *
+         * \param args Arguments to use to construct the Directory
+         *
+         * \return The created Directory
+         *
+         */
+        template <typename... Args>
+        static DirectoryRef make(Args&&... args);
 
     public:
 
@@ -137,5 +153,7 @@ namespace Bull
         std::unique_ptr<prv::DirectoryImpl> m_impl;
     };
 }
+
+#include <Bull/Core/FileSystem/Directory.inl>
 
 #endif // BULL_CORE_FILESYSTEM_DIRECTORY_HPP

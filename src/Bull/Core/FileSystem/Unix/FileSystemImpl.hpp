@@ -17,6 +17,13 @@ namespace Bull
              */
             static Path getRoot();
 
+            /*! \brief Get the path of the temporary directory
+             *
+             * \return The temp path
+             *
+             */
+            static Path getTempPath();
+
             /*! \brief Set the current directory of the process
              *
              * \param path The new path of the process
