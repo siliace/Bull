@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_FILESYSTEM_UNIX_FILESYSTEMIMPL_HPP
-#define BULL_CORE_FILESYSTEM_UNIX_FILESYSTEMIMPL_HPP
+#ifndef BULL_CORE_FILESYSTEM_WIN32_FILESYSTEMIMPL_HPP
+#define BULL_CORE_FILESYSTEM_WIN32_FILESYSTEMIMPL_HPP
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/FileSystem/FileSystemInfo.hpp>
@@ -16,6 +16,20 @@ namespace Bull
              *
              */
             static Path getRoot();
+
+            /*! \brief Get the Path of user's home directory
+             *
+             * \return The home directory
+             *
+             */
+            static Path getHome();
+
+            /*! \brief Get the path of the temporary directory
+             *
+             * \return The temp path
+             *
+             */
+            static Path getTempPath();
 
             /*! \brief Set the current directory of the process
              *
@@ -48,4 +62,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_CORE_FILESYSTEM_UNIX_FILESYSTEMIMPL_HPP
+#endif // BULL_CORE_FILESYSTEM_WIN32_FILESYSTEMIMPL_HPP

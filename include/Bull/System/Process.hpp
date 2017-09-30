@@ -20,7 +20,7 @@ namespace Bull
     {
     public:
 
-        typedef int Id;
+        typedef unsigned int Id;
 
         enum Status
         {

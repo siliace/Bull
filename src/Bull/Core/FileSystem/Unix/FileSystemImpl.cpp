@@ -14,7 +14,7 @@ namespace Bull
 
         Path FileSystemImpl::getTempPath()
         {
-            return Path::canonical("/tmp");
+            return getRoot().getChild("tmp");
         }
 
         bool FileSystemImpl::setCurrentDirectory(const Path& path)

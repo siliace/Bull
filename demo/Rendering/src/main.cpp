@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include <Bull/Core/FileSystem/FileSystem.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Graphics/Material.hpp>
@@ -90,6 +91,7 @@ void show(const Matrix4F& mat)
 int main(int argc, char* argv[])
 {
     Log::get()->createLogger<ConsoleLogger>();
+    auto home = FileSystem::getHome();
 
     ContextSettings settings = ContextSettings::Best;
     settings.type |= ContextSettings::NoError;

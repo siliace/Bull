@@ -2,7 +2,7 @@
 #include <Bull/Core/IO/StringStream.hpp>
 
 #include <Bull/Network/IpAddress.hpp>
-#include <Bull/Network/Unix/IpAddressImpl.hpp>
+#include <Bull/Network/IpAddressImpl.hpp>
 
 namespace Bull
 {

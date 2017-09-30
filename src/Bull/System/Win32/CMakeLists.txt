@@ -16,6 +16,8 @@ target_sources(bull-system
             ${CMAKE_CURRENT_SOURCE_DIR}/LibraryImplWin32.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/MouseImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/MouseImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ProcessImplWin32.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/ProcessImplWin32.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/RAMImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/RAMImpl.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/VideoModeImpl.hpp

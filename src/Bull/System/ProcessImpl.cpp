@@ -1,7 +1,8 @@
 #include <Bull/System/ProcessImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #error Lack of implementation : Process
+    #include <Bull/System/Win32/ProcessImplWin32.hpp>
+    typedef Bull::prv::ProcessImplWin32 ProcessImplType;
 #else
     #include <Bull/System/Unix/ProcessImplUnix.hpp>
     typedef Bull::prv::ProcessImplUnix ProcessImplType;

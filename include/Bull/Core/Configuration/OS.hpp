@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_SYSTEM_OS_HPP
-#define BULL_CORE_SYSTEM_OS_HPP
+#ifndef BULL_CORE_CONFIGURATION_OS_HPP
+#define BULL_CORE_CONFIGURATION_OS_HPP
 
 #if defined _WIN32
     #define BULL_OS_WINDOWS
@@ -41,4 +41,4 @@
     #error Your system is not supported by Bull
 #endif
 
-#endif // BULL_CORE_SYSTEM_OS_HPP
+#endif // BULL_CORE_CONFIGURATION_OS_HPP
