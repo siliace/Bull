@@ -34,6 +34,8 @@ namespace Bull
         this->y() = y;
         this->z() = z;
         this->w() = w;
+
+		return (*this);
     }
 
     template <typename T>

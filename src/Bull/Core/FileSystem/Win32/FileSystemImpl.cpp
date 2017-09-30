@@ -35,12 +35,12 @@ namespace Bull
 
         FileSystemInfo FileSystemImpl::getFileSystemInfo(const Path& base)
         {
-
+			return { 0, 0, 0 };
         }
 
         bool FileSystemImpl::createLink(const Path& target, const String& link)
         {
-
+			return false;
         }
     }
 }

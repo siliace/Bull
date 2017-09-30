@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <limits>
+#include <string>
 #include <vector>
 
 #include <Bull/Core/Configuration/Integer.hpp>

@@ -12,6 +12,8 @@ namespace Bull
     ImageParameterBag& ImageParameterBag::setImageFormat(ImageFormat format)
     {
         setParameter("image_format", format);
+
+		return (*this);
     }
 
     ImageFormat ImageParameterBag::getImageFormat() const

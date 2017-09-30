@@ -2,6 +2,7 @@
 #define BULL_CORE_SYSTEM_INTEGER_HPP
 
 #include <cstdint>
+#include <utility>
 
 namespace Bull
 {

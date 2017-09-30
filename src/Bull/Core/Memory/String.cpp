@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cstring>
 
 #include <Bull/Core/Memory/RangeCheck.hpp>
