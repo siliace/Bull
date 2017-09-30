@@ -5,19 +5,19 @@
 
 namespace Bull
 {
-    constexpr float Pi = std::acos(-1.f);
+    const float Pi = std::acos(-1.f);
 
-    constexpr float Pi2 = Pi / 2.f;
+	const float Pi2 = Pi / 2.f;
 
-    constexpr float Pi3 = Pi / 3.f;
+	const float Pi3 = Pi / 3.f;
 
-    constexpr float PiPow2 = std::pow(Pi, 2.f);
+	const float PiPow2 = std::pow(Pi, 2.f);
 
-    constexpr float PiPow3 = std::pow(Pi, 3.f);
+	const float PiPow3 = std::pow(Pi, 3.f);
 
-    constexpr float Sqrt2 = std::sqrt(2.f);
+	const float Sqrt2 = std::sqrt(2.f);
 
-    constexpr float Sqrt3 = std::sqrt(3.f);
+	const float Sqrt3 = std::sqrt(3.f);
 }
 
 #endif // BULL_MATH_CONSTANTS_HPP
