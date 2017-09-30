@@ -71,3 +71,4 @@ else()
 endif()
 
 target_link_libraries(bull-system bull-core)
+target_link_libraries(bull-system bull-utility)
