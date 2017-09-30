@@ -1,4 +1,5 @@
-#include <memory>
+#include <Bull/Core/Configuration/OS.hpp>
+#include <Bull/Core/FileSystem/DirectoryImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Core/FileSystem/Win32/DirectoryImplWin32.hpp>

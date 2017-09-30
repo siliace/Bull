@@ -336,14 +336,14 @@ namespace Bull
                     if(isSupported("WGL_ARB_create_context_profile"))
                     {
                         int flags   = 0;
-                        int profile = (m_settings.flags & ContextSettings::Compatibility) ? WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : WGL_CONTEXT_CORE_PROFILE_BIT_ARB;
+                        int profile = (m_settings.profile == ContextSettings::Compatibility) ? WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : WGL_CONTEXT_CORE_PROFILE_BIT_ARB;
 
-                        if(m_settings.flags & ContextSettings::Debug)
+                        if(m_settings.type == ContextSettings::Debug)
                         {
                             flags |= WGL_CONTEXT_DEBUG_BIT_ARB;
                         }
 
-                        if(m_settings.flags & ContextSettings::ForwardCompatible)
+                        if(m_settings.type == ContextSettings::ForwardCompatible)
                         {
                             flags |= WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
                         }
@@ -354,7 +354,7 @@ namespace Bull
                         attribs.push_back(flags);
                     }
 
-                    if(m_settings.flags & ContextSettings::NoError)
+                    if(m_settings.type == ContextSettings::NoError)
                     {
                         if(isSupported("WGL_ARB_create_context_no_error"))
                         {
@@ -362,7 +362,7 @@ namespace Bull
                             attribs.push_back(1);
                         }
                         else
-                        {   m_settings.flags &= ~WGL_CONTEXT_OPENGL_NO_ERROR_ARB;
+                        {   m_settings.type = ContextSettings::Default;
                             Log::get()->write("WGL_CONTEXT_OPENGL_NO_ERROR_ARB is not available", Log::Level::Warning);
                         }
                     }
