@@ -2,7 +2,7 @@
 #include <Bull/Core/IO/StringStream.hpp>
 
 #include <Bull/Network/IpAddress.hpp>
-#include <Bull/Network/Win32/IpAddressImpl.hpp>
+#include <Bull/Network/Unix/IpAddressImpl.hpp>
 
 namespace Bull
 {
@@ -68,6 +68,16 @@ namespace Bull
         m_protocol(IpAddress::IpV6)
     {
         /// Nothing
+    }
+
+    IpAddress::IpAddress(Uint32 address) :
+        m_valid(true),
+        m_protocol(IpAddress::IpV4)
+    {
+        m_v4[0] = Uint8(address >> 24);
+        m_v4[1] = Uint8(address >> 16);
+        m_v4[2] = Uint8(address >> 8);
+        m_v4[3] = Uint8(address >> 0);
     }
 
     IpAddress::IpAddress(Uint8 a, Uint8 b, Uint8 c, Uint8 d) :

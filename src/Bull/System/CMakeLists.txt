@@ -20,6 +20,8 @@ target_sources(bull-system
             ${BULL_SRC_SYSTEM}/Library.cpp
             ${BULL_INC_SYSTEM}/Mouse.hpp
             ${BULL_SRC_SYSTEM}/Mouse.cpp
+            ${BULL_INC_SYSTEM}/Process.hpp
+            ${BULL_SRC_SYSTEM}/Process.cpp
             ${BULL_INC_SYSTEM}/RAM.hpp
             ${BULL_SRC_SYSTEM}/RAM.cpp
             ${BULL_INC_SYSTEM}/VideoMode.hpp
@@ -44,6 +46,8 @@ target_sources(bull-system
             ${BULL_SRC_SYSTEM}/LibraryImpl.hpp
             ${BULL_SRC_SYSTEM}/LibraryImpl.cpp
             ${BULL_SRC_SYSTEM}/MouseImpl.hpp
+            ${BULL_SRC_SYSTEM}/ProcessImpl.hpp
+            ${BULL_SRC_SYSTEM}/ProcessImpl.cpp
             ${BULL_SRC_SYSTEM}/RAMImpl.hpp
             ${BULL_SRC_SYSTEM}/JoystickState.hpp
             ${BULL_SRC_SYSTEM}/JoystickState.cpp

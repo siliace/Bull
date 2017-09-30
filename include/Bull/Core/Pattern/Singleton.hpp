@@ -24,7 +24,7 @@ namespace Bull
          *
          */
         template<typename... Args>
-        static Instance get(Args... args)
+        static Instance get(Args&&... args)
         {
             if(!s_instance)
             {
@@ -32,7 +32,7 @@ namespace Bull
 
                 if(!s_instance)
                 {
-                    s_instance = std::make_unique<TChild>(args...);
+                    s_instance = std::make_unique<TChild>(std::forward<Args>(args)...);
                 }
             }
 

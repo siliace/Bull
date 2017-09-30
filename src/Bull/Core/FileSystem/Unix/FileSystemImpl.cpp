@@ -12,6 +12,11 @@ namespace Bull
             return Path::canonical("/");
         }
 
+        Path FileSystemImpl::getTempPath()
+        {
+            return Path::canonical("/tmp");
+        }
+
         bool FileSystemImpl::setCurrentDirectory(const Path& path)
         {
             return chdir(path.toString().getBuffer()) != -1;

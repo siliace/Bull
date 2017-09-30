@@ -1,5 +1,5 @@
-#ifndef BULL_MOUSE_HPP
-#define BULL_MOUSE_HPP
+#ifndef BULL_SYSTEM_MOUSE_HPP
+#define BULL_SYSTEM_MOUSE_HPP
 
 #include <Bull/System/Export.hpp>
 
@@ -57,4 +57,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_MOUSE_HPP
+#endif // BULL_SYSTEM_MOUSE_HPP

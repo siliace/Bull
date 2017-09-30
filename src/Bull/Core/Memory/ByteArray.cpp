@@ -1,7 +1,7 @@
 #include <cstring>
 
-#include <Bull/Core/Memory/RangeCheck.hpp>
 #include <Bull/Core/Memory/ByteArray.hpp>
+#include <Bull/Core/Memory/RangeCheck.hpp>
 
 namespace Bull
 {

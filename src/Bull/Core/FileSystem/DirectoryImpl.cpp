@@ -35,10 +35,7 @@ namespace Bull
             return DirectoryImplType::remove(name);
         }
 
-        DirectoryImpl::~DirectoryImpl()
-        {
-            /// Nothing
-        }
+        DirectoryImpl::~DirectoryImpl() = default;
     }
 }
 

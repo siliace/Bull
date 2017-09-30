@@ -82,6 +82,13 @@ namespace Bull
 
         /*! \brief Constructor
          *
+         * \param address The IPV4 address
+         *
+         */
+        explicit IpAddress(Uint32 address);
+
+        /*! \brief Constructor
+         *
          * \param a The first byte of the IpAddress
          * \param b The second byte of the IpAddress
          * \param c The third byte of the IpAddress

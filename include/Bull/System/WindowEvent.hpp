@@ -1,5 +1,5 @@
-#ifndef BULL_SYSTEMWINDOWEVENT_HPP
-#define BULL_SYSTEMWINDOWEVENT_HPP
+#ifndef BULL_SYSTEM_WINDOWEVENT_HPP
+#define BULL_SYSTEM_WINDOWEVENT_HPP
 
 #include <Bull/System/Joystick.hpp>
 #include <Bull/System/Keyboard.hpp>
@@ -118,4 +118,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_SYSTEMWINDOWEVENT_HPP
+#endif // BULL_SYSTEM_WINDOWEVENT_HPP

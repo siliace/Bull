@@ -265,7 +265,7 @@ namespace Bull
              */
             void setProtocols();
 
-            XScreen           m_screen;
+            XScreen*          m_screen;
             Display::Instance m_display;
             XWindow           m_handler;
             Vector2UI         m_lastSize;

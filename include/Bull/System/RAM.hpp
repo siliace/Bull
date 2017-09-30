@@ -1,5 +1,5 @@
-#ifndef BULL_RAM_HPP
-#define BULL_RAM_HPP
+#ifndef BULL_SYSTEM_RAM_HPP
+#define BULL_SYSTEM_RAM_HPP
 
 #include <Bull/Core/Configuration/Integer.hpp>
 
@@ -18,4 +18,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_RAM_HPP
+#endif // BULL_SYSTEM_RAM_HPP

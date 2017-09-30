@@ -1,5 +1,5 @@
-#ifndef Bull_Constants_hpp
-#define Bull_Constants_hpp
+#ifndef BULL_MATH_CONSTANTS_HPP
+#define BULL_MATH_CONSTANTS_HPP
 
 #include <cmath>
 
@@ -20,4 +20,4 @@ namespace Bull
     constexpr float Sqrt3 = std::sqrt(3.f);
 }
 
-#endif // Bull_Constants_hpp
+#endif // BULL_MATH_CONSTANTS_HPP

@@ -1,6 +1,7 @@
 #ifndef BULL_MEMORYSTREAM_HPP
 #define BULL_MEMORYSTREAM_HPP
 
+#include <Bull/Core/Export.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 
 namespace Bull

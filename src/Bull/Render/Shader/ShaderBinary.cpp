@@ -7,14 +7,14 @@ namespace Bull
 {
     std::vector<int> ShaderBinary::getSupportedFormats()
     {
-        int lenght;
+        int length;
         std::vector<int> formats;
 
         ensureContext();
 
-        gl::getIntegerv(GL_NUM_PROGRAM_BINARY_FORMATS, &lenght);
+        gl::getIntegerv(GL_NUM_PROGRAM_BINARY_FORMATS, &length);
 
-        formats.resize(lenght, 0);
+        formats.resize(length, 0);
 
         gl::getIntegerv(GL_PROGRAM_BINARY_FORMATS, &formats[0]);
 

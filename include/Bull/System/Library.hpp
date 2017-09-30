@@ -1,10 +1,12 @@
-#ifndef BULL_CORE_SYSTEM_LIBRARY_HPP
-#define BULL_CORE_SYSTEM_LIBRARY_HPP
+#ifndef BULL_SYSTEM_LIBRARY_HPP
+#define BULL_SYSTEM_LIBRARY_HPP
 
 #include <memory>
 
-#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
+
+#include <Bull/System/Export.hpp>
 
 namespace Bull
 {
@@ -13,7 +15,7 @@ namespace Bull
         class LibraryImpl;
     }
 
-    class BULL_CORE_API Library : public NonCopyable
+    class BULL_SYSTEM_API Library : public NonCopyable
     {
     public:
 
@@ -74,4 +76,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_SYSTEM_LIBRARY_HPP
+#endif // BULL_SYSTEM_LIBRARY_HPP

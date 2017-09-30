@@ -9,7 +9,7 @@ namespace Bull
     {
         bool DirectoryImplUnix::create(const String& path)
         {
-            return mkdir(path.getBuffer(), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH) != -1;
+            return mkdir(path.getBuffer(), S_IRWXU | S_IRGRP | S_IROTH) != -1;
         }
 
         bool DirectoryImplUnix::exists(const String& path)
@@ -47,7 +47,14 @@ namespace Bull
         {
             m_handler = opendir(path.toString().getBuffer());
 
-            return m_handler != nullptr;
+            if(!m_handler)
+            {
+                return false;
+            }
+
+            m_path = path;
+
+            return true;
         }
 
         std::vector<Path> DirectoryImplUnix::getContent(Uint32 flags)
@@ -57,7 +64,7 @@ namespace Bull
 
             while((result = readdir64(m_handler)))
             {
-                Path p(result->d_name);
+                Path p = Path(m_path.toString() + Path::Separator + result->d_name);
 
                 if((flags & (Directory::Directories) && p.isDirectory()) || (flags & (Directory::Files) && p.isFile()))
                 {

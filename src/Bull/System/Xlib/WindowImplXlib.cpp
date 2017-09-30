@@ -4,8 +4,6 @@
 #include <Bull/Core/Thread/Thread.hpp>
 
 #include <Bull/System/Xlib/WindowImplXlib.hpp>
-#include <X11/Xutil.h>
-#include <X11/Xlib.h>
 
 #ifndef Button6
     #define Button6 6
@@ -535,8 +533,8 @@ namespace Bull
         {
             XSizeHints hints;
 
-            hints.max_width  = (size.x() > 0) ? size.x() : m_screen.width;
-            hints.max_height = (size.y() > 0) ? size.y() : m_screen.height;
+            hints.max_width  = (size.x() > 0) ? size.x() : m_screen->width;
+            hints.max_height = (size.y() > 0) ? size.y() : m_screen->height;
             hints.flags      = PMaxSize;
 
             XSetNormalHints(m_display->getHandler(), m_handler, &hints);
@@ -661,7 +659,7 @@ namespace Bull
             m_cursorVisible(true),
             m_captureCursor(false)
         {
-            /// Nothing
+            m_screen = ScreenOfDisplay(m_display->getHandler(), m_display->getDefaultScreen());
         }
 
         void WindowImplXlib::open(const VideoMode& mode, const String& title, Uint32 WindowStyle)
