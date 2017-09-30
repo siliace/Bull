@@ -7,6 +7,9 @@ obj/
 #Clion
 .idea/
 
+#Visual studio
+.vs/
+
 #CMake
 bin/
 build/
