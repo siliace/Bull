@@ -2,6 +2,7 @@
 #define BULL_CORE_HARDWARE_MOUSE_HPP
 
 #include <Bull/Core/Export.hpp>
+#include <Bull/Core/Window/Window.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -31,13 +32,13 @@ namespace Bull
          */
         static void setPosition(const Vector2I& position);
 
-        /*! \brief Set the position of the cursor on the screen
+        /*! \brief Set the position of the cursor on the screen relatively to a Window
          *
-         * \param x The new x position of the cursor on the screen
-         * \param y The new y position of the cursor on the screen
+         * \param position The position of the cursor
+         * \param relative The Window relative to
          *
          */
-        static void setPosition(int x, int y);
+        static void setPosition(const Vector2I& position, const Window& relative);
 
         /*! \brief Get the cursor position on the screen
          *

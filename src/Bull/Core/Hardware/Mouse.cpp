@@ -8,9 +8,9 @@ namespace Bull
         prv::MouseImpl::setPosition(position);
     }
 
-    void Mouse::setPosition(int x, int y)
+    void Mouse::setPosition(const Vector2I& position, const Window& relative)
     {
-        setPosition(Vector2I(x, y));
+        prv::MouseImpl::setPosition(relative.getPosition() + position);
     }
 
     Vector2I Mouse::getPosition()
