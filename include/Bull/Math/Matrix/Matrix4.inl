@@ -5,7 +5,7 @@ namespace Bull
     template <typename T>
     Matrix4<T> Matrix4<T>::makeScale(const Vector3<T>& scale)
     {
-        Matrix4<T> model;
+        Matrix4<T> model = Matrix4<T>::Identity;
 
         model.at(0, 0) = scale.at(0);
         model.at(1, 1) = scale.at(1);
