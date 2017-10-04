@@ -5,16 +5,11 @@ target_sources(bull-render
         PUBLIC
             ${BULL_INC_RENDER_TARGET}/RenderTarget.hpp
             ${BULL_SRC_RENDER_TARGET}/RenderTarget.cpp
-            ${BULL_INC_RENDER_TARGET}/RenderTexture.hpp
-            ${BULL_SRC_RENDER_TARGET}/RenderTexture.cpp
             ${BULL_INC_RENDER_TARGET}/RenderWindow.hpp
             ${BULL_SRC_RENDER_TARGET}/RenderWindow.cpp
             ${BULL_INC_RENDER_TARGET}/Viewport.hpp
             ${BULL_SRC_RENDER_TARGET}/Viewport.cpp
         PRIVATE
-            ${BULL_SRC_RENDER_TARGET}/RenderTextureImpl.hpp
-            ${BULL_SRC_RENDER_TARGET}/RenderTextureImplDefault.cpp
-            ${BULL_SRC_RENDER_TARGET}/RenderTextureImplDefault.hpp
             ${BULL_SRC_RENDER_TARGET}/RenderWindowImpl.cpp
             ${BULL_SRC_RENDER_TARGET}/RenderWindowImpl.hpp
         )
