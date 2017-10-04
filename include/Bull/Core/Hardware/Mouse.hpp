@@ -2,12 +2,13 @@
 #define BULL_CORE_HARDWARE_MOUSE_HPP
 
 #include <Bull/Core/Export.hpp>
-#include <Bull/Core/Window/Window.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {
+    class Window;
+
     struct BULL_CORE_API Mouse
     {
         enum Button

@@ -1,5 +1,6 @@
 #include <Bull/Core/Hardware/Mouse.hpp>
 #include <Bull/Core/Hardware/MouseImpl.hpp>
+#include <Bull/Core/Window/Window.hpp>
 
 namespace Bull
 {
