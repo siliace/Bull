@@ -4,6 +4,11 @@
 
 namespace Bull
 {
+    Random::Random()
+    {
+        setSeed(time(nullptr));
+    }
+
     Uint64 Random::random(Uint64 min, Uint64 max)
     {
         return (rand() % (max - min)) + min;

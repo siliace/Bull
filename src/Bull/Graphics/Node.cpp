@@ -10,7 +10,6 @@ namespace Bull
     }
 
     Node::Node(const Node* parent) :
-        m_scale(Vector3F::Unit),
         m_parent(parent)
     {
         /// Nothing
@@ -49,7 +48,7 @@ namespace Bull
             return m_parent->getInitialScale();
         }
 
-        return m_scale;
+        return Vector3F::Unit;
     }
 
     const EulerAnglesF& Node::getInitialRotation() const
@@ -59,7 +58,7 @@ namespace Bull
             return m_parent->getInitialRotation();
         }
 
-        return m_rotation;
+        return EulerAnglesF::Zero;
     }
 
     const Vector3F& Node::getInitialTranslation() const
@@ -69,7 +68,7 @@ namespace Bull
             return m_parent->getInitialTranslation();
         }
 
-        return m_translation;
+        return Vector3F::Zero;
     }
 
     Node& Node::addChild(const NodeRef& child)

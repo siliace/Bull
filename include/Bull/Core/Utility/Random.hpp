@@ -14,6 +14,11 @@ namespace Bull
     {
     public:
 
+        /*! \brief Default constructor
+         *
+         */
+        Random();
+
         /*! \brief Generate a pseudo random number
          *
          * \param min The minimum of the random number
@@ -40,7 +45,7 @@ namespace Bull
 
     private:
 
-        unsigned int m_seed = time(nullptr); /*!< The seed */
+        unsigned int m_seed; /*!< The seed */
     };
 }
 
