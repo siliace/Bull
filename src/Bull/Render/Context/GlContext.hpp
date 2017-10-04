@@ -3,13 +3,12 @@
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Window/VideoMode.hpp>
+#include <Bull/Core/Window/WindowImpl.hpp>
 
 #include <Bull/Render/Context/ContextSettings.hpp>
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/SurfaceHandler.hpp>
-
-#include <Bull/System/VideoMode.hpp>
-#include <Bull/System/WindowImpl.hpp>
 
 namespace Bull
 {

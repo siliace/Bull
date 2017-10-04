@@ -2,6 +2,7 @@
 
 #include <Bull/Core/FileSystem/FileSystem.hpp>
 #include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/Log/ConsoleLogger.hpp>
 
 #include <Bull/Graphics/Material.hpp>
 
@@ -12,8 +13,6 @@
 #include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
-
-#include <Bull/Utility/Logger/ConsoleLogger.hpp>
 
 using namespace Bull;
 
@@ -91,16 +90,12 @@ void show(const Matrix4F& mat)
 int main(int argc, char* argv[])
 {
     Log::get()->createLogger<ConsoleLogger>();
-    auto home = FileSystem::getHome();
-
-    ContextSettings settings = ContextSettings::Best;
-    settings.type |= ContextSettings::NoError;
 
     Shader phong;
     WindowEvent event;
     EulerAnglesF rotation;
     Texture diffuse, specular, emission;
-    RenderWindow window(VideoMode(800, 600), "Bull Application", WindowStyle::Default, settings);
+    RenderWindow window(VideoMode(800, 600), "Bull Application");
     Matrix4F camera = Matrix4F::makeLookAt(Vector3F(2.f, 1.f, 3.f), Vector3F::Zero);
     Mesh square;
 

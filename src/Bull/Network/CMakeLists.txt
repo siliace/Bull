@@ -35,4 +35,3 @@ else()
 endif()
 
 target_link_libraries(bull-network bull-core)
-target_link_libraries(bull-network bull-utility)

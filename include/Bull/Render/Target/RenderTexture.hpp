@@ -9,7 +9,7 @@
 #include <Bull/Render/Target/RenderTarget.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
 
-#include <Bull/Utility/Color.hpp>
+#include <Bull/Core/Utility/Color.hpp>
 
 namespace Bull
 {

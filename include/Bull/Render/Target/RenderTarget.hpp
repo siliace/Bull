@@ -12,9 +12,9 @@
 #include <Bull/Render/Context/ContextSettings.hpp>
 #include <Bull/Render/Target/Viewport.hpp>
 
-#include <Bull/Utility/Color.hpp>
+#include <Bull/Core/Utility/Color.hpp>
 
-#include <Bull/System/VideoMode.hpp>
+#include <Bull/Core/Window/VideoMode.hpp>
 
 namespace Bull
 {
