@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_JOYSTICK_HPP
-#define BULL_CORE_JOYSTICK_HPP
+#ifndef BULL_CORE_HARDWARE_JOYSTICK_HPP
+#define BULL_CORE_HARDWARE_JOYSTICK_HPP
 
 #include <array>
 
@@ -129,4 +129,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_JOYSTICK_HPP
+#endif // BULL_CORE_HARDWARE_JOYSTICK_HPP

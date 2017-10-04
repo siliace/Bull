@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_DATE_CLOCK
-#define BULL_CORE_DATE_CLOCK
+#ifndef BULL_CORE_TIME_DATE_HPP
+#define BULL_CORE_TIME_DATE_HPP
 
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Time/Time.hpp>
@@ -147,4 +147,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_DATE_CLOCK
+#endif // BULL_CORE_TIME_DATE_HPP

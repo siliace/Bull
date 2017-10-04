@@ -2,9 +2,9 @@
 #define BULL_CORE_WIN32_JOYSTICKIMPL_HPP
 
 #include <Bull/Core/Configuration/Integer.hpp>
+#include <Bull/Core/Hardware/Joystick.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
 
-#include <Bull/Core/Joystick.hpp>
 
 namespace Bull
 {

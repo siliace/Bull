@@ -1,7 +1,7 @@
-#ifndef Bull_CPUImpl_hpp
-#define Bull_CPUImpl_hpp
+#ifndef BULL_CORE_HARDWARE_WIN32_CPUIMPL_HPP
+#define BULL_CORE_HARDWARE_WIN32_CPUIMPL_HPP
 
-#include <Bull/Core/CPU.hpp>
+#include <Bull/Core/Hardware/CPU.hpp>
 
 namespace Bull
 {
@@ -26,5 +26,5 @@ namespace Bull
     }
 }
 
-#endif // Bull_CPUImpl_hpp
+#endif // BULL_CORE_HARDWARE_WIN32_CPUIMPL_HPP
 

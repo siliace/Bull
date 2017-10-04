@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_KEYBOARD_HPP
-#define BULL_CORE_KEYBOARD_HPP
+#ifndef BULL_CORE_HARDWARE_KEYBOARD_HPP
+#define BULL_CORE_HARDWARE_KEYBOARD_HPP
 
 #include <Bull/Core/Export.hpp>
 
@@ -146,4 +146,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_KEYBOARD_HPP
+#endif // BULL_CORE_HARDWARE_KEYBOARD_HPP

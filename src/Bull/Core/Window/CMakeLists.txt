@@ -28,7 +28,7 @@ target_sources(bull-core
             ${BULL_SRC_CORE_WINDOW}/WindowImpl.cpp
         )
 
-if(BULL_OS_WINDOW)
+if(BULL_OS_WINDOWS)
     add_subdirectory(Win32)
 else()
     add_subdirectory(Xlib)

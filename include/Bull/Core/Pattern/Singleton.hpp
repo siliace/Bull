@@ -1,5 +1,5 @@
-#ifndef BULL_SINGLETON_HPP
-#define BULL_SINGLETON_HPP
+#ifndef BULL_CORE_PATTERN_SINGLETON_HPP
+#define BULL_CORE_PATTERN_SINGLETON_HPP
 
 #include <memory>
 
@@ -72,4 +72,4 @@ namespace Bull
     std::unique_ptr<TChild> Singleton<TChild>::s_instance;
 }
 
-#endif // BULL_SINGLETON_HPP
+#endif // BULL_CORE_PATTERN_SINGLETON_HPP

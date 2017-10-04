@@ -1,7 +1,7 @@
 #include <Bull/Core/Configuration/OS.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #include <Bull/Core/Win32/MouseImpl.hpp>
+    #include <Bull/Core/Hardware/Win32/MouseImpl.hpp>
 #else
     #if defined BULL_XLIB
         #include <Bull/Core/Hardware/Xlib/MouseImpl.hpp>

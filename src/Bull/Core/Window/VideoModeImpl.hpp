@@ -1,7 +1,7 @@
 #include <Bull/Core/Configuration/OS.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #include <Bull/Core/Win32/VideoModeImpl.hpp>
+    #include <Bull/Core/Window/Win32/VideoModeImpl.hpp>
 #else
     #if defined BULL_XLIB
         #include <Bull/Core/Window/Xlib/VideoModeImpl.hpp>

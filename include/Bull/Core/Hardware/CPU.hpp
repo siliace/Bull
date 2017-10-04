@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_CPU_HPP
-#define BULL_CORE_CPU_HPP
+#ifndef BULL_CORE_HARDWARE_CPU_HPP
+#define BULL_CORE_HARDWARE_CPU_HPP
 
 #include <Bull/Core/Export.hpp>
 
@@ -32,4 +32,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_CPU_HPP
+#endif // BULL_CORE_HARDWARE_CPU_HPP

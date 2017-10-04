@@ -1,10 +1,9 @@
-#ifndef BULL_CORE_VIDEOMODE_HPP
-#define BULL_CORE_VIDEOMODE_HPP
+#ifndef BULL_CORE_WINDOW_VIDEOMODE_HPP
+#define BULL_CORE_WINDOW_VIDEOMODE_HPP
 
 #include <vector>
 
 #include <Bull/Core/Configuration/Integer.hpp>
-
 #include <Bull/Core/Export.hpp>
 
 namespace Bull
@@ -70,4 +69,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_VIDEOMODE_HPP
+#endif // BULL_CORE_WINDOW_VIDEOMODE_HPP

@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_LIBRARY_HPP
-#define BULL_CORE_LIBRARY_HPP
+#ifndef BULL_CORE_SYSTEM_LIBRARY_HPP
+#define BULL_CORE_SYSTEM_LIBRARY_HPP
 
 #include <memory>
 
@@ -76,4 +76,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_LIBRARY_HPP
+#endif // BULL_CORE_SYSTEM_LIBRARY_HPP

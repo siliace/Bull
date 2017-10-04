@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_CALLONEXIT_HPP
-#define BULL_CORE_CALLONEXIT_HPP
+#ifndef BULL_CORE_UTILITY_CALLONEXIT_HPP
+#define BULL_CORE_UTILITY_CALLONEXIT_HPP
 
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/Functor/Functor.hpp>
@@ -60,4 +60,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_CALLONEXIT_HPP
+#endif // BULL_CORE_UTILITY_CALLONEXIT_HPP

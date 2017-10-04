@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_VERTEX_HPP
-#define BULL_CORE_VERTEX_HPP
+#ifndef BULL_CORE_UTILITY_VERTEX_HPP
+#define BULL_CORE_UTILITY_VERTEX_HPP
 
 #include <Bull/Math/Vector/Vector2.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
@@ -83,4 +83,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_VERTEX_HPP
+#endif // BULL_CORE_UTILITY_VERTEX_HPP

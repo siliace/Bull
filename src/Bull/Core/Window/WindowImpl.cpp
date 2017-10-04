@@ -4,7 +4,7 @@
 #include <Bull/Core/Window/WindowImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #include <Bull/Core/Win32/WindowImplWin32.hpp>
+    #include <Bull/Core/Window/Win32/WindowImplWin32.hpp>
     typedef Bull::prv::WindowImplWin32 WindowImplType;
 #elif defined BULL_OS_GNU_LINUX
     #if defined BULL_XLIB

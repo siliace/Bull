@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_WINDOW_HPP
-#define BULL_CORE_WINDOW_HPP
+#ifndef BULL_CORE_WINDOW_WINDOW_HPP
+#define BULL_CORE_WINDOW_WINDOW_HPP
 
 #include <memory>
 
@@ -353,4 +353,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_WINDOW_HPP
+#endif // BULL_CORE_WINDOW_WINDOW_HPP

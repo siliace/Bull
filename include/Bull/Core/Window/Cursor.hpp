@@ -1,15 +1,13 @@
-#ifndef BULL_CORE_CURSOR_HPP
-#define BULL_CORE_CURSOR_HPP
+#ifndef BULL_CORE_WINDOW_CURSOR_HPP
+#define BULL_CORE_WINDOW_CURSOR_HPP
 
 #include <memory>
 
+#include <Bull/Core/Export.hpp>
+#include <Bull/Core/Image/Image.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
-
-#include <Bull/Core/Export.hpp>
-
-#include <Bull/Core/Image/Image.hpp>
 
 namespace Bull
 {
@@ -95,4 +93,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_CURSOR_HPP
+#endif // BULL_CORE_WINDOW_CURSOR_HPP

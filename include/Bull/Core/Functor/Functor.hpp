@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_FUNCTOR_HPP
-#define BULL_CORE_FUNCTOR_HPP
+#ifndef BULL_CORE_FUNCTOR_FUNCTOR_HPP
+#define BULL_CORE_FUNCTOR_FUNCTOR_HPP
 
 #include <memory>
 
@@ -106,4 +106,4 @@ namespace Bull
 
 #include <Bull/Core/Functor/Functor.inl>
 
-#endif // BULL_CORE_FUNCTOR_HPP
+#endif // BULL_CORE_FUNCTOR_FUNCTOR_HPP

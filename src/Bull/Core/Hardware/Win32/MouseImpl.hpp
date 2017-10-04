@@ -1,7 +1,7 @@
-#ifndef Bull_MouseImpl_hpp
-#define Bull_MouseImpl_hpp
+#ifndef BULL_CORE_HARDWARE_WIN32_MOUSEIMPL_HPP
+#define BULL_CORE_HARDWARE_WIN32_MOUSEIMPL_HPP
 
-#include <Bull/Core/Mouse.hpp>
+#include <Bull/Core/Hardware/Mouse.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -50,5 +50,5 @@ namespace Bull
     }
 }
 
-#endif // Bull_MouseImpl_hpp
+#endif // BULL_CORE_HARDWARE_WIN32_MOUSEIMPL_HPP
 

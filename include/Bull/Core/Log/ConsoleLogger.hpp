@@ -1,5 +1,5 @@
-#ifndef BULL_CONSOLELOGGER_HPP
-#define BULL_CONSOLELOGGER_HPP
+#ifndef BULL_CORE_LOG_CONSOLELOGGER_HPP
+#define BULL_CORE_LOG_CONSOLELOGGER_HPP
 
 #include <Bull/Core/Log/AbstractLogger.hpp>
 
@@ -18,4 +18,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CONSOLELOGGER_HPP
+#endif // BULL_CORE_LOG_CONSOLELOGGER_HPP

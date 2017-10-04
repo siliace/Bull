@@ -3,7 +3,7 @@
 #include <Bull/Core/Window/CursorImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #include <Bull/Core/Win32/CursorImplWin32.hpp>
+    #include <Bull/Core/Window/Win32/CursorImplWin32.hpp>
     typedef Bull::prv::CursorImplWin32 CursorImplType;
 #elif defined BULL_OS_OSX
     #error Lack of implementation : Cursor

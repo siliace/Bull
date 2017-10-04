@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_WINDOWEVENT_HPP
-#define BULL_CORE_WINDOWEVENT_HPP
+#ifndef BULL_CORE_WINDOW_WINDOWEVENT_HPP
+#define BULL_CORE_WINDOW_WINDOWEVENT_HPP
 
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/Hardware/Joystick.hpp>
@@ -117,4 +117,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_WINDOWEVENT_HPP
+#endif // BULL_CORE_WINDOW_WINDOWEVENT_HPP
