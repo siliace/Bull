@@ -12,4 +12,3 @@ link_directories(${BULL_ROOT}/bin/${CMAKE_BUILD_TYPE})
 
 add_executable(demo-process src/main.cpp)
 target_link_libraries(demo-process bull-core)
-target_link_libraries(demo-process bull-system)

@@ -3,10 +3,10 @@
 
 #include <vector>
 
+#include <Bull/Core/Utility/Vertex.hpp>
+
 #include <Bull/Render/Export.hpp>
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
-
-#include <Bull/Utility/Vertex.hpp>
 
 namespace Bull
 {

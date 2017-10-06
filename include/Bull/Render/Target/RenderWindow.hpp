@@ -3,11 +3,11 @@
 
 #include <Bull/Core/Time/Clock.hpp>
 #include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Window/Window.hpp>
+#include <Bull/Core/Window/VideoMode.hpp>
 
+#include <Bull/Render/Export.hpp>
 #include <Bull/Render/Target/RenderTarget.hpp>
-
-#include <Bull/System/Window.hpp>
-#include <Bull/System/VideoMode.hpp>
 
 namespace Bull
 {

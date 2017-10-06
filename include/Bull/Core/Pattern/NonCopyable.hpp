@@ -1,5 +1,5 @@
-#ifndef BULL_NONCOPYABLE_HPP
-#define BULL_NONCOPYABLE_HPP
+#ifndef BULL_CORE_PATTERN_NONCOPYABLE_HPP
+#define BULL_CORE_PATTERN_NONCOPYABLE_HPP
 
 #include <Bull/Core/Export.hpp>
 
@@ -24,4 +24,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_NONCOPYABLE_HPP
+#endif // BULL_CORE_PATTERN_NONCOPYABLE_HPP

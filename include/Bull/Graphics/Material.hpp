@@ -3,11 +3,11 @@
 
 #include <array>
 
+#include <Bull/Core/Utility/Color.hpp>
+
 #include <Bull/Graphics/Export.hpp>
 
 #include <Bull/Render/Texture/Texture.hpp>
-
-#include <Bull/Utility/Color.hpp>
 
 namespace Bull
 {

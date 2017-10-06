@@ -10,7 +10,7 @@
 
 #include <Bull/Render/Context/ContextResource.hpp>
 
-#include <Bull/Utility/Image/Image.hpp>
+#include <Bull/Core/Image/Image.hpp>
 
 namespace Bull
 {

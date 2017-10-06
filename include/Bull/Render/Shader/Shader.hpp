@@ -2,6 +2,7 @@
 #define BULL_RENDER_SHADER_SHADER_HPP
 
 #include <Bull/Core/Memory/ByteArray.hpp>
+#include <Bull/Core/Utility/Color.hpp>
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
 #include <Bull/Math/Vector/Vector.hpp>
@@ -9,8 +10,6 @@
 #include <Bull/Render/Export.hpp>
 #include <Bull/Render/Shader/ShaderBinary.hpp>
 #include <Bull/Render/Shader/ShaderStage.hpp>
-
-#include <Bull/Utility/Color.hpp>
 
 namespace Bull
 {

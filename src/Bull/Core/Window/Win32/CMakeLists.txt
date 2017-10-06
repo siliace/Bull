@@ -1,0 +1,9 @@
+target_sources(bull-core
+        PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/CursorImplWin32.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/CursorImplWin32.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/VideoModeImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/VideoModeImpl.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/WindowImplWin32.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/WindowImplWin32.cpp
+        )

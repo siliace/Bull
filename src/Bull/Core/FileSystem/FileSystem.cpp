@@ -10,11 +10,6 @@ namespace Bull
         return prv::FileSystemImpl::getRoot();
     }
 
-    Path FileSystem::getHome()
-    {
-        return prv::FileSystemImpl::getHome();
-    }
-
     Path FileSystem::getTempPath()
     {
         return prv::FileSystemImpl::getTempPath();

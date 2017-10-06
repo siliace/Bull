@@ -1,7 +1,7 @@
 #ifndef BULL_RENDERWINDOWIMPLWIN32_HPP
 #define BULL_RENDERWINDOWIMPLWIN32_HPP
 
-#include <Bull/System/Win32/WindowImplWin32.hpp>
+#include <Bull/Core/Window/Win32/WindowImplWin32.hpp>
 
 namespace Bull
 {
