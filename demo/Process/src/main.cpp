@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <Bull/Core/Process.hpp>
+#include <Bull/Core/Process/Process.hpp>
 
 int main(int argc, char* argv[])
 {
