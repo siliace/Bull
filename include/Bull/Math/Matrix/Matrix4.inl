@@ -103,8 +103,9 @@ namespace Bull
         Matrix4<T> view;
 
         Vector3<T> f = Vector3<T>::normalize(center - eye);
-        Vector3<T> s = Vector3<T>::crossProduct(f, up).normalize();
-        Vector3<T> u = Vector3<T>::crossProduct(s, f).normalize();
+        Vector3<T> u = Vector3<T>::normalize(up);
+        Vector3<T> s = Vector3<T>::crossProduct(f, u).normalize();
+        u = Vector3<T>::crossProduct(s, f).normalize();
 
         view.setColumn(Vector4<T>( s, -s.dotProduct(eye)), 0);
         view.setColumn(Vector4<T>( u, -u.dotProduct(eye)), 1);

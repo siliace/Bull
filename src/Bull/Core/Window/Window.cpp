@@ -10,7 +10,15 @@ namespace Bull
         return s_fullscreen;
     }
 
-    Window::Window(const VideoMode& mode, const String& title, Uint32 WindowStyle)
+    Window::Window() :
+        m_ignoreNextMouse(false),
+        m_autoCenterCursor(false)
+    {
+        /// Nothing
+    }
+
+    Window::Window(const VideoMode& mode, const String& title, Uint32 WindowStyle) :
+        Window()
     {
         open(mode, title, WindowStyle);
     }
@@ -72,16 +80,9 @@ namespace Bull
 
     bool Window::pollEvent(WindowEvent& e)
     {
-        if(m_impl)
+        if(m_impl && m_impl->popEvent(e, false))
         {
-            bool success = m_impl->popEvent(e, false);
-
-            if(success)
-            {
-                filterEvent(e);
-            }
-
-            return success;
+            return filterEvent(e);
         }
 
         return false;
@@ -91,10 +92,8 @@ namespace Bull
     {
         WindowEvent e;
 
-        if(m_impl)
+        if(m_impl && m_impl->popEvent(e, true))
         {
-            m_impl->popEvent(e, true);
-
             filterEvent(e);
         }
 
@@ -351,6 +350,21 @@ namespace Bull
         return false;
     }
 
+    Window& Window::enableAutoCenter(bool enable, bool keepVisible)
+    {
+        m_autoCenterCursor = enable;
+
+        if(m_impl)
+        {
+            setMouseCursorVisible(keepVisible);
+            Mouse::setPosition(getSize() / static_cast<unsigned int>(2), (*this));
+
+            m_ignoreNextMouse = true;
+        }
+
+        return (*this);
+    }
+
     bool Window::enableFullscreen(bool fullscreen)
     {
         if(m_impl && (!fullscreen || (fullscreen && !s_fullscreen)))
@@ -374,6 +388,7 @@ namespace Bull
         return false;
     }
 
+
     bool Window::isFullscreenEnable() const
     {
         return this == s_fullscreen;
@@ -384,11 +399,29 @@ namespace Bull
         return m_impl;
     }
 
-    void Window::filterEvent(const WindowEvent& e)
+    bool Window::filterEvent(const WindowEvent& e)
     {
         if(e.type == WindowEvent::Resized)
         {
             onResize();
         }
+
+        if(m_autoCenterCursor && e.type == WindowEvent::MouseMoved)
+        {
+            if(m_ignoreNextMouse)
+            {
+                m_ignoreNextMouse = false;
+
+                return false;
+            }
+            else
+            {
+                Mouse::setPosition(getSize() / static_cast<unsigned int>(2), (*this));
+
+                m_ignoreNextMouse = true;
+            }
+        }
+
+        return true;
     }
 }
