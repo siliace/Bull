@@ -12,6 +12,7 @@
 	#define BULL_COMPILER BULL_COMPILER_MSC
 #elif defined __GNUC__
 	#define BULL_COMPILER BULL_COMPILER_GCC
+    #define BULL_COMPILER_VERSION __GNUC__
 #elif defined __MINGW32__
 	#define BULL_COMPILER BULL_COMPILER_MINGW_32
 #elif defined __MINGW64__

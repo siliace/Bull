@@ -8,14 +8,16 @@
         #define BULL_API_EXPORT __declspec(dllexport)
         #define BULL_API_IMPORT __declspec(dllimport)
     #else
-        #if __GNUC__ >= 4
-            #define BULL_API_EXPORT __attribute__ ((__visibility__ ("default")))
-            #define BULL_API_IMPORT __attribute__ ((__visibility__ ("default")))
-        #else
-            #define BULL_API_EXPORT
-            #define BULL_API_IMPORT
+        #if BULL_COMPLER == BULL_COMPILER_GCC
+            #if BULL_COMPILER_VERSION >= 4
+                #define BULL_API_EXPORT __attribute__ ((__visibility__ ("default")))
+                #define BULL_API_IMPORT __attribute__ ((__visibility__ ("default")))
+            #else
+                #define BULL_API_EXPORT
+                #define BULL_API_IMPORT
+            #endif
         #endif
-    #endif
+     #endif
 #else
     #define BULL_CORE_API
 #endif
