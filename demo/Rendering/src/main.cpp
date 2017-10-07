@@ -67,39 +67,9 @@ int main(int argc, char* argv[])
                 }
             }
 
-            if(event.type == WindowEvent::MouseMoved)
-            {
-                static int lastX, lastY;
-                static AngleF pitch, yaw;
-                static bool firstMouse = true;
-
-                if(firstMouse)
-                {
-                    lastX = event.mouseMove.x;
-                    lastY = event.mouseMove.y;
-                    firstMouse = false;
-                }
-
-                Vector2I offset;
-                offset.x() = event.mouseMove.x - lastX;
-                offset.y() = lastY - event.mouseMove.y;
-                lastX = event.mouseMove.x;
-                lastY = event.mouseMove.y;
-
-                yaw   += AngleF::degree(offset.x());
-                pitch += AngleF::degree(offset.y());
-
-                pitch = clamp(pitch, AngleF::degree(-89.f), AngleF::degree(89.f));
-
-                forward.x() = std::cos(yaw) * std::cos(pitch);
-                forward.y() = std::sin(pitch);
-                forward.z() = std::sin(yaw) * std::sin(pitch);
-                forward.normalize();
-            }
-
             if(event.type == WindowEvent::MouseWheel)
             {
-                fov += (event.mouseWheel.up) ? AngleF::degree(-0.1f) : AngleF::degree(0.1f);
+                fov += (event.mouseWheel.up) ? AngleF::degree(-0.5f) : AngleF::degree(0.5f);
                 fov = clamp(fov, AngleF::degree(0.1f), AngleF::degree(45.f));
             }
         }
