@@ -11,8 +11,7 @@ namespace Bull
     }
 
     Window::Window() :
-        m_ignoreNextMouse(false),
-        m_autoCenterCursor(false)
+        m_ignoreNextMouse(false)
     {
         /// Nothing
     }
@@ -82,7 +81,9 @@ namespace Bull
     {
         if(m_impl && m_impl->popEvent(e, false))
         {
-            return filterEvent(e);
+            filterEvent(e);
+
+            return true;
         }
 
         return false;
@@ -350,21 +351,6 @@ namespace Bull
         return false;
     }
 
-    Window& Window::enableAutoCenter(bool enable, bool keepVisible)
-    {
-        m_autoCenterCursor = enable;
-
-        if(m_impl)
-        {
-            setMouseCursorVisible(keepVisible);
-            Mouse::setPosition(getSize() / static_cast<unsigned int>(2), (*this));
-
-            m_ignoreNextMouse = true;
-        }
-
-        return (*this);
-    }
-
     bool Window::enableFullscreen(bool fullscreen)
     {
         if(m_impl && (!fullscreen || (fullscreen && !s_fullscreen)))
@@ -399,29 +385,11 @@ namespace Bull
         return m_impl;
     }
 
-    bool Window::filterEvent(const WindowEvent& e)
+    void Window::filterEvent(const WindowEvent& e)
     {
         if(e.type == WindowEvent::Resized)
         {
             onResize();
         }
-
-        if(m_autoCenterCursor && e.type == WindowEvent::MouseMoved)
-        {
-            if(m_ignoreNextMouse)
-            {
-                m_ignoreNextMouse = false;
-
-                return false;
-            }
-            else
-            {
-                Mouse::setPosition(getSize() / static_cast<unsigned int>(2), (*this));
-
-                m_ignoreNextMouse = true;
-            }
-        }
-
-        return true;
     }
 }

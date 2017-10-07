@@ -300,16 +300,6 @@ namespace Bull
          */
         bool isMouseCursorVisible() const;
 
-        /*! \brief Toggle automatic centering of the Cursor
-         *
-         * \param enable      True to enable the automatic centering of the cursor
-         * \param keepVisible True to keep the cursor visible
-         *
-         * \return This
-         *
-         */
-        Window& enableAutoCenter(bool enable = true, bool keepVisible = false);
-
         /*! \brief Enter or leave the fullscreen mode
          *
          * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
@@ -356,14 +346,11 @@ namespace Bull
          *
          * \param e The event to filter
          *
-         * \return True if the event is valid
-         *
          */
-        bool filterEvent(const WindowEvent& e);
+        void filterEvent(const WindowEvent& e);
 
         std::unique_ptr<prv::WindowImpl> m_impl;             /*!< The OS specific implementation of the window */
         bool                             m_ignoreNextMouse;  /*!< True to ignore the next mouse event due to cursor centering */
-        bool                             m_autoCenterCursor; /*!< True to automaticly center the cursor */
     };
 }
 

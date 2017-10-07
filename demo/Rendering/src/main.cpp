@@ -33,8 +33,6 @@ int main(int argc, char* argv[])
     phong.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType::Fragment);
     phong.link();
 
-    window.enableAutoCenter(true, true);
-
     std::vector<Cube> cubes(10);
 
     while(window.isOpen())
