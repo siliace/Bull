@@ -8,6 +8,8 @@ namespace Bull
     template <typename T, Index S>
     struct SquareMatrix : public Matrix<T, S, S>
     {
+        static SquareMatrix<T, S> Zero;
+
         /*! \brief Create an identity SquareMatrix
          *
          * \return The identity SquareMatrix
@@ -36,7 +38,10 @@ namespace Bull
         SquareMatrix(const Matrix<U, WU, HU>& copy);
     };
 
-    /*! \brief Multiplicate two Matrix
+    template <typename T, Index S>
+    SquareMatrix<T, S> SquareMatrix<T, S>::Zero = SquareMatrix<T, S>();
+
+    /*! \brief Multiply two Matrix
      *
      * \param left  The left Matrix
      * \param right The right Matrix

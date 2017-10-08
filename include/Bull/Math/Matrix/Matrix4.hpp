@@ -105,7 +105,7 @@ namespace Bull
         Matrix4(const Matrix<U, WU, HU>& copy);
     };
 
-    template<typename T>
+    template <typename T>
     Matrix4<T> Matrix4<T>::Identity = Matrix4<T>::makeIdentity();
 
     typedef Matrix4<int> Matrix4I;
