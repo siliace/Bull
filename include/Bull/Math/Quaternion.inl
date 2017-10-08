@@ -1,9 +1,9 @@
 namespace Bull
 {
     template <typename T>
-    Quaternion<T> Quaternion<T>::conjugate(const Quaternion<T>& left, const Quaternion<T>& right)
+    Quaternion<T> Quaternion<T>::conjugate(const Quaternion<T>& quaternion)
     {
-        return Quaternion<T>(left).conjugate(right);
+        return Quaternion<T>(quaternion).conjugate();
     }
 
     template <typename T>
@@ -13,25 +13,24 @@ namespace Bull
     }
 
     template <typename T>
-    Quaternion<T>::Quaternion()
+    Quaternion<T>::Quaternion() :
+        Quaternion<T>(0, 0, 0, 0)
     {
-        set(0, 0, 0, 0);
+        /// Nothing
+    }
+
+    template <typename T>
+    Quaternion<T>::Quaternion(T w, T x, T y, T z) :
+        w(w),
+        x(x),
+        y(y),
+        z(z)
+    {
+        /// Nothing
     }
 
     template <typename T>
     Quaternion<T>::Quaternion(const EulerAngles<T>& angles)
-    {
-        set(angles);
-    }
-
-    template <typename T>
-    Quaternion<T>::Quaternion(T w, T x, T y, T z)
-    {
-        set(w, x, y, z);
-    }
-
-    template <typename T>
-    Quaternion<T>& Quaternion<T>::set(const EulerAngles<T>& angles)
     {
         T cy = std::cos(angles.yaw   * static_cast<T>(0.5));
         T sy = std::sin(angles.yaw   * static_cast<T>(0.5));
@@ -44,25 +43,6 @@ namespace Bull
         x = cy * sr * cp - sy * cr * sp;
         y = cy * cr * sp + sy * sr * cp;
         z = sy * cr * cp - cy * sr * sp;
-
-        return (*this);
-    }
-
-    template <typename T>
-    Quaternion<T>& Quaternion<T>::set(T w, T x, T y, T z)
-    {
-        this->w = w;
-        this->x = x;
-        this->y = y;
-        this->z = z;
-
-        return (*this);
-    }
-
-    template <typename T>
-    Quaternion<T>& Quaternion<T>::set(const Quaternion& quaternion)
-    {
-        return set(quaternion.w, quaternion.x, quaternion.y, quaternion.z);
     }
 
     template <typename T>
@@ -80,7 +60,7 @@ namespace Bull
     template <typename T>
     Quaternion<T>& Quaternion<T>::normalize()
     {
-        T n = this->getSquareRootLenght(); /// We use this here to prevent GCC warning
+        T n = Quaternion<T>::getSquareRootLenght();
 
         w /= n;
         x /= n;
@@ -91,12 +71,11 @@ namespace Bull
     }
 
     template <typename T>
-    Quaternion<T>& Quaternion<T>::conjugate(const Quaternion<T>& quaternion)
+    Quaternion<T>& Quaternion<T>::conjugate()
     {
-        w =  quaternion.w;
-        x = -quaternion.x;
-        y = -quaternion.y;
-        z = -quaternion.z;
+        x = -x;
+        y = -y;
+        z = -z;
 
         return (*this);
     }
@@ -114,5 +93,27 @@ namespace Bull
     bool Quaternion<T>::operator!=(const Quaternion<T>& right) const
     {
         return !((*this) == right);
+    }
+
+    template <typename T>
+    Quaternion<T> Quaternion<T>::operator*(T scale)
+    {
+        return Quaternion<T>(w * scale,
+                             x * scale,
+                             y * scale,
+                             z * scale);
+    }
+
+    template <typename T>
+    Vector3<T> Quaternion<T>::operator*(const Vector3<T>& vector)
+    {
+        Vector3<T> quaternionVector(x, y, z);
+        Vector3<T> uv  = Vector3<T>::crossProduct(quaternionVector, vector);
+        Vector3<T> uuv = Vector3<T>::crossProduct(quaternionVector, uv);
+
+        uv  *= 2 * w;
+        uuv *= 2;
+
+        return vector + uv + uuv;
     }
 }

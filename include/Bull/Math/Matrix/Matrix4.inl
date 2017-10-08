@@ -60,6 +60,14 @@ namespace Bull
     }
 
     template <typename T>
+    Matrix4<T> Matrix4<T>::makeView(const Vector3<T>& position, const Quaternion<T> orientation)
+    {
+        Quaternion<T> inverse = Quaternion<T>::conjugate(orientation);
+
+        return makeTranslation(position) * makeRotation(inverse) * Identity;
+    }
+
+    template <typename T>
     Matrix4<T> Matrix4<T>::makeOrthographic(const Rectangle<T>& plan, const Vector2<T>& zBounds)
     {
         Matrix4<T> projection;

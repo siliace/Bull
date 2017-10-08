@@ -42,6 +42,16 @@ namespace Bull
          */
         static Matrix4<T> makeTranslation(const Vector3<T>& translation);
 
+        /*! \brief Create a view matrix
+         *
+         * \param position    The position of the view
+         * \param orientation The orientation of the view
+         *
+         * \return The view matrix
+         *
+         */
+        static Matrix4<T> makeView(const Vector3<T>& position, const Quaternion<T> orientation);
+
         /*! \brief Create an orthographic projection matrix
          *
          * \param plan

@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 
                 forward.x() = std::cos(yaw) * std::cos(pitch);
                 forward.y() = std::sin(pitch);
-                forward.z() = std::sin(yaw) * std::sin(pitch);
+                forward.z() = std::sin(yaw) * std::cos(pitch);
                 forward.normalize();
             }
 
