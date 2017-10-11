@@ -20,6 +20,11 @@ namespace Bull
         }
     }
 
+    bool Texture::create(const Image& image)
+    {
+        return create(image.getPixels(), image.getSize());
+    }
+
     bool Texture::create(const Vector2UI& size)
     {
         if(size.x()  > 0 && size.y()  > 0)
@@ -49,11 +54,11 @@ namespace Bull
         return false;
     }
 
-    bool Texture::create(const Image& image)
+    bool Texture::create(const ByteArray& pixels, const Vector2UI& size)
     {
-        if(create(image.getSize()))
+        if(create(size))
         {
-            const ByteArray& pixels = image.getPixels();
+            const ByteArray& pixels = pixels;
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
 
@@ -101,11 +106,6 @@ namespace Bull
     }
 
     Image Texture::getImage() const
-    {
-        return getImage(RectangleUI(m_size));
-    }
-
-    Image Texture::getImage(const RectangleUI& rectangle) const
     {
         if(m_id)
         {

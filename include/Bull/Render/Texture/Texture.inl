@@ -23,9 +23,4 @@ namespace Bull
     {
         return m_size;
     }
-
-    unsigned int Texture::getSystemHandler() const
-    {
-        return m_id;
-    }
 }

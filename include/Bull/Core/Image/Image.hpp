@@ -2,19 +2,11 @@
 #define BULL_CORE_IMAGE_IMAGE_HPP
 
 #include <Bull/Core/Export.hpp>
-#include <Bull/Core/Memory/ByteArray.hpp>
-
-#include <Bull/Math/Vector/Vector2.hpp>
+#include <Bull/Core/Image/AbstractImage.hpp>
 
 namespace Bull
 {
-    namespace prv
-    {
-        class STBSaver;
-        class STBLoader;
-    }
-
-    class BULL_CORE_API Image
+    class BULL_CORE_API Image : public AbstractImage
     {
     public:
 
@@ -30,7 +22,7 @@ namespace Bull
          * \return True if the Image was created successfully
          *
          */
-        bool create(const Vector2UI& size);
+        bool create(const Vector2UI& size) override;
 
         /*! \brief Create the Image
          *
@@ -40,14 +32,7 @@ namespace Bull
          * \return True if the Image was created successfully
          *
          */
-        bool create(const ByteArray& pixels, const Vector2UI& size);
-
-        /*! \brief Get the size of the Image
-         *
-         * \return The size
-         *
-         */
-        const Vector2UI& getSize() const;
+        bool create(const ByteArray& pixels, const Vector2UI& size) override;
 
         /*! \brief Get pixels of the Image
          *
@@ -55,6 +40,13 @@ namespace Bull
          *
          */
         const ByteArray& getPixels() const;
+
+        /*! \brief Get the size of the Image
+         *
+         * \return The size
+         *
+         */
+        const Vector2UI& getSize() const override;
 
     private:
 

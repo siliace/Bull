@@ -12,12 +12,6 @@
 
 namespace Bull
 {
-    namespace prv
-    {
-        class BaseShaderStageSaver;
-        class BaseShaderStageLoader;
-    }
-
     class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource
     {
     public:

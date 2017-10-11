@@ -19,7 +19,7 @@ namespace Bull
     using TextureRef = ObjectRef<Texture>;
     using TexureConstRef = ObjectRef<const Texture>;
 
-    class BULL_RENDER_API Texture : public ContextResource, public RefCounted
+    class BULL_RENDER_API Texture : public ContextResource, public RefCounted, public AbstractImage
     {
     public:
 
@@ -45,15 +45,6 @@ namespace Bull
          */
         ~Texture();
 
-        /*! \brief Create an empty texture
-         *
-         * \param size The size of the texture to create
-         *
-         * \return Return true if the texture was created successfully, false otherwise
-         *
-         */
-        bool create(const Vector2UI& size);
-
         /*! \brief Load a texture form an image
          *
          * \param path The image to load
@@ -62,6 +53,24 @@ namespace Bull
          *
          */
         bool create(const Image& image);
+
+        /*! \brief Create an empty texture
+         *
+         * \param size The size of the texture to create
+         *
+         * \return Return true if the texture was created successfully, false otherwise
+         *
+         */
+        bool create(const Vector2UI& size) override;
+
+        /*! \brief Create an empty texture
+         *
+         * \param size The size of the texture to create
+         *
+         * \return Return true if the texture was created successfully, false otherwise
+         *
+         */
+        bool create(const ByteArray& pixels, const Vector2UI& size) override;
 
         /*! \brief Bind the texture
          *
@@ -96,13 +105,6 @@ namespace Bull
          */
         inline bool isEnableSmooth() const;
 
-        /*! \brief Get the size of the texture
-         *
-         * \return Return the size of the texture
-         *
-         */
-        inline const Vector2UI& getSize() const;
-
         /*! \brief Download the texture from the VRAM
          *
          * \return Return return the image
@@ -110,21 +112,12 @@ namespace Bull
          */
         Image getImage() const;
 
-        /*! \brief Download the texture from the VRAM
+        /*! \brief Get the size of the Image
          *
-         * \param rectangle The rectangle to use to crop the texture
-         *
-         * \return Return return the image
+         * \return The size
          *
          */
-        Image getImage(const RectangleUI& rectangle) const;
-
-        /*! \brief Get the Texture system handler
-         *
-         * \return The native Texture system handler
-         *
-         */
-        inline unsigned int getSystemHandler() const;
+        inline const Vector2UI& getSize() const override;
 
     private:
 
