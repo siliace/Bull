@@ -5,16 +5,14 @@
 
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Utility/Color.hpp>
+#include <Bull/Core/Window/VideoMode.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Context/ContextSettings.hpp>
 #include <Bull/Render/Target/Viewport.hpp>
-
-#include <Bull/Core/Utility/Color.hpp>
-
-#include <Bull/Core/Window/VideoMode.hpp>
 
 namespace Bull
 {
