@@ -1,7 +1,6 @@
 #include <stb_image/stb_image_write.h>
 
 #include <Bull/Core/Image/Image.hpp>
-#include <Bull/Core/Image/ImageFormat.hpp>
 #include <Bull/Core/Image/STBSaver.hpp>
 
 namespace Bull
@@ -20,6 +19,7 @@ namespace Bull
                 case ImageFormat::Png: return stbi_write_png(path.toString().getBuffer(), image->getSize().x(), image->getSize().y(), 4, image->getPixels().getBuffer(), 0) != 0;
                 case ImageFormat::Bmp: return stbi_write_bmp(path.toString().getBuffer(), image->getSize().x(), image->getSize().y(), 4, image->getPixels().getBuffer()) != 0;
                 case ImageFormat::Tga: return stbi_write_tga(path.toString().getBuffer(), image->getSize().x(), image->getSize().y(), 4, image->getPixels().getBuffer()) != 0;
+                case ImageFormat::Jpg: return stbi_write_jpg(path.toString().getBuffer(), image->getSize().x(), image->getSize().y(), 4, image->getPixels().getBuffer(), 50) != 0;
             }
 
             return false;

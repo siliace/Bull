@@ -36,4 +36,4 @@ else()
     target_link_libraries(bull-core pthread)
 endif()
 
-target_link_libraries(bull-core stb)
+target_link_libraries(bull-core stbimage)
