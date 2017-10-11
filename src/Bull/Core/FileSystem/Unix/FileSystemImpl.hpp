@@ -17,6 +17,13 @@ namespace Bull
              */
             static Path getRoot();
 
+            /*! \brief Get the Path of user's home directory
+             *
+             * \return The home directory
+             *
+             */
+            static Path getHome();
+
             /*! \brief Get the path of the temporary directory
              *
              * \return The temp path

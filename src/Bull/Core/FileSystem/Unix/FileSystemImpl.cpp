@@ -12,6 +12,11 @@ namespace Bull
             return Path::canonical("/");
         }
 
+        Path FileSystemImpl::getHome()
+        {
+            return Path::canonical("~");
+        }
+
         Path FileSystemImpl::getTempPath()
         {
             return getRoot().getChild("tmp");
