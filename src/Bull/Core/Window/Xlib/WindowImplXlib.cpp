@@ -4,6 +4,7 @@
 #include <Bull/Core/Thread/Thread.hpp>
 
 #include <Bull/Core/Window/Xlib/WindowImplXlib.hpp>
+#include <X11/Xutil.h>
 
 #ifndef Button6
     #define Button6 6
@@ -620,7 +621,90 @@ namespace Bull
 
         void WindowImplXlib::setIcon(const Image& icon)
         {
-            /// Nothing
+            XImage* image;
+            XGCValues values;
+            XGC iconGraphicContext;
+
+            unsigned int width        = icon.getSize().x();
+            unsigned int height       = icon.getSize().y();
+            unsigned int defaultDepth = m_display->getDefaultDepth();
+            XVisual* defaultVisual    = DefaultVisual(m_display->getHandler(), m_display->getDefaultScreen());
+
+            ByteArray pixels(icon.getPixels().getCapacity());
+
+            for(Index i = 0; i < icon.getSize().x() * icon.getSize().y(); i++)
+            {
+                pixels.at(i * 4 + 0) = icon.getPixels().at(i * 4 + 2);
+                pixels.at(i * 4 + 1) = icon.getPixels().at(i * 4 + 1);
+                pixels.at(i * 4 + 2) = icon.getPixels().at(i * 4 + 0);
+                pixels.at(i * 4 + 3) = icon.getPixels().at(i * 4 + 3);
+            }
+
+            image = XCreateImage(m_display->getHandler(), defaultVisual,defaultDepth, ZPixmap, 0, reinterpret_cast<char*>(&pixels[0]), width, height, 32, 0);
+
+            if(!image)
+            {
+                throw RuntimeError("Failed to set window's icon");
+            }
+
+            if(m_icon)
+            {
+                XFreePixmap(m_display->getHandler(), m_icon);
+            }
+
+            if(m_iconMask)
+            {
+                XFreePixmap(m_display->getHandler(), m_iconMask);
+            }
+
+            m_icon = XCreatePixmap(m_display->getHandler(), m_display->getRootWindow(), width, height, defaultDepth);
+            iconGraphicContext = XCreateGC(m_display->getHandler(), m_icon, 0, &values);
+
+            XPutImage(m_display->getHandler(), m_icon, iconGraphicContext, image, 0, 0, 0, 0, width, height);
+            XFreeGC(m_display->getHandler(), iconGraphicContext);
+            XDestroyImage(image);
+
+            Index pitch = (width + 7 / 8);
+            ByteArray pixelMask(pitch * height);
+
+            for(Index j = 0; j < height; j++)
+            {
+                for(Index i = 0; i < pitch; i++)
+                {
+                    for(Index k = 0; k < 8; k++)
+                    {
+                        Uint8 opacity = (pixels.at((i * 8 + k + j * width) * 3 + 4) > 0) ? 1 : 0;
+                        pixelMask.at(i + j * pitch) |= (opacity << k);
+                    }
+                }
+            }
+
+            m_iconMask = XCreatePixmapFromBitmapData(m_display->getHandler(), m_handler, reinterpret_cast<char*>(&pixels[0]), width, height, 1, 0, 1);
+
+            XWMHints* hints = XAllocWMHints();
+            hints->icon_pixmap = m_icon;
+            hints->icon_mask   = m_iconMask;
+            hints->flags       = IconPixmapHint | IconMaskHint;
+            XSetWMHints(m_display->getHandler(), m_handler, hints);
+            XFree(hints);
+
+            std::vector<unsigned long> icccmPixels(width * height + 2);
+            icccmPixels[0] = width;
+            icccmPixels[1] = height;
+
+            for(Index i = 0; i < width * height; i++)
+            {
+                icccmPixels[i + 2] = (pixels[i * 4 + 2] << 0)  |
+                                     (pixels[i * 4 + 1] << 8)  |
+                                     (pixels[i * 4 + 0] << 16) |
+                                     (pixels[i * 4 + 3] << 24);
+            }
+
+            XChangeProperty(m_display->getHandler(), m_handler,
+                            m_display->getAtom("_NET_WM_ICON"), XA_CARDINAL, 32, PropModeReplace,
+                            reinterpret_cast<const unsigned char*>(&icccmPixels[0]), icccmPixels.size());
+
+            m_display->flush();
         }
 
         void WindowImplXlib::setMouseCursor(const std::unique_ptr<CursorImpl>& cursor)
