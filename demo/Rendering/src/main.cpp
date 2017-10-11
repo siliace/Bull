@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <Bull/Math/Clamp.hpp>
 
 #include <Bull/Render/OpenGL.hpp>
@@ -80,11 +78,13 @@ int main(int argc, char* argv[])
                     firstMouse = false;
                 }
 
-                Vector2I offset;
+                Vector2F offset;
                 offset.x() = event.mouseMove.x - lastX;
                 offset.y() = lastY - event.mouseMove.y;
                 lastX = event.mouseMove.x;
                 lastY = event.mouseMove.y;
+
+                offset *= 0.1f;
 
                 yaw   += AngleF::degree(offset.x());
                 pitch += AngleF::degree(offset.y());

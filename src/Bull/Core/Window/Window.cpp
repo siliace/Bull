@@ -55,8 +55,6 @@ namespace Bull
 
     Window::~Window()
     {
-        onClose();
-
         close();
     }
 
@@ -73,6 +71,8 @@ namespace Bull
         {
             s_fullscreen = nullptr;
         }
+
+        onClose();
 
         m_impl.reset();
     }

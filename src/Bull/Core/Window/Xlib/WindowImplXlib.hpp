@@ -265,9 +265,11 @@ namespace Bull
              */
             void setProtocols();
 
+            XPixmap           m_icon;
             XScreen*          m_screen;
             Display::Instance m_display;
             XWindow           m_handler;
+            XPixmap           m_iconMask;
             Vector2UI         m_lastSize;
             bool              m_isMapped;
             XColormap         m_colormap;

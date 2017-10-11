@@ -5,7 +5,6 @@
 #include <Bull/Core/Hardware/Joystick.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
 
-
 namespace Bull
 {
     namespace prv

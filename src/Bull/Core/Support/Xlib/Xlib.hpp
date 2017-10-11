@@ -24,6 +24,7 @@ namespace Bull
         typedef ::Cursor   XCursor;
         typedef ::Pixmap   XPixmap;
         typedef ::Screen   XScreen;
+        typedef ::Visual   XVisual;
         typedef ::Window   XWindow;
         typedef ::Display  XDisplay;
         typedef ::Colormap XColormap;
