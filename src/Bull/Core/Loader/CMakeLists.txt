@@ -6,4 +6,6 @@ target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE_LOADER}/ParameterBag.hpp
             ${BULL_SRC_CORE_LOADER}/ParameterBag.cpp
+            ${BULL_INC_CORE_LOADER}/Resource.hpp
+            ${BULL_SRC_CORE_LOADER}/Resource.cpp
         )

@@ -3,10 +3,11 @@
 
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/Image/AbstractImage.hpp>
+#include <Bull/Core/Loader/Resource.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API Image : public AbstractImage
+    class BULL_CORE_API Image : public AbstractImage, public Resource
     {
     public:
 
