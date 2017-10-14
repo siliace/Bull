@@ -37,6 +37,36 @@ namespace Bull
         return gl::isShader(m_id);
     }
 
+    bool ShaderStage::loadFromPath(const Path& path, const ShaderStageParameters& parameters)
+    {
+        return Loader::get()->loadFromPath(this, path, parameters);
+    }
+
+    bool ShaderStage::loadFromStream(InStream& stream, const ShaderStageParameters& parameters)
+    {
+        return Loader::get()->loadFromStream(this, stream, parameters);
+    }
+
+    bool ShaderStage::loadFromMemory(const void* data, Index length, const ShaderStageParameters& parameters)
+    {
+        return Loader::get()->loadFromMemory(this, data, length, parameters);
+    }
+
+    bool ShaderStage::saveToPath(const Path& path, const ShaderStageParameters& parameters) const
+    {
+        return Saver::get()->saveToPath(this, path, parameters);
+    }
+
+    bool ShaderStage::saveToStream(OutStream& stream, const ShaderStageParameters& parameters) const
+    {
+        return Saver::get()->saveToStream(this, stream, parameters);
+    }
+
+    bool ShaderStage::saveToMemory(void* data, Index length, const ShaderStageParameters& parameters) const
+    {
+        return Saver::get()->saveToMemory(this, data, length, parameters);
+    }
+
     bool ShaderStage::compile(const String& code)
     {
         if(isValid())

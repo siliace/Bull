@@ -90,6 +90,13 @@ namespace Bull
          */
         Path getChild(const String& child) const;
 
+        /*! \brief Get the extension of the file path
+         *
+         * \return The file's extension
+         *
+         */
+        String getFileExtension() const;
+
         /*! \brief Tell whether the Path is a file
          *
          * \return True if the Path is a file

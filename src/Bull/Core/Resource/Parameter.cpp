@@ -1,4 +1,4 @@
-#include <Bull/Core/Loader/ParameterBag.hpp>
+#include <Bull/Core/Resource/ParameterBag.hpp>
 
 namespace Bull
 {

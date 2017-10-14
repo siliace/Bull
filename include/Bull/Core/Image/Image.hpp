@@ -3,11 +3,12 @@
 
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/Image/AbstractImage.hpp>
-#include <Bull/Core/Loader/Resource.hpp>
+#include <Bull/Core/Image/ImageParameters.hpp>
+#include <Bull/Core/Resource/Resource.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API Image : public AbstractImage, public Resource
+    class BULL_CORE_API Image : public AbstractImage
     {
     public:
 
@@ -35,6 +36,68 @@ namespace Bull
          */
         bool create(const ByteArray& pixels, const Vector2UI& size) override;
 
+        /*! \brief Load a Resource from a Path
+         *
+         * \param path       The Path of the file to read
+         * \param parameters Parameters to load the Resource
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        bool loadFromPath(const Path& path, const ImageParameters& parameters = ImageParameters()) override;
+
+        /*! \brief Load a Resource from an InStream
+         *
+         * \param stream     The stream to read
+         * \param parameters Parameters to load the Resource
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        bool loadFromStream(InStream& stream, const ImageParameters& parameters = ImageParameters()) override;
+
+        /*! \brief Load a Resource from a memory area
+         *
+         * \param data       The memory area to read
+         * \param length     The length of the memory area
+         * \param parameters Parameters to load the Resource
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        bool loadFromMemory(const void* data, Index length, const ImageParameters& parameters = ImageParameters()) override;
+
+        /*! \brief Save the Resource to a Path
+         *
+         * \param path       The path of the
+         * \param parameters Parameters to save the Resource
+         *
+         * \return True if the Resource was saved successfully
+         *
+         */
+        bool saveToPath(const Path& path, const ImageParameters& parameters = ImageParameters()) const override;
+
+        /*! \brief Save the Resource to a stream
+         *
+         * \param stream     The stream to write
+         * \param parameters Parameters to save the Resource
+         *
+         * \return True if the Resource was saved successfully
+         *
+         */
+        bool saveToStream(OutStream& stream, const ImageParameters& parameters = ImageParameters()) const override;
+
+        /*! \brief Save the Resource to a Path
+         *
+         * \param data       The memory to write
+         * \param length     The length of the memory area
+         * \param parameters Parameters to save the Resource
+         *
+         * \return True if the Resource was saved successfully
+         *
+         */
+        bool saveToMemory(void* data, Index length, const ImageParameters& parameters = ImageParameters()) const override;
+        
         /*! \brief Get pixels of the Image
          *
          * \return The pixels

@@ -54,6 +54,36 @@ namespace Bull
         return false;
     }
 
+    bool Shader::attachFromPath(const Path& path, ShaderStageType::ShaderStageType type)
+    {
+        ShaderStage stage;
+        ShaderStageParameters parameters;
+
+        parameters.type = type;
+
+        return stage.loadFromPath(path, parameters) && attach(stage);
+    }
+
+    bool Shader::attachFromStream(InStream& stream, ShaderStageType::ShaderStageType type)
+    {
+        ShaderStage stage;
+        ShaderStageParameters parameters;
+
+        parameters.type = type;
+
+        return stage.loadFromStream(stream, parameters) && attach(stage);
+    }
+
+    bool Shader::attachFromMemory(const void* data, Index length, ShaderStageType::ShaderStageType type)
+    {
+        ShaderStage stage;
+        ShaderStageParameters parameters;
+
+        parameters.type = type;
+
+        return stage.loadFromMemory(data, length, parameters) && attach(stage);
+    }
+
     bool Shader::link()
     {
         if(isValid())

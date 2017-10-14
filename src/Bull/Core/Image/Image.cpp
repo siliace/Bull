@@ -28,6 +28,36 @@ namespace Bull
         return false;
     }
 
+    bool Image::loadFromPath(const Path& path, const ImageParameters& parameters)
+    {
+        return Loader::get()->loadFromPath(this, path, parameters);
+    }
+
+    bool Image::loadFromStream(InStream& stream, const ImageParameters& parameters)
+    {
+        return Loader::get()->loadFromStream(this, stream, parameters);
+    }
+
+    bool Image::loadFromMemory(const void* data, Index length, const ImageParameters& parameters)
+    {
+        return Loader::get()->loadFromMemory(this, data, length, parameters);
+    }
+
+    bool Image::saveToPath(const Path& path, const ImageParameters& parameters) const
+    {
+        return Saver::get()->saveToPath(this, path, parameters);
+    }
+
+    bool Image::saveToStream(OutStream& stream, const ImageParameters& parameters) const
+    {
+        return Saver::get()->saveToStream(this, stream, parameters);
+    }
+
+    bool Image::saveToMemory(void* data, Index length, const ImageParameters& parameters) const
+    {
+        return Saver::get()->saveToMemory(this, data, length, parameters);
+    }
+
     const Vector2UI& Image::getSize() const
     {
         return m_size;

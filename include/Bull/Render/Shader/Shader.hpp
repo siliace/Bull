@@ -54,6 +54,37 @@ namespace Bull
          */
         bool attach(const ShaderStage& stage);
 
+        /*! \brief Load a ShaderStage form a Path and attach it to this Shader
+         *
+         * \param stream The Path of the File to read
+         * \param type   The type of the ShaderStage
+         *
+         * \return True if the ShaderStage was attached successfully
+         *
+         */
+        bool attachFromPath(const Path& path, ShaderStageType::ShaderStageType type);
+
+        /*! \brief Load a ShaderStage form a stream and attach it to this Shader
+         *
+         * \param stream The stream to read
+         * \param type   The type of the ShaderStage
+         *
+         * \return True if the ShaderStage was attached successfully
+         *
+         */
+        bool attachFromStream(InStream& stream, ShaderStageType::ShaderStageType type);
+
+        /*! \brief Load a ShaderStage form a memory area and attach it to this Shader
+         *
+         * \param data   The memory area to read
+         * \param length The length of the memory
+         * \param type   The type of the ShaderStage
+         *
+         * \return True if the ShaderStage was attached successfully
+         *
+         */
+        bool attachFromMemory(const void* data, Index length, ShaderStageType::ShaderStageType type);
+
         /*! \brief Load the Shader from a binary form
          *
          * \param binary The binary

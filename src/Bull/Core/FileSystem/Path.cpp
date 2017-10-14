@@ -52,6 +52,19 @@ namespace Bull
         return Path(toString() + Separator + child);
     }
 
+    String Path::getFileExtension() const
+    {
+        String path = toString();
+        int i       = path.last('.');
+
+        if(i != -1)
+        {
+            return path.subString(static_cast<Index>(i) + 1);
+        }
+
+        return String();
+    }
+
     bool Path::isFile() const
     {
         return File::exists(toString());

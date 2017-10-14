@@ -7,4 +7,5 @@ target_sources(bull-core
             ${BULL_INC_CORE_IMAGE}/Image.hpp
             ${BULL_SRC_CORE_IMAGE}/Image.cpp
             ${BULL_INC_CORE_IMAGE}/ImageFormat.hpp
+            ${BULL_INC_CORE_IMAGE}/ImageParameters.hpp
         )

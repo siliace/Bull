@@ -2,6 +2,8 @@
 #define BULL_RENDER_TEXTURE_TEXTURE_HPP
 
 #include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/Image/Image.hpp>
+#include <Bull/Core/Image/ImageParameters.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Pattern/ObjectRef.hpp>
 
@@ -9,8 +11,6 @@
 #include <Bull/Math/Vector/Vector2.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
-
-#include <Bull/Core/Image/Image.hpp>
 
 namespace Bull
 {
@@ -72,6 +72,68 @@ namespace Bull
          */
         bool create(const ByteArray& pixels, const Vector2UI& size) override;
 
+        /*! \brief Load a Texture from a Path
+         *
+         * \param path       The Path of the file to read
+         * \param parameters Parameters to load the Texture
+         *
+         * \return True if the Texture was loaded successfully
+         *
+         */
+        bool loadFromPath(const Path& path, const ImageParameters& parameters = ImageParameters()) override;
+
+        /*! \brief Load a Texture from an InStream
+         *
+         * \param stream     The stream to read
+         * \param parameters Parameters to load the Texture
+         *
+         * \return True if the Texture was loaded successfully
+         *
+         */
+        bool loadFromStream(InStream& stream, const ImageParameters& parameters = ImageParameters()) override;
+
+        /*! \brief Load a Texture from a memory area
+         *
+         * \param data       The memory area to read
+         * \param length     The length of the memory area
+         * \param parameters Parameters to load the Texture
+         *
+         * \return True if the Texture was loaded successfully
+         *
+         */
+        bool loadFromMemory(const void* data, Index length, const ImageParameters& parameters = ImageParameters()) override;
+
+        /*! \brief Save the Texture to a Path
+         *
+         * \param path       The path of the
+         * \param parameters Parameters to save the Texture
+         *
+         * \return True if the Texture was saved successfully
+         *
+         */
+        bool saveToPath(const Path& path, const ImageParameters& parameters = ImageParameters()) const override;
+
+        /*! \brief Save the Texture to a stream
+         *
+         * \param stream     The stream to write
+         * \param parameters Parameters to save the Texture
+         *
+         * \return True if the Texture was saved successfully
+         *
+         */
+        bool saveToStream(OutStream& stream, const ImageParameters& parameters = ImageParameters()) const override;
+
+        /*! \brief Save the Texture to a Path
+         *
+         * \param data       The memory to write
+         * \param length     The length of the memory area
+         * \param parameters Parameters to save the Texture
+         *
+         * \return True if the Texture was saved successfully
+         *
+         */
+        bool saveToMemory(void* data, Index length, const ImageParameters& parameters = ImageParameters()) const override;
+        
         /*! \brief Bind the texture
          *
          */

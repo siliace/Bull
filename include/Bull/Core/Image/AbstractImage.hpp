@@ -2,14 +2,21 @@
 #define BULL_CORE_IMAGE_ABSTRACTIMAGE_HPP
 
 #include <Bull/Core/Export.hpp>
+#include <Bull/Core/Image/ImageParameters.hpp>
+#include <Bull/Core/Resource/Resource.hpp>
+#include <Bull/Core/Resource/ResourceLoader.hpp>
+#include <Bull/Core/Resource/ResourceSaver.hpp>
 #include <Bull/Core/Memory/ByteArray.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {
-    struct BULL_CORE_API AbstractImage
+    struct BULL_CORE_API AbstractImage : public Resource<ImageParameters>
     {
+        using Saver  = ResourceSaver<AbstractImage, ImageParameters>;
+        using Loader = ResourceLoader<AbstractImage, ImageParameters>;
+
         /*! \brief Create the Image
          *
          * \param size The size of the Image
