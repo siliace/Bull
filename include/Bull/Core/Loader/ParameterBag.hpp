@@ -1,6 +1,7 @@
 #ifndef BULL_CORE_LOADER_PARAMETERBAG_HPP
 #define BULL_CORE_LOADER_PARAMETERBAG_HPP
 
+#include <cstring>
 #include <map>
 
 #include <Bull/Core/Export.hpp>
@@ -54,9 +55,10 @@ namespace Bull
 
             union Value
             {
-                Value() {}
-                Value(const Value&) {}
-                ~Value() {}
+                Value();
+                Value(const Value& copy);
+                ~Value();
+                Value& operator=(const Value& right);
 
                 int    intValue;
                 Color  colorValue;
@@ -65,6 +67,9 @@ namespace Bull
                 bool   booleanValue;
                 void*  pointerValue;
             };
+
+            Parameter();
+            Parameter& operator=(const Parameter& right);
 
             Type  type;
             Value value;
