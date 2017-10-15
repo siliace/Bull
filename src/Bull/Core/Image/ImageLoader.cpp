@@ -1,4 +1,10 @@
+#include <algorithm>
+
+#include <stb_image/stb_image.h>
+
+#include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Image/ImageLoader.hpp>
+#include <Bull/Core/Utility/CallOnExit.hpp>
 
 namespace Bull
 {
@@ -6,27 +12,57 @@ namespace Bull
     {
         bool ImageLoader::loadFromPath(Image* resource, const Path& path, const ImageParameters& parameters) const
         {
+            File file(path);
+
+            if(file.isOpen())
+            {
+                return loadFromStream(resource, file, parameters);
+            }
+
             return false;
         }
 
         bool ImageLoader::loadFromStream(Image* resource, InStream& stream, const ImageParameters& parameters) const
         {
-            return false;
+            String content = stream.readAll();
+
+            return loadFromMemory(resource, content.getBuffer(), content.getCapacity(), parameters);
         }
 
         bool ImageLoader::loadFromMemory(Image* resource, const void* data, Index length, const ImageParameters& parameters) const
         {
+            int w, h, channels;
+
+            stbi_uc* buffer = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &w, &h, &channels, parameters.channels);
+
+            if(buffer && w && h)
+            {
+                ByteArray pixels;
+                CallOnExit cleanup([buffer](){
+                    stbi_image_free(buffer);
+                });
+
+                if(pixels.fill(buffer, w * h * parameters.channels))
+                {
+                    return resource->create(pixels, Vector2I(w, h));
+                }
+            }
+
             return false;
         }
 
         bool ImageLoader::isFormatSupported(const String& extension) const
         {
-            return false;
+            static std::vector<String> extensions = {
+                "jpg", "jpeg", "png", "bmp", "psd", "tga", "gif", "hdr", "pic", "pnm"
+            };
+
+            return std::find(extensions.begin(), extensions.end(), extension) != extensions.end();
         }
 
         bool ImageLoader::isParametersSupported(const ImageParameters& parameters) const
         {
-            return false;
+            return true;
         }
     }
 }

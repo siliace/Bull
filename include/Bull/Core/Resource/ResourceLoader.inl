@@ -57,9 +57,12 @@ namespace Bull
     }
 
     template <typename T, typename P>
-    template <typename S, typename... Args>
-    void ResourceLoader<T, P>::registerLoader(Args&&... args)
+    template <typename L, typename... Args>
+    L& ResourceLoader<T, P>::registerLoader(Args&&... args)
     {
-        m_loaders.emplace_back(std::make_unique<T>(std::forward<Args>(args)...));
+        LoaderPtr saver = std::make_unique<L>(std::forward<Args>(args)...);
+        m_loaders.emplace_back(std::move(saver));
+
+        return static_cast<L&>(*m_loaders.back().get());
     }
 }

@@ -9,9 +9,19 @@ namespace Bull
 {
     struct BULL_CORE_API ImageParameters : public ParameterBag
     {
-        int         stride  = 0;
-        int         quality = 100;
-        ImageFormat format  = ImageFormat::Png;
+        enum Channels
+        {
+            Default   = 0,
+            Grey      = 1,
+            GreyAlpha = 2,
+            RGB       = 3,
+            RGBA      = 4,
+        };
+
+        int         stride   = 0;
+        int         quality  = 100;
+        Channels    channels = RGBA;
+        ImageFormat format   = ImageFormat::Png;
     };
 }
 

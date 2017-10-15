@@ -63,8 +63,8 @@ namespace Bull
          * \param args Arguments to use to create the saver
          *
          */
-        template <typename S, typename... Args>
-        void registerLoader(Args&&... args);
+        template <typename L, typename... Args>
+        L& registerLoader(Args&&... args);
 
     private:
 

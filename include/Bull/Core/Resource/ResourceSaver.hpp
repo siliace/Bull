@@ -67,7 +67,7 @@ namespace Bull
          *
          */
         template <typename S, typename... Args>
-        void registerSaver(Args&&... args);
+        S& registerSaver(Args&&... args);
 
     private:
 

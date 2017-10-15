@@ -114,6 +114,9 @@ namespace Bull
 
     private:
 
+        using Saver  = ResourceSaver<Image, ImageParameters>;
+        using Loader = ResourceLoader<Image, ImageParameters>;
+
         Vector2UI m_size;
         ByteArray m_pixels;
     };

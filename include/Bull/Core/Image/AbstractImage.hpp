@@ -14,9 +14,6 @@ namespace Bull
 {
     struct BULL_CORE_API AbstractImage : public Resource<ImageParameters>
     {
-        using Saver  = ResourceSaver<AbstractImage, ImageParameters>;
-        using Loader = ResourceLoader<AbstractImage, ImageParameters>;
-
         /*! \brief Create the Image
          *
          * \param size The size of the Image
