@@ -4,13 +4,12 @@
 #include <Bull/Core/Image/Image.hpp>
 #include <Bull/Core/Image/ImageParameters.hpp>
 #include <Bull/Core/Resource/AbstractResourceLoader.hpp>
-#include <Bull/Core/Resource/Registrar.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        struct ImageLoader : public AbstractResourceLoader<Image, ImageParameters>, public LoaderRegistrar<ImageLoader, AbstractImage, ImageParameters>
+        struct ImageLoader : public AbstractResourceLoader<Image, ImageParameters>
         {
             /*! \brief Save a Resource to path
              *

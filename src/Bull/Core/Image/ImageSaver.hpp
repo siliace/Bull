@@ -4,11 +4,10 @@
 #include <Bull/Core/Image/Image.hpp>
 #include <Bull/Core/Image/ImageParameters.hpp>
 #include <Bull/Core/Resource/AbstractResourceSaver.hpp>
-#include <Bull/Core/Resource/Registrar.hpp>
 
 namespace Bull
 {
-    struct ImageSaver : public AbstractResourceSaver<Image, ImageParameters>, public SaverRegistrar<ImageSaver, Image, ImageParameters>
+    struct ImageSaver : public AbstractResourceSaver<Image, ImageParameters>
     {
         /*! \brief Save a Resource to path
          *

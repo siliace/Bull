@@ -3,7 +3,7 @@ namespace Bull
     template <typename T, typename P>
     bool ResourceLoader<T, P>::loadFromPath(T* resource, const Path& path, const P& parameters) const
     {
-        for(const LoaderPtr& loader: m_loaders)
+        for(const LoaderPtr& loader : m_loaders)
         {
             if(loader->isParametersSupported(parameters) || loader->isFormatSupported(path.getFileExtension()))
             {
@@ -17,7 +17,7 @@ namespace Bull
     template <typename T, typename P>
     bool ResourceLoader<T, P>::loadFromStream(T* resource, InStream& stream, const P& parameters) const
     {
-        for(const LoaderPtr& loader: m_loaders)
+        for(const LoaderPtr& loader : m_loaders)
         {
             if(loader->isParametersSupported(parameters))
             {
@@ -31,7 +31,7 @@ namespace Bull
     template <typename T, typename P>
     bool ResourceLoader<T, P>::loadFromMemory(T* resource, const void* data, Index length, const P& parameters) const
     {
-        for(const LoaderPtr& loader: m_loaders)
+        for(const LoaderPtr& loader : m_loaders)
         {
             if(loader->isParametersSupported(parameters))
             {
@@ -57,12 +57,9 @@ namespace Bull
     }
 
     template <typename T, typename P>
-    template <typename L, typename... Args>
-    L& ResourceLoader<T, P>::registerLoader(Args&&... args)
+    template <typename L>
+    void ResourceLoader<T, P>::registerLoader()
     {
-        LoaderPtr saver = std::make_unique<L>(std::forward<Args>(args)...);
-        m_loaders.emplace_back(std::move(saver));
-
-        return static_cast<L&>(*m_loaders.back().get());
+        m_loaders.emplace_back(std::make_unique<L>());
     }
 }

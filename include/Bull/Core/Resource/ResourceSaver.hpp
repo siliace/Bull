@@ -8,7 +8,6 @@
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
 #include <Bull/Core/Resource/AbstractResourceSaver.hpp>
-#include <Bull/Core/Resource/Resource.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
 
 namespace Bull
@@ -66,8 +65,8 @@ namespace Bull
          * \param args Arguments to use to create the saver
          *
          */
-        template <typename S, typename... Args>
-        S& registerSaver(Args&&... args);
+        template <typename S>
+        void registerSaver();
 
     private:
 

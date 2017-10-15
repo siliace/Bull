@@ -57,12 +57,9 @@ namespace Bull
     }
 
     template <typename T, typename P>
-    template <typename S, typename... Args>
-    S& ResourceSaver<T, P>::registerSaver(Args&&... args)
+    template <typename S>
+    void ResourceSaver<T, P>::registerSaver()
     {
-        SaverPtr saver = std::make_unique<S>(std::forward<Args>(args)...);
-        m_savers.emplace_back(std::move(saver));
-
-        return static_cast<S&>(*m_savers.back().get());
+        m_savers.emplace_back(std::make_unique<S>());
     }
 }
