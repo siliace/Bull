@@ -8,4 +8,9 @@ target_sources(bull-core
             ${BULL_SRC_CORE_IMAGE}/Image.cpp
             ${BULL_INC_CORE_IMAGE}/ImageFormat.hpp
             ${BULL_INC_CORE_IMAGE}/ImageParameters.hpp
+        PRIVATE
+            ${BULL_SRC_CORE_IMAGE}/ImageLoader.hpp
+            ${BULL_SRC_CORE_IMAGE}/ImageLoader.cpp
+            ${BULL_SRC_CORE_IMAGE}/ImageSaver.hpp
+            ${BULL_SRC_CORE_IMAGE}/ImageSaver.cpp
         )
