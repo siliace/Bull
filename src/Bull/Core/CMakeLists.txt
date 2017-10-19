@@ -35,3 +35,5 @@ else()
     target_link_libraries(bull-core Xrandr)
     target_link_libraries(bull-core pthread)
 endif()
+
+target_link_libraries(bull-core stbimage)

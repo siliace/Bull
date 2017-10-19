@@ -12,6 +12,11 @@ namespace Bull
     {
     public:
 
+        using Saver  = ResourceSaver<Image, ImageParameters>;
+        using Loader = ResourceLoader<Image, ImageParameters>;
+
+    public:
+
         /*! \brief Default constructor
          *
          */
@@ -113,9 +118,6 @@ namespace Bull
         const Vector2UI& getSize() const override;
 
     private:
-
-        using Saver  = ResourceSaver<Image, ImageParameters>;
-        using Loader = ResourceLoader<Image, ImageParameters>;
 
         Vector2UI m_size;
         ByteArray m_pixels;

@@ -1,7 +1,16 @@
 #include <Bull/Core/Image/Image.hpp>
+#include <Bull/Core/Image/ImageLoader.hpp>
+#include <Bull/Core/Image/ImageSaver.hpp>
+#include <Bull/Core/Resource/Registrar.hpp>
 
 namespace Bull
 {
+    namespace
+    {
+        SaverRegistrar<prv::ImageSaver, Image::Saver> saverRegistrar;
+        LoaderRegistrar<prv::ImageLoader, Image::Loader> loaderRegistrar;
+    }
+
     bool Image::create(const Vector2UI& size)
     {
         if(size.x() && size.y())
@@ -17,10 +26,17 @@ namespace Bull
 
     bool Image::create(const ByteArray& pixels, const Vector2UI& size)
     {
-        if(size.x() && size.y() && pixels.getCapacity() == size.x() * size.y() * 4)
+        if(size.x() && size.y())
         {
+            Index pixelsCount = size.x() * size.y() * 4;
+
             m_size   = size;
             m_pixels = pixels;
+
+            if(m_pixels.getCapacity() != pixelsCount)
+            {
+                m_pixels.resize(pixelsCount);
+            }
 
             return true;
         }
