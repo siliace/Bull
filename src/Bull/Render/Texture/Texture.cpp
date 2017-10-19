@@ -58,8 +58,6 @@ namespace Bull
     {
         if(create(size))
         {
-            const ByteArray& pixels = pixels;
-
             gl::bindTexture(GL_TEXTURE_2D, m_id);
 
             for(unsigned int i = 0; i < m_size.y() ; i++)

@@ -9,7 +9,7 @@ namespace Bull
 {
     struct BULL_CORE_API ShaderStageParameters : public ParameterBag
     {
-        ShaderStageType::ShaderStageType type;
+        ShaderStageType::ShaderStageType type = ShaderStageType::Vertex;
     };
 }
 

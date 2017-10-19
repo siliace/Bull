@@ -1,15 +1,21 @@
 #include <Bull/Core/Exception/RuntimeError.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/Resource/Registrar.hpp>
 
 #include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Shader/ShaderStage.hpp>
+#include <Bull/Render/Shader/ShaderStageLoader.hpp>
+#include <Bull/Render/Shader/ShaderStageSaver.hpp>
 
 namespace Bull
 {
     namespace
     {
         unsigned int shaderType[] = {GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, GL_GEOMETRY_SHADER};
+
+        SaverRegistrar<prv::ShaderStageSaver, ShaderStage::Saver> saverResgistrar;
+        LoaderRegistrar<prv::ShaderStageLoader, ShaderStage::Loader> loaderResgistrar;
     }
 
     ShaderStage::ShaderStage() :
