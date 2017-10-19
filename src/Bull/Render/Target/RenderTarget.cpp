@@ -1,5 +1,5 @@
 #include <Bull/Render/Context/GlContext.hpp>
-#include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Target/RenderTarget.hpp>
 
 namespace Bull

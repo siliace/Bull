@@ -8,7 +8,6 @@ target_sources(bull-render
             ${BULL_INC_RENDER}/Export.hpp
             ${BULL_INC_RENDER}/Mesh.hpp
             ${BULL_SRC_RENDER}/Mesh.cpp
-            ${BULL_INC_RENDER}/OpenGL.hpp
         )
 
 add_subdirectory(Buffer)

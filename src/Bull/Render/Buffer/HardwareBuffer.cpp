@@ -1,7 +1,7 @@
 #include <cstring>
 
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
-#include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 
 namespace Bull
 {

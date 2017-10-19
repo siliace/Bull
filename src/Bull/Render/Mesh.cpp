@@ -1,5 +1,5 @@
+#include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Mesh.hpp>
-#include <Bull/Render/OpenGL.hpp>
 
 namespace Bull
 {

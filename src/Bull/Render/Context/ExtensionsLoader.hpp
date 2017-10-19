@@ -25,7 +25,7 @@ namespace Bull
                  * \param loader The function to call to load the extension
                  *
                  */
-                Extension(const String& name, Functor<bool> loader) :
+                Extension(const String& name, const Functor<bool>& loader) :
                     name(name),
                     loader(loader),
                     loaded(false)
@@ -50,7 +50,7 @@ namespace Bull
              * \param handler The handler to use to get supported extensions
              *
              */
-            ExtensionsLoader(SurfaceHandler handler);
+            explicit ExtensionsLoader(SurfaceHandler handler);
 
             /*! \brief Add an extension to load
              *
@@ -62,7 +62,12 @@ namespace Bull
             /*! \brief Load required extensions
              *
              */
-            void load();
+            void loadExtensions();
+
+            /*! \brief Load OpenGL functions
+             *
+             */
+            void loadFunctions();
 
             /*! \brief Check whether an OpenGL extension is loaded
              *
@@ -72,24 +77,6 @@ namespace Bull
              *
              */
             bool isLoaded(const Extension& extension) const;
-
-            /*! \brief Check whether an OpenGL extension is loaded
-             *
-             * \param extension The name of the extension
-             *
-             * \return Return true if loaded, false otherwise
-             *
-             */
-            bool isLoaded(const String& extension) const;
-
-            /*! \brief Check whether an OpenGL extension is supported
-             *
-             * \param extension The extension
-             *
-             * \return Return true if supported, false otherwise
-             *
-             */
-            bool isSupported(const Extension& extension) const;
 
             /*! \brief Check whether an OpenGL extension is supported
              *
@@ -104,7 +91,8 @@ namespace Bull
 
             std::vector<Extension> m_extensions;
             std::vector<String>    m_allExtensions;
-            bool                   m_loaded = false;
+            bool                   m_loadedFunctions;
+            bool                   m_loadedExtensions;
         };
     }
 }

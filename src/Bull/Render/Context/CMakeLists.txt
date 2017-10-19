@@ -14,9 +14,8 @@ target_sources(bull-render
             ${BULL_SRC_RENDER_CONTEXT}/ExtensionsLoader.cpp
             ${BULL_SRC_RENDER_CONTEXT}/GlContext.hpp
             ${BULL_SRC_RENDER_CONTEXT}/GlContext.cpp
+            ${BULL_SRC_RENDER_CONTEXT}/GlFunctions.hpp
             ${BULL_SRC_RENDER_CONTEXT}/GlKhrNoError.hpp
-            ${BULL_SRC_RENDER_CONTEXT}/GlLoader.hpp
-            ${BULL_SRC_RENDER_CONTEXT}/GlLoader.cpp
             ${BULL_SRC_RENDER_CONTEXT}/SurfaceHandler.hpp
         )
 

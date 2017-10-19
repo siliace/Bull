@@ -2,8 +2,8 @@
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
-#include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 
 namespace Bull
 {

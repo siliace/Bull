@@ -1,5 +1,5 @@
 #include <Bull/Render/Buffer/ArrayBuffer.hpp>
-#include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 
 namespace Bull
 {

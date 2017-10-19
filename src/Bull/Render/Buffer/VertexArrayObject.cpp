@@ -1,7 +1,7 @@
 #include <Bull/Core/Exception/RuntimeError.hpp>
 
 #include <Bull/Render/Buffer/VertexArrayObject.hpp>
-#include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 
 namespace Bull
 {

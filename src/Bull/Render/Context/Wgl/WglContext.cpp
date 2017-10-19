@@ -84,7 +84,7 @@ namespace Bull
                             break;
                         }
 
-                        if(isSupported(WglMultisample))
+                        if(isSupported("WGL_ARB_multisample"))
                         {
                             static const int sampleAttribs[] =
                             {
@@ -435,7 +435,7 @@ namespace Bull
                     m_settings.stencil = pfd.cStencilBits;
                 }
 
-                if(isSupported(WglMultisample))
+                if(isSupported("WGL_ARB_multisample"))
                 {
                     int sample[2] = {0};
                     static const int sampleAttribs[] =
