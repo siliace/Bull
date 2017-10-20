@@ -84,6 +84,18 @@ namespace Bull
         return stage.loadFromMemory(data, length, parameters) && attach(stage);
     }
 
+    bool Shader::loadFromBinary(const ShaderBinary& binary)
+    {
+        if(binary.isValid())
+        {
+            gl::programBinary(m_program, binary.format, binary.getBuffer(), binary.getCapacity());
+
+            return true;
+        }
+
+        return false;
+    }
+
     bool Shader::link()
     {
         if(isValid())
