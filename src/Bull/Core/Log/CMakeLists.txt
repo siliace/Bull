@@ -4,6 +4,7 @@ set(BULL_SRC_CORE_LOG ${BULL_SRC_CORE}/Log)
 target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE_LOG}/AbstractLogger.hpp
+            ${BULL_SRC_CORE_LOG}/AbstractLogger.cpp
             ${BULL_INC_CORE_LOG}/ConsoleLogger.hpp
             ${BULL_SRC_CORE_LOG}/ConsoleLogger.cpp
             ${BULL_INC_CORE_LOG}/FileLogger.hpp
@@ -11,4 +12,6 @@ target_sources(bull-core
             ${BULL_INC_CORE_LOG}/Log.hpp
             ${BULL_INC_CORE_LOG}/Log.inl
             ${BULL_SRC_CORE_LOG}/Log.cpp
+            ${BULL_INC_CORE_LOG}/MessageWindowLogger.hpp
+            ${BULL_SRC_CORE_LOG}/MessageWindowLogger.cpp
         )

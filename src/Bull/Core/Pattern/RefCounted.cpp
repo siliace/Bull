@@ -19,7 +19,7 @@ namespace Bull
 
             ss << "Deleting object with " << String::number(static_cast<unsigned int>(m_referenceCounter)) << " references";
 
-            Log::get()->write(ss.toString(), Log::Warning);
+            Log::get()->write(ss.toString(), LogLevel::LogLevel_Warning);
         }
     }
 

@@ -20,16 +20,17 @@ namespace Bull
          * \param filename The name of the log file
          *
          */
-        FileLogger(const String& filename);
+        explicit FileLogger(const String& filename);
 
     protected:
 
         /*! \brief Add a new entry in the log
          *
-         * \param message The entry to add in the log
+         * \param message The log message
+         * \param level   The error level of the message
          *
          */
-        void write(const String& entry) override;
+        void write(const String& message, LogLevel level) override;
 
     private:
 

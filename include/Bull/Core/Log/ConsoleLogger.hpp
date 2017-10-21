@@ -11,10 +11,11 @@ namespace Bull
 
         /*! \brief Add a new entry in the log
          *
-         * \param message The entry to add in the log
+         * \param message The log message
+         * \param level   The error level of the message
          *
          */
-        void write(const String& entry) override;
+        void write(const String& message, LogLevel level) override;
     };
 }
 
