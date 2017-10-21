@@ -6,9 +6,8 @@
 
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Pattern/ObjectRef.hpp>
 #include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Pattern/ObjectRef.hpp>
 
 namespace Bull
 {
@@ -21,6 +20,7 @@ namespace Bull
 
     using DirectoryRef = ObjectRef<Directory>;
     using DirectoryConstRef = ObjectRef<const Directory>;
+
 
     class BULL_CORE_API Directory : public RefCounted
     {
