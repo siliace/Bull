@@ -15,7 +15,7 @@
 
 namespace Bull
 {
-    class ContextSettings;
+    class MessageWindow;
 
     namespace prv
     {
@@ -317,6 +317,8 @@ namespace Bull
         bool isFullscreenEnable() const;
 
     protected:
+
+        friend class MessageWindow;
 
         /*! \brief Function called when the Window is opened
          *
