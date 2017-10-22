@@ -22,13 +22,15 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param vertices Vertices in the ArrayBuffer
+         * \param usage    The usage (static, dynamic, stream) of the ArrayBuffer
          *
          */
-        ArrayBuffer(const std::vector<Vertex>& vertices, Usage usage = StaticDraw);
+        explicit ArrayBuffer(const std::vector<Vertex>& vertices, Usage usage = StaticDraw);
 
         /*! \brief Create the ArrayBuffer from a Vertex vector
          *
          * \param vertices Vertices in the ArrayBuffer
+         * \param usage    The usage (static, dynamic, stream) of the ArrayBuffer
          *
          * \return True if the ArrayBuffer was created successfully
          *

@@ -86,34 +86,34 @@ namespace Bull
         return m_time / 86400;
     }
 
-    Time Time::operator+(const Time& rhs) const
+    Time Time::operator+(const Time& right) const
     {
         Time t(m_time);
 
-        t += rhs;
+        t += right;
 
         return t;
     }
 
-    Time& Time::operator+=(const Time& rhs)
+    Time& Time::operator+=(const Time& right)
     {
-        m_time += rhs.m_time;
+        m_time += right.m_time;
 
         return (*this);
     }
 
-    Time Time::operator-(const Time& rhs) const
+    Time Time::operator-(const Time& right) const
     {
         Time t(m_time);
 
-        t -= rhs;
+        t -= right;
 
         return t;
     }
 
-    Time& Time::operator-=(const Time& rhs)
+    Time& Time::operator-=(const Time& right)
     {
-        m_time -= rhs.m_time;
+        m_time -= right.m_time;
 
         return (*this);
     }
@@ -150,33 +150,33 @@ namespace Bull
         return (*this);
     }
 
-    bool Time::operator==(const Time& rhs) const
+    bool Time::operator==(const Time& right) const
     {
-        return m_time == rhs.m_time;
+        return m_time == right.m_time;
     }
 
-    bool Time::operator!=(const Time& rhs) const
+    bool Time::operator!=(const Time& right) const
     {
-        return !((*this) == rhs);
+        return !((*this) == right);
     }
 
-    bool Time::operator<=(const Time& rhs) const
+    bool Time::operator<=(const Time& right) const
     {
-        return m_time <= rhs.m_time;
+        return m_time <= right.m_time;
     }
 
-    bool Time::operator<(const Time& rhs) const
+    bool Time::operator<(const Time& right) const
     {
-        return m_time < rhs.m_time;
+        return m_time < right.m_time;
     }
 
-    bool Time::operator>=(const Time& rhs) const
+    bool Time::operator>=(const Time& right) const
     {
-        return m_time >= rhs.m_time;
+        return m_time >= right.m_time;
     }
 
-    bool Time::operator>(const Time& rhs) const
+    bool Time::operator>(const Time& right) const
     {
-        return m_time > rhs.m_time;
+        return m_time > right.m_time;
     }
 }

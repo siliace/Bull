@@ -29,6 +29,7 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param name The name of TempDirectory
+         * \param path The base Path of the TempDirectory
          *
          */
         explicit TempDirectory(const String& name = "BullTempDirectory", const Path& path = FileSystem::getTempPath());

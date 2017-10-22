@@ -43,9 +43,9 @@ namespace Bull
         return false;
     }
 
-    bool RefCounted::setPersistent(bool persistence, bool checkReference)
+    bool RefCounted::setPersistent(bool persistent, bool checkReference)
     {
-        m_isPersistent = persistence;
+        m_isPersistent = persistent;
 
         if(m_referenceCounter == 0 && !m_isPersistent && checkReference)
         {

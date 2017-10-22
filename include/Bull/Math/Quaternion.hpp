@@ -120,7 +120,7 @@ namespace Bull
          * \return The product of this and right
          *
          */
-        Vector3<T> operator*(const Vector3<T>& vector);
+        Vector3<T> operator*(const Vector3<T>& right);
 
         T w, x, y, z;
     };

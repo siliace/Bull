@@ -7,8 +7,8 @@
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
-#include <Bull/Core/Resource/AbstractResourceSaver.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
+#include <Bull/Core/Resource/AbstractResourceSaver.hpp>
 
 namespace Bull
 {
@@ -17,22 +17,22 @@ namespace Bull
     {
     public:
 
-        /*! \brief Save a Resource to path
+        /*! \brief Save a Resource to a Path
          *
-         * \param resource
-         * \param path
-         * \param parameters
+         * \param resource      The Resource to save
+         * \param path       The Path of the File to write
+         * \param parameters Parameters to use to save the Resource
          *
-         * \return
+         * \return True if the Resource was saved successfully
          *
          */
         bool saveToPath(const T* resource, const Path& path, const P& parameters) const;
 
         /*! \brief Save a Resource to stream
          *
-         * \param resource
-         * \param stream
-         * \param parameters
+         * \param resource      The Resource to save
+         * \param stream     The stream to write
+         * \param parameters Parameters to use to save the Resource
          *
          * \return
          *
@@ -41,10 +41,10 @@ namespace Bull
 
         /*! \brief Save a Resource to a memory area
          *
-         * \param resource
-         * \param data
-         * \param length
-         * \param parameters
+         * \param resource      The Resource to save
+         * \param data       Data to write
+         * \param length     The length of data
+         * \param parameters Parameters to use to save the Resource
          *
          * \return
          *
@@ -61,8 +61,6 @@ namespace Bull
         bool isFormatSupported(const String& extension) const;
 
         /*! \brief Register a saver
-         *
-         * \param args Arguments to use to create the saver
          *
          */
         template <typename S>

@@ -7,8 +7,6 @@
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
-#include <Bull/Core/Export.hpp>
-
 namespace Bull
 {
     struct BULL_CORE_API Joystick
@@ -70,17 +68,17 @@ namespace Bull
          * \param button The ID of the button to check
          * \param joystick The unique ID of the joystick
          *
-         * \param Return true if the button is pressed, false otherwise
+         * \return True if the button is pressed
          *
          */
         static bool isButtonPressed(unsigned int button, Uint8 joystick);
 
         /*! \brief Get the state of an axis
          *
-         * \param axis The axis to check
+         * \param axis     The axis to check
          * \param joystick The joystick to check
          *
-         * \return Return the position of the axis
+         * \return The position of the axis
          *
          */
         static float getAxisPosition(Joystick::Axis axis, Uint8 joystick);
@@ -94,7 +92,7 @@ namespace Bull
 
         /*! \brief Get the state of the key repeat
          *
-         * \param Return true if the key repeat is enable, false otherwise
+         * \return True if the key repeat is enable
          *
          */
         static bool isKeyRepeatEnable();

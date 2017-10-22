@@ -139,7 +139,7 @@ namespace Bull
                 case VK_NUMPAD9:    return Keyboard::Key::NumPad9;
                 case VK_DECIMAL:    return Keyboard::Key::NumPadDot;
                 case VK_ADD:        return Keyboard::Key::Add;
-                case VK_SUBTRACT:   return Keyboard::Key::Substract;
+                case VK_SUBTRACT:   return Keyboard::Key::Subtract;
                 case VK_MULTIPLY:   return Keyboard::Key::Multiply;
                 case VK_DIVIDE:     return Keyboard::Key::Divide;
                 case VK_F1:         return Keyboard::Key::F1;

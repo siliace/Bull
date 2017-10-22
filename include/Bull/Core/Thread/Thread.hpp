@@ -62,7 +62,7 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param instance The instance to store
-         * \param function The method of the instance to store
+         * \param member   The method of the instance to store
          *
          */
         template<typename Instance, typename Class>
@@ -71,7 +71,7 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param instance The instance to store
-         * \param function The method of the instance to store
+         * \param member   The method of the instance to store
          *
          */
         template<typename Instance, typename Class>
@@ -80,7 +80,7 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param instance The instance to store
-         * \param function The method of the instance to store
+         * \param member   The method of the instance to store
          * \param args     Arguments of the function
          *
          */
@@ -90,7 +90,7 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param instance The instance to store
-         * \param function The method of the instance to store
+         * \param member   The method of the instance to store
          * \param args     Arguments of the function
          *
          */
@@ -103,7 +103,7 @@ namespace Bull
          * \param priority The priority of the thread (by default inherit form the parent thread)
          *
          */
-        Thread(const Functor<void>& function, Priority priority = Priority::Inherit);
+        explicit Thread(const Functor<void>& function, Priority priority = Priority::Inherit);
 
         /*! \brief Destructor
          *

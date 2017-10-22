@@ -11,39 +11,39 @@ namespace Bull
     {
         struct ImageLoader : public AbstractResourceLoader<Image, ImageParameters>
         {
-            /*! \brief Save a Resource to path
+            /*! \brief Load an Image from a Path
              *
-             * \param resource
-             * \param path
-             * \param parameters
+             * \param image      The Image to load
+             * \param path       The Path of the File to read
+             * \param parameters Parameters to use to load the Image
              *
-             * \return
+             * \return True if the Image was loaded successfully
              *
              */
-            bool loadFromPath(Image* resource, const Path& path, const ImageParameters& parameters) const override;
+            bool loadFromPath(Image* image, const Path& path, const ImageParameters& parameters) const override;
 
-            /*! \brief Save a Resource to stream
+            /*! \brief Load an Image from a stream
              *
-             * \param resource
-             * \param stream
-             * \param parameters
+             * \param image      The Image to load
+             * \param stream     The stream to read
+             * \param parameters Parameters to use to load the Image
              *
-             * \return
+             * \return True if the Image was loaded successfully
              *
              */
-            bool loadFromStream(Image* resource, InStream& stream, const ImageParameters& parameters) const override;
+            bool loadFromStream(Image* image, InStream& stream, const ImageParameters& parameters) const override;
 
-            /*! \brief Save a Resource to a memory area
+            /*! \brief Load an Image from a memory area
              *
-             * \param resource
-             * \param data
-             * \param length
-             * \param parameters
+             * \param image      The Image to load
+             * \param data       Data to read
+             * \param length     The length of data
+             * \param parameters Parameters to use to load the Image
              *
-             * \return
+             * \return True if the Image was loaded successfully
              *
              */
-            bool loadFromMemory(Image* resource, const void* data, Index length, const ImageParameters& parameters) const override;
+            bool loadFromMemory(Image* image, const void* data, Index length, const ImageParameters& parameters) const override;
 
             /*! \brief Tell whether the extension is supported
              *

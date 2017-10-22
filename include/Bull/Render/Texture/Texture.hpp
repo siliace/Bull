@@ -45,29 +45,30 @@ namespace Bull
          */
         ~Texture();
 
-        /*! \brief Load a texture form an image
+        /*! \brief Load a Texture form an Image
          *
-         * \param path The image to load
+         * \param image The Image to load
          *
-         * \return Return true if the texture was loaded successfully, false otherwise
+         * \return True if the Texture was loaded successfully
          *
          */
         bool create(const Image& image);
 
-        /*! \brief Create an empty texture
+        /*! \brief Create an empty Texture
          *
-         * \param size The size of the texture to create
+         * \param size The size of the Texture to create
          *
-         * \return Return true if the texture was created successfully, false otherwise
+         * \return True if the Texture was created successfully
          *
          */
         bool create(const Vector2UI& size) override;
 
-        /*! \brief Create an empty texture
+        /*! \brief Create a Texture
          *
-         * \param size The size of the texture to create
+         * \param pixels Pixels of the Texture
+         * \param size   The size of the Texture
          *
-         * \return Return true if the texture was created successfully, false otherwise
+         * \return True if the Texture was created successfully
          *
          */
         bool create(const ByteArray& pixels, const Vector2UI& size) override;
@@ -134,40 +135,40 @@ namespace Bull
          */
         bool saveToMemory(void* data, Index length, const ImageParameters& parameters = ImageParameters()) const override;
         
-        /*! \brief Bind the texture
+        /*! \brief Bind the Texture
          *
          */
         void bind() const;
 
-        /*! \brief Enable or disable the texture repeat
+        /*! \brief Enable or disable the Texture repeat
          *
          * \param enable True to enable, false to disable
          *
          */
         void enableRepeat(bool enable = true);
 
-        /*! \brief Check whether the texture repeat is enable
+        /*! \brief Check whether the Texture repeat is enable
          *
-         * \return Return true if the texture repeat is enable, false otherwise
+         * \return Return true if the Texture repeat is enable, false otherwise
          *
          */
         inline bool isEnableRepeat() const;
 
-        /*! \brief Enable or disable the texture smooth
+        /*! \brief Enable or disable the Texture smooth
          *
          * \param enable True to enable, false to disable
          *
          */
         void enableSmooth(bool enable = true);
 
-        /*! \brief Check whether the texture smooth is enable
+        /*! \brief Check whether the Texture smooth is enable
          *
-         * \return Return true if the texture smooth is enable, false otherwise
+         * \return Return true if the Texture smooth is enable, false otherwise
          *
          */
         inline bool isEnableSmooth() const;
 
-        /*! \brief Download the texture from the VRAM
+        /*! \brief Download the Texture from the VRAM
          *
          * \return Return return the image
          *

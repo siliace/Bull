@@ -8,13 +8,13 @@ namespace Bull
 {
     namespace prv
     {
-        bool ShaderStageSaver::saveToPath(const ShaderStage* resource, const Path& path, const ShaderStageParameters& parameters) const
+        bool ShaderStageSaver::saveToPath(const ShaderStage* shaderStage, const Path& path, const ShaderStageParameters& parameters) const
         {
             File file(path);
 
             if(file.isOpen())
             {
-                file.write(resource->getSource());
+                file.write(shaderStage->getSource());
 
                 return true;
             }
@@ -22,18 +22,18 @@ namespace Bull
             return false;
         }
 
-        bool ShaderStageSaver::saveToStream(const ShaderStage* resource, OutStream& stream, const ShaderStageParameters& parameters) const
+        bool ShaderStageSaver::saveToStream(const ShaderStage* shaderStage, OutStream& stream, const ShaderStageParameters& parameters) const
         {
-            String code = resource->getSource();
+            String code = shaderStage->getSource();
 
             stream.write(code.getBuffer(), code.getCapacity());
 
             return true;
         }
 
-        bool ShaderStageSaver::saveToMemory(const ShaderStage* resource, void* data, Index length, const ShaderStageParameters& parameters) const
+        bool ShaderStageSaver::saveToMemory(const ShaderStage* shaderStage, void* data, Index length, const ShaderStageParameters& parameters) const
         {
-            String code = resource->getSource();
+            String code = shaderStage->getSource();
 
             if(length >= code.getCapacity())
             {

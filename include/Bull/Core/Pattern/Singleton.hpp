@@ -51,7 +51,7 @@ namespace Bull
 
         /*! \brief Check whether the instance is set
          *
-         * \param Return true if the instance is set, false otherwise
+         * \return True if the instance is set
          *
          */
         static bool isSet()

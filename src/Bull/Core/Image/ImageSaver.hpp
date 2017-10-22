@@ -11,39 +11,39 @@ namespace Bull
     {
         struct ImageSaver : public AbstractResourceSaver<Image, ImageParameters>
         {
-            /*! \brief Save a Resource to path
+            /*! \brief Save an Image to Path
              *
-             * \param resource
-             * \param path
-             * \param parameters
+             * \param image      The Image to save
+             * \param path       The Path of the File to write
+             * \param parameters Parameters to use to save the Image
              *
-             * \return
+             * \return True if the Image was saved successfully
              *
              */
-            bool saveToPath(const Image* resource, const Path& path, const ImageParameters& parameters) const override;
+            bool saveToPath(const Image* image, const Path& path, const ImageParameters& parameters) const override;
 
-            /*! \brief Save a Resource to stream
+            /*! \brief Save an Image to stream
              *
-             * \param resource
-             * \param stream
-             * \param parameters
+             * \param image      The Image to save
+             * \param stream     The stream to write
+             * \param parameters Parameters to use to save the Image
              *
-             * \return
+             * \return True if the Image was saved successfully
              *
              */
-            bool saveToStream(const Image* resource, OutStream& stream, const ImageParameters& parameters) const override;
+            bool saveToStream(const Image* image, OutStream& stream, const ImageParameters& parameters) const override;
 
-            /*! \brief Save a Resource to a memory area
+            /*! \brief Save an Image to a memory area
              *
-             * \param resource
-             * \param data
-             * \param length
-             * \param parameters
+             * \param image      The Image to save
+             * \param data       Data to write
+             * \param length     The length of data
+             * \param parameters Parameters to use to save the Image
              *
-             * \return
+             * \return True if the Image was saved successfully
              *
              */
-            bool saveToMemory(const Image* resource, void* data, Index length, const ImageParameters& parameters) const override;
+            bool saveToMemory(const Image* image, void* data, Index length, const ImageParameters& parameters) const override;
 
             /*! \brief Tell whether the extension is supported
              *

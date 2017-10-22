@@ -34,7 +34,7 @@ namespace Bull
 
         /*! \brief Move constructor
          *
-         * \param copy The ObjectRef to move
+         * \param move The ObjectRef to move
          *
          */
         ObjectRef(ObjectRef&& move) noexcept;

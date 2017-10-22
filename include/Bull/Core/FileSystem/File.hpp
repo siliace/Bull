@@ -54,22 +54,22 @@ namespace Bull
          */
         static bool exists(const String& name);
 
-        /*! \brief Copy a file
+        /*! \brief Copy a File
          *
-         * \param path The path (relative or absolute) of the file to copy
-         * \param path The new path (relative or absolute) of the file
+         * \param path    The Path of the file to copy
+         * \param newPath The new Path copied File
          *
-         * \return Return true if the copy was successfully, false otherwise
+         * \return True if the copy was successfully
          *
          */
         static bool copy(const Path& path, const String& newPath);
 
-        /*! \brief Rename a file
+        /*! \brief Rename a File
          *
-         * \param name The name of the file to rename
-         * \param name The new name of the file
+         * \param name    The name of the File to rename
+         * \param newName The new name of the File
          *
-         * \return Return true if the file was renamed successfully, false otherwise
+         * \return True if the file was renamed successfully
          *
          */
         static bool rename(const Path& name, const String& newName);
@@ -125,7 +125,7 @@ namespace Bull
 
         /*! \brief Check if a file is open
          *
-         * \param Return true if the file is open, false otherwise
+         * \return Return true if the file is open, false otherwise
          *
          */
         bool isOpen() const;
@@ -217,7 +217,7 @@ namespace Bull
          * \return Return the actual position of the cursor
          *
          */
-        Uint64 setCursor(Uint64 offset);
+        Uint64 setCursor(Uint64 position);
 
         /*! \brief Get the path of the file
          *
@@ -256,7 +256,7 @@ namespace Bull
 
         /*! \brief Check if the cursor is at the end of the file
          *
-         * \param Return true if the cursor is at end of file, false otherwise
+         * \return Return true if the cursor is at end of file, false otherwise
          *
          */
         inline bool isAtEof() const;
