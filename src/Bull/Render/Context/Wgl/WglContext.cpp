@@ -38,7 +38,6 @@ namespace Bull
             loader->require(WglCreateContext);
             loader->require(WglPixelFormat);
             loader->require(WglSwapControl);
-            loader->require(WglPbuffer);
         }
 
         int WglContext::getBestPixelFormat(HDC device, Uint8 bitsPerPixel, const ContextSettings& settings, bool usePbuffer)
@@ -66,8 +65,8 @@ namespace Bull
 
                     for(UINT i = 0; i < count; i++)
                     {
-                        int format[7]  = {0};
-                        int sample[2]  = {0};
+                        int format[7] = {0};
+                        int sample[2] = {0};
                         static const int formatAttribs[] =
                         {
                             WGL_RED_BITS_ARB,
@@ -407,11 +406,11 @@ namespace Bull
 
         void WglContext::updateSettings()
         {
-            int pixelFormat = GetPixelFormat(m_device);
             PIXELFORMATDESCRIPTOR pfd;
             pfd.nVersion = 1;
             pfd.nSize    = sizeof(PIXELFORMATDESCRIPTOR);
 
+            int pixelFormat = GetPixelFormat(m_device);
             DescribePixelFormat(m_device, pixelFormat, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
 
             if(isLoaded(WglPixelFormat))
