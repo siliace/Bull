@@ -3,7 +3,7 @@
 #include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Resource/Registrar.hpp>
 
-#include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Shader/ShaderStage.hpp>
 #include <Bull/Render/Shader/ShaderStageLoader.hpp>
 #include <Bull/Render/Shader/ShaderStageSaver.hpp>
@@ -84,7 +84,7 @@ namespace Bull
 
             if(!isCompiled())
             {
-                Log::get()->write(getErrorMessage(), Log::Level::Error);
+                Log::get()->write(getErrorMessage(), LogLevel::LogLevel_Error);
 
                 return false;
             }

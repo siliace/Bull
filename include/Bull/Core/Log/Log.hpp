@@ -4,25 +4,16 @@
 #include <memory>
 #include <vector>
 
+#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Log/AbstractLogger.hpp>
-#include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
-#include <Bull/Core/Configuration/Integer.hpp>
 
 namespace Bull
 {
     class BULL_CORE_API Log : public Singleton<Log>
     {
     public:
-
-        enum Level
-        {
-            Debug,
-            Info,
-            Warning,
-            Error,
-        };
 
         typedef std::unique_ptr<AbstractLogger>& AbstractLoggerHandler;
 
@@ -44,7 +35,7 @@ namespace Bull
          * \param level   The message error level
          *
          */
-        virtual void write(const String& message, Level level);
+        void write(const String& message, LogLevel level);
 
     private:
 

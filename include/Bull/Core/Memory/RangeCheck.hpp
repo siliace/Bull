@@ -12,8 +12,7 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param index The index
-         * \param max   The max value of the index
+         * \param max The max value of the index
          *
          */
         explicit RangeCheck(Index max);

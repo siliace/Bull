@@ -15,7 +15,7 @@
 
 namespace Bull
 {
-    class ContextSettings;
+    class MessageWindow;
 
     namespace prv
     {
@@ -48,7 +48,7 @@ namespace Bull
          *
          * \param mode  The VideoMode
          * \param title The title of the window
-         * \param WindowStyle The window decorations
+         * \param style The window decorations
          *
          */
         Window(const VideoMode& mode, const String& title, Uint32 style = WindowStyle::Default);
@@ -62,7 +62,7 @@ namespace Bull
          *
          * \param mode  The VideoMode
          * \param title The title of the window
-         * \param WindowStyle The window decorations
+         * \param style The window decorations
          *
          * \return Return true if the window was open successfully, false otherwise
          *
@@ -101,22 +101,28 @@ namespace Bull
          *
          * \param enable The state of the capture
          *
+         * \return This
+         *
          */
         Window& enableCaptureCursor(bool enable = true);
 
         /*! \brief Minimize a window
+         *
+         * \return This
          *
          */
         Window& minimize();
 
         /*! \brief Check if the window is minimized
          *
-         * \return Return true if the window is minimized, false otherwise
+         * \return True if the window is minimized
          *
          */
         bool isMinimized() const;
 
         /*! \brief Maximize a window
+         *
+         * \return This
          *
          */
         Window& maximize();
@@ -139,6 +145,8 @@ namespace Bull
          *
          * \param x The new position of the left side of the window in the screen
          * \param y The new position of the top of the window in the screen
+         *
+         * \return This
          *
          */
         Window& setPosition(int x, int y);
@@ -206,6 +214,8 @@ namespace Bull
          *
          * \param size The new size of the window
          *
+         * \return This
+         *
          */
         Window& setSize(const Vector2UI& size);
 
@@ -213,6 +223,8 @@ namespace Bull
          *
          * \param x The new width of the window
          * \param y The new height of the window
+         *
+         * \return This
          *
          */
         Window& setSize(unsigned int x, unsigned int y);
@@ -228,6 +240,8 @@ namespace Bull
          *
          * \param title The new title of the window
          *
+         * \return This
+         *
          */
         Window& setTitle(const String& title);
 
@@ -242,19 +256,21 @@ namespace Bull
          *
          * \param enable The state of the key repeat
          *
+         * \return This
+         *
          */
         Window& enableKeyRepeat(bool enable = true);
 
         /*! \brief Get the state of the key repeat
          *
-         * \param Return true if the key repeat is enable, false otherwise
+         * \return True if the key repeat is enable
          *
          */
         bool isKeyRepeatEnable() const;
 
         /*! \brief Check if the window has the focus
          *
-         * \param Return true if the window has the focus, false otherwise
+         * \return True if the window has the focus
          *
          */
         bool hasFocus() const;
@@ -262,6 +278,8 @@ namespace Bull
         /*! \brief Show or hide the window
          *
          * \param visible True to show the window, false to hide the window
+         *
+         * \return This
          *
          */
         Window& setVisible(bool visible = true);
@@ -302,9 +320,9 @@ namespace Bull
 
         /*! \brief Enter or leave the fullscreen mode
          *
-         * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
+         * \param enable False to leave the fullscreen mode, true to enter the fullscreen mode
          *
-         * \return Return true if the switch was done successfully, false otherwise
+         * \return True if the switch was done successfully
          *
          */
         bool enableFullscreen(bool enable = true);
@@ -317,6 +335,8 @@ namespace Bull
         bool isFullscreenEnable() const;
 
     protected:
+
+        friend class MessageWindow;
 
         /*! \brief Function called when the Window is opened
          *

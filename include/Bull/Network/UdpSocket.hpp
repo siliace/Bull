@@ -14,44 +14,45 @@ namespace Bull
          */
         UdpSocket();
 
-        /*! \brief
+        /*! \brief Bind the UdpSocket to a Port
          *
-         * \param port
-         * \param address
+         * \param port    The port the bind
+         * \param address The host bind
          *
-         * \return
+         * \return The new state of the UdpSocket
          *
          */
         State bind(Socket::Port port, const IpAddress& address = IpAddress::AnyIpv4);
 
-        /*! \brief
+        /*! \brief Unbind the UdpSocket
          *
          */
         void unbind();
 
-        /*! \brief
+        /*! \brief Receive data from a remote host
          *
-         * \param data
-         * \param length
-         * \param remoteAddress
-         * \param remotePort
+         * \param data          The buffer to fill with received data
+         * \param length        The length of data
+         * \param received      The amount of bytes received
+         * \param remoteAddress The IpAddress of the remote host
+         * \param remotePort    The Port of the remote host
          *
-         * \return
+         * \return The new state of the UdpSocket
          *
          */
         State receive(void* data, Index length, Index& received, IpAddress& remoteAddress, Socket::Port& remotePort);
 
-        /*! \brief
+        /*! \brief Send data to a remote host
          *
-         * \param remoteAddress
-         * \param remotePort
-         * \param data
-         * \param length
+         * \param data          Data to send
+         * \param length        The length of data
+         * \param remoteAddress The IpAddress of the remote host
+         * \param remotePort    The Port of the remote host
          *
-         * \return
+         * \return The new state of the UdpSocket
          *
          */
-        State send(const IpAddress& remoteAddress, Socket::Port remotePort, const void* data, Index length);
+        State send(const void* data, Index length, const IpAddress& remoteAddress, Socket::Port remotePort);
     };
 }
 

@@ -18,18 +18,18 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param indices
-         * \param usage
+         * \param indices Indices in the ElementBuffer
+         * \param usage   The usage (static, dynamic, stream) of the ElementBuffer
          *
          */
-        ElementBuffer(const std::vector<unsigned int>& indices, Usage usage = StaticDraw);
+        explicit ElementBuffer(const std::vector<unsigned int>& indices, Usage usage = StaticDraw);
 
-        /*! \brief
+        /*! \brief Create the ElementBuffer from a indice vector
          *
-         * \param indices
-         * \param usage
+         * \param indices Indices in the ElementBuffer
+         * \param usage   The usage (static, dynamic, stream) of the ElementBuffer
          *
-         * \return
+         * \return True if the ElementBuffer was created successfully
          *
          */
         bool create(const std::vector<unsigned int>& indices, Usage usage = StaticDraw);

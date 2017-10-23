@@ -1,6 +1,6 @@
 #include <Bull/Math/Clamp.hpp>
 
-#include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
 #include <Bull/Render/Texture/Texture.hpp>

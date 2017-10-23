@@ -13,37 +13,37 @@ namespace Bull
         {
             /*! \brief Save a ShaderStage to path
              *
-             * \param resource
-             * \param path
-             * \param parameters
+             * \param image      The ShaderStage to save
+             * \param path       The Path of the File to write
+             * \param parameters Parameters to use to save the ShaderStage
              *
-             * \return
+             * \return True if the ShaderStage was saved successfully
              *
              */
-            bool saveToPath(const ShaderStage* resource, const Path& path, const ShaderStageParameters& parameters) const override;
+            bool saveToPath(const ShaderStage* shaderStage, const Path& path, const ShaderStageParameters& parameters) const override;
 
             /*! \brief Save a ShaderStage to stream
              *
-             * \param resource
-             * \param stream
-             * \param parameters
+             * \param image      The ShaderStage to save
+             * \param stream     The stream to write
+             * \param parameters Parameters to use to save the ShaderStage
              *
-             * \return
+             * \return True if the ShaderStage was saved successfully
              *
              */
-            bool saveToStream(const ShaderStage* resource, OutStream& stream, const ShaderStageParameters& parameters) const override;
-
+            bool saveToStream(const ShaderStage* shaderStage, OutStream& stream, const ShaderStageParameters& parameters) const override;
+            
             /*! \brief Save a ShaderStage to a memory area
              *
-             * \param resource
-             * \param data
-             * \param length
-             * \param parameters
+             * \param image      The ShaderStage to save
+             * \param data       Data to write
+             * \param length     The length of data
+             * \param parameters Parameters to use to save the ShaderStage
              *
-             * \return
+             * \return True if the ShaderStage was saved successfully
              *
              */
-            bool saveToMemory(const ShaderStage* resource, void* data, Index length, const ShaderStageParameters& parameters) const override;
+            bool saveToMemory(const ShaderStage* shaderStage, void* data, Index length, const ShaderStageParameters& parameters) const override;
 
             /*! \brief Tell whether the extension is supported
              *

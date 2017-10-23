@@ -2,8 +2,8 @@
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
-#include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 
 namespace Bull
 {
@@ -84,6 +84,18 @@ namespace Bull
         return stage.loadFromMemory(data, length, parameters) && attach(stage);
     }
 
+    bool Shader::loadFromBinary(const ShaderBinary& binary)
+    {
+        if(binary.isValid())
+        {
+            gl::programBinary(m_program, binary.format, binary.getBuffer(), binary.getCapacity());
+
+            return true;
+        }
+
+        return false;
+    }
+
     bool Shader::link()
     {
         if(isValid())
@@ -92,7 +104,7 @@ namespace Bull
 
             if(!isLinked())
             {
-                Log::get()->write(getErrorMessage(), Log::Level::Error);
+                Log::get()->write(getErrorMessage(), LogLevel::LogLevel_Error);
 
                 return false;
             }

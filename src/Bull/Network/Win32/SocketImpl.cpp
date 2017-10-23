@@ -145,7 +145,7 @@ namespace Bull
             return 0;
         }
 
-        Index SocketImpl::sendTo(SocketHandler handler, const IpAddress& to, Socket::Port port, const void* data, Index length)
+        Index SocketImpl::sendTo(SocketHandler handler, const void* data, Index length, const IpAddress& to, Socket::Port port)
         {
             if(handler != InvalidHandler && to.isValid() && port != Socket::AnyPort && data && length)
             {

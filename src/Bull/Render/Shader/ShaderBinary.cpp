@@ -1,6 +1,6 @@
 #include <algorithm>
 
-#include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Shader/ShaderBinary.hpp>
 
 namespace Bull

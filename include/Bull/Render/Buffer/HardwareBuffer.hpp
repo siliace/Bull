@@ -54,7 +54,7 @@ namespace Bull
          * \return Return true if the buffer was created successfully, false otherwise
          *
          */
-        bool create(Index size, Usage usage);
+        bool create(Index capacity, Usage usage);
 
         /*! \brief Fill the buffer
          *

@@ -14,7 +14,7 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param persistents
+         * \param persistent The persistence
          *
          */
         explicit RefCounted(bool persistent = true);
@@ -38,13 +38,13 @@ namespace Bull
 
         /*! \brief Set the persistence of the object
          *
-         * \param persistence    The persistence
+         * \param persistent    The persistence
          * \param checkReference Delete the object if it is no more persistent and don't have references
          *
          * \return True if the object have been deleted
          *
          */
-        bool setPersistent(bool persistence = true, bool checkReference = false);
+        bool setPersistent(bool persistent = true, bool checkReference = false);
 
         /*! \brief Tell whether the reference is persistent
          *
@@ -62,7 +62,7 @@ namespace Bull
 
     private:
 
-        std::atomic_bool m_isPersistent;
+        std::atomic_bool         m_isPersistent;
         mutable std::atomic_uint m_referenceCounter;
     };
 }

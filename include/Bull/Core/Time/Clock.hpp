@@ -14,20 +14,20 @@ namespace Bull
          */
         Clock();
 
-        /*! \brief == operator override
+        /*! \brief Compare two Clock
          *
-         * \param right The clock to test
+         * \param right The clock to compare to this
          *
-         * \return Return true if this and right are equal, false otherwise
+         * \return True if this and right are equal
          *
          */
         bool operator==(const Clock& right) const;
 
-        /*! \brief != operator override
+        /*! \brief Compare two Clock
          *
-         * \param right The clock to test
+         * \param right The clock to compare to this
          *
-         * \return Return true if this and right are not equal, false otherwise
+         * \return True if this and right are equal
          *
          */
         bool operator!=(const Clock& right) const;

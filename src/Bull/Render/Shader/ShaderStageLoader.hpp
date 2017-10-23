@@ -11,39 +11,39 @@ namespace Bull
     {
         struct ShaderStageLoader : public AbstractResourceLoader<ShaderStage, ShaderStageParameters>
         {
-            /*! \brief Save a Resource to path
+            /*! \brief Load an ShaderStageLoader from a Path
              *
-             * \param resource
-             * \param path
-             * \param parameters
+             * \param shaderStage The ShaderStageLoader to load
+             * \param path        The Path of the File to read
+             * \param parameters  Parameters to use to load the ShaderStageLoader
              *
-             * \return
+             * \return True if the ShaderStageLoader was loaded successfully
              *
              */
-            bool loadFromPath(ShaderStage* resource, const Path& path, const ShaderStageParameters& parameters) const override;
+            bool loadFromPath(ShaderStage* shaderStage, const Path& path, const ShaderStageParameters& parameters) const override;
 
-            /*! \brief Save a Resource to stream
+            /*! \brief Load an ShaderStage from a stream
              *
-             * \param resource
-             * \param stream
-             * \param parameters
+             * \param shaderStage The ShaderStage to load
+             * \param stream      The stream to read
+             * \param parameters  Parameters to use to load the ShaderStage
              *
-             * \return
+             * \return True if the ShaderStage was loaded successfully
              *
              */
-            bool loadFromStream(ShaderStage* resource, InStream& stream, const ShaderStageParameters& parameters) const override;
+            bool loadFromStream(ShaderStage* shaderStage, InStream& stream, const ShaderStageParameters& parameters) const override;
 
-            /*! \brief Save a Resource to a memory area
+            /*! \brief Load an ShaderStage from a memory area
              *
-             * \param resource
-             * \param data
-             * \param length
-             * \param parameters
+             * \param shaderStage The ShaderStage to load
+             * \param data        Data to read
+             * \param length      The length of data
+             * \param parameters  Parameters to use to load the ShaderStage
              *
-             * \return
+             * \return True if the ShaderStage was loaded successfully
              *
              */
-            bool loadFromMemory(ShaderStage* resource, const void* data, Index length, const ShaderStageParameters& parameters) const override;
+            bool loadFromMemory(ShaderStage* shaderStage, const void* data, Index length, const ShaderStageParameters& parameters) const override;
 
             /*! \brief Tell whether the extension is supported
              *

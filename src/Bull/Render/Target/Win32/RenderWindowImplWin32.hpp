@@ -5,6 +5,8 @@
 
 namespace Bull
 {
+    class ContextSettings;
+
     namespace prv
     {
         struct RenderWindowImplWin32 : public WindowImplWin32

@@ -203,11 +203,11 @@ namespace Bull
         return 0;
     }
 
-    Uint64 File::setCursor(Uint64 offset)
+    Uint64 File::setCursor(Uint64 position)
     {
         if(m_impl)
         {
-            return m_impl->setCursor(offset);
+            return m_impl->setCursor(position);
         }
 
         return 0;

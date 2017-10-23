@@ -23,7 +23,7 @@ namespace Bull
 
             if(!OpenClipboard(nullptr))
             {
-                Log::get()->write("Failed to open clipboard", Log::Level::Error);
+                Log::get()->write("Failed to open clipboard", LogLevel::LogLevel_Error);
             }
 
             Index size = (content.getSize() + 1) * sizeof(char);
@@ -46,7 +46,7 @@ namespace Bull
 
             if(!OpenClipboard(nullptr))
             {
-                Log::get()->write("Failed to open clipboard", Log::Level::Error);
+                Log::get()->write("Failed to open clipboard", LogLevel::LogLevel_Error);
 
                 return text;
             }
@@ -55,7 +55,7 @@ namespace Bull
 
             if(clipboard)
             {
-                Log::get()->write("Failed to open clipboard", Log::Level::Error);
+                Log::get()->write("Failed to open clipboard", LogLevel::LogLevel_Error);
 
                 CloseClipboard();
 

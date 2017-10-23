@@ -21,30 +21,25 @@ namespace Bull
         }
     }
 
+    TempDirectory::~TempDirectory()
+    {
+        Directory::remove(getPath());
+    }
+
     FileRef TempDirectory::createFile(const String& name)
     {
         String fullPath = getPath().toString() + Path::Separator + name;
 
         if(!File::exists(fullPath))
         {
-            if(!File::create(fullPath))
-            {
-
-            }
+            File::create(fullPath);
         }
 
         return File::make(Path(fullPath));
     }
 
-    DirectoryRef TempDirectory::createDirectory(const String& name)
+    TempDirectoryRef TempDirectory::createDirectory(const String& name)
     {
-        String fullPath = getPath().toString() + Path::Separator + name;
-
-        if(!Directory::exists(fullPath))
-        {
-            Directory::create(fullPath);
-        }
-
-        return TempDirectory::make(Path(fullPath));
+        return TempDirectory::make(name, getPath());
     }
 }

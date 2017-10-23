@@ -68,7 +68,7 @@ namespace Bull
          *
          * \param x The X component
          * \param y The Y component
-         * \param y The Z component
+         * \param z The Z component
          *
          * \return This
          *

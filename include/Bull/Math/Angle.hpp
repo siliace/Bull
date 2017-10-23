@@ -5,6 +5,13 @@
 
 namespace Bull
 {
+    /*! \class Angle
+     *
+     * \brief Implement an universal Angle to handle both degree and radian angles
+     *
+     * \tparam T The type of the Angle value
+     *
+     */
     template <typename T>
     class Angle
     {
@@ -74,20 +81,18 @@ namespace Bull
          */
         Angle<T>& clamp(const Angle<T>& min, const Angle<T>& max);
 
-        /*! \brief Compare two Angles
+        /*! \brief Compare two Angle
          *
-         * \param left
-         * \param right
+         * \param right The Angle to compare to this
          *
-         * \return True if left and right are equal
+         * \return True if this and right are equal
          *
          */
         bool operator==(const Angle<T>& right);
 
-        /*! \brief Compare two Angles
+        /*! \brief Compare two Angle
          *
-         * \param left
-         * \param right
+         * \param right The Angle to compare to this
          *
          * \return True if left and right are not equal
          *

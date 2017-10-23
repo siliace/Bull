@@ -56,8 +56,8 @@ namespace Bull
 
         /*! \brief Load a ShaderStage form a Path and attach it to this Shader
          *
-         * \param stream The Path of the File to read
-         * \param type   The type of the ShaderStage
+         * \param path The Path of the File to read
+         * \param type The type of the ShaderStage
          *
          * \return True if the ShaderStage was attached successfully
          *

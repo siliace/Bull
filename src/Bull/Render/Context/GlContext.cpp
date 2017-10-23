@@ -4,8 +4,7 @@
 
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
-#include <Bull/Render/Context/GlLoader.hpp>
-#include <Bull/Render/OpenGL.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglContext.hpp>
@@ -59,9 +58,8 @@ namespace Bull
             ExtensionsLoader::Instance loader = ExtensionsLoader::get(shared->getSurfaceHandler());
 
             ContextType::requireExtensions(loader);
-            loader->load();
-
-            GlLoader::load();
+            loader->loadExtensions();
+            loader->loadFunctions();
 
             shared->initialize();
 
@@ -116,22 +114,12 @@ namespace Bull
             return ContextType::getFunction(function);
         }
 
-        bool GlContext::isLoaded(const String& extension)
-        {
-            return ExtensionsLoader::isSet() && ExtensionsLoader::get()->isLoaded(extension);
-        }
-
         bool GlContext::isLoaded(const ExtensionsLoader::Extension& extension)
         {
             return ExtensionsLoader::isSet() && ExtensionsLoader::get()->isLoaded(extension);
         }
 
         bool GlContext::isSupported(const String& extension)
-        {
-            return ExtensionsLoader::isSet() && ExtensionsLoader::get()->isSupported(extension);
-        }
-
-        bool GlContext::isSupported(const ExtensionsLoader::Extension& extension)
         {
             return ExtensionsLoader::isSet() && ExtensionsLoader::get()->isSupported(extension);
         }
