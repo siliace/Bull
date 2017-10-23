@@ -1,9 +1,8 @@
 #ifndef BULL_CORE_SYSTEM_CLIPBOARD_HPP
 #define BULL_CORE_SYSTEM_CLIPBOARD_HPP
 
-#include <Bull/Core/Memory/String.hpp>
-
 #include <Bull/Core/Export.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {

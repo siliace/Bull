@@ -1,9 +1,6 @@
 #ifndef BULL_CORE_PATTERN_OBJECTREF_HPP
 #define BULL_CORE_PATTERN_OBJECTREF_HPP
 
-#include <utility>
-
-#include <Bull/Core/Export.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
@@ -11,19 +8,16 @@ namespace Bull
     template <typename T>
     class BULL_CORE_API ObjectRef
     {
-    public:
+        static_assert(std::is_base_of<NonCopyable, T>::value, "T must inherit from NonCopyable");
 
-        /*! \brief Default constructor
-         *
-         */
-        ObjectRef();
+    public:
 
         /*! \brief Constructor
          *
          * \param object The object to reference
          *
          */
-        ObjectRef(T* object);
+        explicit ObjectRef(T* object = nullptr);
 
         /*! \brief Copy constructor
          *

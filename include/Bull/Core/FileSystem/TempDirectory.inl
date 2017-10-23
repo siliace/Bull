@@ -6,6 +6,6 @@ namespace Bull
         TempDirectory* tempDirectory = new TempDirectory(std::forward<Args>(args)...);
         tempDirectory->setPersistent(false);
 
-        return tempDirectory;
+        return TempDirectoryRef(tempDirectory);
     }
 }
