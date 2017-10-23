@@ -1,17 +1,17 @@
 #include <Bull/Core/IO/StringStream.hpp>
 #include <Bull/Core/Log/Log.hpp>
-#include <Bull/Core/Pattern/RefCounted.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
 {
-    RefCounted::RefCounted(bool persistent) :
+    NonCopyable::NonCopyable(bool persistent) :
         m_isPersistent(persistent),
         m_referenceCounter(0)
     {
         /// Nothing
     }
 
-    RefCounted::~RefCounted()
+    NonCopyable::~NonCopyable()
     {
         if(m_referenceCounter > 0)
         {
@@ -23,12 +23,12 @@ namespace Bull
         }
     }
 
-    void RefCounted::addReference()
+    void NonCopyable::addReference()
     {
         m_referenceCounter++;
     }
 
-    bool RefCounted::removeReference()
+    bool NonCopyable::removeReference()
     {
         if(m_referenceCounter > 0)
         {
@@ -43,7 +43,7 @@ namespace Bull
         return false;
     }
 
-    bool RefCounted::setPersistent(bool persistent, bool checkReference)
+    bool NonCopyable::setPersistent(bool persistent, bool checkReference)
     {
         m_isPersistent = persistent;
 
@@ -57,12 +57,12 @@ namespace Bull
         return false;
     }
 
-    bool RefCounted::isPersistent() const
+    bool NonCopyable::isPersistent() const
     {
         return m_isPersistent;
     }
 
-    unsigned int RefCounted::getReferenceCount() const
+    unsigned int NonCopyable::getReferenceCount() const
     {
         return m_referenceCounter;
     }

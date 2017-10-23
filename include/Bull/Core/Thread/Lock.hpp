@@ -17,7 +17,7 @@ namespace Bull
          * \param mutex The mutex to lock
          *
          */
-        Lock(Mutex& mutex);
+        explicit Lock(Mutex& mutex);
 
         /*! \brief Destructor
          *

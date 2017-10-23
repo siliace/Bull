@@ -19,7 +19,7 @@ namespace Bull
     using TextureRef = ObjectRef<Texture>;
     using TexureConstRef = ObjectRef<const Texture>;
 
-    class BULL_RENDER_API Texture : public ContextResource, public RefCounted, public AbstractImage
+    class BULL_RENDER_API Texture : public ContextResource, public NonCopyable, public AbstractImage
     {
     public:
 
