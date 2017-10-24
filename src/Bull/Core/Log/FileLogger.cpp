@@ -1,3 +1,4 @@
+#include <Bull/Core/Log/AbstractLogger.hpp>
 #include <Bull/Core/Log/FileLogger.hpp>
 
 namespace Bull
@@ -18,8 +19,8 @@ namespace Bull
         m_logFile.open(Path(filename), File::Truncate | File::Write);
     }
 
-    void FileLogger::write(const String& entry)
+    void FileLogger::write(const String& entry, LogLevel level)
     {
-        m_logFile.write(entry);
+        m_logFile.write(parseMessage(entry, level));
     }
 }

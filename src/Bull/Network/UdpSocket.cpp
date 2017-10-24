@@ -51,7 +51,7 @@ namespace Bull
         return Ready;
     }
 
-    Socket::State UdpSocket::send(const IpAddress& remoteAddress, Socket::Port remotePort, const void* data, Index length)
+    Socket::State UdpSocket::send(const void* data, Index length, const IpAddress& remoteAddress, Socket::Port remotePort)
     {
         create(remoteAddress.getProtocol());
 

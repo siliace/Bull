@@ -43,7 +43,7 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param instance The instance to store
-         * \param function The method of the instance to store
+         * \param member   The method of the instance to store
          *
          */
         template<typename Instance, typename Class>
@@ -52,7 +52,7 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param instance The instance to store
-         * \param function The method of the instance to store
+         * \param member   The method of the instance to store
          *
          */
         template<typename Instance, typename Class>
@@ -61,7 +61,7 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param instance The instance to store
-         * \param function The method of the instance to store
+         * \param member   The method of the instance to store
          * \param args     Arguments of the method
          *
          */
@@ -72,7 +72,7 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param instance The instance to store
-         * \param function The method of the instance to store
+         * \param member   The method of the instance to store
          * \param args     Arguments of the method
          *
          */

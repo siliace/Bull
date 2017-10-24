@@ -130,45 +130,99 @@ namespace Bull
          */
         float asDays() const;
 
-        /*! \brief Override + operator
+        /*! \brief Override == operator
          *
-         * \param rhs The time to add
+         * \param right The time to compare
          *
-         * \return Return the time added
+         * \return Return true if times are equals, else return false
          *
          */
-        Time operator+(const Time& rhs) const;
+        bool operator==(const Time& right) const;
 
-        /*! \brief Override += operator
+        /*! \brief Override != operator
          *
-         * \param rhs The time to add
+         * \param right The time to compare
          *
-         * \return Return the time added
+         * \return Return false if times are equals, else return true
          *
          */
-        Time& operator+=(const Time& rhs);
+        bool operator!=(const Time& right) const;
 
-        /*! \brief Override - operator
+        /*! \brief Override <= operator
          *
-         * \param rhs The time to substract
+         * \param right The time to compare
          *
-         * \return Return the time substracted
+         * \return Return true if times are inferior or equals, else return false
          *
          */
-        Time operator-(const Time& rhs) const;
+        bool operator<=(const Time& right) const;
 
-        /*! \brief Override -= operator
+        /*! \brief Override < operator
          *
-         * \param rhs The time to substract
+         * \param right The time to compare
          *
-         * \return Return the time substracted
+         * \return Return true if times are inferior, else return false
          *
          */
-        Time& operator-=(const Time& rhs);
+        bool operator<(const Time& right) const;
+
+        /*! \brief Override >= operator
+         *
+         * \param right The time to compare
+         *
+         * \return Return true if times are superior or equals, else return false
+         *
+         */
+        bool operator>=(const Time& right) const;
+
+        /*! \brief Override > operator
+         *
+         * \param right The time to compare
+         *
+         * \return Return true if times are superior, else return false
+         *
+         */
+        bool operator>(const Time& right) const;
+
+        /*! \brief Addition a Time to this
+         *
+         * \param right The time to add
+         *
+         * \return The sum of this and right
+         *
+         */
+        Time operator+(const Time& right) const;
+
+        /*! \brief Addition a Time to this
+         *
+         * \param right The time to add
+         *
+         * \return The sum of this and right
+         *
+         */
+        Time& operator+=(const Time& right);
+
+        /*! \brief Subtract a Time to this
+         *
+         * \param right The time to subtract
+         *
+         * \return The difference of this and right
+         *
+         */
+        Time operator-(const Time& right) const;
+
+        /*! \brief Subtract a Time to this
+         *
+         * \param right The time to subtract
+         *
+         * \return The difference of this and right
+         *
+         */
+        Time& operator-=(const Time& right);
 
         /*! \brief Override * operator
          *
-         * \param rhs The time to multiply
+         * \param right The time to multiply
          *
          * \return Return the time multiplied
          *
@@ -177,7 +231,7 @@ namespace Bull
 
         /*! \brief Override *= operator
          *
-         * \param rhs The time to multiply
+         * \param right The time to multiply
          *
          * \return Return the time multiplied
          *
@@ -186,7 +240,7 @@ namespace Bull
 
         /*! \brief Override / operator
          *
-         * \param rhs The time to divide
+         * \param right The time to divide
          *
          * \return Return the time divided
          *
@@ -195,66 +249,12 @@ namespace Bull
 
         /*! \brief Override /= operator
          *
-         * \param rhs The time to divide
+         * \param right The time to divide
          *
          * \return Return the time divided
          *
          */
         Time& operator/=(float right);
-
-        /*! \brief Override == operator
-         *
-         * \param rhs The time to compare
-         *
-         * \return Return true if times are equals, else return false
-         *
-         */
-        bool operator==(const Time& rhs) const;
-
-        /*! \brief Override != operator
-         *
-         * \param rhs The time to compare
-         *
-         * \return Return false if times are equals, else return true
-         *
-         */
-        bool operator!=(const Time& rhs) const;
-
-        /*! \brief Override <= operator
-         *
-         * \param rhs The time to compare
-         *
-         * \return Return true if times are inferior or equals, else return false
-         *
-         */
-        bool operator<=(const Time& rhs) const;
-
-        /*! \brief Override < operator
-         *
-         * \param rhs The time to compare
-         *
-         * \return Return true if times are inferior, else return false
-         *
-         */
-        bool operator<(const Time& rhs) const;
-
-        /*! \brief Override >= operator
-         *
-         * \param rhs The time to compare
-         *
-         * \return Return true if times are superior or equals, else return false
-         *
-         */
-        bool operator>=(const Time& rhs) const;
-
-        /*! \brief Override > operator
-         *
-         * \param rhs The time to compare
-         *
-         * \return Return true if times are superior, else return false
-         *
-         */
-        bool operator>(const Time& rhs) const;
 
     private:
 

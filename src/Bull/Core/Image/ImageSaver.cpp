@@ -9,11 +9,11 @@ namespace Bull
 {
     namespace prv
     {
-        bool ImageSaver::saveToPath(const Image* resource, const Path& path, const ImageParameters& parameters) const
+        bool ImageSaver::saveToPath(const Image* image, const Path& path, const ImageParameters& parameters) const
         {
-            Vector2I size = resource->getSize();
+            Vector2I size = image->getSize();
             const char* file = path.toString().getBuffer();
-            const Uint8* pixels = resource->getPixels().getBuffer();
+            const Uint8* pixels = image->getPixels().getBuffer();
 
             switch(parameters.format)
             {
@@ -26,12 +26,12 @@ namespace Bull
             return false;
         }
 
-        bool ImageSaver::saveToStream(const Image* resource, OutStream& stream, const ImageParameters& parameters) const
+        bool ImageSaver::saveToStream(const Image* image, OutStream& stream, const ImageParameters& parameters) const
         {
             return false;
         }
 
-        bool ImageSaver::saveToMemory(const Image* resource, void* data, Index length, const ImageParameters& parameters) const
+        bool ImageSaver::saveToMemory(const Image* image, void* data, Index length, const ImageParameters& parameters) const
         {
             return false;
         }

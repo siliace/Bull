@@ -5,6 +5,8 @@ target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE_WINDOW}/Cursor.hpp
             ${BULL_SRC_CORE_WINDOW}/Cursor.cpp
+            ${BULL_INC_CORE_WINDOW}/MessageWindow.hpp
+            ${BULL_SRC_CORE_WINDOW}/MessageWindow.cpp
             ${BULL_INC_CORE_WINDOW}/VideoMode.hpp
             ${BULL_SRC_CORE_WINDOW}/VideoMode.cpp
             ${BULL_INC_CORE_WINDOW}/Window.hpp
@@ -22,6 +24,7 @@ target_sources(bull-core
             ${BULL_SRC_CORE_WINDOW}/JoystickManager.cpp
             ${BULL_SRC_CORE_WINDOW}/JoystickState.hpp
             ${BULL_SRC_CORE_WINDOW}/JoystickState.cpp
+            ${BULL_SRC_CORE_WINDOW}/MessageWindowImpl.hpp
             ${BULL_SRC_CORE_WINDOW}/VideoModeImpl.hpp
             ${BULL_SRC_CORE_WINDOW}/WindowHandler.hpp
             ${BULL_SRC_CORE_WINDOW}/WindowImpl.hpp

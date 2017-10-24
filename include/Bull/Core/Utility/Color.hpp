@@ -1,8 +1,8 @@
 #ifndef BULL_CORE_UTILITY_COLOR_HPP
 #define BULL_CORE_UTILITY_COLOR_HPP
 
-#include <Bull/Core/Export.hpp>
 #include <Bull/Core/Configuration/Integer.hpp>
+#include <Bull/Core/Export.hpp>
 
 namespace Bull
 {
@@ -38,7 +38,7 @@ namespace Bull
          * \param hexa The hexadecimal representation of the color
          *
          */
-        Color(Uint32 hexa);
+        explicit Color(Uint32 hexa);
 
         /*! \brief Compare two colors
          *

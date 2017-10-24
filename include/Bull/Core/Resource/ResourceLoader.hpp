@@ -15,36 +15,36 @@ namespace Bull
     {
     public:
 
-        /*! \brief Save a Resource to path
+        /*! \brief Load a Resource from a Path
          *
-         * \param resource
-         * \param path
-         * \param parameters
+         * \param resource   The Resource to load
+         * \param path       The Path of the File to read
+         * \param parameters Parameters to use to load the Resource
          *
-         * \return
+         * \return True if the Resource was loaded successfully
          *
          */
         bool loadFromPath(T* resource, const Path& path, const P& parameters) const;
 
-        /*! \brief Save a Resource to stream
+        /*! \brief Load a Resource from a stream
          *
-         * \param resource
-         * \param stream
-         * \param parameters
+         * \param resource   The Resource to load
+         * \param stream     The stream to read
+         * \param parameters Parameters to use to load the Resource
          *
-         * \return
+         * \return True if the Resource was loaded successfully
          *
          */
         bool loadFromStream(T* resource, InStream& stream, const P& parameters) const;
 
-        /*! \brief Save a Resource to a memory area
+        /*! \brief Load a Resource from a memory area
          *
-         * \param resource
-         * \param data
-         * \param length
-         * \param parameters
+         * \param resource   The Resource to load
+         * \param data       Data to read
+         * \param length     The length of data
+         * \param parameters Parameters to use to load the Resource
          *
-         * \return
+         * \return True if the Resource was loaded successfully
          *
          */
         bool loadFromMemory(T* resource, const void* data, Index length, const P& parameters) const;
@@ -59,8 +59,6 @@ namespace Bull
         bool isFormatSupported(const String& extension) const;
 
         /*! \brief Register a saver
-         *
-         * \param args Arguments to use to create the saver
          *
          */
         template <typename L>

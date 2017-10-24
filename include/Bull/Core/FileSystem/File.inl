@@ -6,6 +6,6 @@ namespace Bull
         File* file = new File(std::forward<Args>(args)...);
         file->setPersistent(false);
 
-        return file;
+        return FileRef(file);
     }
 }

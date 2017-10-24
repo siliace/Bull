@@ -188,7 +188,7 @@ namespace Bull
          * \param toReplace     The character to replace
          * \param other         The use to replace
          * \param start         The starting index to replace
-         * \parma stop          The index to stop to replace
+         * \param stop          The index to stop to replace
          * \param caseSensitive True to be case sensitive, false otherwise
          *
          * \return This

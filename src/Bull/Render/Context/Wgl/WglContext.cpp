@@ -38,7 +38,6 @@ namespace Bull
             loader->require(WglCreateContext);
             loader->require(WglPixelFormat);
             loader->require(WglSwapControl);
-            loader->require(WglPbuffer);
         }
 
         int WglContext::getBestPixelFormat(HDC device, Uint8 bitsPerPixel, const ContextSettings& settings, bool usePbuffer)
@@ -66,8 +65,8 @@ namespace Bull
 
                     for(UINT i = 0; i < count; i++)
                     {
-                        int format[7]  = {0};
-                        int sample[2]  = {0};
+                        int format[7] = {0};
+                        int sample[2] = {0};
                         static const int formatAttribs[] =
                         {
                             WGL_RED_BITS_ARB,
@@ -363,7 +362,7 @@ namespace Bull
                         }
                         else
                         {   m_settings.type = ContextSettings::Default;
-                            Log::get()->write("WGL_CONTEXT_OPENGL_NO_ERROR_ARB is not available", Log::Level::Warning);
+                            Log::get()->write("WGL_CONTEXT_OPENGL_NO_ERROR_ARB is not available", LogLevel::LogLevel_Warning);
                         }
                     }
 
@@ -374,7 +373,7 @@ namespace Bull
 
                     if(!m_render)
                     {
-                        Log::get()->write("Failed to create WglContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), Log::Level::Warning);
+                        Log::get()->write("Failed to create WglContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), LogLevel::LogLevel_Warning);
 
                         if(m_settings.minor == 0)
                         {
@@ -407,11 +406,11 @@ namespace Bull
 
         void WglContext::updateSettings()
         {
-            int pixelFormat = GetPixelFormat(m_device);
             PIXELFORMATDESCRIPTOR pfd;
             pfd.nVersion = 1;
             pfd.nSize    = sizeof(PIXELFORMATDESCRIPTOR);
 
+            int pixelFormat = GetPixelFormat(m_device);
             DescribePixelFormat(m_device, pixelFormat, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
 
             if(isLoaded(WglPixelFormat))

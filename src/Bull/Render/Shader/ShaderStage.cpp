@@ -84,7 +84,7 @@ namespace Bull
 
             if(!isCompiled())
             {
-                Log::get()->write(getErrorMessage(), Log::Level::Error);
+                Log::get()->write(getErrorMessage(), LogLevel::LogLevel_Error);
 
                 return false;
             }

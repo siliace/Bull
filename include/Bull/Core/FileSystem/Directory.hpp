@@ -6,9 +6,9 @@
 
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Pattern/ObjectRef.hpp>
-#include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
@@ -22,7 +22,7 @@ namespace Bull
     using DirectoryRef = ObjectRef<Directory>;
     using DirectoryConstRef = ObjectRef<const Directory>;
 
-    class BULL_CORE_API Directory : public RefCounted
+    class BULL_CORE_API Directory : public NonCopyable
     {
     public:
 
@@ -34,49 +34,49 @@ namespace Bull
             All         = Files | Directories
         };
 
-        /*! \brief Create a directory
+        /*! \brief Create a Directory
          *
-         * \param path The path of the directory to create
+         * \param path The Path of the Directory to create
          *
-         * \return Return true if the file was created successfully, else otherwise
+         * \return True if the file was created successfully
          *
          */
         static bool create(const String& path);
 
-        /*! \brief Check if a directory exists
+        /*! \brief Check if a Directory exists
          *
-         * \param path The path of the directory to check
+         * \param path The Path of the Directory to check
          *
-         * \return Return true if the directory exists, false otherwise
+         * \return True if the Directory exists
          *
          */
         static bool exists(const String& path);
 
-        /*! \brief Copy a directory
+        /*! \brief Copy a Directory
          *
-         * \param path The path (relative or absolute) of the directory to copy
-         * \param path The new path (relative or absolute) of the directory
+         * \param path    The Path of the directory to copy
+         * \param newPath The Path of the copied directory
          *
-         * \return Return true if the copy was successfully, false otherwise
+         * \return True if the copy was successfully
          *
          */
         static bool copy(const Path& path, const String& newPath);
 
-        /*! \brief Rename a directory
+        /*! \brief Rename a Directory
          *
-         * \param path The path of the directory to rename
-         * \param newPath The new path of the directory
+         * \param path    The Path of the Directory to rename
+         * \param newPath The new Path of the Directory
          *
-         * \return Return true if the directory was renamed successfully, false otherwise
+         * \return True if the directory was renamed successfully
          *
          */
         static bool rename(const Path& path, const String& newPath);
 
-        /*! \brief Delete a directory
+        /*! \brief Delete a Directory
          *
-         * \param path The path of the directory to delete
+         * \param path The Path of the directory to delete
          *
-         * \return Return true if the directory was deleted successfully, false otherwise
+         * \return True if the Directory was deleted successfully
          *
          */
         static bool remove(const Path& path);

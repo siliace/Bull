@@ -1,11 +1,12 @@
 #include <iostream>
 
+#include <Bull/Core/Log/AbstractLogger.hpp>
 #include <Bull/Core/Log/ConsoleLogger.hpp>
 
 namespace Bull
 {
-    void ConsoleLogger::write(const String& entry)
+    void ConsoleLogger::write(const String& entry, LogLevel level)
     {
-        std::cout << entry.getBuffer() << std::endl;
+        std::cout << parseMessage(entry, level).getBuffer() << std::endl;
     }
 }

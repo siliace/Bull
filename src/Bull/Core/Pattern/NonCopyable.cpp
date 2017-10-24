@@ -1,17 +1,17 @@
 #include <Bull/Core/IO/StringStream.hpp>
 #include <Bull/Core/Log/Log.hpp>
-#include <Bull/Core/Pattern/RefCounted.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
 {
-    RefCounted::RefCounted(bool persistent) :
+    NonCopyable::NonCopyable(bool persistent) :
         m_isPersistent(persistent),
         m_referenceCounter(0)
     {
         /// Nothing
     }
 
-    RefCounted::~RefCounted()
+    NonCopyable::~NonCopyable()
     {
         if(m_referenceCounter > 0)
         {
@@ -19,16 +19,16 @@ namespace Bull
 
             ss << "Deleting object with " << String::number(static_cast<unsigned int>(m_referenceCounter)) << " references";
 
-            Log::get()->write(ss.toString(), Log::Warning);
+            Log::get()->write(ss.toString(), LogLevel::LogLevel_Warning);
         }
     }
 
-    void RefCounted::addReference()
+    void NonCopyable::addReference()
     {
         m_referenceCounter++;
     }
 
-    bool RefCounted::removeReference()
+    bool NonCopyable::removeReference()
     {
         if(m_referenceCounter > 0)
         {
@@ -43,9 +43,9 @@ namespace Bull
         return false;
     }
 
-    bool RefCounted::setPersistent(bool persistence, bool checkReference)
+    bool NonCopyable::setPersistent(bool persistent, bool checkReference)
     {
-        m_isPersistent = persistence;
+        m_isPersistent = persistent;
 
         if(m_referenceCounter == 0 && !m_isPersistent && checkReference)
         {
@@ -57,12 +57,12 @@ namespace Bull
         return false;
     }
 
-    bool RefCounted::isPersistent() const
+    bool NonCopyable::isPersistent() const
     {
         return m_isPersistent;
     }
 
-    unsigned int RefCounted::getReferenceCount() const
+    unsigned int NonCopyable::getReferenceCount() const
     {
         return m_referenceCounter;
     }

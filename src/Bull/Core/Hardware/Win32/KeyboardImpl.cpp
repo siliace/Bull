@@ -77,7 +77,7 @@ namespace Bull
                 case Keyboard::Key::NumLock:      return VK_NUMLOCK;
                 case Keyboard::Key::NumPadDot:    return VK_DECIMAL;
                 case Keyboard::Key::Add:          return VK_ADD;
-                case Keyboard::Key::Substract:    return VK_SUBTRACT;
+                case Keyboard::Key::Subtract:     return VK_SUBTRACT;
                 case Keyboard::Key::Multiply:     return VK_MULTIPLY;
                 case Keyboard::Key::Divide:       return VK_DIVIDE;
                 case Keyboard::Key::F1:           return VK_F1;

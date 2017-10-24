@@ -1,11 +1,12 @@
 #ifndef BULL_CORE_UTILITY_VERTEX_HPP
 #define BULL_CORE_UTILITY_VERTEX_HPP
 
+#include <Bull/Core/Export.hpp>
+
 #include <Bull/Math/Vector/Vector2.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
 #include <Bull/Math/Vector/Vector4.hpp>
 
-#include <Bull/Core/Export.hpp>
 
 namespace Bull
 {

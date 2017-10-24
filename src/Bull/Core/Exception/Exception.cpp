@@ -20,7 +20,7 @@ namespace Bull
     Exception::Exception(const String& message) :
         m_message(message)
     {
-        Log::get()->write(getLogMessage(), Log::Level::Error);
+        Log::get()->write(getLogMessage(), LogLevel::LogLevel_Error);
     }
 
     Exception::~Exception()

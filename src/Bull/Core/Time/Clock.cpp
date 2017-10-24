@@ -14,7 +14,9 @@ namespace Bull
 
     bool Clock::operator==(const Clock& right) const
     {
-        return (m_start == right.m_start) && (m_pause == right.m_pause) && (m_totalPause == right.m_totalPause);
+        return m_start == right.m_start &&
+               m_pause == right.m_pause &&
+               m_totalPause == right.m_totalPause;
     }
 
     bool Clock::operator!=(const Clock& right) const
@@ -26,8 +28,8 @@ namespace Bull
     {
         if(!isRunning())
         {
-            m_start     = prv::ClockImpl::uptime();
             m_isRunning = true;
+            m_start     = prv::ClockImpl::uptime();
         }
     }
 
@@ -35,19 +37,19 @@ namespace Bull
     {
         if(isRunning())
         {
-            m_pause     = prv::ClockImpl::uptime();
             m_isRunning = false;
+            m_pause     = prv::ClockImpl::uptime();
         }
     }
 
     void Clock::resume()
     {
-        if(!isRunning() && m_start != Time::seconds(0.f))
+        if(!isRunning() && m_start != Time::Zero)
         {
             m_totalPause += prv::ClockImpl::uptime() - m_pause;
 
-            m_pause     = Time::seconds(0.f);
             m_isRunning = true;
+            m_pause     = Time::Zero;
         }
     }
 

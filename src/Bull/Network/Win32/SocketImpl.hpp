@@ -128,7 +128,7 @@ namespace Bull
              * \return
              *
              */
-            static Index sendTo(SocketHandler handler, const IpAddress& to, Socket::Port port, const void* data, Index length);
+            static Index sendTo(SocketHandler handler, const void* data, Index length, const IpAddress& to, Socket::Port port);
 
             /*! \brief Set the blocking mode of a socket
              *

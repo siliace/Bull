@@ -6,7 +6,7 @@
 
 namespace Bull
 {
-    struct Date
+    struct BULL_CORE_API Date
     {
         enum class Day
         {

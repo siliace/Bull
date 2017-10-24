@@ -11,36 +11,36 @@ namespace Bull
     template <typename T, typename P = ParameterBag>
     struct BULL_CORE_API AbstractResourceSaver
     {
-        /*! \brief Save a Resource to path
+        /*! \brief Save a Resource to a Path
          *
-         * \param resource
-         * \param path
-         * \param parameters
+         * \param resource      The Resource to save
+         * \param path       The Path of the File to write
+         * \param parameters Parameters to use to save the Resource
          *
-         * \return
+         * \return True if the Resource was saved successfully
          *
          */
         virtual bool saveToPath(const T* resource, const Path& path, const P& parameters) const = 0;
 
         /*! \brief Save a Resource to stream
          *
-         * \param resource
-         * \param stream
-         * \param parameters
+         * \param resource      The Resource to save
+         * \param stream     The stream to write
+         * \param parameters Parameters to use to save the Resource
          *
-         * \return
+         * \return True if the Resource was saved successfully
          *
          */
         virtual bool saveToStream(const T* resource, OutStream& stream, const P& parameters) const = 0;
 
         /*! \brief Save a Resource to a memory area
          *
-         * \param resource
-         * \param data
-         * \param length
-         * \param parameters
+         * \param resource      The Resource to save
+         * \param data       Data to write
+         * \param length     The length of data
+         * \param parameters Parameters to use to save the Resource
          *
-         * \return
+         * \return True if the Resource was saved successfully
          *
          */
         virtual bool saveToMemory(const T* resource, void* data, Index length, const P& parameters) const = 0;
