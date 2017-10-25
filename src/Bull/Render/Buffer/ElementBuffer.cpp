@@ -3,7 +3,7 @@
 namespace Bull
 {
     ElementBuffer::ElementBuffer() :
-        HardwareBuffer(HardwareBufferType_Array)
+        HardwareBuffer(HardwareBufferType_Element)
     {
         /// Nothing
     }

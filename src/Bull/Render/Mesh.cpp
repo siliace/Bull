@@ -20,6 +20,12 @@ namespace Bull
         };
     }
 
+    Mesh::Mesh() :
+        m_hasIndex(false)
+    {
+        /// Nothing
+    }
+
     Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
     {
         create(vertices, indices);
@@ -52,7 +58,7 @@ namespace Bull
         });
     }
 
-    void Mesh::render(Primitive primitive) const
+    void Mesh::render(RenderPrimitive primitive) const
     {
         m_vao.runBound([this, primitive](){
             if(m_hasIndex)

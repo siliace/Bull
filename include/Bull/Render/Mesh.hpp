@@ -4,6 +4,7 @@
 #include <Bull/Render/Buffer/ArrayBuffer.hpp>
 #include <Bull/Render/Buffer/ElementBuffer.hpp>
 #include <Bull/Render/Buffer/VertexArrayObject.hpp>
+#include <Bull/Render/RenderPrimitive.hpp>
 
 namespace Bull
 {
@@ -11,27 +12,10 @@ namespace Bull
     {
     public:
 
-        enum Primitive
-        {
-            Points,
-            Lines,
-            LineLoop,
-            LineStrip,
-            Triangles,
-            TriangleFan ,
-            TriangleStrip,
-            LinesAdjacency,
-            LineStripAdjacency,
-            TrianglesAdjacency,
-            TriangleStripAdjacency,
-        };
-
-    public:
-
         /*! \brief Default constructor
          *
          */
-        Mesh() = default;
+        Mesh();
 
         /*! \brief Constructor
          *
@@ -61,7 +45,7 @@ namespace Bull
          * \param primitive The primitive to use to render the Mesh
          *
          */
-        void render(Primitive primitive) const;
+        void render(RenderPrimitive primitive) const;
 
     private:
 

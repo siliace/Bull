@@ -88,5 +88,5 @@ Cube::Cube()
 
 void Cube::render()
 {
-    m_mesh.render(Bull::Mesh::Triangles);
+    m_mesh.render(Bull::RenderPrimitive_Triangles);
 }
