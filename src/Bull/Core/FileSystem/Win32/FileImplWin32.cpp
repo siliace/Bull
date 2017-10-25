@@ -52,19 +52,19 @@ namespace Bull
             DWORD creationMode = 0;
             DWORD openingMode  = 0;
 
-            if(mode & File::OpeningMode::Read)
+            if(mode & FileOpeningMode_Read)
             {
                 openingMode |= GENERIC_READ;
 
-                if(!(mode & File::OpeningMode::Write))
+                if(!(mode & FileOpeningMode_Write))
                 {
-                    creationMode = (mode & File::Exists) ? OPEN_EXISTING : CREATE_NEW;
+                    creationMode = (mode & FileOpeningMode_Exists) ? OPEN_EXISTING : CREATE_NEW;
                 }
             }
 
-            if(mode & File::OpeningMode::Write)
+            if(mode & FileOpeningMode_Write)
             {
-                if(mode & File::OpeningMode::Append)
+                if(mode & FileOpeningMode_Append)
                 {
                     openingMode |= FILE_APPEND_DATA;
                 }
@@ -73,11 +73,11 @@ namespace Bull
                     openingMode |= GENERIC_WRITE;
                 }
 
-                if(mode & File::Truncate)
+                if(mode & FileOpeningMode_Truncate)
                 {
                     creationMode = CREATE_ALWAYS;
                 }
-                else if(mode & File::Exists)
+                else if(mode & FileOpeningMode_Exists)
                 {
                     creationMode = OPEN_EXISTING;
                 }

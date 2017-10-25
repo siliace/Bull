@@ -28,7 +28,7 @@ namespace Bull
          * \return The new State of the TcpSocket
          *
          */
-        State connect(const IpAddress& address, Port port);
+        SocketState connect(const IpAddress& address, Port port);
 
         /*! \brief Connect the TcpSocket to a remote host
          *
@@ -39,7 +39,7 @@ namespace Bull
          * \return The new State of the TcpSocket
          *
          */
-        State connect(const IpAddress& address, Port port, const Time& timeout);
+        SocketState connect(const IpAddress& address, Port port, const Time& timeout);
 
         /*! \brief Disconnect the TcpSocket from the remote host
          *
@@ -62,7 +62,7 @@ namespace Bull
          * \return The new State of the TcpSocket
          *
          */
-        State send(const void* data, Index length, Index& sent);
+        SocketState send(const void* data, Index length, Index& sent);
 
         /*! \brief Send data to the remote host
          *
@@ -73,7 +73,7 @@ namespace Bull
          * \return The new State of the TcpSocket
          *
          */
-        State receive(void* data, Index length, Index& received);
+        SocketState receive(void* data, Index length, Index& received);
 
     private:
 
@@ -94,11 +94,11 @@ namespace Bull
          *
          * \return This
          */
-        TcpSocket& updateState(Socket::State state);
+        TcpSocket& updateState(SocketState state);
 
-        State     m_state;
-        Port      m_remotePort;
-        IpAddress m_remoteAddress;
+        SocketState m_state;
+        Port        m_remotePort;
+        IpAddress   m_remoteAddress;
     };
 }
 

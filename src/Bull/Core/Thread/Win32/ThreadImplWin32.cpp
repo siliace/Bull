@@ -19,7 +19,7 @@ namespace Bull
             return 0;
         }
 
-        ThreadImplWin32::ThreadImplWin32(Functor<void>& function, Thread::Priority priority)
+        ThreadImplWin32::ThreadImplWin32(Functor<void>& function, ThreadPriority priority)
         {
             m_handler = CreateThread(nullptr,
                                      0,
@@ -30,41 +30,14 @@ namespace Bull
 
             switch(priority)
             {
-            case Thread::Idle:
-                SetThreadPriority(m_handler, THREAD_PRIORITY_IDLE);
-                break;
-
-            case Thread::Lowest:
-                SetThreadPriority(m_handler, THREAD_PRIORITY_LOWEST);
-                break;
-
-            case Thread::Low:
-                SetThreadPriority(m_handler, THREAD_PRIORITY_BELOW_NORMAL);
-                break;
-
-            case Thread::Normal:
-                SetThreadPriority(m_handler, THREAD_PRIORITY_NORMAL);
-                break;
-
-            case Thread::High:
-                SetThreadPriority(m_handler, THREAD_PRIORITY_ABOVE_NORMAL);
-                break;
-
-            case Thread::Highest:
-                SetThreadPriority(m_handler, THREAD_PRIORITY_HIGHEST);
-                break;
-
-            case Thread::TimeCritial:
-                SetThreadPriority(m_handler, THREAD_PRIORITY_TIME_CRITICAL);
-                break;
-
-            case Thread::Inherit:
-                SetThreadPriority(m_handler, GetThreadPriority(GetCurrentThread()));
-                break;
-
-            default:
-                SetThreadPriority(m_handler, THREAD_PRIORITY_NORMAL);
-                break;
+                case ThreadPriority_Idle: SetThreadPriority(m_handler, THREAD_PRIORITY_IDLE); break;
+                case ThreadPriority_Lowest: SetThreadPriority(m_handler, THREAD_PRIORITY_LOWEST); break;
+                case ThreadPriority_Low: SetThreadPriority(m_handler, THREAD_PRIORITY_BELOW_NORMAL); break;
+                case ThreadPriority_Normal: SetThreadPriority(m_handler, THREAD_PRIORITY_NORMAL); break;
+                case ThreadPriority_High: SetThreadPriority(m_handler, THREAD_PRIORITY_ABOVE_NORMAL); break;
+                case ThreadPriority_Highest: SetThreadPriority(m_handler, THREAD_PRIORITY_HIGHEST); break;
+                case ThreadPriority_TimeCritial: SetThreadPriority(m_handler, THREAD_PRIORITY_TIME_CRITICAL); break;
+                case ThreadPriority_Inherit: SetThreadPriority(m_handler, GetThreadPriority(GetCurrentThread())); break;
             }
         }
 

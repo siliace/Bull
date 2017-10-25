@@ -22,7 +22,7 @@ namespace Bull
          * \return The new state of the UdpSocket
          *
          */
-        State bind(Socket::Port port, const IpAddress& address = IpAddress::AnyIpv4);
+        SocketState bind(Socket::Port port, const IpAddress& address = IpAddress::AnyIpv4);
 
         /*! \brief Unbind the UdpSocket
          *
@@ -40,7 +40,7 @@ namespace Bull
          * \return The new state of the UdpSocket
          *
          */
-        State receive(void* data, Index length, Index& received, IpAddress& remoteAddress, Socket::Port& remotePort);
+        SocketState receive(void* data, Index length, Index& received, IpAddress& remoteAddress, Socket::Port& remotePort);
 
         /*! \brief Send data to a remote host
          *
@@ -52,7 +52,7 @@ namespace Bull
          * \return The new state of the UdpSocket
          *
          */
-        State send(const void* data, Index length, const IpAddress& remoteAddress, Socket::Port remotePort);
+        SocketState send(const void* data, Index length, const IpAddress& remoteAddress, Socket::Port remotePort);
     };
 }
 

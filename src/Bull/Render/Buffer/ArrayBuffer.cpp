@@ -4,18 +4,18 @@
 namespace Bull
 {
     ArrayBuffer::ArrayBuffer() :
-        HardwareBuffer(Array)
+        HardwareBuffer(HardwareBufferType_Array)
     {
         /// Nothing
     }
 
-    ArrayBuffer::ArrayBuffer(const std::vector<Vertex>& vertices, Usage usage) :
+    ArrayBuffer::ArrayBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage) :
         ArrayBuffer()
     {
         create(vertices, usage);
     }
 
-    bool ArrayBuffer::create(const std::vector<Vertex>& vertices, Usage usage)
+    bool ArrayBuffer::create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage)
     {
         if(HardwareBuffer::create(vertices.size() * sizeof(Vertex), usage))
         {

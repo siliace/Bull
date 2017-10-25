@@ -5,36 +5,12 @@
 #include <Bull/Core/Hardware/Joystick.hpp>
 #include <Bull/Core/Hardware/Keyboard.hpp>
 #include <Bull/Core/Hardware/Mouse.hpp>
+#include <Bull/Core/Window/WindowEventType.hpp>
 
 namespace Bull
 {
     struct BULL_CORE_API WindowEvent
     {
-        enum Type
-        {
-            None,
-            Closed,
-            Resized,
-            Moved,
-            KeyUp,
-            KeyDown,
-            Character,
-            MouseEnter,
-            MouseLeave,
-            MouseMoved,
-            MouseButtonUp,
-            MouseButtonDown,
-            MouseButtonDoubleClicked,
-            MouseWheel,
-            LostFocus,
-            GainFocus,
-            JoystickButtonUp,
-            JoystickButtonDown,
-            JoystickMoved,
-            JoystickConnected,
-            JoystickDisconnected,
-        };
-
         struct WindowResizedEvent
         {
             unsigned int width;
@@ -113,7 +89,7 @@ namespace Bull
          */
         WindowEvent();
 
-        Type type;
+        WindowEventType type;
     };
 }
 

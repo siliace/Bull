@@ -25,7 +25,7 @@ namespace Bull
         return m_isBlocking;
     }
 
-    Socket::Socket(Type type) :
+    Socket::Socket(SocketType type) :
         m_type(type),
         m_handler(prv::SocketImpl::InvalidHandler),
         m_isBlocking(true)
@@ -41,7 +41,7 @@ namespace Bull
         }
     }
 
-    void Socket::create(IpAddress::NetProtocol protocol)
+    void Socket::create(NetProtocol protocol)
     {
         if(m_handler == prv::SocketImpl::InvalidHandler)
         {

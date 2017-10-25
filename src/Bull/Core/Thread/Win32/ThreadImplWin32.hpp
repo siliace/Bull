@@ -38,7 +38,7 @@ namespace Bull
              * \param priority The priority of the thread (by default inherit form the parent thread)
              *
              */
-            ThreadImplWin32(Functor<void>& function, Thread::Priority priority);
+            ThreadImplWin32(Functor<void>& function, ThreadPriority priority);
 
             /*! \brief Wait the end of a thread
              *

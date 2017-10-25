@@ -7,29 +7,14 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Render/Export.hpp>
+#include <Bull/Render/Buffer/HardwareBufferType.hpp>
+#include <Bull/Render/Buffer/HardwareBufferUsage.hpp>
 #include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull
 {
     class BULL_RENDER_API HardwareBuffer : public NonCopyable, public ContextResource, public AbstractBuffer
     {
-    public:
-
-        enum Usage
-        {
-            StaticDraw,
-            DynamicDraw,
-            StreamDraw,
-        };
-
-    protected:
-
-        enum Type
-        {
-            Array,
-            Element
-        };
-
     public:
 
         /*! \brief Destructor
@@ -54,7 +39,7 @@ namespace Bull
          * \return Return true if the buffer was created successfully, false otherwise
          *
          */
-        bool create(Index capacity, Usage usage);
+        bool create(Index capacity, HardwareBufferUsage usage);
 
         /*! \brief Fill the buffer
          *
@@ -110,7 +95,7 @@ namespace Bull
          * \param type The type the of OpenGL buffer to create
          *
          */
-        explicit HardwareBuffer(Type type);
+        explicit HardwareBuffer(HardwareBufferType type);
 
         /*! \brief Bind the buffer
          *
@@ -126,8 +111,8 @@ namespace Bull
 
     private:
 
-        unsigned int m_id;
-        Type         m_type;
+        unsigned int       m_id;
+        HardwareBufferType m_type;
     };
 }
 

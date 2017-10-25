@@ -16,7 +16,7 @@ namespace Bull
             File::create(filename);
         }
 
-        m_logFile.open(Path(filename), File::Truncate | File::Write);
+        m_logFile.open(Path(filename), FileOpeningMode_Truncate | FileOpeningMode_Write);
     }
 
     void FileLogger::write(const String& entry, LogLevel level)

@@ -22,7 +22,7 @@ namespace Bull
          * \param usage   The usage (static, dynamic, stream) of the ElementBuffer
          *
          */
-        explicit ElementBuffer(const std::vector<unsigned int>& indices, Usage usage = StaticDraw);
+        explicit ElementBuffer(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
 
         /*! \brief Create the ElementBuffer from a indice vector
          *
@@ -32,7 +32,7 @@ namespace Bull
          * \return True if the ElementBuffer was created successfully
          *
          */
-        bool create(const std::vector<unsigned int>& indices, Usage usage = StaticDraw);
+        bool create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
     };
 }
 

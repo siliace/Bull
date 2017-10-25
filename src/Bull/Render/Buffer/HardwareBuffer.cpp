@@ -18,10 +18,10 @@ namespace Bull
 
     bool HardwareBuffer::create(Index size)
     {
-        return create(size, HardwareBuffer::Usage::StaticDraw);
+        return create(size, HardwareBufferUsage_StaticDraw);
     }
 
-    bool HardwareBuffer::create(Index size, Usage usage)
+    bool HardwareBuffer::create(Index size, HardwareBufferUsage usage)
     {
         if(gl::isBuffer(m_id))
         {
@@ -136,7 +136,7 @@ namespace Bull
         return 0;
     }
 
-    HardwareBuffer::HardwareBuffer(Type type) :
+    HardwareBuffer::HardwareBuffer(HardwareBufferType type) :
         m_id(0),
         m_type(type)
     {

@@ -49,7 +49,7 @@ namespace Bull
 
     IpAddress::IpAddress() :
         m_valid(false),
-        m_protocol(IpAddress::Unknown)
+        m_protocol(NetProtocol_Unknown)
     {
         /// Nothing
     }
@@ -57,7 +57,7 @@ namespace Bull
     IpAddress::IpAddress(const V4& v4) :
         m_v4(v4),
         m_valid(true),
-        m_protocol(IpAddress::IpV4)
+        m_protocol(NetProtocol_IpV4)
     {
         /// Nothing
     }
@@ -65,14 +65,14 @@ namespace Bull
     IpAddress::IpAddress(const V6& v6) :
         m_v6(v6),
         m_valid(true),
-        m_protocol(IpAddress::IpV6)
+        m_protocol(NetProtocol_IpV6)
     {
         /// Nothing
     }
 
     IpAddress::IpAddress(Uint32 address) :
         m_valid(true),
-        m_protocol(IpAddress::IpV4)
+        m_protocol(NetProtocol_IpV4)
     {
         m_v4[0] = Uint8(address >> 24);
         m_v4[1] = Uint8(address >> 16);
@@ -82,7 +82,7 @@ namespace Bull
 
     IpAddress::IpAddress(Uint8 a, Uint8 b, Uint8 c, Uint8 d) :
         m_valid(true),
-        m_protocol(IpAddress::IpV4)
+        m_protocol(NetProtocol_IpV4)
     {
         m_v4[0] = a;
         m_v4[1] = b;
@@ -102,11 +102,11 @@ namespace Bull
 
     String IpAddress::toString() const
     {
-        if(m_protocol == IpAddress::IpV4)
+        if(m_protocol == NetProtocol_IpV4)
         {
             return toString(m_v4);
         }
-        else if(m_protocol == IpAddress::IpV6)
+        else if(m_protocol == NetProtocol_IpV6)
         {
             return toString(m_v6);
         }
@@ -116,7 +116,7 @@ namespace Bull
 
     Uint32 IpAddress::toUint32() const
     {
-        if(!isValid() || m_protocol != IpAddress::IpV4)
+        if(!isValid() || m_protocol != NetProtocol_IpV4)
         {
             throw LogicError("The Ip is not valid or not Ipv4");
         }
@@ -134,7 +134,7 @@ namespace Bull
         return isValid();
     }
 
-    IpAddress::NetProtocol IpAddress::getProtocol() const
+    NetProtocol IpAddress::getProtocol() const
     {
         return m_protocol;
     }

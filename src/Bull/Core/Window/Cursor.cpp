@@ -11,7 +11,7 @@ namespace Bull
 
     Cursor::~Cursor() = default;
 
-    bool Cursor::create(Type cursor)
+    bool Cursor::create(CursorType cursor)
     {
         return m_impl->create(cursor);
     }

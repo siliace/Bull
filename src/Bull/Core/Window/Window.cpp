@@ -387,7 +387,7 @@ namespace Bull
 
     void Window::filterEvent(const WindowEvent& e)
     {
-        if(e.type == WindowEvent::Resized)
+        if(e.type == WindowEventType_Resized)
         {
             onResize();
         }

@@ -9,6 +9,7 @@ target_sources(bull-graphics
             ${BULL_INC_GRAPHICS}/Export.hpp
             ${BULL_INC_GRAPHICS}/Material.hpp
             ${BULL_SRC_GRAPHICS}/Material.cpp
+            ${BULL_INC_GRAPHICS}/MaterialTextureType.hpp
             ${BULL_INC_GRAPHICS}/Node.hpp
             ${BULL_SRC_GRAPHICS}/Node.cpp
         )

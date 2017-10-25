@@ -76,25 +76,25 @@ namespace Bull
             return false;
         }
 
-        SocketHandler SocketImpl::create(IpAddress::NetProtocol protocol, Socket::Type type)
+        SocketHandler SocketImpl::create(NetProtocol protocol, SocketType type)
         {
             return socket(translateProtocol(protocol), translateSocketType(type), 0);
         }
 
-        Socket::State SocketImpl::lastError()
+        SocketState SocketImpl::lastError()
         {
             switch(WSAGetLastError())
             {
-                case WSAEWOULDBLOCK:   return Socket::NotReady;
-                case WSAEALREADY:      return Socket::NotReady;
-                case WSAECONNABORTED:  return Socket::Disconnected;
-                case WSAECONNRESET:    return Socket::Disconnected;
-                case WSAETIMEDOUT:     return Socket::Disconnected;
-                case WSAENETRESET:     return Socket::Disconnected;
-                case WSAENOTCONN:      return Socket::Disconnected;
-                case WSAEISCONN:       return Socket::Ready;
-                case WSAEADDRNOTAVAIL: return Socket::ConnectionRefused;
-                default:               return Socket::Error;
+                case WSAEWOULDBLOCK:   return SocketState_NotReady;
+                case WSAEALREADY:      return SocketState_NotReady;
+                case WSAECONNABORTED:  return SocketState_Disconnected;
+                case WSAECONNRESET:    return SocketState_Disconnected;
+                case WSAETIMEDOUT:     return SocketState_Disconnected;
+                case WSAENETRESET:     return SocketState_Disconnected;
+                case WSAENOTCONN:      return SocketState_Disconnected;
+                case WSAEISCONN:       return SocketState_Ready;
+                case WSAEADDRNOTAVAIL: return SocketState_ConnectionRefused;
+                default:               return SocketState_Error;
             }
         }
 
@@ -167,26 +167,26 @@ namespace Bull
             }
         }
 
-        int SocketImpl::translateSocketType(Socket::Type type)
+        int SocketImpl::translateSocketType(SocketType type)
         {
             switch(type)
             {
-                case Socket::Tcp: return SOCK_STREAM;
-                case Socket::Udp: return SOCK_DGRAM;
-                case Socket::Raw: return SOCK_RAW;
+                case SocketType_Tcp: return SOCK_STREAM;
+                case SocketType_Udp: return SOCK_DGRAM;
+                case SocketType_Raw: return SOCK_RAW;
             }
 
             return -1;
         }
 
-        int SocketImpl::translateProtocol(IpAddress::NetProtocol protocol)
+        int SocketImpl::translateProtocol(NetProtocol protocol)
         {
             switch(protocol)
             {
-                case IpAddress::Any:     return -1;
-                case IpAddress::IpV4:    return AF_INET;
-                case IpAddress::IpV6:    return AF_INET6;
-                case IpAddress::Unknown: return AF_UNSPEC;
+                case NetProtocol_Any:     return -1;
+                case NetProtocol_IpV4:    return AF_INET;
+                case NetProtocol_IpV6:    return AF_INET6;
+                case NetProtocol_Unknown: return AF_UNSPEC;
             }
 
             return -1;

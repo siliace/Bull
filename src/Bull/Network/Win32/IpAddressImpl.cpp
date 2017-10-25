@@ -72,7 +72,7 @@ namespace Bull
             {
                 switch(ip.getProtocol())
                 {
-                    case IpAddress::IpV4:
+                    case NetProtocol_IpV4:
                     {
                         sockaddr_in* addr = reinterpret_cast<sockaddr_in*>(buffer);
                         ZeroMemory(addr, sizeof(sockaddr_in));

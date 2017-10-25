@@ -17,7 +17,7 @@ namespace Bull
             destroy();
         }
 
-        bool CursorImplWin32::create(Cursor::Type cursor)
+        bool CursorImplWin32::create(CursorType cursor)
         {
             LPCSTR shape;
 
@@ -25,25 +25,25 @@ namespace Bull
 
             switch(cursor)
             {
-                case Cursor::Crosshair:  shape = IDC_CROSS;       break;
-                case Cursor::Default:    shape = IDC_ARROW;       break;
-                case Cursor::Hand:       shape = IDC_HAND;        break;
-                case Cursor::Help:       shape = IDC_HELP;        break;
-                case Cursor::Move:       shape = IDC_SIZEALL;     break;
-                case Cursor::None:       shape = nullptr;         break;
-                case Cursor::Pointer:    shape = IDC_HAND;        break;
-                case Cursor::Progress:   shape = IDC_APPSTARTING; break;
-                case Cursor::ResizeE:    shape = IDC_SIZEWE;      break;
-                case Cursor::ResizeN:    shape = IDC_SIZENS;      break;
-                case Cursor::ResizeNE:   shape = IDC_SIZENESW;    break;
-                case Cursor::ResizeNW:   shape = IDC_SIZENWSE;    break;
-                case Cursor::ResizeS:    shape = IDC_SIZENS;      break;
-                case Cursor::ResizeSE:   shape = IDC_SIZENWSE;    break;
-                case Cursor::ResizeSW:   shape = IDC_SIZENESW;    break;
-                case Cursor::ResizeW:    shape = IDC_SIZEWE;      break;
-                case Cursor::Text:       shape = IDC_IBEAM;       break;
-                case Cursor::Wait:       shape = IDC_WAIT;        break;
-                case Cursor::NotAllowed: shape = IDC_NO;          break;
+                case CursorType_Crosshair:  shape = IDC_CROSS;       break;
+                case CursorType_Default:    shape = IDC_ARROW;       break;
+                case CursorType_Hand:       shape = IDC_HAND;        break;
+                case CursorType_Help:       shape = IDC_HELP;        break;
+                case CursorType_Move:       shape = IDC_SIZEALL;     break;
+                case CursorType_None:       shape = nullptr;         break;
+                case CursorType_Pointer:    shape = IDC_HAND;        break;
+                case CursorType_Progress:   shape = IDC_APPSTARTING; break;
+                case CursorType_ResizeE:    shape = IDC_SIZEWE;      break;
+                case CursorType_ResizeN:    shape = IDC_SIZENS;      break;
+                case CursorType_ResizeNE:   shape = IDC_SIZENESW;    break;
+                case CursorType_ResizeNW:   shape = IDC_SIZENWSE;    break;
+                case CursorType_ResizeS:    shape = IDC_SIZENS;      break;
+                case CursorType_ResizeSE:   shape = IDC_SIZENWSE;    break;
+                case CursorType_ResizeSW:   shape = IDC_SIZENESW;    break;
+                case CursorType_ResizeW:    shape = IDC_SIZEWE;      break;
+                case CursorType_Text:       shape = IDC_IBEAM;       break;
+                case CursorType_Wait:       shape = IDC_WAIT;        break;
+                case CursorType_NotAllowed: shape = IDC_NO;          break;
                 default: return false;
             }
 

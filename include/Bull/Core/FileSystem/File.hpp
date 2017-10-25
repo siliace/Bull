@@ -4,6 +4,7 @@
 #include <memory>
 
 #include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/IO/InOutStream.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Pattern/ObjectRef.hpp>
@@ -24,17 +25,6 @@ namespace Bull
     class BULL_CORE_API File : public InOutStream, public NonCopyable
     {
     public:
-
-        enum OpeningMode
-        {
-            None      = 0x00,
-            Append    = 0x01,
-            Write     = 0x02,
-            Exists    = 0x04,
-            Truncate  = 0x08,
-            Read      = 0x16,
-            ReadWrite = Read | Write,
-        };
 
         /*! \brief Create a file
          *
@@ -106,7 +96,7 @@ namespace Bull
          * \param mode The opening mode of the file (read, write or both)
          *
          */
-        explicit File(const Path& path, Uint32 mode = OpeningMode::Read | OpeningMode::Write);
+        explicit File(const Path& path, Uint32 mode = FileOpeningMode_ReadWrite);
 
         /*! \brief Destructor
          *
@@ -121,7 +111,7 @@ namespace Bull
          * \return Return true if the file was opened successfully, false otherwise
          *
          */
-        bool open(const Path& path, Uint32 mode = OpeningMode::Read | OpeningMode::Write);
+        bool open(const Path& path, Uint32 mode = FileOpeningMode_ReadWrite);
 
         /*! \brief Check if a file is open
          *

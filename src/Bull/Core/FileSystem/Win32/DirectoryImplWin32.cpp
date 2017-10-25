@@ -51,7 +51,7 @@ namespace Bull
             {
                 Path p(m_base.toString() + "/" + m_result.cFileName);
 
-                if((flags & (Directory::Directories) && p.isDirectory()) || (flags & (Directory::Files) && p.isFile()))
+                if((flags & (DirectorySearchFlag_Directories) && p.isDirectory()) || (flags & (DirectorySearchFlag_Files) && p.isFile()))
                 {
                     content.push_back(p);
                 }

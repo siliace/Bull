@@ -10,12 +10,12 @@ namespace Bull
 
     Thread::Thread() :
         m_impl(nullptr),
-        m_priority(Priority::Inherit)
+        m_priority(ThreadPriority_Inherit)
     {
         /// Nothing
     }
 
-    Thread::Thread(const Functor<void>& function, Priority priority) :
+    Thread::Thread(const Functor<void>& function, ThreadPriority priority) :
         m_impl(nullptr),
         m_function(function),
         m_priority(priority)
@@ -65,7 +65,7 @@ namespace Bull
         }
     }
 
-    Thread::Priority Thread::getPriority() const
+    ThreadPriority Thread::getPriority() const
     {
         return m_priority;
     }

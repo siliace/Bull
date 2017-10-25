@@ -7,6 +7,7 @@
 #include <Bull/Core/Configuration/Integer.hpp>
 
 #include <Bull/Network/Export.hpp>
+#include <Bull/Network/NetProtocol.hpp>
 
 namespace Bull
 {
@@ -23,14 +24,6 @@ namespace Bull
         static IpAddress LoopbackIpv4;
         static IpAddress LoopbackIpv6;
         static IpAddress BroadcastIpv4;
-
-        enum NetProtocol
-        {
-            Any,
-            IpV4,
-            IpV6,
-            Unknown,
-        };
 
         /*! \brief Resolve an hostname
          *

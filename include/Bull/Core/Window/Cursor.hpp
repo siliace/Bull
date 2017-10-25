@@ -6,6 +6,7 @@
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/Image/Image.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Window/CursorType.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -22,31 +23,6 @@ namespace Bull
     {
     public:
 
-        enum Type
-        {
-            Crosshair,
-            Default,
-            Hand,
-            Help,
-            Move,
-            None,
-            Pointer,
-            Progress,
-            ResizeE,
-            ResizeN,
-            ResizeNE,
-            ResizeNW,
-            ResizeS,
-            ResizeSE,
-            ResizeSW,
-            ResizeW,
-            Text,
-            Wait,
-            NotAllowed,
-        };
-
-    public:
-
         /*! \brief Default constructor
          *
          */
@@ -55,7 +31,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~Cursor();
+        virtual ~Cursor();
 
         /*! \brief Create a Cursor from the system
          *
@@ -64,7 +40,7 @@ namespace Bull
          * \return True if the cursor was created successfully
          *
          */
-        bool create(Type cursor);
+        bool create(CursorType cursor);
 
         /*! \brief Create a Cursor from an image
          *

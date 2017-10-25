@@ -3,18 +3,18 @@
 namespace Bull
 {
     ElementBuffer::ElementBuffer() :
-        HardwareBuffer(Element)
+        HardwareBuffer(HardwareBufferType_Array)
     {
         /// Nothing
     }
 
-    ElementBuffer::ElementBuffer(const std::vector<unsigned int>& indices, Usage usage) :
+    ElementBuffer::ElementBuffer(const std::vector<unsigned int>& indices, HardwareBufferUsage usage) :
         ElementBuffer()
     {
         create(indices, usage);
     }
 
-    bool ElementBuffer::create(const std::vector<unsigned int>& indices, Usage usage)
+    bool ElementBuffer::create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage)
     {
         if(HardwareBuffer::create(indices.size() * sizeof(unsigned int), usage))
         {

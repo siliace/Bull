@@ -1,8 +1,9 @@
 #ifndef BULL_CORECURSORIMPL_HPP
 #define BULL_CORECURSORIMPL_HPP
 
+#include <Bull/Core/Image/Image.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Window/Cursor.hpp>
+#include <Bull/Core/Window/CursorType.hpp>
 #include <Bull/Core/Window/CursorHandler.hpp>
 
 namespace Bull
@@ -34,7 +35,7 @@ namespace Bull
              * \return True if the cursor was created successfully
              *
              */
-            virtual bool create(Cursor::Type cursor) = 0;
+            virtual bool create(CursorType cursor) = 0;
 
             /*! \brief Create a Cursor from an image
              *

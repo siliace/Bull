@@ -27,7 +27,7 @@ namespace Bull
          * \return The new State of the TcpListener
          *
          */
-        State listen(Port port, unsigned int backlog = 0);
+        SocketState listen(Port port, unsigned int backlog = 0);
 
         /*! \brief Listen a local port
          *
@@ -38,7 +38,7 @@ namespace Bull
          * \return The new State of the TcpListener
          *
          */
-        State listen(Port port, const IpAddress& host, unsigned int backlog = 0);
+        SocketState listen(Port port, const IpAddress& host, unsigned int backlog = 0);
 
         /*! \brief Accept an incoming connection
          *
@@ -47,7 +47,7 @@ namespace Bull
          * \return The new State of the TcpListener
          *
          */
-        State accept(TcpSocket& client);
+        SocketState accept(TcpSocket& client);
 
         /*! \brief Accept an incoming connection
          *
@@ -57,7 +57,7 @@ namespace Bull
          * \return
          *
          */
-        State accept(TcpSocket& client, const Time& timeout);
+        SocketState accept(TcpSocket& client, const Time& timeout);
 
         /*! \brief Get the local port bound to this TcpListener
          *

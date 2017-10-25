@@ -5,14 +5,20 @@ target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE_WINDOW}/Cursor.hpp
             ${BULL_SRC_CORE_WINDOW}/Cursor.cpp
+            ${BULL_INC_CORE_WINDOW}/CursorType.hpp
             ${BULL_INC_CORE_WINDOW}/MessageWindow.hpp
             ${BULL_SRC_CORE_WINDOW}/MessageWindow.cpp
+            ${BULL_INC_CORE_WINDOW}/MessageWindowButtons.hpp
+            ${BULL_INC_CORE_WINDOW}/MessageWindowDefaultButton.hpp
+            ${BULL_INC_CORE_WINDOW}/MessageWindowIcon.hpp
+            ${BULL_INC_CORE_WINDOW}/MessageWindowResponse.hpp
             ${BULL_INC_CORE_WINDOW}/VideoMode.hpp
             ${BULL_SRC_CORE_WINDOW}/VideoMode.cpp
             ${BULL_INC_CORE_WINDOW}/Window.hpp
             ${BULL_SRC_CORE_WINDOW}/Window.cpp
             ${BULL_INC_CORE_WINDOW}/WindowEvent.hpp
             ${BULL_SRC_CORE_WINDOW}/WindowEvent.cpp
+            ${BULL_INC_CORE_WINDOW}/WindowEventType.hpp
             ${BULL_INC_CORE_WINDOW}/WindowStyle.hpp
         PRIVATE
             ${BULL_SRC_CORE_WINDOW}/AbstractInputManager.hpp

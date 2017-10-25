@@ -5,30 +5,16 @@
 
 #include <Bull/Network/Export.hpp>
 #include <Bull/Network/IpAddress.hpp>
+#include <Bull/Network/NetProtocol.hpp>
 #include <Bull/Network/SocketHandler.hpp>
+#include <Bull/Network/SocketState.hpp>
+#include <Bull/Network/SocketType.hpp>
 
 namespace Bull
 {
     class BULL_NETWORK_API Socket : public NonCopyable
     {
     public:
-
-        enum Type
-        {
-            Tcp,
-            Udp,
-            Raw
-        };
-
-        enum State
-        {
-            Ready,
-            NotReady,
-            Partial,
-            Disconnected,
-            ConnectionRefused,
-            Error,
-        };
 
         typedef unsigned short Port;
 
@@ -68,14 +54,14 @@ namespace Bull
          *
          * \param type The type of the Socket
          */
-        explicit Socket(Type type);
+        explicit Socket(SocketType type);
 
         /*! \brief Create the Socket
          *
          * \param protocol The protocol to use in the Socket
          *
          */
-        void create(IpAddress::NetProtocol protocol);
+        void create(NetProtocol protocol);
 
         /*! \brief Reset the SocketHandler
          *
@@ -93,10 +79,10 @@ namespace Bull
 
     private:
 
-        Type                   m_type;
-        SocketHandler          m_handler;
-        IpAddress::NetProtocol m_protocol;
-        bool                   m_isBlocking;
+        SocketType    m_type;
+        SocketHandler m_handler;
+        NetProtocol   m_protocol;
+        bool          m_isBlocking;
     };
 }
 

@@ -9,6 +9,8 @@ target_sources(bull-render
             ${BULL_SRC_RENDER_CONTEXT}/ContextResource.cpp
             ${BULL_INC_RENDER_CONTEXT}/ContextSettings.hpp
             ${BULL_SRC_RENDER_CONTEXT}/ContextSettings.cpp
+            ${BULL_INC_RENDER_CONTEXT}/ContextSettingsProfile.hpp
+            ${BULL_INC_RENDER_CONTEXT}/ContextSettingsType.hpp
         PRIVATE
             ${BULL_SRC_RENDER_CONTEXT}/ExtensionsLoader.hpp
             ${BULL_SRC_RENDER_CONTEXT}/ExtensionsLoader.cpp

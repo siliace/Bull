@@ -37,12 +37,12 @@ int main(int argc, char* argv[])
     {
         while(window.pollEvent(event))
         {
-            if(event.type == WindowEvent::Closed)
+            if(event.type == WindowEventType_Closed)
             {
                 window.close();
             }
 
-            if(event.type == WindowEvent::KeyDown)
+            if(event.type == WindowEventType_KeyDown)
             {
                 if(event.key.code == Keyboard::S)
                 {
@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
                 }
             }
 
-            if(event.type == WindowEvent::MouseMoved)
+            if(event.type == WindowEventType_MouseMoved)
             {
                 static int lastX, lastY;
                 static AngleF pitch, yaw;
@@ -97,7 +97,7 @@ int main(int argc, char* argv[])
                 forward.normalize();
             }
 
-            if(event.type == WindowEvent::MouseWheel)
+            if(event.type == WindowEventType_MouseWheel)
             {
                 fov += (event.mouseWheel.up) ? AngleF::degree(-0.1f) : AngleF::degree(0.1f);
                 fov = clamp(fov, AngleF::degree(0.1f), AngleF::degree(45.f));

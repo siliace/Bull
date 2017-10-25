@@ -38,7 +38,7 @@ namespace Bull
 
     File::File() :
         m_eof(false),
-        m_mode(OpeningMode::None)
+        m_mode(FileOpeningMode_None)
     {
         /// Nothing
     }
@@ -67,7 +67,7 @@ namespace Bull
             m_mode = mode;
             m_impl.reset(prv::FileImpl::createInstance(m_path, m_mode));
 
-            if(m_impl && (mode & OpeningMode::Read))
+            if(m_impl && (mode & FileOpeningMode_Read))
             {
                 setCursor(0);
             }
@@ -87,7 +87,7 @@ namespace Bull
     {
         m_eof  = false;
         m_path = Path();
-        m_mode = File::OpeningMode::None;
+        m_mode = FileOpeningMode_None;
         m_impl.reset(nullptr);
     }
 
@@ -235,12 +235,12 @@ namespace Bull
 
     bool File::canRead() const
     {
-        return m_mode & OpeningMode::Read;
+        return m_mode & FileOpeningMode_Read;
     }
 
     bool File::canWrite() const
     {
-        return m_mode & OpeningMode::Write;
+        return m_mode & FileOpeningMode_Write;
     }
 
     bool File::isAtEof() const

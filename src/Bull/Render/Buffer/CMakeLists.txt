@@ -9,6 +9,8 @@ target_sources(bull-render
             ${BULL_SRC_RENDER_BUFFER}/ElementBuffer.cpp
             ${BULL_INC_RENDER_BUFFER}/HardwareBuffer.hpp
             ${BULL_SRC_RENDER_BUFFER}/HardwareBuffer.cpp
+            ${BULL_INC_RENDER_BUFFER}/HardwareBufferType.hpp
+            ${BULL_INC_RENDER_BUFFER}/HardwareBufferUsage.hpp
             ${BULL_INC_RENDER_BUFFER}/VertexArrayObject.hpp
             ${BULL_SRC_RENDER_BUFFER}/VertexArrayObject.cpp
         )

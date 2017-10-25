@@ -562,7 +562,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type = WindowEvent::Closed;
+                    e.type = WindowEventType_Closed;
 
                     pushEvent(e);
                 }
@@ -583,7 +583,7 @@ namespace Bull
                     {
                         WindowEvent e;
 
-                        e.type                = WindowEvent::Resized;
+                        e.type                = WindowEventType_Resized;
                         e.windowResize.width  = LOWORD(lParam);
                         e.windowResize.height = HIWORD(lParam);
 
@@ -598,7 +598,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type = WindowEvent::LostFocus;
+                    e.type = WindowEventType_LostFocus;
 
                     pushEvent(e);
                 }
@@ -608,7 +608,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type = WindowEvent::GainFocus;
+                    e.type = WindowEventType_GainFocus;
 
                     pushEvent(e);
                 }
@@ -629,7 +629,7 @@ namespace Bull
                         WindowEvent e;
                         m_lastSize = getSize();
 
-                        e.type                = WindowEvent::Resized;
+                        e.type                = WindowEventType_Resized;
                         e.windowResize.width  = m_lastSize.x();
                         e.windowResize.height = m_lastSize.y();
 
@@ -641,7 +641,7 @@ namespace Bull
                         WindowEvent e;
                         m_lastPosition = getPosition();
 
-                        e.type         = WindowEvent::Moved;
+                        e.type         = WindowEventType_Moved;
                         e.windowMove.x = getPosition().x();
                         e.windowMove.y = getPosition().y();
 
@@ -657,7 +657,7 @@ namespace Bull
                     {
                         WindowEvent e;
 
-                        e.type        = WindowEvent::KeyDown;
+                        e.type        = WindowEventType_KeyDown;
                         e.key.code    = convertVKToBullkey(wParam);
                         e.key.alt     = Keyboard::isKeyPressed(Keyboard::Key::Alt);
                         e.key.control = Keyboard::isKeyPressed(Keyboard::Key::Control);
@@ -674,7 +674,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type        = WindowEvent::KeyUp;
+                    e.type        = WindowEventType_KeyUp;
                     e.key.code    = convertVKToBullkey(wParam);
                     e.key.alt     = Keyboard::isKeyPressed(Keyboard::Key::Alt);
                     e.key.control = Keyboard::isKeyPressed(Keyboard::Key::Control);
@@ -689,7 +689,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type = WindowEvent::Character;
+                    e.type = WindowEventType_Character;
                     e.character = static_cast<Uint32>(wParam);
 
                     pushEvent(e);
@@ -700,7 +700,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type           = WindowEvent::MouseMoved;
+                    e.type           = WindowEventType_MouseMoved;
                     e.mouseMove.x    = GET_X_LPARAM(lParam);
                     e.mouseMove.y    = GET_Y_LPARAM(lParam);
                     e.mouseMove.xRel = e.mouseMove.x - getCursorPosition().x();
@@ -715,7 +715,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type               = WindowEvent::MouseButtonDown;
+                    e.type               = WindowEventType_MouseButtonDown;
                     e.mouseButton.button = Mouse::Button::Left;
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
@@ -724,7 +724,7 @@ namespace Bull
 
                     if(message == WM_LBUTTONDBLCLK)
                     {
-                        e.type = WindowEvent::MouseButtonDoubleClicked;
+                        e.type = WindowEventType_MouseButtonDoubleClicked;
 
                         pushEvent(e);
                     }
@@ -735,7 +735,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type               = WindowEvent::MouseButtonUp;
+                    e.type               = WindowEventType_MouseButtonUp;
                     e.mouseButton.button = Mouse::Button::Left;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -749,7 +749,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type               = WindowEvent::MouseButtonDown;
+                    e.type               = WindowEventType_MouseButtonDown;
                     e.mouseButton.button = Mouse::Button::Middle;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -758,7 +758,7 @@ namespace Bull
 
                     if(message == WM_MBUTTONDBLCLK)
                     {
-                        e.type = WindowEvent::MouseButtonDoubleClicked;
+                        e.type = WindowEventType_MouseButtonDoubleClicked;
 
                         pushEvent(e);
                     }
@@ -769,7 +769,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type               = WindowEvent::MouseButtonUp;
+                    e.type               = WindowEventType_MouseButtonUp;
                     e.mouseButton.button = Mouse::Button::Middle;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -783,7 +783,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type               = WindowEvent::MouseButtonDown;
+                    e.type               = WindowEventType_MouseButtonDown;
                     e.mouseButton.button = Mouse::Button::Right;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -792,7 +792,7 @@ namespace Bull
 
                     if(message == WM_RBUTTONDBLCLK)
                     {
-                        e.type = WindowEvent::MouseButtonDoubleClicked;
+                        e.type = WindowEventType_MouseButtonDoubleClicked;
 
                         pushEvent(e);
                     }
@@ -803,7 +803,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type               = WindowEvent::MouseButtonUp;
+                    e.type               = WindowEventType_MouseButtonUp;
                     e.mouseButton.button = Mouse::Button::Right;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -817,7 +817,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type               = WindowEvent::MouseButtonDown;
+                    e.type               = WindowEventType_MouseButtonDown;
                     e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? Mouse::Button::Extra1 : Mouse::Button::Extra2;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -826,7 +826,7 @@ namespace Bull
 
                     if(message == WM_XBUTTONDBLCLK)
                     {
-                        e.type = WindowEvent::MouseButtonDoubleClicked;
+                        e.type = WindowEventType_MouseButtonDoubleClicked;
 
                         pushEvent(e);
                     }
@@ -837,7 +837,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type               = WindowEvent::MouseButtonUp;
+                    e.type               = WindowEventType_MouseButtonUp;
                     e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? Mouse::Button::Extra1 : Mouse::Button::Extra2;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
@@ -850,7 +850,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type              = WindowEvent::MouseWheel;
+                    e.type              = WindowEventType_MouseWheel;
                     e.mouseWheel.wheel  = Mouse::Wheel::Vertical;
                     e.mouseWheel.up     = (HIWORD(wParam) == 120);
                     e.mouseWheel.x      = GET_X_LPARAM(lParam);
@@ -864,7 +864,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type              = WindowEvent::MouseWheel;
+                    e.type              = WindowEventType_MouseWheel;
                     e.mouseWheel.wheel  = Mouse::Wheel::Horizontal;
                     e.mouseWheel.up     = (HIWORD(wParam) == 120);
                     e.mouseWheel.x      = GET_X_LPARAM(lParam);

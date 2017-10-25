@@ -6,6 +6,7 @@
 #include <Bull/Core/Utility/Color.hpp>
 
 #include <Bull/Graphics/Export.hpp>
+#include <Bull/Graphics/MaterialTextureType.hpp>
 
 #include <Bull/Render/Texture/Texture.hpp>
 
@@ -13,19 +14,6 @@ namespace Bull
 {
     class BULL_GRAPHICS_API Material
     {
-    public:
-
-        enum TextureType : unsigned int
-        {
-            Alpha,
-            Height,
-            Normal,
-            Ambient,
-            Diffuse,
-            Emission,
-            Specular,
-        };
-
     public:
 
         /*! \brief Default constructor
@@ -57,7 +45,7 @@ namespace Bull
          * \return This
          *
          */
-        Material& setTexture(TextureRef texture, TextureType type);
+        Material& setTexture(TextureRef texture, MaterialTextureType type);
 
         /*! \brief Get a Texture
          *
@@ -66,7 +54,7 @@ namespace Bull
          * \return The texture
          *
          */
-        const TextureRef& getTexture(TextureType type) const;
+        const TextureRef& getTexture(MaterialTextureType type) const;
 
     private:
 

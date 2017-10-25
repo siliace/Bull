@@ -12,7 +12,7 @@ namespace Bull
 {
     namespace prv
     {
-        ThreadImpl* ThreadImpl::createInstance(Functor<void>& function, Thread::Priority priority)
+        ThreadImpl* ThreadImpl::createInstance(Functor<void>& function, ThreadPriority priority)
         {
             return new ThreadImplType(function, priority);
         }

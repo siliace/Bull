@@ -1,8 +1,12 @@
 #ifndef BULL_CORE_WINDOW_WIN32_MESSAGEBOXIMPL_HPP
 #define BULL_CORE_WINDOW_WIN32_MESSAGEBOXIMPL_HPP
 
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
-#include <Bull/Core/Window/MessageWindow.hpp>
+#include <Bull/Core/Window/MessageWindowButtons.hpp>
+#include <Bull/Core/Window/MessageWindowDefaultButton.hpp>
+#include <Bull/Core/Window/MessageWindowIcon.hpp>
+#include <Bull/Core/Window/MessageWindowResponse.hpp>
 #include <Bull/Core/Window/WindowHandler.hpp>
 
 namespace Bull
@@ -22,7 +26,7 @@ namespace Bull
              * \return
              *
              */
-            static MessageWindow::Response open(const String& message, const String& title, MessageWindow::Icon icon, MessageWindow::Buttons buttons, MessageWindow::DefaultButton defaultButton, WindowHandler parent);
+            static MessageWindowResponse open(const String& message, const String& title, MessageWindowIcon icon, MessageWindowButtons buttons, MessageWindowDefaultButton defaultButton, WindowHandler parent);
 
         private:
 
@@ -33,7 +37,7 @@ namespace Bull
              * \return
              *
              */
-            static UINT translateIcon(MessageWindow::Icon icon);
+            static UINT translateIcon(MessageWindowIcon icon);
 
             /*! \brief
              *
@@ -42,7 +46,7 @@ namespace Bull
              * \return
              *
              */
-            static UINT translateButtons(MessageWindow::Buttons buttons);
+            static UINT translateButtons(MessageWindowButtons buttons);
 
             /*! \brief
              *
@@ -51,7 +55,7 @@ namespace Bull
              * \return
              *
              */
-            static MessageWindow::Response translateResponse(int response);
+            static MessageWindowResponse translateResponse(int response);
 
             /*! \brief
              *
@@ -60,7 +64,7 @@ namespace Bull
              * \return
              *
              */
-            static UINT translateDefaultButton(MessageWindow::DefaultButton defaultButton);
+            static UINT translateDefaultButton(MessageWindowDefaultButton defaultButton);
 
         };
     }

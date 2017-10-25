@@ -4,7 +4,7 @@ namespace Bull
 {
     namespace prv
     {
-        MessageWindow::Response MessageWindowImpl::open(const String& message, const String& title, MessageWindow::Icon icon, MessageWindow::Buttons buttons, MessageWindow::DefaultButton defaultButton, WindowHandler parent)
+        MessageWindowResponse MessageWindowImpl::open(const String& message, const String& title, MessageWindowIcon icon, MessageWindowButtons buttons, MessageWindowDefaultButton defaultButton, WindowHandler parent)
         {
             UINT winIcon = translateIcon(icon);
             UINT winButtons = translateButtons(buttons);
@@ -17,67 +17,67 @@ namespace Bull
             return translateResponse(response);
         }
 
-        UINT MessageWindowImpl::translateIcon(MessageWindow::Icon icon)
+        UINT MessageWindowImpl::translateIcon(MessageWindowIcon icon)
         {
             switch(icon)
             {
-                case MessageWindow::Icon::Icon_None: return 0;
-                case MessageWindow::Icon::Icon_Hand: return MB_ICONHAND;
-                case MessageWindow::Icon::Icon_Stop: return MB_ICONSTOP;
-                case MessageWindow::Icon::Icon_Error: return MB_ICONERROR;
-                case MessageWindow::Icon::Icon_Warning: return MB_ICONWARNING;
-                case MessageWindow::Icon::Icon_Asterisk: return MB_ICONASTERISK;
-                case MessageWindow::Icon::Icon_Question: return MB_ICONQUESTION;
-                case MessageWindow::Icon::Icon_Information: return MB_ICONINFORMATION;
-                case MessageWindow::Icon::Icon_Exclamation: return MB_ICONEXCLAMATION;
+                case MessageWindowIcon_None: return 0;
+                case MessageWindowIcon_Hand: return MB_ICONHAND;
+                case MessageWindowIcon_Stop: return MB_ICONSTOP;
+                case MessageWindowIcon_Error: return MB_ICONERROR;
+                case MessageWindowIcon_Warning: return MB_ICONWARNING;
+                case MessageWindowIcon_Asterisk: return MB_ICONASTERISK;
+                case MessageWindowIcon_Question: return MB_ICONQUESTION;
+                case MessageWindowIcon_Information: return MB_ICONINFORMATION;
+                case MessageWindowIcon_Exclamation: return MB_ICONEXCLAMATION;
             }
 
             return 0;
         }
 
-        UINT MessageWindowImpl::translateButtons(MessageWindow::Buttons buttons)
+        UINT MessageWindowImpl::translateButtons(MessageWindowButtons buttons)
         {
             switch(buttons)
             {
-                case MessageWindow::Buttons::Buttons_Ok: return MB_OK;
-                case MessageWindow::Buttons::Buttons_Help: return MB_HELP;
-                case MessageWindow::Buttons::Buttons_YesNo: return MB_YESNO;
-                case MessageWindow::Buttons::Buttons_OkCancel: return MB_OKCANCEL;
-                case MessageWindow::Buttons::Buttons_RetryCancel: return MB_RETRYCANCEL;
-                case MessageWindow::Buttons::Buttons_YesNoCancel: return MB_YESNOCANCEL;
-                case MessageWindow::Buttons::Buttons_AbortRetryIgnore: return MB_ABORTRETRYIGNORE;
-                case MessageWindow::Buttons::Buttons_CancelTryContinue: return MB_CANCELTRYCONTINUE;
+                case MessageWindowButtons_Ok: return MB_OK;
+                case MessageWindowButtons_Help: return MB_HELP;
+                case MessageWindowButtons_YesNo: return MB_YESNO;
+                case MessageWindowButtons_OkCancel: return MB_OKCANCEL;
+                case MessageWindowButtons_RetryCancel: return MB_RETRYCANCEL;
+                case MessageWindowButtons_YesNoCancel: return MB_YESNOCANCEL;
+                case MessageWindowButtons_AbortRetryIgnore: return MB_ABORTRETRYIGNORE;
+                case MessageWindowButtons_CancelTryContinue: return MB_CANCELTRYCONTINUE;
             }
 
             return MB_OK;
         }
 
-        MessageWindow::Response MessageWindowImpl::translateResponse(int response)
+        MessageWindowResponse MessageWindowImpl::translateResponse(int response)
         {
             switch(response)
             {
-                case IDOK: return MessageWindow::Response::Response_Ok;
-                case IDNO: return MessageWindow::Response::Response_No;
-                case IDYES: return MessageWindow::Response::Response_Yes;
-                case IDABORT: return MessageWindow::Response::Response_Abort;
-                case IDRETRY: return MessageWindow::Response::Response_Retry;
-                case IDCANCEL: return MessageWindow::Response::Response_Cancel;
-                case IDIGNORE: return MessageWindow::Response::Response_Ignore;
-                case IDCONTINUE: return MessageWindow::Response::Response_Continue;
-                case IDTRYAGAIN: return MessageWindow::Response::Response_TryAgain;
+                case IDOK: return MessageWindowResponse_Ok;
+                case IDNO: return MessageWindowResponse_No;
+                case IDYES: return MessageWindowResponse_Yes;
+                case IDABORT: return MessageWindowResponse_Abort;
+                case IDRETRY: return MessageWindowResponse_Retry;
+                case IDCANCEL: return MessageWindowResponse_Cancel;
+                case IDIGNORE: return MessageWindowResponse_Ignore;
+                case IDCONTINUE: return MessageWindowResponse_Continue;
+                case IDTRYAGAIN: return MessageWindowResponse_TryAgain;
             }
 
-            return MessageWindow::Response::Response_Ok;
+            return MessageWindowResponse_Ok;
         }
 
-        UINT MessageWindowImpl::translateDefaultButton(MessageWindow::DefaultButton defaultButton)
+        UINT MessageWindowImpl::translateDefaultButton(MessageWindowDefaultButton defaultButton)
         {
             switch(defaultButton)
             {
-                case MessageWindow::DefaultButton::DefaultButton_Button1: return MB_DEFBUTTON1;
-                case MessageWindow::DefaultButton::DefaultButton_Button2: return MB_DEFBUTTON2;
-                case MessageWindow::DefaultButton::DefaultButton_Button3: return MB_DEFBUTTON3;
-                case MessageWindow::DefaultButton::DefaultButton_Button4: return MB_DEFBUTTON4;
+                case MessageWindowDefaultButton_Button1: return MB_DEFBUTTON1;
+                case MessageWindowDefaultButton_Button2: return MB_DEFBUTTON2;
+                case MessageWindowDefaultButton_Button3: return MB_DEFBUTTON3;
+                case MessageWindowDefaultButton_Button4: return MB_DEFBUTTON4;
             }
 
             return MB_DEFBUTTON1;

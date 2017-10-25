@@ -15,9 +15,9 @@ namespace Bull
     ContextSettings::ContextSettings(Uint8 depths, Uint8 stencil, Uint8 antialiasing, Uint8 major, Uint8 minor) :
         major(major),
         minor(minor),
-        type(Type::Default),
+        type(ContextSettingsType_Default),
         depths(depths),
-        profile(Profile::Core),
+        profile(ContextSettingsProfile_Core),
         stencil(stencil),
         antialiasing(antialiasing)
     {

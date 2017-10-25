@@ -81,7 +81,7 @@ namespace Bull
 
         void WindowImpl::pushEvent(const WindowEvent& e)
         {
-            if(e.type == WindowEvent::MouseMoved)
+            if(e.type == WindowEventType_MouseMoved)
             {
                 m_cursorPosition = Vector2I(e.mouseMove.x, e.mouseMove.y);
             }

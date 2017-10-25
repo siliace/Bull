@@ -21,7 +21,7 @@ namespace Bull
             /*! \brief Destructor
              *
              */
-            ~CursorImplWin32();
+            virtual ~CursorImplWin32();
 
             /*! \brief Create a Cursor from the system
              *
@@ -30,7 +30,7 @@ namespace Bull
              * \return True if the cursor was created successfully
              *
              */
-            bool create(Cursor::Type cursor) override;
+            bool create(CursorType cursor) override;
 
             /*! \brief Create a Cursor from an image
              *

@@ -66,7 +66,7 @@ namespace Bull
             {
                 WindowEvent e;
 
-                e.type = (state.connected) ? WindowEvent::JoystickConnected : WindowEvent::JoystickDisconnected;
+                e.type = (state.connected) ? WindowEventType_JoystickConnected : WindowEventType_JoystickDisconnected;
 
                 e.joystickConnection.joystick = joystick;
 
@@ -83,14 +83,14 @@ namespace Bull
                 if(state.buttons[i].first != cached.buttons[i].first)
                 {
                     WindowEvent e;
-                    e.type = (state.buttons[i].first) ? WindowEvent::JoystickButtonDown : WindowEvent::JoystickButtonUp;
+                    e.type = (state.buttons[i].first) ? WindowEventType_JoystickButtonDown : WindowEventType_JoystickButtonUp;
 
                     e.joystickButton.joystick = joystick;
                     e.joystickButton.button   = static_cast<Uint8>(i);
 
                     eventQueue.push(e);
 
-                    if(e.type == WindowEvent::JoystickButtonDown)
+                    if(e.type == WindowEventType_JoystickButtonDown)
                     {
                         state.buttons[i].second.start();
                     }
@@ -105,7 +105,7 @@ namespace Bull
                         cached.buttons[i].second.getElapsedTime() > m_repeatDelay)
                 {
                     WindowEvent e;
-                    e.type = WindowEvent::JoystickButtonDown;
+                    e.type = WindowEventType_JoystickButtonDown;
 
                     e.joystickButton.joystick = joystick;
                     e.joystickButton.button   = static_cast<Uint8>(i);
@@ -124,7 +124,7 @@ namespace Bull
                 {
                     WindowEvent e;
 
-                    e.type = WindowEvent::JoystickMoved;
+                    e.type = WindowEventType_JoystickMoved;
 
                     e.joystickMoved.joystick = joystick;
                     e.joystickMoved.axis     = static_cast<Joystick::Axis>(i);

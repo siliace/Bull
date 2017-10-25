@@ -3,6 +3,7 @@
 
 #include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Thread/ThreadPriority.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 namespace Bull
@@ -15,18 +16,6 @@ namespace Bull
     class BULL_CORE_API Thread : public NonCopyable
     {
     public:
-
-        enum Priority
-        {
-            Idle        = 0, /*!< Scheduled only when no other threads are running */
-            Lowest      = 1, /*!< Scheduled less often than LowPriority */
-            Low         = 2, /*!< Scheduled less often than NormalPriority */
-            Normal      = 3, /*!< The default priority of the operating system */
-            High        = 4, /*!< Scheduled more often than NormalPriority */
-            Highest     = 5, /*!< Scheduled more often than HighPriority */
-            TimeCritial = 6, /*!< Scheduled as often as possible */
-            Inherit     = 7  /*!< Use the same priority as the creating thread */
-        };
 
         /*! \brief Asleep the current thread
          *
@@ -103,7 +92,7 @@ namespace Bull
          * \param priority The priority of the thread (by default inherit form the parent thread)
          *
          */
-        explicit Thread(const Functor<void>& function, Priority priority = Priority::Inherit);
+        explicit Thread(const Functor<void>& function, ThreadPriority priority = ThreadPriority_Idle);
 
         /*! \brief Destructor
          *
@@ -139,7 +128,7 @@ namespace Bull
          * \return The thread priority
          *
          */
-        Thread::Priority getPriority() const;
+        ThreadPriority getPriority() const;
 
     private:
 
@@ -153,7 +142,7 @@ namespace Bull
         /// would be an incomplete type
         prv::ThreadImpl* m_impl;
         Functor<void>    m_function;
-        Thread::Priority m_priority;
+        ThreadPriority   m_priority;
     };
 }
 

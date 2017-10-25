@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 
     buffer.reserve(512);
 
-    if(socket.connect(IpAddress::LoopbackIpv4, 6969) != TcpSocket::Ready)
+    if(socket.connect(IpAddress::LoopbackIpv4, 6969) != SocketState_Ready)
     {
         std::cout << "Failed to connect" << std::endl;
     }
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     {
         Index received = 0;
 
-        if(socket.receive(&buffer[0], buffer.getCapacity(), received) == Socket::Ready)
+        if(socket.receive(&buffer[0], buffer.getCapacity(), received) == SocketState_Ready)
         {
             std::cout << received << " bytes" << std::endl;
             std::cout << "Message: " << buffer.getBuffer() << std::endl;

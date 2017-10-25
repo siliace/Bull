@@ -8,15 +8,15 @@
 namespace Bull
 {
     TcpSocket::TcpSocket() :
-        Socket(Tcp),
-        m_state(Disconnected),
+        Socket(SocketType_Tcp),
+        m_state(SocketState_Disconnected),
         m_remotePort(AnyPort),
         m_remoteAddress(IpAddress::None)
     {
         /// Nothing
     }
 
-    Socket::State TcpSocket::connect(const IpAddress& address, Port port)
+    SocketState TcpSocket::connect(const IpAddress& address, Port port)
     {
         if(getHandler() != prv::SocketImpl::InvalidHandler)
         {
@@ -30,16 +30,16 @@ namespace Bull
             m_remotePort    = port;
             m_remoteAddress = address;
 
-            return Ready;
+            return SocketState_Ready;
         }
 
-        return Disconnected;
+        return SocketState_Disconnected;
     }
 
-    Socket::State TcpSocket::connect(const IpAddress& address, Port port, const Time& timeout)
+    SocketState TcpSocket::connect(const IpAddress& address, Port port, const Time& timeout)
     {
-        Clock timer;
-        State state;
+        SocketState state;
+        Clock       timer;
 
         timer.start();
 
@@ -47,7 +47,7 @@ namespace Bull
         {
             Thread::sleep(Time::milliseconds(10.f));
             state = connect(address, port);
-        }while(timer.getElapsedTime() < timeout && state != Ready);
+        }while(timer.getElapsedTime() < timeout && state != SocketState_Ready);
 
         return state;
     }
@@ -65,11 +65,11 @@ namespace Bull
         return getHandler() != prv::SocketImpl::InvalidHandler;
     }
 
-    Socket::State TcpSocket::send(const void* data, Index length, Index& sent)
+    SocketState TcpSocket::send(const void* data, Index length, Index& sent)
     {
         if(data && length)
         {
-            State state;
+            SocketState state;
             Index result = 0;
             for(sent = 0; sent < length; sent += result)
             {
@@ -79,26 +79,26 @@ namespace Bull
                 {
                     state = prv::SocketImpl::lastError();
 
-                    if(state == NotReady && sent > 0)
+                    if(state == SocketState_NotReady && sent > 0)
                     {
-                        return Partial;
+                        return SocketState_Partial;
                     }
 
                     return state;
                 }
             }
 
-            return Ready;
+            return SocketState_Ready;
         }
         else
         {
-            updateState(Error);
+            updateState(SocketState_Error);
         }
 
         return m_state;
     }
 
-    Socket::State TcpSocket::receive(void* data, Index length, Index& received)
+    SocketState TcpSocket::receive(void* data, Index length, Index& received)
     {
         received = 0;
 
@@ -110,11 +110,11 @@ namespace Bull
             {
                 received = result;
 
-                updateState(Ready);
+                updateState(SocketState_Ready);
             }
             else if(result == 0)
             {
-                updateState(Disconnected);
+                updateState(SocketState_Disconnected);
             }
             else
             {
@@ -135,11 +135,11 @@ namespace Bull
         Socket::reset(handler);
 
         m_remotePort    = port;
-        m_state         = Ready;
+        m_state         = SocketState_Ready;
         m_remoteAddress = address;
     }
 
-    TcpSocket& TcpSocket::updateState(Socket::State state)
+    TcpSocket& TcpSocket::updateState(SocketState state)
     {
         m_state = state;
 

@@ -4,12 +4,12 @@
 namespace Bull
 {
     UdpSocket::UdpSocket() :
-        Socket(Udp)
+        Socket(SocketType_Udp)
     {
         /// Nothing
     }
 
-    Socket::State UdpSocket::bind(Socket::Port port, const IpAddress& address)
+    SocketState UdpSocket::bind(Socket::Port port, const IpAddress& address)
     {
         if(address == IpAddress::None || address == IpAddress::BroadcastIpv4)
         {
@@ -17,13 +17,13 @@ namespace Bull
 
             if(!prv::SocketImpl::bind(getHandler(), address, port))
             {
-                return Error;
+                return SocketState_Error;
             }
 
-            return Ready;
+            return SocketState_Ready;
         }
 
-        return Error;
+        return SocketState_Error;
     }
 
     void UdpSocket::unbind()
@@ -31,7 +31,7 @@ namespace Bull
         close();
     }
 
-    Socket::State UdpSocket::receive(void* data, Index length, Index& received, IpAddress& remoteAddress, Socket::Port& remotePort)
+    SocketState UdpSocket::receive(void* data, Index length, Index& received, IpAddress& remoteAddress, Socket::Port& remotePort)
     {
         received      = 0;
         remotePort    = Socket::AnyPort;
@@ -43,30 +43,30 @@ namespace Bull
 
         if(result < 0)
         {
-            return Error;
+            return SocketState_Error;
         }
 
         received = result;
 
-        return Ready;
+        return SocketState_Ready;
     }
 
-    Socket::State UdpSocket::send(const void* data, Index length, const IpAddress& remoteAddress, Socket::Port remotePort)
+    SocketState UdpSocket::send(const void* data, Index length, const IpAddress& remoteAddress, Socket::Port remotePort)
     {
         create(remoteAddress.getProtocol());
 
         if(length > MaxDatagramSize)
         {
-            return Error;
+            return SocketState_Error;
         }
 
-        Index sent = prv::SocketImpl::sendTo(getHandler(), remoteAddress, remotePort, data, length);
+        Index sent = prv::SocketImpl::sendTo(getHandler(), data, length, remoteAddress, remotePort);
 
         if(sent < 0)
         {
             return prv::SocketImpl::lastError();
         }
 
-        return Ready;
+        return SocketState_Ready;
     }
 }

@@ -10,18 +10,18 @@
 namespace Bull
 {
     TcpListener::TcpListener() :
-        Socket(Tcp),
+        Socket(SocketType_Tcp),
         m_listeningPort(AnyPort)
     {
         /// Nothing
     }
 
-    Socket::State TcpListener::listen(Socket::Port port, unsigned int backlog)
+    SocketState TcpListener::listen(Socket::Port port, unsigned int backlog)
     {
         return listen(port, IpAddress::AnyIpv4, backlog);
     }
 
-    Socket::State TcpListener::listen(Port port, const IpAddress& host, unsigned int backlog)
+    SocketState TcpListener::listen(Port port, const IpAddress& host, unsigned int backlog)
     {
         if(host.isValid())
         {
@@ -29,23 +29,23 @@ namespace Bull
 
             if(!prv::SocketImpl::bind(getHandler(), host, port))
             {
-                return Socket::Error;
+                return SocketState_Error;
             }
 
             if(!prv::SocketImpl::listen(getHandler(), backlog))
             {
-                return Socket::Error;
+                return SocketState_Error;
             }
 
             m_listeningPort = port;
 
-            return Socket::Ready;
+            return SocketState_Ready;
         }
 
-        return Socket::Error;
+        return SocketState_Error;
     }
 
-    Socket::State TcpListener::accept(TcpSocket& client)
+    SocketState TcpListener::accept(TcpSocket& client)
     {
         if(getHandler() != prv::SocketImpl::InvalidHandler)
         {
@@ -56,21 +56,21 @@ namespace Bull
 
             if(clientHandler == prv::SocketImpl::InvalidHandler)
             {
-                return Socket::Disconnected;
+                return SocketState_Disconnected;
             }
 
             client.reset(clientHandler, ip, port);
 
-            return Socket::Ready;
+            return SocketState_Ready;
         }
 
-        return Socket::Disconnected;
+        return SocketState_Disconnected;
     }
 
-    Socket::State TcpListener::accept(TcpSocket& client, const Time& timeout)
+    SocketState TcpListener::accept(TcpSocket& client, const Time& timeout)
     {
         Clock timer;
-        Socket::State state;
+        SocketState state;
         bool blockingMode = isEnableBlocking();
 
         // We need to use the non blocking mode of the Socket
@@ -85,7 +85,7 @@ namespace Bull
         {
             Thread::sleep(Time::milliseconds(10.f));
             state = accept(client);
-        }while(timer.getElapsedTime() < timeout && state == Disconnected);
+        }while(timer.getElapsedTime() < timeout && state == SocketState_Disconnected);
 
         return state;
     }

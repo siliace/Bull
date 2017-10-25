@@ -22,7 +22,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static ThreadImpl* createInstance(Functor<void>& function, Thread::Priority priority);
+            static ThreadImpl* createInstance(Functor<void>& function, ThreadPriority priority);
 
             /*! \brief Asleep the current thread
              *

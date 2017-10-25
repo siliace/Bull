@@ -11,12 +11,12 @@ namespace Bull
         {
             switch(host.getProtocol())
             {
-                case IpAddress::IpV4:
+                case NetProtocol_IpV4:
                 {
                     return ping(host.toUint32(), timeout);
                 }
 
-                case IpAddress::IpV6:
+                case NetProtocol_IpV6:
                 {
                     IpAddressImpl::SockAddrBuffer sockAddr;
                     IpAddressImpl::SockAddrLenght length = IpAddressImpl::toSockAddr(host, Socket::AnyPort, &sockAddr[0]);

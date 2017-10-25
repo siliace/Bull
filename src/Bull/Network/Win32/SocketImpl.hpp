@@ -64,14 +64,14 @@ namespace Bull
              * \return The created SocketHandler
              *
              */
-            static SocketHandler create(IpAddress::NetProtocol protocol, Socket::Type type);
+            static SocketHandler create(NetProtocol protocol, SocketType type);
 
             /*! \brief
              *
              * \return
              *
              */
-            static Socket::State lastError();
+            static SocketState lastError();
 
             /*! \brief Start to listen the bound port
              *
@@ -147,7 +147,7 @@ namespace Bull
              * \return
              *
              */
-            static int translateSocketType(Socket::Type type);
+            static int translateSocketType(SocketType type);
 
             /*! \brief
              *
@@ -156,7 +156,7 @@ namespace Bull
              * \return
              *
              */
-            static int translateProtocol(IpAddress::NetProtocol protocol);
+            static int translateProtocol(NetProtocol protocol);
         };
     }
 }

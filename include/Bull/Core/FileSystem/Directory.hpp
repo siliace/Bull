@@ -6,6 +6,7 @@
 
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/FileSystem/DirectorySearchFlag.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Pattern/ObjectRef.hpp>
@@ -25,14 +26,6 @@ namespace Bull
     class BULL_CORE_API Directory : public NonCopyable
     {
     public:
-
-        enum SearchFlag
-        {
-            None        = 0x00,
-            Files       = 0x01,
-            Directories = 0x02,
-            All         = Files | Directories
-        };
 
         /*! \brief Create a Directory
          *
@@ -138,7 +131,7 @@ namespace Bull
          * \return Return the list of content entity
          *
          */
-        std::vector<Path> getContent(Uint32 flags = SearchFlag::All);
+        std::vector<Path> getContent(Uint32 flags = DirectorySearchFlag_All);
 
         /*! \brief Get the path of the directory
          *

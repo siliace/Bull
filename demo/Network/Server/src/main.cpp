@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
     TcpListener server;
     String message("Hello world");
 
-    if(server.listen(6969) != Socket::Ready)
+    if(server.listen(6969) != SocketState_Ready)
     {
         std::cout << "Failed to listen the port" << std::endl;
 
@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     {
         Index sent = 0;
 
-        if(client.send(message.getBuffer(), message.getSize(), sent) == Socket::Ready)
+        if(client.send(message.getBuffer(), message.getSize(), sent) == SocketState_Ready)
         {
             std::cout << sent << " bytes sent" << std::endl;
         }
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
         {
             std::cout << "Waiting for client" << std::endl;
 
-            if(server.accept(client, Time::seconds(1.f)) == Socket::Ready)
+            if(server.accept(client, Time::seconds(1.f)) == SocketState_Ready)
             {
                 std::cout << "Client found" << std::endl;
             }
