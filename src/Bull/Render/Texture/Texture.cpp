@@ -3,6 +3,15 @@
 
 namespace Bull
 {
+    unsigned int Texture::getMaximumSize()
+    {
+        int size;
+
+        gl::getIntegerv(GL_MAX_TEXTURE_SIZE, &size);
+
+        return static_cast<unsigned int>(size);
+    }
+
     Texture::Texture() :
         m_id(0),
         m_size(0, 0),
@@ -64,6 +73,8 @@ namespace Bull
             {
                 gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, m_size.x() , 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[m_size.x() * (m_size.y() - i - 1) * 4]);
             }
+
+            gl::generateMipmap(GL_TEXTURE_2D);
 
             return true;
         }

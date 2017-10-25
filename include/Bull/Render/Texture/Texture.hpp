@@ -33,6 +33,13 @@ namespace Bull
         template <typename... Args>
         static TextureRef make(Args&&... args);
 
+        /*! \brief Get the maximum size of a Texture
+         *
+         * \return The size
+         *
+         */
+        static unsigned int getMaximumSize();
+
     public:
 
         /*! \brief Default constructor
