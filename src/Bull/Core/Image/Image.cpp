@@ -73,7 +73,16 @@ namespace Bull
 
     Image& Image::flipHorizontally()
     {
+        ByteArray pixels(m_size.x() * m_size.y() * 4);
 
+        for(unsigned int i = 0; i < m_size.y() ; i++)
+        {
+            std::memcpy(&m_pixels[i * m_size.y()], &pixels[m_size.y() * (m_size.x() - i - 1) * 4], m_size.x());
+        }
+
+        m_pixels = pixels;
+
+        return (*this);
     }
 
     bool Image::loadFromPath(const Path& path, const ImageParameters& parameters)
