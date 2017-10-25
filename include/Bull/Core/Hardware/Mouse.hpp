@@ -2,6 +2,7 @@
 #define BULL_CORE_HARDWARE_MOUSE_HPP
 
 #include <Bull/Core/Export.hpp>
+#include <Bull/Core/Hardware/MouseButton.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -11,21 +12,6 @@ namespace Bull
 
     struct BULL_CORE_API Mouse
     {
-        enum Button
-        {
-            Right,
-            Middle,
-            Left,
-            Extra1,
-            Extra2
-        };
-
-        enum Wheel
-        {
-            Vertical,
-            Horizontal
-        };
-
         /*! \brief Set the position of the cursor on the screen
          *
          * \param position The new position of the cursor on the screen
@@ -55,7 +41,7 @@ namespace Bull
          * \return True if the button is pressed
          *
          */
-        static bool isButtonPressed(Button button);
+        static bool isButtonPressed(MouseButton button);
     };
 }
 

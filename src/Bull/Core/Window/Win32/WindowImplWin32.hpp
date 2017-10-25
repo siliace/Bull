@@ -39,7 +39,7 @@ namespace Bull
              * \return Return the Bull::Keyboard::Key equivalent
              *
              */
-            static Keyboard::Key convertVKToBullkey(WPARAM vkey);
+            static KeyboardKey convertVKToBullkey(WPARAM vkey);
 
             /*! \brief Convert a Bull::VideoWindowStyle to a WS
              *

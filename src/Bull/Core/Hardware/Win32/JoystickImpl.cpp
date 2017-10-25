@@ -24,32 +24,32 @@ namespace Bull
             {
                 caps.name = infoCaps.szPname;
 
-                caps.axes[Joystick::Axis::X].exists    = true;
-                caps.axes[Joystick::Axis::Y].exists    = true;
-                caps.axes[Joystick::Axis::Z].exists    = infoCaps.wCaps & JOYCAPS_HASZ;
-                caps.axes[Joystick::Axis::R].exists    = infoCaps.wCaps & JOYCAPS_HASR;
-                caps.axes[Joystick::Axis::U].exists    = infoCaps.wCaps & JOYCAPS_HASU;
-                caps.axes[Joystick::Axis::V].exists    = infoCaps.wCaps & JOYCAPS_HASV;
-                caps.axes[Joystick::Axis::PovX].exists = infoCaps.wCaps & JOYCAPS_HASPOV;
-                caps.axes[Joystick::Axis::PovY].exists = infoCaps.wCaps & JOYCAPS_HASPOV;
+                caps.axes[JoystickAxis_X].exists    = true;
+                caps.axes[JoystickAxis_Y].exists    = true;
+                caps.axes[JoystickAxis_Z].exists    = infoCaps.wCaps & JOYCAPS_HASZ;
+                caps.axes[JoystickAxis_R].exists    = infoCaps.wCaps & JOYCAPS_HASR;
+                caps.axes[JoystickAxis_U].exists    = infoCaps.wCaps & JOYCAPS_HASU;
+                caps.axes[JoystickAxis_V].exists    = infoCaps.wCaps & JOYCAPS_HASV;
+                caps.axes[JoystickAxis_PovX].exists = infoCaps.wCaps & JOYCAPS_HASPOV;
+                caps.axes[JoystickAxis_PovY].exists = infoCaps.wCaps & JOYCAPS_HASPOV;
 
-                caps.axes[Joystick::Axis::X].min    = infoCaps.wXmin;
-                caps.axes[Joystick::Axis::Y].min    = infoCaps.wYmin;
-                caps.axes[Joystick::Axis::Z].min    = infoCaps.wZmin;
-                caps.axes[Joystick::Axis::R].min    = infoCaps.wRmin;
-                caps.axes[Joystick::Axis::U].min    = infoCaps.wUmin;
-                caps.axes[Joystick::Axis::V].min    = infoCaps.wVmin;
-                caps.axes[Joystick::Axis::PovX].min = 90;
-                caps.axes[Joystick::Axis::PovY].min = 90;
+                caps.axes[JoystickAxis_X].min    = infoCaps.wXmin;
+                caps.axes[JoystickAxis_Y].min    = infoCaps.wYmin;
+                caps.axes[JoystickAxis_Z].min    = infoCaps.wZmin;
+                caps.axes[JoystickAxis_R].min    = infoCaps.wRmin;
+                caps.axes[JoystickAxis_U].min    = infoCaps.wUmin;
+                caps.axes[JoystickAxis_V].min    = infoCaps.wVmin;
+                caps.axes[JoystickAxis_PovX].min = 90;
+                caps.axes[JoystickAxis_PovY].min = 90;
 
-                caps.axes[Joystick::Axis::X].max    = infoCaps.wXmax;
-                caps.axes[Joystick::Axis::Y].max    = infoCaps.wYmax;
-                caps.axes[Joystick::Axis::Z].max    = infoCaps.wZmax;
-                caps.axes[Joystick::Axis::R].max    = infoCaps.wRmax;
-                caps.axes[Joystick::Axis::U].max    = infoCaps.wUmax;
-                caps.axes[Joystick::Axis::V].max    = infoCaps.wVmax;
-                caps.axes[Joystick::Axis::PovX].max = 9000;
-                caps.axes[Joystick::Axis::PovY].max = 9000;
+                caps.axes[JoystickAxis_X].max    = infoCaps.wXmax;
+                caps.axes[JoystickAxis_Y].max    = infoCaps.wYmax;
+                caps.axes[JoystickAxis_Z].max    = infoCaps.wZmax;
+                caps.axes[JoystickAxis_R].max    = infoCaps.wRmax;
+                caps.axes[JoystickAxis_U].max    = infoCaps.wUmax;
+                caps.axes[JoystickAxis_V].max    = infoCaps.wVmax;
+                caps.axes[JoystickAxis_PovX].max = 9000;
+                caps.axes[JoystickAxis_PovY].max = 9000;
 
                 caps.countButtons = infoCaps.wNumButtons;
                 caps.countAxes    = infoCaps.wNumAxes;
@@ -63,20 +63,20 @@ namespace Bull
             return std::bitset<Joystick::CountButton>(getJoystickState(joystick).dwButtons).test(button);
         }
 
-        float JoystickImpl::getAxisPosition(Joystick::Axis axis, Uint8 joystick)
+        float JoystickImpl::getAxisPosition(JoystickAxis axis, Uint8 joystick)
         {
             JOYINFOEX joystickState = getJoystickState(joystick);
 
             switch(axis)
             {
-                case Joystick::Axis::X:    return joystickState.dwXpos;
-                case Joystick::Axis::Y:    return joystickState.dwYpos;
-                case Joystick::Axis::Z:    return joystickState.dwZpos;
-                case Joystick::Axis::R:    return joystickState.dwRpos;
-                case Joystick::Axis::U:    return joystickState.dwUpos;
-                case Joystick::Axis::V:    return joystickState.dwVpos;
-                case Joystick::Axis::PovX: return std::cos(AngleUI::degree(joystickState.dwPOV));
-                case Joystick::Axis::PovY: return std::sin(AngleUI::degree(joystickState.dwPOV));
+                case JoystickAxis_X:    return joystickState.dwXpos;
+                case JoystickAxis_Y:    return joystickState.dwYpos;
+                case JoystickAxis_Z:    return joystickState.dwZpos;
+                case JoystickAxis_R:    return joystickState.dwRpos;
+                case JoystickAxis_U:    return joystickState.dwUpos;
+                case JoystickAxis_V:    return joystickState.dwVpos;
+                case JoystickAxis_PovX: return std::cos(AngleUI::degree(joystickState.dwPOV));
+                case JoystickAxis_PovY: return std::sin(AngleUI::degree(joystickState.dwPOV));
             }
 
             return 0;

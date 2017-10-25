@@ -26,7 +26,7 @@ namespace Bull
 
                 for(unsigned int i = 0; i < Joystick::getCapabilities(joystick).countAxes; i++)
                 {
-                    axes[i] = Joystick::getAxisPosition(static_cast<Joystick::Axis>(i), joystick);
+                    axes[i] = Joystick::getAxisPosition(static_cast<JoystickAxis>(i), joystick);
                 }
             }
         }

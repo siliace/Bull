@@ -3,8 +3,12 @@
 
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/Hardware/Joystick.hpp>
+#include <Bull/Core/Hardware/JoystickAxis.hpp>
 #include <Bull/Core/Hardware/Keyboard.hpp>
+#include <Bull/Core/Hardware/KeyboardKey.hpp>
 #include <Bull/Core/Hardware/Mouse.hpp>
+#include <Bull/Core/Hardware/MouseButton.hpp>
+#include <Bull/Core/Hardware/MouseWheel.hpp>
 #include <Bull/Core/Window/WindowEventType.hpp>
 
 namespace Bull
@@ -25,11 +29,11 @@ namespace Bull
 
         struct KeyEvent
         {
-            Keyboard::Key code;
-            bool          alt;
-            bool          control;
-            bool          shift;
-            bool          system;
+            KeyboardKey code;
+            bool        alt;
+            bool        control;
+            bool        shift;
+            bool        system;
         };
 
         struct MouseMoveEvent
@@ -41,14 +45,14 @@ namespace Bull
         struct MouseButtonEvent
         {
             int x, y;
-            Mouse::Button button;
+            MouseButton button;
         };
 
         struct MouseWheelEvent
         {
             bool up;
             int x, y;
-            Mouse::Wheel wheel;
+            MouseWheel wheel;
         };
 
         struct JoystickConnectionEvent
@@ -61,7 +65,7 @@ namespace Bull
             Uint8 joystick;
             float position;
             float relative;
-            Joystick::Axis axis;
+            JoystickAxis axis;
         };
 
         struct JoystickButtonEvent

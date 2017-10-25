@@ -19,7 +19,7 @@ namespace Bull
         return prv::MouseImpl::getPosition();
     }
 
-    bool Mouse::isButtonPressed(Button button)
+    bool Mouse::isButtonPressed(MouseButton button)
     {
         return prv::MouseImpl::isButtonPressed(button);
     }

@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_HARDWARE_WIN32_MOUSEIMPL_HPP
 #define BULL_CORE_HARDWARE_WIN32_MOUSEIMPL_HPP
 
-#include <Bull/Core/Hardware/Mouse.hpp>
+#include <Bull/Core/Hardware/MouseButton.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -35,7 +35,7 @@ namespace Bull
              * \return True if the button is pressed
              *
              */
-            static bool isButtonPressed(Mouse::Button button);
+            static bool isButtonPressed(MouseButton button);
 
         private:
 
@@ -45,7 +45,7 @@ namespace Bull
              *
              * \return The VKey
              */
-            static int convertBullbuttonToVK(Mouse::Button button);
+            static int convertBullbuttonToVK(MouseButton button);
         };
     }
 }

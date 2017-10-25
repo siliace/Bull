@@ -44,22 +44,22 @@ int main(int argc, char* argv[])
 
             if(event.type == WindowEventType_KeyDown)
             {
-                if(event.key.code == Keyboard::S)
+                if(event.key.code == KeyboardKey_S)
                 {
                     position -= forward;
                 }
 
-                if(event.key.code == Keyboard::Z)
+                if(event.key.code == KeyboardKey_Z)
                 {
                     position += forward;
                 }
 
-                if(event.key.code == Keyboard::D)
+                if(event.key.code == KeyboardKey_D)
                 {
                     position += Vector3F::crossProduct(forward, up).normalize();
                 }
 
-                if(event.key.code == Keyboard::Q)
+                if(event.key.code == KeyboardKey_Q)
                 {
                     position -= Vector3F::crossProduct(forward, up).normalize();
                 }

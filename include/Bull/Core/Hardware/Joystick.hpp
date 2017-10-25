@@ -4,6 +4,7 @@
 #include <array>
 
 #include <Bull/Core/Configuration/Integer.hpp>
+#include <Bull/Core/Hardware/JoystickAxis.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
@@ -11,24 +12,9 @@ namespace Bull
 {
     struct BULL_CORE_API Joystick
     {
-        enum
-        {
-            Count       = 16,
-            CountButton = 32,
-            CountAxis   = 8,
-        };
-
-        enum Axis
-        {
-            X,
-            Y,
-            Z,
-            R,
-            U,
-            V,
-            PovX,
-            PovY
-        };
+        static constexpr unsigned int Count       = 16;
+        static constexpr unsigned int CountAxis   = 8;
+        static constexpr unsigned int CountButton = 32;
 
         struct Capabilities
         {
@@ -39,10 +25,10 @@ namespace Bull
                 bool   exists;
             };
 
-            String                                           name;
-            std::array<AxisCapabilites, Joystick::CountAxis> axes;
-            unsigned int                                     countAxes;
-            unsigned int                                     countButtons;
+            String                                 name;
+            std::array<AxisCapabilites, CountAxis> axes;
+            unsigned int                           countAxes;
+            unsigned int                           countButtons;
         };
 
         /*! \brief Check whether a joystick is connected
@@ -81,7 +67,7 @@ namespace Bull
          * \return The position of the axis
          *
          */
-        static float getAxisPosition(Joystick::Axis axis, Uint8 joystick);
+        static float getAxisPosition(JoystickAxis axis, Uint8 joystick);
 
         /*! \brief Enable or disable the key repeat
          *

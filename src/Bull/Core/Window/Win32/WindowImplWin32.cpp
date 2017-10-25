@@ -86,130 +86,130 @@ namespace Bull
             return DefWindowProc(handler, message, wParam, lParam);
         }
 
-        Keyboard::Key WindowImplWin32::convertVKToBullkey(WPARAM vkey)
+        KeyboardKey WindowImplWin32::convertVKToBullkey(WPARAM vkey)
         {
             switch(vkey)
             {
-                case 'A':           return Keyboard::Key::A;
-                case 'B':           return Keyboard::Key::B;
-                case 'C':           return Keyboard::Key::C;
-                case 'D':           return Keyboard::Key::D;
-                case 'E':           return Keyboard::Key::E;
-                case 'F':           return Keyboard::Key::F;
-                case 'G':           return Keyboard::Key::G;
-                case 'H':           return Keyboard::Key::H;
-                case 'I':           return Keyboard::Key::I;
-                case 'J':           return Keyboard::Key::J;
-                case 'K':           return Keyboard::Key::K;
-                case 'L':           return Keyboard::Key::L;
-                case 'M':           return Keyboard::Key::M;
-                case 'N':           return Keyboard::Key::N;
-                case 'O':           return Keyboard::Key::O;
-                case 'P':           return Keyboard::Key::P;
-                case 'Q':           return Keyboard::Key::Q;
-                case 'R':           return Keyboard::Key::R;
-                case 'S':           return Keyboard::Key::S;
-                case 'T':           return Keyboard::Key::T;
-                case 'U':           return Keyboard::Key::U;
-                case 'V':           return Keyboard::Key::V;
-                case 'W':           return Keyboard::Key::W;
-                case 'X':           return Keyboard::Key::X;
-                case 'Y':           return Keyboard::Key::Y;
-                case 'Z':           return Keyboard::Key::Z;
-                case '0':           return Keyboard::Key::Num0;
-                case '1':           return Keyboard::Key::Num1;
-                case '2':           return Keyboard::Key::Num2;
-                case '3':           return Keyboard::Key::Num3;
-                case '4':           return Keyboard::Key::Num4;
-                case '5':           return Keyboard::Key::Num5;
-                case '6':           return Keyboard::Key::Num6;
-                case '7':           return Keyboard::Key::Num7;
-                case '8':           return Keyboard::Key::Num8;
-                case '9':           return Keyboard::Key::Num9;
-                case VK_NUMLOCK:    return Keyboard::Key::NumLock;
-                case VK_NUMPAD0:    return Keyboard::Key::NumPad0;
-                case VK_NUMPAD1:    return Keyboard::Key::NumPad1;
-                case VK_NUMPAD2:    return Keyboard::Key::NumPad2;
-                case VK_NUMPAD3:    return Keyboard::Key::NumPad3;
-                case VK_NUMPAD4:    return Keyboard::Key::NumPad4;
-                case VK_NUMPAD5:    return Keyboard::Key::NumPad5;
-                case VK_NUMPAD6:    return Keyboard::Key::NumPad6;
-                case VK_NUMPAD7:    return Keyboard::Key::NumPad7;
-                case VK_NUMPAD8:    return Keyboard::Key::NumPad8;
-                case VK_NUMPAD9:    return Keyboard::Key::NumPad9;
-                case VK_DECIMAL:    return Keyboard::Key::NumPadDot;
-                case VK_ADD:        return Keyboard::Key::Add;
-                case VK_SUBTRACT:   return Keyboard::Key::Subtract;
-                case VK_MULTIPLY:   return Keyboard::Key::Multiply;
-                case VK_DIVIDE:     return Keyboard::Key::Divide;
-                case VK_F1:         return Keyboard::Key::F1;
-                case VK_F2:         return Keyboard::Key::F2;
-                case VK_F3:         return Keyboard::Key::F3;
-                case VK_F4:         return Keyboard::Key::F4;
-                case VK_F5:         return Keyboard::Key::F5;
-                case VK_F6:         return Keyboard::Key::F6;
-                case VK_F7:         return Keyboard::Key::F7;
-                case VK_F8:         return Keyboard::Key::F8;
-                case VK_F9:         return Keyboard::Key::F9;
-                case VK_F10:        return Keyboard::Key::F10;
-                case VK_F11:        return Keyboard::Key::F11;
-                case VK_F12:        return Keyboard::Key::F12;
-                case VK_F13:        return Keyboard::Key::F13;
-                case VK_F14:        return Keyboard::Key::F14;
-                case VK_F15:        return Keyboard::Key::F15;
-                case VK_F16:        return Keyboard::Key::F16;
-                case VK_F17:        return Keyboard::Key::F17;
-                case VK_F18:        return Keyboard::Key::F18;
-                case VK_F19:        return Keyboard::Key::F19;
-                case VK_F20:        return Keyboard::Key::F20;
-                case VK_F21:        return Keyboard::Key::F21;
-                case VK_F22:        return Keyboard::Key::F22;
-                case VK_F23:        return Keyboard::Key::F23;
-                case VK_F24:        return Keyboard::Key::F24;
-                case VK_LEFT:       return Keyboard::Key::Left;
-                case VK_RIGHT:      return Keyboard::Key::Right;
-                case VK_UP:         return Keyboard::Key::Up;
-                case VK_DOWN:       return Keyboard::Key::Down;
-                case VK_SPACE:      return Keyboard::Key::Space;
-                case VK_ESCAPE:     return Keyboard::Key::Escape;
-                case VK_CONTROL:    return Keyboard::isKeyPressed(Keyboard::LeftControl) ? Keyboard::LeftControl : Keyboard::RightControl;
-                case VK_LCONTROL:   return Keyboard::Key::LeftControl;
-                case VK_RCONTROL:   return Keyboard::Key::RightControl;
-                case VK_MENU:       return Keyboard::isKeyPressed(Keyboard::LeftAlt) ? Keyboard::LeftAlt : Keyboard::RightAlt;
-                case VK_LMENU:      return Keyboard::Key::LeftAlt;
-                case VK_RMENU:      return Keyboard::Key::RightAlt;
-                case VK_LWIN:       return Keyboard::Key::LeftSystem;
-                case VK_RWIN:       return Keyboard::Key::RightSystem;
-                case VK_SHIFT:      return Keyboard::isKeyPressed(Keyboard::LeftShift) ? Keyboard::LeftShift : Keyboard::RightShift;
-                case VK_LSHIFT:     return Keyboard::Key::LeftShift;
-                case VK_RSHIFT:     return Keyboard::Key::RightShift;
-                case VK_OEM_1:      return Keyboard::Key::OEM1;
-                case VK_OEM_PERIOD: return Keyboard::Key::OEMPeriod;
-                case VK_OEM_2:      return Keyboard::Key::OEM2;
-                case VK_OEM_3:      return Keyboard::Key::OEM3;
-                case VK_OEM_4:      return Keyboard::Key::OEM4;
-                case VK_OEM_5:      return Keyboard::Key::OEM5;
-                case VK_OEM_6:      return Keyboard::Key::OEM6;
-                case VK_OEM_7:      return Keyboard::Key::OEM7;
-                case VK_OEM_8:      return Keyboard::Key::OEM8;
-                case VK_OEM_102:    return Keyboard::Key::OEM9;
-                case VK_OEM_PLUS:   return Keyboard::Key::OEMPlus;
-                case VK_OEM_COMMA:  return Keyboard::Key::OEMComma;
-                case VK_TAB:        return Keyboard::Key::Tab;
-                case VK_BACK:       return Keyboard::Key::Back;
-                case VK_RETURN:     return Keyboard::Key::Enter;
-                case VK_CAPITAL:    return Keyboard::Key::CapsLock;
-                case VK_APPS:       return Keyboard::Key::Apps;
-                case VK_DELETE:     return Keyboard::Key::Delete;
-                case VK_INSERT:     return Keyboard::Key::Insert;
-                case VK_PRIOR:      return Keyboard::Key::PageUp;
-                case VK_NEXT:       return Keyboard::Key::PageDown;
-                case VK_END:        return Keyboard::Key::End;
-                case VK_HOME:       return Keyboard::Key::Home;
-                case VK_PAUSE:      return Keyboard::Key::Pause;
-                case VK_SNAPSHOT:   return Keyboard::Key::ScreenShot;
-                case VK_SCROLL:     return Keyboard::Key::Scroll;
-                default:            return Keyboard::Key::Unknown;
+                case 'A':           return KeyboardKey_A;
+                case 'B':           return KeyboardKey_B;
+                case 'C':           return KeyboardKey_C;
+                case 'D':           return KeyboardKey_D;
+                case 'E':           return KeyboardKey_E;
+                case 'F':           return KeyboardKey_F;
+                case 'G':           return KeyboardKey_G;
+                case 'H':           return KeyboardKey_H;
+                case 'I':           return KeyboardKey_I;
+                case 'J':           return KeyboardKey_J;
+                case 'K':           return KeyboardKey_K;
+                case 'L':           return KeyboardKey_L;
+                case 'M':           return KeyboardKey_M;
+                case 'N':           return KeyboardKey_N;
+                case 'O':           return KeyboardKey_O;
+                case 'P':           return KeyboardKey_P;
+                case 'Q':           return KeyboardKey_Q;
+                case 'R':           return KeyboardKey_R;
+                case 'S':           return KeyboardKey_S;
+                case 'T':           return KeyboardKey_T;
+                case 'U':           return KeyboardKey_U;
+                case 'V':           return KeyboardKey_V;
+                case 'W':           return KeyboardKey_W;
+                case 'X':           return KeyboardKey_X;
+                case 'Y':           return KeyboardKey_Y;
+                case 'Z':           return KeyboardKey_Z;
+                case '0':           return KeyboardKey_Num0;
+                case '1':           return KeyboardKey_Num1;
+                case '2':           return KeyboardKey_Num2;
+                case '3':           return KeyboardKey_Num3;
+                case '4':           return KeyboardKey_Num4;
+                case '5':           return KeyboardKey_Num5;
+                case '6':           return KeyboardKey_Num6;
+                case '7':           return KeyboardKey_Num7;
+                case '8':           return KeyboardKey_Num8;
+                case '9':           return KeyboardKey_Num9;
+                case VK_NUMLOCK:    return KeyboardKey_NumLock;
+                case VK_NUMPAD0:    return KeyboardKey_NumPad0;
+                case VK_NUMPAD1:    return KeyboardKey_NumPad1;
+                case VK_NUMPAD2:    return KeyboardKey_NumPad2;
+                case VK_NUMPAD3:    return KeyboardKey_NumPad3;
+                case VK_NUMPAD4:    return KeyboardKey_NumPad4;
+                case VK_NUMPAD5:    return KeyboardKey_NumPad5;
+                case VK_NUMPAD6:    return KeyboardKey_NumPad6;
+                case VK_NUMPAD7:    return KeyboardKey_NumPad7;
+                case VK_NUMPAD8:    return KeyboardKey_NumPad8;
+                case VK_NUMPAD9:    return KeyboardKey_NumPad9;
+                case VK_DECIMAL:    return KeyboardKey_NumPadDot;
+                case VK_ADD:        return KeyboardKey_Add;
+                case VK_SUBTRACT:   return KeyboardKey_Subtract;
+                case VK_MULTIPLY:   return KeyboardKey_Multiply;
+                case VK_DIVIDE:     return KeyboardKey_Divide;
+                case VK_F1:         return KeyboardKey_F1;
+                case VK_F2:         return KeyboardKey_F2;
+                case VK_F3:         return KeyboardKey_F3;
+                case VK_F4:         return KeyboardKey_F4;
+                case VK_F5:         return KeyboardKey_F5;
+                case VK_F6:         return KeyboardKey_F6;
+                case VK_F7:         return KeyboardKey_F7;
+                case VK_F8:         return KeyboardKey_F8;
+                case VK_F9:         return KeyboardKey_F9;
+                case VK_F10:        return KeyboardKey_F10;
+                case VK_F11:        return KeyboardKey_F11;
+                case VK_F12:        return KeyboardKey_F12;
+                case VK_F13:        return KeyboardKey_F13;
+                case VK_F14:        return KeyboardKey_F14;
+                case VK_F15:        return KeyboardKey_F15;
+                case VK_F16:        return KeyboardKey_F16;
+                case VK_F17:        return KeyboardKey_F17;
+                case VK_F18:        return KeyboardKey_F18;
+                case VK_F19:        return KeyboardKey_F19;
+                case VK_F20:        return KeyboardKey_F20;
+                case VK_F21:        return KeyboardKey_F21;
+                case VK_F22:        return KeyboardKey_F22;
+                case VK_F23:        return KeyboardKey_F23;
+                case VK_F24:        return KeyboardKey_F24;
+                case VK_LEFT:       return KeyboardKey_Left;
+                case VK_RIGHT:      return KeyboardKey_Right;
+                case VK_UP:         return KeyboardKey_Up;
+                case VK_DOWN:       return KeyboardKey_Down;
+                case VK_SPACE:      return KeyboardKey_Space;
+                case VK_ESCAPE:     return KeyboardKey_Escape;
+                case VK_CONTROL:    return Keyboard::isKeyPressed(KeyboardKey_LeftControl) ? KeyboardKey_LeftControl : KeyboardKey_RightControl;
+                case VK_LCONTROL:   return KeyboardKey_LeftControl;
+                case VK_RCONTROL:   return KeyboardKey_RightControl;
+                case VK_MENU:       return Keyboard::isKeyPressed(KeyboardKey_LeftAlt) ? KeyboardKey_LeftAlt : KeyboardKey_RightAlt;
+                case VK_LMENU:      return KeyboardKey_LeftAlt;
+                case VK_RMENU:      return KeyboardKey_RightAlt;
+                case VK_LWIN:       return KeyboardKey_LeftSystem;
+                case VK_RWIN:       return KeyboardKey_RightSystem;
+                case VK_SHIFT:      return Keyboard::isKeyPressed(KeyboardKey_LeftShift) ? KeyboardKey_LeftShift : KeyboardKey_RightShift;
+                case VK_LSHIFT:     return KeyboardKey_LeftShift;
+                case VK_RSHIFT:     return KeyboardKey_RightShift;
+                case VK_OEM_1:      return KeyboardKey_OEM1;
+                case VK_OEM_PERIOD: return KeyboardKey_OEMPeriod;
+                case VK_OEM_2:      return KeyboardKey_OEM2;
+                case VK_OEM_3:      return KeyboardKey_OEM3;
+                case VK_OEM_4:      return KeyboardKey_OEM4;
+                case VK_OEM_5:      return KeyboardKey_OEM5;
+                case VK_OEM_6:      return KeyboardKey_OEM6;
+                case VK_OEM_7:      return KeyboardKey_OEM7;
+                case VK_OEM_8:      return KeyboardKey_OEM8;
+                case VK_OEM_102:    return KeyboardKey_OEM9;
+                case VK_OEM_PLUS:   return KeyboardKey_OEMPlus;
+                case VK_OEM_COMMA:  return KeyboardKey_OEMComma;
+                case VK_TAB:        return KeyboardKey_Tab;
+                case VK_BACK:       return KeyboardKey_Back;
+                case VK_RETURN:     return KeyboardKey_Enter;
+                case VK_CAPITAL:    return KeyboardKey_CapsLock;
+                case VK_APPS:       return KeyboardKey_Apps;
+                case VK_DELETE:     return KeyboardKey_Delete;
+                case VK_INSERT:     return KeyboardKey_Insert;
+                case VK_PRIOR:      return KeyboardKey_PageUp;
+                case VK_NEXT:       return KeyboardKey_PageDown;
+                case VK_END:        return KeyboardKey_End;
+                case VK_HOME:       return KeyboardKey_Home;
+                case VK_PAUSE:      return KeyboardKey_Pause;
+                case VK_SNAPSHOT:   return KeyboardKey_ScreenShot;
+                case VK_SCROLL:     return KeyboardKey_Scroll;
+                default:            return KeyboardKey_Unknown;
             }
         }
 
@@ -659,10 +659,10 @@ namespace Bull
 
                         e.type        = WindowEventType_KeyDown;
                         e.key.code    = convertVKToBullkey(wParam);
-                        e.key.alt     = Keyboard::isKeyPressed(Keyboard::Key::Alt);
-                        e.key.control = Keyboard::isKeyPressed(Keyboard::Key::Control);
-                        e.key.shift   = Keyboard::isKeyPressed(Keyboard::Key::Shift);
-                        e.key.system  = Keyboard::isKeyPressed(Keyboard::Key::System);
+                        e.key.alt     = Keyboard::isKeyPressed(KeyboardKey_Alt);
+                        e.key.control = Keyboard::isKeyPressed(KeyboardKey_Control);
+                        e.key.shift   = Keyboard::isKeyPressed(KeyboardKey_Shift);
+                        e.key.system  = Keyboard::isKeyPressed(KeyboardKey_System);
 
                         pushEvent(e);
                     }
@@ -676,10 +676,10 @@ namespace Bull
 
                     e.type        = WindowEventType_KeyUp;
                     e.key.code    = convertVKToBullkey(wParam);
-                    e.key.alt     = Keyboard::isKeyPressed(Keyboard::Key::Alt);
-                    e.key.control = Keyboard::isKeyPressed(Keyboard::Key::Control);
-                    e.key.shift   = Keyboard::isKeyPressed(Keyboard::Key::Shift);
-                    e.key.system  = Keyboard::isKeyPressed(Keyboard::Key::System);
+                    e.key.alt     = Keyboard::isKeyPressed(KeyboardKey_Alt);
+                    e.key.control = Keyboard::isKeyPressed(KeyboardKey_Control);
+                    e.key.shift   = Keyboard::isKeyPressed(KeyboardKey_Shift);
+                    e.key.system  = Keyboard::isKeyPressed(KeyboardKey_System);
 
                     pushEvent(e);
                 }
@@ -716,7 +716,7 @@ namespace Bull
                     WindowEvent e;
 
                     e.type               = WindowEventType_MouseButtonDown;
-                    e.mouseButton.button = Mouse::Button::Left;
+                    e.mouseButton.button = MouseButton_Left;
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
 
@@ -736,7 +736,7 @@ namespace Bull
                     WindowEvent e;
 
                     e.type               = WindowEventType_MouseButtonUp;
-                    e.mouseButton.button = Mouse::Button::Left;
+                    e.mouseButton.button = MouseButton_Left;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
 
@@ -750,7 +750,7 @@ namespace Bull
                     WindowEvent e;
 
                     e.type               = WindowEventType_MouseButtonDown;
-                    e.mouseButton.button = Mouse::Button::Middle;
+                    e.mouseButton.button = MouseButton_Middle;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
 
@@ -770,7 +770,7 @@ namespace Bull
                     WindowEvent e;
 
                     e.type               = WindowEventType_MouseButtonUp;
-                    e.mouseButton.button = Mouse::Button::Middle;
+                    e.mouseButton.button = MouseButton_Middle;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
 
@@ -784,7 +784,7 @@ namespace Bull
                     WindowEvent e;
 
                     e.type               = WindowEventType_MouseButtonDown;
-                    e.mouseButton.button = Mouse::Button::Right;
+                    e.mouseButton.button = MouseButton_Right;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
 
@@ -804,7 +804,7 @@ namespace Bull
                     WindowEvent e;
 
                     e.type               = WindowEventType_MouseButtonUp;
-                    e.mouseButton.button = Mouse::Button::Right;
+                    e.mouseButton.button = MouseButton_Right;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
 
@@ -818,7 +818,7 @@ namespace Bull
                     WindowEvent e;
 
                     e.type               = WindowEventType_MouseButtonDown;
-                    e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? Mouse::Button::Extra1 : Mouse::Button::Extra2;
+                    e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? MouseButton_Extra1 : MouseButton_Extra2;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
 
@@ -838,7 +838,7 @@ namespace Bull
                     WindowEvent e;
 
                     e.type               = WindowEventType_MouseButtonUp;
-                    e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? Mouse::Button::Extra1 : Mouse::Button::Extra2;
+                    e.mouseButton.button = (HIWORD(wParam) == XBUTTON1) ? MouseButton_Extra1 : MouseButton_Extra2;
                     e.mouseButton.x      = GET_X_LPARAM(lParam);
                     e.mouseButton.y      = GET_Y_LPARAM(lParam);
 
@@ -851,7 +851,7 @@ namespace Bull
                     WindowEvent e;
 
                     e.type              = WindowEventType_MouseWheel;
-                    e.mouseWheel.wheel  = Mouse::Wheel::Vertical;
+                    e.mouseWheel.wheel  = MouseWheel_Vertical;
                     e.mouseWheel.up     = (HIWORD(wParam) == 120);
                     e.mouseWheel.x      = GET_X_LPARAM(lParam);
                     e.mouseWheel.y      = GET_Y_LPARAM(lParam);
@@ -865,7 +865,7 @@ namespace Bull
                     WindowEvent e;
 
                     e.type              = WindowEventType_MouseWheel;
-                    e.mouseWheel.wheel  = Mouse::Wheel::Horizontal;
+                    e.mouseWheel.wheel  = MouseWheel_Horizontal;
                     e.mouseWheel.up     = (HIWORD(wParam) == 120);
                     e.mouseWheel.x      = GET_X_LPARAM(lParam);
                     e.mouseWheel.y      = GET_Y_LPARAM(lParam);

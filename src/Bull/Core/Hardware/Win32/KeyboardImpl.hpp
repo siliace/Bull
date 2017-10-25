@@ -18,7 +18,7 @@ namespace Bull
              * \return Return true if the key is down, false otherwise
              *
              */
-            static bool isKeyPressed(Keyboard::Key key);
+            static bool isKeyPressed(KeyboardKey key);
 
         private:
 
@@ -29,7 +29,7 @@ namespace Bull
              * \return Return the VK equivalent
              *
              */
-            static int convertBullkeyToVK(Keyboard::Key key);
+            static int convertBullkeyToVK(KeyboardKey key);
         };
     }
 }

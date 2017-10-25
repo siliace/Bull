@@ -127,7 +127,7 @@ namespace Bull
                     e.type = WindowEventType_JoystickMoved;
 
                     e.joystickMoved.joystick = joystick;
-                    e.joystickMoved.axis     = static_cast<Joystick::Axis>(i);
+                    e.joystickMoved.axis     = static_cast<JoystickAxis>(i);
                     e.joystickMoved.position = state.axes[i];
                     e.joystickMoved.relative = relative;
 

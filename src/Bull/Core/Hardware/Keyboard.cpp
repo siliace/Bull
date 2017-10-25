@@ -3,7 +3,7 @@
 
 namespace Bull
 {
-    bool Keyboard::isKeyPressed(Keyboard::Key key)
+    bool Keyboard::isKeyPressed(KeyboardKey key)
     {
         return prv::KeyboardImpl::isKeyPressed(key);
     }

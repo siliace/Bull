@@ -7,10 +7,14 @@ target_sources(bull-core
             ${BULL_SRC_CORE_HARDWARE}/CPU.cpp
             ${BULL_INC_CORE_HARDWARE}/Joystick.hpp
             ${BULL_SRC_CORE_HARDWARE}/Joystick.cpp
+            ${BULL_INC_CORE_HARDWARE}/JoystickAxis.hpp
             ${BULL_INC_CORE_HARDWARE}/Keyboard.hpp
             ${BULL_SRC_CORE_HARDWARE}/Keyboard.cpp
+            ${BULL_INC_CORE_HARDWARE}/KeyboardKey.hpp
             ${BULL_INC_CORE_HARDWARE}/Mouse.hpp
             ${BULL_SRC_CORE_HARDWARE}/Mouse.cpp
+            ${BULL_INC_CORE_HARDWARE}/MouseButton.hpp
+            ${BULL_INC_CORE_HARDWARE}/MouseWheel.hpp
             ${BULL_INC_CORE_HARDWARE}/RAM.hpp
             ${BULL_SRC_CORE_HARDWARE}/RAM.cpp
         PRIVATE

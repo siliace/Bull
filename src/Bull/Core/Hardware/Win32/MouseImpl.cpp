@@ -20,20 +20,20 @@ namespace Bull
             return Vector2I(p.x, p.y);
         }
 
-        bool MouseImpl::isButtonPressed(Mouse::Button button)
+        bool MouseImpl::isButtonPressed(MouseButton button)
         {
             return (GetAsyncKeyState(convertBullbuttonToVK(button)) & 0x8000) != FALSE;
         }
 
-        int MouseImpl::convertBullbuttonToVK(Mouse::Button button)
+        int MouseImpl::convertBullbuttonToVK(MouseButton button)
         {
             switch(button)
             {
-                case Mouse::Button::Left:   return VK_LBUTTON;
-                case Mouse::Button::Middle: return VK_MBUTTON;
-                case Mouse::Button::Right:  return VK_RBUTTON;
-                case Mouse::Button::Extra1: return VK_XBUTTON1;
-                case Mouse::Button::Extra2: return VK_XBUTTON2;
+                case MouseButton_Left:   return VK_LBUTTON;
+                case MouseButton_Middle: return VK_MBUTTON;
+                case MouseButton_Right:  return VK_RBUTTON;
+                case MouseButton_Extra1: return VK_XBUTTON1;
+                case MouseButton_Extra2: return VK_XBUTTON2;
             }
         }
     }

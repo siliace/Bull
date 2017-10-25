@@ -19,7 +19,7 @@ namespace Bull
         return prv::JoystickImpl::isButtonPressed(button, joystick);
     }
 
-    float Joystick::getAxisPosition(Joystick::Axis axis, Uint8 joystick)
+    float Joystick::getAxisPosition(JoystickAxis axis, Uint8 joystick)
     {
         return prv::JoystickImpl::getAxisPosition(axis, joystick);
     }
