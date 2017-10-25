@@ -1,6 +1,7 @@
 #include <memory>
 
 #include <Bull/Core/Exception/RuntimeError.hpp>
+#include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
@@ -20,6 +21,8 @@ namespace Bull
     {
         namespace
         {
+            Mutex mutex;
+
             /// The context shared with all others
             std::shared_ptr<ContextType> shared;
 
@@ -34,6 +37,8 @@ namespace Bull
             {
                 if(!internal)
                 {
+                    Lock l(mutex);
+
                     ContextSettings realInternalSettings;
                     internal = std::make_unique<Context>(VideoMode::getCurrent().bitsPerPixel, internalSettings);
 
@@ -71,6 +76,8 @@ namespace Bull
 
         void GlContext::ensureContext()
         {
+            Lock l(mutex);
+
             if(current == nullptr)
             {
                 getInternalContext();
@@ -79,6 +86,8 @@ namespace Bull
 
          GlContext* GlContext::createInstance()
          {
+            Lock l(mutex);
+
             ContextType* context = new ContextType(shared);
             context->initialize();
 
@@ -87,6 +96,8 @@ namespace Bull
 
         GlContext* GlContext::createInstance(const VideoMode& mode, const ContextSettings& settings)
         {
+            Lock l(mutex);
+
             ContextType* context = new ContextType(shared, mode, settings);
             context->initialize();
 
@@ -95,6 +106,8 @@ namespace Bull
 
         GlContext* GlContext::createInstance(unsigned int bitsPerPixel, const ContextSettings& settings)
         {
+            Lock l(mutex);
+
             ContextType* context = new ContextType(shared, bitsPerPixel, settings);
             context->initialize(settings);
 
@@ -103,6 +116,8 @@ namespace Bull
 
         GlContext* GlContext::createInstance(const std::unique_ptr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings)
         {
+            Lock l(mutex);
+
             ContextType* context = new ContextType(shared, window, bitsPerPixel, settings);
             context->initialize(settings);
 
@@ -149,6 +164,8 @@ namespace Bull
             {
                 if(current != this)
                 {
+                    Lock l(mutex);
+
                     if(makeCurrent())
                     {
                        current = this;
@@ -165,6 +182,8 @@ namespace Bull
             {
                 if(current == this)
                 {
+                    Lock l(mutex);
+
                     return getInternalContext()->setActive(true);
                 }
 
