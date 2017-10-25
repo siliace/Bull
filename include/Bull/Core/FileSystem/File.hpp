@@ -111,7 +111,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~File();
+        virtual ~File();
 
         /*! \brief Open a file
          *

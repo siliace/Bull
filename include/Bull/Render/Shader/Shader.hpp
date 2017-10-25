@@ -62,7 +62,7 @@ namespace Bull
          * \return True if the ShaderStage was attached successfully
          *
          */
-        bool attachFromPath(const Path& path, ShaderStageType::ShaderStageType type);
+        bool attachFromPath(const Path& path, ShaderStageType type);
 
         /*! \brief Load a ShaderStage form a stream and attach it to this Shader
          *
@@ -72,7 +72,7 @@ namespace Bull
          * \return True if the ShaderStage was attached successfully
          *
          */
-        bool attachFromStream(InStream& stream, ShaderStageType::ShaderStageType type);
+        bool attachFromStream(InStream& stream, ShaderStageType type);
 
         /*! \brief Load a ShaderStage form a memory area and attach it to this Shader
          *
@@ -83,7 +83,7 @@ namespace Bull
          * \return True if the ShaderStage was attached successfully
          *
          */
-        bool attachFromMemory(const void* data, Index length, ShaderStageType::ShaderStageType type);
+        bool attachFromMemory(const void* data, Index length, ShaderStageType type);
 
         /*! \brief Load the Shader from a binary form
          *

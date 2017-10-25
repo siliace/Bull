@@ -27,8 +27,8 @@ int main(int argc, char* argv[])
     emission.loadFromPath(Path("../resources/textures/container_emission.png"));
     emission.enableSmooth();
 
-    phong.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType::Vertex);
-    phong.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType::Fragment);
+    phong.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType_Vertex);
+    phong.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType_Fragment);
     phong.link();
 
     std::vector<Cube> cubes(10);

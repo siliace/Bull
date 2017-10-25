@@ -54,7 +54,7 @@ namespace Bull
         return false;
     }
 
-    bool Shader::attachFromPath(const Path& path, ShaderStageType::ShaderStageType type)
+    bool Shader::attachFromPath(const Path& path, ShaderStageType type)
     {
         ShaderStage stage;
         ShaderStageParameters parameters;
@@ -64,7 +64,7 @@ namespace Bull
         return stage.loadFromPath(path, parameters) && attach(stage);
     }
 
-    bool Shader::attachFromStream(InStream& stream, ShaderStageType::ShaderStageType type)
+    bool Shader::attachFromStream(InStream& stream, ShaderStageType type)
     {
         ShaderStage stage;
         ShaderStageParameters parameters;
@@ -74,7 +74,7 @@ namespace Bull
         return stage.loadFromStream(stream, parameters) && attach(stage);
     }
 
-    bool Shader::attachFromMemory(const void* data, Index length, ShaderStageType::ShaderStageType type)
+    bool Shader::attachFromMemory(const void* data, Index length, ShaderStageType type)
     {
         ShaderStage stage;
         ShaderStageParameters parameters;

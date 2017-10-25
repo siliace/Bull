@@ -108,7 +108,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~Directory();
+        virtual ~Directory();
 
         /*! \brief Open a directory
          *

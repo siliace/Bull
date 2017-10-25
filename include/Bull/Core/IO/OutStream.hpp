@@ -11,10 +11,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        virtual ~OutStream()
-        {
-            /// Nothing
-        }
+        virtual ~OutStream();
 
         /*! \brief Write data into a stream
          *

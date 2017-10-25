@@ -14,26 +14,26 @@ namespace Bull
 {
     struct BULL_CORE_API AbstractImage : public Resource<ImageParameters>
     {
-        /*! \brief Create the Image
+        /*! \brief Create the AbstractImage
          *
-         * \param size The size of the Image
+         * \param size The size of the AbstractImage
          *
-         * \return True if the Image was created successfully
+         * \return True if the AbstractImage was created successfully
          *
          */
         virtual bool create(const Vector2UI& size) = 0;
 
-        /*! \brief Create the Image
+        /*! \brief Create the AbstractImage
          *
          * \param pixels Pixels of the Image
          * \param size   The size of the Image
          *
-         * \return True if the Image was created successfully
+         * \return True if the AbstractImage was created successfully
          *
          */
         virtual bool create(const ByteArray& pixels, const Vector2UI& size) = 0;
 
-        /*! \brief Get the size of the Image
+        /*! \brief Get the size of the AbstractImage
          *
          * \return The size
          *

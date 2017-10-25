@@ -3,7 +3,7 @@
 namespace Bull
 {
     StringStream::StringStream() :
-        m_bufferSize(0)
+        m_cursor(0)
     {
         /// Nothing
     }
@@ -11,68 +11,83 @@ namespace Bull
     void StringStream::clear()
     {
         m_content.clear();
-        m_bufferSize = 0;
+    }
+
+    Uint64 StringStream::write(const String& string)
+    {
+        Uint64 oldSize = getSize();
+
+        m_content.insert(string, getCursor());
+        m_cursor += string.getSize();
+
+        return getSize() - oldSize;
+    }
+
+    Uint64 StringStream::write(const void* data, Uint64 size)
+    {
+        String string(reinterpret_cast<const char*>(data), size);
+
+        return write(string);
+    }
+
+    Uint64 StringStream::setCursor(Uint64 position)
+    {
+        m_cursor = std::min(position, getSize());
+
+        return m_cursor;
+    }
+
+    Uint64 StringStream::getCursor() const
+    {
+        return m_cursor;
     }
 
     Index StringStream::getSize() const
     {
-        return m_bufferSize;
+        return m_content.getSize();
     }
 
-    String StringStream::toString() const
+    const String& StringStream::toString() const
     {
-        String str;
-        str.reserve(m_bufferSize);
-
-        for(const String& chuck : m_content)
-        {
-            str += chuck;
-        }
-
-        return str;
+        return m_content;
     }
 
     StringStream& StringStream::operator<<(int right)
     {
-        m_content.push_back(String::number(right));
-        m_bufferSize += m_content.back().getSize();
+        write(String::number(right));
 
         return (*this);
     }
 
     StringStream& StringStream::operator<<(bool right)
     {
-        m_content.push_back(String::boolean(right));
-        m_bufferSize += m_content.back().getSize();
+        write(String::boolean(right));
 
         return (*this);
     }
 
     StringStream& StringStream::operator<<(char right)
     {
-        m_content.push_back(String(right));
-        m_bufferSize += m_content.back().getSize();
+        write(String(right));
 
         return (*this);
     }
 
     StringStream& StringStream::operator<<(const char* right)
     {
-        m_content.push_back(String(right));
-        m_bufferSize += m_content.back().getSize();
+        write(String(right));
 
         return (*this);
     }
 
     StringStream& StringStream::operator<<(const String& right)
     {
-        m_content.push_back(right);
-        m_bufferSize += m_content.back().getSize();
+        write(right);
 
         return (*this);
     }
 
-    StringStream::operator String() const
+    StringStream::operator const String&() const
     {
         return toString();
     }

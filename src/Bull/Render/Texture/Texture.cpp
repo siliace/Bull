@@ -62,7 +62,7 @@ namespace Bull
 
             for(unsigned int i = 0; i < m_size.y() ; i++)
             {
-                gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, m_size.x() , 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[m_size.x()  * (m_size.y()  - i - 1) * 4]);
+                gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, m_size.x() , 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[m_size.x() * (m_size.y() - i - 1) * 4]);
             }
 
             return true;

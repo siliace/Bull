@@ -30,7 +30,7 @@ namespace Bull
         destroy();
     }
 
-    bool ShaderStage::create(ShaderStageType::ShaderStageType type)
+    bool ShaderStage::create(ShaderStageType type)
     {
         if(isValid())
         {
@@ -136,7 +136,7 @@ namespace Bull
         return String();
     }
 
-    ShaderStageType::ShaderStageType ShaderStage::getType() const
+    ShaderStageType ShaderStage::getType() const
     {
         return m_type;
     }

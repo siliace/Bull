@@ -40,6 +40,29 @@ namespace Bull
          */
         bool create(const ByteArray& pixels, const Vector2UI& size) override;
 
+        /*! \brief Fill the Image with a Color
+         *
+         * \param color The Color
+         *
+         * \return This
+         *
+         */
+        Image& fill(const Color& color);
+
+        /*! \brief Flip the Image vertically
+         *
+         * \return This
+         *
+         */
+        Image& flipVertically();
+
+        /*! \brief Flip the Image horizontally
+         *
+         * \return This
+         *
+         */
+        Image& flipHorizontally();
+
         /*! \brief Load a Resource from a Path
          *
          * \param path       The Path of the file to read
@@ -101,7 +124,7 @@ namespace Bull
          *
          */
         bool saveToMemory(void* data, Index length, const ImageParameters& parameters = ImageParameters()) const override;
-        
+
         /*! \brief Get pixels of the Image
          *
          * \return The pixels

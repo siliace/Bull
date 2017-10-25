@@ -2,6 +2,8 @@
 
 namespace Bull
 {
+    InStream::~InStream() = default;
+
     String InStream::readAll()
     {
         String content;

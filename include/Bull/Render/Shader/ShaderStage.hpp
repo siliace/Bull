@@ -32,7 +32,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~ShaderStage();
+        virtual ~ShaderStage();
 
         /*! \brief Create the shader
          *
@@ -41,7 +41,7 @@ namespace Bull
          * \return True if the ShaderStage was created successfully
          *
          */
-        bool create(ShaderStageType::ShaderStageType type);
+        bool create(ShaderStageType type);
         
         /*! \brief Load a Resource from a Path
          *
@@ -145,7 +145,7 @@ namespace Bull
          * \return The type
          *
          */
-        ShaderStageType::ShaderStageType getType() const;
+        ShaderStageType getType() const;
 
         /*! \brief Get the ShaderStage system handler
          *
@@ -165,9 +165,9 @@ namespace Bull
 
     private:
 
-        unsigned int                     m_id;         /*!< The OpenGL shader handler */
-        ShaderStageType::ShaderStageType m_type;       /*!< The shader type */
-        bool                             m_isCompiled; /*!< Does the shader is compiled? */
+        unsigned int    m_id;         /*!< The OpenGL shader handler */
+        ShaderStageType m_type;       /*!< The shader type */
+        bool            m_isCompiled; /*!< Does the shader is compiled? */
     };
 }
 

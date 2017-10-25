@@ -3,12 +3,12 @@
 
 #include <vector>
 
-#include <Bull/Core/IO/InOutStream.hpp>
+#include <Bull/Core/IO/OutStream.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API StringStream
+    class BULL_CORE_API StringStream : public OutStream
     {
     public:
 
@@ -17,24 +17,59 @@ namespace Bull
          */
         StringStream();
 
-        /*! \brief Empty the stream content
+        /*! \brief Flush the StringStream
          *
          */
         void clear();
 
-        /*! \brief Get the size of the content of the stream
+        /*! \brief Write a String into the StringStream
          *
-         * \return Return the size of the content of the stream
+         * \param string The String to write
+         *
+         * \return The number of bytes written
          *
          */
-        Index getSize() const;
+        Uint64 write(const String& string);
+
+        /*! \brief Write data into the StringStream
+         *
+         * \param data A pointer to the memory area to write
+         * \param size The size of the memory area to write
+         *
+         * \return Return the number of written bytes
+         *
+         */
+        Uint64 write(const void* data, Uint64 size) override;
+
+        /*! \brief Set the reading position in the stream
+         *
+         * \param position The position to seek to
+         *
+         * \return Return the actual position
+         *
+         */
+        Uint64 setCursor(Uint64 position) override;
+
+        /*! \brief Get the reading position in the stream
+         *
+         * \return Return the current position
+         *
+         */
+        Uint64 getCursor() const override;
+
+        /*! \brief Get the size of the stream
+         *
+         * \return Return the size of the stream
+         *
+         */
+        Uint64 getSize() const override;
 
         /*! \brief Get the content of the stream
          *
          * \return Return the content of the stream
          *
          */
-        String toString() const;
+        const String& toString() const;
 
         /*! \brief Adds the representation of an integer
          *
@@ -86,12 +121,12 @@ namespace Bull
          * \return Return the representation of this as a String
          *
          */
-        operator String() const;
+        explicit operator const String&() const;
 
     private:
 
-        std::vector<String> m_content;
-        Index         m_bufferSize;
+        Uint64 m_cursor;
+        String m_content;
     };
 }
 

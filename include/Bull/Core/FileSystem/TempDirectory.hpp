@@ -37,7 +37,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~TempDirectory();
+        virtual ~TempDirectory();
 
         /*! \brief Create a File in the temporary directory
          *

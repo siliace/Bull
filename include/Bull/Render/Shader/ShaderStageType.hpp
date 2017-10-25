@@ -3,15 +3,12 @@
 
 namespace Bull
 {
-    namespace ShaderStageType
+    enum ShaderStageType
     {
-        enum ShaderStageType : unsigned int
-        {
-            Vertex,
-            Fragment,
-            Geometry
-        };
-    }
+        ShaderStageType_Vertex,
+        ShaderStageType_Fragment,
+        ShaderStageType_Geometry
+    };
 }
 
 #endif // BULL_RENDER_SHADER_SHADERSTAGETYPE_HPP

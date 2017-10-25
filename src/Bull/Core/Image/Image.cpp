@@ -44,6 +44,38 @@ namespace Bull
         return false;
     }
 
+    Image& Image::fill(const Color &color)
+    {
+        for(Index i = 0; i < m_pixels.getCapacity() / 4; i++)
+        {
+            m_pixels[i * 4 + 0] = color.red;
+            m_pixels[i * 4 + 1] = color.green;
+            m_pixels[i * 4 + 2] = color.blue;
+            m_pixels[i * 4 + 3] = color.alpha;
+        }
+
+        return (*this);
+    }
+
+    Image& Image::flipVertically()
+    {
+        ByteArray pixels(m_size.x() * m_size.y() * 4);
+
+        for(unsigned int i = 0; i < m_size.y() ; i++)
+        {
+            std::memcpy(&m_pixels[i * m_size.x()], &pixels[m_size.x() * (m_size.y() - i - 1) * 4], m_size.y());
+        }
+
+        m_pixels = pixels;
+
+        return (*this);
+    }
+
+    Image& Image::flipHorizontally()
+    {
+
+    }
+
     bool Image::loadFromPath(const Path& path, const ImageParameters& parameters)
     {
         return Loader::get()->loadFromPath(this, path, parameters);

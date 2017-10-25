@@ -11,10 +11,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        virtual ~InStream()
-        {
-            /// Nothing
-        }
+        virtual ~InStream();
 
         /*! \brief Read data from a stream
          *
