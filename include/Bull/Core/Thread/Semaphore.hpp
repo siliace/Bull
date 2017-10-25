@@ -22,12 +22,12 @@ namespace Bull
          * \param count The initial count to set the semaphore
          *
          */
-        Semaphore(unsigned int count);
+        explicit Semaphore(unsigned int count);
 
         /*! \brief Destructor
          *
          */
-        ~Semaphore();
+        virtual ~Semaphore();
 
         /*! \brief Wait until the current thread can continue
          *

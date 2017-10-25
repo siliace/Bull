@@ -26,7 +26,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~Mutex();
+        virtual ~Mutex();
 
         /*! \brief Try to lock the mutex
          *

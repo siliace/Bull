@@ -48,7 +48,7 @@ namespace Bull
          *
          */
         template<typename Function>
-        Thread(Function function);
+        explicit Thread(Function function);
 
         /*! \brief Constructor
          *
@@ -57,7 +57,7 @@ namespace Bull
          *
          */
         template<typename Function, typename... Args>
-        Thread(Function function, Args... args);
+        explicit Thread(Function function, Args... args);
 
         /*! \brief Constructor
          *
@@ -108,7 +108,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~Thread();
+        virtual ~Thread();
 
         /*! \brief Start the thread
          *

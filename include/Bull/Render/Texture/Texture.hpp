@@ -43,7 +43,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~Texture();
+        virtual ~Texture();
 
         /*! \brief Load a Texture form an Image
          *

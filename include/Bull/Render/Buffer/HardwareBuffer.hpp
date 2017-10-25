@@ -35,7 +35,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~HardwareBuffer();
+        virtual ~HardwareBuffer();
 
         /*! \brief Create the buffer in the VRAM
          *

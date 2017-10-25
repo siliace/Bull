@@ -24,7 +24,7 @@ namespace Bull
          * Unlock the mutex
          *
          */
-        ~Lock();
+        virtual ~Lock();
 
     private:
 

@@ -27,7 +27,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~ConditionVariable();
+        virtual ~ConditionVariable();
 
         /*! \brief Send a signal to a waiting thread
          *

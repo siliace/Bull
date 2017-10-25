@@ -34,7 +34,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~Shader();
+        virtual ~Shader();
 
         /*! \brief Create a Shader from a ShaderBinary
          *

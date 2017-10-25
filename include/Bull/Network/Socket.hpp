@@ -68,7 +68,7 @@ namespace Bull
          *
          * \param type The type of the Socket
          */
-        Socket(Type type);
+        explicit Socket(Type type);
 
         /*! \brief Create the Socket
          *

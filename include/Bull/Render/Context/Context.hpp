@@ -58,7 +58,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~Context();
+        virtual ~Context();
 
         /*! \brief Activate or deactivate the context
          *
