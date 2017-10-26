@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_HARDWARE_WIN32_CPUIMPL_HPP
 #define BULL_CORE_HARDWARE_WIN32_CPUIMPL_HPP
 
-#include <Bull/Core/Hardware/CPU.hpp>
+#include <Bull/Core/Hardware/CPUArchitecture.hpp>
 
 namespace Bull
 {
@@ -21,7 +21,7 @@ namespace Bull
              * \return Return the CPU architecture
              *
              */
-            static CPU::Architecture getArchitecture();
+            static CPUArchitecture getArchitecture();
         };
     }
 }

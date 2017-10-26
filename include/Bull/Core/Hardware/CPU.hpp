@@ -2,20 +2,12 @@
 #define BULL_CORE_HARDWARE_CPU_HPP
 
 #include <Bull/Core/Export.hpp>
+#include <Bull/Core/Hardware/CPUArchitecture.hpp>
 
 namespace Bull
 {
     struct BULL_CORE_API CPU
     {
-        enum Architecture
-        {
-            x64,
-            ARM,
-            IA64,
-            Intel,
-            Unknown
-        };
-
         /*! \brief Get the number of CPU
          *
          * \return Return the number of CPU
@@ -28,7 +20,7 @@ namespace Bull
          * \return Return the CPU architecture
          *
          */
-        static Architecture getArchitecture();
+        static CPUArchitecture getArchitecture();
     };
 }
 

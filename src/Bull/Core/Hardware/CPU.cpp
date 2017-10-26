@@ -8,7 +8,7 @@ namespace Bull
         return prv::CPUImpl::getCount();
     }
 
-    CPU::Architecture CPU::getArchitecture()
+    CPUArchitecture CPU::getArchitecture()
     {
         return prv::CPUImpl::getArchitecture();
     }

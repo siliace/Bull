@@ -14,20 +14,20 @@ namespace Bull
             return info.dwNumberOfProcessors;
         }
 
-        CPU::Architecture CPUImpl::getArchitecture()
+        CPUArchitecture CPUImpl::getArchitecture()
         {
             SYSTEM_INFO info;
             GetSystemInfo(&info);
 
             switch(info.wProcessorArchitecture)
             {
-                case PROCESSOR_ARCHITECTURE_AMD64: return CPU::x64;
-                case PROCESSOR_ARCHITECTURE_ARM:   return CPU::ARM;
-                case PROCESSOR_ARCHITECTURE_IA64:  return CPU::IA64;
-                case PROCESSOR_ARCHITECTURE_INTEL: return CPU::Intel;
+                case PROCESSOR_ARCHITECTURE_AMD64: return CPUArchitecture_x64;
+                case PROCESSOR_ARCHITECTURE_ARM:   return CPUArchitecture_ARM;
+                case PROCESSOR_ARCHITECTURE_IA64:  return CPUArchitecture_IA64;
+                case PROCESSOR_ARCHITECTURE_INTEL: return CPUArchitecture_Intel;
             }
 
-            return CPU::Unknown;
+            return CPUArchitecture_Unknown;
         }
     }
 }

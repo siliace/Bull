@@ -5,6 +5,7 @@ target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE_HARDWARE}/CPU.hpp
             ${BULL_SRC_CORE_HARDWARE}/CPU.cpp
+            ${BULL_INC_CORE_HARDWARE}/CPUArchitecture.hpp
             ${BULL_INC_CORE_HARDWARE}/Joystick.hpp
             ${BULL_SRC_CORE_HARDWARE}/Joystick.cpp
             ${BULL_INC_CORE_HARDWARE}/JoystickAxis.hpp
