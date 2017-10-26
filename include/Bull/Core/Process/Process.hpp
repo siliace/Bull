@@ -63,7 +63,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        virtual ~Process();
+        ~Process();
 
         /*! \brief Start the Process
          *

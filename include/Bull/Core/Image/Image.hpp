@@ -1,6 +1,7 @@
 #ifndef BULL_CORE_IMAGE_IMAGE_HPP
 #define BULL_CORE_IMAGE_IMAGE_HPP
 
+#include <Bull/Core/Export.hpp>
 #include <Bull/Core/Image/AbstractImage.hpp>
 #include <Bull/Core/Image/ImageParameters.hpp>
 #include <Bull/Core/Resource/Resource.hpp>

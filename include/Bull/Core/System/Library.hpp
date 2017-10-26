@@ -6,6 +6,8 @@
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
+#include <Bull/Core/Export.hpp>
+
 namespace Bull
 {
     namespace prv

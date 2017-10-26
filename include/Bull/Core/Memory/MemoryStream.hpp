@@ -10,7 +10,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /*! \brief Default contructor
          *
          */
         MemoryStream();
@@ -26,7 +26,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        virtual ~MemoryStream();
+        ~MemoryStream();
 
         /*! \brief Open a stream
          *

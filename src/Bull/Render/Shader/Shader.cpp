@@ -338,7 +338,7 @@ namespace Bull
 
             if(length)
             {
-                binary.create(static_cast<Index>(length));
+                binary.create(length);
 
                 gl::getProgramBinary(getSystemHandler(), length, nullptr, &binary.format, &binary[0]);
 

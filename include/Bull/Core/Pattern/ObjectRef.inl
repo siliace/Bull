@@ -3,6 +3,13 @@
 namespace Bull
 {
     template <typename T>
+    ObjectRef<T>::ObjectRef() :
+        m_object(nullptr)
+    {
+        /// Nothing
+    }
+
+    template <typename T>
     ObjectRef<T>::ObjectRef(T* object) :
         m_object(object)
     {
