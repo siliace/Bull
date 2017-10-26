@@ -1,58 +1,44 @@
-#include <Bull/Core/Support/Win32/Windows.hpp>
 #include <Bull/Core/Process/Win32/ProcessImplWin32.hpp>
-
 
 namespace Bull
 {
     namespace prv
     {
-        Process::Id ProcessImplWin32::getCurrentPid()
+        ProcessImplWin32::ProcessImplWin32(const CommandLine& commandLine)
         {
-            return GetCurrentProcessId();
+            CreateProcess(commandLine.getProgram().getBuffer(),
+                          const_cast<LPSTR>(commandLine.getOptions(true).data()),
+                          nullptr,
+                          nullptr,
+                          FALSE,
+                          NORMAL_PRIORITY_CLASS,
+                          nullptr,
+                          nullptr,
+                          &m_startupinfo,
+                          &m_processInformation);
         }
 
-        Process::Id ProcessImplWin32::getCurrentParentPid()
+        ProcessState ProcessImplWin32::wait()
         {
-            Process::Id ppid     = 0;
-            PROCESSENTRY32 entry = {0};
-            HANDLE handler       = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+            WaitForSingleObject(m_processInformation.hProcess, INFINITE);
+            CloseHandle(m_processInformation.hProcess);
+            CloseHandle(m_processInformation.hThread);
 
-            entry.dwSize = sizeof(PROCESSENTRY32);
-
-            if(Process32First(handler, &entry))
-            {
-                do
-                {
-                    if(entry.th32ProcessID == getCurrentPid())
-                    {
-                        ppid = entry.th32ParentProcessID;
-                        break;
-                    }
-                } while(Process32Next(handler, &entry));
-            }
-            CloseHandle(handler);
-
-            return ppid;
+            return ProcessState_Terminated;
         }
 
-        ProcessImplWin32::ProcessImplWin32(const String &commandLine, const Path &workingDirectory, const std::vector<String> &args)
+        ProcessState ProcessImplWin32::wait(const Time& timeout)
         {
+            WaitForSingleObject(m_processInformation.hProcess, static_cast<DWORD>(timeout.asMilliseconds()));
+            CloseHandle(m_processInformation.hProcess);
+            CloseHandle(m_processInformation.hThread);
 
+            return ProcessState_Terminated;
         }
 
-        Process::Id ProcessImplWin32::getPid() const
+        Process::Id ProcessImplWin32::getId() const
         {
-            return 0;
-        }
-
-        Process::Status ProcessImplWin32::getStatus() const
-        {
-            return Process::Ready;
-        }
-
-        Process::ExitCode ProcessImplWin32::getExitCode(bool block) const
-        {
-            return Process::Ok;
+            return m_processInformation.dwProcessId;
         }
     }
 }

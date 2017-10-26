@@ -1,12 +1,9 @@
-#ifndef BULL_CORE_PROCESSIMPL_HPP
-#define BULL_CORE_PROCESSIMPL_HPP
+#ifndef BULL_CORE_PROCESS_PROCESSIMPL_HPP
+#define BULL_CORE_PROCESS_PROCESSIMPL_HPP
 
-#include <vector>
-
-#include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Process/Process.hpp>
+#include <Bull/Core/Time/Time.hpp>
 
 namespace Bull
 {
@@ -16,57 +13,34 @@ namespace Bull
         {
         public:
 
-            /*! \brief Get the PID of the current process
-             *
-             * \return The PID of the process
-             *
-             */
-            static Process::Id getCurrentPid();
-
-            /*! \brief Get the Parent PID of the process
-             *
-             * \return The PPID of the process
-             *
-             */
-            static Process::Id getCurrentParentPid();
-
-            /*! \brief Create an OS specific instance of ProcessImpl
-             *
-             * \param commandLine      The command line to start the process
-             * \param workingDirectory The working directory of the process
-             * \param args             The arguments of the process
-             *
-             * \return The created instance
-             *
-             */
-            static ProcessImpl* createInstance(const String& commandLine, const Path& workingDirectory, const std::vector<String>& args);
+            static ProcessImpl* createInstance(const CommandLine& commandLine);
 
         public:
 
+            /*! \brief Wait for the Process to stop
+             *
+             * \return The state of the Process
+             *
+             */
+            virtual ProcessState wait() = 0;
+
+            /*! \brief Wait for the Process to stop
+             *
+             * \param timeout The time to wait before failure
+             *
+             * \return The state of the Process
+             *
+             */
+            virtual ProcessState wait(const Time& timeout) = 0;
+
             /*! \brief Get the PID of the Process
              *
-             * \return The PID
+             * \return The PID of the Process
              *
              */
-            virtual Process::Id getPid() const = 0;
-
-            /*! \brief Get the status of the process
-             *
-             * \return The status
-             *
-             */
-            virtual Process::Status getStatus() const = 0;
-
-            /*! \brief Get the exit code of the Process
-             *
-             * \param block True to wait the end of the process
-             *
-             * \return The exit code, -1 if the Process is still running
-             *
-             */
-            virtual Process::ExitCode getExitCode(bool block) const = 0;
+            virtual Process::Id getId() const = 0;
         };
     }
 }
 
-#endif // BULL_CORE_PROCESSIMPL_HPP
+#endif // BULL_CORE_PROCESS_PROCESSIMPL_HPP

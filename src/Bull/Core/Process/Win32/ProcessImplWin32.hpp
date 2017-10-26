@@ -1,6 +1,7 @@
-#ifndef BULL_CORE_WIN32_PROCESSIMPLWIN32_HPP
-#define BULL_CORE_WIN32_PROCESSIMPLWIN32_HPP
+#ifndef BULL_CORE_PROCESS_WIN32_PROCESSIMPLWIN32_HPP
+#define BULL_CORE_PROCESS_WIN32_PROCESSIMPLWIN32_HPP
 
+#include <Bull/Core/Support/Win32/Windows.hpp>
 #include <Bull/Core/Process/ProcessImpl.hpp>
 
 namespace Bull
@@ -11,55 +12,42 @@ namespace Bull
         {
         public:
 
-            /*! \brief Get the PID of the current process
-             *
-             * \return The PID of the process
-             *
-             */
-            static Process::Id getCurrentPid();
-
-            /*! \brief Get the Parent PID of the process
-             *
-             * \return The PPID of the process
-             *
-             */
-            static Process::Id getCurrentParentPid();
-
-        public:
-
             /*! \brief Constructor
              *
-             * \param commandLine      The command line to start the process
-             * \param workingDirectory The working directory of the process
-             * \param args             The arguments of the process
+             * \param commandLine The CommandLine to start
              *
              */
-            ProcessImplWin32(const String& commandLine, const Path& workingDirectory, const std::vector<String>& args);
+            explicit ProcessImplWin32(const CommandLine& commandLine);
+
+            /*! \brief Wait for the Process to stop
+             *
+             * \return The state of the Process
+             *
+             */
+            ProcessState wait() override;
+
+            /*! \brief Wait for the Process to stop
+             *
+             * \param timeout The time to wait before failure
+             *
+             * \return The state of the Process
+             *
+             */
+            ProcessState wait(const Time& timeout) override;
 
             /*! \brief Get the PID of the Process
              *
-             * \return The PID
+             * \return The PID of the Process
              *
              */
-            Process::Id getPid() const override;
+            Process::Id getId() const override;
 
-            /*! \brief Get the status of the process
-             *
-             * \return The status
-             *
-             */
-            Process::Status getStatus() const override;
+        private:
 
-            /*! \brief Get the exit code of the Process
-             *
-             * \param block True to wait the end of the process
-             *
-             * \return The exit code, -1 if the Process is still running
-             *
-             */
-            Process::ExitCode getExitCode(bool block) const override;
+            STARTUPINFO         m_startupinfo;
+            PROCESS_INFORMATION m_processInformation;
         };
     }
 }
 
-#endif // BULL_CORE_WIN32_PROCESSIMPLWIN32_HPP
+#endif // BULL_CORE_PROCESS_WIN32_PROCESSIMPLWIN32_HPP
