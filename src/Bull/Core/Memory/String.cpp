@@ -367,6 +367,16 @@ namespace Bull
         m_sharedString = std::move(string);
     }
 
+    void String::ensureOwnership()
+    {
+        if(m_sharedString != getEmptyString())
+        {
+            SharedString sharedString = std::make_shared<prv::StringBuffer>(getSize(), getCapacity());
+            std::memcpy(&sharedString->string[0], &m_sharedString->string[0], getCapacity());
+            m_sharedString = std::move(sharedString);
+        }
+    }
+
     Index String::getCapacity() const
     {
         return m_sharedString->capacity;

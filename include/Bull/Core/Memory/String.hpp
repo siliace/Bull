@@ -291,6 +291,11 @@ namespace Bull
          */
         void reserve(Index capacity);
 
+        /*! \brief Ensure that the String is used only by this instance
+         *
+         */
+        void ensureOwnership();
+
         /*! \brief Get the capacity of the string
          *
          * \return Return the capacity of the string
