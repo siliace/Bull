@@ -12,7 +12,7 @@ namespace Bull
 
     CommandLine& CommandLine::withOption(const String& value, const String& prefix)
     {
-        m_options.emplace_back({prefix, value});
+        m_options.push_back({prefix, value});
 
         return (*this);
     }
@@ -64,7 +64,7 @@ namespace Bull
         {
             StringStream ss;
 
-            ss << " " << option.prefix << option.value;
+            ss << option.prefix << option.value;
 
             options.emplace_back(ss.toString());
         }

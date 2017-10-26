@@ -1,3 +1,4 @@
+#include <Bull/Core/IO/StringStream.hpp>
 #include <Bull/Core/Process/Win32/ProcessImplWin32.hpp>
 
 namespace Bull
@@ -6,8 +7,19 @@ namespace Bull
     {
         ProcessImplWin32::ProcessImplWin32(const CommandLine& commandLine)
         {
+            String buffer;
+            StringStream ss;
+
+            for(const String& option : commandLine.getOptions(true))
+            {
+                ss << " " << option;
+            }
+
+            buffer = ss.toString();
+            buffer.ensureOwnership();
+
             CreateProcess(commandLine.getProgram().getBuffer(),
-                          const_cast<LPSTR>(commandLine.getOptions(true).data()),
+                          &buffer[0],
                           nullptr,
                           nullptr,
                           FALSE,

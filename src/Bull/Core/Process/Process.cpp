@@ -1,4 +1,5 @@
 #include <Bull/Core/Process/Process.hpp>
+#include <Bull/Core/Process/ProcessImpl.hpp>
 
 namespace Bull
 {
@@ -12,7 +13,7 @@ namespace Bull
 
     }
 
-    Id Process::getId() const
+    Process::Id Process::getId() const
     {
         if(m_impl)
         {
