@@ -1,25 +1,22 @@
+#include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Log/MessageWindowLogger.hpp>
 
 namespace Bull
 {
-    void MessageWindowLogger::write(const String& message, LogLevel level)
+    MessageWindowIcon MessageWindowLogger::chooseIcon(LogLevel level)
     {
-        static String levelStrings[] =
-        {
-            "Debug",
-            "Info",
-            "Warning",
-            "Error"
-        };
-
         switch(level)
         {
-            case LogLevel_Debug:   m_messageWindow.icon = MessageWindowIcon_Hand; break;
-            case LogLevel_Error:   m_messageWindow.icon = MessageWindowIcon_Error; break;
-            case LogLevel_Warning: m_messageWindow.icon = MessageWindowIcon_Warning; break;
-            case LogLevel_Info:    m_messageWindow.icon = MessageWindowIcon_Information; break;
+            case LogLevel_Debug:   return MessageWindowIcon_Hand;
+            case LogLevel_Error:   return MessageWindowIcon_Error;
+            case LogLevel_Warning: return MessageWindowIcon_Warning;
+            case LogLevel_Info:    return MessageWindowIcon_Information;
         }
+    }
 
-        m_messageWindow.open(message, levelStrings[level]);
+    void MessageWindowLogger::write(const String& message, LogLevel level)
+    {
+        m_messageWindow.icon = chooseIcon(level);
+        m_messageWindow.open(message, Log::getLevelString(level));
     }
 }

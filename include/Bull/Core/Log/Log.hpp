@@ -17,6 +17,15 @@ namespace Bull
 
         typedef std::unique_ptr<AbstractLogger>& AbstractLoggerHandler;
 
+        /*! \brief Get a LogLevel as a String
+         *
+         * \param level The LogLevel
+         *
+         * \return The String
+         *
+         */
+        static String getLevelString(LogLevel level);
+
     public:
 
         /*! \brief Create a logger

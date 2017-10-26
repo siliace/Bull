@@ -8,6 +8,17 @@ namespace Bull
 {
     class BULL_CORE_API MessageWindowLogger : public AbstractLogger
     {
+    private:
+
+        /*! \brief Get the MessageWindowIcon according to a LogLevel
+         *
+         * \param level The LogLevel
+         *
+         * \return The MessageWindowIcon
+         *
+         */
+        static MessageWindowIcon chooseIcon(LogLevel level);
+
     public:
 
         /*! \brief Default constructor
