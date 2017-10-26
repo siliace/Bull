@@ -4,7 +4,7 @@
 #include <utility>
 
 #include <Bull/Core/Export.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/RefCounted.hpp>
 
 namespace Bull
 {
@@ -122,7 +122,7 @@ namespace Bull
          * \return True if the object is not null
          *
          */
-        operator bool() const;
+        explicit operator bool() const;
 
     private:
 

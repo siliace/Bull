@@ -2,7 +2,7 @@
 #define BULL_GRAPHICS_NODE_HPP
 
 #include <Bull/Core/Pattern/ObjectRef.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/RefCounted.hpp>
 
 #include <Bull/Graphics/Export.hpp>
 
@@ -17,7 +17,7 @@ namespace Bull
     using NodeRef = ObjectRef<Node>;
     using NodeConstRef = ObjectRef<const Node>;
 
-    class BULL_GRAPHICS_API Node : public NonCopyable
+    class BULL_GRAPHICS_API Node : public RefCounted
     {
     public:
 

@@ -22,7 +22,7 @@ namespace Bull
     using FileRef = ObjectRef<File>;
     using FileConstRef = ObjectRef<const File>;
 
-    class BULL_CORE_API File : public InOutStream, public NonCopyable
+    class BULL_CORE_API File : public InOutStream, public RefCounted
     {
     public:
 
@@ -133,7 +133,7 @@ namespace Bull
          * \return Return the number of bytes actually read
          *
          */
-        Uint64 read(void* data, Uint64 size) override;
+        Uint64 read(void* data, Uint64 size);
 
         /*! \brief Read a line in the file
          *
@@ -152,7 +152,7 @@ namespace Bull
          * \return Return the number of bytes actually written
          *
          */
-        Uint64 write(const void* data, Uint64 size) override;
+        Uint64 write(const void* data, Uint64 size);
 
         /*! \brief Write a string in the file
          *
@@ -189,7 +189,7 @@ namespace Bull
          * \return Return the position of the cursor in the file
          *
          */
-        Uint64 getCursor() const override;
+        Uint64 getCursor() const;
 
         /*! \brief Move the reading position in the file
          *
@@ -207,7 +207,7 @@ namespace Bull
          * \return Return the actual position of the cursor
          *
          */
-        Uint64 setCursor(Uint64 position) override;
+        Uint64 setCursor(Uint64 position);
 
         /*! \brief Get the path of the file
          *
@@ -221,7 +221,7 @@ namespace Bull
          * \return Return the size of the file
          *
          */
-        Uint64 getSize() const override;
+        Uint64 getSize() const;
 
         /*! \brief Get the opening mode of the file
          *
