@@ -9,6 +9,6 @@ Bull uses CMake to build, therefore you can generate easily projects for your pl
 
 ## Dependencies
 ### Windows
-Everything is included in the `extlib` directory
+Everything is included in the `libs` directory
 ### Linux
 You will need to install the following packages: `libx11-dev libxrandr-dev libgl1-mesa-dev`
