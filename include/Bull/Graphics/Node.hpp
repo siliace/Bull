@@ -1,7 +1,6 @@
 #ifndef BULL_GRAPHICS_NODE_HPP
 #define BULL_GRAPHICS_NODE_HPP
 
-#include <Bull/Core/Pattern/ObjectRef.hpp>
 #include <Bull/Core/Pattern/RefCounted.hpp>
 
 #include <Bull/Graphics/Export.hpp>
@@ -12,12 +11,7 @@
 
 namespace Bull
 {
-    class Node;
-
-    using NodeRef = ObjectRef<Node>;
-    using NodeConstRef = ObjectRef<const Node>;
-
-    class BULL_GRAPHICS_API Node : public RefCounted
+    class BULL_GRAPHICS_API Node : public RefCounted<Node>
     {
     public:
 
@@ -95,7 +89,7 @@ namespace Bull
          * \return This
          *
          */
-        Node& addChild(const NodeRef& child);
+        Node& addChild(const Ref& child);
 
         /*! \brief Get the parent Node
          *
@@ -113,11 +107,11 @@ namespace Bull
 
     private:
 
-        Vector3F             m_scale; /*!< The scale of the Node */
-        const Node*          m_parent; /*!< The parent Node */
-        std::vector<NodeRef> m_children; /*!< Children of the Node */
-        EulerAnglesF         m_rotation; /*!< The rotation of the Node */
-        Vector3F             m_translation; /*!< The translation of the Node */
+        Vector3F         m_scale; /*!< The scale of the Node */
+        const Node*      m_parent; /*!< The parent Node */
+        std::vector<Ref> m_children; /*!< Children of the Node */
+        EulerAnglesF     m_rotation; /*!< The rotation of the Node */
+        Vector3F         m_translation; /*!< The translation of the Node */
     };
 }
 

@@ -71,7 +71,7 @@ namespace Bull
         return Vector3F::Zero;
     }
 
-    Node& Node::addChild(const NodeRef& child)
+    Node& Node::addChild(const Ref& child)
     {
         child->m_parent = this;
         m_children.emplace_back(child);

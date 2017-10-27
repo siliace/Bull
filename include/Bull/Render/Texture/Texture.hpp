@@ -4,8 +4,7 @@
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Image/Image.hpp>
 #include <Bull/Core/Image/ImageParameters.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Pattern/ObjectRef.hpp>
+#include <Bull/Core/Pattern/RefCounted.hpp>
 
 #include <Bull/Math/Polygon/Rectangle.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
@@ -14,24 +13,9 @@
 
 namespace Bull
 {
-    class Texture;
-
-    using TextureRef = ObjectRef<Texture>;
-    using TexureConstRef = ObjectRef<const Texture>;
-
-    class BULL_RENDER_API Texture : public ContextResource, public RefCounted, public AbstractImage
+    class BULL_RENDER_API Texture : public ContextResource, public RefCounted<Texture>, public AbstractImage
     {
     public:
-
-        /*! \brief Make a new Texture
-         *
-         * \param args Arguments to create the Texture
-         *
-         * \return A reference to the new Texture
-         *
-         */
-        template <typename... Args>
-        static TextureRef make(Args&&... args);
 
         /*! \brief Get the maximum size of a Texture
          *

@@ -4,11 +4,9 @@ set(BULL_SRC_CORE_FILESYSTEM ${BULL_SRC_CORE}/FileSystem)
 target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE_FILESYSTEM}/Directory.hpp
-            ${BULL_INC_CORE_FILESYSTEM}/Directory.inl
             ${BULL_SRC_CORE_FILESYSTEM}/Directory.cpp
             ${BULL_INC_CORE_FILESYSTEM}/DirectorySearchFlag.hpp
             ${BULL_INC_CORE_FILESYSTEM}/File.hpp
-            ${BULL_INC_CORE_FILESYSTEM}/File.inl
             ${BULL_SRC_CORE_FILESYSTEM}/File.cpp
             ${BULL_INC_CORE_FILESYSTEM}/FileOpeningMode.hpp
             ${BULL_INC_CORE_FILESYSTEM}/FileSystem.hpp
@@ -18,9 +16,6 @@ target_sources(bull-core
             ${BULL_SRC_CORE_FILESYSTEM}/InvalidPathException.cpp
             ${BULL_INC_CORE_FILESYSTEM}/Path.hpp
             ${BULL_SRC_CORE_FILESYSTEM}/Path.cpp
-            ${BULL_INC_CORE_FILESYSTEM}/TempDirectory.hpp
-            ${BULL_INC_CORE_FILESYSTEM}/TempDirectory.inl
-            ${BULL_SRC_CORE_FILESYSTEM}/TempDirectory.cpp
         PRIVATE
             ${BULL_SRC_CORE_FILESYSTEM}/DirectoryImpl.hpp
             ${BULL_SRC_CORE_FILESYSTEM}/DirectoryImpl.cpp

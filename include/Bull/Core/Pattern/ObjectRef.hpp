@@ -4,7 +4,6 @@
 #include <utility>
 
 #include <Bull/Core/Export.hpp>
-#include <Bull/Core/Pattern/RefCounted.hpp>
 
 namespace Bull
 {
@@ -23,7 +22,7 @@ namespace Bull
          * \param object The object to reference
          *
          */
-        ObjectRef(T* object);
+        explicit ObjectRef(T* object);
 
         /*! \brief Copy constructor
          *

@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    while(!Keyboard::isKeyPressed(Keyboard::Escape))
+    while(!Keyboard::isKeyPressed(KeyboardKey_Escape))
     {
         Index sent = 0;
 

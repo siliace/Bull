@@ -7,22 +7,17 @@
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/IO/InOutStream.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Pattern/ObjectRef.hpp>
+#include <Bull/Core/Pattern/RefCounted.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
 {
-    class File;
-
     namespace prv
     {
         class FileImpl;
     }
 
-    using FileRef = ObjectRef<File>;
-    using FileConstRef = ObjectRef<const File>;
-
-    class BULL_CORE_API File : public InOutStream, public RefCounted
+    class BULL_CORE_API File : public InOutStream, public RefCounted<File>
     {
     public:
 
@@ -72,16 +67,6 @@ namespace Bull
          *
          */
         static bool remove(const Path& name);
-
-        /*! \brief Make a File
-         *
-         * \param args Arguments to use to construct the File
-         *
-         * \return The created File
-         *
-         */
-        template <typename... Args>
-        static FileRef make(Args&&... args);
 
     public:
 
@@ -266,7 +251,5 @@ namespace Bull
         std::unique_ptr<prv::FileImpl> m_impl;
     };
 }
-
-#include <Bull/Core/FileSystem/File.inl>
 
 #endif // BULL_CORE_FILESYSTEM_FILE_HPP
