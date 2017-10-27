@@ -4,6 +4,7 @@
 #include <array>
 
 #include <Bull/Core/Configuration/Integer.hpp>
+#include <Bull/Core/Meta/Operators.hpp>
 
 #include <Bull/Math/Vector/Vector3.hpp>
 
@@ -145,7 +146,7 @@ namespace Bull
 
     private:
 
-        std::array<T, W * H> m_matrix;
+        std::array<T, Multiply<Index, W, H>::Value> m_matrix;
     };
 
     /*! \brief Addition two Matrix
