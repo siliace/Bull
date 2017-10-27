@@ -2,7 +2,7 @@
 #define BULL_CORE_MEMORY_MOVABLEPTR_HPP
 
 #include <Bull/Core/Export.hpp>
-#include <Bull/Core/Meta/EnableIfBaseOf.hpp>
+#include <Bull/Core/Meta/TypeTrait.hpp>
 
 namespace Bull
 {

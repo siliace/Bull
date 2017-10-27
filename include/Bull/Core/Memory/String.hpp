@@ -8,6 +8,7 @@
 
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Export.hpp>
+#include <Bull/Core/Meta/TypeTrait.hpp>
 
 namespace Bull
 {
@@ -76,7 +77,7 @@ namespace Bull
          * \return Return a String representing the number
          *
          */
-        template <typename T, typename = std::enable_if_t<std::is_arithmetic<T>::value>>
+        template <typename T, typename = EnableIfNumber<T>>
         static String number(T number)
         {
             return String(std::to_string(number).c_str());
