@@ -3,64 +3,64 @@
 
 namespace Bull
 {
-    template <T, T left, T right>
+    template <typename T, T left, T right>
     struct Add
     {
-        static constexpr T value = left + right;
+        static constexpr T Value = left + right;
     };
 
-    template <T, T left, T right>
+    template <typename T, T left, T right>
     struct Subtract
     {
-        static constexpr T value = left - right;
+        static constexpr T Value = left - right;
     };
 
-    template <T, T left, T right>
+    template <typename T, T left, T right>
     struct Multiply
     {
-        static constexpr T value = left * right;
+        static constexpr T Value = left * right;
     };
 
-    template <T, T left, T right>
+    template <typename T, T left, T right>
     struct Divide
     {
-        static constexpr T value = left / right;
+        static constexpr T Value = left / right;
     };
 
-    template <T, T left, T right>
+    template <typename T, T left, T right>
     struct Equal
     {
-        static constexpr bool value = left == right;
+        static constexpr bool Value = left == right;
     };
 
-    template <T, T left, T right>
+    template <typename T, T left, T right>
     struct NotEqual
     {
-        static constexpr bool value = left != right;
+        static constexpr bool Value = left != right;
     };
 
-    template <T, T left, T right>
+    template <typename T, T left, T right>
     struct Greater
     {
-        static constexpr bool value = left > right;
+        static constexpr bool Value = left > right;
     };
 
-    template <T, T left, T right>
+    template <typename T, T left, T right>
     struct Lower
     {
-        static constexpr bool value = left < right;
+        static constexpr bool Value = left < right;
     };
 
-    template <T, T left, T right>
+    template <typename T, T left, T right>
     struct GreaterOrEqual
     {
-        static constexpr bool value = Greater<T, left, right> | Equal<T, left, right>;
+        static constexpr bool Value = Greater<T, left, right>::Value | Equal<T, left, right>::Value;
     };
 
-    template <T, T left, T right>
+    template <typename T, T left, T right>
     struct LowerOrEqual
     {
-        static constexpr bool value = Lower<T, left, right> | Equal<T, left, right>;
+        static constexpr bool Value = Lower<T, left, right>::Value | Equal<T, left, right>::Value;
     };
 }
 
