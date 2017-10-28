@@ -4,7 +4,7 @@ namespace Bull
 {
     namespace prv
     {
-        IpAddress IpAddressImpl::fromSockAddr(const sockaddr* address, Socket::Port& port)
+        IpAddress IpAddressImpl::fromSockAddr(const sockaddr* address, NetPort& port)
         {
             switch(address->sa_family)
             {
@@ -15,14 +15,14 @@ namespace Bull
             return IpAddress::None;
         }
 
-        IpAddress IpAddressImpl::fromSockAddr(const sockaddr_in* address, Socket::Port& port)
+        IpAddress IpAddressImpl::fromSockAddr(const sockaddr_in* address, NetPort& port)
         {
             port = ntohs(port);
 
             return IpAddress(address->sin_addr.s_addr);
         }
 
-        IpAddress IpAddressImpl::fromSockAddr(const sockaddr_in6* address, Socket::Port& port)
+        IpAddress IpAddressImpl::fromSockAddr(const sockaddr_in6* address, NetPort& port)
         {
             return IpAddress::None;
         }
@@ -46,7 +46,7 @@ namespace Bull
             return false;
         }
 
-        IpAddressImpl::SockAddrLength IpAddressImpl::toSockAddr(const IpAddress& ip, Socket::Port port, void* buffer)
+        IpAddressImpl::SockAddrLength IpAddressImpl::toSockAddr(const IpAddress& ip, NetPort port, void* buffer)
         {
             return 0;
         }

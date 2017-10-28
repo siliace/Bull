@@ -10,13 +10,13 @@ namespace Bull
     TcpSocket::TcpSocket() :
         Socket(SocketType_Tcp),
         m_state(SocketState_Disconnected),
-        m_remotePort(AnyPort),
+        m_remotePort(NetPort_Any),
         m_remoteAddress(IpAddress::None)
     {
         /// Nothing
     }
 
-    SocketState TcpSocket::connect(const IpAddress& address, Port port)
+    SocketState TcpSocket::connect(const IpAddress& address, NetPort port)
     {
         if(getHandler() != prv::SocketImpl::InvalidHandler)
         {
@@ -36,7 +36,7 @@ namespace Bull
         return SocketState_Disconnected;
     }
 
-    SocketState TcpSocket::connect(const IpAddress& address, Port port, const Time& timeout)
+    SocketState TcpSocket::connect(const IpAddress& address, NetPort port, const Time& timeout)
     {
         SocketState state;
         Clock       timer;
@@ -56,7 +56,7 @@ namespace Bull
     {
         close();
 
-        m_remotePort    = AnyPort;
+        m_remotePort    = NetPort_Any;
         m_remoteAddress = IpAddress::None;
     }
 
@@ -125,7 +125,7 @@ namespace Bull
         return m_state;
     }
 
-    void TcpSocket::reset(SocketHandler handler, const IpAddress& address, Socket::Port port)
+    void TcpSocket::reset(SocketHandler handler, const IpAddress& address, NetPort port)
     {
         if(getHandler() != prv::SocketImpl::InvalidHandler)
         {

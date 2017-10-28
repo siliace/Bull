@@ -25,7 +25,7 @@ namespace Bull
              * \return The SocketHandler of the accepted client
              *
              */
-            static SocketHandler accept(SocketHandler handler, IpAddress& ip, Socket::Port& port);
+            static SocketHandler accept(SocketHandler handler, IpAddress& ip, NetPort& port);
 
             /*! \brief Bind a SocketHandler to an IpAddress and a port to listen
              *
@@ -36,7 +36,7 @@ namespace Bull
              * \return True if the SocketHandler was bound successfully
              *
              */
-            static bool bind(SocketHandler handler, const IpAddress& address, Socket::Port port);
+            static bool bind(SocketHandler handler, const IpAddress& address, NetPort port);
 
             /*! \brief Close a socket
              *
@@ -54,7 +54,7 @@ namespace Bull
              * \return True if the socket is connected
              *
              */
-            static bool connect(SocketHandler handler, const IpAddress& address, Socket::Port port);
+            static bool connect(SocketHandler handler, const IpAddress& address, NetPort port);
 
             /*! \brief Create a SocketHandler
              *
@@ -105,7 +105,7 @@ namespace Bull
              * \return
              *
              */
-            static Index receiveFrom(SocketHandler handler, void* data, Index length, IpAddress& from, Socket::Port& port);
+            static Index receiveFrom(SocketHandler handler, void* data, Index length, IpAddress& from, NetPort& port);
 
             /*! \brief
              *
@@ -128,7 +128,7 @@ namespace Bull
              * \return
              *
              */
-            static Index sendTo(SocketHandler handler, const void* data, Index length, const IpAddress& to, Socket::Port port);
+            static Index sendTo(SocketHandler handler, const void* data, Index length, const IpAddress& to, NetPort port);
 
             /*! \brief Set the blocking mode of a socket
              *

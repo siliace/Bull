@@ -9,12 +9,12 @@ namespace Bull
 {
     namespace prv
     {
-        SocketHandler SocketImpl::accept(SocketHandler handler, IpAddress& ip, Socket::Port& port)
+        SocketHandler SocketImpl::accept(SocketHandler handler, IpAddress& ip, NetPort& port)
         {
             return InvalidHandler;
         }
 
-        bool SocketImpl::bind(SocketHandler handler, const IpAddress& address, Socket::Port port)
+        bool SocketImpl::bind(SocketHandler handler, const IpAddress& address, NetPort port)
         {
             if(handler != InvalidHandler)
             {
@@ -35,7 +35,7 @@ namespace Bull
             }
         }
 
-        bool SocketImpl::connect(SocketHandler handler, const IpAddress& address, Socket::Port port)
+        bool SocketImpl::connect(SocketHandler handler, const IpAddress& address, NetPort port)
         {
             if(handler != InvalidHandler)
             {
@@ -83,7 +83,7 @@ namespace Bull
             return 0;
         }
 
-        Index SocketImpl::receiveFrom(SocketHandler handler, void* data, Index length, IpAddress& from, Socket::Port& port)
+        Index SocketImpl::receiveFrom(SocketHandler handler, void* data, Index length, IpAddress& from, NetPort& port)
         {
             return 0;
         }
@@ -103,7 +103,7 @@ namespace Bull
             return 0;
         }
 
-        Index SocketImpl::sendTo(SocketHandler handler, const IpAddress& to, Socket::Port port, const void* data, Index length)
+        Index SocketImpl::sendTo(SocketHandler handler, const IpAddress& to, NetPort port, const void* data, Index length)
         {
             return 0;
         }

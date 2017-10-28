@@ -21,7 +21,7 @@ namespace Bull
 
         Wsa wsa;
 
-        SocketHandler SocketImpl::accept(SocketHandler handler, IpAddress& ip, Socket::Port& port)
+        SocketHandler SocketImpl::accept(SocketHandler handler, IpAddress& ip, NetPort& port)
         {
             if(handler != InvalidHandler)
             {
@@ -42,9 +42,9 @@ namespace Bull
             return InvalidHandler;
         }
 
-        bool SocketImpl::bind(SocketHandler handler, const IpAddress& address, Socket::Port port)
+        bool SocketImpl::bind(SocketHandler handler, const IpAddress& address, NetPort port)
         {
-            if(handler != InvalidHandler && address.isValid() && port != Socket::AnyPort)
+            if(handler != InvalidHandler && address.isValid() && port != NetPort_Any)
             {
                 IpAddressImpl::SockAddrBuffer addrBuffer;
                 IpAddressImpl::SockAddrLenght length = IpAddressImpl::toSockAddr(address, port, &addrBuffer);
@@ -63,9 +63,9 @@ namespace Bull
             }
         }
 
-        bool SocketImpl::connect(SocketHandler handler, const IpAddress& address, Socket::Port port)
+        bool SocketImpl::connect(SocketHandler handler, const IpAddress& address, NetPort port)
         {
-            if(handler != InvalidHandler && address.isValid() && port != Socket::AnyPort)
+            if(handler != InvalidHandler && address.isValid() && port != NetPort_Any)
             {
                 IpAddressImpl::SockAddrBuffer addrBuffer;
                 IpAddressImpl::SockAddrLenght length = IpAddressImpl::toSockAddr(address, port, &addrBuffer);
@@ -118,9 +118,9 @@ namespace Bull
             return 0;
         }
 
-        Index SocketImpl::receiveFrom(SocketHandler handler, void* data, Index length, IpAddress& from, Socket::Port& port)
+        Index SocketImpl::receiveFrom(SocketHandler handler, void* data, Index length, IpAddress& from, NetPort& port)
         {
-            if(handler != InvalidHandler && from.isValid() && port != Socket::AnyPort && data && length)
+            if(handler != InvalidHandler && from.isValid() && port != NetPort_Any && data && length)
             {
                 IpAddressImpl::SockAddrBuffer addrBuffer;
                 IpAddressImpl::SockAddrLenght addrLenght;
@@ -145,9 +145,9 @@ namespace Bull
             return 0;
         }
 
-        Index SocketImpl::sendTo(SocketHandler handler, const void* data, Index length, const IpAddress& to, Socket::Port port)
+        Index SocketImpl::sendTo(SocketHandler handler, const void* data, Index length, const IpAddress& to, NetPort port)
         {
-            if(handler != InvalidHandler && to.isValid() && port != Socket::AnyPort && data && length)
+            if(handler != InvalidHandler && to.isValid() && port != NetPort_Any && data && length)
             {
                 IpAddressImpl::SockAddrBuffer addrBuffer;
                 IpAddressImpl::SockAddrLenght addrLenght = IpAddressImpl::toSockAddr(to, port, &addrBuffer);

@@ -10,6 +10,7 @@ target_sources(bull-network
             ${BULL_SRC_NETWORK}/Icmp.cpp
             ${BULL_INC_NETWORK}/IpAddress.hpp
             ${BULL_SRC_NETWORK}/IpAddress.cpp
+            ${BULL_INC_NETWORK}/NetPort.hpp
             ${BULL_INC_NETWORK}/NetProtocol.hpp
             ${BULL_INC_NETWORK}/Socket.hpp
             ${BULL_SRC_NETWORK}/Socket.cpp

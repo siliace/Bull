@@ -4,8 +4,8 @@
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Network/Export.hpp>
-#include <Bull/Network/IpAddress.hpp>
 #include <Bull/Network/NetProtocol.hpp>
+#include <Bull/Network/NetPort.hpp>
 #include <Bull/Network/SocketHandler.hpp>
 #include <Bull/Network/SocketState.hpp>
 #include <Bull/Network/SocketType.hpp>
@@ -14,12 +14,6 @@ namespace Bull
 {
     class BULL_NETWORK_API Socket : public NonCopyable
     {
-    public:
-
-        typedef unsigned short Port;
-
-        static constexpr Port AnyPort = 0;
-
     public:
 
         /*! \brief Destructor

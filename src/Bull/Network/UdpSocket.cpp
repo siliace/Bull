@@ -9,7 +9,7 @@ namespace Bull
         /// Nothing
     }
 
-    SocketState UdpSocket::bind(Socket::Port port, const IpAddress& address)
+    SocketState UdpSocket::bind(NetPort port, const IpAddress& address)
     {
         if(address == IpAddress::None || address == IpAddress::BroadcastIpv4)
         {
@@ -31,10 +31,10 @@ namespace Bull
         close();
     }
 
-    SocketState UdpSocket::receive(void* data, Index length, Index& received, IpAddress& remoteAddress, Socket::Port& remotePort)
+    SocketState UdpSocket::receive(void* data, Index length, Index& received, IpAddress& remoteAddress, NetPort& remotePort)
     {
         received      = 0;
-        remotePort    = Socket::AnyPort;
+        remotePort    = NetPort_Any;
         remoteAddress = IpAddress::None;
 
         create(remoteAddress.getProtocol());
@@ -51,7 +51,7 @@ namespace Bull
         return SocketState_Ready;
     }
 
-    SocketState UdpSocket::send(const void* data, Index length, const IpAddress& remoteAddress, Socket::Port remotePort)
+    SocketState UdpSocket::send(const void* data, Index length, const IpAddress& remoteAddress, NetPort remotePort)
     {
         create(remoteAddress.getProtocol());
 

@@ -19,7 +19,7 @@ namespace Bull
                 case NetProtocol_IpV6:
                 {
                     IpAddressImpl::SockAddrBuffer sockAddr;
-                    IpAddressImpl::SockAddrLenght length = IpAddressImpl::toSockAddr(host, Socket::AnyPort, &sockAddr[0]);
+                    IpAddressImpl::SockAddrLenght length = IpAddressImpl::toSockAddr(host, NetPort_Any, &sockAddr[0]);
 
                     if(length > 0)
                     {

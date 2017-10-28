@@ -4,7 +4,7 @@ namespace Bull
 {
     namespace prv
     {
-        IpAddress IpAddressImpl::fromSockAddr(const sockaddr* address, Socket::Port& port)
+        IpAddress IpAddressImpl::fromSockAddr(const sockaddr* address, NetPort& port)
         {
             switch(address->sa_family)
             {
@@ -15,14 +15,14 @@ namespace Bull
             return IpAddress::None;
         }
 
-        IpAddress IpAddressImpl::fromSockAddr(const sockaddr_in* address, Socket::Port& port)
+        IpAddress IpAddressImpl::fromSockAddr(const sockaddr_in* address, NetPort& port)
         {
-            port = ntohs(address->sin_port);
+            port = static_cast<NetPort>(ntohs(address->sin_port));
 
             return IpAddress(address->sin_addr.s_net, address->sin_addr.s_host, address->sin_addr.s_lh, address->sin_addr.s_impno);
         }
 
-        IpAddress IpAddressImpl::fromSockAddr(const sockaddr_in6* address, Socket::Port& port)
+        IpAddress IpAddressImpl::fromSockAddr(const sockaddr_in6* address, NetPort& port)
         {
 
         }
@@ -52,7 +52,7 @@ namespace Bull
 
                 while(current)
                 {
-                    Socket::Port port = Socket::AnyPort;
+                    NetPort port = NetPort_Any;
                     IpAddress address = fromSockAddr(current->ai_addr, port);
 
                     addresses.emplace_back(address);
@@ -66,7 +66,7 @@ namespace Bull
             return false;
         }
 
-        IpAddressImpl::SockAddrLenght IpAddressImpl::toSockAddr(const IpAddress& ip, Socket::Port port, void* buffer)
+        IpAddressImpl::SockAddrLenght IpAddressImpl::toSockAddr(const IpAddress& ip, NetPort port, void* buffer)
         {
             if(ip.isValid())
             {

@@ -1,6 +1,7 @@
 #ifndef BULL_NETWORK_UDPSOCKET_HPP
 #define BULL_NETWORK_UDPSOCKET_HPP
 
+#include <Bull/Network/IpAddress.hpp>
 #include <Bull/Network/Socket.hpp>
 
 namespace Bull
@@ -22,7 +23,7 @@ namespace Bull
          * \return The new state of the UdpSocket
          *
          */
-        SocketState bind(Socket::Port port, const IpAddress& address = IpAddress::AnyIpv4);
+        SocketState bind(NetPort port, const IpAddress& address = IpAddress::AnyIpv4);
 
         /*! \brief Unbind the UdpSocket
          *
@@ -40,7 +41,7 @@ namespace Bull
          * \return The new state of the UdpSocket
          *
          */
-        SocketState receive(void* data, Index length, Index& received, IpAddress& remoteAddress, Socket::Port& remotePort);
+        SocketState receive(void* data, Index length, Index& received, IpAddress& remoteAddress, NetPort& remotePort);
 
         /*! \brief Send data to a remote host
          *
@@ -52,7 +53,7 @@ namespace Bull
          * \return The new state of the UdpSocket
          *
          */
-        SocketState send(const void* data, Index length, const IpAddress& remoteAddress, Socket::Port remotePort);
+        SocketState send(const void* data, Index length, const IpAddress& remoteAddress, NetPort remotePort);
     };
 }
 

@@ -1,8 +1,6 @@
 #ifndef BULL_NETWORK_TCPSOCKET_HPP
 #define BULL_NETWORK_TCPSOCKET_HPP
 
-#include <Bull/Core/Time/Time.hpp>
-
 #include <Bull/Network/Socket.hpp>
 
 namespace Bull
@@ -28,7 +26,7 @@ namespace Bull
          * \return The new State of the TcpSocket
          *
          */
-        SocketState connect(const IpAddress& address, Port port);
+        SocketState connect(const IpAddress& address, NetPort port);
 
         /*! \brief Connect the TcpSocket to a remote host
          *
@@ -39,7 +37,7 @@ namespace Bull
          * \return The new State of the TcpSocket
          *
          */
-        SocketState connect(const IpAddress& address, Port port, const Time& timeout);
+        SocketState connect(const IpAddress& address, NetPort port, const Time& timeout);
 
         /*! \brief Disconnect the TcpSocket from the remote host
          *
@@ -84,7 +82,7 @@ namespace Bull
          * \param handler The handler to use
          *
          */
-        void reset(SocketHandler handler, const IpAddress& address, Socket::Port port);
+        void reset(SocketHandler handler, const IpAddress& address, NetPort port);
 
     private:
 
@@ -97,7 +95,7 @@ namespace Bull
         TcpSocket& updateState(SocketState state);
 
         SocketState m_state;
-        Port        m_remotePort;
+        NetPort        m_remotePort;
         IpAddress   m_remoteAddress;
     };
 }

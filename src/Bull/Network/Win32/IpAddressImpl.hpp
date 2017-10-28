@@ -28,7 +28,7 @@ namespace Bull
              * \return The converted IpAddress
              *
              */
-            static IpAddress fromSockAddr(const sockaddr* address, Socket::Port& port);
+            static IpAddress fromSockAddr(const sockaddr* address, NetPort& port);
 
             /*! \brief Convert a sockaddr_in to an IpAddress
              *
@@ -38,7 +38,7 @@ namespace Bull
              * \return The converted IpAddress
              *
              */
-            static IpAddress fromSockAddr(const sockaddr_in* address, Socket::Port& port);
+            static IpAddress fromSockAddr(const sockaddr_in* address, NetPort& port);
 
             /*! \brief Convert a sockaddr_in6 to an IpAddress
              *
@@ -48,7 +48,7 @@ namespace Bull
              * \return The converted IpAddress
              *
              */
-            static IpAddress fromSockAddr(const sockaddr_in6* address, Socket::Port& port);
+            static IpAddress fromSockAddr(const sockaddr_in6* address, NetPort& port);
 
             /*! \brief Get information about an host
              *
@@ -79,7 +79,7 @@ namespace Bull
              * \return The length of the converted sockaddr
              *
              */
-            static SockAddrLenght toSockAddr(const IpAddress& ip, Socket::Port port, void* buffer);
+            static SockAddrLenght toSockAddr(const IpAddress& ip, NetPort port, void* buffer);
         };
     }
 }

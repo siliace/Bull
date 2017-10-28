@@ -11,17 +11,17 @@ namespace Bull
 {
     TcpListener::TcpListener() :
         Socket(SocketType_Tcp),
-        m_listeningPort(AnyPort)
+        m_listeningPort(NetPort_Any)
     {
         /// Nothing
     }
 
-    SocketState TcpListener::listen(Socket::Port port, unsigned int backlog)
+    SocketState TcpListener::listen(NetPort port, unsigned int backlog)
     {
         return listen(port, IpAddress::AnyIpv4, backlog);
     }
 
-    SocketState TcpListener::listen(Port port, const IpAddress& host, unsigned int backlog)
+    SocketState TcpListener::listen(NetPort port, const IpAddress& host, unsigned int backlog)
     {
         if(host.isValid())
         {
@@ -50,7 +50,7 @@ namespace Bull
         if(getHandler() != prv::SocketImpl::InvalidHandler)
         {
             IpAddress ip;
-            Socket::Port port;
+            NetPort port;
 
             SocketHandler clientHandler = prv::SocketImpl::accept(getHandler(), ip, port);
 
@@ -90,7 +90,7 @@ namespace Bull
         return state;
     }
 
-    Socket::Port TcpListener::getListeningPort() const
+    NetPort TcpListener::getListeningPort() const
     {
         return m_listeningPort;
     }

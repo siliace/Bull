@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
     TcpListener server;
     String message("Hello world");
 
-    if(server.listen(6969) != SocketState_Ready)
+    if(server.listen(NetPort(6969)) != SocketState_Ready)
     {
         std::cout << "Failed to listen the port" << std::endl;
 
