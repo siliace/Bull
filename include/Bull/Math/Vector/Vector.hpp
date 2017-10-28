@@ -32,16 +32,6 @@ namespace Bull
          */
         static T dotProduct(const Vector<T, S>& left, const Vector<T, S>& right);
 
-        /*! \brief Compute the crossProduct of two Vector
-         *
-         * \param left  The left  Vector
-         * \param right The right Vector
-         *
-         * \return The normal Vector
-         *
-         */
-        static Vector<T, S> crossProduct(const Vector<T, S>& left, const Vector<T, S>& right);
-
     public:
 
         /*! \brief Default constructor
@@ -62,7 +52,7 @@ namespace Bull
          *
          */
         template <typename U, Index US>
-        Vector(const Vector<U, US>& copy);
+        explicit Vector(const Vector<U, US>& copy);
 
         /*! \brief Basic assignment operator
          *
