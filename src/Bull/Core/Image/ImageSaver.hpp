@@ -11,6 +11,20 @@ namespace Bull
     {
         struct ImageSaver : public AbstractResourceSaver<Image, ImageParameters>
         {
+        private:
+
+            struct PixelBuffer
+            {
+                void* data;
+                Index length;
+            };
+
+            static void writeToStream(void* context, void* data, int size);
+
+            static void writeToMemory(void* context, void* data, int size);
+
+        public:
+
             /*! \brief Save an Image to Path
              *
              * \param image      The Image to save

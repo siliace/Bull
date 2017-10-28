@@ -21,7 +21,7 @@ namespace Bull
         int         stride   = 0;
         int         quality  = 100;
         Channels    channels = RGBA;
-        ImageFormat format   = ImageFormat::Png;
+        ImageFormat format   = ImageFormat_Png;
     };
 }
 
