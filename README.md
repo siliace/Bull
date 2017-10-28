@@ -1,5 +1,5 @@
 # Bull - An easy to use OpenGL toolkit
-Bull is a simple, fast, cross-platform, object-oriented API providing an access windowing, threading, file system, logging, memory and more.
+Bull is a simple, fast, cross-platform, object-oriented API providing an access to windowing, threading, file system, logging, memory and more.
 
 ## Author
 Benjamin Bernard - Main developer (benjber69@gmail.com)
