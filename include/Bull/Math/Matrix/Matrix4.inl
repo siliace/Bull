@@ -60,7 +60,7 @@ namespace Bull
     }
 
     template <typename T>
-    Matrix4<T> Matrix4<T>::makeView(const Vector3<T>& position, const Quaternion<T> orientation)
+    Matrix4<T> Matrix4<T>::makeView(const Vector3<T>& position, const Quaternion<T>& orientation)
     {
         Quaternion<T> inverse = Quaternion<T>::conjugate(orientation);
 

@@ -50,7 +50,7 @@ namespace Bull
          * \return The view matrix
          *
          */
-        static Matrix4<T> makeView(const Vector3<T>& position, const Quaternion<T> orientation);
+        static Matrix4<T> makeView(const Vector3<T>& position, const Quaternion<T>& orientation);
 
         /*! \brief Create an orthographic projection matrix
          *
