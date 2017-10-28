@@ -4,6 +4,8 @@ set(BULL_SRC_CORE_MEMORY ${BULL_SRC_CORE}/Memory)
 target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE_MEMORY}/AbstractBuffer.hpp
+            ${BULL_INC_CORE_MEMORY}/Array.hpp
+            ${BULL_INC_CORE_MEMORY}/Array.inl
             ${BULL_INC_CORE_MEMORY}/BadFree.hpp
             ${BULL_SRC_CORE_MEMORY}/BadFree.cpp
             ${BULL_INC_CORE_MEMORY}/ByteArray.hpp
