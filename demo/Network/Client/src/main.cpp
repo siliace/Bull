@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 
     buffer.reserve(512);
 
-    if(socket.connect(IpAddress::LoopbackIpv4, 6969) != SocketState_Ready)
+    if(socket.connect(IpAddress::LoopbackIpv4, NetPort(6969)) != SocketState_Ready)
     {
         std::cout << "Failed to connect" << std::endl;
     }
