@@ -14,5 +14,7 @@ target_sources(bull-graphics
             ${BULL_SRC_GRAPHICS}/Node.cpp
         )
 
+add_subdirectory(Light)
+
 target_link_libraries(bull-graphics bull-core)
 target_link_libraries(bull-graphics bull-render)
