@@ -4,27 +4,11 @@
 #include <atomic>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Pattern/ObjectRef.hpp>
 
 namespace Bull
 {
-    template <typename T>
     class BULL_CORE_API RefCounted : public NonCopyable
     {
-    public:
-
-        using Ref = ObjectRef<T>;
-        using ConstRef = ObjectRef<const T>;
-
-        /*! \brief Create an object
-         *
-         * \param args Arguments to create the object
-         *
-         * \return
-         */
-        template <typename... Args>
-        static ObjectRef<T> make(Args&&... args);
-
     public:
 
         /*! \brief Constructor
@@ -81,7 +65,5 @@ namespace Bull
         mutable std::atomic_uint m_referenceCounter;
     };
 }
-
-#include <Bull/Core/Pattern/RefCounted.inl>
 
 #endif // BULL_CORE_PATTERN_REFCOUNTED_HPP

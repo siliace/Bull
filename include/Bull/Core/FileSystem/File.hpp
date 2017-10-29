@@ -17,7 +17,7 @@ namespace Bull
         class FileImpl;
     }
 
-    class BULL_CORE_API File : public InOutStream, public RefCounted<File>
+    class BULL_CORE_API File : public InOutStream, public RefCounted
     {
     public:
 

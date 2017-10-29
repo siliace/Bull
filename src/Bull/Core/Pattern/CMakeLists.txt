@@ -8,6 +8,6 @@ target_sources(bull-core
             ${BULL_INC_CORE_PATTERN}/ObjectRef.hpp
             ${BULL_INC_CORE_PATTERN}/ObjectRef.inl
             ${BULL_INC_CORE_PATTERN}/RefCounted.hpp
-            ${BULL_INC_CORE_PATTERN}/RefCounted.inl
+            ${BULL_SRC_CORE_PATTERN}/RefCounted.cpp
             ${BULL_INC_CORE_PATTERN}/Singleton.hpp
         )

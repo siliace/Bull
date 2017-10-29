@@ -17,7 +17,7 @@ namespace Bull
         class DirectoryImpl;
     }
 
-    class BULL_CORE_API Directory : public RefCounted<Directory>
+    class BULL_CORE_API Directory : public RefCounted
     {
     public:
 

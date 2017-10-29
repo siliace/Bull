@@ -45,7 +45,7 @@ namespace Bull
          * \return This
          *
          */
-        Material& setTexture(Texture::Ref texture, TextureType type);
+        Material& setTexture(const TextureRef& texture, TextureType type);
 
         /*! \brief Get a Texture
          *
@@ -54,16 +54,16 @@ namespace Bull
          * \return The texture
          *
          */
-        const Texture::Ref& getTexture(TextureType type) const;
+        const TextureRef& getTexture(TextureType type) const;
 
     private:
 
-        std::array<Texture::Ref, 7> m_textures;
-        float                       m_shininess;
-        Color                       m_ambientColor;
-        Color                       m_diffuseColor;
-        Color                       m_specularColor;
-        float                       m_alphaThreshold;
+        std::array<TextureRef, 7> m_textures;
+        float                     m_shininess;
+        Color                     m_ambientColor;
+        Color                     m_diffuseColor;
+        Color                     m_specularColor;
+        float                     m_alphaThreshold;
     };
 }
 

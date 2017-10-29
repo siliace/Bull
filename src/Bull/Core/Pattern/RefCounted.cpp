@@ -1,30 +1,17 @@
-#include <memory>
-
 #include <Bull/Core/IO/StringStream.hpp>
 #include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/Pattern/RefCounted.hpp>
 
 namespace Bull
 {
-    template <typename T>
-    template <typename... Args>
-    ObjectRef<T> RefCounted<T>::make(Args&&... args)
-    {
-        std::unique_ptr<T> pointer = std::make_unique<T>(std::forward<Args>(args)...);
-        pointer->setPersistent(false);
-
-        return ObjectRef<T>(pointer.get());
-    }
-
-    template <typename T>
-    RefCounted<T>::RefCounted(bool persistent) :
+    RefCounted::RefCounted(bool persistent) :
         m_isPersistent(persistent),
         m_referenceCounter(0)
     {
         /// Nothing
     }
 
-    template <typename T>
-    RefCounted<T>::~RefCounted()
+    RefCounted::~RefCounted()
     {
         if(m_referenceCounter > 0)
         {
@@ -36,14 +23,12 @@ namespace Bull
         }
     }
 
-    template <typename T>
-    void RefCounted<T>::addReference()
+    void RefCounted::addReference()
     {
         m_referenceCounter++;
     }
 
-    template <typename T>
-    bool RefCounted<T>::removeReference()
+    bool RefCounted::removeReference()
     {
         if(m_referenceCounter > 0)
         {
@@ -58,8 +43,7 @@ namespace Bull
         return false;
     }
 
-    template <typename T>
-    bool RefCounted<T>::setPersistent(bool persistent, bool checkReference)
+    bool RefCounted::setPersistent(bool persistent, bool checkReference)
     {
         m_isPersistent = persistent;
 
@@ -73,14 +57,12 @@ namespace Bull
         return false;
     }
 
-    template <typename T>
-    bool RefCounted<T>::isPersistent() const
+    bool RefCounted::isPersistent() const
     {
         return m_isPersistent;
     }
 
-    template <typename T>
-    unsigned int RefCounted<T>::getReferenceCount() const
+    unsigned int RefCounted::getReferenceCount() const
     {
         return m_referenceCounter;
     }

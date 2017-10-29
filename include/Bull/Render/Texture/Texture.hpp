@@ -4,6 +4,7 @@
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Image/Image.hpp>
 #include <Bull/Core/Image/ImageParameters.hpp>
+#include <Bull/Core/Pattern/ObjectRef.hpp>
 #include <Bull/Core/Pattern/RefCounted.hpp>
 
 #include <Bull/Math/Polygon/Rectangle.hpp>
@@ -13,7 +14,12 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API Texture : public ContextResource, public RefCounted<Texture>, public AbstractImage
+    class Texture;
+
+    using TextureRef = ObjectRef<Texture>;
+    using TextureConstRef = ObjectRef<const Texture>;
+
+    class BULL_RENDER_API Texture : public ContextResource, public RefCounted, public AbstractImage
     {
     public:
 
