@@ -9,25 +9,25 @@ namespace Bull
     }
 
     Date::Date() :
-        year(1970),
-        month(Month::January),
         day(1),
-        dayOfWeek(Day::Thusday),
         hour(0),
+        year(1970),
+        month(DateMonth_January),
         minute(0),
-        second(Time::seconds(0))
+        second(Time::seconds(0)),
+        dayOfWeek(DateDay_Thusday)
     {
         /// Nothing
     }
 
     bool Date::operator==(const Date& left) const
     {
-        return (year   == left.year)   &&
-               (month  == left.month)  &&
-               (day    == left.day)    &&
-               (hour   == left.hour)   &&
-               (minute == left.minute) &&
-               (second == left.second);
+        return year   == left.year   &&
+               month  == left.month  &&
+               day    == left.day    &&
+               hour   == left.hour   &&
+               minute == left.minute &&
+               second == left.second;
     }
 
     bool Date::operator!=(const Date& left) const

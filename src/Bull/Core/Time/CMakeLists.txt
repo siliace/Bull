@@ -7,6 +7,8 @@ target_sources(bull-core
             ${BULL_SRC_CORE_TIME}/Clock.cpp
             ${BULL_INC_CORE_TIME}/Date.hpp
             ${BULL_SRC_CORE_TIME}/Date.cpp
+            ${BULL_INC_CORE_TIME}/Day.hpp
+            ${BULL_INC_CORE_TIME}/Month.hpp
             ${BULL_INC_CORE_TIME}/Time.hpp
             ${BULL_SRC_CORE_TIME}/Time.cpp
         PRIVATE

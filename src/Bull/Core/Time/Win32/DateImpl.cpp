@@ -13,11 +13,11 @@ namespace Bull
             GetLocalTime(&lt);
 
             now.year      = lt.wYear;
-            now.month     = Date::Month(lt.wMonth);
-            now.day       = lt.wDay;
-            now.dayOfWeek = Date::Day(lt.wDayOfWeek);
-            now.hour      = lt.wHour;
-            now.minute    = lt.wMinute;
+            now.month     = DateMonth(lt.wMonth);
+            now.dayOfWeek = DateDay(lt.wDayOfWeek);
+            now.day       = static_cast<Uint8>(lt.wDay);
+            now.hour      = static_cast<Uint8>(lt.wHour);
+            now.minute    = static_cast<Uint8>(lt.wMinute);
             now.second    = Time::seconds(lt.wSecond) + Time::milliseconds(lt.wMilliseconds);
 
             return now;

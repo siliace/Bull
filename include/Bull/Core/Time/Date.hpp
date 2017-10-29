@@ -2,39 +2,14 @@
 #define BULL_CORE_TIME_DATE_HPP
 
 #include <Bull/Core/Configuration/Integer.hpp>
+#include <Bull/Core/Time/DateDay.hpp>
+#include <Bull/Core/Time/DateMonth.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 namespace Bull
 {
     struct BULL_CORE_API Date
     {
-        enum class Day
-        {
-            Sunday    = 0,
-            Monday    = 1,
-            Tuesday   = 2,
-            Wednesday = 3,
-            Thusday   = 4,
-            Friday    = 5,
-            Saturday  = 6
-        };
-
-        enum class Month
-        {
-            January   = 1,
-            Febuary   = 2,
-            March     = 3,
-            April     = 4,
-            May       = 5,
-            June      = 6,
-            Juily     = 7,
-            August    = 8,
-            September = 9,
-            October   = 10,
-            November  = 11,
-            December  = 12
-        };
-
         /*! \brief Get the current date
          *
          * \return Return the current date
@@ -137,13 +112,13 @@ namespace Bull
          */
         Date operator-(const Date& left) const;
 
-        Uint32 year;
-        Month  month;
-        Uint8  day;
-        Day    dayOfWeek;
-        Uint8  hour;
-        Uint8  minute;
-        Time   second;
+        Uint8     day;
+        Uint8     hour;
+        Uint32    year;
+        DateMonth month;
+        Uint8     minute;
+        Time      second;
+        DateDay   dayOfWeek;
     };
 }
 

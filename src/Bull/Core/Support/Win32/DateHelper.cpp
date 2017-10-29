@@ -10,9 +10,9 @@ namespace Bull
             Date date;
 
             date.year      = sysTime.wYear;
-            date.month     = Date::Month(sysTime.wMonth);
+            date.month     = DateMonth(sysTime.wMonth);
             date.day       = sysTime.wDay;
-            date.dayOfWeek = Date::Day(sysTime.wDayOfWeek);
+            date.dayOfWeek = DateDay(sysTime.wDayOfWeek);
             date.hour      = sysTime.wHour;
             date.minute    = sysTime.wMinute;
             date.second    = Time::seconds(sysTime.wSecond) + Time::milliseconds(sysTime.wMilliseconds);
