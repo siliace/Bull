@@ -6,8 +6,6 @@ bull_add_library(bull-render)
 target_sources(bull-render
         PUBLIC
             ${BULL_INC_RENDER}/Export.hpp
-            ${BULL_INC_RENDER}/Mesh.hpp
-            ${BULL_SRC_RENDER}/Mesh.cpp
             ${BULL_INC_RENDER}/RenderPrimitive.hpp
         )
 

@@ -3,7 +3,7 @@
 
 #include <Bull/Graphics/Model/Node.hpp>
 
-#include <Bull/Render/Mesh.hpp>
+#include <Bull/Graphics/Model/Mesh.hpp>
 
 class Cube : public Bull::Node
 {
