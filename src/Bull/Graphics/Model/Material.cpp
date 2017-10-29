@@ -1,4 +1,4 @@
-#include <Bull/Graphics/Material.hpp>
+#include <Bull/Graphics/Model/Material.hpp>
 
 namespace Bull
 {
@@ -20,14 +20,14 @@ namespace Bull
         return m_shininess;
     }
 
-    Material& Material::setTexture(Texture::Ref texture, MaterialTextureType type)
+    Material& Material::setTexture(Texture::Ref texture, TextureType type)
     {
         m_textures[type] = std::move(texture);
 
         return (*this);
     }
 
-    const Texture::Ref& Material::getTexture(MaterialTextureType type) const
+    const Texture::Ref& Material::getTexture(TextureType type) const
     {
         return m_textures[type];
     }

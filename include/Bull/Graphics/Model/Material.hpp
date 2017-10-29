@@ -6,7 +6,7 @@
 #include <Bull/Core/Utility/Color.hpp>
 
 #include <Bull/Graphics/Export.hpp>
-#include <Bull/Graphics/MaterialTextureType.hpp>
+#include <Bull/Graphics/Model/TextureType.hpp>
 
 #include <Bull/Render/Texture/Texture.hpp>
 
@@ -45,7 +45,7 @@ namespace Bull
          * \return This
          *
          */
-        Material& setTexture(Texture::Ref texture, MaterialTextureType type);
+        Material& setTexture(Texture::Ref texture, TextureType type);
 
         /*! \brief Get a Texture
          *
@@ -54,7 +54,7 @@ namespace Bull
          * \return The texture
          *
          */
-        const Texture::Ref& getTexture(MaterialTextureType type) const;
+        const Texture::Ref& getTexture(TextureType type) const;
 
     private:
 

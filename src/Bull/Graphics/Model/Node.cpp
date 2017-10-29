@@ -1,4 +1,4 @@
-#include <Bull/Graphics/Node.hpp>
+#include <Bull/Graphics/Model/Node.hpp>
 
 namespace Bull
 {
