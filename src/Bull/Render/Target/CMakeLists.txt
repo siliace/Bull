@@ -9,19 +9,4 @@ target_sources(bull-render
             ${BULL_SRC_RENDER_TARGET}/RenderWindow.cpp
             ${BULL_INC_RENDER_TARGET}/Viewport.hpp
             ${BULL_SRC_RENDER_TARGET}/Viewport.cpp
-        PRIVATE
-            ${BULL_SRC_RENDER_TARGET}/RenderWindowImpl.cpp
-            ${BULL_SRC_RENDER_TARGET}/RenderWindowImpl.hpp
         )
-
-if(BULL_OS_WINDOWS)
-    add_subdirectory(Win32)
-else()
-    if(WINDOW_LIBRARY STREQUAL "BULL_BUILD_XLIB")
-        add_subdirectory(Xlib)
-    elseif(WINDOW_LIBRARY STREQUAL "BULL_BUILD_XCB")
-        add_subdirectory(XCB)
-    elseif(WINDOW_LIBRARY STREQUAL "BULL_BUILD_WEYLAND")
-        add_subdirectory(Weyland)
-    endif()
-endif()

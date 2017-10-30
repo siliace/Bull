@@ -1,12 +1,11 @@
-#ifndef BULL_COREWINDOWIMPL_hpp
-#define BULL_COREWINDOWIMPL_hpp
+#ifndef BULL_CORE_WINDOW_WINDOWSIMPL_HPP
+#define BULL_CORE_WINDOW_WINDOWSIMPL_HPP
 
 #include <queue>
 #include <memory>
 
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Pattern/NonMovable.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Window/CursorImpl.hpp>
 #include <Bull/Core/Window/VideoMode.hpp>
@@ -19,7 +18,7 @@ namespace Bull
 {
     namespace prv
     {
-        class WindowImpl : public NonCopyable, public NonMovable
+        class WindowImpl : public NonCopyable
         {
         public:
 
@@ -259,4 +258,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_COREWINDOWIMPL_hpp
+#endif // BULL_CORE_WINDOW_WINDOWSIMPL_HPP

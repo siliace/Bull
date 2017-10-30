@@ -8,7 +8,6 @@
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/FileSystem/DirectorySearchFlag.hpp>
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Pattern/RefCounted.hpp>
 
 namespace Bull
 {
@@ -17,7 +16,7 @@ namespace Bull
         class DirectoryImpl;
     }
 
-    class BULL_CORE_API Directory : public RefCounted
+    class BULL_CORE_API Directory
     {
     public:
 

@@ -7,7 +7,6 @@
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/IO/InOutStream.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Pattern/RefCounted.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
@@ -17,7 +16,7 @@ namespace Bull
         class FileImpl;
     }
 
-    class BULL_CORE_API File : public InOutStream, public RefCounted
+    class BULL_CORE_API File : public InOutStream
     {
     public:
 

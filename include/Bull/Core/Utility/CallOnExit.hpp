@@ -4,12 +4,11 @@
 #include <Bull/Core/Export.hpp>
 #include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Pattern/NonMovable.hpp>
 
 
 namespace Bull
 {
-    class BULL_CORE_API CallOnExit : public NonCopyable, public NonMovable
+    class BULL_CORE_API CallOnExit : public NonCopyable
     {
     public:
 

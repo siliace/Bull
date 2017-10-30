@@ -3,21 +3,9 @@
 namespace Bull
 {
     Node::Node() :
-        m_scale(Vector3F::Unit),
-        m_parent(nullptr)
+        m_scale(Vector3F::Unit)
     {
         /// Nothing
-    }
-
-    Node::Node(const Node* parent) :
-        m_parent(parent)
-    {
-        /// Nothing
-    }
-
-    bool Node::isRoot() const
-    {
-        return getParent() == nullptr;
     }
 
     Node& Node::scale(const Vector3F& scale)
@@ -41,56 +29,13 @@ namespace Bull
         return (*this);
     }
 
-    const Vector3F& Node::getInitialScale() const
-    {
-        if(m_parent)
-        {
-            return m_parent->getInitialScale();
-        }
-
-        return Vector3F::Unit;
-    }
-
-    const EulerAnglesF& Node::getInitialRotation() const
-    {
-        if(m_parent)
-        {
-            return m_parent->getInitialRotation();
-        }
-
-        return EulerAnglesF::Zero;
-    }
-
-    const Vector3F& Node::getInitialTranslation() const
-    {
-        if(m_parent)
-        {
-            return m_parent->getInitialTranslation();
-        }
-
-        return Vector3F::Zero;
-    }
-
-    Node& Node::addChild(const NodeRef& child)
-    {
-        child->m_parent = this;
-        m_children.emplace_back(child);
-
-        return (*this);
-    }
-
-    const Node* Node::getParent() const
-    {
-        return m_parent;
-    }
-
     Matrix4F Node::getModelMatrix() const
     {
-        QuaternionF rotationQuaternion(EulerAnglesF::normalize(getInitialRotation() + m_rotation));
+        QuaternionF rotationQuaternion(EulerAnglesF::normalize(m_rotation));
 
         Matrix4F rotation = Matrix4F::makeRotation(rotationQuaternion);
-        Matrix4F scaling = Matrix4F::makeScale(getInitialScale() + m_scale);
-        Matrix4F translation = Matrix4F::makeTranslation(getInitialTranslation() + m_translation);
+        Matrix4F scaling = Matrix4F::makeScale(m_scale);
+        Matrix4F translation = Matrix4F::makeTranslation(m_translation);
 
         return translation * rotation * scaling;
     }

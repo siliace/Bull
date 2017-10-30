@@ -2,7 +2,6 @@
 
 #include <Bull/Render/Context/GlContext.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
-#include <Bull/Render/Target/RenderWindowImpl.hpp>
 
 namespace Bull
 {
