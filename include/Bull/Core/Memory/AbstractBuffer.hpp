@@ -1,8 +1,6 @@
 #ifndef BULL_CORE_MEMORY_ABSTRACTBUFFER_HPP
 #define BULL_CORE_MEMORY_ABSTRACTBUFFER_HPP
 
-#include <utility>
-
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Export.hpp>
 
