@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 
 #include <Bull/Core/Utility/Random.hpp>
@@ -66,22 +67,24 @@ namespace
             20, 21, 22,
             21, 22, 23
     };
+
+    Bull::RandomGenerator generator;
 }
 
 Cube::Cube()
 {
-    m_mesh.create(vertices, indices);
-
     Bull::Vector3F translation;
     Bull::EulerAnglesF rotation;
 
-    rotation.roll  = Bull::AngleF::degree(Bull::Random::get()->random(0, 360));
-    rotation.pitch = Bull::AngleF::degree(Bull::Random::get()->random(0, 360));
-    rotation.yaw   = Bull::AngleF::degree(Bull::Random::get()->random(0, 360));
+    m_mesh.create(vertices, indices);
 
-    translation.x() = int(Bull::Random::get()->random(0, 12)) - 6;
-    translation.y() = int(Bull::Random::get()->random(0, 12)) - 6;
-    translation.z() = int(Bull::Random::get()->random(0, 12)) - 6;
+    rotation.roll  = Bull::AngleF::degree(generator.number(0.f, 360.f));
+    rotation.pitch = Bull::AngleF::degree(generator.number(0.f, 360.f));
+    rotation.yaw   = Bull::AngleF::degree(generator.number(0.f, 360.f));
+
+    translation.x() = generator.number(-6.f, 6.f);
+    translation.y() = generator.number(-6.f, 6.f);
+    translation.z() = generator.number(-6.f, 6.f);
 
     rotate(rotation).move(translation);
 }
