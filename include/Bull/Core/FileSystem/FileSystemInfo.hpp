@@ -8,9 +8,9 @@ namespace Bull
 {
     struct BULL_CORE_API FileSystemInfo
     {
-        Uint64 free;
-        Uint64 capacity;
-        Uint64 available;
+        Uint64 free      = 0;
+        Uint64 capacity  = 0;
+        Uint64 available = 0;
     };
 }
 

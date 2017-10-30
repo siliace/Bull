@@ -35,12 +35,22 @@ namespace Bull
 
         FileSystemInfo FileSystemImpl::getFileSystemInfo(const Path& base)
         {
-			return { 0, 0, 0 };
+            FileSystemInfo fileSystemInfo;
+            ULARGE_INTEGER free, total, totalFree;
+
+            if(GetDiskFreeSpaceEx(base.toString().getBuffer(), &free, &total, &totalFree))
+            {
+                fileSystemInfo.free      = totalFree.QuadPart;
+                fileSystemInfo.available = free.QuadPart;
+                fileSystemInfo.capacity  = total.QuadPart;
+            }
+
+			return fileSystemInfo;
         }
 
         bool FileSystemImpl::createLink(const Path& target, const String& link)
         {
-			return false;
+			return CreateSymbolicLink(link.getBuffer(), target.toString().getBuffer(), target.isDirectory() ? SYMBOLIC_LINK_FLAG_DIRECTORY : 0) != 0;
         }
     }
 }

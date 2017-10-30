@@ -4,8 +4,8 @@ target_sources(bull-core
             ${CMAKE_CURRENT_SOURCE_DIR}/DirectoryImplWin32.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/FileImplWin32.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/FileImplWin32.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/FileSystemImpl.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/FileSystemImpl.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/FileSystemImpl.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/FileSystemImpl.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/PathImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/PathImpl.cpp
         )
