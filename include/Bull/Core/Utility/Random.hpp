@@ -1,51 +1,43 @@
 #ifndef BULL_CORE_UTILITY_RANDOM_HPP
 #define BULL_CORE_UTILITY_RANDOM_HPP
 
-#include <ctime>
+#include <random>
 
-#include <Bull/Core/Pattern/Singleton.hpp>
 #include <Bull/Core/Configuration/Integer.hpp>
-
-#include <Bull/Core/Export.hpp>
+#include <Bull/Core/Meta/TypeTrait.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API Random : public Singleton<Random>
+    class BULL_CORE_API RandomGenerator
     {
     public:
 
         /*! \brief Default constructor
          *
          */
-        Random();
+        RandomGenerator();
 
-        /*! \brief Generate a pseudo random number
+        /*! \brief Constructor
          *
-         * \param min The minimum of the random number
-         * \param max The maximum of the random number
-         *
-         * \return Return a pseudo random number between min and max
+         * \param seed The seed to initialize the RandomGenerator
          *
          */
-        Uint64 random(Uint64 min, Uint64 max);
+        explicit RandomGenerator(Uint64 seed);
 
-        /*! \brief Change the current seed
+        /*! \brief Generate a random number
          *
-         * \param seed The new seed to use
+         * \param min The lowest value of the generated random number
+         * \param max The biggest value of the generated random number
+         *
+         * \return The random number
          *
          */
-        void setSeed(unsigned int seed);
-
-        /*! \brief Get the current seed
-         *
-         * \return Return the current seed
-         *
-         */
-        unsigned int getSeed() const;
+        template <typename T>
+        T number(T min = Min<T>::Value, T max = Max<T>::Value);
 
     private:
 
-        unsigned int m_seed; /*!< The seed */
+        std::mt19937 m_generator;
     };
 }
 

@@ -77,7 +77,7 @@ namespace Bull
          * \return Return a String representing the number
          *
          */
-        template <typename T, typename = EnableIfNumber<T>>
+        template <typename T, typename = EnableIfIsNumber<T>>
         static String number(T number)
         {
             return String(std::to_string(number).c_str());
