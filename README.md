@@ -1,5 +1,5 @@
-# Bull - An easy to use OpenGL toolkit
-Bull is a simple, fast, cross-platform, object-oriented API providing an access to windowing, threading, file system, logging, memory and more.
+# Bull - An easy to use 3D rendering engine
+Bull is a 3D rendering engine created for learning purpuse. It's aim to be a simple and cross-platform API.
 
 ## Author
 Benjamin Bernard - Main developer (benjber69@gmail.com)
