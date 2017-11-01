@@ -72,7 +72,7 @@ namespace Bull
          * \return True if the Resource was loaded successfully
          *
          */
-        bool loadFromMemory(const void* data, Index length, const ShaderStageParameters& parameters) override;
+        bool loadFromMemory(const void* data, std::size_t length, const ShaderStageParameters& parameters) override;
 
         /*! \brief Save the Resource to a Path
          *
@@ -103,7 +103,7 @@ namespace Bull
          * \return True if the Resource was saved successfully
          *
          */
-        bool saveToMemory(void* data, Index length, const ShaderStageParameters& parameters) const override;
+        bool saveToMemory(void* data, std::size_t length, const ShaderStageParameters& parameters) const override;
         
         /*! \brief Compile the ShaderStage
          *

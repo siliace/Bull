@@ -123,7 +123,7 @@ namespace Bull
     }
 
     template <typename T>
-    template <typename U, Index WU, Index HU>
+    template <typename U, std::size_t WU, std::size_t HU>
     Matrix4<T>::Matrix4(const Matrix<U, WU, HU>& copy) :
         SquareMatrix<T, 4>(copy)
     {

@@ -16,7 +16,7 @@ namespace Bull
             struct PixelBuffer
             {
                 void* data;
-                Index length;
+                std::size_t length;
             };
 
             static void writeToStream(void* context, void* data, int size);
@@ -57,7 +57,7 @@ namespace Bull
              * \return True if the Image was saved successfully
              *
              */
-            bool saveToMemory(const Image* image, void* data, Index length, const ImageParameters& parameters) const override;
+            bool saveToMemory(const Image* image, void* data, std::size_t length, const ImageParameters& parameters) const override;
 
             /*! \brief Tell whether the extension is supported
              *

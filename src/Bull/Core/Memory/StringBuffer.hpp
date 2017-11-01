@@ -21,7 +21,7 @@ namespace Bull
              * \param size The size of the SharedString
              *
              */
-            explicit StringBuffer(Index size);
+            explicit StringBuffer(std::size_t size);
 
             /*! \brief Constructor
              *
@@ -29,11 +29,11 @@ namespace Bull
              * \param capacity The capacity of the SharedString
              *
              */
-            StringBuffer(Index size, Index capacity);
+            StringBuffer(std::size_t size, std::size_t capacity);
 
-            Index                   size;
+            std::size_t                   size;
             std::unique_ptr<char[]> string;
-            Index                   capacity;
+            std::size_t                   capacity;
         };
     }
 }

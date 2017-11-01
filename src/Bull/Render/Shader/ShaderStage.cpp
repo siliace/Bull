@@ -53,7 +53,7 @@ namespace Bull
         return Loader::get()->loadFromStream(this, stream, parameters);
     }
 
-    bool ShaderStage::loadFromMemory(const void* data, Index length, const ShaderStageParameters& parameters)
+    bool ShaderStage::loadFromMemory(const void* data, std::size_t length, const ShaderStageParameters& parameters)
     {
         return Loader::get()->loadFromMemory(this, data, length, parameters);
     }
@@ -68,7 +68,7 @@ namespace Bull
         return Saver::get()->saveToStream(this, stream, parameters);
     }
 
-    bool ShaderStage::saveToMemory(void* data, Index length, const ShaderStageParameters& parameters) const
+    bool ShaderStage::saveToMemory(void* data, std::size_t length, const ShaderStageParameters& parameters) const
     {
         return Saver::get()->saveToMemory(this, data, length, parameters);
     }
@@ -127,7 +127,7 @@ namespace Bull
 
             gl::getShaderiv(m_id, GL_SHADER_SOURCE_LENGTH, &capacity);
 
-            code.reserve(static_cast<Index>(capacity));
+            code.reserve(static_cast<std::size_t>(capacity));
             gl::getShaderSource(m_id, static_cast<int>(code.getSize()), &size, &code[0]);
 
             return code;
@@ -155,7 +155,7 @@ namespace Bull
 
         if(capacity)
         {
-            message.setSize(static_cast<Index>(capacity));
+            message.setSize(static_cast<std::size_t>(capacity));
             gl::getShaderInfoLog(m_id, capacity, nullptr, &message[0]);
         }
 

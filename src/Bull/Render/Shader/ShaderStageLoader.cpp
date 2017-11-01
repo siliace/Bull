@@ -28,7 +28,7 @@ namespace Bull
             return false;
         }
 
-        bool ShaderStageLoader::loadFromMemory(ShaderStage* shaderStage, const void* data, Index length, const ShaderStageParameters& parameters) const
+        bool ShaderStageLoader::loadFromMemory(ShaderStage* shaderStage, const void* data, std::size_t length, const ShaderStageParameters& parameters) const
         {
             String code(static_cast<const char*>(data), length);
 

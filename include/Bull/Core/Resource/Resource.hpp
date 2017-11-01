@@ -41,7 +41,7 @@ namespace Bull
          * \return True if the Resource was loaded successfully
          *
          */
-        virtual bool loadFromMemory(const void* data, Index length, const P& parameters) = 0;
+        virtual bool loadFromMemory(const void* data, std::size_t length, const P& parameters) = 0;
 
         /*! \brief Save the Resource to a Path
          *
@@ -72,7 +72,7 @@ namespace Bull
          * \return True if the Resource was saved successfully
          *
          */
-        virtual bool saveToMemory(void* data, Index length, const P& parameters) const = 0;
+        virtual bool saveToMemory(void* data, std::size_t length, const P& parameters) const = 0;
     };
 }
 

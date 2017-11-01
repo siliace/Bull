@@ -5,21 +5,21 @@
 namespace Bull
 {
     template <typename T>
-    Array<T>::Array(Index size) :
+    Array<T>::Array(std::size_t size) :
         Array<T>(size, T())
     {
         /// nothing
     }
 
     template <typename T>
-    Array<T>::Array(Index size, T value) :
+    Array<T>::Array(std::size_t size, T value) :
         m_array(size, value)
     {
         /// Nothing
     }
 
     template <typename T>
-    bool Array<T>::create(Index capacity)
+    bool Array<T>::create(std::size_t capacity)
     {
         if(isEmpty())
         {
@@ -32,7 +32,7 @@ namespace Bull
     }
 
     template <typename T>
-    bool Array<T>::fill(const void* data, Index size, Index offset)
+    bool Array<T>::fill(const void* data, std::size_t size, std::size_t offset)
     {
         if(data && size)
         {
@@ -50,7 +50,7 @@ namespace Bull
     }
 
     template <typename T>
-    T& Array<T>::at(Index index)
+    T& Array<T>::at(std::size_t index)
     {
         RangeCheck(index, getCapacity());
 
@@ -58,7 +58,7 @@ namespace Bull
     }
 
     template <typename T>
-    const T& Array<T>::at(Index index) const
+    const T& Array<T>::at(std::size_t index) const
     {
         RangeCheck(index, getCapacity());
 
@@ -67,7 +67,7 @@ namespace Bull
 
 
     template <typename T>
-    void Array<T>::resize(Index size)
+    void Array<T>::resize(std::size_t size)
     {
         m_array.resize(size);
     }
@@ -97,19 +97,19 @@ namespace Bull
     }
 
     template <typename T>
-    Index Array<T>::getCapacity() const
+    std::size_t Array<T>::getCapacity() const
     {
         return m_array.size();
     }
 
     template <typename T>
-    T& Array<T>::operator[](Index index)
+    T& Array<T>::operator[](std::size_t index)
     {
         return at(index);
     }
 
     template <typename T>
-    const T& Array<T>::operator[](Index index) const
+    const T& Array<T>::operator[](std::size_t index) const
     {
         return at(index);
     }

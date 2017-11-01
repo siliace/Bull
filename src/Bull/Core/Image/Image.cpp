@@ -28,7 +28,7 @@ namespace Bull
     {
         if(size.x() && size.y())
         {
-            Index pixelsCount = size.x() * size.y() * 4;
+            std::size_t pixelsCount = size.x() * size.y() * 4;
 
             m_size   = size;
             m_pixels = pixels;
@@ -46,7 +46,7 @@ namespace Bull
 
     Image& Image::fill(const Color &color)
     {
-        for(Index i = 0; i < m_pixels.getCapacity() / 4; i++)
+        for(std::size_t i = 0; i < m_pixels.getCapacity() / 4; i++)
         {
             m_pixels[i * 4 + 0] = color.red;
             m_pixels[i * 4 + 1] = color.green;
@@ -95,7 +95,7 @@ namespace Bull
         return Loader::get()->loadFromStream(this, stream, parameters);
     }
 
-    bool Image::loadFromMemory(const void* data, Index length, const ImageParameters& parameters)
+    bool Image::loadFromMemory(const void* data, std::size_t length, const ImageParameters& parameters)
     {
         return Loader::get()->loadFromMemory(this, data, length, parameters);
     }
@@ -110,7 +110,7 @@ namespace Bull
         return Saver::get()->saveToStream(this, stream, parameters);
     }
 
-    bool Image::saveToMemory(void* data, Index length, const ImageParameters& parameters) const
+    bool Image::saveToMemory(void* data, std::size_t length, const ImageParameters& parameters) const
     {
         return Saver::get()->saveToMemory(this, data, length, parameters);
     }

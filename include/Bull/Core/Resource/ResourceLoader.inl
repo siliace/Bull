@@ -29,7 +29,7 @@ namespace Bull
     }
 
     template <typename T, typename P>
-    bool ResourceLoader<T, P>::loadFromMemory(T* resource, const void* data, Index length, const P& parameters) const
+    bool ResourceLoader<T, P>::loadFromMemory(T* resource, const void* data, std::size_t length, const P& parameters) const
     {
         for(const LoaderPtr& loader : m_loaders)
         {

@@ -632,7 +632,7 @@ namespace Bull
 
             ByteArray pixels(icon.getPixels().getCapacity());
 
-            for(Index i = 0; i < icon.getSize().x() * icon.getSize().y(); i++)
+            for(std::size_t i = 0; i < icon.getSize().x() * icon.getSize().y(); i++)
             {
                 pixels.at(i * 4 + 0) = icon.getPixels().at(i * 4 + 2);
                 pixels.at(i * 4 + 1) = icon.getPixels().at(i * 4 + 1);
@@ -664,14 +664,14 @@ namespace Bull
             XFreeGC(m_display->getHandler(), iconGraphicContext);
             XDestroyImage(image);
 
-            Index pitch = (width + 7 / 8);
+            std::size_t pitch = (width + 7 / 8);
             ByteArray pixelMask(pitch * height);
 
-            for(Index j = 0; j < height; j++)
+            for(std::size_t j = 0; j < height; j++)
             {
-                for(Index i = 0; i < pitch; i++)
+                for(std::size_t i = 0; i < pitch; i++)
                 {
-                    for(Index k = 0; k < 8; k++)
+                    for(std::size_t k = 0; k < 8; k++)
                     {
                         Uint8 opacity = (pixels.at((i * 8 + k + j * width) * 3 + 4) > 0) ? 1 : 0;
                         pixelMask.at(i + j * pitch) |= (opacity << k);
@@ -692,7 +692,7 @@ namespace Bull
             icccmPixels[0] = width;
             icccmPixels[1] = height;
 
-            for(Index i = 0; i < width * height; i++)
+            for(std::size_t i = 0; i < width * height; i++)
             {
                 icccmPixels[i + 2] = (pixels[i * 4 + 2] << 0)  |
                                      (pixels[i * 4 + 1] << 8)  |

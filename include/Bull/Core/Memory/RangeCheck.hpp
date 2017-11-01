@@ -15,7 +15,7 @@ namespace Bull
          * \param max The max value of the index
          *
          */
-        explicit RangeCheck(Index max);
+        explicit RangeCheck(std::size_t max);
 
         /*! \brief Constructor
          *
@@ -23,7 +23,7 @@ namespace Bull
          * \param max   The max value of the index
          *
          */
-        RangeCheck(Index index, Index max);
+        RangeCheck(std::size_t index, std::size_t max);
 
         /*! \brief Perform range check
          *
@@ -32,11 +32,11 @@ namespace Bull
          * \return This
          *
          */
-        RangeCheck& apply(Index index);
+        RangeCheck& apply(std::size_t index);
 
     private:
 
-        Index m_max;
+        std::size_t m_max;
     };
 }
 

@@ -29,7 +29,7 @@ namespace Bull
          * \param copy The Matrix to copy
          *
          */
-        template <typename U, Index WU, Index HU>
+        template <typename U, std::size_t WU, std::size_t HU>
         Matrix2(const Matrix<U, WU, HU>& copy);
     };
 

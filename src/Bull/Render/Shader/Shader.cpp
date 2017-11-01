@@ -74,7 +74,7 @@ namespace Bull
         return stage.loadFromStream(stream, parameters) && attach(stage);
     }
 
-    bool Shader::attachFromMemory(const void* data, Index length, ShaderStageType type)
+    bool Shader::attachFromMemory(const void* data, std::size_t length, ShaderStageType type)
     {
         ShaderStage stage;
         ShaderStageParameters parameters;
@@ -366,7 +366,7 @@ namespace Bull
 
         if(capacity)
         {
-            message.setSize(static_cast<Index>(capacity));
+            message.setSize(static_cast<std::size_t>(capacity));
             gl::getProgramInfoLog(m_program, capacity, nullptr, &message[0]);
         }
 

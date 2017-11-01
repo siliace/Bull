@@ -22,7 +22,7 @@ namespace Bull
         /// Nothing
     }
 
-    OutOfRange::OutOfRange(const String& message, Index min, Index max, Index index) :
+    OutOfRange::OutOfRange(const String& message, std::size_t min, std::size_t max, std::size_t index) :
         RuntimeError(message),
         min(min),
         max(max),
@@ -40,7 +40,7 @@ namespace Bull
 
         if(m_hasIndex)
         {
-            ss << "(Index between " << String::number(min) << "and " << String::number(max) << ", has " << String::number(index) << ")";
+            ss << "(std::size_t between " << String::number(min) << "and " << String::number(max) << ", has " << String::number(index) << ")";
         }
 
         return ss.toString();

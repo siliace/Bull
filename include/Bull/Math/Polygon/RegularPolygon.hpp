@@ -8,7 +8,7 @@
 
 namespace Bull
 {
-    template<typename T, Index S>
+    template<typename T, std::size_t S>
     class RegularPolygon : public Polygon<T>
     {
     public:
@@ -33,14 +33,14 @@ namespace Bull
          *
          * \return The vertex
          */
-        Vector2<T> getVertex(Index index) const override;
+        Vector2<T> getVertex(std::size_t index) const override;
 
         /*! \brief Get the number of vertex in the polygon
          *
          * \return The number of vertex
          *
          */
-        Index getVertexCount() const override;
+        std::size_t getVertexCount() const override;
 
         /*! \brief Set the center of the polygon
          *

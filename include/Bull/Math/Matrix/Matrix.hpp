@@ -4,13 +4,12 @@
 #include <array>
 
 #include <Bull/Core/Configuration/Integer.hpp>
-#include <Bull/Core/Meta/Operators.hpp>
 
 #include <Bull/Math/Vector/Vector3.hpp>
 
 namespace Bull
 {
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     class Matrix
     {
     public:
@@ -32,7 +31,7 @@ namespace Bull
          * \param copy The Matrix to copy
          *
          */
-        template <typename U, Index WU, Index HU>
+        template <typename U, std::size_t WU, std::size_t HU>
         Matrix(const Matrix<U, WU, HU>& copy);
 
         /*! \brief Basic assignment operator
@@ -42,7 +41,7 @@ namespace Bull
          * \return This
          *
          */
-        template <typename U, Index WU, Index HU>
+        template <typename U, std::size_t WU, std::size_t HU>
         Matrix<T, W, H>& operator=(const Matrix<U, WU, HU>& copy);
 
         /*! \brief Set the Matrix
@@ -80,7 +79,7 @@ namespace Bull
          * \return The cell
          *
          */
-        T& at(Index x, Index y);
+        T& at(std::size_t x, std::size_t y);
 
         /*! \brief Access to a Matrix cell
          *
@@ -90,7 +89,7 @@ namespace Bull
          * \return The cell
          *
          */
-        const T& at(Index x, Index y) const;
+        const T& at(std::size_t x, std::size_t y) const;
 
         /*! \brief Set a row of the Matrix
          *
@@ -100,7 +99,7 @@ namespace Bull
          * \return This
          *
          */
-        Matrix<T, W, H>& setRow(const Vector<T, H>& row, Index index);
+        Matrix<T, W, H>& setRow(const Vector<T, H>& row, std::size_t index);
 
         /*! \brief Get a row of the Matrix
          *
@@ -109,7 +108,7 @@ namespace Bull
          * \return The row
          *
          */
-        Vector<T, W> getRow(Index row) const;
+        Vector<T, W> getRow(std::size_t row) const;
 
         /*! \brief Set a column of the Matrix
          *
@@ -119,7 +118,7 @@ namespace Bull
          * \return This
          *
          */
-        Matrix<T, W, H>& setColumn(const Vector<T, H>& column, Index index);
+        Matrix<T, W, H>& setColumn(const Vector<T, H>& column, std::size_t index);
 
         /*! \brief Get a column of the Matrix
          *
@@ -128,7 +127,7 @@ namespace Bull
          * \return The column
          *
          */
-        Vector<T, H> getColumn(Index column) const;
+        Vector<T, H> getColumn(std::size_t column) const;
 
         /*! \brief Negation operator
          *
@@ -146,7 +145,7 @@ namespace Bull
 
     private:
 
-        std::array<T, Multiply<Index, W, H>::Value> m_matrix;
+        std::array<T, W * H> m_matrix;
     };
 
     /*! \brief Addition two Matrix
@@ -157,7 +156,7 @@ namespace Bull
      * \return The sum of left and right
      *
      */
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     Matrix<T, W, H> operator+(const Matrix<T, W, H>& left, const Matrix<T, W, H>& right);
 
     /*! \brief Subtract two Matrix
@@ -168,7 +167,7 @@ namespace Bull
      * \return The difference of left and right
      *
      */
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     Matrix<T, W, H> operator-(const Matrix<T, W, H>& left, const Matrix<T, W, H>& right);
 }
 

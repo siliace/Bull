@@ -49,7 +49,7 @@ namespace Bull
          * \return
          *
          */
-        bool saveToMemory(const T* resource, void* data, Index length, const P& parameters) const;
+        bool saveToMemory(const T* resource, void* data, std::size_t length, const P& parameters) const;
 
         /*! \brief Tell whether the extension is supported
          *

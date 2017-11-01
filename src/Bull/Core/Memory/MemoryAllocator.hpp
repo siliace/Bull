@@ -33,7 +33,7 @@ namespace Bull
              * \return A pointer to the allocated memory area
              *
              */
-            void* allocate(const Index& size, bool array);
+            void* allocate(const std::size_t& size, bool array);
 
             /*! \brief Free allocated memory
              *
@@ -52,7 +52,7 @@ namespace Bull
 
             struct Block
             {
-                Index size;
+                std::size_t size;
                 bool  array;
             };
 

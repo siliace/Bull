@@ -8,7 +8,6 @@
 
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Export.hpp>
-#include <Bull/Core/Meta/TypeTrait.hpp>
 
 namespace Bull
 {
@@ -23,7 +22,7 @@ namespace Bull
 
         static constexpr char NullByte = '\0';
 
-        static constexpr Index npos = std::numeric_limits<Index>::max();
+        static constexpr std::size_t npos = std::numeric_limits<std::size_t>::max();
 
         /*! \brief Convert a lowercase character to the uppercase equivalent character
          *
@@ -77,7 +76,7 @@ namespace Bull
          * \return Return a String representing the number
          *
          */
-        template <typename T, typename = EnableIfIsNumber<T>>
+        template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
         static String number(T number)
         {
             return String(std::to_string(number).c_str());
@@ -106,7 +105,7 @@ namespace Bull
          * \param size The size of the String
          *
          */
-        explicit String(Index size);
+        explicit String(std::size_t size);
 
         /*! \brief Constructor
          *
@@ -114,7 +113,7 @@ namespace Bull
          * \param capacity The capacity of the String
          *
          */
-        String(Index size, Index capacity);
+        String(std::size_t size, std::size_t capacity);
         
         /*! \brief Constructor
          *
@@ -136,7 +135,7 @@ namespace Bull
          * \param size   The size of the string
          *
          */
-        String(const char* string, Index size);
+        String(const char* string, std::size_t size);
         
         /*! \brief Constructor
          *
@@ -151,7 +150,7 @@ namespace Bull
          * \param size   The size of the string
          *
          */
-        void set(const char* string, Index size);
+        void set(const char* string, std::size_t size);
 
         /*! \brief Counts occurrences of a character in the string
          *
@@ -162,7 +161,7 @@ namespace Bull
          * \return The number of occurrences of the character in the string
          *
          */
-        unsigned int count(char character, Index start = 0, bool caseSensitive = true) const;
+        unsigned int count(char character, std::size_t start = 0, bool caseSensitive = true) const;
 
         /*! \brief Get the index of the first iteration of a character
          *
@@ -195,7 +194,7 @@ namespace Bull
          * \return This
          *
          */
-        String& replace(char toReplace, char other, Index start = 0, Index stop = npos, bool caseSensitive = true);
+        String& replace(char toReplace, char other, std::size_t start = 0, std::size_t stop = npos, bool caseSensitive = true);
 
         /*! \brief Get a subpart of the string
          *
@@ -205,7 +204,7 @@ namespace Bull
          * \return Return the substring created
          *
          */
-        String subString(Index start, Index stop = String::npos) const;
+        String subString(std::size_t start, std::size_t stop = String::npos) const;
 
         /*! \brief Check whether a String start with a specified string
          *
@@ -242,7 +241,7 @@ namespace Bull
          * \return Return the string after the transformation
          *
          */
-        String& toUppercase(Index start = 0, Index stop = String::npos);
+        String& toUppercase(std::size_t start = 0, std::size_t stop = String::npos);
 
         /*! \brief Set the string in lowercase
          *
@@ -252,7 +251,7 @@ namespace Bull
          * \return Return the string after the transformation
          *
          */
-        String& toLowercase(Index start = 0, Index stop = String::npos);
+        String& toLowercase(std::size_t start = 0, std::size_t stop = String::npos);
 
         /*! \brief Inset a String at the ith index
          *
@@ -262,7 +261,7 @@ namespace Bull
          * \return Return this after the insert
          *
          */
-        String& insert(const String& toInsert, Index index);
+        String& insert(const String& toInsert, std::size_t index);
 
         /*! \brief Clear the string
          *
@@ -276,21 +275,21 @@ namespace Bull
          * \param size The new size of the string
          *
          */
-        void setSize(Index size);
+        void setSize(std::size_t size);
 
         /*! \brief Get the size of the string
          *
          * \return Return the size of the string
          *
          */
-        Index getSize() const;
+        std::size_t getSize() const;
 
         /*! \brief Set the capacity of the string
          *
          * \param capacity Set the capacity of the string
          *
          */
-        void reserve(Index capacity);
+        void reserve(std::size_t capacity);
 
         /*! \brief Ensure that the String is used only by this instance
          *
@@ -302,7 +301,7 @@ namespace Bull
          * \return Return the capacity of the string
          *
          */
-        Index getCapacity() const;
+        std::size_t getCapacity() const;
 
         /*! \brief Check whether the string is empty
          *
@@ -325,7 +324,7 @@ namespace Bull
          * \return Return the character at the ith position
          *
          */
-        char& operator[](Index index);
+        char& operator[](std::size_t index);
 
         /*! \brief Get the ith character of the string
          *
@@ -334,7 +333,7 @@ namespace Bull
          * \return Return the character at the ith position
          *
          */
-        const char& operator[](Index index) const;
+        const char& operator[](std::size_t index) const;
 
         /*! \brief Convert a string to an integer
          *

@@ -43,7 +43,7 @@ namespace Bull
              * \return True if the Image was loaded successfully
              *
              */
-            bool loadFromMemory(Image* image, const void* data, Index length, const ImageParameters& parameters) const override;
+            bool loadFromMemory(Image* image, const void* data, std::size_t length, const ImageParameters& parameters) const override;
 
             /*! \brief Tell whether the extension is supported
              *

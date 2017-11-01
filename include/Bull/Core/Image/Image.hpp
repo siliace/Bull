@@ -93,7 +93,7 @@ namespace Bull
          * \return True if the Resource was loaded successfully
          *
          */
-        bool loadFromMemory(const void* data, Index length, const ImageParameters& parameters = ImageParameters()) override;
+        bool loadFromMemory(const void* data, std::size_t length, const ImageParameters& parameters = ImageParameters()) override;
 
         /*! \brief Save the Resource to a Path
          *
@@ -124,7 +124,7 @@ namespace Bull
          * \return True if the Resource was saved successfully
          *
          */
-        bool saveToMemory(void* data, Index length, const ImageParameters& parameters = ImageParameters()) const override;
+        bool saveToMemory(void* data, std::size_t length, const ImageParameters& parameters = ImageParameters()) const override;
 
         /*! \brief Get pixels of the Image
          *

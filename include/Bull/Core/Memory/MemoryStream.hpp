@@ -21,7 +21,7 @@ namespace Bull
          * \param length The length of data
          *
          */
-        MemoryStream(const void* data, Index length);
+        MemoryStream(const void* data, std::size_t length);
 
         /*! \brief Destructor
          *
@@ -36,7 +36,7 @@ namespace Bull
          * \return True if the stream was opened successfully
          *
          */
-        bool open(const void* data, Index length);
+        bool open(const void* data, std::size_t length);
 
         /*! \brief Check if the stream is open
          *
@@ -93,8 +93,8 @@ namespace Bull
     private:
 
         const void* m_data;   /*!< Data to stream */
-        Index       m_size;   /*!< Size of data to stream */
-        Index       m_cursor; /*!< The internal cursor */
+        std::size_t       m_size;   /*!< Size of data to stream */
+        std::size_t       m_cursor; /*!< The internal cursor */
     };
 }
 

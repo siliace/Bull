@@ -92,7 +92,7 @@ namespace Bull
          * \return True if the Texture was loaded successfully
          *
          */
-        bool loadFromMemory(const void* data, Index length, const ImageParameters& parameters = ImageParameters()) override;
+        bool loadFromMemory(const void* data, std::size_t length, const ImageParameters& parameters = ImageParameters()) override;
 
         /*! \brief Save the Texture to a Path
          *
@@ -123,7 +123,7 @@ namespace Bull
          * \return True if the Texture was saved successfully
          *
          */
-        bool saveToMemory(void* data, Index length, const ImageParameters& parameters = ImageParameters()) const override;
+        bool saveToMemory(void* data, std::size_t length, const ImageParameters& parameters = ImageParameters()) const override;
         
         /*! \brief Bind the Texture
          *

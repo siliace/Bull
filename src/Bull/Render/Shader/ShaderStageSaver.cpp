@@ -31,7 +31,7 @@ namespace Bull
             return true;
         }
 
-        bool ShaderStageSaver::saveToMemory(const ShaderStage* shaderStage, void* data, Index length, const ShaderStageParameters& parameters) const
+        bool ShaderStageSaver::saveToMemory(const ShaderStage* shaderStage, void* data, std::size_t length, const ShaderStageParameters& parameters) const
         {
             String code = shaderStage->getSource();
 

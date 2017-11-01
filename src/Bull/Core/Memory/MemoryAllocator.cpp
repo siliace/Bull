@@ -19,7 +19,7 @@ namespace Bull
             }
         }
 
-        void* MemoryAllocator::allocate(const Index& size, bool array)
+        void* MemoryAllocator::allocate(const std::size_t& size, bool array)
         {
             Block block;
             void* pointer = std::malloc(size);

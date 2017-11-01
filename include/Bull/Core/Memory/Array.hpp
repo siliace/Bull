@@ -22,7 +22,7 @@ namespace Bull
          * \param size The size of the Array
          *
          */
-        explicit Array(Index size);
+        explicit Array(std::size_t size);
 
         /*! \brief Constructor
          *
@@ -30,7 +30,7 @@ namespace Bull
          * \param value The value to the Array
          *
          */
-        Array(Index size, T value);
+        Array(std::size_t size, T value);
 
         /*! \brief Create the Array
          *
@@ -39,7 +39,7 @@ namespace Bull
          * \return True if the Array was created successfully
          *
          */
-        bool create(Index capacity) override;
+        bool create(std::size_t capacity) override;
 
         /*! \brief Fill the buffer
          *
@@ -50,7 +50,7 @@ namespace Bull
          * \return True if the buffer was filled successfully
          *
          */
-        bool fill(const void* data, Index size, Index offset = 0) override;
+        bool fill(const void* data, std::size_t size, std::size_t offset = 0) override;
 
         /*! \brief Access operator
          *
@@ -59,7 +59,7 @@ namespace Bull
          * \return The value
          *
          */
-        T& at(Index index);
+        T& at(std::size_t index);
 
         /*! \brief Access operator
          *
@@ -68,14 +68,14 @@ namespace Bull
          * \return The value
          *
          */
-        const T& at(Index index) const;
+        const T& at(std::size_t index) const;
 
         /*! \brief Resize the Array
          *
          * \param size The size
          *
          */
-        void resize(Index size);
+        void resize(std::size_t size);
 
         /*! \brief Flush the Array
          *
@@ -106,7 +106,7 @@ namespace Bull
          * \return The capacity
          *
          */
-        Index getCapacity() const override;
+        std::size_t getCapacity() const override;
 
         /*! \brief Access operator
          *
@@ -115,7 +115,7 @@ namespace Bull
          * \return The value
          *
          */
-        T& operator[](Index index);
+        T& operator[](std::size_t index);
 
         /*! \brief Access operator
          *
@@ -124,7 +124,7 @@ namespace Bull
          * \return The value
          *
          */
-        const T& operator[](Index index) const;
+        const T& operator[](std::size_t index) const;
 
     private:
 

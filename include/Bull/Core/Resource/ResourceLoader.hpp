@@ -47,7 +47,7 @@ namespace Bull
          * \return True if the Resource was loaded successfully
          *
          */
-        bool loadFromMemory(T* resource, const void* data, Index length, const P& parameters) const;
+        bool loadFromMemory(T* resource, const void* data, std::size_t length, const P& parameters) const;
 
         /*! \brief Tell whether the extension is supported
          *

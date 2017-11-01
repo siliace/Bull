@@ -2,42 +2,42 @@
 
 namespace Bull
 {
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     Matrix<T, W, H>::Matrix() :
         Matrix<T, W, H>(0)
     {
         /// Nothing
     }
 
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     Matrix<T, W, H>::Matrix(T value)
     {
         set(value);
     }
 
-    template <typename T, Index W, Index H>
-    template <typename U, Index WU, Index HU>
+    template <typename T, std::size_t W, std::size_t H>
+    template <typename U, std::size_t WU, std::size_t HU>
     Matrix<T, W, H>::Matrix(const Matrix<U, WU, HU>& copy) :
         Matrix<T, W, H>(0)
     {
-        for(Index j = 0; j < std::min(H, HU); j++)
+        for(std::size_t j = 0; j < std::min(H, HU); j++)
         {
-            for(Index i = 0; i < std::min(W, WU); i++)
+            for(std::size_t i = 0; i < std::min(W, WU); i++)
             {
                 at(i, j) = static_cast<T>(copy.at(i, j));
             }
         }
     }
 
-    template <typename T, Index W, Index H>
-    template <typename U, Index WU, Index HU>
+    template <typename T, std::size_t W, std::size_t H>
+    template <typename U, std::size_t WU, std::size_t HU>
     Matrix<T, W, H>& Matrix<T, W, H>::operator=(const Matrix<U, WU, HU>& copy)
     {
         set(0);
 
-        for(Index j = 0; j < std::min(H, HU); j++)
+        for(std::size_t j = 0; j < std::min(H, HU); j++)
         {
-            for(Index i = 0; i < std::min(W, WU); i++)
+            for(std::size_t i = 0; i < std::min(W, WU); i++)
             {
                 at(i, j) = static_cast<T>(copy.at(i, j));
             }
@@ -46,26 +46,26 @@ namespace Bull
         return (*this);
     }
 
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     Matrix<T, W, H>& Matrix<T, W, H>::set(T value)
     {
         m_matrix.fill(value);
     }
 
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     bool Matrix<T, W, H>::operator==(const Matrix<T, W, H>& right) const
     {
         return m_matrix == right.m_matrix;
     }
 
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     bool Matrix<T, W, H>::operator!=(const Matrix<T, W, H>& right) const
     {
         return m_matrix != right.m_matrix;
     }
 
-    template <typename T, Index W, Index H>
-    T& Matrix<T, W, H>::at(Index x, Index y)
+    template <typename T, std::size_t W, std::size_t H>
+    T& Matrix<T, W, H>::at(std::size_t x, std::size_t y)
     {
         RangeCheck(x, W);
         RangeCheck(y, H);
@@ -73,8 +73,8 @@ namespace Bull
         return m_matrix.at(y * W + x);
     }
 
-    template <typename T, Index W, Index H>
-    const T& Matrix<T, W, H>::at(Index x, Index y) const
+    template <typename T, std::size_t W, std::size_t H>
+    const T& Matrix<T, W, H>::at(std::size_t x, std::size_t y) const
     {
         RangeCheck(x, W);
         RangeCheck(y, H);
@@ -82,10 +82,10 @@ namespace Bull
         return m_matrix.at(y * W + x);
     }
 
-    template <typename T, Index W, Index H>
-    Matrix<T, W, H>& Matrix<T, W, H>::setRow(const Vector<T, H>& row, Index index)
+    template <typename T, std::size_t W, std::size_t H>
+    Matrix<T, W, H>& Matrix<T, W, H>::setRow(const Vector<T, H>& row, std::size_t index)
     {
-        for(Index i = 0; i < W; i++)
+        for(std::size_t i = 0; i < W; i++)
         {
             at(index, i) = row.at(i);
         }
@@ -93,12 +93,12 @@ namespace Bull
         return (*this);
     }
 
-    template <typename T, Index W, Index H>
-    Vector<T, W> Matrix<T, W, H>::getRow(Index row) const
+    template <typename T, std::size_t W, std::size_t H>
+    Vector<T, W> Matrix<T, W, H>::getRow(std::size_t row) const
     {
         Vector<T, W> rowVec;
 
-        for(Index i = 0; i < W; i++)
+        for(std::size_t i = 0; i < W; i++)
         {
             rowVec.at(i) = at(row, i);
         }
@@ -106,10 +106,10 @@ namespace Bull
         return rowVec;
     }
 
-    template <typename T, Index W, Index H>
-    Matrix<T, W, H>& Matrix<T, W, H>::setColumn(const Vector<T, H>& column, Index index)
+    template <typename T, std::size_t W, std::size_t H>
+    Matrix<T, W, H>& Matrix<T, W, H>::setColumn(const Vector<T, H>& column, std::size_t index)
     {
-        for(Index i = 0; i < W; i++)
+        for(std::size_t i = 0; i < W; i++)
         {
             at(i, index) = column.at(i);
         }
@@ -117,12 +117,12 @@ namespace Bull
         return (*this);
     }
 
-    template <typename T, Index W, Index H>
-    Vector<T, H> Matrix<T, W, H>::getColumn(Index column) const
+    template <typename T, std::size_t W, std::size_t H>
+    Vector<T, H> Matrix<T, W, H>::getColumn(std::size_t column) const
     {
         Vector<T, W> columnVec;
 
-        for(Index i = 0; i < W; i++)
+        for(std::size_t i = 0; i < W; i++)
         {
             columnVec.at(i) = at(i, column);
         }
@@ -130,12 +130,12 @@ namespace Bull
         return columnVec;
     }
 
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     Matrix<T, W, H> Matrix<T, W, H>::operator-() const
     {
         Matrix<T, W, H> negation;
 
-        for(Index i = 0; i < W * H; i++)
+        for(std::size_t i = 0; i < W * H; i++)
         {
             negation.at(i) = -at(i);
         }
@@ -143,20 +143,20 @@ namespace Bull
         return negation;
     }
 
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     const T* Matrix<T, W, H>::getPtr() const
     {
         return m_matrix.data();
     }
 
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     Matrix<T, W, H> operator+(const Matrix<T, W, H>& left, const Matrix<T, W, H>& right)
     {
         Matrix<T, W, H> sum;
 
-        for(Index j = 0; j < H; j++)
+        for(std::size_t j = 0; j < H; j++)
         {
-            for(Index i = 0; i < W; i++)
+            for(std::size_t i = 0; i < W; i++)
             {
                 sum.at(i, j) = left.at(i, j) + right(i, j);
             }
@@ -165,7 +165,7 @@ namespace Bull
         return sum;
     }
 
-    template <typename T, Index W, Index H>
+    template <typename T, std::size_t W, std::size_t H>
     Matrix<T, W, H> operator-(const Matrix<T, W, H>& left, const Matrix<T, W, H>& right)
     {
         return left + -right;

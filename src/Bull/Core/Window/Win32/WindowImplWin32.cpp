@@ -503,7 +503,7 @@ namespace Bull
         {
             ByteArray pixels(icon.getSize().x() * icon.getSize().y() * 4);
 
-            for(Index i = 0; i < pixels.getCapacity() / 4; i += 4)
+            for(std::size_t i = 0; i < pixels.getCapacity() / 4; i += 4)
             {
                 pixels.at(i * 4 + 0) = icon.getPixels().at(i * 4 + 2);
                 pixels.at(i * 4 + 1) = icon.getPixels().at(i * 4 + 1);

@@ -65,7 +65,7 @@ namespace Bull
     }
 
     template<typename T>
-    Vector2<T> Rectangle<T>::getVertex(Index index) const
+    Vector2<T> Rectangle<T>::getVertex(std::size_t index) const
     {
         switch(index)
         {
@@ -79,7 +79,7 @@ namespace Bull
     }
 
     template<typename T>
-    Index Rectangle<T>::getVertexCount() const
+    std::size_t Rectangle<T>::getVertexCount() const
     {
         return 4;
     }

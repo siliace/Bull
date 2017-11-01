@@ -13,7 +13,7 @@ namespace Bull
         {
             OutStream* stream = reinterpret_cast<OutStream*>(context);
 
-            stream->write(data, static_cast<Index>(size));
+            stream->write(data, static_cast<std::size_t>(size));
         }
 
         void ImageSaver::writeToMemory(void* context, void* data, int size)
@@ -21,7 +21,7 @@ namespace Bull
             PixelBuffer* buffer = reinterpret_cast<PixelBuffer*>(context);
 
             std::memset(buffer->data, 0, buffer->length);
-            std::memcpy(buffer->data, data, std::min(buffer->length, static_cast<Index>(size)));
+            std::memcpy(buffer->data, data, std::min(buffer->length, static_cast<std::size_t>(size)));
         }
 
         bool ImageSaver::saveToPath(const Image* image, const Path& path, const ImageParameters& parameters) const
@@ -57,7 +57,7 @@ namespace Bull
             return false;
         }
 
-        bool ImageSaver::saveToMemory(const Image* image, void* data, Index length, const ImageParameters& parameters) const
+        bool ImageSaver::saveToMemory(const Image* image, void* data, std::size_t length, const ImageParameters& parameters) const
         {
             PixelBuffer buffer;
             Vector2UI size = image->getSize();

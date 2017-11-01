@@ -83,7 +83,7 @@ namespace Bull
          * \return True if the ShaderStage was attached successfully
          *
          */
-        bool attachFromMemory(const void* data, Index length, ShaderStageType type);
+        bool attachFromMemory(const void* data, std::size_t length, ShaderStageType type);
 
         /*! \brief Load the Shader from a binary form
          *

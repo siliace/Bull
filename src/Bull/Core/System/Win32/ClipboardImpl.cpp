@@ -26,7 +26,7 @@ namespace Bull
                 Log::get()->write("Failed to open clipboard", LogLevel::LogLevel_Error);
             }
 
-            Index size = (content.getSize() + 1) * sizeof(char);
+            std::size_t size = (content.getSize() + 1) * sizeof(char);
             HANDLE handler = GlobalAlloc(CF_UNICODETEXT, size);
 
             if(handler)

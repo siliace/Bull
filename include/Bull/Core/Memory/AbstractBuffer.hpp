@@ -15,7 +15,7 @@ namespace Bull
          * \return True if the Buffer was created successfully
          *
          */
-        virtual bool create(Index capacity) = 0;
+        virtual bool create(std::size_t capacity) = 0;
 
         /*! \brief Fill the buffer
          *
@@ -26,7 +26,7 @@ namespace Bull
          * \return True if the buffer was filled successfully
          *
          */
-        virtual bool fill(const void* data, Index size, Index offset) = 0;
+        virtual bool fill(const void* data, std::size_t size, std::size_t offset) = 0;
 
         /*! \brief Flush the Buffer
          *
@@ -43,7 +43,7 @@ namespace Bull
          * \return The size
          *
          */
-        virtual Index getCapacity() const = 0;
+        virtual std::size_t getCapacity() const = 0;
     };
 }
 

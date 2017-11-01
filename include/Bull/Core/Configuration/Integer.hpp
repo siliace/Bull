@@ -15,8 +15,6 @@ namespace Bull
     typedef int16_t Int16;
     typedef int32_t Int32;
     typedef int64_t Int64;
-
-    typedef std::size_t Index;
 }
 
 #endif // BULL_CORE_CONFIGURATION_INTEGER_HPP

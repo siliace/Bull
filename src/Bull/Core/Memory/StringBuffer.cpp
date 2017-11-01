@@ -14,13 +14,13 @@ namespace Bull
             /// Nothing
         }
 
-        StringBuffer::StringBuffer(Index size) :
+        StringBuffer::StringBuffer(std::size_t size) :
             StringBuffer(size, size)
         {
             /// Nothing
         }
 
-        StringBuffer::StringBuffer(Index size, Index capacity) :
+        StringBuffer::StringBuffer(std::size_t size, std::size_t capacity) :
             size(size),
             capacity(capacity),
             string(new char[capacity + 1])

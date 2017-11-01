@@ -29,7 +29,7 @@ namespace Bull
             return loadFromMemory(image, content.getBuffer(), content.getCapacity(), parameters);
         }
 
-        bool ImageLoader::loadFromMemory(Image* image, const void* data, Index length, const ImageParameters& parameters) const
+        bool ImageLoader::loadFromMemory(Image* image, const void* data, std::size_t length, const ImageParameters& parameters) const
         {
             int w, h, channels;
 

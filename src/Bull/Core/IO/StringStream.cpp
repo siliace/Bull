@@ -42,7 +42,7 @@ namespace Bull
         return m_cursor;
     }
 
-    Index StringStream::getSize() const
+    std::size_t StringStream::getSize() const
     {
         return m_content.getSize();
     }

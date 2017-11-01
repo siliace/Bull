@@ -43,7 +43,7 @@ namespace Bull
              * \return True if the ShaderStage was loaded successfully
              *
              */
-            bool loadFromMemory(ShaderStage* shaderStage, const void* data, Index length, const ShaderStageParameters& parameters) const override;
+            bool loadFromMemory(ShaderStage* shaderStage, const void* data, std::size_t length, const ShaderStageParameters& parameters) const override;
 
             /*! \brief Tell whether the extension is supported
              *

@@ -29,7 +29,7 @@ namespace Bull
     }
 
     template <typename T, typename P>
-    bool ResourceSaver<T, P>::saveToMemory(const T* resource, void* data, Index length, const P& parameters) const
+    bool ResourceSaver<T, P>::saveToMemory(const T* resource, void* data, std::size_t length, const P& parameters) const
     {
         for(const SaverPtr& saver: m_savers)
         {

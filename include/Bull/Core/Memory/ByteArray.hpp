@@ -18,7 +18,7 @@ namespace Bull
          * \param size The size of the array
          *
          */
-        explicit ByteArray(Index size);
+        explicit ByteArray(std::size_t size);
 
         /*! \brief Constructor
          *
@@ -26,7 +26,7 @@ namespace Bull
          * \param value The value to the array
          *
          */
-        ByteArray(Index size, Uint8 value);
+        ByteArray(std::size_t size, Uint8 value);
 
         /*! \brief Convert the byte array to a String
          *

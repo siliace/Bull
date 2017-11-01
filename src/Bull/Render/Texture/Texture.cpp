@@ -96,7 +96,7 @@ namespace Bull
         return image.loadFromStream(stream) && create(image);
     }
 
-    bool Texture::loadFromMemory(const void* data, Index length, const ImageParameters& parameters)
+    bool Texture::loadFromMemory(const void* data, std::size_t length, const ImageParameters& parameters)
     {
         Image image;
 
@@ -113,7 +113,7 @@ namespace Bull
         return getImage().saveToStream(stream, parameters);
     }
 
-    bool Texture::saveToMemory(void* data, Index length, const ImageParameters& parameters) const
+    bool Texture::saveToMemory(void* data, std::size_t length, const ImageParameters& parameters) const
     {
         return getImage().saveToMemory(data, length, parameters);
     }

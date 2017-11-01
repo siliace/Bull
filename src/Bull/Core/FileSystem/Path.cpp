@@ -44,7 +44,7 @@ namespace Bull
 
     Path Path::getParent() const
     {
-        return Path(toString().subString(0, static_cast<Index>(toString().last(Separator))).subString(static_cast<Index>(toString().first(Separator))));
+        return Path(toString().subString(0, static_cast<std::size_t>(toString().last(Separator))).subString(static_cast<std::size_t>(toString().first(Separator))));
     }
 
     Path Path::getChild(const String& child) const
@@ -59,7 +59,7 @@ namespace Bull
 
         if(i != -1)
         {
-            return path.subString(static_cast<Index>(i) + 1);
+            return path.subString(static_cast<std::size_t>(i) + 1);
         }
 
         return String();

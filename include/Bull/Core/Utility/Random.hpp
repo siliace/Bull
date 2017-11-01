@@ -4,7 +4,7 @@
 #include <random>
 
 #include <Bull/Core/Configuration/Integer.hpp>
-#include <Bull/Core/Meta/TypeTrait.hpp>
+#include <Bull/Core/Export.hpp>
 
 namespace Bull
 {
@@ -33,7 +33,7 @@ namespace Bull
          *
          */
         template <typename T>
-        T number(T min = Min<T>::Value, T max = Max<T>::Value);
+        T number(T min = std::numeric_limits<T>::min(), T max = std::numeric_limits<T>::max());
 
     private:
 

@@ -7,7 +7,7 @@ namespace Bull
     {
         Path FileSystemImpl::getRoot()
         {
-            String root(static_cast<Index>(255));
+            String root(static_cast<std::size_t>(255));
 
             GetEnvironmentVariable("systemdrive", &root[0], static_cast<DWORD>(root.getCapacity()));
 
@@ -16,7 +16,7 @@ namespace Bull
 
         Path FileSystemImpl::getHome()
         {
-            String userPath(static_cast<Index>(255));
+            String userPath(static_cast<std::size_t>(255));
 
             GetEnvironmentVariable("homepath", &userPath[0], static_cast<DWORD>(userPath.getCapacity()));
 

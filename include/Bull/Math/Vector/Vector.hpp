@@ -8,7 +8,7 @@
 
 namespace Bull
 {
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     class Vector
     {
     public:
@@ -51,7 +51,7 @@ namespace Bull
          * \param copy The Vector to copy
          *
          */
-        template <typename U, Index US>
+        template <typename U, std::size_t US>
         explicit Vector(const Vector<U, US>& copy);
 
         /*! \brief Basic assignment operator
@@ -61,7 +61,7 @@ namespace Bull
          * \return This
          *
          */
-        template <typename U, Index US>
+        template <typename U, std::size_t US>
         Vector<T, S>& operator=(const Vector<U, US>& copy);
 
         /*! \brief Set the value of the Vector
@@ -121,7 +121,7 @@ namespace Bull
          * \return The coordinate
          *
          */
-        T& at(Index index);
+        T& at(std::size_t index);
 
         /*! \brief Get a coordinate
          *
@@ -130,7 +130,7 @@ namespace Bull
          * \return The coordinate
          *
          */
-        const T& at(Index index) const;
+        const T& at(std::size_t index) const;
 
         Vector<T, S> operator-() const;
 
@@ -155,40 +155,40 @@ namespace Bull
         std::array<T, S> m_components; /*!< Components of the Vector */
     };
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator+(const Vector<T, S>& left, const Vector<T, S>& right);
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator+(T left, const Vector<T, S>& right);
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator+(const Vector<T, S>& left, T right);
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator-(const Vector<T, S>& left, const Vector<T, S>& right);
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator-(T left, const Vector<T, S>& right);
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator-(const Vector<T, S>& left, T right);
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator*(const Vector<T, S>& left, const Vector<T, S>& right);
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator*(T left, const Vector<T, S>& right);
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator*(const Vector<T, S>& left, T right);
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator/(const Vector<T, S>& left, const Vector<T, S>& right);
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator/(T left, const Vector<T, S>& right);
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     Vector<T, S> operator/(const Vector<T, S>& left, T right);
 }
 

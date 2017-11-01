@@ -19,7 +19,7 @@ namespace Bull
     }
 
     template <typename T>
-    template <typename U, Index US>
+    template <typename U, std::size_t US>
     Vector3<T>::Vector3(const Vector<U, US>& copy) :
         Vector<T, US>(copy)
     {

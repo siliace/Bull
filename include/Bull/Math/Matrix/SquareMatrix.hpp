@@ -5,7 +5,7 @@
 
 namespace Bull
 {
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     struct SquareMatrix : public Matrix<T, S, S>
     {
         static SquareMatrix<T, S> Zero;
@@ -34,11 +34,11 @@ namespace Bull
          * \param copy The Matrix to copy
          *
          */
-        template <typename U, Index WU, Index HU>
+        template <typename U, std::size_t WU, std::size_t HU>
         SquareMatrix(const Matrix<U, WU, HU>& copy);
     };
 
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     SquareMatrix<T, S> SquareMatrix<T, S>::Zero = SquareMatrix<T, S>();
 
     /*! \brief Multiply two Matrix
@@ -49,7 +49,7 @@ namespace Bull
      * \return The product of left and right
      *
      */
-    template <typename T, Index S>
+    template <typename T, std::size_t S>
     SquareMatrix<T, S> operator*(const SquareMatrix<T, S>& left, const SquareMatrix<T, S>& right);
 }
 

@@ -2,13 +2,13 @@
 
 namespace Bull
 {
-    ByteArray::ByteArray(Index size) :
+    ByteArray::ByteArray(std::size_t size) :
         ByteArray(size, 0)
     {
         /// Nothing
     }
 
-    ByteArray::ByteArray(Index size, Uint8 value) :
+    ByteArray::ByteArray(std::size_t size, Uint8 value) :
         Array<Uint8>(size, value)
     {
         /// Nothing

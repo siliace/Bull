@@ -47,7 +47,7 @@ namespace Bull
          * \param copy The Vector to copy
          *
          */
-        template <typename U, Index US>
+        template <typename U, std::size_t US>
         Vector4(const Vector<U, US>& copy);
 
         /*! \brief Set the Vector3

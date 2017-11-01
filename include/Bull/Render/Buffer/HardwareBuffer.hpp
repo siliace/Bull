@@ -29,7 +29,7 @@ namespace Bull
          * \return Return true if the buffer was created successfully, false otherwise
          *
          */
-        bool create(Index capacity) override;
+        bool create(std::size_t capacity) override;
 
         /*! \brief Create the buffer in the VRAM
          *
@@ -39,7 +39,7 @@ namespace Bull
          * \return Return true if the buffer was created successfully, false otherwise
          *
          */
-        bool create(Index capacity, HardwareBufferUsage usage);
+        bool create(std::size_t capacity, HardwareBufferUsage usage);
 
         /*! \brief Fill the buffer
          *
@@ -50,7 +50,7 @@ namespace Bull
          * \return True if the buffer was filled successfully
          *
          */
-        bool fill(const void* data, Index size, Index offset = 0) override;
+        bool fill(const void* data, std::size_t size, std::size_t offset = 0) override;
 
         /*! \brief Map data to a pointer
          *
@@ -86,7 +86,7 @@ namespace Bull
          * \return The capacity
          *
          */
-        Index getCapacity() const override;
+        std::size_t getCapacity() const override;
 
     protected:
 

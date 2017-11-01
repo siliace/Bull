@@ -43,7 +43,7 @@ namespace Bull
              * \return True if the ShaderStage was saved successfully
              *
              */
-            bool saveToMemory(const ShaderStage* shaderStage, void* data, Index length, const ShaderStageParameters& parameters) const override;
+            bool saveToMemory(const ShaderStage* shaderStage, void* data, std::size_t length, const ShaderStageParameters& parameters) const override;
 
             /*! \brief Tell whether the extension is supported
              *

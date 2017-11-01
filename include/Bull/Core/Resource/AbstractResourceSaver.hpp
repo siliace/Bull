@@ -43,7 +43,7 @@ namespace Bull
          * \return True if the Resource was saved successfully
          *
          */
-        virtual bool saveToMemory(const T* resource, void* data, Index length, const P& parameters) const = 0;
+        virtual bool saveToMemory(const T* resource, void* data, std::size_t length, const P& parameters) const = 0;
 
         /*! \brief Tell whether the extension is supported
          *

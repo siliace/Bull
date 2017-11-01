@@ -7,7 +7,7 @@ namespace Bull
     {
         String PathImpl::realPath(const String& relative)
         {
-            String absolute(static_cast<Index>(MAX_PATH));
+            String absolute(static_cast<std::size_t>(MAX_PATH));
 
             GetFullPathName(relative.getBuffer(), static_cast<DWORD>(absolute.getCapacity()), &absolute[0], nullptr);
 

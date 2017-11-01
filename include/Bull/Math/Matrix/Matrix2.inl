@@ -8,7 +8,7 @@ namespace Bull
     }
 
     template <typename T>
-    template <typename U, Index WU, Index HU>
+    template <typename U, std::size_t WU, std::size_t HU>
     Matrix2<T>::Matrix2(const Matrix<U, WU, HU>& copy) :
         SquareMatrix<T, 2>(copy)
     {
