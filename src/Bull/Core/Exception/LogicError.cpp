@@ -25,7 +25,7 @@ namespace Bull
     {
         StringStream ss;
 
-        ss << getMessage();
+        ss << what();
 
         if(!m_expected.isEmpty())
         {

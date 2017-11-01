@@ -5,32 +5,15 @@
 
 namespace Bull
 {
-    Exception::ExceptionQueue Exception::s_queue;
-
-    const Exception::ExceptionQueue& Exception::getExceptionQueue()
-    {
-        return s_queue;
-    }
-
-    Exception::Exception()
-    {
-        s_queue.emplace_back(this);
-    }
-
     Exception::Exception(const String& message) :
         m_message(message)
     {
         Log::get()->write(getLogMessage(), LogLevel::LogLevel_Error);
     }
 
-    Exception::~Exception()
+    const char* Exception::what() const noexcept
     {
-        s_queue.erase(std::find(s_queue.begin(), s_queue.end(), this));
-    }
-
-    const String& Exception::getMessage() const
-    {
-        return m_message;
+        return m_message.getBuffer();
     }
 
     String Exception::getLogMessage() const

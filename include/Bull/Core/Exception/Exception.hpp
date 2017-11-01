@@ -1,35 +1,20 @@
 #ifndef BULL_CORE_EXCEPTION_EXCEPTION_HPP
 #define BULL_CORE_EXCEPTION_EXCEPTION_HPP
 
-#include <vector>
+#include <exception>
 
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API Exception
+    class BULL_CORE_API Exception : public std::exception
     {
-    public:
-
-        using ExceptionQueue = std::vector<const Exception*>;
-
-        /*! \brief Get the current exception queue
-         *
-         * \return The exception queue
-         *
-         */
-        static const ExceptionQueue& getExceptionQueue();
-
-    private:
-
-        static ExceptionQueue s_queue;
-
     public:
 
         /*! \brief Default constructor
          *
          */
-        Exception();
+        Exception() = default;
 
         /*! \brief Constructor
          *
@@ -38,17 +23,12 @@ namespace Bull
          */
         explicit Exception(const String& message);
 
-        /*! \brief Destructor
-         *
-         */
-        ~Exception();
-
         /*! \brief Get the Exception's message
          *
          * \return The message
          *
          */
-        const String& getMessage() const;
+        const char* what() const noexcept override;
 
     protected:
 
