@@ -12,7 +12,6 @@ target_sources(bull-core
             ${BULL_SRC_CORE_MEMORY}/ByteArray.cpp
             ${BULL_INC_CORE_MEMORY}/MemoryStream.hpp
             ${BULL_SRC_CORE_MEMORY}/MemoryStream.cpp
-            ${BULL_INC_CORE_MEMORY}/MovablePtr.hpp
             ${BULL_INC_CORE_MEMORY}/RangeCheck.hpp
             ${BULL_SRC_CORE_MEMORY}/RangeCheck.cpp
             ${BULL_INC_CORE_MEMORY}/String.hpp

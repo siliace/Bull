@@ -23,7 +23,5 @@
 #include <windows.h>
 #include <windowsx.h>
 #include <mmsystem.h>
-#include <psapi.h>
-#include <tlhelp32.h>
 
 #endif // BULL_CORE_SUPPORT_WINDOWS_HPP
