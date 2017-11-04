@@ -1,0 +1,42 @@
+#ifndef BULL_NETWORK_SOCKET_TCPCLIENTIMPL_HPP
+#define BULL_NETWORK_SOCKET_TCPCLIENTIMPL_HPP
+
+#include <Bull/Core/Pattern/NonCopyable.hpp>
+
+#include <Bull/Network/Address/IpAddress.hpp>
+#include <Bull/Network/Address/NetPort.hpp>
+#include <Bull/Network/Socket/SocketImpl.hpp>
+
+namespace Bull
+{
+    namespace prv
+    {
+        class TcpClientImpl : public NonCopyable
+        {
+        public:
+
+            /*! \brief Constructor
+             *
+             * \param socket The SocketImpl to use
+             *
+             */
+            TcpClientImpl(const std::unique_ptr<prv::SocketImpl>& socket);
+
+            /*! \brief Connect the TcpClientImpl to a remote host
+             *
+             * \param address The IpAddress of the remote host
+             * \param port    The NetPort of the remote host
+             *
+             * \return True if the TcpClientImpl is connected
+             *
+             */
+            bool connect(const IpAddress& address, NetPort port);
+
+        private:
+
+            const std::unique_ptr<SocketImpl>& m_socket;
+        };
+    }
+}
+
+#endif // BULL_NETWORK_SOCKET_TCPCLIENTIMPL_HPP

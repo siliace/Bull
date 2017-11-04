@@ -1,0 +1,8 @@
+target_sources(bull-network
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/SocketHeader.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SocketImplWin32.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SocketImplWin32.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/WsaService.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/WsaService.cpp
+        )
