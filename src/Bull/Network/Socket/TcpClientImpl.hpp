@@ -32,6 +32,10 @@ namespace Bull
              */
             bool connect(const IpAddressWrapper& address, NetPort port);
 
+            bool send(const void* data, std::size_t length, std::size_t& sent);
+
+            bool reveive(void* data , std::size_t length, std::size_t& received);
+
         private:
 
             const std::unique_ptr<SocketImpl>& m_socket;

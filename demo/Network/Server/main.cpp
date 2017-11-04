@@ -12,12 +12,30 @@ int main()
     {
         if(server.accept(client))
         {
+            std::size_t sent = 0;
+            Bull::String hello = "Hello World";
+
             std::cout << "Client accepted" << std::endl;
 
-            return EXIT_SUCCESS;
-        }
+            if(client.send(hello.getBuffer(), hello.getCapacity(), sent))
+            {
+                std::cout << sent << " bytes sent" << std::endl;
 
-        std::cout << "Failed to accept" << std::endl;
+                return EXIT_SUCCESS;
+            }
+            else
+            {
+                std::cout << "Failed to send" << std::endl;
+            }
+        }
+        else
+        {
+            std::cout << "Failed to accept" << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Failed to listen" << std::endl;
     }
 
     return EXIT_FAILURE;

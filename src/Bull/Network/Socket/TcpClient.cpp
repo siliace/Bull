@@ -36,32 +36,55 @@ namespace Bull
     {
         close();
         m_impl.reset();
+        m_hostPort = NetPort_Any;
+        m_hostAddress = IpAddressV4::None;
     }
 
-    bool TcpClient::send(const ByteArray& bytes)
+    bool TcpClient::send(const void* data, std::size_t length, std::size_t& sent)
     {
+        if(isConnected())
+        {
+            return m_impl->send(data, length, sent);
+        }
 
+        return false;
     }
 
-    bool TcpClient::receive(ByteArray& bytes)
+    bool TcpClient::receive(void* data, std::size_t length, std::size_t& sent)
     {
+        if(isConnected())
+        {
+            return m_impl->reveive(data, length, sent);
+        }
 
+        return false;
     }
 
     NetPort TcpClient::getRemotePort() const
     {
-        return m_hostPort;
+        if(isConnected())
+        {
+            return m_hostPort;
+        }
+
+        return NetPort_Any;
     }
 
     const IpAddress& TcpClient::getRemoteAddress() const
     {
-        return m_hostAddress.getAddress();
+        if(isConnected())
+        {
+            return m_hostAddress.getAddress();
+        }
+
+        return IpAddressV4::None;
     }
 
     bool TcpClient::create(SocketHandler handler, const IpAddressWrapper& address, NetPort port)
     {
         if(Socket::create(handler))
         {
+            m_impl = std::make_unique<prv::TcpClientImpl>(getImpl());
             m_hostPort = port;
             m_hostAddress = address;
 

@@ -101,7 +101,9 @@ namespace Bull
     void TcpServer::disconnect()
     {
         close();
+        m_backlog = 0;
         m_impl.reset();
+        m_port = NetPort_Any;
     }
 
     int TcpServer::getBacklog() const

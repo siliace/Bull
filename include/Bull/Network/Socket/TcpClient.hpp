@@ -1,6 +1,8 @@
 #ifndef BULL_NETWORK_SOCKET_TCPCLIENT_HPP
 #define BULL_NETWORK_SOCKET_TCPCLIENT_HPP
 
+#include <Bull/Core/Memory/AbstractBuffer.hpp>
+
 #include <Bull/Network/Socket/Socket.hpp>
 #include <Bull/Network/Socket/SocketHandler.hpp>
 
@@ -37,27 +39,39 @@ namespace Bull
          */
         bool connect(const IpAddressWrapper& address, NetPort port);
 
+        /*! \brief Tell whether the TcpClient is connected
+         *
+         * \return True if the TcpClient is connected
+         *
+         */
         bool isConnected() const;
 
+        /*! \brief Disconnect the TcpClient from the remote host
+         *
+         */
         void disconnect();
 
-        /*! \brief Send bytes the remote host
+        /*! \brief Send a data buffer the remote host
          *
-         * \param bytes Bytes to send
+         * \param data   Data to send
+         * \param length The length of the data buffer to send
+         * \param sent   The amount of bytes sent
          *
-         * \return True if bytes were sent successfully
+         * \return True if the data buffer were sent successfully
          *
          */
-        bool send(const ByteArray& bytes);
+        bool send(const void* data, std::size_t length, std::size_t& sent);
 
-        /*! \brief Receive bytes from from the remote host
+        /*! \brief Receive data from
          *
-         * \param bytes Bytes received
+         * \param data
+         * \param length
+         * \param sent
          *
-         * \return True if bytes were received successfully
+         * \return
          *
          */
-        bool receive(ByteArray& bytes);
+        bool receive(void* data, std::size_t length, std::size_t& sent);
 
         /*! \brief Get the remote NetPort
          *
