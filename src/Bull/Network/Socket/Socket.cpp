@@ -40,11 +40,21 @@ namespace Bull
 
     bool Socket::create(NetProtocol protocol)
     {
+        if(m_impl->isValid())
+        {
+            close();
+        }
+
         return m_impl->create(protocol, m_type);
     }
 
     bool Socket::create(SocketHandler handler)
     {
+        if(m_impl->isValid())
+        {
+            close();
+        }
+
         return m_impl->create(handler);
     }
 
