@@ -24,7 +24,7 @@ namespace Bull
 
     bool TcpServer::listen(NetPort port, const IpAddressWrapper& host, int backlog)
     {
-        if(create(host.getProtocol()))
+        if(port != NetPort_Any && host.isValid() && create(host.getProtocol()))
         {
             m_impl = std::make_unique<prv::TcpServerImpl>(getImpl());
 
