@@ -21,7 +21,7 @@ namespace Bull
 
     bool TcpClient::connect(const IpAddressWrapper& address, NetPort port)
     {
-        if(Socket::create(address.getProtocol()))
+        if(address.isValid() && port != NetPort_Any && Socket::create(address.getProtocol()))
         {
             m_impl = std::make_unique<prv::TcpClientImpl>(getImpl());
 
@@ -33,20 +33,25 @@ namespace Bull
 
     bool TcpClient::connect(const IpAddressWrapper& address, NetPort port, const Time& timeout, const Time& pause)
     {
-        Clock clock;
-        bool connected;
+        bool connected = false;
 
-        clock.start();
-
-        do
+        if(address.isValid() && port != NetPort_Any)
         {
-            connected = connect(address, port);
+            Clock clock;
+            clock.start();
 
-            if(!connected)
+            do
             {
-                Thread::sleep(pause);
-            }
-        }while(!connected && clock.getElapsedTime() < timeout);
+                connected = connect(address, port);
+
+                if(!connected)
+                {
+                    Thread::sleep(pause);
+                }
+            }while(!connected && clock.getElapsedTime() < timeout);
+
+            return connected;
+        }
 
         return connected;
     }
@@ -66,7 +71,7 @@ namespace Bull
 
     bool TcpClient::send(const void* data, std::size_t length, std::size_t& sent)
     {
-        if(isConnected())
+        if(isConnected() && data && length)
         {
             return m_impl->send(data, length, sent);
         }
@@ -76,7 +81,7 @@ namespace Bull
 
     bool TcpClient::receive(void* data, std::size_t length, std::size_t& sent)
     {
-        if(isConnected())
+        if(isConnected() && data && length)
         {
             return m_impl->reveive(data, length, sent);
         }
