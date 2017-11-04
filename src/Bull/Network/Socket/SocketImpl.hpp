@@ -54,7 +54,7 @@ namespace Bull
              */
             virtual ~SocketImpl();
 
-            /*! \brief
+            /*! \brief Create the SocketImpl
              *
              * \param protocol The NetProtocol to use on the SocketImpl
              * \param type     The SocketType to use on the SocketType
@@ -63,6 +63,15 @@ namespace Bull
              *
              */
             bool create(NetProtocol protocol, SocketType type);
+
+            /*! \brief Create the SocketImpl
+             *
+             * \param handler The SocketHandler
+             * s
+             * \return True if the SocketImpl was created successfully
+             *
+             */
+            bool create(SocketHandler handler);
 
             /*! \brief Tell whether the SocketImpl is valid
              *

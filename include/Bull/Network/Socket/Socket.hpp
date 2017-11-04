@@ -5,6 +5,7 @@
 
 #include <Bull/Network/Address/IpAddress.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
+#include <Bull/Network/Socket/SocketHandler.hpp>
 #include <Bull/Network/Socket/SocketType.hpp>
 
 namespace Bull
@@ -62,6 +63,15 @@ namespace Bull
          *
          */
         bool create(NetProtocol protocol);
+
+        /*! \brief Create the Socket
+         *
+         * \param handler The SocketHandler
+         *
+         * \return True if the Socket was created successfully
+         *
+         */
+        bool create(SocketHandler handler);
 
         /*! \brief Close the Socket
          *

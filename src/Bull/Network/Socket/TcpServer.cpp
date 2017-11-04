@@ -59,9 +59,7 @@ namespace Bull
 
             if(socket != prv::SocketImpl::getInvalidSocket())
             {
-                client.reset(socket, address, port);
-
-                return true;
+                return client.create(socket, address, port);
             }
         }
 

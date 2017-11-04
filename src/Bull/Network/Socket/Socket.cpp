@@ -43,6 +43,11 @@ namespace Bull
         return m_impl->create(protocol, m_type);
     }
 
+    bool Socket::create(SocketHandler handler)
+    {
+        return m_impl->create(handler);
+    }
+
     void Socket::close()
     {
         m_impl.reset();

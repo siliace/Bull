@@ -77,14 +77,16 @@ namespace Bull
 
         friend class TcpServer;
 
-        /*! \brief Reset the TcpClient
+        /*! \brief Create the TcpClient
          *
          * \param handler The new SocketHandler
          * \param address The new IpAddress
          * \param port    The new NetPort
          *
+         * \return True if the TcpClient was created successfully
+         *
          */
-        void reset(SocketHandler handler, const IpAddress& address, NetPort port);
+        bool create(SocketHandler handler, const IpAddress& address, NetPort port);
 
     private:
 

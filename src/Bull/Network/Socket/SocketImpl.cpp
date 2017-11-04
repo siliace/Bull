@@ -52,6 +52,13 @@ namespace Bull
             return isValid();
         }
 
+        bool SocketImpl::create(SocketHandler handler)
+        {
+            m_handler = handler;
+
+            return isValid();
+        }
+
         bool SocketImpl::isValid() const
         {
             return m_handler != SocketImplType::InvalidHandler;

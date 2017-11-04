@@ -17,7 +17,7 @@ namespace Bull
 
     bool TcpClient::connect(const IpAddress& address, NetPort port)
     {
-        if(create(address.getProtocol()))
+        if(Socket::create(address.getProtocol()))
         {
             m_impl = std::make_unique<prv::TcpClientImpl>(getImpl());
 
@@ -58,9 +58,16 @@ namespace Bull
         return m_hostAddress;
     }
 
-    void TcpClient::reset(SocketHandler handler, const IpAddress& address, NetPort port)
+    bool TcpClient::create(SocketHandler handler, const IpAddress& address, NetPort port)
     {
-        m_hostPort = port;
-        m_hostAddress = address;
+        if(Socket::create(handler))
+        {
+            m_hostPort = port;
+            m_hostAddress = address;
+
+            return true;
+        }
+
+        return false;
     }
 }

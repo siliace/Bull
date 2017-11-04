@@ -10,7 +10,7 @@ int main()
 
     if(server.listen(Bull::NetPort(6969)))
     {
-        while(!server.accept(client, Bull::Time::seconds(1.f)))
+        if(!server.accept(client))
         {
             std::cout << "Failed to accept" << std::endl;
         }

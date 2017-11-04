@@ -64,6 +64,9 @@ namespace Bull
             {
                 throw RuntimeError("Failed to copy bytes");
             }
+
+            ///Todo : refactor
+            return;
         }
 
         throw LogicError("Invalid length of bytes or offset", "bytes capacity + offset should be lower or equal to 4");
