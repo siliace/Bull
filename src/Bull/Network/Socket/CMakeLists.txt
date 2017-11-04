@@ -12,6 +12,7 @@ target_sources(bull-network
             ${BULL_INC_NETWORK_SOCKET}/TcpServer.hpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpServer.cpp
             ${BULL_INC_NETWORK_SOCKET}/UdpSocket.hpp
+            ${BULL_SRC_NETWORK_SOCKET}/UdpSocket.cpp
         PRIVATE
             ${BULL_SRC_NETWORK_SOCKET}/SocketHeader.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketImpl.hpp
@@ -20,6 +21,8 @@ target_sources(bull-network
             ${BULL_SRC_NETWORK_SOCKET}/TcpClientImpl.cpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpServerImpl.hpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpServerImpl.cpp
+            ${BULL_SRC_NETWORK_SOCKET}/UdpSocketImpl.hpp
+            ${BULL_SRC_NETWORK_SOCKET}/UdpSocketImpl.cpp
         )
 
 if(BULL_OS_WINDOWS)
