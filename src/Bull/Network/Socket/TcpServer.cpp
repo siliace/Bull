@@ -22,7 +22,7 @@ namespace Bull
         disconnect();
     }
 
-    bool TcpServer::listen(NetPort port, const IpAddress& host, int backlog)
+    bool TcpServer::listen(NetPort port, const IpAddressWrapper& host, int backlog)
     {
         if(create(host.getProtocol()))
         {
@@ -53,7 +53,7 @@ namespace Bull
         if(isListening())
         {
             NetPort port;
-            IpAddress address;
+            IpAddressWrapper address;
 
             SocketHandler socket = m_impl->accept(address, port);
 

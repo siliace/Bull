@@ -28,7 +28,7 @@ namespace Bull
              * \return True if the TcpServerImpl has been bound correctly
              *
              */
-            bool bind(const IpAddress& address, NetPort port);
+            bool bind(const IpAddressWrapper& address, NetPort port);
 
             /*! \brief Start to listen the NetPort
              *
@@ -47,7 +47,7 @@ namespace Bull
              * \return The SocketHandler of the accepted client
              *
              */
-            SocketHandler accept(IpAddress& address, NetPort& port);
+            SocketHandler accept(IpAddressWrapper& address, NetPort& port);
 
         private:
 

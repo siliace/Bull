@@ -3,7 +3,7 @@
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
-#include <Bull/Network/Address/IpAddress.hpp>
+#include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
 #include <Bull/Network/Socket/SocketImpl.hpp>
 
@@ -30,7 +30,7 @@ namespace Bull
              * \return True if the TcpClientImpl is connected
              *
              */
-            bool connect(const IpAddress& address, NetPort port);
+            bool connect(const IpAddressWrapper& address, NetPort port);
 
         private:
 

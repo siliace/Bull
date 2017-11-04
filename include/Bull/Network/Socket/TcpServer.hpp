@@ -3,7 +3,7 @@
 
 #include <Bull/Core/Time/Time.hpp>
 
-#include <Bull/Network/Address/IpAddress.hpp>
+#include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Socket/Socket.hpp>
 
 namespace Bull
@@ -38,7 +38,7 @@ namespace Bull
          * \return True if the TcpServer is listening the NetPort
          *
          */
-        bool listen(NetPort port, const IpAddress& host = IpAddress::Any, int backlog = -1);
+        bool listen(NetPort port, const IpAddressWrapper& host = IpAddressV4::Any, int backlog = -1);
 
         /*! \brief Tell whether the TcpServer is listening a NetPort
          *

@@ -4,7 +4,7 @@ int main()
 {
     Bull::TcpClient client;
 
-    if(client.connect(Bull::IpAddress::Loopback, Bull::NetPort(6969)))
+    if(client.connect(Bull::IpAddressV4::Loopback, Bull::NetPort(6969)))
     {
         return EXIT_SUCCESS;
     }

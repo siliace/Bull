@@ -11,7 +11,7 @@ namespace Bull
             /// Nothing
         }
 
-        bool TcpServerImpl::bind(const IpAddress& address, NetPort port)
+        bool TcpServerImpl::bind(const IpAddressWrapper& address, NetPort port)
         {
             if(m_socket->isValid())
             {
@@ -33,14 +33,14 @@ namespace Bull
             return false;
         }
 
-        SocketHandler TcpServerImpl::accept(IpAddress& address, NetPort& port)
+        SocketHandler TcpServerImpl::accept(IpAddressWrapper& address, NetPort& port)
         {
             SocketHandler client = SocketImpl::getInvalidSocket();
 
             if(m_socket->isValid())
             {
-                int length;
                 sockaddr addr;
+                int length = sizeof(sockaddr);
 
                 client = ::accept(m_socket->getHandler(), &addr, &length);
 

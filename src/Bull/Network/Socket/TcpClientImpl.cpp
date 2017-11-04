@@ -11,7 +11,7 @@ namespace Bull
             /// Nothing
         }
 
-        bool TcpClientImpl::connect(const IpAddress& address, NetPort port)
+        bool TcpClientImpl::connect(const IpAddressWrapper& address, NetPort port)
         {
             if(m_socket->isValid())
             {

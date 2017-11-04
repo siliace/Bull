@@ -1,4 +1,4 @@
-#include <Bull/Network/Address/IpAddress.hpp>
+#include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Socket/TcpClient.hpp>
 #include <Bull/Network/Socket/TcpClientImpl.hpp>
 
@@ -15,7 +15,7 @@ namespace Bull
         disconnect();
     }
 
-    bool TcpClient::connect(const IpAddress& address, NetPort port)
+    bool TcpClient::connect(const IpAddressWrapper& address, NetPort port)
     {
         if(Socket::create(address.getProtocol()))
         {
@@ -55,10 +55,10 @@ namespace Bull
 
     const IpAddress& TcpClient::getRemoteAddress() const
     {
-        return m_hostAddress;
+        return m_hostAddress.getAddress();
     }
 
-    bool TcpClient::create(SocketHandler handler, const IpAddress& address, NetPort port)
+    bool TcpClient::create(SocketHandler handler, const IpAddressWrapper& address, NetPort port)
     {
         if(Socket::create(handler))
         {

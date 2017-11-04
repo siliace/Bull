@@ -10,12 +10,14 @@ int main()
 
     if(server.listen(Bull::NetPort(6969)))
     {
-        if(!server.accept(client))
+        if(server.accept(client))
         {
-            std::cout << "Failed to accept" << std::endl;
+            std::cout << "Client accepted" << std::endl;
+
+            return EXIT_SUCCESS;
         }
 
-        std::cout << "Client accepted" << std::endl;
+        std::cout << "Failed to accept" << std::endl;
     }
 
     return EXIT_FAILURE;

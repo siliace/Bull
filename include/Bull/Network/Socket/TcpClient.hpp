@@ -35,7 +35,7 @@ namespace Bull
          * \return True if the TcpClient is connected
          *
          */
-        bool connect(const IpAddress& address, NetPort port);
+        bool connect(const IpAddressWrapper& address, NetPort port);
 
         bool isConnected() const;
 
@@ -86,13 +86,13 @@ namespace Bull
          * \return True if the TcpClient was created successfully
          *
          */
-        bool create(SocketHandler handler, const IpAddress& address, NetPort port);
+        bool create(SocketHandler handler, const IpAddressWrapper& address, NetPort port);
 
     private:
 
         std::unique_ptr<prv::TcpClientImpl> m_impl;
         NetPort                             m_hostPort;
-        IpAddress                           m_hostAddress;
+        IpAddressWrapper                    m_hostAddress;
     };
 }
 
