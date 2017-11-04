@@ -2,6 +2,7 @@
 #define BULL_NETWORK_SOCKET_TCPCLIENT_HPP
 
 #include <Bull/Core/Memory/AbstractBuffer.hpp>
+#include <Bull/Core/Time/Time.hpp>
 
 #include <Bull/Network/Socket/Socket.hpp>
 #include <Bull/Network/Socket/SocketHandler.hpp>
@@ -38,6 +39,18 @@ namespace Bull
          *
          */
         bool connect(const IpAddressWrapper& address, NetPort port);
+
+        /*! \brief Connect the TcpClient to a remote host
+         *
+         * \param address The IpAddress of the remote host
+         * \param port    The NetPort of the remote host
+         * \param timeout The timeout of before the function fail
+         * \param pause   The time between two try
+         *
+         * \return True if the TcpClient is connected
+         *
+         */
+        bool connect(const IpAddressWrapper& address, NetPort port, const Time& timeout, const Time& pause = Time::milliseconds(20.f));
 
         /*! \brief Tell whether the TcpClient is connected
          *

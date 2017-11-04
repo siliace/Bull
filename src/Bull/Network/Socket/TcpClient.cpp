@@ -1,3 +1,7 @@
+#include <Bull/Core/Thread/Thread.hpp>
+#include <Bull/Core/Time/Clock.hpp>
+#include <Bull/Core/Utility/CallOnExit.hpp>
+
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Socket/TcpClient.hpp>
 #include <Bull/Network/Socket/TcpClientImpl.hpp>
@@ -25,6 +29,26 @@ namespace Bull
         }
 
         return false;
+    }
+
+    bool TcpClient::connect(const IpAddressWrapper& address, NetPort port, const Time& timeout, const Time& pause)
+    {
+        Clock clock;
+        bool connected;
+
+        clock.start();
+
+        do
+        {
+            connected = connect(address, port);
+
+            if(!connected)
+            {
+                Thread::sleep(pause);
+            }
+        }while(!connected && clock.getElapsedTime() < timeout);
+
+        return connected;
     }
 
     bool TcpClient::isConnected() const
