@@ -22,38 +22,38 @@ namespace Bull
              */
             explicit UdpSocketImpl(const std::unique_ptr<SocketImpl>& socket);
 
-            /*! \brief
+            /*! \brief Bind the UdpSocket to a NetPort
              *
-             * \param address
-             * \param port
+             * \param port    The NetPort to listen
+             * \param address The IpAddress to listen
              *
-             * \return
+             * \return True if the UdpSocket was bound successfully
              *
              */
             bool bind(NetPort port, const IpAddressWrapper& address);
 
-            /*! \brief
+            /*! \brief Send data to a remote host
              *
-             * \param address
-             * \param port
-             * \param data
-             * \param length
-             * \param sent
+             * \param address The IpAddress of the remote host to send data
+             * \param port    The NetPort of the remote host to use
+             * \param data    Data to send
+             * \param length  The length of data to send
+             * \param sent    The amount of bytes sent
              *
-             * \return
+             * \return True if the data were sent successfully
              *
              */
             bool sendTo(const IpAddressWrapper& address, NetPort port, const void* data, std::size_t length, std::size_t& sent) const;
 
-            /*! \brief
+            /*! \brief Receive data from a remote host
              *
-             * \param address
-             * \param port
-             * \param data
-             * \param length
-             * \param received
+             * \param address  The IpAddress of the remote host
+             * \param port     The NetPort of the remote host
+             * \param data     Data to receive
+             * \param length   The length of data to receive
+             * \param received The amount of bytes received
              *
-             * \return
+             * \return True if the data were received successfully
              *
              */
             bool receiveFrom(IpAddressWrapper& address, NetPort& port, void* data, std::size_t length, std::size_t& received) const;

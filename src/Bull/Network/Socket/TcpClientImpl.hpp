@@ -32,8 +32,26 @@ namespace Bull
              */
             bool connect(const IpAddressWrapper& address, NetPort port);
 
+            /*! \brief Send a data buffer the remote host
+             *
+             * \param data   Data to send
+             * \param length The length of data to send
+             * \param sent   The amount of bytes sent
+             *
+             * \return True if data were sent successfully
+             *
+             */
             bool send(const void* data, std::size_t length, std::size_t& sent);
 
+            /*! \brief Receive data from the remote host
+             *
+             * \param data     Data to receive
+             * \param length   The length of data to receive
+             * \param received The amount of bytes received
+             *
+             * \return True if data were received successfully
+             *
+             */
             bool reveive(void* data , std::size_t length, std::size_t& received);
 
         private:

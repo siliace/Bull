@@ -67,7 +67,7 @@ namespace Bull
             /*! \brief Create the SocketImpl
              *
              * \param handler The SocketHandler
-             * s
+             *
              * \return True if the SocketImpl was created successfully
              *
              */
@@ -76,6 +76,7 @@ namespace Bull
             /*! \brief Tell whether the SocketImpl is valid
              *
              * \return True if the SocketImpl is valid
+             *
              */
             bool isValid() const;
 

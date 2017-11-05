@@ -67,24 +67,24 @@ namespace Bull
         /*! \brief Send a data buffer the remote host
          *
          * \param data   Data to send
-         * \param length The length of the data buffer to send
+         * \param length The length of data to send
          * \param sent   The amount of bytes sent
          *
-         * \return True if the data buffer were sent successfully
+         * \return True if data were sent successfully
          *
          */
         bool send(const void* data, std::size_t length, std::size_t& sent);
 
-        /*! \brief Receive data from
+        /*! \brief Receive data from the remote host
          *
-         * \param data
-         * \param length
-         * \param sent
+         * \param data     Data to receive
+         * \param length   The length of data to receive
+         * \param received The amount of bytes received
          *
-         * \return
+         * \return True if data were received successfully
          *
          */
-        bool receive(void* data, std::size_t length, std::size_t& sent);
+        bool receive(void* data, std::size_t length, std::size_t& received);
 
         /*! \brief Get the remote NetPort
          *

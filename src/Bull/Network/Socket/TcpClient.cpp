@@ -79,11 +79,11 @@ namespace Bull
         return false;
     }
 
-    bool TcpClient::receive(void* data, std::size_t length, std::size_t& sent)
+    bool TcpClient::receive(void* data, std::size_t length, std::size_t& received)
     {
         if(isConnected() && data && length)
         {
-            return m_impl->reveive(data, length, sent);
+            return m_impl->reveive(data, length, received);
         }
 
         return false;
