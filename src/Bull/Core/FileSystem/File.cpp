@@ -91,12 +91,12 @@ namespace Bull
         m_impl.reset(nullptr);
     }
 
-    Uint64 File::read(void* data, Uint64 size)
+    std::size_t File::read(void* data, std::size_t size)
     {
         if(m_impl)
         {
             std::memset(data, 0, size);
-            Uint64 read = m_impl->read(data, size);
+            std::size_t read = m_impl->read(data, size);
 
             if(read < size)
             {
@@ -138,7 +138,7 @@ namespace Bull
         return false;
     }
 
-    Uint64 File::write(const void* data, Uint64 size)
+    std::size_t File::write(const void* data, std::size_t size)
     {
         if(m_impl)
         {
@@ -148,7 +148,7 @@ namespace Bull
         return 0;
     }
 
-    Uint64 File::write(const String& string)
+    std::size_t File::write(const String& string)
     {
         return write(&string[0], string.getSize());
     }
@@ -183,7 +183,7 @@ namespace Bull
         return Date();
     }
 
-    Uint64 File::getCursor() const
+    std::size_t File::getCursor() const
     {
         if(m_impl)
         {
@@ -193,7 +193,7 @@ namespace Bull
         return 0;
     }
 
-    Uint64 File::moveCursor(Int64 offset)
+    std::size_t File::moveCursor(Int64 offset)
     {
         if(m_impl)
         {
@@ -203,7 +203,7 @@ namespace Bull
         return 0;
     }
 
-    Uint64 File::setCursor(Uint64 position)
+    std::size_t File::setCursor(std::size_t position)
     {
         if(m_impl)
         {
@@ -218,7 +218,7 @@ namespace Bull
         return m_path;
     }
 
-    Uint64 File::getSize() const
+    std::size_t File::getSize() const
     {
         if(m_impl)
         {

@@ -21,7 +21,7 @@ namespace Bull
          * \return Return the number of read bytes
          *
          */
-        virtual Uint64 read(void* data, Uint64 size) = 0;
+        virtual std::size_t read(void* data, std::size_t size) = 0;
 
         /*! \brief Get all the content of the stream
          *
@@ -37,21 +37,21 @@ namespace Bull
          * \return Return the actual position
          *
          */
-        virtual Uint64 setCursor(Uint64 position) = 0;
+        virtual std::size_t setCursor(std::size_t position) = 0;
 
         /*! \brief Get the reading position in the stream
          *
          * \return Return the current position
          *
          */
-        virtual Uint64 getCursor() const = 0;
+        virtual std::size_t getCursor() const = 0;
 
         /*! \brief Get the size of the stream
          *
          * \return Return the size of the stream
          *
          */
-        virtual Uint64 getSize() const = 0;
+        virtual std::size_t getSize() const = 0;
     };
 }
 

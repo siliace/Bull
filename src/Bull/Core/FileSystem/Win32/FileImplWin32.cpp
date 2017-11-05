@@ -98,7 +98,7 @@ namespace Bull
             return m_handler != INVALID_HANDLE_VALUE;
         }
 
-        Uint64 FileImplWin32::read(void* data, Uint64 size)
+        std::size_t FileImplWin32::read(void* data, std::size_t size)
         {
             DWORD read;
             LARGE_INTEGER cursor;
@@ -111,7 +111,7 @@ namespace Bull
             return read;
         }
 
-        Uint64 FileImplWin32::write(const void* data, Uint64 size)
+        std::size_t FileImplWin32::write(const void* data, std::size_t size)
         {
             DWORD written = 0;
             LARGE_INTEGER cursor;
@@ -169,7 +169,7 @@ namespace Bull
             return Date();
         }
 
-        Uint64 FileImplWin32::getCursor() const
+        std::size_t FileImplWin32::getCursor() const
         {
             LARGE_INTEGER zero = {0};
             LARGE_INTEGER position;
@@ -179,10 +179,10 @@ namespace Bull
                 return 0;
             }
 
-            return static_cast<Uint64>(position.QuadPart);
+            return static_cast<std::size_t>(position.QuadPart);
         }
 
-        Uint64 FileImplWin32::moveCursor(Int64 offset)
+        std::size_t FileImplWin32::moveCursor(Int64 offset)
         {
             LARGE_INTEGER distance;
             LARGE_INTEGER position;
@@ -193,10 +193,10 @@ namespace Bull
                 return 0;
             }
 
-            return static_cast<Uint64>(position.QuadPart);
+            return position.QuadPart;
         }
 
-        Uint64 FileImplWin32::setCursor(Uint64 offset)
+        std::size_t FileImplWin32::setCursor(std::size_t offset)
         {
             LARGE_INTEGER distance;
             LARGE_INTEGER position;
@@ -207,16 +207,16 @@ namespace Bull
                 return 0;
             }
 
-            return static_cast<Uint64>(position.QuadPart);
+            return position.QuadPart;
         }
 
-        Uint64 FileImplWin32::getSize() const
+        std::size_t FileImplWin32::getSize() const
         {
             LARGE_INTEGER size;
 
             GetFileSizeEx(m_handler, &size);
 
-            return static_cast<Uint64>(size.QuadPart);
+            return size.QuadPart;
         }
     }
 }
