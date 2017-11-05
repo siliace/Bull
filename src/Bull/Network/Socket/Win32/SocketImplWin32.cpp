@@ -13,27 +13,30 @@ namespace Bull
 
         SocketImplWin32::~SocketImplWin32()
         {
-            if(getHandler() != InvalidHandler)
-            {
-                closesocket(getHandler());
-            }
+            closesocket(getHandler());
         }
 
         void SocketImplWin32::enableBlockingMode(bool enable)
         {
-            if(getHandler() != InvalidHandler)
-            {
-                m_blocking = enable;
+            m_blocking = enable;
 
-                u_long yes = 1, no = 0;
+            u_long yes = 1, no = 0;
 
-                ioctlsocket(getHandler(), FIONBIO, m_blocking ? &yes : &no);
-            }
+            ioctlsocket(getHandler(), FIONBIO, m_blocking ? &yes : &no);
         }
 
         bool SocketImplWin32::isEnableBlockingMode() const
         {
             return m_blocking;
+        }
+
+        std::size_t SocketImplWin32::getPendingLength() const
+        {
+            u_long length = 0;
+
+            ioctlsocket(getHandler(), FIONREAD, &length);
+
+            return length;
         }
 
         SocketImplWin32::SocketImplWin32() :

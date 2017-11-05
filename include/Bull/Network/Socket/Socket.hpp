@@ -39,6 +39,13 @@ namespace Bull
          */
         bool isEnableBlockingMode() const;
 
+        /*! \brief Get the length of data in pending to be read
+         *
+         * \return The length
+         *
+         */
+        std::size_t getPendingLength() const;
+
         /*! \brief Get the SocketType of the Socket
          *
          * \return The SocketType
