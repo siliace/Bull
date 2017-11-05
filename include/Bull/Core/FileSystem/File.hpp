@@ -117,7 +117,7 @@ namespace Bull
          * \return Return the number of bytes actually read
          *
          */
-        Uint64 read(void* data, Uint64 size);
+        std::size_t read(void* data, std::size_t size);
 
         /*! \brief Read a line in the file
          *
@@ -136,7 +136,7 @@ namespace Bull
          * \return Return the number of bytes actually written
          *
          */
-        Uint64 write(const void* data, Uint64 size);
+        std::size_t write(const void* data, std::size_t size);
 
         /*! \brief Write a string in the file
          *
@@ -145,7 +145,7 @@ namespace Bull
          * \return Return the number of bytes actually written
          *
          */
-        Uint64 write(const String& string);
+        std::size_t write(const String& string);
 
         /*! \brief Get the date of the creation of the file
          *
@@ -173,7 +173,7 @@ namespace Bull
          * \return Return the position of the cursor in the file
          *
          */
-        Uint64 getCursor() const;
+        std::size_t getCursor() const;
 
         /*! \brief Move the reading position in the file
          *
@@ -182,7 +182,7 @@ namespace Bull
          * \return Return the actual position of the cursor
          *
          */
-        Uint64 moveCursor(Int64 offset);
+        std::size_t moveCursor(Int64 offset);
 
         /*! \brief Set the reading position in the file
          *
@@ -191,7 +191,7 @@ namespace Bull
          * \return Return the actual position of the cursor
          *
          */
-        Uint64 setCursor(Uint64 position);
+        std::size_t setCursor(std::size_t position);
 
         /*! \brief Get the path of the file
          *
@@ -205,7 +205,7 @@ namespace Bull
          * \return Return the size of the file
          *
          */
-        Uint64 getSize() const;
+        std::size_t getSize() const;
 
         /*! \brief Get the opening mode of the file
          *

@@ -13,9 +13,9 @@ namespace Bull
         m_content.clear();
     }
 
-    Uint64 StringStream::write(const String& string)
+    std::size_t StringStream::write(const String& string)
     {
-        Uint64 oldSize = getSize();
+        std::size_t oldSize = getSize();
 
         m_content.insert(string, getCursor());
         m_cursor += string.getSize();
@@ -23,21 +23,21 @@ namespace Bull
         return getSize() - oldSize;
     }
 
-    Uint64 StringStream::write(const void* data, Uint64 size)
+    std::size_t StringStream::write(const void* data, std::size_t size)
     {
         String string(reinterpret_cast<const char*>(data), size);
 
         return write(string);
     }
 
-    Uint64 StringStream::setCursor(Uint64 position)
+    std::size_t StringStream::setCursor(std::size_t position)
     {
         m_cursor = std::min(position, getSize());
 
         return m_cursor;
     }
 
-    Uint64 StringStream::getCursor() const
+    std::size_t StringStream::getCursor() const
     {
         return m_cursor;
     }
