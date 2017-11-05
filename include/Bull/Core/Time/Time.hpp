@@ -67,6 +67,8 @@ namespace Bull
 
         static Time Zero;
 
+        static Time Infinite;
+
     public:
 
         /*! \brief Default constructor

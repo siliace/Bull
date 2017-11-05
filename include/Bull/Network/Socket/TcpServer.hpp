@@ -31,7 +31,7 @@ namespace Bull
 
         /*! \brief Start to listen a NetPort
          *
-         * \param port    The NetPort
+         * \param port    The NetPort to listen
          * \param host    The host to listen
          * \param backlog The number of simultaneous active connection on the TcpServer
          *
@@ -59,7 +59,7 @@ namespace Bull
         /*! \brief Accept an incoming connection
          *
          * \param client  The client to accept
-         * \param timeout The timeout of before the function fail
+         * \param timeout The time before the function fail
          * \param pause   The time between two try
          *
          * \return True if the client was accepted successfully

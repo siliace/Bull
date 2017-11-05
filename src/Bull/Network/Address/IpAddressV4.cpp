@@ -35,6 +35,11 @@ namespace Bull
         return m_valid;
     }
 
+    Uint32 IpAddressV4::toInt() const
+    {
+        return (m_bytes[0] << 24) | (m_bytes[1] << 16) | (m_bytes[2] << 8) | m_bytes[3];
+    }
+
     String IpAddressV4::toString() const
     {
         StringStream ss;

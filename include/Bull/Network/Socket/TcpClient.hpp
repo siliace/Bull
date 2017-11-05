@@ -44,7 +44,7 @@ namespace Bull
          *
          * \param address The IpAddress of the remote host
          * \param port    The NetPort of the remote host
-         * \param timeout The timeout of before the function fail
+         * \param timeout The time before the function fail
          * \param pause   The time between two try
          *
          * \return True if the TcpClient is connected

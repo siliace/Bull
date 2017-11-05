@@ -9,8 +9,10 @@ target_sources(bull-network
         )
 
 add_subdirectory(Address)
+add_subdirectory(Icmp)
 add_subdirectory(Socket)
 
 if(BULL_OS_WINDOWS)
     target_link_libraries(bull-network ws2_32)
+    target_link_libraries(bull-network iphlpapi)
 endif()

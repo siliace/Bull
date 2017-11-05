@@ -1,26 +1,12 @@
 #include <iostream>
 
-#include <Bull/Network/Socket/TcpClient.hpp>
+#include <Bull/Network/Icmp/Icmp.hpp>
 
 int main()
 {
-    Bull::TcpClient client;
+    Bull::Time ping = Bull::Icmp::ping(Bull::IpAddressV4::Loopback, Bull::Time::seconds(1.f));
 
-    if(client.connect(Bull::IpAddressV4::Loopback, Bull::NetPort(6969)))
-    {
-        std::size_t received;
-        Bull::String message(256, 256);
+    std::cout << ping.asSeconds() << std::endl;
 
-        if(client.receive(&message[0], message.getCapacity(), received))
-        {
-            message.setSize(received);
-
-            std::cout << received << " bytes received" << std::endl;
-            std::cout << message.getBuffer() << std::endl;
-
-            return EXIT_SUCCESS;
-        }
-    }
-
-    return EXIT_FAILURE;
+    return 0;
 }

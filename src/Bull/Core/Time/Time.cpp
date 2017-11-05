@@ -1,8 +1,11 @@
 #include <Bull/Core/Time/Time.hpp>
+#include <limits>
 
 namespace Bull
 {
-    Time Time::Zero;
+    Time Time::Zero = Time::seconds(0.f);
+
+    Time Time::Infinite = Time::seconds(std::numeric_limits<float>::max());
 
     Time Time::nanoseconds(float nanoseconds)
     {

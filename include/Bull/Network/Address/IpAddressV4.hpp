@@ -49,6 +49,13 @@ namespace Bull
          */
         bool isValid() const override;
 
+        /*! \brief Convert the IpAddressV4 to an Uint32
+         *
+         * \return The IpAddressV4 as a Uint32
+         *
+         */
+        Uint32 toInt() const;
+
         /*! \brief Convert the IpAddressV4 to a String
          *
          * \return The IpAddressV4 as a String
