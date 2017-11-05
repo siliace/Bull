@@ -15,7 +15,7 @@ namespace Bull
 
     void Socket::enableBlockingMode(bool enable)
     {
-        if(m_impl)
+        if(m_impl->isValid())
         {
             m_impl->enableBlockingMode(enable);
         }
@@ -23,12 +23,22 @@ namespace Bull
 
     bool Socket::isEnableBlockingMode() const
     {
-        if(m_impl)
+        if(m_impl->isValid())
         {
             return m_impl->isEnableBlockingMode();
         }
 
         return false;
+    }
+
+    std::size_t Socket::getPendingLength() const
+    {
+        if(m_impl->isValid())
+        {
+            return m_impl->getPendingLength();
+        }
+
+        return 0;
     }
 
     Socket::Socket(SocketType type) :

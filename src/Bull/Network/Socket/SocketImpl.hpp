@@ -93,6 +93,13 @@ namespace Bull
              */
             virtual bool isEnableBlockingMode() const = 0;
 
+            /*! \brief Get the length of data in pending to be read
+             *
+             * \return The length
+             *
+             */
+            virtual std::size_t getPendingLength() const = 0;
+
             /*! \brief Get the SocketHandler of the SocketImpl
              *
              * \return The SocketHandler

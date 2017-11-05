@@ -58,7 +58,7 @@ namespace Bull
          * \return Return the number of read bytes
          *
          */
-        Uint64 read(void* data, Uint64 size) override;
+        std::size_t read(void* data, std::size_t size) override;
 
         /*! \brief Set the reading position in the stream
          *
@@ -67,21 +67,21 @@ namespace Bull
          * \return Return the actual position
          *
          */
-        Uint64 setCursor(Uint64 position) override;
+        std::size_t setCursor(std::size_t position) override;
 
         /*! \brief Get the reading position in the stream
          *
          * \return Return the current position
          *
          */
-        Uint64 getCursor() const override;
+        std::size_t getCursor() const override;
 
         /*! \brief Get the size of the stream
          *
          * \return Return the size of the stream
          *
          */
-        Uint64 getSize() const override;
+        std::size_t getSize() const override;
 
         /*! \brief Check if the stream is open
          *

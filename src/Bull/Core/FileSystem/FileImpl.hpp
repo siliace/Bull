@@ -86,14 +86,14 @@ namespace Bull
              * \param Return the number of byte read
              *
              */
-            virtual Uint64 read(void* dst, Uint64 size) = 0;
+            virtual std::size_t read(void* dst, std::size_t size) = 0;
 
             /*! \brief Write a byte in this file
              *
              * \param byte A byte to write
              *
              */
-            virtual Uint64 write(const void* data, Uint64 size) = 0;
+            virtual std::size_t write(const void* data, std::size_t size) = 0;
 
             /*! \brief Get the date of the creation of the file
              *
@@ -121,7 +121,7 @@ namespace Bull
              * \return Return the position of the cursor in the file
              *
              */
-            virtual Uint64 getCursor() const = 0;
+            virtual std::size_t getCursor() const = 0;
 
             /*! \brief Move the reading position in the file
              *
@@ -130,7 +130,7 @@ namespace Bull
              * \return Return true if the cursor reached its new position, false otherwise
              *
              */
-            virtual Uint64 moveCursor(Int64 offset) = 0;
+            virtual std::size_t moveCursor(Int64 offset) = 0;
 
             /*! \brief Set the reading position in the file
              *
@@ -139,14 +139,14 @@ namespace Bull
              * \return Return true if the cursor reached its new position, false otherwise
              *
              */
-            virtual Uint64 setCursor(Uint64 offset) = 0;
+            virtual std::size_t setCursor(std::size_t offset) = 0;
 
             /*! \brief Get the size of the file
              *
              * \return Return the size of the file
              *
              */
-            virtual Uint64 getSize() const = 0;
+            virtual std::size_t getSize() const = 0;
 
         protected:
 

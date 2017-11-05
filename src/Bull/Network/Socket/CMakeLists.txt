@@ -11,6 +11,8 @@ target_sources(bull-network
             ${BULL_SRC_NETWORK_SOCKET}/TcpClient.cpp
             ${BULL_INC_NETWORK_SOCKET}/TcpServer.hpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpServer.cpp
+            ${BULL_INC_NETWORK_SOCKET}/TcpSocketStream.hpp
+            ${BULL_SRC_NETWORK_SOCKET}/TcpSocketStream.cpp
             ${BULL_INC_NETWORK_SOCKET}/UdpSocket.hpp
             ${BULL_SRC_NETWORK_SOCKET}/UdpSocket.cpp
         PRIVATE

@@ -74,14 +74,14 @@ namespace Bull
              * \param Return the number of byte read
              *
              */
-            Uint64 read(void* data, Uint64 size) override;
+            std::size_t read(void* data, std::size_t size) override;
 
             /*! \brief Write a byte in this file
              *
              * \param byte A byte to write
              *
              */
-            Uint64 write(const void* data, Uint64 size) override;
+            std::size_t write(const void* data, std::size_t size) override;
 
             /*! \brief Get the date of the creation of the file
              *
@@ -109,7 +109,7 @@ namespace Bull
              * \return Return the position of the cursor in the file
              *
              */
-            Uint64 getCursor() const override;
+            std::size_t getCursor() const override;
 
             /*! \brief Set the reading position in the file
              *
@@ -118,7 +118,7 @@ namespace Bull
              * \return Return true if the cursor reached its new position, false otherwise
              *
              */
-            Uint64 moveCursor(Int64 offset) override;
+            std::size_t moveCursor(Int64 offset) override;
 
             /*! \brief Set the reading position in the file
              *
@@ -127,14 +127,14 @@ namespace Bull
              * \return Return true if the cursor reached its new position, false otherwise
              *
              */
-            Uint64 setCursor(Uint64 offset) override;
+            std::size_t setCursor(std::size_t offset) override;
 
             /*! \brief Get the size of the file
              *
              * \return Return the size of the file
              *
              */
-            Uint64 getSize() const override;
+            std::size_t getSize() const override;
 
         private:
 

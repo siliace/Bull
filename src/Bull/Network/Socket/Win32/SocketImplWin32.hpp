@@ -40,6 +40,13 @@ namespace Bull
              */
             bool isEnableBlockingMode() const override;
 
+            /*! \brief Get the length of data in pending to be read
+             *
+             * \return The length
+             *
+             */
+            std::size_t getPendingLength() const override;
+
         private:
 
             bool m_blocking;
