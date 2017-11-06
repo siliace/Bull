@@ -6,6 +6,10 @@ target_sources(bull-network
             ${BULL_INC_NETWORK_SOCKET}/Socket.hpp
             ${BULL_SRC_NETWORK_SOCKET}/Socket.cpp
             ${BULL_INC_NETWORK_SOCKET}/SocketHandler.hpp
+            ${BULL_INC_NETWORK_SOCKET}/SocketPoller.hpp
+            ${BULL_SRC_NETWORK_SOCKET}/SocketPoller.cpp
+            ${BULL_INC_NETWORK_SOCKET}/SocketPollerEvent.hpp
+            ${BULL_INC_NETWORK_SOCKET}/SocketHandler.hpp
             ${BULL_INC_NETWORK_SOCKET}/SocketType.hpp
             ${BULL_INC_NETWORK_SOCKET}/TcpClient.hpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpClient.cpp
@@ -19,6 +23,9 @@ target_sources(bull-network
             ${BULL_SRC_NETWORK_SOCKET}/SocketHeader.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketImpl.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketImpl.cpp
+            ${BULL_SRC_NETWORK_SOCKET}/SocketPollDescriptor.hpp
+            ${BULL_SRC_NETWORK_SOCKET}/SocketPollerImpl.hpp
+            ${BULL_SRC_NETWORK_SOCKET}/SocketPollerImpl.cpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpClientImpl.hpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpClientImpl.cpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpServerImpl.hpp

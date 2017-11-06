@@ -10,6 +10,8 @@
 
 namespace Bull
 {
+    class SocketPoller;
+
     namespace prv
     {
         class SocketImpl;
@@ -84,6 +86,10 @@ namespace Bull
          *
          */
         void close();
+
+    protected:
+
+        friend class SocketPoller;
 
         /*! \brief Get the SocketImpl of the Socket
          *

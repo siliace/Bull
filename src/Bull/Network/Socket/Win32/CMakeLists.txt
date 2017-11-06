@@ -3,6 +3,8 @@ target_sources(bull-network
             ${CMAKE_CURRENT_SOURCE_DIR}/SocketHeader.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/SocketImplWin32.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/SocketImplWin32.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SocketPollerImplWin32.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/SocketPollerImplWin32.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WsaService.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WsaService.cpp
         )
