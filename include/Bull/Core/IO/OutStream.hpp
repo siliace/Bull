@@ -23,22 +23,6 @@ namespace Bull
          */
         virtual std::size_t write(const void* data, std::size_t size) = 0;
 
-        /*! \brief Set the reading position in the stream
-         *
-         * \param position The position to seek to
-         *
-         * \return Return the actual position
-         *
-         */
-        virtual std::size_t setCursor(std::size_t position) = 0;
-
-        /*! \brief Get the reading position in the stream
-         *
-         * \return Return the current position
-         *
-         */
-        virtual std::size_t getCursor() const = 0;
-
         /*! \brief Get the size of the stream
          *
          * \return Return the size of the stream

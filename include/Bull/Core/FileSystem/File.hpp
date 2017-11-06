@@ -5,7 +5,7 @@
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
-#include <Bull/Core/IO/InOutStream.hpp>
+#include <Bull/Core/IO/CursorAwareInOutStream.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
@@ -16,7 +16,7 @@ namespace Bull
         class FileImpl;
     }
 
-    class BULL_CORE_API File : public InOutStream
+    class BULL_CORE_API File : public CursorAwareInOutStream
     {
     public:
 

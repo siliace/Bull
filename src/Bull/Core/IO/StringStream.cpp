@@ -8,6 +8,8 @@ namespace Bull
         /// Nothing
     }
 
+    StringStream::~StringStream() = default;
+
     void StringStream::clear()
     {
         m_content.clear();

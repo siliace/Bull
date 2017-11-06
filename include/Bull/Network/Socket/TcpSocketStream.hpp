@@ -37,22 +37,6 @@ namespace Bull
          *
          */
         std::size_t write(const void* data, std::size_t size) override;
-        
-        /*! \brief Set the reading position in the stream
-         *
-         * \param position The position to seek to
-         *
-         * \return Return the actual position
-         *
-         */
-        std::size_t setCursor(std::size_t position) override;
-
-        /*! \brief Get the reading position in the stream
-         *
-         * \return Return the current position
-         *
-         */
-        std::size_t getCursor() const override;
 
         /*! \brief Get the size of the stream
          *

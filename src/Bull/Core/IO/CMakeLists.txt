@@ -3,6 +3,12 @@ set(BULL_SRC_CORE_IO ${BULL_SRC_CORE}/IO)
 
 target_sources(bull-core
         PUBLIC
+            ${BULL_INC_CORE_IO}/CursorAwareInOutStream.hpp
+            ${BULL_SRC_CORE_IO}/CursorAwareInOutStream.cpp
+            ${BULL_INC_CORE_IO}/CursorAwareOutStream.hpp
+            ${BULL_SRC_CORE_IO}/CursorAwareOutStream.cpp
+            ${BULL_INC_CORE_IO}/CursorAwareInStream.hpp
+            ${BULL_SRC_CORE_IO}/CursorAwareInStream.cpp
             ${BULL_INC_CORE_IO}/InOutStream.hpp
             ${BULL_SRC_CORE_IO}/InOutStream.cpp
             ${BULL_INC_CORE_IO}/InStream.hpp

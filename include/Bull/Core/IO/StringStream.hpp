@@ -3,12 +3,12 @@
 
 #include <vector>
 
-#include <Bull/Core/IO/OutStream.hpp>
+#include <Bull/Core/IO/CursorAwareOutStream.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API StringStream : public OutStream
+    class BULL_CORE_API StringStream : public CursorAwareOutStream
     {
     public:
 
@@ -16,6 +16,11 @@ namespace Bull
          *
          */
         StringStream();
+
+        /*! \brief Destructor
+         *
+         */
+        ~StringStream();
 
         /*! \brief Flush the StringStream
          *

@@ -1,12 +1,11 @@
 #ifndef BULL_CORE_MEMORY_MEMORYSTREAM_HPP
 #define BULL_CORE_MEMORY_MEMORYSTREAM_HPP
 
-#include <Bull/Core/Export.hpp>
-#include <Bull/Core/IO/InStream.hpp>
+#include <Bull/Core/IO/CursorAwareInStream.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API MemoryStream : public InStream
+    class BULL_CORE_API MemoryStream : public CursorAwareInStream
     {
     public:
 

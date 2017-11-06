@@ -32,16 +32,6 @@ namespace Bull
         return sent;
     }
 
-    std::size_t TcpSocketStream::setCursor(std::size_t position)
-    {
-        return 0;
-    }
-
-    std::size_t TcpSocketStream::getCursor() const
-    {
-        return 0;
-    }
-
     std::size_t TcpSocketStream::getSize() const
     {
         return m_client.getPendingLength();
