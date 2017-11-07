@@ -22,15 +22,16 @@ namespace Bull
 
         void SocketPollerImpl::add(SocketHandler socket, SocketPollerEvent event)
         {
-            SocketPollDescriptor descriptor;
-            descriptor.fd = socket;
-            descriptor.revents = 0;
+            SocketPollDescriptor descriptor = {socket, 0, 0};
 
-            switch(event)
+            if(event & SocketPollerEvent_Read)
             {
-                case SocketPollerEvent_Read: descriptor.events = POLLRDNORM; break;
-                case SocketPollerEvent_Write: descriptor.events = POLLWRNORM; break;
-                case SocketPollerEvent_All: descriptor.events = POLLRDNORM | POLLWRNORM; break;
+                descriptor.events |= POLLRDNORM;
+            }
+
+            if(event & SocketPollerEvent_Write)
+            {
+                descriptor.events |= POLLWRNORM;
             }
 
             m_sockets.emplace_back(descriptor);
@@ -46,6 +47,36 @@ namespace Bull
             m_sockets.clear();
         }
 
+        bool SocketPollerImpl::wait()
+        {
+            if(!m_sockets.empty())
+            {
+                int result = poll(m_sockets, -1);
+
+                if(result != SocketPollerImplType::SocketError)
+                {
+                    return result > 0;
+                }
+            }
+
+            return false;
+        }
+
+        bool SocketPollerImpl::wait(const Time& timeout)
+        {
+            if(!m_sockets.empty())
+            {
+                int result = poll(m_sockets, static_cast<int>(timeout.asMilliseconds()));
+
+                if(result != SocketPollerImplType::SocketError)
+                {
+                    return result > 0;
+                }
+            }
+
+            return false;
+        }
+
         bool SocketPollerImpl::isAdded(SocketHandler socket)
         {
             return getSocketPoll(socket) != m_sockets.end();
@@ -53,12 +84,12 @@ namespace Bull
 
         bool SocketPollerImpl::isReadyToRead(SocketHandler socket)
         {
-            return (getSocketPoll(socket)->revents & POLLRDNORM) > 0;
+            return (getSocketPoll(socket)->revents & (POLLRDNORM | POLLHUP | POLLERR)) > 0;
         }
 
         bool SocketPollerImpl::isReadyToWrite(SocketHandler socket)
         {
-            return (getSocketPoll(socket)->revents & POLLWRNORM) > 0;
+            return (getSocketPoll(socket)->revents & (POLLWRNORM | POLLERR)) > 0;
         }
 
         SocketPollerImpl::SocketPollDescriptorList::iterator SocketPollerImpl::getSocketPoll(SocketHandler socket)

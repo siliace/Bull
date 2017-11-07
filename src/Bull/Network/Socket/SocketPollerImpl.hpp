@@ -37,7 +37,7 @@ namespace Bull
              * \param events Events to listen
              *
              */
-            void add(SocketHandler socket, SocketPollerEvent event = SocketPollerEvent_All);
+            void add(SocketHandler socket, SocketPollerEvent event);
 
             /*! \brief Remove a Socket from SocketPollerImpl
              *
@@ -56,7 +56,7 @@ namespace Bull
              * \return True if the SocketPollerImpl waited successfully
              *
              */
-            virtual bool wait() = 0;
+            bool wait();
 
             /*! \brief Wait until a Socket is ready to read or write
              *
@@ -65,7 +65,7 @@ namespace Bull
              * \return True if the SocketPollerImpl waited successfully
              *
              */
-            virtual bool wait(const Time& timeout) = 0;
+            bool wait(const Time& timeout);
 
             /*! \brief Tell whether a Socket can be waited by the SocketPollerImpl
              *
@@ -101,7 +101,15 @@ namespace Bull
              */
             SocketPollerImpl() = default;
 
-            SocketPollDescriptorList m_sockets;
+            /*! \brief Poll sockets
+             *
+             * \param sockets Sockets to poll
+             * \param timeout The time before the function fail
+             *
+             * \return The number of sockets updated during the poll, SocketError if an error occured
+             *
+             */
+            virtual int poll(SocketPollDescriptorList& sockets, int timeout) const = 0;
 
         private:
 
@@ -113,6 +121,8 @@ namespace Bull
              *
              */
             SocketPollDescriptorList::iterator getSocketPoll(SocketHandler socket);
+
+            SocketPollDescriptorList m_sockets;
         };
     }
 }

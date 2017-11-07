@@ -9,21 +9,17 @@ namespace Bull
     {
         struct SocketPollerImplWin32 : public SocketPollerImpl
         {
-            /*! \brief Wait until a Socket is ready to read or write
-             *
-             * \return True if the SocketPollerImplWin32 waited successfully
-             *
-             */
-            bool wait() override;
+            static constexpr int SocketError = SOCKET_ERROR;
 
-            /*! \brief Wait until a Socket is ready to read or write
+            /*! \brief Poll sockets
              *
+             * \param sockets Sockets to poll
              * \param timeout The time before the function fail
              *
-             * \return True if the SocketPollerImplWin32 waited successfully
+             * \return The number of sockets updated during the poll, SocketError if an error occured
              *
              */
-            bool wait(const Time& timeout) override;
+            int poll(std::vector<SocketPollDescriptor>& sockets, int timeout) const;
         };
     }
 }

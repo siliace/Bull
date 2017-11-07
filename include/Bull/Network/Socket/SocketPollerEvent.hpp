@@ -5,9 +5,8 @@ namespace Bull
 {
     enum SocketPollerEvent
     {
-        SocketPollerEvent_Read,
-        SocketPollerEvent_Write,
-        SocketPollerEvent_All,
+        SocketPollerEvent_Read  = 0x2,
+        SocketPollerEvent_Write = 0x4,
     };
 }
 

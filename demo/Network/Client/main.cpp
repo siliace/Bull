@@ -16,7 +16,7 @@ int main()
         return EXIT_FAILURE;
     }
 
-    if(!poller.add(client))
+    if(!poller.add(client, Bull::SocketPollerEvent_Read))
     {
         std::cout << "Failed to add client" << std::endl;
 
@@ -38,6 +38,10 @@ int main()
 
                 return EXIT_SUCCESS;
             }
+        }
+        else if(poller.isReadyToWrite(client))
+        {
+            std::cout << "Ready to write" << std::endl;
         }
         else
         {

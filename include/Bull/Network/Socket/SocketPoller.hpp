@@ -35,7 +35,7 @@ namespace Bull
          * \return True if the Socket was add successfully
          *
          */
-        bool add(const Socket& socket, SocketPollerEvent event = SocketPollerEvent_All);
+        bool add(const Socket& socket, SocketPollerEvent event);
 
         /*! \brief Remove a Socket from SocketPoller
          *
