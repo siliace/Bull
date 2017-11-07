@@ -5,6 +5,7 @@
 
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Socket/Socket.hpp>
+#include <Bull/Network/Socket/SocketState.hpp>
 
 namespace Bull
 {
@@ -35,10 +36,10 @@ namespace Bull
          * \param host    The host to listen
          * \param backlog The number of simultaneous active connection on the TcpServer
          *
-         * \return True if the TcpServer is listening the NetPort
+         * \return The new SocketState
          *
          */
-        bool listen(NetPort port, const IpAddressWrapper& host = IpAddressV4::Any, int backlog = -1);
+        SocketState listen(NetPort port, const IpAddressWrapper& host = IpAddressV4::Any, int backlog = -1);
 
         /*! \brief Tell whether the TcpServer is listening a NetPort
          *
@@ -51,10 +52,10 @@ namespace Bull
          *
          * \param client The client to accept
          *
-         * \return True if the client was accepted successfully
+         * \return The new SocketState
          *
          */
-        bool accept(TcpClient& client);
+        SocketState accept(TcpClient& client);
 
         /*! \brief Accept an incoming connection
          *
@@ -62,10 +63,10 @@ namespace Bull
          * \param timeout The time before the function fail
          * \param pause   The time between two try
          *
-         * \return True if the client was accepted successfully
+         * \return The new SocketState
          *
          */
-        bool accept(TcpClient& client, const Time& timeout, const Time& pause = Time::milliseconds(20.f));
+        SocketState accept(TcpClient& client, const Time& timeout, const Time& pause = Time::milliseconds(20.f));
 
         /*! \brief Disconnect the TcpServer
          *

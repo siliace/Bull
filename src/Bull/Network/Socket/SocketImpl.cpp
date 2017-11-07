@@ -43,6 +43,11 @@ namespace Bull
             }
         }
 
+        SocketError SocketImpl::getLastError()
+        {
+            return SocketImplType::getLastError();
+        }
+
         SocketImpl::~SocketImpl() = default;
 
         bool SocketImpl::create(NetProtocol protocol, SocketType type)

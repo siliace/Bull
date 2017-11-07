@@ -14,7 +14,7 @@ namespace Bull
         unbind();
     }
 
-    bool UdpSocket::bind(NetPort port, const IpAddressWrapper& address)
+    SocketState UdpSocket::bind(NetPort port, const IpAddressWrapper& address)
     {
         if(create(address.getProtocol()) && address.isValid() && port != NetPort_Any)
         {
@@ -22,7 +22,7 @@ namespace Bull
 
             if(m_impl->bind(port, address))
             {
-                return true;
+                return SocketState();
             }
             else
             {
@@ -30,7 +30,7 @@ namespace Bull
             }
         }
 
-        return false;
+        return SocketState(prv::SocketImpl::getLastError());
     }
 
     bool UdpSocket::isBound() const
@@ -44,23 +44,23 @@ namespace Bull
         m_impl.reset();
     }
 
-    bool UdpSocket::sendTo(const IpAddressWrapper& address, NetPort port, const void* data, std::size_t length, std::size_t& sent) const
+    SocketState UdpSocket::sendTo(const IpAddressWrapper& address, NetPort port, const void* data, std::size_t length, std::size_t& sent) const
     {
-        if(isBound() && address.isValid() && port != NetPort_Any && data && length)
+        if(isBound() && address.isValid() && port != NetPort_Any && data && length && m_impl->sendTo(address, port, data, length, sent))
         {
-            return m_impl->sendTo(address, port, data, length, sent) == 0;
+            return SocketState();
         }
 
-        return false;
+        return SocketState(prv::SocketImpl::getLastError());
     }
 
-    bool UdpSocket::receiveFrom(IpAddressWrapper& address, NetPort& port, void* data, std::size_t length, std::size_t& received) const
+    SocketState UdpSocket::receiveFrom(IpAddressWrapper& address, NetPort& port, void* data, std::size_t length, std::size_t& received) const
     {
-        if(data && length)
+        if(data && length && m_impl->receiveFrom(address, port, data, length, received))
         {
-            return m_impl->receiveFrom(address, port, data, length, received);
+            return SocketState();
         }
 
-        return false;
+        return SocketState(prv::SocketImpl::getLastError());
     }
 }

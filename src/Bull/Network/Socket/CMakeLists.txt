@@ -5,11 +5,13 @@ target_sources(bull-network
         PUBLIC
             ${BULL_INC_NETWORK_SOCKET}/Socket.hpp
             ${BULL_SRC_NETWORK_SOCKET}/Socket.cpp
+            ${BULL_INC_NETWORK_SOCKET}/SocketError.hpp
             ${BULL_INC_NETWORK_SOCKET}/SocketHandler.hpp
             ${BULL_INC_NETWORK_SOCKET}/SocketPoller.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketPoller.cpp
             ${BULL_INC_NETWORK_SOCKET}/SocketPollerEvent.hpp
-            ${BULL_INC_NETWORK_SOCKET}/SocketHandler.hpp
+            ${BULL_INC_NETWORK_SOCKET}/SocketState.hpp
+            ${BULL_SRC_NETWORK_SOCKET}/SocketState.cpp
             ${BULL_INC_NETWORK_SOCKET}/SocketType.hpp
             ${BULL_INC_NETWORK_SOCKET}/TcpClient.hpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpClient.cpp

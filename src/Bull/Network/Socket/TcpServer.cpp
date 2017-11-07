@@ -22,7 +22,7 @@ namespace Bull
         disconnect();
     }
 
-    bool TcpServer::listen(NetPort port, const IpAddressWrapper& host, int backlog)
+    SocketState TcpServer::listen(NetPort port, const IpAddressWrapper& host, int backlog)
     {
         if(port != NetPort_Any && host.isValid() && create(host.getProtocol()))
         {
@@ -35,12 +35,12 @@ namespace Bull
                     m_port    = port;
                     m_backlog = backlog;
 
-                    return true;
+                    return SocketState();
                 }
             }
         }
 
-        return false;
+        return SocketState(prv::SocketImpl::getLastError());
     }
 
     bool TcpServer::isListening() const
@@ -48,7 +48,7 @@ namespace Bull
         return m_impl != nullptr;
     }
 
-    bool TcpServer::accept(TcpClient& client)
+    SocketState TcpServer::accept(TcpClient& client)
     {
         if(isListening())
         {
@@ -57,21 +57,20 @@ namespace Bull
 
             SocketHandler socket = m_impl->accept(address, port);
 
-            if(socket != prv::SocketImpl::getInvalidSocket())
+            if(socket != prv::SocketImpl::getInvalidSocket() && client.create(socket, address, port))
             {
-                return client.create(socket, address, port);
+                return SocketState();
             }
         }
 
-        return false;
+        return SocketState(prv::SocketImpl::getLastError());
     }
 
-    bool TcpServer::accept(TcpClient& client, const Time& timeout, const Time& pause)
+    SocketState TcpServer::accept(TcpClient& client, const Time& timeout, const Time& pause)
     {
         if(isListening())
         {
             Clock clock;
-            bool connected;
             bool blocking = isEnableBlockingMode();
 
             CallOnExit cleanup([this, blocking](){
@@ -84,18 +83,16 @@ namespace Bull
 
             do
             {
-                connected = accept(client);
-
-                if(!connected)
+                if(accept(client))
                 {
-                    Thread::sleep(pause);
+                    return SocketState();
                 }
-            }while(!connected && clock.getElapsedTime() < timeout);
 
-            return connected;
+                Thread::sleep(pause);
+            }while(clock.getElapsedTime() < timeout);
         }
 
-        return false;
+        return SocketState(prv::SocketImpl::getLastError());
     }
 
     void TcpServer::disconnect()

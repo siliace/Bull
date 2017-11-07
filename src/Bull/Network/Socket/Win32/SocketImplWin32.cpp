@@ -11,6 +11,29 @@ namespace Bull
             WsaService::Instance wsa = WsaService::get();
         }
 
+        SocketError SocketImplWin32::getLastError()
+        {
+            DWORD error = wsa->getLastError();
+
+            if(error)
+            {
+                switch(error)
+                {
+                    case WSAEFAULT:       return SocketError_Error;
+                    case WSAENOBUFS:      return SocketError_Error;
+                    case WSAENETDOWN:     return SocketError_Error;
+                    case WSAEWOULDBLOCK:  return SocketError_Error;
+                    case WSAETIMEDOUT:    return SocketError_Timeout;
+                    case WSAECONNABORTED: return SocketError_Disconnected;
+                    case WSAENETUNREACH:  return SocketError_NetworkFailed;
+                    case WSAEHOSTUNREACH: return SocketError_NetworkFailed;
+                    case WSAECONNREFUSED: return SocketError_ConnectionRefused;
+                }
+            }
+
+            return SocketError_Ok;
+        }
+
         SocketImplWin32::~SocketImplWin32()
         {
             closesocket(getHandler());

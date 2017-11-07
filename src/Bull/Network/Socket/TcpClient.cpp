@@ -19,22 +19,23 @@ namespace Bull
         disconnect();
     }
 
-    bool TcpClient::connect(const IpAddressWrapper& address, NetPort port)
+    SocketState TcpClient::connect(const IpAddressWrapper& address, NetPort port)
     {
         if(address.isValid() && port != NetPort_Any && Socket::create(address.getProtocol()))
         {
             m_impl = std::make_unique<prv::TcpClientImpl>(getImpl());
 
-            return m_impl->connect(address, port);
+            if(m_impl->connect(address, port))
+            {
+                return SocketState();
+            }
         }
 
-        return false;
+        return SocketState(prv::SocketImpl::getLastError());
     }
 
-    bool TcpClient::connect(const IpAddressWrapper& address, NetPort port, const Time& timeout, const Time& pause)
+    SocketState TcpClient::connect(const IpAddressWrapper& address, NetPort port, const Time& timeout, const Time& pause)
     {
-        bool connected = false;
-
         if(address.isValid() && port != NetPort_Any)
         {
             Clock clock;
@@ -42,18 +43,16 @@ namespace Bull
 
             do
             {
-                connected = connect(address, port);
-
-                if(!connected)
+                if(connect(address, port))
                 {
-                    Thread::sleep(pause);
+                    return SocketState();
                 }
-            }while(!connected && clock.getElapsedTime() < timeout);
 
-            return connected;
+                Thread::sleep(pause);
+            }while(clock.getElapsedTime() < timeout);
         }
 
-        return connected;
+        return SocketState(prv::SocketImpl::getLastError());
     }
 
     bool TcpClient::isConnected() const
@@ -69,24 +68,24 @@ namespace Bull
         m_hostAddress = IpAddressV4::None;
     }
 
-    bool TcpClient::send(const void* data, std::size_t length, std::size_t& sent)
+    SocketState TcpClient::send(const void* data, std::size_t length, std::size_t& sent)
     {
-        if(isConnected() && data && length)
+        if(isConnected() && data && length && m_impl->send(data, length, sent))
         {
-            return m_impl->send(data, length, sent);
+            return SocketState();
         }
 
-        return false;
+        return SocketState(prv::SocketImpl::getLastError());
     }
 
-    bool TcpClient::receive(void* data, std::size_t length, std::size_t& received)
+    SocketState TcpClient::receive(void* data, std::size_t length, std::size_t& received)
     {
-        if(isConnected() && data && length)
+        if(isConnected() && data && length && m_impl->reveive(data, length, received))
         {
-            return m_impl->reveive(data, length, received);
+            return SocketState();
         }
 
-        return false;
+        return SocketState(prv::SocketImpl::getLastError());
     }
 
     NetPort TcpClient::getRemotePort() const

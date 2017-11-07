@@ -6,6 +6,7 @@
 
 #include <Bull/Network/Socket/Socket.hpp>
 #include <Bull/Network/Socket/SocketHandler.hpp>
+#include <Bull/Network/Socket/SocketState.hpp>
 
 namespace Bull
 {
@@ -35,10 +36,10 @@ namespace Bull
          * \param address The IpAddress of the remote host
          * \param port    The NetPort of the remote host
          *
-         * \return True if the TcpClient is connected
+         * \return The new SocketState
          *
          */
-        bool connect(const IpAddressWrapper& address, NetPort port);
+        SocketState connect(const IpAddressWrapper& address, NetPort port);
 
         /*! \brief Connect the TcpClient to a remote host
          *
@@ -47,10 +48,10 @@ namespace Bull
          * \param timeout The time before the function fail
          * \param pause   The time between two try
          *
-         * \return True if the TcpClient is connected
+         * \return The new SocketState
          *
          */
-        bool connect(const IpAddressWrapper& address, NetPort port, const Time& timeout, const Time& pause = Time::milliseconds(20.f));
+        SocketState connect(const IpAddressWrapper& address, NetPort port, const Time& timeout, const Time& pause = Time::milliseconds(20.f));
 
         /*! \brief Tell whether the TcpClient is connected
          *
@@ -70,10 +71,10 @@ namespace Bull
          * \param length The length of data to send
          * \param sent   The amount of bytes sent
          *
-         * \return True if data were sent successfully
+         * \return The new SocketState
          *
          */
-        bool send(const void* data, std::size_t length, std::size_t& sent);
+        SocketState send(const void* data, std::size_t length, std::size_t& sent);
 
         /*! \brief Receive data from the remote host
          *
@@ -81,10 +82,10 @@ namespace Bull
          * \param length   The length of data to receive
          * \param received The amount of bytes received
          *
-         * \return True if data were received successfully
+         * \return The new SocketState
          *
          */
-        bool receive(void* data, std::size_t length, std::size_t& received);
+        SocketState receive(void* data, std::size_t length, std::size_t& received);
 
         /*! \brief Get the remote NetPort
          *

@@ -4,6 +4,7 @@
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
 #include <Bull/Network/Socket/Socket.hpp>
+#include <Bull/Network/Socket/SocketState.hpp>
 
 namespace Bull
 {
@@ -31,10 +32,10 @@ namespace Bull
          * \param port    The NetPort to listen
          * \param address The IpAddress to listen
          *
-         * \return True if the UdpSocket was bound successfully
+         * \return The new SocketState
          *
          */
-        bool bind(NetPort port, const IpAddressWrapper& address = IpAddressV4::Any);
+        SocketState bind(NetPort port, const IpAddressWrapper& address = IpAddressV4::Any);
 
         /*! \brief Tell whether the UdpSocket is bound
          *
@@ -56,10 +57,10 @@ namespace Bull
          * \param length  The length of data to send
          * \param sent    The amount of bytes sent
          *
-         * \return True if the data were sent successfully
+         * \return The new SocketState
          *
          */
-        bool sendTo(const IpAddressWrapper& address, NetPort port, const void* data, std::size_t length, std::size_t& sent) const;
+        SocketState sendTo(const IpAddressWrapper& address, NetPort port, const void* data, std::size_t length, std::size_t& sent) const;
 
         /*! \brief Receive data from a remote host
          *
@@ -69,10 +70,10 @@ namespace Bull
          * \param length   The length of data to receive
          * \param received The amount of bytes received
          *
-         * \return True if the data were received successfully
+         * \return The new SocketState
          *
          */
-        bool receiveFrom(IpAddressWrapper& address, NetPort& port, void* data, std::size_t length, std::size_t& received) const;
+        SocketState receiveFrom(IpAddressWrapper& address, NetPort& port, void* data, std::size_t length, std::size_t& received) const;
 
     private:
 

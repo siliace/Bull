@@ -5,6 +5,7 @@
 
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
+#include <Bull/Network/Socket/SocketError.hpp>
 #include <Bull/Network/Socket/SocketHandler.hpp>
 #include <Bull/Network/Socket/SocketType.hpp>
 
@@ -44,6 +45,13 @@ namespace Bull
              * \return The address family value
              */
             static int convertNetProtocol(NetProtocol protocol);
+
+            /*! \brief Get the last socket error
+             *
+             * \return The error
+             *
+             */
+            static SocketError getLastError();
 
         public:
 
