@@ -19,7 +19,10 @@ namespace Bull
     IpAddressV4::IpAddressV4(Uint32 address) :
         IpAddress(4)
     {
-        /// Todo
+        at(0) = (address & 0x000000ff) >> 0;
+        at(1) = (address & 0x0000ff00) >> 8;
+        at(2) = (address & 0x00ff0000) >> 16;
+        at(3) = (address & 0xff000000) >> 24;
     }
 
     IpAddressV4::IpAddressV4(Uint8 a, Uint8 b, Uint8 c, Uint8 d) :
