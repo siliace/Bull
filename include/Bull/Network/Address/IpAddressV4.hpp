@@ -36,7 +36,7 @@ namespace Bull
          *
          * \param a The first byte of the IpAddressV4
          * \param b The second byte of the IpAddressV4
-         * \param c The thrid byte of the IpAddressV4
+         * \param c The third byte of the IpAddressV4
          * \param d The forth byte of the IpAddressV4
          *
          */
