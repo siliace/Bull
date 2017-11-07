@@ -13,6 +13,11 @@ target_sources(bull-network
             ${BULL_INC_NETWORK_ADDRESS}/NetPort.hpp
             ${BULL_INC_NETWORK_ADDRESS}/NetProtocol.hpp
         PRIVATE
+            ${BULL_SRC_NETWORK_ADDRESS}/IpAddressImpl.hpp
             ${BULL_SRC_NETWORK_ADDRESS}/SockAddrBuffer.hpp
             ${BULL_SRC_NETWORK_ADDRESS}/SockAddrBuffer.cpp
         )
+
+if(BULL_OS_WINDOWS)
+    add_subdirectory(Win32)
+endif()

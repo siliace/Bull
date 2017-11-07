@@ -28,8 +28,6 @@ namespace Bull
              */
             static SocketHandler getInvalidSocket();
 
-        private:
-
             /*! \brief Convert a SocketType to a SOCK value
              *
              * \param type The SocketType
@@ -37,7 +35,7 @@ namespace Bull
              * \return The SOCK value
              *
              */
-            int convertSocketType(SocketType type);
+            static int convertSocketType(SocketType type);
 
             /*! \brief Convert a NetProtocol to the equivalent address family value
              *
@@ -45,7 +43,7 @@ namespace Bull
              *
              * \return The address family value
              */
-            int convertNetProtocol(NetProtocol protocol);
+            static int convertNetProtocol(NetProtocol protocol);
 
         public:
 

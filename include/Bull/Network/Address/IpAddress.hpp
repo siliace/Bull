@@ -11,6 +11,13 @@ namespace Bull
 {
     struct BULL_NETWORK_API IpAddress
     {
+        /*! \brief \brief Resolve an hostname to an IpAddress
+         *
+         * \param hostname The hostname to resolve
+         *
+         */
+        virtual void resolve(const String& hostname) = 0;
+
         /*! \brief Tell whether the IpAddress is valid
          *
          * \return True if the IpAddress is valid

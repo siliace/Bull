@@ -42,6 +42,13 @@ namespace Bull
          */
         IpAddressV4(Uint8 a, Uint8 b, Uint8 c, Uint8 d);
 
+        /*! \brief \brief Resolve an hostname to an IpAddress4
+         *
+         * \param hostname The hostname to resolve
+         *
+         */
+        void resolve(const String& hostname) override;
+
         /*! \brief Tell whether the IpAddressV4 is valid
          *
          * \return True if the IpAddressV4 is valid
@@ -97,8 +104,8 @@ namespace Bull
 
     private:
 
-        std::array<Uint8, 4> m_bytes;
-        bool                 m_valid;
+        ByteArray m_bytes;
+        bool      m_valid;
     };
 }
 

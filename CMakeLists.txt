@@ -13,6 +13,10 @@ if(BULL_OS_WINDOWS)
     add_definitions("-D${WINDOWS_BUILD_VERSION}")
 endif()
 
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    add_definitions("-DBULL_BUILD_DEBUG")
+endif()
+
 include_directories(libs/include)
 include_directories(include)
 include_directories(src)

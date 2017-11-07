@@ -9,6 +9,14 @@ int main()
     Bull::TcpClient client;
     Bull::SocketPoller poller;
 
+    Bull::IpAddressV4 google;
+    google.resolve("www.google.fr");
+
+    if(google.isValid())
+    {
+        std::cout << google.toString().getBuffer() << std::endl;
+    }
+
     if(!client.connect(Bull::IpAddressV4::Loopback, Bull::NetPort(6969)))
     {
         std::cout << "Failed to connect" << std::endl;

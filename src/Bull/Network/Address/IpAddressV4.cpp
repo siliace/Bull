@@ -1,5 +1,6 @@
 #include <Bull/Core/IO/StringStream.hpp>
 
+#include <Bull/Network/Address/IpAddressImpl.hpp>
 #include <Bull/Network/Address/IpAddressV4.hpp>
 
 namespace Bull
@@ -10,24 +11,32 @@ namespace Bull
     IpAddressV4 IpAddressV4::Broadcast = IpAddressV4(255, 255, 255, 255);
 
     IpAddressV4::IpAddressV4() :
+        m_bytes(4),
         m_valid(false)
     {
         /// Nothing
     }
 
     IpAddressV4::IpAddressV4(Uint32 address) :
+        m_bytes(4),
         m_valid(true)
     {
         /// Todo
     }
 
     IpAddressV4::IpAddressV4(Uint8 a, Uint8 b, Uint8 c, Uint8 d) :
+        m_bytes(4),
         m_valid(true)
     {
         m_bytes[0] = a;
         m_bytes[1] = b;
         m_bytes[2] = c;
         m_bytes[3] = d;
+    }
+
+    void IpAddressV4::resolve(const String& hostname)
+    {
+        m_valid = prv::IpAddressImpl::resolve(hostname, NetProtocol_Ipv4, m_bytes);
     }
 
     bool IpAddressV4::isValid() const
@@ -44,7 +53,7 @@ namespace Bull
     {
         StringStream ss;
 
-        for(std::size_t i = 0; i < m_bytes.size(); i++)
+        for(std::size_t i = 0; i < m_bytes.getCapacity(); i++)
         {
             ss << m_bytes[i];
 
@@ -64,20 +73,16 @@ namespace Bull
 
     std::size_t IpAddressV4::getByteCount() const
     {
-        return 4;
+        return m_bytes.getCapacity();
     }
 
     Uint8& IpAddressV4::at(std::size_t index)
     {
-        RangeCheck(index, m_bytes.size());
-
         return m_bytes.at(index);
     }
 
     Uint8 IpAddressV4::at(std::size_t index) const
     {
-        RangeCheck(index, m_bytes.size());
-
         return m_bytes.at(index);
     }
 }

@@ -18,6 +18,13 @@ namespace Bull
          */
         IpAddressV6();
 
+        /*! \brief \brief Resolve an hostname to an IpAddressV6
+         *
+         * \param hostname The hostname to resolve
+         *
+         */
+        void resolve(const String& hostname);
+
         /*! \brief Tell whether the IpAddressV6 is valid
          *
          * \return True if the IpAddressV6 is valid
@@ -66,8 +73,8 @@ namespace Bull
 
     private:
 
-        std::array<Uint8, 16> m_bytes;
-        bool                  m_valid;
+        ByteArray m_bytes;
+        bool      m_valid;
     };
 }
 
