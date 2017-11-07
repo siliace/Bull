@@ -70,8 +70,22 @@ namespace Bull
 
     SocketState TcpClient::send(const void* data, std::size_t length, std::size_t& sent)
     {
-        if(isConnected() && data && length && m_impl->send(data, length, sent))
+        if(isConnected() && data && length)
         {
+            std::size_t blockSent = 0;
+
+            for(std::size_t i = 0; i < length; i += blockSent)
+            {
+                const unsigned char* ptr = reinterpret_cast<const unsigned char*>(data);
+
+                if(!m_impl->send(ptr + i, length, blockSent))
+                {
+                    return SocketState(prv::SocketImpl::getLastError());
+                }
+
+                sent += blockSent;
+            }
+
             return SocketState();
         }
 
