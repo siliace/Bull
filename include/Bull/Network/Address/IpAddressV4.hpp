@@ -42,20 +42,6 @@ namespace Bull
          */
         IpAddressV4(Uint8 a, Uint8 b, Uint8 c, Uint8 d);
 
-        /*! \brief \brief Resolve an hostname to an IpAddress4
-         *
-         * \param hostname The hostname to resolve
-         *
-         */
-        void resolve(const String& hostname) override;
-
-        /*! \brief Tell whether the IpAddressV4 is valid
-         *
-         * \return True if the IpAddressV4 is valid
-         *
-         */
-        bool isValid() const override;
-
         /*! \brief Convert the IpAddressV4 to an Uint32
          *
          * \return The IpAddressV4 as a Uint32
@@ -76,31 +62,6 @@ namespace Bull
          *
          */
         NetProtocol getProtocol() const override;
-
-        /*! \brief Get the number of bytes used by the IpAddress
-         *
-         * \return The number of bytes
-         *
-         */
-        std::size_t getByteCount() const override;
-
-        /*! \brief Get a byte of the IpAddress
-         *
-         * \param index The index of the byte
-         *
-         * \return The byte
-         *
-         */
-        Uint8& at(std::size_t index) override;
-
-        /*! \brief Get a byte of the IpAddressV4
-         *
-         * \param index The index of the byte
-         *
-         * \return The byte
-         *
-         */
-        Uint8 at(std::size_t index) const override;
 
     private:
 

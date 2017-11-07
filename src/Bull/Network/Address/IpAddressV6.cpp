@@ -6,20 +6,9 @@
 namespace Bull
 {
     IpAddressV6::IpAddressV6() :
-        m_bytes(16),
-        m_valid(false)
+        IpAddress(16, false)
     {
         /// Nothing
-    }
-
-    void IpAddressV6::resolve(const String& hostname)
-    {
-        m_valid = prv::IpAddressImpl::resolve(hostname, NetProtocol_Ipv6, m_bytes);
-    }
-
-    bool IpAddressV6::isValid() const
-    {
-        return m_valid;
     }
 
     String IpAddressV6::toString() const
@@ -42,20 +31,5 @@ namespace Bull
     NetProtocol IpAddressV6::getProtocol() const
     {
         return NetProtocol_Ipv6;
-    }
-
-    std::size_t IpAddressV6::getByteCount() const
-    {
-        return m_bytes.getCapacity();
-    }
-
-    Uint8& IpAddressV6::at(std::size_t index)
-    {
-        return m_bytes[index];
-    }
-
-    Uint8 IpAddressV6::at(std::size_t index) const
-    {
-        return m_bytes[index];
     }
 }

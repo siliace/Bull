@@ -18,20 +18,6 @@ namespace Bull
          */
         IpAddressV6();
 
-        /*! \brief \brief Resolve an hostname to an IpAddressV6
-         *
-         * \param hostname The hostname to resolve
-         *
-         */
-        void resolve(const String& hostname);
-
-        /*! \brief Tell whether the IpAddressV6 is valid
-         *
-         * \return True if the IpAddressV6 is valid
-         *
-         */
-        bool isValid() const override;
-
         /*! \brief Convert the IpAddressV6 to a String
          *
          * \return The IpAddressV6 as a String
@@ -45,31 +31,6 @@ namespace Bull
          *
          */
         NetProtocol getProtocol() const override;
-
-        /*! \brief Get the number of bytes used by the IpAddressV6
-         *
-         * \return The number of bytes
-         *
-         */
-        std::size_t getByteCount() const override;
-
-        /*! \brief Get a byte of the IpAddressV6
-         *
-         * \param index The index of the byte
-         *
-         * \return The byte
-         *
-         */
-        Uint8& at(std::size_t index) override;
-
-        /*! \brief Get a byte of the IpAddressV6
-         *
-         * \param index The index of the byte
-         *
-         * \return The byte
-         *
-         */
-        Uint8 at(std::size_t index) const override;
 
     private:
 

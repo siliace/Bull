@@ -9,21 +9,23 @@
 
 namespace Bull
 {
-    struct BULL_NETWORK_API IpAddress
+    class BULL_NETWORK_API IpAddress
     {
+    public:
+
         /*! \brief \brief Resolve an hostname to an IpAddress
          *
          * \param hostname The hostname to resolve
          *
          */
-        virtual void resolve(const String& hostname) = 0;
+        void resolve(const String& hostname);
 
         /*! \brief Tell whether the IpAddress is valid
          *
          * \return True if the IpAddress is valid
          *
          */
-        virtual bool isValid() const = 0;
+        bool isValid() const;
 
         /*! \brief Convert the IpAddress to a String
          *
@@ -44,7 +46,7 @@ namespace Bull
          * \return The number of bytes
          *
          */
-        virtual std::size_t getByteCount() const = 0;
+        std::size_t getByteCount() const;
 
         /*! \brief Get a byte of the IpAddress
          *
@@ -53,7 +55,7 @@ namespace Bull
          * \return The byte
          *
          */
-        virtual Uint8& at(std::size_t index) = 0;
+        Uint8& at(std::size_t index);
 
         /*! \brief Get a byte of the IpAddress
          *
@@ -62,8 +64,22 @@ namespace Bull
          * \return The byte
          *
          */
-        virtual Uint8 at(std::size_t index) const = 0;
+        Uint8 at(std::size_t index) const;
 
+    protected:
+
+        /*! \brief Constructor
+         *
+         * \param size  The byte count of the IpAddress
+         * \param valid True if the IpAddress is valid
+         *
+         */
+        explicit IpAddress(std::size_t size, bool valid = true);
+
+    private:
+
+        ByteArray m_bytes;
+        bool      m_valid;
     };
 }
 
