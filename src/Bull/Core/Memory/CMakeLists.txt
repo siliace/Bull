@@ -6,8 +6,6 @@ target_sources(bull-core
             ${BULL_INC_CORE_MEMORY}/AbstractBuffer.hpp
             ${BULL_INC_CORE_MEMORY}/Array.hpp
             ${BULL_INC_CORE_MEMORY}/Array.inl
-            ${BULL_INC_CORE_MEMORY}/BadFree.hpp
-            ${BULL_SRC_CORE_MEMORY}/BadFree.cpp
             ${BULL_INC_CORE_MEMORY}/ByteArray.hpp
             ${BULL_SRC_CORE_MEMORY}/ByteArray.cpp
             ${BULL_INC_CORE_MEMORY}/MemoryStream.hpp
@@ -16,7 +14,4 @@ target_sources(bull-core
             ${BULL_SRC_CORE_MEMORY}/RangeCheck.cpp
             ${BULL_INC_CORE_MEMORY}/String.hpp
             ${BULL_SRC_CORE_MEMORY}/String.cpp
-        PRIVATE
-            ${BULL_SRC_CORE_MEMORY}/StringBuffer.hpp
-            ${BULL_SRC_CORE_MEMORY}/StringBuffer.cpp
         )
