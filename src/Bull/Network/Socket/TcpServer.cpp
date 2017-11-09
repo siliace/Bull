@@ -1,6 +1,6 @@
 #include <Bull/Core/Thread/Thread.hpp>
 #include <Bull/Core/Time/Clock.hpp>
-#include <Bull/Core/Utility/CallOnExit.hpp>
+#include <Bull/Core/Utility/CleanupCallback.hpp>
 
 #include <Bull/Network/Socket/SocketImpl.hpp>
 #include <Bull/Network/Socket/TcpClient.hpp>
@@ -73,7 +73,7 @@ namespace Bull
             Clock clock;
             bool blocking = isEnableBlockingMode();
 
-            CallOnExit cleanup([this, blocking](){
+            CleanupCallback cleanup([this, blocking](){
                 enableBlockingMode(blocking);
             });
 

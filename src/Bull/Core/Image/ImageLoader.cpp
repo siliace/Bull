@@ -4,7 +4,7 @@
 
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Image/ImageLoader.hpp>
-#include <Bull/Core/Utility/CallOnExit.hpp>
+#include <Bull/Core/Utility/CleanupCallback.hpp>
 
 namespace Bull
 {
@@ -38,7 +38,7 @@ namespace Bull
             if(buffer && w && h)
             {
                 ByteArray pixels;
-                CallOnExit cleanup([buffer](){
+                CleanupCallback cleanup([buffer](){
                     stbi_image_free(buffer);
                 });
 
