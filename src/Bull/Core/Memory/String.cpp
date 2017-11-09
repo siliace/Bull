@@ -175,15 +175,9 @@ namespace Bull
         return m_string[index];
     }
 
-    void String::flush()
+    void String::clear()
     {
-        m_string.resize(0);
-    }
-
-    void String::destroy()
-    {
-        flush();
-        m_string.shrink_to_fit();
+        m_string.clear();
     }
 
     const char* String::getBuffer() const

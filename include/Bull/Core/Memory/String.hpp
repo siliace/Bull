@@ -210,15 +210,12 @@ namespace Bull
          */
         const char& operator[](std::size_t index) const;
 
-        /*! \brief Flush the String
+        /*! \brief Clear the String
+         *
+         * Make the String empty (but some memory can be still allocated)
          *
          */
-        void flush() override;
-
-        /*! \brief Destroy the String
-         *
-         */
-        void destroy() override;
+        void clear() override;
 
         /*! \brief Get the buffer of the String
          *

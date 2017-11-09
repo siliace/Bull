@@ -115,7 +115,7 @@ namespace Bull
         {
             Uint8 byte;
 
-            line.flush();
+            line.clear();
 
             do
             {
@@ -123,7 +123,7 @@ namespace Bull
                 {
                     if(byte != '\n')
                     {
-                        line += String(static_cast<char>(byte));
+                        line += String(byte);
                     }
                 }
                 else

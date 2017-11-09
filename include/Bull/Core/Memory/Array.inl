@@ -73,13 +73,7 @@ namespace Bull
     }
 
     template <typename T>
-    void Array<T>::flush()
-    {
-        std::fill(m_array.begin(), m_array.end(), 0);
-    }
-
-    template <typename T>
-    void Array<T>::destroy()
+    void Array<T>::clear()
     {
         m_array.clear();
     }

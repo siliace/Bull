@@ -28,15 +28,10 @@ namespace Bull
          */
         virtual bool fill(const void* data, std::size_t size, std::size_t offset) = 0;
 
-        /*! \brief Flush the Buffer
+        /*! \brief Clear the Buffer
          *
          */
-        virtual void flush() = 0;
-
-        /*! \brief Destroy the Buffer
-         *
-         */
-        virtual void destroy() = 0;
+        virtual void clear() = 0;
 
         /*! \brief Get the capacity of the Buffer
          *

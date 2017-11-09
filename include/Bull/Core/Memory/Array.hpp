@@ -77,15 +77,10 @@ namespace Bull
          */
         void resize(std::size_t size);
 
-        /*! \brief Flush the Array
+        /*! \brief Clear the Array
          *
          */
-        void flush() override;
-
-        /*! \brief Destroy the Array
-         *
-         */
-        void destroy() override;
+        void clear() override;
 
         /*! \brief Tell whether the Array is empty
          *

@@ -71,15 +71,19 @@ namespace Bull
          */
         void unmap() const;
 
-        /*! \brief Flush the buffer
+        /*! \brief Flush the HardwareBuffer
+         *
+         * Flush the content of the HardwareBuffer without destroying it
          *
          */
-        void flush() override;
+        void flush();
 
-        /*! \brief Destroy the buffer
+        /*! \brief Clear the HardwareBuffer
+         *
+         * Destroy the allocated VRAM corresponding to this buffer
          *
          */
-        void destroy() override;
+        void clear() override;
 
         /*! \brief Get the capacity of the HardwareBuffer
          *

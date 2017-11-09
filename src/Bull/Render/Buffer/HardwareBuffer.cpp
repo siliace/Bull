@@ -13,7 +13,7 @@ namespace Bull
 
     HardwareBuffer::~HardwareBuffer()
     {
-        destroy();
+        clear();
     }
 
     bool HardwareBuffer::create(std::size_t size)
@@ -25,14 +25,14 @@ namespace Bull
     {
         if(gl::isBuffer(m_id))
         {
-            destroy();
+            gl::genBuffers(1, &m_id);
+            gl::bindBuffer(BufferType[m_type], m_id);
+            gl::bufferData(BufferType[m_type], size, nullptr, BufferUsage[usage]);
+
+            return true;
         }
 
-        gl::genBuffers(1, &m_id);
-        gl::bindBuffer(BufferType[m_type], m_id);
-        gl::bufferData(BufferType[m_type], size, nullptr, BufferUsage[usage]);
-
-        return true;
+        return false;
     }
 
     bool HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
@@ -113,7 +113,7 @@ namespace Bull
         }
     }
 
-    void HardwareBuffer::destroy()
+    void HardwareBuffer::clear()
     {
         if(gl::isBuffer(m_id))
         {
