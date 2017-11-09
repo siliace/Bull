@@ -1,6 +1,5 @@
 #include <Bull/Core/Thread/Thread.hpp>
 #include <Bull/Core/Time/Clock.hpp>
-#include <Bull/Core/Utility/CallOnExit.hpp>
 
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Socket/TcpClient.hpp>
@@ -73,11 +72,10 @@ namespace Bull
         if(isConnected() && data && length)
         {
             std::size_t blockSent = 0;
+            const unsigned char* ptr = reinterpret_cast<const unsigned char*>(data);
 
             for(std::size_t i = 0; i < length; i += blockSent)
             {
-                const unsigned char* ptr = reinterpret_cast<const unsigned char*>(data);
-
                 if(!m_impl->send(ptr + i, length, blockSent))
                 {
                     return SocketState(prv::SocketImpl::getLastError());
