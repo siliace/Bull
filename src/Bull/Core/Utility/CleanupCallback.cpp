@@ -1,21 +1,21 @@
-#include <Bull/Core/Utility/CallOnExit.hpp>
+#include <Bull/Core/Utility/CleanupCallback.hpp>
 
 namespace Bull
 {
-    CallOnExit::CallOnExit() :
+    CleanupCallback::CleanupCallback() :
         m_enable(false)
     {
         /// Nothing
     }
 
-    CallOnExit::CallOnExit(Functor<void> callback) :
+    CleanupCallback::CleanupCallback(Functor<void> callback) :
         m_callback(callback),
         m_enable(true)
     {
         /// Nothing
     }
 
-    CallOnExit::~CallOnExit()
+    CleanupCallback::~CleanupCallback()
     {
         if(m_enable)
         {
@@ -23,17 +23,17 @@ namespace Bull
         }
     }
 
-    void CallOnExit::reset(Functor<void> callback)
+    void CleanupCallback::reset(Functor<void> callback)
     {
         m_callback = callback;
     }
 
-    void CallOnExit::enable(bool enable)
+    void CleanupCallback::enable(bool enable)
     {
         m_enable = enable;
     }
 
-    bool CallOnExit::isEnable() const
+    bool CleanupCallback::isEnable() const
     {
         return m_enable;
     }

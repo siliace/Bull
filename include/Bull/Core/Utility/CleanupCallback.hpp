@@ -1,35 +1,33 @@
 #ifndef BULL_CORE_UTILITY_CALLONEXIT_HPP
 #define BULL_CORE_UTILITY_CALLONEXIT_HPP
 
-#include <Bull/Core/Export.hpp>
 #include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
-
 namespace Bull
 {
-    class BULL_CORE_API CallOnExit : public NonCopyable
+    class BULL_CORE_API CleanupCallback : public NonCopyable
     {
     public:
 
         /*! \brief Default constructor
          *
          */
-        CallOnExit();
+        CleanupCallback();
 
         /*! \brief Constructor
          *
          * \param callback The function to call when the instance is destroyed
          *
          */
-        explicit CallOnExit(Functor<void> callback);
+        explicit CleanupCallback(Functor<void> callback);
 
         /*! \brief Destructor
          *
          * Call the callback if enable
          *
          */
-        ~CallOnExit();
+        ~CleanupCallback();
 
         /*! \brief Change the callback
          *
