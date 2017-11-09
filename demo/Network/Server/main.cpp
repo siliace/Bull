@@ -17,7 +17,7 @@ int main()
 
             std::cout << "Client accepted" << std::endl;
 
-            if(client.send(hello.getBuffer(), hello.getCapacity(), sent))
+            if(client.send(hello.getBuffer(), hello.getSize(), sent))
             {
                 std::cout << sent << " bytes sent" << std::endl;
 
