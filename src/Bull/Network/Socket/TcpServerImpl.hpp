@@ -1,6 +1,8 @@
 #ifndef BULL_NETWORK_SOCKET_TCPSERVERIMPL_HPP
 #define BULL_NETWORK_SOCKET_TCPSERVERIMPL_HPP
 
+#include <memory>
+
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Network/Socket/SocketImpl.hpp>

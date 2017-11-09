@@ -1,36 +1,28 @@
 #ifndef BULL_CORE_MEMORY_STRING_HPP
 #define BULL_CORE_MEMORY_STRING_HPP
 
-#include <memory>
-#include <limits>
 #include <string>
 #include <vector>
 
-#include <Bull/Core/Configuration/Integer.hpp>
-#include <Bull/Core/Export.hpp>
+#include <Bull/Core/Memory/AbstractBuffer.hpp>
 
 namespace Bull
 {
-    namespace prv
-    {
-        struct StringBuffer;
-    }
-
-    class BULL_CORE_API String
+    class BULL_CORE_API String : public AbstractBuffer
     {
     public:
 
         static constexpr char NullByte = '\0';
 
-        static constexpr std::size_t npos = std::numeric_limits<std::size_t>::max();
+        static constexpr std::size_t InvalidPosition = std::basic_string<char>::npos;
 
         /*! \brief Convert a lowercase character to the uppercase equivalent character
-         *
-         * \param character the character to convert
-         *
-         * \return Return the uppercase equivalent of the character
-         *
-         */
+          *
+          * \param character the character to convert
+          *
+          * \return Return the uppercase equivalent of the character
+          *
+          */
         static char toUpper(char character);
 
         /*! \brief Convert a uppercase character to the lowercase equivalent character
@@ -60,400 +52,238 @@ namespace Bull
          */
         static int charToInt(char character);
 
-        /*! \brief Create a String from a boolean
+        /*! \brief Convert a number to a String
          *
-         * \param boolean The boolean to represent in the String
+         * \param number The number to convert
          *
-         * \return Return a String representing the boolean
-         *
-         */
-        static String boolean(bool boolean);
-
-        /*! \brief Create a String from a number
-         *
-         * \param number The number to represent in the String
-         *
-         * \return Return a String representing the number
+         * \return The number converted as a String
          *
          */
         template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
         static String number(T number)
         {
-            return String(std::to_string(number).c_str());
-        };
+            return std::to_string(number).c_str();
+        }
 
-    private:
-
-        using SharedString = std::shared_ptr<prv::StringBuffer>;
-
-        /*! \brief Get the instance of SharedString which corresponding to the empty string
-         *
-         * \return Return the empty SharedString
-         *
-         */
-        static const SharedString& getEmptyString();
+        static String boolean(bool boolean);
 
     public:
 
         /*! \brief Default constructor
          *
+         * Create an empty String
+         *
          */
-        String();
+        String() = default;
 
         /*! \brief Constructor
          *
-         * \param size The size of the String
-         *
-         */
-        explicit String(std::size_t size);
-
-        /*! \brief Constructor
-         *
-         * \param size     The size of the String
-         * \param capacity The capacity of the String
-         *
-         */
-        String(std::size_t size, std::size_t capacity);
-        
-        /*! \brief Constructor
-         *
-         * \param character The character to put in the string
+         * \param character The character in the String
+         * \param repeat    The number of character in the String
          *
          */
         String(char character);
 
         /*! \brief Constructor
          *
-         * \param string The string to copy
+         * Create a String by coping a null terminated pointer
+         *
+         * \param string The C style string to copy
          *
          */
         String(const char* string);
 
         /*! \brief Constructor
          *
-         * \param string The string to copy
-         * \param size   The size of the string
+         * Create a String by coping a pointer
+         *
+         * \param string The C style string to copy
+         * \param size   The length of the C style string
          *
          */
         String(const char* string, std::size_t size);
-        
-        /*! \brief Constructor
-         *
-         * \param string The string to copy
-         *
-         */
-        void set(const char* string);
 
         /*! \brief Constructor
          *
-         * \param string The string to copy
-         * \param size   The size of the string
+         * Create a String filled with NullByte
+         *
+         * \param size     The size of the String
+         * \param capacity The total capacity of the String
          *
          */
-        void set(const char* string, std::size_t size);
+        String(std::size_t size, std::size_t capacity);
 
-        /*! \brief Counts occurrences of a character in the string
+        String& setSize(std::size_t size);
+
+        /*! \brief Create the String
          *
-         * \param character     The character to count
-         * \param start         The index to start
-         * \param caseSensitive True to be case sensitive
+         * \param capacity The capacity of the String to create
          *
-         * \return The number of occurrences of the character in the string
+         * \return True if the String was created successfully
          *
          */
-        unsigned int count(char character, std::size_t start = 0, bool caseSensitive = true) const;
+        bool create(std::size_t capacity) override;
 
-        /*! \brief Get the index of the first iteration of a character
+        /*! \brief Fill the String
          *
-         * \param c             The character
-         * \param caseSensitive True to be case sensitive, false otherwise
+         * \param data   Data to insert in the String
+         * \param size   The length of data
+         * \param offset The offset of the data in the String
          *
-         * \return The index or -1 if the character was not found
+         * \return True if the String was filled successfully
          *
          */
-        int first(char c, bool caseSensitive = true) const;
+        bool fill(const void* data, std::size_t size, std::size_t offset = 0) override;
 
-        /*! \brief Get the index of the last iteration of a character
-         *
-         * \param c             The character
-         * \param caseSensitive True to be case sensitive, false otherwiseX
-         *
-         * \return The index or -1 if the character was not found
-         *
-         */
-        int last(char c, bool caseSensitive = true) const;
+        std::size_t first(const String& search) const;
+        std::size_t last(const String& search) const;
 
-        /*! \brief Replace every a character of the String by another one
-         *
-         * \param toReplace     The character to replace
-         * \param other         The use to replace
-         * \param start         The starting index to replace
-         * \param stop          The index to stop to replace
-         * \param caseSensitive True to be case sensitive, false otherwise
-         *
-         * \return This
-         *
-         */
-        String& replace(char toReplace, char other, std::size_t start = 0, std::size_t stop = npos, bool caseSensitive = true);
+        String& insert(const String& string, size_t position);
+        String& append(const String& string);
 
-        /*! \brief Get a subpart of the string
-         *
-         * \param start The index where the substring begins
-         * \param stop  The index where the substring ends
-         *
-         * \return Return the substring created
-         *
-         */
-        String subString(std::size_t start, std::size_t stop = String::npos) const;
+        String& subString(std::size_t begin, std::size_t end = InvalidPosition);
+        String getSubString(std::size_t begin, std::size_t end = InvalidPosition) const;
 
-        /*! \brief Check whether a String start with a specified string
-         *
-         * \param string The string to test
-         *
-         * \return Return true if this string start with string, false otherwise
-         *
-         */
-        bool startWith(const String& string);
+        std::vector<String> explode(char separator, bool ignoreEmpty = true);
 
-        /*! \brief Check whether a String end with a specified string
+        /*! \brief Tell whether the String is empty
          *
-         * \param string The string to test
+         * A String is considered empty if there is no character inside but can have memory allocated
          *
-         * \return Return true if this string end with string, false otherwise
-         *
-         */
-        bool endsWith(const String& string);
-
-        /*! \brief Splits a string into others
-         *
-         * \param delimiter The character between two split strings
-         *
-         * \return Return the splits
-         *
-         */
-        std::vector<String> explode(char delimiter) const;
-
-        /*! \brief Set the string in uppercase
-         *
-         * \param start The index to start to set characters in uppercase
-         * \param stop  The index to stop to set characters in uppercase
-         *
-         * \return Return the string after the transformation
-         *
-         */
-        String& toUppercase(std::size_t start = 0, std::size_t stop = String::npos);
-
-        /*! \brief Set the string in lowercase
-         *
-         * \param start The index to start to set characters in lowercase
-         * \param stop  The index to stop to set characters in lowercase
-         *
-         * \return Return the string after the transformation
-         *
-         */
-        String& toLowercase(std::size_t start = 0, std::size_t stop = String::npos);
-
-        /*! \brief Inset a String at the ith index
-         *
-         * \param toInsert The String to insert
-         * \param index    The index where the String must be inserted
-         *
-         * \return Return this after the insert
-         *
-         */
-        String& insert(const String& toInsert, std::size_t index);
-
-        /*! \brief Clear the string
-         *
-         * \param keepMemory True to reset capacity, false to keep
-         *
-         */
-        void clear(bool keepMemory = false);
-
-        /*! \brief Set the size of the string
-         *
-         * \param size The new size of the string
-         *
-         */
-        void setSize(std::size_t size);
-
-        /*! \brief Get the size of the string
-         *
-         * \return Return the size of the string
-         *
-         */
-        std::size_t getSize() const;
-
-        /*! \brief Set the capacity of the string
-         *
-         * \param capacity Set the capacity of the string
-         *
-         */
-        void reserve(std::size_t capacity);
-
-        /*! \brief Ensure that the String is used only by this instance
-         *
-         */
-        void ensureOwnership();
-
-        /*! \brief Get the capacity of the string
-         *
-         * \return Return the capacity of the string
-         *
-         */
-        std::size_t getCapacity() const;
-
-        /*! \brief Check whether the string is empty
-         *
-         * \return Return true if the string is empty, false otherwise
-         *
+         * \return True if the String is empty
          */
         bool isEmpty() const;
 
-        /*! \brief Casting operator override
+        /*! \brief Access to a character of the String
          *
-         * \return Return a constant pointer to the string
+         * Get the character of the String at a given index.
+         * If the index is bigger than the String capacity, throw OutOfRange
+         *
+         * \param index The index of the character in the String
+         *
+         * \return A reference to the character
+         *
+         * \throw OutOfRange
          *
          */
-        const char* getBuffer() const;
+        char& at(std::size_t index);
 
-        /*! \brief Get the ith character of the string
+        /*! \brief Access to a character of the String
          *
-         * \param index The index of the character to get
+         * Get the character of the String at a given index.
+         * If the index is bigger than the String capacity, throw OutOfRange
          *
-         * \return Return the character at the ith position
+         * \param index The index of the character in the String
+         *
+         * \return A reference to the character
+         *
+         * \throw OutOfRange
+         *
+         */
+        const char& at(std::size_t index) const;
+
+        /*! \brief Access to a character of the String
+         *
+         * Get the character of the String at a given index.
+         * If the index is bigger than the String capacity, throw OutOfRange
+         *
+         * \param index The index of the character in the String
+         *
+         * \return A reference to the character
+         *
+         * \throw OutOfRange
          *
          */
         char& operator[](std::size_t index);
 
-        /*! \brief Get the ith character of the string
+        /*! \brief Access to a character of the String
          *
-         * \param index The index of the character to get
+         * Get the character of the String at a given index.
+         * If the index is bigger than the String capacity, throw OutOfRange
          *
-         * \return Return the character at the ith position
+         * \param index The index of the character in the String
+         *
+         * \return A reference to the character
+         *
+         * \throw OutOfRange
          *
          */
         const char& operator[](std::size_t index) const;
 
-        /*! \brief Convert a string to an integer
-         *
-         * \return Return an integer representing the string
+        /*! \brief Flush the String
          *
          */
-        int toInt() const;
+        void flush() override;
 
-        /*! \brief Compare two Strings
-         *
-         * \param left The first String to compare
-         * \param right The second String to compare
-         *
-         * \return Return true if left and right are equal, false otherwise
+        /*! \brief Destroy the String
          *
          */
-        friend bool operator==(const String& left, const String& right);
+        void destroy() override;
 
-        /*! \brief Compare two Strings
+        /*! \brief Get the buffer of the String
          *
-         * \param left The first String to compare
-         * \param right The second String to compare
+         * The returned buffer is a pointer to the internal String
          *
-         * \return Return true if left and right are equal, false otherwise
+         * \return The buffer
          *
          */
-        friend bool operator==(const char* left, const String& right);
+        const char* getBuffer() const;
 
-        /*! \brief Compare two Strings
+        /*! \brief Get the size of the String
          *
-         * \param left The first String to compare
-         * \param right The second String to compare
+         * The size is the length (e.g the number of character) in the String
          *
-         * \return Return true if left and right are equal, false otherwise
+         * \return The size
          *
          */
-        friend bool operator==(const String& left, const char* right);
+        std::size_t getSize() const;
 
-        /*! \brief Compare two Strings
+        /*! \brief Get the capacity of the String
          *
-         * \param left The first String to compare
-         * \param right The second String to compare
+         * The capacity is the size of the memory area allocated by the String
          *
-         * \return Return true if left and right are not equal, false otherwise
+         * \return The capacity
          *
          */
-        friend bool operator!=(const String& left, const String& right);
+        std::size_t getCapacity() const override;
 
-        /*! \brief Compare two Strings
+        /*! \brief Compare two String
          *
-         * \param left The first String to compare
-         * \param right The second String to compare
+         * \param right The String to compare to this
          *
-         * \return Return true if left and right are not equal, false otherwise
+         * \return True if this and right are equal
          *
          */
-        friend bool operator!=(const char* left, const String& right);
+        bool operator==(const String& right) const;
 
-        /*! \brief Compare two Strings
+        /*! \brief Compare two String
          *
-         * \param left The first String to compare
-         * \param right The second String to compare
+         * \param right The String to compare to this
          *
-         * \return Return true if left and right are not equal, false otherwise
+         * \return True if this and right are not equal
          *
          */
-        friend bool operator!=(const String& left, const char* right);
+        bool operator!=(const String& right) const;
 
-        /*! \brief Compare two Strings
-         *
-         * \param left
-         * \param right
-         *
-         * \return
-         *
-         */
-        friend bool operator<(const String& left, const String& right);
+        bool operator<(const String& right) const;
+        bool operator>(const String& right) const;
+        bool operator<=(const String& right) const;
+        bool operator>=(const String& right) const;
 
-        /*! \brief Compare two Strings
+        /*! \brief Concatenate two String
          *
-         * \param left
-         * \param right
+         * \param right The String to concatenate to this
          *
-         * \return
-         *
-         */
-        friend bool operator<(const char* left, const String& right);
-
-        /*! \brief Compare two Strings
-         *
-         * \param left
-         * \param right
-         *
-         * \return
-         *
-         */
-        friend bool operator<(const String& left, const char* right);
-
-        /*! \brief Concatenates two Strings
-         *
-         * \param left  The left part of the final String
-         * \param right The right part of the final String
-         *
-         * \return Return the concatenated String
-         *
-         */
-        friend String operator+(const String& left, const String& right);
-
-        /*! \brief Concatenates a String at the end of the string
-         *
-         * \param right The String to add
-         *
-         * \return Return this after the concatenation
+         * \return The concatenation of this and right
          *
          */
         String& operator+=(const String& right);
 
+        friend String operator+(const String& left, const String& right);
+
     private:
 
-        SharedString m_sharedString;
+        std::basic_string<char> m_string;
     };
 }
 

@@ -115,7 +115,7 @@ namespace Bull
         {
             Uint8 byte;
 
-            line.clear();
+            line.flush();
 
             do
             {

@@ -1,3 +1,5 @@
+#include <limits>
+
 #include <Bull/Core/Exception/RuntimeError.hpp>
 
 #include <Bull/Core/Window/Win32/WindowImplWin32.hpp>

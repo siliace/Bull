@@ -12,7 +12,7 @@ namespace Bull
 
     void StringStream::clear()
     {
-        m_content.clear();
+        m_content.flush();
     }
 
     std::size_t StringStream::write(const String& string)

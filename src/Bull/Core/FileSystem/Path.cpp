@@ -44,7 +44,7 @@ namespace Bull
 
     Path Path::getParent() const
     {
-        return Path(toString().subString(0, static_cast<std::size_t>(toString().last(Separator))).subString(static_cast<std::size_t>(toString().first(Separator))));
+        return Path(toString().getSubString(0, static_cast<std::size_t>(toString().last(Separator))).getSubString(static_cast<std::size_t>(toString().first(Separator))));
     }
 
     Path Path::getChild(const String& child) const
@@ -55,11 +55,11 @@ namespace Bull
     String Path::getFileExtension() const
     {
         String path = toString();
-        int i       = path.last('.');
+        std::size_t pos = path.last('.');
 
-        if(i != -1)
+        if(pos < String::InvalidPosition)
         {
-            return path.subString(static_cast<std::size_t>(i) + 1);
+            return path.subString(pos + 1);
         }
 
         return String();

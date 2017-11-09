@@ -1,6 +1,8 @@
 #ifndef BULL_NETWORK_SOCKET_SOCKET_HPP
 #define BULL_NETWORK_SOCKET_SOCKET_HPP
 
+#include <memory>
+
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Network/Address/IpAddressWrapper.hpp>

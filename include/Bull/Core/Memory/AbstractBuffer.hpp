@@ -40,7 +40,7 @@ namespace Bull
 
         /*! \brief Get the capacity of the Buffer
          *
-         * \return The size
+         * \return The capacity
          *
          */
         virtual std::size_t getCapacity() const = 0;

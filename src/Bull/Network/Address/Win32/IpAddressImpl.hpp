@@ -22,7 +22,6 @@ namespace Bull
              *
              * \return True if the IpAddress was resolved successfully
              *
-             *
              */
             static bool resolve(const String& hostname, NetProtocol protocol, ByteArray& bytes, const String& service = "http");
         };
