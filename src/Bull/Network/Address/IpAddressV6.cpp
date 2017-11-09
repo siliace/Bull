@@ -1,4 +1,4 @@
-#include <Bull/Core/IO/StringStream.hpp>
+#include <Bull/Core/IO/OutStringStream.hpp>
 
 #include <Bull/Network/Address/IpAddressImpl.hpp>
 #include <Bull/Network/Address/IpAddressV6.hpp>
@@ -13,7 +13,7 @@ namespace Bull
 
     String IpAddressV6::toString() const
     {
-        StringStream ss;
+        OutStringStream ss;
 
         for(std::size_t i = 0; i < getByteCount(); i++)
         {

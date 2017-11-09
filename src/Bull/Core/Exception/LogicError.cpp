@@ -1,5 +1,5 @@
 #include <Bull/Core/Exception/LogicError.hpp>
-#include <Bull/Core/IO/StringStream.hpp>
+#include <Bull/Core/IO/OutStringStream.hpp>
 
 namespace Bull
 {
@@ -23,7 +23,7 @@ namespace Bull
 
     String LogicError::getLogMessage() const
     {
-        StringStream ss;
+        OutStringStream ss;
 
         ss << what();
 

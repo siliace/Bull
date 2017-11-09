@@ -1,33 +1,31 @@
-#ifndef BULL_CORE_IO_STRINGSTREAM_HPP
-#define BULL_CORE_IO_STRINGSTREAM_HPP
-
-#include <vector>
+#ifndef BULL_CORE_IO_OUTSTRINGSTREAM_HPP
+#define BULL_CORE_IO_OUTSTRINGSTREAM_HPP
 
 #include <Bull/Core/IO/CursorAwareOutStream.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API StringStream : public CursorAwareOutStream
+    class BULL_CORE_API OutStringStream : public CursorAwareOutStream
     {
     public:
 
         /*! \brief Default constructor
          *
          */
-        StringStream();
+        OutStringStream();
 
         /*! \brief Destructor
          *
          */
-        ~StringStream();
+        ~OutStringStream();
 
-        /*! \brief Flush the StringStream
+        /*! \brief Flush the OutStringStream
          *
          */
         void clear();
 
-        /*! \brief Write a String into the StringStream
+        /*! \brief Write a String into the OutStringStream
          *
          * \param string The String to write
          *
@@ -36,7 +34,7 @@ namespace Bull
          */
         std::size_t write(const String& string);
 
-        /*! \brief Write data into the StringStream
+        /*! \brief Write data into the OutStringStream
          *
          * \param data A pointer to the memory area to write
          * \param size The size of the memory area to write
@@ -83,7 +81,7 @@ namespace Bull
          * \return Return a reference to this
          *
          */
-        StringStream& operator<<(int right);
+        OutStringStream& operator<<(int right);
 
         /*! \brief Adds the representation of a boolean
          *
@@ -92,7 +90,7 @@ namespace Bull
          * \return Return a reference to this
          *
          */
-        StringStream& operator<<(bool right);
+        OutStringStream& operator<<(bool right);
 
         /*! \brief Adds the representation of an char
          *
@@ -101,7 +99,7 @@ namespace Bull
          * \return Return a reference to this
          *
          */
-        StringStream& operator<<(char right);
+        OutStringStream& operator<<(char right);
 
         /*! \brief Adds the representation of an char array
          *
@@ -110,7 +108,7 @@ namespace Bull
          * \return Return a reference to this
          *
          */
-        StringStream& operator<<(const char* right);
+        OutStringStream& operator<<(const char* right);
 
         /*! \brief Adds the representation of a String
          *
@@ -119,9 +117,9 @@ namespace Bull
          * \return Return a reference to this
          *
          */
-        StringStream& operator<<(const String& right);
+        OutStringStream& operator<<(const String& right);
 
-        /*! \brief Convert the StringStream to a String
+        /*! \brief Convert the OutStringStream to a String
          *
          * \return Return the representation of this as a String
          *
@@ -135,4 +133,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_IO_STRINGSTREAM_HPP
+#endif // BULL_CORE_IO_OUTSTRINGSTREAM_HPP

@@ -13,8 +13,10 @@ target_sources(bull-core
             ${BULL_SRC_CORE_IO}/InOutStream.cpp
             ${BULL_INC_CORE_IO}/InStream.hpp
             ${BULL_SRC_CORE_IO}/InStream.cpp
+            ${BULL_INC_CORE_IO}/InStringStream.hpp
+            ${BULL_SRC_CORE_IO}/InStringStream.cpp
             ${BULL_INC_CORE_IO}/OutStream.hpp
             ${BULL_SRC_CORE_IO}/OutStream.cpp
-            ${BULL_INC_CORE_IO}/StringStream.hpp
-            ${BULL_SRC_CORE_IO}/StringStream.cpp
+            ${BULL_INC_CORE_IO}/OutStringStream.hpp
+            ${BULL_SRC_CORE_IO}/OutStringStream.cpp
         )

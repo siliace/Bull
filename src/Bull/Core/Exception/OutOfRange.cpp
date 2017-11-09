@@ -1,5 +1,5 @@
 #include <Bull/Core/Exception/OutOfRange.hpp>
-#include <Bull/Core/IO/StringStream.hpp>
+#include <Bull/Core/IO/OutStringStream.hpp>
 
 namespace Bull
 {
@@ -34,7 +34,7 @@ namespace Bull
 
     String OutOfRange::getLogMessage() const
     {
-        StringStream ss;
+        OutStringStream ss;
 
         ss << what();
 

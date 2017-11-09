@@ -1,4 +1,4 @@
-#include <Bull/Core/IO/StringStream.hpp>
+#include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Log/AbstractLogger.hpp>
 #include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Time/Date.hpp>
@@ -7,7 +7,7 @@ namespace Bull
 {
     String AbstractLogger::parseMessage(const String& entry, LogLevel level) const
     {
-        StringStream ss;
+        OutStringStream ss;
         Date now = Date::now();
 
         ss << "[" << String::number(now.year) << "/";

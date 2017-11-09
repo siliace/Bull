@@ -1,5 +1,5 @@
 #include <Bull/Core/FileSystem/InvalidPathException.hpp>
-#include <Bull/Core/IO/StringStream.hpp>
+#include <Bull/Core/IO/OutStringStream.hpp>
 
 namespace Bull
 {
@@ -16,7 +16,7 @@ namespace Bull
 
     String InvalidPathException::getLogMessage() const
     {
-        StringStream ss;
+        OutStringStream ss;
 
         ss << "The path " << getPath() << " does not exists";
 
