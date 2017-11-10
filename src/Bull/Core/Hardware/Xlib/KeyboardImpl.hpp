@@ -16,7 +16,7 @@ namespace Bull
              * \return Return true if the key is down, false otherwise
              *
              */
-            static bool isKeyPressed(Keyboard::Key key);
+            static bool isKeyPressed(KeyboardKey key);
         };
     }
 }

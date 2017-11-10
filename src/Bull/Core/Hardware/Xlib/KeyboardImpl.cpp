@@ -4,19 +4,19 @@ namespace Bull
 {
     namespace prv
     {
-        bool KeyboardImpl::isKeyPressed(Keyboard::Key key)
+        bool KeyboardImpl::isKeyPressed(KeyboardKey key)
         {
-            if(key == Keyboard::Key::Control)
+            if(key == KeyboardKey_Control)
             {
-                return Keyboard::isKeyPressed(Keyboard::LeftControl) || Keyboard::isKeyPressed(Keyboard::RightControl);
+                return Keyboard::isKeyPressed(KeyboardKey_LeftControl) || Keyboard::isKeyPressed(KeyboardKey_RightControl);
             }
-            else if(key == Keyboard::Key::Alt)
+            else if(key == KeyboardKey_Alt)
             {
-                return Keyboard::isKeyPressed(Keyboard::LeftAlt) || Keyboard::isKeyPressed(Keyboard::RightAlt);
+                return Keyboard::isKeyPressed(KeyboardKey_LeftAlt) || Keyboard::isKeyPressed(KeyboardKey_RightAlt);
             }
-            else if(key == Keyboard::Key::System)
+            else if(key == KeyboardKey_System)
             {
-                return Keyboard::isKeyPressed(Keyboard::LeftSystem) || Keyboard::isKeyPressed(Keyboard::RightSystem);
+                return Keyboard::isKeyPressed(KeyboardKey_LeftSystem) || Keyboard::isKeyPressed(KeyboardKey_RightSystem);
             }
 
             return false;

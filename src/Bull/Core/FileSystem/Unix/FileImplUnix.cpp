@@ -56,28 +56,28 @@ namespace Bull
         {
             int flags = 0;
 
-            if(mode & File::OpeningMode::ReadWrite)
+            if(mode & FileOpeningMode_ReadWrite)
             {
                 flags |= O_RDWR;
             }
             else
             {
-                if(mode & File::OpeningMode::Read)
+                if(mode & FileOpeningMode_Read)
                 {
                     flags |= O_RDONLY;
                 }
-                else if(mode & File::OpeningMode::Write)
+                else if(mode & FileOpeningMode_Write)
                 {
                     flags |= O_WRONLY;
                 }
             }
 
-            if(!(mode & File::OpeningMode::Exists) && mode & File::OpeningMode::Write)
+            if(!(mode & FileOpeningMode_Exists) && mode & FileOpeningMode_Write)
             {
                 flags |= O_CREAT;
             }
 
-            if(mode & File::OpeningMode::Truncate)
+            if(mode & FileOpeningMode_Truncate)
             {
                 flags |= O_TRUNC;
             }
@@ -107,7 +107,7 @@ namespace Bull
 
         Date FileImplUnix::getCreationDate() const
         {
-            Bull::Log::get()->write("Creation date is not available on UNIX-like systems", Log::Level::Warning);
+            Bull::Log::get()->write("Creation date is not available on UNIX-like systems", LogLevel_Warning);
 
             return Date();
         }

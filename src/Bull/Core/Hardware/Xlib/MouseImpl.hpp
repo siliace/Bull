@@ -30,7 +30,7 @@ namespace Bull
              * \return True if the button is pressed
              *
              */
-            static bool isButtonPressed(Mouse::Button button);
+            static bool isButtonPressed(MouseButton button);
         };
     }
 }

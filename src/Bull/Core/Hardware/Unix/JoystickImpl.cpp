@@ -21,7 +21,7 @@ namespace Bull
             return false;
         }
 
-        float JoystickImpl::getAxisPosition(Joystick::Axis axis, Uint8 joystick)
+        float JoystickImpl::getAxisPosition(JoystickAxis axis, Uint8 joystick)
         {
             return 0;
         }
