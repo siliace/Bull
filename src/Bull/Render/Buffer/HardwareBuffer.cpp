@@ -13,7 +13,10 @@ namespace Bull
 
     HardwareBuffer::~HardwareBuffer()
     {
-        clear();
+        if(gl::isBuffer(m_id))
+        {
+            gl::deleteBuffers(1, &m_id);
+        }
     }
 
     bool HardwareBuffer::create(std::size_t size)
@@ -23,7 +26,7 @@ namespace Bull
 
     bool HardwareBuffer::create(std::size_t size, HardwareBufferUsage usage)
     {
-        if(gl::isBuffer(m_id))
+        if(!gl::isBuffer(m_id))
         {
             gl::genBuffers(1, &m_id);
             gl::bindBuffer(BufferType[m_type], m_id);
@@ -101,7 +104,7 @@ namespace Bull
         }
     }
 
-    void HardwareBuffer::flush()
+    void HardwareBuffer::clear()
     {
         if(gl::isBuffer(m_id))
         {
@@ -110,14 +113,6 @@ namespace Bull
             int usage;
             gl::getBufferParameteriv(BufferType[m_type], GL_BUFFER_USAGE, &usage);
             gl::bufferData(BufferType[m_type], getCapacity(), nullptr, static_cast<unsigned int>(usage));
-        }
-    }
-
-    void HardwareBuffer::clear()
-    {
-        if(gl::isBuffer(m_id))
-        {
-            gl::deleteBuffers(1, &m_id);
         }
     }
 
