@@ -19,6 +19,16 @@ namespace Bull
          */
         String readAll();
 
+        /*! \brief Read a line from the InStream
+         *
+         * \param line      The String to fill with the line
+         * \param separator The character that delimit two lines
+         *
+         * \return True if a line could be read
+         *
+         */
+        bool readLine(String& line, char separator = '\n');
+
         /*! \brief Read data from a stream
          *
          * \param data A pointer to the memory area to fill
@@ -35,6 +45,24 @@ namespace Bull
          *
          */
         virtual std::size_t getSize() const = 0;
+
+        /*! \brief Tell whether the InStream is at its end
+         *
+         * An InStream is considered at its end when there is not left to read
+         *
+         * \return True if the InStream is at its end
+         *
+         */
+        virtual bool isAtEnd() const = 0;
+
+        /*! \brief Cast the InStream to a bool
+         *
+         * \return True if the InStream is not at its end
+         *
+         * \see isAtEnd
+         *
+         */
+        operator bool() const;
     };
 }
 

@@ -59,7 +59,7 @@ namespace Bull
 
         if(pos < String::InvalidPosition)
         {
-            return path.subString(pos + 1);
+            return path.getSubString(pos + 1);
         }
 
         return String();

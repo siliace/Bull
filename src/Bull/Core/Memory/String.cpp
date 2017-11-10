@@ -74,7 +74,7 @@ namespace Bull
     {
         if(isEmpty())
         {
-            m_string.reserve(capacity);
+            m_string.resize(capacity);
 
             return true;
         }
@@ -149,30 +149,26 @@ namespace Bull
 
     char& String::at(std::size_t index)
     {
-        RangeCheck(index, getCapacity());
+        RangeCheck(index, getSize());
 
         return m_string[index];
     }
 
     const char& String::at(std::size_t index) const
     {
-        RangeCheck(index, getCapacity());
+        RangeCheck(index, getSize());
 
         return m_string[index];
     }
 
     char& String::operator[](std::size_t index)
     {
-        RangeCheck(index, getCapacity());
-
-        return m_string[index];
+        return at(index);
     }
 
     const char& String::operator[](std::size_t index) const
     {
-        RangeCheck(index, getCapacity());
-
-        return m_string[index];
+        return at(index);
     }
 
     void String::clear()
@@ -182,7 +178,7 @@ namespace Bull
 
     const char* String::getBuffer() const
     {
-        return m_string.data();
+        return m_string.c_str();
     }
 
     std::size_t String::getSize() const

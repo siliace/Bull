@@ -37,6 +37,8 @@ namespace Bull
         if(binary.isValid())
         {
             gl::programBinary(m_program, binary.format, binary.getBuffer(), binary.getCapacity());
+
+            return true;
         }
 
         return false;
@@ -108,9 +110,11 @@ namespace Bull
 
                 return false;
             }
+
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     void Shader::bind() const

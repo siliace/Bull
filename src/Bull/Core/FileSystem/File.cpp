@@ -37,14 +37,12 @@ namespace Bull
     }
 
     File::File() :
-        m_eof(false),
         m_mode(FileOpeningMode_None)
     {
         /// Nothing
     }
 
-    File::File(const Path& path, Uint32 mode) :
-        m_eof(false)
+    File::File(const Path& path, Uint32 mode)
     {
         open(path, mode);
     }
@@ -67,12 +65,12 @@ namespace Bull
             m_mode = mode;
             m_impl.reset(prv::FileImpl::createInstance(m_path, m_mode));
 
-            if(m_impl && (mode & FileOpeningMode_Read))
+            if(mode & FileOpeningMode_Read)
             {
                 setCursor(0);
             }
 
-            return isOpen();
+            return true;
         }
 
         return false;
@@ -85,57 +83,24 @@ namespace Bull
 
     void File::close()
     {
-        m_eof  = false;
+        m_impl.reset();
         m_path = Path();
         m_mode = FileOpeningMode_None;
-        m_impl.reset(nullptr);
     }
 
     std::size_t File::read(void* data, std::size_t size)
     {
         if(m_impl)
         {
-            std::memset(data, 0, size);
-            std::size_t read = m_impl->read(data, size);
-
-            if(read < size)
-            {
-                m_eof = true;
-            }
-
-            return read;
+            return m_impl->read(data, size);
         }
 
         return 0;
     }
 
-    bool File::readLine(String& line)
+    std::size_t File::write(const String& line)
     {
-        if(m_impl && !m_eof)
-        {
-            Uint8 byte;
-
-            line.clear();
-
-            do
-            {
-                if(read(&byte, 1) == 1)
-                {
-                    if(byte != '\n')
-                    {
-                        line += String(byte);
-                    }
-                }
-                else
-                {
-                    m_eof = true;
-                }
-            }while(!m_eof && byte != '\n');
-
-            return true;
-        }
-
-        return false;
+        return write(line.getBuffer(), line.getSize());
     }
 
     std::size_t File::write(const void* data, std::size_t size)
@@ -146,11 +111,6 @@ namespace Bull
         }
 
         return 0;
-    }
-
-    std::size_t File::write(const String& string)
-    {
-        return write(&string[0], string.getSize());
     }
 
     Date File::getCreationDate() const
@@ -241,15 +201,5 @@ namespace Bull
     bool File::canWrite() const
     {
         return m_mode & FileOpeningMode_Write;
-    }
-
-    bool File::isAtEof() const
-    {
-        return m_eof;
-    }
-
-    File::operator bool() const
-    {
-        return isOpen();
     }
 }

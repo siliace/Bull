@@ -26,7 +26,7 @@ namespace Bull
         {
             String content = stream.readAll();
 
-            return loadFromMemory(image, content.getBuffer(), content.getCapacity(), parameters);
+            return loadFromMemory(image, content.getBuffer(), content.getSize(), parameters);
         }
 
         bool ImageLoader::loadFromMemory(Image* image, const void* data, std::size_t length, const ImageParameters& parameters) const

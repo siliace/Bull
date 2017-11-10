@@ -1,8 +1,7 @@
 #ifndef BULL_CORE_IO_OUTSTREAM_HPP
 #define BULL_CORE_IO_OUTSTREAM_HPP
 
-#include <Bull/Core/Export.hpp>
-#include <Bull/Core/Configuration/Integer.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {

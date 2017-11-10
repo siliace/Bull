@@ -1,13 +1,14 @@
 #ifndef BULL_NETWORK_SOCKET_TCPSOCKETSTREAM_HPP
 #define BULL_NETWORK_SOCKET_TCPSOCKETSTREAM_HPP
 
-#include <Bull/Core/IO/InOutStream.hpp>
+#include <Bull/Core/IO/InStream.hpp>
+#include <Bull/Core/IO/OutStream.hpp>
 
 #include <Bull/Network/Socket/TcpClient.hpp>
 
 namespace Bull
 {
-    class BULL_NETWORK_API TcpSocketStream : public InOutStream
+    class BULL_NETWORK_API TcpSocketStream : public InStream, public OutStream
     {
     public:
 

@@ -2,12 +2,6 @@
 
 namespace Bull
 {
-    OutStringStream::OutStringStream() :
-        m_cursor(0)
-    {
-        /// Nothing
-    }
-
     OutStringStream::~OutStringStream() = default;
 
     void OutStringStream::clear()
@@ -19,8 +13,7 @@ namespace Bull
     {
         std::size_t oldSize = getSize();
 
-        m_content.insert(string, getCursor());
-        m_cursor += string.getSize();
+        m_content.append(string);
 
         return getSize() - oldSize;
     }
@@ -28,18 +21,6 @@ namespace Bull
     std::size_t OutStringStream::write(const void* data, std::size_t size)
     {
         return write(String(reinterpret_cast<const char*>(data), size));
-    }
-
-    std::size_t OutStringStream::setCursor(std::size_t position)
-    {
-        m_cursor = std::min(position, getSize());
-
-        return m_cursor;
-    }
-
-    std::size_t OutStringStream::getCursor() const
-    {
-        return m_cursor;
     }
 
     std::size_t OutStringStream::getSize() const

@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 
 #include <Bull/Core/Utility/Random.hpp>

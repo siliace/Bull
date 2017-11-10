@@ -27,6 +27,15 @@ namespace Bull
          *
          */
         virtual std::size_t getCursor() const = 0;
+
+        /*! \brief Tell whether the CursorAwareInStream is at its end
+         *
+         * An InStream is considered at its end when there is not left to read
+         *
+         * \return True if the CursorAwareInStream is at its end
+         *
+         */
+        bool isAtEnd() const override;
     };
 }
 

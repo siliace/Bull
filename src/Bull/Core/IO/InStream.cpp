@@ -7,10 +7,39 @@ namespace Bull
     String InStream::readAll()
     {
         String content;
-        content.create(getSize() + 1);
+        if(content.create(getSize()))
+        {
+            read(&content[0], content.getSize());
 
-        read(&content[0], content.getCapacity());
+            return content;
+        }
 
-        return content;
+        return "";
+    }
+
+    bool InStream::readLine(String& line, char separator)
+    {
+        line.clear();
+
+        while(!isAtEnd())
+        {
+            char character;
+
+            if(read(&character, 1) == 1 && character != separator)
+            {
+                line += character;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    InStream::operator bool() const
+    {
+        return isAtEnd();
     }
 }

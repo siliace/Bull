@@ -5,7 +5,8 @@
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
-#include <Bull/Core/IO/CursorAwareInOutStream.hpp>
+#include <Bull/Core/IO/CursorAwareInStream.hpp>
+#include <Bull/Core/IO/OutStream.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
@@ -16,7 +17,7 @@ namespace Bull
         class FileImpl;
     }
 
-    class BULL_CORE_API File : public CursorAwareInOutStream
+    class BULL_CORE_API File : public CursorAwareInStream, public OutStream
     {
     public:
 
@@ -119,14 +120,14 @@ namespace Bull
          */
         std::size_t read(void* data, std::size_t size) override;
 
-        /*! \brief Read a line in the file
+        /*! \brief Write a String to the File
          *
-         * \param line The line to fill
+         * \param string The String to write
          *
-         * \return Return true if the file has still lines to read
+         * \return The number of bytes written
          *
          */
-        bool readLine(String& line);
+        std::size_t write(const String& line);
 
         /*! \brief Write a buffer in the file
          *
@@ -137,15 +138,6 @@ namespace Bull
          *
          */
         std::size_t write(const void* data, std::size_t size) override;
-
-        /*! \brief Write a string in the file
-         *
-         * \param string The string to write
-         *
-         * \return Return the number of bytes actually written
-         *
-         */
-        std::size_t write(const String& string);
 
         /*! \brief Get the date of the creation of the file
          *
@@ -212,39 +204,24 @@ namespace Bull
          * \return Return the opening mode of the file
          *
          */
-        inline Uint32 getOpeningMode() const;
+        Uint32 getOpeningMode() const;
 
         /*! \brief Check if this file is open with read permission
          *
          * \return Return true if this file is open with read permission, false otherwise
          *
          */
-        inline bool canRead() const;
+        bool canRead() const;
 
         /*! \brief Check if this file is open with write permission
          *
          * \return Return true if this file is open with write permission, false otherwise
          *
          */
-        inline bool canWrite() const;
-
-        /*! \brief Check if the cursor is at the end of the file
-         *
-         * \return Return true if the cursor is at end of file, false otherwise
-         *
-         */
-        inline bool isAtEof() const;
-
-        /*! \brief Convert the file to a boolean
-         *
-         * \return True if the file is open
-         *
-         */
-        operator bool() const;
+        bool canWrite() const;
 
     private:
 
-        bool                           m_eof;
         Path                           m_path;
         Uint32                         m_mode;
         std::unique_ptr<prv::FileImpl> m_impl;
