@@ -82,18 +82,11 @@ namespace Bull
          */
         std::size_t getSize() const override;
 
-        /*! \brief Check if the stream is open
-         *
-         * \return True is the stream is open
-         *
-         */
-        operator bool() const;
-
     private:
 
         const void* m_data;   /*!< Data to stream */
-        std::size_t       m_size;   /*!< Size of data to stream */
-        std::size_t       m_cursor; /*!< The internal cursor */
+        std::size_t m_size;   /*!< Size of data to stream */
+        std::size_t m_cursor; /*!< The internal cursor */
     };
 }
 

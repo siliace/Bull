@@ -52,8 +52,8 @@ namespace Bull
     {
         if(m_data && m_size)
         {
-            std::size_t count = std::min(static_cast<std::size_t>(size), m_size - m_cursor);
-            std::memcpy(data, &reinterpret_cast<const unsigned char*>(m_data)[m_cursor], static_cast<std::size_t>(count));
+            std::size_t count = std::min(size, m_size - m_cursor);
+            std::memcpy(data, &reinterpret_cast<const unsigned char*>(m_data)[m_cursor], count);
             m_cursor += count;
 
             return count;
@@ -64,7 +64,7 @@ namespace Bull
 
     std::size_t MemoryStream::setCursor(std::size_t position)
     {
-        return m_cursor = std::min(static_cast<std::size_t>(position), m_size);
+        return m_cursor = std::min(position, m_size);
     }
 
     std::size_t MemoryStream::getCursor() const
@@ -75,10 +75,5 @@ namespace Bull
     std::size_t MemoryStream::getSize() const
     {
         return m_size;
-    }
-
-    MemoryStream::operator bool() const
-    {
-        return isOpen();
     }
 }
