@@ -25,13 +25,14 @@ namespace Bull
         {
             char character;
 
-            if(read(&character, 1) == 1 && character != separator)
+            if(read(&character, 1) == 1)
             {
+                if(character == separator)
+                {
+                    return true;
+                }
+
                 line += character;
-            }
-            else
-            {
-                return true;
             }
         }
 

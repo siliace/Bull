@@ -1,8 +1,7 @@
 #include <cstring>
-#include <sstream>
 
+#include <Bull/Core/IO/InStringStream.hpp>
 #include <Bull/Core/Memory/RangeCheck.hpp>
-#include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
@@ -41,9 +40,10 @@ namespace Bull
         return boolean ? "true" : "false";
     }
 
-    String::String(char character)
+    String::String(char character) :
+        String(1, character)
     {
-        m_string.resize(1, character);
+        /// Nothing
     }
 
     String::String(const char* string) :
@@ -57,15 +57,14 @@ namespace Bull
         fill(string, size);
     }
 
-    String::String(std::size_t size, std::size_t capacity)
+    String::String(std::size_t size, char character)
     {
-        m_string.resize(size, NullByte);
-        m_string.reserve(capacity);
+        m_string.resize(size, character);
     }
 
     String& String::setSize(std::size_t size)
     {
-        m_string.resize(size);
+        m_string.resize(size, NullByte);
 
         return (*this);
     }
@@ -113,29 +112,24 @@ namespace Bull
         return (*this);
     }
 
-    String& String::subString(std::size_t begin, std::size_t end)
+    String String::subString(std::size_t begin, std::size_t end) const
     {
-        m_string = m_string.substr(begin, end);
+        RangeCheck(begin, getSize());
 
-        return (*this);
-    }
-
-    String String::getSubString(std::size_t begin, std::size_t end) const
-    {
         return String(m_string.substr(begin, end).c_str());
     }
 
     std::vector<String> String::explode(char separator, bool ignoreEmpty)
     {
-        std::string         token;
+        String              token;
         std::vector<String> tokens;
-        std::istringstream  iss(m_string);
+        InStringStream      stream(*this);
 
-        while(std::getline(iss, token, separator))
+        while(stream.readLine(token, separator))
         {
-            if(!token.empty() || !ignoreEmpty)
+            if(!token.isEmpty() || !ignoreEmpty)
             {
-                tokens.emplace_back(token.c_str());
+                tokens.emplace_back(token);
             }
         }
 

@@ -105,14 +105,24 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * Create a String filled with NullByte
+         * Create a String filled with a character
          *
          * \param size     The size of the String
-         * \param capacity The total capacity of the String
+         * \param capacity The character to use to fill the String
          *
          */
-        String(std::size_t size, std::size_t capacity);
+        String(std::size_t size, char character);
 
+        /*! \brief Set the size of the String
+         *
+         * Resize the String (result getSize() will be modified). If the new size if lower than the current size,
+         * the String will be truncated, otherwise the string will be extended and filled with NullByte
+         *
+         * \param size The new size of the String
+         *
+         * \return This
+         *
+         */
         String& setSize(std::size_t size);
 
         /*! \brief Create the String
@@ -135,15 +145,61 @@ namespace Bull
          */
         bool fill(const void* data, std::size_t size, std::size_t offset = 0) override;
 
+        /*! \brief The the first occurence of a String
+         *
+         * \param search The String to search
+         *
+         * \return The position of int String if the searched String was found, InvalidPosition otherwise
+         *
+         */
         std::size_t first(const String& search) const;
+
+        /*! \brief The the ladt occurence of a String
+         *
+         * \param search The String to search
+         *
+         * \return The position of int String if the searched String was found, InvalidPosition otherwise
+         *
+         */
         std::size_t last(const String& search) const;
 
+        /*! \brief Insert a String at a given position
+         *
+         * \param string   The String to insert
+         * \param position The position where insert the String
+         *
+         * \return This
+         *
+         */
         String& insert(const String& string, size_t position);
+
+        /*! \brief Append a String at the end this
+         *
+         * \param string The String to append to this
+         *
+         * \return This
+         *
+         */
         String& append(const String& string);
 
-        String& subString(std::size_t begin, std::size_t end = InvalidPosition);
-        String getSubString(std::size_t begin, std::size_t end = InvalidPosition) const;
+        /*! \brief Get a sub String from the String
+         *
+         * \param begin The index where start the sub String
+         * \param end   The index where end the sub String
+         *
+         * \return The sub String
+         *
+         */
+        String subString(std::size_t begin, std::size_t end = InvalidPosition) const;
 
+        /*! \brief Explose the String to tokens
+         *
+         * \param separator   The character between two tokens
+         * \param ignoreEmpty True to ignore empty tokens
+         *
+         * \return Tokens
+         *
+         */
         std::vector<String> explode(char separator, bool ignoreEmpty = true);
 
         /*! \brief Tell whether the String is empty
@@ -151,6 +207,7 @@ namespace Bull
          * A String is considered empty if there is no character inside but can have memory allocated
          *
          * \return True if the String is empty
+         *
          */
         bool isEmpty() const;
 
@@ -262,9 +319,40 @@ namespace Bull
          */
         bool operator!=(const String& right) const;
 
+        /*! \brief Compare two String
+         *
+         * \param right The String to compare to this
+         *
+         * \return True if this is lexically prior to right
+         *
+         */
         bool operator<(const String& right) const;
+
+        /*! \brief Compare two String
+         *
+         * \param right The String to compare to this
+         *
+         * \return True if this is lexically superior to right
+         *
+         */
         bool operator>(const String& right) const;
+
+        /*! \brief Compare two String
+         *
+         * \param right The String to compare to this
+         *
+         * \return True if this is lexically prior or equal to right
+         *
+         */
         bool operator<=(const String& right) const;
+
+        /*! \brief Compare two String
+         *
+         * \param right The String to compare to this
+         *
+         * \return True if this is lexically superior or equal to right
+         *
+         */
         bool operator>=(const String& right) const;
 
         /*! \brief Concatenate two String
@@ -276,6 +364,14 @@ namespace Bull
          */
         String& operator+=(const String& right);
 
+        /*! \brief Concatenate two String
+         *
+         * \param left  The left String
+         * \param right The right String
+         *
+         * \return The concatenation of left and right
+         *
+         */
         friend String operator+(const String& left, const String& right);
 
     private:

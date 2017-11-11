@@ -21,7 +21,7 @@ namespace Bull
         }
         else
         {
-            toRead = m_cursor + size;
+            toRead = size;
         }
 
         std::memcpy(data, &m_string[m_cursor], toRead);
