@@ -20,13 +20,13 @@ namespace Bull
             return nullptr;
         }
 
-        ThreadImplUnix::ThreadImplUnix(Functor<void>& function, Thread::Priority priority)
+        ThreadImplUnix::ThreadImplUnix(Functor<void>& function, ThreadPriority priority)
         {
             pthread_attr_t attributes;
             pthread_attr_init(&attributes);
             pthread_attr_setdetachstate(&attributes, PTHREAD_CREATE_DETACHED);
 
-            if(priority == Thread::Priority::Inherit)
+            if(priority == ThreadPriority_Inherit)
             {
                 pthread_attr_setinheritsched(&attributes, PTHREAD_INHERIT_SCHED);
             }

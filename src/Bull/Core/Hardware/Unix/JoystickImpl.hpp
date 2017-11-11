@@ -48,7 +48,7 @@ namespace Bull
              * \return Return the position of the axis
              *
              */
-            static float getAxisPosition(Joystick::Axis axis, Uint8 joystick);
+            static float getAxisPosition(JoystickAxis axis, Uint8 joystick);
         };
     }
 }

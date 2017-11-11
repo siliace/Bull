@@ -30,7 +30,7 @@ namespace Bull
             return Vector2I();
         }
 
-        bool MouseImpl::isButtonPressed(Mouse::Button button)
+        bool MouseImpl::isButtonPressed(MouseButton button)
         {
             int x, y;
             int rootX, rootY;
@@ -42,11 +42,11 @@ namespace Bull
             {
                 switch(button)
                 {
-                    case Mouse::Button::Left:   return buttons & Button1Mask;
-                    case Mouse::Button::Middle: return buttons & Button2Mask;
-                    case Mouse::Button::Right:  return buttons & Button3Mask;
-                    case Mouse::Button::Extra1: return buttons & Button4Mask;
-                    case Mouse::Button::Extra2: return buttons & Button5Mask;
+                    case MouseButton_Left:   return buttons & Button1Mask;
+                    case MouseButton_Middle: return buttons & Button2Mask;
+                    case MouseButton_Right:  return buttons & Button3Mask;
+                    case MouseButton_Extra1: return buttons & Button4Mask;
+                    case MouseButton_Extra2: return buttons & Button5Mask;
                 }
             }
 

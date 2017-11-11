@@ -11,9 +11,9 @@ namespace Bull
             return static_cast<unsigned int>(sysconf(_SC_NPROCESSORS_ONLN));
         }
 
-        CPU::Architecture CPUImpl::getArchitecture()
+        CPUArchitecture CPUImpl::getArchitecture()
         {
-            return CPU::Unknown;
+            return CPUArchitecture_Unknown;
         }
     }
 }

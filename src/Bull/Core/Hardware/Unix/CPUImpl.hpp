@@ -21,7 +21,7 @@ namespace Bull
              * \return Return the CPU architecture
              *
              */
-            static CPU::Architecture getArchitecture();
+            static CPUArchitecture getArchitecture();
         };
     }
 }

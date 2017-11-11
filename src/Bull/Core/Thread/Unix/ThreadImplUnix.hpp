@@ -39,7 +39,7 @@ namespace Bull
              * \param priority The priority of the thread (by default inherit form the parent thread)
              *
              */
-            ThreadImplUnix(Functor<void>& function, Thread::Priority priority);
+            ThreadImplUnix(Functor<void>& function, ThreadPriority priority);
 
             /*! \brief Wait the end of a thread
              *

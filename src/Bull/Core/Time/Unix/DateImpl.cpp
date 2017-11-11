@@ -19,8 +19,8 @@ namespace Bull
             now.minute    = sysDate->tm_min;
             now.hour      = sysDate->tm_hour;
             now.day       = sysDate->tm_mday;
-            now.dayOfWeek = Date::Day(sysDate->tm_wday);
-            now.month     = Date::Month(sysDate->tm_mon);
+            now.dayOfWeek = DateDay(sysDate->tm_wday);
+            now.month     = DateMonth(sysDate->tm_mon);
             now.year      = 1900 + sysDate->tm_year;
 
             return now;
