@@ -42,13 +42,13 @@ namespace Bull
             if(m_socket->isValid())
             {
                 sockaddr addr;
-                int length = sizeof(sockaddr);
+                int sockLength = sizeof(sockaddr);
 
-                received = ::recvfrom(m_socket->getHandler(), reinterpret_cast<char*>(data), length, 0, &addr, &length);
+                received = ::recvfrom(m_socket->getHandler(), reinterpret_cast<char*>(data), length, 0, &addr, &sockLength);
 
                 if(received >= 0)
                 {
-                    SockAddrBuffer buffer(addr, length);
+                    SockAddrBuffer buffer(addr, sockLength);
 
                     port    = buffer.getPort();
                     address = buffer.getIpAddress();
