@@ -49,6 +49,34 @@ namespace Bull
     }
 
     template <typename T>
+    T& DynArray<T>::at(std::size_t index)
+    {
+        RangeCheck(index, getCapacity());
+
+        return m_array[index];
+    }
+
+    template <typename T>
+    const T& DynArray<T>::at(std::size_t index) const
+    {
+        RangeCheck(index, getCapacity());
+
+        return m_array[index];
+    }
+
+    template <typename T>
+    T& DynArray<T>::operator[](std::size_t index)
+    {
+        return at(index);
+    }
+
+    template <typename T>
+    const T& DynArray<T>::operator[](std::size_t index) const
+    {
+        return at(index);
+    }
+
+    template <typename T>
     void DynArray<T>::clear()
     {
         std::fill_n(&m_array[0], getCapacity(), 0);
