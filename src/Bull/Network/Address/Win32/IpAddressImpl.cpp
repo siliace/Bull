@@ -8,7 +8,7 @@ namespace Bull
 {
     namespace prv
     {
-        bool IpAddressImpl::resolve(const String& hostname, NetProtocol protocol, ByteArray& bytes, const String& service)
+        bool IpAddressImpl::resolve(const String& hostname, NetProtocol protocol, ByteVector& bytes, const String& service)
         {
             addrinfo hints;
             addrinfo* info;

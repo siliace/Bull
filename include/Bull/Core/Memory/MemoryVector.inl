@@ -5,21 +5,21 @@
 namespace Bull
 {
     template <typename T>
-    Array<T>::Array(std::size_t size) :
-        Array<T>(size, T())
+    MemoryVector<T>::MemoryVector(std::size_t size) :
+        MemoryVector<T>(size, T())
     {
         /// nothing
     }
 
     template <typename T>
-    Array<T>::Array(std::size_t size, T value) :
+    MemoryVector<T>::MemoryVector(std::size_t size, T value) :
         m_array(size, value)
     {
         /// Nothing
     }
 
     template <typename T>
-    bool Array<T>::create(std::size_t capacity)
+    bool MemoryVector<T>::create(std::size_t capacity)
     {
         if(isEmpty())
         {
@@ -32,7 +32,7 @@ namespace Bull
     }
 
     template <typename T>
-    bool Array<T>::fill(const void* data, std::size_t size, std::size_t offset)
+    bool MemoryVector<T>::fill(const void* data, std::size_t size, std::size_t offset)
     {
         if(data && size)
         {
@@ -50,7 +50,7 @@ namespace Bull
     }
 
     template <typename T>
-    T& Array<T>::at(std::size_t index)
+    T& MemoryVector<T>::at(std::size_t index)
     {
         RangeCheck(index, getCapacity());
 
@@ -58,7 +58,7 @@ namespace Bull
     }
 
     template <typename T>
-    const T& Array<T>::at(std::size_t index) const
+    const T& MemoryVector<T>::at(std::size_t index) const
     {
         RangeCheck(index, getCapacity());
 
@@ -67,43 +67,43 @@ namespace Bull
 
 
     template <typename T>
-    void Array<T>::resize(std::size_t size)
+    void MemoryVector<T>::resize(std::size_t size)
     {
         m_array.resize(size);
     }
 
     template <typename T>
-    void Array<T>::clear()
+    void MemoryVector<T>::clear()
     {
         m_array.clear();
     }
 
     template <typename T>
-    bool Array<T>::isEmpty() const
+    bool MemoryVector<T>::isEmpty() const
     {
         return getCapacity() == 0;
     }
 
     template <typename T>
-    const T* Array<T>::getBuffer() const
+    const T* MemoryVector<T>::getBuffer() const
     {
         return m_array.data();
     }
 
     template <typename T>
-    std::size_t Array<T>::getCapacity() const
+    std::size_t MemoryVector<T>::getCapacity() const
     {
         return m_array.size();
     }
 
     template <typename T>
-    T& Array<T>::operator[](std::size_t index)
+    T& MemoryVector<T>::operator[](std::size_t index)
     {
         return at(index);
     }
 
     template <typename T>
-    const T& Array<T>::operator[](std::size_t index) const
+    const T& MemoryVector<T>::operator[](std::size_t index) const
     {
         return at(index);
     }

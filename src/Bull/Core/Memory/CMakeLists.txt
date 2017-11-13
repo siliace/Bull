@@ -4,12 +4,12 @@ set(BULL_SRC_CORE_MEMORY ${BULL_SRC_CORE}/Memory)
 target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE_MEMORY}/AbstractBuffer.hpp
-            ${BULL_INC_CORE_MEMORY}/Array.hpp
-            ${BULL_INC_CORE_MEMORY}/Array.inl
-            ${BULL_INC_CORE_MEMORY}/ByteArray.hpp
-            ${BULL_SRC_CORE_MEMORY}/ByteArray.cpp
+            ${BULL_INC_CORE_MEMORY}/ByteVector.hpp
+            ${BULL_SRC_CORE_MEMORY}/ByteVector.cpp
             ${BULL_INC_CORE_MEMORY}/MemoryStream.hpp
             ${BULL_SRC_CORE_MEMORY}/MemoryStream.cpp
+            ${BULL_INC_CORE_MEMORY}/MemoryVector.hpp
+            ${BULL_INC_CORE_MEMORY}/MemoryVector.inl
             ${BULL_INC_CORE_MEMORY}/RangeCheck.hpp
             ${BULL_SRC_CORE_MEMORY}/RangeCheck.cpp
             ${BULL_INC_CORE_MEMORY}/String.hpp

@@ -503,7 +503,7 @@ namespace Bull
 
         void WindowImplWin32::setIcon(const Image& icon)
         {
-            ByteArray pixels(icon.getSize().x() * icon.getSize().y() * 4);
+            ByteVector pixels(icon.getSize().x() * icon.getSize().y() * 4);
 
             for(std::size_t i = 0; i < pixels.getCapacity() / 4; i += 4)
             {

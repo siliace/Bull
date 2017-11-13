@@ -37,7 +37,7 @@ namespace Bull
 
             if(buffer && w && h)
             {
-                ByteArray pixels;
+                ByteVector pixels;
                 CleanupCallback cleanup([buffer](){
                     stbi_image_free(buffer);
                 });

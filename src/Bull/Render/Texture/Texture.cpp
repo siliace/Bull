@@ -63,7 +63,7 @@ namespace Bull
         return false;
     }
 
-    bool Texture::create(const ByteArray& pixels, const Vector2UI& size)
+    bool Texture::create(const ByteVector& pixels, const Vector2UI& size)
     {
         if(create(size))
         {
@@ -155,7 +155,7 @@ namespace Bull
         if(m_id)
         {
             Image image;
-            ByteArray pixels(m_size.x()  * m_size.y()  * 4);
+            ByteVector pixels(m_size.x()  * m_size.y()  * 4);
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
             gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);

@@ -16,7 +16,7 @@ namespace Bull
         if(size.x() && size.y())
         {
             m_size   = size;
-            m_pixels = ByteArray(m_size.x() * m_size.y() * 4);
+            m_pixels = ByteVector(m_size.x() * m_size.y() * 4);
 
             return true;
         }
@@ -24,7 +24,7 @@ namespace Bull
         return false;
     }
 
-    bool Image::create(const ByteArray& pixels, const Vector2UI& size)
+    bool Image::create(const ByteVector& pixels, const Vector2UI& size)
     {
         if(size.x() && size.y())
         {
@@ -59,7 +59,7 @@ namespace Bull
 
     Image& Image::flipVertically()
     {
-        ByteArray pixels(m_size.x() * m_size.y() * 4);
+        ByteVector pixels(m_size.x() * m_size.y() * 4);
 
         for(unsigned int i = 0; i < m_size.y() ; i++)
         {
@@ -73,7 +73,7 @@ namespace Bull
 
     Image& Image::flipHorizontally()
     {
-        ByteArray pixels(m_size.x() * m_size.y() * 4);
+        ByteVector pixels(m_size.x() * m_size.y() * 4);
 
         for(unsigned int i = 0; i < m_size.y() ; i++)
         {
@@ -120,7 +120,7 @@ namespace Bull
         return m_size;
     }
 
-    const ByteArray& Image::getPixels() const
+    const ByteVector& Image::getPixels() const
     {
         return m_pixels;
     }

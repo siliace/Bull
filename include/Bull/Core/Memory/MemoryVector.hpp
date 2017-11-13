@@ -8,21 +8,21 @@
 namespace Bull
 {
     template <typename T>
-    class Array : public AbstractBuffer
+    class MemoryVector : public AbstractBuffer
     {
     public:
 
         /*! \brief Default constructor
          *
          */
-        Array() = default;
+        MemoryVector() = default;
 
         /*! \brief Constructor
          *
          * \param size The size of the Array
          *
          */
-        explicit Array(std::size_t size);
+        explicit MemoryVector(std::size_t size);
 
         /*! \brief Constructor
          *
@@ -30,7 +30,7 @@ namespace Bull
          * \param value The value to the Array
          *
          */
-        Array(std::size_t size, T value);
+        MemoryVector(std::size_t size, T value);
 
         /*! \brief Create the Array
          *
@@ -127,6 +127,6 @@ namespace Bull
     };
 }
 
-#include <Bull/Core/Memory/Array.inl>
+#include <Bull/Core/Memory/MemoryVector.inl>
 
 #endif // BULL_CORE_MEMORY_ARRAY_HPP

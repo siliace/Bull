@@ -39,7 +39,7 @@ namespace Bull
          * \return True if the Image was created successfully
          *
          */
-        bool create(const ByteArray& pixels, const Vector2UI& size) override;
+        bool create(const ByteVector& pixels, const Vector2UI& size) override;
 
         /*! \brief Fill the Image with a Color
          *
@@ -131,7 +131,7 @@ namespace Bull
          * \return The pixels
          *
          */
-        const ByteArray& getPixels() const;
+        const ByteVector& getPixels() const;
 
         /*! \brief Get the size of the Image
          *
@@ -143,7 +143,7 @@ namespace Bull
     private:
 
         Vector2UI m_size;
-        ByteArray m_pixels;
+        ByteVector m_pixels;
     };
 }
 

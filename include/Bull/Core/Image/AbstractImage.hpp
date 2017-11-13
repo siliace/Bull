@@ -6,7 +6,7 @@
 #include <Bull/Core/Resource/Resource.hpp>
 #include <Bull/Core/Resource/ResourceLoader.hpp>
 #include <Bull/Core/Resource/ResourceSaver.hpp>
-#include <Bull/Core/Memory/ByteArray.hpp>
+#include <Bull/Core/Memory/ByteVector.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
@@ -31,7 +31,7 @@ namespace Bull
          * \return True if the AbstractImage was created successfully
          *
          */
-        virtual bool create(const ByteArray& pixels, const Vector2UI& size) = 0;
+        virtual bool create(const ByteVector& pixels, const Vector2UI& size) = 0;
 
         /*! \brief Get the size of the AbstractImage
          *

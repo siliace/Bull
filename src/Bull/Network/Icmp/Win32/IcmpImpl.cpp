@@ -14,9 +14,9 @@ namespace Bull
 
             if(icmpHandle != INVALID_HANDLE_VALUE)
             {
-                ByteArray request(32);
+                ByteVector request(32);
                 IPAddr addr = address.toInt();
-                ByteArray response(sizeof(ICMP_ECHO_REPLY) + request.getCapacity());
+                ByteVector response(sizeof(ICMP_ECHO_REPLY) + request.getCapacity());
 
                 if(IcmpSendEcho(icmpHandle,
                                 addr,

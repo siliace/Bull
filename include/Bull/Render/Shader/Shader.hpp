@@ -1,7 +1,7 @@
 #ifndef BULL_RENDER_SHADER_SHADER_HPP
 #define BULL_RENDER_SHADER_SHADER_HPP
 
-#include <Bull/Core/Memory/ByteArray.hpp>
+#include <Bull/Core/Memory/ByteVector.hpp>
 #include <Bull/Core/Utility/Color.hpp>
 
 #include <Bull/Math/Matrix/Matrix4.hpp>

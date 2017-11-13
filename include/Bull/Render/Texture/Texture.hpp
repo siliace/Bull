@@ -61,7 +61,7 @@ namespace Bull
          * \return True if the Texture was created successfully
          *
          */
-        bool create(const ByteArray& pixels, const Vector2UI& size) override;
+        bool create(const ByteVector& pixels, const Vector2UI& size) override;
 
         /*! \brief Load a Texture from a Path
          *

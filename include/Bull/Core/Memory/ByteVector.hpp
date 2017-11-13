@@ -1,24 +1,24 @@
 #ifndef BULL_CORE_MEMORY_BYTEARRAY_HPP
 #define BULL_CORE_MEMORY_BYTEARRAY_HPP
 
-#include <Bull/Core/Memory/Array.hpp>
+#include <Bull/Core/Memory/MemoryVector.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
-    struct BULL_CORE_API ByteArray : public Array<Uint8>
+    struct BULL_CORE_API ByteVector : public MemoryVector<Uint8>
     {
         /*! \brief Default constructor
          *
          */
-        ByteArray() = default;
+        ByteVector() = default;
 
         /*! \brief Constructor
          *
          * \param size The size of the array
          *
          */
-        explicit ByteArray(std::size_t size);
+        explicit ByteVector(std::size_t size);
 
         /*! \brief Constructor
          *
@@ -26,7 +26,7 @@ namespace Bull
          * \param value The value to the array
          *
          */
-        ByteArray(std::size_t size, Uint8 value);
+        ByteVector(std::size_t size, Uint8 value);
 
         /*! \brief Convert the byte array to a String
          *

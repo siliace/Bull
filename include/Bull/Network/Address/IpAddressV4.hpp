@@ -65,7 +65,7 @@ namespace Bull
 
     private:
 
-        ByteArray m_bytes;
+        ByteVector m_bytes;
         bool      m_valid;
     };
 }

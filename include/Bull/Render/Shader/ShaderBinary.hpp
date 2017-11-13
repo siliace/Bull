@@ -1,14 +1,14 @@
 #ifndef BULL_RENDER_SHADER_SHADERBINARY_HPP
 #define BULL_RENDER_SHADER_SHADERBINARY_HPP
 
-#include <Bull/Core/Memory/ByteArray.hpp>
+#include <Bull/Core/Memory/ByteVector.hpp>
 
 #include <Bull/Render/Export.hpp>
 #include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull
 {
-    struct BULL_RENDER_API ShaderBinary : public ByteArray, public ContextResource
+    struct BULL_RENDER_API ShaderBinary : public ByteVector, public ContextResource
     {
         /*! \brief Get the list of supported shader binary formats
          *
