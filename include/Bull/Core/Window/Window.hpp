@@ -15,6 +15,7 @@
 
 namespace Bull
 {
+    class Mouse;
     class MessageWindow;
 
     namespace prv
@@ -362,15 +363,21 @@ namespace Bull
 
     private:
 
+        friend class Mouse;
+
+        void ignoreNextMouseEvent() const;
+
+    private:
+
         /*! \brief Filter events to start callbacks
          *
          * \param e The event to filter
          *
          */
-        void filterEvent(const WindowEvent& e);
+        bool filterEvent(const WindowEvent& e);
 
-        std::unique_ptr<prv::WindowImpl> m_impl;             /*!< The OS specific implementation of the window */
-        bool                             m_ignoreNextMouse;  /*!< True to ignore the next mouse event due to cursor centering */
+        std::unique_ptr<prv::WindowImpl> m_impl;            /*!< The OS specific implementation of the window */
+        mutable bool                     m_ignoreNextMouse; /*!< True to ignore the next mouse event due to cursor centering */
     };
 }
 

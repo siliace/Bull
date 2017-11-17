@@ -86,7 +86,10 @@ namespace Bull
     {
         if(m_impl && m_impl->popEvent(e, false))
         {
-            filterEvent(e);
+            if(!filterEvent(e))
+            {
+                e.type = WindowEventType_None;
+            }
 
             return true;
         }
@@ -390,11 +393,25 @@ namespace Bull
         return m_impl;
     }
 
-    void Window::filterEvent(const WindowEvent& e)
+    void Window::ignoreNextMouseEvent() const
+    {
+        m_ignoreNextMouse = true;
+    }
+
+    bool Window::filterEvent(const WindowEvent& e)
     {
         if(e.type == WindowEventType_Resized)
         {
             onResize();
         }
+
+        if(m_ignoreNextMouse && e.type == WindowEventType_MouseMoved)
+        {
+            m_ignoreNextMouse = false;
+
+            return false;
+        }
+
+        return true;
     }
 }
