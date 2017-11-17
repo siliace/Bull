@@ -28,7 +28,7 @@ namespace Bull
          * \param settings Settings to use to create the OpenGL context
          *
          */
-        RenderWindow(const VideoMode& mode, const String& title, Uint32 WindowStyle = WindowStyle::Default, const ContextSettings& settings = ContextSettings::Best);
+        RenderWindow(const VideoMode& mode, const String& title, Uint32 WindowStyle = WindowStyle_Default, const ContextSettings& settings = ContextSettings::Best);
 
         /*! \brief Open the window. If a window was already opened, its closed
          *
@@ -40,7 +40,7 @@ namespace Bull
          * \return Return true if the window was open successfully, false otherwise
          *
          */
-        bool open(const VideoMode& mode, const String& title, Uint32 WindowStyle = WindowStyle::Default, const ContextSettings& settings = ContextSettings::Best);
+        bool open(const VideoMode& mode, const String& title, Uint32 WindowStyle = WindowStyle_Default, const ContextSettings& settings = ContextSettings::Best);
 
         /*! \brief Display what has been rendered so far
          *

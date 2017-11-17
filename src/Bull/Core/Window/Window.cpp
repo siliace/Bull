@@ -29,24 +29,29 @@ namespace Bull
             close();
         }
 
-        if(style == WindowStyle::Fullscreen && s_fullscreen)
+        if(style == WindowStyle_Fullscreen && s_fullscreen)
         {
-            style = WindowStyle::Default;
+            style = WindowStyle_Default;
         }
 
         m_impl.reset(prv::WindowImpl::createInstance(mode, title, style));
 
-        if(style == WindowStyle::Fullscreen)
+        if(style == WindowStyle_Fullscreen)
         {
-            enableFullscreen();
+            if(!enableFullscreen())
+            {
+                close();
+
+                return false;
+            }
         }
 
         setTitle(title);
+        setVisible(true);
         setMinSize(-1, -1);
         setMaxSize(-1, -1);
         enableKeyRepeat(true);
         setMouseCursorVisible(true);
-        setVisible(style & WindowStyle::Visible);
 
         onOpen();
 

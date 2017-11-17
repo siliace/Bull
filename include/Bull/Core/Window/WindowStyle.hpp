@@ -5,17 +5,13 @@ namespace Bull
 {
     enum WindowStyle
     {
-        None        = 0x0,  /*!< The Window do not have any decoration */
-
-        Visible     = 0x1,  /*!< The Window is visible */
-        Closable    = 0x2,  /*!< The Window has a exit button */
-        Minimizable = 0x4,  /*!< The Window has a minimize button */
-        Maximizable = 0x8,  /*!< The Window has a maximize button */
-        Resizable   = 0x16, /*!< The Window is resizable with drag&drop */
-
-        Fullscreen  = 0x32, /*!< The Window is in full screen */
-
-        Default     = Visible | Closable | Minimizable | Maximizable | Resizable
+        WindowStyle_None        = 0x0,  /*!< The Window do not have any decoration */
+        WindowStyle_Closable    = 0x1,  /*!< The Window has a exit button */
+        WindowStyle_Minimizable = 0x2,  /*!< The Window has a minimize button */
+        WindowStyle_Maximizable = 0x4,  /*!< The Window has a maximize button */
+        WindowStyle_Resizable   = 0x8, /*!< The Window is resizable with drag&drop */
+        WindowStyle_Fullscreen  = 0x16, /*!< The Window is in full screen */
+        WindowStyle_Default     = WindowStyle_Closable | WindowStyle_Minimizable | WindowStyle_Maximizable | WindowStyle_Resizable
     };
 }
 

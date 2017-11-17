@@ -51,7 +51,7 @@ namespace Bull
          * \param style The window decorations
          *
          */
-        Window(const VideoMode& mode, const String& title, Uint32 style = WindowStyle::Default);
+        Window(const VideoMode& mode, const String& title, Uint32 style = WindowStyle_Default);
 
         /*! \brief Destructor
          *
@@ -67,7 +67,7 @@ namespace Bull
          * \return Return true if the window was open successfully, false otherwise
          *
          */
-        virtual bool open(const VideoMode& mode, const String& title, Uint32 style = WindowStyle::Default);
+        virtual bool open(const VideoMode& mode, const String& title, Uint32 style = WindowStyle_Default);
 
         /*! \brief Check if the window is open
          *
