@@ -355,9 +355,8 @@ namespace Bull
         {
             if(capture)
             {
-                RECT winRect = {0, 0, 0, 0};
-
-                GetClientRect(m_handler, &winRect);
+                RECT winRect;
+                GetWindowRect(m_handler, &winRect);
 
                 ClipCursor(&winRect);
             }
