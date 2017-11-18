@@ -6,6 +6,7 @@
 #include <Bull/Render/Texture/Texture.hpp>
 
 #include <Cube.hpp>
+#include <iostream>
 
 using namespace Bull;
 
@@ -32,6 +33,9 @@ int main(int argc, char* argv[])
     phong.link();
 
     std::vector<Cube> cubes(10);
+
+    window.enableCaptureCursor(true);
+    window.setMouseCursorVisible(false);
 
     while(window.isOpen())
     {
@@ -67,22 +71,13 @@ int main(int argc, char* argv[])
 
             if(event.type == WindowEventType_MouseMoved)
             {
-                static int lastX, lastY;
-                static AngleF pitch, yaw;
-                static bool firstMouse = true;
+                std::cout << event.mouseMove.xRel << "/" << event.mouseMove.yRel << std::endl;
 
-                if(firstMouse)
-                {
-                    lastX = event.mouseMove.x;
-                    lastY = event.mouseMove.y;
-                    firstMouse = false;
-                }
+                static AngleF pitch, yaw;
 
                 Vector2F offset;
-                offset.x() = event.mouseMove.x - lastX;
-                offset.y() = lastY - event.mouseMove.y;
-                lastX = event.mouseMove.x;
-                lastY = event.mouseMove.y;
+                offset.x() = event.mouseMove.xRel;
+                offset.y() = -event.mouseMove.yRel;
 
                 offset *= 0.1f;
 
@@ -95,6 +90,8 @@ int main(int argc, char* argv[])
                 forward.y() = std::sin(pitch);
                 forward.z() = std::sin(yaw) * std::cos(pitch);
                 forward.normalize();
+
+                Mouse::center(window);
             }
 
             if(event.type == WindowEventType_MouseWheel)
