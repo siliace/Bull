@@ -692,6 +692,26 @@ namespace Bull
                 }
                 break;
 
+                case WM_MOUSEHOVER:
+                {
+                    WindowEvent e;
+
+                    e.type = WindowEventType_MouseEnter;
+
+                    pushEvent(e);
+                }
+                break;
+
+                case WM_MOUSELEAVE:
+                {
+                    WindowEvent e;
+
+                    e.type = WindowEventType_MouseLeave;
+
+                    pushEvent(e);
+                }
+                break;
+
                 case WM_MOUSEMOVE:
                 {
                     WindowEvent e;
