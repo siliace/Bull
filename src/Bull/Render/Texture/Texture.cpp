@@ -138,6 +138,11 @@ namespace Bull
         }
     }
 
+    bool Texture::isEnableRepeat() const
+    {
+        return m_isRepeated;
+    }
+
     void Texture::enableSmooth(bool enable)
     {
         m_isSmooth = enable;
@@ -148,6 +153,11 @@ namespace Bull
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
         }
+    }
+
+    bool Texture::isEnableSmooth() const
+    {
+        return m_isSmooth;
     }
 
     Image Texture::getImage() const
@@ -167,5 +177,10 @@ namespace Bull
         }
 
         return Image();
+    }
+
+    const Vector2UI& Texture::getSize() const
+    {
+        return m_size;
     }
 }

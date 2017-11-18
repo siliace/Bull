@@ -142,7 +142,7 @@ namespace Bull
          * \return Return true if the Texture repeat is enable, false otherwise
          *
          */
-        inline bool isEnableRepeat() const;
+        bool isEnableRepeat() const;
 
         /*! \brief Enable or disable the Texture smooth
          *
@@ -156,7 +156,7 @@ namespace Bull
          * \return Return true if the Texture smooth is enable, false otherwise
          *
          */
-        inline bool isEnableSmooth() const;
+        bool isEnableSmooth() const;
 
         /*! \brief Download the Texture from the VRAM
          *
@@ -170,7 +170,7 @@ namespace Bull
          * \return The size
          *
          */
-        inline const Vector2UI& getSize() const override;
+        const Vector2UI& getSize() const override;
 
     private:
 
@@ -180,7 +180,5 @@ namespace Bull
         bool         m_isRepeated;
     };
 }
-
-#include <Bull/Render/Texture/Texture.inl>
 
 #endif // BULL_RENDER_TEXTURE_TEXTURE_HPP
