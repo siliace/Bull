@@ -15,12 +15,24 @@ namespace Bull
         /*! \brief Copy constructor
          *
          */
-        NonCopyable(const NonCopyable& copy) = delete;
+        NonCopyable(const NonCopyable&) = delete;
+
+        /*! \brief Constructor by movement
+         *
+         */
+        NonCopyable(NonCopyable&&) noexcept = default;
 
         /*! \brief Basic assignment operator
          *
          */
-        NonCopyable& operator=(const NonCopyable& copy) = delete;
+        NonCopyable& operator=(const NonCopyable&) = delete;
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \return This
+         *
+         */
+        NonCopyable& operator=(NonCopyable&&) noexcept = default;
     };
 }
 
