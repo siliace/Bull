@@ -29,24 +29,29 @@ namespace Bull
             close();
         }
 
-        if(style == WindowStyle::Fullscreen && s_fullscreen)
+        if(style == WindowStyle_Fullscreen && s_fullscreen)
         {
-            style = WindowStyle::Default;
+            style = WindowStyle_Default;
         }
 
         m_impl.reset(prv::WindowImpl::createInstance(mode, title, style));
 
-        if(style == WindowStyle::Fullscreen)
+        if(style == WindowStyle_Fullscreen)
         {
-            enableFullscreen();
+            if(!enableFullscreen())
+            {
+                close();
+
+                return false;
+            }
         }
 
         setTitle(title);
+        setVisible(true);
         setMinSize(-1, -1);
         setMaxSize(-1, -1);
         enableKeyRepeat(true);
         setMouseCursorVisible(true);
-        setVisible(style & WindowStyle::Visible);
 
         onOpen();
 
@@ -81,7 +86,10 @@ namespace Bull
     {
         if(m_impl && m_impl->popEvent(e, false))
         {
-            filterEvent(e);
+            if(!filterEvent(e))
+            {
+                e.type = WindowEventType_None;
+            }
 
             return true;
         }
@@ -385,11 +393,25 @@ namespace Bull
         return m_impl;
     }
 
-    void Window::filterEvent(const WindowEvent& e)
+    void Window::ignoreNextMouseEvent() const
+    {
+        m_ignoreNextMouse = true;
+    }
+
+    bool Window::filterEvent(const WindowEvent& e)
     {
         if(e.type == WindowEventType_Resized)
         {
             onResize();
         }
+
+        if(m_ignoreNextMouse && e.type == WindowEventType_MouseMoved)
+        {
+            m_ignoreNextMouse = false;
+
+            return false;
+        }
+
+        return true;
     }
 }

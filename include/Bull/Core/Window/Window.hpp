@@ -15,6 +15,7 @@
 
 namespace Bull
 {
+    class Mouse;
     class MessageWindow;
 
     namespace prv
@@ -51,7 +52,7 @@ namespace Bull
          * \param style The window decorations
          *
          */
-        Window(const VideoMode& mode, const String& title, Uint32 style = WindowStyle::Default);
+        Window(const VideoMode& mode, const String& title, Uint32 style = WindowStyle_Default);
 
         /*! \brief Destructor
          *
@@ -67,7 +68,7 @@ namespace Bull
          * \return Return true if the window was open successfully, false otherwise
          *
          */
-        virtual bool open(const VideoMode& mode, const String& title, Uint32 style = WindowStyle::Default);
+        virtual bool open(const VideoMode& mode, const String& title, Uint32 style = WindowStyle_Default);
 
         /*! \brief Check if the window is open
          *
@@ -362,15 +363,21 @@ namespace Bull
 
     private:
 
+        friend class Mouse;
+
+        void ignoreNextMouseEvent() const;
+
+    private:
+
         /*! \brief Filter events to start callbacks
          *
          * \param e The event to filter
          *
          */
-        void filterEvent(const WindowEvent& e);
+        bool filterEvent(const WindowEvent& e);
 
-        std::unique_ptr<prv::WindowImpl> m_impl;             /*!< The OS specific implementation of the window */
-        bool                             m_ignoreNextMouse;  /*!< True to ignore the next mouse event due to cursor centering */
+        std::unique_ptr<prv::WindowImpl> m_impl;            /*!< The OS specific implementation of the window */
+        mutable bool                     m_ignoreNextMouse; /*!< True to ignore the next mouse event due to cursor centering */
     };
 }
 

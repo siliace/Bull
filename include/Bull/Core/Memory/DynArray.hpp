@@ -51,6 +51,50 @@ namespace Bull
          */
         bool fill(const void* data, std::size_t size, std::size_t offset = 0) override;
 
+        /*! \brief Access to an element of the DynArray
+         *
+         * \param index The index of the element to access
+         *
+         * \return The element
+         *
+         * \throw OutOfRange
+         *
+         */
+        T& at(std::size_t index);
+
+        /*! \brief Access to an element of the DynArray
+         *
+         * \param index The index of the element to access
+         *
+         * \return The element
+         *
+         * \throw OutOfRange
+         *
+         */
+        const T& at(std::size_t index) const;
+
+        /*! \brief Access to an element of the DynArray
+         *
+         * \param index The index of the element to access
+         *
+         * \return The element
+         *
+         * \throw OutOfRange
+         *
+         */
+        T& operator[](std::size_t index);
+
+        /*! \brief Access to an element of the DynArray
+         *
+         * \param index The index of the element to access
+         *
+         * \return The element
+         *
+         * \throw OutOfRange
+         *
+         */
+        const T& operator[](std::size_t index) const;
+
         /*! \brief Clear the DynArray
          *
          */

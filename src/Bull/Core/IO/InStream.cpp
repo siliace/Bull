@@ -41,6 +41,6 @@ namespace Bull
 
     InStream::operator bool() const
     {
-        return isAtEnd();
+        return !isAtEnd();
     }
 }

@@ -822,38 +822,38 @@ namespace Bull
 
             setTitle(title);
 
-            if(style != WindowStyle::Fullscreen)
+            if(style != WindowStyle_Fullscreen)
             {
                 XAtom hintsAtom = m_display->getAtom("_MOTIF_WM_HINTS", false);
                 if(hintsAtom)
                 {
                     WMHints hints;
 
-                    if(style != WindowStyle::None)
+                    if(style != WindowStyle_None)
                     {
                         hints.decorations |= WMHints::Decor_Menu | WMHints::Decor_Title;
                         hints.functions   |= WMHints::Function_Move;
                     }
 
-                    if(style & WindowStyle::Resizable)
+                    if(style & WindowStyle_Resizable)
                     {
                         hints.decorations |= WMHints::Decor_ResizeH;
                         hints.functions   |= WMHints::Function_Resize;
                     }
 
-                    if(style & WindowStyle::Minimizable)
+                    if(style & WindowStyle_Minimizable)
                     {
                         hints.decorations |= WMHints::Decor_Minimize;
                         hints.functions   |= WMHints::Function_Minimize;
                     }
 
-                    if(style & WindowStyle::Maximizable)
+                    if(style & WindowStyle_Maximizable)
                     {
                         hints.decorations |= WMHints::Decor_Maximize;
                         hints.functions   |= WMHints::Function_Maximize;
                     }
 
-                    if(style & WindowStyle::Closable)
+                    if(style & WindowStyle_Closable)
                     {
                         hints.decorations |= 0;
                         hints.functions   |= WMHints::Function_Close;
@@ -872,7 +872,7 @@ namespace Bull
 
             m_lastSize = getSize();
 
-            setVisible(style & WindowStyle::Visible);
+            setVisible(style & WindowStyle_Visible);
         }
 
         void WindowImplXlib::setProtocols()

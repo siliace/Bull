@@ -217,29 +217,24 @@ namespace Bull
 
         DWORD WindowImplWin32::computeWindowStyle(Uint32 WindowStyle)
         {
-            DWORD windowWindowStyle = 0;
+            DWORD windowWindowStyle = WS_VISIBLE;
 
-            if(WindowStyle & (WindowStyle::Visible) || WindowStyle == WindowStyle::Fullscreen)
-            {
-                windowWindowStyle |= WS_VISIBLE;
-            }
-
-            if(WindowStyle & (WindowStyle::Closable))
+            if(WindowStyle & (WindowStyle_Closable))
             {
                 windowWindowStyle |= WS_SYSMENU;
             }
 
-            if(WindowStyle & (WindowStyle::Maximizable))
+            if(WindowStyle & (WindowStyle_Maximizable))
             {
                 windowWindowStyle |= WS_MAXIMIZEBOX;
             }
 
-            if(WindowStyle & (WindowStyle::Minimizable))
+            if(WindowStyle & (WindowStyle_Minimizable))
             {
                 windowWindowStyle |= WS_MINIMIZEBOX;
             }
 
-            if(WindowStyle & (WindowStyle::Resizable))
+            if(WindowStyle & (WindowStyle_Resizable))
             {
                 windowWindowStyle |= WS_THICKFRAME;
             }
@@ -263,7 +258,7 @@ namespace Bull
                 registerWindowClass();
             }
 
-            if(!(style & WindowStyle::Fullscreen))
+            if(!(style & WindowStyle_Fullscreen))
             {
                 RECT rectangle = {0, 0,
                                   static_cast<LONG>(mode.width),

@@ -12,6 +12,13 @@ namespace Bull
 
     struct BULL_CORE_API Mouse
     {
+        /*! \brief Move the cursor to the center of a Window
+         *
+         * \param window The Window to move the cursor in
+         *
+         */
+        static void center(const Window& window);
+
         /*! \brief Set the position of the cursor on the screen
          *
          * \param position The new position of the cursor on the screen
