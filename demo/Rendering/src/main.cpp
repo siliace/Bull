@@ -6,7 +6,6 @@
 #include <Bull/Render/Texture/Texture.hpp>
 
 #include <Cube.hpp>
-#include <iostream>
 
 using namespace Bull;
 
@@ -71,8 +70,6 @@ int main(int argc, char* argv[])
 
             if(event.type == WindowEventType_MouseMoved)
             {
-                std::cout << event.mouseMove.xRel << "/" << event.mouseMove.yRel << std::endl;
-
                 static AngleF pitch, yaw;
 
                 Vector2F offset;
