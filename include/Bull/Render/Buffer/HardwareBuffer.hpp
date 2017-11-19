@@ -52,6 +52,15 @@ namespace Bull
          */
         bool fill(const void* data, std::size_t size, std::size_t offset = 0) override;
 
+        /*! \brief Tell whether the HardwareBuffer is valid
+         *
+         * A HardwareBuffer is valid since its exists in the VRAM no matter if its filled or not
+         *
+         * \return True if the HardwareBuffer is valid
+         *
+         */
+        bool isValid() const;
+
         /*! \brief Map data to a pointer
          *
          * \return A pointer to data

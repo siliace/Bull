@@ -5,7 +5,6 @@
 
 #include <Bull/Core/Utility/Vertex.hpp>
 
-#include <Bull/Render/Export.hpp>
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
 
 namespace Bull

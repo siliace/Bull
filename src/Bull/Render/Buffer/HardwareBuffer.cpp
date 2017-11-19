@@ -13,7 +13,7 @@ namespace Bull
 
     HardwareBuffer::~HardwareBuffer()
     {
-        if(gl::isBuffer(m_id))
+        if(isValid())
         {
             gl::deleteBuffers(1, &m_id);
         }
@@ -26,7 +26,7 @@ namespace Bull
 
     bool HardwareBuffer::create(std::size_t size, HardwareBufferUsage usage)
     {
-        if(!gl::isBuffer(m_id))
+        if(!isValid())
         {
             gl::genBuffers(1, &m_id);
             gl::bindBuffer(BufferType[m_type], m_id);
@@ -40,7 +40,7 @@ namespace Bull
 
     bool HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
     {
-        if(gl::isBuffer(m_id))
+        if(isValid())
         {
             bind();
 
@@ -52,7 +52,7 @@ namespace Bull
             }
             else
             {
-                unsigned char* ptr = reinterpret_cast<unsigned char*>(gl::mapBuffer(BufferType[m_type], GL_WRITE_ONLY));
+                unsigned char* ptr = reinterpret_cast<unsigned char*>(map());
 
                 if(!ptr)
                 {
@@ -61,7 +61,7 @@ namespace Bull
 
                 std::memcpy(ptr + offset, data, size);
 
-                gl::unmapBuffer(BufferType[m_type]);
+                unmap();
             }
 
             return true;
@@ -70,9 +70,14 @@ namespace Bull
         return false;
     }
 
+    bool HardwareBuffer::isValid() const
+    {
+        return gl::isBuffer(m_id);
+    }
+
     void* HardwareBuffer::map()
     {
-        if(gl::isBuffer(m_id))
+        if(isValid())
         {
             bind();
 
@@ -84,7 +89,7 @@ namespace Bull
 
     const void* HardwareBuffer::map() const
     {
-        if(gl::isBuffer(m_id))
+        if(isValid())
         {
             bind();
 
@@ -96,7 +101,7 @@ namespace Bull
 
     void HardwareBuffer::unmap() const
     {
-        if(gl::isBuffer(m_id))
+        if(isValid())
         {
             bind();
 
@@ -106,7 +111,7 @@ namespace Bull
 
     void HardwareBuffer::clear()
     {
-        if(gl::isBuffer(m_id))
+        if(isValid())
         {
             bind();
 
@@ -118,7 +123,7 @@ namespace Bull
 
     std::size_t HardwareBuffer::getCapacity() const
     {
-        if(gl::isBuffer(m_id))
+        if(isValid())
         {
             bind();
 
@@ -141,7 +146,7 @@ namespace Bull
 
     void HardwareBuffer::bind() const
     {
-        if(gl::isBuffer(m_id))
+        if(isValid())
         {
             gl::bindBuffer(BufferType[m_type], m_id);
         }
