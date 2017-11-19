@@ -1,21 +1,21 @@
-#include <Bull/Render/Buffer/ArrayBuffer.hpp>
+#include <Bull/Render/Buffer/VertexBuffer.hpp>
 #include <Bull/Render/Context/GlFunctions.hpp>
 
 namespace Bull
 {
-    ArrayBuffer::ArrayBuffer() :
+    VertexBuffer::VertexBuffer() :
         HardwareBuffer(HardwareBufferType_Array)
     {
         /// Nothing
     }
 
-    ArrayBuffer::ArrayBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage) :
-        ArrayBuffer()
+    VertexBuffer::VertexBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage) :
+        VertexBuffer()
     {
         create(vertices, usage);
     }
 
-    bool ArrayBuffer::create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage)
+    bool VertexBuffer::create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage)
     {
         if(HardwareBuffer::create(vertices.size() * sizeof(Vertex), usage))
         {
@@ -25,7 +25,7 @@ namespace Bull
         return false;
     }
 
-    ArrayBuffer& ArrayBuffer::setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride, std::size_t start)
+    VertexBuffer& VertexBuffer::setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride, std::size_t start)
     {
         if(gl::isBuffer(getSystemHandler()))
         {

@@ -1,21 +1,21 @@
-#include <Bull/Render/Buffer/ElementBuffer.hpp>
+#include <Bull/Render/Buffer/IndexBuffer.hpp>
 
 namespace Bull
 {
-    ElementBuffer::ElementBuffer() :
+    IndexBuffer::IndexBuffer() :
         HardwareBuffer(HardwareBufferType_Element),
         m_dataType(DataType_UnsignedInt)
     {
         /// Nothing
     }
 
-    ElementBuffer::ElementBuffer(const std::vector<unsigned int>& indices, HardwareBufferUsage usage) :
-        ElementBuffer()
+    IndexBuffer::IndexBuffer(const std::vector<unsigned int>& indices, HardwareBufferUsage usage) :
+        IndexBuffer()
     {
         create(indices, usage);
     }
 
-    bool ElementBuffer::create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage)
+    bool IndexBuffer::create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage)
     {
         if(HardwareBuffer::create(indices.size() * sizeof(unsigned int), usage))
         {
@@ -25,7 +25,7 @@ namespace Bull
         return false;
     }
 
-    DataType ElementBuffer::getDataType() const
+    DataType IndexBuffer::getDataType() const
     {
         return m_dataType;
     }

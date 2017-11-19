@@ -1,5 +1,5 @@
-#ifndef BULL_RENDER_BUFFER_ELEMENTBUFFER_HPP
-#define BULL_RENDER_BUFFER_ELEMENTBUFFER_HPP
+#ifndef BULL_RENDER_BUFFER_INDEXEBUFFER_HPP
+#define BULL_RENDER_BUFFER_INDEXEBUFFER_HPP
 
 #include <vector>
 
@@ -9,14 +9,14 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API ElementBuffer : public HardwareBuffer
+    class BULL_RENDER_API IndexBuffer : public HardwareBuffer
     {
     public:
 
         /*! \brief Default constructor
          *
          */
-        ElementBuffer();
+        IndexBuffer();
 
         /*! \brief Constructor
          *
@@ -24,7 +24,7 @@ namespace Bull
          * \param usage   The usage (static, dynamic, stream) of the ElementBuffer
          *
          */
-        explicit ElementBuffer(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
+        explicit IndexBuffer(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
 
         /*! \brief Create the ElementBuffer from a indice vector
          *
@@ -49,4 +49,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_RENDER_BUFFER_ELEMENTBUFFER_HPP
+#endif // BULL_RENDER_BUFFER_INDEXEBUFFER_HPP
