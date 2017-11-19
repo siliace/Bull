@@ -4,7 +4,7 @@
 #include <Bull/Render/Buffer/ArrayBuffer.hpp>
 #include <Bull/Render/Buffer/ElementBuffer.hpp>
 #include <Bull/Render/Buffer/VertexArrayObject.hpp>
-#include <Bull/Render/RenderPrimitive.hpp>
+#include <Bull/Render/Draw/RenderPrimitive.hpp>
 
 namespace Bull
 {

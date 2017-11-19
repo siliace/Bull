@@ -3,7 +3,8 @@
 namespace Bull
 {
     ElementBuffer::ElementBuffer() :
-        HardwareBuffer(HardwareBufferType_Element)
+        HardwareBuffer(HardwareBufferType_Element),
+        m_dataType(DataType_UnsignedInt)
     {
         /// Nothing
     }
@@ -22,5 +23,10 @@ namespace Bull
         }
 
         return false;
+    }
+
+    DataType ElementBuffer::getDataType() const
+    {
+        return m_dataType;
     }
 }

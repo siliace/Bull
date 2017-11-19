@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include <Bull/Core/Utility/DataType.hpp>
+
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
 
 namespace Bull
@@ -33,6 +35,17 @@ namespace Bull
          *
          */
         bool create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
+
+        /*! \brief Get the DataType of the element buffer
+         *
+         * \return The DataType
+         *
+         */
+        DataType getDataType() const;
+
+    private:
+
+        DataType m_dataType;
     };
 }
 

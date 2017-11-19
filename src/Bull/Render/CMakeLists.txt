@@ -6,11 +6,11 @@ bull_add_library(bull-render)
 target_sources(bull-render
         PUBLIC
             ${BULL_INC_RENDER}/Export.hpp
-            ${BULL_INC_RENDER}/RenderPrimitive.hpp
         )
 
 add_subdirectory(Buffer)
 add_subdirectory(Context)
+add_subdirectory(Draw)
 add_subdirectory(Shader)
 add_subdirectory(Target)
 add_subdirectory(Texture)
