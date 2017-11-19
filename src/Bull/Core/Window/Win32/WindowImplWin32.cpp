@@ -251,6 +251,7 @@ namespace Bull
             m_cursorVisible(true)
         {
             unsigned int width, height;
+            m_isFullscreen = style & WindowStyle_Fullscreen;
             DWORD winWindowStyle = computeWindowStyle(style);
 
             if(instanceCounter == 0)
@@ -258,7 +259,7 @@ namespace Bull
                 registerWindowClass();
             }
 
-            if(!(style & WindowStyle_Fullscreen))
+            if(m_isFullscreen)
             {
                 RECT rectangle = {0, 0,
                                   static_cast<LONG>(mode.width),
@@ -488,6 +489,8 @@ namespace Bull
                     maximize();
                 }
             }
+
+            m_isFullscreen = fullscreen;
         }
 
         void WindowImplWin32::setVisible(bool visible)
@@ -891,31 +894,34 @@ namespace Bull
 
                 case WM_GETMINMAXINFO:
                 {
-                    Vector2I min           = getMinSize();
-                    Vector2I max           = getMaxSize();
-                    MINMAXINFO* minmaxinfo = reinterpret_cast<MINMAXINFO*>(lParam);
-
-                    minmaxinfo->ptMaxSize.x = std::numeric_limits<LONG>::max();
-                    minmaxinfo->ptMaxSize.y = std::numeric_limits<LONG>::max();
-
-                    if(min.x() > -1)
+                    if(!m_isFullscreen)
                     {
-                        minmaxinfo->ptMinTrackSize.x = min.x();
-                    }
+                        Vector2I min           = getMinSize();
+                        Vector2I max           = getMaxSize();
+                        MINMAXINFO* minmaxinfo = reinterpret_cast<MINMAXINFO*>(lParam);
 
-                    if(min.y() > -1)
-                    {
-                        minmaxinfo->ptMinTrackSize.y = min.y();
-                    }
+                        minmaxinfo->ptMaxSize.x = std::numeric_limits<LONG>::max();
+                        minmaxinfo->ptMaxSize.y = std::numeric_limits<LONG>::max();
 
-                    if(max.x() > -1)
-                    {
-                        minmaxinfo->ptMaxTrackSize.x = max.x();
-                    }
+                        if(min.x() > -1)
+                        {
+                            minmaxinfo->ptMinTrackSize.x = min.x();
+                        }
 
-                    if(max.y() > -1)
-                    {
-                        minmaxinfo->ptMaxTrackSize.y = max.y();
+                        if(min.y() > -1)
+                        {
+                            minmaxinfo->ptMinTrackSize.y = min.y();
+                        }
+
+                        if(max.x() > -1)
+                        {
+                            minmaxinfo->ptMaxTrackSize.x = max.x();
+                        }
+
+                        if(max.y() > -1)
+                        {
+                            minmaxinfo->ptMaxTrackSize.y = max.y();
+                        }
                     }
                 }
                 break;

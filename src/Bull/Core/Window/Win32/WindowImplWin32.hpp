@@ -255,6 +255,7 @@ namespace Bull
             Vector2UI       m_lastSize;
             SavedWindowInfo m_savedInfo;
             bool            m_isResizing;
+            bool            m_isFullscreen;
             Vector2I        m_lastPosition;
             bool            m_cursorVisible;
         };
