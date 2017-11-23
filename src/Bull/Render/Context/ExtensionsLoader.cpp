@@ -219,13 +219,20 @@ namespace Bull
 {
     namespace prv
     {
-         ExtensionsLoader::ExtensionsLoader(SurfaceHandler handler) :
-             m_allExtensions(ExtensionsLoaderType::getExtensions(handler)),
-             m_loadedFunctions(false),
-             m_loadedExtensions(false)
-         {
+        ExtensionsLoader::ExtensionsLoader() :
+            m_loadedFunctions(false),
+            m_loadedExtensions(false)
+        {
             /// Nothing
-         }
+        }
+
+        ExtensionsLoader::ExtensionsLoader(SurfaceHandler handler) :
+            m_allExtensions(ExtensionsLoaderType::getExtensions(handler)),
+            m_loadedFunctions(false),
+            m_loadedExtensions(false)
+        {
+            /// Nothing
+        }
 
         void ExtensionsLoader::require(const Extension& extension)
         {

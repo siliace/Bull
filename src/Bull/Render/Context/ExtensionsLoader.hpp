@@ -43,7 +43,7 @@ namespace Bull
             /*! \brief Default constructor
              *
              */
-            ExtensionsLoader() = default;
+            ExtensionsLoader();
 
             /*! \brief Constructor
              *
