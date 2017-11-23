@@ -33,61 +33,6 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param function The function to store
-         *
-         */
-        template<typename Function>
-        explicit Thread(Function function);
-
-        /*! \brief Constructor
-         *
-         * \param function The function to store
-         * \param args     Arguments of the function
-         *
-         */
-        template<typename Function, typename... Args>
-        explicit Thread(Function function, Args... args);
-
-        /*! \brief Constructor
-         *
-         * \param instance The instance to store
-         * \param member   The method of the instance to store
-         *
-         */
-        template<typename Instance, typename Class>
-        Thread(Instance& instance, void(Class::*member)());
-
-        /*! \brief Constructor
-         *
-         * \param instance The instance to store
-         * \param member   The method of the instance to store
-         *
-         */
-        template<typename Instance, typename Class>
-        Thread(const Instance& instance, void(Class::*member)() const);
-
-        /*! \brief Constructor
-         *
-         * \param instance The instance to store
-         * \param member   The method of the instance to store
-         * \param args     Arguments of the function
-         *
-         */
-        template<typename Instance, typename Class, typename... Args>
-        Thread(Instance& instance, void(Class::*member)(Args...), Args... args);
-
-        /*! \brief Constructor
-         *
-         * \param instance The instance to store
-         * \param member   The method of the instance to store
-         * \param args     Arguments of the function
-         *
-         */
-        template<typename Instance, typename Class, typename... Args>
-        Thread(const Instance& instance, void(Class::*member)(Args...) const, Args... args);
-
-        /*! \brief Constructor
-         *
          * \param function The function to run
          * \param priority The priority of the thread (by default inherit form the parent thread)
          *
@@ -153,7 +98,5 @@ namespace Bull
         ThreadPriority           m_priority;
     };
 }
-
-#include <Bull/Core/Thread/Thread.inl>
 
 #endif // BULL_CORE_THREAD_THREAD_HPP

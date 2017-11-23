@@ -12,7 +12,6 @@ target_sources(bull-core
             ${BULL_INC_CORE_THREAD}/Semaphore.hpp
             ${BULL_SRC_CORE_THREAD}/Semaphore.cpp
             ${BULL_INC_CORE_THREAD}/Thread.hpp
-            ${BULL_INC_CORE_THREAD}/Thread.inl
             ${BULL_SRC_CORE_THREAD}/Thread.cpp
             ${BULL_INC_CORE_THREAD}/ThreadPriority.hpp
         PRIVATE

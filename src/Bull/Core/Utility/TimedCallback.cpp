@@ -12,7 +12,7 @@ namespace Bull
     }
 
     TimedCallback::TimedCallback(const Functor<void>& functor, const Time& timeout) :
-        m_worker(&TimedCallback::loop, functor, timeout)
+        m_worker(Functor<void>(&TimedCallback::loop, functor, timeout))
     {
         m_worker.start();
     }
