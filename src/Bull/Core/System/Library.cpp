@@ -17,7 +17,7 @@ namespace Bull
     {
         if(!isLoaded())
         {
-            m_impl.reset(prv::LibraryImpl::createInstance(name));
+            m_impl = prv::LibraryImpl::createInstance(name);
 
             return isLoaded();
         }
@@ -27,7 +27,7 @@ namespace Bull
 
     bool Library::isLoaded() const
     {
-        return m_impl != nullptr;
+        return m_impl;
     }
 
     Library::LibFunction Library::getFunction(const String& name)

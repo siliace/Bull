@@ -1,13 +1,11 @@
 #ifndef BULL_CORE_FILESYSTEM_DIRECTORY_HPP
 #define BULL_CORE_FILESYSTEM_DIRECTORY_HPP
 
-#include <memory>
 #include <vector>
 
-#include <Bull/Core/Configuration/Integer.hpp>
-#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/FileSystem/DirectorySearchFlag.hpp>
-#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/Pattern/ImplPtr.hpp>
 
 namespace Bull
 {
@@ -81,10 +79,26 @@ namespace Bull
          */
         explicit Directory(const Path& path);
 
+        /*! \brief Constructor by movement
+         *
+         * \param directory The Directory to move
+         *
+         */
+        Directory(Directory&& directory) noexcept = default;
+
         /*! \brief Destructor
          *
          */
-        virtual ~Directory();
+        ~Directory();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param directory The Directory to move
+         *
+         * \return This
+         *
+         */
+        Directory& operator=(Directory&& directory) noexcept = default;
 
         /*! \brief Open a directory
          *
@@ -125,8 +139,8 @@ namespace Bull
 
     private:
 
-        Path                                m_path;
-        std::unique_ptr<prv::DirectoryImpl> m_impl;
+        Path                        m_path;
+        ImplPtr<prv::DirectoryImpl> m_impl;
     };
 }
 

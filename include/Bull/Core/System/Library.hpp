@@ -1,12 +1,8 @@
 #ifndef BULL_CORE_SYSTEM_LIBRARY_HPP
 #define BULL_CORE_SYSTEM_LIBRARY_HPP
 
-#include <memory>
-
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
-
-#include <Bull/Core/Export.hpp>
+#include <Bull/Core/Pattern/ImplPtr.hpp>
 
 namespace Bull
 {
@@ -35,10 +31,26 @@ namespace Bull
          */
         explicit Library(const String& name);
 
+        /*! \brief Constructor by movement
+         *
+         * \param library The Library to move
+         *
+         */
+        Library(Library&& library) noexcept = default;
+
         /*! \brief Destructor
          *
          */
         ~Library();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param library The Library to move
+         *
+         * \return This
+         *
+         */
+        Library& operator=(Library&& library) noexcept = default;
 
         /*! \brief Load a library
          *
@@ -72,7 +84,7 @@ namespace Bull
 
     private:
 
-        std::unique_ptr<prv::LibraryImpl> m_impl;
+        ImplPtr<prv::LibraryImpl> m_impl;
     };
 }
 

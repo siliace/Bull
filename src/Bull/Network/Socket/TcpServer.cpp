@@ -26,7 +26,7 @@ namespace Bull
     {
         if(port != NetPort_Any && host.isValid() && create(host.getProtocol()))
         {
-            m_impl = std::make_unique<prv::TcpServerImpl>(getImpl());
+            m_impl = ImplPtr<prv::TcpServerImpl>(new prv::TcpServerImpl(getImpl()));
 
             if(m_impl->bind(host, port))
             {
@@ -45,7 +45,7 @@ namespace Bull
 
     bool TcpServer::isListening() const
     {
-        return m_impl != nullptr;
+        return m_impl;
     }
 
     SocketState TcpServer::accept(TcpClient& client)

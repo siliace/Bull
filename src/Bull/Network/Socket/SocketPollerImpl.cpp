@@ -15,9 +15,9 @@ namespace Bull
 {
     namespace prv
     {
-        SocketPollerImpl* SocketPollerImpl::createInstance()
+        ImplPtr<SocketPollerImpl> SocketPollerImpl::createInstance()
         {
-            return new SocketPollerImplType();
+            return ImplPtr<SocketPollerImpl>::make<SocketPollerImplType>(SocketPollerImplType());
         }
 
         void SocketPollerImpl::add(SocketHandler socket, SocketPollerEvent event)

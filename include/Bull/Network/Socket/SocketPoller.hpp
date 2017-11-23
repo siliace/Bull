@@ -22,10 +22,26 @@ namespace Bull
          */
         SocketPoller();
 
+        /*! \brief Constructor by movement
+         *
+         * \param move The SocketPoller to move
+         *
+         */
+        SocketPoller(SocketPoller&& move) noexcept = default;
+
         /*! \brief Destructor
          *
          */
         ~SocketPoller();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param move The SocketPoller to move
+         *
+         * \return This
+         *
+         */
+        SocketPoller& operator=(SocketPoller&& move) noexcept = default;
 
         /*! \brief Add a Socket to the SocketPoller
          *
@@ -94,7 +110,7 @@ namespace Bull
 
     private:
 
-        std::unique_ptr<prv::SocketPollerImpl> m_impl;
+        ImplPtr<prv::SocketPollerImpl> m_impl;
     };
 }
 

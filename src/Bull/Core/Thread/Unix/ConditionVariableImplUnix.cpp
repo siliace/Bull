@@ -27,12 +27,12 @@ namespace Bull
             pthread_cond_broadcast(&m_handler);
         }
 
-        void ConditionVariableImplUnix::wait(const std::unique_ptr<MutexImpl>& mutex)
+        void ConditionVariableImplUnix::wait(const ImplPtr<MutexImpl>& mutex)
         {
             pthread_cond_wait(&m_handler, mutex->getHandler());
         }
 
-        bool ConditionVariableImplUnix::wait(const std::unique_ptr<MutexImpl>& mutex, const Time& timeout)
+        bool ConditionVariableImplUnix::wait(const ImplPtr<MutexImpl>& mutex, const Time& timeout)
         {
             struct timeval tv;
             struct timespec ts;

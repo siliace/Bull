@@ -2,7 +2,7 @@
 #define BULL_CORE_THREAD_THREAD_HPP
 
 #include <Bull/Core/Functor/Functor.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/ImplPtr.hpp>
 #include <Bull/Core/Thread/ThreadPriority.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
@@ -94,10 +94,26 @@ namespace Bull
          */
         explicit Thread(const Functor<void>& function, ThreadPriority priority = ThreadPriority_Idle);
 
+        /*! \brief Constructor by movement
+         *
+         * \param thread The Thread to move
+         *
+         */
+        Thread(Thread&& thread) noexcept = default;
+
         /*! \brief Destructor
          *
          */
-        virtual ~Thread();
+        ~Thread();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param thread The Thread to move
+         *
+         * \return This
+         *
+         */
+        Thread& operator=(Thread&& thread) noexcept = default;
 
         /*! \brief Start the thread
          *
@@ -132,17 +148,9 @@ namespace Bull
 
     private:
 
-        /*! \brief Reset the implementation
-         *
-         */
-        void reset();
-
-        /// We do not use std::unique_ptr because
-        /// in Thread.inl, prv::ThreadImpl
-        /// would be an incomplete type
-        prv::ThreadImpl* m_impl;
-        Functor<void>    m_function;
-        ThreadPriority   m_priority;
+        ImplPtr<prv::ThreadImpl> m_impl;
+        Functor<void>            m_function;
+        ThreadPriority           m_priority;
     };
 }
 

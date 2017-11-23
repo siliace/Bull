@@ -26,10 +26,26 @@ namespace Bull
          */
         TcpClient();
 
+        /*! \brief Constructor by movement
+         *
+         * \param move The TcpClient to move
+         *
+         */
+        TcpClient(TcpClient&& move) noexcept = default;
+
         /*! \brief Destructor
          *
          */
         ~TcpClient();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param move The TcpClient to move
+         *
+         * \return This
+         *
+         */
+        TcpClient& operator=(TcpClient&& move) noexcept = default;
 
         /*! \brief Connect the TcpClient to a remote host
          *
@@ -118,9 +134,9 @@ namespace Bull
 
     private:
 
-        std::unique_ptr<prv::TcpClientImpl> m_impl;
-        NetPort                             m_hostPort;
-        IpAddressWrapper                    m_hostAddress;
+        ImplPtr<prv::TcpClientImpl> m_impl;
+        NetPort                     m_hostPort;
+        IpAddressWrapper            m_hostAddress;
     };
 }
 

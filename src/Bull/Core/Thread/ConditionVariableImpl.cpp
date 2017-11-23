@@ -12,9 +12,9 @@ namespace Bull
 {
     namespace prv
     {
-        ConditionVariableImpl* ConditionVariableImpl::createInstance()
+        ImplPtr<ConditionVariableImpl> ConditionVariableImpl::createInstance()
         {
-            return new ConditionVariableType();
+            return ImplPtr<ConditionVariableImpl>::make<ConditionVariableType>();
         }
 
         ConditionVariableImpl::~ConditionVariableImpl() = default;

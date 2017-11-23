@@ -42,7 +42,7 @@ namespace Bull
 
     bool Thread::isRunning() const
     {
-        return m_impl != nullptr;
+        return m_impl;
     }
 
     void Thread::wait()
@@ -50,8 +50,7 @@ namespace Bull
         if(m_impl)
         {
             m_impl->wait();
-
-            reset();
+            m_impl.reset();
         }
     }
 
@@ -60,19 +59,12 @@ namespace Bull
         if(m_impl)
         {
             m_impl->stop();
-
-            reset();
+            m_impl.reset();
         }
     }
 
     ThreadPriority Thread::getPriority() const
     {
         return m_priority;
-    }
-
-    void Thread::reset()
-    {
-        delete m_impl;
-        m_impl = nullptr;
     }
 }

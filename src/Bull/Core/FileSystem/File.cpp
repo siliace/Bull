@@ -63,7 +63,7 @@ namespace Bull
 
             m_path = path;
             m_mode = mode;
-            m_impl.reset(prv::FileImpl::createInstance(m_path, m_mode));
+            m_impl = prv::FileImpl::createInstance(m_path, m_mode);
 
             if(mode & FileOpeningMode_Read)
             {
@@ -78,7 +78,7 @@ namespace Bull
 
     bool File::isOpen() const
     {
-        return m_impl != nullptr;
+        return m_impl;
     }
 
     void File::close()

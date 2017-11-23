@@ -1,7 +1,6 @@
 #ifndef BULL_CORE_IMAGE_ABSTRACTIMAGE_HPP
 #define BULL_CORE_IMAGE_ABSTRACTIMAGE_HPP
 
-#include <Bull/Core/Export.hpp>
 #include <Bull/Core/Image/ImageParameters.hpp>
 #include <Bull/Core/Resource/Resource.hpp>
 #include <Bull/Core/Resource/ResourceLoader.hpp>

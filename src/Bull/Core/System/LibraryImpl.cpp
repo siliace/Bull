@@ -12,18 +12,12 @@ namespace Bull
 {
     namespace prv
     {
-        LibraryImpl* LibraryImpl::createInstance(const String& name)
+        ImplPtr<LibraryImpl> LibraryImpl::createInstance(const String& name)
         {
-            LibraryImpl* instance = new LibraryImplType();
+            ImplPtr<LibraryImpl> ptr = ImplPtr<LibraryImpl>::make<LibraryImplType>();
+            ptr->load(name);
 
-            if(instance->load(name))
-            {
-                return instance;
-            }
-
-            delete instance;
-
-            return nullptr;
+            return ptr;
         }
 
         LibraryImpl::~LibraryImpl() = default;

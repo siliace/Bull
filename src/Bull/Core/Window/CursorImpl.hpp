@@ -19,7 +19,7 @@ namespace Bull
              * \return The instance
              *
              */
-            static CursorImpl* createInstance();
+            static ImplPtr<CursorImpl> createInstance();
 
         public:
 

@@ -22,10 +22,26 @@ namespace Bull
          */
         UdpSocket();
 
+        /*! \brief Constructor by movement
+         *
+         * \param move The UdpSocket to move
+         *
+         */
+        UdpSocket(UdpSocket&& move) noexcept = default;
+
         /*! \brief Destructor
          *
          */
         ~UdpSocket();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param move The UdpSocket to move
+         *
+         * \return This
+         *
+         */
+        UdpSocket& operator=(UdpSocket&& move) noexcept = default;
 
         /*! \brief Bind the UdpSocket to a NetPort
          *
@@ -77,7 +93,7 @@ namespace Bull
 
     private:
 
-        std::unique_ptr<prv::UdpSocketImpl> m_impl;
+        ImplPtr<prv::UdpSocketImpl> m_impl;
     };
 }
 

@@ -1,6 +1,5 @@
-#include <memory>
-
 #include <Bull/Core/Exception/RuntimeError.hpp>
+#include <Bull/Core/Pattern/ImplPtr.hpp>
 #include <Bull/Core/Thread/Lock.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
@@ -84,41 +83,41 @@ namespace Bull
             }
         }
 
-         GlContext* GlContext::createInstance()
+         ImplPtr<GlContext> GlContext::createInstance()
          {
             Lock l(mutex);
 
-            ContextType* context = new ContextType(shared);
+            ImplPtr<GlContext> context = ImplPtr<GlContext>::make<ContextType>(shared);
             context->initialize();
 
             return context;
          }
 
-        GlContext* GlContext::createInstance(const VideoMode& mode, const ContextSettings& settings)
+        ImplPtr<GlContext> GlContext::createInstance(const VideoMode& mode, const ContextSettings& settings)
         {
             Lock l(mutex);
 
-            ContextType* context = new ContextType(shared, mode, settings);
+            ImplPtr<GlContext> context = ImplPtr<GlContext>::make<ContextType>(shared, mode, settings);
             context->initialize();
 
             return context;
         }
 
-        GlContext* GlContext::createInstance(unsigned int bitsPerPixel, const ContextSettings& settings)
+        ImplPtr<GlContext> GlContext::createInstance(unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             Lock l(mutex);
 
-            ContextType* context = new ContextType(shared, bitsPerPixel, settings);
+            ImplPtr<GlContext> context = ImplPtr<GlContext>::make<ContextType>(shared, bitsPerPixel, settings);
             context->initialize(settings);
 
             return context;
         }
 
-        GlContext* GlContext::createInstance(const std::unique_ptr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings)
+        ImplPtr<GlContext> GlContext::createInstance(const ImplPtr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             Lock l(mutex);
 
-            ContextType* context = new ContextType(shared, window, bitsPerPixel, settings);
+            ImplPtr<GlContext> context = ImplPtr<GlContext>::make<ContextType>(shared, window, bitsPerPixel, settings);
             context->initialize(settings);
 
             return context;

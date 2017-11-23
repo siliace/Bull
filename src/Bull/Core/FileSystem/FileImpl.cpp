@@ -13,17 +13,12 @@ namespace Bull
 {
     namespace prv
     {
-        FileImpl* FileImpl::createInstance(const Path& name, Uint32 mode)
+        ImplPtr<FileImpl> FileImpl::createInstance(const Path& name, Uint32 mode)
         {
-            FileImplType* impl = new FileImplType();
+            ImplPtr<FileImpl> ptr = ImplPtr<FileImpl>::make<FileImplType>();
+            ptr->open(name, mode);
 
-            if(impl->open(name, mode))
-            {
-                return impl;
-            }
-
-            delete impl;
-            return nullptr;
+            return ptr;
         }
 
         bool FileImpl::create(const String& name)

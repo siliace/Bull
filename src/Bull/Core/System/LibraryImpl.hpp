@@ -19,7 +19,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static LibraryImpl* createInstance(const String& name);
+            static ImplPtr<LibraryImpl> createInstance(const String& name);
 
         public:
 

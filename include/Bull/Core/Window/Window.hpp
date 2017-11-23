@@ -1,11 +1,9 @@
 #ifndef BULL_CORE_WINDOW_WINDOW_HPP
 #define BULL_CORE_WINDOW_WINDOW_HPP
 
-#include <memory>
-
-#include <Bull/Core/Configuration/Integer.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Image/Image.hpp>
 #include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Pattern/ImplPtr.hpp>
 #include <Bull/Core/Window/Cursor.hpp>
 #include <Bull/Core/Window/VideoMode.hpp>
 #include <Bull/Core/Window/WindowEvent.hpp>
@@ -54,10 +52,26 @@ namespace Bull
          */
         Window(const VideoMode& mode, const String& title, Uint32 style = WindowStyle_Default);
 
+        /*! \brief Constructor by movement
+         *
+         * \param window The Window to move
+         *
+         */
+        Window(Window&& window) noexcept = default;
+
         /*! \brief Destructor
          *
          */
         virtual ~Window();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param window The Window to move
+         *
+         * \return This
+         *
+         */
+        Window& operator=(Window&& window) noexcept = default;
 
         /*! \brief Open the window
          *
@@ -359,7 +373,7 @@ namespace Bull
          * \return The implementation
          *
          */
-        const std::unique_ptr<prv::WindowImpl>& getImpl() const;
+        const ImplPtr<prv::WindowImpl>& getImpl() const;
 
     private:
 
@@ -376,8 +390,8 @@ namespace Bull
          */
         bool filterEvent(const WindowEvent& e);
 
-        std::unique_ptr<prv::WindowImpl> m_impl;            /*!< The OS specific implementation of the window */
-        mutable bool                     m_ignoreNextMouse; /*!< True to ignore the next mouse event due to cursor centering */
+        ImplPtr<prv::WindowImpl> m_impl;            /*!< The OS specific implementation of the window */
+        mutable bool             m_ignoreNextMouse; /*!< True to ignore the next mouse event due to cursor centering */
     };
 }
 

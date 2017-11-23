@@ -24,9 +24,9 @@ namespace Bull
 {
     namespace prv
     {
-        WindowImpl* WindowImpl::createInstance(const VideoMode& mode, const String& title, Uint32 WindowStyle)
+        ImplPtr<WindowImpl> WindowImpl::createInstance(const VideoMode& mode, const String& title, Uint32 WindowStyle)
         {
-            return new WindowImplType(mode, title, WindowStyle);
+            return ImplPtr<WindowImpl>::make<WindowImplType>(mode, title, WindowStyle);
         }
 
         WindowImpl::~WindowImpl() = default;

@@ -1,9 +1,7 @@
 #ifndef BULL_CORE_THREAD_SEMAPHORE_HPP
 #define BULL_CORE_THREAD_SEMAPHORE_HPP
 
-#include <memory>
-
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/ImplPtr.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 namespace Bull
@@ -24,10 +22,26 @@ namespace Bull
          */
         explicit Semaphore(unsigned int count);
 
+        /*! \brief Constructor by movement
+         *
+         * \param semaphore The Semaphore to move
+         *
+         */
+        Semaphore(Semaphore&& semaphore) noexcept = default;
+
         /*! \brief Destructor
          *
          */
-        virtual ~Semaphore();
+        ~Semaphore();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param semaphore The Semaphore to move
+         *
+         * \return This
+         *
+         */
+        Semaphore& operator=(Semaphore&& semaphore) noexcept = default;
 
         /*! \brief Wait until the current thread can continue
          *
@@ -57,7 +71,7 @@ namespace Bull
 
     private:
 
-        std::unique_ptr<prv::SemaphoreImpl> m_impl;
+        ImplPtr<prv::SemaphoreImpl> m_impl;
     };
 }
 

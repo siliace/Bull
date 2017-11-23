@@ -1,7 +1,6 @@
 #ifndef BULL_CORE_WINDOW_WINDOWEVENT_HPP
 #define BULL_CORE_WINDOW_WINDOWEVENT_HPP
 
-#include <Bull/Core/Export.hpp>
 #include <Bull/Core/Hardware/Joystick.hpp>
 #include <Bull/Core/Hardware/JoystickAxis.hpp>
 #include <Bull/Core/Hardware/Keyboard.hpp>

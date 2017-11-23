@@ -19,7 +19,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static SemaphoreImpl* createInstance(unsigned int count);
+            static ImplPtr<SemaphoreImpl> createInstance(unsigned int count);
 
         public:
 

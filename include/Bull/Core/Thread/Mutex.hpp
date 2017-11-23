@@ -1,9 +1,7 @@
 #ifndef BULL_CORE_THREAD_MUTEX_HPP
 #define BULL_CORE_THREAD_MUTEX_HPP
 
-#include <memory>
-
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/ImplPtr.hpp>
 
 namespace Bull
 {
@@ -23,10 +21,26 @@ namespace Bull
          */
         Mutex();
 
+        /*! \brief Constructor by movement
+         *
+         * \param mutex The Mutex to move
+         *
+         */
+        Mutex(Mutex&& mutex) noexcept = default;
+
         /*! \brief Destructor
          *
          */
-        virtual ~Mutex();
+        ~Mutex();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param mutex The Mutex to move
+         *
+         * \return This
+         *
+         */
+        Mutex& operator=(Mutex&& mutex) noexcept = default;
 
         /*! \brief Try to lock the mutex
          *
@@ -56,8 +70,8 @@ namespace Bull
 
         friend class ConditionVariable;
 
-        std::unique_ptr<prv::MutexImpl> m_impl;
-        bool                            m_locked;
+        ImplPtr<prv::MutexImpl> m_impl;
+        bool                    m_locked;
     };
 }
 

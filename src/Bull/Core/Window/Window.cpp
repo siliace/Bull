@@ -34,7 +34,7 @@ namespace Bull
             style = WindowStyle_Default;
         }
 
-        m_impl.reset(prv::WindowImpl::createInstance(mode, title, style));
+        m_impl = prv::WindowImpl::createInstance(mode, title, style);
 
         if(style == WindowStyle_Fullscreen)
         {
@@ -65,7 +65,7 @@ namespace Bull
 
     bool Window::isOpen() const
     {
-        return m_impl != nullptr;
+        return m_impl.isValid();
     }
 
     void Window::close()
@@ -388,7 +388,7 @@ namespace Bull
         return this == s_fullscreen;
     }
 
-    const std::unique_ptr<prv::WindowImpl>& Window::getImpl() const
+    const ImplPtr<prv::WindowImpl>& Window::getImpl() const
     {
         return m_impl;
     }

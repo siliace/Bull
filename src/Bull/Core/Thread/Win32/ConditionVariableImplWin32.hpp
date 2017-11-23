@@ -32,7 +32,7 @@ namespace Bull
              * \param mutex The mutex to lock the resource
              *
              */
-            void wait(const std::unique_ptr<MutexImpl>& mutex) override;
+            void wait(ImplPtr<MutexImpl>& mutex) override;
 
             /*! \brief Wait for a signal
              *
@@ -42,7 +42,7 @@ namespace Bull
              * \return Return false if timeout, else return true
              *
              */
-            bool wait(const std::unique_ptr<MutexImpl>& mutex, const Time& timeout) override;
+            bool wait(ImplPtr<MutexImpl>& mutex, const Time& timeout) override;
 
         private:
 
