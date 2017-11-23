@@ -1,9 +1,9 @@
 #ifndef Bull_ExtensionsLoader_hpp
 #define Bull_ExtensionsLoader_hpp
 
+#include <functional>
 #include <vector>
 
-#include <Bull/Core/Functor/Functor.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
@@ -25,7 +25,7 @@ namespace Bull
                  * \param loader The function to call to load the extension
                  *
                  */
-                Extension(const String& name, const Functor<bool>& loader) :
+                Extension(const String& name, const std::function<bool()>& loader) :
                     name(name),
                     loader(loader),
                     loaded(false)
@@ -33,9 +33,9 @@ namespace Bull
                     /// Nothing
                 }
 
-                String        name;
-                Functor<bool> loader;
-                bool          loaded;
+                String                name;
+                std::function<bool()> loader;
+                bool                  loaded;
             };
 
         public:

@@ -11,7 +11,6 @@ target_sources(bull-core
 add_subdirectory(Configuration)
 add_subdirectory(Exception)
 add_subdirectory(FileSystem)
-add_subdirectory(Functor)
 add_subdirectory(Hardware)
 add_subdirectory(Image)
 add_subdirectory(IO)

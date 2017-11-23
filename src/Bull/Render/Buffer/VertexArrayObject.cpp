@@ -21,7 +21,7 @@ namespace Bull
         gl::deleteVertexArrays(1, &m_vao);
     }
 
-    void VertexArrayObject::runBound(const Functor<void>& functor) const
+    void VertexArrayObject::runBound(const std::function<void()>& functor) const
     {
         gl::bindVertexArray(m_vao);
         functor();

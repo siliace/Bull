@@ -1,7 +1,8 @@
 #ifndef BULL_CORE_UTILITY_CALLONEXIT_HPP
 #define BULL_CORE_UTILITY_CALLONEXIT_HPP
 
-#include <Bull/Core/Functor/Functor.hpp>
+#include <functional>
+
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
@@ -20,7 +21,7 @@ namespace Bull
          * \param callback The function to call when the instance is destroyed
          *
          */
-        explicit CleanupCallback(Functor<void> callback);
+        explicit CleanupCallback(const std::function<void()>& callback);
 
         /*! \brief Destructor
          *
@@ -34,7 +35,7 @@ namespace Bull
          * \param callback The new callback
          *
          */
-        void reset(Functor<void> callback);
+        void reset(const std::function<void()>& callback);
 
         /*! \brief Enable or disable the callback
          *
@@ -52,8 +53,8 @@ namespace Bull
 
     private:
 
-        bool          m_enable;
-        Functor<void> m_callback;
+        bool                  m_enable;
+        std::function<void()> m_callback;
     };
 }
 

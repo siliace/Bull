@@ -1,8 +1,10 @@
 #ifndef BULL_CORE_THREAD_THREAD_HPP
 #define BULL_CORE_THREAD_THREAD_HPP
 
-#include <Bull/Core/Functor/Functor.hpp>
+#include <functional>
+
 #include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <Bull/Core/Thread/Runnable.hpp>
 #include <Bull/Core/Thread/ThreadPriority.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
@@ -16,6 +18,8 @@ namespace Bull
     class BULL_CORE_API Thread : public NonCopyable
     {
     public:
+
+        using Callable = std::function<void()>;
 
         /*! \brief Asleep the current thread
          *
@@ -33,11 +37,24 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param function The function to run
+         * \param runnable The object to run
          * \param priority The priority of the thread (by default inherit form the parent thread)
          *
          */
-        explicit Thread(const Functor<void>& function, ThreadPriority priority = ThreadPriority_Inherit);
+        template <typename T, typename = std::enable_if<std::is_base_of<Runnable, T>::value>>
+        explicit Thread(const T& runnable, ThreadPriority priority = ThreadPriority_Inherit) :
+            Thread(std::bind(T::run, runnable), priority)
+        {
+            /// Nothing
+        };
+
+        /*! \brief Constructor
+         *
+         * \param callable The function to run
+         * \param priority The priority of the thread (by default inherit form the parent thread)
+         *
+         */
+        explicit Thread(const Callable& callable, ThreadPriority priority = ThreadPriority_Inherit);
 
         /*! \brief Constructor by movement
          *
@@ -94,7 +111,7 @@ namespace Bull
     private:
 
         ImplPtr<prv::ThreadImpl> m_impl;
-        Functor<void>            m_function;
+        std::function<void()>    m_function;
         ThreadPriority           m_priority;
     };
 }

@@ -7,19 +7,19 @@ namespace Bull
 
         void ThreadImplWin32::sleep(const Time& time)
         {
-            Sleep(time.asMilliseconds());
+            Sleep(static_cast<DWORD>(time.asMilliseconds()));
         }
 
         DWORD WINAPI ThreadImplWin32::entryPoint(void* data)
         {
-            Functor<void>* function = static_cast<Functor<void>*>(data);
+            std::function<void()>* function = static_cast<std::function<void()>*>(data);
 
-            function->run();
+            function->operator()();
 
             return 0;
         }
 
-        ThreadImplWin32::ThreadImplWin32(Functor<void>& function, ThreadPriority priority)
+        ThreadImplWin32::ThreadImplWin32(std::function<void()>& function, ThreadPriority priority)
         {
             m_handler = CreateThread(nullptr,
                                      0,
