@@ -9,14 +9,12 @@ namespace Bull
     }
 
     Thread::Thread() :
-        m_impl(nullptr),
         m_priority(ThreadPriority_Inherit)
     {
         /// Nothing
     }
 
     Thread::Thread(const Functor<void>& function, ThreadPriority priority) :
-        m_impl(nullptr),
         m_function(function),
         m_priority(priority)
     {

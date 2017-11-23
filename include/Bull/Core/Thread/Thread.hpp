@@ -37,7 +37,7 @@ namespace Bull
          * \param priority The priority of the thread (by default inherit form the parent thread)
          *
          */
-        explicit Thread(const Functor<void>& function, ThreadPriority priority = ThreadPriority_Idle);
+        explicit Thread(const Functor<void>& function, ThreadPriority priority = ThreadPriority_Inherit);
 
         /*! \brief Constructor by movement
          *
