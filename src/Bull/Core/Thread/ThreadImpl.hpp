@@ -39,16 +39,6 @@ namespace Bull
              */
             virtual ~ThreadImpl();
 
-            /*! \brief Wait the end of a thread
-             *
-             */
-            virtual void wait() = 0;
-
-            /*! \brief Stop the thread
-             *
-             */
-            virtual void stop() = 0;
-
         protected:
 
             /*! \brief Default constructor

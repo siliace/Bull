@@ -40,15 +40,10 @@ namespace Bull
              */
             ThreadImplWin32(std::function<void()>& function, ThreadPriority priority);
 
-            /*! \brief Wait the end of a thread
+            /*! \brief Destructor
              *
              */
-            void wait();
-
-            /*! \brief Stop the thread
-             *
-             */
-            void stop();
+            ~ThreadImplWin32();
 
         private:
 

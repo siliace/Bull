@@ -96,11 +96,6 @@ namespace Bull
          */
         void wait();
 
-        /*! \brief Stop the thread
-         *
-         */
-        void stop();
-
         /*! \brief Get the priority of the thread
          *
          * \return The thread priority

@@ -47,16 +47,6 @@ namespace Bull
     {
         if(m_impl)
         {
-            m_impl->wait();
-            m_impl.reset();
-        }
-    }
-
-    void Thread::stop()
-    {
-        if(m_impl)
-        {
-            m_impl->stop();
             m_impl.reset();
         }
     }

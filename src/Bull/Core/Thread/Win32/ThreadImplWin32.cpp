@@ -41,16 +41,13 @@ namespace Bull
             }
         }
 
-        void ThreadImplWin32::wait()
+        ThreadImplWin32::~ThreadImplWin32()
         {
             if(GetCurrentThread() != m_handler)
             {
                 WaitForSingleObject(m_handler, INFINITE);
             }
-        }
 
-        void ThreadImplWin32::stop()
-        {
             CloseHandle(m_handler);
         }
     }
