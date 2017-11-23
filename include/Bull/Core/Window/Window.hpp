@@ -3,15 +3,11 @@
 
 #include <memory>
 
-#include <Bull/Core/Configuration/Integer.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Window/Cursor.hpp>
 #include <Bull/Core/Window/VideoMode.hpp>
 #include <Bull/Core/Window/WindowEvent.hpp>
 #include <Bull/Core/Window/WindowStyle.hpp>
-
-#include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {

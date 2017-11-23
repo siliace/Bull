@@ -3,12 +3,9 @@
 
 #include <memory>
 
-#include <Bull/Core/Export.hpp>
 #include <Bull/Core/Image/Image.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Window/CursorType.hpp>
-
-#include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {
