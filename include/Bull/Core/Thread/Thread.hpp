@@ -42,8 +42,8 @@ namespace Bull
          *
          */
         template <typename T, typename = std::enable_if<std::is_base_of<Runnable, T>::value>>
-        explicit Thread(const T& runnable, ThreadPriority priority = ThreadPriority_Inherit) :
-            Thread(std::bind(T::run, runnable), priority)
+        explicit Thread(T* runnable, ThreadPriority priority = ThreadPriority_Inherit) :
+            Thread(std::bind(&T::run, runnable), priority)
         {
             /// Nothing
         };

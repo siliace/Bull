@@ -5,18 +5,29 @@
 
 namespace Bull
 {
-    class Thread;
-
     class BULL_CORE_API Runnable
     {
-    private:
+    public:
 
-        friend class Thread;
+        /*! \brief Call operator
+         *
+         */
+        void operator()()
+        {
+            run();
+        }
+
+    protected:
+
+        /*! \brief Default constructor
+         *
+         */
+        Runnable() = default;
 
         /*! \brief The function to run in the Thread
          *
          */
-        virtual void run() const = 0;
+        virtual void run() = 0;
     };
 }
 

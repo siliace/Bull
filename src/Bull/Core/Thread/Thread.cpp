@@ -15,7 +15,7 @@ namespace Bull
     }
 
     Thread::Thread(const Callable& callable, ThreadPriority priority) :
-        m_function(m_function),
+        m_function(callable),
         m_priority(priority)
     {
         /// Nothing
