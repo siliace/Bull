@@ -7,8 +7,7 @@
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglContext.hpp>
-
-typedef Bull::prv::WglContext ContextType;
+    typedef Bull::prv::WglContext ContextType;
 #else
     #include <Bull/Render/Context/Glx/GlxContext.hpp>
     typedef Bull::prv::GlxContext ContextType;
