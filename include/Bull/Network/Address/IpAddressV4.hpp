@@ -9,16 +9,12 @@
 
 namespace Bull
 {
-    class BULL_NETWORK_API IpAddressV4 : public IpAddress
+    struct BULL_NETWORK_API IpAddressV4 : public IpAddress
     {
-    public:
-
         static IpAddressV4 Any;
         static IpAddressV4 None;
         static IpAddressV4 Loopback;
         static IpAddressV4 Broadcast;
-
-    public:
 
         /*! \brief Default constructor
          *
@@ -62,11 +58,6 @@ namespace Bull
          *
          */
         NetProtocol getProtocol() const override;
-
-    private:
-
-        ByteVector m_bytes;
-        bool      m_valid;
     };
 }
 

@@ -17,7 +17,7 @@ namespace Bull
 
         for(std::size_t i = 0; i < getByteCount(); i++)
         {
-            ss << m_bytes[i];
+            ss << at(i);
 
             if(i < getByteCount() - 1)
             {

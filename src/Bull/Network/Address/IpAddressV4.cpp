@@ -43,7 +43,7 @@ namespace Bull
     {
         OutStringStream ss;
 
-        for(std::size_t i = 0; i < m_bytes.getCapacity(); i++)
+        for(std::size_t i = 0; i < getByteCount(); i++)
         {
             ss << at(i);
 
