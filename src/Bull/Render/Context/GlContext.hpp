@@ -1,5 +1,5 @@
-#ifndef BULL_GLCONTEXT_HPP
-#define BULL_GLCONTEXT_HPP
+#ifndef BULL_RENDER_CONTEXT_GLCONTEXT_HPP
+#define BULL_RENDER_CONTEXT_GLCONTEXT_HPP
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Memory/String.hpp>
@@ -8,6 +8,7 @@
 
 #include <Bull/Render/Context/ContextSettings.hpp>
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Context/SurfaceHandler.hpp>
 
 namespace Bull
@@ -92,6 +93,19 @@ namespace Bull
              *
              */
             static bool isSupported(const String& extension);
+
+            /*! \brief The function called by OpenGL when an error occur
+             *
+             * \param source
+             * \param type
+             * \param id
+             * \param severity
+             * \param length
+             * \param message
+             * \param userParam
+             *
+             */
+            static void debugProc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* msg, const void *userParam);
 
         protected:
 

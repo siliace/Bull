@@ -1,14 +1,14 @@
 #include <Bull/Core/Exception/RuntimeError.hpp>
-#include <Bull/Core/Pattern/ImplPtr.hpp>
-#include <Bull/Core/Thread/Lock.hpp>
+#include <Bull/Core/IO/OutStringStream.hpp>
+#include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
-#include <Bull/Render/Context/GlFunctions.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglContext.hpp>
-    typedef Bull::prv::WglContext ContextType;
+
+typedef Bull::prv::WglContext ContextType;
 #else
     #include <Bull/Render/Context/Glx/GlxContext.hpp>
     typedef Bull::prv::GlxContext ContextType;
@@ -138,12 +138,44 @@ namespace Bull
             return ExtensionsLoader::isSet() && ExtensionsLoader::get()->isSupported(extension);
         }
 
+        void GlContext::debugProc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* msg, const void* userParam)
+        {
+            String message(msg);
+            OutStringStream oss;
+
+            switch(type)
+            {
+                case GL_DEBUG_TYPE_ERROR:               oss << "[Type: Error]"; break;
+                case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: oss << "[Type: Deprecated Behaviour]"; break;
+                case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  oss << "[Type: Undefined Behaviour]"; break;
+                case GL_DEBUG_TYPE_PORTABILITY:         oss << "[Type: Portability]"; break;
+                case GL_DEBUG_TYPE_PERFORMANCE:         oss << "[Type: Performance]"; break;
+                case GL_DEBUG_TYPE_MARKER:              oss << "[Type: Marker]"; break;
+                case GL_DEBUG_TYPE_PUSH_GROUP:          oss << "[Type: Push Group]"; break;
+                case GL_DEBUG_TYPE_POP_GROUP:           oss << "[Type: Pop Group]"; break;
+                case GL_DEBUG_TYPE_OTHER:               oss << "[Type: Other]"; break;
+            }
+
+            switch(source)
+            {
+                case GL_DEBUG_SOURCE_API:             oss << "[Source: API]"; break;
+                case GL_DEBUG_SOURCE_WINDOW_SYSTEM:   oss << "[Source: Window System]"; break;
+                case GL_DEBUG_SOURCE_SHADER_COMPILER: oss << "[Source: Shader Compiler]"; break;
+                case GL_DEBUG_SOURCE_THIRD_PARTY:     oss << "[Source: Third Party]"; break;
+                case GL_DEBUG_SOURCE_APPLICATION:     oss << "[Source: Application]"; break;
+                case GL_DEBUG_SOURCE_OTHER:           oss << "[Source: Other]"; break;
+            }
+
+            oss << message;
+            Log::get()->write(oss.toString(), (severity == GL_DEBUG_SEVERITY_NOTIFICATION) ? LogLevel_Info : LogLevel_Error);
+        }
+
         int GlContext::evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int antialiasing, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted)
         {
-            int colorDiff        = static_cast<int>(bitsPerPixelWanted)          - bitsPerPixel;
-            int depthDiff        = static_cast<int>(settingsWanted.depths)       - depths;
-            int stencilDiff      = static_cast<int>(settingsWanted.stencil)      - stencil;
-            int antialiasingDiff = static_cast<int>(settingsWanted.antialiasing) - antialiasing;
+            int colorDiff        = bitsPerPixelWanted          - bitsPerPixel;
+            int depthDiff        = settingsWanted.depths       - depths;
+            int stencilDiff      = settingsWanted.stencil      - stencil;
+            int antialiasingDiff = settingsWanted.antialiasing - antialiasing;
 
             colorDiff        *= ((colorDiff        > 0) ? 100000 : 1);
             depthDiff        *= ((depthDiff        > 0) ? 100000 : 1);
@@ -205,6 +237,8 @@ namespace Bull
         {
             if(setActive(true))
             {
+                gl::debugMessageCallback(&GlContext::debugProc, this);
+
                 int majorVersion = 0;
                 int minorVersion = 0;
 
