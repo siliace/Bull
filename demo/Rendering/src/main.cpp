@@ -18,18 +18,18 @@ int main(int argc, char* argv[])
     RenderWindow window(VideoMode(800, 600), "Bull Application");
     Vector3F position(0, 0, 3), forward = Vector3F::Backward, up = Vector3F::Up;
 
-//    diffuse.loadFromPath(Path("../resources/textures/container.png"));
-//    diffuse.enableSmooth();
-//
-//    specular.loadFromPath(Path("../resources/textures/container_specular.png"));
-//    specular.enableSmooth();
-//
-//    emission.loadFromPath(Path("../resources/textures/container_emission.png"));
-//    emission.enableSmooth();
-//
-//    phong.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType_Vertex);
-//    phong.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType_Fragment);
-//    phong.link();
+    diffuse.loadFromPath(Path("../resources/textures/container.png"));
+    diffuse.enableSmooth();
+
+    specular.loadFromPath(Path("../resources/textures/container_specular.png"));
+    specular.enableSmooth();
+
+    emission.loadFromPath(Path("../resources/textures/container_emission.png"));
+    emission.enableSmooth();
+
+    phong.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType_Vertex);
+    phong.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType_Fragment);
+    phong.link();
 
     std::vector<Cube> cubes(10);
 

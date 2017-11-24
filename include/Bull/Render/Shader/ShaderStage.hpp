@@ -3,16 +3,25 @@
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
+#include <Bull/Core/Resource/ResourceLoader.hpp>
+#include <Bull/Core/Resource/ResourceSaver.hpp>
+#include <Bull/Core/Resource/Resource.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
+#include <Bull/Render/Export.hpp>
 #include <Bull/Render/Context/ContextResource.hpp>
-#include <Bull/Render/Shader/ShaderStageType.hpp>
+#include <Bull/Render/Shader/ShaderStageParameters.hpp>
 
 namespace Bull
 {
-    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource
+    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource, public Resource<ShaderStageParameters>
     {
+    public:
+
+        using Saver = ResourceSaver<ShaderStage, ShaderStageParameters>;
+        using Loader = ResourceLoader<ShaderStage, ShaderStageParameters>;
+
     public:
 
         /*! \brief Default constructor
@@ -23,7 +32,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        ~ShaderStage();
+        virtual ~ShaderStage();
 
         /*! \brief Create the shader
          *
@@ -33,7 +42,69 @@ namespace Bull
          *
          */
         bool create(ShaderStageType type);
+        
+        /*! \brief Load a Resource from a Path
+         *
+         * \param path       The Path of the file to read
+         * \param parameters Parameters to load the Resource
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        bool loadFromPath(const Path& path, const ShaderStageParameters& parameters) override;
 
+        /*! \brief Load a Resource from an InStream
+         *
+         * \param stream     The stream to read
+         * \param parameters Parameters to load the Resource
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        bool loadFromStream(InStream& stream, const ShaderStageParameters& parameters) override;
+
+        /*! \brief Load a Resource from a memory area
+         *
+         * \param data       The memory area to read
+         * \param length     The length of the memory area
+         * \param parameters Parameters to load the Resource
+         *
+         * \return True if the Resource was loaded successfully
+         *
+         */
+        bool loadFromMemory(const void* data, std::size_t length, const ShaderStageParameters& parameters) override;
+
+        /*! \brief Save the Resource to a Path
+         *
+         * \param path       The path of the
+         * \param parameters Parameters to save the Resource
+         *
+         * \return True if the Resource was saved successfully
+         *
+         */
+        bool saveToPath(const Path& path, const ShaderStageParameters& parameters) const override;
+
+        /*! \brief Save the Resource to a stream
+         *
+         * \param stream     The stream to write
+         * \param parameters Parameters to save the Resource
+         *
+         * \return True if the Resource was saved successfully
+         *
+         */
+        bool saveToStream(OutStream& stream, const ShaderStageParameters& parameters) const override;
+
+        /*! \brief Save the Resource to a Path
+         *
+         * \param data       The memory to write
+         * \param length     The length of the memory area
+         * \param parameters Parameters to save the Resource
+         *
+         * \return True if the Resource was saved successfully
+         *
+         */
+        bool saveToMemory(void* data, std::size_t length, const ShaderStageParameters& parameters) const override;
+        
         /*! \brief Compile the ShaderStage
          *
          * \param code The code of the ShaderStage

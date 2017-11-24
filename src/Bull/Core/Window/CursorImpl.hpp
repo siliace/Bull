@@ -2,7 +2,7 @@
 #define BULL_CORECURSORIMPL_HPP
 
 #include <Bull/Core/Image/Image.hpp>
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Window/CursorType.hpp>
 #include <Bull/Core/Window/CursorHandler.hpp>
 

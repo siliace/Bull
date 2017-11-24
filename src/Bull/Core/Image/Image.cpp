@@ -1,7 +1,16 @@
 #include <Bull/Core/Image/Image.hpp>
+#include <Bull/Core/Image/ImageLoader.hpp>
+#include <Bull/Core/Image/ImageSaver.hpp>
+#include <Bull/Core/Resource/Registrar.hpp>
 
 namespace Bull
 {
+    namespace
+    {
+        SaverRegistrar<prv::ImageSaver, Image::Saver> saverRegistrar;
+        LoaderRegistrar<prv::ImageLoader, Image::Loader> loaderRegistrar;
+    }
+
     bool Image::create(const Vector2UI& size)
     {
         if(size.x() && size.y())
@@ -35,7 +44,7 @@ namespace Bull
         return false;
     }
 
-    Image& Image::fill(const Color& color)
+    Image& Image::fill(const Color &color)
     {
         for(std::size_t i = 0; i < m_pixels.getCapacity() / 4; i++)
         {
@@ -74,6 +83,36 @@ namespace Bull
         m_pixels = pixels;
 
         return (*this);
+    }
+
+    bool Image::loadFromPath(const Path& path, const ImageParameters& parameters)
+    {
+        return Loader::get()->loadFromPath(this, path, parameters);
+    }
+
+    bool Image::loadFromStream(InStream& stream, const ImageParameters& parameters)
+    {
+        return Loader::get()->loadFromStream(this, stream, parameters);
+    }
+
+    bool Image::loadFromMemory(const void* data, std::size_t length, const ImageParameters& parameters)
+    {
+        return Loader::get()->loadFromMemory(this, data, length, parameters);
+    }
+
+    bool Image::saveToPath(const Path& path, const ImageParameters& parameters) const
+    {
+        return Saver::get()->saveToPath(this, path, parameters);
+    }
+
+    bool Image::saveToStream(OutStream& stream, const ImageParameters& parameters) const
+    {
+        return Saver::get()->saveToStream(this, stream, parameters);
+    }
+
+    bool Image::saveToMemory(void* data, std::size_t length, const ImageParameters& parameters) const
+    {
+        return Saver::get()->saveToMemory(this, data, length, parameters);
     }
 
     const Vector2UI& Image::getSize() const

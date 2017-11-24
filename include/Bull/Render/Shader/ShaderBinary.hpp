@@ -3,11 +3,12 @@
 
 #include <Bull/Core/Memory/ByteVector.hpp>
 
+#include <Bull/Render/Export.hpp>
 #include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull
 {
-    struct BULL_RENDER_API ShaderBinary : public ContextResource
+    struct BULL_RENDER_API ShaderBinary : public ByteVector, public ContextResource
     {
         /*! \brief Get the list of supported shader binary formats
          *
@@ -28,7 +29,6 @@ namespace Bull
          */
         bool isValid() const;
 
-        ByteVector   binary; /*!< The binary */
         unsigned int format; /*!< The binary format */
     };
 }
