@@ -24,10 +24,26 @@ namespace Bull
          */
         ConditionVariable();
 
+        /*! \brief Constructor by movement
+         *
+         * \param conditionVariable The ConditionVariable to move
+         *
+         */
+        ConditionVariable(ConditionVariable&& conditionVariable) noexcept = default;
+
         /*! \brief Destructor
          *
          */
-        virtual ~ConditionVariable();
+        ~ConditionVariable();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param conditionVariable The ConditionVariable to move
+         *
+         * \return This
+         *
+         */
+        ConditionVariable& operator=(ConditionVariable&& conditionVariable) noexcept = default;
 
         /*! \brief Send a signal to a waiting thread
          *
@@ -58,7 +74,7 @@ namespace Bull
 
     private:
 
-        std::unique_ptr<prv::ConditionVariableImpl> m_impl;
+        ImplPtr<prv::ConditionVariableImpl> m_impl;
     };
 }
 

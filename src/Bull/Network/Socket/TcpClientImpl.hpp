@@ -22,7 +22,7 @@ namespace Bull
              * \param socket The SocketImpl to use
              *
              */
-            TcpClientImpl(const std::unique_ptr<prv::SocketImpl>& socket);
+            TcpClientImpl(const ImplPtr<prv::SocketImpl>& socket);
 
             /*! \brief Connect the TcpClientImpl to a remote host
              *
@@ -58,7 +58,7 @@ namespace Bull
 
         private:
 
-            const std::unique_ptr<SocketImpl>& m_socket;
+            const ImplPtr<SocketImpl>& m_socket;
         };
     }
 }

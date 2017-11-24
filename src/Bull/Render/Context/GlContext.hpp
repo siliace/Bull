@@ -1,5 +1,5 @@
-#ifndef BULL_GLCONTEXT_HPP
-#define BULL_GLCONTEXT_HPP
+#ifndef BULL_RENDER_CONTEXT_GLCONTEXT_HPP
+#define BULL_RENDER_CONTEXT_GLCONTEXT_HPP
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Memory/String.hpp>
@@ -8,6 +8,7 @@
 
 #include <Bull/Render/Context/ContextSettings.hpp>
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Context/SurfaceHandler.hpp>
 
 namespace Bull
@@ -33,7 +34,7 @@ namespace Bull
              * \return Return the created context
              *
              */
-            static GlContext* createInstance();
+            static ImplPtr<GlContext> createInstance();
 
             /*! \brief Create an OS specific instance of GlContext
              *
@@ -43,7 +44,7 @@ namespace Bull
              * \return Return the created context
              *
              */
-            static GlContext* createInstance(const VideoMode& mode, const ContextSettings& settings);
+            static ImplPtr<GlContext> createInstance(const VideoMode& mode, const ContextSettings& settings);
 
             /*! \brief Create an OS specific instance of GlContext
              *
@@ -53,7 +54,7 @@ namespace Bull
              * \return Return the created context
              *
              */
-            static GlContext* createInstance(unsigned int bitsPerPixel, const ContextSettings& settings);
+            static ImplPtr<GlContext> createInstance(unsigned int bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Create an OS specific instance of GlContext
              *
@@ -64,7 +65,7 @@ namespace Bull
              * \return Return the created context
              *
              */
-            static GlContext* createInstance(const std::unique_ptr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings);
+            static ImplPtr<GlContext> createInstance(const ImplPtr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Get an OpenGL function
              *
@@ -92,6 +93,19 @@ namespace Bull
              *
              */
             static bool isSupported(const String& extension);
+
+            /*! \brief The function called by OpenGL when an error occur
+             *
+             * \param source
+             * \param type
+             * \param id
+             * \param severity
+             * \param length
+             * \param message
+             * \param userParam
+             *
+             */
+            static void debugProc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* msg, const void *userParam);
 
         protected:
 

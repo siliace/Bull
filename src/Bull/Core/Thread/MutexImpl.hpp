@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_THREAD_MUTEXIMPL_HPP
 #define BULL_CORE_THREAD_MUTEXIMPL_HPP
 
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/ImplPtr.hpp>
 #include <Bull/Core/Thread/MutexHandler.hpp>
 
 namespace Bull
@@ -17,7 +17,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static MutexImpl* createInstance();
+            static ImplPtr<MutexImpl> createInstance();
 
         public:
 

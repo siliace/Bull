@@ -1,9 +1,7 @@
 #ifndef BULL_NETWORK_SOCKET_SOCKET_HPP
 #define BULL_NETWORK_SOCKET_SOCKET_HPP
 
-#include <memory>
-
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/ImplPtr.hpp>
 
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
@@ -21,7 +19,6 @@ namespace Bull
 
     class BULL_NETWORK_API Socket : public NonCopyable
     {
-
     public:
 
         /*! \brief Destructor
@@ -93,17 +90,33 @@ namespace Bull
 
         friend class SocketPoller;
 
+        /*! \brief Constructor by movement
+         *
+         * \param move The Socket to move
+         *
+         */
+        Socket(Socket&& move) noexcept = default;
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param move The Socket to move
+         *
+         * \return This
+         *
+         */
+        Socket& operator=(Socket&& move) noexcept = default;
+
         /*! \brief Get the SocketImpl of the Socket
          *
          * \return The SocketImpl
          *
          */
-        const std::unique_ptr<prv::SocketImpl>& getImpl() const;
+        const ImplPtr<prv::SocketImpl>& getImpl() const;
 
     private:
 
-        std::unique_ptr<prv::SocketImpl> m_impl;
-        SocketType                       m_type;
+        ImplPtr<prv::SocketImpl> m_impl;
+        SocketType               m_type;
     };
 }
 

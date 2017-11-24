@@ -290,6 +290,7 @@ namespace Bull
                 gl::cullFace                 = reinterpret_cast<PFNGLCULLFACEPROC>(GlContext::getFunction("glCullFace"));
                 gl::compileShader            = reinterpret_cast<PFNGLCOMPILESHADERPROC>(GlContext::getFunction("glCompileShader"));
                 gl::copyTexSubImage2D        = reinterpret_cast<PFNGLCOPYTEXSUBIMAGE2DPROC>(GlContext::getFunction("glCopyTexSubImage2D"));
+                gl::debugMessageCallback     = reinterpret_cast<PFNGLDEBUGMESSAGECALLBACKPROC>(GlContext::getFunction("glDebugMessageCallback"));
                 gl::deleteBuffers            = reinterpret_cast<PFNGLDELETEBUFFERSPROC>(GlContext::getFunction("glDeleteBuffers"));
                 gl::deleteFramebuffers       = reinterpret_cast<PFNGLDELETEFRAMEBUFFERSPROC>(GlContext::getFunction("glDeleteFramebuffers"));
                 gl::deleteQueries            = reinterpret_cast<PFNGLDELETEQUERIESPROC>(GlContext::getFunction("glDeleteQueries"));

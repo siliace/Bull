@@ -1,13 +1,11 @@
 #ifndef BULL_CORE_FILESYSTEM_FILE_HPP
 #define BULL_CORE_FILESYSTEM_FILE_HPP
 
-#include <memory>
-
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/IO/CursorAwareInStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/ImplPtr.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
@@ -83,10 +81,26 @@ namespace Bull
          */
         explicit File(const Path& path, Uint32 mode = FileOpeningMode_ReadWrite);
 
+        /*! \brief Constructor by movement
+         *
+         * \param file The File to move
+         *
+         */
+        File(File&& file) noexcept = default;
+
         /*! \brief Destructor
          *
          */
-        virtual ~File();
+        ~File();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param directory The File to move
+         *
+         * \return This
+         *
+         */
+        File& operator=(File&& file) noexcept = default;
 
         /*! \brief Open a file
          *
@@ -222,9 +236,9 @@ namespace Bull
 
     private:
 
-        Path                           m_path;
-        Uint32                         m_mode;
-        std::unique_ptr<prv::FileImpl> m_impl;
+        Path                   m_path;
+        Uint32                 m_mode;
+        ImplPtr<prv::FileImpl> m_impl;
     };
 }
 

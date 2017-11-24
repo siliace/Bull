@@ -1,7 +1,8 @@
 #ifndef BULL_RENDER_BUFFER_VERTEXARRAYOBJECT_HPP
 #define BULL_RENDER_BUFFER_VERTEXARRAYOBJECT_HPP
 
-#include <Bull/Core/Functor/Functor.hpp>
+#include <functional>
+
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Render/Export.hpp>
@@ -27,7 +28,7 @@ namespace Bull
          * \param functor The Functor to run
          *
          */
-        void runBound(const Functor<void>& functor) const;
+        void runBound(const std::function<void()>& functor) const;
 
     private:
 

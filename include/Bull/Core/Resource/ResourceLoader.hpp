@@ -4,7 +4,6 @@
 #include <list>
 #include <memory>
 
-#include <Bull/Core/Export.hpp>
 #include <Bull/Core/Resource/AbstractResourceLoader.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
 

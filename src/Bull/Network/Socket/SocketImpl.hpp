@@ -1,7 +1,7 @@
 #ifndef BULL_NETWORK_SOCKET_SOCKETIMPL_HPP
 #define BULL_NETWORK_SOCKET_SOCKETIMPL_HPP
 
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Pattern/ImplPtr.hpp>
 
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
@@ -20,7 +20,7 @@ namespace Bull
             /*! \brief Create an OS specific instance of SocketImpl
              *
              */
-            static SocketImpl* createInstance();
+            static ImplPtr<SocketImpl> createInstance();
 
             /*! \brief Get an invalid SocketHandler value
              *

@@ -101,7 +101,23 @@ namespace Bull
          */
         RenderTarget() = default;
 
-        std::unique_ptr<prv::GlContext> m_context;
+        /*! \brief Constructor by movement
+         *
+         * \param renderTarget The RenderTarget to move
+         *
+         */
+        RenderTarget(RenderTarget&& renderTarget) noexcept = default;
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param move The RenderTarget to renderTarget
+         *
+         * \return This
+         *
+         */
+        RenderTarget& operator=(RenderTarget&& renderTarget) noexcept = default;
+
+        ImplPtr<prv::GlContext> m_context;
 
     private:
 

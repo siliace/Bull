@@ -9,10 +9,8 @@
 
 namespace Bull
 {
-    class BULL_NETWORK_API IpAddressV6 : public IpAddress
+    struct BULL_NETWORK_API IpAddressV6 : public IpAddress
     {
-    public:
-
         /*! \brief Default constructor
          *
          */
@@ -31,11 +29,6 @@ namespace Bull
          *
          */
         NetProtocol getProtocol() const override;
-
-    private:
-
-        ByteVector m_bytes;
-        bool      m_valid;
     };
 }
 

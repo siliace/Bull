@@ -2,17 +2,15 @@
 
 namespace Bull
 {
-    CleanupCallback::CleanupCallback() :
-        m_enable(false)
+    CleanupCallback::CleanupCallback()
     {
-        /// Nothing
+        enable(false);
     }
 
-    CleanupCallback::CleanupCallback(Functor<void> callback) :
-        m_callback(callback),
-        m_enable(true)
+    CleanupCallback::CleanupCallback(const std::function<void()>& callback)
     {
-        /// Nothing
+        enable();
+        reset(callback);
     }
 
     CleanupCallback::~CleanupCallback()
@@ -23,7 +21,7 @@ namespace Bull
         }
     }
 
-    void CleanupCallback::reset(Functor<void> callback)
+    void CleanupCallback::reset(const std::function<void()>& callback)
     {
         m_callback = callback;
     }

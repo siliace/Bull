@@ -1,8 +1,10 @@
 #ifndef BULL_CORE_THREAD_THREAD_HPP
 #define BULL_CORE_THREAD_THREAD_HPP
 
-#include <Bull/Core/Functor/Functor.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <functional>
+
+#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <Bull/Core/Thread/Runnable.hpp>
 #include <Bull/Core/Thread/ThreadPriority.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
@@ -16,6 +18,8 @@ namespace Bull
     class BULL_CORE_API Thread : public NonCopyable
     {
     public:
+
+        using Callable = std::function<void()>;
 
         /*! \brief Asleep the current thread
          *
@@ -33,71 +37,45 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param function The function to store
-         *
-         */
-        template<typename Function>
-        explicit Thread(Function function);
-
-        /*! \brief Constructor
-         *
-         * \param function The function to store
-         * \param args     Arguments of the function
-         *
-         */
-        template<typename Function, typename... Args>
-        explicit Thread(Function function, Args... args);
-
-        /*! \brief Constructor
-         *
-         * \param instance The instance to store
-         * \param member   The method of the instance to store
-         *
-         */
-        template<typename Instance, typename Class>
-        Thread(Instance& instance, void(Class::*member)());
-
-        /*! \brief Constructor
-         *
-         * \param instance The instance to store
-         * \param member   The method of the instance to store
-         *
-         */
-        template<typename Instance, typename Class>
-        Thread(const Instance& instance, void(Class::*member)() const);
-
-        /*! \brief Constructor
-         *
-         * \param instance The instance to store
-         * \param member   The method of the instance to store
-         * \param args     Arguments of the function
-         *
-         */
-        template<typename Instance, typename Class, typename... Args>
-        Thread(Instance& instance, void(Class::*member)(Args...), Args... args);
-
-        /*! \brief Constructor
-         *
-         * \param instance The instance to store
-         * \param member   The method of the instance to store
-         * \param args     Arguments of the function
-         *
-         */
-        template<typename Instance, typename Class, typename... Args>
-        Thread(const Instance& instance, void(Class::*member)(Args...) const, Args... args);
-
-        /*! \brief Constructor
-         *
-         * \param function The function to run
+         * \param runnable The object to run
          * \param priority The priority of the thread (by default inherit form the parent thread)
          *
          */
-        explicit Thread(const Functor<void>& function, ThreadPriority priority = ThreadPriority_Idle);
+        template <typename T, typename = std::enable_if<std::is_base_of<Runnable, T>::value>>
+        explicit Thread(T* runnable, ThreadPriority priority = ThreadPriority_Inherit) :
+            Thread(std::bind(&T::run, runnable), priority)
+        {
+            /// Nothing
+        };
+
+        /*! \brief Constructor
+         *
+         * \param callable The function to run
+         * \param priority The priority of the thread (by default inherit form the parent thread)
+         *
+         */
+        explicit Thread(const Callable& callable, ThreadPriority priority = ThreadPriority_Inherit);
+
+        /*! \brief Constructor by movement
+         *
+         * \param thread The Thread to move
+         *
+         */
+        Thread(Thread&& thread) noexcept = default;
 
         /*! \brief Destructor
          *
          */
-        virtual ~Thread();
+        ~Thread();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param thread The Thread to move
+         *
+         * \return This
+         *
+         */
+        Thread& operator=(Thread&& thread) noexcept = default;
 
         /*! \brief Start the thread
          *
@@ -118,11 +96,6 @@ namespace Bull
          */
         void wait();
 
-        /*! \brief Stop the thread
-         *
-         */
-        void stop();
-
         /*! \brief Get the priority of the thread
          *
          * \return The thread priority
@@ -132,20 +105,10 @@ namespace Bull
 
     private:
 
-        /*! \brief Reset the implementation
-         *
-         */
-        void reset();
-
-        /// We do not use std::unique_ptr because
-        /// in Thread.inl, prv::ThreadImpl
-        /// would be an incomplete type
-        prv::ThreadImpl* m_impl;
-        Functor<void>    m_function;
-        ThreadPriority   m_priority;
+        ImplPtr<prv::ThreadImpl> m_impl;
+        std::function<void()>    m_function;
+        ThreadPriority           m_priority;
     };
 }
-
-#include <Bull/Core/Thread/Thread.inl>
 
 #endif // BULL_CORE_THREAD_THREAD_HPP

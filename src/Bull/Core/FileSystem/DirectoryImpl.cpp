@@ -13,11 +13,12 @@ namespace Bull
 {
     namespace prv
     {
-        DirectoryImpl* DirectoryImpl::createInstance(const Path& name)
+        ImplPtr<DirectoryImpl> DirectoryImpl::createInstance(const Path& name)
         {
-            std::unique_ptr<DirectoryImplType> instance = std::make_unique<DirectoryImplType>();
-            instance->open(name);
-            return instance.release();
+            ImplPtr<DirectoryImpl> ptr = ImplPtr<DirectoryImpl>::make<DirectoryImplType>();
+            ptr->open(name);
+
+            return ptr;
         }
 
         bool DirectoryImpl::create(const String& name)

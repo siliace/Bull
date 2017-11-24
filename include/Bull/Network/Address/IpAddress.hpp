@@ -79,7 +79,7 @@ namespace Bull
     private:
 
         ByteVector m_bytes;
-        bool      m_valid;
+        bool       m_valid;
     };
 }
 

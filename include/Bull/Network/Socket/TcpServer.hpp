@@ -25,10 +25,26 @@ namespace Bull
          */
         TcpServer();
 
+        /*! \brief Constructor by movement
+         *
+         * \param move The TcpServer to move
+         *
+         */
+        TcpServer(TcpServer&& move) noexcept = default;
+
         /*! \brief Destructor
          *
          */
         ~TcpServer();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param move The TcpServer to move
+         *
+         * \return This
+         *
+         */
+        TcpServer& operator=(TcpServer&& move) noexcept = default;
 
         /*! \brief Start to listen a NetPort
          *
@@ -89,7 +105,7 @@ namespace Bull
 
     private:
 
-        std::unique_ptr<prv::TcpServerImpl> m_impl;
+        ImplPtr<prv::TcpServerImpl> m_impl;
         NetPort                             m_port;
         int                                 m_backlog;
     };

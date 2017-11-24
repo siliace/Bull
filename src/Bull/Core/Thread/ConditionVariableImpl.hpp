@@ -21,7 +21,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static ConditionVariableImpl* createInstance();
+            static ImplPtr<ConditionVariableImpl> createInstance();
 
         public:
 
@@ -45,17 +45,17 @@ namespace Bull
              * \param mutex The mutex to lock the resource
              *
              */
-            virtual void wait(const std::unique_ptr<MutexImpl>& mutex) = 0;
+            virtual void wait(ImplPtr<MutexImpl>& mutex) = 0;
 
             /*! \brief Wait for a signal
              *
-             * \param mutex The mutex to lock the resource
+             * \param mutex   The mutex to lock the resource
              * \param timeout The time to wait before failing
              *
              * \return Return false if timeout, else return true
              *
              */
-            virtual bool wait(const std::unique_ptr<MutexImpl>& mutex, const Time& timeout) = 0;
+            virtual bool wait(ImplPtr<MutexImpl>& mutex, const Time& timeout) = 0;
 
         protected:
 

@@ -38,9 +38,9 @@ namespace Bull
             if(buffer && w && h)
             {
                 ByteVector pixels;
-                CleanupCallback cleanup([buffer](){
+                CleanupCallback cleanup(std::function<void()>([buffer](){
                     stbi_image_free(buffer);
-                });
+                }));
 
                 if(pixels.fill(buffer, w * h * parameters.channels))
                 {

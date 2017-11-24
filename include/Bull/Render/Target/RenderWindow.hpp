@@ -30,6 +30,22 @@ namespace Bull
          */
         RenderWindow(const VideoMode& mode, const String& title, Uint32 WindowStyle = WindowStyle_Default, const ContextSettings& settings = ContextSettings::Best);
 
+        /*! \brief Constructor by movement
+         *
+         * \param move The RenderWindow to move
+         *
+         */
+        RenderWindow(RenderWindow&& move) noexcept = default;
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param move The RenderWindow to move
+         *
+         * \return This
+         *
+         */
+        RenderWindow& operator=(RenderWindow&& move) noexcept = default;
+
         /*! \brief Open the window. If a window was already opened, its closed
          *
          * \param mode     The VideoMode

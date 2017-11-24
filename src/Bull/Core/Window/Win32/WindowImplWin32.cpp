@@ -3,6 +3,7 @@
 #include <Bull/Core/Exception/RuntimeError.hpp>
 
 #include <Bull/Core/Window/Win32/WindowImplWin32.hpp>
+#include <Bull/Core/Window/WindowStyle.hpp>
 
 /// GCC missing define
 #ifndef WM_XBUTTONDOWN
@@ -528,7 +529,7 @@ namespace Bull
             }
         }
 
-        void WindowImplWin32::setMouseCursor(const std::unique_ptr<CursorImpl>& cursor)
+        void WindowImplWin32::setMouseCursor(const ImplPtr<CursorImpl>& cursor)
         {
             m_cursor = cursor->getSystemHandler();
             SetCursor(m_cursor);

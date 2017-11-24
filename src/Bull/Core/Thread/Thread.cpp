@@ -9,15 +9,13 @@ namespace Bull
     }
 
     Thread::Thread() :
-        m_impl(nullptr),
         m_priority(ThreadPriority_Inherit)
     {
         /// Nothing
     }
 
-    Thread::Thread(const Functor<void>& function, ThreadPriority priority) :
-        m_impl(nullptr),
-        m_function(function),
+    Thread::Thread(const Callable& callable, ThreadPriority priority) :
+        m_function(callable),
         m_priority(priority)
     {
         /// Nothing
@@ -30,49 +28,31 @@ namespace Bull
 
     bool Thread::start()
     {
-        if(isRunning())
+        if(!isRunning() && m_function)
         {
-            return false;
+            m_impl = prv::ThreadImpl::createInstance(m_function, m_priority);
+
+            return true;
         }
 
-        m_impl = prv::ThreadImpl::createInstance(m_function, m_priority);
-
-        return true;
+        return false;
     }
 
     bool Thread::isRunning() const
     {
-        return m_impl != nullptr;
+        return m_impl;
     }
 
     void Thread::wait()
     {
         if(m_impl)
         {
-            m_impl->wait();
-
-            reset();
-        }
-    }
-
-    void Thread::stop()
-    {
-        if(m_impl)
-        {
-            m_impl->stop();
-
-            reset();
+            m_impl.reset();
         }
     }
 
     ThreadPriority Thread::getPriority() const
     {
         return m_priority;
-    }
-
-    void Thread::reset()
-    {
-        delete m_impl;
-        m_impl = nullptr;
     }
 }

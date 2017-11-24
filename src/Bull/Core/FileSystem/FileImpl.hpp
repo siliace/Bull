@@ -22,7 +22,7 @@ namespace Bull
              * \return Return the instance of the FileImpl if the file exist, nullptr otherwise
              *
              */
-            static FileImpl* createInstance(const Path& name, Uint32 mode);
+            static ImplPtr<FileImpl> createInstance(const Path& name, Uint32 mode);
 
             /*! \brief Create a file
              *

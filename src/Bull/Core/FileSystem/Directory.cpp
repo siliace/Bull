@@ -79,15 +79,14 @@ namespace Bull
     bool Directory::open(const Path& path)
     {
         m_path = path;
-
-        m_impl.reset(prv::DirectoryImpl::createInstance(path));
+        m_impl = prv::DirectoryImpl::createInstance(path);
 
         return true;
     }
 
     bool Directory::isOpen() const
     {
-        return m_impl != nullptr;
+        return m_impl;
     }
 
     void Directory::close()

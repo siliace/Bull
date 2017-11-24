@@ -38,17 +38,12 @@ namespace Bull
              * \param priority The priority of the thread (by default inherit form the parent thread)
              *
              */
-            ThreadImplWin32(Functor<void>& function, ThreadPriority priority);
+            ThreadImplWin32(std::function<void()>& function, ThreadPriority priority);
 
-            /*! \brief Wait the end of a thread
+            /*! \brief Destructor
              *
              */
-            void wait();
-
-            /*! \brief Stop the thread
-             *
-             */
-            void stop();
+            ~ThreadImplWin32();
 
         private:
 
