@@ -40,7 +40,7 @@ namespace Bull
 
     bool HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
     {
-        if(isValid())
+        if(isValid() && size + offset <= getCapacity())
         {
             bind();
 
@@ -117,7 +117,7 @@ namespace Bull
 
             int usage;
             gl::getBufferParameteriv(BufferType[m_type], GL_BUFFER_USAGE, &usage);
-            gl::bufferData(BufferType[m_type], getCapacity(), nullptr, static_cast<unsigned int>(usage));
+            gl::bufferData(BufferType[m_type], getCapacity(), nullptr, usage);
         }
     }
 

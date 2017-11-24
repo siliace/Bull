@@ -50,8 +50,8 @@ namespace Bull
     private:
 
         VertexArrayObject m_vao;
-        VertexBuffer       m_vbo;
-        IndexBuffer     m_ebo;
+        VertexBuffer      m_vbo;
+        IndexBuffer       m_ebo;
         bool              m_hasIndex;
     };
 }
