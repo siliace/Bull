@@ -38,12 +38,12 @@ namespace Bull
 
         /*! \brief Create a Shader from a ShaderBinary
          *
-         * \param binary The binary of the Shader
+         * \param shaderBinary The binary of the Shader
          *
          * \return True if the Shader was created successfully
          *
          */
-        bool create(const ShaderBinary& binary);
+        bool create(const ShaderBinary& shaderBinary);
 
         /*! \brief Attach a ShaderStage to this Shader
          *
@@ -53,46 +53,6 @@ namespace Bull
          *
          */
         bool attach(const ShaderStage& stage);
-
-        /*! \brief Load a ShaderStage form a Path and attach it to this Shader
-         *
-         * \param path The Path of the File to read
-         * \param type The type of the ShaderStage
-         *
-         * \return True if the ShaderStage was attached successfully
-         *
-         */
-        bool attachFromPath(const Path& path, ShaderStageType type);
-
-        /*! \brief Load a ShaderStage form a stream and attach it to this Shader
-         *
-         * \param stream The stream to read
-         * \param type   The type of the ShaderStage
-         *
-         * \return True if the ShaderStage was attached successfully
-         *
-         */
-        bool attachFromStream(InStream& stream, ShaderStageType type);
-
-        /*! \brief Load a ShaderStage form a memory area and attach it to this Shader
-         *
-         * \param data   The memory area to read
-         * \param length The length of the memory
-         * \param type   The type of the ShaderStage
-         *
-         * \return True if the ShaderStage was attached successfully
-         *
-         */
-        bool attachFromMemory(const void* data, std::size_t length, ShaderStageType type);
-
-        /*! \brief Load the Shader from a binary form
-         *
-         * \param binary The binary
-         *
-         * \return True if the Shader was loaded successfully
-         *
-         */
-        bool loadFromBinary(const ShaderBinary& binary);
 
         /*! \brief Link the shader
          *

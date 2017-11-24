@@ -82,42 +82,6 @@ namespace Bull
         return false;
     }
 
-    bool Texture::loadFromPath(const Path& path, const ImageParameters& parameters)
-    {
-        Image image;
-
-        return image.loadFromPath(path) && create(image);
-    }
-
-    bool Texture::loadFromStream(InStream& stream, const ImageParameters& parameters)
-    {
-        Image image;
-
-        return image.loadFromStream(stream) && create(image);
-    }
-
-    bool Texture::loadFromMemory(const void* data, std::size_t length, const ImageParameters& parameters)
-    {
-        Image image;
-
-        return image.loadFromMemory(data, length) && create(image);
-    }
-
-    bool Texture::saveToPath(const Path& path, const ImageParameters& parameters) const
-    {
-        return getImage().saveToPath(path, parameters);
-    }
-
-    bool Texture::saveToStream(OutStream& stream, const ImageParameters& parameters) const
-    {
-        return getImage().saveToStream(stream, parameters);
-    }
-
-    bool Texture::saveToMemory(void* data, std::size_t length, const ImageParameters& parameters) const
-    {
-        return getImage().saveToMemory(data, length, parameters);
-    }
-
     void Texture::bind() const
     {
         if(m_id)

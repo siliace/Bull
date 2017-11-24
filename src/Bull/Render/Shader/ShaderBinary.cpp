@@ -29,7 +29,7 @@ namespace Bull
 
     bool ShaderBinary::isValid() const
     {
-        if(!isEmpty() && format)
+        if(!binary.isEmpty() && format)
         {
             std::vector<int> formats = getSupportedFormats();
 
