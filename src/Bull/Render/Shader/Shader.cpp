@@ -32,11 +32,11 @@ namespace Bull
         }
     }
 
-    bool Shader::create(const ShaderBinary& binary)
+    bool Shader::create(const ShaderBinary& shaderBinary)
     {
-        if(binary.isValid())
+        if(shaderBinary.isValid())
         {
-            gl::programBinary(m_program, binary.format, binary.getBuffer(), binary.getCapacity());
+            gl::programBinary(m_program, shaderBinary.format, shaderBinary.binary.getBuffer(), shaderBinary.binary.getCapacity());
 
             return true;
         }
@@ -49,48 +49,6 @@ namespace Bull
         if(stage.isValid() && stage.isCompiled())
         {
             gl::attachShader(m_program, stage.getSystemHandler());
-
-            return true;
-        }
-
-        return false;
-    }
-
-    bool Shader::attachFromPath(const Path& path, ShaderStageType type)
-    {
-        ShaderStage stage;
-        ShaderStageParameters parameters;
-
-        parameters.type = type;
-
-        return stage.loadFromPath(path, parameters) && attach(stage);
-    }
-
-    bool Shader::attachFromStream(InStream& stream, ShaderStageType type)
-    {
-        ShaderStage stage;
-        ShaderStageParameters parameters;
-
-        parameters.type = type;
-
-        return stage.loadFromStream(stream, parameters) && attach(stage);
-    }
-
-    bool Shader::attachFromMemory(const void* data, std::size_t length, ShaderStageType type)
-    {
-        ShaderStage stage;
-        ShaderStageParameters parameters;
-
-        parameters.type = type;
-
-        return stage.loadFromMemory(data, length, parameters) && attach(stage);
-    }
-
-    bool Shader::loadFromBinary(const ShaderBinary& binary)
-    {
-        if(binary.isValid())
-        {
-            gl::programBinary(m_program, binary.format, binary.getBuffer(), binary.getCapacity());
 
             return true;
         }
@@ -332,7 +290,7 @@ namespace Bull
 
     ShaderBinary Shader::getBinary() const
     {
-        ShaderBinary binary;
+        ShaderBinary shaderBinary;
 
         if(isValid() && isLinked())
         {
@@ -342,18 +300,18 @@ namespace Bull
 
             if(length)
             {
-                binary.create(length);
+                shaderBinary.binary.create(length);
 
-                gl::getProgramBinary(getSystemHandler(), length, nullptr, &binary.format, &binary[0]);
+                gl::getProgramBinary(getSystemHandler(), length, nullptr, &shaderBinary.format, &shaderBinary.binary[0]);
 
-                if(!binary.isValid())
+                if(!shaderBinary.isValid())
                 {
                     throw RuntimeError("Failed to download program binary");
                 }
             }
         }
 
-        return binary;
+        return shaderBinary;
     }
 
     unsigned int Shader::getSystemHandler() const
