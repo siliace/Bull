@@ -34,7 +34,7 @@ namespace Bull
              * \return Return the created context
              *
              */
-            static ImplPtr<GlContext> createInstance();
+            static std::unique_ptr<GlContext> createInstance();
 
             /*! \brief Create an OS specific instance of GlContext
              *
@@ -44,7 +44,7 @@ namespace Bull
              * \return Return the created context
              *
              */
-            static ImplPtr<GlContext> createInstance(const VideoMode& mode, const ContextSettings& settings);
+            static std::unique_ptr<GlContext> createInstance(const VideoMode& mode, const ContextSettings& settings);
 
             /*! \brief Create an OS specific instance of GlContext
              *
@@ -54,7 +54,7 @@ namespace Bull
              * \return Return the created context
              *
              */
-            static ImplPtr<GlContext> createInstance(unsigned int bitsPerPixel, const ContextSettings& settings);
+            static std::unique_ptr<GlContext> createInstance(unsigned int bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Create an OS specific instance of GlContext
              *
@@ -65,7 +65,7 @@ namespace Bull
              * \return Return the created context
              *
              */
-            static ImplPtr<GlContext> createInstance(const ImplPtr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings);
+            static std::unique_ptr<GlContext> createInstance(const std::unique_ptr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Get an OpenGL function
              *

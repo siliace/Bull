@@ -26,7 +26,7 @@ namespace Bull
         return false;
     }
 
-    const ImplPtr<prv::CursorImpl>& Cursor::getImpl() const
+    const std::unique_ptr<prv::CursorImpl>& Cursor::getImpl() const
     {
         return m_impl;
     }

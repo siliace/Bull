@@ -1,8 +1,10 @@
 #ifndef BULL_CORECURSORIMPL_HPP
 #define BULL_CORECURSORIMPL_HPP
 
+#include <memory>
+
 #include <Bull/Core/Image/Image.hpp>
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Window/CursorType.hpp>
 #include <Bull/Core/Window/CursorHandler.hpp>
 
@@ -19,7 +21,7 @@ namespace Bull
              * \return The instance
              *
              */
-            static ImplPtr<CursorImpl> createInstance();
+            static std::unique_ptr<CursorImpl> createInstance();
 
         public:
 

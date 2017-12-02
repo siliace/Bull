@@ -19,7 +19,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static ImplPtr<SemaphoreImpl> createInstance(unsigned int count);
+            static std::unique_ptr<SemaphoreImpl> createInstance(unsigned int count);
 
         public:
 

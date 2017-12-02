@@ -2,8 +2,9 @@
 #define BULL_CORE_THREAD_THREADIMPL_HPP
 
 #include <functional>
+#include <memory>
 
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/ThreadPriority.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
@@ -23,7 +24,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static ImplPtr<ThreadImpl> createInstance(std::function<void()>& function, ThreadPriority priority);
+            static std::unique_ptr<ThreadImpl> createInstance(std::function<void()>& function, ThreadPriority priority);
 
             /*! \brief Asleep the current thread
              *

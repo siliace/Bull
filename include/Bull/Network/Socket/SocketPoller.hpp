@@ -110,7 +110,7 @@ namespace Bull
 
     private:
 
-        ImplPtr<prv::SocketPollerImpl> m_impl;
+        std::unique_ptr<prv::SocketPollerImpl> m_impl;
     };
 }
 

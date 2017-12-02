@@ -5,7 +5,7 @@ namespace Bull
 {
     namespace prv
     {
-        UdpSocketImpl::UdpSocketImpl(const ImplPtr<SocketImpl>& socket) :
+        UdpSocketImpl::UdpSocketImpl(const std::unique_ptr<SocketImpl>& socket) :
             m_socket(socket)
         {
             /// Nothing

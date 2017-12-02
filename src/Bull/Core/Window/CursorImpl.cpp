@@ -25,9 +25,9 @@ namespace Bull
 {
     namespace prv
     {
-        ImplPtr<CursorImpl> CursorImpl::createInstance()
+        std::unique_ptr<CursorImpl> CursorImpl::createInstance()
         {
-            return ImplPtr<CursorImpl>::make<CursorImplType>();
+            return std::make_unique<CursorImplType>();
         }
 
         CursorImpl::~CursorImpl() = default;

@@ -12,9 +12,9 @@ namespace Bull
 {
     namespace prv
     {
-        ImplPtr<SemaphoreImpl> SemaphoreImpl::createInstance(unsigned int count)
+        std::unique_ptr<SemaphoreImpl> SemaphoreImpl::createInstance(unsigned int count)
         {
-            return ImplPtr<SemaphoreImpl>::make<SemaphoreImplType>(count);
+            return std::make_unique<SemaphoreImplType>(count);
         }
 
         SemaphoreImpl::~SemaphoreImpl() = default;

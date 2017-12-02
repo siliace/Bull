@@ -27,7 +27,7 @@ namespace Bull
 
     bool Library::isLoaded() const
     {
-        return m_impl;
+        return m_impl != nullptr;
     }
 
     Library::LibFunction Library::getFunction(const String& name)

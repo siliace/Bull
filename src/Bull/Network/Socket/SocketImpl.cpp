@@ -14,9 +14,9 @@ namespace Bull
 {
     namespace prv
     {
-        ImplPtr<SocketImpl> SocketImpl::createInstance()
+        std::unique_ptr<SocketImpl> SocketImpl::createInstance()
         {
-            return ImplPtr<SocketImpl>::make<SocketImplType>();
+            return std::make_unique<SocketImplType>();
         }
 
         SocketHandler SocketImpl::getInvalidSocket()

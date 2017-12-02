@@ -21,7 +21,7 @@ namespace Bull
              * \return Return the instance of the DirectoryImpl if the file exist, nullptr otherwise
              *
              */
-            static ImplPtr<DirectoryImpl> createInstance(const Path& path);
+            static std::unique_ptr<DirectoryImpl> createInstance(const Path& path);
 
             /*! \brief Create a directory
              *

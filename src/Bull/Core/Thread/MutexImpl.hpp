@@ -1,7 +1,9 @@
 #ifndef BULL_CORE_THREAD_MUTEXIMPL_HPP
 #define BULL_CORE_THREAD_MUTEXIMPL_HPP
 
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <memory>
+
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/MutexHandler.hpp>
 
 namespace Bull
@@ -17,7 +19,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static ImplPtr<MutexImpl> createInstance();
+            static std::unique_ptr<MutexImpl> createInstance();
 
         public:
 

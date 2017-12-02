@@ -40,7 +40,7 @@ namespace Bull
 
     bool Thread::isRunning() const
     {
-        return m_impl;
+        return m_impl != nullptr;
     }
 
     void Thread::wait()

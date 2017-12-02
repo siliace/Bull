@@ -1,8 +1,10 @@
 #ifndef BULL_CORE_SYSTEM_LIBRARY_HPP
 #define BULL_CORE_SYSTEM_LIBRARY_HPP
 
+#include <memory>
+
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
 {
@@ -84,7 +86,7 @@ namespace Bull
 
     private:
 
-        ImplPtr<prv::LibraryImpl> m_impl;
+        std::unique_ptr<prv::LibraryImpl> m_impl;
     };
 }
 

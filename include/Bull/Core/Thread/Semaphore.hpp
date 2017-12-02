@@ -1,7 +1,9 @@
 #ifndef BULL_CORE_THREAD_SEMAPHORE_HPP
 #define BULL_CORE_THREAD_SEMAPHORE_HPP
 
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <memory>
+
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 namespace Bull
@@ -71,7 +73,7 @@ namespace Bull
 
     private:
 
-        ImplPtr<prv::SemaphoreImpl> m_impl;
+        std::unique_ptr<prv::SemaphoreImpl> m_impl;
     };
 }
 

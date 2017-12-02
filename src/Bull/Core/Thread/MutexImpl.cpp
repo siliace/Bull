@@ -12,9 +12,9 @@ namespace Bull
 {
     namespace prv
     {
-        ImplPtr<MutexImpl> MutexImpl::createInstance()
+        std::unique_ptr<MutexImpl> MutexImpl::createInstance()
         {
-            return ImplPtr<MutexImpl>::make<MutexImplType>();
+            return std::make_unique<MutexImplType>();
         }
 
         MutexImpl::~MutexImpl() = default;

@@ -134,7 +134,7 @@ namespace Bull
 
     private:
 
-        ImplPtr<prv::TcpClientImpl> m_impl;
+        std::unique_ptr<prv::TcpClientImpl> m_impl;
         NetPort                     m_hostPort;
         IpAddressWrapper            m_hostAddress;
     };

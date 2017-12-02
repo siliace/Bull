@@ -83,41 +83,41 @@ namespace Bull
             }
         }
 
-         ImplPtr<GlContext> GlContext::createInstance()
+         std::unique_ptr<GlContext> GlContext::createInstance()
          {
             Lock l(mutex);
 
-            ImplPtr<GlContext> context = ImplPtr<GlContext>::make<ContextType>(shared);
+            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared);
             context->initialize();
 
             return context;
          }
 
-        ImplPtr<GlContext> GlContext::createInstance(const VideoMode& mode, const ContextSettings& settings)
+        std::unique_ptr<GlContext> GlContext::createInstance(const VideoMode& mode, const ContextSettings& settings)
         {
             Lock l(mutex);
 
-            ImplPtr<GlContext> context = ImplPtr<GlContext>::make<ContextType>(shared, mode, settings);
+            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared, mode, settings);
             context->initialize();
 
             return context;
         }
 
-        ImplPtr<GlContext> GlContext::createInstance(unsigned int bitsPerPixel, const ContextSettings& settings)
+        std::unique_ptr<GlContext> GlContext::createInstance(unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             Lock l(mutex);
 
-            ImplPtr<GlContext> context = ImplPtr<GlContext>::make<ContextType>(shared, bitsPerPixel, settings);
+            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared, bitsPerPixel, settings);
             context->initialize(settings);
 
             return context;
         }
 
-        ImplPtr<GlContext> GlContext::createInstance(const ImplPtr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings)
+        std::unique_ptr<GlContext> GlContext::createInstance(const std::unique_ptr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             Lock l(mutex);
 
-            ImplPtr<GlContext> context = ImplPtr<GlContext>::make<ContextType>(shared, window, bitsPerPixel, settings);
+            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared, window, bitsPerPixel, settings);
             context->initialize(settings);
 
             return context;

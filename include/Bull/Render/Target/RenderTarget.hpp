@@ -117,7 +117,7 @@ namespace Bull
          */
         RenderTarget& operator=(RenderTarget&& renderTarget) noexcept = default;
 
-        ImplPtr<prv::GlContext> m_context;
+        std::unique_ptr<prv::GlContext> m_context;
 
     private:
 

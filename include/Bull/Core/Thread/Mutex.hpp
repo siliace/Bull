@@ -1,7 +1,9 @@
 #ifndef BULL_CORE_THREAD_MUTEX_HPP
 #define BULL_CORE_THREAD_MUTEX_HPP
 
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <memory>
+
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
 {
@@ -70,7 +72,7 @@ namespace Bull
 
         friend class ConditionVariable;
 
-        ImplPtr<prv::MutexImpl> m_impl;
+        std::unique_ptr<prv::MutexImpl> m_impl;
         bool                    m_locked;
     };
 }
