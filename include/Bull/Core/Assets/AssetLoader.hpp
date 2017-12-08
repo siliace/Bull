@@ -85,9 +85,9 @@ namespace Bull
 
     public:
 
-        /*! \brief Get the percentage of loaded AbstractImage
+        /*! \brief Get the percentage of loaded Asset
          *
-         * \return The percentage of loaded AbstractImage
+         * \return The percentage of loaded Asset
          *
          */
         float getProgress() const
@@ -105,9 +105,9 @@ namespace Bull
             return (count / m_threads.size()) * 100.f;
         }
 
-        /*! \brief Wait every AbstractImage has been loaded
+        /*! \brief Wait every Asset has been loaded
          *
-         * \return True if every AbstractImage has been loaded successfully
+         * \return True if every Asset has been loaded successfully
          *
          */
         bool wait()
