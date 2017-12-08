@@ -12,7 +12,6 @@ namespace Bull
     {
     private:
 
-
         class Worker : public Runnable
         {
         public:
