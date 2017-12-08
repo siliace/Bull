@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/RuntimeError.hpp>
 #include <Bull/Core/Thread/Win32/ThreadImplWin32.hpp>
 
 namespace Bull
@@ -43,12 +44,45 @@ namespace Bull
 
         ThreadImplWin32::~ThreadImplWin32()
         {
+            if(m_handler)
+            {
+                CloseHandle(m_handler);
+            }
+        }
+
+        bool ThreadImplWin32::isRunning() const
+        {
+            return WaitForSingleObject(m_handler, 0) != WAIT_OBJECT_0;
+        }
+
+        void ThreadImplWin32::wait()
+        {
             if(GetCurrentThread() != m_handler)
             {
-                WaitForSingleObject(m_handler, INFINITE);
+                if(WaitForSingleObject(m_handler, INFINITE) == WAIT_FAILED)
+                {
+                    throw RuntimeError("Failed to wait thread");
+                }
             }
+            else
+            {
+                throw RuntimeError("Failed to wait thread");
+            }
+        }
 
-            CloseHandle(m_handler);
+        void ThreadImplWin32::terminate()
+        {
+            if(GetCurrentThread() != m_handler)
+            {
+                if(!TerminateThread(m_handler, 0))
+                {
+                    throw RuntimeError("Failed to terminate thread");
+                }
+            }
+            else
+            {
+                throw RuntimeError("Failed to terminate thread");
+            }
         }
     }
 }

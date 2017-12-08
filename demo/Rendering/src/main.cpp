@@ -1,3 +1,5 @@
+#include <Bull/Core/Image/ImageLoader.hpp>
+
 #include <Bull/Math/Clamp.hpp>
 
 #include <Bull/Render/Context/GlFunctions.hpp>
@@ -18,18 +20,22 @@ int main(int argc, char* argv[])
     RenderWindow window(VideoMode(800, 600), "Bull Application");
     Vector3F position(0, 0, 3), forward = Vector3F::Backward, up = Vector3F::Up;
 
-//    diffuse.loadFromPath(Path("../resources/textures/container.png"));
-//    diffuse.enableSmooth();
-//
-//    specular.loadFromPath(Path("../resources/textures/container_specular.png"));
-//    specular.enableSmooth();
-//
-//    emission.loadFromPath(Path("../resources/textures/container_emission.png"));
-//    emission.enableSmooth();
-//
-//    phong.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType_Vertex);
-//    phong.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType_Fragment);
-//    phong.link();
+    ImageLoader::get()->loadFromPath(diffuse, Path("../resources/textures/container.png"));
+    ImageLoader::get()->loadFromPath(specular, Path("../resources/textures/container_specular.png"));
+    ImageLoader::get()->loadFromPath(emission, Path("../resources/textures/container_emission.png"));
+
+    if(!ImageLoader::get()->wait())
+    {
+        return -1;
+    }
+
+    diffuse.enableSmooth();
+    specular.enableSmooth();
+    emission.enableSmooth();
+
+    phong.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType_Vertex);
+    phong.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType_Fragment);
+    phong.link();
 
     std::vector<Cube> cubes(10);
 

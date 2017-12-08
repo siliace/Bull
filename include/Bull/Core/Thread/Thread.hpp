@@ -47,7 +47,7 @@ namespace Bull
             Thread(std::bind(&T::run, runnable), priority)
         {
             /// Nothing
-        };
+        }
 
         /*! \brief Constructor
          *
@@ -96,6 +96,11 @@ namespace Bull
          *
          */
         void wait();
+
+        /*! \brief Terminate the Thread
+         *
+         */
+        void terminate();
 
         /*! \brief Get the priority of the thread
          *

@@ -31,6 +31,8 @@ namespace Bull
             destroy();
         }
 
+        ensureContext();
+
         m_type = type;
         m_id   = gl::createShader(shaderType[type]);
 
@@ -42,6 +44,8 @@ namespace Bull
         if(isValid())
         {
             const char* source = code.getBuffer();
+
+            ensureContext();
 
             gl::shaderSource(m_id, 1, &source, nullptr);
             gl::compileShader(m_id);
@@ -65,6 +69,8 @@ namespace Bull
     {
         if(isValid())
         {
+            ensureContext();
+
             gl::deleteShader(m_id);
         }
     }
@@ -72,6 +78,9 @@ namespace Bull
     bool ShaderStage::isCompiled() const
     {
         int error = 0;
+
+        ensureContext();
+
         gl::getShaderiv(m_id, GL_COMPILE_STATUS, &error);
 
         return error == GL_TRUE;
@@ -79,6 +88,8 @@ namespace Bull
 
     bool ShaderStage::isValid() const
     {
+        ensureContext();
+
         return gl::isShader(m_id);
     }
 
@@ -88,6 +99,8 @@ namespace Bull
         {
             String code;
             int size, capacity;
+
+            ensureContext();
 
             gl::getShaderiv(m_id, GL_SHADER_SOURCE_LENGTH, &capacity);
 
@@ -114,6 +127,8 @@ namespace Bull
     {
         int capacity;
         String message;
+
+        ensureContext();
 
         gl::getShaderiv(m_id, GL_INFO_LOG_LENGTH, &capacity);
 

@@ -40,6 +40,12 @@ namespace Bull
              */
             virtual ~ThreadImpl();
 
+            virtual bool isRunning() const = 0;
+
+            virtual void wait() = 0;
+
+            virtual void terminate() = 0;
+
         protected:
 
             /*! \brief Default constructor
