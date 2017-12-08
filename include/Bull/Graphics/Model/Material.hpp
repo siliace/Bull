@@ -25,10 +25,8 @@ namespace Bull
          *
          * \param shininess The shininess
          *
-         * \return This
-         *
          */
-        Material& setShininess(float shininess);
+        void setShininess(float shininess);
 
         /*! \brief Get the shininess of the Material
          *
@@ -42,10 +40,8 @@ namespace Bull
          * \param texture The texture
          * \param type    The type of the texture
          *
-         * \return This
-         *
          */
-        Material& setTexture(const Texture* texture, TextureType type);
+        void setTexture(const Texture* texture, TextureType type);
 
         /*! \brief Get a Texture
          *
