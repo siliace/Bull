@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <Bull/Core/Assets/AssetLoader.hpp>
+#include <Bull/Core/Assets/AssetIOScheduler.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/Image/AbstractImage.hpp>
@@ -12,7 +12,7 @@
 
 namespace Bull
 {
-    class BULL_CORE_API ImageLoader : public Singleton<ImageLoader>, public AssetLoader<AbstractImage>
+    class BULL_CORE_API ImageLoader : public Singleton<ImageLoader>, public AssetIOScheduler<AbstractImage>
     {
     private:
 

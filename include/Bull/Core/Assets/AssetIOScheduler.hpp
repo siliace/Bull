@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_ASSETS_ASSETLOADER_HPP
-#define BULL_CORE_ASSETS_ASSETLOADER_HPP
+#ifndef BULL_CORE_ASSETS_ASSETIOSCHEDULER_HPP
+#define BULL_CORE_ASSETS_ASSETIOSCHEDULER_HPP
 
 #include <vector>
 
@@ -8,7 +8,7 @@
 namespace Bull
 {
     template <typename T>
-    class BULL_CORE_API AssetLoader
+    class BULL_CORE_API AssetIOScheduler
     {
     private:
 
@@ -154,4 +154,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_ASSETS_ASSETLOADER_HPP
+#endif // BULL_CORE_ASSETS_ASSETIOSCHEDULER_HPP

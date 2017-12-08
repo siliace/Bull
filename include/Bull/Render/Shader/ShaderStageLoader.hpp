@@ -1,7 +1,7 @@
 #ifndef BULL_RENDER_SHADER_SHADERSTAGELOADER_HPP
 #define BULL_RENDER_SHADER_SHADERSTAGELOADER_HPP
 
-#include <Bull/Core/Assets/AssetLoader.hpp>
+#include <Bull/Core/Assets/AssetIOScheduler.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
 
@@ -9,7 +9,7 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API ShaderStageLoader : public Singleton<ShaderStageLoader>, public AssetLoader<ShaderStage>
+    class BULL_RENDER_API ShaderStageLoader : public Singleton<ShaderStageLoader>, public AssetIOScheduler<ShaderStage>
     {
     public:
 
