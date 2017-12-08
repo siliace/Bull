@@ -29,6 +29,43 @@ namespace Bull
         return stream->isAtEnd() ? 1 : 0;
     }
 
+    bool ImageLoader::getInfo(ImageInfo& info, const Path& path)
+    {
+        return createTask([&info, path]() -> bool{
+            return stbi_info(path.toString().getBuffer(),
+                             reinterpret_cast<int*>(&info.size.x()),
+                             reinterpret_cast<int*>(&info.size.y()),
+                             reinterpret_cast<int*>(&info.channels)) == 0;
+        });
+    }
+
+    bool ImageLoader::getInfo(ImageInfo& info, InStream& stream)
+    {
+        return createTask([&info, &stream]() -> bool{
+            stbi_io_callbacks callbacks;
+
+            callbacks.read = &ImageLoader::read;
+            callbacks.skip = &ImageLoader::skip;
+            callbacks.eof  = &ImageLoader::eof;
+
+            return stbi_info_from_callbacks(&callbacks, &stream,
+                                            reinterpret_cast<int*>(&info.size.x()),
+                                            reinterpret_cast<int*>(&info.size.y()),
+                                            reinterpret_cast<int*>(&info.channels)) == 0;
+        });
+    }
+
+    bool ImageLoader::getInfo(ImageInfo& info, const void* data, std::size_t length)
+    {
+        return createTask([&info, data, length]() -> bool{
+            return stbi_info_from_memory(reinterpret_cast<stbi_uc*>(data), length,
+                                         reinterpret_cast<int*>(&info.size.x()),
+                                         reinterpret_cast<int*>(&info.size.y()),
+                                         reinterpret_cast<int*>(&info.channels)) == 0;
+        });
+    }
+
+
     bool ImageLoader::loadFromPath(AbstractImage& image, const Path& path)
     {
         return createTask([&image, path, this]() -> bool{

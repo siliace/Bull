@@ -14,6 +14,14 @@ namespace Bull
 {
     class BULL_CORE_API ImageLoader : public Singleton<ImageLoader>, public AssetIOScheduler<AbstractImage>
     {
+    public:
+
+        struct ImageInfo
+        {
+            Vector2UI size;
+            Uint8     channels;
+        };
+
     private:
 
         /*! \brief Read data from a stream
@@ -45,6 +53,10 @@ namespace Bull
         static int eof(void* user);
 
     public:
+
+        bool getInfo(ImageInfo& info, const Path& path);
+        bool getInfo(ImageInfo& info, InStream& stream);
+        bool getInfo(ImageInfo& info, const void* data, std::size_t length);
 
         /*! \brief Load an AbstractImage from a File
          *
