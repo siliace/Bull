@@ -22,9 +22,9 @@ namespace Bull
          *
          */
         template <typename... Args>
-        T* createAsset(const String& name, Args&&... args)
+        T& createAsset(const String& name, Args&&... args)
         {
-            return m_assets[name] = std::make_unique<T>(std::forward<Args>(args)...);
+            return static_cast<T&>(*(m_assets[name] = std::make_unique<T>(std::forward<Args>(args)...)));
         }
 
         /*! \brief Register an Asset in the AssetManager
@@ -44,6 +44,16 @@ namespace Bull
             return false;
         }
 
+        /*! \brief Remove an Asset from the AssetManager
+         *
+         * \param name The name of the Asset to remove
+         *
+         */
+        void unregisterAsset(const String& name)
+        {
+            m_assets.erase(m_assets.find(name));
+        }
+
         /*! \brief Tell whether an Asset exists in the AssetManager
          *
          * \param name The name of the Asset to get
@@ -51,7 +61,7 @@ namespace Bull
          * \return True if the Asset exists
          *
          */
-        bool has(const String& name)
+        bool has(const String& name) const
         {
             return m_assets.find(name) != m_assets.end();
         }
@@ -63,9 +73,14 @@ namespace Bull
          * \return The Asset
          *
          */
-        T* getAsset(const String& name) const
+        T& getAsset(const String& name)
         {
-            return m_assets[name].get();
+            if(!has(name))
+            {
+                return createAsset(name);
+            }
+
+            return static_cast<T&>(*m_assets[name]);
         }
 
         /*! \brief Delete every Asset
