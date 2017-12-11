@@ -707,7 +707,7 @@ namespace Bull
             m_display->flush();
         }
 
-        void WindowImplXlib::setMouseCursor(const ImplPtr<CursorImpl>& cursor)
+        void WindowImplXlib::setMouseCursor(const std::unique_ptr<CursorImpl>& cursor)
         {
             XDefineCursor(m_display->getHandler(), m_handler, cursor->getSystemHandler());
         }

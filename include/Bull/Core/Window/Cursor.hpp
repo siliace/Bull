@@ -1,8 +1,10 @@
 #ifndef BULL_CORE_CURSOR_CURSOR_HPP
 #define BULL_CORE_CURSOR_CURSOR_HPP
 
+#include <memory>
+
 #include <Bull/Core/Image/Image.hpp>
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Window/CursorType.hpp>
 
 namespace Bull
@@ -72,11 +74,11 @@ namespace Bull
          * \return The implementation
          *
          */
-        const ImplPtr<prv::CursorImpl>& getImpl() const;
+        const std::unique_ptr<prv::CursorImpl>& getImpl() const;
 
     private:
 
-        ImplPtr<prv::CursorImpl> m_impl;
+        std::unique_ptr<prv::CursorImpl> m_impl;
     };
 }
 

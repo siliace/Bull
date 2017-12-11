@@ -1,11 +1,12 @@
 #ifndef BULL_CORE_FILESYSTEM_FILE_HPP
 #define BULL_CORE_FILESYSTEM_FILE_HPP
 
+#include <memory>
+
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/IO/CursorAwareInStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
-#include <Bull/Core/Pattern/ImplPtr.hpp>
 #include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
@@ -238,7 +239,7 @@ namespace Bull
 
         Path                   m_path;
         Uint32                 m_mode;
-        ImplPtr<prv::FileImpl> m_impl;
+        std::unique_ptr<prv::FileImpl> m_impl;
     };
 }
 

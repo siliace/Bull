@@ -1,7 +1,6 @@
 #ifndef BULL_RENDER_TEXTURE_TEXTURE_HPP
 #define BULL_RENDER_TEXTURE_TEXTURE_HPP
 
-#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Image/Image.hpp>
 
 #include <Bull/Math/Polygon/Rectangle.hpp>

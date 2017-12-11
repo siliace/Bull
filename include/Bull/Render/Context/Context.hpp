@@ -1,7 +1,9 @@
 #ifndef BULL_RENDER_CONTEXT_CONTEXT_HPP
 #define BULL_RENDER_CONTEXT_CONTEXT_HPP
 
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <memory>
+
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
 #include <Bull/Render/Context/ContextSettings.hpp>
@@ -92,7 +94,7 @@ namespace Bull
 
     protected:
 
-        ImplPtr<prv::GlContext> m_context; /*!< The concrete implementation of the context */
+        std::unique_ptr<prv::GlContext> m_context; /*!< The concrete implementation of the context */
     };
 }
 

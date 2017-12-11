@@ -15,9 +15,9 @@ namespace Bull
 {
     namespace prv
     {
-        ImplPtr<SocketPollerImpl> SocketPollerImpl::createInstance()
+        std::unique_ptr<SocketPollerImpl> SocketPollerImpl::createInstance()
         {
-            return ImplPtr<SocketPollerImpl>::make<SocketPollerImplType>(SocketPollerImplType());
+            return std::make_unique<SocketPollerImplType>(SocketPollerImplType());
         }
 
         void SocketPollerImpl::add(SocketHandler socket, SocketPollerEvent event)

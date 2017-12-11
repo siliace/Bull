@@ -105,7 +105,7 @@ namespace Bull
 
     private:
 
-        ImplPtr<prv::TcpServerImpl> m_impl;
+        std::unique_ptr<prv::TcpServerImpl> m_impl;
         NetPort                             m_port;
         int                                 m_backlog;
     };

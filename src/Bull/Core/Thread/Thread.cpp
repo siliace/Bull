@@ -40,14 +40,27 @@ namespace Bull
 
     bool Thread::isRunning() const
     {
-        return m_impl;
+        if(m_impl)
+        {
+            return m_impl->isRunning();
+        }
+
+        return false;
     }
 
     void Thread::wait()
     {
         if(m_impl)
         {
-            m_impl.reset();
+            m_impl->wait();
+        }
+    }
+
+    void Thread::terminate()
+    {
+        if(m_impl)
+        {
+            m_impl->terminate();
         }
     }
 

@@ -93,7 +93,7 @@ namespace Bull
 
     private:
 
-        ImplPtr<prv::UdpSocketImpl> m_impl;
+        std::unique_ptr<prv::UdpSocketImpl> m_impl;
     };
 }
 

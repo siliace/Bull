@@ -1,9 +1,10 @@
 #ifndef BULL_NETWORK_SOCKET_SOCKETPOLLERIMPL_HPP
 #define BULL_NETWORK_SOCKET_SOCKETPOLLERIMPL_HPP
 
+#include <memory>
 #include <vector>
 
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Time/Time.hpp>
 
 #include <Bull/Network/Socket/SocketHandler.hpp>
@@ -23,7 +24,7 @@ namespace Bull
              * \return The created instance
              *
              */
-            static ImplPtr<SocketPollerImpl> createInstance();
+            static std::unique_ptr<SocketPollerImpl> createInstance();
 
         private:
 

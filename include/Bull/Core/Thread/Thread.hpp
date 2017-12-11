@@ -2,8 +2,9 @@
 #define BULL_CORE_THREAD_THREAD_HPP
 
 #include <functional>
+#include <memory>
 
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/Runnable.hpp>
 #include <Bull/Core/Thread/ThreadPriority.hpp>
 #include <Bull/Core/Time/Time.hpp>
@@ -46,7 +47,7 @@ namespace Bull
             Thread(std::bind(&T::run, runnable), priority)
         {
             /// Nothing
-        };
+        }
 
         /*! \brief Constructor
          *
@@ -96,6 +97,11 @@ namespace Bull
          */
         void wait();
 
+        /*! \brief Terminate the Thread
+         *
+         */
+        void terminate();
+
         /*! \brief Get the priority of the thread
          *
          * \return The thread priority
@@ -105,7 +111,7 @@ namespace Bull
 
     private:
 
-        ImplPtr<prv::ThreadImpl> m_impl;
+        std::unique_ptr<prv::ThreadImpl> m_impl;
         std::function<void()>    m_function;
         ThreadPriority           m_priority;
     };

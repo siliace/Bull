@@ -65,7 +65,7 @@ namespace Bull
 
     bool Window::isOpen() const
     {
-        return m_impl.isValid();
+        return m_impl != nullptr;
     }
 
     void Window::close()
@@ -388,7 +388,7 @@ namespace Bull
         return this == s_fullscreen;
     }
 
-    const ImplPtr<prv::WindowImpl>& Window::getImpl() const
+    const std::unique_ptr<prv::WindowImpl>& Window::getImpl() const
     {
         return m_impl;
     }

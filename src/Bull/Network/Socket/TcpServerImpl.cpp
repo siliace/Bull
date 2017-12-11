@@ -5,7 +5,7 @@ namespace Bull
 {
     namespace prv
     {
-        TcpServerImpl::TcpServerImpl(const ImplPtr<prv::SocketImpl>& socket) :
+        TcpServerImpl::TcpServerImpl(const std::unique_ptr<prv::SocketImpl>& socket) :
             m_socket(socket)
         {
             /// Nothing

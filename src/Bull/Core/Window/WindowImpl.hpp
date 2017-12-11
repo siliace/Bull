@@ -1,11 +1,11 @@
 #ifndef BULL_CORE_WINDOW_WINDOWSIMPL_HPP
 #define BULL_CORE_WINDOW_WINDOWSIMPL_HPP
 
+#include <memory>
 #include <queue>
 
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Pattern/ImplPtr.hpp>
 #include <Bull/Core/Window/CursorImpl.hpp>
 #include <Bull/Core/Window/VideoMode.hpp>
 #include <Bull/Core/Window/WindowHandler.hpp>
@@ -30,7 +30,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static ImplPtr<WindowImpl> createInstance(const VideoMode& mode, const String& title, Uint32 WindowStyle);
+            static std::unique_ptr<WindowImpl> createInstance(const VideoMode& mode, const String& title, Uint32 WindowStyle);
 
         public:
 
@@ -203,7 +203,7 @@ namespace Bull
              * \param cursor The cursor
              *
              */
-            virtual void setMouseCursor(const ImplPtr<CursorImpl>& cursor) = 0;
+            virtual void setMouseCursor(const std::unique_ptr<CursorImpl>& cursor) = 0;
 
             /*! \brief Toggle cursor visibility
              *

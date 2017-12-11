@@ -8,11 +8,9 @@ namespace Bull
         /// Nothing
     }
 
-    Material& Material::setShininess(float shininess)
+    void Material::setShininess(float shininess)
     {
         m_shininess = shininess;
-
-        return (*this);
     }
 
     float Material::getShininess() const
@@ -20,11 +18,9 @@ namespace Bull
         return m_shininess;
     }
 
-    Material& Material::setTexture(const Texture* texture, TextureType type)
+    void Material::setTexture(const Texture* texture, TextureType type)
     {
         m_textures[type] = texture;
-
-        return (*this);
     }
 
     const Texture* Material::getTexture(TextureType type) const

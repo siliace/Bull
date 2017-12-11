@@ -1,7 +1,9 @@
 #ifndef BULL_NETWORK_SOCKET_SOCKET_HPP
 #define BULL_NETWORK_SOCKET_SOCKET_HPP
 
-#include <Bull/Core/Pattern/ImplPtr.hpp>
+#include <memory>
+
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
@@ -111,11 +113,11 @@ namespace Bull
          * \return The SocketImpl
          *
          */
-        const ImplPtr<prv::SocketImpl>& getImpl() const;
+        const std::unique_ptr<prv::SocketImpl>& getImpl() const;
 
     private:
 
-        ImplPtr<prv::SocketImpl> m_impl;
+        std::unique_ptr<prv::SocketImpl> m_impl;
         SocketType               m_type;
     };
 }

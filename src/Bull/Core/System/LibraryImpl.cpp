@@ -12,9 +12,9 @@ namespace Bull
 {
     namespace prv
     {
-        ImplPtr<LibraryImpl> LibraryImpl::createInstance(const String& name)
+        std::unique_ptr<LibraryImpl> LibraryImpl::createInstance(const String& name)
         {
-            ImplPtr<LibraryImpl> ptr = ImplPtr<LibraryImpl>::make<LibraryImplType>();
+            std::unique_ptr<LibraryImpl> ptr = std::make_unique<LibraryImplType>();
             ptr->load(name);
 
             return ptr;

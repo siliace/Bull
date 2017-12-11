@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <Bull/Core/Image/Image.hpp>
 
 namespace Bull

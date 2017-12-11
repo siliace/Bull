@@ -12,9 +12,9 @@ namespace Bull
 {
     namespace prv
     {
-        ImplPtr<ThreadImpl> ThreadImpl::createInstance(std::function<void()>& function, ThreadPriority priority)
+        std::unique_ptr<ThreadImpl> ThreadImpl::createInstance(std::function<void()>& function, ThreadPriority priority)
         {
-            return ImplPtr<ThreadImpl>::make<ThreadImplType>(function, priority);
+            return std::make_unique<ThreadImplType>(function, priority);
         }
 
         void ThreadImpl::sleep(const Time& time)

@@ -1,11 +1,11 @@
 #ifndef BULL_CORE_FILESYSTEM_DIRECTORY_HPP
 #define BULL_CORE_FILESYSTEM_DIRECTORY_HPP
 
+#include <memory>
 #include <vector>
 
 #include <Bull/Core/FileSystem/DirectorySearchFlag.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/Pattern/ImplPtr.hpp>
 
 namespace Bull
 {
@@ -140,7 +140,7 @@ namespace Bull
     private:
 
         Path                        m_path;
-        ImplPtr<prv::DirectoryImpl> m_impl;
+        std::unique_ptr<prv::DirectoryImpl> m_impl;
     };
 }
 

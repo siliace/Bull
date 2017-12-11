@@ -2,8 +2,9 @@
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
-#include <Bull/Render/Shader/Shader.hpp>
 #include <Bull/Render/Context/GlFunctions.hpp>
+#include <Bull/Render/Shader/Shader.hpp>
+#include <Bull/Render/Shader/ShaderStageLoader.hpp>
 
 namespace Bull
 {
@@ -51,6 +52,36 @@ namespace Bull
             gl::attachShader(m_program, stage.getSystemHandler());
 
             return true;
+        }
+
+        return false;
+    }
+
+    bool Shader::attachFromPath(const Path& path, ShaderStageType type)
+    {
+        ShaderStage stage;
+
+        if(ShaderStageLoader::get()->loadFromPath(stage, path, type))
+        {
+            if(ShaderStageLoader::get()->wait())
+            {
+                return attach(stage);
+            }
+        }
+
+        return false;
+    }
+
+    bool Shader::attachFromStream(InStream& stream, ShaderStageType type)
+    {
+        ShaderStage stage;
+
+        if(ShaderStageLoader::get()->loadFromStream(stage, stream, type))
+        {
+            if(ShaderStageLoader::get()->wait())
+            {
+                return attach(stage);
+            }
         }
 
         return false;

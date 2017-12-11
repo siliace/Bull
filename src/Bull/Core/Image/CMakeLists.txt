@@ -7,8 +7,12 @@ target_sources(bull-core
             ${BULL_INC_CORE_IMAGE}/Image.hpp
             ${BULL_SRC_CORE_IMAGE}/Image.cpp
             ${BULL_INC_CORE_IMAGE}/ImageFormat.hpp
+            ${BULL_INC_CORE_IMAGE}/ImageLoader.hpp
+            ${BULL_SRC_CORE_IMAGE}/ImageLoader.cpp
             ${BULL_INC_CORE_IMAGE}/PixelDataType.hpp
             ${BULL_INC_CORE_IMAGE}/PixelFormat.hpp
             ${BULL_SRC_CORE_IMAGE}/PixelFormat.cpp
             ${BULL_INC_CORE_IMAGE}/PixelFormatType.hpp
+            ${BULL_INC_CORE_IMAGE}/ImageSaver.hpp
+            ${BULL_SRC_CORE_IMAGE}/ImageSaver.cpp
         )

@@ -529,7 +529,7 @@ namespace Bull
             }
         }
 
-        void WindowImplWin32::setMouseCursor(const ImplPtr<CursorImpl>& cursor)
+        void WindowImplWin32::setMouseCursor(const std::unique_ptr<CursorImpl>& cursor)
         {
             m_cursor = cursor->getSystemHandler();
             SetCursor(m_cursor);

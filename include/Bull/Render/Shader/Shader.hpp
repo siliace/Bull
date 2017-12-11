@@ -54,6 +54,10 @@ namespace Bull
          */
         bool attach(const ShaderStage& stage);
 
+        bool attachFromPath(const Path& path, ShaderStageType type);
+
+        bool attachFromStream(InStream& stream, ShaderStageType type);
+
         /*! \brief Link the shader
          *
          * \return True if the shader was linked successfully

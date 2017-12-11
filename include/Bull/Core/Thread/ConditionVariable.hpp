@@ -74,7 +74,7 @@ namespace Bull
 
     private:
 
-        ImplPtr<prv::ConditionVariableImpl> m_impl;
+        std::unique_ptr<prv::ConditionVariableImpl> m_impl;
     };
 }
 

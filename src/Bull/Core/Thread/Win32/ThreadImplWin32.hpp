@@ -45,6 +45,12 @@ namespace Bull
              */
             ~ThreadImplWin32();
 
+            bool isRunning() const override;
+
+            void wait() override;
+
+            void terminate() override;
+
         private:
 
             HANDLE m_handler;

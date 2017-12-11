@@ -19,7 +19,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static ImplPtr<LibraryImpl> createInstance(const String& name);
+            static std::unique_ptr<LibraryImpl> createInstance(const String& name);
 
         public:
 
