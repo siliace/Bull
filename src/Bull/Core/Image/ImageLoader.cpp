@@ -58,7 +58,7 @@ namespace Bull
     bool ImageLoader::getInfo(ImageInfo& info, const void* data, std::size_t length)
     {
         return createTask([&info, data, length]() -> bool{
-            return stbi_info_from_memory(reinterpret_cast<stbi_uc*>(data), length,
+            return stbi_info_from_memory(reinterpret_cast<const stbi_uc*>(data), length,
                                          reinterpret_cast<int*>(&info.size.x()),
                                          reinterpret_cast<int*>(&info.size.y()),
                                          reinterpret_cast<int*>(&info.channels)) == 0;
