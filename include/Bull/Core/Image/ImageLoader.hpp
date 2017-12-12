@@ -28,7 +28,7 @@ namespace Bull
          *
          * \param user The stream to read
          * \param data The buffer to fill
-         * \param size The numfer of bytes to read
+         * \param size The number of bytes to read
          *
          * \return The number of bytes read
          *
@@ -54,8 +54,35 @@ namespace Bull
 
     public:
 
+        /*! \brief Get the width, the height and the number of channels of and Image on disk
+         *
+         * \param info Information about the Image
+         * \param path The Path of the Image
+         *
+         * \return True if the task was created successfully
+         *
+         */
         bool getInfo(ImageInfo& info, const Path& path);
+
+        /*! \brief Get the width, the height and the number of channels of and Image from a stream
+         *
+         * \param info   Information about the Image
+         * \param stream The stream to read
+         *
+         * \return True if the task was created successfully
+         *
+         */
         bool getInfo(ImageInfo& info, InStream& stream);
+
+        /*! \brief Get the width, the height and the number of channels of and Image from a memory area
+         *
+         * \param info   Information about the Image
+         * \param data   Data to read
+         * \param length The length of the data
+         *
+         * \return True if the task was created successfully
+         *
+         */
         bool getInfo(ImageInfo& info, const void* data, std::size_t length);
 
         /*! \brief Load an AbstractImage from a File

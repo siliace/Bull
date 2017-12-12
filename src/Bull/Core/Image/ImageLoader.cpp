@@ -65,7 +65,6 @@ namespace Bull
         });
     }
 
-
     bool ImageLoader::loadFromPath(AbstractImage& image, const Path& path)
     {
         return createTask([&image, path, this]() -> bool{
