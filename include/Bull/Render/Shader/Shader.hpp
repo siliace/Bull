@@ -45,6 +45,26 @@ namespace Bull
          */
         bool create(const ShaderBinary& shaderBinary);
 
+        /*! \brief Create a Shader by loading both vertex stage and fragment stage from their Path
+         *
+         * \param vertex   The Path of the vertex shader
+         * \param fragment The Path of the fragment shader
+         *
+         * \return True if the Shader was created successfully
+         *
+         */
+        bool create(const Path& vertex, const Path& fragment);
+
+        /*! \brief Create a Shader by loading both vertex stage and fragment stage from streams
+         *
+         * \param vertex   The stream of the vertex shader
+         * \param fragment The stream of the fragment shader
+         *
+         * \return True if the Shader was created successfully
+         *
+         */
+        bool create(InStream& vertex, InStream& fragment);
+
         /*! \brief Attach a ShaderStage to this Shader
          *
          * \param stage The stage to attach to this Shader

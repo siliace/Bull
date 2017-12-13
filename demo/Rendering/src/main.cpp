@@ -33,8 +33,7 @@ int main(int argc, char* argv[])
     specular.enableSmooth();
     emission.enableSmooth();
 
-    phong.attachFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType_Vertex);
-    phong.attachFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType_Fragment);
+    phong.create(Path("../resources/shaders/phong/phong.vert"), Path("../resources/shaders/phong/phong.frag"));
     phong.link();
 
     std::vector<Cube> cubes(10);
