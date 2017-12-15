@@ -29,4 +29,18 @@ namespace Bull
             return false;
         });
     }
+
+    bool ShaderStageLoader::loadFromMemory(ShaderStage& stage, const void* data, std::size_t length, ShaderStageType type)
+    {
+        return createTask([&stage, data, length, type]() -> bool{
+            String code(reinterpret_cast<const char*>(data), length);
+
+            if(stage.create(type))
+            {
+                return stage.compile(code);
+            }
+
+            return false;
+        });
+    }
 }
