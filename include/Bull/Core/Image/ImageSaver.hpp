@@ -9,15 +9,43 @@
 
 namespace Bull
 {
-    struct ImageSavingParameters
+    struct BULL_CORE_API ImageSavingParameters
     {
         int stride         = 0;
         int quality        = 100;
         ImageFormat format = ImageFormat_Png;
     };
 
-    struct BULL_CORE_API ImageSaver : public AssetIOScheduler<Image>
+    class BULL_CORE_API ImageSaver : public AssetIOScheduler<Image>
     {
+    private:
+
+        /*! \brief Write data from stb to an OutStream
+         *
+         * \param context The stream
+         * \param data    Data to write
+         * \param size    Length of data
+         *
+         */
+        static void writeToStream(void* context, void* data, int size);
+
+        /*! \brief Write data from stb to a memory area
+         *
+         * \param context The memory area
+         * \param data    Data to write
+         * \param size    Length of data
+         *
+         */
+        static void writeToMemory(void* context, void* data, int size);
+
+        struct Buffer
+        {
+            void*       target;
+            std::size_t length;
+        };
+
+    public:
+
         /*! \brief Tell whether an ImageFormat is supported
          *
          * \param format The ImageFormat to test
@@ -37,6 +65,29 @@ namespace Bull
          *
          */
         bool saveToPath(const Image& image, const Path& path, const ImageSavingParameters& parameters = ImageSavingParameters());
+
+        /*! \brief Save an Image to a stream
+         *
+         * \param image      The Image to save
+         * \param stream     The stream to write
+         * \param parameters Parameters to use to save the Image
+         *
+         * \return True if the Image started to be saved
+         *
+         */
+        bool saveToStream(const Image& image, OutStream& stream, const ImageSavingParameters& parameters = ImageSavingParameters());
+
+        /*! \brief Save an Image to a memory area
+         *
+         * \param image      The Image to save
+         * \param data       Data to write
+         * \param length     The length of data
+         * \param parameters Parameters to use to save the Image
+         *
+         * \return True if the Image started to be saved
+         *
+         */
+        bool saveToMemory(const Image& image, void* data, std::size_t length, const ImageSavingParameters& parameters = ImageSavingParameters());
     };
 }
 

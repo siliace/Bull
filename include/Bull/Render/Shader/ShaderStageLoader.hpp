@@ -34,6 +34,18 @@ namespace Bull
          *
          */
         bool loadFromStream(ShaderStage& stage, InStream& stream, ShaderStageType type);
+
+        /*! \brief Load an ShaderStage from a memory area
+         *
+         * \param stage  The ShaderStage to load
+         * \param data   Data to read
+         * \param length The length of data
+         * \param type   The type of ShaderStage to load
+         *
+         * \return True if the ShaderStage started to be loaded
+         *
+         */
+        bool loadFromMemory(ShaderStage& stage, const void* data, std::size_t length, ShaderStageType type);
     };
 }
 
