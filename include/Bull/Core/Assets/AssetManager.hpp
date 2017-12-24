@@ -80,7 +80,7 @@ namespace Bull
                 return createAsset(name);
             }
 
-            return static_cast<T&>(*m_assets[name]);
+            return *m_assets[name];
         }
 
         /*! \brief Delete every Asset
