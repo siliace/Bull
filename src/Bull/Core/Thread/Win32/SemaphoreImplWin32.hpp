@@ -17,7 +17,7 @@ namespace Bull
              * \param count The initial count to set the semaphore
              *
              */
-            SemaphoreImplWin32(unsigned int count);
+            explicit SemaphoreImplWin32(unsigned int count);
 
             /*! \brief Destructor
              *
@@ -27,7 +27,7 @@ namespace Bull
             /*! \brief Wait until the current thread can continue
              *
              */
-            void wait();
+            void wait() override;
 
             /*! \brief Wait until the current thread can continue
              *
@@ -36,19 +36,19 @@ namespace Bull
              * \return Return true if the waiting time was less than the timeout, false otherwise
              *
              */
-            bool wait(const Time& timeout);
+            bool wait(const Time& timeout) override;
 
             /*! \brief Get the current count of the semaphore
              *
              * \return Return the current count of the semaphore
              *
              */
-            unsigned int getCount() const;
+            unsigned int getCount() const override;
 
             /*! \brief Release semaphore's protection
              *
              */
-            void release();
+            void release() override;
 
         private:
 
