@@ -8,7 +8,7 @@
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/Image/AbstractImage.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
-#include <Bull/Core/Thread/Mutex.hpp>
+#include <Bull/Core/Concurrency/Mutex.hpp>
 
 namespace Bull
 {

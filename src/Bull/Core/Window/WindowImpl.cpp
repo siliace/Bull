@@ -1,5 +1,5 @@
 #include <Bull/Core/Hardware/Mouse.hpp>
-#include <Bull/Core/Thread/Thread.hpp>
+#include <Bull/Core/Concurrency/Thread.hpp>
 #include <Bull/Core/Window/JoystickManager.hpp>
 #include <Bull/Core/Window/WindowImpl.hpp>
 

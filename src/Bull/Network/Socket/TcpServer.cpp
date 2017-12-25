@@ -1,4 +1,4 @@
-#include <Bull/Core/Thread/Thread.hpp>
+#include <Bull/Core/Concurrency/Thread.hpp>
 #include <Bull/Core/Time/Clock.hpp>
 #include <Bull/Core/Utility/CleanupCallback.hpp>
 

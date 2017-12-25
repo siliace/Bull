@@ -10043,16 +10043,16 @@ GLAPI void APIENTRY glProgramUniformui64vNV (GLuint program, GLint location, GLs
 #define GL_NV_shader_storage_buffer_object 1
 #endif /* GL_NV_shader_storage_buffer_object */
 
-#ifndef GL_NV_shader_thread_group
-#define GL_NV_shader_thread_group 1
+#ifndef GL_NV_shader_CONCURRENCY_group
+#define GL_NV_shader_CONCURRENCY_group 1
 #define GL_WARP_SIZE_NV                   0x9339
 #define GL_WARPS_PER_SM_NV                0x933A
 #define GL_SM_COUNT_NV                    0x933B
-#endif /* GL_NV_shader_thread_group */
+#endif /* GL_NV_shader_CONCURRENCY_group */
 
-#ifndef GL_NV_shader_thread_shuffle
-#define GL_NV_shader_thread_shuffle 1
-#endif /* GL_NV_shader_thread_shuffle */
+#ifndef GL_NV_shader_CONCURRENCY_shuffle
+#define GL_NV_shader_CONCURRENCY_shuffle 1
+#endif /* GL_NV_shader_CONCURRENCY_shuffle */
 
 #ifndef GL_NV_tessellation_program5
 #define GL_NV_tessellation_program5 1

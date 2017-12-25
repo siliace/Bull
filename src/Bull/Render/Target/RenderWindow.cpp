@@ -1,4 +1,4 @@
-#include <Bull/Core/Thread/Thread.hpp>
+#include <Bull/Core/Concurrency/Thread.hpp>
 
 #include <Bull/Render/Context/GlContext.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>

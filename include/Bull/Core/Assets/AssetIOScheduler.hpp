@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <Bull/Core/Thread/Thread.hpp>
+#include <Bull/Core/Concurrency/Thread.hpp>
 
 namespace Bull
 {

@@ -1,7 +1,7 @@
 #include <Bull/Core/Exception/RuntimeError.hpp>
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 #include <Bull/Core/Support/Xlib/WMHints.hpp>
-#include <Bull/Core/Thread/Thread.hpp>
+#include <Bull/Core/Concurrency/Thread.hpp>
 
 #include <Bull/Core/Window/Xlib/WindowImplXlib.hpp>
 #include <X11/Xutil.h>
