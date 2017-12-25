@@ -9,7 +9,7 @@ namespace Bull
     }
 
     DirectionalLight::DirectionalLight(const Vector3F& direction, const Color& color) :
-        Light(LightType_Directional)
+        AbstractLight(LightType_Directional)
     {
         setColor(color);
         setDirection(direction);

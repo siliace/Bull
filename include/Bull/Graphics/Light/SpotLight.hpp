@@ -1,13 +1,13 @@
 #ifndef BULL_GRAPHICS_LIGHT_SPOTLIGHT_HPP
 #define BULL_GRAPHICS_LIGHT_SPOTLIGHT_HPP
 
-#include <Bull/Graphics/Light/Light.hpp>
+#include <Bull/Graphics/Light/AbstractLight.hpp>
 
 #include <Bull/Math/Vector/Vector3.hpp>
 
 namespace Bull
 {
-    class BULL_GRAPHICS_API SpotLight : public Light
+    class BULL_GRAPHICS_API SpotLight : public AbstractLight
     {
     public:
 
@@ -19,8 +19,8 @@ namespace Bull
         /*! \brief Constructor
          *
          * \param position  The position of the SpotLight
-         * \param direction
-         * \param color
+         * \param direction The direction of the SpotLight
+         * \param color     The Color emitted by the SpotLight
          *
          */
         SpotLight(const Vector3F& position, const Vector3F& direction, const Color& color = Color::White);

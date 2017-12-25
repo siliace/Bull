@@ -9,7 +9,7 @@ namespace Bull
     }
 
     PointLight::PointLight(const Vector3F& position, const Color& color) :
-        Light(LightType_Point)
+        AbstractLight(LightType_Point)
     {
         setRadius(5.f);
         setColor(color);

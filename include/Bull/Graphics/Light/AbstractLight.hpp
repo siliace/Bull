@@ -1,5 +1,5 @@
-#ifndef BULL_GRAPHICS_LIGHT_LIGHT_HPP
-#define BULL_GRAPHICS_LIGHT_LIGHT_HPP
+#ifndef BULL_GRAPHICS_LIGHT_ABSTRACTLIGHT_HPP
+#define BULL_GRAPHICS_LIGHT_ABSTRACTLIGHT_HPP
 
 #include <Bull/Core/Utility/Color.hpp>
 
@@ -7,8 +7,8 @@
 #include <Bull/Graphics/Light/LightType.hpp>
 
 namespace Bull
-{
-    class BULL_GRAPHICS_API Light
+{ 
+    class BULL_GRAPHICS_API AbstractLight
     {
     public:
 
@@ -68,7 +68,7 @@ namespace Bull
          * \param type The type of the Light
          *
          */
-        explicit Light(LightType type);
+        explicit AbstractLight(LightType type);
 
     private:
 
@@ -79,4 +79,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_GRAPHICS_LIGHT_LIGHT_HPP
+#endif // BULL_GRAPHICS_LIGHT_ABSTRACTLIGHT_HPP

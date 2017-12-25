@@ -1,13 +1,13 @@
 #ifndef BULL_GRAPHICS_LIGHT_POINTLIGHT_HPP
 #define BULL_GRAPHICS_LIGHT_POINTLIGHT_HPP
 
-#include <Bull/Graphics/Light/Light.hpp>
+#include <Bull/Graphics/Light/AbstractLight.hpp>
 
 #include <Bull/Math/Vector/Vector3.hpp>
 
 namespace Bull
 {
-    class BULL_GRAPHICS_API PointLight : public Light
+    class BULL_GRAPHICS_API PointLight : public AbstractLight
     {
     public:
 
