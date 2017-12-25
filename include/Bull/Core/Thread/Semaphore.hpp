@@ -4,7 +4,7 @@
 #include <memory>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 namespace Bull
 {
@@ -57,7 +57,7 @@ namespace Bull
          * \return Return true if the waiting time was less than the timeout, false otherwise
          *
          */
-        bool wait(const Time& timeout);
+        bool wait(const Duration& timeout);
 
         /*! \brief Get the current count of the semaphore
          *

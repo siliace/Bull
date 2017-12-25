@@ -46,7 +46,7 @@ namespace Bull
                     {
                         startProcessEvents();
                         manager->processEvents(m_events);
-                        Thread::sleep(Time::milliseconds(10));
+                        Thread::sleep(Duration::milliseconds(10));
                     }while(m_events.empty());
                 }
             }

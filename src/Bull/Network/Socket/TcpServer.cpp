@@ -66,7 +66,7 @@ namespace Bull
         return SocketState(prv::SocketImpl::getLastError());
     }
 
-    SocketState TcpServer::accept(TcpClient& client, const Time& timeout, const Time& pause)
+    SocketState TcpServer::accept(TcpClient& client, const Duration& timeout, const Duration& pause)
     {
         if(isListening())
         {

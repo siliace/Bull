@@ -5,7 +5,7 @@
 #include <vector>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 #include <Bull/Network/Socket/SocketHandler.hpp>
 #include <Bull/Network/Socket/SocketPollDescriptor.hpp>
@@ -66,7 +66,7 @@ namespace Bull
              * \return True if the SocketPollerImpl waited successfully
              *
              */
-            bool wait(const Time& timeout);
+            bool wait(const Duration& timeout);
 
             /*! \brief Tell whether a Socket can be waited by the SocketPollerImpl
              *

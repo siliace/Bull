@@ -33,7 +33,7 @@ namespace Bull
         return SocketState(prv::SocketImpl::getLastError());
     }
 
-    SocketState TcpClient::connect(const IpAddressWrapper& address, NetPort port, const Time& timeout, const Time& pause)
+    SocketState TcpClient::connect(const IpAddressWrapper& address, NetPort port, const Duration& timeout, const Duration& pause)
     {
         if(address.isValid() && port != NetPort_Any)
         {

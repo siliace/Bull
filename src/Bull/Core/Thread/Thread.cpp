@@ -3,7 +3,7 @@
 
 namespace Bull
 {
-    void Thread::sleep(const Time& time)
+    void Thread::sleep(const Duration& time)
     {
         prv::ThreadImpl::sleep(time);
     }

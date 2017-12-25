@@ -6,7 +6,7 @@ namespace Bull
     namespace prv
     {
 
-        void ThreadImplWin32::sleep(const Time& time)
+        void ThreadImplWin32::sleep(const Duration& time)
         {
             Sleep(static_cast<DWORD>(time.asMilliseconds()));
         }

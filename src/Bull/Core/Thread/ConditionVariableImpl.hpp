@@ -6,7 +6,7 @@
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/MutexImpl.hpp>
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 namespace Bull
 {
@@ -55,7 +55,7 @@ namespace Bull
              * \return Return false if timeout, else return true
              *
              */
-            virtual bool wait(std::unique_ptr<MutexImpl>& mutex, const Time& timeout) = 0;
+            virtual bool wait(std::unique_ptr<MutexImpl>& mutex, const Duration& timeout) = 0;
 
         protected:
 

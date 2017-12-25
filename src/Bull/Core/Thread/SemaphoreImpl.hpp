@@ -2,7 +2,7 @@
 #define BULL_CORE_THREAD_SEMAPHOREIMPL_HPP
 
 #include <Bull/Core/Pattern/Singleton.hpp>
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 namespace Bull
 {
@@ -40,7 +40,7 @@ namespace Bull
              * \return Return true if the waiting time was less than the timeout, false otherwise
              *
              */
-            virtual bool wait(const Time& timeout) = 0;
+            virtual bool wait(const Duration& timeout) = 0;
 
             /*! \brief Get the current count of the semaphore
              *

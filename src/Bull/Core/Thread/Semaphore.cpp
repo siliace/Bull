@@ -19,7 +19,7 @@ namespace Bull
         }
     }
 
-    bool Semaphore::wait(const Time& timeout)
+    bool Semaphore::wait(const Duration& timeout)
     {
         if(m_impl)
         {

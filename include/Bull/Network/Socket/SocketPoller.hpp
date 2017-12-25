@@ -1,7 +1,7 @@
 #ifndef BULL_NETWORK_SOCKET_SOCKETPOLLER_HPP
 #define BULL_NETWORK_SOCKET_SOCKETPOLLER_HPP
 
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 #include <Bull/Network/Socket/Socket.hpp>
 #include <Bull/Network/Socket/SocketPollerEvent.hpp>
@@ -79,7 +79,7 @@ namespace Bull
          * \return True if the SocketPoller waited successfully
          *
          */
-        bool wait(const Time& timeout);
+        bool wait(const Duration& timeout);
 
         /*! \brief Tell whether a Socket can be waited by the SocketPoller
          *

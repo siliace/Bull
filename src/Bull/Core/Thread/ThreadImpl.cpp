@@ -17,7 +17,7 @@ namespace Bull
             return std::make_unique<ThreadImplType>(function, priority);
         }
 
-        void ThreadImpl::sleep(const Time& time)
+        void ThreadImpl::sleep(const Duration& time)
         {
             ThreadImplType::sleep(time);
         }

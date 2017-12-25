@@ -42,12 +42,12 @@ namespace Bull
             return m_threshold;
         }
 
-        void JoystickManager::setRepeatDelay(const Time& delay)
+        void JoystickManager::setRepeatDelay(const Duration& delay)
         {
             m_repeatDelay = delay;
         }
 
-        const Time& JoystickManager::getRepeatDelay()
+        const Duration& JoystickManager::getRepeatDelay()
         {
             return m_repeatDelay;
         }

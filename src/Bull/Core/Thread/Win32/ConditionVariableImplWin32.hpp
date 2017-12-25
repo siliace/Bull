@@ -42,7 +42,7 @@ namespace Bull
              * \return Return false if timeout, else return true
              *
              */
-            bool wait(std::unique_ptr<MutexImpl>& mutex, const Time& timeout) override;
+            bool wait(std::unique_ptr<MutexImpl>& mutex, const Duration& timeout) override;
 
         private:
 

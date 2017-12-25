@@ -17,7 +17,7 @@ namespace Bull
              * \param time The time to sleep
              *
              */
-            static void sleep(const Time& time);
+            static void sleep(const Duration& time);
 
         private:
 

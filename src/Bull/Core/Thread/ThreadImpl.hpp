@@ -6,7 +6,7 @@
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/ThreadPriority.hpp>
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 namespace Bull
 {
@@ -31,7 +31,7 @@ namespace Bull
              * \param time The time to sleep
              *
              */
-            static void sleep(const Time& time);
+            static void sleep(const Duration& time);
 
         public:
 

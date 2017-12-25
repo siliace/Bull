@@ -3,7 +3,7 @@
 
 namespace Bull
 {
-    Time Icmp::ping(const IpAddressV4& address, const Time& timeout)
+    Duration Icmp::ping(const IpAddressV4& address, const Duration& timeout)
     {
         return prv::IcmpImpl::ping(address, timeout);
     }

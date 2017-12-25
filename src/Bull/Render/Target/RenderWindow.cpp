@@ -24,7 +24,7 @@ namespace Bull
 
     void RenderWindow::display()
     {
-        if(m_frameDelay != Time::Zero && m_frameDelay > m_clock.getElapsedTime())
+        if(m_frameDelay != Duration::Zero && m_frameDelay > m_clock.getElapsedTime())
         {
             Thread::sleep(m_frameDelay - m_clock.getElapsedTime());
         }
@@ -41,17 +41,17 @@ namespace Bull
     {
         if(limit)
         {
-            m_frameDelay = Time::seconds(1 / static_cast<float>(limit));
+            m_frameDelay = Duration::seconds(1 / static_cast<float>(limit));
         }
         else
         {
-            m_frameDelay = Time::Zero;
+            m_frameDelay = Duration::Zero;
         }
     }
 
     unsigned int RenderWindow::getFramerateLimit() const
     {
-        if(m_frameDelay != Time::Zero)
+        if(m_frameDelay != Duration::Zero)
         {
             return static_cast<unsigned int>(1 / m_frameDelay.asSeconds());
         }

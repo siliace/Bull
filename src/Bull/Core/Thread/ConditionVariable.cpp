@@ -35,7 +35,7 @@ namespace Bull
         }
     }
 
-    bool ConditionVariable::wait(Mutex& mutex, const Time& timeout)
+    bool ConditionVariable::wait(Mutex& mutex, const Duration& timeout)
     {
         if(m_impl)
         {

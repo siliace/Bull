@@ -5,9 +5,9 @@ namespace Bull
 {
     namespace prv
     {
-        Time ClockImpl::uptime()
+        Duration ClockImpl::uptime()
         {
-            return Time::milliseconds(GetTickCount());
+            return Duration::milliseconds(GetTickCount());
         }
     }
 }

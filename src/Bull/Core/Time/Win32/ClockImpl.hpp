@@ -1,7 +1,7 @@
 #ifndef Bull_ClockImpl_hpp
 #define Bull_ClockImpl_hpp
 
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 namespace Bull
 {
@@ -16,7 +16,7 @@ namespace Bull
              * \return Return the update
              *
              */
-            static Time uptime();
+            static Duration uptime();
         };
     }
 }

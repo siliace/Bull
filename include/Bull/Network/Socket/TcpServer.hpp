@@ -1,7 +1,7 @@
 #ifndef BULL_NETWORK_SOCKET_TCPSERVER_HPP
 #define BULL_NETWORK_SOCKET_TCPSERVER_HPP
 
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Socket/Socket.hpp>
@@ -82,7 +82,7 @@ namespace Bull
          * \return The new SocketState
          *
          */
-        SocketState accept(TcpClient& client, const Time& timeout, const Time& pause = Time::milliseconds(20.f));
+        SocketState accept(TcpClient& client, const Duration& timeout, const Duration& pause = Duration::milliseconds(20.f));
 
         /*! \brief Disconnect the TcpServer
          *

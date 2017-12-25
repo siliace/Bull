@@ -6,7 +6,7 @@
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Thread/Mutex.hpp>
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 namespace Bull
 {
@@ -70,7 +70,7 @@ namespace Bull
          * \return Return false if timeout, else return true
          *
          */
-        bool wait(Mutex& mutex, const Time& timeout);
+        bool wait(Mutex& mutex, const Duration& timeout);
 
     private:
 

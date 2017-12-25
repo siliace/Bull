@@ -1,7 +1,7 @@
 #ifndef BULL_NETWORK_ICMP_WIN32_ICMPIMPL_HPP
 #define BULL_NETWORK_ICMP_WIN32_ICMPIMPL_HPP
 
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 
@@ -21,7 +21,7 @@ namespace Bull
              * \return The ping duration
              *
              */
-            static Time ping(const IpAddressV4& address, const Time& timeout);
+            static Duration ping(const IpAddressV4& address, const Duration& timeout);
         };
     }
 }

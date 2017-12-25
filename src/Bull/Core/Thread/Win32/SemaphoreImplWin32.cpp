@@ -19,7 +19,7 @@ namespace Bull
             WaitForSingleObject(m_handler, INFINITE);
         }
 
-        bool SemaphoreImplWin32::wait(const Time& timeout)
+        bool SemaphoreImplWin32::wait(const Duration& timeout)
         {
             return WaitForSingleObject(m_handler, timeout.asMilliseconds()) == WAIT_OBJECT_0;
         }

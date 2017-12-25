@@ -44,12 +44,12 @@ namespace Bull
         return prv::JoystickManager::get()->getThreshold();
     }
 
-    void Joystick::setRepeatDelay(const Time& delay)
+    void Joystick::setRepeatDelay(const Duration& delay)
     {
         prv::JoystickManager::get()->setRepeatDelay(delay);
     }
 
-    const Time& Joystick::getRepeatDelay()
+    const Duration& Joystick::getRepeatDelay()
     {
         return prv::JoystickManager::get()->getRepeatDelay();
     }

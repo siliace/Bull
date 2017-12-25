@@ -36,7 +36,7 @@ namespace Bull
              * \return Return true if the waiting time was less than the timeout, false otherwise
              *
              */
-            bool wait(const Time& timeout) override;
+            bool wait(const Duration& timeout) override;
 
             /*! \brief Get the current count of the semaphore
              *

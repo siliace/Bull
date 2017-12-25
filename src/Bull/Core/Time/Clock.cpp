@@ -44,16 +44,16 @@ namespace Bull
 
     void Clock::resume()
     {
-        if(!isRunning() && m_start != Time::Zero)
+        if(!isRunning() && m_start != Duration::Zero)
         {
             m_totalPause += prv::ClockImpl::uptime() - m_pause;
 
             m_isRunning = true;
-            m_pause     = Time::Zero;
+            m_pause     = Duration::Zero;
         }
     }
 
-    Time Clock::getElapsedTime() const
+    Duration Clock::getElapsedTime() const
     {
         if(isRunning())
         {
@@ -68,13 +68,13 @@ namespace Bull
         return m_isRunning;
     }
 
-    Time Clock::restart()
+    Duration Clock::restart()
     {
-        Time elapsed = getElapsedTime();
+        Duration elapsed = getElapsedTime();
 
         m_isRunning  = true;
-        m_pause      = Time::seconds(0.f);
-        m_totalPause = Time::seconds(0.f);
+        m_pause      = Duration::Zero;
+        m_totalPause = Duration::Zero;
         m_start      = prv::ClockImpl::uptime();
 
         return elapsed;

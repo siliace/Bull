@@ -62,7 +62,7 @@ namespace Bull
             return false;
         }
 
-        bool SocketPollerImpl::wait(const Time& timeout)
+        bool SocketPollerImpl::wait(const Duration& timeout)
         {
             if(!m_sockets.empty())
             {
