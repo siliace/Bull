@@ -2,6 +2,7 @@
 #define BULL_GRAPHICS_LIGHT_DIRECTIONALLIGHT_HPP
 
 #include <Bull/Graphics/Light/AbstractLight.hpp>
+
 #include <Bull/Math/Vector/Vector3.hpp>
 
 namespace Bull
