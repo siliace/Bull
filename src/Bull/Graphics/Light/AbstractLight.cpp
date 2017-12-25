@@ -7,12 +7,12 @@ namespace Bull
         return m_type;
     }
 
-    void AbstractLight::setAmbiantFactor(float ambient)
+    void AbstractLight::setAmbientFactor(float ambient)
     {
         m_ambient = ambient;
     }
 
-    float AbstractLight::getAmbiantFactor() const
+    float AbstractLight::getAmbientFactor() const
     {
         return m_ambient;
     }
@@ -41,6 +41,6 @@ namespace Bull
         m_type(type)
     {
         setDiffuseFactor(1.f);
-        setAmbiantFactor((type == LightType_Directional) ? 0.2f : 0.f);
+        setAmbientFactor((type == LightType_Directional) ? 0.2f : 0.f);
     }
 }

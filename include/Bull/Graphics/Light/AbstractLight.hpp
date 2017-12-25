@@ -38,14 +38,14 @@ namespace Bull
          * \param ambient The ambient factor
          *
          */
-        void setAmbiantFactor(float ambient);
+        void setAmbientFactor(float ambient);
 
         /*! \brief Get the ambient factor of the Light
          *
          * \return The ambient factor
          *
          */
-        float getAmbiantFactor() const;
+        float getAmbientFactor() const;
 
         /*! \brief Set the diffuse factor of the Light
          *
