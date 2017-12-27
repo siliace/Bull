@@ -14,6 +14,7 @@ add_subdirectory(Draw)
 add_subdirectory(Shader)
 add_subdirectory(Target)
 add_subdirectory(Texture)
+add_subdirectory(Vertex)
 
 if(BULL_OS_WINDOWS)
     target_link_libraries(bull-render opengl32 gdi32)

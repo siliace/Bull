@@ -1,11 +1,11 @@
-#ifndef BULL_CORE_UTILITY_VERTEX_HPP
-#define BULL_CORE_UTILITY_VERTEX_HPP
+#ifndef BULL_RENDER_VERTEX_VERTEX_HPP
+#define BULL_RENDER_VERTEX_VERTEX_HPP
 
 #include <Bull/Math/Vector/Vector2.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
 #include <Bull/Math/Vector/Vector4.hpp>
 
-#include <Bull/Core/Export.hpp>
+#include <Bull/Render/Export.hpp>
 
 namespace Bull
 {
@@ -83,4 +83,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_UTILITY_VERTEX_HPP
+#endif // BULL_RENDER_VERTEX_VERTEX_HPP

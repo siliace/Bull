@@ -1,7 +1,7 @@
 #include <vector>
 
 #include <Bull/Core/Utility/Random.hpp>
-#include <Bull/Core/Utility/Vertex.hpp>
+#include <Bull/Render/Vertex/Vertex.hpp>
 
 #include <Bull/Math/EulerAngles.hpp>
 

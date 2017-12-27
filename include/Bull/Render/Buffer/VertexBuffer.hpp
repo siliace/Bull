@@ -3,9 +3,8 @@
 
 #include <vector>
 
-#include <Bull/Core/Utility/Vertex.hpp>
-
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
+#include <Bull/Render/Vertex/Vertex.hpp>
 
 namespace Bull
 {

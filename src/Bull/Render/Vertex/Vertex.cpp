@@ -1,4 +1,4 @@
-#include <Bull/Core/Utility/Vertex.hpp>
+#include <Bull/Render/Vertex/Vertex.hpp>
 
 namespace Bull
 {
