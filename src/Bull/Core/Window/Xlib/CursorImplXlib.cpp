@@ -19,7 +19,7 @@ namespace Bull
             destroy();
         }
 
-        bool CursorImplXlib::create(Cursor::Type cursor)
+        bool CursorImplXlib::create(CursorType cursor)
         {
             unsigned int shape;
 
@@ -27,24 +27,24 @@ namespace Bull
 
             switch(cursor)
             {
-                case Cursor::Crosshair: shape = XC_crosshair;           break;
-                case Cursor::Default:   shape = XC_cross;               break;
-                case Cursor::Hand:      shape = XC_hand1;               break;
-                case Cursor::Help:      shape = XC_question_arrow;      break;
-                case Cursor::Move:      shape = XC_fleur;               break;
-                case Cursor::None:      shape = XNone;                  break;
-                case Cursor::Pointer:   shape = XC_hand1;               break;
-                case Cursor::Progress:  shape = XC_watch;               break;
-                case Cursor::ResizeE:   shape = XC_right_side;          break;
-                case Cursor::ResizeN:   shape = XC_top_side;            break;
-                case Cursor::ResizeNE:  shape = XC_top_right_corner;    break;
-                case Cursor::ResizeNW:  shape = XC_top_left_corner;     break;
-                case Cursor::ResizeS:   shape = XC_bottom_side;         break;
-                case Cursor::ResizeSE:  shape = XC_bottom_right_corner; break;
-                case Cursor::ResizeSW:  shape = XC_bottom_left_corner;  break;
-                case Cursor::ResizeW:   shape = XC_left_side;           break;
-                case Cursor::Text:      shape = XC_xterm;               break;
-                case Cursor::Wait:      shape = XC_watch;               break;
+                case CursorType_Crosshair: shape = XC_crosshair;           break;
+                case CursorType_Default:   shape = XC_cross;               break;
+                case CursorType_Hand:      shape = XC_hand1;               break;
+                case CursorType_Help:      shape = XC_question_arrow;      break;
+                case CursorType_Move:      shape = XC_fleur;               break;
+                case CursorType_None:      shape = XNone;                  break;
+                case CursorType_Pointer:   shape = XC_hand1;               break;
+                case CursorType_Progress:  shape = XC_watch;               break;
+                case CursorType_ResizeE:   shape = XC_right_side;          break;
+                case CursorType_ResizeN:   shape = XC_top_side;            break;
+                case CursorType_ResizeNE:  shape = XC_top_right_corner;    break;
+                case CursorType_ResizeNW:  shape = XC_top_left_corner;     break;
+                case CursorType_ResizeS:   shape = XC_bottom_side;         break;
+                case CursorType_ResizeSE:  shape = XC_bottom_right_corner; break;
+                case CursorType_ResizeSW:  shape = XC_bottom_left_corner;  break;
+                case CursorType_ResizeW:   shape = XC_left_side;           break;
+                case CursorType_Text:      shape = XC_xterm;               break;
+                case CursorType_Wait:      shape = XC_watch;               break;
                 default: return false;
             }
 

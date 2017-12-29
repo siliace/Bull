@@ -18,7 +18,7 @@ namespace Bull
              * \param time The time to sleep
              *
              */
-            static void sleep(const Time& time);
+            static void sleep(const Duration& time);
 
         private:
 
@@ -39,21 +39,29 @@ namespace Bull
              * \param priority The priority of the thread (by default inherit form the parent thread)
              *
              */
-            ThreadImplUnix(Functor<void>& function, ThreadPriority priority);
+            ThreadImplUnix(std::function<void()>& function, ThreadPriority priority);
 
             /*! \brief Wait the end of a thread
              *
              */
             void wait() override;
 
+            /*! \brief Tell whether the Thread is still running
+             *
+             * \return True if the Thread is running
+             *
+             */
+            bool isRunning() const override;
+
             /*! \brief Stop the thread
              *
              */
-            void stop() override;
+            void terminate() override;
 
         private:
 
-            pthread_t m_handler;
+            pthread_t    m_handler;
+            mutable bool m_isRunning;
         };
     }
 }

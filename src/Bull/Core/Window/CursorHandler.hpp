@@ -17,13 +17,7 @@ namespace Bull
         #elif defined BULL_OS_OSX
             #error Lack of implementation : CursorHandler
         #elif defined BULL_OS_GNU_LINUX
-            #if defined BULL_WEYLAND
-                #error Lack of implementation : CursorHandler
-            #elif defined BULL_XCB
-                typedef Uint32 CursorHandler;
-            #elif defined BULL_XLIB
-                typedef unsigned long CursorHandler;
-            #endif
+            typedef unsigned long CursorHandler;
         #endif
     }
 }

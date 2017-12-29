@@ -46,12 +46,12 @@ namespace Bull
                 }
                 else
                 {
-                    Log::get()->write("Your version of Xorg does not support XRandR extension", Log::Level::Error);
+                    Log::get()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
                 }
             }
             else
             {
-                Log::get()->write("Your version of Xorg does not support XRandR extension", Log::Level::Error);
+                Log::get()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
             }
 
             return desktopMode;
@@ -96,12 +96,12 @@ namespace Bull
                 }
                 else
                 {
-                    Log::get()->write("Your version of Xorg does not support XRandR extension", Log::Level::Error);
+                    Log::get()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
                 }
             }
             else
             {
-                Log::get()->write("Your version of Xorg does not support XRandR extension", Log::Level::Error);
+                Log::get()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
             }
 
             return modes;

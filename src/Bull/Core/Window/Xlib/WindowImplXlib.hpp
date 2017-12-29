@@ -32,7 +32,7 @@ namespace Bull
              * \return Return the Bull::Keyboard::Key equivalent
              *
              */
-            static Keyboard::Key convertXKToBullkey(KeySym xkey);
+            static KeyboardKey convertXKToBullkey(KeySym xkey);
 
             /*! \brief Create an hidden cursor
              *

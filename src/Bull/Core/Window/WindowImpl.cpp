@@ -7,15 +7,8 @@
     #include <Bull/Core/Window/Win32/WindowImplWin32.hpp>
     typedef Bull::prv::WindowImplWin32 WindowImplType;
 #elif defined BULL_OS_GNU_LINUX
-    #if defined BULL_XLIB
-        #include <Bull/Core/Window/Xlib/WindowImplXlib.hpp>
-        typedef Bull::prv::WindowImplXlib WindowImplType;
-    #elif defined BULL_XCB
-        #include <Bull/Window/XCB/WindowImplXCB.hpp>
-        typedef Bull::prv::WindowImplXCB WindowImplType;
-    #elif defined BULL_WAYLAND
-        #error Todo
-    #endif
+    #include <Bull/Core/Window/Xlib/WindowImplXlib.hpp>
+    typedef Bull::prv::WindowImplXlib WindowImplType;
 #else
     #error System not supported
 #endif

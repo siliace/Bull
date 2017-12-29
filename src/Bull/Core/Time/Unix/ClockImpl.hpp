@@ -7,16 +7,14 @@ namespace Bull
 {
     namespace prv
     {
-        class ClockImpl
+        struct ClockImpl
         {
-        public:
-
             /*! \brief Get the uptime
              *
              * \return Return the update
              *
              */
-            static Time uptime();
+            static Duration uptime();
         };
     }
 }

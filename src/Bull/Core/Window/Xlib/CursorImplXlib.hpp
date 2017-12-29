@@ -1,5 +1,5 @@
-#ifndef BULL_CURSORIMPLXLIB_HPP
-#define BULL_CURSORIMPLXLIB_HPP
+#ifndef BULL_CORE_WINDOW_XLIB_CURSORIMPLXLIB_HPP
+#define BULL_CORE_WINDOW_XLIB_CURSORIMPLXLIB_HPP
 
 #include <Bull/Core/Support/Xlib/Display.hpp>
 
@@ -30,14 +30,14 @@ namespace Bull
              * \return True if the cursor was created successfully
              *
              */
-            bool create(Cursor::Type cursor) override;
+            bool create(CursorType cursor) override;
 
-            /*! \brief Create a Cursor from an image
+            /*! \brief Create a Cursor from an Image
              *
-             * \param cursor  The image of the Cursor
+             * \param cursor  The Image of the Cursor
              * \param hotSpot The hotspot of the Cursor
              *
-             * \return True if the cursor was created successfully
+             * \return True if the Cursor was created successfully
              *
              */
             bool create(const Image& cursor, const Vector2UI& hotSpot) override;
@@ -62,4 +62,4 @@ namespace Bull
     }
 }
 
-#endif //BULL_CURSORIMPLXLIB_HPP
+#endif //BULL_CORE_WINDOW_XLIB_CURSORIMPLXLIB_HPP

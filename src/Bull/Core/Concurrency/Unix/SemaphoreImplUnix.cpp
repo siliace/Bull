@@ -21,7 +21,7 @@ namespace Bull
             sem_wait(&m_handler);
         }
 
-        bool SemaphoreImplUnix::wait(const Time& timeout)
+        bool SemaphoreImplUnix::wait(const Duration& timeout)
         {
             struct timeval tv;
             struct timespec ts;
