@@ -1,8 +1,8 @@
 #ifndef BULL_RENDER_CONTEXT_GLFUNCTIONS_HPP
 #define BULL_RENDER_CONTEXT_GLFUNCTIONS_HPP
 
-#include <GL/glcorearb.h>
-#include <GL/glext.h>
+#include <gl/glcorearb.h>
+#include <gl/glext.h>
 
 namespace gl
 {

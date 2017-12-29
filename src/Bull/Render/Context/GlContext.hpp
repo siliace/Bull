@@ -1,14 +1,10 @@
 #ifndef BULL_RENDER_CONTEXT_GLCONTEXT_HPP
 #define BULL_RENDER_CONTEXT_GLCONTEXT_HPP
 
-#include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Window/VideoMode.hpp>
 #include <Bull/Core/Window/WindowImpl.hpp>
 
 #include <Bull/Render/Context/ContextSettings.hpp>
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
-#include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Context/SurfaceHandler.hpp>
 
 namespace Bull

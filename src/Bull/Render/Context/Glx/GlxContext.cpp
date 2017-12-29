@@ -26,15 +26,15 @@ namespace Bull
             loader->require(GlxCreateContextARB);
             loader->require(GlxPbuffer);
 
-            if(isSupported(GlxSwapControlEXT))
+            if(isLoaded(GlxSwapControlEXT))
             {
                 loader->require(GlxSwapControlEXT);
             }
-            else if(isSupported(GlxSwapControlMESA))
+            else if(isLoaded(GlxSwapControlMESA))
             {
                 loader->require(GlxSwapControlMESA);
             }
-            else if(isSupported(GlxSwapControlSGI))
+            else if(isLoaded(GlxSwapControlSGI))
             {
                 loader->require(GlxSwapControlSGI);
             }
@@ -212,21 +212,21 @@ namespace Bull
         {
             ErrorHandler handler;
 
-            if(isSupported(GlxSwapControlEXT))
+            if(isLoaded(GlxSwapControlEXT))
             {
                 ext::glXSwapInterval(m_display->getHandler(), glXGetCurrentDrawable(), active ? 1 : 0);
             }
-            else if(isSupported(GlxSwapControlMESA))
+            else if(isLoaded(GlxSwapControlMESA))
             {
                 mesa::glXSwapInterval(active ? 1 : 0);
             }
-            else if(isSupported(GlxSwapControlSGI))
+            else if(isLoaded(GlxSwapControlSGI))
             {
                 sgi::glXSwapInterval(active ? 1 : 0);
             }
             else
             {
-                Log::get()->write("VSync is not available on your system", Log::Level::Warning);
+                Log::get()->write("VSync is not available on your system", LogLevel_Warning);
             }
         }
 
@@ -263,7 +263,7 @@ namespace Bull
         {
             ErrorHandler handler;
 
-            if(isSupported(GlxPbuffer) && shared)
+            if(isLoaded(GlxPbuffer) && shared)
             {
                 int fbCounts         = 0;
                 GLXFBConfig* configs = glXChooseFBConfig(m_display->getHandler(), m_display->getDefaultScreen(), nullptr, &fbCounts);
@@ -324,7 +324,7 @@ namespace Bull
 
             glXQueryVersion(m_display->getHandler(), &glxMajor, &glxMinor);
 
-            if(isSupported(GlxCreateContextARB) && (glxMajor > 1 || glxMinor >= 3))
+            if(isLoaded(GlxCreateContextARB) && (glxMajor > 1 || glxMinor >= 3))
             {
                 do
                 {
@@ -338,14 +338,14 @@ namespace Bull
                     if(isSupported("GLX_ARB_create_context_profile"))
                     {
                         int flags   = 0;
-                        int profile = (m_settings.profile & ContextSettings::Compatibility) ? GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : GLX_CONTEXT_CORE_PROFILE_BIT_ARB;
+                        int profile = (m_settings.profile & ContextSettingsProfile_Compatibility) ? GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : GLX_CONTEXT_CORE_PROFILE_BIT_ARB;
 
-                        if(m_settings.type & ContextSettings::Debug)
+                        if(m_settings.type & ContextSettingsType_Debug)
                         {
                             flags |= GLX_CONTEXT_DEBUG_BIT_ARB;
                         }
 
-                        if(m_settings.type & ContextSettings::ForwardCompatible)
+                        if(m_settings.type & ContextSettingsType_ForwardCompatible)
                         {
                             flags |= GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
                         }
@@ -355,7 +355,7 @@ namespace Bull
                         attribs.push_back(GLX_CONTEXT_FLAGS_ARB);
                         attribs.push_back(flags);
 
-                        if(m_settings.type & ContextSettings::NoError)
+                        if(m_settings.type & ContextSettingsType_NoError)
                         {
                             if(isSupported("GLX_CONTEXT_OPENGL_NO_ERROR_ARB"))
                             {
@@ -369,14 +369,14 @@ namespace Bull
                             }
                             else
                             {
-                                m_settings.type &= ~ContextSettings::NoError;
-                                Log::get()->write("GLX_CONTEXT_OPENGL_NO_ERROR_ARB is not available", Log::Level::Warning);
+                                m_settings.type &= ~ContextSettingsType_NoError;
+                                Log::get()->write("GLX_CONTEXT_OPENGL_NO_ERROR_ARB is not available", LogLevel_Warning);
                             }
                         }
                     }
                     else
                     {
-                        m_settings.type = ContextSettings::Default;
+                        m_settings.type = ContextSettingsType_Default;
                     }
 
                     attribs.push_back(0);
@@ -385,7 +385,7 @@ namespace Bull
 
                     if(!m_render)
                     {
-                        Log::get()->write("Failed to create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), Log::Level::Warning);
+                        Log::get()->write("Failed to create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), LogLevel_Warning);
 
                         if(m_settings.minor == 0)
                         {

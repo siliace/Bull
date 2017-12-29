@@ -4,6 +4,7 @@
 
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglContext.hpp>
