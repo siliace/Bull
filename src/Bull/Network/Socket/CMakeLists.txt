@@ -25,6 +25,7 @@ target_sources(bull-network
             ${BULL_SRC_NETWORK_SOCKET}/SocketHeader.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketImpl.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketImpl.cpp
+            ${BULL_SRC_NETWORK_SOCKET}/SocketLength.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketPollDescriptor.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketPollerImpl.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketPollerImpl.cpp
@@ -38,4 +39,6 @@ target_sources(bull-network
 
 if(BULL_OS_WINDOWS)
     add_subdirectory(Win32)
+else()
+    add_subdirectory(Unix)
 endif()

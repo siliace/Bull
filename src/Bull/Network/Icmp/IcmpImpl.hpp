@@ -3,5 +3,5 @@
 #if defined BULL_OS_WINDOWS
     #include <Bull/Network/Icmp/Win32/IcmpImpl.hpp>
 #else
-    #error Lack of implementation : Icmp
+    #include <Bull/Network/Icmp/Unix/IcmpImpl.hpp>
 #endif

@@ -1,5 +1,5 @@
-#ifndef BULL_NETWORK_SOCKET_WIN32_SOCKETPOLLERIMPLWIN32_HPP
-#define BULL_NETWORK_SOCKET_WIN32_SOCKETPOLLERIMPLWIN32_HPP
+#ifndef BULL_NETWORK_SOCKET_UNIX_SOCKETPOLLERIMPLUNIX_HPP
+#define BULL_NETWORK_SOCKET_UNIX_SOCKETPOLLERIMPLUNIX_HPP
 
 #include <Bull/Network/Socket/SocketPollerImpl.hpp>
 
@@ -7,9 +7,9 @@ namespace Bull
 {
     namespace prv
     {
-        struct SocketPollerImplWin32 : public SocketPollerImpl
+        struct SocketPollerImplUnix : public SocketPollerImpl
         {
-            static constexpr int SocketError = SOCKET_ERROR;
+            static constexpr int SocketError = -1;
 
             /*! \brief Poll sockets
              *
@@ -24,4 +24,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_NETWORK_SOCKET_WIN32_SOCKETPOLLERIMPLWIN32_HPP
+#endif // BULL_NETWORK_SOCKET_UNIX_SOCKETPOLLERIMPLUNIX_HPP

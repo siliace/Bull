@@ -1,4 +1,5 @@
 #include <Bull/Network/Address/SockAddrBuffer.hpp>
+#include <Bull/Network/Socket/SocketLength.hpp>
 #include <Bull/Network/Socket/UdpSocketImpl.hpp>
 
 namespace Bull
@@ -42,7 +43,7 @@ namespace Bull
             if(m_socket->isValid())
             {
                 sockaddr addr;
-                int sockLength = sizeof(sockaddr);
+                SocketLength sockLength = sizeof(sockaddr);
 
                 received = ::recvfrom(m_socket->getHandler(), reinterpret_cast<char*>(data), length, 0, &addr, &sockLength);
 

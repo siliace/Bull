@@ -11,4 +11,6 @@ target_sources(bull-network
 
 if(BULL_OS_WINDOWS)
     add_subdirectory(Win32)
+else()
+    add_subdirectory(Unix)
 endif()

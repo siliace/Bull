@@ -1,4 +1,3 @@
-#include <Bull/Core/Configuration/OS.hpp>
 #include <Bull/Core/Exception/RuntimeError.hpp>
 
 #include <Bull/Network/Socket/SocketImpl.hpp>
@@ -7,7 +6,8 @@
     #include <Bull/Network/Socket/Win32/SocketImplWin32.hpp>
     typedef Bull::prv::SocketImplWin32 SocketImplType;
 #else
-    #error Lack of implemenation : SocketImpl
+    #include <Bull/Network/Socket/Unix/SocketImplUnix.hpp>
+    typedef Bull::prv::SocketImplUnix SocketImplType;
 #endif
 
 namespace Bull
