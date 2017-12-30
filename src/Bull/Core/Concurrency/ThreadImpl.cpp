@@ -1,3 +1,4 @@
+#include <Bull/Core/Concurrency/Runnable.hpp>
 #include <Bull/Core/Concurrency/ThreadImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
@@ -12,7 +13,7 @@ namespace Bull
 {
     namespace prv
     {
-        std::unique_ptr<ThreadImpl> ThreadImpl::createInstance(std::function<void()>& function, ThreadPriority priority)
+        std::unique_ptr<ThreadImpl> ThreadImpl::createInstance(Runnable* function, ThreadPriority priority)
         {
             return std::make_unique<ThreadImplType>(function, priority);
         }

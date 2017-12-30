@@ -33,13 +33,13 @@ namespace Bull
 
         public:
 
-            /*! \brief Contructor
+            /*! \brief Constructor
              *
              * \param function The function to run
              * \param priority The priority of the thread (by default inherit form the parent thread)
              *
              */
-            ThreadImplUnix(std::function<void()>& function, ThreadPriority priority);
+            ThreadImplUnix(Runnable* function, ThreadPriority priority);
 
             /*! \brief Wait the end of a thread
              *

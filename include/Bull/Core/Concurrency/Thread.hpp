@@ -4,9 +4,9 @@
 #include <functional>
 #include <memory>
 
-#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Concurrency/Runnable.hpp>
 #include <Bull/Core/Concurrency/ThreadPriority.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Time/Duration.hpp>
 
 namespace Bull
@@ -29,6 +29,28 @@ namespace Bull
          */
         static void sleep(const Duration& time);
 
+    private:
+
+        class FunctionRunnable : public Runnable
+        {
+        public:
+
+            explicit FunctionRunnable(std::function<void()> function) :
+                m_function(function)
+            {
+                /// Nothing
+            }
+
+            void run() override
+            {
+                m_function();
+            }
+
+        private:
+
+            std::function<void()> m_function;
+        };
+
     public:
 
         /*! \brief Default constructor
@@ -42,12 +64,7 @@ namespace Bull
          * \param priority The priority of the thread (by default inherit form the parent thread)
          *
          */
-        template <typename T, typename = std::enable_if<std::is_base_of<Runnable, T>::value>>
-        explicit Thread(T* runnable, ThreadPriority priority = ThreadPriority_Inherit) :
-            Thread(std::bind(&T::run, runnable), priority)
-        {
-            /// Nothing
-        }
+        explicit Thread(Runnable* runnable, ThreadPriority priority = ThreadPriority_Inherit);
 
         /*! \brief Constructor
          *
@@ -112,8 +129,8 @@ namespace Bull
     private:
 
         std::unique_ptr<prv::ThreadImpl> m_impl;
-        std::function<void()>    m_function;
-        ThreadPriority           m_priority;
+        std::unique_ptr<Runnable>        m_runnable;
+        ThreadPriority                   m_priority;
     };
 }
 

@@ -4,8 +4,9 @@
 #include <functional>
 #include <memory>
 
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Concurrency/Runnable.hpp>
 #include <Bull/Core/Concurrency/ThreadPriority.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Time/Duration.hpp>
 
 namespace Bull
@@ -24,7 +25,7 @@ namespace Bull
              * \return Return the created instance
              *
              */
-            static std::unique_ptr<ThreadImpl> createInstance(std::function<void()>& function, ThreadPriority priority);
+            static std::unique_ptr<ThreadImpl> createInstance(Runnable* function, ThreadPriority priority);
 
             /*! \brief Asleep the current thread
              *

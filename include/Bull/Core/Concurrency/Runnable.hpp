@@ -5,25 +5,8 @@
 
 namespace Bull
 {
-    class BULL_CORE_API Runnable
+    struct BULL_CORE_API Runnable
     {
-    public:
-
-        /*! \brief Call operator
-         *
-         */
-        void operator()()
-        {
-            run();
-        }
-
-    protected:
-
-        /*! \brief Default constructor
-         *
-         */
-        Runnable() = default;
-
         /*! \brief The function to run in the Thread
          *
          */

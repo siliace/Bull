@@ -392,7 +392,7 @@ namespace Bull
         bool filterEvent(const WindowEvent& e);
 
         std::unique_ptr<prv::WindowImpl> m_impl;            /*!< The OS specific implementation of the window */
-        mutable bool             m_ignoreNextMouse; /*!< True to ignore the next mouse event due to cursor centering */
+        mutable bool                     m_ignoreNextMouse; /*!< True to ignore the mouse event due to cursor centering */
     };
 }
 

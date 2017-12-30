@@ -346,7 +346,7 @@ namespace Bull
                                                        GrabModeAsync, GrabModeAsync,
                                                        m_handler,
                                                        XNone,
-                                                       CurrentTime) != GrabSuccess;
+                                                       CurrentTime) == GrabSuccess;
 
                                 if(!grabbed)
                                 {
@@ -471,7 +471,13 @@ namespace Bull
 
                 do
                 {
-                    grabbed = XGrabPointer(m_display->getHandler(), m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
+                    grabbed = XGrabPointer(m_display->getHandler(), m_handler,
+                                           True,
+                                           XNone,
+                                           GrabModeAsync, GrabModeAsync,
+                                           m_handler,
+                                           XNone,
+                                           CurrentTime) == GrabSuccess;
 
                     if(!grabbed)
                     {

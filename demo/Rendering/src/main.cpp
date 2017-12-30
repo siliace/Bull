@@ -39,7 +39,6 @@ int main(int argc, char* argv[])
 
     std::vector<Cube> cubes(10);
 
-    window.enableCaptureCursor(true);
     window.setMouseCursorVisible(false);
 
     while(window.isOpen())

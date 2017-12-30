@@ -13,27 +13,21 @@ namespace Bull
 
         void* ThreadImplUnix::entryPoint(void* data)
         {
-            std::function<void()>* function = static_cast<std::function<void()>*>(data);
+            Runnable* runnable = static_cast<Runnable*>(data);
 
             pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, nullptr);
 
-            function->operator()();
+            runnable->run();
 
             return nullptr;
         }
 
-        ThreadImplUnix::ThreadImplUnix(std::function<void()>& function, ThreadPriority priority)
+        ThreadImplUnix::ThreadImplUnix(Runnable* runnable, ThreadPriority priority)
         {
             pthread_attr_t attributes;
             pthread_attr_init(&attributes);
-            pthread_attr_setdetachstate(&attributes, PTHREAD_CREATE_DETACHED);
 
-            if(priority == ThreadPriority_Inherit)
-            {
-                pthread_attr_setinheritsched(&attributes, PTHREAD_INHERIT_SCHED);
-            }
-
-            m_isRunning = pthread_create(&m_handler, &attributes, &ThreadImplUnix::entryPoint, &function) == 0;
+            m_isRunning = pthread_create(&m_handler, &attributes, &ThreadImplUnix::entryPoint, runnable) == 0;
         }
 
         void ThreadImplUnix::wait()
