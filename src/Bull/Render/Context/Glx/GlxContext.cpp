@@ -125,7 +125,7 @@ namespace Bull
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, const VideoMode& mode, const ContextSettings& settings) :
             GlContext(settings),
             m_window(0),
-            m_render(0),
+            m_render(nullptr),
             m_config(nullptr),
             m_pbuffer(0),
             m_display(Display::get()),
@@ -151,7 +151,7 @@ namespace Bull
         GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, const std::unique_ptr<WindowImpl>& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
             m_window(0),
-            m_render(0),
+            m_render(nullptr),
             m_config(nullptr),
             m_pbuffer(0),
             m_display(Display::get()),
