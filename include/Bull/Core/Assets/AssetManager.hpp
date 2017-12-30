@@ -22,9 +22,18 @@ namespace Bull
          *
          */
         template <typename... Args>
-        T& createAsset(const String& name, Args&&... args)
+        T* createAsset(const String& name, Args&&... args)
         {
-            return static_cast<T&>(*(m_assets[name] = std::make_unique<T>(std::forward<Args>(args)...)));
+            AssetMap::iterator it = m_assets.find(name);
+
+            if(it == m_assets.end())
+            {
+                it = m_assets.insert(
+                        std::make_pair(name, new T(std::forward<Args>(args)...))
+                ).first;
+            }
+
+            return it->second.get();
         }
 
         /*! \brief Register an Asset in the AssetManager
@@ -73,14 +82,14 @@ namespace Bull
          * \return The Asset
          *
          */
-        T& getAsset(const String& name)
+        T* getAsset(const String& name)
         {
             if(!has(name))
             {
                 return createAsset(name);
             }
 
-            return *m_assets[name];
+            return m_assets[name].get();
         }
 
         /*! \brief Delete every Asset
@@ -93,7 +102,9 @@ namespace Bull
 
     private:
 
-        std::map<String, std::unique_ptr<T>> m_assets;
+        using AssetMap = std::map<String, std::unique_ptr<T>>;
+
+        AssetMap m_assets;
     };
 }
 
