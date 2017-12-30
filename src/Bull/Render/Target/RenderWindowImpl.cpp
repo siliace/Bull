@@ -1,7 +1,8 @@
 #include <Bull/Render/Target/RenderWindowImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #error Lack of implementation : RenderWindow
+    #include <Bull/Render/Target/Win32/RenderWindowImplWin32.hpp>
+    typedef Bull::prv::RenderWindowImplWin32 RenderWindowImplType;
 #else
     #include <Bull/Render/Target/Xlib/RenderWindowImplXlib.hpp>
     typedef Bull::prv::RenderWindowImplXlib RenderWindowImplType;

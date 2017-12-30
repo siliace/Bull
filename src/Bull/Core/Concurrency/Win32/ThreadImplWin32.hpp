@@ -34,11 +34,10 @@ namespace Bull
 
             /*! \brief Constructor
              *
-             * \param function The function to run
              * \param priority The priority of the thread (by default inherit form the parent thread)
              *
              */
-            ThreadImplWin32(std::function<void()>& function, ThreadPriority priority);
+            ThreadImplWin32(Runnable* runnable, ThreadPriority priority);
 
             /*! \brief Destructor
              *

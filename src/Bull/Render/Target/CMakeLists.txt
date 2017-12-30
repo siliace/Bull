@@ -14,6 +14,8 @@ target_sources(bull-render
             ${BULL_SRC_RENDER_TARGET}/RenderWindowImpl.cpp
         )
 
-if(NOT BULL_OS_WINDOWS)
+if(BULL_OS_WINDOWS)
+    add_subdirectory(Win32)
+else()
     add_subdirectory(Xlib)
 endif()

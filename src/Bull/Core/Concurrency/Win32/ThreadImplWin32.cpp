@@ -13,19 +13,19 @@ namespace Bull
 
         DWORD WINAPI ThreadImplWin32::entryPoint(void* data)
         {
-            std::function<void()>* function = static_cast<std::function<void()>*>(data);
+            Runnable* runnable = static_cast<Runnable*>(data);
 
-            function->operator()();
+            runnable->run();
 
             return 0;
         }
 
-        ThreadImplWin32::ThreadImplWin32(std::function<void()>& function, ThreadPriority priority)
+        ThreadImplWin32::ThreadImplWin32(Runnable* runnable, ThreadPriority priority)
         {
             m_handler = CreateThread(nullptr,
                                      0,
                                      &ThreadImplWin32::entryPoint,
-                                     &function,
+                                     runnable,
                                      0,
                                      nullptr);
 
