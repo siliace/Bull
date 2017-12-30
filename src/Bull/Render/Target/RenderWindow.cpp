@@ -2,19 +2,22 @@
 
 #include <Bull/Render/Context/GlContext.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
+#include <Bull/Render/Target/RenderWindowImpl.hpp>
 
 namespace Bull
 {
-    RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 WindowStyle, const ContextSettings& settings)
+    RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
-        open(mode, title, WindowStyle, settings);
+        open(mode, title, style, settings);
     }
 
-    bool RenderWindow::open(const VideoMode& mode, const String& title, Uint32 WindowStyle, const ContextSettings& settings)
+    bool RenderWindow::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
-        if(Window::open(mode, title, WindowStyle))
+        std::unique_ptr<prv::WindowImpl> impl = prv::RenderWindowImpl::createInstance(mode, title, style, settings);
+
+        if(Window::open(std::move(impl), title, style))
         {
-            m_context = prv::GlContext::createInstance(getImpl(), mode.bitsPerPixel, settings);
+            m_context = prv::GlContext::createInstance(m_impl, mode.bitsPerPixel, settings);
 
             return true;
         }

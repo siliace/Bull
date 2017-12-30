@@ -24,38 +24,7 @@ namespace Bull
 
     bool Window::open(const VideoMode& mode, const String& title, Uint32 style)
     {
-        if(isOpen())
-        {
-            close();
-        }
-
-        if(style == WindowStyle_Fullscreen && s_fullscreen)
-        {
-            style = WindowStyle_Default;
-        }
-
-        m_impl = prv::WindowImpl::createInstance(mode, title, style);
-
-        if(style == WindowStyle_Fullscreen)
-        {
-            if(!enableFullscreen())
-            {
-                close();
-
-                return false;
-            }
-        }
-
-        setTitle(title);
-        setVisible(true);
-        setMinSize(-1, -1);
-        setMaxSize(-1, -1);
-        enableKeyRepeat(true);
-        setMouseCursorVisible(true);
-
-        onOpen();
-
-        return true;
+        return open(prv::WindowImpl::createInstance(mode, title, style), title, style);
     }
 
     Window::~Window()
@@ -388,14 +357,50 @@ namespace Bull
         return this == s_fullscreen;
     }
 
-    const std::unique_ptr<prv::WindowImpl>& Window::getImpl() const
+    bool Window::open(std::unique_ptr<prv::WindowImpl> impl, const String& title, Uint32 style)
     {
-        return m_impl;
+        if(!isOpen())
+        {
+            if(style == WindowStyle_Fullscreen && s_fullscreen)
+            {
+                style = WindowStyle_Default;
+            }
+
+            m_impl = std::move(impl);
+
+            if(style == WindowStyle_Fullscreen)
+            {
+                if(!enableFullscreen())
+                {
+                    close();
+
+                    return false;
+                }
+            }
+
+            setTitle(title);
+            setVisible(true);
+            setMinSize(-1, -1);
+            setMaxSize(-1, -1);
+            enableKeyRepeat(true);
+            setMouseCursorVisible(true);
+
+            onOpen();
+
+            return true;
+        }
+
+        return false;
     }
 
     void Window::ignoreNextMouseEvent() const
     {
         m_ignoreNextMouse = true;
+    }
+
+    const prv::WindowImpl* Window::getImpl() const
+    {
+        return m_impl.get();
     }
 
     bool Window::filterEvent(const WindowEvent& e)

@@ -9,4 +9,11 @@ target_sources(bull-render
             ${BULL_SRC_RENDER_TARGET}/RenderWindow.cpp
             ${BULL_INC_RENDER_TARGET}/Viewport.hpp
             ${BULL_SRC_RENDER_TARGET}/Viewport.cpp
+        PRIVATE
+            ${BULL_SRC_RENDER_TARGET}/RenderWindowImpl.hpp
+            ${BULL_SRC_RENDER_TARGET}/RenderWindowImpl.cpp
         )
+
+if(NOT BULL_OS_WINDOWS)
+    add_subdirectory(Xlib)
+endif()
