@@ -70,6 +70,11 @@ namespace Bull
         }
     }
 
+    Runnable* Thread::getRunnable() const
+    {
+        return m_runnable.get();
+    }
+
     ThreadPriority Thread::getPriority() const
     {
         return m_priority;

@@ -119,6 +119,13 @@ namespace Bull
          */
         void terminate();
 
+        /*! \brief Get the runnable used by the Thread
+         *
+         * \return The runnable
+         *
+         */
+        Runnable* getRunnable() const;
+
         /*! \brief Get the priority of the thread
          *
          * \return The thread priority
