@@ -736,7 +736,7 @@ namespace Bull
         }
 
         WindowImplXlib::WindowImplXlib() :
-            m_display(Display::get()),
+            m_display(Display::getInstance()),
             m_handler(0),
             m_isMapped(false),
             m_hiddenCursor(0),

@@ -14,7 +14,7 @@ namespace Bull
         VideoMode VideoModeImpl::getCurrent()
         {
             VideoMode desktopMode;
-            Display::Instance display = Display::get();
+            Display::Instance display = Display::getInstance();
 
             if(display->isSupportedExtension("RANDR"))
             {
@@ -48,12 +48,12 @@ namespace Bull
                 }
                 else
                 {
-                    Log::get()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
+                    Log::getInstance()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
                 }
             }
             else
             {
-                Log::get()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
+                Log::getInstance()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
             }
 
             return desktopMode;
@@ -100,12 +100,12 @@ namespace Bull
                 }
                 else
                 {
-                    Log::get()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
+                    Log::getInstance()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
                 }
             }
             else
             {
-                Log::get()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
+                Log::getInstance()->write("Your version of Xorg does not support XRandR extension", LogLevel_Error);
             }
 
             return modes;

@@ -23,7 +23,7 @@ namespace Bull
          *
          */
         template<typename... Args>
-        static Instance get(Args&&... args)
+        static Instance getInstance(Args&&... args)
         {
             if(!s_instance)
             {

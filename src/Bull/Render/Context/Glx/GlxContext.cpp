@@ -128,7 +128,7 @@ namespace Bull
             m_render(nullptr),
             m_config(nullptr),
             m_pbuffer(0),
-            m_display(Display::get()),
+            m_display(Display::getInstance()),
             m_colormap(0),
             m_ownWindow(false)
         {
@@ -154,7 +154,7 @@ namespace Bull
             m_render(nullptr),
             m_config(nullptr),
             m_pbuffer(0),
-            m_display(Display::get()),
+            m_display(Display::getInstance()),
             m_colormap(0),
             m_ownWindow(false)
         {
@@ -228,7 +228,7 @@ namespace Bull
             }
             else
             {
-                Log::get()->write("VSync is not available on your system", LogLevel_Warning);
+                Log::getInstance()->write("VSync is not available on your system", LogLevel_Warning);
             }
         }
 
@@ -372,7 +372,7 @@ namespace Bull
                             else
                             {
                                 m_settings.type &= ~ContextSettingsType_NoError;
-                                Log::get()->write("GLX_CONTEXT_OPENGL_NO_ERROR_ARB is not available", LogLevel_Warning);
+                                Log::getInstance()->write("GLX_CONTEXT_OPENGL_NO_ERROR_ARB is not available", LogLevel_Warning);
                             }
                         }
                     }
@@ -387,7 +387,7 @@ namespace Bull
 
                     if(!m_render)
                     {
-                        Log::get()->write("Failed to create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), LogLevel_Warning);
+                        Log::getInstance()->write("Failed to create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), LogLevel_Warning);
 
                         if(m_settings.minor == 0)
                         {

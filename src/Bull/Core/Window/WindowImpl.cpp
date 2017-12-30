@@ -26,7 +26,7 @@ namespace Bull
 
         bool WindowImpl::popEvent(WindowEvent& e, bool block)
         {
-            JoystickManager::Instance manager = JoystickManager::get();
+            JoystickManager::Instance manager = JoystickManager::getInstance();
 
             if(m_events.empty())
             {

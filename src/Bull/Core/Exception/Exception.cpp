@@ -8,7 +8,7 @@ namespace Bull
     Exception::Exception(const String& message) :
         m_message(message)
     {
-        Log::get()->write(getLogMessage(), LogLevel::LogLevel_Error);
+        Log::getInstance()->write(getLogMessage(), LogLevel::LogLevel_Error);
     }
 
     const char* Exception::what() const noexcept
