@@ -16,6 +16,8 @@ namespace Bull
             vi = glXGetVisualFromFBConfig(display->getHandler(), config);
 
             open(mode.width, mode.height, title, style, vi);
+
+            XFree(vi);
         }
     }
 }
