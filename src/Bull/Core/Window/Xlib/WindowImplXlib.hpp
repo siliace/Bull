@@ -234,21 +234,21 @@ namespace Bull
              *
              * \param mode
              * \param title
-             * \param WindowStyle
+             * \param style
              *
              */
-            void open(const VideoMode& mode, const String& title, Uint32 WindowStyle);
+            void open(const VideoMode& mode, const String& title, Uint32 style);
 
             /*! \brief Open the window
              *
              * \param width
              * \param height
              * \param title
-             * \param WindowStyle
+             * \param style
              * \param vi
              *
              */
-            void open(unsigned int width, unsigned int height, const String& title, Uint32 WindowStyle, XVisualInfo* vi);
+            void open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi);
 
         private:
 

@@ -746,7 +746,7 @@ namespace Bull
             m_screen = ScreenOfDisplay(m_display->getHandler(), m_display->getDefaultScreen());
         }
 
-        void WindowImplXlib::open(const VideoMode& mode, const String& title, Uint32 WindowStyle)
+        void WindowImplXlib::open(const VideoMode& mode, const String& title, Uint32 style)
         {
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
@@ -779,10 +779,10 @@ namespace Bull
                 throw RuntimeError("Failed to create window");
             }
 
-            initialize(title, WindowStyle);
+            initialize(title, style);
         }
 
-        void WindowImplXlib::open(unsigned int width, unsigned int height, const String& title, Uint32 WindowStyle, XVisualInfo* vi)
+        void WindowImplXlib::open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi)
         {
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
@@ -813,7 +813,7 @@ namespace Bull
                 throw RuntimeError("Failed to create window");
             }
 
-            initialize(title, WindowStyle);
+            initialize(title, style);
         }
 
         void WindowImplXlib::initialize(const String& title, Uint32 style)
