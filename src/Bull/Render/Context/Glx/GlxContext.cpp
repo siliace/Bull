@@ -105,6 +105,8 @@ namespace Bull
                         bestConfig = i;
                     }
                 }
+
+                XFree(vi);
             }
 
             config = configs[bestConfig];

@@ -43,6 +43,8 @@ namespace Bull
                             desktopMode.height = sizes[currentMode].height;
                         }
                     }
+
+                    XFree(config);
                 }
                 else
                 {
@@ -93,6 +95,8 @@ namespace Bull
                             }
                         }
                     }
+
+                    XFree(config);
                 }
                 else
                 {
