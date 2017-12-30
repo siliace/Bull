@@ -7,20 +7,18 @@ namespace Bull
     {
         Path FileSystemImpl::getRoot()
         {
-            String root(static_cast<std::size_t>(255));
+            char buffer[255] = {0};
+            GetEnvironmentVariable("systemdrive", buffer, 255);
 
-            GetEnvironmentVariable("systemdrive", &root[0], static_cast<DWORD>(root.getCapacity()));
-
-            return Path(root);
+            return Path::canonical(buffer);
         }
 
         Path FileSystemImpl::getHome()
         {
-            String userPath(static_cast<std::size_t>(255));
+            char buffer[255] = {0};
+            GetEnvironmentVariable("homepath", buffer, 255);
 
-            GetEnvironmentVariable("homepath", &userPath[0], static_cast<DWORD>(userPath.getCapacity()));
-
-            return getRoot().getChild(userPath);
+            return getRoot().getChild(buffer);
         }
 
         Path FileSystemImpl::getTempPath()
