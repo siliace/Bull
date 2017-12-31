@@ -8,7 +8,7 @@ namespace Bull
     {
         namespace
         {
-            WsaService::Instance wsa = WsaService::get();
+            WsaService::Instance wsa = WsaService::getInstance();
         }
 
         SocketError SocketImplWin32::getLastError()

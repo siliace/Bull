@@ -362,7 +362,7 @@ namespace Bull
                         }
                         else
                         {   m_settings.type = ContextSettingsType_Default;
-                            Log::get()->write("WGL_CONTEXT_OPENGL_NO_ERROR_ARB is not available", LogLevel::LogLevel_Warning);
+                            Log::getInstance()->write("WGL_CONTEXT_OPENGL_NO_ERROR_ARB is not available", LogLevel::LogLevel_Warning);
                         }
                     }
 
@@ -373,7 +373,7 @@ namespace Bull
 
                     if(!m_render)
                     {
-                        Log::get()->write("Failed to create WglContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), LogLevel::LogLevel_Warning);
+                        Log::getInstance()->write("Failed to create WglContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), LogLevel::LogLevel_Warning);
 
                         if(m_settings.minor == 0)
                         {

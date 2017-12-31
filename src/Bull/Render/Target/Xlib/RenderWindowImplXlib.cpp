@@ -9,7 +9,7 @@ namespace Bull
         {
             XVisualInfo*      vi;
             GLXFBConfig       config;
-            Display::Instance display = Display::get();
+            Display::Instance display = Display::getInstance();
 
             config = GlxContext::chooseBestConfig(display, settings, mode.bitsPerPixel);
 

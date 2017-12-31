@@ -61,9 +61,9 @@ namespace Bull
     {
         ShaderStage stage;
 
-        if(ShaderStageLoader::get()->loadFromPath(stage, path, type))
+        if(ShaderStageLoader::getInstance()->loadFromPath(stage, path, type))
         {
-            if(ShaderStageLoader::get()->wait())
+            if(ShaderStageLoader::getInstance()->wait())
             {
                 return attach(stage);
             }
@@ -76,9 +76,9 @@ namespace Bull
     {
         ShaderStage stage;
 
-        if(ShaderStageLoader::get()->loadFromStream(stage, stream, type))
+        if(ShaderStageLoader::getInstance()->loadFromStream(stage, stream, type))
         {
-            if(ShaderStageLoader::get()->wait())
+            if(ShaderStageLoader::getInstance()->wait())
             {
                 return attach(stage);
             }
@@ -95,7 +95,7 @@ namespace Bull
 
             if(!isLinked())
             {
-                Log::get()->write(getErrorMessage(), LogLevel::LogLevel_Error);
+                Log::getInstance()->write(getErrorMessage(), LogLevel::LogLevel_Error);
 
                 return false;
             }

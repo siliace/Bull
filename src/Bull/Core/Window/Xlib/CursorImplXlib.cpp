@@ -9,7 +9,7 @@ namespace Bull
     {
         CursorImplXlib::CursorImplXlib() :
             m_cursor(XNone),
-            m_display(Display::get())
+            m_display(Display::getInstance())
         {
             /// Nothing
         }

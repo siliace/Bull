@@ -20,11 +20,11 @@ int main(int argc, char* argv[])
     RenderWindow window(VideoMode(800, 600), "Bull Application");
     Vector3F position(0, 0, 3), forward = Vector3F::Backward, up = Vector3F::Up;
 
-    ImageLoader::get()->loadFromPath(diffuse, Path("../resources/textures/container.png"));
-    ImageLoader::get()->loadFromPath(specular, Path("../resources/textures/container_specular.png"));
-    ImageLoader::get()->loadFromPath(emission, Path("../resources/textures/container_emission.png"));
+    ImageLoader::getInstance()->loadFromPath(diffuse, Path("../resources/textures/container.png"));
+    ImageLoader::getInstance()->loadFromPath(specular, Path("../resources/textures/container_specular.png"));
+    ImageLoader::getInstance()->loadFromPath(emission, Path("../resources/textures/container_emission.png"));
 
-    if(!ImageLoader::get()->wait())
+    if(!ImageLoader::getInstance()->wait())
     {
         return -1;
     }
