@@ -8,7 +8,7 @@ namespace Bull
     {
         void MouseImpl::setPosition(const Vector2I& position)
         {
-            Display::Instance display = Display::get();
+            Display::Instance display = Display::getInstance();
 
             XWarpPointer(display->getHandler(), XNone, display->getRootWindow(), 0, 0, 0, 0, position.x(), position.y());
             display->flush();
@@ -20,7 +20,7 @@ namespace Bull
             int rootX, rootY;
             XWindow root, child;
             unsigned int buttons;
-            Display::Instance display = Display::get();
+            Display::Instance display = Display::getInstance();
 
             if(XQueryPointer(display->getHandler(), display->getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))
             {
@@ -36,7 +36,7 @@ namespace Bull
             int rootX, rootY;
             XWindow root, child;
             unsigned int buttons;
-            Display::Instance display = Display::get();
+            Display::Instance display = Display::getInstance();
 
             if(XQueryPointer(display->getHandler(), display->getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))
             {

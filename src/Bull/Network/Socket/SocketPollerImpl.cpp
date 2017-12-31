@@ -8,7 +8,8 @@
     #include <Bull/Network/Socket/Win32/SocketPollerImplWin32.hpp>
     typedef Bull::prv::SocketPollerImplWin32 SocketPollerImplType;
 #else
-    #error Lack of implementation : SocketPoller
+    #include <Bull/Network/Socket/Unix/SocketPollerImplUnix.hpp>
+    typedef Bull::prv::SocketPollerImplUnix SocketPollerImplType;
 #endif
 
 namespace Bull
@@ -62,7 +63,7 @@ namespace Bull
             return false;
         }
 
-        bool SocketPollerImpl::wait(const Time& timeout)
+        bool SocketPollerImpl::wait(const Duration& timeout)
         {
             if(!m_sockets.empty())
             {

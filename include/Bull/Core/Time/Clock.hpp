@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_TIME_CLOCK_HPP
 #define BULL_CORE_TIME_CLOCK_HPP
 
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 namespace Bull
 {
@@ -52,7 +52,7 @@ namespace Bull
          * \return Return the time since the clock is started
          *
          */
-        Time getElapsedTime() const;
+        Duration getElapsedTime() const;
 
         /*! \brief Get the state of the clock
          *
@@ -66,13 +66,13 @@ namespace Bull
          * \return Return the time since the clock is started before restart
          *
          */
-        Time restart();
+        Duration restart();
 
     private:
 
-        Time m_start;
-        Time m_pause;
-        Time m_totalPause;
+        Duration m_start;
+        Duration m_pause;
+        Duration m_totalPause;
 
         bool m_isRunning;
     };

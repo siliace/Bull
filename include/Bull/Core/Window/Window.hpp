@@ -83,7 +83,7 @@ namespace Bull
          * \return Return true if the window was open successfully, false otherwise
          *
          */
-        virtual bool open(const VideoMode& mode, const String& title, Uint32 style = WindowStyle_Default);
+        bool open(const VideoMode& mode, const String& title, Uint32 style = WindowStyle_Default);
 
         /*! \brief Check if the window is open
          *
@@ -352,7 +352,14 @@ namespace Bull
 
     protected:
 
-        friend class MessageWindow;
+        /*! \brief Open the Window
+         *
+         * \param impl The implementation to use
+         *
+         * \return True if the Window was open successfully
+         *
+         */
+        bool open(std::unique_ptr<prv::WindowImpl> impl, const String& title, Uint32 style);
 
         /*! \brief Function called when the Window is opened
          *
@@ -369,18 +376,24 @@ namespace Bull
          */
         virtual void onClose() {}
 
-        /*! \brief Get the implementation of the Window
-         *
-         * \return The implementation
-         *
-         */
-        const std::unique_ptr<prv::WindowImpl>& getImpl() const;
+        std::unique_ptr<prv::WindowImpl> m_impl; /*!< The OS specific implementation of the window */
 
     private:
 
         friend class Mouse;
 
         void ignoreNextMouseEvent() const;
+
+    private:
+
+        friend class MessageWindow;
+
+        /*! \brief
+         *
+         * \return
+         *
+         */
+        const prv::WindowImpl* getImpl() const;
 
     private:
 
@@ -391,8 +404,7 @@ namespace Bull
          */
         bool filterEvent(const WindowEvent& e);
 
-        std::unique_ptr<prv::WindowImpl> m_impl;            /*!< The OS specific implementation of the window */
-        mutable bool             m_ignoreNextMouse; /*!< True to ignore the next mouse event due to cursor centering */
+        mutable bool m_ignoreNextMouse; /*!< True to ignore the mouse event due to cursor centering */
     };
 }
 

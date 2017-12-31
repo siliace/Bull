@@ -17,7 +17,7 @@ namespace Bull
 
             s_errorOccurred = true;
 
-            Log::get()->write(errorMessage, LogLevel_Debug);
+            Log::getInstance()->write(errorMessage, LogLevel_Debug);
 
             return 0;
         }
@@ -59,7 +59,7 @@ namespace Bull
         {
             if(m_isBound)
             {
-                XSync(Display::get()->getHandler(), False);
+                XSync(Display::getInstance()->getHandler(), False);
                 XSetErrorHandler(m_previousHandler);
                 m_isBound = false;
             }

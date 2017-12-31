@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <Bull/Core/Thread/Thread.hpp>
+#include <Bull/Core/Concurrency/Thread.hpp>
 
 namespace Bull
 {
@@ -52,37 +52,6 @@ namespace Bull
             std::function<bool()> m_function;
         };
 
-        class ThreadWorker : public Thread
-        {
-        public:
-
-            /*! \brief Constructor
-             *
-             * \param worker The Worker to run
-             *
-             */
-            explicit ThreadWorker(std::unique_ptr<Worker> worker) :
-                Thread(std::bind(&Worker::run, worker.get())),
-                m_worker(std::move(worker))
-            {
-                /// Nothing
-            }
-
-            /*! \brief Get the Worker of the Thread
-             *
-             * \return The Worker
-             *
-             */
-            const Worker& getWorker() const
-            {
-                return *m_worker;
-            }
-
-        private:
-
-            std::unique_ptr<Worker> m_worker;
-        };
-
     public:
 
         /*! \brief Get the percentage of loaded Asset
@@ -94,7 +63,7 @@ namespace Bull
         {
             std::size_t count = 0;
 
-            for(const std::unique_ptr<ThreadWorker>& thread : m_threads)
+            for(const std::unique_ptr<Thread>& thread : m_threads)
             {
                 if(!thread->isRunning())
                 {
@@ -114,10 +83,10 @@ namespace Bull
         {
             bool success = true;
 
-            for(const std::unique_ptr<ThreadWorker>& thread : m_threads)
+            for(const std::unique_ptr<Thread>& thread : m_threads)
             {
                 thread->wait();
-                success &= thread->getWorker().isSuccess();
+                success &= static_cast<Worker*>(thread->getRunnable())->isSuccess();
             }
 
             m_threads.clear();
@@ -136,7 +105,7 @@ namespace Bull
          */
         bool createTask(const std::function<bool()>& task)
         {
-            std::unique_ptr<ThreadWorker> thread = std::make_unique<ThreadWorker>(std::make_unique<Worker>(task));
+            std::unique_ptr<Thread> thread = std::make_unique<Thread>(new Worker(task));
 
             if(!thread->start())
             {
@@ -150,7 +119,7 @@ namespace Bull
 
     private:
 
-        std::vector<std::unique_ptr<ThreadWorker>> m_threads;
+        std::vector<std::unique_ptr<Thread>> m_threads;
     };
 }
 

@@ -23,14 +23,14 @@ namespace Bull
          * \param indices
          *
          */
-        Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+        Mesh(const VertexArray& vertices, const std::vector<unsigned int>& indices);
 
         /*! \brief Create the Mesh
          *
          * \param vertices
          *
          */
-        void create(const std::vector<Vertex>& vertices);
+        void create(const VertexArray& vertices);
 
         /*! \brief Create the Mesh
          *
@@ -38,7 +38,7 @@ namespace Bull
          * \param indices
          *
          */
-        void create(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+        void create(const VertexArray& vertices, const std::vector<unsigned int>& indices);
 
         /*! \brief Render the Mesh
          *

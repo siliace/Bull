@@ -1,5 +1,5 @@
 #include <Bull/Core/Hardware/Mouse.hpp>
-#include <Bull/Core/Thread/Thread.hpp>
+#include <Bull/Core/Concurrency/Thread.hpp>
 #include <Bull/Core/Window/JoystickManager.hpp>
 #include <Bull/Core/Window/WindowImpl.hpp>
 
@@ -7,15 +7,8 @@
     #include <Bull/Core/Window/Win32/WindowImplWin32.hpp>
     typedef Bull::prv::WindowImplWin32 WindowImplType;
 #elif defined BULL_OS_GNU_LINUX
-    #if defined BULL_XLIB
-        #include <Bull/Core/Window/Xlib/WindowImplXlib.hpp>
-        typedef Bull::prv::WindowImplXlib WindowImplType;
-    #elif defined BULL_XCB
-        #include <Bull/Window/XCB/WindowImplXCB.hpp>
-        typedef Bull::prv::WindowImplXCB WindowImplType;
-    #elif defined BULL_WAYLAND
-        #error Todo
-    #endif
+    #include <Bull/Core/Window/Xlib/WindowImplXlib.hpp>
+    typedef Bull::prv::WindowImplXlib WindowImplType;
 #else
     #error System not supported
 #endif
@@ -33,7 +26,7 @@ namespace Bull
 
         bool WindowImpl::popEvent(WindowEvent& e, bool block)
         {
-            JoystickManager::Instance manager = JoystickManager::get();
+            JoystickManager::Instance manager = JoystickManager::getInstance();
 
             if(m_events.empty())
             {
@@ -46,7 +39,7 @@ namespace Bull
                     {
                         startProcessEvents();
                         manager->processEvents(m_events);
-                        Thread::sleep(Time::milliseconds(10));
+                        Thread::sleep(Duration::milliseconds(10));
                     }while(m_events.empty());
                 }
             }

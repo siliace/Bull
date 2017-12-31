@@ -15,7 +15,7 @@ namespace Bull
             time(&row);
             sysDate = localtime(&row);
 
-            now.second    = Time(sysDate->tm_sec);
+            now.second    = Duration(sysDate->tm_sec);
             now.minute    = sysDate->tm_min;
             now.hour      = sysDate->tm_hour;
             now.day       = sysDate->tm_mday;

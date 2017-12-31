@@ -1,9 +1,10 @@
 #include <Bull/Core/Image/ImageLoader.hpp>
 
+#include <Bull/Graphics/Light/DirectionalLight.hpp>
+
 #include <Bull/Math/Clamp.hpp>
 
 #include <Bull/Render/Context/GlFunctions.hpp>
-#include <Bull/Render/Shader/Shader.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
 
@@ -17,14 +18,17 @@ int main(int argc, char* argv[])
     WindowEvent event;
     AngleF fov = AngleF::degree(45.f);
     Texture diffuse, specular, emission;
+    DirectionalLight directionalLight(Vector3F::UnitX);
     RenderWindow window(VideoMode(800, 600), "Bull Application");
     Vector3F position(0, 0, 3), forward = Vector3F::Backward, up = Vector3F::Up;
 
-    ImageLoader::get()->loadFromPath(diffuse, Path("../resources/textures/container.png"));
-    ImageLoader::get()->loadFromPath(specular, Path("../resources/textures/container_specular.png"));
-    ImageLoader::get()->loadFromPath(emission, Path("../resources/textures/container_emission.png"));
+    window.setPosition(0, 0);
 
-    if(!ImageLoader::get()->wait())
+    ImageLoader::getInstance()->loadFromPath(diffuse, Path("../resources/textures/container.png"));
+    ImageLoader::getInstance()->loadFromPath(specular, Path("../resources/textures/container_specular.png"));
+    ImageLoader::getInstance()->loadFromPath(emission, Path("../resources/textures/container_emission.png"));
+
+    if(!ImageLoader::getInstance()->wait())
     {
         return -1;
     }
@@ -34,11 +38,9 @@ int main(int argc, char* argv[])
     emission.enableSmooth();
 
     phong.create(Path("../resources/shaders/phong/phong.vert"), Path("../resources/shaders/phong/phong.frag"));
-    phong.link();
 
     std::vector<Cube> cubes(10);
 
-    window.enableCaptureCursor(true);
     window.setMouseCursorVisible(false);
 
     while(window.isOpen())
@@ -127,10 +129,7 @@ int main(int argc, char* argv[])
         emission.bind();
         phong.setUniform("material.emission", 2);
 
-        phong.setUniformVector("light.position", Vector3F::UnitX * 3.f);
-        phong.setUniformVector("light.ambient", Vector4F::Unit / 5.f);
-        phong.setUniformVector("light.diffuse", Vector4F::Unit / 2.f);
-        phong.setUniformVector("light.specular", Vector4F(1.f, 1.f, 1.f, 0.f));
+        directionalLight.setUniforms(phong, "light");
 
         phong.setUniformVector("camera_position", Vector3F(2.f, 1.f, 3.f));
 

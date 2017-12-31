@@ -26,31 +26,31 @@ namespace Bull
 
     void Joystick::enableKeyRepeat(bool enable)
     {
-        prv::JoystickManager::get()->enableKeyRepeat(enable);
+        prv::JoystickManager::getInstance()->enableKeyRepeat(enable);
     }
 
     bool Joystick::isKeyRepeatEnable()
     {
-        return prv::JoystickManager::get()->isKeyRepeatEnable();
+        return prv::JoystickManager::getInstance()->isKeyRepeatEnable();
     }
 
     void Joystick::setThreshold(float threshold)
     {
-        prv::JoystickManager::get()->setThreshold(threshold);
+        prv::JoystickManager::getInstance()->setThreshold(threshold);
     }
 
     float Joystick::getThreshold()
     {
-        return prv::JoystickManager::get()->getThreshold();
+        return prv::JoystickManager::getInstance()->getThreshold();
     }
 
-    void Joystick::setRepeatDelay(const Time& delay)
+    void Joystick::setRepeatDelay(const Duration& delay)
     {
-        prv::JoystickManager::get()->setRepeatDelay(delay);
+        prv::JoystickManager::getInstance()->setRepeatDelay(delay);
     }
 
-    const Time& Joystick::getRepeatDelay()
+    const Duration& Joystick::getRepeatDelay()
     {
-        return prv::JoystickManager::get()->getRepeatDelay();
+        return prv::JoystickManager::getInstance()->getRepeatDelay();
     }
 }

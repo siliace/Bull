@@ -1,10 +1,9 @@
+#include <Bull/Core/Concurrency/Thread.hpp>
 #include <Bull/Core/Exception/RuntimeError.hpp>
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 #include <Bull/Core/Support/Xlib/WMHints.hpp>
-#include <Bull/Core/Thread/Thread.hpp>
-
+#include <Bull/Core/Window/WindowStyle.hpp>
 #include <Bull/Core/Window/Xlib/WindowImplXlib.hpp>
-#include <X11/Xutil.h>
 
 #ifndef Button6
     #define Button6 6
@@ -26,101 +25,100 @@ namespace Bull
 {
     namespace prv
     {
-        Keyboard::Key WindowImplXlib::convertXKToBullkey(KeySym xkey)
+        KeyboardKey WindowImplXlib::convertXKToBullkey(KeySym xkey)
         {
             switch(xkey)
             {
-                case XK_a:           return Keyboard::Key::A;
-                case XK_b:           return Keyboard::Key::B;
-                case XK_c:           return Keyboard::Key::C;
-                case XK_d:           return Keyboard::Key::D;
-                case XK_e:           return Keyboard::Key::E;
-                case XK_f:           return Keyboard::Key::F;
-                case XK_g:           return Keyboard::Key::G;
-                case XK_h:           return Keyboard::Key::H;
-                case XK_i:           return Keyboard::Key::I;
-                case XK_j:           return Keyboard::Key::J;
-                case XK_k:           return Keyboard::Key::K;
-                case XK_l:           return Keyboard::Key::L;
-                case XK_m:           return Keyboard::Key::M;
-                case XK_n:           return Keyboard::Key::N;
-                case XK_o:           return Keyboard::Key::O;
-                case XK_p:           return Keyboard::Key::P;
-                case XK_q:           return Keyboard::Key::Q;
-                case XK_r:           return Keyboard::Key::R;
-                case XK_s:           return Keyboard::Key::S;
-                case XK_t:           return Keyboard::Key::T;
-                case XK_u:           return Keyboard::Key::U;
-                case XK_v:           return Keyboard::Key::V;
-                case XK_w:           return Keyboard::Key::W;
-                case XK_x:           return Keyboard::Key::X;
-                case XK_y:           return Keyboard::Key::Y;
-                case XK_z:           return Keyboard::Key::Z;
-                case XK_0:           return Keyboard::Key::Num0;
-                case XK_1:           return Keyboard::Key::Num1;
-                case XK_2:           return Keyboard::Key::Num2;
-                case XK_3:           return Keyboard::Key::Num3;
-                case XK_4:           return Keyboard::Key::Num4;
-                case XK_5:           return Keyboard::Key::Num5;
-                case XK_6:           return Keyboard::Key::Num6;
-                case XK_7:           return Keyboard::Key::Num7;
-                case XK_8:           return Keyboard::Key::Num8;
-                case XK_9:           return Keyboard::Key::Num9;
-                case XK_Num_Lock:    return Keyboard::Key::NumLock;
-                case XK_KP_0:        return Keyboard::Key::NumPad0;
-                case XK_KP_1:        return Keyboard::Key::NumPad1;
-                case XK_KP_2:        return Keyboard::Key::NumPad2;
-                case XK_KP_3:        return Keyboard::Key::NumPad3;
-                case XK_KP_4:        return Keyboard::Key::NumPad4;
-                case XK_KP_5:        return Keyboard::Key::NumPad5;
-                case XK_KP_6:        return Keyboard::Key::NumPad6;
-                case XK_KP_7:        return Keyboard::Key::NumPad7;
-                case XK_KP_8:        return Keyboard::Key::NumPad8;
-                case XK_KP_9:        return Keyboard::Key::NumPad9;
-                case XK_KP_Enter:    return Keyboard::Key::NumPadEnter;
-                case XK_KP_Add:      return Keyboard::Key::Add;
-                case XK_KP_Subtract: return Keyboard::Key::Substract;
-                case XK_KP_Multiply: return Keyboard::Key::Multiply;
-                case XK_KP_Divide:   return Keyboard::Key::Divide;
-                case XK_F1:          return Keyboard::Key::F1;
-                case XK_F2:          return Keyboard::Key::F2;
-                case XK_F3:          return Keyboard::Key::F3;
-                case XK_F4:          return Keyboard::Key::F4;
-                case XK_F5:          return Keyboard::Key::F5;
-                case XK_F6:          return Keyboard::Key::F6;
-                case XK_F7:          return Keyboard::Key::F7;
-                case XK_F8:          return Keyboard::Key::F8;
-                case XK_F9:          return Keyboard::Key::F9;
-                case XK_F10:         return Keyboard::Key::F10;
-                case XK_F11:         return Keyboard::Key::F11;
-                case XK_F12:         return Keyboard::Key::F12;
-                case XK_F13:         return Keyboard::Key::F13;
-                case XK_F14:         return Keyboard::Key::F14;
-                case XK_F15:         return Keyboard::Key::F15;
-                case XK_F16:         return Keyboard::Key::F16;
-                case XK_F17:         return Keyboard::Key::F17;
-                case XK_F18:         return Keyboard::Key::F18;
-                case XK_F19:         return Keyboard::Key::F19;
-                case XK_F20:         return Keyboard::Key::F20;
-                case XK_F21:         return Keyboard::Key::F21;
-                case XK_F22:         return Keyboard::Key::F22;
-                case XK_F23:         return Keyboard::Key::F23;
-                case XK_F24:         return Keyboard::Key::F24;
-                case XK_Left:        return Keyboard::Key::Left;
-                case XK_Right:       return Keyboard::Key::Right;
-                case XK_Up:          return Keyboard::Key::Up;
-                case XK_Down:        return Keyboard::Key::Down;
-                case XK_space:       return Keyboard::Key::Space;
-                case XK_Escape:      return Keyboard::Key::Escape;
-                case XK_Control_L:   return Keyboard::Key::LeftControl;
-                case XK_Control_R:   return Keyboard::Key::RightControl;
-                case XK_Alt_L:       return Keyboard::Key::LeftAlt;
-                case XK_Alt_R:       return Keyboard::Key::RightAlt;
-                case XK_Super_L:     return Keyboard::Key::LeftSystem;
-                case XK_Super_R:     return Keyboard::Key::RightSystem;
-                case XK_Shift_L:     return Keyboard::Key::LeftShift;
-                case XK_Shift_R:     return Keyboard::Key::RightShift;
-                default:             return Keyboard::Key::Unknown;
+                case XK_a:           return KeyboardKey_A;
+                case XK_b:           return KeyboardKey_B;
+                case XK_c:           return KeyboardKey_C;
+                case XK_d:           return KeyboardKey_D;
+                case XK_e:           return KeyboardKey_E;
+                case XK_f:           return KeyboardKey_F;
+                case XK_g:           return KeyboardKey_G;
+                case XK_h:           return KeyboardKey_H;
+                case XK_i:           return KeyboardKey_I;
+                case XK_j:           return KeyboardKey_J;
+                case XK_k:           return KeyboardKey_K;
+                case XK_l:           return KeyboardKey_L;
+                case XK_m:           return KeyboardKey_M;
+                case XK_n:           return KeyboardKey_N;
+                case XK_o:           return KeyboardKey_O;
+                case XK_p:           return KeyboardKey_P;
+                case XK_q:           return KeyboardKey_Q;
+                case XK_r:           return KeyboardKey_R;
+                case XK_s:           return KeyboardKey_S;
+                case XK_t:           return KeyboardKey_T;
+                case XK_u:           return KeyboardKey_U;
+                case XK_v:           return KeyboardKey_V;
+                case XK_w:           return KeyboardKey_W;
+                case XK_x:           return KeyboardKey_X;
+                case XK_y:           return KeyboardKey_Y;
+                case XK_z:           return KeyboardKey_Z;
+                case XK_0:           return KeyboardKey_Num0;
+                case XK_1:           return KeyboardKey_Num1;
+                case XK_2:           return KeyboardKey_Num2;
+                case XK_3:           return KeyboardKey_Num3;
+                case XK_4:           return KeyboardKey_Num4;
+                case XK_5:           return KeyboardKey_Num5;
+                case XK_6:           return KeyboardKey_Num6;
+                case XK_7:           return KeyboardKey_Num7;
+                case XK_8:           return KeyboardKey_Num8;
+                case XK_9:           return KeyboardKey_Num9;
+                case XK_Num_Lock:    return KeyboardKey_NumLock;
+                case XK_KP_0:        return KeyboardKey_NumPad0;
+                case XK_KP_1:        return KeyboardKey_NumPad1;
+                case XK_KP_2:        return KeyboardKey_NumPad2;
+                case XK_KP_3:        return KeyboardKey_NumPad3;
+                case XK_KP_4:        return KeyboardKey_NumPad4;
+                case XK_KP_5:        return KeyboardKey_NumPad5;
+                case XK_KP_6:        return KeyboardKey_NumPad6;
+                case XK_KP_7:        return KeyboardKey_NumPad7;
+                case XK_KP_8:        return KeyboardKey_NumPad8;
+                case XK_KP_9:        return KeyboardKey_NumPad9;
+                case XK_KP_Add:      return KeyboardKey_Add;
+                case XK_KP_Subtract: return KeyboardKey_Subtract;
+                case XK_KP_Multiply: return KeyboardKey_Multiply;
+                case XK_KP_Divide:   return KeyboardKey_Divide;
+                case XK_F1:          return KeyboardKey_F1;
+                case XK_F2:          return KeyboardKey_F2;
+                case XK_F3:          return KeyboardKey_F3;
+                case XK_F4:          return KeyboardKey_F4;
+                case XK_F5:          return KeyboardKey_F5;
+                case XK_F6:          return KeyboardKey_F6;
+                case XK_F7:          return KeyboardKey_F7;
+                case XK_F8:          return KeyboardKey_F8;
+                case XK_F9:          return KeyboardKey_F9;
+                case XK_F10:         return KeyboardKey_F10;
+                case XK_F11:         return KeyboardKey_F11;
+                case XK_F12:         return KeyboardKey_F12;
+                case XK_F13:         return KeyboardKey_F13;
+                case XK_F14:         return KeyboardKey_F14;
+                case XK_F15:         return KeyboardKey_F15;
+                case XK_F16:         return KeyboardKey_F16;
+                case XK_F17:         return KeyboardKey_F17;
+                case XK_F18:         return KeyboardKey_F18;
+                case XK_F19:         return KeyboardKey_F19;
+                case XK_F20:         return KeyboardKey_F20;
+                case XK_F21:         return KeyboardKey_F21;
+                case XK_F22:         return KeyboardKey_F22;
+                case XK_F23:         return KeyboardKey_F23;
+                case XK_F24:         return KeyboardKey_F24;
+                case XK_Left:        return KeyboardKey_Left;
+                case XK_Right:       return KeyboardKey_Right;
+                case XK_Up:          return KeyboardKey_Up;
+                case XK_Down:        return KeyboardKey_Down;
+                case XK_space:       return KeyboardKey_Space;
+                case XK_Escape:      return KeyboardKey_Escape;
+                case XK_Control_L:   return KeyboardKey_LeftControl;
+                case XK_Control_R:   return KeyboardKey_RightControl;
+                case XK_Alt_L:       return KeyboardKey_LeftAlt;
+                case XK_Alt_R:       return KeyboardKey_RightAlt;
+                case XK_Super_L:     return KeyboardKey_LeftSystem;
+                case XK_Super_R:     return KeyboardKey_RightSystem;
+                case XK_Shift_L:     return KeyboardKey_LeftShift;
+                case XK_Shift_R:     return KeyboardKey_RightShift;
+                default:             return KeyboardKey_Unknown;
             }
         }
 
@@ -184,7 +182,7 @@ namespace Bull
                             {
                                 WindowEvent event;
 
-                                event.type = WindowEvent::Closed;
+                                event.type = WindowEventType_Closed;
 
                                 pushEvent(event);
                             }
@@ -195,14 +193,14 @@ namespace Bull
                     case KeyPress:
                     {
                         WindowEvent event;
-                        Keyboard::Key key = Keyboard::Key::Unknown;
+                        KeyboardKey key = KeyboardKey_Unknown;
 
-                        for(int i = 0; i < 4 && key == Keyboard::Key::Unknown; i++)
+                        for(int i = 0; i < 4 && key == KeyboardKey_Unknown; i++)
                         {
                             key = convertXKToBullkey(XLookupKeysym(&e.xkey, i));
                         }
 
-                        event.type        = WindowEvent::KeyDown;
+                        event.type        = WindowEventType_KeyDown;
                         event.key.code    = key;
                         event.key.alt     = e.xkey.state & Mod1Mask;
                         event.key.control = e.xkey.state & ControlMask;
@@ -216,14 +214,14 @@ namespace Bull
                     case KeyRelease:
                     {
                         WindowEvent event;
-                        Keyboard::Key key = Keyboard::Key::Unknown;
+                        KeyboardKey key = KeyboardKey_Unknown;
 
-                        for(int i = 0; i < 4 && key == Keyboard::Key::Unknown; i++)
+                        for(int i = 0; i < 4 && key == KeyboardKey_Unknown; i++)
                         {
                             key = convertXKToBullkey(XLookupKeysym(&e.xkey, i));
                         }
 
-                        event.type        = WindowEvent::KeyUp;
+                        event.type        = WindowEventType_KeyUp;
                         event.key.code    = key;
                         event.key.alt     = e.xkey.state & Mod1Mask;
                         event.key.control = e.xkey.state & ControlMask;
@@ -238,7 +236,7 @@ namespace Bull
                     {
                         WindowEvent event;
 
-                        event.type           = WindowEvent::MouseMoved;
+                        event.type           = WindowEventType_MouseMoved;
                         event.mouseMove.x    = e.xmotion.x;
                         event.mouseMove.y    = e.xmotion.y;
                         event.mouseMove.xRel = event.mouseMove.x - getCursorPosition().x();
@@ -254,14 +252,14 @@ namespace Bull
 
                         if(e.xbutton.button <= Button3 || e.xbutton.button >= Button8)
                         {
-                            event.type = WindowEvent::MouseButtonDown;
+                            event.type = WindowEventType_MouseButtonDown;
 
                             event.mouseButton.x = e.xbutton.x;
                             event.mouseButton.y = e.xbutton.y;
                         }
                         else
                         {
-                            event.type = WindowEvent::MouseWheel;
+                            event.type = WindowEventType_MouseWheel;
 
                             event.mouseWheel.x = e.xbutton.x;
                             event.mouseWheel.y = e.xbutton.y;
@@ -270,35 +268,35 @@ namespace Bull
                         switch(e.xbutton.button)
                         {
                             case Button1:
-                                event.mouseButton.button = Mouse::Left;
+                                event.mouseButton.button = MouseButton_Left;
                             break;
                             case Button2:
-                                event.mouseButton.button = Mouse::Middle;
+                                event.mouseButton.button = MouseButton_Middle;
                             break;
                             case Button3:
-                                event.mouseButton.button = Mouse::Right;
+                                event.mouseButton.button = MouseButton_Right;
                             break;
                             case Button4:
                                 event.mouseWheel.up      = true;
-                                event.mouseWheel.wheel   = Mouse::Vertical;
+                                event.mouseWheel.wheel   = MouseWheel_Vertical;
                             break;
                             case Button5:
                                 event.mouseWheel.up      = false;
-                                event.mouseWheel.wheel   = Mouse::Vertical;
+                                event.mouseWheel.wheel   = MouseWheel_Vertical;
                             break;
                             case Button6:
                                 event.mouseWheel.up      = true;
-                                event.mouseWheel.wheel   = Mouse::Horizontal;
+                                event.mouseWheel.wheel   = MouseWheel_Horizontal;
                             break;
                             case Button7:
                                 event.mouseWheel.up      = false;
-                                event.mouseWheel.wheel   = Mouse::Horizontal;
+                                event.mouseWheel.wheel   = MouseWheel_Horizontal;
                             break;
                             case Button8:
-                                event.mouseButton.button = Mouse::Extra1;
+                                event.mouseButton.button = MouseButton_Extra1;
                             break;
                             case Button9:
-                                event.mouseButton.button = Mouse::Extra2;
+                                event.mouseButton.button = MouseButton_Extra2;
                             break;
                         }
 
@@ -311,25 +309,15 @@ namespace Bull
                         if(e.xbutton.button <= Button3 || e.xbutton.button >= Button8)
                         {
                             WindowEvent event;
-                            event.type = WindowEvent::MouseButtonUp;
+                            event.type = WindowEventType_MouseButtonUp;
 
                             switch(e.xbutton.button)
                             {
-                                case Button1:
-                                    event.mouseButton.button = Mouse::Left;
-                                break;
-                                case Button2:
-                                    event.mouseButton.button = Mouse::Middle;
-                                break;
-                                case Button3:
-                                    event.mouseButton.button = Mouse::Right;
-                                break;
-                                case Button8:
-                                    event.mouseButton.button = Mouse::Extra1;
-                                break;
-                                case Button9:
-                                    event.mouseButton.button = Mouse::Extra2;
-                                break;
+                                case Button1: event.mouseButton.button = MouseButton_Left;   break;
+                                case Button2: event.mouseButton.button = MouseButton_Middle; break;
+                                case Button3: event.mouseButton.button = MouseButton_Right;  break;
+                                case Button8: event.mouseButton.button = MouseButton_Extra1; break;
+                                case Button9: event.mouseButton.button = MouseButton_Extra2; break;
                             }
 
                             event.mouseButton.x = e.xbutton.x;
@@ -344,7 +332,7 @@ namespace Bull
                     {
                         WindowEvent event;
 
-                        event.type = WindowEvent::GainFocus;
+                        event.type = WindowEventType_GainFocus;
 
                         if(m_captureCursor)
                         {
@@ -352,11 +340,17 @@ namespace Bull
 
                             do
                             {
-                                grabbed = XGrabPointer(m_display->getHandler(), m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
+                                grabbed = XGrabPointer(m_display->getHandler(), m_handler,
+                                                       True,
+                                                       XNone,
+                                                       GrabModeAsync, GrabModeAsync,
+                                                       m_handler,
+                                                       XNone,
+                                                       CurrentTime) == GrabSuccess;
 
                                 if(!grabbed)
                                 {
-                                    Thread::sleep(Time::milliseconds(10.f));
+                                    Thread::sleep(Duration::milliseconds(10.f));
                                 }
                             }while(!grabbed);
                         }
@@ -369,7 +363,7 @@ namespace Bull
                     {
                         WindowEvent event;
 
-                        event.type = WindowEvent::LostFocus;
+                        event.type = WindowEventType_LostFocus;
 
                         if(m_captureCursor)
                         {
@@ -389,7 +383,7 @@ namespace Bull
 
                         if(size != m_lastSize)
                         {
-                            event.type                = WindowEvent::Resized;
+                            event.type                = WindowEventType_Resized;
                             event.windowResize.width  = size.x();
                             event.windowResize.height = size.y();
 
@@ -397,7 +391,7 @@ namespace Bull
                         }
                         else
                         {
-                            event.type         = WindowEvent::Moved;
+                            event.type         = WindowEventType_Moved;
                             event.windowMove.x = position.x();
                             event.windowMove.y = position.y();
                         }
@@ -410,7 +404,7 @@ namespace Bull
                     {
                         WindowEvent event;
 
-                        event.type = WindowEvent::MouseEnter;
+                        event.type = WindowEventType_MouseEnter;
 
                         pushEvent(event);
                     }
@@ -420,7 +414,7 @@ namespace Bull
                     {
                         WindowEvent event;
 
-                        event.type = WindowEvent::MouseLeave;
+                        event.type = WindowEventType_MouseLeave;
 
                         pushEvent(event);
                     }
@@ -477,11 +471,17 @@ namespace Bull
 
                 do
                 {
-                    grabbed = XGrabPointer(m_display->getHandler(), m_handler, True, XNone, GrabModeAsync, GrabModeAsync, m_handler, XNone, CurrentTime) != GrabSuccess;
+                    grabbed = XGrabPointer(m_display->getHandler(), m_handler,
+                                           True,
+                                           XNone,
+                                           GrabModeAsync, GrabModeAsync,
+                                           m_handler,
+                                           XNone,
+                                           CurrentTime) == GrabSuccess;
 
                     if(!grabbed)
                     {
-                        Thread::sleep(Time::milliseconds(10.f));
+                        Thread::sleep(Duration::milliseconds(10.f));
                     }
                 }while(!grabbed);
             }
@@ -578,7 +578,7 @@ namespace Bull
 
             XFetchName(m_display->getHandler(), m_handler, &buffer);
 
-            title.set(buffer);
+            title = buffer;
 
             XFree(buffer);
 
@@ -630,7 +630,7 @@ namespace Bull
             unsigned int defaultDepth = m_display->getDefaultDepth();
             XVisual* defaultVisual    = DefaultVisual(m_display->getHandler(), m_display->getDefaultScreen());
 
-            ByteArray pixels(icon.getPixels().getCapacity());
+            ByteVector pixels(icon.getPixels().getCapacity());
 
             for(std::size_t i = 0; i < icon.getSize().x() * icon.getSize().y(); i++)
             {
@@ -665,7 +665,7 @@ namespace Bull
             XDestroyImage(image);
 
             std::size_t pitch = (width + 7 / 8);
-            ByteArray pixelMask(pitch * height);
+            ByteVector pixelMask(pitch * height);
 
             for(std::size_t j = 0; j < height; j++)
             {
@@ -736,7 +736,7 @@ namespace Bull
         }
 
         WindowImplXlib::WindowImplXlib() :
-            m_display(Display::get()),
+            m_display(Display::getInstance()),
             m_handler(0),
             m_isMapped(false),
             m_hiddenCursor(0),
@@ -746,7 +746,7 @@ namespace Bull
             m_screen = ScreenOfDisplay(m_display->getHandler(), m_display->getDefaultScreen());
         }
 
-        void WindowImplXlib::open(const VideoMode& mode, const String& title, Uint32 WindowStyle)
+        void WindowImplXlib::open(const VideoMode& mode, const String& title, Uint32 style)
         {
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
@@ -779,10 +779,10 @@ namespace Bull
                 throw RuntimeError("Failed to create window");
             }
 
-            initialize(title, WindowStyle);
+            initialize(title, style);
         }
 
-        void WindowImplXlib::open(unsigned int width, unsigned int height, const String& title, Uint32 WindowStyle, XVisualInfo* vi)
+        void WindowImplXlib::open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi)
         {
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
@@ -813,7 +813,7 @@ namespace Bull
                 throw RuntimeError("Failed to create window");
             }
 
-            initialize(title, WindowStyle);
+            initialize(title, style);
         }
 
         void WindowImplXlib::initialize(const String& title, Uint32 style)
@@ -872,7 +872,7 @@ namespace Bull
 
             m_lastSize = getSize();
 
-            setVisible(style & WindowStyle_Visible);
+            setVisible(true);
         }
 
         void WindowImplXlib::setProtocols()

@@ -14,7 +14,7 @@ namespace Bull
         year(1970),
         month(DateMonth_January),
         minute(0),
-        second(Time::seconds(0)),
+        second(Duration::Zero),
         dayOfWeek(DateDay_Thusday)
     {
         /// Nothing

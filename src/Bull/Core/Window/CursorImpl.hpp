@@ -1,5 +1,5 @@
-#ifndef BULL_CORECURSORIMPL_HPP
-#define BULL_CORECURSORIMPL_HPP
+#ifndef BULL_CORE_WINDOW_CURSORIMPL_HPP
+#define BULL_CORE_WINDOW_CURSORIMPL_HPP
 
 #include <memory>
 
@@ -66,4 +66,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_CORECURSORIMPL_HPP
+#endif // BULL_CORE_WINDOW_CURSORIMPL_HPP

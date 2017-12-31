@@ -12,7 +12,7 @@ namespace Bull
     #if defined BULL_OS_WINDOWS
         typedef Uint64 SocketHandler;
     #else
-        #error Lack of implementation : SocketHandler
+        typedef int SocketHandler;
     #endif
 }
 

@@ -42,7 +42,7 @@ namespace Bull
         return m_impl->wait();
     }
 
-    bool SocketPoller::wait(const Time& timeout)
+    bool SocketPoller::wait(const Duration& timeout)
     {
         return m_impl->wait(timeout);
     }

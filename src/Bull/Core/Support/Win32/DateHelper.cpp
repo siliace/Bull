@@ -15,7 +15,7 @@ namespace Bull
             date.dayOfWeek = DateDay(sysTime.wDayOfWeek);
             date.hour      = sysTime.wHour;
             date.minute    = sysTime.wMinute;
-            date.second    = Time::seconds(sysTime.wSecond) + Time::milliseconds(sysTime.wMilliseconds);
+            date.second    = Duration::seconds(sysTime.wSecond) + Duration::milliseconds(sysTime.wMilliseconds);
 
             return date;
         }

@@ -22,9 +22,22 @@ namespace Bull
          *
          */
         template <typename... Args>
-        T& createAsset(const String& name, Args&&... args)
+        T* create(const String& name, Args&&... args)
         {
-            return static_cast<T&>(*(m_assets[name] = std::make_unique<T>(std::forward<Args>(args)...)));
+            typename AssetMap::iterator it = m_assets.find(name);
+
+            if(it == m_assets.end())
+            {
+                it = m_assets.insert(
+                        std::make_pair(name, new T(std::forward<Args>(args)...))
+                ).first;
+            }
+            else
+            {
+                it->second = std::make_unique<T>(std::forward<Args>(args)...);
+            }
+
+            return it->second.get();
         }
 
         /*! \brief Register an Asset in the AssetManager
@@ -34,7 +47,7 @@ namespace Bull
          * \param override True to override the existing Asset
          *
          */
-        bool registerAsset(T* asset, const String& name, bool override = true)
+        bool add(T* asset, const String& name, bool override = true)
         {
             if(!has(name) || override)
             {
@@ -49,7 +62,7 @@ namespace Bull
          * \param name The name of the Asset to remove
          *
          */
-        void unregisterAsset(const String& name)
+        void remove(const String& name)
         {
             m_assets.erase(m_assets.find(name));
         }
@@ -66,21 +79,35 @@ namespace Bull
             return m_assets.find(name) != m_assets.end();
         }
 
-        /*! \brief Get an Asset
+        /*! \brief Find an Asset by its name a new one and return it
          *
-         * \param name The name of the Asset to get
+         * \param name The name of the Asset to find
          *
          * \return The Asset
          *
          */
-        T& getAsset(const String& name)
+        T* find(const String& name)
         {
-            if(!has(name))
+            typename AssetMap::iterator it = m_assets.find(name);
+
+            if(it != m_assets.end())
             {
-                return createAsset(name);
+                return it->second.get();
             }
 
-            return static_cast<T&>(*m_assets[name]);
+            return nullptr;
+        }
+
+        /*! \brief Find an Asset by its name or create a new one and return it
+         *
+         * \param name The name of the Asset to find
+         *
+         * \return The Asset
+         *
+         */
+        T* findOrCreate(const String& name)
+        {
+            return find(name) ?: create(name);
         }
 
         /*! \brief Delete every Asset
@@ -93,7 +120,9 @@ namespace Bull
 
     private:
 
-        std::map<String, std::unique_ptr<T>> m_assets;
+        using AssetMap = std::map<String, std::unique_ptr<T>>;
+
+        AssetMap m_assets;
     };
 }
 

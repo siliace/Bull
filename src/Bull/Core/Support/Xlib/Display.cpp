@@ -5,9 +5,11 @@ namespace Bull
 {
     namespace prv
     {
-        Display::Display() :
-            m_display(XOpenDisplay(nullptr))
+        Display::Display()
         {
+            XInitThreads();
+
+            m_display = XOpenDisplay(nullptr);
 
             if(!m_display)
             {
@@ -58,6 +60,8 @@ namespace Bull
 
         Atom Display::getAtom(const String& name, bool mustExists)
         {
+            XLockDisplay(m_display);
+
             std::map<String, XAtom>::const_iterator iterator = m_atoms.find(name);
 
             if(iterator != m_atoms.end())
@@ -66,6 +70,8 @@ namespace Bull
             }
 
             XAtom atom = XInternAtom(m_display, name.getBuffer(), mustExists ? True : False);
+
+            XUnlockDisplay(m_display);
 
             m_atoms[name] = atom;
 

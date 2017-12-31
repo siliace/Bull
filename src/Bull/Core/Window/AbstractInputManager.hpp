@@ -3,7 +3,7 @@
 
 #include <queue>
 
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 #include <Bull/Core/Window/WindowEvent.hpp>
 
 namespace Bull
@@ -38,14 +38,14 @@ namespace Bull
              * \param delay The delay between two key repeat
              *
              */
-            virtual void setRepeatDelay(const Time& delay) = 0;
+            virtual void setRepeatDelay(const Duration& delay) = 0;
 
             /*! \brief Get the delay between two key repeat
              *
              * \return delay The delay between two key repeat
              *
              */
-            virtual const Time& getRepeatDelay() = 0;
+            virtual const Duration& getRepeatDelay() = 0;
         };
     }
 }

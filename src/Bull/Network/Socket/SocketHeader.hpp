@@ -3,5 +3,5 @@
 #if defined BULL_OS_WINDOWS
     #include <Bull/Network/Socket/Win32/SocketHeader.hpp>
 #else
-    #error Lack of implementation : SocketHeader
+    #include <Bull/Network/Socket/Unix/SocketHeader.hpp>
 #endif

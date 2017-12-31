@@ -2,7 +2,7 @@
 #define BULL_RENDER_TARGET_RENDERWINDOW_HPP
 
 #include <Bull/Core/Time/Clock.hpp>
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 #include <Bull/Core/Window/Window.hpp>
 #include <Bull/Core/Window/VideoMode.hpp>
 
@@ -111,7 +111,7 @@ namespace Bull
     private:
 
         Clock m_clock;
-        Time  m_frameDelay;
+        Duration  m_frameDelay;
     };
 }
 

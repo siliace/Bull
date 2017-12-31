@@ -49,27 +49,28 @@ namespace Bull
     {
         ShaderStage vertexStage, fragmentStage;
 
-        ShaderStageLoader::get()->loadFromPath(vertexStage, vertex, ShaderStageType_Vertex);
-        ShaderStageLoader::get()->loadFromPath(fragmentStage, fragment, ShaderStageType_Fragment);
+        ShaderStageLoader::getInstance()->loadFromPath(vertexStage, vertex, ShaderStageType_Vertex);
+        ShaderStageLoader::getInstance()->loadFromPath(fragmentStage, fragment, ShaderStageType_Fragment);
 
-        if(ShaderStageLoader::get()->wait())
+        if(ShaderStageLoader::getInstance()->wait())
         {
-            return attach(vertexStage) && attach(fragmentStage);
+            return attach(vertexStage) && attach(fragmentStage) && link();
         }
 
         return false;
     }
 
-    bool Shader::create(InStream& vertex, InStream& fragment)
+    bool Shader::create(const Path& vertex, const Path& fragment, const Path& geometry)
     {
-        ShaderStage vertexStage, fragmentStage;
+        ShaderStage vertexStage, fragmentStage, geometryStage;
 
-        ShaderStageLoader::get()->loadFromStream(vertexStage, vertex, ShaderStageType_Vertex);
-        ShaderStageLoader::get()->loadFromStream(fragmentStage, fragment, ShaderStageType_Fragment);
+        ShaderStageLoader::getInstance()->loadFromPath(vertexStage, vertex, ShaderStageType_Vertex);
+        ShaderStageLoader::getInstance()->loadFromPath(fragmentStage, fragment, ShaderStageType_Fragment);
+        ShaderStageLoader::getInstance()->loadFromPath(geometryStage, geometry, ShaderStageType_Geometry);
 
-        if(ShaderStageLoader::get()->wait())
+        if(ShaderStageLoader::getInstance()->wait())
         {
-            return attach(vertexStage) && attach(fragmentStage);
+            return attach(vertexStage) && attach(fragmentStage) && attach(geometryStage) && link();
         }
 
         return false;
@@ -91,9 +92,9 @@ namespace Bull
     {
         ShaderStage stage;
 
-        if(ShaderStageLoader::get()->loadFromPath(stage, path, type))
+        if(ShaderStageLoader::getInstance()->loadFromPath(stage, path, type))
         {
-            if(ShaderStageLoader::get()->wait())
+            if(ShaderStageLoader::getInstance()->wait())
             {
                 return attach(stage);
             }
@@ -106,9 +107,9 @@ namespace Bull
     {
         ShaderStage stage;
 
-        if(ShaderStageLoader::get()->loadFromStream(stage, stream, type))
+        if(ShaderStageLoader::getInstance()->loadFromStream(stage, stream, type))
         {
-            if(ShaderStageLoader::get()->wait())
+            if(ShaderStageLoader::getInstance()->wait())
             {
                 return attach(stage);
             }
@@ -125,7 +126,7 @@ namespace Bull
 
             if(!isLinked())
             {
-                Log::get()->write(getErrorMessage(), LogLevel::LogLevel_Error);
+                Log::getInstance()->write(getErrorMessage(), LogLevel::LogLevel_Error);
 
                 return false;
             }

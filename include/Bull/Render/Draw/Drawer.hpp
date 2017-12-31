@@ -1,6 +1,8 @@
 #ifndef BULL_RENDER_DRAW_DRAWER_HPP
 #define BULL_RENDER_DRAW_DRAWER_HPP
 
+#include <utility>
+
 #include <Bull/Core/Utility/DataType.hpp>
 
 #include <Bull/Render/Draw/RenderPrimitive.hpp>
@@ -15,7 +17,7 @@ namespace Bull
         /*! \brief Draw arrays
          *
          * \param primitive The primitive to use to draw
-         * \param start     The index of the first vertex to drax
+         * \param start     The index of the first vertex to draw
          * \param count     The number of vertices to draw
          *
          */
@@ -37,7 +39,7 @@ namespace Bull
          *
          * \param primitive The RenderPrimitive to convert
          *
-         * \return The OpenGL rendering mdoe
+         * \return The OpenGL rendering mode
          *
          */
         static unsigned int convertPrimitive(RenderPrimitive primitive);

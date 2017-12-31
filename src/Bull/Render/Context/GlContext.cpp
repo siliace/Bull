@@ -4,6 +4,7 @@
 
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglContext.hpp>
@@ -58,7 +59,7 @@ namespace Bull
             shared->setActive(true);
 
             /// We load OpenGL functions before initialize because this method uses OpenGL functions (glEnable, glGetIntegerv...)
-            ExtensionsLoader::Instance loader = ExtensionsLoader::get(shared->getSurfaceHandler());
+            ExtensionsLoader::Instance loader = ExtensionsLoader::getInstance(shared->getSurfaceHandler());
 
             ContextType::requireExtensions(loader);
             loader->loadExtensions();
@@ -129,12 +130,12 @@ namespace Bull
 
         bool GlContext::isLoaded(const ExtensionsLoader::Extension& extension)
         {
-            return ExtensionsLoader::isSet() && ExtensionsLoader::get()->isLoaded(extension);
+            return ExtensionsLoader::isSet() && ExtensionsLoader::getInstance()->isLoaded(extension);
         }
 
         bool GlContext::isSupported(const String& extension)
         {
-            return ExtensionsLoader::isSet() && ExtensionsLoader::get()->isSupported(extension);
+            return ExtensionsLoader::isSet() && ExtensionsLoader::getInstance()->isSupported(extension);
         }
 
         void GlContext::debugProc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* msg, const void* userParam)
@@ -166,7 +167,7 @@ namespace Bull
             }
 
             oss << message;
-            Log::get()->write(oss.toString(), (severity == GL_DEBUG_SEVERITY_NOTIFICATION) ? LogLevel_Info : LogLevel_Error);
+            Log::getInstance()->write(oss.toString(), (severity == GL_DEBUG_SEVERITY_NOTIFICATION) ? LogLevel_Info : LogLevel_Error);
         }
 
         int GlContext::evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int antialiasing, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted)

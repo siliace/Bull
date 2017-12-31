@@ -4,7 +4,7 @@
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Time/DateDay.hpp>
 #include <Bull/Core/Time/DateMonth.hpp>
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 namespace Bull
 {
@@ -117,7 +117,7 @@ namespace Bull
         Uint32    year;
         DateMonth month;
         Uint8     minute;
-        Time      second;
+        Duration      second;
         DateDay   dayOfWeek;
     };
 }

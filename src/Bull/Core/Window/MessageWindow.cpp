@@ -2,6 +2,12 @@
 #include <Bull/Core/Window/MessageWindowImpl.hpp>
 #include <Bull/Core/Window/WindowImpl.hpp>
 
+#if defined BULL_OS_WINDOWS
+    #define NULL_WINDOW_HANDLER nullptr
+#else
+    #define NULL_WINDOW_HANDLER 0
+#endif
+
 namespace Bull
 {
     MessageWindow::MessageWindow() :
@@ -20,6 +26,8 @@ namespace Bull
 
     MessageWindowResponse MessageWindow::open(const String& message, const String& title, const Window* parent)
     {
-        return prv::MessageWindowImpl::open(message, title, icon, buttons, defaultButton, (parent) ? parent->getImpl()->getSystemHandler() : nullptr);
+        return prv::MessageWindowImpl::open(message, title,
+                                            icon, buttons, defaultButton,
+                                            (parent) ? parent->getImpl()->getSystemHandler() : NULL_WINDOW_HANDLER);
     }
 }

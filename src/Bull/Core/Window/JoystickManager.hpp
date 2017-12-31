@@ -63,14 +63,14 @@ namespace Bull
              * \param delay The delay between two key repeat
              *
              */
-            void setRepeatDelay(const Time& delay) override;
+            void setRepeatDelay(const Duration& delay) override;
 
             /*! \brief Get the delay between two key repeat
              *
              * \return delay The delay between two key repeat
              *
              */
-            const Time& getRepeatDelay() override;
+            const Duration& getRepeatDelay() override;
 
         private:
 
@@ -85,7 +85,7 @@ namespace Bull
             bool                                             m_keyrepeat;
             float                                            m_threshold;
             std::array<JoystickState, Joystick::CountButton> m_stateCache;
-            Time                                             m_repeatDelay;
+            Duration                                             m_repeatDelay;
         };
     }
 }

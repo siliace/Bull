@@ -1,19 +1,20 @@
 #ifndef BULL_GRAPHICS_LIGHT_DIRECTIONALLIGHT_HPP
 #define BULL_GRAPHICS_LIGHT_DIRECTIONALLIGHT_HPP
 
-#include <Bull/Graphics/Light/Light.hpp>
+#include <Bull/Graphics/Light/AbstractLight.hpp>
+
 #include <Bull/Math/Vector/Vector3.hpp>
 
 namespace Bull
 {
-    class BULL_GRAPHICS_API DirectionalLight : public Light
+    class BULL_GRAPHICS_API DirectionalLight : public AbstractLight
     {
     public:
 
         /*! \brief Default constructor
          *
          */
-        DirectionalLight();
+        DirectionalLight() = default;
 
         /*! \brief Constructor
          *
@@ -22,6 +23,14 @@ namespace Bull
          *
          */
         explicit DirectionalLight(const Vector3F& direction, const Color& color = Color::White);
+
+        /*! \brief Send uniforms values to a Shader
+         *
+         * \param shader The Shader
+         * \param name   The name of the uniform
+         *
+         */
+        void setUniforms(Shader& shader, const String& name) const override;
 
         /*! \brief Set the direction of the DirectionalLight
          *

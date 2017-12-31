@@ -6,7 +6,7 @@
 #include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Hardware/JoystickAxis.hpp>
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 namespace Bull
 {
@@ -102,14 +102,14 @@ namespace Bull
          * \param delay The delay between two key repeat
          *
          */
-        static void setRepeatDelay(const Time& delay);
+        static void setRepeatDelay(const Duration& delay);
 
         /*! \brief Get the delay between two key repeat
          *
          * \return delay The delay between two key repeat
          *
          */
-        static const Time& getRepeatDelay();
+        static const Duration& getRepeatDelay();
     };
 }
 

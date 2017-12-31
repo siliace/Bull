@@ -4,7 +4,7 @@
 #include <memory>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Thread/Lock.hpp>
+#include <Bull/Core/Concurrency/Lock.hpp>
 
 namespace Bull
 {
@@ -23,7 +23,7 @@ namespace Bull
          *
          */
         template<typename... Args>
-        static Instance get(Args&&... args)
+        static Instance getInstance(Args&&... args)
         {
             if(!s_instance)
             {

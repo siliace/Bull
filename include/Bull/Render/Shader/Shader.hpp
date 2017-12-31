@@ -1,13 +1,14 @@
 #ifndef BULL_RENDER_SHADER_SHADER_HPP
 #define BULL_RENDER_SHADER_SHADER_HPP
 
+#include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/Memory/ByteVector.hpp>
 #include <Bull/Core/Utility/Color.hpp>
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
 #include <Bull/Math/Vector/Vector.hpp>
 
-#include <Bull/Render/Export.hpp>
 #include <Bull/Render/Shader/ShaderBinary.hpp>
 #include <Bull/Render/Shader/ShaderStage.hpp>
 
@@ -45,25 +46,9 @@ namespace Bull
          */
         bool create(const ShaderBinary& shaderBinary);
 
-        /*! \brief Create a Shader by loading both vertex stage and fragment stage from their Path
-         *
-         * \param vertex   The Path of the vertex shader
-         * \param fragment The Path of the fragment shader
-         *
-         * \return True if the Shader was created successfully
-         *
-         */
         bool create(const Path& vertex, const Path& fragment);
 
-        /*! \brief Create a Shader by loading both vertex stage and fragment stage from streams
-         *
-         * \param vertex   The stream of the vertex shader
-         * \param fragment The stream of the fragment shader
-         *
-         * \return True if the Shader was created successfully
-         *
-         */
-        bool create(InStream& vertex, InStream& fragment);
+        bool create(const Path& vertex, const Path& fragment, const Path& geometry);
 
         /*! \brief Attach a ShaderStage to this Shader
          *

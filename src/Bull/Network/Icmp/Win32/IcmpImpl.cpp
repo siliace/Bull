@@ -7,9 +7,9 @@ namespace Bull
 {
     namespace prv
     {
-        Time IcmpImpl::ping(const IpAddressV4& address, const Time& timeout)
+        Duration IcmpImpl::ping(const IpAddressV4& address, const Duration& timeout)
         {
-            Time duration = Time::Infinite;
+            Duration duration = Duration::Infinite;
             HANDLE icmpHandle = IcmpCreateFile();
 
             if(icmpHandle != INVALID_HANDLE_VALUE)
@@ -27,7 +27,7 @@ namespace Bull
                 {
                     const ICMP_ECHO_REPLY* reply = reinterpret_cast<const ICMP_ECHO_REPLY*>(response.getBuffer());
 
-                    duration = Time::milliseconds(reply->RoundTripTime);
+                    duration = Duration::milliseconds(reply->RoundTripTime);
                 }
 
                 IcmpCloseHandle(icmpHandle);

@@ -12,7 +12,7 @@ namespace Bull
         #if defined BULL_OS_WINDOWS
             typedef WSAPOLLFD SocketPollDescriptor;
         #else
-            #error Lack of implementation : SocketPollDescriptor
+            typedef struct pollfd SocketPollDescriptor;
         #endif
     }
 }

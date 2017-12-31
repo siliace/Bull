@@ -8,9 +8,9 @@ struct Material
     sampler2D specular;
 };
 
-struct Light
+struct DirectionalLight
 {
-    vec3 position;
+    vec3 direction;
     vec4 ambient;
     vec4 diffuse;
     vec4 specular;
@@ -23,12 +23,12 @@ in vec3 frag_normal;
 
 out vec4 pixel;
 
-uniform Light light;
 uniform Material material;
 uniform vec3 camera_position;
+uniform DirectionalLight light;
 
 vec3 normal = normalize(frag_normal);
-vec3 lightDirection = normalize(light.position - frag_position);
+vec3 lightDirection = normalize(-light.direction);
 
 float getDiffusion()
 {

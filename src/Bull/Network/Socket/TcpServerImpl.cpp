@@ -1,4 +1,5 @@
 #include <Bull/Network/Address/SockAddrBuffer.hpp>
+#include <Bull/Network/Socket/SocketLength.hpp>
 #include <Bull/Network/Socket/TcpServerImpl.hpp>
 
 namespace Bull
@@ -40,7 +41,7 @@ namespace Bull
             if(m_socket->isValid())
             {
                 sockaddr addr;
-                int length = sizeof(sockaddr);
+                SocketLength length = sizeof(sockaddr);
 
                 client = ::accept(m_socket->getHandler(), &addr, &length);
 

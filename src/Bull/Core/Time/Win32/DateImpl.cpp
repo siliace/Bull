@@ -18,7 +18,7 @@ namespace Bull
             now.day       = static_cast<Uint8>(lt.wDay);
             now.hour      = static_cast<Uint8>(lt.wHour);
             now.minute    = static_cast<Uint8>(lt.wMinute);
-            now.second    = Time::seconds(lt.wSecond) + Time::milliseconds(lt.wMilliseconds);
+            now.second    = Duration::seconds(lt.wSecond) + Duration::milliseconds(lt.wMilliseconds);
 
             return now;
         }

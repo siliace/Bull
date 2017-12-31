@@ -2,7 +2,7 @@
 #define BULL_NETWORK_SOCKET_TCPCLIENT_HPP
 
 #include <Bull/Core/Memory/AbstractBuffer.hpp>
-#include <Bull/Core/Time/Time.hpp>
+#include <Bull/Core/Time/Duration.hpp>
 
 #include <Bull/Network/Socket/Socket.hpp>
 #include <Bull/Network/Socket/SocketHandler.hpp>
@@ -67,7 +67,7 @@ namespace Bull
          * \return The new SocketState
          *
          */
-        SocketState connect(const IpAddressWrapper& address, NetPort port, const Time& timeout, const Time& pause = Time::milliseconds(20.f));
+        SocketState connect(const IpAddressWrapper& address, NetPort port, const Duration& timeout, const Duration& pause = Duration::milliseconds(20.f));
 
         /*! \brief Tell whether the TcpClient is connected
          *

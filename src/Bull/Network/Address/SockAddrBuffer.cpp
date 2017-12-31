@@ -59,20 +59,22 @@ namespace Bull
         void SockAddrBuffer::createFromIpAddressV4(const IpAddress& address, NetPort port)
         {
             sockaddr_in* addr = reinterpret_cast<sockaddr_in*>(&m_addr);
+            Uint8* bytes      = reinterpret_cast<Uint8*>(&addr->sin_addr);
 
             m_length = sizeof(sockaddr_in);
 
-            addr->sin_family                = AF_INET;
-            addr->sin_port                  = htons(port);
-            addr->sin_addr.S_un.S_un_b.s_b1 = address.at(0);
-            addr->sin_addr.S_un.S_un_b.s_b2 = address.at(1);
-            addr->sin_addr.S_un.S_un_b.s_b3 = address.at(2);
-            addr->sin_addr.S_un.S_un_b.s_b4 = address.at(3);
+            addr->sin_family = AF_INET;
+            addr->sin_port   = htons(port);
+            bytes[0]         = address.at(0);
+            bytes[1]         = address.at(1);
+            bytes[2]         = address.at(2);
+            bytes[3]         = address.at(3);
         }
 
         void SockAddrBuffer::createFromIpAddressV6(const IpAddress& address, NetPort port)
         {
             sockaddr_in6* addr = reinterpret_cast<sockaddr_in6*>(&m_addr);
+            Uint8* bytes       = reinterpret_cast<Uint8*>(&addr->sin6_addr);
 
             m_length = sizeof(sockaddr_in6);
 
@@ -81,28 +83,27 @@ namespace Bull
 
             for(std::size_t i = 0; i < address.getByteCount(); i++)
             {
-                addr->sin6_addr.u.Byte[i] = address.at(i);
+                bytes[i] = address.at(i);
             }
         }
 
         IpAddressV4 SockAddrBuffer::createFromSockAddrV4() const
         {
             const sockaddr_in* addr = reinterpret_cast<const sockaddr_in*>(&m_addr);
+            const Uint8* bytes      = reinterpret_cast<const Uint8*>(&addr->sin_addr);
 
-            return IpAddressV4(addr->sin_addr.S_un.S_un_b.s_b1,
-                               addr->sin_addr.S_un.S_un_b.s_b2,
-                               addr->sin_addr.S_un.S_un_b.s_b3,
-                               addr->sin_addr.S_un.S_un_b.s_b4);
+            return IpAddressV4(bytes[0], bytes[1], bytes[2], bytes[3]);
         }
 
         IpAddressV6 SockAddrBuffer::createFromSockAddrV6() const
         {
             IpAddressV6 address;
             const sockaddr_in6* addr = reinterpret_cast<const sockaddr_in6*>(&m_addr);
+            const Uint8* bytes      = reinterpret_cast<const Uint8*>(&addr->sin6_addr);
 
             for(std::size_t i = 0; i < 16; i++)
             {
-                address.at(i) = addr->sin6_addr.u.Byte[i];
+                address.at(i) = bytes[i];
             }
 
             return address;

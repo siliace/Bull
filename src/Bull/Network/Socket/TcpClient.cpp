@@ -1,4 +1,4 @@
-#include <Bull/Core/Thread/Thread.hpp>
+#include <Bull/Core/Concurrency/Thread.hpp>
 #include <Bull/Core/Time/Clock.hpp>
 
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
@@ -22,7 +22,7 @@ namespace Bull
     {
         if(address.isValid() && port != NetPort_Any && Socket::create(address.getProtocol()))
         {
-            m_impl = std::unique_ptr<prv::TcpClientImpl>(new prv::TcpClientImpl(getImpl()));
+            m_impl = std::make_unique<prv::TcpClientImpl>(getImpl());
 
             if(m_impl->connect(address, port))
             {
@@ -33,7 +33,7 @@ namespace Bull
         return SocketState(prv::SocketImpl::getLastError());
     }
 
-    SocketState TcpClient::connect(const IpAddressWrapper& address, NetPort port, const Time& timeout, const Time& pause)
+    SocketState TcpClient::connect(const IpAddressWrapper& address, NetPort port, const Duration& timeout, const Duration& pause)
     {
         if(address.isValid() && port != NetPort_Any)
         {
@@ -126,7 +126,7 @@ namespace Bull
         {
             m_hostPort    = port;
             m_hostAddress = address;
-            m_impl        = std::unique_ptr<prv::TcpClientImpl>(new prv::TcpClientImpl(getImpl()));
+            m_impl        = std::make_unique<prv::TcpClientImpl>(getImpl());
 
             return true;
         }

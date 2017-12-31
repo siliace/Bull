@@ -2,6 +2,8 @@ target_sources(bull-core
         PUBLIC
             ${CMAKE_CURRENT_SOURCE_DIR}/CursorImplXlib.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/CursorImplXlib.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/MessageWindowImpl.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/MessageWindowImpl.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/VideoModeImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/VideoModeImpl.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WindowImplXlib.hpp

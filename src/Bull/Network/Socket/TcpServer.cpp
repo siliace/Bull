@@ -1,4 +1,4 @@
-#include <Bull/Core/Thread/Thread.hpp>
+#include <Bull/Core/Concurrency/Thread.hpp>
 #include <Bull/Core/Time/Clock.hpp>
 #include <Bull/Core/Utility/CleanupCallback.hpp>
 
@@ -26,7 +26,7 @@ namespace Bull
     {
         if(port != NetPort_Any && host.isValid() && create(host.getProtocol()))
         {
-            m_impl = std::unique_ptr<prv::TcpServerImpl>(new prv::TcpServerImpl(getImpl()));
+            m_impl = std::make_unique<prv::TcpServerImpl>(getImpl());
 
             if(m_impl->bind(host, port))
             {
@@ -66,7 +66,7 @@ namespace Bull
         return SocketState(prv::SocketImpl::getLastError());
     }
 
-    SocketState TcpServer::accept(TcpClient& client, const Time& timeout, const Time& pause)
+    SocketState TcpServer::accept(TcpClient& client, const Duration& timeout, const Duration& pause)
     {
         if(isListening())
         {
