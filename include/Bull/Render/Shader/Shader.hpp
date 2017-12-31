@@ -45,6 +45,10 @@ namespace Bull
          */
         bool create(const ShaderBinary& shaderBinary);
 
+        bool create(const Path& vertex, const Path& fragment);
+
+        bool create(const Path& vertex, const Path& fragment, const Path& geometry);
+
         /*! \brief Attach a ShaderStage to this Shader
          *
          * \param stage The stage to attach to this Shader

@@ -45,6 +45,37 @@ namespace Bull
         return false;
     }
 
+    bool Shader::create(const Path& vertex, const Path& fragment)
+    {
+        ShaderStage vertexStage, fragmentStage;
+
+        ShaderStageLoader::getInstance()->loadFromPath(vertexStage, vertex, ShaderStageType_Vertex);
+        ShaderStageLoader::getInstance()->loadFromPath(fragmentStage, fragment, ShaderStageType_Fragment);
+
+        if(ShaderStageLoader::getInstance()->wait())
+        {
+            return attach(vertexStage) && attach(fragmentStage) && link();
+        }
+
+        return false;
+    }
+
+    bool Shader::create(const Path& vertex, const Path& fragment, const Path& geometry)
+    {
+        ShaderStage vertexStage, fragmentStage, geometryStage;
+
+        ShaderStageLoader::getInstance()->loadFromPath(vertexStage, vertex, ShaderStageType_Vertex);
+        ShaderStageLoader::getInstance()->loadFromPath(fragmentStage, fragment, ShaderStageType_Fragment);
+        ShaderStageLoader::getInstance()->loadFromPath(geometryStage, geometry, ShaderStageType_Geometry);
+
+        if(ShaderStageLoader::getInstance()->wait())
+        {
+            return attach(vertexStage) && attach(fragmentStage) && attach(geometryStage) && link();
+        }
+
+        return false;
+    }
+
     bool Shader::attach(const ShaderStage& stage)
     {
         if(stage.isValid() && stage.isCompiled())
