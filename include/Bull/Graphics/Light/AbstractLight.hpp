@@ -1,15 +1,27 @@
 #ifndef BULL_GRAPHICS_LIGHT_ABSTRACTLIGHT_HPP
 #define BULL_GRAPHICS_LIGHT_ABSTRACTLIGHT_HPP
 
-#include <Bull/Core/Utility/Color.hpp>
-
 #include <Bull/Graphics/Export.hpp>
 #include <Bull/Graphics/Light/LightType.hpp>
 
+#include <Bull/Render/Shader/Shader.hpp>
+
 namespace Bull
-{ 
+{
     class BULL_GRAPHICS_API AbstractLight
     {
+    protected:
+
+        /*! \brief Compose the name of a member
+         *
+         * \param base
+         * \param uniform
+         *
+         * \return
+         *
+         */
+        static String compose(const String& base, const String& uniform);
+
     public:
 
         /*! \brief Get the type of the Light
@@ -69,6 +81,14 @@ namespace Bull
          *
          */
         explicit AbstractLight(LightType type);
+
+        /*! \brief Send uniforms values to a Shader
+         *
+         * \param shader The Shader
+         * \param name   The name of the uniform
+         *
+         */
+        virtual void setUniforms(Shader& shader, const String& name) const;
 
     private:
 

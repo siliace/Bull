@@ -1,13 +1,14 @@
 #ifndef BULL_RENDER_SHADER_SHADER_HPP
 #define BULL_RENDER_SHADER_SHADER_HPP
 
+#include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/Memory/ByteVector.hpp>
 #include <Bull/Core/Utility/Color.hpp>
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
 #include <Bull/Math/Vector/Vector.hpp>
 
-#include <Bull/Render/Export.hpp>
 #include <Bull/Render/Shader/ShaderBinary.hpp>
 #include <Bull/Render/Shader/ShaderStage.hpp>
 

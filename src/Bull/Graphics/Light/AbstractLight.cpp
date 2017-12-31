@@ -43,4 +43,19 @@ namespace Bull
         setDiffuseFactor(1.f);
         setAmbientFactor((type == LightType_Directional) ? 0.2f : 0.f);
     }
+
+    void AbstractLight::setUniforms(Shader& shader, const String& name) const
+    {
+        if(shader.isLinked())
+        {
+            shader.setUniformVector(compose(name, "ambient"), Vector4F::makeFromColor(m_color) * m_ambient);
+            shader.setUniformVector(compose(name, "diffuse"), Vector4F::makeFromColor(m_color) * m_diffuse);
+            shader.setUniformVector(compose(name, "specular"), Vector4F::makeFromColor(m_color));
+        }
+    }
+
+    String compose(const String& base, const String& member)
+    {
+        return base + "." + member;
+    }
 }
