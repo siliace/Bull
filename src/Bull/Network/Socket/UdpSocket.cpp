@@ -18,7 +18,7 @@ namespace Bull
     {
         if(create(address.getProtocol()) && address.isValid() && port != NetPort_Any)
         {
-            m_impl = std::unique_ptr<prv::UdpSocketImpl>(new prv::UdpSocketImpl(getImpl()));
+            m_impl = std::make_unique<prv::UdpSocketImpl>(getImpl());
 
             if(m_impl->bind(port, address))
             {
