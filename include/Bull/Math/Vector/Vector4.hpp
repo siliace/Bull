@@ -1,6 +1,8 @@
 #ifndef BULL_MATH_VECTOR_VECTOR4_HPP
 #define BULL_MATH_VECTOR_VECTOR4_HPP
 
+#include <Bull/Core/Utility/Color.hpp>
+
 #include <Bull/Math/Vector/Vector.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
 
@@ -12,6 +14,23 @@ namespace Bull
         static Vector4<T> Zero;
 
         static Vector4<T> Unit;
+
+        /*! \brief Create a Vector4 from a Color
+         *
+         * \param color The color
+         *
+         * \return The created Vector4
+         *
+         */
+        static Vector4<T> makeFromColor(const Color& color)
+        {
+            return Vector4<T>(
+                    static_cast<T>(color.red)   / 255,
+                    static_cast<T>(color.green) / 255,
+                    static_cast<T>(color.blue)  / 255,
+                    static_cast<T>(color.alpha) / 255
+            );
+        }
 
         /*! \brief Default constructor
          *

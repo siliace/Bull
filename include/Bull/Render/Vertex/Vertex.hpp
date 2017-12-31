@@ -9,7 +9,7 @@
 
 namespace Bull
 {
-    struct BULL_CORE_API Vertex
+    struct BULL_RENDER_API Vertex
     {
         /*! \brief Default constructor
          *

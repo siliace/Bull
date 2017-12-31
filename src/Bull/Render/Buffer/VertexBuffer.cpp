@@ -9,15 +9,15 @@ namespace Bull
         /// Nothing
     }
 
-    VertexBuffer::VertexBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage) :
+    VertexBuffer::VertexBuffer(const VertexArray& vertices, HardwareBufferUsage usage) :
         VertexBuffer()
     {
         create(vertices, usage);
     }
 
-    bool VertexBuffer::create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage)
+    bool VertexBuffer::create(const VertexArray& vertices, HardwareBufferUsage usage)
     {
-        if(HardwareBuffer::create(vertices.size() * sizeof(Vertex), usage))
+        if(HardwareBuffer::create(vertices.getVertexCount() * sizeof(Vertex), usage))
         {
             return fill(&vertices[0], getCapacity(), 0);
         }
