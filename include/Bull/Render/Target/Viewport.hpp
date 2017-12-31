@@ -3,9 +3,11 @@
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
+#include <Bull/Render/Export.hpp>
+
 namespace Bull
 {
-    struct Viewport
+    struct BULL_RENDER_API Viewport
     {
         /*! \brief Default constructor
          *
