@@ -14,7 +14,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        DirectionalLight() = default;
+        DirectionalLight();
 
         /*! \brief Constructor
          *

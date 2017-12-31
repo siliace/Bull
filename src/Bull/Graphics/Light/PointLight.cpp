@@ -3,7 +3,7 @@
 namespace Bull
 {
     PointLight::PointLight() :
-        PointLight(Vector3F::Zero)
+        AbstractLight(LightType_Point)
     {
         /// Nothing
     }
