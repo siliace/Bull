@@ -118,7 +118,7 @@ namespace Bull
 
             /*! \brief Create the render surface
              *
-             * \param handler The window to bind to this context
+             * \param window The window to bind to this context
              *
              */
             void createSurface(const std::unique_ptr<WindowImpl>& window);

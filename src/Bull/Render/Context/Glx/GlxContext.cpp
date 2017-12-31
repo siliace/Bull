@@ -256,9 +256,9 @@ namespace Bull
             return false;
         }
 
-        void GlxContext::createSurface(const std::unique_ptr<WindowImpl>& handler)
+        void GlxContext::createSurface(const std::unique_ptr<WindowImpl>& window)
         {
-            m_window = handler->getSystemHandler();
+            m_window = window->getSystemHandler();
         }
 
         void GlxContext::createSurface(const std::shared_ptr<GlxContext>& shared, unsigned int width, unsigned int height)
