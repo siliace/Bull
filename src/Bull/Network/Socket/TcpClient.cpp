@@ -22,7 +22,7 @@ namespace Bull
     {
         if(address.isValid() && port != NetPort_Any && Socket::create(address.getProtocol()))
         {
-            m_impl = std::unique_ptr<prv::TcpClientImpl>(new prv::TcpClientImpl(getImpl()));
+            m_impl = std::make_unique<prv::TcpClientImpl>(getImpl());
 
             if(m_impl->connect(address, port))
             {
@@ -126,7 +126,7 @@ namespace Bull
         {
             m_hostPort    = port;
             m_hostAddress = address;
-            m_impl        = std::unique_ptr<prv::TcpClientImpl>(new prv::TcpClientImpl(getImpl()));
+            m_impl        = std::make_unique<prv::TcpClientImpl>(getImpl());
 
             return true;
         }
