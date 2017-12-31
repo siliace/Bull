@@ -2,6 +2,11 @@
 
 namespace Bull
 {
+    String AbstractLight::compose(const String& base, const String& member)
+    {
+        return base + "." + member;
+    }
+
     LightType AbstractLight::getType() const
     {
         return m_type;
@@ -52,10 +57,5 @@ namespace Bull
             shader.setUniformVector(compose(name, "diffuse"), Vector4F::makeFromColor(m_color) * m_diffuse);
             shader.setUniformVector(compose(name, "specular"), Vector4F::makeFromColor(m_color));
         }
-    }
-
-    String compose(const String& base, const String& member)
-    {
-        return base + "." + member;
     }
 }
