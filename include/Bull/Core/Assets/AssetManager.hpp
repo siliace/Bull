@@ -32,6 +32,10 @@ namespace Bull
                         std::make_pair(name, new T(std::forward<Args>(args)...))
                 ).first;
             }
+            else
+            {
+                it->second = std::make_unique<T>(std::forward<Args>(args)...);
+            }
 
             return it->second.get();
         }
@@ -103,14 +107,7 @@ namespace Bull
          */
         T* findOrCreate(const String& name)
         {
-            T* asset = find(name);
-
-            if(!asset)
-            {
-                asset = create(name);
-            }
-
-            return asset;
+            return find(name) ?: create(name);
         }
 
         /*! \brief Delete every Asset
