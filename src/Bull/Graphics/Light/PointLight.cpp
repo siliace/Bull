@@ -3,7 +3,7 @@
 namespace Bull
 {
     PointLight::PointLight() :
-        AbstractLight(LightType_Point)
+        PointLight(Vector3F::Zero)
     {
         /// Nothing
     }
@@ -11,19 +11,28 @@ namespace Bull
     PointLight::PointLight(const Vector3F& position, const Color& color) :
         AbstractLight(LightType_Point)
     {
-        setRadius(5.f);
         setColor(color);
         setPosition(position);
+        setAttenuation(1.f, 0.09f, 0.032f);
     }
 
-    void PointLight::setRadius(float radius)
+    void PointLight::setAttenuation(float constant, float linear, float quadratic)
     {
-        m_radius = radius;
+        m_linear    = linear;
+        m_constant  = constant;
+        m_quadratic = quadratic;
     }
 
-    float PointLight::getRadius() const
+    void PointLight::setUniforms(Shader& shader, const String& name) const
     {
-        return m_radius;
+        if(shader.isLinked())
+        {
+            AbstractLight::setUniforms(shader, name);
+            shader.setUniform(compose(name, "linear"), m_linear);
+            shader.setUniform(compose(name, "constant"), m_constant);
+            shader.setUniform(compose(name, "quadratic"), m_quadratic);
+            shader.setUniformVector(compose(name, "position"), m_position);
+        }
     }
 
     void PointLight::setPosition(const Vector3F& position)

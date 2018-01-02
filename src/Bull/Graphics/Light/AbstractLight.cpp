@@ -46,7 +46,7 @@ namespace Bull
         m_type(type)
     {
         setDiffuseFactor(1.f);
-        setAmbientFactor((type == LightType_Directional) ? 0.2f : 0.f);
+        setAmbientFactor(0.2f);
     }
 
     void AbstractLight::setUniforms(Shader& shader, const String& name) const

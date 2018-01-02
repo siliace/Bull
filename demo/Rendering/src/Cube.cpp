@@ -81,9 +81,9 @@ Cube::Cube()
     rotation.pitch = Bull::AngleF::degree(generator.number(0.f, 360.f));
     rotation.yaw   = Bull::AngleF::degree(generator.number(0.f, 360.f));
 
-    translation.x() = generator.number(-6.f, 6.f);
-    translation.y() = generator.number(-6.f, 6.f);
-    translation.z() = generator.number(-6.f, 6.f);
+    translation.x() = generator.number(-3.f, 3.f);
+    translation.y() = generator.number(-3.f, 3.f);
+    translation.z() = generator.number(-3.f, 3.f);
 
     rotate(rotation).move(translation);
 }

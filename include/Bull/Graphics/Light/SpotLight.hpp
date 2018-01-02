@@ -18,17 +18,28 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param position  The position of the SpotLight
-         * \param direction The direction of the SpotLight
-         * \param color     The Color emitted by the SpotLight
+         * \param position  The position
+         * \param direction The direction
+         * \param color     The Color emitted
          *
          */
         SpotLight(const Vector3F& position, const Vector3F& direction, const Color& color = Color::White);
 
-    private:
+        /*! \brief Send uniforms values to a Shader
+         *
+         * \param shader The Shader
+         * \param name   The name of the uniform
+         *
+         */
+        virtual void setUniforms(Shader& shader, const String& name) const override;
 
-        Vector3F m_position;
-        Vector3F m_direction;
+        float    linear;
+        float    constant;
+        Vector3F position;
+        Vector3F direction;
+        float    quadratic;
+        AngleF   innerCutOff;
+        AngleF   outerCutOff;
     };
 }
 

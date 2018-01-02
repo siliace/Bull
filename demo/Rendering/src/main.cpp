@@ -1,6 +1,10 @@
 #include <Bull/Core/Image/ImageLoader.hpp>
+#include <Bull/Core/Log/ConsoleLogger.hpp>
+#include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Graphics/Light/DirectionalLight.hpp>
+#include <Bull/Graphics/Light/PointLight.hpp>
+#include <Bull/Graphics/Light/SpotLight.hpp>
 
 #include <Bull/Math/Clamp.hpp>
 
@@ -14,15 +18,15 @@ using namespace Bull;
 
 int main(int argc, char* argv[])
 {
+    Log::getInstance()->createLogger<ConsoleLogger>();
+
     Shader phong;
     WindowEvent event;
+    SpotLight spotLight;
     AngleF fov = AngleF::degree(45.f);
     Texture diffuse, specular, emission;
-    DirectionalLight directionalLight(Vector3F::UnitX);
     RenderWindow window(VideoMode(800, 600), "Bull Application");
     Vector3F position(0, 0, 3), forward = Vector3F::Backward, up = Vector3F::Up;
-
-    window.setPosition(0, 0);
 
     ImageLoader::getInstance()->loadFromPath(diffuse, Path("../resources/textures/container.png"));
     ImageLoader::getInstance()->loadFromPath(specular, Path("../resources/textures/container_specular.png"));
@@ -41,7 +45,8 @@ int main(int argc, char* argv[])
 
     std::vector<Cube> cubes(10);
 
-    window.setMouseCursorVisible(false);
+    //window.setMouseCursorVisible(false);
+    window.setPosition(100, 200);
 
     while(window.isOpen())
     {
@@ -95,7 +100,7 @@ int main(int argc, char* argv[])
                 forward.z() = std::sin(yaw) * std::cos(pitch);
                 forward.normalize();
 
-                Mouse::center(window);
+                //Mouse::center(window);
             }
 
             if(event.type == WindowEventType_MouseWheel)
@@ -129,8 +134,9 @@ int main(int argc, char* argv[])
         emission.bind();
         phong.setUniform("material.emission", 2);
 
-        directionalLight.setUniforms(phong, "light");
-
+        spotLight.position = position;
+        spotLight.direction = forward;
+        spotLight.setUniforms(phong, "light");
         phong.setUniformVector("camera_position", Vector3F(2.f, 1.f, 3.f));
 
         for(Cube& cube : cubes)
