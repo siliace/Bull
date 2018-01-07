@@ -1,7 +1,6 @@
 #ifndef BULL_CORE_MEMORY_RANGECHECK_HPP
 #define BULL_CORE_MEMORY_RANGECHECK_HPP
 
-#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Export.hpp>
 
 namespace Bull
