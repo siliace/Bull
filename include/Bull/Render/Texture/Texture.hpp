@@ -60,7 +60,14 @@ namespace Bull
          *
          */
         bool create(const ByteVector& pixels, const Vector2UI& size) override;
-        
+
+        /*! \brief Tell whether an Asset is loaded
+         *
+         * \return True if the Asset is loaded
+         *
+         */
+        bool isLoaded() const override;
+
         /*! \brief Bind the Texture
          *
          */

@@ -2,6 +2,12 @@
 
 namespace Bull
 {
+    DirectionalLight::DirectionalLight() :
+        AbstractLight(LightType_Directional)
+    {
+        /// Nothing
+    }
+
     DirectionalLight::DirectionalLight(const Vector3F& direction, const Color& color) :
         AbstractLight(LightType_Directional)
     {

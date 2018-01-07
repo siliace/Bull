@@ -1,13 +1,14 @@
 #ifndef BULL_CORE_IMAGE_ABSTRACTIMAGE_HPP
 #define BULL_CORE_IMAGE_ABSTRACTIMAGE_HPP
 
+#include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Memory/ByteVector.hpp>
 
 #include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {
-    struct BULL_CORE_API AbstractImage
+    struct BULL_CORE_API AbstractImage : public Asset
     {
         /*! \brief Create the AbstractImage
          *

@@ -3,12 +3,13 @@
 
 #include <map>
 
+#include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
 
 namespace Bull
 {
-    template <typename T>
+    template <typename T, typename = std::enable_if<std::is_base_of<Asset, T>::value>>
     class BULL_CORE_API AssetManager : public Singleton<AssetManager<T>>
     {
     public:

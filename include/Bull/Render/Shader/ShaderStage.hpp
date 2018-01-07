@@ -1,6 +1,7 @@
 #ifndef BULL_RENDER_SHADER_SHADERSTAGE_HPP
 #define BULL_RENDER_SHADER_SHADERSTAGE_HPP
 
+#include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
@@ -9,7 +10,7 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource
+    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource, public Asset
     {
     public:
 
@@ -59,6 +60,13 @@ namespace Bull
          *
          */
         bool isValid() const;
+
+        /*! \brief Tell whether the ShaderStage is loaded
+         *
+         * \return True if the ShaderStage is loaded
+         *
+         */
+        bool isLoaded() const override;
 
         /*! \brief Get the source code of the shader
          *

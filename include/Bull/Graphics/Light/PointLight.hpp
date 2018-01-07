@@ -24,19 +24,22 @@ namespace Bull
          */
         explicit PointLight(const Vector3F& position, const Color& color = Color::White);
 
-        /*! \brief Set the radius of the PointLight
+        /*! \brief Set the attenuation of the PointLight
          *
-         * \param radius The radius
+         * \param constant
+         * \param linear
+         * \param quadratic
          *
          */
-        void setRadius(float radius);
+        void setAttenuation(float constant, float linear, float quadratic);
 
-        /*! \brief Get the radius of the PointLight
+        /*! \brief Send uniforms values to a Shader
          *
-         * \return The radius
+         * \param shader The Shader
+         * \param name   The name of the uniform
          *
          */
-        float getRadius() const;
+        void setUniforms(Shader& shader, const String& name) const override;
 
         /*! \brief Set the position of the PointLight
          *
@@ -54,8 +57,10 @@ namespace Bull
 
     private:
 
-        float    m_radius;
+        float    m_linear;
+        float    m_constant;
         Vector3F m_position;
+        float    m_quadratic;
     };
 }
 

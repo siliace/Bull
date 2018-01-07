@@ -109,6 +109,7 @@ namespace gl
     extern PFNGLISENABLEDPROC                 isEnabled;
     extern PFNGLISPROGRAMPROC                 isProgram;
     extern PFNGLISSHADERPROC                  isShader;
+    extern PFNGLISTEXTUREPROC                 isTexture;
     extern PFNGLISVERTEXARRAYPROC             isVertexArray;
     extern PFNGLLINEWIDTHPROC                 lineWidth;
     extern PFNGLLINKPROGRAMPROC               linkProgram;

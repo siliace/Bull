@@ -1,11 +1,12 @@
 #ifndef BULL_CORE_ASSETS_ASSETHANDLER_HPP
 #define BULL_CORE_ASSETS_ASSETHANDLER_HPP
 
+#include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Assets/AssetManager.hpp>
 
 namespace Bull
 {
-    template <typename T>
+    template <typename T, typename = std::enable_if<std::is_base_of<Asset, T>::value>>
     class BULL_CORE_API AssetHandler
     {
     public:
