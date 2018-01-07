@@ -93,6 +93,11 @@ namespace Bull
         return gl::isShader(m_id);
     }
 
+    bool ShaderStage::isLoaded() const
+    {
+        return isCompiled();
+    }
+
     String ShaderStage::getSource() const
     {
         if(isValid())

@@ -86,6 +86,11 @@ namespace Bull
         return false;
     }
 
+    bool Texture::isLoaded() const
+    {
+        return gl::isTexture(m_id);
+    }
+
     void Texture::bind() const
     {
         if(m_id)

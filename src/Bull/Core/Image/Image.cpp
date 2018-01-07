@@ -37,6 +37,11 @@ namespace Bull
         return false;
     }
 
+    bool Image::isLoaded() const
+    {
+        return m_pixels.getCapacity() > 0;
+    }
+
     Image& Image::fill(const Color& color)
     {
         for(std::size_t i = 0; i < m_pixels.getCapacity() / 4; i++)

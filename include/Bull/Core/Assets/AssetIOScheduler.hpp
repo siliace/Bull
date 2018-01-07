@@ -3,11 +3,12 @@
 
 #include <vector>
 
+#include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Concurrency/Thread.hpp>
 
 namespace Bull
 {
-    template <typename T>
+    template <typename T, typename = std::enable_if<std::is_base_of<Asset, T>::value>>
     class BULL_CORE_API AssetIOScheduler
     {
     private:

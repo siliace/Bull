@@ -34,6 +34,13 @@ namespace Bull
          */
         bool create(const ByteVector& pixels, const Vector2UI& size) override;
 
+        /*! \brief Tell whether an Image is loaded
+         *
+         * \return True if the Image is loaded
+         *
+         */
+        bool isLoaded() const override;
+
         /*! \brief Fill the Image with a Color
          *
          * \param color The Color

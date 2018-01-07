@@ -3,8 +3,6 @@
 
 #include <Bull/Core/Memory/String.hpp>
 
-#include <Bull/Core/Export.hpp>
-
 namespace Bull
 {
     struct BULL_CORE_API Clipboard
