@@ -4,7 +4,7 @@
 #include <random>
 
 #include <Bull/Core/Configuration/Integer.hpp>
-#include <Bull/Core/Export.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
@@ -34,6 +34,15 @@ namespace Bull
          */
         template <typename T>
         T number(T min = std::numeric_limits<T>::min(), T max = std::numeric_limits<T>::max());
+
+        /*! \brief Generate a random String
+         *
+         * \param length The length of the String to generate
+         *
+         * \return The random String
+         *
+         */
+        String string(std::size_t length);
 
     private:
 
