@@ -88,36 +88,6 @@ namespace Bull
         return false;
     }
 
-    bool Shader::attachFromPath(const Path& path, ShaderStageType type)
-    {
-        ShaderStage stage;
-
-        if(ShaderStageLoader::getInstance()->loadFromPath(stage, path, type))
-        {
-            if(ShaderStageLoader::getInstance()->wait())
-            {
-                return attach(stage);
-            }
-        }
-
-        return false;
-    }
-
-    bool Shader::attachFromStream(InStream& stream, ShaderStageType type)
-    {
-        ShaderStage stage;
-
-        if(ShaderStageLoader::getInstance()->loadFromStream(stage, stream, type))
-        {
-            if(ShaderStageLoader::getInstance()->wait())
-            {
-                return attach(stage);
-            }
-        }
-
-        return false;
-    }
-
     bool Shader::link()
     {
         if(isValid())

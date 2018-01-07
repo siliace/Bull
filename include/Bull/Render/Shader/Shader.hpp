@@ -35,7 +35,7 @@ namespace Bull
         /*! \brief Destructor
          *
          */
-        virtual ~Shader();
+        ~Shader();
 
         /*! \brief Create a Shader from a ShaderBinary
          *
@@ -46,8 +46,25 @@ namespace Bull
          */
         bool create(const ShaderBinary& shaderBinary);
 
+        /*! \brief Create a Shader by loading its stages from their Path
+         *
+         * \param vertex   The Path of the vertex shader
+         * \param fragment The Path of the fragment shader
+         *
+         * \return True if the Shader was created successfully
+         *
+         */
         bool create(const Path& vertex, const Path& fragment);
 
+        /*! \brief Create a Shader by loading its stages from their Path
+         *
+         * \param vertex   The Path of the vertex shader
+         * \param fragment The Path of the fragment shader
+         * \param geometry The Path of the geometry shader
+         *
+         * \return True if the Shader was created successfully
+         *
+         */
         bool create(const Path& vertex, const Path& fragment, const Path& geometry);
 
         /*! \brief Attach a ShaderStage to this Shader
@@ -58,10 +75,6 @@ namespace Bull
          *
          */
         bool attach(const ShaderStage& stage);
-
-        bool attachFromPath(const Path& path, ShaderStageType type);
-
-        bool attachFromStream(InStream& stream, ShaderStageType type);
 
         /*! \brief Link the shader
          *
