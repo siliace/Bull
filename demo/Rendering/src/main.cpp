@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     SpotLight spotLight;
     AngleF fov = AngleF::degree(45.f);
     Texture diffuse, specular, emission;
-    RenderWindow window(VideoMode(800, 600), "Bull Application");
+    RenderWindow window(VideoMode::getCurrent(), "Bull Application");
     Vector3F position(0, 0, 3), forward = Vector3F::Backward, up = Vector3F::Up;
 
     ImageLoader::getInstance()->loadFromPath(diffuse, Path("../resources/textures/container.png"));
@@ -44,9 +44,6 @@ int main(int argc, char* argv[])
     phong.create(Path("../resources/shaders/phong/phong.vert"), Path("../resources/shaders/phong/phong.frag"));
 
     std::vector<Cube> cubes(10);
-
-    //window.setMouseCursorVisible(false);
-    window.setPosition(100, 200);
 
     while(window.isOpen())
     {
@@ -99,8 +96,6 @@ int main(int argc, char* argv[])
                 forward.y() = std::sin(pitch);
                 forward.z() = std::sin(yaw) * std::cos(pitch);
                 forward.normalize();
-
-                //Mouse::center(window);
             }
 
             if(event.type == WindowEventType_MouseWheel)
