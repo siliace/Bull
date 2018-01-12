@@ -1,5 +1,5 @@
-#ifndef Bull_WglPbuffer_hpp
-#define Bull_WglPbuffer_hpp
+#ifndef BULL_RENDER_CONTEXT_WGL_WGLPBUFFER_HPP
+#define BULL_RENDER_CONTEXT_WGL_WGLPBUFFER_HPP
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 
@@ -35,4 +35,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_WglPbuffer_hpp
+#endif // BULL_RENDER_CONTEXT_WGL_WGLPBUFFER_HPP
