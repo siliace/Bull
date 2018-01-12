@@ -19,7 +19,8 @@
         #endif
      #endif
 #else
-    #define BULL_CORE_API
+    #define BULL_API_EXPORT
+    #define BULL_API_IMPORT
 #endif
 
 
