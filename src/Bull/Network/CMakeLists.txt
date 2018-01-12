@@ -16,3 +16,5 @@ if(BULL_OS_WINDOWS)
     target_link_libraries(bull-network ws2_32)
     target_link_libraries(bull-network iphlpapi)
 endif()
+
+target_link_libraries(bull-network bull-core)
