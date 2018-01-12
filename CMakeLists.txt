@@ -6,7 +6,10 @@ include(cmake/Config.cmake)
 include(cmake/Platform.cmake)
 
 add_definitions(-DBULL_BUILD)
-add_definitions(-DBULL_DYNAMIC)
+
+if(BUILD_SHARED_LIBS)
+    add_definitions(-DBULL_DYNAMIC)
+endif()
 
 if(BULL_OS_WINDOWS)
     set(WINDOWS_BUILD_VERSION "BULL_BUILD_WINDOWS_VISTA")
