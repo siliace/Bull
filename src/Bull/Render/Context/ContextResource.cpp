@@ -20,8 +20,5 @@ namespace Bull
         }
     }
 
-    ContextResource::~ContextResource()
-    {
-        /// Nothing
-    }
+    ContextResource::~ContextResource() = default;
 }
