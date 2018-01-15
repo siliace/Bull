@@ -235,7 +235,7 @@ namespace Bull
             /// Nothing
         }
 
-        void ExtensionsLoader::require(const Extension& extension)
+        void ExtensionsLoader::require(Extension& extension)
         {
             m_extensions.push_back(extension);
         }
@@ -244,11 +244,11 @@ namespace Bull
         {
             if(!m_loadedExtensions)
             {
-                for(Extension& e : m_extensions)
+                for(Extension& extension : m_extensions)
                 {
-                    if(isSupported(e.name))
+                    if(isSupported(extension.getName()))
                     {
-                        e.loaded = e.loader();
+                        extension.load();
                     }
                 }
             }
@@ -443,19 +443,6 @@ namespace Bull
             }
 
             m_loadedFunctions = true;
-        }
-
-        bool ExtensionsLoader::isLoaded(const Extension& extension) const
-        {
-            for(const Extension& e : m_extensions)
-            {
-                if(e.name == extension.name)
-                {
-                    return e.loaded;
-                }
-            }
-
-            return false;
         }
 
         bool ExtensionsLoader::isSupported(const String& extension) const

@@ -1,12 +1,9 @@
-#ifndef Bull_ExtensionsLoader_hpp
-#define Bull_ExtensionsLoader_hpp
-
-#include <functional>
-#include <vector>
+#ifndef BULL_RENDER_CONTEXT_EXTENSIONSLOADER_HPP
+#define BULL_RENDER_CONTEXT_EXTENSIONSLOADER_HPP
 
 #include <Bull/Core/Pattern/Singleton.hpp>
-#include <Bull/Core/Memory/String.hpp>
 
+#include <Bull/Render/Context/Extension.hpp>
 #include <Bull/Render/Context/SurfaceHandler.hpp>
 
 namespace Bull
@@ -15,29 +12,6 @@ namespace Bull
     {
         class ExtensionsLoader : public Singleton<ExtensionsLoader>
         {
-        public:
-
-            struct Extension
-            {
-                /*! \brief Constructor
-                 *
-                 * \param name The name of the extension
-                 * \param loader The function to call to load the extension
-                 *
-                 */
-                Extension(const String& name, const std::function<bool()>& loader) :
-                    name(name),
-                    loader(loader),
-                    loaded(false)
-                {
-                    /// Nothing
-                }
-
-                String                name;
-                std::function<bool()> loader;
-                bool                  loaded;
-            };
-
         public:
 
             /*! \brief Default constructor
@@ -57,7 +31,7 @@ namespace Bull
              * \param extension The extension to load
              *
              */
-            void require(const Extension& extension);
+            void require(Extension& extension);
 
             /*! \brief Load required extensions
              *
@@ -68,15 +42,6 @@ namespace Bull
              *
              */
             void loadFunctions();
-
-            /*! \brief Check whether an OpenGL extension is loaded
-             *
-             * \param extension The extension
-             *
-             * \return Return true if loaded, false otherwise
-             *
-             */
-            bool isLoaded(const Extension& extension) const;
 
             /*! \brief Check whether an OpenGL extension is supported
              *
@@ -89,12 +54,12 @@ namespace Bull
 
         private:
 
-            std::vector<Extension> m_extensions;
-            std::vector<String>    m_allExtensions;
-            bool                   m_loadedFunctions;
-            bool                   m_loadedExtensions;
+            std::vector<std::reference_wrapper<Extension>> m_extensions;
+            std::vector<String>                            m_allExtensions;
+            bool                                           m_loadedFunctions;
+            bool                                           m_loadedExtensions;
         };
     }
 }
 
-#endif // Bull_ExtensionsLoader_hpp
+#endif // BULL_RENDER_CONTEXT_EXTENSIONSLOADER_HPP

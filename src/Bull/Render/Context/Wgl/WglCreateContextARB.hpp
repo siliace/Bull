@@ -1,7 +1,7 @@
-#ifndef Bull_WglCreateContextARB_hpp
-#define Bull_WglCreateContextARB_hpp
+#ifndef BULL_RENDER_CONTEXT_WGL_WGLCREATECONTEXTARB_HPP
+#define BULL_RENDER_CONTEXT_WGL_WGLCREATECONTEXTARB_HPP
 
-#include <Bull/Render/Context/ExtensionsLoader.hpp>
+#include <Bull/Render/Context/Extension.hpp>
 
 #define WGL_CONTEXT_MAJOR_VERSION_ARB             0x2091
 #define WGL_CONTEXT_MINOR_VERSION_ARB             0x2092
@@ -21,7 +21,7 @@ namespace Bull
     {
         HGLRC (WINAPI* wglCreateContextAttribs)(HDC hDC, HGLRC hShareContext, const int *attribList) = nullptr;
 
-        ExtensionsLoader::Extension WglCreateContext("WGL_ARB_create_context", []
+        Extension WglCreateContext("WGL_ARB_create_context", []
         {
             wglCreateContextAttribs = reinterpret_cast<HGLRC (WINAPI*)(HDC, HGLRC, const int*)>(GlContext::getFunction("wglCreateContextAttribsARB"));
 
@@ -30,4 +30,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_WglCreateContextARB_hpp
+#endif // BULL_RENDER_CONTEXT_WGL_WGLCREATECONTEXTARB_HPP

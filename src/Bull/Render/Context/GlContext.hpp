@@ -74,15 +74,6 @@ namespace Bull
 
             /*! \brief Check whether an extensions is loaded
              *
-             * \param  extension The extension
-             *
-             * \return Return true if the extension is loaded, false otherwise
-             *
-             */
-            static bool isLoaded(const ExtensionsLoader::Extension& extension);
-
-            /*! \brief Check whether an extensions is loaded
-             *
              * \param  extension The name of the extension
              *
              * \return Return true if the extension is supported, false otherwise

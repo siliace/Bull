@@ -1,5 +1,5 @@
-#ifndef Bull_WglPixelFormatARB_hpp
-#define Bull_WglPixelFormatARB_hpp
+#ifndef BULL_RENDER_CONTEXT_WGL_WGLPIXELFORMATARB_HPP
+#define BULL_RENDER_CONTEXT_WGL_WGLPIXELFORMATARB_HPP
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 
@@ -61,7 +61,7 @@ namespace Bull
         BOOL (WINAPI* wglGetPixelFormatAttribfv)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues) = nullptr;
         BOOL (WINAPI* wglChoosePixelFormat)(HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats) = nullptr;
 
-        ExtensionsLoader::Extension WglPixelFormat("WGL_ARB_pixel_format", []
+        Extension WglPixelFormat("WGL_ARB_pixel_format", []
         {
             wglGetPixelFormatAttribiv = reinterpret_cast<BOOL (WINAPI*)(HDC, int, int, UINT, const int*, int*)>(GlContext::getFunction("wglGetPixelFormatAttribivARB"));
             wglGetPixelFormatAttribfv = reinterpret_cast<BOOL (WINAPI*)(HDC, int, int, UINT, const int*, FLOAT*)>(GlContext::getFunction("wglGetPixelFormatAttribfvARB"));
@@ -72,4 +72,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_WglPixelFormatARB_hpp
+#endif // BULL_RENDER_CONTEXT_WGL_WGLPIXELFORMATARB_HPP

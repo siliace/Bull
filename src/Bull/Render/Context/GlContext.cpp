@@ -128,11 +128,6 @@ namespace Bull
             return ContextType::getFunction(function);
         }
 
-        bool GlContext::isLoaded(const ExtensionsLoader::Extension& extension)
-        {
-            return ExtensionsLoader::isSet() && ExtensionsLoader::getInstance()->isLoaded(extension);
-        }
-
         bool GlContext::isSupported(const String& extension)
         {
             return ExtensionsLoader::isSet() && ExtensionsLoader::getInstance()->isSupported(extension);
