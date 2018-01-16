@@ -247,9 +247,9 @@ namespace Bull
                 }
                 else
                 {
-                    const GLubyte* version = gl::getString(GL_VERSION);
+                    String version = reinterpret_cast<const char*>(gl::getString(GL_VERSION));
 
-                    if (version)
+                    if(!version.isEmpty())
                     {
                         m_settings.major = static_cast<Uint8>(String::charToInt(version[0]));
                         m_settings.minor = static_cast<Uint8>(String::charToInt(version[2]));
