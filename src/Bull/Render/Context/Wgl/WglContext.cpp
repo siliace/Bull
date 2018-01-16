@@ -385,6 +385,10 @@ namespace Bull
                             m_settings.minor -= 1;
                         }
                     }
+                    else
+                    {
+                        Log::getInstance()->write("Create WglContext  with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), LogLevel::LogLevel_Info);
+                    }
                 }while(!m_render && m_settings.major >= 1);
             }
 

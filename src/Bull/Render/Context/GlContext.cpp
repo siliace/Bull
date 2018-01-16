@@ -130,7 +130,7 @@ namespace Bull
 
         bool GlContext::isSupported(const String& extension)
         {
-            return ExtensionsLoader::isSet() && ExtensionsLoader::getInstance()->isSupported(extension);
+            return ExtensionsLoader::getInstance()->isSupported(extension);
         }
 
         void GlContext::debugProc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* msg, const void* userParam)

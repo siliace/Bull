@@ -38,26 +38,6 @@ namespace Bull
             return s_instance;
         }
 
-        /*! \brief Get the instance only if exists
-         *
-         * \return Return the instance is exists, nullptr otherwise
-         *
-         */
-        static Instance getIfExists()
-        {
-            return isSet() ? s_instance : nullptr;
-        }
-
-        /*! \brief Check whether the instance is set
-         *
-         * \return True if the instance is set
-         *
-         */
-        static bool isSet()
-        {
-            return s_instance != nullptr;
-        }
-
     private:
 
         static Mutex                   s_mutex;

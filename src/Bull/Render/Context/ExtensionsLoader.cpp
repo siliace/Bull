@@ -237,7 +237,7 @@ namespace Bull
 
         void ExtensionsLoader::require(Extension& extension)
         {
-            m_extensions.push_back(extension);
+            m_extensions.emplace_back(extension);
         }
 
         void ExtensionsLoader::loadExtensions()
@@ -249,6 +249,11 @@ namespace Bull
                     if(isSupported(extension.getName()))
                     {
                         extension.load();
+
+                        if(!extension.isLoaded())
+                        {
+                            Log::getInstance()->write("Failed to load OpenGL extension : " + extension.getName(), LogLevel_Info);
+                        }
                     }
                 }
             }
