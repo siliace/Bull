@@ -59,10 +59,10 @@ namespace Bull
             shared->setActive(true);
 
             /// We load OpenGL functions before initialize because this method uses OpenGL functions (glEnable, glGetIntegerv...)
-            ExtensionsLoader::Instance loader = ExtensionsLoader::getInstance(shared->getSurfaceHandler());
+            ExtensionsLoader::Instance loader;
 
             ContextType::requireExtensions(loader);
-            loader->loadExtensions();
+            loader->loadExtensions(shared->getSurfaceHandler());
             loader->loadFunctions();
 
             shared->initialize();

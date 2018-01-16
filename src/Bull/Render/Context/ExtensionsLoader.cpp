@@ -227,23 +227,18 @@ namespace Bull
             /// Nothing
         }
 
-        ExtensionsLoader::ExtensionsLoader(SurfaceHandler handler) :
-            m_allExtensions(ExtensionsLoaderType::getExtensions(handler)),
-            m_loadedFunctions(false),
-            m_loadedExtensions(false)
-        {
-            /// Nothing
-        }
-
         void ExtensionsLoader::require(Extension& extension)
         {
             m_extensions.emplace_back(extension);
         }
 
-        void ExtensionsLoader::loadExtensions()
+        void ExtensionsLoader::loadExtensions(SurfaceHandler surface)
         {
             if(!m_loadedExtensions)
             {
+                m_loadedExtensions = true;
+                m_allExtensions    = ExtensionsLoaderType::getExtensions(surface);
+
                 for(Extension& extension : m_extensions)
                 {
                     if(isSupported(extension.getName()))
@@ -257,8 +252,6 @@ namespace Bull
                     }
                 }
             }
-
-            m_loadedExtensions = true;
         }
 
         void ExtensionsLoader::loadFunctions()
@@ -452,7 +445,12 @@ namespace Bull
 
         bool ExtensionsLoader::isSupported(const String& extension) const
         {
-            return std::find(m_allExtensions.begin(), m_allExtensions.end(), extension) != m_allExtensions.end();
+            if(m_loadedExtensions)
+            {
+                return std::find(m_allExtensions.begin(), m_allExtensions.end(), extension) != m_allExtensions.end();
+            }
+
+            return false;
         }
     }
 }

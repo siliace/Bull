@@ -8,47 +8,73 @@
 
 namespace Bull
 {
-    template<typename TChild>
+    template<typename T>
     class BULL_CORE_API Singleton : public NonCopyable
     {
     public:
 
-        typedef std::unique_ptr<TChild>& Instance;
-
-        /*! \brief Get the instance of the singleton. Create the instance if needed
-         *
-         * \param args Arguments to use to create the instance
-         *
-         * \return Return the instance of the singleton
-         *
-         */
-        template<typename... Args>
-        static Instance getInstance(Args&&... args)
+        struct Instance
         {
-            if(!s_instance)
+            /*! \brief Default constructor
+             *
+             * Create the instance is not exists
+             *
+             */
+            Instance()
             {
-                Lock lock(s_mutex);
-
                 if(!s_instance)
                 {
-                    s_instance = std::make_unique<TChild>(std::forward<Args>(args)...);
+                    Lock lock(s_mutex);
+
+                    if(!s_instance)
+                    {
+                        s_instance = std::make_unique<T>();
+                    }
                 }
             }
 
-            return s_instance;
+            /*! \brief Access operator
+             *
+             * \return A pointer to the instance
+             *
+             */
+            T* operator->()
+            {
+                return s_instance.get();
+            }
+        };
+
+    public:
+
+        /*! \brief Get the Instance of the Singleton. Create the instance if needed
+         *
+         * \return The Instance
+         *
+         */
+        static Instance getInstance()
+        {
+            return Instance();
+        }
+
+        /*! \brief Reset the Instance
+         *
+         */
+        static void destroyInstance()
+        {
+            s_instance.reset();
         }
 
     private:
 
-        static Mutex                   s_mutex;
-        static std::unique_ptr<TChild> s_instance;
+        static Mutex              s_mutex;
+        static std::unique_ptr<T> s_instance;
     };
 
-    template <typename TChild>
-    Mutex Singleton<TChild>::s_mutex;
+    template <typename T>
+    Mutex Singleton<T>::s_mutex;
 
-    template <typename TChild>
-    std::unique_ptr<TChild> Singleton<TChild>::s_instance;
+    template <typename T>
+    std::unique_ptr<T> Singleton<T>::s_instance;
 }
 
 #endif // BULL_CORE_PATTERN_SINGLETON_HPP

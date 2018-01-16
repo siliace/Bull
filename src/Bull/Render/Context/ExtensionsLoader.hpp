@@ -35,8 +35,10 @@ namespace Bull
 
             /*! \brief Load required extensions
              *
+             * \param surface The surface to get extensions from
+             *
              */
-            void loadExtensions();
+            void loadExtensions(SurfaceHandler surface);
 
             /*! \brief Load OpenGL functions
              *

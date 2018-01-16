@@ -33,7 +33,7 @@ namespace Bull
             return reinterpret_cast<void*>(GetProcAddress(module, function.getBuffer()));
         }
 
-        void WglContext::requireExtensions(const ExtensionsLoader::Instance& loader)
+        void WglContext::requireExtensions(ExtensionsLoader::Instance& loader)
         {
             loader->require(WglCreateContext);
             loader->require(WglPixelFormat);
@@ -387,7 +387,7 @@ namespace Bull
                     }
                     else
                     {
-                        Log::getInstance()->write("Create WglContext  with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), LogLevel::LogLevel_Info);
+                        Log::getInstance()->write("Create WglContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor), LogLevel::LogLevel_Info);
                     }
                 }while(!m_render && m_settings.major >= 1);
             }

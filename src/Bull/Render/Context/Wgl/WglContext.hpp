@@ -30,7 +30,7 @@ namespace Bull
              * \param loader The instance of the extension loader to use
              *
              */
-            static void requireExtensions(const ExtensionsLoader::Instance& loader);
+            static void requireExtensions(ExtensionsLoader::Instance& loader);
 
         private:
 
