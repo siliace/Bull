@@ -1,26 +1,36 @@
-#include <Bull/Core/Log/AbstractLogger.hpp>
+#include <Bull/Core/Exception/RuntimeError.hpp>
 #include <Bull/Core/Log/FileLogger.hpp>
 
 namespace Bull
 {
-    FileLogger::FileLogger() :
-        FileLogger("BullApp.log")
+    FileLogger::FileLogger()
     {
-        /// Nothing
-    }
+        String path = "bull.log";
 
-    FileLogger::FileLogger(const String& filename)
-    {
-        if(!File::exists(filename))
+        if(!File::exists(path))
         {
-            File::create(filename);
+            if(!File::create(path))
+            {
+                throw RuntimeError("Failed to create bull.log file");
+            }
         }
 
-        m_logFile.open(Path(filename), FileOpeningMode_Truncate | FileOpeningMode_Write);
+        if(!m_file.open(Path(path), FileOpeningMode_Truncate | FileOpeningMode_Write))
+        {
+            throw RuntimeError("Failed to open bull.log file");
+        }
     }
 
-    void FileLogger::write(const String& entry, LogLevel level)
+    FileLogger::FileLogger(const Path& path)
     {
-        m_logFile.write(parseMessage(entry, level));
+        if(!m_file.open(path, FileOpeningMode_Truncate | FileOpeningMode_Write))
+        {
+            throw RuntimeError("Failed to open bull.log file");
+        }
+    }
+
+    void FileLogger::write(const String& entry)
+    {
+        m_file.write(entry);
     }
 }

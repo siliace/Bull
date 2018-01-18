@@ -1,4 +1,4 @@
-#include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/Configuration/Macro.hpp>
 #include <Bull/Core/Log/MessageWindowLogger.hpp>
 
 namespace Bull
@@ -14,9 +14,30 @@ namespace Bull
         }
     }
 
-    void MessageWindowLogger::write(const String& message, LogLevel level)
+    MessageWindowLogger::MessageWindowLogger()
     {
-        m_messageWindow.icon = chooseIcon(level);
-        m_messageWindow.open(message, Log::getLevelString(level));
+        m_messageBox.buttons       = MessageWindowButtons_Ok;
+        m_messageBox.defaultButton = MessageWindowDefaultButton_Button1;
+    }
+
+    void MessageWindowLogger::write(const String& entry)
+    {
+        m_messageBox.open(entry, m_title);
+    }
+
+    void MessageWindowLogger::prepareWrite(LogLevel level, const Date& date)
+    {
+        BULL_UNUSED(date);
+
+        m_title = logLevelToString(level);
+        m_messageBox.icon = chooseIcon(level);
+    }
+
+    String MessageWindowLogger::formatEntry(const String& entry, LogLevel level, const Date& date)
+    {
+        BULL_UNUSED(date);
+        BULL_UNUSED(level);
+
+        return entry;
     }
 }

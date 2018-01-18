@@ -1,24 +1,59 @@
 #include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Log/AbstractLogger.hpp>
-#include <Bull/Core/Log/Log.hpp>
-#include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
 {
-    String AbstractLogger::parseMessage(const String& entry, LogLevel level) const
+    String AbstractLogger::logLevelToString(LogLevel level)
     {
-        OutStringStream ss;
-        Date now = Date::now();
+        switch(level)
+        {
+            case LogLevel_Debug:   return "Debug";
+            case LogLevel_Info:    return "Info";
+            case LogLevel_Warning: return "Warning";
+            case LogLevel_Error:   return "Error";
+        }
+    }
 
-        ss << "[" << String::number(now.year) << "/";
-        ss << String::number(static_cast<unsigned int>(now.month))  << "/";
-        ss << String::number(static_cast<unsigned int>(now.day));
-        ss << " ";
-        ss << String::number(now.hour) << ":" << String::number(now.minute) << ":" << String::number(now.second.asSeconds()) << "]";
-        ss << "[" << Log::getLevelString(level) << "]";
-        ss << " : ";
-        ss << entry;
+    void AbstractLogger::setMinimalSeverity(LogLevel level)
+    {
+        m_minimalLevel = level;
+    }
 
-        return ss.toString();
+    LogLevel AbstractLogger::getMinimalSeverity() const
+    {
+        return m_minimalLevel;
+    }
+
+    void AbstractLogger::addEntry(const String& entry, LogLevel level, const Date& date)
+    {
+        if(shouldWriteEntry(level))
+        {
+            prepareWrite(level, date);
+            write(formatEntry(entry, level, date));
+        }
+    }
+
+    AbstractLogger::AbstractLogger(LogLevel minimalLevel) :
+        m_minimalLevel(minimalLevel)
+    {
+        /// Nothing
+    }
+
+    bool AbstractLogger::shouldWriteEntry(LogLevel level) const
+    {
+        return level >= m_minimalLevel;
+    }
+
+    String AbstractLogger::formatEntry(const String& entry, LogLevel level, const Date& date)
+    {
+        OutStringStream oss;
+
+        oss << "[" << String::number(date.year) << "/" << String::number(date.month) <<  "/" << String::number(date.day);
+        oss << " " << String::number(date.hour) << ":" << String::number(date.minute) << ":" << String::number(date.second.asSeconds());
+        oss << "]";
+        oss << "(" << logLevelToString(level) << ")";
+        oss << " " << entry;
+
+        return oss.toString();
     }
 }
