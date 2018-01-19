@@ -1,21 +1,73 @@
 #ifndef BULL_CORE_LOG_CONSOLELOGGER_HPP
 #define BULL_CORE_LOG_CONSOLELOGGER_HPP
 
+#include <map>
+
 #include <Bull/Core/Log/AbstractLogger.hpp>
+#include <Bull/Core/System/ConsoleOutput.hpp>
 
 namespace Bull
 {
-    class ConsoleLogger : public AbstractLogger
+    class BULL_CORE_API ConsoleLogger : public AbstractLogger
     {
-    protected:
+    public:
 
-        /*! \brief Add a new entry in the log
-         *
-         * \param message The log message
-         * \param level   The error level of the message
+        /*! \brief Constructor
          *
          */
-        void write(const String& message, LogLevel level) override;
+        ConsoleLogger();
+
+        /*! \brief
+         *
+         * \param level
+         * \param color
+         *
+         */
+        void setLevelTextColor(LogLevel level, ConsoleColor color);
+
+        /*! \brief
+         *
+         * \param level
+         * \param color
+         *
+         */
+        void setLevelBackgroundColor(LogLevel level, ConsoleColor color);
+
+    protected:
+
+        /*! \brief Write an entry in the StreamLogger
+         *
+         * \param entry The entry to write
+         *
+         */
+        void write(const String& entry) override;
+
+        /*! \brief
+         *
+         * \param level
+         * \param date
+         *
+         */
+        void prepareWrite(LogLevel level, const Date& date) override;
+
+        /*! \brief Format a log entry
+         *
+         * \param entry The log entry to format
+         * \param level The LogLevel to format
+         * \param date  The date to when the entry should be written
+         *
+         * \return The formatted entry
+         *
+         */
+        String formatEntry(const String& entry, LogLevel level, const Date& date) override;
+
+    private:
+
+        using ColorMap = std::map<LogLevel, ConsoleColor>;
+
+        ConsoleOutput m_output;
+        ColorMap      m_levelTextColor;
+        ColorMap      m_levelBackgroundColor;
     };
 }
 

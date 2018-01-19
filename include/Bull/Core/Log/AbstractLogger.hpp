@@ -3,34 +3,101 @@
 
 #include <Bull/Core/Log/LogLevel.hpp>
 #include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
 {
-    struct BULL_CORE_API AbstractLogger
+    class Log;
+
+    class BULL_CORE_API AbstractLogger
     {
     protected:
 
-        /*! \brief Convert the log message and the alert level to a log entry
+        /*! \brief Convert a LogLevel to its String equivalent
          *
-         * \param message The log message
-         * \param level   The error level of the message
+         * \param level The LogLevel to convert
          *
-         * \return The log entry
+         * \return The LogLevel as a String
          *
          */
-        String parseMessage(const String& message, LogLevel level) const;
+        static String logLevelToString(LogLevel level);
+
+    public:
+
+        /*! \brief Set the minimal LogLevel required by a log entry to be written
+         *
+         * \param level The LogLevel
+         *
+         */
+        void setMinimalSeverity(LogLevel level);
+
+        /*! \brief Get the minimal LogLevel required by a log entry to be written
+         *
+         * \return The LogLevel
+         *
+         */
+        LogLevel getMinimalSeverity() const;
 
     protected:
 
         friend class Log;
 
-        /*! \brief Add a new entry in the log
+        /*! \brief Add a log entry in the logger
          *
-         * \param message The log message
-         * \param level   The error level of the message
+         * \param message The entry
+         * \param level   The LogLevel of the entry
+         * \param date    The date when the entry should be added
          *
          */
-        virtual void write(const String& message, LogLevel level) = 0;
+        void addEntry(const String& entry, LogLevel level, const Date& date = Date::now());
+
+    protected:
+
+        /*! \brief Constructor
+         *
+         * \param minimalLevel The minimal LogLevel required by a log entry to be written
+         *
+         */
+        explicit AbstractLogger(LogLevel minimalLevel = LogLevel_Info);
+
+        /*! \brief Write an entry in the logger
+         *
+         * \param entry The entry to write
+         *
+         */
+        virtual void write(const String& entry) = 0;
+
+        /*! \brief Prepare the logger to be written
+         *
+         * \param level
+         * \param date
+         *
+         */
+        virtual void prepareWrite(LogLevel level, const Date& date) {}
+
+        /*! \brief Format a log entry
+         *
+         * \param entry The log entry to format
+         * \param level The LogLevel to format
+         * \param date  The date to when the entry should be written
+         *
+         * \return The formatted entry
+         *
+         */
+        virtual String formatEntry(const String& entry, LogLevel level, const Date& date);
+
+    private:
+
+        /*! \brief Tell whether an entry should be written
+         *
+         * \param level The LogLevel of the entry
+         *
+         * \return True if the entry should be written
+         *
+         */
+        bool shouldWriteEntry(LogLevel level) const;
+
+        LogLevel m_minimalLevel;
     };
 }
 

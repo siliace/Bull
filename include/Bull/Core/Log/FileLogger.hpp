@@ -6,7 +6,7 @@
 
 namespace Bull
 {
-    class FileLogger : public AbstractLogger
+    class BULL_CORE_API FileLogger : public AbstractLogger
     {
     public:
 
@@ -17,25 +17,24 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param filename The name of the log file
+         * \param path The Path of the log file
          *
          */
-        explicit FileLogger(const String& filename);
+        explicit FileLogger(const Path& path);
 
     protected:
 
-        /*! \brief Add a new entry in the log
+        /*! \brief Write an entry in the FileLogger
          *
-         * \param message The log message
-         * \param level   The error level of the message
+         * \param entry The entry to write
          *
          */
-        void write(const String& message, LogLevel level) override;
+        void write(const String& entry) override;
 
     private:
 
-        File m_logFile;
+        File m_file;
     };
 }
 
-#endif // BULL_CORE_LOGGER_FILELOGGER_HPP
+#endif // BULL_CORE_LOG_FILELOGGER_HPP

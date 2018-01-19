@@ -18,7 +18,7 @@ using namespace Bull;
 
 int main(int argc, char* argv[])
 {
-    Log::getInstance()->createLogger<ConsoleLogger>();
+    Log::getInstance()->addLogger(new ConsoleLogger());
 
     Shader phong;
     WindowEvent event;

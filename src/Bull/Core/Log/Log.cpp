@@ -2,22 +2,16 @@
 
 namespace Bull
 {
-    String Log::getLevelString(LogLevel level)
+    void Log::write(const String& message, LogLevel level)
     {
-        switch(level)
+        for(std::unique_ptr<AbstractLogger>& logger : m_listeners)
         {
-            case LogLevel_Debug:   return "Debug";
-            case LogLevel_Info:    return "Info";
-            case LogLevel_Warning: return "Warning";
-            case LogLevel_Error:   return "Error";
+            logger->addEntry(message, level);
         }
     }
 
-    void Log::write(const String& message, LogLevel level)
+    void Log::addLogger(AbstractLogger* logger)
     {
-        for(AbstractLoggerHandler& logger : m_listeners)
-        {
-            logger->write(message, level);
-        }
+        m_listeners.emplace_back(std::unique_ptr<AbstractLogger>(logger));
     }
 }

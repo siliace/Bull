@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_LOG_MESSAGEBOXLOGGER_HPP
-#define BULL_CORE_LOG_MESSAGEBOXLOGGER_HPP
+#ifndef BULL_CORE_LOG_WINDOWMESSAGELOGGER_HPP
+#define BULL_CORE_LOG_WINDOWMESSAGELOGGER_HPP
 
 #include <Bull/Core/Log/AbstractLogger.hpp>
 #include <Bull/Core/Window/MessageWindow.hpp>
@@ -10,34 +10,48 @@ namespace Bull
     {
     private:
 
-        /*! \brief Get the MessageWindowIcon according to a LogLevel
-         *
-         * \param level The LogLevel
-         *
-         * \return The MessageWindowIcon
-         *
-         */
         static MessageWindowIcon chooseIcon(LogLevel level);
 
     public:
 
-        /*! \brief Default constructor
+        /*! \brief Constructor
          *
          */
-        MessageWindowLogger() = default;
+        MessageWindowLogger();
 
-        /*! \brief Add a new entry in the log
+    protected:
+
+        /*! \brief Write an entry in the logger
          *
-         * \param message The log message
-         * \param level   The error level of the message
+         * \param entry The entry to write
          *
          */
-        void write(const String& message, LogLevel level) override;
+        void write(const String& entry) override;
+
+        /*! \brief Prepare the MessageWindowLogger to be written
+         *
+         * \param level
+         * \param date
+         *
+         */
+        void prepareWrite(LogLevel level, const Date& date) override;
+
+        /*! \brief Format a log entry
+         *
+         * \param entry The log entry to format
+         * \param level The LogLevel to format
+         * \param date  The date to when the entry should be written
+         *
+         * \return The formatted entry
+         *
+         */
+        String formatEntry(const String& entry, LogLevel level, const Date& date) override;
 
     private:
 
-        MessageWindow m_messageWindow;
+        String        m_title;
+        MessageWindow m_messageBox;
     };
 }
 
-#endif // BULL_CORE_LOG_MESSAGEBOXLOGGER_HPP
+#endif // BULL_CORE_LOG_WINDOWMESSAGELOGGER_HPP
