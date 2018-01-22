@@ -1,4 +1,5 @@
-#include <Bull/Core/Exception/RuntimeError.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/System/Win32/ConsoleOutputImplWin32.hpp>
 
 namespace Bull
@@ -92,24 +93,24 @@ namespace Bull
 
             if(!GetConsoleScreenBufferInfo(m_handler, &info))
             {
-                throw RuntimeError("Failed to get console info");
+                Throw(InternalError, "ConsoleOutputImplWin32::clear", "Failed to get console info");
             }
 
             DWORD consoleSize = info.dwSize.X * info.dwSize.Y;
 
             if(!FillConsoleOutputCharacter(m_handler, ' ', consoleSize, screen, nullptr))
             {
-                throw RuntimeError("Failed to fill console with blanks");
+                Throw(InternalError, "ConsoleOutputImplWin32::clear", "Failed to fill console with blanks");
             }
 
             if(!GetConsoleScreenBufferInfo(m_handler, &info))
             {
-                throw RuntimeError("Failed to get console info");
+                Throw(InternalError, "ConsoleOutputImplWin32::clear", "Failed to get console info");
             }
 
             if(!FillConsoleOutputAttribute(m_handler, info.wAttributes, consoleSize, screen, nullptr))
             {
-                throw RuntimeError("Failed to set console attributes");
+                Throw(InternalError, "ConsoleOutputImplWin32::clear", "Failed to set console attributes");
             }
 
             SetConsoleCursorPosition(m_handler, screen);

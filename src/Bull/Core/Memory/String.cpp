@@ -136,6 +136,19 @@ namespace Bull
         return tokens;
     }
 
+    std::size_t String::replace(const String& search, const String& replace)
+    {
+        std::size_t count = 0;
+        std::size_t nextReplace;
+
+        while((nextReplace = m_string.find(search.m_string)) < InvalidPosition)
+        {
+            m_string.replace(nextReplace, search.getSize(), replace.m_string);
+        }
+
+        return count;
+    }
+
     bool String::isEmpty() const
     {
         return m_string.empty();

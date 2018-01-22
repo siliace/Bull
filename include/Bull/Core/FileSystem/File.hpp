@@ -18,6 +18,14 @@ namespace Bull
 
     class BULL_CORE_API File : public CursorAwareInStream, public OutStream
     {
+    private:
+
+        #if defined BULL_OS_WINDOWS
+            static constexpr const char* EndOfLine = "\r\n";
+        #else
+            static constexpr char EndOfLine = '\n';
+        #endif
+
     public:
 
         /*! \brief Create a file
@@ -143,6 +151,15 @@ namespace Bull
          *
          */
         std::size_t write(const String& line);
+
+        /*! \brief Write a line to the File
+         *
+         * \param string The String to write
+         *
+         * \return The number of bytes written
+         *
+         */
+        std::size_t writeLine(const String& line);
 
         /*! \brief Write a buffer in the file
          *

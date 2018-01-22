@@ -1,5 +1,5 @@
-#include <Bull/Core/Exception/RuntimeError.hpp>
-
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Window/Win32/CursorImplWin32.hpp>
 
 namespace Bull
@@ -51,7 +51,7 @@ namespace Bull
 
             if(!m_handler)
             {
-                throw RuntimeError("Failed to create cursor");
+                Throw(InternalError, "CursorImplWin32::create", "Failed to create cursor");
             }
 
             return true;

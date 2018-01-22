@@ -1,6 +1,6 @@
-#include <Bull/Core/Exception/RuntimeError.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
-#include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
@@ -45,7 +45,7 @@ namespace Bull
 
                     if(realInternalSettings.major < 3 || realInternalSettings.major == 3 && realInternalSettings.minor <= 2)
                     {
-                        throw RuntimeError("Bull needs OpenGL 3.3 or higher to work");
+                        Throw(InternalError, "getInternalContext", "Bull needs OpenGL 3.3 or higher to work");
                     }
                 }
 

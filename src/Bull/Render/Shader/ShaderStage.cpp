@@ -1,4 +1,3 @@
-#include <Bull/Core/Exception/RuntimeError.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Log/Log.hpp>
 

@@ -103,6 +103,11 @@ namespace Bull
         return write(line.getBuffer(), line.getSize());
     }
 
+    std::size_t File::writeLine(const String& line)
+    {
+        return write(line + EndOfLine);
+    }
+
     std::size_t File::write(const void* data, std::size_t size)
     {
         if(m_impl)

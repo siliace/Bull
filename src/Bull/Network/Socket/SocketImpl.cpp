@@ -1,5 +1,3 @@
-#include <Bull/Core/Exception/RuntimeError.hpp>
-
 #include <Bull/Network/Socket/SocketImpl.hpp>
 
 #if defined BULL_OS_WINDOWS

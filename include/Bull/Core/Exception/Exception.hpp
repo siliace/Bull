@@ -3,7 +3,7 @@
 
 #include <exception>
 
-#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Log/Log.hpp>
 
 namespace Bull
 {
@@ -11,38 +11,72 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /*! \brief Get the name file where the Exception was thrown
+         *
+         * \return The name of the file
          *
          */
-        Exception() = default;
+        const String& getFile() const;
+
+        /*! \brief Get the line where the Exception was thrown
+         *
+         * \return The line
+         *
+         */
+        Uint64 getLine() const;
+
+        /*! \brief Get the type of Exception thrown
+         *
+         * \return The type of Exception
+         *
+         */
+        const String& getType() const;
+
+        /*! \brief Get the method where the Exception was thrown
+         *
+         * \return The method
+         *
+         */
+        const String& getSource() const;
+
+        /*!! \brief Get the message describing the Exception
+         *
+         * \return The description
+         *
+         */
+        const String& getDescription() const;
+
+    protected:
 
         /*! \brief Constructor
          *
-         * \param message The Exception's message
+         * \param file        The name file where the Exception was thrown
+         * \param line        The line where the Exception was thrown
+         * \param type        The type of Exception thrown
+         * \param source      The method where the Exception was thrown
+         * \param description The message describing the Exception
          *
          */
-        explicit Exception(const String& message);
+        Exception(const String& file, Uint64 line, const String& type, const String& source, const String& description);
 
-        /*! \brief Get the Exception's message
+    private:
+
+        /*! \brief Get the exception's description as a C-Style string
          *
-         * \return The message
+         * \return The description
          *
          */
         const char* what() const noexcept override;
 
-    protected:
-
-        /*! \brief Get the log message
-         *
-         * \return The log message
-         *
-         */
-        virtual String getLogMessage() const;
-
     private:
 
-        String m_message;
+        Log::Instance m_log;
+        String        m_file;
+        Uint64        m_line;
+        String        m_type;
+        String        m_source;
+        String        m_description;
     };
 }
 
-#endif //BULL_EXCEPTION_HPP
+#endif // BULL_CORE_EXCEPTION_EXCEPTION_HPP

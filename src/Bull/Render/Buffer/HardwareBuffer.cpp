@@ -1,7 +1,10 @@
 #include <cstring>
 
+#include <Bull/Core/Exception/Throw.hpp>
+
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
 #include <Bull/Render/Context/GlFunctions.hpp>
+#include <Bull/Render/Context/OpenGLHandlerError.hpp>
 
 namespace Bull
 {
@@ -30,6 +33,12 @@ namespace Bull
         {
             gl::genBuffers(1, &m_id);
             gl::bindBuffer(BufferType[m_type], m_id);
+
+            if(!gl::isBuffer(m_id))
+            {
+                Throw(OpenGLHandlerError, "HardwareBuffer::create", "Failed to create buffer");
+            }
+
             gl::bufferData(BufferType[m_type], size, nullptr, BufferUsage[usage]);
 
             return true;

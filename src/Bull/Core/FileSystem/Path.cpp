@@ -1,6 +1,7 @@
+#include <Bull/Core/Exception/FileNotFound.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/Directory.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/FileSystem/InvalidPathException.hpp>
 #include <Bull/Core/FileSystem/PathImpl.hpp>
 
 namespace Bull
@@ -24,7 +25,7 @@ namespace Bull
     {
         if(!File::exists(path) && !Directory::exists(path))
         {
-            throw InvalidPathException(path);
+            Throw(FileNotFound, "Path::open", "The path " + path + " does not exists");
         }
 
         m_path = path;

@@ -1,4 +1,5 @@
-#include <Bull/Core/Exception/RuntimeError.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
@@ -338,7 +339,7 @@ namespace Bull
 
                 if(!shaderBinary.isValid())
                 {
-                    throw RuntimeError("Failed to download program binary");
+                    Throw(InternalError, "Shader::getBinary", "Failed to download program binary");
                 }
             }
         }
