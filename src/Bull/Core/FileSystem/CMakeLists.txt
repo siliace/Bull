@@ -12,8 +12,6 @@ target_sources(bull-core
             ${BULL_INC_CORE_FILESYSTEM}/FileSystem.hpp
             ${BULL_SRC_CORE_FILESYSTEM}/FileSystem.cpp
             ${BULL_INC_CORE_FILESYSTEM}/FileSystemInfo.hpp
-            ${BULL_INC_CORE_FILESYSTEM}/InvalidPathException.hpp
-            ${BULL_SRC_CORE_FILESYSTEM}/InvalidPathException.cpp
             ${BULL_INC_CORE_FILESYSTEM}/Path.hpp
             ${BULL_SRC_CORE_FILESYSTEM}/Path.cpp
         PRIVATE

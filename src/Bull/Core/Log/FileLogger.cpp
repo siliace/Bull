@@ -1,4 +1,5 @@
-#include <Bull/Core/Exception/RuntimeError.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Log/FileLogger.hpp>
 
 namespace Bull
@@ -11,13 +12,13 @@ namespace Bull
         {
             if(!File::create(path))
             {
-                throw RuntimeError("Failed to create bull.log file");
+                Throw(InternalError, "FileLogger::FileLogger", "Failed to create log file");
             }
         }
 
         if(!m_file.open(Path(path), FileOpeningMode_Truncate | FileOpeningMode_Write))
         {
-            throw RuntimeError("Failed to open bull.log file");
+            Throw(InternalError, "FileLogger::FileLogger", "Failed to open log file");
         }
     }
 
@@ -25,12 +26,12 @@ namespace Bull
     {
         if(!m_file.open(path, FileOpeningMode_Truncate | FileOpeningMode_Write))
         {
-            throw RuntimeError("Failed to open bull.log file");
+            Throw(InternalError, "FileLogger::FileLogger", "Failed to open log file");
         }
     }
 
     void FileLogger::write(const String& entry)
     {
-        m_file.write(entry);
+        m_file.writeLine(entry);
     }
 }

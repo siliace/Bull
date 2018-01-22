@@ -1,8 +1,6 @@
 #ifndef BULL_MATH_POLYGON_RECTANGLE_HPP
 #define BULL_MATH_POLYGON_RECTANGLE_HPP
 
-#include <Bull/Core/Exception/OutOfRange.hpp>
-
 #include <Bull/Math/Polygon/Polygon.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 

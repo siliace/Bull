@@ -1,4 +1,5 @@
-#include <Bull/Core/Exception/RuntimeError.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Concurrency/Win32/ThreadImplWin32.hpp>
 
 namespace Bull
@@ -27,6 +28,11 @@ namespace Bull
                                      runnable,
                                      0,
                                      nullptr);
+
+            if(m_handler == INVALID_HANDLE_VALUE)
+            {
+                Throw(InternalError, "ThreadImplWin32::ThreadImplWin32", "Failed to create thread");
+            }
 
             switch(priority)
             {
@@ -60,12 +66,12 @@ namespace Bull
             {
                 if(WaitForSingleObject(m_handler, INFINITE) == WAIT_FAILED)
                 {
-                    throw RuntimeError("Failed to wait thread");
+                    Throw(InternalError, "ThreadImplWin32::wait", "Failed to wait thread");
                 }
             }
             else
             {
-                throw RuntimeError("Failed to wait thread");
+                Throw(InternalError, "ThreadImplWin32::wait", "Failed to wait thread");
             }
         }
 
@@ -75,12 +81,12 @@ namespace Bull
             {
                 if(!TerminateThread(m_handler, 0))
                 {
-                    throw RuntimeError("Failed to terminate thread");
+                    Throw(InternalError, "ThreadImplWin32::terminate", "Failed to terminate thread");
                 }
             }
             else
             {
-                throw RuntimeError("Failed to terminate thread");
+                Throw(InternalError, "ThreadImplWin32::terminate", "Failed to terminate thread");
             }
         }
     }

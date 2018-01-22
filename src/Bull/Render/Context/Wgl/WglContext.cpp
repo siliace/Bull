@@ -145,9 +145,9 @@ namespace Bull
                 descriptor.iLayerType   = PFD_MAIN_PLANE;
                 descriptor.dwFlags      = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
                 descriptor.iPixelType   = PFD_TYPE_RGBA;
-                descriptor.cColorBits   = static_cast<BYTE>(bitsPerPixel);
-                descriptor.cDepthBits   = static_cast<BYTE>(settings.depths);
-                descriptor.cStencilBits = static_cast<BYTE>(settings.stencil);
+                descriptor.cColorBits   = bitsPerPixel;
+                descriptor.cDepthBits   = settings.depths;
+                descriptor.cStencilBits = settings.stencil;
                 descriptor.cAlphaBits   = bitsPerPixel == 32 ? 8 : 0;
 
                 bestPixelFormat = ChoosePixelFormat(device, &descriptor);

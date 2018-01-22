@@ -61,12 +61,14 @@ namespace Bull
     template<typename T>
     Rectangle<T>& Rectangle<T>::set(const Vector2<T>& topLeft, const Vector2<T>& bottomRight)
     {
-        return set(topLeft, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+        return set(topLeft, bottomRight.x() - topLeft.x(), bottomRight.y() - topLeft.y());
     }
 
     template<typename T>
     Vector2<T> Rectangle<T>::getVertex(std::size_t index) const
     {
+        RangeCheck(index, 4);
+
         switch(index)
         {
             case 0: return Vector2<T>(x, y);
@@ -74,8 +76,6 @@ namespace Bull
             case 2: return Vector2<T>(x + width, y + height);
             case 3: return Vector2<T>(x, y + height);
         }
-
-        throw OutOfRange("Rectangle<T>::getVertex() : index is out of range", 0, 3, index);
     }
 
     template<typename T>

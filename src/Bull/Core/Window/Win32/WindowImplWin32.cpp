@@ -1,7 +1,7 @@
 #include <limits>
 
-#include <Bull/Core/Exception/RuntimeError.hpp>
-
+#include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Support/Win32/Win32Error.hpp>
 #include <Bull/Core/Window/Win32/WindowImplWin32.hpp>
 #include <Bull/Core/Window/WindowStyle.hpp>
 
@@ -287,6 +287,11 @@ namespace Bull
                                         instance,
                                         this);
 
+            if(m_handler == INVALID_HANDLE_VALUE)
+            {
+                Throw(Win32Error, "WindowImplWin32::WindowImplWin32", "Failed to create window");
+            }
+
             UpdateWindow(m_handler);
 
             m_lastSize     = getSize();
@@ -525,7 +530,7 @@ namespace Bull
             }
             else
             {
-                throw RuntimeError("Failed to set window's icon");
+                Throw(Win32Error, "WindowImplWin32::setIcon", "Failed to set window's icon");
             }
         }
 

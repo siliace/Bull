@@ -1,4 +1,6 @@
-#include <Bull/Core/Exception/OutOfRange.hpp>
+#include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Memory/RangeCheck.hpp>
 
 namespace Bull
@@ -19,7 +21,9 @@ namespace Bull
     {
         if(index >= m_max)
         {
-            throw OutOfRange("std::size_t out of range", index, 0, m_max - 1);
+            OutStringStream oss;
+
+            Throw(InvalidParameter, "RangeCheck::apply", "Index out of range, expected in range [0, " + String::number(index) + "[");
         }
 
         return (*this);
