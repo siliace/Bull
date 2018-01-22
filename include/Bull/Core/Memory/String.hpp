@@ -202,6 +202,16 @@ namespace Bull
          */
         std::vector<String> explode(char separator, bool ignoreEmpty = true);
 
+        /*! \brief Replace a piece of the String by another one
+         *
+         * \param search  The String to replace
+         * \param replace The String to use to replace
+         *
+         * \return The number of replacement made
+         *
+         */
+        std::size_t replace(const String& search, const String& replace);
+
         /*! \brief Tell whether the String is empty
          *
          * A String is considered empty if there is no character inside but can have memory allocated
