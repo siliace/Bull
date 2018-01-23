@@ -40,7 +40,7 @@ namespace Bull
              * \return True if the cursor was created successfully
              *
              */
-            bool create(const Image& cursor, const Vector2UI& hotSpot) override;
+            bool create(const Image& cursor, const Size& hotSpot) override;
 
             /*! \brief Get the native system handler of the cursor
              *

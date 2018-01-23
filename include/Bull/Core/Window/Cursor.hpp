@@ -63,7 +63,7 @@ namespace Bull
          * \return True if the cursor was created successfully
          *
          */
-        bool create(const Image& image, const Vector2UI& hotSpot);
+        bool create(const Image& image, const Size& hotSpot);
 
     private:
 

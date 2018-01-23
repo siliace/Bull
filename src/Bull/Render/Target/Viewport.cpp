@@ -12,16 +12,16 @@ namespace Bull
     }
 
     Viewport::Viewport(int x, int y, int width, int height) :
-        Viewport(Vector2I(x, y), Vector2I(width, height))
+        Viewport(Size(x, y), Size(width, height))
     {
         /// Nothing
     }
 
-    Viewport::Viewport(const Vector2I& position, const Vector2I& size) :
-        x(position.x()),
-        y(position.y()),
-        width(size.x()),
-        height(size.y())
+    Viewport::Viewport(const Size& position, const Size& size) :
+        x(position.width),
+        y(position.height),
+        width(size.width),
+        height(size.height)
     {
         /// Nothing
     }
@@ -39,14 +39,14 @@ namespace Bull
         return !((*this) == right);
     }
 
-    void Viewport::move(const Vector2I& offset)
+    void Viewport::move(const Size& offset)
     {
-        x += offset.x();
-        y += offset.y();
+        x += offset.width;
+        y += offset.height;
     }
 
     void Viewport::move(int x, int y)
     {
-        move(Vector2I(x, y));
+        move(Size(x, y));
     }
 }

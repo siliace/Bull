@@ -122,7 +122,7 @@ namespace Bull
         return false;
     }
 
-    void Window::setPosition(const Vector2I& position)
+    void Window::setPosition(const Size& position)
     {
         if(m_impl)
         {
@@ -132,20 +132,20 @@ namespace Bull
 
     void Window::setPosition(int x, int y)
     {
-        return setPosition(Vector2I(x, y));
+        return setPosition(Size(x, y));
     }
 
-    Vector2I Window::getPosition() const
+    Size Window::getPosition() const
     {
         if(m_impl)
         {
             return m_impl->getPosition();
         }
 
-        return Vector2I();
+        return Size();
     }
 
-    void Window::setMinSize(const Vector2I& size)
+    void Window::setMinSize(const Size& size)
     {
         if(m_impl)
         {
@@ -155,20 +155,20 @@ namespace Bull
 
     void Window::setMinSize(int width, int height)
     {
-        return setMinSize(Vector2I(width, height));
+        return setMinSize(Size(width, height));
     }
 
-    Vector2I Window::getMinSize() const
+    Size Window::getMinSize() const
     {
         if(m_impl)
         {
             return m_impl->getMinSize();
         }
 
-        return Vector2I();
+        return Size();
     }
 
-    void Window::setMaxSize(const Vector2I& size)
+    void Window::setMaxSize(const Size& size)
     {
         if(m_impl)
         {
@@ -178,20 +178,20 @@ namespace Bull
 
     void Window::setMaxSize(int width, int height)
     {
-        return setMaxSize(Vector2I(width, height));
+        return setMaxSize(Size(width, height));
     }
 
-    Vector2I Window::getMaxSize() const
+    Size Window::getMaxSize() const
     {
         if(m_impl)
         {
             return m_impl->getMinSize();
         }
 
-        return Vector2I();
+        return Size();
     }
 
-    void Window::setSize(const Vector2UI& size)
+    void Window::setSize(const Size& size)
     {
         if(m_impl)
         {
@@ -201,17 +201,17 @@ namespace Bull
 
     void Window::setSize(unsigned int x, unsigned int y)
     {
-        return setSize(Vector2UI(x, y));
+        return setSize(Size(x, y));
     }
 
-    Vector2UI Window::getSize() const
+    Size Window::getSize() const
     {
         if(m_impl)
         {
             return m_impl->getSize();
         }
 
-        return Vector2UI();
+        return Size();
     }
 
     void Window::setTitle(const String& title)

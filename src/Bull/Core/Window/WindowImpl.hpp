@@ -90,7 +90,7 @@ namespace Bull
              * \param size The new size of the window
              *
              */
-            virtual void setPosition(const Vector2I& position) = 0;
+            virtual void setPosition(const Size& position) = 0;
 
             /*! \brief Set the size of the window
              *
@@ -98,49 +98,49 @@ namespace Bull
              * \param y The new height of the window
              *
              */
-            virtual Vector2I getPosition() const = 0;
+            virtual Size getPosition() const = 0;
 
             /*! \brief Set the minimal size of the window
              *
              * \param size The minimal size of the window
              *
              */
-            virtual void setMinSize(const Vector2I& size) = 0;
+            virtual void setMinSize(const Size& size) = 0;
 
             /*! \brief Get the minimal size of the window
              *
              * \return The minimal size
              *
              */
-            virtual Vector2I getMinSize() const = 0;
+            virtual Size getMinSize() const = 0;
 
             /*! \brief Set the maximal size of the window
              *
              * \param size The maximal size of the window
              *
              */
-            virtual void setMaxSize(const Vector2I& size) = 0;
+            virtual void setMaxSize(const Size& size) = 0;
 
             /*! \brief Get the maximal size of the window
              *
              * \return The maximal size
              *
              */
-            virtual Vector2I getMaxSize() const = 0;
+            virtual Size getMaxSize() const = 0;
 
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window
              *
              */
-            virtual void setSize(const Vector2UI& size) = 0;
+            virtual void setSize(const Size& size) = 0;
 
             /*! \brief Get the size of the window
              *
              * \return Return the size of the window
              *
              */
-            virtual Vector2UI getSize() const = 0;
+            virtual Size getSize() const = 0;
 
             /*! \brief Set the title of the window
              *
@@ -246,13 +246,13 @@ namespace Bull
              *
              * \return The position of the cursor
              */
-            const Vector2I& getCursorPosition() const;
+            const Size& getCursorPosition() const;
 
         private:
 
             std::queue<WindowEvent> m_events;         /*!< The event queue */
             bool                    m_keyrepeat;      /*!< Does the key repeat is enable? */
-            Vector2I                m_cursorPosition; /*!< The position of the cursor in the window */
+            Size                m_cursorPosition; /*!< The position of the cursor in the window */
         };
     }
 }

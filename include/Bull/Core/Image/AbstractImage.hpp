@@ -3,8 +3,7 @@
 
 #include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Memory/ByteVector.hpp>
-
-#include <Bull/Math/Vector/Vector2.hpp>
+#include <Bull/Core/Utility/Size.hpp>
 
 namespace Bull
 {
@@ -17,7 +16,7 @@ namespace Bull
          * \return True if the AbstractImage was created successfully
          *
          */
-        virtual bool create(const Vector2UI& size) = 0;
+        virtual bool create(const Size& size) = 0;
 
         /*! \brief Create the AbstractImage
          *
@@ -27,14 +26,14 @@ namespace Bull
          * \return True if the AbstractImage was created successfully
          *
          */
-        virtual bool create(const ByteVector& pixels, const Vector2UI& size) = 0;
+        virtual bool create(const ByteVector& pixels, const Size& size) = 0;
 
         /*! \brief Get the size of the AbstractImage
          *
          * \return The size
          *
          */
-        virtual const Vector2UI& getSize() const = 0;
+        virtual const Size& getSize() const = 0;
     };
 }
 

@@ -76,8 +76,8 @@ namespace Bull
 
         viewport.x      = 0;
         viewport.y      = 0;
-        viewport.width  = getSize().x();
-        viewport.height = getSize().y();
+        viewport.width  = getSize().width;
+        viewport.height = getSize().height;
 
         return viewport;
     }

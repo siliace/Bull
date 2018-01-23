@@ -57,7 +57,7 @@ namespace Bull
             return true;
         }
 
-        bool CursorImplWin32::create(const Image& cursor, const Vector2UI& hotSpot)
+        bool CursorImplWin32::create(const Image& cursor, const Size& hotSpot)
         {
             return false;
         }

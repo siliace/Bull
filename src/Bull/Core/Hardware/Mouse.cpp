@@ -6,21 +6,21 @@ namespace Bull
 {
     void Mouse::center(const Window& window)
     {
-        setPosition(window.getSize() / static_cast<unsigned int>(2), window);
+        setPosition(window.getSize() / 2, window);
     }
 
-    void Mouse::setPosition(const Vector2I& position)
+    void Mouse::setPosition(const Size& position)
     {
         prv::MouseImpl::setPosition(position);
     }
 
-    void Mouse::setPosition(const Vector2I& position, const Window& relative)
+    void Mouse::setPosition(const Size& position, const Window& relative)
     {
         relative.ignoreNextMouseEvent();
         prv::MouseImpl::setPosition(relative.getPosition() + position);
     }
 
-    Vector2I Mouse::getPosition()
+    Size Mouse::getPosition()
     {
         return prv::MouseImpl::getPosition();
     }

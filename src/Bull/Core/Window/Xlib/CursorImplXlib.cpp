@@ -53,7 +53,7 @@ namespace Bull
             return true;
         }
 
-        bool CursorImplXlib::create(const Image& cursor, const Vector2UI& hotSpot)
+        bool CursorImplXlib::create(const Image& cursor, const Size& hotSpot)
         {
             // Todo
 

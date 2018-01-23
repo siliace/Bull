@@ -18,8 +18,8 @@ namespace Bull
 
         struct ImageInfo
         {
-            Vector2UI size;
-            Uint8     channels;
+            Size  size;
+            Uint8 channels;
         };
 
     private:
