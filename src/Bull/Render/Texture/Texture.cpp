@@ -36,7 +36,7 @@ namespace Bull
 
     bool Texture::create(const Vector2UI& size)
     {
-        if(size.x()  > 0 && size.y()  > 0)
+        if(size.x() && size.y())
         {
             ensureContext();
 
@@ -144,7 +144,7 @@ namespace Bull
         if(m_id)
         {
             Image image;
-            ByteVector pixels(m_size.x()  * m_size.y()  * 4);
+            ByteVector pixels(m_size.x() * m_size.y() * 4);
 
             ensureContext();
 
