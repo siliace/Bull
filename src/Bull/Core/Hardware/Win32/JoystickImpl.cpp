@@ -1,5 +1,6 @@
 #include <bitset>
 
+#include <Bull/Core/Configuration/Macro.hpp>
 #include <Bull/Core/Hardware/Win32/JoystickImpl.hpp>
 
 #include <Bull/Math/Angle.hpp>
@@ -19,6 +20,8 @@ namespace Bull
         {
             Joystick::Capabilities caps;
             JOYCAPS                infoCaps;
+
+            BULL_ZERO_MEMORY(caps);
 
             if(joyGetDevCaps(id, &infoCaps, sizeof(JOYCAPS)) == JOYERR_NOERROR)
             {
@@ -86,14 +89,14 @@ namespace Bull
         {
             JOYINFOEX joystickState;
 
-            ZeroMemory(&joystickState, sizeof(JOYINFOEX));
+            BULL_ZERO_MEMORY(joystickState);
 
             joystickState.dwSize  = sizeof(JOYINFOEX);
-            joystickState.dwFlags = JOY_RETURNALL;
+            joystickState.dwFlags = flag;
 
             if(!isConnected(joystick) || joyGetPosEx(joystick, &joystickState) != JOYERR_NOERROR)
             {
-                ZeroMemory(&joystickState, sizeof(JOYINFOEX));
+                BULL_ZERO_MEMORY(joystickState);
             }
 
             return joystickState;
