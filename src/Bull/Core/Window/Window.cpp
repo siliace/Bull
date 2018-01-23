@@ -78,24 +78,20 @@ namespace Bull
         return e;
     }
 
-    Window& Window::enableCaptureCursor(bool enable)
+    void Window::enableCaptureCursor(bool enable)
     {
         if(m_impl)
         {
             m_impl->enableCaptureCursor(enable);
         }
-
-        return (*this);
     }
 
-    Window& Window::minimize()
+    void Window::minimize()
     {
         if(m_impl)
         {
             m_impl->minimize();
         }
-
-        return (*this);
     }
 
     bool Window::isMinimized() const
@@ -108,14 +104,12 @@ namespace Bull
         return false;
     }
 
-    Window& Window::maximize()
+    void Window::maximize()
     {
         if(m_impl)
         {
             m_impl->maximize();
         }
-
-        return (*this);
     }
 
     bool Window::isMaximized() const
@@ -128,17 +122,15 @@ namespace Bull
         return false;
     }
 
-    Window& Window::setPosition(const Vector2I& position)
+    void Window::setPosition(const Vector2I& position)
     {
         if(m_impl)
         {
             m_impl->setPosition(position);
         }
-
-        return (*this);
     }
 
-    Window& Window::setPosition(int x, int y)
+    void Window::setPosition(int x, int y)
     {
         return setPosition(Vector2I(x, y));
     }
@@ -153,17 +145,15 @@ namespace Bull
         return Vector2I();
     }
 
-    Window& Window::setMinSize(const Vector2I& size)
+    void Window::setMinSize(const Vector2I& size)
     {
         if(m_impl)
         {
             m_impl->setMinSize(size);
         }
-
-        return (*this);
     }
 
-    Window& Window::setMinSize(int width, int height)
+    void Window::setMinSize(int width, int height)
     {
         return setMinSize(Vector2I(width, height));
     }
@@ -178,17 +168,15 @@ namespace Bull
         return Vector2I();
     }
 
-    Window& Window::setMaxSize(const Vector2I& size)
+    void Window::setMaxSize(const Vector2I& size)
     {
         if(m_impl)
         {
             m_impl->setMaxSize(size);
         }
-
-        return (*this);
     }
 
-    Window& Window::setMaxSize(int width, int height)
+    void Window::setMaxSize(int width, int height)
     {
         return setMaxSize(Vector2I(width, height));
     }
@@ -203,17 +191,15 @@ namespace Bull
         return Vector2I();
     }
 
-    Window& Window::setSize(const Vector2UI& size)
+    void Window::setSize(const Vector2UI& size)
     {
         if(m_impl)
         {
             m_impl->setSize(size);
         }
-
-        return (*this);
     }
 
-    Window& Window::setSize(unsigned int x, unsigned int y)
+    void Window::setSize(unsigned int x, unsigned int y)
     {
         return setSize(Vector2UI(x, y));
     }
@@ -228,14 +214,12 @@ namespace Bull
         return Vector2UI();
     }
 
-    Window& Window::setTitle(const String& title)
+    void Window::setTitle(const String& title)
     {
         if(m_impl)
         {
             m_impl->setTitle(title);
         }
-
-        return (*this);
     }
 
     String Window::getTitle() const
@@ -248,14 +232,12 @@ namespace Bull
         return String();
     }
 
-    Window& Window::enableKeyRepeat(bool enable)
+    void Window::enableKeyRepeat(bool enable)
     {
         if(m_impl)
         {
             m_impl->enableKeyRepeat(enable);
         }
-
-        return (*this);
     }
 
     bool Window::isKeyRepeatEnable() const
@@ -278,44 +260,36 @@ namespace Bull
         return false;
     }
 
-    Window& Window::setVisible(bool visible)
+    void Window::setVisible(bool visible)
     {
         if(m_impl)
         {
             m_impl->setVisible(visible);
         }
-
-        return (*this);
     }
 
-    Window& Window::setIcon(const Image& icon)
+    void Window::setIcon(const Image& icon)
     {
         if(m_impl)
         {
             m_impl->setIcon(icon);
         }
-
-        return (*this);
     }
 
-    Window& Window::setMouseCursor(const Cursor& cursor)
+    void Window::setMouseCursor(const Cursor& cursor)
     {
         if(m_impl)
         {
             m_impl->setMouseCursor(cursor.getImpl());
         }
-
-        return (*this);
     }
 
-    Window& Window::setMouseCursorVisible(bool visible)
+    void Window::setMouseCursorVisible(bool visible)
     {
         if(m_impl)
         {
             m_impl->setMouseCursorVisible(visible);
         }
-
-        return (*this);
     }
 
     bool Window::isMouseCursorVisible() const
@@ -330,7 +304,7 @@ namespace Bull
 
     bool Window::enableFullscreen(bool fullscreen)
     {
-        if(m_impl && (!fullscreen || (fullscreen && !s_fullscreen)))
+        if(m_impl && (!fullscreen || !s_fullscreen))
         {
             m_impl->switchFullscreen(fullscreen);
 
@@ -350,8 +324,7 @@ namespace Bull
 
         return false;
     }
-
-
+    
     bool Window::isFullscreenEnable() const
     {
         return this == s_fullscreen;
