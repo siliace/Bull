@@ -22,7 +22,7 @@ namespace Bull
         BOOL (WINAPI* wglDestroyPbuffer)(HPBUFFER hPbuffer) = nullptr;
         BOOL (WINAPI* wglQueryPbuffer)(HPBUFFER hPbuffer, int iAttribute, int *piValue) = nullptr;
 
-        Extension WglPbuffer("WGL_ARB_pbuffer", []
+        Extension wglPbuffer("WGL_ARB_pbuffer", []
         {
             wglCreatePbuffer    = reinterpret_cast<HPBUFFER (WINAPI*)(HDC, int, int , int, const int*)>(GlContext::getFunction("wglCreatePbufferARB"));
             wglGetPbufferDC     = reinterpret_cast<HDC (WINAPI*)(HPBUFFER)>(GlContext::getFunction("wglGetPbufferDCARB"));

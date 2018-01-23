@@ -10,7 +10,7 @@ namespace Bull
         BOOL (WINAPI* wglSwapInterval)(int interval) = nullptr;
         int (WINAPI* wglGetSwapInterval)() = nullptr;
 
-        Extension WglSwapControl("WGL_EXT_swap_control", []
+        Extension wglSwapControl("WGL_EXT_swap_control", []
         {
             wglSwapInterval    = reinterpret_cast<BOOL (WINAPI*)(int)>(GlContext::getFunction("wglSwapIntervalEXT"));
             wglGetSwapInterval = reinterpret_cast<int (WINAPI*)()>(GlContext::getFunction("wglGetSwapIntervalEXT"));

@@ -35,16 +35,16 @@ namespace Bull
 
         void WglContext::requireExtensions(ExtensionsLoader::Instance& loader)
         {
-            loader->require(WglCreateContext);
-            loader->require(WglPixelFormat);
-            loader->require(WglSwapControl);
+            loader->require(wglCreateContext);
+            loader->require(wglPixelFormat);
+            loader->require(wglSwapControl);
         }
 
         int WglContext::getBestPixelFormat(HDC device, Uint8 bitsPerPixel, const ContextSettings& settings, bool usePbuffer)
         {
             int bestPixelFormat = 0;
 
-            if(WglPixelFormat.isLoaded())
+            if(wglPixelFormat.isLoaded())
             {
                 static const int attribs[] =
                 {
@@ -248,7 +248,7 @@ namespace Bull
 
         void WglContext::enableVsync(bool active)
         {
-            if(WglSwapControl.isLoaded())
+            if(wglSwapControl.isLoaded())
             {
                 wglSwapInterval(active ? 1 : 0);
             }
@@ -268,7 +268,7 @@ namespace Bull
 
         void WglContext::createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel)
         {
-            if(WglPbuffer.isLoaded() && shared)
+            if(wglPbuffer.isLoaded() && shared)
             {
                 int format = getBestPixelFormat(shared->m_device, bitsPerPixel, m_settings, true);
 
@@ -321,7 +321,7 @@ namespace Bull
         {
             HGLRC sharedHandler = shared ? shared->m_render : nullptr;
 
-            if(WglCreateContext.isLoaded())
+            if(wglCreateContext.isLoaded())
             {
                 do
                 {
@@ -394,7 +394,7 @@ namespace Bull
 
             if(m_render == nullptr)
             {
-                m_render = wglCreateContext(m_device);
+                m_render = ::wglCreateContext(m_device);
 
                 if(m_render && shared)
                 {
@@ -417,7 +417,7 @@ namespace Bull
             int pixelFormat = GetPixelFormat(m_device);
             DescribePixelFormat(m_device, pixelFormat, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
 
-            if(WglPixelFormat.isLoaded())
+            if(wglPixelFormat.isLoaded())
             {
                 int format[2] = {0};
 

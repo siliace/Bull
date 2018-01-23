@@ -21,7 +21,7 @@ namespace Bull
     {
         HGLRC (WINAPI* wglCreateContextAttribs)(HDC hDC, HGLRC hShareContext, const int *attribList) = nullptr;
 
-        Extension WglCreateContext("WGL_ARB_create_context", []
+        Extension wglCreateContext("WGL_ARB_create_context", []
         {
             wglCreateContextAttribs = reinterpret_cast<HGLRC (WINAPI*)(HDC, HGLRC, const int*)>(GlContext::getFunction("wglCreateContextAttribsARB"));
 
