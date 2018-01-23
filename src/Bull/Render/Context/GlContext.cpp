@@ -1,4 +1,4 @@
-#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/DeclareException.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
 
@@ -18,6 +18,8 @@ namespace Bull
 {
     namespace prv
     {
+        DeclareException(WrongOpenGLVersion);
+
         namespace
         {
             Mutex mutex;
@@ -45,7 +47,7 @@ namespace Bull
 
                     if(realInternalSettings.major < 3 || realInternalSettings.major == 3 && realInternalSettings.minor <= 2)
                     {
-                        Throw(InternalError, "getInternalContext", "Bull needs OpenGL 3.3 or higher to work");
+                        Throw(WrongOpenGLVersion, "getInternalContext", "Bull needs OpenGL 3.3 or higher to work");
                     }
                 }
 
