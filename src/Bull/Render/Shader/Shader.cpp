@@ -1,7 +1,6 @@
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Shader/Shader.hpp>
@@ -329,7 +328,7 @@ namespace Bull
         {
             int length;
 
-            gl::getProgramiv(m_program,  GL_PROGRAM_BINARY_LENGTH, &length);
+            gl::getProgramiv(m_program, GL_PROGRAM_BINARY_LENGTH, &length);
 
             if(length)
             {
