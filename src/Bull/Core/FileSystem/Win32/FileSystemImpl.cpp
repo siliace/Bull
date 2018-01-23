@@ -33,8 +33,8 @@ namespace Bull
 
         FileSystemInfo FileSystemImpl::getFileSystemInfo(const Path& base)
         {
-            FileSystemInfo fileSystemInfo;
             ULARGE_INTEGER free, total, totalFree;
+            FileSystemInfo fileSystemInfo = {0, 0, 0};
 
             if(GetDiskFreeSpaceEx(base.toString().getBuffer(), &free, &total, &totalFree))
             {
