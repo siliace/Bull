@@ -117,17 +117,13 @@ namespace Bull
          *
          * \param enable The state of the capture
          *
-         * \return This
-         *
          */
-        Window& enableCaptureCursor(bool enable = true);
+        void enableCaptureCursor(bool enable = true);
 
         /*! \brief Minimize a window
          *
-         * \return This
-         *
          */
-        Window& minimize();
+        void minimize();
 
         /*! \brief Check if the window is minimized
          *
@@ -138,10 +134,8 @@ namespace Bull
 
         /*! \brief Maximize a window
          *
-         * \return This
-         *
          */
-        Window& maximize();
+        void maximize();
 
         /*! \brief Check if the window is maximized
          *
@@ -155,17 +149,15 @@ namespace Bull
          * \param position The new position of the window
          *
          */
-        Window& setPosition(const Vector2I& position);
+        void setPosition(const Vector2I& position);
 
         /*! \brief Set the window position
          *
          * \param x The new position of the left side of the window in the screen
          * \param y The new position of the top of the window in the screen
          *
-         * \return This
-         *
          */
-        Window& setPosition(int x, int y);
+        void setPosition(int x, int y);
 
         /*! \brief Get the position in the screen of the window
          *
@@ -178,20 +170,16 @@ namespace Bull
          *
          * \param size The minimal size of the window
          *
-         * \return This
-         *
          */
-        Window& setMinSize(const Vector2I& size);
+        void setMinSize(const Vector2I& size);
 
         /*! \brief Set the minimal size of the window
          *
          * \param width  The minimal width of the window
          * \param height The minimal height of the window
          *
-         * \return This
-         *
          */
-        Window& setMinSize(int width, int height);
+        void setMinSize(int width, int height);
 
         /*! \brief Get the minimal size of the window
          *
@@ -204,20 +192,16 @@ namespace Bull
          *
          * \param size The maximal size of the window
          *
-         * \return This
-         *
          */
-        Window& setMaxSize(const Vector2I& size);
+        void setMaxSize(const Vector2I& size);
 
         /*! \brief Set the maximal size of the window
          *
          * \param width  The maximal width of the window
          * \param height The maximal height of the window
          *
-         * \return This
-         *
          */
-        Window& setMaxSize(int width, int height);
+        void setMaxSize(int width, int height);
 
         /*! \brief Get the maximal size of the window
          *
@@ -230,20 +214,16 @@ namespace Bull
          *
          * \param size The new size of the window
          *
-         * \return This
-         *
          */
-        Window& setSize(const Vector2UI& size);
+        void setSize(const Vector2UI& size);
 
         /*! \brief Set the size of the window
          *
          * \param x The new width of the window
          * \param y The new height of the window
          *
-         * \return This
-         *
          */
-        Window& setSize(unsigned int x, unsigned int y);
+        void setSize(unsigned int x, unsigned int y);
 
         /*! \brief Get the size of the window
          *
@@ -256,10 +236,8 @@ namespace Bull
          *
          * \param title The new title of the window
          *
-         * \return This
-         *
          */
-        Window& setTitle(const String& title);
+        void setTitle(const String& title);
 
         /*! \brief Get the title of the window
          *
@@ -272,10 +250,8 @@ namespace Bull
          *
          * \param enable The state of the key repeat
          *
-         * \return This
-         *
          */
-        Window& enableKeyRepeat(bool enable = true);
+        void enableKeyRepeat(bool enable = true);
 
         /*! \brief Get the state of the key repeat
          *
@@ -295,37 +271,29 @@ namespace Bull
          *
          * \param visible True to show the window, false to hide the window
          *
-         * \return This
-         *
          */
-        Window& setVisible(bool visible = true);
+        void setVisible(bool visible = true);
 
         /*! \brief Set the icon of the Window
          *
          * \param icon The icon
          *
-         * \return This
-         *
          */
-        Window& setIcon(const Image& icon);
+        void setIcon(const Image& icon);
 
         /*! \brief Set the mouse cursor of the Window
          *
          * \param cursor The cursor
          *
-         * \return This
-         *
          */
-        Window& setMouseCursor(const Cursor& cursor);
+        void setMouseCursor(const Cursor& cursor);
 
         /*! \brief Toggle cursor visibility
          *
          * \param visible True to show the cursor, false to hide
          *
-         * \return This
-         *
          */
-        Window& setMouseCursorVisible(bool visible = false);
+        void setMouseCursorVisible(bool visible = false);
 
         /*! \brief Check whether the mouse cursor is visible
          *
