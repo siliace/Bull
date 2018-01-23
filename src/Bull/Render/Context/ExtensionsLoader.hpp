@@ -19,13 +19,6 @@ namespace Bull
              */
             ExtensionsLoader();
 
-            /*! \brief Constructor
-             *
-             * \param handler The handler to use to get supported extensions
-             *
-             */
-            explicit ExtensionsLoader(SurfaceHandler handler);
-
             /*! \brief Add an extension to load
              *
              * \param extension The extension to load
