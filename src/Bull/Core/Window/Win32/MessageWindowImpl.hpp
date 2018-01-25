@@ -3,10 +3,7 @@
 
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
-#include <Bull/Core/Window/MessageWindowButtons.hpp>
-#include <Bull/Core/Window/MessageWindowDefaultButton.hpp>
-#include <Bull/Core/Window/MessageWindowIcon.hpp>
-#include <Bull/Core/Window/MessageWindowResponse.hpp>
+#include <Bull/Core/Window/MessageWindow.hpp>
 #include <Bull/Core/Window/WindowHandler.hpp>
 
 namespace Bull

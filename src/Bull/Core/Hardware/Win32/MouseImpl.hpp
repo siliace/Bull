@@ -2,8 +2,7 @@
 #define BULL_CORE_HARDWARE_WIN32_MOUSEIMPL_HPP
 
 #include <Bull/Core/Hardware/MouseButton.hpp>
-
-#include <Bull/Math/Vector/Vector2.hpp>
+#include <Bull/Core/Utility/Size.hpp>
 
 namespace Bull
 {
@@ -18,14 +17,14 @@ namespace Bull
              * \param position The new position of the cursor on the screen
              *
              */
-            static void setPosition(const Vector2I& position);
+            static void setPosition(const Size& position);
 
             /*! \brief Get the cursor position
              *
              * \return Return the cursor position
              *
              */
-            static Vector2I getPosition();
+            static Size getPosition();
 
 
             /*! \brief Check whether a button is pressed

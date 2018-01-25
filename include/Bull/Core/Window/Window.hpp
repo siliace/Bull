@@ -149,7 +149,7 @@ namespace Bull
          * \param position The new position of the window
          *
          */
-        void setPosition(const Vector2I& position);
+        void setPosition(const Size& position);
 
         /*! \brief Set the window position
          *
@@ -164,14 +164,14 @@ namespace Bull
          * \return Return the window position
          *
          */
-        Vector2I getPosition() const;
+        Size getPosition() const;
 
         /*! \brief Set the minimal size of the window
          *
          * \param size The minimal size of the window
          *
          */
-        void setMinSize(const Vector2I& size);
+        void setMinSize(const Size& size);
 
         /*! \brief Set the minimal size of the window
          *
@@ -186,14 +186,14 @@ namespace Bull
          * \return The minimal size
          *
          */
-        Vector2I getMinSize() const;
+        Size getMinSize() const;
 
         /*! \brief Set the maximal size of the window
          *
          * \param size The maximal size of the window
          *
          */
-        void setMaxSize(const Vector2I& size);
+        void setMaxSize(const Size& size);
 
         /*! \brief Set the maximal size of the window
          *
@@ -208,14 +208,14 @@ namespace Bull
          * \return The maximal size
          *
          */
-        Vector2I getMaxSize() const;
+        Size getMaxSize() const;
 
         /*! \brief Set the size of the window
          *
          * \param size The new size of the window
          *
          */
-        void setSize(const Vector2UI& size);
+        void setSize(const Size& size);
 
         /*! \brief Set the size of the window
          *
@@ -230,7 +230,7 @@ namespace Bull
          * \return Return the size of the window
          *
          */
-        Vector2UI getSize() const;
+        Size getSize() const;
 
         /*! \brief Set the title of the window
          *

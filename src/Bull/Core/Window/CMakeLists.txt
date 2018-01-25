@@ -8,10 +8,6 @@ target_sources(bull-core
             ${BULL_INC_CORE_WINDOW}/CursorType.hpp
             ${BULL_INC_CORE_WINDOW}/MessageWindow.hpp
             ${BULL_SRC_CORE_WINDOW}/MessageWindow.cpp
-            ${BULL_INC_CORE_WINDOW}/MessageWindowButtons.hpp
-            ${BULL_INC_CORE_WINDOW}/MessageWindowDefaultButton.hpp
-            ${BULL_INC_CORE_WINDOW}/MessageWindowIcon.hpp
-            ${BULL_INC_CORE_WINDOW}/MessageWindowResponse.hpp
             ${BULL_INC_CORE_WINDOW}/VideoMode.hpp
             ${BULL_SRC_CORE_WINDOW}/VideoMode.cpp
             ${BULL_INC_CORE_WINDOW}/Window.hpp

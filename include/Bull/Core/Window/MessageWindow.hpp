@@ -1,17 +1,57 @@
 #ifndef BULL_CORE_WINDOW_MESSAGEWINDOW_HPP
 #define BULL_CORE_WINDOW_MESSAGEWINDOW_HPP
 
-#include <memory>
-
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Window/MessageWindowButtons.hpp>
-#include <Bull/Core/Window/MessageWindowDefaultButton.hpp>
-#include <Bull/Core/Window/MessageWindowIcon.hpp>
-#include <Bull/Core/Window/MessageWindowResponse.hpp>
 #include <Bull/Core/Window/Window.hpp>
 
 namespace Bull
 {
+    enum MessageWindowDefaultButton
+    {
+        MessageWindowDefaultButton_Button1,
+        MessageWindowDefaultButton_Button2,
+        MessageWindowDefaultButton_Button3,
+        MessageWindowDefaultButton_Button4,
+    };
+
+    enum MessageWindowButtons
+    {
+        MessageWindowButtons_Ok,
+        MessageWindowButtons_Help,
+        MessageWindowButtons_YesNo,
+        MessageWindowButtons_OkCancel,
+        MessageWindowButtons_RetryCancel,
+        MessageWindowButtons_YesNoCancel,
+        MessageWindowButtons_AbortRetryIgnore,
+        MessageWindowButtons_CancelTryContinue,
+    };
+
+    enum MessageWindowResponse
+    {
+        MessageWindowResponse_Ok,
+        MessageWindowResponse_No,
+        MessageWindowResponse_Yes,
+        MessageWindowResponse_Abort,
+        MessageWindowResponse_Retry,
+        MessageWindowResponse_Cancel,
+        MessageWindowResponse_Ignore,
+        MessageWindowResponse_Continue,
+        MessageWindowResponse_TryAgain,
+    };
+
+    enum MessageWindowIcon
+    {
+        MessageWindowIcon_None,
+        MessageWindowIcon_Hand,
+        MessageWindowIcon_Stop,
+        MessageWindowIcon_Error,
+        MessageWindowIcon_Warning,
+        MessageWindowIcon_Asterisk,
+        MessageWindowIcon_Question,
+        MessageWindowIcon_Information,
+        MessageWindowIcon_Exclamation,
+    };
+
     struct BULL_CORE_API MessageWindow : public NonCopyable
     {
         /*! \brief Default constructor

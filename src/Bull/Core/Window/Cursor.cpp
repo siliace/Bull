@@ -16,9 +16,9 @@ namespace Bull
         return m_impl->create(cursor);
     }
 
-    bool Cursor::create(const Image& image, const Vector2UI& hotSpot)
+    bool Cursor::create(const Image& image, const Size& hotSpot)
     {
-        if(image.getSize().x() && image.getSize().y())
+        if(image.getSize().width && image.getSize().height)
         {
             return m_impl->create(image, hotSpot);
         }

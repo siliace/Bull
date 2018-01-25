@@ -2,12 +2,12 @@
 
 namespace Bull
 {
-    bool Image::create(const Vector2UI& size)
+    bool Image::create(const Size& size)
     {
-        if(size.x() && size.y())
+        if(size.width && size.height)
         {
             m_size   = size;
-            m_pixels = ByteVector(m_size.x() * m_size.y() * 4);
+            m_pixels = ByteVector(m_size.width * m_size.height * 4);
 
             return true;
         }
@@ -15,11 +15,11 @@ namespace Bull
         return false;
     }
 
-    bool Image::create(const ByteVector& pixels, const Vector2UI& size)
+    bool Image::create(const ByteVector& pixels, const Size& size)
     {
-        if(size.x() && size.y())
+        if(size.width && size.height)
         {
-            std::size_t pixelsCount = size.x() * size.y() * 4;
+            std::size_t pixelsCount = size.width * size.height * 4;
 
             m_size   = size;
             m_pixels = pixels;
@@ -53,35 +53,7 @@ namespace Bull
         return (*this);
     }
 
-    Image& Image::flipVertically()
-    {
-        ByteVector pixels(m_size.x() * m_size.y() * 4);
-
-        for(unsigned int i = 0; i < m_size.y() ; i++)
-        {
-            std::memcpy(&m_pixels[i * m_size.x()], &pixels[m_size.x() * (m_size.y() - i - 1) * 4], m_size.y());
-        }
-
-        m_pixels = pixels;
-
-        return (*this);
-    }
-
-    Image& Image::flipHorizontally()
-    {
-        ByteVector pixels(m_size.x() * m_size.y() * 4);
-
-        for(unsigned int i = 0; i < m_size.y() ; i++)
-        {
-            std::memcpy(&m_pixels[i * m_size.y()], &pixels[m_size.y() * (m_size.x() - i - 1) * 4], m_size.x());
-        }
-
-        m_pixels = pixels;
-
-        return (*this);
-    }
-
-    const Vector2UI& Image::getSize() const
+    const Size& Image::getSize() const
     {
         return m_size;
     }

@@ -6,7 +6,7 @@ namespace Bull
 {
     namespace prv
     {
-        void MouseImpl::setPosition(const Vector2I& position)
+        void MouseImpl::setPosition(const Size& position)
         {
             Display::Instance display = Display::getInstance();
 
@@ -14,7 +14,7 @@ namespace Bull
             display->flush();
         }
 
-        Vector2I MouseImpl::getPosition()
+        Size MouseImpl::getPosition()
         {
             int x, y;
             int rootX, rootY;
@@ -24,10 +24,10 @@ namespace Bull
 
             if(XQueryPointer(display->getHandler(), display->getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))
             {
-                return Vector2I(x, y);
+                return Size(x, y);
             }
 
-            return Vector2I();
+            return Size();
         }
 
         bool MouseImpl::isButtonPressed(MouseButton button)

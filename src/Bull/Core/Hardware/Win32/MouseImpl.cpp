@@ -6,18 +6,18 @@ namespace Bull
 {
     namespace prv
     {
-        void MouseImpl::setPosition(const Vector2I& position)
+        void MouseImpl::setPosition(const Size& position)
         {
-            SetCursorPos(position.x(), position.y());
+            SetCursorPos(position.width, position.height);
         }
 
-        Vector2I MouseImpl::getPosition()
+        Size MouseImpl::getPosition()
         {
             POINT p;
 
             GetCursorPos(&p);
 
-            return Vector2I(p.x, p.y);
+            return Size(p.x, p.y);
         }
 
         bool MouseImpl::isButtonPressed(MouseButton button)

@@ -22,7 +22,7 @@ namespace Bull
          * \return True if the Image was created successfully
          *
          */
-        bool create(const Vector2UI& size) override;
+        bool create(const Size& size) override;
 
         /*! \brief Create the Image
          *
@@ -32,7 +32,7 @@ namespace Bull
          * \return True if the Image was created successfully
          *
          */
-        bool create(const ByteVector& pixels, const Vector2UI& size) override;
+        bool create(const ByteVector& pixels, const Size& size) override;
 
         /*! \brief Tell whether an Image is loaded
          *
@@ -50,20 +50,6 @@ namespace Bull
          */
         Image& fill(const Color& color);
 
-        /*! \brief Flip the Image vertically
-         *
-         * \return This
-         *
-         */
-        Image& flipVertically();
-
-        /*! \brief Flip the Image horizontally
-         *
-         * \return This
-         *
-         */
-        Image& flipHorizontally();
-
         /*! \brief Get pixels of the Image
          *
          * \return The pixels
@@ -76,11 +62,11 @@ namespace Bull
          * \return The size
          *
          */
-        const Vector2UI& getSize() const override;
+        const Size& getSize() const override;
 
     private:
 
-        Vector2UI m_size;
+        Size       m_size;
         ByteVector m_pixels;
     };
 }

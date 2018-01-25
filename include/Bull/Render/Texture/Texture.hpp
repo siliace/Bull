@@ -49,7 +49,7 @@ namespace Bull
          * \return True if the Texture was created successfully
          *
          */
-        bool create(const Vector2UI& size) override;
+        bool create(const Size& size) override;
 
         /*! \brief Create a Texture
          *
@@ -59,7 +59,7 @@ namespace Bull
          * \return True if the Texture was created successfully
          *
          */
-        bool create(const ByteVector& pixels, const Vector2UI& size) override;
+        bool create(const ByteVector& pixels, const Size& size) override;
 
         /*! \brief Tell whether an Asset is loaded
          *
@@ -113,12 +113,12 @@ namespace Bull
          * \return The size
          *
          */
-        const Vector2UI& getSize() const override;
+        const Size& getSize() const override;
 
     private:
 
         unsigned int m_id;
-        Vector2UI    m_size;
+        Size    m_size;
         bool         m_isSmooth;
         bool         m_isRepeated;
     };

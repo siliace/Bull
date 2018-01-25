@@ -1,7 +1,7 @@
 #ifndef BULL_RENDER_TARGET_VIEWPORT_HPP
 #define BULL_RENDER_TARGET_VIEWPORT_HPP
 
-#include <Bull/Math/Vector/Vector2.hpp>
+#include <Bull/Core/Utility/Size.hpp>
 
 #include <Bull/Render/Export.hpp>
 
@@ -30,7 +30,7 @@ namespace Bull
          * \param size
          *
          */
-        Viewport(const Vector2I& position, const Vector2I& size);
+        Viewport(const Size& position, const Size& size);
 
         /*! \brief Compare two viewports
          *
@@ -55,7 +55,7 @@ namespace Bull
          * \param offset The offset to move the viewport
          *
          */
-        void move(const Vector2I& offset);
+        void move(const Size& offset);
 
         /*! \brief Move the viewport
          *

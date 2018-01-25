@@ -33,8 +33,8 @@ namespace Bull
     {
         return createTask([&info, path]() -> bool{
             return stbi_info(path.toString().getBuffer(),
-                             reinterpret_cast<int*>(&info.size.x()),
-                             reinterpret_cast<int*>(&info.size.y()),
+                             reinterpret_cast<int*>(&info.size.width),
+                             reinterpret_cast<int*>(&info.size.height),
                              reinterpret_cast<int*>(&info.channels)) == 0;
         });
     }
@@ -49,8 +49,8 @@ namespace Bull
             callbacks.eof  = &ImageLoader::eof;
 
             return stbi_info_from_callbacks(&callbacks, &stream,
-                                            reinterpret_cast<int*>(&info.size.x()),
-                                            reinterpret_cast<int*>(&info.size.y()),
+                                            reinterpret_cast<int*>(&info.size.width),
+                                            reinterpret_cast<int*>(&info.size.height),
                                             reinterpret_cast<int*>(&info.channels)) == 0;
         });
     }
@@ -59,8 +59,8 @@ namespace Bull
     {
         return createTask([&info, data, length]() -> bool{
             return stbi_info_from_memory(reinterpret_cast<const stbi_uc*>(data), length,
-                                         reinterpret_cast<int*>(&info.size.x()),
-                                         reinterpret_cast<int*>(&info.size.y()),
+                                         reinterpret_cast<int*>(&info.size.width),
+                                         reinterpret_cast<int*>(&info.size.height),
                                          reinterpret_cast<int*>(&info.channels)) == 0;
         });
     }
@@ -160,7 +160,7 @@ namespace Bull
 
             if(pixels.fill(buffer, width * height * channels))
             {
-                Vector2UI size(width, height);
+                Size size(width, height);
 
                 return image.create(pixels, size);
             }

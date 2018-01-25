@@ -1,10 +1,8 @@
 #ifndef BULL_CORE_HARDWARE_MOUSE_HPP
 #define BULL_CORE_HARDWARE_MOUSE_HPP
 
-#include <Bull/Core/Export.hpp>
 #include <Bull/Core/Hardware/MouseButton.hpp>
-
-#include <Bull/Math/Vector/Vector2.hpp>
+#include <Bull/Core/Utility/Size.hpp>
 
 namespace Bull
 {
@@ -24,7 +22,7 @@ namespace Bull
          * \param position The new position of the cursor on the screen
          *
          */
-        static void setPosition(const Vector2I& position);
+        static void setPosition(const Size& position);
 
         /*! \brief Set the position of the cursor on the screen relatively to a Window
          *
@@ -32,14 +30,14 @@ namespace Bull
          * \param relative The Window relative to
          *
          */
-        static void setPosition(const Vector2I& position, const Window& relative);
+        static void setPosition(const Size& position, const Window& relative);
 
         /*! \brief Get the cursor position on the screen
          *
          * \return Return the cursor position of the screen
          *
          */
-        static Vector2I getPosition();
+        static Size getPosition();
 
         /*! \brief Check whether a button is pressed
          *

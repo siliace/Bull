@@ -47,7 +47,7 @@ namespace Bull
              * \return True if the cursor was created successfully
              *
              */
-            virtual bool create(const Image& cursor, const Vector2UI& hotSpot) = 0;
+            virtual bool create(const Image& cursor, const Size& hotSpot) = 0;
 
             /*! \brief Get the native system handler of the cursor
              *

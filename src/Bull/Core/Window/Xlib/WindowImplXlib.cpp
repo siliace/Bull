@@ -378,8 +378,8 @@ namespace Bull
                     case ConfigureNotify:
                     {
                         WindowEvent event;
-                        Vector2UI size(e.xconfigure.width, e.xconfigure.height);
-                        Vector2I  position(e.xconfigure.x, e.xconfigure.y);
+                        Size size(e.xconfigure.width, e.xconfigure.height);
+                        Size  position(e.xconfigure.x, e.xconfigure.y);
 
                         if(size != m_lastSize)
                         {
@@ -492,13 +492,13 @@ namespace Bull
             }
         }
 
-        void WindowImplXlib::setPosition(const Vector2I& position)
+        void WindowImplXlib::setPosition(const Size& position)
         {
             XMoveWindow(m_display->getHandler(), m_handler, position.x(), position.y());
             m_display->flush();
         }
 
-        Vector2I WindowImplXlib::getPosition() const
+        Size WindowImplXlib::getPosition() const
         {
             XWindow root, child;
             int localX, localY, x, y;
@@ -507,10 +507,10 @@ namespace Bull
             XGetGeometry(m_display->getHandler(), m_handler, &root, &localX, &localY, &width, &height, &border, &depth);
             XTranslateCoordinates(m_display->getHandler(), m_handler, root, localX, localY, &x, &y, &child);
 
-            return Vector2I(x, y);
+            return Size(x, y);
         }
 
-        void WindowImplXlib::setMinSize(const Vector2I& size)
+        void WindowImplXlib::setMinSize(const Size& size)
         {
             XSizeHints hints;
 
@@ -521,16 +521,16 @@ namespace Bull
             XSetNormalHints(m_display->getHandler(), m_handler, &hints);
         }
 
-        Vector2I WindowImplXlib::getMinSize() const
+        Size WindowImplXlib::getMinSize() const
         {
             XSizeHints hints;
 
             XGetNormalHints(m_display->getHandler(), m_handler, &hints);
 
-            return Vector2I(hints.min_width, hints.min_height);
+            return Size(hints.min_width, hints.min_height);
         }
 
-        void WindowImplXlib::setMaxSize(const Vector2I& size)
+        void WindowImplXlib::setMaxSize(const Size& size)
         {
             XSizeHints hints;
 
@@ -541,29 +541,29 @@ namespace Bull
             XSetNormalHints(m_display->getHandler(), m_handler, &hints);
         }
 
-        Vector2I WindowImplXlib::getMaxSize() const
+        Size WindowImplXlib::getMaxSize() const
         {
             XSizeHints hints;
 
             XGetNormalHints(m_display->getHandler(), m_handler, &hints);
 
-            return Vector2I(hints.max_width, hints.max_height);
+            return Size(hints.max_width, hints.max_height);
         }
 
-        void WindowImplXlib::setSize(const Vector2UI& size)
+        void WindowImplXlib::setSize(const Size& size)
         {
             XResizeWindow(m_display->getHandler(), m_handler, size.x(), size.y());
             m_lastSize = size;
             m_display->flush();
         }
 
-        Vector2UI WindowImplXlib::getSize() const
+        Size WindowImplXlib::getSize() const
         {
             XWindowAttributes attributes;
 
             XGetWindowAttributes(m_display->getHandler(), m_handler, &attributes);
 
-            return Vector2UI(attributes.width, attributes.height);
+            return Size(attributes.width, attributes.height);
         }
 
         void WindowImplXlib::setTitle(const String& title)

@@ -34,9 +34,9 @@ namespace Bull
         return create(image.getPixels(), image.getSize());
     }
 
-    bool Texture::create(const Vector2UI& size)
+    bool Texture::create(const Size& size)
     {
-        if(size.x() && size.y())
+        if(size.width && size.height)
         {
             ensureContext();
 
@@ -53,7 +53,7 @@ namespace Bull
             }
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
-            gl::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.x() , m_size.y() , 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+            gl::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.width , m_size.height , 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
             gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
@@ -65,7 +65,7 @@ namespace Bull
         return false;
     }
 
-    bool Texture::create(const ByteVector& pixels, const Vector2UI& size)
+    bool Texture::create(const ByteVector& pixels, const Size& size)
     {
         if(create(size))
         {
@@ -73,9 +73,9 @@ namespace Bull
 
             gl::bindTexture(GL_TEXTURE_2D, m_id);
 
-            for(unsigned int i = 0; i < m_size.y() ; i++)
+            for(unsigned int i = 0; i < m_size.height ; i++)
             {
-                gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, m_size.x() , 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[m_size.x() * (m_size.y() - i - 1) * 4]);
+                gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, m_size.width , 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[m_size.width * (m_size.height - i - 1) * 4]);
             }
 
             gl::generateMipmap(GL_TEXTURE_2D);
@@ -144,7 +144,7 @@ namespace Bull
         if(m_id)
         {
             Image image;
-            ByteVector pixels(m_size.x() * m_size.y() * 4);
+            ByteVector pixels(m_size.width * m_size.height * 4);
 
             ensureContext();
 
@@ -160,7 +160,7 @@ namespace Bull
         return Image();
     }
 
-    const Vector2UI& Texture::getSize() const
+    const Size& Texture::getSize() const
     {
         return m_size;
     }
