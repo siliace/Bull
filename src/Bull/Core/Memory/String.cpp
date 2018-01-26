@@ -98,18 +98,19 @@ namespace Bull
         return m_string.find_last_of(search.m_string);
     }
 
-    String& String::insert(const String& string, size_t position)
+    std::size_t String::find(const String& search) const
     {
-        m_string.insert(position, string.m_string);
-
-        return (*this);
+        return m_string.find(search.m_string);
     }
 
-    String& String::append(const String& string)
+    void String::insert(const String& string, size_t position)
+    {
+        m_string.insert(position, string.m_string);
+    }
+
+    void String::append(const String& string)
     {
         m_string.append(string.m_string);
-
-        return (*this);
     }
 
     String String::subString(std::size_t begin, std::size_t end) const
@@ -141,7 +142,7 @@ namespace Bull
         std::size_t count = 0;
         std::size_t nextReplace;
 
-        while((nextReplace = m_string.find(search.m_string)) < InvalidPosition)
+        while((nextReplace = find(search)) < InvalidPosition)
         {
             m_string.replace(nextReplace, search.getSize(), replace.m_string);
         }
@@ -230,7 +231,9 @@ namespace Bull
 
     String& String::operator+=(const String& right)
     {
-        return append(right);
+        append(right);
+
+        return (*this);
     }
 
     String operator+(const String& left, const String& right)

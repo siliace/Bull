@@ -154,33 +154,38 @@ namespace Bull
          */
         std::size_t first(const String& search) const;
 
-        /*! \brief The the ladt occurence of a String
+        /*! \brief The the last occurence of a String
          *
          * \param search The String to search
          *
-         * \return The position of int String if the searched String was found, InvalidPosition otherwise
+         * \return The position of String if found, InvalidPosition otherwise
          *
          */
         std::size_t last(const String& search) const;
+
+        /*! \brief Find a substring in the String
+         *
+         * \param search The String to find
+         *
+         * \return The position of String if found, InvalidPosition otherwise
+         *
+         */
+        std::size_t find(const String& search) const;
 
         /*! \brief Insert a String at a given position
          *
          * \param string   The String to insert
          * \param position The position where insert the String
          *
-         * \return This
-         *
          */
-        String& insert(const String& string, size_t position);
+        void insert(const String& string, size_t position);
 
         /*! \brief Append a String at the end this
          *
          * \param string The String to append to this
          *
-         * \return This
-         *
          */
-        String& append(const String& string);
+        void append(const String& string);
 
         /*! \brief Get a sub String from the String
          *
