@@ -1,4 +1,5 @@
 #include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/LackOfImplementation.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Window/Win32/CursorImplWin32.hpp>
 
@@ -59,7 +60,7 @@ namespace Bull
 
         bool CursorImplWin32::create(const Image& cursor, const Size& hotSpot)
         {
-            return false;
+            Throw(LackOfImplementation, "CursorImplWin32::create", "Unimplemented method");
         }
 
         CursorHandler CursorImplWin32::getSystemHandler() const
