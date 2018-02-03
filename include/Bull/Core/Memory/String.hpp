@@ -82,7 +82,7 @@ namespace Bull
          * \param repeat    The number of character in the String
          *
          */
-        String(char character);
+        String(char character, std::size_t repeat = 1);
 
         /*! \brief Constructor
          *
@@ -102,16 +102,6 @@ namespace Bull
          *
          */
         String(const char* string, std::size_t size);
-
-        /*! \brief Constructor
-         *
-         * Create a String filled with a character
-         *
-         * \param size     The size of the String
-         * \param capacity The character to use to fill the String
-         *
-         */
-        String(std::size_t size, char character);
 
         /*! \brief Set the size of the String
          *
