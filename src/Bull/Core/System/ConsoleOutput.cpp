@@ -4,7 +4,6 @@
 namespace Bull
 {
     ConsoleOutput::ConsoleOutput() :
-        m_size(0),
         m_impl(prv::ConsoleOutputImpl::createInstance())
     {
         /// Nothing
@@ -24,7 +23,6 @@ namespace Bull
 
     void ConsoleOutput::clear()
     {
-        m_size = 0;
         m_impl->clear();
     }
 
@@ -40,15 +38,6 @@ namespace Bull
 
     std::size_t ConsoleOutput::write(const void* data, std::size_t size)
     {
-        std::size_t written = m_impl->write(data, size);
-
-        m_size += written;
-
-        return written;
-    }
-
-    std::size_t ConsoleOutput::getSize() const
-    {
-        return m_size;
+        return m_impl->write(data, size);
     }
 }

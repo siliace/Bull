@@ -11,21 +11,16 @@ namespace Bull
 
     std::size_t OutStringStream::write(const String& string)
     {
-        std::size_t oldSize = getSize();
+        std::size_t oldSize = m_content.getSize();
 
         m_content.append(string);
 
-        return getSize() - oldSize;
+        return m_content.getSize() - oldSize;
     }
 
     std::size_t OutStringStream::write(const void* data, std::size_t size)
     {
         return write(String(reinterpret_cast<const char*>(data), size));
-    }
-
-    std::size_t OutStringStream::getSize() const
-    {
-        return m_content.getSize();
     }
 
     const String& OutStringStream::toString() const

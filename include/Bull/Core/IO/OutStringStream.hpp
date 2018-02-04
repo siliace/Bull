@@ -39,13 +39,6 @@ namespace Bull
          */
         std::size_t write(const void* data, std::size_t size) override;
 
-        /*! \brief Get the size of the stream
-         *
-         * \return Return the size of the stream
-         *
-         */
-        std::size_t getSize() const override;
-
         /*! \brief Get the content of the stream
          *
          * \return Return the content of the stream
