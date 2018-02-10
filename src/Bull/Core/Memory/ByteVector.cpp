@@ -16,6 +16,6 @@ namespace Bull
 
     String ByteVector::toString() const
     {
-        return String(reinterpret_cast<const char*>(getBuffer(), getCapacity()));
+        return String(reinterpret_cast<const char*>(getBuffer()), getCapacity());
     }
 }
