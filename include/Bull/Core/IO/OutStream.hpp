@@ -21,13 +21,6 @@ namespace Bull
          *
          */
         virtual std::size_t write(const void* data, std::size_t size) = 0;
-
-        /*! \brief Get the size of the stream
-         *
-         * \return Return the size of the stream
-         *
-         */
-        virtual std::size_t getSize() const = 0;
     };
 }
 

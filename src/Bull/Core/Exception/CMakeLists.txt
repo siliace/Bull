@@ -9,6 +9,7 @@ target_sources(bull-core
             ${BULL_SRC_CORE_EXCEPTION}/Exception.cpp
             ${BULL_INC_CORE_EXCEPTION}/InternalError.hpp
             ${BULL_INC_CORE_EXCEPTION}/InvalidParameter.hpp
+            ${BULL_INC_CORE_EXCEPTION}/LackOfImplementation.hpp
             ${BULL_INC_CORE_EXCEPTION}/LogicError.hpp
             ${BULL_INC_CORE_EXCEPTION}/Throw.hpp
         )

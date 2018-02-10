@@ -40,10 +40,9 @@ namespace Bull
         return boolean ? "true" : "false";
     }
 
-    String::String(char character) :
-        String(1, character)
+    String::String(char character, std::size_t repeat)
     {
-        /// Nothing
+        m_string.resize(repeat, character);
     }
 
     String::String(const char* string) :
@@ -55,11 +54,6 @@ namespace Bull
     String::String(const char* string, std::size_t size)
     {
         fill(string, size);
-    }
-
-    String::String(std::size_t size, char character)
-    {
-        m_string.resize(size, character);
     }
 
     String& String::setSize(std::size_t size)

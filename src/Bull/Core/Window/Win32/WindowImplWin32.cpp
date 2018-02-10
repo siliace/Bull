@@ -5,35 +5,6 @@
 #include <Bull/Core/Window/Win32/WindowImplWin32.hpp>
 #include <Bull/Core/Window/WindowStyle.hpp>
 
-/// GCC missing define
-#ifndef WM_XBUTTONDOWN
-    #define WM_XBUTTONDOWN 0x020B
-#endif
-#ifndef WM_XBUTTONUP
-    #define WM_XBUTTONUP 0x020C
-#endif
-#ifndef XBUTTON1
-    #define XBUTTON1 0x0001
-#endif
-#ifndef XBUTTON2
-    #define XBUTTON2 0x0002
-#endif
-#ifndef VK_OEM_PLUS
-    #define VK_OEM_PLUS 0xBB
-#endif
-#ifndef VK_OEM_COMMA
-    #define VK_OEM_COMMA 0xBC
-#endif
-#ifndef VK_OEM_PERIOD
-    #define VK_OEM_PERIOD 0xBE
-#endif
-#ifndef VK_OEM_102
-    #define VK_OEM_102 0xE2
-#endif
-#ifndef GWL_USERDATA
-    #define GWL_USERDATA -21
-#endif
-
 namespace Bull
 {
     namespace prv
@@ -74,7 +45,7 @@ namespace Bull
                 SetWindowLongPtr(handler, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(createdImpl));
             }
 
-            WindowImplWin32* window = reinterpret_cast<WindowImplWin32*>(GetWindowLongPtrW(handler, GWL_USERDATA));
+            WindowImplWin32* window = reinterpret_cast<WindowImplWin32*>(GetWindowLongPtrW(handler, GWLP_USERDATA));
 
             if(window)
             {

@@ -72,16 +72,8 @@ namespace Bull
          */
         std::size_t write(const void* data, std::size_t size) override;
 
-        /*! \brief Get the size of the ConsoleOutput
-         *
-         * \return Return the size of the ConsoleOutput
-         *
-         */
-        std::size_t getSize() const override;
-
     private:
 
-        std::size_t                             m_size;
         std::unique_ptr<prv::ConsoleOutputImpl> m_impl;
     };
 }
