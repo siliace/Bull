@@ -413,16 +413,14 @@ namespace Bull
 
         String WindowImplWin32::getTitle() const
         {
-            wchar_t* titleBuffer = new wchar_t[1024];
-            String title;
+            MemoryVector<wchar_t> buffer;
 
-            GetWindowTextW(m_handler, titleBuffer, 1024);
+            if(buffer.create(GetWindowTextLengthW(m_handler) + 1))
+            {
+                GetWindowTextW(m_handler, &buffer[0], buffer.getCapacity());
+            }
 
-            title = reinterpret_cast<char*>(titleBuffer);
-
-            delete[] titleBuffer;
-
-            return title;
+            return String(reinterpret_cast<const char*>(buffer.getBuffer()), buffer.getCapacity());
         }
 
         bool WindowImplWin32::hasFocus() const
