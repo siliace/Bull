@@ -10,8 +10,10 @@ namespace Bull
         }
     }
 
-    void Log::addLogger(AbstractLogger* logger)
+    AbstractLogger& Log::addLogger(std::unique_ptr<AbstractLogger>&& logger)
     {
-        m_listeners.emplace_back(std::unique_ptr<AbstractLogger>(logger));
+        m_listeners.emplace_back(std::move(logger));
+
+        return (*m_listeners.back());
     }
 }

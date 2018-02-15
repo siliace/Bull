@@ -22,12 +22,29 @@ namespace Bull
          */
         void write(const String& message, LogLevel level);
 
-        /*! \brief Add a new logger
+        /*! \brief Create a new AbstractLogger
          *
-         * \param logger The logger to add
+         * \param args Arguments to use to create the AbstractLogger
+         *
+         * \return The created AbstractLogger
          *
          */
-        void addLogger(AbstractLogger* logger);
+        template <typename T, typename... Args>
+        T& createLogger(Args&&... args)
+        {
+            std::unique_ptr<AbstractLogger> logger(new T(std::forward<Args>(args)...));
+
+            return static_cast<T&>(addLogger(std::move(logger)));
+        }
+
+        /*! \brief Add an AbstractLogger
+         *
+         * \param logger The AbstractLogger to add
+         *
+         * \return The newly added AbstractLogger
+         *
+         */
+        AbstractLogger& addLogger(std::unique_ptr<AbstractLogger>&& logger);
 
     private:
 
