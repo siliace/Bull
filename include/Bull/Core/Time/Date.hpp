@@ -40,84 +40,12 @@ namespace Bull
          */
         bool operator!=(const Date& left) const;
 
-        /*! \brief Compare two dates
-         *
-         * \param left The date to compare with this
-         *
-         * \return Return true if this is superior or equal to left, false otherwise
-         *
-         */
-        bool operator>=(const Date& left) const;
-
-        /*! \brief Compare two dates
-         *
-         * \param left The date to compare with this
-         *
-         * \return Return true if this is superior to left, false otherwise
-         *
-         */
-        bool operator>(const Date& left) const;
-
-        /*! \brief Compare two dates
-         *
-         * \param left The date to compare with this
-         *
-         * \return Return true if this is inferior or equal to left, false otherwise
-         *
-         */
-        bool operator<=(const Date& left) const;
-
-        /*! \brief Compare two dates
-         *
-         * \param left The date to compare with this
-         *
-         * \return Return true if this is inferior to left, false otherwise
-         *
-         */
-        bool operator<(const Date& left) const;
-
-        /*! \brief Add a date to this
-         *
-         * \param left The date to add to this
-         *
-         * \return Return this after the addition
-         *
-         */
-        Date& operator+=(const Date& left);
-
-        /*! \brief Addition of two dates
-         *
-         * \param left The date to add to this
-         *
-         * \return Return the sum of this and left
-         *
-         */
-        Date operator+(const Date& left) const;
-
-        /*! \brief Subtract a date to this
-         *
-         * \param left The date to subtract to this
-         *
-         * \return Return this after the subtraction
-         *
-         */
-        Date& operator-=(const Date& left);
-
-        /*! \brief Subtraction  of two dates
-         *
-         * \param left The date to add to this
-         *
-         * \return Return the difference of this and left
-         *
-         */
-        Date operator-(const Date& left) const;
-
         Uint8     day;
         Uint8     hour;
         Uint32    year;
         DateMonth month;
         Uint8     minute;
-        Duration      second;
+        Duration  second;
         DateDay   dayOfWeek;
     };
 }
