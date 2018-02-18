@@ -17,18 +17,18 @@ namespace Bull
          */
         ConsoleLogger();
 
-        /*! \brief
+        /*! \brief Set the ConsoleColor to use to write a log entry according to its LogLevel
          *
-         * \param level
-         * \param color
+         * \param level The LogLevel
+         * \param color The ConsoleColor
          *
          */
         void setLevelTextColor(LogLevel level, ConsoleColor color);
 
-        /*! \brief
+        /*! \brief Set the background ConsoleColor a log entry according to its LogLevel
          *
-         * \param level
-         * \param color
+         * \param level The LogLevel
+         * \param color The ConsoleColor
          *
          */
         void setLevelBackgroundColor(LogLevel level, ConsoleColor color);
@@ -42,10 +42,10 @@ namespace Bull
          */
         void write(const String& entry) override;
 
-        /*! \brief
+        /*! \brief Prepare the logger to be written
          *
-         * \param level
-         * \param date
+         * \param level The LogLevel that going to be written
+         * \param date  The Date that going to be written
          *
          */
         void prepareWrite(LogLevel level, const Date& date) override;

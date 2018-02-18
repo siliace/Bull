@@ -65,6 +65,15 @@ namespace Bull
             return std::to_string(number).c_str();
         }
 
+        /*! \brief Convert a boolean to a String
+         *
+         * The boolean with be converted to "true" or "false"
+         *
+         * \param boolean The boolean
+         *
+         * \return The String
+         *
+         */
         static String boolean(bool boolean);
 
     public:

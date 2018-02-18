@@ -38,7 +38,7 @@ namespace Bull
          * \param hexa The hexadecimal representation of the color
          *
          */
-        Color(Uint32 hexa);
+        explicit Color(Uint32 hexa);
 
         /*! \brief Compare two colors
          *

@@ -10,6 +10,13 @@ namespace Bull
     {
     private:
 
+        /*! \brief Get the MessageWindowIcon according to a LogLevel
+         *
+         * \param level The LogLevel
+         *
+         * \return The MessageWindowIcon
+         *
+         */
         static MessageWindowIcon chooseIcon(LogLevel level);
 
     public:
@@ -30,8 +37,8 @@ namespace Bull
 
         /*! \brief Prepare the MessageWindowLogger to be written
          *
-         * \param level
-         * \param date
+         * \param level The LogLevel that going to be written
+         * \param date  The Date that going to be written
          *
          */
         void prepareWrite(LogLevel level, const Date& date) override;
