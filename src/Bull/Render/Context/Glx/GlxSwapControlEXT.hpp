@@ -17,7 +17,7 @@ namespace Bull
             void (*glXSwapInterval)(::Display* dpy, GLXDrawable drawable, int interval) = nullptr;
         }
 
-        ExtensionsLoader::Extension GlxSwapControlEXT("GLX_EXT_swap_control", []
+        Extension GlxSwapControlEXT("GLX_EXT_swap_control", []
         {
             ext::glXSwapInterval = reinterpret_cast<void (*)(::Display*, GLXDrawable, int)>(GlContext::getFunction("glXSwapIntervalEXT"));
 

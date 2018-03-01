@@ -7,7 +7,8 @@
     #include <Bull/Core/System/Win32/ConsoleOutputImplWin32.hpp>
     typedef Bull::prv::ConsoleOutputImplWin32 ConsoleOutputImplType;
 #else
-    #error Lack of implementation : ConsoleOutput
+    #include <Bull/Core/System/Unix/ConsoleOutputImplUnix.hpp>
+    typedef Bull::prv::ConsoleOutputImplUnix ConsoleOutputImplType;
 #endif
 
 namespace Bull

@@ -10,7 +10,7 @@ namespace Bull
         {
             Display::Instance display = Display::getInstance();
 
-            XWarpPointer(display->getHandler(), XNone, display->getRootWindow(), 0, 0, 0, 0, position.x(), position.y());
+            XWarpPointer(display->getHandler(), XNone, display->getRootWindow(), 0, 0, 0, 0, position.width, position.height);
             display->flush();
         }
 

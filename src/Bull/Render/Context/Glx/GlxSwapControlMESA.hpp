@@ -15,7 +15,7 @@ namespace Bull
             int (*glXGetSwapInterval)() = nullptr;
         }
 
-        ExtensionsLoader::Extension GlxSwapControlMESA("GLX_MESA_swap_control", []
+        Extension GlxSwapControlMESA("GLX_MESA_swap_control", []
         {
             mesa::glXSwapInterval    = reinterpret_cast<int (*)(int)>(GlContext::getFunction("glXSwapIntervalMESA"));
             mesa::glXGetSwapInterval = reinterpret_cast<int (*)()>(GlContext::getFunction("glXGetSwapIntervalMESA"));
