@@ -9,7 +9,13 @@ namespace Bull
     }
 
     Date::Date() :
-        Date(Date::now())
+        day(0),
+        year(0),
+        hour(0),
+        minute(0),
+        second(0),
+        month(DateMonth_January),
+        dayOfWeek(DateDay_Monday)
     {
         /// Nothing
     }
