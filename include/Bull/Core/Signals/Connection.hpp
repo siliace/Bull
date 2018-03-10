@@ -22,15 +22,14 @@ namespace Bull
          * \param signal The Signal connected
          * \param slot   The Slot connected
          */
-        Connection(Signal<T>* signal, Slot<T>* slot)
+        Connection(Signal<T>* signal, std::unique_ptr<Slot<T>>& slot) :
+            m_signal(signal),
+            m_slot(slot)
         {
-            if(signal && slot)
+            if(!m_signal || !m_slot)
             {
-                m_slot   = slot;
-                m_signal = signal;
+                Throw(LogicError, "Connection<T>::Connection", "Invalid signal or slot");
             }
-
-            Throw(LogicError, "Connection<T>::Connection", "Invalid signal or slot");
         }
 
         /*! \brief Disconnect the Signal and the Slot
@@ -44,8 +43,8 @@ namespace Bull
 
     private:
 
-        Slot<T>*   m_slot;
-        Signal<T>* m_signal;
+        std::unique_ptr<Slot<T>>& m_slot;
+        Signal<T>*                m_signal;
     };
 }
 

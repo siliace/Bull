@@ -30,12 +30,13 @@ namespace Bull
          * \param slot The slot to connect
          *
          * \return The connection between the Signal and the Slot
+         *
          */
-        Connection<T> connect(Slot<T>* slot)
+        Connection<T> connect(std::unique_ptr<Slot<T>>&& slot)
         {
-            m_slots.emplace_back(slot);
+            m_slots.emplace_back(std::move(slot));
 
-            return Connection<T>(this, slot);
+            return Connection<T>(this, m_slots.back());
         }
 
         /*! \brief Connect a function to the Signal
@@ -49,7 +50,7 @@ namespace Bull
         {
             if(callable)
             {
-                return connect(new Slot(callable));
+                return connect(std::make_unique<Slot<T>>(callable));
             }
         }
 
@@ -61,9 +62,9 @@ namespace Bull
         template <typename... Args>
         void operator()(Args&&... args)
         {
-            for(std::unique_ptr<T>& slot : m_slots)
+            for(std::unique_ptr<Slot<T>>& slot : m_slots)
             {
-                slot(std::forward<Args>(args)...);
+                slot->emit(std::forward<Args>(args)...);
             }
         }
 
@@ -76,13 +77,13 @@ namespace Bull
          * \param slot The Slot to disconnect
          *
          */
-        void disconnect(Slot<T>* slot)
+        void disconnect(std::unique_ptr<Slot<T>>& slot)
         {
-            SlotArray::iterator iterator = std::find(m_slots.begin(), m_slots.end(), slot);
+            typename SlotArray::iterator it = std::find(m_slots.begin(), m_slots.end(), slot);
 
-            if(iterator != m_slots.end())
+            if(it != m_slots.end())
             {
-                m_slots.erase(iterator);
+                m_slots.erase(it);
             }
         }
 
