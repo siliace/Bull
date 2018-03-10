@@ -13,7 +13,7 @@ namespace Bull
 
     void ConsoleOutput::write(const String& string)
     {
-        write(string.getBuffer(), string.getCapacity());
+        write(string.getBuffer(), string.getSize());
     }
 
     void ConsoleOutput::writeLine(const String& string)
