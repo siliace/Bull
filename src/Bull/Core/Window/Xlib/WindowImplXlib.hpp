@@ -265,17 +265,17 @@ namespace Bull
              */
             void setProtocols();
 
-            XPixmap           m_icon;
-            XScreen*          m_screen;
-            Display::Instance m_display;
-            XWindow           m_handler;
-            XPixmap           m_iconMask;
-            Size         m_lastSize;
-            bool              m_isMapped;
-            XColormap         m_colormap;
-            XCursor           m_hiddenCursor;
-            bool              m_cursorVisible;
-            bool              m_captureCursor;
+            XPixmap                   m_icon;
+            XScreen*                  m_screen;
+            mutable Display::Instance m_display;
+            XWindow                   m_handler;
+            XPixmap                   m_iconMask;
+            Size                      m_lastSize;
+            bool                      m_isMapped;
+            XColormap                 m_colormap;
+            XCursor                   m_hiddenCursor;
+            bool                      m_cursorVisible;
+            bool                      m_captureCursor;
         };
     }
 }

@@ -80,7 +80,7 @@ namespace Bull
         {
             std::size_t written;
 
-            if(WriteConsoleA(m_handler, data, length, reinterpret_cast<LPDWORD>(&written), nullptr))
+            if(WriteConsole(m_handler, data, length, reinterpret_cast<LPDWORD>(&written), nullptr))
             {
                 return written;
             }

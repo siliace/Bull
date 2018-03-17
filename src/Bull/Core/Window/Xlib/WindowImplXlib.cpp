@@ -1,5 +1,6 @@
 #include <Bull/Core/Concurrency/Thread.hpp>
-#include <Bull/Core/Exception/RuntimeError.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 #include <Bull/Core/Support/Xlib/WMHints.hpp>
 #include <Bull/Core/Window/WindowStyle.hpp>
@@ -19,6 +20,9 @@
 
 #ifndef Button9
     #define Button9 9
+
+class RuntimeError;
+
 #endif // Button6
 
 namespace Bull
@@ -239,8 +243,8 @@ namespace Bull
                         event.type           = WindowEventType_MouseMoved;
                         event.mouseMove.x    = e.xmotion.x;
                         event.mouseMove.y    = e.xmotion.y;
-                        event.mouseMove.xRel = event.mouseMove.x - getCursorPosition().x();
-                        event.mouseMove.yRel = event.mouseMove.y - getCursorPosition().y();
+                        event.mouseMove.xRel = event.mouseMove.x - getCursorPosition().width;
+                        event.mouseMove.yRel = event.mouseMove.y - getCursorPosition().height;
 
                         pushEvent(event);
                     }
@@ -384,16 +388,16 @@ namespace Bull
                         if(size != m_lastSize)
                         {
                             event.type                = WindowEventType_Resized;
-                            event.windowResize.width  = size.x();
-                            event.windowResize.height = size.y();
+                            event.windowResize.width  = size.width;
+                            event.windowResize.height = size.height;
 
                             m_lastSize = size;
                         }
                         else
                         {
                             event.type         = WindowEventType_Moved;
-                            event.windowMove.x = position.x();
-                            event.windowMove.y = position.y();
+                            event.windowMove.x = position.width;
+                            event.windowMove.y = position.height;
                         }
 
                         pushEvent(event);
@@ -494,7 +498,7 @@ namespace Bull
 
         void WindowImplXlib::setPosition(const Size& position)
         {
-            XMoveWindow(m_display->getHandler(), m_handler, position.x(), position.y());
+            XMoveWindow(m_display->getHandler(), m_handler, position.width, position.height);
             m_display->flush();
         }
 
@@ -514,8 +518,8 @@ namespace Bull
         {
             XSizeHints hints;
 
-            hints.max_width  = (size.x() > 0) ? size.x() : 0;
-            hints.max_height = (size.y() > 0) ? size.y() : 0;
+            hints.max_width  = (size.width > 0) ? size.width : 0;
+            hints.max_height = (size.height > 0) ? size.height : 0;
             hints.flags      = PMinSize;
 
             XSetNormalHints(m_display->getHandler(), m_handler, &hints);
@@ -534,8 +538,8 @@ namespace Bull
         {
             XSizeHints hints;
 
-            hints.max_width  = (size.x() > 0) ? size.x() : m_screen->width;
-            hints.max_height = (size.y() > 0) ? size.y() : m_screen->height;
+            hints.max_width  = (size.width > 0) ? size.width : m_screen->width;
+            hints.max_height = (size.height > 0) ? size.height : m_screen->height;
             hints.flags      = PMaxSize;
 
             XSetNormalHints(m_display->getHandler(), m_handler, &hints);
@@ -552,7 +556,7 @@ namespace Bull
 
         void WindowImplXlib::setSize(const Size& size)
         {
-            XResizeWindow(m_display->getHandler(), m_handler, size.x(), size.y());
+            XResizeWindow(m_display->getHandler(), m_handler, size.width, size.height);
             m_lastSize = size;
             m_display->flush();
         }
@@ -625,14 +629,14 @@ namespace Bull
             XGCValues values;
             XGC iconGraphicContext;
 
-            unsigned int width        = icon.getSize().x();
-            unsigned int height       = icon.getSize().y();
+            unsigned int width        = icon.getSize().width;
+            unsigned int height       = icon.getSize().height;
             unsigned int defaultDepth = m_display->getDefaultDepth();
             XVisual* defaultVisual    = DefaultVisual(m_display->getHandler(), m_display->getDefaultScreen());
 
             ByteVector pixels(icon.getPixels().getCapacity());
 
-            for(std::size_t i = 0; i < icon.getSize().x() * icon.getSize().y(); i++)
+            for(std::size_t i = 0; i < icon.getSize().width * icon.getSize().height; i++)
             {
                 pixels.at(i * 4 + 0) = icon.getPixels().at(i * 4 + 2);
                 pixels.at(i * 4 + 1) = icon.getPixels().at(i * 4 + 1);
@@ -644,7 +648,7 @@ namespace Bull
 
             if(!image)
             {
-                throw RuntimeError("Failed to set window's icon");
+                Throw(InternalError, "WindowImplXlib::setIcon", "Failed to set window's icon");
             }
 
             if(m_icon)
@@ -776,7 +780,7 @@ namespace Bull
 
             if(m_handler == 0)
             {
-                throw RuntimeError("Failed to create window");
+                Throw(InternalError, "WindowImplXlib::open", "Failed to create window");
             }
 
             initialize(title, style);
@@ -810,7 +814,7 @@ namespace Bull
 
             if(m_handler == 0)
             {
-                throw RuntimeError("Failed to create window");
+                Throw(InternalError, "WindowImplXlib::open", "Failed to create window");
             }
 
             initialize(title, style);

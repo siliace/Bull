@@ -21,20 +21,20 @@ namespace Bull
             return reinterpret_cast<void*>(glXGetProcAddressARB(reinterpret_cast<const unsigned char*>(function.getBuffer())));
         }
 
-        void GlxContext::requireExtensions(const ExtensionsLoader::Instance& loader)
+        void GlxContext::requireExtensions(ExtensionsLoader::Instance& loader)
         {
             loader->require(GlxCreateContextARB);
             loader->require(GlxPbuffer);
 
-            if(isLoaded(GlxSwapControlEXT))
+            if(GlxSwapControlEXT.isLoaded())
             {
                 loader->require(GlxSwapControlEXT);
             }
-            else if(isLoaded(GlxSwapControlMESA))
+            else if(GlxSwapControlMESA.isLoaded())
             {
                 loader->require(GlxSwapControlMESA);
             }
-            else if(isLoaded(GlxSwapControlSGI))
+            else if(GlxSwapControlSGI.isLoaded())
             {
                 loader->require(GlxSwapControlSGI);
             }
@@ -214,15 +214,15 @@ namespace Bull
         {
             ErrorHandler handler;
 
-            if(isLoaded(GlxSwapControlEXT))
+            if(GlxSwapControlEXT.isLoaded())
             {
                 ext::glXSwapInterval(m_display->getHandler(), glXGetCurrentDrawable(), active ? 1 : 0);
             }
-            else if(isLoaded(GlxSwapControlMESA))
+            else if(GlxSwapControlMESA.isLoaded())
             {
                 mesa::glXSwapInterval(active ? 1 : 0);
             }
-            else if(isLoaded(GlxSwapControlSGI))
+            else if(GlxSwapControlSGI.isLoaded())
             {
                 sgi::glXSwapInterval(active ? 1 : 0);
             }
@@ -265,7 +265,7 @@ namespace Bull
         {
             ErrorHandler handler;
 
-            if(isLoaded(GlxPbuffer) && shared)
+            if(GlxPbuffer.isLoaded() && shared)
             {
                 int fbCounts         = 0;
                 GLXFBConfig* configs = glXChooseFBConfig(m_display->getHandler(), m_display->getDefaultScreen(), nullptr, &fbCounts);
@@ -326,7 +326,7 @@ namespace Bull
 
             glXQueryVersion(m_display->getHandler(), &glxMajor, &glxMinor);
 
-            if(isLoaded(GlxCreateContextARB) && (glxMajor > 1 || glxMinor >= 3))
+            if(GlxCreateContextARB.isLoaded() && (glxMajor > 1 || glxMinor >= 3))
             {
                 do
                 {

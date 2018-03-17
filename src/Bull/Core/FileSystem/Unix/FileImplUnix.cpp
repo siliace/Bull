@@ -2,9 +2,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <Bull/Core/Exception/RuntimeError.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/Unix/FileImplUnix.hpp>
-#include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Support/Unix/DateHelper.hpp>
 
 namespace Bull
@@ -39,7 +39,7 @@ namespace Bull
 
         bool FileImplUnix::copy(const Path& path, const String& newPath)
         {
-            throw RuntimeError("Unimplemented method :(");
+            Throw(InternalError, "FileImplUnix::copy", "Unimplemented method");
         }
 
         bool FileImplUnix::remove(const Path& name)

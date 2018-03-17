@@ -1,4 +1,5 @@
-#include <Bull/Core/Exception/RuntimeError.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Xlib/Display.hpp>
 
 namespace Bull
@@ -13,7 +14,7 @@ namespace Bull
 
             if(!m_display)
             {
-                throw RuntimeError("Failed to open display");
+                Throw(InternalError, "Display::Display", "Failed to open display");
             }
         }
 

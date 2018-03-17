@@ -30,7 +30,7 @@ namespace Bull
              * \param loader The instance of the extension loader to use
              *
              */
-            static void requireExtensions(const ExtensionsLoader::Instance& loader);
+            static void requireExtensions(ExtensionsLoader::Instance& loader);
 
             /*! \brief Get the best config according to context settings
              *
@@ -49,7 +49,7 @@ namespace Bull
              * \param shared The shared context
              *
              */
-            GlxContext(const std::shared_ptr<GlxContext>& shared);
+            explicit GlxContext(const std::shared_ptr<GlxContext>& shared);
 
             /*! \brief Constructor
              *
@@ -144,13 +144,13 @@ namespace Bull
              */
             void updateSettings();
 
-            XWindow           m_window;
-            GLXContext        m_render;
-            GLXFBConfig       m_config;
-            GLXPbuffer        m_pbuffer;
-            Display::Instance m_display;
-            XColormap         m_colormap;
-            bool              m_ownWindow;
+            XWindow                   m_window;
+            GLXContext                m_render;
+            GLXFBConfig               m_config;
+            GLXPbuffer                m_pbuffer;
+            mutable Display::Instance m_display;
+            XColormap                 m_colormap;
+            bool                      m_ownWindow;
         };
     }
 }

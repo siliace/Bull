@@ -33,9 +33,15 @@ namespace Bull
         }
 
         template <typename... Args>
-        void operator()(Args&&... args)
+        void emit(Args&&... args)
         {
             m_function(std::forward<Args>(args)...);
+        }
+
+        template <typename... Args>
+        void operator()(Args&&... args)
+        {
+            emit(std::forward<Args>(args)...);
         }
 
     private:
