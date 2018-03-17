@@ -28,7 +28,6 @@ namespace Bull
     {
         if(shouldWriteEntry(level))
         {
-            prepareWrite(level, date);
             write(formatEntry(entry, level, date));
         }
     }

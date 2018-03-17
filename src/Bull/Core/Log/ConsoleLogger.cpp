@@ -33,16 +33,11 @@ namespace Bull
         m_output.writeLine(entry);
     }
 
-    void ConsoleLogger::prepareWrite(LogLevel level, const Date& date)
+    String ConsoleLogger::formatEntry(const String& entry, LogLevel level, const Date& date)
     {
         m_output.setTextColor(m_levelTextColor[level]);
         m_output.setBackgroundColor(m_levelBackgroundColor[level]);
-    }
 
-    String ConsoleLogger::formatEntry(const String& entry, LogLevel level, const Date& date)
-    {
         return AbstractLogger::formatEntry(entry, level, date);
     }
-
-
 }

@@ -42,14 +42,6 @@ namespace Bull
          */
         void write(const String& entry) override;
 
-        /*! \brief Prepare the logger to be written
-         *
-         * \param level The LogLevel that going to be written
-         * \param date  The Date that going to be written
-         *
-         */
-        void prepareWrite(LogLevel level, const Date& date) override;
-
         /*! \brief Format a log entry
          *
          * \param entry The log entry to format

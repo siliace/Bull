@@ -25,18 +25,12 @@ namespace Bull
         m_messageBox.open(entry, m_title);
     }
 
-    void MessageWindowLogger::prepareWrite(LogLevel level, const Date& date)
+    String MessageWindowLogger::formatEntry(const String& entry, LogLevel level, const Date& date)
     {
         BULL_UNUSED(date);
 
         m_title = logLevelToString(level);
         m_messageBox.icon = chooseIcon(level);
-    }
-
-    String MessageWindowLogger::formatEntry(const String& entry, LogLevel level, const Date& date)
-    {
-        BULL_UNUSED(date);
-        BULL_UNUSED(level);
 
         return entry;
     }
