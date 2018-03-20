@@ -16,7 +16,7 @@ namespace Bull
             /*! \brief Constructor
              *
              */
-            LibraryImplWin32() = default;
+            LibraryImplWin32();
 
             /*! \brief Destructor
              *
@@ -31,6 +31,13 @@ namespace Bull
              *
              */
             bool load(const String& name);
+
+            /*! \brief Tell whether the library is loaded
+             *
+             * \return True if the library is loaded
+             *
+             */
+            bool isLoaded() const override;
 
             /*! \brief Get a function from the library
              *

@@ -1,6 +1,7 @@
 #include <limits>
 
 #include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/System/Library.hpp>
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
 #include <Bull/Render/Context/Wgl/WglContextNoError.hpp>
@@ -23,14 +24,17 @@ namespace Bull
                 return functionProc;
             }
 
-            static HMODULE module = LoadLibrary("opengl32.dll");
+            // wglGetProcAddress will set the last error to 127 if a function is not found but we don't care here
+            SetLastError(0);
 
-            if(!module)
+            static Library library("opengl32.dll");
+
+            if(!library)
             {
                 return nullptr;
             }
 
-            return reinterpret_cast<void*>(GetProcAddress(module, function.getBuffer()));
+            return reinterpret_cast<void*>(library.getFunction(function));
         }
 
         void WglContext::requireExtensions(ExtensionsLoader::Instance& loader)

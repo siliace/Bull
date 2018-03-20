@@ -1,3 +1,5 @@
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/System/Library.hpp>
 #include <Bull/Core/System/LibraryImpl.hpp>
 
@@ -5,7 +7,10 @@ namespace Bull
 {
     Library::Library(const String& name)
     {
-        load(name);
+        if(!load(name))
+        {
+            Throw(InternalError, "Library::Library", "Failed to load library " + name);
+        }
     }
 
     Library::~Library()
@@ -27,14 +32,19 @@ namespace Bull
 
     bool Library::isLoaded() const
     {
-        return m_impl != nullptr;
+        if(m_impl)
+        {
+            return m_impl->isLoaded();
+        }
+
+        return false;
     }
 
     Library::LibFunction Library::getFunction(const String& name)
     {
-        if(m_impl)
+        if(isLoaded())
         {
-            m_impl->getFunction(name);
+            return m_impl->getFunction(name);
         }
 
         return nullptr;
@@ -43,5 +53,10 @@ namespace Bull
     void Library::free()
     {
         m_impl.reset();
+    }
+
+    Library::operator bool() const
+    {
+        return isLoaded();
     }
 }

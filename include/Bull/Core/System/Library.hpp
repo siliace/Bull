@@ -84,6 +84,13 @@ namespace Bull
          */
         void free();
 
+        /*! \brief Check whether the library is loaded
+         *
+         * \return Return true if the library is loaded, false otherwise
+         *
+         */
+        operator bool() const;
+
     private:
 
         std::unique_ptr<prv::LibraryImpl> m_impl;
