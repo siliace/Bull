@@ -42,6 +42,7 @@ namespace Bull
             loader->require(wglCreateContext);
             loader->require(wglPixelFormat);
             loader->require(wglSwapControl);
+            loader->require(wglPbuffer);
         }
 
         int WglContext::getBestPixelFormat(HDC device, Uint8 bitsPerPixel, const ContextSettings& settings, bool usePbuffer)
