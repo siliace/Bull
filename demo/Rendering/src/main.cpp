@@ -25,9 +25,7 @@ int main(int argc, char* argv[])
     SpotLight spotLight;
     AngleF fov = AngleF::degree(45.f);
     Texture diffuse, specular, emission;
-    ContextSettings settings;
-    settings.type = ContextSettingsType_Debug;
-    RenderWindow window(VideoMode::getCurrent(), "Bull Application", WindowStyle_Default, settings);
+    RenderWindow window(VideoMode::getCurrent(), "Bull Application");
     Vector3F position(0, 0, 3), forward = Vector3F::Backward, up = Vector3F::Up;
 
     ImageLoader::getInstance()->loadFromPath(diffuse, Path("../resources/textures/container.png"));
