@@ -80,7 +80,7 @@ namespace Bull
                 OutStringStream oss;
                 oss << "Failed to load image from path " << path.toString() << " : " << getErrorMessage();
 
-                Log::getInstance()->write(oss.toString(), LogLevel_Error);
+                Log::getInstance()->error(oss.toString());
 
                 return false;
             }
@@ -110,7 +110,7 @@ namespace Bull
                 OutStringStream oss;
                 oss << "Failed to load image from stream : " << getErrorMessage();
 
-                Log::getInstance()->write(oss.toString(), LogLevel_Error);
+                Log::getInstance()->error(oss.toString());
 
                 return false;
             }
@@ -134,7 +134,7 @@ namespace Bull
                 OutStringStream oss;
                 oss << "Failed to load image from memory : " << getErrorMessage();
 
-                Log::getInstance()->write(oss.toString(), LogLevel_Error);
+                Log::getInstance()->error(oss.toString());
 
                 return false;
             }

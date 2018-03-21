@@ -96,7 +96,7 @@ namespace Bull
 
             if(!isLinked())
             {
-                Log::getInstance()->write(getErrorMessage(), LogLevel::LogLevel_Error);
+                Log::getInstance()->error(getErrorMessage());
 
                 return false;
             }

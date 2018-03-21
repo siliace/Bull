@@ -164,7 +164,15 @@ namespace Bull
             }
 
             oss << message;
-            Log::getInstance()->write(oss.toString(), (severity == GL_DEBUG_SEVERITY_NOTIFICATION) ? LogLevel_Info : LogLevel_Error);
+
+            if(severity == GL_DEBUG_SEVERITY_NOTIFICATION)
+            {
+                Log::getInstance()->info(oss.toString());
+            }
+            else
+            {
+                Log::getInstance()->error(oss.toString());
+            }
         }
 
         int GlContext::evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int antialiasing, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted)

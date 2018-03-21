@@ -14,13 +14,33 @@ namespace Bull
     {
     public:
 
-        /*! \brief Add an entry in every listener
+        /*! \brief Write a message in the Log with a debug level
          *
-         * \param message The message to log
-         * \param level   The message error level
+         * \param message The message to write
          *
          */
-        void write(const String& message, LogLevel level);
+        void debug(const String& message);
+
+        /*! \brief Write a message in the Log with a info level
+         *
+         * \param message The message to write
+         *
+         */
+        void info(const String& message);
+
+        /*! \brief Write a message in the Log with a v level
+         *
+         * \param message The message to write
+         *
+         */
+        void warning(const String& message);
+
+        /*! \brief Write a message in the Log with a error level
+         *
+         * \param message The message to write
+         *
+         */
+        void error(const String& message);
 
         /*! \brief Create a new AbstractLogger
          *
@@ -47,6 +67,14 @@ namespace Bull
         AbstractLogger& addLogger(std::unique_ptr<AbstractLogger>&& logger);
 
     private:
+
+        /*! \brief Add an entry in every listener
+         *
+         * \param message The message to log
+         * \param level   The message error level
+         *
+         */
+        void write(const String& message, LogLevel level);
 
         std::vector<std::unique_ptr<AbstractLogger>> m_listeners;
     };

@@ -40,7 +40,7 @@ namespace Bull
         oss << "Exception " << m_type << " from file " << m_file << " at line " << String::number(m_line)
             << " in method " << m_source << " : " << m_description;
 
-        m_log->write(oss.toString(), LogLevel_Error);
+        m_log->error(oss.toString());
     }
 
     const char* Exception::what() const noexcept
