@@ -413,14 +413,26 @@ namespace Bull
             {
                 m_render = ::wglCreateContext(m_device);
 
-                m_log->info("Create legacy WglContext");
-
-                if(m_render && shared)
+                if(m_render)
                 {
-                    static Mutex mutex;
-                    Lock lock(mutex);
+                    if(shared)
+                    {
+                        static Mutex mutex;
 
-                    wglShareLists(sharedHandler, m_render);
+                        m_log->info("Create legacy WglContext");
+
+                        Lock lock(mutex);
+
+                        wglShareLists(sharedHandler, m_render);
+                    }
+                    else
+                    {
+                        m_log->info("Create shared WglContext");
+                    }
+                }
+                else
+                {
+                    Throw(InternalError, "WglContext::createContext", "Failed to create legacy/shared context");
                 }
             }
 
