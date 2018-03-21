@@ -1,7 +1,6 @@
 #include <limits>
 
 #include <Bull/Core/Exception/Throw.hpp>
-#include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/System/Library.hpp>
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
@@ -114,7 +113,8 @@ namespace Bull
                             if(!wglGetPixelFormatAttribiv(device, formats[i], PFD_MAIN_PLANE, 1, pbufferAttribs, &pbuffer))
                             {
                                 break;
-                            }else if(pbuffer != 1)
+                            }
+                            else if(pbuffer != 1)
                             {
                                 continue;
                             }
@@ -225,7 +225,8 @@ namespace Bull
                 {
                     wglReleasePbufferDC(m_pbuffer, m_device);
                     wglDestroyPbuffer(m_pbuffer);
-                }else
+                }
+                else
                 {
                     ReleaseDC(m_window, m_device);
                 }
@@ -374,7 +375,8 @@ namespace Bull
                         {
                             attribs.push_back(WGL_CONTEXT_OPENGL_NO_ERROR_ARB);
                             attribs.push_back(1);
-                        }else
+                        }
+                        else
                         {
                             m_settings.type = ContextSettingsType_Default;
                             m_log->warning("WGL_CONTEXT_OPENGL_NO_ERROR_ARB is not available");
@@ -394,11 +396,13 @@ namespace Bull
                         {
                             m_settings.major -= 1;
                             m_settings.minor = 9;
-                        }else
+                        }
+                        else
                         {
                             m_settings.minor -= 1;
                         }
-                    }else
+                    }
+                    else
                     {
                         m_log->info("Create WglContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor));
                     }
@@ -446,7 +450,8 @@ namespace Bull
                 {
                     m_settings.depths = static_cast<Uint8>(format[0]);
                     m_settings.stencil = static_cast<Uint8>(format[1]);
-                }else
+                }
+                else
                 {
                     m_settings.depths = pfd.cDepthBits;
                     m_settings.stencil = pfd.cStencilBits;
@@ -464,15 +469,18 @@ namespace Bull
                     if(wglGetPixelFormatAttribiv(m_device, pixelFormat, PFD_MAIN_PLANE, 2, sampleAttribs, sample))
                     {
                         m_settings.antialiasing = sample[0] ? sample[1] : 0;
-                    }else
+                    }
+                    else
                     {
                         m_settings.antialiasing = 0;
                     }
-                }else
+                }
+                else
                 {
                     m_settings.antialiasing = 0;
                 }
-            }else
+            }
+            else
             {
                 m_settings.depths = pfd.cDepthBits;
                 m_settings.stencil = pfd.cStencilBits;
