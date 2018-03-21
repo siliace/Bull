@@ -1,5 +1,6 @@
 #include <limits>
 
+#include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/System/Library.hpp>
 
@@ -42,7 +43,6 @@ namespace Bull
             loader->require(wglCreateContext);
             loader->require(wglPixelFormat);
             loader->require(wglSwapControl);
-            loader->require(wglPbuffer);
         }
 
         int WglContext::getBestPixelFormat(HDC device, Uint8 bitsPerPixel, const ContextSettings& settings, bool usePbuffer)
