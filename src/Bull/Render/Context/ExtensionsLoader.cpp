@@ -245,7 +245,11 @@ namespace Bull
                     {
                         extension.load();
 
-                        if(!extension.isLoaded())
+                        if(extension.isLoaded())
+                        {
+                            Log::getInstance()->write("Loaded OpenGL extension : " + extension.getName(), LogLevel_Info);
+                        }
+                        else
                         {
                             Log::getInstance()->write("Failed to load OpenGL extension : " + extension.getName(), LogLevel_Info);
                         }

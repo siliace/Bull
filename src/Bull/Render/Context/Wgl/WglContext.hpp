@@ -156,11 +156,12 @@ namespace Bull
              */
             void updateSettings();
 
-            HWND     m_window;
-            HDC      m_device;
-            HGLRC    m_render;
-            HPBUFFER m_pbuffer;
-            bool     m_ownWindow;
+            Log::Instance m_log;
+            HWND          m_window;
+            HDC           m_device;
+            HGLRC         m_render;
+            HPBUFFER      m_pbuffer;
+            bool          m_ownWindow;
         };
     }
 }
