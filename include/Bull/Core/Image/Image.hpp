@@ -32,7 +32,7 @@ namespace Bull
          * \return True if the Image was created successfully
          *
          */
-        bool create(const ByteVector& pixels, const Size& size) override;
+        bool create(const ByteArray& pixels, const Size& size) override;
 
         /*! \brief Tell whether an Image is loaded
          *
@@ -55,7 +55,7 @@ namespace Bull
          * \return The pixels
          *
          */
-        const ByteVector& getPixels() const;
+        const ByteArray& getPixels() const;
 
         /*! \brief Get the size of the Image
          *
@@ -67,7 +67,7 @@ namespace Bull
     private:
 
         Size       m_size;
-        ByteVector m_pixels;
+        ByteArray m_pixels;
     };
 }
 

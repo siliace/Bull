@@ -16,7 +16,7 @@ namespace Bull
 
     void ImageLoader::skip(void* user, int n)
     {
-        ByteVector buffer(n);
+        ByteArray buffer(n);
         InStream* stream = reinterpret_cast<InStream*>(user);
 
         stream->read(&buffer[0], buffer.getCapacity());
@@ -156,7 +156,7 @@ namespace Bull
     {
         if(buffer && width && height)
         {
-            ByteVector pixels;
+            ByteArray pixels;
 
             if(pixels.fill(buffer, width * height * channels))
             {

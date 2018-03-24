@@ -413,7 +413,7 @@ namespace Bull
 
         String WindowImplWin32::getTitle() const
         {
-            MemoryVector<wchar_t> buffer;
+            ArrayList<wchar_t> buffer;
 
             if(buffer.create(GetWindowTextLengthW(m_handler) + 1))
             {
@@ -475,7 +475,7 @@ namespace Bull
 
         void WindowImplWin32::setIcon(const Image& icon)
         {
-            ByteVector pixels(icon.getSize().width * icon.getSize().height * 4);
+            ByteArray pixels(icon.getSize().width * icon.getSize().height * 4);
 
             for(std::size_t i = 0; i < pixels.getCapacity() / 4; i += 4)
             {

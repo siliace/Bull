@@ -59,7 +59,7 @@ namespace Bull
          * \return True if the Texture was created successfully
          *
          */
-        bool create(const ByteVector& pixels, const Size& size) override;
+        bool create(const ByteArray& pixels, const Size& size) override;
 
         /*! \brief Tell whether an Asset is loaded
          *

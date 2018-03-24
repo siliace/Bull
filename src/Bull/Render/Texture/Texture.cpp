@@ -65,7 +65,7 @@ namespace Bull
         return false;
     }
 
-    bool Texture::create(const ByteVector& pixels, const Size& size)
+    bool Texture::create(const ByteArray& pixels, const Size& size)
     {
         if(create(size))
         {
@@ -144,7 +144,7 @@ namespace Bull
         if(m_id)
         {
             Image image;
-            ByteVector pixels(m_size.width * m_size.height * 4);
+            ByteArray pixels(m_size.width * m_size.height * 4);
 
             ensureContext();
 

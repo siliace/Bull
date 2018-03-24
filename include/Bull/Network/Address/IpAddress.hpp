@@ -1,7 +1,7 @@
 #ifndef BULL_NETWORK_ADDRESS_IPADDRESS_HPP
 #define BULL_NETWORK_ADDRESS_IPADDRESS_HPP
 
-#include <Bull/Core/Memory/ByteVector.hpp>
+#include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Network/Export.hpp>
@@ -78,7 +78,7 @@ namespace Bull
 
     private:
 
-        ByteVector m_bytes;
+        ByteArray m_bytes;
         bool       m_valid;
     };
 }

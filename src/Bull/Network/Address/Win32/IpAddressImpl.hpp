@@ -2,7 +2,7 @@
 #define BULL_NETWORK_ADDRESS_WIN32_IPADDRESSIMPL_HPP
 
 #include <Bull/Core/Configuration/Integer.hpp>
-#include <Bull/Core/Memory/ByteVector.hpp>
+#include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Network/Address/NetProtocol.hpp>
@@ -23,7 +23,7 @@ namespace Bull
              * \return True if the IpAddress was resolved successfully
              *
              */
-            static bool resolve(const String& hostname, NetProtocol protocol, ByteVector& bytes, const String& service = "http");
+            static bool resolve(const String& hostname, NetProtocol protocol, ByteArray& bytes, const String& service = "http");
         };
     }
 }

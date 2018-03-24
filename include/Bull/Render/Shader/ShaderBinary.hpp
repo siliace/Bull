@@ -1,7 +1,7 @@
 #ifndef BULL_RENDER_SHADER_SHADERBINARY_HPP
 #define BULL_RENDER_SHADER_SHADERBINARY_HPP
 
-#include <Bull/Core/Memory/ByteVector.hpp>
+#include <Bull/Core/Memory/ByteArray.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
 
@@ -28,7 +28,7 @@ namespace Bull
          */
         bool isValid() const;
 
-        ByteVector   binary; /*!< The binary */
+        ByteArray   binary; /*!< The binary */
         unsigned int format; /*!< The binary format */
     };
 }

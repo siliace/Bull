@@ -2,7 +2,7 @@
 #define BULL_CORE_IMAGE_ABSTRACTIMAGE_HPP
 
 #include <Bull/Core/Assets/Asset.hpp>
-#include <Bull/Core/Memory/ByteVector.hpp>
+#include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/Utility/Size.hpp>
 
 namespace Bull
@@ -26,7 +26,7 @@ namespace Bull
          * \return True if the AbstractImage was created successfully
          *
          */
-        virtual bool create(const ByteVector& pixels, const Size& size) = 0;
+        virtual bool create(const ByteArray& pixels, const Size& size) = 0;
 
         /*! \brief Get the size of the AbstractImage
          *

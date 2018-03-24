@@ -7,7 +7,7 @@ namespace Bull
         if(size.width && size.height)
         {
             m_size   = size;
-            m_pixels = ByteVector(m_size.width * m_size.height * 4);
+            m_pixels = ByteArray(m_size.width * m_size.height * 4);
 
             return true;
         }
@@ -15,7 +15,7 @@ namespace Bull
         return false;
     }
 
-    bool Image::create(const ByteVector& pixels, const Size& size)
+    bool Image::create(const ByteArray& pixels, const Size& size)
     {
         if(size.width && size.height)
         {
@@ -58,7 +58,7 @@ namespace Bull
         return m_size;
     }
 
-    const ByteVector& Image::getPixels() const
+    const ByteArray& Image::getPixels() const
     {
         return m_pixels;
     }
