@@ -1,5 +1,5 @@
 target_sources(bull-core
-        PRIVATE
+        PUBLIC
             ${CMAKE_CURRENT_SOURCE_DIR}/DirectoryImplUnix.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/DirectoryImplUnix.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/FileImplUnix.cpp

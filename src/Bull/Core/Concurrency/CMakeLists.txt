@@ -15,7 +15,6 @@ target_sources(bull-core
             ${BULL_INC_CORE_CONCURRENCY}/Thread.hpp
             ${BULL_SRC_CORE_CONCURRENCY}/Thread.cpp
             ${BULL_INC_CORE_CONCURRENCY}/ThreadPriority.hpp
-        PRIVATE
             ${BULL_SRC_CORE_CONCURRENCY}/ConditionVariableImpl.cpp
             ${BULL_SRC_CORE_CONCURRENCY}/ConditionVariableImpl.hpp
             ${BULL_SRC_CORE_CONCURRENCY}/MutexHandler.hpp

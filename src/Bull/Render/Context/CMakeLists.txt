@@ -12,7 +12,7 @@ target_sources(bull-render
             ${BULL_INC_RENDER_CONTEXT}/ContextSettingsProfile.hpp
             ${BULL_INC_RENDER_CONTEXT}/ContextSettingsType.hpp
             ${BULL_INC_RENDER_CONTEXT}/OpenGLHandlerError.hpp
-        PRIVATE
+        PUBLIC
             ${BULL_SRC_RENDER_CONTEXT}/Extension.hpp
             ${BULL_SRC_RENDER_CONTEXT}/Extension.cpp
             ${BULL_SRC_RENDER_CONTEXT}/ExtensionsLoader.hpp

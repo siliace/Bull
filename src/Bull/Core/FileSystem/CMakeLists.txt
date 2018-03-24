@@ -14,7 +14,7 @@ target_sources(bull-core
             ${BULL_INC_CORE_FILESYSTEM}/FileSystemInfo.hpp
             ${BULL_INC_CORE_FILESYSTEM}/Path.hpp
             ${BULL_SRC_CORE_FILESYSTEM}/Path.cpp
-        PRIVATE
+        PUBLIC
             ${BULL_SRC_CORE_FILESYSTEM}/DirectoryImpl.hpp
             ${BULL_SRC_CORE_FILESYSTEM}/DirectoryImpl.cpp
             ${BULL_SRC_CORE_FILESYSTEM}/FileImpl.hpp

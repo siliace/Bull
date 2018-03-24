@@ -1,5 +1,5 @@
 target_sources(bull-core
-        PRIVATE
+        PUBLIC
             ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariableImplUnix.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/ConditionVariableImplUnix.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/MutexImplUnix.cpp

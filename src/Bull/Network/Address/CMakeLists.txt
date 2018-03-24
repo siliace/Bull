@@ -13,7 +13,7 @@ target_sources(bull-network
             ${BULL_SRC_NETWORK_ADDRESS}/IpAddressWrapper.cpp
             ${BULL_INC_NETWORK_ADDRESS}/NetPort.hpp
             ${BULL_INC_NETWORK_ADDRESS}/NetProtocol.hpp
-        PRIVATE
+        PUBLIC
             ${BULL_SRC_NETWORK_ADDRESS}/IpAddressImpl.hpp
             ${BULL_SRC_NETWORK_ADDRESS}/SockAddrBuffer.hpp
             ${BULL_SRC_NETWORK_ADDRESS}/SockAddrBuffer.cpp

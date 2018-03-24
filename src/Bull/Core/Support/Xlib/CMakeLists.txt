@@ -1,5 +1,5 @@
 target_sources(bull-core
-        PRIVATE
+        PUBLIC
             ${CMAKE_CURRENT_SOURCE_DIR}/Display.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Display.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/ErrorHandler.cpp

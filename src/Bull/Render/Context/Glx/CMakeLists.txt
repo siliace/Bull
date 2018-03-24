@@ -1,5 +1,5 @@
 target_sources(bull-render
-        PRIVATE
+        PUBLIC
             ${CMAKE_CURRENT_SOURCE_DIR}/GlxContext.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/GlxContext.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/GlxContextNoError.hpp

@@ -10,7 +10,7 @@ target_sources(bull-core
             ${BULL_SRC_CORE_SYSTEM}/ConsoleOutput.cpp
             ${BULL_INC_CORE_SYSTEM}/Library.hpp
             ${BULL_SRC_CORE_SYSTEM}/Library.cpp
-        PRIVATE
+        PUBLIC
             ${BULL_SRC_CORE_SYSTEM}/ClipboardImpl.hpp
             ${BULL_SRC_CORE_SYSTEM}/ConsoleOutputImpl.hpp
             ${BULL_SRC_CORE_SYSTEM}/ConsoleOutputImpl.cpp

@@ -1,5 +1,5 @@
 target_sources(bull-core
-        PRIVATE
+        PUBLIC
             ${CMAKE_CURRENT_SOURCE_DIR}/DateHelper.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/DateHelper.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Win32Error.hpp

@@ -1,5 +1,5 @@
 target_sources(bull-core
-        PRIVATE
+        PUBLIC
             ${CMAKE_CURRENT_SOURCE_DIR}/ClockImpl.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/ClockImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/DateImpl.cpp

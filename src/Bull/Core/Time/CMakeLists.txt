@@ -11,7 +11,7 @@ target_sources(bull-core
             ${BULL_INC_CORE_TIME}/DateMonth.hpp
             ${BULL_INC_CORE_TIME}/Duration.hpp
             ${BULL_SRC_CORE_TIME}/Duration.cpp
-        PRIVATE
+        PUBLIC
             ${BULL_SRC_CORE_TIME}/ClockImpl.hpp
             ${BULL_SRC_CORE_TIME}/DateImpl.hpp
         )

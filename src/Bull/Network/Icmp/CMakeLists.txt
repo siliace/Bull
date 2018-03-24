@@ -5,7 +5,7 @@ target_sources(bull-network
         PUBLIC
             ${BULL_INC_NETWORK_ICMP}/Icmp.hpp
             ${BULL_SRC_NETWORK_ICMP}/Icmp.cpp
-        PRIVATE
+        PUBLIC
             ${BULL_SRC_NETWORK_ICMP}/IcmpImpl.hpp
         )
 

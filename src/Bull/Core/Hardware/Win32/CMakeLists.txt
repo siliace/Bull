@@ -1,5 +1,5 @@
 target_sources(bull-core
-        PRIVATE
+        PUBLIC
             ${CMAKE_CURRENT_SOURCE_DIR}/CPUImpl.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/CPUImpl.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/JoystickImpl.hpp

@@ -18,7 +18,7 @@ target_sources(bull-core
             ${BULL_INC_CORE_HARDWARE}/MouseWheel.hpp
             ${BULL_INC_CORE_HARDWARE}/RAM.hpp
             ${BULL_SRC_CORE_HARDWARE}/RAM.cpp
-        PRIVATE
+        PUBLIC
             ${BULL_SRC_CORE_HARDWARE}/CPUImpl.hpp
             ${BULL_SRC_CORE_HARDWARE}/JoystickImpl.hpp
             ${BULL_SRC_CORE_HARDWARE}/KeyboardImpl.hpp
