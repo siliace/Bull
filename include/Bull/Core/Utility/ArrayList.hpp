@@ -99,6 +99,21 @@ namespace Bull
             m_array.push_back(element);
         }
 
+        /*! \brief Add an element in a precise index of the List
+         *
+         * \param element The element to add
+         * \param index   The index where insert the element
+         *
+         * \throw InvalidParameter
+         *
+         */
+        void insert(const T& element, std::size_t index) override
+        {
+            RangeCheck(index, getSize());
+
+            m_array.insert(m_array.begin() + index, element);
+        }
+
         /*! \brief Access operator
          *
          * \param index The value to get from the ArrayList 

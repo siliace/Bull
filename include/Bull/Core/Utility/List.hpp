@@ -17,6 +17,16 @@ namespace Bull
          */
         virtual void add(const T& element) = 0;
 
+        /*! \brief Add an element in a precise index of the List
+         *
+         * \param element The element to add
+         * \param index   The index where insert the element
+         *
+         * \throw InvalidParameter
+         *
+         */
+        virtual void insert(const T& element, std::size_t index) = 0;
+
         /*! \brief Get a reference to an element
          *
          *  Get an element from the List by its index.
