@@ -42,13 +42,13 @@ namespace Bull
 
         /*! \brief Add an element in a precise index of the LinkList
          *
-         * \param element The element to add
          * \param index   The index where insert the element
+         * \param element The element to add
          *
          * \throw InvalidParameter
          *
          */
-        void insert(const T& element, std::size_t index) override
+        void add(std::size_t index, const T& element) override
         {
             RangeCheck(index, getSize());
 

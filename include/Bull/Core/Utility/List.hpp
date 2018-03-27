@@ -19,13 +19,13 @@ namespace Bull
 
         /*! \brief Add an element in a precise index of the List
          *
-         * \param element The element to add
          * \param index   The index where insert the element
+         * \param element The element to add
          *
          * \throw InvalidParameter
          *
          */
-        virtual void insert(const T& element, std::size_t index) = 0;
+        virtual void add(std::size_t index, const T& element) = 0;
 
         /*! \brief Get a reference to an element
          *
