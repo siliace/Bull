@@ -21,6 +21,17 @@ namespace Bull
 
         /*! \brief Constructor
          *
+         * \param list A list of value to copy in the LinkList
+         *
+         */
+        LinkList(std::initializer_list<T> list) :
+            m_list(list)
+        {
+            /// Nothing
+        }
+
+        /*! \brief Constructor
+         *
          * \param size The initial size of the LinkList
          *
          */

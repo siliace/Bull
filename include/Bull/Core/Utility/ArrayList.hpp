@@ -34,6 +34,17 @@ namespace Bull
 
         /*! \brief Constructor
          *
+         * \param list A list of value to copy in the ArrayList
+         *
+         */
+        ArrayList(std::initializer_list<T> list) :
+            m_array(list)
+        {
+            /// Nothing
+        }
+
+        /*! \brief Constructor
+         *
          * \param size  The size of the ArrayList 
          * \param value The value to the ArrayList 
          *
