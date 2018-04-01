@@ -17,7 +17,7 @@ namespace Bull
 
             s_errorOccurred = true;
 
-            Log::getInstance()->write(errorMessage, LogLevel_Debug);
+            Log::getInstance()->debug(errorMessage);
 
             return 0;
         }

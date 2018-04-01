@@ -107,7 +107,7 @@ namespace Bull
 
         Date FileImplUnix::getCreationDate() const
         {
-            Bull::Log::getInstance()->write("Creation date is not available on UNIX-like systems", LogLevel_Warning);
+            Bull::Log::getInstance()->warning("Creation date is not available on UNIX-like systems");
 
             return Date();
         }

@@ -25,19 +25,26 @@ namespace Bull
              *
              * \param name The name or the path to the library to load
              *
-             * \return Return true if the library is loaded, false otherwise
+             * \return True if the library has been loaded successfully
              *
              */
-            bool load(const String& name);
+            bool load(const String& name) override;
+
+            /*! \brief Tell whether the library is loaded
+             * 
+             * \return True if the library is loaded
+             *
+             */
+            bool isLoaded() const override;
 
             /*! \brief Get a function from the library
              *
              * \param name The name of the function
              *
-             * \return Return the function or nullptr if the function does not exists
+             * \return The function or nullptr if the function does not exists
              *
              */
-            Library::LibFunction getFunction(const String& name);
+            Library::LibFunction getFunction(const String& name) override;
 
         private:
 

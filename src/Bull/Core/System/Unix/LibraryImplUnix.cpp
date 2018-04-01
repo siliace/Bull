@@ -24,6 +24,11 @@ namespace Bull
             return m_handler == nullptr;
         }
 
+        bool LibraryImplUnix::isLoaded() const
+        {
+            return m_handler != nullptr;
+        }
+
         Library::LibFunction LibraryImplUnix::getFunction(const String& name)
         {
             return reinterpret_cast<Library::LibFunction>(dlsym(m_handler, name.getBuffer()));
