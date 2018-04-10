@@ -5,7 +5,7 @@
 
 #include <Bull/Core/Exception/Exception.hpp>
 
-#define Throw(Exception, Source, Description) prv::__throw<Exception>(__FILE__, __LINE__, Source, Description)
+#define Throw(Exception, Source, Description) Bull::prv::__throw<Exception>(__FILE__, __LINE__, Source, Description)
 
 namespace Bull
 {
