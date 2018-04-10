@@ -3,6 +3,13 @@
 
 namespace Bull
 {
+    Exception Exception::s_lastThrown("", 0, "", "", "");
+
+    const Exception& Exception::getLastThrown()
+    {
+        return s_lastThrown;
+    }
+
     const String& Exception::getFile() const
     {
         return m_file;
@@ -28,7 +35,7 @@ namespace Bull
         return m_description;
     }
 
-    Exception::Exception(const String& file, Uint64 line, const String& type, const String& source, const String& description) :
+    Exception::Exception(const String& file, Uint64 line, const String& type, const String& source, const String& description) noexcept :
         m_file(file),
         m_line(line),
         m_type(type),

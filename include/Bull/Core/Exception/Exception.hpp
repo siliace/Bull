@@ -11,6 +11,33 @@ namespace Bull
     {
     public:
 
+        /*! \brief Throw an Exception
+         *
+         * \param file
+         * \param line
+         * \param source
+         * \param description
+         *
+         */
+        template <typename T>
+        static void throwException(const String& file, Uint64 line, const String& source, const String& description) noexcept(false)
+        {
+            throw (s_lastThrown = T(file, line, source, description));
+        }
+
+        /*! \brief Get the last thrown Exception
+         *
+         * \return The Exception
+         *
+         */
+        static const Exception& getLastThrown();
+
+    private:
+
+        static Exception s_lastThrown;
+
+    public:
+
         /*! \brief Get the name file where the Exception was thrown
          *
          * \return The name of the file
@@ -57,7 +84,7 @@ namespace Bull
          * \param description The message describing the Exception
          *
          */
-        Exception(const String& file, Uint64 line, const String& type, const String& source, const String& description);
+        Exception(const String& file, Uint64 line, const String& type, const String& source, const String& description) noexcept;
 
     private:
 

@@ -14,7 +14,7 @@ namespace Bull
         template <typename T, typename = std::enable_if<std::is_base_of<Exception, T>::value>>
         void __throw(const String& file, Uint64 line, const String& source, const String& description)
         {
-            throw T(file, line, source, description);
+            Exception::throwException<T>(file, line, source, description);
         }
     }
 }
