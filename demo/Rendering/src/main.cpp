@@ -27,6 +27,7 @@ int main(int argc, char* argv[])
     Texture diffuse, specular, emission;
     RenderWindow window(VideoMode::getCurrent(), "Bull Application");
     Vector3F position(0, 0, 3), forward = Vector3F::Backward, up = Vector3F::Up;
+    Matrix4F projection = Matrix4F::makePerspective(fov, window.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
     ImageLoader::getInstance()->loadFromPath(diffuse, Path("../resources/textures/container.png"));
     ImageLoader::getInstance()->loadFromPath(specular, Path("../resources/textures/container_specular.png"));
@@ -103,6 +104,11 @@ int main(int argc, char* argv[])
                 fov += (event.mouseWheel.up) ? AngleF::degree(-0.1f) : AngleF::degree(0.1f);
                 fov = clamp(fov, AngleF::degree(0.1f), AngleF::degree(45.f));
             }
+
+            if(event.type == WindowEventType_Resized)
+            {
+                projection = Matrix4F::makePerspective(fov, window.getSize().getRatio(), Vector2F(0.1f, 100.f));
+            }
         }
 
         window.clear();
@@ -110,7 +116,6 @@ int main(int argc, char* argv[])
         phong.bind();
 
         Matrix4F camera = Matrix4F::makeLookAt(position, position + forward, up);
-        Matrix4F projection = Matrix4F::makePerspective(fov, window.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
         phong.setUniformMatrix("view", camera);
         phong.setUniformMatrix("projection", projection);
