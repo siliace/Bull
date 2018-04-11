@@ -16,10 +16,11 @@ add_subdirectory(Target)
 add_subdirectory(Texture)
 add_subdirectory(Vertex)
 
+find_package(OpenGL REQUIRED)
+target_link_libraries(bull-render ${OPENGL_gl_LIBRARY})
+
 if(BULL_OS_WINDOWS)
-    target_link_libraries(bull-render opengl32 gdi32)
-else()
-    target_link_libraries(bull-render GL)
+    target_link_libraries(bull-render gdi32)
 endif()
 
 target_link_libraries(bull-render bull-core)
