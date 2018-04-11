@@ -28,6 +28,11 @@ namespace Bull
          */
         TerminationHandler();
 
+        /*! \brief Destructor
+         *
+         */
+        ~TerminationHandler();
+
         /*! \brief Register a callback to call when the program exists normaly
          *
          * \param callback The callback to call

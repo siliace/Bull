@@ -15,6 +15,11 @@ namespace Bull
         /// Nothing
     }
 
+    TerminationHandler::~TerminationHandler()
+    {
+        reset();
+    }
+
     void TerminationHandler::registerCallback(const TerminationHandler::Callback& callback)
     {
         ensureInitialized();
