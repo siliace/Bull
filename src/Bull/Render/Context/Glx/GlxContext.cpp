@@ -127,7 +127,6 @@ namespace Bull
             m_render(nullptr),
             m_config(nullptr),
             m_pbuffer(0),
-            m_display(Display::getInstance()),
             m_colormap(0),
             m_ownWindow(false)
         {
@@ -153,7 +152,6 @@ namespace Bull
             m_render(nullptr),
             m_config(nullptr),
             m_pbuffer(0),
-            m_display(Display::getInstance()),
             m_colormap(0),
             m_ownWindow(false)
         {
