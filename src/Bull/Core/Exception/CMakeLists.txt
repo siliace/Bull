@@ -12,4 +12,5 @@ target_sources(bull-core
             ${BULL_INC_CORE_EXCEPTION}/LackOfImplementation.hpp
             ${BULL_INC_CORE_EXCEPTION}/LogicError.hpp
             ${BULL_INC_CORE_EXCEPTION}/Throw.hpp
+            ${BULL_INC_CORE_EXCEPTION}/UnsupportedOperation.hpp
         )
