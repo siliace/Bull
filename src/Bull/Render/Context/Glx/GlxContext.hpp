@@ -3,6 +3,7 @@
 
 #include <GL/glx.h>
 
+#include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Support/Xlib/Display.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
@@ -144,6 +145,7 @@ namespace Bull
              */
             void updateSettings();
 
+            Log::Instance             m_log;
             XWindow                   m_window;
             GLXContext                m_render;
             GLXFBConfig               m_config;

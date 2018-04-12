@@ -1,6 +1,5 @@
 #include <limits>
 
-#include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 
 #include <Bull/Render/Context/GlKhrNoError.hpp>
@@ -228,7 +227,7 @@ namespace Bull
             }
             else
             {
-                Log::getInstance()->warning("VSync is not available on your system");
+                m_log->warning("VSync is not available on your system");
             }
         }
 
@@ -372,7 +371,7 @@ namespace Bull
                             else
                             {
                                 m_settings.type &= ~ContextSettingsType_NoError;
-                                Log::getInstance()->warning("GLX_CONTEXT_OPENGL_NO_ERROR_ARB is not available");
+                                m_log->warning("GLX_CONTEXT_OPENGL_NO_ERROR_ARB is not available");
                             }
                         }
                     }
@@ -387,7 +386,7 @@ namespace Bull
 
                     if(!m_render)
                     {
-                        Log::getInstance()->warning("Failed to create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor));
+                        m_log->warning("Failed to create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor));
 
                         if(m_settings.minor == 0)
                         {
@@ -399,12 +398,28 @@ namespace Bull
                             m_settings.minor -= 1;
                         }
                     }
+                    else
+                    {
+                        m_log->info("Create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor));
+                    }
                 }while(!m_render && m_settings.major >= 1);
             }
 
             if(!m_render)
             {
                 m_render = glXCreateNewContext(m_display->getHandler(), m_config, GLX_RGBA_TYPE, sharedHandler, True);
+
+                if(m_render)
+                {
+                    if(shared)
+                    {
+                        m_log->info("Create shared GlxContext");
+                    }
+                    else
+                    {
+                        m_log->info("Create legacy GlxContext");
+                    }
+                }
             }
 
             updateSettings();
