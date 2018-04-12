@@ -24,19 +24,9 @@ namespace Bull
         {
             loader->require(GlxCreateContextARB);
             loader->require(GlxPbuffer);
-
-            if(GlxSwapControlEXT.isLoaded())
-            {
-                loader->require(GlxSwapControlEXT);
-            }
-            else if(GlxSwapControlMESA.isLoaded())
-            {
-                loader->require(GlxSwapControlMESA);
-            }
-            else if(GlxSwapControlSGI.isLoaded())
-            {
-                loader->require(GlxSwapControlSGI);
-            }
+            loader->require(GlxSwapControlEXT);
+            loader->require(GlxSwapControlMESA);
+            loader->require(GlxSwapControlSGI);
         }
 
         GLXFBConfig GlxContext::chooseBestConfig(Display::Instance display, const ContextSettings& settings, Uint8 bitsPerPixel)
