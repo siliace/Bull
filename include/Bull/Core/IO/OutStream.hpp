@@ -21,6 +21,11 @@ namespace Bull
          *
          */
         virtual std::size_t write(const void* data, std::size_t size) = 0;
+
+        /*! \brief Flush the OutStream
+         *
+         */
+        virtual void flush() = 0;
     };
 }
 

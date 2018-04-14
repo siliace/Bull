@@ -39,6 +39,11 @@ namespace Bull
          */
         std::size_t write(const void* data, std::size_t size) override;
 
+        /*! \brief Flush the OutStream
+         *
+         */
+        void flush() override;
+
         /*! \brief Get the content of the stream
          *
          * \return Return the content of the stream

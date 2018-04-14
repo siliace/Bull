@@ -52,6 +52,11 @@ namespace Bull
              */
             size_t write(const void* data, std::size_t length) override;
 
+            /*! \brief Flush the ConsoleOutput
+             *
+             */
+            void flush() override;
+
             /*! \brief Clear the console output
              *
              */

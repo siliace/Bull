@@ -1,3 +1,5 @@
+#include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Exception/UnsupportedOperation.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
 
 namespace Bull
@@ -66,5 +68,10 @@ namespace Bull
     OutStringStream::operator const String&() const
     {
         return toString();
+    }
+
+    void OutStringStream::flush()
+    {
+        Throw(UnsupportedOperation, "OutStringStream::flush", "Impossible to flush an OutStringStream");
     }
 }
