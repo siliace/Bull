@@ -80,7 +80,12 @@ namespace Bull
              * \param byte A byte to write
              *
              */
-            Uint64 write(const void* data, Uint64 size);
+            Uint64 write(const void* data, Uint64 size) override;
+
+            /*! \brief Flush the File
+             *
+             */
+            void flush() override;
 
             /*! \brief Get the date of the creation of the file
              *

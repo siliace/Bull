@@ -105,6 +105,14 @@ namespace Bull
             return written;
         }
 
+        void FileImplUnix::flush()
+        {
+            if(fsync(m_handler) == -1)
+            {
+                Throw(InternalError, "FileImplUnix::flush", "Failed to sync .file descriptor");
+            }
+        }
+
         Date FileImplUnix::getCreationDate() const
         {
             Bull::Log::getInstance()->warning("Creation date is not available on UNIX-like systems");
