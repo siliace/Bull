@@ -68,6 +68,14 @@ namespace Bull
             return written;
         }
 
+        void ConsoleOutputImplUnix::flush()
+        {
+            if(fsync(STDOUT_FILENO) == -1)
+            {
+                Throw(InternalError, "ConsoleOutputImplUnix::flush", "Failed to flush stdout");
+            }
+        }
+
         void ConsoleOutputImplUnix::clear()
         {
             write("\e[1;1H\e[2J");
