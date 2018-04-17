@@ -46,7 +46,6 @@ namespace Bull
         }
     }
 
-
     std::vector<TerminationHandler::Callback> TerminationHandler::getCallbacks()
     {
         return m_callbacks;
