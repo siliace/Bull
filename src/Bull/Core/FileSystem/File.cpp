@@ -83,6 +83,8 @@ namespace Bull
 
     void File::close()
     {
+        flush();
+
         m_impl.reset();
         m_path = Path();
         m_mode = FileOpeningMode_None;
@@ -116,6 +118,14 @@ namespace Bull
         }
 
         return 0;
+    }
+
+    void File::flush()
+    {
+        if(m_impl)
+        {
+            m_impl->flush();
+        }
     }
 
     Date File::getCreationDate() const

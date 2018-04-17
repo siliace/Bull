@@ -171,6 +171,11 @@ namespace Bull
          */
         std::size_t write(const void* data, std::size_t size) override;
 
+        /*! \brief Flush the File
+         *
+         */
+        void flush() override;
+
         /*! \brief Get the date of the creation of the file
          *
          * \return Return the date of the creation of the file

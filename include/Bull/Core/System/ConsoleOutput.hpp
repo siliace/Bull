@@ -41,6 +41,11 @@ namespace Bull
          */
         void writeLine(const String& string);
 
+        /*! \brief Flush the ConsoleOutput
+         *
+         */
+        void flush() override;
+
         /*! \brief Clear the ConsoleOutput
          *
          */

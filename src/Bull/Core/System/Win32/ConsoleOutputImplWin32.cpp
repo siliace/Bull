@@ -88,6 +88,11 @@ namespace Bull
             return 0;
         }
 
+        void ConsoleOutputImplWin32::flush()
+        {
+            FlushConsoleInputBuffer(m_handler);
+        }
+
         void ConsoleOutputImplWin32::clear()
         {
             CONSOLE_SCREEN_BUFFER_INFO info;

@@ -9,7 +9,10 @@ namespace Bull
         /// Nothing
     }
 
-    ConsoleOutput::~ConsoleOutput() = default;
+    ConsoleOutput::~ConsoleOutput()
+    {
+        flush();
+    }
 
     void ConsoleOutput::write(const String& string)
     {
@@ -39,5 +42,10 @@ namespace Bull
     std::size_t ConsoleOutput::write(const void* data, std::size_t size)
     {
         return m_impl->write(data, size);
+    }
+
+    void ConsoleOutput::flush()
+    {
+        m_impl->flush();
     }
 }

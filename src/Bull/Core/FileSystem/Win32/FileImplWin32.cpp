@@ -124,6 +124,11 @@ namespace Bull
             return written;
         }
 
+        void FileImplWin32::flush()
+        {
+            FlushFileBuffers(m_handler);
+        }
+
         Date FileImplWin32::getCreationDate() const
         {
             FILETIME date;

@@ -95,6 +95,11 @@ namespace Bull
              */
             virtual std::size_t write(const void* data, std::size_t size) = 0;
 
+            /*! \brief Flush the File
+             *
+             */
+            virtual void flush() = 0;
+
             /*! \brief Get the date of the creation of the file
              *
              * \return Return the date of the creation of the file

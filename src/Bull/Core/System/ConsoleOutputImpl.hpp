@@ -38,6 +38,11 @@ namespace Bull
              */
             virtual std::size_t write(const void* data, std::size_t length) = 0;
 
+            /*! \brief Flush the ConsoleOutput
+             *
+             */
+            virtual void flush() = 0;
+
             /*! \brief Clear the console output
              *
              */
