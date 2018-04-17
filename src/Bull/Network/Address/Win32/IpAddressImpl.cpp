@@ -10,14 +10,17 @@ namespace Bull
     {
         bool IpAddressImpl::resolve(const String& hostname, NetProtocol protocol, ByteArray& bytes, const String& service)
         {
+            int error;
             addrinfo hints;
             addrinfo* info;
 
             BULL_ZERO_MEMORY(hints);
 
-            hints.ai_protocol = SocketImpl::convertNetProtocol(protocol);
+            hints.ai_family = SocketImpl::convertNetProtocol(protocol);
 
-            if(getaddrinfo(hostname.getBuffer(), service.getBuffer(), &hints, &info) == 0)
+            error = getaddrinfo(hostname.getBuffer(), service.getBuffer(), &hints, &info);
+
+            if(error == 0)
             {
                 SockAddrBuffer buffer((*info->ai_addr), info->ai_addrlen);
                 const IpAddress& address = buffer.getIpAddress().getAddress();
@@ -27,8 +30,12 @@ namespace Bull
                     bytes[i] = address.at(i);
                 }
 
+                freeaddrinfo(info);
+
                 return true;
             }
+
+            Log::getInstance()->warning("Failed to get host address : " + String(gai_strerror(error)));
 
             return false;
         }
