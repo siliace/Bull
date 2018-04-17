@@ -70,7 +70,7 @@ namespace Bull
 
         void ConsoleOutputImplUnix::flush()
         {
-            if(fsync(STDOUT_FILENO) == -1)
+            if(fflush(stdout) == -1)
             {
                 Throw(InternalError, "ConsoleOutputImplUnix::flush", "Failed to flush stdout");
             }
