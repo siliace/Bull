@@ -118,7 +118,7 @@ namespace Bull
     private:
 
         std::unique_ptr<prv::SocketImpl> m_impl;
-        SocketType               m_type;
+        SocketType                       m_type;
     };
 }
 

@@ -9,32 +9,25 @@ namespace Bull
 {
     int ImageLoader::read(void* user, char* data, int size)
     {
-        InStream* stream = reinterpret_cast<InStream*>(user);
-
-        return stream->read(data, size);
+        return reinterpret_cast<InStream*>(user)->read(data, size);
     }
 
     void ImageLoader::skip(void* user, int n)
     {
         ByteArray buffer(n);
-        InStream* stream = reinterpret_cast<InStream*>(user);
-
-        stream->read(&buffer[0], buffer.getCapacity());
+        reinterpret_cast<InStream*>(user)->read(&buffer[0], buffer.getCapacity());
     }
 
     int ImageLoader::eof(void* user)
     {
-        InStream* stream = reinterpret_cast<InStream*>(user);
-
-        return stream->isAtEnd() ? 1 : 0;
+        return reinterpret_cast<InStream*>(user)->isAtEnd() ? 1 : 0;
     }
 
     bool ImageLoader::getInfo(ImageInfo& info, const Path& path)
     {
         return createTask([&info, path]() -> bool{
             return stbi_info(path.toString().getBuffer(),
-                             reinterpret_cast<int*>(&info.size.width),
-                             reinterpret_cast<int*>(&info.size.height),
+                             &info.size.width, &info.size.height,
                              reinterpret_cast<int*>(&info.channels)) == 0;
         });
     }
@@ -49,8 +42,7 @@ namespace Bull
             callbacks.eof  = &ImageLoader::eof;
 
             return stbi_info_from_callbacks(&callbacks, &stream,
-                                            reinterpret_cast<int*>(&info.size.width),
-                                            reinterpret_cast<int*>(&info.size.height),
+                                            &info.size.width, &info.size.height,
                                             reinterpret_cast<int*>(&info.channels)) == 0;
         });
     }
@@ -59,8 +51,7 @@ namespace Bull
     {
         return createTask([&info, data, length]() -> bool{
             return stbi_info_from_memory(reinterpret_cast<const stbi_uc*>(data), length,
-                                         reinterpret_cast<int*>(&info.size.width),
-                                         reinterpret_cast<int*>(&info.size.height),
+                                         &info.size.width, &info.size.height,
                                          reinterpret_cast<int*>(&info.channels)) == 0;
         });
     }
