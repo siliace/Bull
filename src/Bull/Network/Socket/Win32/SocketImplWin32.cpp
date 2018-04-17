@@ -1,3 +1,6 @@
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
+
 #include <Bull/Network/Socket/SocketHeader.hpp>
 #include <Bull/Network/Socket/Win32/SocketImplWin32.hpp>
 #include <Bull/Network/Socket/Win32/WsaService.hpp>
@@ -13,7 +16,7 @@ namespace Bull
 
         SocketError SocketImplWin32::getLastError()
         {
-            DWORD error = wsa->getLastError();
+            int error = wsa->getLastError();
 
             if(error)
             {
@@ -43,9 +46,12 @@ namespace Bull
         {
             m_blocking = enable;
 
-            u_long yes = 1, no = 0;
+            u_long blocking = m_blocking ? 1 : 0;
 
-            ioctlsocket(getHandler(), FIONBIO, m_blocking ? &yes : &no);
+            if(ioctlsocket(getHandler(), FIONBIO, &blocking) != NO_ERROR)
+            {
+                Throw(InternalError, "SocketImplWin32::enableBlockingMode", "Failed to switch blocking mode");
+            }
         }
 
         bool SocketImplWin32::isEnableBlockingMode() const
@@ -57,7 +63,10 @@ namespace Bull
         {
             u_long length = 0;
 
-            ioctlsocket(getHandler(), FIONREAD, &length);
+            if(ioctlsocket(getHandler(), FIONREAD, &length) != NO_ERROR)
+            {
+                Throw(InternalError, "SocketImplWin32::getPendingLength", "Failed to get pending length");
+            }
 
             return length;
         }
