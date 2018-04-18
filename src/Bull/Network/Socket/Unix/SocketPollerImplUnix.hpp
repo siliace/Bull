@@ -19,7 +19,7 @@ namespace Bull
              * \return The number of sockets updated during the poll, SocketError if an error occurred
              *
              */
-            int poll(std::vector<SocketPollDescriptor>& sockets, int timeout) const;
+            int poll(std::vector<SocketPollDescriptor>& sockets, int timeout) const override;
         };
     }
 }
