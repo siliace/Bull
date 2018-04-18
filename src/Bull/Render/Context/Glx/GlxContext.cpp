@@ -309,7 +309,7 @@ namespace Bull
         {
             ErrorHandler handler;
             int glxMajor, glxMinor;
-            GLXContext sharedHandler = shared ? shared->m_render : 0;
+            GLXContext sharedHandler = shared ? shared->m_render : nullptr;
 
             glXQueryVersion(m_display->getHandler(), &glxMajor, &glxMinor);
 
