@@ -327,7 +327,7 @@ namespace Bull
          * \return True if the Window was open successfully
          *
          */
-        bool open(std::unique_ptr<prv::WindowImpl> impl, const String& title, Uint32 style);
+        bool open(std::unique_ptr<prv::WindowImpl>&& impl, const String& title, Uint32 style);
 
         /*! \brief Function called when the Window is opened
          *

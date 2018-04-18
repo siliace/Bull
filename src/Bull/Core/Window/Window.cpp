@@ -330,7 +330,7 @@ namespace Bull
         return this == s_fullscreen;
     }
 
-    bool Window::open(std::unique_ptr<prv::WindowImpl> impl, const String& title, Uint32 style)
+    bool Window::open(std::unique_ptr<prv::WindowImpl>&& impl, const String& title, Uint32 style)
     {
         if(!isOpen())
         {
