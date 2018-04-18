@@ -136,11 +136,9 @@ namespace Bull
 
     String ImageLoader::getErrorMessage() const
     {
-        m_mutex.lock();
-        String message(stbi_failure_reason());
-        m_mutex.unlock();
+        Lock lock(m_mutex);
 
-        return message;
+        return stbi_failure_reason();
     }
 
     bool ImageLoader::createImage(AbstractImage& image, const void* buffer, int width, int height, int channels)

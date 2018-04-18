@@ -8,8 +8,7 @@ namespace Bull
 {
     void ImageSaver::writeToStream(void* context, void* data, int size)
     {
-        OutStream* stream = reinterpret_cast<OutStream*>(context);
-        stream->write(data, size);
+        reinterpret_cast<OutStream*>(context)->write(data, size);
     }
 
     void ImageSaver::writeToMemory(void* context, void* data, int size)
