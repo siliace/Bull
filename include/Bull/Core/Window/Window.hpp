@@ -10,11 +10,8 @@
 #include <Bull/Core/Window/WindowEvent.hpp>
 #include <Bull/Core/Window/WindowStyle.hpp>
 
-#include <Bull/Math/Vector/Vector2.hpp>
-
 namespace Bull
 {
-    class Mouse;
     class MessageWindow;
 
     namespace prv
@@ -350,15 +347,18 @@ namespace Bull
 
         friend class Mouse;
 
+        /*! \brief Ignore the next mouse event that the window will receive
+         *
+         */
         void ignoreNextMouseEvent() const;
 
     private:
 
         friend class MessageWindow;
 
-        /*! \brief
+        /*! \brief Get the implementation of the Window
          *
-         * \return
+         * \return The implementation
          *
          */
         const prv::WindowImpl* getImpl() const;
