@@ -13,9 +13,7 @@ namespace Bull
 
     bool RenderWindow::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
-        std::unique_ptr<prv::WindowImpl> impl = prv::RenderWindowImpl::createInstance(mode, title, style, settings);
-
-        if(Window::open(std::move(impl), title, style))
+        if(Window::open(prv::RenderWindowImpl::createInstance(mode, title, style, settings), title, style))
         {
             m_context = prv::GlContext::createInstance(m_impl, mode.bitsPerPixel, settings);
 
