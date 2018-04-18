@@ -226,6 +226,16 @@ namespace Bull
             return m_array.size();
         }
 
+        /*! \brief Get a pointer to the ArrayList
+         *
+         * \return The pointer
+         *
+         */
+        T* getBuffer()
+        {
+            return m_array.data();
+        }
+
         /*! \brief Get a pointer to the ArrayList 
          *
          * \return The pointer
