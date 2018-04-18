@@ -2,9 +2,9 @@
 
 #include <X11/extensions/Xrandr.h>
 
-#include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Xlib/Display.hpp>
-
 #include <Bull/Core/Window/Xlib/VideoModeImpl.hpp>
 
 namespace Bull
@@ -45,18 +45,12 @@ namespace Bull
                     }
 
                     XFree(config);
+
+                    return desktopMode;
                 }
-                else
-                {
-                    Log::getInstance()->error("Your version of Xorg does not support XRandR extension");
-                }
-            }
-            else
-            {
-                Log::getInstance()->error("Your version of Xorg does not support XRandR extension");
             }
 
-            return desktopMode;
+            Throw(InternalError, "VideoModeImpl::getCurrent", "Missing XRandR extension");
         }
 
         std::vector<VideoMode> VideoModeImpl::getAllAvailable()
@@ -97,18 +91,12 @@ namespace Bull
                     }
 
                     XFree(config);
+
+                    return modes;
                 }
-                else
-                {
-                    Log::getInstance()->error("Your version of Xorg does not support XRandR extension");
-                }
-            }
-            else
-            {
-                Log::getInstance()->error("Your version of Xorg does not support XRandR extension");
             }
 
-            return modes;
+            Throw(InternalError, "VideoModeImpl::getAllAvailable", "Missing XRandR extension");
         }
     }
 }
