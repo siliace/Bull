@@ -1,4 +1,4 @@
-#include <iostream>
+#include <Bull/Core/System/ConsoleOutput.hpp>
 
 #include <Bull/Network/Socket/SocketPoller.hpp>
 #include <Bull/Network/Socket/TcpClient.hpp>
@@ -7,18 +7,19 @@
 int main()
 {
     Bull::TcpClient client;
+    Bull::ConsoleOutput cout;
     Bull::SocketPoller poller;
 
     if(!client.connect(Bull::IpAddressV4::Loopback, Bull::NetPort(6969)))
     {
-        std::cout << "Failed to connect" << std::endl;
+        cout.writeLine("Failed to connect");
 
         return EXIT_FAILURE;
     }
 
     if(!poller.add(client, Bull::SocketPollerEvent_Read))
     {
-        std::cout << "Failed to add client" << std::endl;
+        cout.writeLine("Failed to add client");
 
         return EXIT_FAILURE;
     }
@@ -35,23 +36,23 @@ int main()
             {
                 message.setSize(size);
 
-                std::cout << message.getBuffer() << std::endl;
+                cout.writeLine(message.getBuffer());
 
                 return EXIT_SUCCESS;
             }
         }
         else if(poller.isReadyToWrite(client))
         {
-            std::cout << "Ready to write" << std::endl;
+            cout.writeLine("Ready to write");
         }
         else
         {
-            std::cout << "Can't read" << std::endl;
+            cout.writeLine("Can't read");
         }
     }
     else
     {
-        std::cout << "Failed to wait" << std::endl;
+        cout.writeLine("Failed to wait");
     }
 
     return EXIT_FAILURE;
