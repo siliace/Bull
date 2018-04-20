@@ -20,6 +20,10 @@ namespace Bull
     {
     public:
 
+        static constexpr int UnlimitedBacklog = -1;
+
+    public:
+
         /*! \brief Default constructor
          *
          */
@@ -55,7 +59,7 @@ namespace Bull
          * \return The new SocketState
          *
          */
-        SocketState listen(NetPort port, const IpAddressWrapper& host = IpAddressV4::Any, int backlog = -1);
+        SocketState listen(NetPort port, const IpAddressWrapper& host = IpAddressV4::Any, int backlog = UnlimitedBacklog);
 
         /*! \brief Tell whether the TcpServer is listening a NetPort
          *
