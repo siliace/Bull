@@ -73,8 +73,8 @@ namespace Bull
         m_impl.reset();
     }
 
-    const std::unique_ptr<prv::SocketImpl>& Socket::getImpl() const
+    const prv::SocketImpl& Socket::getImpl() const
     {
-        return m_impl;
+        return *m_impl;
     }
 }

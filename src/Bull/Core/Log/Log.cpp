@@ -31,7 +31,7 @@ namespace Bull
 
     void Log::write(const String& message, LogLevel level)
     {
-        for(std::unique_ptr<AbstractLogger>& logger : m_listeners)
+        for(auto& logger : m_listeners)
         {
             logger->addEntry(message, level);
         }

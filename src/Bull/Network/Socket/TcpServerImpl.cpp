@@ -6,7 +6,7 @@ namespace Bull
 {
     namespace prv
     {
-        TcpServerImpl::TcpServerImpl(const std::unique_ptr<prv::SocketImpl>& socket) :
+        TcpServerImpl::TcpServerImpl(const prv::SocketImpl& socket) :
             m_socket(socket)
         {
             /// Nothing
@@ -14,11 +14,11 @@ namespace Bull
 
         bool TcpServerImpl::bind(const IpAddressWrapper& address, NetPort port)
         {
-            if(m_socket->isValid())
+            if(m_socket.isValid())
             {
                 SockAddrBuffer buffer(address, port);
 
-                return ::bind(m_socket->getHandler(), buffer.getSockAddr(), buffer.getLength()) == 0;
+                return ::bind(m_socket.getHandler(), buffer.getSockAddr(), buffer.getLength()) == 0;
             }
 
             return false;
@@ -26,9 +26,9 @@ namespace Bull
 
         bool TcpServerImpl::listen(int backlog)
         {
-            if(m_socket->isValid())
+            if(m_socket.isValid())
             {
-                return ::listen(m_socket->getHandler(), backlog) == 0;
+                return ::listen(m_socket.getHandler(), backlog) == 0;
             }
 
             return false;
@@ -38,12 +38,12 @@ namespace Bull
         {
             SocketHandler client = SocketImpl::getInvalidSocket();
 
-            if(m_socket->isValid())
+            if(m_socket.isValid())
             {
                 sockaddr addr;
                 SocketLength length = sizeof(sockaddr);
 
-                client = ::accept(m_socket->getHandler(), &addr, &length);
+                client = ::accept(m_socket.getHandler(), &addr, &length);
 
                 if(client != SocketImpl::getInvalidSocket())
                 {

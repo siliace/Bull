@@ -203,7 +203,7 @@ namespace Bull
              * \param cursor The cursor
              *
              */
-            virtual void setMouseCursor(const std::unique_ptr<CursorImpl>& cursor) = 0;
+            virtual void setMouseCursor(const CursorImpl& cursor) = 0;
 
             /*! \brief Toggle cursor visibility
              *

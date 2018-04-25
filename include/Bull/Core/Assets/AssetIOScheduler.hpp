@@ -64,7 +64,7 @@ namespace Bull
         {
             std::size_t count = 0;
 
-            for(const std::unique_ptr<Thread>& thread : m_threads)
+            for(auto& thread : m_threads)
             {
                 if(!thread->isRunning())
                 {
@@ -84,7 +84,7 @@ namespace Bull
         {
             bool success = true;
 
-            for(const std::unique_ptr<Thread>& thread : m_threads)
+            for(auto& thread : m_threads)
             {
                 thread->wait();
                 success &= static_cast<Worker*>(thread->getRunnable())->isSuccess();

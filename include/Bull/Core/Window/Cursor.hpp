@@ -74,7 +74,7 @@ namespace Bull
          * \return The implementation
          *
          */
-        const std::unique_ptr<prv::CursorImpl>& getImpl() const;
+        const prv::CursorImpl& getImpl() const;
 
     private:
 

@@ -115,7 +115,7 @@ namespace Bull
             return context;
         }
 
-        std::unique_ptr<GlContext> GlContext::createInstance(const std::unique_ptr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings)
+        std::unique_ptr<GlContext> GlContext::createInstance(const WindowImpl& window, unsigned int bitsPerPixel, const ContextSettings& settings)
         {
             Lock l(mutex);
 

@@ -5,7 +5,7 @@ namespace Bull
 {
     namespace prv
     {
-        TcpClientImpl::TcpClientImpl(const std::unique_ptr<prv::SocketImpl>& socket) :
+        TcpClientImpl::TcpClientImpl(const prv::SocketImpl& socket) :
             m_socket(socket)
         {
             /// Nothing
@@ -13,11 +13,11 @@ namespace Bull
 
         bool TcpClientImpl::connect(const IpAddressWrapper& address, NetPort port)
         {
-            if(m_socket->isValid())
+            if(m_socket.isValid())
             {
                 SockAddrBuffer buffer(address, port);
 
-                return ::connect(m_socket->getHandler(), buffer.getSockAddr(), buffer.getLength()) == 0;
+                return ::connect(m_socket.getHandler(), buffer.getSockAddr(), buffer.getLength()) == 0;
             }
 
             return false;
@@ -25,9 +25,9 @@ namespace Bull
 
         bool TcpClientImpl::send(const void* data, std::size_t length, std::size_t& sent)
         {
-            if(m_socket->isValid())
+            if(m_socket.isValid())
             {
-                sent = ::send(m_socket->getHandler(), reinterpret_cast<const char*>(data), length, 0);
+                sent = ::send(m_socket.getHandler(), reinterpret_cast<const char*>(data), length, 0);
 
                 if(sent >= 0)
                 {
@@ -42,9 +42,9 @@ namespace Bull
 
         bool TcpClientImpl::reveive(void* data, std::size_t length, std::size_t& received)
         {
-            if(m_socket->isValid())
+            if(m_socket.isValid())
             {
-                received = ::recv(m_socket->getHandler(), reinterpret_cast<char*>(data), length, 0);
+                received = ::recv(m_socket.getHandler(), reinterpret_cast<char*>(data), length, 0);
 
                 if(received >= 0)
                 {

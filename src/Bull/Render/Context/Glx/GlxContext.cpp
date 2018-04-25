@@ -136,7 +136,7 @@ namespace Bull
             /// Nothing
         }
 
-        GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, const std::unique_ptr<WindowImpl>& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
+        GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, const WindowImpl& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
             m_window(0),
             m_render(nullptr),
@@ -243,9 +243,9 @@ namespace Bull
             return false;
         }
 
-        void GlxContext::createSurface(const std::unique_ptr<WindowImpl>& window)
+        void GlxContext::createSurface(const WindowImpl& window)
         {
-            m_window = window->getSystemHandler();
+            m_window = window.getSystemHandler();
         }
 
         void GlxContext::createSurface(const std::shared_ptr<GlxContext>& shared, unsigned int width, unsigned int height)

@@ -22,7 +22,7 @@ namespace Bull
              * \param socket The SocketImpl to use
              *
              */
-            explicit UdpSocketImpl(const std::unique_ptr<SocketImpl>& socket);
+            explicit UdpSocketImpl(const SocketImpl& socket);
 
             /*! \brief Bind the UdpSocket to a NetPort
              *
@@ -62,7 +62,7 @@ namespace Bull
 
         private:
 
-            const std::unique_ptr<SocketImpl>& m_socket;
+            const SocketImpl& m_socket;
         };
     }
 }

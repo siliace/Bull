@@ -27,12 +27,12 @@ namespace Bull
             pthread_cond_broadcast(&m_handler);
         }
 
-        void ConditionVariableImplUnix::wait(std::unique_ptr<MutexImpl>& mutex)
+        void ConditionVariableImplUnix::wait(MutexImpl& mutex)
         {
-            pthread_cond_wait(&m_handler, mutex->getHandler());
+            pthread_cond_wait(&m_handler, mutex.getHandler());
         }
 
-        bool ConditionVariableImplUnix::wait(std::unique_ptr<MutexImpl>& mutex, const Duration& timeout)
+        bool ConditionVariableImplUnix::wait(MutexImpl& mutex, const Duration& timeout)
         {
             struct timeval tv;
             struct timespec ts;
@@ -43,7 +43,7 @@ namespace Bull
             ts.tv_sec += ts.tv_nsec / (1000 * 1000 * 1000);
             ts.tv_nsec %= (1000 * 1000 * 1000);
 
-            return pthread_cond_timedwait(&m_handler, mutex->getHandler(), &ts) != 0;
+            return pthread_cond_timedwait(&m_handler, mutex.getHandler(), &ts) != 0;
         }
     }
 }

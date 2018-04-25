@@ -113,7 +113,7 @@ namespace Bull
          * \return The SocketImpl
          *
          */
-        const std::unique_ptr<prv::SocketImpl>& getImpl() const;
+        const prv::SocketImpl& getImpl() const;
 
     private:
 

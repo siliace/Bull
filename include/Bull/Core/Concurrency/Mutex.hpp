@@ -73,7 +73,7 @@ namespace Bull
         friend class ConditionVariable;
 
         std::unique_ptr<prv::MutexImpl> m_impl;
-        bool                    m_locked;
+        bool                            m_locked;
     };
 }
 

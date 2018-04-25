@@ -15,7 +15,7 @@ namespace Bull
     {
         if(Window::open(prv::RenderWindowImpl::createInstance(mode, title, style, settings), title, style))
         {
-            m_context = prv::GlContext::createInstance(m_impl, mode.bitsPerPixel, settings);
+            m_context = prv::GlContext::createInstance(*m_impl, mode.bitsPerPixel, settings);
 
             return true;
         }

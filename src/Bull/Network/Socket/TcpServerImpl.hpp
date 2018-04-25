@@ -20,7 +20,7 @@ namespace Bull
              * \param socket The SocketImpl to use
              *
              */
-            TcpServerImpl(const std::unique_ptr<prv::SocketImpl>& socket);
+            TcpServerImpl(const prv::SocketImpl& socket);
 
             /*! \brief Bind the SocketImpl on an IpAddress and a NetPort
              *
@@ -53,7 +53,7 @@ namespace Bull
 
         private:
 
-            const std::unique_ptr<prv::SocketImpl>& m_socket;
+            const prv::SocketImpl& m_socket;
         };
     }
 }

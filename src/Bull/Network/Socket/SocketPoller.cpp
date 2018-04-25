@@ -14,9 +14,9 @@ namespace Bull
 
     bool SocketPoller::add(const Socket& socket, SocketPollerEvent event)
     {
-        if(!isAdded(socket) && socket.getImpl()->isValid())
+        if(!isAdded(socket) && socket.getImpl().isValid())
         {
-            m_impl->add(socket.getImpl()->getHandler(), event);
+            m_impl->add(socket.getImpl().getHandler(), event);
 
             return true;
         }
@@ -26,9 +26,9 @@ namespace Bull
 
     void SocketPoller::remove(const Socket& socket)
     {
-        if(isAdded(socket) && socket.getImpl()->isValid())
+        if(isAdded(socket) && socket.getImpl().isValid())
         {
-            m_impl->remove(socket.getImpl()->getHandler());
+            m_impl->remove(socket.getImpl().getHandler());
         }
     }
 
@@ -49,14 +49,14 @@ namespace Bull
 
     bool SocketPoller::isAdded(const Socket& socket)
     {
-        return m_impl->isAdded(socket.getImpl()->getHandler());
+        return m_impl->isAdded(socket.getImpl().getHandler());
     }
 
     bool SocketPoller::isReadyToRead(const Socket& socket)
     {
-        if(isAdded(socket) && socket.getImpl()->isValid())
+        if(isAdded(socket) && socket.getImpl().isValid())
         {
-            return m_impl->isReadyToRead(socket.getImpl()->getHandler());
+            return m_impl->isReadyToRead(socket.getImpl().getHandler());
         }
 
         return false;
@@ -64,9 +64,9 @@ namespace Bull
 
     bool SocketPoller::isReadyToWrite(const Socket& socket)
     {
-        if(isAdded(socket) && socket.getImpl()->isValid())
+        if(isAdded(socket) && socket.getImpl().isValid())
         {
-            return m_impl->isReadyToWrite(socket.getImpl()->getHandler());
+            return m_impl->isReadyToWrite(socket.getImpl().getHandler());
         }
 
         return false;

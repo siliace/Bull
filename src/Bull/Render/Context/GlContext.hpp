@@ -61,7 +61,7 @@ namespace Bull
              * \return Return the created context
              *
              */
-            static std::unique_ptr<GlContext> createInstance(const std::unique_ptr<WindowImpl>& window, unsigned int bitsPerPixel, const ContextSettings& settings);
+            static std::unique_ptr<GlContext> createInstance(const WindowImpl& window, unsigned int bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Get an OpenGL function
              *
