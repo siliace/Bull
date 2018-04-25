@@ -25,7 +25,7 @@ namespace Bull
             Mutex mutex;
 
             /// The context shared with all others
-            std::shared_ptr<ContextType> shared;
+            std::unique_ptr<ContextType> shared;
 
             /// The context activate in this thread
             thread_local const GlContext* current = nullptr;
@@ -57,7 +57,7 @@ namespace Bull
 
         void GlContext::globalInit()
         {
-            shared = std::make_shared<ContextType>(nullptr);
+            shared = std::make_unique<ContextType>(nullptr);
             shared->setActive(true);
 
             /// We load OpenGL functions before initialize because this method uses OpenGL functions (glEnable, glGetIntegerv...)
@@ -89,7 +89,7 @@ namespace Bull
          {
             Lock l(mutex);
 
-            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared);
+            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared.get());
             context->initialize();
 
             return context;
@@ -99,7 +99,7 @@ namespace Bull
         {
             Lock l(mutex);
 
-            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared, mode, settings);
+            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared.get(), mode, settings);
             context->initialize();
 
             return context;
@@ -109,7 +109,7 @@ namespace Bull
         {
             Lock l(mutex);
 
-            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared, bitsPerPixel, settings);
+            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared.get(), bitsPerPixel, settings);
             context->initialize(settings);
 
             return context;
@@ -119,7 +119,7 @@ namespace Bull
         {
             Lock l(mutex);
 
-            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared, window, bitsPerPixel, settings);
+            std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared.get(), window, bitsPerPixel, settings);
             context->initialize(settings);
 
             return context;

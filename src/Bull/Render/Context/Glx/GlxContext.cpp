@@ -105,13 +105,13 @@ namespace Bull
             return config;
         }
 
-        GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared) :
+        GlxContext::GlxContext(const GlxContext* shared) :
             GlxContext(shared, VideoMode(1, 1), ContextSettings::Worst)
         {
             /// Nothing
         }
 
-        GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, const VideoMode& mode, const ContextSettings& settings) :
+        GlxContext::GlxContext(const GlxContext* shared, const VideoMode& mode, const ContextSettings& settings) :
             GlContext(settings),
             m_window(0),
             m_render(nullptr),
@@ -130,13 +130,13 @@ namespace Bull
             }
         }
 
-        GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
+        GlxContext::GlxContext(const GlxContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
             GlxContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
         {
             /// Nothing
         }
 
-        GlxContext::GlxContext(const std::shared_ptr<GlxContext>& shared, const WindowImpl& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
+        GlxContext::GlxContext(const GlxContext* shared, const WindowImpl& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
             m_window(0),
             m_render(nullptr),
@@ -248,7 +248,7 @@ namespace Bull
             m_window = window.getSystemHandler();
         }
 
-        void GlxContext::createSurface(const std::shared_ptr<GlxContext>& shared, unsigned int width, unsigned int height)
+        void GlxContext::createSurface(const GlxContext* shared, unsigned int width, unsigned int height)
         {
             ErrorHandler handler;
 
@@ -305,7 +305,7 @@ namespace Bull
             }
         }
 
-        void GlxContext::createContext(const std::shared_ptr<GlxContext>& shared)
+        void GlxContext::createContext(const GlxContext* shared)
         {
             ErrorHandler handler;
             int glxMajor, glxMinor;

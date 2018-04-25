@@ -50,7 +50,7 @@ namespace Bull
              * \param shared The shared context
              *
              */
-            explicit GlxContext(const std::shared_ptr<GlxContext>& shared);
+            explicit GlxContext(const GlxContext* shared);
 
             /*! \brief Constructor
              *
@@ -59,7 +59,7 @@ namespace Bull
              * \param settings Settings to use to create the context
              *
              */
-            GlxContext(const std::shared_ptr<GlxContext>& shared, const VideoMode& mode, const ContextSettings& settings);
+            GlxContext(const GlxContext* shared, const VideoMode& mode, const ContextSettings& settings);
 
             /*! \brief Constructor
              *
@@ -68,7 +68,7 @@ namespace Bull
              * \param settings Parameters to create the OpenGL context
              *
              */
-            GlxContext(const std::shared_ptr<GlxContext>& shared, Uint8 bitsPerPixel, const ContextSettings& settings);
+            GlxContext(const GlxContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Constructor
              *
@@ -78,7 +78,7 @@ namespace Bull
              * \param settings Parameters to create the OpenGL context
              *
              */
-            GlxContext(const std::shared_ptr<GlxContext>& shared, const WindowImpl& window, Uint8 bitsPerPixel, const ContextSettings& settings);
+            GlxContext(const GlxContext* shared, const WindowImpl& window, Uint8 bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Destructor
              *
@@ -131,14 +131,14 @@ namespace Bull
              * \param height The height of the surface
              *
              */
-            void createSurface(const std::shared_ptr<GlxContext>& shared, unsigned int width, unsigned int height);
+            void createSurface(const GlxContext* shared, unsigned int width, unsigned int height);
 
             /*! \brief Create the render context
              *
              * \param shared The shared context
              *
              */
-            void createContext(const std::shared_ptr<GlxContext>& shared);
+            void createContext(const GlxContext* shared);
 
             /*! \brief Update the ContextSettings according to the created context
              *
