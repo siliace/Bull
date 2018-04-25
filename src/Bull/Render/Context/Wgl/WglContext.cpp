@@ -161,18 +161,18 @@ namespace Bull
             return bestPixelFormat;
         }
 
-        WglContext::WglContext(const std::shared_ptr<WglContext>& shared) :
-                WglContext(shared, VideoMode(1, 1), ContextSettings())
+        WglContext::WglContext(const WglContext* shared) :
+            WglContext(shared, VideoMode(1, 1), ContextSettings())
         {
             /// Nothing
         }
 
-        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, const VideoMode& mode, const ContextSettings& settings) :
-                GlContext(settings),
-                m_device(nullptr),
-                m_render(nullptr),
-                m_pbuffer(nullptr),
-                m_ownWindow(false)
+        WglContext::WglContext(const WglContext* shared, const VideoMode& mode, const ContextSettings& settings) :
+            GlContext(settings),
+            m_device(nullptr),
+            m_render(nullptr),
+            m_pbuffer(nullptr),
+            m_ownWindow(false)
         {
             createSurface(shared, mode.width, mode.height, mode.bitsPerPixel);
 
@@ -184,18 +184,18 @@ namespace Bull
             }
         }
 
-        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
-                WglContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
+        WglContext::WglContext(const WglContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
+            WglContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
         {
             /// Nothing
         }
 
-        WglContext::WglContext(const std::shared_ptr<WglContext>& shared, const std::unique_ptr<WindowImpl>& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
-                GlContext(settings),
-                m_device(nullptr),
-                m_render(nullptr),
-                m_pbuffer(nullptr),
-                m_ownWindow(false)
+        WglContext::WglContext(const WglContext* shared, const WindowImpl& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
+            GlContext(settings),
+            m_device(nullptr),
+            m_render(nullptr),
+            m_pbuffer(nullptr),
+            m_ownWindow(false)
         {
             createSurface(window);
 
@@ -275,14 +275,14 @@ namespace Bull
             return wglMakeCurrent(m_device, m_render) == TRUE;
         }
 
-        void WglContext::createSurface(const std::unique_ptr<WindowImpl>& window)
+        void WglContext::createSurface(const WindowImpl& window)
         {
-            m_window = window->getSystemHandler();
+            m_window = window.getSystemHandler();
 
             m_device = GetDC(m_window);
         }
 
-        void WglContext::createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel)
+        void WglContext::createSurface(const WglContext* shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel)
         {
             if(wglPbuffer.isLoaded() && shared)
             {
@@ -333,7 +333,7 @@ namespace Bull
             SetPixelFormat(m_device, bestFormat, &descriptor);
         }
 
-        void WglContext::createContext(const std::shared_ptr<WglContext>& shared)
+        void WglContext::createContext(const WglContext* shared)
         {
             HGLRC sharedHandler = shared ? shared->m_render : nullptr;
 

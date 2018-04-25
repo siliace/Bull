@@ -53,7 +53,7 @@ namespace Bull
              * \param shared The shared context
              *
              */
-            WglContext(const std::shared_ptr<WglContext>& shared);
+            explicit WglContext(const WglContext* shared);
 
             /*! \brief Constructor
              *
@@ -62,7 +62,7 @@ namespace Bull
              * \param settings Settings to use to create the context
              *
              */
-            WglContext(const std::shared_ptr<WglContext>& shared, const VideoMode& mode, const ContextSettings& settings);
+            WglContext(const WglContext* shared, const VideoMode& mode, const ContextSettings& settings);
 
             /*! \brief Constructor
              *
@@ -71,7 +71,7 @@ namespace Bull
              * \param settings     Parameters to create the OpenGL context
              *
              */
-            WglContext(const std::shared_ptr<WglContext>& shared, Uint8 bitsPerPixel, const ContextSettings& settings);
+            WglContext(const WglContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Constructor
              *
@@ -81,7 +81,7 @@ namespace Bull
              * \param settings Settings to use to create the OpenGL context
              *
              */
-            WglContext(const std::shared_ptr<WglContext>& shared, const std::unique_ptr<WindowImpl>& window, Uint8 bitsPerPixel, const ContextSettings& settings);
+            WglContext(const WglContext* shared, const WindowImpl& window, Uint8 bitsPerPixel, const ContextSettings& settings);
 
             /*! \brief Destructor
              *
@@ -125,7 +125,7 @@ namespace Bull
              * \param window The window to bind to the context
              *
              */
-            void createSurface(const std::unique_ptr<WindowImpl>& window);
+            void createSurface(const WindowImpl& window);
 
             /*! \brief Create the render surface
              *
@@ -135,7 +135,7 @@ namespace Bull
              * \param bitsPerPixel Number of bits per pixel to use
              *
              */
-            void createSurface(const std::shared_ptr<WglContext>& shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel);
+            void createSurface(const WglContext* shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel);
 
             /*! \brief Set the best pixel format
              *
@@ -149,7 +149,7 @@ namespace Bull
              * \param shared The shared render context
              *
              */
-            void createContext(const std::shared_ptr<WglContext>& shared);
+            void createContext(const WglContext* shared);
 
             /*! \brief Update settings according to the pixel format
              *

@@ -20,14 +20,14 @@ namespace Bull
             WakeAllConditionVariable(&m_handler);
         }
 
-        void ConditionVariableImplWin32::wait(std::unique_ptr<MutexImpl>& mutex)
+        void ConditionVariableImplWin32::wait(MutexImpl& mutex)
         {
-            SleepConditionVariableCS(&m_handler, mutex->getHandler(), INFINITE);
+            SleepConditionVariableCS(&m_handler, mutex.getHandler(), INFINITE);
         }
 
-        bool ConditionVariableImplWin32::wait(std::unique_ptr<MutexImpl>& mutex, const Duration& timeout)
+        bool ConditionVariableImplWin32::wait(MutexImpl& mutex, const Duration& timeout)
         {
-            return SleepConditionVariableCS(&m_handler, mutex->getHandler(), static_cast<DWORD>(timeout.asMilliseconds())) != 0;
+            return SleepConditionVariableCS(&m_handler, mutex.getHandler(), static_cast<DWORD>(timeout.asMilliseconds())) != 0;
         }
     }
 }
