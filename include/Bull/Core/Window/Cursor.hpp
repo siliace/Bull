@@ -25,6 +25,21 @@ namespace Bull
          */
         Cursor();
 
+        /*! \brief Constructor
+         *
+         * \param cursor
+         *
+         */
+        explicit Cursor(CursorType cursor);
+
+        /*! \brief Constructor
+         *
+         * \param cursor
+         * \param hotSpot
+         *
+         */
+        Cursor(const Image& cursor, const Size& hotSpot);
+
         /*! \brief Constructor by movement
          *
          * \param cursor The Cursor to move
@@ -50,20 +65,16 @@ namespace Bull
          *
          * \param cursor The type of cursor to create
          *
-         * \return True if the cursor was created successfully
-         *
          */
-        bool create(CursorType cursor);
+        void create(CursorType cursor);
 
         /*! \brief Create a Cursor from an image
          *
          * \param image   The image of the Cursor
-         * \param hotSpot The hotspot of the Cursor
-         *
-         * \return True if the cursor was created successfully
+         * \param hotSpot The hotSpot of the Cursor
          *
          */
-        bool create(const Image& image, const Size& hotSpot);
+        void create(const Image& image, const Size& hotSpot);
 
     private:
 

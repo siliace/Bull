@@ -27,20 +27,16 @@ namespace Bull
              *
              * \param cursor The type of cursor to create
              *
-             * \return True if the cursor was created successfully
-             *
              */
-            bool create(CursorType cursor) override;
+            void create(CursorType cursor) override;
 
             /*! \brief Create a Cursor from an image
              *
              * \param cursor  The image of the Cursor
              * \param hotSpot The hotspot of the Cursor
              *
-             * \return True if the cursor was created successfully
-             *
              */
-            bool create(const Image& cursor, const Size& hotSpot) override;
+            void create(const Image& cursor, const Size& hotSpot) override;
 
             /*! \brief Get the native system handler of the cursor
              *
