@@ -1,6 +1,7 @@
 #include <Bull/Core/Exception/DeclareException.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
@@ -261,8 +262,8 @@ namespace Bull
 
                     if(!version.isEmpty())
                     {
-                        m_settings.major = static_cast<Uint8>(String::charToInt(version[0]));
-                        m_settings.minor = static_cast<Uint8>(String::charToInt(version[2]));
+                        m_settings.major = static_cast<Uint8>(StringUtils::charToInt(version[0]));
+                        m_settings.minor = static_cast<Uint8>(StringUtils::charToInt(version[2]));
                     }
                     else
                     {

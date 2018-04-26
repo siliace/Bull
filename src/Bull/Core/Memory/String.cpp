@@ -5,36 +5,6 @@
 
 namespace Bull
 {
-    char String::toUpper(char character)
-    {
-        if(character >= 'a' && character <= 'z')
-        {
-            return character - ('a' - 'A');
-        }
-
-        return character;
-    }
-
-    char String::toLower(char character)
-    {
-        if(character >= 'A' && character <= 'Z')
-        {
-            return character + ('a' - 'A');
-        }
-
-        return character;
-    }
-
-    char String::intToChar(int integer)
-    {
-        return static_cast<char>(integer) + '0';
-    }
-
-    int String::charToInt(char character)
-    {
-        return character - '0';
-    }
-
     String String::boolean(bool boolean)
     {
         return boolean ? "true" : "false";
