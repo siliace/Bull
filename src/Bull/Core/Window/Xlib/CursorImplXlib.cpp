@@ -1,6 +1,8 @@
 #include <X11/cursorfont.h>
 #include <X11/Xutil.h>
 
+#include <Bull/Core/Exception/LackOfImplementation.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Window/Xlib/CursorImplXlib.hpp>
 
 namespace Bull
@@ -55,9 +57,7 @@ namespace Bull
 
         bool CursorImplXlib::create(const Image& cursor, const Size& hotSpot)
         {
-            // Todo
-
-            return false;
+            Throw(LackOfImplementation, "CursorImplXlib::create", "Unimplemented method");
         }
 
         CursorHandler CursorImplXlib::getSystemHandler() const
