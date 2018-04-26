@@ -10,7 +10,7 @@ namespace Bull
         /// Nothing
     }
 
-    Mesh::Mesh(const VertexArray& vertices, const std::vector<unsigned int>& indices)
+    Mesh::Mesh(const VertexArray& vertices, const ArrayList<unsigned int>& indices)
     {
         create(vertices, indices);
     }
@@ -28,7 +28,7 @@ namespace Bull
         });
     }
 
-    void Mesh::create(const VertexArray& vertices, const std::vector<unsigned int>& indices)
+    void Mesh::create(const VertexArray& vertices, const ArrayList<unsigned int>& indices)
     {
         m_hasIndex = true;
 

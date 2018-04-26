@@ -47,7 +47,7 @@ namespace
             Bull::Vertex(Bull::Vector3F(-0.5f, -0.5f, -0.5f), Bull::Vector4F(1.f, 1.f, 1.f, 0.f), Bull::Vector2F(1.f, 1.f), Bull::Vector3F::Down), /// 23
     };
 
-    std::vector<unsigned int> indices = {
+    Bull::ArrayList<unsigned int> indices = {
             0, 1, 2,
             1, 2, 3,
 

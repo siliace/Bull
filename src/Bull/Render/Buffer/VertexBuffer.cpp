@@ -17,7 +17,7 @@ namespace Bull
 
     bool VertexBuffer::create(const VertexArray& vertices, HardwareBufferUsage usage)
     {
-        if(HardwareBuffer::create(vertices.getVertexCount() * sizeof(Vertex), usage))
+        if(HardwareBuffer::create(vertices.getSize() * sizeof(Vertex), usage))
         {
             return fill(&vertices[0], getCapacity(), 0);
         }

@@ -6,7 +6,6 @@
 #include <Bull/Core/Memory/AbstractBuffer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
-#include <Bull/Render/Export.hpp>
 #include <Bull/Render/Buffer/HardwareBufferType.hpp>
 #include <Bull/Render/Buffer/HardwareBufferUsage.hpp>
 #include <Bull/Render/Context/ContextResource.hpp>

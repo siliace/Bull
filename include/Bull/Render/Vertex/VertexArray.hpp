@@ -1,8 +1,7 @@
 #ifndef BULL_RENDER_VERTEX_VERTEXARRAY_HPP
 #define BULL_RENDER_VERTEX_VERTEXARRAY_HPP
 
-#include <vector>
-
+#include <Bull/Core/Utility/ArrayList.hpp>
 #include <Bull/Core/Utility/Color.hpp>
 
 #include <Bull/Math/Polygon/Polygon.hpp>
@@ -11,10 +10,8 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API VertexArray
+    struct BULL_RENDER_API VertexArray : public ArrayList<Vertex>
     {
-    public:
-
         /*! \brief Default constructor
          *
          */
@@ -34,42 +31,6 @@ namespace Bull
          *
          */
         explicit VertexArray(const Polygon<float>& polygon, const Color& color = Color::White);
-
-        /*! \brief Add a Vertex in the VertexArray
-         *
-         * \param vertex The Vertex to add
-         *
-         */
-        void addVertex(const Vertex& vertex);
-
-        /*! \brief Get the number of Vertex in the VertexArray
-         *
-         * \return The number of Vertex
-         *
-         */
-        std::size_t getVertexCount() const;
-
-        /*! \brief Access operator
-         *
-         * \param index The index of the Vertex to get
-         *
-         * \return The Vertex
-         *
-         */
-        Vertex& operator[](std::size_t index);
-
-        /*! \brief Access operator
-         *
-         * \param index The index of the Vertex to get
-         *
-         * \return The Vertex
-         *
-         */
-        const Vertex& operator[](std::size_t index) const;
-
-    private:
-
-        std::vector<Vertex> m_vertices;
     };
 }
 
