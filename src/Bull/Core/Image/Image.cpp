@@ -37,7 +37,7 @@ namespace Bull
 
     bool Image::isLoaded() const
     {
-        return m_pixels.getCapacity() > 0;
+        return m_pixels.getCapacity() > 0 && m_size.width > 0 && m_size.height > 0;
     }
 
     Image& Image::fill(const Color& color)
