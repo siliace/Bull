@@ -73,7 +73,10 @@ namespace Bull
         {
             std::size_t pending;
 
-            ioctl(getHandler(), FIONREAD, &pending);
+            if(ioctl(getHandler(), FIONREAD, &pending) == -1)
+            {
+                Throw(InternalError, "SocketImplUnix::getPendingLength", "Failed to perform IO operation on socket");
+            }
 
             return pending;
         }
