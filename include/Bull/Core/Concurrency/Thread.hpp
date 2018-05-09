@@ -97,10 +97,8 @@ namespace Bull
 
         /*! \brief Start the thread
          *
-         * \return Return true if the thread is started successfully, else return false
-         *
          */
-        bool start();
+        void start();
 
         /*! \brief Check if a thread is running
          *

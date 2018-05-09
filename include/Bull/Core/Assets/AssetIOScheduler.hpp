@@ -101,21 +101,13 @@ namespace Bull
          *
          * \param task The function to run
          *
-         * \return True if the task was created successfully
-         *
          */
-        bool createTask(const std::function<bool()>& task)
+        void createTask(const std::function<bool()>& task)
         {
             std::unique_ptr<Thread> thread = std::make_unique<Thread>(new Worker(task));
-
-            if(!thread->start())
-            {
-                return false;
-            }
+            thread->start();
 
             m_threads.emplace_back(std::move(thread));
-
-            return true;
         }
 
     private:

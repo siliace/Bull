@@ -59,20 +59,16 @@ namespace Bull
          * \param info Information about the Image
          * \param path The Path of the Image
          *
-         * \return True if the task was created successfully
-         *
          */
-        bool getInfo(ImageInfo& info, const Path& path);
+        void getInfo(ImageInfo& info, const Path& path);
 
         /*! \brief Get the width, the height and the number of channels of and Image from a stream
          *
          * \param info   Information about the Image
          * \param stream The stream to read
          *
-         * \return True if the task was created successfully
-         *
          */
-        bool getInfo(ImageInfo& info, InStream& stream);
+        void getInfo(ImageInfo& info, InStream& stream);
 
         /*! \brief Get the width, the height and the number of channels of and Image from a memory area
          *
@@ -80,30 +76,24 @@ namespace Bull
          * \param data   Data to read
          * \param length The length of the data
          *
-         * \return True if the task was created successfully
-         *
          */
-        bool getInfo(ImageInfo& info, const void* data, std::size_t length);
+        void getInfo(ImageInfo& info, const void* data, std::size_t length);
 
         /*! \brief Load an AbstractImage from a File
          *
          * \param image The AbstractImage to load
          * \param path  The Path of the File to read
          *
-         * \return True if the Image started to be loaded
-         *
          */
-        bool loadFromPath(AbstractImage& image, const Path& path);
+        void loadFromPath(AbstractImage& image, const Path& path);
 
         /*! \brief Load an AbstractImage from an InStream
          *
          * \param image  The AbstractImage to load
          * \param stream The InStream to read
          *
-         * \return True if the Image started to be loaded
-         *
          */
-        bool loadFromStream(AbstractImage& image, InStream& stream);
+        void loadFromStream(AbstractImage& image, InStream& stream);
 
         /*! \brief Load a AbstractImage from a memory area
          *
@@ -111,10 +101,8 @@ namespace Bull
          * \param path   Data to read
          * \param length The length of data to read
          *
-         * \return True if the Image started to be loaded
-         *
          */
-        bool loadFromMemory(AbstractImage& image, const void* data, std::size_t length);
+        void loadFromMemory(AbstractImage& image, const void* data, std::size_t length);
 
     private:
 

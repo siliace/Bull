@@ -1,5 +1,8 @@
 #include <Bull/Core/Concurrency/Thread.hpp>
 #include <Bull/Core/Concurrency/ThreadImpl.hpp>
+#include <Bull/Core/Exception/LogicError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Exception/InvalidParameter.hpp>
 
 namespace Bull
 {
@@ -32,16 +35,19 @@ namespace Bull
         wait();
     }
 
-    bool Thread::start()
+    void Thread::start()
     {
-        if(!isRunning() && m_runnable)
+        if(isRunning())
         {
-            m_impl = prv::ThreadImpl::createInstance(m_runnable.get(), m_priority);
-
-            return true;
+            wait();
         }
 
-        return false;
+        if(!m_runnable)
+        {
+            Throw(InvalidParameter, "Thread::start", "The provided runnable is null");
+        }
+
+        m_impl = prv::ThreadImpl::createInstance(m_runnable.get(), m_priority);
     }
 
     bool Thread::isRunning() const

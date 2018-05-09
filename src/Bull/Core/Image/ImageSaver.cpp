@@ -2,6 +2,8 @@
 
 #include <stb_image/stb_image_write.h>
 
+#include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Image/ImageSaver.hpp>
 
 namespace Bull
@@ -30,9 +32,14 @@ namespace Bull
         return false;
     }
 
-    bool ImageSaver::saveToPath(const Image& image, const Path& path, const ImageSavingParameters& parameters)
+    void ImageSaver::saveToPath(const Image& image, const Path& path, const ImageSavingParameters& parameters)
     {
-        return isSupportedFormat(parameters.format) && createTask([image, path, parameters]() -> bool{
+        if(!isSupportedFormat(parameters.format))
+        {
+            Throw(InvalidParameter, "ImageSaver::saveToPath", "Unsupported image format");
+        }
+
+        createTask([image, path, parameters]() -> bool{
             switch(parameters.format)
             {
                 case ImageFormat_Bmp: return stbi_write_bmp(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer()) == 0;
@@ -45,9 +52,14 @@ namespace Bull
         });
     }
 
-    bool ImageSaver::saveToStream(const Image& image, OutStream& stream, const ImageSavingParameters& parameters)
+    void ImageSaver::saveToStream(const Image& image, OutStream& stream, const ImageSavingParameters& parameters)
     {
-        return isSupportedFormat(parameters.format) && createTask([&image, &stream, parameters]() -> bool{
+        if(!isSupportedFormat(parameters.format))
+        {
+            Throw(InvalidParameter, "ImageSaver::saveToPath", "Unsupported image format");
+        }
+
+        createTask([&image, &stream, parameters]() -> bool{
             switch(parameters.format)
             {
                 case ImageFormat_Bmp: return stbi_write_bmp_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer()) == 0;
@@ -60,11 +72,16 @@ namespace Bull
         });
     }
 
-    bool ImageSaver::saveToMemory(const Image& image, void* data, std::size_t length, const ImageSavingParameters& parameters)
+    void ImageSaver::saveToMemory(const Image& image, void* data, std::size_t length, const ImageSavingParameters& parameters)
     {
         if(data && length)
         {
-            return isSupportedFormat(parameters.format) && createTask([&image, data, length, parameters]() -> bool{
+            if(!isSupportedFormat(parameters.format))
+            {
+                Throw(InvalidParameter, "ImageSaver::saveToPath", "Unsupported image format");
+            }
+
+            createTask([&image, data, length, parameters]() -> bool{
                 Buffer buffer = {data, length};
 
                 switch(parameters.format)
@@ -78,7 +95,5 @@ namespace Bull
                 return false;
             });
         }
-
-        return false;
     }
 }

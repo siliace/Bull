@@ -19,10 +19,8 @@ namespace Bull
          * \param path  The Path of the File to read
          * \param type  The type of ShaderStage to load
          *
-         * \return True if the ShaderStage started to be loaded
-         *
          */
-        bool loadFromPath(ShaderStage& stage, const Path& path, ShaderStageType type);
+        void loadFromPath(ShaderStage& stage, const Path& path, ShaderStageType type);
 
         /*! \brief Load an ShaderStage from an InStream
          *
@@ -30,10 +28,8 @@ namespace Bull
          * \param stream The InStream to read
          * \param type   The type of ShaderStage to load
          *
-         * \return True if the ShaderStage started to be loaded
-         *
          */
-        bool loadFromStream(ShaderStage& stage, InStream& stream, ShaderStageType type);
+        void loadFromStream(ShaderStage& stage, InStream& stream, ShaderStageType type);
 
         /*! \brief Load an ShaderStage from a memory area
          *
@@ -42,10 +38,8 @@ namespace Bull
          * \param length The length of data
          * \param type   The type of ShaderStage to load
          *
-         * \return True if the ShaderStage started to be loaded
-         *
          */
-        bool loadFromMemory(ShaderStage& stage, const void* data, std::size_t length, ShaderStageType type);
+        void loadFromMemory(ShaderStage& stage, const void* data, std::size_t length, ShaderStageType type);
     };
 }
 

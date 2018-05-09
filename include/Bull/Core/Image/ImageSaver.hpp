@@ -61,10 +61,8 @@ namespace Bull
          * \param path       The Path of the File to write
          * \param parameters Parameters to use to save the Image
          *
-         * \return True if the Image started to be saved
-         *
          */
-        bool saveToPath(const Image& image, const Path& path, const ImageSavingParameters& parameters = ImageSavingParameters());
+        void saveToPath(const Image& image, const Path& path, const ImageSavingParameters& parameters = ImageSavingParameters());
 
         /*! \brief Save an Image to a stream
          *
@@ -72,10 +70,8 @@ namespace Bull
          * \param stream     The stream to write
          * \param parameters Parameters to use to save the Image
          *
-         * \return True if the Image started to be saved
-         *
          */
-        bool saveToStream(const Image& image, OutStream& stream, const ImageSavingParameters& parameters = ImageSavingParameters());
+        void saveToStream(const Image& image, OutStream& stream, const ImageSavingParameters& parameters = ImageSavingParameters());
 
         /*! \brief Save an Image to a memory area
          *
@@ -84,10 +80,8 @@ namespace Bull
          * \param length     The length of data
          * \param parameters Parameters to use to save the Image
          *
-         * \return True if the Image started to be saved
-         *
          */
-        bool saveToMemory(const Image& image, void* data, std::size_t length, const ImageSavingParameters& parameters = ImageSavingParameters());
+        void saveToMemory(const Image& image, void* data, std::size_t length, const ImageSavingParameters& parameters = ImageSavingParameters());
     };
 }
 

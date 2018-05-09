@@ -1,6 +1,8 @@
 #include <unistd.h>
 
 #include <Bull/Core/Concurrency/Unix/ThreadImplUnix.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
 
 namespace Bull
 {
@@ -13,11 +15,9 @@ namespace Bull
 
         void* ThreadImplUnix::entryPoint(void* data)
         {
-            Runnable* runnable = static_cast<Runnable*>(data);
-
             pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, nullptr);
 
-            runnable->run();
+            static_cast<Runnable*>(data)->run();
 
             return nullptr;
         }
@@ -27,7 +27,12 @@ namespace Bull
             pthread_attr_t attributes;
             pthread_attr_init(&attributes);
 
-            m_isRunning = pthread_create(&m_handler, &attributes, &ThreadImplUnix::entryPoint, runnable) == 0;
+            if(pthread_create(&m_handler, &attributes, &ThreadImplUnix::entryPoint, runnable) != 0)
+            {
+                Throw(InternalError, "ThreadImplUnix::ThreadImplUnix", "Failed to start thread");
+            }
+
+            m_isRunning = true;
         }
 
         void ThreadImplUnix::wait()

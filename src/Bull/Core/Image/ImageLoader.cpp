@@ -23,18 +23,18 @@ namespace Bull
         return reinterpret_cast<InStream*>(user)->isAtEnd() ? 1 : 0;
     }
 
-    bool ImageLoader::getInfo(ImageInfo& info, const Path& path)
+    void ImageLoader::getInfo(ImageInfo& info, const Path& path)
     {
-        return createTask([&info, path]() -> bool{
+        createTask([&info, path]() -> bool{
             return stbi_info(path.toString().getBuffer(),
                              &info.size.width, &info.size.height,
                              reinterpret_cast<int*>(&info.channels)) == 0;
         });
     }
 
-    bool ImageLoader::getInfo(ImageInfo& info, InStream& stream)
+    void ImageLoader::getInfo(ImageInfo& info, InStream& stream)
     {
-        return createTask([&info, &stream]() -> bool{
+        createTask([&info, &stream]() -> bool{
             stbi_io_callbacks callbacks;
 
             callbacks.read = &ImageLoader::read;
@@ -47,18 +47,18 @@ namespace Bull
         });
     }
 
-    bool ImageLoader::getInfo(ImageInfo& info, const void* data, std::size_t length)
+    void ImageLoader::getInfo(ImageInfo& info, const void* data, std::size_t length)
     {
-        return createTask([&info, data, length]() -> bool{
+        createTask([&info, data, length]() -> bool{
             return stbi_info_from_memory(reinterpret_cast<const stbi_uc*>(data), length,
                                          &info.size.width, &info.size.height,
                                          reinterpret_cast<int*>(&info.channels)) == 0;
         });
     }
 
-    bool ImageLoader::loadFromPath(AbstractImage& image, const Path& path)
+    void ImageLoader::loadFromPath(AbstractImage& image, const Path& path)
     {
-        return createTask([&image, path, this]() -> bool{
+        createTask([&image, path, this]() -> bool{
             int width, height, channels;
             stbi_uc* buffer = stbi_load(path.toString().getBuffer(), &width, &height, &channels, STBI_rgb_alpha);
 
@@ -80,9 +80,9 @@ namespace Bull
         });
     }
 
-    bool ImageLoader::loadFromStream(AbstractImage& image, InStream& stream)
+    void ImageLoader::loadFromStream(AbstractImage& image, InStream& stream)
     {
-        return createTask([&image, &stream, this]() -> bool{
+        createTask([&image, &stream, this]() -> bool{
             stbi_io_callbacks callbacks;
             int width, height, channels;
 
@@ -110,9 +110,9 @@ namespace Bull
         });
     }
 
-    bool ImageLoader::loadFromMemory(AbstractImage& image, const void* data, std::size_t length)
+    void ImageLoader::loadFromMemory(AbstractImage& image, const void* data, std::size_t length)
     {
-        return createTask([&image, data, length, this]() -> bool{
+        createTask([&image, data, length, this]() -> bool{
             int width, height, channels;
             stbi_uc* buffer = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &width, &height, &channels, STBI_rgb_alpha);
 

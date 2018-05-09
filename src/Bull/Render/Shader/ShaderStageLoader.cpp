@@ -4,9 +4,9 @@
 
 namespace Bull
 {
-    bool ShaderStageLoader::loadFromPath(ShaderStage& stage, const Path& path, ShaderStageType type)
+    void ShaderStageLoader::loadFromPath(ShaderStage& stage, const Path& path, ShaderStageType type)
     {
-        return createTask([&stage, path, type]() -> bool{
+        createTask([&stage, path, type]() -> bool{
             File file(path);
 
             if(file && stage.create(type))
@@ -18,9 +18,9 @@ namespace Bull
         });
     }
 
-    bool ShaderStageLoader::loadFromStream(ShaderStage& stage, InStream& stream, ShaderStageType type)
+    void ShaderStageLoader::loadFromStream(ShaderStage& stage, InStream& stream, ShaderStageType type)
     {
-        return createTask([&stage, &stream, type]() -> bool{
+        createTask([&stage, &stream, type]() -> bool{
             if(stage.create(type))
             {
                 return stage.compile(stream.readAll());
@@ -30,9 +30,9 @@ namespace Bull
         });
     }
 
-    bool ShaderStageLoader::loadFromMemory(ShaderStage& stage, const void* data, std::size_t length, ShaderStageType type)
+    void ShaderStageLoader::loadFromMemory(ShaderStage& stage, const void* data, std::size_t length, ShaderStageType type)
     {
-        return createTask([&stage, data, length, type]() -> bool{
+        createTask([&stage, data, length, type]() -> bool{
             String code(reinterpret_cast<const char*>(data), length);
 
             if(stage.create(type))
