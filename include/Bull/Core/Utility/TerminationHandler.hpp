@@ -23,11 +23,6 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
-         *
-         */
-        TerminationHandler();
-
         /*! \brief Destructor
          *
          */
@@ -45,6 +40,15 @@ namespace Bull
          */
         void reset();
 
+    private:
+
+        friend class Singleton<TerminationHandler>;
+
+        /*! \brief Default constructor
+         *
+         */
+        TerminationHandler();
+        
     private:
 
         /*! \brief Ensure the termination handler will use at the program end

@@ -16,7 +16,7 @@ namespace Bull
         ImageFormat format = ImageFormat_Png;
     };
 
-    class BULL_CORE_API ImageSaver : public AssetIOScheduler<Image>
+    class BULL_CORE_API ImageSaver : public AssetIOScheduler<Image>, public Singleton<ImageSaver>
     {
     private:
 
@@ -82,6 +82,15 @@ namespace Bull
          *
          */
         void saveToMemory(const Image& image, void* data, std::size_t length, const ImageSavingParameters& parameters = ImageSavingParameters());
+
+    private:
+
+        friend class Singleton<ImageSaver>;
+
+        /*! \brief Default constructor
+         *
+         */
+        ImageSaver() = default;
     };
 }
 

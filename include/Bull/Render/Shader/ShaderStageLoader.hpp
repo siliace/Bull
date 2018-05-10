@@ -40,6 +40,15 @@ namespace Bull
          *
          */
         void loadFromMemory(ShaderStage& stage, const void* data, std::size_t length, ShaderStageType type);
+
+    private:
+
+        friend class Singleton<ShaderStageLoader>;
+
+        /*! \brief Default constructor
+         *
+         */
+        ShaderStageLoader() = default;
     };
 }
 

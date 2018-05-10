@@ -68,6 +68,15 @@ namespace Bull
 
     private:
 
+        friend class Singleton<Log>;
+
+        /*! \brief Default constructor
+         *
+         */
+        Log() = default;
+        
+    private:
+
         /*! \brief Add an entry in every listener
          *
          * \param message The message to log

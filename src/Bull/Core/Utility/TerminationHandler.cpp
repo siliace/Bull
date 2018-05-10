@@ -9,12 +9,6 @@ namespace Bull
         }
     }
 
-    TerminationHandler::TerminationHandler() :
-        m_initialized(false)
-    {
-        /// Nothing
-    }
-
     TerminationHandler::~TerminationHandler()
     {
         reset();
@@ -35,6 +29,12 @@ namespace Bull
 
         m_initialized = false;
         m_terminateHandler = nullptr;
+    }
+
+    TerminationHandler::TerminationHandler() :
+        m_initialized(false)
+    {
+        /// Nothing
     }
 
     void TerminationHandler::ensureInitialized()

@@ -106,6 +106,15 @@ namespace Bull
 
     private:
 
+        friend class Singleton<ImageLoader>;
+
+        /*! \brief Default constructor
+         *
+         */
+        ImageLoader() = default;
+
+    private:
+
         /*! \brief Get the last loading error message
          *
          * \return The error message

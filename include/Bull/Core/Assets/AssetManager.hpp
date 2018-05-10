@@ -121,6 +121,15 @@ namespace Bull
 
     private:
 
+        friend class Singleton<AssetManager<T>>;
+
+        /*! \brief Default constructor
+         *
+         */
+        AssetManager() = default;
+
+    private:
+
         using AssetMap = std::map<String, std::unique_ptr<T>>;
 
         AssetMap m_assets;

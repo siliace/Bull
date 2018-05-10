@@ -28,7 +28,7 @@ namespace Bull
 
                     if(!s_instance)
                     {
-                        s_instance = std::make_unique<T>();
+                        s_instance.reset(new T());
                     }
                 }
             }
