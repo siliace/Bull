@@ -1,8 +1,8 @@
 #include <cstring>
 
-#include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Support/Win32/Win32Error.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
-
 #include <Bull/Core/System/Win32/ClipboardImpl.hpp>
 
 namespace Bull
@@ -23,7 +23,7 @@ namespace Bull
 
             if(!OpenClipboard(nullptr))
             {
-                Log::getInstance()->error("Failed to open clipboard");
+                Throw(Win32Error, "ClipboardImpl::setContent", "Failed to open clipboard");
             }
 
             std::size_t size = (content.getSize() + 1) * sizeof(char);
@@ -46,20 +46,14 @@ namespace Bull
 
             if(!OpenClipboard(nullptr))
             {
-                Log::getInstance()->error("Failed to open clipboard");
-
-                return text;
+                Throw(Win32Error, "ClipboardImpl::getContent", "Failed to open clipboard");
             }
 
             clipboard = GetClipboardData(CF_UNICODETEXT);
 
             if(clipboard)
             {
-                Log::getInstance()->error("Failed to open clipboard");
-
-                CloseClipboard();
-
-                return text;
+                Throw(Win32Error, "ClipboardImpl::getContent", "Failed to get clipboard content");
             }
 
             text = String(static_cast<const char*>(GlobalLock(clipboard)));
