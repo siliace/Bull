@@ -1,40 +1,23 @@
+#include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Utility/StringUtils.hpp>
 
 namespace Bull
 {
-    bool StringUtils::isAlphaNumeric(char character)
+    String StringUtils::join(const ArrayList<String>& strings, const String glue)
     {
-        return std::isalnum(character);
-    }
+        OutStringStream oss;
+        std::size_t size = strings.getSize();
 
-    char StringUtils::toUpper(char character)
-    {
-        if(character >= 'a' && character <= 'z')
+        for(std::size_t i = 0; i < size; i++)
         {
-            return character - ('a' - 'A');
+            oss.write(strings[i]);
+
+            if(i < size - 1)
+            {
+                oss.write(glue);
+            }
         }
 
-        return character;
+        return oss.toString();
     }
-
-    char StringUtils::toLower(char character)
-    {
-        if(character >= 'A' && character <= 'Z')
-        {
-            return character + ('a' - 'A');
-        }
-
-        return character;
-    }
-
-    char StringUtils::intToChar(int integer)
-    {
-        return static_cast<char>(integer) + '0';
-    }
-
-    int StringUtils::charToInt(char character)
-    {
-        return character - '0';
-    }
-
 }
