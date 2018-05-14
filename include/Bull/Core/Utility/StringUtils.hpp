@@ -8,15 +8,24 @@ namespace Bull
 {
     struct BULL_CORE_API StringUtils
     {
-        /*! \brief
+        /*! \brief Create a String from a List of Strings
          *
-         * \param strings
-         * \param glue
+         * \param strings Strings to join
+         * \param glue    The String to use to join two String
          *
-         * \return
+         * \return The created String
          *
          */
-        static String join(const ArrayList<String>& strings, const String& glue);
+        static String join(const ArrayList<String>& strings, const String& glue = String());
+
+        /*! \brief Generate a random String
+         *
+         * \param length The length of the String to generate
+         *
+         * \return The random String
+         *
+         */
+        static String random(std::size_t length);
     };
 }
 

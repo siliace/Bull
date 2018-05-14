@@ -84,17 +84,4 @@ namespace Bull
         std::uniform_real_distribution<double> distribution(min, max);
         return distribution(m_generator);
     }
-
-    String RandomGenerator::string(std::size_t length)
-    {
-        String str(length, String::NullByte);
-        static String charset = "ABCEDFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-        for(std::size_t i = 0; i < str.getSize(); i++)
-        {
-            str[i] = number<char>();
-        }
-
-        return str;
-    }
 }

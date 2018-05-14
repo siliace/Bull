@@ -35,15 +35,6 @@ namespace Bull
         template <typename T>
         T number(T min = std::numeric_limits<T>::min(), T max = std::numeric_limits<T>::max());
 
-        /*! \brief Generate a random String
-         *
-         * \param length The length of the String to generate
-         *
-         * \return The random String
-         *
-         */
-        String string(std::size_t length);
-
     private:
 
         std::mt19937 m_generator;
