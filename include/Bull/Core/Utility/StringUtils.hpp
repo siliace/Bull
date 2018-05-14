@@ -16,7 +16,7 @@ namespace Bull
          * \return
          *
          */
-        static String join(const ArrayList<String>& strings, const String glue);
+        static String join(const ArrayList<String>& strings, const String& glue);
     };
 }
 

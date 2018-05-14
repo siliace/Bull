@@ -3,7 +3,7 @@
 
 namespace Bull
 {
-    String StringUtils::join(const ArrayList<String>& strings, const String glue)
+    String StringUtils::join(const ArrayList<String>& strings, const String& glue)
     {
         OutStringStream oss;
         std::size_t size = strings.getSize();
