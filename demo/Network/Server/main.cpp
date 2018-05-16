@@ -2,6 +2,7 @@
 
 #include <Bull/Network/Socket/TcpClient.hpp>
 #include <Bull/Network/Socket/TcpServer.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 
 int main()
 {
@@ -20,7 +21,7 @@ int main()
 
             if(client.send(hello.getBuffer(), hello.getSize(), sent))
             {
-                cout.writeLine(Bull::String::number(sent) + " bytes sent");
+                cout.writeLine(Bull::StringUtils::number(sent) + " bytes sent");
 
                 return EXIT_SUCCESS;
             }
