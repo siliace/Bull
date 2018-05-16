@@ -4,6 +4,7 @@
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/System/Unix/ConsoleOutputImplUnix.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 
 namespace Bull
 {
@@ -83,12 +84,12 @@ namespace Bull
 
         void ConsoleOutputImplUnix::setTextColor(ConsoleColor color)
         {
-            write("\033[" + String::number(colorToTextAttribute(color)) + "m");
+            write("\033[" + StringUtils::number(colorToTextAttribute(color)) + "m");
         }
 
         void ConsoleOutputImplUnix::setBackgroundColor(ConsoleColor color)
         {
-            write("\033[" + String::number(colorToBackgroundAttribute(color)) + "m");
+            write("\033[" + StringUtils::number(colorToBackgroundAttribute(color)) + "m");
         }
 
         std::size_t ConsoleOutputImplUnix::write(const String& string)

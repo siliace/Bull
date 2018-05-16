@@ -1,6 +1,7 @@
 #include <limits>
 
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 
 #include <Bull/Render/Context/GlKhrNoError.hpp>
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
@@ -374,7 +375,7 @@ namespace Bull
 
                     if(!m_render)
                     {
-                        m_log->warning("Failed to create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor));
+                        m_log->warning("Failed to create GlxContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
 
                         if(m_settings.minor == 0)
                         {
@@ -388,7 +389,7 @@ namespace Bull
                     }
                     else
                     {
-                        m_log->info("Create GlxContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor));
+                        m_log->info("Create GlxContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
                     }
                 }while(!m_render && m_settings.major >= 1);
             }

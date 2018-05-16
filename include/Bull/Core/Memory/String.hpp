@@ -16,30 +16,6 @@ namespace Bull
 
         static constexpr std::size_t InvalidPosition = std::basic_string<char>::npos;
 
-        /*! \brief Convert a number to a String
-         *
-         * \param number The number to convert
-         *
-         * \return The number converted as a String
-         *
-         */
-        template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
-        static String number(T number)
-        {
-            return std::to_string(number).c_str();
-        }
-
-        /*! \brief Convert a boolean to a String
-         *
-         * The boolean with be converted to "true" or "false"
-         *
-         * \param boolean The boolean
-         *
-         * \return The String
-         *
-         */
-        static String boolean(bool boolean);
-
     public:
 
         /*! \brief Default constructor

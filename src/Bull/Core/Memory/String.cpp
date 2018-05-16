@@ -5,11 +5,6 @@
 
 namespace Bull
 {
-    String String::boolean(bool boolean)
-    {
-        return boolean ? "true" : "false";
-    }
-
     String::String(char character, std::size_t repeat)
     {
         m_string.resize(repeat, character);

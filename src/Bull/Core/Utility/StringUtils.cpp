@@ -6,7 +6,12 @@ namespace Bull
 {
     namespace
     {
-        static String charset = "ABCEDFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        String charset = "ABCEDFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    }
+
+    String StringUtils::boolean(bool boolean)
+    {
+        return boolean ? "true" : "false";
     }
 
     String StringUtils::join(const ArrayList<String>& strings, const String& glue)
@@ -40,5 +45,10 @@ namespace Bull
         }
 
         return str;
+    }
+
+    String StringUtils::repeat(const Bull::String& string, std::size_t count)
+    {
+        return count >= 2 ? string + repeat(string, count - 1) : string;
     }
 }

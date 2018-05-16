@@ -2,6 +2,7 @@
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Memory/RangeCheck.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 
 namespace Bull
 {
@@ -23,7 +24,7 @@ namespace Bull
         {
             OutStringStream oss;
 
-            Throw(InvalidParameter, "RangeCheck::apply", "Index out of range, expected in range [0, " + String::number(index) + "[");
+            Throw(InvalidParameter, "RangeCheck::apply", "Index out of range, expected in range [0, " + StringUtils::number(index) + "[");
         }
 
         return (*this);

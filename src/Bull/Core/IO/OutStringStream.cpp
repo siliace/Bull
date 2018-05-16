@@ -1,6 +1,7 @@
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Exception/UnsupportedOperation.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 
 namespace Bull
 {
@@ -32,14 +33,14 @@ namespace Bull
 
     OutStringStream& OutStringStream::operator<<(int right)
     {
-        write(String::number(right));
+        write(StringUtils::number(right));
 
         return (*this);
     }
 
     OutStringStream& OutStringStream::operator<<(bool right)
     {
-        write(String::boolean(right));
+        write(StringUtils::boolean(right));
 
         return (*this);
     }

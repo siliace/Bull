@@ -1,5 +1,6 @@
 #include <Bull/Core/Exception/Exception.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 
 namespace Bull
 {
@@ -44,7 +45,7 @@ namespace Bull
     {
         OutStringStream oss;
 
-        oss << "Exception " << m_type << " from file " << m_file << " at line " << String::number(m_line)
+        oss << "Exception " << m_type << " from file " << m_file << " at line " << StringUtils::number(m_line)
             << " in method " << m_source << " : " << m_description;
 
         m_log->error(oss.toString());

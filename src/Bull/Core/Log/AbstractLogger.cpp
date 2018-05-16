@@ -1,5 +1,6 @@
 #include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Log/AbstractLogger.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 
 namespace Bull
 {
@@ -47,8 +48,8 @@ namespace Bull
     {
         OutStringStream oss;
 
-        oss << "[" << String::number(date.year) << "/" << String::number(date.month) <<  "/" << String::number(date.day);
-        oss << " " << String::number(date.hour) << ":" << String::number(date.minute) << ":" << String::number(date.second.asSeconds());
+        oss << "[" << StringUtils::number(date.year) << "/" << StringUtils::number(date.month) <<  "/" << StringUtils::number(date.day);
+        oss << " " << StringUtils::number(date.hour) << ":" << StringUtils::number(date.minute) << ":" << StringUtils::number(date.second.asSeconds());
         oss << "]";
         oss << "(" << logLevelToString(level) << ")";
         oss << " " << entry;

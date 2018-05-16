@@ -8,6 +8,30 @@ namespace Bull
 {
     struct BULL_CORE_API StringUtils
     {
+        /*! \brief Convert a number to a String
+         *
+         * \param number The number to convert
+         *
+         * \return The number converted as a String
+         *
+         */
+        template <typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>
+        static String number(T number)
+        {
+            return std::to_string(number).c_str();
+        }
+
+        /*! \brief Convert a boolean to a String
+         *
+         * The boolean with be converted to "true" or "false"
+         *
+         * \param boolean The boolean
+         *
+         * \return The String
+         *
+         */
+        static String boolean(bool boolean);
+
         /*! \brief Create a String from a List of Strings
          *
          * \param strings Strings to join
@@ -26,6 +50,16 @@ namespace Bull
          *
          */
         static String random(std::size_t length);
+
+        /*! \brief Create a String by repeating another one
+         *
+         * \param string The String to repeat
+         * \param count  How many times the String shall be repeated
+         *
+         * \return The repeated String
+         *
+         */
+        static String repeat(const String& string, std::size_t count);
     };
 }
 
