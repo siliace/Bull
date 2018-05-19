@@ -3,6 +3,7 @@
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/System/Library.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
 #include <Bull/Render/Context/Wgl/WglContextNoError.hpp>
@@ -390,7 +391,7 @@ namespace Bull
 
                     if(!m_render)
                     {
-                        m_log->warning("Failed to create WglContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor));
+                        m_log->warning("Failed to create WglContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
 
                         if(m_settings.minor == 0)
                         {
@@ -404,7 +405,7 @@ namespace Bull
                     }
                     else
                     {
-                        m_log->info("Create WglContext with version " + String::number(m_settings.major) + "." + String::number(m_settings.minor));
+                        m_log->info("Create WglContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
                     }
                 }while(!m_render && m_settings.major >= 1);
             }

@@ -3,6 +3,7 @@
 
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Utility/ArrayList.hpp>
+#include <Bull/Core/Utility/StringParameter.hpp>
 
 namespace Bull
 {
@@ -45,11 +46,12 @@ namespace Bull
         /*! \brief Generate a random String
          *
          * \param length The length of the String to generate
+         * \param flags  Flags to use to generate the String
          *
          * \return The random String
          *
          */
-        static String random(std::size_t length);
+        static String random(std::size_t length, Uint32 flags = StringParameter_Numbers | StringParameter_Uppercase | StringParameter_Lowercase);
 
         /*! \brief Create a String by repeating another one
          *
