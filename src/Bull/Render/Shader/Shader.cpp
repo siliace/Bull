@@ -1,4 +1,6 @@
 #include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/LogicError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 
@@ -22,102 +24,87 @@ namespace Bull
     Shader::Shader() :
         m_program(gl::createProgram())
     {
-        /// Nothing
+        if(!gl::isProgram(m_program))
+        {
+            Throw(InternalError, "Shader::Shader", "Failed to create shader");
+        }
     }
 
     Shader::~Shader()
     {
-        if(isValid())
-        {
-            gl::deleteProgram(m_program);
-        }
+        gl::deleteProgram(m_program);
     }
 
     bool Shader::create(const ShaderBinary& shaderBinary)
     {
-        if(shaderBinary.isValid())
+        if(!shaderBinary.isValid())
         {
-            gl::programBinary(m_program, shaderBinary.format, shaderBinary.binary.getBuffer(), shaderBinary.binary.getCapacity());
-
-            return true;
+            Throw(InvalidParameter, "Shader::create", "Invalid shader binary");
         }
 
-        return false;
+        gl::programBinary(m_program, shaderBinary.format, shaderBinary.binary.getBuffer(), shaderBinary.binary.getCapacity());
     }
 
-    bool Shader::create(const Path& vertex, const Path& fragment)
+    void Shader::create(const Path& vertex, const Path& fragment)
     {
         ShaderStage vertexStage, fragmentStage;
 
-        ShaderStageLoader::getInstance()->loadFromPath(vertexStage, vertex, ShaderStageType_Vertex);
-        ShaderStageLoader::getInstance()->loadFromPath(fragmentStage, fragment, ShaderStageType_Fragment);
+        m_stageLoader->loadFromPath(vertexStage, vertex, ShaderStageType_Vertex);
+        m_stageLoader->loadFromPath(fragmentStage, fragment, ShaderStageType_Fragment);
 
-        if(ShaderStageLoader::getInstance()->wait())
-        {
-            return attach(vertexStage) && attach(fragmentStage) && link();
-        }
+        m_stageLoader->wait();
 
-        return false;
+        attach(vertexStage);
+        attach(fragmentStage);
+
+        link();
     }
 
-    bool Shader::create(const Path& vertex, const Path& fragment, const Path& geometry)
+    void Shader::create(const Path& vertex, const Path& fragment, const Path& geometry)
     {
         ShaderStage vertexStage, fragmentStage, geometryStage;
 
-        ShaderStageLoader::getInstance()->loadFromPath(vertexStage, vertex, ShaderStageType_Vertex);
-        ShaderStageLoader::getInstance()->loadFromPath(fragmentStage, fragment, ShaderStageType_Fragment);
-        ShaderStageLoader::getInstance()->loadFromPath(geometryStage, geometry, ShaderStageType_Geometry);
+        m_stageLoader->loadFromPath(vertexStage, vertex, ShaderStageType_Vertex);
+        m_stageLoader->loadFromPath(fragmentStage, fragment, ShaderStageType_Fragment);
+        m_stageLoader->loadFromPath(geometryStage, geometry, ShaderStageType_Geometry);
 
-        if(ShaderStageLoader::getInstance()->wait())
-        {
-            return attach(vertexStage) && attach(fragmentStage) && attach(geometryStage) && link();
-        }
+        m_stageLoader->wait();
 
-        return false;
+        attach(vertexStage);
+        attach(fragmentStage);
+        attach(geometryStage);
+
+        link();
     }
 
-    bool Shader::attach(const ShaderStage& stage)
+    void Shader::attach(const ShaderStage& stage)
     {
-        if(stage.isValid() && stage.isCompiled())
+        if(!stage.isValid())
         {
-            gl::attachShader(m_program, stage.getSystemHandler());
-
-            return true;
+            Throw(InvalidParameter, "Shader::attach", "Can't attach invalid ShaderStage");
         }
 
-        return false;
+        if(!stage.isCompiled())
+        {
+            Throw(InvalidParameter, "Shader::attach", "Can't attach non compiled ShaderStage");
+        }
+
+        gl::attachShader(m_program, stage.getSystemHandler());
     }
 
-    bool Shader::link()
+    void Shader::link()
     {
-        if(isValid())
+        gl::linkProgram(m_program);
+
+        if(!isLinked())
         {
-            gl::linkProgram(m_program);
-
-            if(!isLinked())
-            {
-                Log::getInstance()->error(getErrorMessage());
-
-                return false;
-            }
-
-            return true;
+            Throw(InternalError, "Shader::link", "Failed to link shader");
         }
-
-        return false;
     }
 
     void Shader::bind() const
     {
-        if(isValid())
-        {
-            gl::useProgram(m_program);
-        }
-    }
-
-    bool Shader::isValid() const
-    {
-        return gl::isProgram(m_program) == GL_TRUE;
+        gl::useProgram(m_program);
     }
 
     bool Shader::isLinked() const
@@ -128,13 +115,13 @@ namespace Bull
         return status == GL_TRUE;
     }
 
-    bool Shader::setUniform(const String& name, int uniform)
+    void Shader::setUniform(const String& name, int uniform)
     {
         int location = getUniformLocation(name);
 
         if(location == -1)
         {
-            return false;
+            Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found");
         }
 
         if(gl::programUniform1i)
@@ -147,17 +134,15 @@ namespace Bull
 
             gl::uniform1i(location, uniform);
         }
-
-        return true;
     }
 
-    bool  Shader::setUniform(const String& name, unsigned int uniform)
+    void Shader::setUniform(const String& name, unsigned int uniform)
     {
         int location = getUniformLocation(name);
 
         if(location == -1)
         {
-            return false;
+            Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found");
         }
 
         if(gl::programUniform1i)
@@ -170,17 +155,15 @@ namespace Bull
 
             gl::uniform1i(location, uniform);
         }
-
-        return true;
     }
 
-    bool Shader::setUniform(const String& name, float uniform)
+    void Shader::setUniform(const String& name, float uniform)
     {
         int location = getUniformLocation(name);
 
         if(location == -1)
         {
-            return false;
+            Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found");
         }
 
         if(gl::programUniform1i)
@@ -193,17 +176,15 @@ namespace Bull
 
             gl::uniform1f(location, uniform);
         }
-
-        return true;
     }
 
-    bool Shader::setUniformColor(const String& name, const Color& uniform)
+    void Shader::setUniformColor(const String& name, const Color& uniform)
     {
         int location = getUniformLocation(name);
 
         if(location == -1)
         {
-            return false;
+            Throw(UniformVariableNotFound, "Shader::setUniformColor", "Uniform " + name + " not found");
         }
 
         if(gl::programUniform4f)
@@ -224,17 +205,15 @@ namespace Bull
                           static_cast<float>(uniform.blue)  / 255.f,
                           static_cast<float>(uniform.alpha) / 255.f);
         }
-
-        return true;
     }
 
-    bool Shader::setUniformVector(const String& name, const Vector<float, 2>& uniform)
+    void Shader::setUniformVector(const String& name, const Vector<float, 2>& uniform)
     {
         int location = getUniformLocation(name);
 
         if(location == -1)
         {
-            return false;
+            Throw(UniformVariableNotFound, "Shader::setUniformVector", "Uniform " + name + " not found");
         }
 
         if(gl::programUniform2f)
@@ -247,17 +226,15 @@ namespace Bull
 
             gl::uniform2f(location, uniform.at(0), uniform.at(1));
         }
-
-        return true;
     }
 
-    bool Shader::setUniformVector(const String& name, const Vector<float, 3>& uniform)
+    void Shader::setUniformVector(const String& name, const Vector<float, 3>& uniform)
     {
         int location = getUniformLocation(name);
 
         if(location == -1)
         {
-            return false;
+            Throw(UniformVariableNotFound, "Shader::setUniformVector", "Uniform " + name + " not found");
         }
 
         if(gl::programUniform3f)
@@ -270,17 +247,15 @@ namespace Bull
 
             gl::uniform3f(location, uniform.at(0), uniform.at(1), uniform.at(2));
         }
-
-        return true;
     }
 
-    bool Shader::setUniformVector(const String& name, const Vector<float, 4>& uniform)
+    void Shader::setUniformVector(const String& name, const Vector<float, 4>& uniform)
     {
         int location = getUniformLocation(name);
 
         if(location == -1)
         {
-            return false;
+            Throw(UniformVariableNotFound, "Shader::setUniformVector", "Uniform " + name + " not found");
         }
 
         if(gl::programUniform4f)
@@ -293,17 +268,15 @@ namespace Bull
 
             gl::uniform4f(location, uniform.at(0), uniform.at(1), uniform.at(2), uniform.at(3));
         }
-
-        return true;
     }
 
-    bool Shader::setUniformMatrix(const String& name, const Matrix4F& uniform)
+    void Shader::setUniformMatrix(const String& name, const Matrix4F& uniform)
     {
         int location = getUniformLocation(name);
 
         if(location == -1)
         {
-            return false;
+            Throw(UniformVariableNotFound, "Shader::setUniformMatrix", "Uniform " + name + " not found");
         }
 
         if(gl::programUniformMatrix4fv)
@@ -316,32 +289,32 @@ namespace Bull
 
             gl::uniformMatrix4fv(location, 1, true, uniform.getPtr());
         }
-
-        return true;
     }
 
     ShaderBinary Shader::getBinary() const
     {
+        int length;
         ShaderBinary shaderBinary;
 
-        if(isValid() && isLinked())
+        if(!isLinked())
         {
-            int length;
+            Throw(LogicError, "Shader::getBinary", "Cannot get binary from a non linked shader");
+        }
 
-            gl::getProgramiv(m_program, GL_PROGRAM_BINARY_LENGTH, &length);
+        gl::getProgramiv(m_program, GL_PROGRAM_BINARY_LENGTH, &length);
 
-            if(length)
+        if(length)
+        {
+            shaderBinary.binary.create(length);
+
+            gl::getProgramBinary(getSystemHandler(), length, nullptr, &shaderBinary.format, &shaderBinary.binary[0]);
+
+            if(!shaderBinary.isValid())
             {
-                shaderBinary.binary.create(length);
-
-                gl::getProgramBinary(getSystemHandler(), length, nullptr, &shaderBinary.format, &shaderBinary.binary[0]);
-
-                if(!shaderBinary.isValid())
-                {
-                    Throw(InternalError, "Shader::getBinary", "Failed to download program binary");
-                }
+                Throw(InternalError, "Shader::getBinary", "Failed to download program binary");
             }
         }
+
 
         return shaderBinary;
     }

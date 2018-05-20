@@ -23,16 +23,14 @@ namespace Bull
 
     void SpotLight::setUniforms(Shader& shader, const String& name) const
     {
-        if(shader.isValid())
-        {
-            AbstractLight::setUniforms(shader, name);
-            shader.setUniform(compose(name, "linear"), linear);
-            shader.setUniform(compose(name, "constant"), constant);
-            shader.setUniform(compose(name, "quadratic"), quadratic);
-            shader.setUniformVector(compose(name, "position"), position);
-            shader.setUniformVector(compose(name, "direction"), direction);
-            shader.setUniform(compose(name, "innerCutOff"), std::cos(innerCutOff));
-            shader.setUniform(compose(name, "outerCutOff"), std::cos(outerCutOff));
-        }
+        AbstractLight::setUniforms(shader, name);
+
+        shader.setUniform(compose(name, "linear"), linear);
+        shader.setUniform(compose(name, "constant"), constant);
+        shader.setUniform(compose(name, "quadratic"), quadratic);
+        shader.setUniformVector(compose(name, "position"), position);
+        shader.setUniformVector(compose(name, "direction"), direction);
+        shader.setUniform(compose(name, "innerCutOff"), std::cos(innerCutOff));
+        shader.setUniform(compose(name, "outerCutOff"), std::cos(outerCutOff));
     }
 }

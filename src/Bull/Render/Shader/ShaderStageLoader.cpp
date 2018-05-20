@@ -9,9 +9,12 @@ namespace Bull
         createTask([&stage, path, type]() -> bool{
             File file(path);
 
-            if(file && stage.create(type))
+            if(file)
             {
-                return stage.compile(file.readAll());
+                stage.create(type);
+                stage.compile(file.readAll());
+
+                return true;
             }
 
             return false;
@@ -21,12 +24,10 @@ namespace Bull
     void ShaderStageLoader::loadFromStream(ShaderStage& stage, InStream& stream, ShaderStageType type)
     {
         createTask([&stage, &stream, type]() -> bool{
-            if(stage.create(type))
-            {
-                return stage.compile(stream.readAll());
-            }
+            stage.create(type);
+            stage.compile(stream.readAll());
 
-            return false;
+            return true;
         });
     }
 
@@ -35,12 +36,10 @@ namespace Bull
         createTask([&stage, data, length, type]() -> bool{
             String code(reinterpret_cast<const char*>(data), length);
 
-            if(stage.create(type))
-            {
-                return stage.compile(code);
-            }
+            stage.create(type);
+            stage.compile(code);
 
-            return false;
+            return true;
         });
     }
 }

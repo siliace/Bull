@@ -1,6 +1,7 @@
 #ifndef BULL_RENDER_SHADER_SHADER_HPP
 #define BULL_RENDER_SHADER_SHADER_HPP
 
+#include <Bull/Core/Exception/DeclareException.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/Memory/ByteArray.hpp>
@@ -10,10 +11,12 @@
 #include <Bull/Math/Vector/Vector.hpp>
 
 #include <Bull/Render/Shader/ShaderBinary.hpp>
-#include <Bull/Render/Shader/ShaderStage.hpp>
+#include <Bull/Render/Shader/ShaderStageLoader.hpp>
 
 namespace Bull
 {
+    DeclareException(UniformVariableNotFound);
+
     class BULL_RENDER_API Shader : public NonCopyable, public ContextResource
     {
     public:
@@ -51,10 +54,8 @@ namespace Bull
          * \param vertex   The Path of the vertex shader
          * \param fragment The Path of the fragment shader
          *
-         * \return True if the Shader was created successfully
-         *
          */
-        bool create(const Path& vertex, const Path& fragment);
+        void create(const Path& vertex, const Path& fragment);
 
         /*! \brief Create a Shader by loading its stages from their Path
          *
@@ -62,38 +63,25 @@ namespace Bull
          * \param fragment The Path of the fragment shader
          * \param geometry The Path of the geometry shader
          *
-         * \return True if the Shader was created successfully
-         *
          */
-        bool create(const Path& vertex, const Path& fragment, const Path& geometry);
+        void create(const Path& vertex, const Path& fragment, const Path& geometry);
 
         /*! \brief Attach a ShaderStage to this Shader
          *
          * \param stage The stage to attach to this Shader
          *
-         * \return True if the stage was attached successfully
-         *
          */
-        bool attach(const ShaderStage& stage);
+        void attach(const ShaderStage& stage);
 
         /*! \brief Link the shader
          *
-         * \return True if the shader was linked successfully
-         *
          */
-        bool link();
+        void link();
 
         /*! \brief Bind the shader
          *
          */
         void bind() const;
-
-        /*! \brief Check if the Shader is valid
-         *
-         * \return True if the Shader is valid
-         *
-         */
-        bool isValid() const;
 
         /*! \brief Check whether the Shader is linked
          *
@@ -107,80 +95,64 @@ namespace Bull
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
-         * \return Return true if the uniform variable was found, false otherwise
-         *
          */
-        bool setUniform(const String& name, int uniform);
+        void setUniform(const String& name, int uniform);
 
         /*! \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
-         * \return Return true if the uniform variable was found, false otherwise
-         *
          */
-        bool setUniform(const String& name, unsigned int uniform);
+        void setUniform(const String& name, unsigned int uniform);
 
         /*! \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
-         * \return Return true if the uniform variable was found, false otherwise
-         *
          */
-        bool setUniform(const String& name, float uniform);
+        void setUniform(const String& name, float uniform);
 
         /*! \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
-         * \return Return true if the uniform variable was found, false otherwise
-         *
          */
-        bool setUniformColor(const String& name, const Color& uniform);
+        void setUniformColor(const String& name, const Color& uniform);
 
         /*! \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
-         * \return Return true if the uniform variable was found, false otherwise
-         *
          */
-        bool setUniformVector(const String& name, const Vector<float, 2>& uniform);
+        void setUniformVector(const String& name, const Vector<float, 2>& uniform);
 
         /*! \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
-         * \return Return true if the uniform variable was found, false otherwise
-         *
          */
-        bool setUniformVector(const String& name, const Vector<float, 3>& uniform);
+        void setUniformVector(const String& name, const Vector<float, 3>& uniform);
 
         /*! \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
-         * \return Return true if the uniform variable was found, false otherwise
-         *
          */
-        bool setUniformVector(const String& name, const Vector<float, 4>& uniform);
+        void setUniformVector(const String& name, const Vector<float, 4>& uniform);
 
         /*! \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
-         * \return Return true if the uniform variable was found, false otherwise
-         *
          */
-        bool setUniformMatrix(const String& name, const Matrix4F& uniform);
+        void setUniformMatrix(const String& name, const Matrix4F& uniform);
 
         /*! \brief Get the program as a binary format
          *
@@ -216,7 +188,8 @@ namespace Bull
          */
         int getUniformLocation(const String& name);
 
-        unsigned int m_program;
+        unsigned int                m_program;
+        ShaderStageLoader::Instance m_stageLoader;
     };
 }
 

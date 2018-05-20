@@ -28,19 +28,15 @@ namespace Bull
          *
          * \param type The type of shader to create
          *
-         * \return True if the ShaderStage was created successfully
-         *
          */
-        bool create(ShaderStageType type);
+        void create(ShaderStageType type);
 
         /*! \brief Compile the ShaderStage
          *
          * \param code The code of the ShaderStage
          *
-         * \return True if the shader was compiled successfully
-         *
          */
-        bool compile(const String& code);
+        void compile(const String& code);
 
         /*! \brief Destroy the shader
          *

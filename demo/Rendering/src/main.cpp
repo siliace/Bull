@@ -130,10 +130,6 @@ int main(int argc, char* argv[])
         specular.bind();
         phong.setUniform("material.specular", 1);
 
-        gl::activeTexture(GL_TEXTURE2);
-        emission.bind();
-        phong.setUniform("material.emission", 2);
-
         spotLight.position = position;
         spotLight.direction = forward;
         spotLight.setUniforms(phong, "light");

@@ -1,5 +1,6 @@
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Shader/ShaderStage.hpp>
@@ -23,7 +24,7 @@ namespace Bull
         destroy();
     }
 
-    bool ShaderStage::create(ShaderStageType type)
+    void ShaderStage::create(ShaderStageType type)
     {
         if(isValid())
         {
@@ -35,54 +36,50 @@ namespace Bull
         m_type = type;
         m_id   = gl::createShader(shaderType[type]);
 
-        return gl::isShader(m_id);
+        if(!isValid())
+        {
+            Throw(InternalError, "ShaderStage::create", "Failed to create ShaderStage");
+        }
     }
 
-    bool ShaderStage::compile(const String& code)
+    void ShaderStage::compile(const String& code)
     {
-        if(isValid())
+        const char* source = code.getBuffer();
+
+        ensureContext();
+
+        gl::shaderSource(m_id, 1, &source, nullptr);
+        gl::compileShader(m_id);
+
+        if(!isCompiled())
         {
-            const char* source = code.getBuffer();
-
-            ensureContext();
-
-            gl::shaderSource(m_id, 1, &source, nullptr);
-            gl::compileShader(m_id);
-
-            if(!isCompiled())
-            {
-                Log::getInstance()->error(getErrorMessage());
-
-                return false;
-            }
-
-            m_isCompiled = true;
-
-            return true;
+            Throw(InternalError, "ShaderStage::compile", "Failed to compile ShaderStage");
         }
 
-        return false;
+        m_isCompiled = true;
     }
 
     void ShaderStage::destroy()
     {
-        if(isValid())
-        {
-            ensureContext();
+        ensureContext();
 
-            gl::deleteShader(m_id);
-        }
+        gl::deleteShader(m_id);
     }
 
     bool ShaderStage::isCompiled() const
     {
-        int error = 0;
+        if(isValid())
+        {
+            int error = 0;
 
-        ensureContext();
+            ensureContext();
 
-        gl::getShaderiv(m_id, GL_COMPILE_STATUS, &error);
+            gl::getShaderiv(m_id, GL_COMPILE_STATUS, &error);
 
-        return error == GL_TRUE;
+            return error == GL_TRUE;
+        }
+
+        return false;
     }
 
     bool ShaderStage::isValid() const
@@ -99,22 +96,17 @@ namespace Bull
 
     String ShaderStage::getSource() const
     {
-        if(isValid())
-        {
-            String code;
-            int size, capacity;
+        String code;
+        int size, capacity;
 
-            ensureContext();
+        ensureContext();
 
-            gl::getShaderiv(m_id, GL_SHADER_SOURCE_LENGTH, &capacity);
+        gl::getShaderiv(m_id, GL_SHADER_SOURCE_LENGTH, &capacity);
 
-            code.create(capacity);
-            gl::getShaderSource(m_id, code.getSize(), &size, &code[0]);
+        code.create(capacity);
+        gl::getShaderSource(m_id, code.getSize(), &size, &code[0]);
 
-            return code;
-        }
-
-        return String();
+        return code;
     }
 
     ShaderStageType ShaderStage::getType() const
