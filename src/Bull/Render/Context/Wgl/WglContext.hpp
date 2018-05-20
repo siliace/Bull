@@ -113,10 +113,8 @@ namespace Bull
 
             /*! \brief Make the context current
              *
-             * \return Return true if the context is now active, false otherwise
-             *
              */
-            bool makeCurrent() override;
+            void makeCurrent() override;
 
         private:
 

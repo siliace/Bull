@@ -1,5 +1,7 @@
 #include <stb_image/stb_image.h>
 
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Image/ImageLoader.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Log/Log.hpp>
@@ -25,58 +27,40 @@ namespace Bull
 
     void ImageLoader::getInfo(ImageInfo& info, const Path& path)
     {
-        createTask([&info, path]() -> bool{
-            return stbi_info(path.toString().getBuffer(),
-                             &info.size.width, &info.size.height,
-                             reinterpret_cast<int*>(&info.channels)) == 0;
+        createTask([&info, path]() {
+            stbi_info(path.toString().getBuffer(), &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
         });
     }
 
     void ImageLoader::getInfo(ImageInfo& info, InStream& stream)
     {
-        createTask([&info, &stream]() -> bool{
+        createTask([&info, &stream]() {
             stbi_io_callbacks callbacks;
 
             callbacks.read = &ImageLoader::read;
             callbacks.skip = &ImageLoader::skip;
             callbacks.eof  = &ImageLoader::eof;
 
-            return stbi_info_from_callbacks(&callbacks, &stream,
-                                            &info.size.width, &info.size.height,
-                                            reinterpret_cast<int*>(&info.channels)) == 0;
+            stbi_info_from_callbacks(&callbacks, &stream, &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
         });
     }
 
     void ImageLoader::getInfo(ImageInfo& info, const void* data, std::size_t length)
     {
-        createTask([&info, data, length]() -> bool{
-            return stbi_info_from_memory(reinterpret_cast<const stbi_uc*>(data), length,
-                                         &info.size.width, &info.size.height,
-                                         reinterpret_cast<int*>(&info.channels)) == 0;
+        createTask([&info, data, length]() {
+            stbi_info_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels)) == 0;
         });
     }
 
     void ImageLoader::loadFromPath(AbstractImage& image, const Path& path)
     {
-        createTask([&image, path, this]() -> bool{
+        createTask([&image, path, this]() {
             int width, height, channels;
             stbi_uc* buffer = stbi_load(path.toString().getBuffer(), &width, &height, &channels, STBI_rgb_alpha);
 
-            CleanupCallback cleanupCallback([buffer](){
-                stbi_image_free(buffer);
-            });
+            createImage(image, buffer, width, height, channels);
 
-            if(!createImage(image, buffer, width, height, channels))
-            {
-                OutStringStream oss;
-                oss << "Failed to load image from path " << path.toString() << " : " << getErrorMessage();
-
-                Log::getInstance()->error(oss.toString());
-
-                return false;
-            }
-
-            return true;
+            stbi_image_free(buffer);
         });
     }
 
@@ -92,21 +76,9 @@ namespace Bull
 
             stbi_uc* buffer = stbi_load_from_callbacks(&callbacks, &stream, &width, &height, &channels, STBI_rgb_alpha);
 
-            CleanupCallback cleanupCallback([buffer](){
-                stbi_image_free(buffer);
-            });
+            createImage(image, buffer, width, height, channels);
 
-            if(!createImage(image, buffer, width, height, channels))
-            {
-                OutStringStream oss;
-                oss << "Failed to load image from stream : " << getErrorMessage();
-
-                Log::getInstance()->error(oss.toString());
-
-                return false;
-            }
-
-            return true;
+            stbi_image_free(buffer);
         });
     }
 
@@ -116,21 +88,9 @@ namespace Bull
             int width, height, channels;
             stbi_uc* buffer = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &width, &height, &channels, STBI_rgb_alpha);
 
-            CleanupCallback cleanupCallback([buffer](){
-                stbi_image_free(buffer);
-            });
+            createImage(image, buffer, width, height, channels);
 
-            if(!createImage(image, buffer, width, height, channels))
-            {
-                OutStringStream oss;
-                oss << "Failed to load image from memory : " << getErrorMessage();
-
-                Log::getInstance()->error(oss.toString());
-
-                return false;
-            }
-
-            return true;
+            stbi_image_free(buffer);
         });
     }
 
@@ -141,20 +101,20 @@ namespace Bull
         return stbi_failure_reason();
     }
 
-    bool ImageLoader::createImage(AbstractImage& image, const void* buffer, int width, int height, int channels)
+    void ImageLoader::createImage(AbstractImage& image, const void* buffer, int width, int height, int channels)
     {
-        if(buffer && width && height)
+        ByteArray pixels;
+
+        if(pixels.fill(buffer, width * height * channels))
         {
-            ByteArray pixels;
-
-            if(pixels.fill(buffer, width * height * channels))
+            if(!image.create(pixels, Size(width, height)))
             {
-                Size size(width, height);
-
-                return image.create(pixels, size);
+                Throw(InternalError, "ImageLoader::createImage", "Failed to create AbstractImage");
             }
         }
-
-        return false;
+        else
+        {
+            Throw(InternalError, "ImageLoader::createImage", "Failed to fill pixel buffer");
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Bull
 {
-    ContextSettings ContextSettings::Best  = ContextSettings(24, 8, 16, 4, 5);
+    ContextSettings ContextSettings::Best  = ContextSettings(24, 8, 16, 4, 6);
     ContextSettings ContextSettings::Worst = ContextSettings(0,  0, 0,  1, 1);
     ContextSettings ContextSettings::Empty = ContextSettings(0,  0, 0,  0, 0);
 

@@ -11,48 +11,6 @@ namespace Bull
     template <typename T, typename = std::enable_if<std::is_base_of<Asset, T>::value>>
     class BULL_CORE_API AssetIOScheduler
     {
-    private:
-
-        class Worker : public Runnable
-        {
-        public:
-
-            /*! \brief Constructor
-             *
-             * \param function The function to run
-             *
-             */
-            explicit Worker(const std::function<bool()>& function) :
-                m_success(false),
-                m_function(function)
-            {
-                /// Nothing
-            }
-
-            /*! \brief Load the resource
-             *
-             */
-            void run() override
-            {
-                m_success = m_function();
-            }
-
-            /*! \brief Tell whether the Worker loaded de resource successfully
-             *
-             * \return True if the resource was loaded successfully
-             *
-             */
-            bool isSuccess() const
-            {
-                return m_success;
-            }
-
-        private:
-
-            bool                  m_success;
-            std::function<bool()> m_function;
-        };
-
     public:
 
         /*! \brief Get the percentage of loaded Asset
@@ -77,22 +35,15 @@ namespace Bull
 
         /*! \brief Wait every Asset has been loaded
          *
-         * \return True if every Asset has been loaded successfully
-         *
          */
-        bool wait()
+        void wait()
         {
-            bool success = true;
-
             for(auto& thread : m_threads)
             {
                 thread->wait();
-                success &= static_cast<Worker*>(thread->getRunnable())->isSuccess();
             }
 
             m_threads.clear();
-
-            return success;
         }
 
     protected:
@@ -102,9 +53,9 @@ namespace Bull
          * \param task The function to run
          *
          */
-        void createTask(const std::function<bool()>& task)
+        void createTask(const std::function<void()>& task)
         {
-            std::unique_ptr<Thread> thread = std::make_unique<Thread>(new Worker(task));
+            std::unique_ptr<Thread> thread = std::make_unique<Thread>(task);
             thread->start();
 
             m_threads.emplace_back(std::move(thread));

@@ -33,10 +33,7 @@ int main(int argc, char* argv[])
     ImageLoader::getInstance()->loadFromPath(specular, Path("../resources/textures/container_specular.png"));
     ImageLoader::getInstance()->loadFromPath(emission, Path("../resources/textures/container_emission.png"));
 
-    if(!ImageLoader::getInstance()->wait())
-    {
-        return -1;
-    }
+    ImageLoader::getInstance()->wait();
 
     diffuse.enableSmooth();
     specular.enableSmooth();

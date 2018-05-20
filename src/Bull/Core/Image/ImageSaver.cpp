@@ -39,16 +39,14 @@ namespace Bull
             Throw(InvalidParameter, "ImageSaver::saveToPath", "Unsupported image format");
         }
 
-        createTask([image, path, parameters]() -> bool{
+        createTask([image, path, parameters]() {
             switch(parameters.format)
             {
-                case ImageFormat_Bmp: return stbi_write_bmp(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer()) == 0;
-                case ImageFormat_Png: return stbi_write_png(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.stride) == 0;
-                case ImageFormat_Jpg: return stbi_write_jpg(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.quality) == 0;
-                case ImageFormat_Tga: return stbi_write_tga(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer()) == 0;
+                case ImageFormat_Bmp: stbi_write_bmp(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer());
+                case ImageFormat_Png: stbi_write_png(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.stride);
+                case ImageFormat_Jpg: stbi_write_jpg(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.quality);
+                case ImageFormat_Tga: stbi_write_tga(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer());
             }
-
-            return false;
         });
     }
 
@@ -59,16 +57,14 @@ namespace Bull
             Throw(InvalidParameter, "ImageSaver::saveToPath", "Unsupported image format");
         }
 
-        createTask([&image, &stream, parameters]() -> bool{
+        createTask([&image, &stream, parameters]() {
             switch(parameters.format)
             {
-                case ImageFormat_Bmp: return stbi_write_bmp_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer()) == 0;
-                case ImageFormat_Png: return stbi_write_png_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.stride) == 0;
-                case ImageFormat_Jpg: return stbi_write_jpg_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.quality) == 0;
-                case ImageFormat_Tga: return stbi_write_tga_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer()) == 0;
+                case ImageFormat_Bmp: stbi_write_bmp_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer());
+                case ImageFormat_Png: stbi_write_png_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.stride);
+                case ImageFormat_Jpg: stbi_write_jpg_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.quality);
+                case ImageFormat_Tga: stbi_write_tga_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer());
             }
-
-            return false;
         });
     }
 
@@ -81,18 +77,16 @@ namespace Bull
                 Throw(InvalidParameter, "ImageSaver::saveToPath", "Unsupported image format");
             }
 
-            createTask([&image, data, length, parameters]() -> bool{
+            createTask([&image, data, length, parameters]() {
                 Buffer buffer = {data, length};
 
                 switch(parameters.format)
                 {
-                    case ImageFormat_Bmp: return stbi_write_bmp_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer()) == 0;
-                    case ImageFormat_Png: return stbi_write_png_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.stride) == 0;
-                    case ImageFormat_Jpg: return stbi_write_jpg_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.quality) == 0;
-                    case ImageFormat_Tga: return stbi_write_tga_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer()) == 0;
+                    case ImageFormat_Bmp: stbi_write_bmp_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer());
+                    case ImageFormat_Png: stbi_write_png_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.stride);
+                    case ImageFormat_Jpg: stbi_write_jpg_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer(), parameters.quality);
+                    case ImageFormat_Tga: stbi_write_tga_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().getBuffer());
                 }
-
-                return false;
             });
         }
     }

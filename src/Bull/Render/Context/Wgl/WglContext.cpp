@@ -260,7 +260,7 @@ namespace Bull
             }
         }
 
-        bool WglContext::makeCurrent()
+        void WglContext::makeCurrent()
         {
             if(m_pbuffer)
             {
@@ -273,7 +273,10 @@ namespace Bull
                 }
             }
 
-            return wglMakeCurrent(m_device, m_render) == TRUE;
+            if(wglMakeCurrent(m_device, m_render) != TRUE)
+            {
+                Throw(InternalError, "WglContext::makeCurrent", "Failed to make context current");
+            }
         }
 
         void WglContext::createSurface(const WindowImpl& window)

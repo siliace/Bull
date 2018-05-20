@@ -71,16 +71,14 @@ namespace Bull
          */
         Window& operator=(Window&& window) noexcept = default;
 
-        /*! \brief Open the window
+        /*! \brief Create the window
          *
          * \param mode  The VideoMode
          * \param title The title of the window
          * \param style The window decorations
          *
-         * \return Return true if the window was open successfully, false otherwise
-         *
          */
-        bool open(const VideoMode& mode, const String& title, Uint32 style = WindowStyle_Default);
+        void create(const VideoMode& mode, const String& title, Uint32 style = WindowStyle_Default);
 
         /*! \brief Check if the window is open
          *
@@ -321,10 +319,8 @@ namespace Bull
          *
          * \param impl The implementation to use
          *
-         * \return True if the Window was open successfully
-         *
          */
-        bool open(std::unique_ptr<prv::WindowImpl>&& impl, const String& title, Uint32 style);
+        void create(std::unique_ptr<prv::WindowImpl>&& impl, const String& title, Uint32 style);
 
         /*! \brief Function called when the Window is opened
          *

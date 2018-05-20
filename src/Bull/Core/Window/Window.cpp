@@ -1,3 +1,5 @@
+#include <Bull/Core/Exception/LogicError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Window/Window.hpp>
 #include <Bull/Core/Window/WindowImpl.hpp>
 
@@ -19,12 +21,17 @@ namespace Bull
     Window::Window(const VideoMode& mode, const String& title, Uint32 WindowStyle) :
         Window()
     {
-        open(mode, title, WindowStyle);
+        create(mode, title, WindowStyle);
     }
 
-    bool Window::open(const VideoMode& mode, const String& title, Uint32 style)
+    void Window::create(const VideoMode& mode, const String& title, Uint32 style)
     {
-        return open(prv::WindowImpl::createInstance(mode, title, style), title, style);
+        if(isOpen())
+        {
+            close();
+        }
+
+        create(prv::WindowImpl::createInstance(mode, title, style), title, style);
     }
 
     Window::~Window()
@@ -304,25 +311,28 @@ namespace Bull
 
     bool Window::enableFullscreen(bool fullscreen)
     {
-        if(m_impl && (!fullscreen || !s_fullscreen))
+        if(!m_impl)
         {
-            m_impl->switchFullscreen(fullscreen);
-
-            if(fullscreen)
-            {
-                s_fullscreen = this;
-                enableCaptureCursor();
-            }
-            else
-            {
-                enableCaptureCursor(false);
-                s_fullscreen = nullptr;
-            }
-
-            return true;
+            Throw(LogicError, "Window::enableFullscreen", "The Window is not open");
         }
 
-        return false;
+        if(s_fullscreen && this != s_fullscreen && fullscreen)
+        {
+            Throw(LogicError, "Window::enableFullscreen", "Another Window is already in fullscreen");
+        }
+
+        m_impl->switchFullscreen(fullscreen);
+
+        if(fullscreen)
+        {
+            s_fullscreen = this;
+            enableCaptureCursor();
+        }
+        else
+        {
+            enableCaptureCursor(false);
+            s_fullscreen = nullptr;
+        }
     }
     
     bool Window::isFullscreenEnable() const
@@ -330,40 +340,28 @@ namespace Bull
         return this == s_fullscreen;
     }
 
-    bool Window::open(std::unique_ptr<prv::WindowImpl>&& impl, const String& title, Uint32 style)
+    void Window::create(std::unique_ptr<prv::WindowImpl>&& impl, const String& title, Uint32 style)
     {
-        if(!isOpen())
+        if(style == WindowStyle_Fullscreen && s_fullscreen)
         {
-            if(style == WindowStyle_Fullscreen && s_fullscreen)
-            {
-                style = WindowStyle_Default;
-            }
-
-            m_impl = std::move(impl);
-
-            if(style == WindowStyle_Fullscreen)
-            {
-                if(!enableFullscreen())
-                {
-                    close();
-
-                    return false;
-                }
-            }
-
-            setTitle(title);
-            setVisible(true);
-            setMinSize(-1, -1);
-            setMaxSize(-1, -1);
-            enableKeyRepeat(true);
-            setMouseCursorVisible(true);
-
-            onOpen();
-
-            return true;
+            style = WindowStyle_Default;
         }
 
-        return false;
+        m_impl = std::move(impl);
+
+        if(style == WindowStyle_Fullscreen)
+        {
+            enableFullscreen(true);
+        }
+
+        setTitle(title);
+        setVisible(true);
+        setMinSize(-1, -1);
+        setMaxSize(-1, -1);
+        enableKeyRepeat(true);
+        setMouseCursorVisible(true);
+
+        onOpen();
     }
 
     void Window::ignoreNextMouseEvent() const

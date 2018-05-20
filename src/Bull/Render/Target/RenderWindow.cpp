@@ -8,19 +8,14 @@ namespace Bull
 {
     RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
-        open(mode, title, style, settings);
+        create(mode, title, style, settings);
     }
 
-    bool RenderWindow::open(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+    void RenderWindow::create(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
     {
-        if(Window::open(prv::RenderWindowImpl::createInstance(mode, title, style, settings), title, style))
-        {
-            m_context = prv::GlContext::createInstance(*m_impl, mode.bitsPerPixel, settings);
+        Window::create(prv::RenderWindowImpl::createInstance(mode, title, style, settings), title, style);
 
-            return true;
-        }
-
-        return false;
+        m_context = prv::GlContext::createInstance(*m_impl, mode.bitsPerPixel, settings);
     }
 
     void RenderWindow::display()
@@ -30,10 +25,8 @@ namespace Bull
             Thread::sleep(m_frameDelay - m_clock.getElapsedTime());
         }
 
-        if(setActive())
-        {
-            m_context->display();
-        }
+        setActive();
+        m_context->display();
 
         m_clock.restart();
     }
@@ -62,10 +55,8 @@ namespace Bull
 
     void RenderWindow::enableVsync(bool active)
     {
-        if(setActive())
-        {
-            m_context->enableVsync(active);
-        }
+        setActive();
+        m_context->enableVsync(active);
     }
 
     Viewport RenderWindow::getDefaultViewport() const

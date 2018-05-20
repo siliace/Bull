@@ -130,10 +130,8 @@ namespace Bull
          * \param height   The height in pixel of the image
          * \param channels The number of channels per pixel
          *
-         * \return True if the AbstractImage was created successfully
-         *
          */
-        bool createImage(AbstractImage& image, const void* buffer, int width, int height, int channels);
+        void createImage(AbstractImage& image, const void* buffer, int width, int height, int channels);
 
         mutable Mutex m_mutex;
     };

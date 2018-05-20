@@ -8,15 +8,14 @@ namespace Bull
 
     void RenderTarget::clear(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
     {
-        if(setActive())
-        {
-            gl::clearColor(static_cast<float>(red)   / 255.f,
-                           static_cast<float>(green) / 255.f,
-                           static_cast<float>(blue)  / 255.f,
-                           static_cast<float>(alpha) / 255.f);
+        setActive();
 
-            gl::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        }
+        gl::clearColor(static_cast<float>(red)   / 255.f,
+                       static_cast<float>(green) / 255.f,
+                       static_cast<float>(blue)  / 255.f,
+                       static_cast<float>(alpha) / 255.f);
+
+        gl::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     void RenderTarget::clear(const Color& color)
@@ -24,24 +23,21 @@ namespace Bull
         clear(color.red, color.green, color.blue, color.alpha);
     }
 
-    bool RenderTarget::setActive(bool active)
+    void RenderTarget::setActive(bool active)
     {
         if(m_context)
         {
-            return m_context->setActive(active);
+            m_context->setActive(active);
         }
-
-        return false;
     }
 
     void RenderTarget::setViewport(const Viewport& viewport)
     {
-        if(setActive())
-        {
-            m_currentViewport = viewport;
+        setActive();
 
-            gl::viewport(m_currentViewport.x, m_currentViewport.y, m_currentViewport.width, m_currentViewport.height);
-        }
+        m_currentViewport = viewport;
+
+        gl::viewport(m_currentViewport.x, m_currentViewport.y, m_currentViewport.width, m_currentViewport.height);
     }
 
     const Viewport& RenderTarget::getViewport() const

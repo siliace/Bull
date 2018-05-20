@@ -33,16 +33,11 @@ namespace Bull
         setActive(false);
     }
 
-    bool Context::setActive(bool active)
+    void Context::setActive(bool active)
     {
-        bool result = m_context->setActive(active);
+        m_context->setActive(active);
 
-        if(result)
-        {
-            s_active = active ? this : nullptr;
-        }
-
-        return result;
+        s_active = active ? this : nullptr;
     }
 
     const ContextSettings& Context::getSettings() const

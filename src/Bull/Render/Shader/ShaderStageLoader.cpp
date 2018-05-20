@@ -1,23 +1,25 @@
 #include <Bull/Core/FileSystem/File.hpp>
 
 #include <Bull/Render/Shader/ShaderStageLoader.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
 
 namespace Bull
 {
     void ShaderStageLoader::loadFromPath(ShaderStage& stage, const Path& path, ShaderStageType type)
     {
-        createTask([&stage, path, type]() -> bool{
+        createTask([&stage, path, type]() {
             File file(path);
 
             if(file)
             {
                 stage.create(type);
                 stage.compile(file.readAll());
-
-                return true;
             }
-
-            return false;
+            else
+            {
+                Throw(InternalError, "ShaderStageLoader::loadFromPath", "Failed to open " + path.toString());
+            }
         });
     }
 
@@ -26,8 +28,6 @@ namespace Bull
         createTask([&stage, &stream, type]() -> bool{
             stage.create(type);
             stage.compile(stream.readAll());
-
-            return true;
         });
     }
 
@@ -38,8 +38,6 @@ namespace Bull
 
             stage.create(type);
             stage.compile(code);
-
-            return true;
         });
     }
 }

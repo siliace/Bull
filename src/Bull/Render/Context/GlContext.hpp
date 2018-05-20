@@ -121,10 +121,8 @@ namespace Bull
              *
              * \param active True to activate, false to deactivate
              *
-             * \return Return true if the context's status changed successfully, false otherwise
-             *
              */
-            bool setActive(bool active);
+            void setActive(bool active);
 
             /*! \brief Display what has been rendered so far
              *
@@ -166,14 +164,12 @@ namespace Bull
              * \param settings Settings to use to create the context
              *
              */
-            GlContext(const ContextSettings& settings);
+            explicit GlContext(const ContextSettings& settings);
 
             /*! \brief Make the context current
              *
-             * \return Return true if the context is now active, false otherwise
-             *
              */
-            virtual bool makeCurrent() = 0;
+            virtual void makeCurrent() = 0;
 
             ContextSettings m_settings;
 

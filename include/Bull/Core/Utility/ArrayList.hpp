@@ -93,11 +93,9 @@ namespace Bull
                 }
 
                 std::memcpy(&m_array[offset], data, size);
-
-                return true;
             }
 
-            return false;
+            return true;
         }
 
         /*! \brief Add an element at the end of the ArrayList

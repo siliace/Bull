@@ -51,10 +51,8 @@ namespace Bull
          *
          * \param active True to activate, false to deactivate the context
          *
-         * \return Return true if the context's status changed successfully, false otherwise
-         *
          */
-        bool setActive(bool active = true);
+        void setActive(bool active = true);
 
         /*! \brief Change the viewport of the RenderTarget
          *

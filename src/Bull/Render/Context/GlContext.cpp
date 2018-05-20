@@ -86,15 +86,15 @@ namespace Bull
             }
         }
 
-         std::unique_ptr<GlContext> GlContext::createInstance()
-         {
+        std::unique_ptr<GlContext> GlContext::createInstance()
+        {
             Lock l(mutex);
 
             std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared.get());
             context->initialize();
 
             return context;
-         }
+        }
 
         std::unique_ptr<GlContext> GlContext::createInstance(const VideoMode& mode, const ContextSettings& settings)
         {
@@ -195,7 +195,7 @@ namespace Bull
 
         GlContext::~GlContext() = default;
 
-        bool GlContext::setActive(bool active)
+        void GlContext::setActive(bool active)
         {
             if(active)
             {
@@ -203,17 +203,10 @@ namespace Bull
                 {
                     Lock l(mutex);
 
-                    if(makeCurrent())
-                    {
-                       current = this;
+                    makeCurrent();
 
-                       return true;
-                    }
-
-                    return false;
+                    current = this;
                 }
-
-                return true;
             }
             else
             {
@@ -221,10 +214,8 @@ namespace Bull
                 {
                     Lock l(mutex);
 
-                    return getInternalContext()->setActive(true);
+                    getInternalContext()->setActive(true);
                 }
-
-                return true;
             }
         }
 
@@ -241,75 +232,74 @@ namespace Bull
 
         void GlContext::initialize(const ContextSettings& wanted)
         {
-            if(setActive(true))
+            setActive(true);
+
+            gl::debugMessageCallback(&GlContext::debugProc, this);
+
+            int majorVersion = 0;
+            int minorVersion = 0;
+
+            gl::getIntegerv(GL_MAJOR_VERSION, &majorVersion);
+            gl::getIntegerv(GL_MINOR_VERSION, &minorVersion);
+
+            if(gl::getError() != GL_INVALID_ENUM)
             {
-                gl::debugMessageCallback(&GlContext::debugProc, this);
+                m_settings.major = static_cast<Uint8>(majorVersion);
+                m_settings.minor = static_cast<Uint8>(minorVersion);
+            }
+            else
+            {
+                String version = reinterpret_cast<const char*>(gl::getString(GL_VERSION));
 
-                int majorVersion = 0;
-                int minorVersion = 0;
-
-                gl::getIntegerv(GL_MAJOR_VERSION, &majorVersion);
-                gl::getIntegerv(GL_MINOR_VERSION, &minorVersion);
-
-                if(gl::getError() != GL_INVALID_ENUM)
+                if(!version.isEmpty())
                 {
-                    m_settings.major = static_cast<Uint8>(majorVersion);
-                    m_settings.minor = static_cast<Uint8>(minorVersion);
+                    m_settings.major = static_cast<Uint8>(Character::charToInt(version[0]));
+                    m_settings.minor = static_cast<Uint8>(Character::charToInt(version[2]));
                 }
                 else
                 {
-                    String version = reinterpret_cast<const char*>(gl::getString(GL_VERSION));
-
-                    if(!version.isEmpty())
-                    {
-                        m_settings.major = static_cast<Uint8>(Character::charToInt(version[0]));
-                        m_settings.minor = static_cast<Uint8>(Character::charToInt(version[2]));
-                    }
-                    else
-                    {
-                        m_settings.major = 1;
-                        m_settings.minor = 1;
-                    }
+                    m_settings.major = 1;
+                    m_settings.minor = 1;
                 }
+            }
 
-                m_settings.type = ContextSettingsType_Default;
+            m_settings.type = ContextSettingsType_Default;
 
-                gl::enable(GL_DEPTH_TEST);
+            gl::enable(GL_DEPTH_TEST);
 
-                if(m_settings.major >= 3)
+            if(m_settings.major >= 3)
+            {
+                int flags;
+                gl::getIntegerv(GL_CONTEXT_FLAGS, &flags);
+
+                if(flags & GL_CONTEXT_FLAG_DEBUG_BIT)
                 {
-                    int flags;
-                    gl::getIntegerv(GL_CONTEXT_FLAGS, &flags);
-
-                    if(flags & GL_CONTEXT_FLAG_DEBUG_BIT)
-                    {
-                        m_settings.type |= ContextSettingsType_Debug;
-                    }
-
-                    if(flags & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT)
-                    {
-                        m_settings.type |= ContextSettingsType_ForwardCompatible;
-                    }
-
-                    if(m_settings.major == 3 && m_settings.minor == 1 && isSupported("GL_ARB_compatibility"))
-                    {
-                        m_settings.type |= ContextSettingsProfile_Compatibility;
-                    }
+                    m_settings.type |= ContextSettingsType_Debug;
                 }
 
-                if(m_settings.antialiasing > 0 && wanted.antialiasing > 0)
+                if(flags & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT)
                 {
-                    gl::enable(GL_MULTISAMPLE);
-
-                    if(!gl::isEnabled(GL_MULTISAMPLE))
-                    {
-                        m_settings.antialiasing = 0;
-                    }
+                    m_settings.type |= ContextSettingsType_ForwardCompatible;
                 }
-                else
+
+                if(m_settings.major == 3 && m_settings.minor == 1 && isSupported("GL_ARB_compatibility"))
+                {
+                    m_settings.type |= ContextSettingsProfile_Compatibility;
+                }
+            }
+
+            if(m_settings.antialiasing > 0 && wanted.antialiasing > 0)
+            {
+                gl::enable(GL_MULTISAMPLE);
+
+                if(!gl::isEnabled(GL_MULTISAMPLE))
                 {
                     m_settings.antialiasing = 0;
                 }
+            }
+            else
+            {
+                m_settings.antialiasing = 0;
             }
         }
     }

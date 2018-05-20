@@ -28,7 +28,7 @@ namespace Bull
          */
         bool isValid() const;
 
-        ByteArray   binary; /*!< The binary */
+        ByteArray    binary; /*!< The binary */
         unsigned int format; /*!< The binary format */
     };
 }
