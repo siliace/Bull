@@ -56,11 +56,8 @@ namespace Bull
 
         private:
 
-            struct
-            {
-                LONG   m_count;   /*!< The current count value of the semaphore. We keep our own counter to avoid a dummy call to ReleaseSemaphore */
-                HANDLE m_handler; /*!< The handler of the semaphore */
-            };
+            LONG   m_count;   /*!< The current count value of the semaphore. We keep our own counter to avoid a dummy call to ReleaseSemaphore */
+            HANDLE m_handler; /*!< The handler of the semaphore */
         };
     }
 }
