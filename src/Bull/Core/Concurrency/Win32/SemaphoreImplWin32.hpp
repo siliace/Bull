@@ -10,6 +10,10 @@ namespace Bull
     {
         class SemaphoreImplWin32 : public SemaphoreImpl
         {
+        private:
+
+            static constexpr LONG MaxSemaphoreCount = 32 * 1024;
+
         public:
 
             /*! \brief Constructor
@@ -52,7 +56,11 @@ namespace Bull
 
         private:
 
-            HANDLE m_handler;
+            struct
+            {
+                LONG   m_count;   /*!< The current count value of the semaphore. We keep our own counter to avoid a dummy call to ReleaseSemaphore */
+                HANDLE m_handler; /*!< The handler of the semaphore */
+            };
         };
     }
 }
