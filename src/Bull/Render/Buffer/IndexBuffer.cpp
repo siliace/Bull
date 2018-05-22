@@ -17,12 +17,9 @@ namespace Bull
 
     bool IndexBuffer::create(const ArrayList<unsigned int>& indices, HardwareBufferUsage usage)
     {
-        if(HardwareBuffer::create(indices.getSize() * sizeof(unsigned int), usage))
-        {
-            return fill(indices.getBuffer(), indices.getSize() * sizeof(unsigned int), 0);
-        }
+        HardwareBuffer::create(indices.getSize() * sizeof(unsigned int), usage);
 
-        return false;
+        fill(indices.getBuffer(), indices.getSize() * sizeof(unsigned int), 0);
     }
 
     DataType IndexBuffer::getDataType() const

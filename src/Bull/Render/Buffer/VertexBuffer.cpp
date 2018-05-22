@@ -17,12 +17,9 @@ namespace Bull
 
     bool VertexBuffer::create(const VertexArray& vertices, HardwareBufferUsage usage)
     {
-        if(HardwareBuffer::create(vertices.getSize() * sizeof(Vertex), usage))
-        {
-            return fill(&vertices[0], getCapacity(), 0);
-        }
+        HardwareBuffer::create(vertices.getSize() * sizeof(Vertex), usage);
 
-        return false;
+        fill(&vertices[0], getCapacity(), 0);
     }
 
     VertexBuffer& VertexBuffer::setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride, std::size_t start)

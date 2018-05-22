@@ -68,10 +68,8 @@ namespace Bull
          *
          * \param capacity The capacity of the String to create
          *
-         * \return True if the String was created successfully
-         *
          */
-        bool create(std::size_t capacity) override;
+        void create(std::size_t capacity) override;
 
         /*! \brief Fill the String
          *
@@ -79,10 +77,8 @@ namespace Bull
          * \param size   The length of data
          * \param offset The offset of the data in the String
          *
-         * \return True if the String was filled successfully
-         *
          */
-        bool fill(const void* data, std::size_t size, std::size_t offset = 0) override;
+        void fill(const void* data, std::size_t size, std::size_t offset = 0) override;
 
         /*! \brief The the first occurence of a String
          *

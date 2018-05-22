@@ -1,5 +1,8 @@
 #include <cstring>
 
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/LogicError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
@@ -10,8 +13,8 @@ namespace Bull
 {
     namespace
     {
-        constexpr unsigned int BufferType[]  = {GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER};
-        constexpr unsigned int BufferUsage[] = {GL_STATIC_DRAW, GL_DYNAMIC_DRAW, GL_STREAM_DRAW};
+        constexpr unsigned int bufferType[]  = {GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER};
+        constexpr unsigned int bufferUsage[] = {GL_STATIC_DRAW, GL_DYNAMIC_DRAW, GL_STREAM_DRAW};
     }
 
     HardwareBuffer::~HardwareBuffer()
@@ -22,61 +25,72 @@ namespace Bull
         }
     }
 
-    bool HardwareBuffer::create(std::size_t size)
+    void HardwareBuffer::create(std::size_t size)
     {
-        return create(size, HardwareBufferUsage_StaticDraw);
+        create(size, DefaultUsage);
     }
 
-    bool HardwareBuffer::create(std::size_t size, HardwareBufferUsage usage)
+    void HardwareBuffer::create(std::size_t size, HardwareBufferUsage usage)
+    {
+        if(isValid())
+        {
+            clear();
+        }
+
+        gl::genBuffers(1, &m_id);
+        gl::bindBuffer(bufferType[m_type], m_id);
+
+        if(!gl::isBuffer(m_id))
+        {
+            Throw(OpenGLHandlerError, "HardwareBuffer::create", "Failed to create buffer");
+        }
+
+        gl::bufferData(bufferType[m_type], size, nullptr, bufferUsage[usage]);
+    }
+
+    void HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
     {
         if(!isValid())
         {
-            gl::genBuffers(1, &m_id);
-            gl::bindBuffer(BufferType[m_type], m_id);
-
-            if(!gl::isBuffer(m_id))
-            {
-                Throw(OpenGLHandlerError, "HardwareBuffer::create", "Failed to create buffer");
-            }
-
-            gl::bufferData(BufferType[m_type], size, nullptr, BufferUsage[usage]);
-
-            return true;
+            Throw(LogicError, "HardwareBuffer::fill", "The buffer is not created");
         }
 
-        return false;
-    }
-
-    bool HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
-    {
-        if(isValid() && size + offset <= getCapacity())
+        if(!data)
         {
-            bind();
-
-            /// It seems that glBufferSubData is more efficient than glMapBuffer with small buffers
-            /// http://www.stevestreeting.com/2007/03/17/glmapbuffer-vs-glbuffersubdata-the-return/
-            if(size < 32 * 1024)
-            {
-                gl::bufferSubData(BufferType[m_type], offset, size, data);
-            }
-            else
-            {
-                unsigned char* ptr = reinterpret_cast<unsigned char*>(map());
-
-                if(!ptr)
-                {
-                    return false;
-                }
-
-                std::memcpy(ptr + offset, data, size);
-
-                unmap();
-            }
-
-            return true;
+            Throw(LogicError, "HardwareBuffer::fill", "Invalid buffer pointer");
         }
 
-        return false;
+        if(!size)
+        {
+            Throw(LogicError, "ArrayList::fill", "Invalid buffer size");
+        }
+
+        if(size + offset > getCapacity())
+        {
+            Throw(InvalidParameter, "HardwareBuffer::fill", "Invalid buffer size");
+        }
+
+        bind();
+
+        /// It seems that glBufferSubData is more efficient than glMapBuffer with small buffers
+        /// http://www.stevestreeting.com/2007/03/17/glmapbuffer-vs-glbuffersubdata-the-return/
+        if(size < 32 * 1024)
+        {
+            gl::bufferSubData(bufferType[m_type], offset, size, data);
+        }
+        else
+        {
+            unsigned char* ptr = reinterpret_cast<unsigned char*>(map());
+
+            if(!ptr)
+            {
+                Throw(InternalError, "HardwareBuffer::fill", "Failed to map HardwareBuffer");
+            }
+
+            std::memcpy(ptr + offset, data, size);
+
+            unmap();
+        }
     }
 
     bool HardwareBuffer::isValid() const
@@ -90,7 +104,7 @@ namespace Bull
         {
             bind();
 
-            return gl::mapBuffer(BufferType[m_type], GL_READ_WRITE);
+            return gl::mapBuffer(bufferType[m_type], GL_READ_WRITE);
         }
 
         return nullptr;
@@ -102,7 +116,7 @@ namespace Bull
         {
             bind();
 
-            return gl::mapBuffer(BufferType[m_type], GL_READ_ONLY);
+            return gl::mapBuffer(bufferType[m_type], GL_READ_ONLY);
         }
 
         return nullptr;
@@ -114,7 +128,7 @@ namespace Bull
         {
             bind();
 
-            gl::unmapBuffer(BufferType[m_type]);
+            gl::unmapBuffer(bufferType[m_type]);
         }
     }
 
@@ -125,8 +139,8 @@ namespace Bull
             bind();
 
             int usage;
-            gl::getBufferParameteriv(BufferType[m_type], GL_BUFFER_USAGE, &usage);
-            gl::bufferData(BufferType[m_type], getCapacity(), nullptr, usage);
+            gl::getBufferParameteriv(bufferType[m_type], GL_BUFFER_USAGE, &usage);
+            gl::bufferData(bufferType[m_type], getCapacity(), nullptr, usage);
         }
     }
 
@@ -137,7 +151,7 @@ namespace Bull
             bind();
 
             int capacity;
-            gl::getBufferParameteriv(BufferType[m_type], GL_BUFFER_SIZE, &capacity);
+            gl::getBufferParameteriv(bufferType[m_type], GL_BUFFER_SIZE, &capacity);
 
             return static_cast<std::size_t>(capacity);
         }
@@ -157,7 +171,7 @@ namespace Bull
     {
         if(isValid())
         {
-            gl::bindBuffer(BufferType[m_type], m_id);
+            gl::bindBuffer(bufferType[m_type], m_id);
         }
     }
 

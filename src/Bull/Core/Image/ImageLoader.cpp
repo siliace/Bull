@@ -105,16 +105,11 @@ namespace Bull
     {
         ByteArray pixels;
 
-        if(pixels.fill(buffer, width * height * channels))
+        pixels.fill(buffer, width * height * channels);
+
+        if(!image.create(pixels, Size(width, height)))
         {
-            if(!image.create(pixels, Size(width, height)))
-            {
-                Throw(InternalError, "ImageLoader::createImage", "Failed to create AbstractImage");
-            }
-        }
-        else
-        {
-            Throw(InternalError, "ImageLoader::createImage", "Failed to fill pixel buffer");
+            Throw(InternalError, "ImageLoader::createImage", "Failed to create AbstractImage");
         }
     }
 }

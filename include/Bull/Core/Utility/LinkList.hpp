@@ -125,7 +125,7 @@ namespace Bull
          */
         bool remove(const T& element) override
         {
-            m_list.erase(std::remove(m_list.begin(), m_list.end(), element), m_list.end());
+            return m_list.erase(std::remove(m_list.begin(), m_list.end(), element), m_list.end()) != m_list.end();
         }
 
         /*! \brief Tell whether the List is empty

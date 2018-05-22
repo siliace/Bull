@@ -5,6 +5,8 @@
 #include <cstring>
 #include <vector>
 
+#include <Bull/Core/Exception/LogicError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Memory/AbstractBuffer.hpp>
 #include <Bull/Core/Memory/RangeCheck.hpp>
 #include <Bull/Core/Utility/List.hpp>
@@ -62,16 +64,9 @@ namespace Bull
          * \return True if the ArrayList was created successfully
          *
          */
-        bool create(std::size_t capacity) override
+        void create(std::size_t capacity) override
         {
-            if(isEmpty())
-            {
-                resize(capacity);
-
-                return true;
-            }
-
-            return false;
+            resize(capacity);
         }
 
         /*! \brief Fill the buffer
@@ -83,19 +78,24 @@ namespace Bull
          * \return True if the buffer was filled successfully
          *
          */
-        bool fill(const void* data, std::size_t size, std::size_t offset = 0) override
+        void fill(const void* data, std::size_t size, std::size_t offset = 0) override
         {
-            if(data && size)
+            if(!data)
             {
-                if(getCapacity() < size + offset)
-                {
-                    resize(size + offset);
-                }
-
-                std::memcpy(&m_array[offset], data, size);
+                Throw(LogicError, "ArrayList::fill", "Invalid buffer pointer");
             }
 
-            return true;
+            if(!size)
+            {
+                Throw(LogicError, "ArrayList::fill", "Invalid buffer size");
+            }
+
+            if(getCapacity() < size + offset)
+            {
+                resize(size + offset);
+            }
+
+            std::memcpy(&m_array[offset], data, size);
         }
 
         /*! \brief Add an element at the end of the ArrayList
@@ -184,14 +184,7 @@ namespace Bull
          */
         bool remove(const T& element) override
         {
-            if(std::find(m_array.begin(), m_array.end(), element) != m_array.end())
-            {
-                m_array.erase(std::remove(m_array.begin(), m_array.end(), element), m_array.end());
-
-                return true;
-            }
-
-            return false;
+            return m_array.erase(std::remove(m_array.begin(), m_array.end(), element), m_array.end()) != m_array.end();
         }
 
         /*! \brief Tell whether the List is empty

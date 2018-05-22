@@ -16,6 +16,10 @@ namespace Bull
     {
     public:
 
+        static constexpr HardwareBufferUsage DefaultUsage = HardwareBufferUsage_StaticDraw;
+
+    public:
+
         /*! \brief Destructor
          *
          */
@@ -25,20 +29,16 @@ namespace Bull
          *
          * \param capacity The capacity of the buffer
          *
-         * \return Return true if the buffer was created successfully, false otherwise
-         *
          */
-        bool create(std::size_t capacity) override;
+        void create(std::size_t capacity) override;
 
         /*! \brief Create the buffer in the VRAM
          *
          * \param capacity The capacity of the buffer
          * \param usage    The usage of the buffer
          *
-         * \return Return true if the buffer was created successfully, false otherwise
-         *
          */
-        bool create(std::size_t capacity, HardwareBufferUsage usage);
+        void create(std::size_t capacity, HardwareBufferUsage usage);
 
         /*! \brief Fill the buffer
          *
@@ -46,10 +46,8 @@ namespace Bull
          * \param size   The size of data
          * \param offset The offset of the data in the buffer
          *
-         * \return True if the buffer was filled successfully
-         *
          */
-        bool fill(const void* data, std::size_t size, std::size_t offset = 0) override;
+        void fill(const void* data, std::size_t size, std::size_t offset = 0) override;
 
         /*! \brief Tell whether the HardwareBuffer is valid
          *

@@ -62,6 +62,13 @@ namespace Bull
          *
          */
         static String repeat(const String& string, std::size_t count);
+
+        /*! \brief Create a String of a given size
+         *
+         * \param size The size
+         * \return The created String
+         */
+        static String ofSize(std::size_t size);
     };
 }
 

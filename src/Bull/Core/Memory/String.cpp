@@ -28,23 +28,14 @@ namespace Bull
         return (*this);
     }
 
-    bool String::create(std::size_t capacity)
+    void String::create(std::size_t capacity)
     {
-        if(isEmpty())
-        {
-            m_string.resize(capacity);
-
-            return true;
-        }
-
-        return false;
+        m_string.resize(capacity);
     }
 
-    bool String::fill(const void* data, std::size_t size, std::size_t offset)
+    void String::fill(const void* data, std::size_t size, std::size_t offset)
     {
         m_string.insert(offset, reinterpret_cast<const char*>(data), size);
-
-        return true;
     }
 
     std::size_t String::first(const String& search) const

@@ -12,10 +12,8 @@ namespace Bull
          *
          * \param capacity The capacity of the Buffer to create
          *
-         * \return True if the Buffer was created successfully
-         *
          */
-        virtual bool create(std::size_t capacity) = 0;
+        virtual void create(std::size_t capacity) = 0;
 
         /*! \brief Fill the buffer
          *
@@ -23,10 +21,8 @@ namespace Bull
          * \param size   The length of data
          * \param offset The offset of the data in the Buffer
          *
-         * \return True if the buffer was filled successfully
-         *
          */
-        virtual bool fill(const void* data, std::size_t size, std::size_t offset) = 0;
+        virtual void fill(const void* data, std::size_t size, std::size_t offset) = 0;
 
         /*! \brief Clear the Buffer
          *
