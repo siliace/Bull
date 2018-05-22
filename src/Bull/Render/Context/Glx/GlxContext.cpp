@@ -1,5 +1,7 @@
 #include <limits>
 
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 #include <Bull/Core/Utility/StringUtils.hpp>
 
@@ -18,16 +20,20 @@ namespace Bull
     {
         void* GlxContext::getFunction(const String& function)
         {
-            return reinterpret_cast<void*>(glXGetProcAddressARB(reinterpret_cast<const unsigned char*>(function.getBuffer())));
+            return reinterpret_cast<void*>(
+                    glXGetProcAddressARB(
+                            reinterpret_cast<const unsigned char*>(function.getBuffer())
+                    )
+            );
         }
 
         void GlxContext::requireExtensions(ExtensionsLoader::Instance& loader)
         {
-            loader->require(GlxCreateContextARB);
-            loader->require(GlxPbuffer);
-            loader->require(GlxSwapControlEXT);
-            loader->require(GlxSwapControlMESA);
-            loader->require(GlxSwapControlSGI);
+            loader->require(glxCreateContextARB);
+            loader->require(glxPbuffer);
+            loader->require(glxSwapControlEXT);
+            loader->require(glxSwapControlMESA);
+            loader->require(glxSwapControlSGI);
         }
 
         GLXFBConfig GlxContext::chooseBestConfig(Display::Instance display, const ContextSettings& settings, Uint8 bitsPerPixel)
@@ -41,8 +47,7 @@ namespace Bull
 
             do
             {
-                int attributes[] =
-                {
+                int attributes[] = {
                     GLX_X_RENDERABLE  , True,
                     GLX_DRAWABLE_TYPE , GLX_WINDOW_BIT,
                     GLX_RENDER_TYPE   , GLX_RGBA_BIT,
@@ -132,7 +137,7 @@ namespace Bull
         }
 
         GlxContext::GlxContext(const GlxContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
-            GlxContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
+                GlxContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
         {
             /// Nothing
         }
@@ -164,7 +169,10 @@ namespace Bull
             {
                 if(glXGetCurrentContext() == m_render)
                 {
-                    glXMakeCurrent(m_display->getHandler(), XNone, nullptr);
+                    if(glXMakeCurrent(m_display->getHandler(), XNone, nullptr) == False)
+                    {
+                        Throw(InternalError, "GlxContext::~GlxContext", "Failed to disable current context");
+                    }
                 }
 
                 glXDestroyContext(m_display->getHandler(), m_render);
@@ -202,15 +210,15 @@ namespace Bull
         {
             ErrorHandler handler;
 
-            if(GlxSwapControlEXT.isLoaded())
+            if(glxSwapControlEXT.isLoaded())
             {
                 ext::glXSwapInterval(m_display->getHandler(), glXGetCurrentDrawable(), active ? 1 : 0);
             }
-            else if(GlxSwapControlMESA.isLoaded())
+            else if(glxSwapControlMESA.isLoaded())
             {
                 mesa::glXSwapInterval(active ? 1 : 0);
             }
-            else if(GlxSwapControlSGI.isLoaded())
+            else if(glxSwapControlSGI.isLoaded())
             {
                 sgi::glXSwapInterval(active ? 1 : 0);
             }
@@ -225,23 +233,25 @@ namespace Bull
             return m_display->getDefaultScreen();
         }
 
-        bool GlxContext::makeCurrent()
+        void GlxContext::makeCurrent()
         {
             ErrorHandler handler;
 
-            if(m_render)
+            if(m_window)
             {
-                if(m_window)
+                if(glXMakeCurrent(m_display->getHandler(), m_window, m_render) == False)
                 {
-                    return glXMakeCurrent(m_display->getHandler(), m_window, m_render) == True;
+                    Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current");
                 }
-                else if(m_pbuffer)
+            }
+            else if(m_pbuffer)
+            {
+                if(glXMakeContextCurrent(m_display->getHandler(), m_pbuffer, m_pbuffer, m_render) == False)
                 {
-                    return glXMakeContextCurrent(m_display->getHandler(), m_pbuffer, m_pbuffer, m_render) == True;
+                    Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current");
                 }
             }
 
-            return false;
         }
 
         void GlxContext::createSurface(const WindowImpl& window)
@@ -253,15 +263,14 @@ namespace Bull
         {
             ErrorHandler handler;
 
-            if(GlxPbuffer.isLoaded() && shared)
+            if(glxPbuffer.isLoaded() && shared)
             {
                 int fbCounts         = 0;
                 GLXFBConfig* configs = glXChooseFBConfig(m_display->getHandler(), m_display->getDefaultScreen(), nullptr, &fbCounts);
 
                 if(fbCounts && configs)
                 {
-                    int attributes[] =
-                    {
+                    int attributes[] = {
                         GLX_PBUFFER_WIDTH,  static_cast<int>(width),
                         GLX_PBUFFER_HEIGHT, static_cast<int>(height),
                         0
@@ -304,6 +313,11 @@ namespace Bull
 
                 XFree(vi);
             }
+
+            if(!m_ownWindow && !m_window && !m_pbuffer)
+            {
+                Throw(InternalError, "GlxContext::createSurface", "Failed to create rendering surface");
+            }
         }
 
         void GlxContext::createContext(const GlxContext* shared)
@@ -314,7 +328,7 @@ namespace Bull
 
             glXQueryVersion(m_display->getHandler(), &glxMajor, &glxMinor);
 
-            if(GlxCreateContextARB.isLoaded() && (glxMajor > 1 || glxMinor >= 3))
+            if(glxCreateContextARB.isLoaded() && (glxMajor > 1 || glxMinor >= 3))
             {
                 do
                 {
@@ -408,6 +422,10 @@ namespace Bull
                     {
                         m_log->info("Create legacy GlxContext");
                     }
+                }
+                else
+                {
+                    Throw(InternalError, "GlxContext::createContext", "Failed to create GlxContext");
                 }
             }
 

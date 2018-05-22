@@ -41,8 +41,7 @@ namespace Bull
         void (*glXSelectEvent)(Display* dpy, GLXDrawable drawable, unsigned long mask);
         void (*glXGetSelectedEvent)(Display* dpy, GLXDrawable drawable, unsigned long *mask);
 
-        Extension GlxPbuffer("GLX_SGIX_pbuffer", []
-        {
+        Extension glxPbuffer("GLX_SGIX_pbuffer", [] {
             glXCreateGLXPbuffer  = reinterpret_cast<GLXPbuffer (*)(Display*, GLXFBConfig, unsigned int, unsigned int, int*)>(GlContext::getFunction("glXCreateGLXPbufferSGIX"));
             glXDestroyGLXPbuffer = reinterpret_cast<void (*)(Display*, GLXPbuffer)>(GlContext::getFunction("glXDestroyGLXPbufferSGIX"));
             glXQueryGLXPbuffer   = reinterpret_cast<void (*)(Display*, GLXPbuffer, int, unsigned int*)>(GlContext::getFunction("glXQueryGLXPbufferSGIX"));
