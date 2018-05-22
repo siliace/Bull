@@ -137,7 +137,7 @@ namespace Bull
         }
 
         GlxContext::GlxContext(const GlxContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
-                GlxContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
+            GlxContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
         {
             /// Nothing
         }
@@ -251,7 +251,6 @@ namespace Bull
                     Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current");
                 }
             }
-
         }
 
         void GlxContext::createSurface(const WindowImpl& window)
