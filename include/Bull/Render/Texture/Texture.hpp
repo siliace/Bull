@@ -37,29 +37,23 @@ namespace Bull
          *
          * \param image The Image to load
          *
-         * \return True if the Texture was loaded successfully
-         *
          */
-        bool create(const Image& image);
+        void create(const Image& image);
 
         /*! \brief Create an empty Texture
          *
          * \param size The size of the Texture to create
          *
-         * \return True if the Texture was created successfully
-         *
          */
-        bool create(const Size& size) override;
+        void create(const Size& size) override;
 
         /*! \brief Create a Texture
          *
          * \param pixels Pixels of the Texture
          * \param size   The size of the Texture
          *
-         * \return True if the Texture was created successfully
-         *
          */
-        bool create(const ByteArray& pixels, const Size& size) override;
+        void create(const ByteArray& pixels, const Size& size) override;
 
         /*! \brief Tell whether an Asset is loaded
          *

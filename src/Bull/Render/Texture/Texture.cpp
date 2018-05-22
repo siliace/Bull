@@ -1,3 +1,6 @@
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/InvalidParameter.hpp>
+
 #include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
 
@@ -18,101 +21,85 @@ namespace Bull
         m_isSmooth(false),
         m_isRepeated(false)
     {
-        /// Nothing
+        gl::genTextures(1, &m_id);
+
+        if(!m_id)
+        {
+            Throw(InternalError, "Texture::Texture", "Failed to create the texture");
+        }
     }
 
     Texture::~Texture()
     {
-        if(m_id != 0)
-        {
-            gl::deleteTextures(1, &m_id);
-        }
+        gl::deleteTextures(1, &m_id);
     }
 
-    bool Texture::create(const Image& image)
+    void Texture::create(const Image& image)
     {
-        return create(image.getPixels(), image.getSize());
+        create(image.getPixels(), image.getSize());
     }
 
-    bool Texture::create(const Size& size)
+    void Texture::create(const Size& size)
     {
-        if(size.width && size.height)
+        if(size.width < 0 || size.height < 0)
         {
-            ensureContext();
-
-            m_size = size;
-
-            if(!m_id)
-            {
-                gl::genTextures(1, &m_id);
-
-                if(!m_id)
-                {
-                    return false;
-                }
-            }
-
-            gl::bindTexture(GL_TEXTURE_2D, m_id);
-            gl::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.width , m_size.height , 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
-            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
-            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
-            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
-            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
-
-            return true;
+            Throw(InvalidParameter, "Texture::create", "Invalid texture size");
         }
 
-        return false;
+        ensureContext();
+
+        m_size = size;
+
+        gl::bindTexture(GL_TEXTURE_2D, m_id);
+        gl::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.width , m_size.height , 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
+        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
+        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
+        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
     }
 
-    bool Texture::create(const ByteArray& pixels, const Size& size)
+    void Texture::create(const ByteArray& pixels, const Size& size)
     {
-        if(create(size))
+        create(size);
+
+        gl::bindTexture(GL_TEXTURE_2D, m_id);
+
+        for(unsigned int i = 0; i < m_size.height ; i++)
         {
-            ensureContext();
-
-            gl::bindTexture(GL_TEXTURE_2D, m_id);
-
-            for(unsigned int i = 0; i < m_size.height ; i++)
-            {
-                gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, m_size.width , 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[m_size.width * (m_size.height - i - 1) * 4]);
-            }
-
-            gl::generateMipmap(GL_TEXTURE_2D);
-
-            return true;
+            gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, m_size.width , 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[m_size.width * (m_size.height - i - 1) * 4]);
         }
 
-        return false;
+        gl::generateMipmap(GL_TEXTURE_2D);
     }
 
     bool Texture::isLoaded() const
     {
-        return gl::isTexture(m_id);
+        int width, height;
+
+        bind();
+
+        gl::getTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_WIDTH, &width);
+        gl::getTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_HEIGHT, &height);
+
+        return width && height;
     }
 
     void Texture::bind() const
     {
-        if(m_id)
-        {
-            ensureContext();
+        ensureContext();
 
-            gl::bindTexture(GL_TEXTURE_2D, m_id);
-        }
+        gl::bindTexture(GL_TEXTURE_2D, m_id);
     }
 
     void Texture::enableRepeat(bool enable)
     {
         m_isRepeated = enable;
 
-        if(m_id)
-        {
-            ensureContext();
+        bind();
 
-            gl::bindTexture(GL_TEXTURE_2D, m_id);
-            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
-            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
-        }
+        gl::bindTexture(GL_TEXTURE_2D, m_id);
+        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
+        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
     }
 
     bool Texture::isEnableRepeat() const
@@ -124,14 +111,10 @@ namespace Bull
     {
         m_isSmooth = enable;
 
-        if(m_id)
-        {
-            ensureContext();
+        bind();
 
-            gl::bindTexture(GL_TEXTURE_2D, m_id);
-            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
-            gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
-        }
+        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
+        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
     }
 
     bool Texture::isEnableSmooth() const
@@ -141,23 +124,16 @@ namespace Bull
 
     Image Texture::getImage() const
     {
-        if(m_id)
-        {
-            Image image;
-            ByteArray pixels(m_size.width * m_size.height * 4);
+        Image image;
+        ByteArray pixels(m_size.width * m_size.height * 4);
 
-            ensureContext();
+        bind();
 
-            gl::bindTexture(GL_TEXTURE_2D, m_id);
-            gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);
+        gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);
 
-            if(image.create(pixels, m_size))
-            {
-                return image;
-            }
-        }
+        image.create(pixels, m_size);
 
-        return Image();
+        return image;
     }
 
     const Size& Texture::getSize() const

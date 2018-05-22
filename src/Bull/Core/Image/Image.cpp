@@ -1,38 +1,35 @@
+#include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Image/Image.hpp>
 
 namespace Bull
 {
-    bool Image::create(const Size& size)
+    void Image::create(const Size& size)
     {
-        if(size.width && size.height)
+        if(size.width < 0 || size.height < 0)
         {
-            m_size   = size;
-            m_pixels = ByteArray(m_size.width * m_size.height * 4);
-
-            return true;
+            Throw(InvalidParameter, "Image::create", "Invalid image size");
         }
 
-        return false;
+        m_size   = size;
+        m_pixels = ByteArray(m_size.width * m_size.height * 4);
     }
 
-    bool Image::create(const ByteArray& pixels, const Size& size)
+    void Image::create(const ByteArray& pixels, const Size& size)
     {
-        if(size.width && size.height)
+        if(size.width < 0 || size.height < 0)
         {
-            std::size_t pixelsCount = size.width * size.height * 4;
-
-            m_size   = size;
-            m_pixels = pixels;
-
-            if(m_pixels.getCapacity() != pixelsCount)
-            {
-                m_pixels.resize(pixelsCount);
-            }
-
-            return true;
+            Throw(InvalidParameter, "Image::create", "Invalid image size");
         }
 
-        return false;
+        std::size_t pixelsCount = size.width * size.height * 4;
+
+        m_size   = size;
+        m_pixels = pixels;
+
+        if(m_pixels.getCapacity() != pixelsCount)
+        {
+            m_pixels.resize(pixelsCount);
+        }
     }
 
     bool Image::isLoaded() const

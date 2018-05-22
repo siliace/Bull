@@ -107,9 +107,6 @@ namespace Bull
 
         pixels.fill(buffer, width * height * channels);
 
-        if(!image.create(pixels, Size(width, height)))
-        {
-            Throw(InternalError, "ImageLoader::createImage", "Failed to create AbstractImage");
-        }
+        image.create(pixels, Size(width, height));
     }
 }

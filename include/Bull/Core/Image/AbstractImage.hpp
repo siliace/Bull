@@ -13,20 +13,16 @@ namespace Bull
          *
          * \param size The size of the AbstractImage
          *
-         * \return True if the AbstractImage was created successfully
-         *
          */
-        virtual bool create(const Size& size) = 0;
+        virtual void create(const Size& size) = 0;
 
         /*! \brief Create the AbstractImage
          *
          * \param pixels Pixels of the Image
          * \param size   The size of the Image
          *
-         * \return True if the AbstractImage was created successfully
-         *
          */
-        virtual bool create(const ByteArray& pixels, const Size& size) = 0;
+        virtual void create(const ByteArray& pixels, const Size& size) = 0;
 
         /*! \brief Get the size of the AbstractImage
          *

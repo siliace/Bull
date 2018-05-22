@@ -19,20 +19,16 @@ namespace Bull
          *
          * \param size The size of the Image
          *
-         * \return True if the Image was created successfully
-         *
          */
-        bool create(const Size& size) override;
+        void create(const Size& size) override;
 
         /*! \brief Create the Image
          *
          * \param pixels Pixels of the Image
          * \param size   The size of the Image
          *
-         * \return True if the Image was created successfully
-         *
          */
-        bool create(const ByteArray& pixels, const Size& size) override;
+        void create(const ByteArray& pixels, const Size& size) override;
 
         /*! \brief Tell whether an Image is loaded
          *
