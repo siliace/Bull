@@ -424,7 +424,7 @@ namespace Bull
                 }
                 else
                 {
-                    Throw(InternalError, "GlxContext::createContext", "Failed to create GlxContext");
+                    Throw(InternalError, "GlxContext::createContext", "Failed to create legacy/shared GlxContext");
                 }
             }
 

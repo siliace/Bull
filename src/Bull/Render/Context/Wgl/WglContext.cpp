@@ -52,14 +52,13 @@ namespace Bull
 
             if(wglPixelFormat.isLoaded())
             {
-                static const int attribs[] =
-                        {
-                                WGL_DRAW_TO_WINDOW_ARB, 1,
-                                WGL_SUPPORT_OPENGL_ARB, 1,
-                                WGL_DOUBLE_BUFFER_ARB, 1,
-                                WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
-                                0
-                        };
+                static const int attribs[] = {
+                    WGL_DRAW_TO_WINDOW_ARB, 1,
+                    WGL_SUPPORT_OPENGL_ARB, 1,
+                    WGL_DOUBLE_BUFFER_ARB, 1,
+                    WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
+                    0
+                };
 
                 int formats[512];
                 UINT count = 0;
@@ -73,16 +72,15 @@ namespace Bull
                     {
                         int format[7] = {0};
                         int sample[2] = {0};
-                        static const int formatAttribs[] =
-                                {
-                                        WGL_RED_BITS_ARB,
-                                        WGL_GREEN_BITS_ARB,
-                                        WGL_BLUE_BITS_ARB,
-                                        WGL_ALPHA_BITS_ARB,
-                                        WGL_DEPTH_BITS_ARB,
-                                        WGL_STENCIL_BITS_ARB,
-                                        WGL_ACCELERATION_ARB
-                                };
+                        static const int formatAttribs[] = {
+                            WGL_RED_BITS_ARB,
+                            WGL_GREEN_BITS_ARB,
+                            WGL_BLUE_BITS_ARB,
+                            WGL_ALPHA_BITS_ARB,
+                            WGL_DEPTH_BITS_ARB,
+                            WGL_STENCIL_BITS_ARB,
+                            WGL_ACCELERATION_ARB
+                        };
 
                         if(!wglGetPixelFormatAttribiv(device, formats[i], PFD_MAIN_PLANE, 7, formatAttribs, format))
                         {
@@ -91,11 +89,10 @@ namespace Bull
 
                         if(isSupported("WGL_ARB_multisample"))
                         {
-                            static const int sampleAttribs[] =
-                                    {
-                                            WGL_SAMPLE_BUFFERS_ARB,
-                                            WGL_SAMPLES_ARB
-                                    };
+                            static const int sampleAttribs[] = {
+                                WGL_SAMPLE_BUFFERS_ARB,
+                                WGL_SAMPLES_ARB
+                            };
 
                             if(!wglGetPixelFormatAttribiv(device, formats[i], PFD_MAIN_PLANE, 2, sampleAttribs, sample))
                             {
@@ -106,10 +103,9 @@ namespace Bull
                         if(usePbuffer)
                         {
                             int pbuffer;
-                            static const int pbufferAttribs[] =
-                                    {
-                                            WGL_DRAW_TO_PBUFFER_ARB
-                                    };
+                            static const int pbufferAttribs[] = {
+                                WGL_DRAW_TO_PBUFFER_ARB
+                            };
 
                             if(!wglGetPixelFormatAttribiv(device, formats[i], PFD_MAIN_PLANE, 1, pbufferAttribs, &pbuffer))
                             {
@@ -345,12 +341,12 @@ namespace Bull
             {
                 do
                 {
-                    std::vector<int> attribs;
+                    ArrayList<int> attribs;
 
-                    attribs.push_back(WGL_CONTEXT_MAJOR_VERSION_ARB);
-                    attribs.push_back(m_settings.major);
-                    attribs.push_back(WGL_CONTEXT_MINOR_VERSION_ARB);
-                    attribs.push_back(m_settings.minor);
+                    attribs.add(WGL_CONTEXT_MAJOR_VERSION_ARB);
+                    attribs.add(m_settings.major);
+                    attribs.add(WGL_CONTEXT_MINOR_VERSION_ARB);
+                    attribs.add(m_settings.minor);
 
                     if(isSupported("WGL_ARB_create_context_profile"))
                     {
@@ -367,18 +363,18 @@ namespace Bull
                             flags |= WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
                         }
 
-                        attribs.push_back(WGL_CONTEXT_PROFILE_MASK_ARB);
-                        attribs.push_back(profile);
-                        attribs.push_back(WGL_CONTEXT_FLAGS_ARB);
-                        attribs.push_back(flags);
+                        attribs.add(WGL_CONTEXT_PROFILE_MASK_ARB);
+                        attribs.add(profile);
+                        attribs.add(WGL_CONTEXT_FLAGS_ARB);
+                        attribs.add(flags);
                     }
 
                     if(m_settings.type == ContextSettingsType_NoError)
                     {
                         if(isSupported("WGL_ARB_create_context_no_error"))
                         {
-                            attribs.push_back(WGL_CONTEXT_OPENGL_NO_ERROR_ARB);
-                            attribs.push_back(1);
+                            attribs.add(WGL_CONTEXT_OPENGL_NO_ERROR_ARB);
+                            attribs.add(1);
                         }
                         else
                         {
@@ -387,8 +383,7 @@ namespace Bull
                         }
                     }
 
-                    attribs.push_back(0);
-                    attribs.push_back(0);
+                    attribs.add(0);
 
                     m_render = wglCreateContextAttribs(m_device, sharedHandler, &attribs[0]);
 
@@ -436,7 +431,7 @@ namespace Bull
                 }
                 else
                 {
-                    Throw(InternalError, "WglContext::createContext", "Failed to create legacy/shared context");
+                    Throw(InternalError, "WglContext::createContext", "Failed to create legacy/shared WglContext");
                 }
             }
 
@@ -456,11 +451,10 @@ namespace Bull
             {
                 int format[2] = {0};
 
-                static const int formatAttribs[] =
-                        {
-                                WGL_DEPTH_BITS_ARB,
-                                WGL_STENCIL_BITS_ARB
-                        };
+                static const int formatAttribs[] = {
+                    WGL_DEPTH_BITS_ARB,
+                    WGL_STENCIL_BITS_ARB
+                };
 
                 if(wglGetPixelFormatAttribiv(m_device, pixelFormat, PFD_MAIN_PLANE, 2, formatAttribs, format))
                 {
@@ -476,11 +470,10 @@ namespace Bull
                 if(isSupported("WGL_ARB_multisample"))
                 {
                     int sample[2] = {0};
-                    static const int sampleAttribs[] =
-                            {
-                                    WGL_SAMPLE_BUFFERS_ARB,
-                                    WGL_SAMPLES_ARB
-                            };
+                    static const int sampleAttribs[] = {
+                        WGL_SAMPLE_BUFFERS_ARB,
+                        WGL_SAMPLES_ARB
+                    };
 
                     if(wglGetPixelFormatAttribiv(m_device, pixelFormat, PFD_MAIN_PLANE, 2, sampleAttribs, sample))
                     {

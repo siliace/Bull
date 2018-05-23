@@ -415,10 +415,9 @@ namespace Bull
         {
             ArrayList<wchar_t> buffer;
 
-            if(buffer.create(GetWindowTextLengthW(m_handler) + 1))
-            {
-                GetWindowTextW(m_handler, &buffer[0], buffer.getCapacity());
-            }
+            buffer.create(GetWindowTextLengthW(m_handler) + 1);
+
+            GetWindowTextW(m_handler, &buffer[0], buffer.getCapacity());
 
             return String(reinterpret_cast<const char*>(buffer.getBuffer()), buffer.getCapacity());
         }
