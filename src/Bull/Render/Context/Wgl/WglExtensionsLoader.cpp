@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
 
 #include <Bull/Render/Context/GlContext.hpp>
@@ -12,15 +13,14 @@ namespace Bull
 
         std::vector<String> WglExtensionsLoader::getExtensions(SurfaceHandler handler)
         {
-            std::vector<String> extensions;
             wglGetExtensionsStringARB = reinterpret_cast<const char* (WINAPI*)(HDC)>(GlContext::getFunction("wglGetExtensionsStringARB"));
 
-            if(wglGetExtensionsStringARB)
+            if(!wglGetExtensionsStringARB)
             {
-                extensions = String(wglGetExtensionsStringARB(handler)).explode(' ');
+                Throw(InternalError, "WglExtensionsLoader::getExtensions", "Failed to load wglGetExtensionsStringARB function");
             }
 
-            return extensions;
+            return String(wglGetExtensionsStringARB(handler)).explode(' ');
         }
     }
 }
