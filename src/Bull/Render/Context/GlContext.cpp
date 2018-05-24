@@ -1,4 +1,5 @@
 #include <Bull/Core/Exception/DeclareException.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Utility/Character.hpp>
@@ -46,10 +47,10 @@ namespace Bull
 
                     realInternalSettings = internal->getSettings();
 
-                    if(realInternalSettings.major < 3 || realInternalSettings.major == 3 && realInternalSettings.minor <= 2)
-                    {
-                        Throw(WrongOpenGLVersion, "getInternalContext", "Bull needs OpenGL 3.3 or higher to work");
-                    }
+                    Uint8 major = realInternalSettings.major;
+                    Uint8 minor = realInternalSettings.minor;
+
+                    Expect(major > 3 || major == 3 && minor >= 3, Throw(WrongOpenGLVersion, "getInternalContext", "Bull needs OpenGL 3.3 or higher to work"));
                 }
 
                 return internal;

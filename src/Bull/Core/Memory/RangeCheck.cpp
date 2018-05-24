@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
@@ -20,12 +21,7 @@ namespace Bull
 
     RangeCheck& RangeCheck::apply(std::size_t index)
     {
-        if(index >= m_max)
-        {
-            OutStringStream oss;
-
-            Throw(InvalidParameter, "RangeCheck::apply", "Index out of range, expected in range [0, " + StringUtils::number(index) + "[");
-        }
+        Expect(index < m_max, Throw(InvalidParameter, "RangeCheck::apply", "Index out of range, expected in range [0, " + StringUtils::number(index) + "["));
 
         return (*this);
     }

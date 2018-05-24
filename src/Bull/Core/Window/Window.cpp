@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/LogicError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Window/Window.hpp>
@@ -311,15 +312,8 @@ namespace Bull
 
     bool Window::enableFullscreen(bool fullscreen)
     {
-        if(!m_impl)
-        {
-            Throw(LogicError, "Window::enableFullscreen", "The Window is not open");
-        }
-
-        if(s_fullscreen && this != s_fullscreen && fullscreen)
-        {
-            Throw(LogicError, "Window::enableFullscreen", "Another Window is already in fullscreen");
-        }
+        Expect(m_impl, Throw(LogicError, "Window::enableFullscreen", "The Window is not open"));
+        Expect(!s_fullscreen && fullscreen || s_fullscreen == this && !fullscreen, Throw(LogicError, "Window::enableFullscreen", "Another Window is already in fullscreen"));
 
         m_impl->switchFullscreen(fullscreen);
 

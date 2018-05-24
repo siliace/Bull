@@ -1,5 +1,6 @@
 #include <cstring>
 
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Exception/LogicError.hpp>
@@ -40,35 +41,17 @@ namespace Bull
         gl::genBuffers(1, &m_id);
         gl::bindBuffer(bufferType[m_type], m_id);
 
-        if(!gl::isBuffer(m_id))
-        {
-            Throw(OpenGLHandlerError, "HardwareBuffer::create", "Failed to create buffer");
-        }
+        Expect(gl::isBuffer(m_id), Throw(OpenGLHandlerError, "HardwareBuffer::create", "Failed to create buffer"));
 
         gl::bufferData(bufferType[m_type], size, nullptr, bufferUsage[usage]);
     }
 
     void HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
     {
-        if(!isValid())
-        {
-            Throw(LogicError, "HardwareBuffer::fill", "The buffer is not created");
-        }
-
-        if(!data)
-        {
-            Throw(LogicError, "HardwareBuffer::fill", "Invalid buffer pointer");
-        }
-
-        if(!size)
-        {
-            Throw(LogicError, "ArrayList::fill", "Invalid buffer size");
-        }
-
-        if(size + offset > getCapacity())
-        {
-            Throw(InvalidParameter, "HardwareBuffer::fill", "Invalid buffer size");
-        }
+        Expect(isValid(), Throw(LogicError, "HardwareBuffer::fill", "The buffer is not created"));
+        Expect(data, Throw(LogicError, "HardwareBuffer::fill", "Invalid buffer pointer"));
+        Expect(size, Throw(InvalidParameter, "HardwareBuffer::fill", "Invalid buffer size"));
+        Expect(size + offset <= getCapacity(), Throw(InvalidParameter, "HardwareBuffer::fill", "Invalid buffer size"));
 
         bind();
 
@@ -82,10 +65,7 @@ namespace Bull
         {
             unsigned char* ptr = reinterpret_cast<unsigned char*>(map());
 
-            if(!ptr)
-            {
-                Throw(InternalError, "HardwareBuffer::fill", "Failed to map HardwareBuffer");
-            }
+            Expect(ptr, Throw(InternalError, "HardwareBuffer::fill", "Failed to map HardwareBuffer"));
 
             std::memcpy(ptr + offset, data, size);
 

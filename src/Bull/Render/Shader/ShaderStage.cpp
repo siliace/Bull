@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
@@ -36,10 +37,7 @@ namespace Bull
         m_type = type;
         m_id   = gl::createShader(shaderType[type]);
 
-        if(!isValid())
-        {
-            Throw(InternalError, "ShaderStage::create", "Failed to create ShaderStage");
-        }
+        Expect(isValid(), Throw(InternalError, "ShaderStage::create", "Failed to create ShaderStage"));
     }
 
     void ShaderStage::compile(const String& code)
@@ -51,10 +49,7 @@ namespace Bull
         gl::shaderSource(m_id, 1, &source, nullptr);
         gl::compileShader(m_id);
 
-        if(!isCompiled())
-        {
-            Throw(InternalError, "ShaderStage::compile", "Failed to compile ShaderStage");
-        }
+        Expect(isCompiled(), Throw(InternalError, "ShaderStage::compile", "Failed to compile ShaderStage"));
 
         m_isCompiled = true;
     }

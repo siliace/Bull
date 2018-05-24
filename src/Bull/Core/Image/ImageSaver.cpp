@@ -2,6 +2,7 @@
 
 #include <stb_image/stb_image_write.h>
 
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Image/ImageSaver.hpp>
@@ -34,10 +35,7 @@ namespace Bull
 
     void ImageSaver::saveToPath(const Image& image, const Path& path, const ImageSavingParameters& parameters)
     {
-        if(!isSupportedFormat(parameters.format))
-        {
-            Throw(InvalidParameter, "ImageSaver::saveToPath", "Unsupported image format");
-        }
+        Expect(isSupportedFormat(parameters.format), Throw(InvalidParameter, "ImageSaver::saveToPath", "Unsupported image format"));
 
         createTask([image, path, parameters]() {
             switch(parameters.format)
@@ -52,10 +50,7 @@ namespace Bull
 
     void ImageSaver::saveToStream(const Image& image, OutStream& stream, const ImageSavingParameters& parameters)
     {
-        if(!isSupportedFormat(parameters.format))
-        {
-            Throw(InvalidParameter, "ImageSaver::saveToPath", "Unsupported image format");
-        }
+        Expect(isSupportedFormat(parameters.format), Throw(InvalidParameter, "ImageSaver::saveToStream", "Unsupported image format"));
 
         createTask([&image, &stream, parameters]() {
             switch(parameters.format)
@@ -72,10 +67,7 @@ namespace Bull
     {
         if(data && length)
         {
-            if(!isSupportedFormat(parameters.format))
-            {
-                Throw(InvalidParameter, "ImageSaver::saveToPath", "Unsupported image format");
-            }
+            Expect(isSupportedFormat(parameters.format), Throw(InvalidParameter, "ImageSaver::saveToMemory", "Unsupported image format"));
 
             createTask([&image, data, length, parameters]() {
                 Buffer buffer = {data, length};

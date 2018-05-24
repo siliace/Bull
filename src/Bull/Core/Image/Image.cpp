@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Image/Image.hpp>
 
@@ -5,10 +6,7 @@ namespace Bull
 {
     void Image::create(const Size& size)
     {
-        if(size.width < 0 || size.height < 0)
-        {
-            Throw(InvalidParameter, "Image::create", "Invalid image size");
-        }
+        Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Image::create", "Invalid image size"));
 
         m_size   = size;
         m_pixels = ByteArray(m_size.width * m_size.height * 4);
@@ -16,10 +14,7 @@ namespace Bull
 
     void Image::create(const ByteArray& pixels, const Size& size)
     {
-        if(size.width < 0 || size.height < 0)
-        {
-            Throw(InvalidParameter, "Image::create", "Invalid image size");
-        }
+        Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Image::create", "Invalid image size"));
 
         std::size_t pixelsCount = size.width * size.height * 4;
 

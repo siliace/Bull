@@ -7,6 +7,7 @@ target_sources(bull-core
             ${BULL_INC_CORE_EXCEPTION}/FileNotFound.hpp
             ${BULL_INC_CORE_EXCEPTION}/Exception.hpp
             ${BULL_SRC_CORE_EXCEPTION}/Exception.cpp
+            ${BULL_INC_CORE_EXCEPTION}/Expect.hpp
             ${BULL_INC_CORE_EXCEPTION}/InternalError.hpp
             ${BULL_INC_CORE_EXCEPTION}/InvalidParameter.hpp
             ${BULL_INC_CORE_EXCEPTION}/LackOfImplementation.hpp

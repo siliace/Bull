@@ -1,5 +1,6 @@
 #include <stb_image/stb_image_resize.h>
 
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
@@ -24,10 +25,7 @@ namespace Bull
 
     ImageTransformer::ImageTransformer(const Image& image)
     {
-        if(!image.isLoaded())
-        {
-            Throw(InvalidParameter, "ImageTransformer::ImageTransformer", "Can not transform an Image not loaded");
-        }
+        Expect(image.isLoaded(), Throw(InvalidParameter, "ImageTransformer::ImageTransformer", "Can not transform an Image not loaded"));
 
         m_image = image;
     }
@@ -42,10 +40,7 @@ namespace Bull
                                                       edgeModeToStbirEdge(mode)
         );
 
-        if(result == 0)
-        {
-            Throw(InternalError, "ImageTransformer::resize", "Failed to resize image");
-        }
+        Expect(result, Throw(InternalError, "ImageTransformer::resize", "Failed to resize image"));
 
         m_image.create(pixelsOutput, size);
 

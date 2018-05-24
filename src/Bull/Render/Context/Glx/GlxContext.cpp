@@ -1,5 +1,6 @@
 #include <limits>
 
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
@@ -43,7 +44,7 @@ namespace Bull
             ErrorHandler handler;
             GLXFBConfig* configs = nullptr;
             unsigned int antialiasing = settings.antialiasing;
-            int bestConfig = 0, bestScore = std::numeric_limits<int>::max();
+            int bestConfig = -1, bestScore = std::numeric_limits<int>::max();
 
             do
             {
@@ -103,6 +104,8 @@ namespace Bull
 
                 XFree(vi);
             }
+
+            Expect(bestConfig != -1, Throw(InternalError, "GlxContext::chooseBestConfig", "Failed to get best framebuffer configuration"))
 
             config = configs[bestConfig];
 
@@ -169,10 +172,7 @@ namespace Bull
             {
                 if(glXGetCurrentContext() == m_render)
                 {
-                    if(glXMakeCurrent(m_display->getHandler(), XNone, nullptr) == False)
-                    {
-                        Throw(InternalError, "GlxContext::~GlxContext", "Failed to disable current context");
-                    }
+                    Expect(glXMakeCurrent(m_display->getHandler(), XNone, nullptr), Throw(InternalError, "GlxContext::~GlxContext", "Failed to disable current context"));
                 }
 
                 glXDestroyContext(m_display->getHandler(), m_render);
@@ -239,17 +239,11 @@ namespace Bull
 
             if(m_window)
             {
-                if(glXMakeCurrent(m_display->getHandler(), m_window, m_render) == False)
-                {
-                    Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current");
-                }
+                Expect(glXMakeCurrent(m_display->getHandler(), m_window, m_render), Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current"));
             }
             else if(m_pbuffer)
             {
-                if(glXMakeContextCurrent(m_display->getHandler(), m_pbuffer, m_pbuffer, m_render) == False)
-                {
-                    Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current");
-                }
+                Expect(glXMakeContextCurrent(m_display->getHandler(), m_pbuffer, m_pbuffer, m_render), Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current"));
             }
         }
 
@@ -313,10 +307,7 @@ namespace Bull
                 XFree(vi);
             }
 
-            if(!m_ownWindow && !m_window && !m_pbuffer)
-            {
-                Throw(InternalError, "GlxContext::createSurface", "Failed to create rendering surface");
-            }
+            Expect(m_ownWindow && m_window || m_pbuffer, Throw(InternalError, "GlxContext::createSurface", "Failed to create rendering surface"));
         }
 
         void GlxContext::createContext(const GlxContext* shared)
@@ -411,20 +402,15 @@ namespace Bull
             {
                 m_render = glXCreateNewContext(m_display->getHandler(), m_config, GLX_RGBA_TYPE, sharedHandler, True);
 
-                if(m_render)
+                Expect(m_render, Throw(InternalError, "GlxContext::createContext", "Failed to create legacy/shared GlxContext"));
+
+                if(shared)
                 {
-                    if(shared)
-                    {
-                        m_log->info("Create shared GlxContext");
-                    }
-                    else
-                    {
-                        m_log->info("Create legacy GlxContext");
-                    }
+                    m_log->info("Create shared GlxContext");
                 }
                 else
                 {
-                    Throw(InternalError, "GlxContext::createContext", "Failed to create legacy/shared GlxContext");
+                    m_log->info("Create legacy GlxContext");
                 }
             }
 

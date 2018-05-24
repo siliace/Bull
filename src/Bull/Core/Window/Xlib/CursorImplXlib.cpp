@@ -5,6 +5,7 @@
 #include <Bull/Core/Exception/LackOfImplementation.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Window/Xlib/CursorImplXlib.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
 
 namespace Bull
 {
@@ -51,10 +52,7 @@ namespace Bull
 
             m_handler = XCreateFontCursor(m_display->getHandler(), shape);
 
-            if(!m_handler)
-            {
-                Throw(InternalError, "CursorImplXlib::create", "Failed to create cursor");
-            }
+            Expect(m_handler, Throw(InternalError, "CursorImplXlib::create", "Failed to create cursor"));
         }
 
         void CursorImplXlib::create(const Image& cursor, const Size& hotSpot)

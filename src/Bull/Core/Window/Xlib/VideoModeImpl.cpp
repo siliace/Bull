@@ -2,6 +2,7 @@
 
 #include <X11/extensions/Xrandr.h>
 
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Xlib/Display.hpp>
@@ -13,90 +14,81 @@ namespace Bull
     {
         VideoMode VideoModeImpl::getCurrent()
         {
-            VideoMode desktopMode;
-            Display::Instance display = Display::getInstance();
+            Display::Instance display;
+            Rotation          rotation;
+            int               sizesCount;
+            VideoMode         desktopMode;
 
-            if(display->isSupportedExtension("RANDR"))
+            Expect(display->isSupportedExtension("RANDR"), Throw(InternalError, "VideoModeImpl::getCurrent", "Missing XRandR extension"));
+
+            XRRScreenConfiguration* config = XRRGetScreenInfo(display->getHandler(), display->getRootWindow());
+
+            Expect(config, Throw(InternalError, "VideoModeImpl::getAllAvailable", "Failed to get screen configurations"));
+
+            int currentMode = XRRConfigCurrentConfiguration(config, &rotation);
+
+            XRRScreenSize* sizes = XRRConfigSizes(config, &sizesCount);
+
+            if(sizes && sizesCount > 0)
             {
-                XRRScreenConfiguration* config = XRRGetScreenInfo(display->getHandler(), display->getRootWindow());
+                desktopMode.bitsPerPixel = display->getDefaultDepth();
 
-                if(config)
+                if(rotation == RR_Rotate_90 || rotation == RR_Rotate_270)
                 {
-                    Rotation rotation;
-                    int      sizesCount;
-                    int      currentMode = XRRConfigCurrentConfiguration(config, &rotation);
-
-                    XRRScreenSize* sizes = XRRConfigSizes(config, &sizesCount);
-
-                    if(sizes && sizesCount > 0)
-                    {
-                        desktopMode.bitsPerPixel = display->getDefaultDepth();
-
-                        if(rotation == RR_Rotate_90 || rotation == RR_Rotate_270)
-                        {
-                            desktopMode.height = sizes[currentMode].width;
-                            desktopMode.width  = sizes[currentMode].height;
-                        }
-                        else
-                        {
-                            desktopMode.width  = sizes[currentMode].width;
-                            desktopMode.height = sizes[currentMode].height;
-                        }
-                    }
-
-                    XFree(config);
-
-                    return desktopMode;
+                    desktopMode.height = sizes[currentMode].width;
+                    desktopMode.width  = sizes[currentMode].height;
+                }
+                else
+                {
+                    desktopMode.width  = sizes[currentMode].width;
+                    desktopMode.height = sizes[currentMode].height;
                 }
             }
 
-            Throw(InternalError, "VideoModeImpl::getCurrent", "Missing XRandR extension");
+            XFree(config);
+
+            return desktopMode;
         }
 
         std::vector<VideoMode> VideoModeImpl::getAllAvailable()
         {
-            Display display;
             std::vector<VideoMode> modes;
+            Display::Instance      display;
+            int                    sizesCount;
+            int                    depthsCount;
 
-            if(display.isSupportedExtension("RANDR"))
+            Expect(display->isSupportedExtension("RANDR"), Throw(InternalError, "VideoModeImpl::getAllAvailable", "Missing XRandR extension"));
+
+            XRRScreenConfiguration* config = XRRGetScreenInfo(display->getHandler(), display->getRootWindow());
+
+            Expect(config, Throw(InternalError, "VideoModeImpl::getAllAvailable", "Failed to get screen configurations"));
+
+            XRRScreenSize* sizes  = XRRConfigSizes(config, &sizesCount);
+            int*           depths = XListDepths(display->getHandler(), display->getDefaultScreen(), &depthsCount);
+
+            if(sizes && sizesCount > 0 && depths && depthsCount > 0)
             {
-                XRRScreenConfiguration* config = XRRGetScreenInfo(display.getHandler(), display.getRootWindow());
-
-                if(config)
+                for(int j = 0; j < depthsCount; j++)
                 {
-                    int sizesCount;
-                    int depthsCount;
-
-                    XRRScreenSize* sizes = XRRConfigSizes(config, &sizesCount);
-                    int* depths          = XListDepths(display.getHandler(), display.getDefaultScreen(), &depthsCount);
-
-                    if(sizes && sizesCount > 0 && depths && depthsCount > 0)
+                    for(int i = 0; i < sizesCount; i++)
                     {
-                        for(int j = 0; j < depthsCount; j++)
+                        VideoMode mode;
+
+                        mode.bitsPerPixel = depths[j];
+                        mode.width        = sizes[i].width;
+                        mode.height       = sizes[i].height;
+
+                        if(std::find(modes.begin(), modes.end(), mode) == modes.end())
                         {
-                            for(int i = 0; i < sizesCount; i++)
-                            {
-                                VideoMode mode;
-
-                                mode.bitsPerPixel = depths[j];
-                                mode.width        = sizes[i].width;
-                                mode.height       = sizes[i].height;
-
-                                if(std::find(modes.begin(), modes.end(), mode) == modes.end())
-                                {
-                                    modes.push_back(mode);
-                                }
-                            }
+                            modes.push_back(mode);
                         }
                     }
-
-                    XFree(config);
-
-                    return modes;
                 }
             }
 
-            Throw(InternalError, "VideoModeImpl::getAllAvailable", "Missing XRandR extension");
+            XFree(config);
+
+            return modes;
         }
     }
 }
