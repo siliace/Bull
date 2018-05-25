@@ -15,11 +15,6 @@ namespace Bull
         {
         public:
 
-            /*! \brief Default constructor
-             *
-             */
-            Display();
-
             /*! \brief Destructor
              *
              */
@@ -94,6 +89,15 @@ namespace Bull
              *
              */
             XDisplay* getHandler();
+
+        private:
+
+            friend class Singleton<Display>;
+
+            /*! \brief Default constructor
+             *
+             */
+            Display();
 
         private:
 
