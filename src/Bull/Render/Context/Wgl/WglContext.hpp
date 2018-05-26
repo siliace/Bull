@@ -1,5 +1,5 @@
-#ifndef Bull_WglContext_hpp
-#define Bull_WglContext_hpp
+#ifndef BULL_RENDER_CONTEXT_WIN32_WGLCONTEXT_HPP
+#define BULL_RENDER_CONTEXT_WIN32_WGLCONTEXT_HPP
 
 #include <Bull/Core/Support/Win32/Windows.hpp>
 
@@ -164,4 +164,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_WglContext_hpp
+#endif // BULL_RENDER_CONTEXT_WIN32_WGLCONTEXT_HPP

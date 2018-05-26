@@ -1,5 +1,5 @@
-#ifndef Bull_WglExtensionsLoader_hpp
-#define Bull_WglExtensionsLoader_hpp
+#ifndef BULL_RENDER_CONTEXT_WIN32_WGLEXTENSIONSLOADER_HPP
+#define BULL_RENDER_CONTEXT_WIN32_WGLEXTENSIONSLOADER_HPP
 
 #include <vector>
 
@@ -25,4 +25,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_WglExtensionsLoader_hpp
+#endif // BULL_RENDER_CONTEXT_WIN32_WGLEXTENSIONSLOADER_HPP

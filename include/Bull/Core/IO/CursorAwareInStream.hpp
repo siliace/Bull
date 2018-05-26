@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_IO_CursorAwareINSTREAM_HPP
-#define BULL_CORE_IO_CursorAwareINSTREAM_HPP
+#ifndef BULL_CORE_IO_CURSORAWAREINSTREAM_HPP
+#define BULL_CORE_IO_CURSORAWAREINSTREAM_HPP
 
 #include <Bull/Core/IO/InStream.hpp>
 
@@ -39,4 +39,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_IO_CursorAwareINSTREAM_HPP
+#endif // BULL_CORE_IO_CURSORAWAREINSTREAM_HPP

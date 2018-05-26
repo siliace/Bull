@@ -1,5 +1,5 @@
-#ifndef Bull_SurfaceHandler_hpp
-#define Bull_SurfaceHandler_hpp
+#ifndef BULL_RENDER_CONTEXT_SURFACEHANDLER_HPP
+#define BULL_RENDER_CONTEXT_SURFACEHANDLER_HPP
 
 #include <Bull/Core/Configuration/OS.hpp>
 
@@ -19,4 +19,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_SurfaceHandler_hpp
+#endif // BULL_RENDER_CONTEXT_SURFACEHANDLER_HPP
