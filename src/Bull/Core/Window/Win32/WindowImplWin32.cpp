@@ -1,5 +1,6 @@
 #include <limits>
 
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
 #include <Bull/Core/Window/Win32/WindowImplWin32.hpp>
@@ -258,10 +259,7 @@ namespace Bull
                                         instance,
                                         this);
 
-            if(m_handler == INVALID_HANDLE_VALUE)
-            {
-                Throw(Win32Error, "WindowImplWin32::WindowImplWin32", "Failed to create window");
-            }
+            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "WindowImplWin32::WindowImplWin32", "Failed to create window"));
 
             UpdateWindow(m_handler);
 
@@ -491,15 +489,10 @@ namespace Bull
 
             m_icon = CreateIcon(instance, icon.getSize().width, icon.getSize().height, 1, 32, nullptr, pixels.getBuffer());
 
-            if(m_icon)
-            {
-                SendMessageW(m_handler, WM_SETICON, ICON_BIG,   (LPARAM)m_icon);
-                SendMessageW(m_handler, WM_SETICON, ICON_SMALL, (LPARAM)m_icon);
-            }
-            else
-            {
-                Throw(Win32Error, "WindowImplWin32::setIcon", "Failed to set window's icon");
-            }
+            Expect(m_icon, Throw(Win32Error, "WindowImplWin32::setIcon", "Failed to set window's icon"));
+
+            SendMessageW(m_handler, WM_SETICON, ICON_BIG,   (LPARAM)m_icon);
+            SendMessageW(m_handler, WM_SETICON, ICON_SMALL, (LPARAM)m_icon);
         }
 
         void WindowImplWin32::setMouseCursor(const CursorImpl& cursor)

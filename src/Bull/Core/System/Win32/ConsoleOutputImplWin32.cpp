@@ -1,5 +1,6 @@
-#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Support/Win32/Win32Error.hpp>
 #include <Bull/Core/System/Win32/ConsoleOutputImplWin32.hpp>
 
 namespace Bull
@@ -98,27 +99,15 @@ namespace Bull
             CONSOLE_SCREEN_BUFFER_INFO info;
             COORD                      screen = {0, 0};
 
-            if(!GetConsoleScreenBufferInfo(m_handler, &info))
-            {
-                Throw(InternalError, "ConsoleOutputImplWin32::clear", "Failed to get console info");
-            }
+            Expect(GetConsoleScreenBufferInfo(m_handler, &info), Throw(Win32Error, "ConsoleOutputImplWin32::clear", "Failed to get console info"));
 
             DWORD consoleSize = info.dwSize.X * info.dwSize.Y;
 
-            if(!FillConsoleOutputCharacter(m_handler, ' ', consoleSize, screen, nullptr))
-            {
-                Throw(InternalError, "ConsoleOutputImplWin32::clear", "Failed to fill console with blanks");
-            }
+            Expect(FillConsoleOutputCharacter(m_handler, ' ', consoleSize, screen, nullptr), Throw(Win32Error, "ConsoleOutputImplWin32::clear", "Failed to fill console with blanks"));
 
-            if(!GetConsoleScreenBufferInfo(m_handler, &info))
-            {
-                Throw(InternalError, "ConsoleOutputImplWin32::clear", "Failed to get console info");
-            }
+            Expect(GetConsoleScreenBufferInfo(m_handler, &info), Throw(Win32Error, "ConsoleOutputImplWin32::clear", "Failed to get console info"));
 
-            if(!FillConsoleOutputAttribute(m_handler, info.wAttributes, consoleSize, screen, nullptr))
-            {
-                Throw(InternalError, "ConsoleOutputImplWin32::clear", "Failed to set console attributes");
-            }
+            Expect(FillConsoleOutputAttribute(m_handler, info.wAttributes, consoleSize, screen, nullptr), Throw(Win32Error, "ConsoleOutputImplWin32::clear", "Failed to set console attributes"));
 
             SetConsoleCursorPosition(m_handler, screen);
         }

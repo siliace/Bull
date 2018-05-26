@@ -4,6 +4,7 @@
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
 #include <Bull/Core/System/Win32/ClipboardImpl.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
 
 namespace Bull
 {
@@ -21,10 +22,7 @@ namespace Bull
         {
             flush();
 
-            if(!OpenClipboard(nullptr))
-            {
-                Throw(Win32Error, "ClipboardImpl::setContent", "Failed to open clipboard");
-            }
+            Expect(OpenClipboard(nullptr), Throw(Win32Error, "ClipboardImpl::setContent", "Failed to open clipboard"));
 
             std::size_t size = (content.getSize() + 1) * sizeof(char);
             HANDLE handler = GlobalAlloc(CF_UNICODETEXT, size);
@@ -44,17 +42,11 @@ namespace Bull
             String text;
             HANDLE clipboard;
 
-            if(!OpenClipboard(nullptr))
-            {
-                Throw(Win32Error, "ClipboardImpl::getContent", "Failed to open clipboard");
-            }
+            Expect(OpenClipboard(nullptr), Throw(Win32Error, "ClipboardImpl::getContent", "Failed to open clipboard"));
 
             clipboard = GetClipboardData(CF_UNICODETEXT);
 
-            if(clipboard)
-            {
-                Throw(Win32Error, "ClipboardImpl::getContent", "Failed to get clipboard content");
-            }
+            Expect(clipboard, Throw(Win32Error, "ClipboardImpl::getContent", "Failed to get clipboard content"));
 
             text = String(static_cast<const char*>(GlobalLock(clipboard)));
             GlobalUnlock(clipboard);

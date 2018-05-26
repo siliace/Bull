@@ -1,9 +1,9 @@
 #include <Bull/Core/Configuration/Macro.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/LackOfImplementation.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Window/Win32/CursorImplWin32.hpp>
-#include <wingdi.h>
 
 namespace Bull
 {
@@ -121,10 +121,7 @@ namespace Bull
             DeleteObject(mask);
             DeleteObject(color);
 
-            if(!m_handler)
-            {
-                Throw(InternalError, "CursorImplWin32::create", "Failed to create cursor from Image");
-            }
+            Expect(m_handler, Throw(InternalError, "CursorImplWin32::create", "Failed to create cursor from Image"));
         }
 
         CursorHandler CursorImplWin32::getSystemHandler() const

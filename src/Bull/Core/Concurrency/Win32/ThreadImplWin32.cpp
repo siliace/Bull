@@ -1,6 +1,7 @@
+#include <Bull/Core/Concurrency/Win32/ThreadImplWin32.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
-#include <Bull/Core/Concurrency/Win32/ThreadImplWin32.hpp>
 
 namespace Bull
 {
@@ -29,10 +30,7 @@ namespace Bull
                                      0,
                                      nullptr);
 
-            if(m_handler == INVALID_HANDLE_VALUE)
-            {
-                Throw(InternalError, "ThreadImplWin32::ThreadImplWin32", "Failed to create thread");
-            }
+            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(InternalError, "ThreadImplWin32::ThreadImplWin32", "Failed to create thread"));
 
             switch(priority)
             {
@@ -62,14 +60,9 @@ namespace Bull
 
         void ThreadImplWin32::wait()
         {
-            if(GetCurrentThread() != m_handler)
-            {
-                if(WaitForSingleObject(m_handler, INFINITE) == WAIT_FAILED)
-                {
-                    Throw(InternalError, "ThreadImplWin32::wait", "Failed to wait thread");
-                }
-            }
-            else
+            Expect(GetCurrentThread() != m_handler, Throw(InternalError, "ThreadImplWin32::wait", "Failed to wait thread"));
+
+            if(WaitForSingleObject(m_handler, INFINITE) == WAIT_FAILED)
             {
                 Throw(InternalError, "ThreadImplWin32::wait", "Failed to wait thread");
             }
@@ -77,14 +70,9 @@ namespace Bull
 
         void ThreadImplWin32::terminate()
         {
-            if(GetCurrentThread() != m_handler)
-            {
-                if(!TerminateThread(m_handler, 0))
-                {
-                    Throw(InternalError, "ThreadImplWin32::terminate", "Failed to terminate thread");
-                }
-            }
-            else
+            Expect(GetCurrentThread() != m_handler, Throw(InternalError, "ThreadImplWin32::wait", "Failed to terminate thread"));
+
+            if(!TerminateThread(m_handler, 0))
             {
                 Throw(InternalError, "ThreadImplWin32::terminate", "Failed to terminate thread");
             }

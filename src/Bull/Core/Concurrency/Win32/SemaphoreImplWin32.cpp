@@ -1,4 +1,5 @@
 #include <Bull/Core/Concurrency/Win32/SemaphoreImplWin32.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 
@@ -10,11 +11,8 @@ namespace Bull
         {
             m_count = count;
             m_handler = CreateSemaphore(nullptr, m_count, MaxSemaphoreCount, nullptr);
-
-            if(m_handler == INVALID_HANDLE_VALUE)
-            {
-                Throw(InternalError, "SemaphoreImplWin32::SemaphoreImplWin32", "Failed to create semaphore");
-            }
+            
+            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(InternalError, "SemaphoreImplWin32::SemaphoreImplWin32", "Failed to create semaphore"));
         }
 
         SemaphoreImplWin32::~SemaphoreImplWin32()
