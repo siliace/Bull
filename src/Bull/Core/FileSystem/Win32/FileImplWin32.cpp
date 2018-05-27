@@ -1,5 +1,8 @@
+#include <Bull/Core/Exception/Expect.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/Win32/FileImplWin32.hpp>
 #include <Bull/Core/Support/Win32/DateHelper.hpp>
+#include <Bull/Core/Support/Win32/Win32Error.hpp>
 
 namespace Bull
 {
@@ -129,49 +132,49 @@ namespace Bull
             FlushFileBuffers(m_handler);
         }
 
-        Date FileImplWin32::getCreationDate() const
+        DateTime FileImplWin32::getCreationDate() const
         {
             FILETIME date;
 
-            if(GetFileTime(m_handler, &date, nullptr, nullptr))
-            {
-                SYSTEMTIME sysDate;
-                FileTimeToSystemTime(&date, &sysDate);
+            Expect(
+                    GetFileTime(m_handler, &date, nullptr, nullptr),
+                    Throw(Win32Error, "FileImplWin32::getCreationDate", "Failed to get file creation date")
+            );
 
-                return systemTimeToDate(sysDate);
-            }
+            SYSTEMTIME sysDate;
+            FileTimeToSystemTime(&date, &sysDate);
 
-            return Date();
+            return systemTimeToDate(sysDate);
         }
 
-        Date FileImplWin32::getLastAccessDate() const
+        DateTime FileImplWin32::getLastAccessDate() const
         {
             FILETIME date;
 
-            if(GetFileTime(m_handler, nullptr, &date, nullptr))
-            {
-                SYSTEMTIME sysDate;
-                FileTimeToSystemTime(&date, &sysDate);
+            Expect(
+                    GetFileTime(m_handler, &date, nullptr, nullptr),
+                    Throw(Win32Error, "FileImplWin32::getLastAccessDate", "Failed to get file last access date")
+            );
 
-                return systemTimeToDate(sysDate);
-            }
+            SYSTEMTIME sysDate;
+            FileTimeToSystemTime(&date, &sysDate);
 
-            return Date();
+            return systemTimeToDate(sysDate);
         }
 
-        Date FileImplWin32::getLastWriteDate() const
+        DateTime FileImplWin32::getLastWriteDate() const
         {
             FILETIME date;
 
-            if(GetFileTime(m_handler, nullptr, nullptr, &date))
-            {
-                SYSTEMTIME sysDate;
-                FileTimeToSystemTime(&date, &sysDate);
+            Expect(
+                    GetFileTime(m_handler, &date, nullptr, nullptr),
+                    Throw(Win32Error, "FileImplWin32::getLastWriteDate", "Failed to get file last write date")
+            );
 
-                return systemTimeToDate(sysDate);
-            }
+            SYSTEMTIME sysDate;
+            FileTimeToSystemTime(&date, &sysDate);
 
-            return Date();
+            return systemTimeToDate(sysDate);
         }
 
         std::size_t FileImplWin32::getCursor() const
@@ -179,10 +182,10 @@ namespace Bull
             LARGE_INTEGER zero = {0};
             LARGE_INTEGER position;
 
-            if(!SetFilePointerEx(m_handler, zero, &position, FILE_CURRENT))
-            {
-                return 0;
-            }
+            Expect(
+                    SetFilePointerEx(m_handler, zero, &position, FILE_CURRENT),
+                    Throw(Win32Error, "FileImplWin32::getCursor", "Failed to get file cursor")
+            );
 
             return static_cast<std::size_t>(position.QuadPart);
         }
@@ -193,10 +196,10 @@ namespace Bull
             LARGE_INTEGER position;
             distance.QuadPart = offset;
 
-            if(SetFilePointerEx(m_handler, distance, &position, FILE_CURRENT) == 0)
-            {
-                return 0;
-            }
+            Expect(
+                    SetFilePointerEx(m_handler, distance, &position, FILE_CURRENT),
+                    Throw(Win32Error, "FileImplWin32::moveCursor", "Failed to move file cursor")
+            );
 
             return position.QuadPart;
         }
@@ -207,10 +210,10 @@ namespace Bull
             LARGE_INTEGER position;
             distance.QuadPart = offset;
 
-            if(SetFilePointerEx(m_handler, distance, &position, FILE_BEGIN) == 0)
-            {
-                return 0;
-            }
+            Expect(
+                    SetFilePointerEx(m_handler, distance, &position, FILE_CURRENT),
+                    Throw(Win32Error, "FileImplWin32::setCursor", "Failed to set file cursor")
+            );
 
             return position.QuadPart;
         }

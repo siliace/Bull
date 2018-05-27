@@ -105,21 +105,21 @@ namespace Bull
              * \return Return the date of the creation of the file
              *
              */
-            virtual Date getCreationDate() const = 0;
+            virtual DateTime getCreationDate() const = 0;
 
             /*! \brief Get the date of the creation of the file
              *
              * \return Return the date of the last access of the file
              *
              */
-            virtual Date getLastAccessDate() const = 0;
+            virtual DateTime getLastAccessDate() const = 0;
 
             /*! \brief Get the date of the creation of the file
              *
              * \return Return the date of the last write of the file
              *
              */
-            virtual Date getLastWriteDate() const = 0;
+            virtual DateTime getLastWriteDate() const = 0;
 
             /*! \brief Get the position of the cursor in the file
              *

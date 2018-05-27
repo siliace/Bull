@@ -7,7 +7,7 @@
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/IO/CursorAwareInStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
-#include <Bull/Core/Time/Date.hpp>
+#include <Bull/Core/Time/DateTime.hpp>
 
 namespace Bull
 {
@@ -181,21 +181,21 @@ namespace Bull
          * \return Return the date of the creation of the file
          *
          */
-        Date getCreationDate() const;
+        DateTime getCreationDate() const;
 
         /*! \brief Get the date of the creation of the file
          *
          * \return Return the date of the last access of the file
          *
          */
-        Date getLastAccessDate() const;
+        DateTime getLastAccessDate() const;
 
         /*! \brief Get the date of the creation of the file
          *
          * \return Return the date of the last write of the file
          *
          */
-        Date getLastWriteDate() const;
+        DateTime getLastWriteDate() const;
 
         /*! \brief Get the position of the cursor in the file
          *

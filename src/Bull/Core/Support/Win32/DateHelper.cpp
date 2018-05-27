@@ -1,23 +1,16 @@
 #include <Bull/Core/Support/Win32/Windows.hpp>
-#include <Bull/Core/Time/Date.hpp>
+#include <Bull/Core/Time/DateTime.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        Date systemTimeToDate(SYSTEMTIME sysTime)
+        DateTime systemTimeToDate(SYSTEMTIME sysTime)
         {
-            Date date;
-
-            date.year      = sysTime.wYear;
-            date.month     = DateMonth(sysTime.wMonth);
-            date.day       = sysTime.wDay;
-            date.dayOfWeek = DateDay(sysTime.wDayOfWeek);
-            date.hour      = sysTime.wHour;
-            date.minute    = sysTime.wMinute;
-            date.second    = Duration::seconds(sysTime.wSecond) + Duration::milliseconds(sysTime.wMilliseconds);
-
-            return date;
+            return DateTime::make(
+                    Date::make(sysTime.wYear, DateMonth(sysTime.wMonth),sysTime.wDay),
+                    Time::make(sysTime.wHour, sysTime.wMinute, sysTime.wSecond, sysTime.wMilliseconds)
+            );
         }
     }
 }

@@ -2,13 +2,13 @@
 #define BULL_CORE_SUPPORT_DATEHELPER_HPP
 
 #include <Bull/Core/Support/Win32/Windows.hpp>
-#include <Bull/Core/Time/Date.hpp>
+#include <Bull/Core/Time/DateTime.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        Date systemTimeToDate(SYSTEMTIME sysTime);
+        DateTime systemTimeToDate(SYSTEMTIME sysTime);
     }
 }
 

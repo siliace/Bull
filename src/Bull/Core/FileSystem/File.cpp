@@ -128,34 +128,34 @@ namespace Bull
         }
     }
 
-    Date File::getCreationDate() const
+    DateTime File::getCreationDate() const
     {
         if(m_impl)
         {
             return m_impl->getCreationDate();
         }
 
-        return Date();
+        return DateTime::now();
     }
 
-    Date File::getLastAccessDate() const
+    DateTime File::getLastAccessDate() const
     {
         if(m_impl)
         {
             return m_impl->getLastAccessDate();
         }
 
-        return Date();
+        return DateTime::now();
     }
 
-    Date File::getLastWriteDate() const
+    DateTime File::getLastWriteDate() const
     {
         if(m_impl)
         {
             return m_impl->getLastWriteDate();
         }
 
-        return Date();
+        return DateTime::now();
     }
 
     std::size_t File::getCursor() const

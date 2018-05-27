@@ -25,7 +25,7 @@ namespace Bull
         return m_minimalLevel;
     }
 
-    void AbstractLogger::addEntry(const String& entry, LogLevel level, const Date& date)
+    void AbstractLogger::addEntry(const String& entry, LogLevel level, const DateTime& date)
     {
         if(shouldWriteEntry(level))
         {
@@ -44,12 +44,12 @@ namespace Bull
         return level >= m_minimalLevel;
     }
 
-    String AbstractLogger::formatEntry(const String& entry, LogLevel level, const Date& date)
+    String AbstractLogger::formatEntry(const String& entry, LogLevel level, const DateTime& date)
     {
         OutStringStream oss;
 
-        oss << "[" << StringUtils::number(date.year) << "/" << StringUtils::number(date.month) <<  "/" << StringUtils::number(date.day);
-        oss << " " << StringUtils::number(date.hour) << ":" << StringUtils::number(date.minute) << ":" << StringUtils::number(date.second.asSeconds());
+        oss << "[" << StringUtils::number(date.getYear()) << "/" << StringUtils::number(date.getMonth()) <<  "/" << StringUtils::number(date.getDay());
+        oss << " " << StringUtils::number(date.getHour()) << ":" << StringUtils::number(date.getMinute()) << ":" << StringUtils::number(date.getSecond());
         oss << "]";
         oss << "(" << logLevelToString(level) << ")";
         oss << " " << entry;

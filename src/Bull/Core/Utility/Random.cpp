@@ -1,10 +1,10 @@
 #include <Bull/Core/Utility/Random.hpp>
-#include <Bull/Core/Time/Date.hpp>
+#include <Bull/Core/Time/Time.hpp>
 
 namespace Bull
 {
     RandomGenerator::RandomGenerator() :
-        RandomGenerator(Date::now().second.asMicroseconds())
+        RandomGenerator(Time::now().getSecond())
     {
         /// Nothing
     }

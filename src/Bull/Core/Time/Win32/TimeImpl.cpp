@@ -1,16 +1,16 @@
 #include <Bull/Core/Support/Win32/Windows.hpp>
-#include <Bull/Core/Time/Win32/DateImpl.hpp>
+#include <Bull/Core/Time/Win32/TimeImpl.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        Date DateImpl::now()
+        Time TimeImpl::now()
         {
             SYSTEMTIME lt = {0};
             GetLocalTime(&lt);
 
-            return Date::make(lt.wYear, DateMonth(lt.wMonth), lt.wDay);
+            return Time::make(lt.wHour, lt.wMinute, lt.wSecond, lt.wMilliseconds);
         }
     }
 }

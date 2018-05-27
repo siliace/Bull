@@ -93,21 +93,21 @@ namespace Bull
              * \return Return the date of the creation of the file
              *
              */
-            Date getCreationDate() const override;
+            DateTime getCreationDate() const override;
 
             /*! \brief Get the date of the creation of the file
              *
              * \return Return the date of the last access of the file
              *
              */
-            Date getLastAccessDate() const override;
+            DateTime getLastAccessDate() const override;
 
             /*! \brief Get the date of the creation of the file
              *
              * \return Return the date of the last write of the file
              *
              */
-            Date getLastWriteDate() const override;
+            DateTime getLastWriteDate() const override;
 
             /*! \brief Get the position of the cursor in the file
              *

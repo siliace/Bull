@@ -51,7 +51,7 @@ namespace Bull
          * \return The formatted entry
          *
          */
-        String formatEntry(const String& entry, LogLevel level, const Date& date) override;
+        String formatEntry(const String& entry, LogLevel level, const DateTime& date) override;
 
     private:
 

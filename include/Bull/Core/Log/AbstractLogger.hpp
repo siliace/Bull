@@ -3,7 +3,7 @@
 
 #include <Bull/Core/Log/LogLevel.hpp>
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Time/Date.hpp>
+#include <Bull/Core/Time/DateTime.hpp>
 
 namespace Bull
 {
@@ -49,7 +49,7 @@ namespace Bull
          * \param date    The date when the entry should be added
          *
          */
-        void addEntry(const String& entry, LogLevel level, const Date& date = Date::now());
+        void addEntry(const String& entry, LogLevel level, const DateTime& date = DateTime::now());
 
     protected:
 
@@ -76,7 +76,7 @@ namespace Bull
          * \return The formatted entry
          *
          */
-        virtual String formatEntry(const String& entry, LogLevel level, const Date& date);
+        virtual String formatEntry(const String& entry, LogLevel level, const DateTime& date);
 
     private:
 
