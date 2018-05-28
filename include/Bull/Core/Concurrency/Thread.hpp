@@ -6,6 +6,7 @@
 
 #include <Bull/Core/Concurrency/Runnable.hpp>
 #include <Bull/Core/Concurrency/ThreadPriority.hpp>
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Time/Duration.hpp>
 
@@ -28,6 +29,13 @@ namespace Bull
          *
          */
         static void sleep(const Duration& time);
+
+        /*! \brief Set the name of the current thread
+         *
+         * \param name The name of the thread
+         *
+         */
+        static void setCurrentName(const String& name);
 
     private:
 
@@ -130,6 +138,13 @@ namespace Bull
          *
          */
         ThreadPriority getPriority() const;
+
+        /*! \brief Set the name of the thread
+         *
+         * \param name The name
+         *
+         */
+        void setName(const String& name);
 
     private:
 

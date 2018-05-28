@@ -11,6 +11,11 @@ namespace Bull
         prv::ThreadImpl::sleep(time);
     }
 
+    void Thread::setCurrentName(const String &name)
+    {
+        prv::ThreadImpl::setCurrentName(name);
+    }
+
     Thread::Thread() :
         m_priority(ThreadPriority_Inherit)
     {
@@ -84,5 +89,13 @@ namespace Bull
     ThreadPriority Thread::getPriority() const
     {
         return m_priority;
+    }
+
+    void Thread::setName(const String& name)
+    {
+        if(isRunning())
+        {
+            m_impl->setName(name);
+        }
     }
 }

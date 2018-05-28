@@ -1,8 +1,9 @@
 #include <unistd.h>
 
 #include <Bull/Core/Concurrency/Unix/ThreadImplUnix.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Exception/UnsupportedOperation.hpp>
 
 namespace Bull
 {
@@ -11,6 +12,15 @@ namespace Bull
         void ThreadImplUnix::sleep(const Duration& time)
         {
             usleep(static_cast<__useconds_t>(time.asMicroseconds()));
+        }
+
+        void ThreadImplUnix::setCurrentName(const Bull::String& name)
+        {
+            #if defined __USE_GNU
+            pthread_setname_np(pthread_self(), name.getBuffer());
+            #else
+            Throw(UnsupportedOperation, "ThreadImplUnix::setCurrentName", "Set thread's name is not supported on your system");
+            #endif
         }
 
         void* ThreadImplUnix::entryPoint(void* data)
@@ -58,6 +68,15 @@ namespace Bull
         void ThreadImplUnix::terminate()
         {
             pthread_cancel(m_handler);
+        }
+
+        void ThreadImplUnix::setName(const Bull::String& name)
+        {
+            #if defined __USE_GNU
+            pthread_setname_np(m_handler, name.getBuffer());
+            #else
+            Throw(UnsupportedOperation, "ThreadImplUnix::setName", "Set thread's name is not supported on your system");
+            #endif
         }
     }
 }

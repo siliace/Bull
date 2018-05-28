@@ -20,6 +20,13 @@ namespace Bull
              */
             static void sleep(const Duration& time);
 
+            /*! \brief Set the name of the current thread
+             *
+             * \param name The name of the thread
+             *
+             */
+            static void setCurrentName(const String& name);
+
         private:
 
             /*! \brief Entry point for every Win32 threads
@@ -57,6 +64,13 @@ namespace Bull
              *
              */
             void terminate() override;
+
+            /*! \brief Set the name of the thread
+             *
+             * \param name The name
+             *
+             */
+            void setName(const String& name) override;
 
         private:
 

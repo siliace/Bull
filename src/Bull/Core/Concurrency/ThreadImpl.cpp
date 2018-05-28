@@ -23,6 +23,11 @@ namespace Bull
             ThreadImplType::sleep(time);
         }
 
+        void ThreadImpl::setCurrentName(const String& name)
+        {
+            ThreadImplType::setCurrentName(name);
+        }
+
         ThreadImpl::~ThreadImpl() = default;
     }
 }
