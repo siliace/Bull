@@ -51,11 +51,8 @@ namespace Bull
 
     void AbstractLight::setUniforms(Shader& shader, const String& name) const
     {
-        if(shader.isLinked())
-        {
-            shader.setUniformVector(compose(name, "ambient"), Vector4F::makeFromColor(m_color) * m_ambient);
-            shader.setUniformVector(compose(name, "diffuse"), Vector4F::makeFromColor(m_color) * m_diffuse);
-            shader.setUniformVector(compose(name, "specular"), Vector4F::makeFromColor(m_color));
-        }
+        shader.setUniformVector(compose(name, "ambient"), Vector4F::makeFromColor(m_color) * m_ambient);
+        shader.setUniformVector(compose(name, "diffuse"), Vector4F::makeFromColor(m_color) * m_diffuse);
+        shader.setUniformVector(compose(name, "specular"), Vector4F::makeFromColor(m_color));
     }
 }
