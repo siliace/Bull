@@ -23,7 +23,7 @@ namespace Bull
          *
          */
         template <typename... Args>
-        T* create(const String& name, Args&&... args)
+        T& create(const String& name, Args&&... args)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
@@ -38,7 +38,7 @@ namespace Bull
                 it->second = std::make_unique<T>(std::forward<Args>(args)...);
             }
 
-            return it->second.get();
+            return *it->second.get();
         }
 
         /*! \brief Register an Asset in the AssetManager
