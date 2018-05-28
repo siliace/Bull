@@ -2,8 +2,11 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/LackOfImplementation.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Exception/UnsupportedOperation.hpp>
 #include <Bull/Core/FileSystem/Unix/FileImplUnix.hpp>
 #include <Bull/Core/Support/Unix/DateHelper.hpp>
 
@@ -11,40 +14,32 @@ namespace Bull
 {
     namespace prv
     {
-        bool FileImplUnix::create(const String& name)
+        void FileImplUnix::create(const String& name)
         {
             int handler = ::open64(name.getBuffer(), O_CREAT | O_TRUNC | O_EXCL, S_IRWXU);
 
-            if(handler == -1)
-            {
-                return false;
-            }
+            Expect(handler != -1, Throw(InternalError, "FileImplUnix::create", "Failed to create file"));
 
             close(handler);
-
-            return true;
         }
 
         bool FileImplUnix::exists(const String& name)
         {
             struct stat64 filestats;
 
-            if(stat64(name.getBuffer(), &filestats) == -1)
-            {
-                return false;
-            }
+            Expect(stat64(name.getBuffer(), &filestats) != -1, Throw(InternalError, "FileImplUnix::exists", "Failed to check whether a file exists"))
 
             return S_ISREG(filestats.st_mode);
         }
 
         bool FileImplUnix::copy(const Path& path, const String& newPath)
         {
-            Throw(InternalError, "FileImplUnix::copy", "Unimplemented method");
+            Throw(LackOfImplementation, "FileImplUnix::copy", "Unimplemented method");
         }
 
-        bool FileImplUnix::remove(const Path& name)
+        void FileImplUnix::remove(const Path& name)
         {
-            return unlink(name.toString().getBuffer()) != -1;
+            Expect(unlink(name.toString().getBuffer()) != -1, Throw(InternalError, "FileImplUnix::remove", "Failed to remove file"));
         }
 
         FileImplUnix::~FileImplUnix()
@@ -107,20 +102,15 @@ namespace Bull
 
         void FileImplUnix::flush()
         {
-            if(fsync(m_handler) == -1)
-            {
-                Throw(InternalError, "FileImplUnix::flush", "Failed to sync .file descriptor");
-            }
+            Expect(fsync(m_handler) != -1, Throw(InternalError, "FileImplUnix::flush", "Failed to sync file descriptor"));
         }
 
-        Date FileImplUnix::getCreationDate() const
+        DateTime FileImplUnix::getCreationDate() const
         {
-            Bull::Log::getInstance()->warning("Creation date is not available on UNIX-like systems");
-
-            return Date();
+            Throw(UnsupportedOperation, "FileImplUnix::getCreationDate", "Creation date is not supported on your system");
         }
 
-        Date FileImplUnix::getLastAccessDate() const
+        DateTime FileImplUnix::getLastAccessDate() const
         {
             struct stat64 info;
 
@@ -129,7 +119,7 @@ namespace Bull
             return systemTimeToDate(localtime(&info.st_atim.tv_sec));
         }
 
-        Date FileImplUnix::getLastWriteDate() const
+        DateTime FileImplUnix::getLastWriteDate() const
         {
             struct stat64 info;
 

@@ -10,10 +10,7 @@ namespace Bull
 
         if(!File::exists(path))
         {
-            if(!File::create(path))
-            {
-                Throw(InternalError, "FileLogger::FileLogger", "Failed to create log file");
-            }
+            File::create(path);
         }
 
         if(!m_file.open(Path(path), FileOpeningMode_Truncate | FileOpeningMode_Write))

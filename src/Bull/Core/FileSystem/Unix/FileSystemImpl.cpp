@@ -1,6 +1,9 @@
 #include <sys/statvfs.h>
 #include <unistd.h>
 
+#include <Bull/Core/Exception/Expect.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/Unix/FileSystemImpl.hpp>
 
 namespace Bull
@@ -22,9 +25,9 @@ namespace Bull
             return getRoot().getChild("tmp");
         }
 
-        bool FileSystemImpl::setCurrentDirectory(const Path& path)
+        void FileSystemImpl::setCurrentDirectory(const Path& path)
         {
-            return chdir(path.toString().getBuffer()) != -1;
+            Expect(chdir(path.toString().getBuffer()) != -1, Throw(InternalError, "FileSystemImpl::setCurrentDirectory", "Failed to set current directory"));
         }
 
         FileSystemInfo FileSystemImpl::getFileSystemInfo(const Path& base)
@@ -41,9 +44,9 @@ namespace Bull
             return info;
         }
 
-        bool FileSystemImpl::createLink(const Path& target, const String& link)
+        void FileSystemImpl::createLink(const Path& target, const String& link)
         {
-            return symlink(target.toString().getBuffer(), link.getBuffer()) != -1;
+            Expect(symlink(target.toString().getBuffer(), link.getBuffer()) != -1, Throw(InternalError, "FileSystemImpl::createLink", "Failed to create link"));
         }
     }
 }

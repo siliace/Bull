@@ -20,9 +20,9 @@ namespace Bull
         return prv::FileSystemImpl::getTempPath();
     }
 
-    bool FileSystem::setCurrentDirectory(const Path& path)
+    void FileSystem::setCurrentDirectory(const Path& path)
     {
-        return prv::FileSystemImpl::setCurrentDirectory(path);
+        prv::FileSystemImpl::setCurrentDirectory(path);
     }
 
     Path FileSystem::getCurrentDirectory()
@@ -35,16 +35,8 @@ namespace Bull
         return prv::FileSystemImpl::getFileSystemInfo(base);
     }
 
-    bool FileSystem::createLink(const Path& target, const String& link, bool force)
+    void FileSystem::createLink(const Path& target, const String& link)
     {
-        if((File::exists(link) || Directory::exists(link)) && force)
-        {
-            if(!File::remove(Path(link)) && !Directory::remove(Path(link)))
-            {
-                return false;
-            }
-        }
-
-        return prv::FileSystemImpl::createLink(target, link);
+        prv::FileSystemImpl::createLink(target, link);
     }
 }

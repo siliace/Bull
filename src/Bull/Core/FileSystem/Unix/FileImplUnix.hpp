@@ -15,10 +15,8 @@ namespace Bull
              *
              * \param name The name of the file to create
              *
-             * \return Return true if the file was created successfully, else otherwise
-             *
              */
-            static bool create(const String& name);
+            static void create(const String& name);
 
             /*! \brief Check if a file exists
              *
@@ -43,10 +41,8 @@ namespace Bull
              *
              * \param name The name of the file to delete
              *
-             * \return Return true if the file was deleted successfully, false otherwise
-             *
              */
-            static bool remove(const Path& name);
+            static void remove(const Path& name);
 
         public:
 
@@ -92,21 +88,21 @@ namespace Bull
              * \return Return the date of the creation of the file
              *
              */
-            Date getCreationDate() const override;
+            DateTime getCreationDate() const override;
 
             /*! \brief Get the date of the last access of the file
              *
              * \return Return the date of the last access of the file
              *
              */
-            Date getLastAccessDate() const override;
+            DateTime getLastAccessDate() const override;
 
             /*! \brief Get the date of the last write of the file
              *
              * \return Return the date of the last write of the file
              *
              */
-            Date getLastWriteDate() const override;
+            DateTime getLastWriteDate() const override;
 
             /*! \brief Get the position of the cursor in the file
              *

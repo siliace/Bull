@@ -21,9 +21,9 @@ namespace Bull
             return ptr;
         }
 
-        bool FileImpl::create(const String& name)
+        void FileImpl::create(const String& name)
         {
-            return FileImplType::create(name);
+            FileImplType::create(name);
         }
 
         bool FileImpl::exists(const String& name)
@@ -36,9 +36,9 @@ namespace Bull
             return FileImplType::copy(path, newPath);
         }
 
-        bool FileImpl::remove(const Path& name)
+        void FileImpl::remove(const Path& name)
         {
-            return FileImplType::remove(name);
+            FileImplType::remove(name);
         }
 
         FileImpl::~FileImpl() = default;

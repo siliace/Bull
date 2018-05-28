@@ -35,10 +35,8 @@ namespace Bull
              *
              * \param path The new path of the process
              *
-             * \return True if the path was changed successfully
-             *
              */
-            static bool setCurrentDirectory(const Path& path);
+            static void setCurrentDirectory(const Path& path);
 
             /*! \brief Get information about the file system
              *
@@ -54,10 +52,8 @@ namespace Bull
              * \param target The target of the link
              * \param link   The path of the link to create
              *
-             * \return True if the link was created successfully
-             *
              */
-            static bool createLink(const Path& target, const String& link);
+            static void createLink(const Path& target, const String& link);
         };
     }
 }

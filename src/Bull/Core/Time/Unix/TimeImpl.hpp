@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_TIME_WIN32_TIMEIMPL_HPP
-#define BULL_CORE_TIME_WIN32_TIMEIMPL_HPP
+#ifndef BULL_CORE_TIME_UNIX_TIMEIMPL_HPP
+#define BULL_CORE_TIME_UNIX_TIMEIMPL_HPP
 
 #include <Bull/Core/Time/Time.hpp>
 
@@ -9,6 +9,7 @@ namespace Bull
     {
         struct TimeImpl
         {
+
             /*! \brief Create a Time of now
              *
              * \return The created time
@@ -19,4 +20,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_CORE_TIME_WIN32_TIMEIMPL_HPP
+#endif // BULL_CORE_TIME_UNIX_TIMEIMPL_HPP

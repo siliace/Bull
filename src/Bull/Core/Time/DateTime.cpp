@@ -16,8 +16,8 @@ namespace Bull
 
     bool DateTime::operator==(const Bull::DateTime& right) const
     {
-        return static_cast<const Date&>(*this) == static_cast<const Date&>(right) &&
-               static_cast<const Time&>(*this) == static_cast<const Time&>(right);
+        return m_date == right.m_date &&
+               m_time == right.m_time;
     }
 
     bool DateTime::operator!=(const Bull::DateTime& right) const
@@ -26,9 +26,19 @@ namespace Bull
     }
 
     DateTime::DateTime(const Bull::Date& date, const Bull::Time& time) :
-        Date(date),
-        Time(time)
+        m_date(date),
+        m_time(time)
     {
         /// Nothing
+    }
+
+    const Date &DateTime::getDate() const
+    {
+        return m_date;
+    }
+
+    const Time &DateTime::getTime() const
+    {
+        return m_time;
     }
 }

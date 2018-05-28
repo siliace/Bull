@@ -6,7 +6,7 @@
 
 namespace Bull
 {
-    class BULL_CORE_API DateTime : public Date, public Time
+    class BULL_CORE_API DateTime
     {
     public:
 
@@ -27,6 +27,10 @@ namespace Bull
         static DateTime make(const Bull::Date& date, const Bull::Time& time);
 
     public:
+
+        const Date& getDate() const;
+
+        const Time& getTime() const;
 
         /*! \brief Compare two DateTime
          *
@@ -55,6 +59,11 @@ namespace Bull
          *
          */
         DateTime(const Date& date, const Time& time);
+
+    private:
+
+        Date m_date;
+        Time m_time;
     };
 }
 

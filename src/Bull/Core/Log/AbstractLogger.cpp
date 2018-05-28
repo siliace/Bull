@@ -48,8 +48,8 @@ namespace Bull
     {
         OutStringStream oss;
 
-        oss << "[" << StringUtils::number(date.getYear()) << "/" << StringUtils::number(date.getMonth()) <<  "/" << StringUtils::number(date.getDay());
-        oss << " " << StringUtils::number(date.getHour()) << ":" << StringUtils::number(date.getMinute()) << ":" << StringUtils::number(date.getSecond());
+        oss << "[" << StringUtils::number(date.getDate().getYear()) << "/" << StringUtils::number(date.getDate().getMonth()) <<  "/" << StringUtils::number(date.getDate().getDay());
+        oss << " " << StringUtils::number(date.getTime().getHour()) << ":" << StringUtils::number(date.getTime().getMinute()) << ":" << StringUtils::number(date.getTime().getSecond());
         oss << "]";
         oss << "(" << logLevelToString(level) << ")";
         oss << " " << entry;

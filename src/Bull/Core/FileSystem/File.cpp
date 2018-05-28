@@ -1,14 +1,18 @@
 #include <cstdio>
 #include <cstring>
 
+#include <Bull/Core/Exception/Expect.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/FileSystem/FileImpl.hpp>
 
 namespace Bull
 {
-    bool File::create(const String& name)
+    void File::create(const String& name)
     {
-        return prv::FileImpl::create(name);
+        prv::FileImpl::create(name);
     }
 
     bool File::exists(const String& name)
@@ -23,17 +27,15 @@ namespace Bull
 
     bool File::rename(const Path& name, const String& newName)
     {
-        if(File::exists(name.toString()) && !File::exists(newName))
-        {
-            return ::rename(name.toString().getBuffer(), newName.getBuffer()) == 0;
-        }
+        Expect(File::exists(name.toString()), Throw(InvalidParameter, "File::rename", "The file to rename does not exists"));
+        Expect(!File::exists(newName), Throw(InvalidParameter, "File::rename", "A file with the new name already exists"));
 
-        return false;
+        Expect(::rename(name.toString().getBuffer(), newName.getBuffer()) != 0, Throw(InternalError, "File::rename", "Failed to rename file"));
     }
 
-    bool File::remove(const Path& name)
+    void File::remove(const Path& name)
     {
-        return prv::FileImpl::remove(name);
+        prv::FileImpl::remove(name);
     }
 
     File::File() :
@@ -74,11 +76,6 @@ namespace Bull
         }
 
         return false;
-    }
-
-    bool File::isOpen() const
-    {
-        return m_impl != nullptr;
     }
 
     void File::close()
@@ -188,11 +185,6 @@ namespace Bull
         return 0;
     }
 
-    const Path& File::getPath() const
-    {
-        return m_path;
-    }
-
     std::size_t File::getSize() const
     {
         if(m_impl)
@@ -201,20 +193,5 @@ namespace Bull
         }
 
         return 0;
-    }
-
-    Uint32 File::getOpeningMode() const
-    {
-        return m_mode;
-    }
-
-    bool File::canRead() const
-    {
-        return m_mode & FileOpeningMode_Read;
-    }
-
-    bool File::canWrite() const
-    {
-        return m_mode & FileOpeningMode_Write;
     }
 }

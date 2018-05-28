@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 
@@ -23,10 +24,7 @@ namespace Bull
     {
         gl::genTextures(1, &m_id);
 
-        if(!m_id)
-        {
-            Throw(InternalError, "Texture::Texture", "Failed to create the texture");
-        }
+        Expect(m_id, Throw(InternalError, "Texture::Texture", "Failed to create the texture"));
     }
 
     Texture::~Texture()
@@ -41,10 +39,7 @@ namespace Bull
 
     void Texture::create(const Size& size)
     {
-        if(size.width < 0 || size.height < 0)
-        {
-            Throw(InvalidParameter, "Texture::create", "Invalid texture size");
-        }
+        Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Texture::create", "Invalid texture size"));
 
         ensureContext();
 

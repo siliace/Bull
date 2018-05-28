@@ -1,24 +1,17 @@
 #include <ctime>
 
-#include <Bull/Core/Time/Date.hpp>
+#include <Bull/Core/Time/DateTime.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        Date systemTimeToDate(struct tm* sysDate)
+        DateTime systemTimeToDate(struct tm* sysDate)
         {
-            Date date;
-
-            date.second    = Duration(sysDate->tm_sec);
-            date.minute    = sysDate->tm_min;
-            date.hour      = sysDate->tm_hour;
-            date.day       = sysDate->tm_mday;
-            date.dayOfWeek = DateDay(sysDate->tm_wday);
-            date.month     = DateMonth(sysDate->tm_mon);
-            date.year      = 1900 + sysDate->tm_year;
-
-            return date;
+            return DateTime::make(
+                    Date::make(1900 + sysDate->tm_year, DateMonth(sysDate->tm_mon), sysDate->tm_mday),
+                    Time::make(sysDate->tm_hour, sysDate->tm_min, sysDate->tm_sec)
+            );
         }
     }
 }

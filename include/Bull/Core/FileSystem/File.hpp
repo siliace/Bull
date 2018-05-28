@@ -32,10 +32,8 @@ namespace Bull
          *
          * \param name The name of the file to create
          *
-         * \return Return true if the file was created successfully, else otherwise
-         *
          */
-        static bool create(const String& name);
+        static void create(const String& name);
 
         /*! \brief Check if a file exists
          *
@@ -70,10 +68,8 @@ namespace Bull
          *
          * \param name The name of the file to delete
          *
-         * \return Return true if the file was deleted successfully, false otherwise
-         *
          */
-        static bool remove(const Path& name);
+        static void remove(const Path& name);
 
     public:
 
@@ -126,7 +122,10 @@ namespace Bull
          * \return Return true if the file is open, false otherwise
          *
          */
-        bool isOpen() const;
+        inline bool isOpen() const
+        {
+            return m_impl != nullptr;
+        }
 
         /*! \brief Close a file
          *
@@ -227,7 +226,10 @@ namespace Bull
          * \return Return the path of the file
          *
          */
-        inline const Path& getPath() const;
+        inline const Path& getPath() const
+        {
+            return m_path;
+        }
 
         /*! \brief Get the size of the file
          *
@@ -241,21 +243,30 @@ namespace Bull
          * \return Return the opening mode of the file
          *
          */
-        Uint32 getOpeningMode() const;
+        Uint32 getOpeningMode() const
+        {
+            return m_mode;
+        }
 
         /*! \brief Check if this file is open with read permission
          *
          * \return Return true if this file is open with read permission, false otherwise
          *
          */
-        bool canRead() const;
+        bool canRead() const
+        {
+            return m_mode & FileOpeningMode_Read;
+        }
 
         /*! \brief Check if this file is open with write permission
          *
          * \return Return true if this file is open with write permission, false otherwise
          *
          */
-        bool canWrite() const;
+        bool canWrite() const
+        {
+            return m_mode & FileOpeningMode_Write;
+        }
 
     private:
 

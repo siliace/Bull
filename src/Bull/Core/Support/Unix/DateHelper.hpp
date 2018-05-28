@@ -3,13 +3,13 @@
 
 #include <unistd.h>
 
-#include <Bull/Core/Time/Date.hpp>
+#include <Bull/Core/Time/DateTime.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        Date systemTimeToDate(struct tm* sysDate);
+        DateTime systemTimeToDate(struct tm* sysDate);
     }
 }
 

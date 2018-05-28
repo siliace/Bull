@@ -1,12 +1,12 @@
 #include <ctime>
 
-#include <Bull/Core/Time/Unix/DateImpl.hpp>
+#include <Bull/Core/Time/Unix/TimeImpl.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        Date DateImpl::now()
+        Time TimeImpl::now()
         {
             time_t now;
             struct tm* sysDate;
@@ -14,7 +14,7 @@ namespace Bull
             time(&now);
             sysDate = localtime(&now);
 
-            return Date::make(1900 + sysDate->tm_year, DateMonth(sysDate->tm_mon), sysDate->tm_mday);
+            return Time::make(sysDate->tm_hour, sysDate->tm_min, sysDate->tm_sec);
         }
     }
 }
