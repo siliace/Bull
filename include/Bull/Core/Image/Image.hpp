@@ -28,7 +28,7 @@ namespace Bull
          * \param size   The size of the Image
          *
          */
-        void create(const ByteArray& pixels, const Size& size) override;
+        void create(const std::vector<Uint8>& pixels, const Size& size) override;
 
         /*! \brief Tell whether an Image is loaded
          *
@@ -51,7 +51,7 @@ namespace Bull
          * \return The pixels
          *
          */
-        const ByteArray& getPixels() const;
+        const std::vector<Uint8>& getPixels() const;
 
         /*! \brief Get the size of the Image
          *
@@ -62,8 +62,8 @@ namespace Bull
 
     private:
 
-        Size       m_size;
-        ByteArray m_pixels;
+        Size m_size;
+        std::vector<Uint8> m_pixels;
     };
 }
 

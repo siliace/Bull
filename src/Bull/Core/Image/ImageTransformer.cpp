@@ -32,9 +32,9 @@ namespace Bull
 
     ImageTransformer& ImageTransformer::resize(const Size& size, EdgeMode mode)
     {
-        ByteArray pixelsOutput(size.width * size.height * 4);
+        std::vector<Uint8> pixelsOutput(size.width * size.height * 4);
 
-        int result = stbir_resize_uint8_srgb_edgemode(m_image.getPixels().getBuffer(), m_image.getSize().width, m_image.getSize().height, 0,
+        int result = stbir_resize_uint8_srgb_edgemode(m_image.getPixels().data(), m_image.getSize().width, m_image.getSize().height, 0,
                                                       &pixelsOutput[0], size.width, size.height, 0,
                                                       4, 1, 0,
                                                       edgeModeToStbirEdge(mode)

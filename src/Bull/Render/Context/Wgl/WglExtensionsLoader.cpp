@@ -1,4 +1,6 @@
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
 
 #include <Bull/Render/Context/GlContext.hpp>
@@ -15,10 +17,7 @@ namespace Bull
         {
             wglGetExtensionsStringARB = reinterpret_cast<const char* (WINAPI*)(HDC)>(GlContext::getFunction("wglGetExtensionsStringARB"));
 
-            if(!wglGetExtensionsStringARB)
-            {
-                Throw(InternalError, "WglExtensionsLoader::getExtensions", "Failed to load wglGetExtensionsStringARB function");
-            }
+            Expect(wglGetExtensionsStringARB, Throw(InternalError, "WglExtensionsLoader::getExtensions", "Failed to load wglGetExtensionsStringARB function"));
 
             return String(wglGetExtensionsStringARB(handler)).explode(' ');
         }

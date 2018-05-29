@@ -1,8 +1,10 @@
 #ifndef BULL_CORE_IMAGE_ABSTRACTIMAGE_HPP
 #define BULL_CORE_IMAGE_ABSTRACTIMAGE_HPP
 
+#include <vector>
+
 #include <Bull/Core/Assets/Asset.hpp>
-#include <Bull/Core/Memory/ByteArray.hpp>
+#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Utility/Size.hpp>
 
 namespace Bull
@@ -22,7 +24,7 @@ namespace Bull
          * \param size   The size of the Image
          *
          */
-        virtual void create(const ByteArray& pixels, const Size& size) = 0;
+        virtual void create(const std::vector<Uint8>& pixels, const Size& size) = 0;
 
         /*! \brief Get the size of the AbstractImage
          *

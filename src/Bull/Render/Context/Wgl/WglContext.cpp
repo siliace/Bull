@@ -341,12 +341,12 @@ namespace Bull
             {
                 do
                 {
-                    ArrayList<int> attribs;
+                    std::vector<int> attribs;
 
-                    attribs.add(WGL_CONTEXT_MAJOR_VERSION_ARB);
-                    attribs.add(m_settings.major);
-                    attribs.add(WGL_CONTEXT_MINOR_VERSION_ARB);
-                    attribs.add(m_settings.minor);
+                    attribs.emplace_back(WGL_CONTEXT_MAJOR_VERSION_ARB);
+                    attribs.emplace_back(m_settings.major);
+                    attribs.emplace_back(WGL_CONTEXT_MINOR_VERSION_ARB);
+                    attribs.emplace_back(m_settings.minor);
 
                     if(isSupported("WGL_ARB_create_context_profile"))
                     {
@@ -363,18 +363,18 @@ namespace Bull
                             flags |= WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
                         }
 
-                        attribs.add(WGL_CONTEXT_PROFILE_MASK_ARB);
-                        attribs.add(profile);
-                        attribs.add(WGL_CONTEXT_FLAGS_ARB);
-                        attribs.add(flags);
+                        attribs.emplace_back(WGL_CONTEXT_PROFILE_MASK_ARB);
+                        attribs.emplace_back(profile);
+                        attribs.emplace_back(WGL_CONTEXT_FLAGS_ARB);
+                        attribs.emplace_back(flags);
                     }
 
                     if(m_settings.type == ContextSettingsType_NoError)
                     {
                         if(isSupported("WGL_ARB_create_context_no_error"))
                         {
-                            attribs.add(WGL_CONTEXT_OPENGL_NO_ERROR_ARB);
-                            attribs.add(1);
+                            attribs.emplace_back(WGL_CONTEXT_OPENGL_NO_ERROR_ARB);
+                            attribs.emplace_back(1);
                         }
                         else
                         {
@@ -383,7 +383,7 @@ namespace Bull
                         }
                     }
 
-                    attribs.add(0);
+                    attribs.emplace_back(0);
 
                     m_render = wglCreateContextAttribs(m_device, sharedHandler, &attribs[0]);
 

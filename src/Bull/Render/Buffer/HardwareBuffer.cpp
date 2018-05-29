@@ -149,10 +149,9 @@ namespace Bull
 
     void HardwareBuffer::bind() const
     {
-        if(isValid())
-        {
-            gl::bindBuffer(bufferType[m_type], m_id);
-        }
+        Expect(isValid(), Throw(LogicError, "HardwareBuffer::bind", "The buffer was not created"));
+
+        gl::bindBuffer(bufferType[m_type], m_id);
     }
 
     unsigned int HardwareBuffer::getSystemHandler() const

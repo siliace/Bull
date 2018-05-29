@@ -3,7 +3,6 @@ set(BULL_SRC_CORE_UTILITY ${BULL_SRC_CORE}/Utility)
 
 target_sources(bull-core
         PUBLIC
-            ${BULL_INC_CORE_UTILITY}/ArrayList.hpp
             ${BULL_INC_CORE_UTILITY}/Character.hpp
             ${BULL_SRC_CORE_UTILITY}/Character.cpp
             ${BULL_INC_CORE_UTILITY}/CleanupCallback.hpp
@@ -11,8 +10,6 @@ target_sources(bull-core
             ${BULL_INC_CORE_UTILITY}/Color.hpp
             ${BULL_SRC_CORE_UTILITY}/Color.cpp
             ${BULL_INC_CORE_UTILITY}/DataType.hpp
-            ${BULL_INC_CORE_UTILITY}/LinkList.hpp
-            ${BULL_INC_CORE_UTILITY}/List.hpp
             ${BULL_INC_CORE_UTILITY}/Random.hpp
             ${BULL_SRC_CORE_UTILITY}/Random.cpp
             ${BULL_INC_CORE_UTILITY}/Size.hpp

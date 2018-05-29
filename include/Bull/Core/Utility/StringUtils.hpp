@@ -2,7 +2,6 @@
 #define BULL_CORE_UTILITY_STRINGUTILS_HPP
 
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Utility/ArrayList.hpp>
 #include <Bull/Core/Utility/StringParameter.hpp>
 
 namespace Bull
@@ -41,7 +40,7 @@ namespace Bull
          * \return The created String
          *
          */
-        static String join(const ArrayList<String>& strings, const String& glue = String());
+        static String join(const std::vector<String>& strings, const String& glue = String());
 
         /*! \brief Generate a random String
          *

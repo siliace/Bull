@@ -4,7 +4,7 @@
 #include <vector>
 
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
-#include <Bull/Render/Vertex/VertexArray.hpp>
+#include <Bull/Render/Vertex/Vertex.hpp>
 
 namespace Bull
 {
@@ -23,7 +23,7 @@ namespace Bull
          * \param usage    The usage (static, dynamic, stream) of the ArrayBuffer
          *
          */
-        explicit VertexBuffer(const VertexArray& vertices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
+        explicit VertexBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
 
         /*! \brief Create the ArrayBuffer from a Vertex vector
          *
@@ -33,7 +33,7 @@ namespace Bull
          * \return True if the ArrayBuffer was created successfully
          *
          */
-        bool create(const VertexArray& vertices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
+        bool create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
 
         /*! \brief Set a buffer array attribute pointer
          *
@@ -42,10 +42,8 @@ namespace Bull
          * \param stride The stride of the buffer
          * \param start  The beginning of the attribute in the stride
          *
-         * \return This
-         *
          */
-        VertexBuffer& setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride = 0, std::size_t start = 0);
+        void setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride = 0, std::size_t start = 0);
     };
 }
 

@@ -1,6 +1,7 @@
 #include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 
 #include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
@@ -53,7 +54,7 @@ namespace Bull
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
     }
 
-    void Texture::create(const ByteArray& pixels, const Size& size)
+    void Texture::create(const std::vector<Uint8>& pixels, const Size& size)
     {
         create(size);
 
@@ -120,7 +121,7 @@ namespace Bull
     Image Texture::getImage() const
     {
         Image image;
-        ByteArray pixels(m_size.width * m_size.height * 4);
+        std::vector<Uint8> pixels(m_size.width * m_size.height * 4);
 
         bind();
 

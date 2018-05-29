@@ -9,17 +9,17 @@ namespace Bull
         /// Nothing
     }
 
-    IndexBuffer::IndexBuffer(const ArrayList<unsigned int>& indices, HardwareBufferUsage usage) :
+    IndexBuffer::IndexBuffer(const std::vector<unsigned int>& indices, HardwareBufferUsage usage) :
         IndexBuffer()
     {
         create(indices, usage);
     }
 
-    bool IndexBuffer::create(const ArrayList<unsigned int>& indices, HardwareBufferUsage usage)
+    bool IndexBuffer::create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage)
     {
-        HardwareBuffer::create(indices.getSize() * sizeof(unsigned int), usage);
+        HardwareBuffer::create(indices.size() * sizeof(unsigned int), usage);
 
-        fill(indices.getBuffer(), indices.getSize() * sizeof(unsigned int), 0);
+        fill(indices.data(), indices.size() * sizeof(unsigned int), 0);
     }
 
     DataType IndexBuffer::getDataType() const

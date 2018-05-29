@@ -4,7 +4,6 @@
 #include <Bull/Core/Exception/DeclareException.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
-#include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/Utility/Color.hpp>
 
 #include <Bull/Math/Matrix/Matrix4.hpp>

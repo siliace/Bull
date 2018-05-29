@@ -1,7 +1,7 @@
 #include <vector>
 
 #include <Bull/Core/Utility/Random.hpp>
-#include <Bull/Render/Vertex/VertexArray.hpp>
+#include <Bull/Render/Vertex/Vertex.hpp>
 
 #include <Bull/Math/EulerAngles.hpp>
 
@@ -9,7 +9,7 @@
 
 namespace
 {
-    Bull::VertexArray vertices = {
+    std::vector<Bull::Vertex> vertices = {
             /// front
             Bull::Vertex(Bull::Vector3F( 0.5f,  0.5f,  0.5f), Bull::Vector4F(1.f, 1.f, 1.f, 0.f), Bull::Vector2F(1.f, 1.f), Bull::Vector3F::Forward), /// 0
             Bull::Vertex(Bull::Vector3F(-0.5f,  0.5f,  0.5f), Bull::Vector4F(1.f, 1.f, 1.f, 0.f), Bull::Vector2F(0.f, 1.f), Bull::Vector3F::Forward), /// 1
@@ -47,7 +47,7 @@ namespace
             Bull::Vertex(Bull::Vector3F(-0.5f, -0.5f, -0.5f), Bull::Vector4F(1.f, 1.f, 1.f, 0.f), Bull::Vector2F(1.f, 1.f), Bull::Vector3F::Down), /// 23
     };
 
-    Bull::ArrayList<unsigned int> indices = {
+    std::vector<unsigned int> indices = {
             0, 1, 2,
             1, 2, 3,
 

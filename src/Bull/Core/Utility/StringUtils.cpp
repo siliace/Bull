@@ -23,10 +23,10 @@ namespace Bull
         return boolean ? "true" : "false";
     }
 
-    String StringUtils::join(const ArrayList<String>& strings, const String& glue)
+    String StringUtils::join(const std::vector<String>& strings, const String& glue)
     {
         OutStringStream oss;
-        std::size_t size = strings.getSize();
+        std::size_t size = strings.size();
 
         for(std::size_t i = 0; i < size; i++)
         {

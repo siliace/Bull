@@ -37,7 +37,7 @@ namespace Bull
     {
         Expect(shaderBinary.isValid(), Throw(InvalidParameter, "Shader::create", "Invalid shader binary"));
 
-        gl::programBinary(m_program, shaderBinary.format, shaderBinary.binary.getBuffer(), shaderBinary.binary.getCapacity());
+        gl::programBinary(m_program, shaderBinary.format, shaderBinary.binary.data(), shaderBinary.binary.capacity());
     }
 
     void Shader::create(const Path& vertex, const Path& fragment)
@@ -263,7 +263,7 @@ namespace Bull
 
         if(length)
         {
-            shaderBinary.binary.create(length);
+            shaderBinary.binary.reserve(length);
 
             gl::getProgramBinary(getSystemHandler(), length, nullptr, &shaderBinary.format, &shaderBinary.binary[0]);
 

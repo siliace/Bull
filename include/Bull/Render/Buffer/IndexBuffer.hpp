@@ -1,7 +1,8 @@
 #ifndef BULL_RENDER_BUFFER_INDEXEBUFFER_HPP
 #define BULL_RENDER_BUFFER_INDEXEBUFFER_HPP
 
-#include <Bull/Core/Utility/ArrayList.hpp>
+#include <vector>
+
 #include <Bull/Core/Utility/DataType.hpp>
 
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
@@ -23,7 +24,7 @@ namespace Bull
          * \param usage   The usage (static, dynamic, stream) of the ElementBuffer
          *
          */
-        explicit IndexBuffer(const ArrayList<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
+        explicit IndexBuffer(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
 
         /*! \brief Create the ElementBuffer from a indice vector
          *
@@ -33,7 +34,7 @@ namespace Bull
          * \return True if the ElementBuffer was created successfully
          *
          */
-        bool create(const ArrayList<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
+        bool create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
 
         /*! \brief Get the DataType of the element buffer
          *

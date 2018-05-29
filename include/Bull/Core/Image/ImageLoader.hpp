@@ -131,7 +131,7 @@ namespace Bull
          * \param channels The number of channels per pixel
          *
          */
-        void createImage(AbstractImage& image, const void* buffer, int width, int height, int channels);
+        void createImage(AbstractImage& image, const unsigned char* buffer, int width, int height, int channels);
 
         mutable Mutex m_mutex;
     };

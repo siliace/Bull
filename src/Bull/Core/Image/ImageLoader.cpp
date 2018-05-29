@@ -1,5 +1,6 @@
 #include <stb_image/stb_image.h>
 
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Image/ImageLoader.hpp>
@@ -16,8 +17,8 @@ namespace Bull
 
     void ImageLoader::skip(void* user, int n)
     {
-        ByteArray buffer(n);
-        reinterpret_cast<InStream*>(user)->read(&buffer[0], buffer.getCapacity());
+        std::vector<Uint8> buffer(n);
+        reinterpret_cast<InStream*>(user)->read(&buffer[0], buffer.capacity());
     }
 
     int ImageLoader::eof(void* user)
@@ -58,6 +59,8 @@ namespace Bull
             int width, height, channels;
             stbi_uc* buffer = stbi_load(path.toString().getBuffer(), &width, &height, &channels, STBI_rgb_alpha);
 
+            Expect(buffer, Throw(InternalError, "ImageLoader::loadFromPath", "Failed to load image: " + getErrorMessage()));
+
             createImage(image, buffer, width, height, channels);
 
             stbi_image_free(buffer);
@@ -76,6 +79,8 @@ namespace Bull
 
             stbi_uc* buffer = stbi_load_from_callbacks(&callbacks, &stream, &width, &height, &channels, STBI_rgb_alpha);
 
+            Expect(buffer, Throw(InternalError, "ImageLoader::loadFromPath", "Failed to load image: " + getErrorMessage()));
+
             createImage(image, buffer, width, height, channels);
 
             stbi_image_free(buffer);
@@ -87,6 +92,8 @@ namespace Bull
         createTask([&image, data, length, this]() -> bool{
             int width, height, channels;
             stbi_uc* buffer = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &width, &height, &channels, STBI_rgb_alpha);
+
+            Expect(buffer, Throw(InternalError, "ImageLoader::loadFromPath", "Failed to load image: " + getErrorMessage()));
 
             createImage(image, buffer, width, height, channels);
 
@@ -101,11 +108,14 @@ namespace Bull
         return stbi_failure_reason();
     }
 
-    void ImageLoader::createImage(AbstractImage& image, const void* buffer, int width, int height, int channels)
+    void ImageLoader::createImage(AbstractImage& image, const unsigned char* buffer, int width, int height, int channels)
     {
-        ByteArray pixels;
+        std::vector<Uint8> pixels;
+        std::size_t pixelsCount = width * height * channels;
 
-        pixels.fill(buffer, width * height * channels);
+        pixels.reserve(pixelsCount);
+
+        std::copy(buffer, buffer + pixelsCount, pixels.begin());
 
         image.create(pixels, Size(width, height));
     }

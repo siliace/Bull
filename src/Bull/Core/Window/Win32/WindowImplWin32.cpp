@@ -411,13 +411,13 @@ namespace Bull
 
         String WindowImplWin32::getTitle() const
         {
-            ArrayList<wchar_t> buffer;
+            std::vector<wchar_t> buffer;
 
-            buffer.create(GetWindowTextLengthW(m_handler) + 1);
+            buffer.resize(GetWindowTextLengthW(m_handler) + 1);
 
-            GetWindowTextW(m_handler, &buffer[0], buffer.getCapacity());
+            GetWindowTextW(m_handler, &buffer[0], buffer.capacity());
 
-            return String(reinterpret_cast<const char*>(buffer.getBuffer()), buffer.getCapacity());
+            return String(reinterpret_cast<const char*>(buffer.data()), buffer.capacity());
         }
 
         bool WindowImplWin32::hasFocus() const
@@ -472,9 +472,9 @@ namespace Bull
 
         void WindowImplWin32::setIcon(const Image& icon)
         {
-            ByteArray pixels(icon.getSize().width * icon.getSize().height * 4);
+            std::vector<Uint8> pixels(icon.getSize().width * icon.getSize().height * 4);
 
-            for(std::size_t i = 0; i < pixels.getCapacity() / 4; i += 4)
+            for(std::size_t i = 0; i < pixels.capacity() / 4; i += 4)
             {
                 pixels.at(i * 4 + 0) = icon.getPixels().at(i * 4 + 2);
                 pixels.at(i * 4 + 1) = icon.getPixels().at(i * 4 + 1);
@@ -487,7 +487,7 @@ namespace Bull
                 DestroyIcon(m_icon);
             }
 
-            m_icon = CreateIcon(instance, icon.getSize().width, icon.getSize().height, 1, 32, nullptr, pixels.getBuffer());
+            m_icon = CreateIcon(instance, icon.getSize().width, icon.getSize().height, 1, 32, nullptr, pixels.data());
 
             Expect(m_icon, Throw(Win32Error, "WindowImplWin32::setIcon", "Failed to set window's icon"));
 

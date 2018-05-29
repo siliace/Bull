@@ -53,7 +53,7 @@ namespace Bull
          * \param size   The size of the Texture
          *
          */
-        void create(const ByteArray& pixels, const Size& size) override;
+        void create(const std::vector<Uint8>& pixels, const Size& size) override;
 
         /*! \brief Tell whether an Asset is loaded
          *

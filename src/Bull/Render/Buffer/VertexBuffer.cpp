@@ -9,29 +9,24 @@ namespace Bull
         /// Nothing
     }
 
-    VertexBuffer::VertexBuffer(const VertexArray& vertices, HardwareBufferUsage usage) :
+    VertexBuffer::VertexBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage) :
         VertexBuffer()
     {
         create(vertices, usage);
     }
 
-    bool VertexBuffer::create(const VertexArray& vertices, HardwareBufferUsage usage)
+    bool VertexBuffer::create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage)
     {
-        HardwareBuffer::create(vertices.getSize() * sizeof(Vertex), usage);
+        HardwareBuffer::create(vertices.size() * sizeof(Vertex), usage);
 
         fill(&vertices[0], getCapacity(), 0);
     }
 
-    VertexBuffer& VertexBuffer::setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride, std::size_t start)
+    void VertexBuffer::setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride, std::size_t start)
     {
-        if(gl::isBuffer(getSystemHandler()))
-        {
-            bind();
+        bind();
 
-            gl::enableVertexAttribArray(attrib);
-            gl::vertexAttribPointer(attrib, static_cast<int>(size), GL_FLOAT, GL_FALSE, static_cast<int>(stride), (void*)start);
-        }
-
-        return (*this);
+        gl::enableVertexAttribArray(attrib);
+        gl::vertexAttribPointer(attrib, static_cast<int>(size), GL_FLOAT, GL_FALSE, static_cast<int>(stride), (void*)start);
     }
 }
