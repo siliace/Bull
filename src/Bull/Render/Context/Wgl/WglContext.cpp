@@ -1,7 +1,9 @@
 #include <limits>
 
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Support/Win32/Win32Error.hpp>
 #include <Bull/Core/System/Library.hpp>
 #include <Bull/Core/Utility/StringUtils.hpp>
 
@@ -263,16 +265,10 @@ namespace Bull
                 int flag = 0;
                 wglQueryPbuffer(m_pbuffer, WGL_PBUFFER_LOST_ARB, &flag);
 
-                if(flag)
-                {
-                    Throw(InternalError, "WglContext::makeCurrent", "PBuffer is became invalid");
-                }
+                Expect(!flag, Throw(InternalError, "WglContext::makeCurrent", "PBuffer is became invalid"));
             }
 
-            if(wglMakeCurrent(m_device, m_render) != TRUE)
-            {
-                Throw(InternalError, "WglContext::makeCurrent", "Failed to make context current");
-            }
+            Expect(wglMakeCurrent(m_device, m_render), Throw(Win32Error, "WglContext::makeCurrent", "Failed to make context current"));
         }
 
         void WglContext::createSurface(const WindowImpl& window)
@@ -298,6 +294,8 @@ namespace Bull
 
                         if(!m_device)
                         {
+                            m_log->warning("Failed to get device context from PBuffer");
+
                             wglDestroyPbuffer(m_pbuffer);
                         }
                     }
@@ -315,6 +313,8 @@ namespace Bull
                                         GetModuleHandle(nullptr),
                                         nullptr);
 
+                Expect(m_window != INVALID_HANDLE_VALUE, Throw(Win32Error, "WglContext::createSurface", "Failed to create internal window"));
+
                 m_device = GetDC(m_window);
 
                 m_ownWindow = true;
@@ -330,7 +330,7 @@ namespace Bull
             descriptor.nVersion = 1;
             DescribePixelFormat(m_device, bestFormat, sizeof(PIXELFORMATDESCRIPTOR), &descriptor);
 
-            SetPixelFormat(m_device, bestFormat, &descriptor);
+            Expect(SetPixelFormat(m_device, bestFormat, &descriptor), Throw(Win32Error, "WglContext::setPixelFormat", "Failed to set pixel format"));
         }
 
         void WglContext::createContext(const WglContext* shared)
