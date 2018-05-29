@@ -2,6 +2,7 @@
 #define BULL_RENDER_CONTEXT_WGL_WGLPBUFFER_HPP
 
 #include <Bull/Render/Context/Extension.hpp>
+#include <Bull/Render/Context/Wgl/PBufferHandler.hpp>
 
 #define WGL_DRAW_TO_PBUFFER_ARB    0x202D
 #define WGL_MAX_PBUFFER_PIXELS_ARB 0x202E

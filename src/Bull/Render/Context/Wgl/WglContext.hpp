@@ -1,17 +1,14 @@
 #ifndef BULL_RENDER_CONTEXT_WIN32_WGLCONTEXT_HPP
 #define BULL_RENDER_CONTEXT_WIN32_WGLCONTEXT_HPP
 
-#include <Bull/Core/Support/Win32/Windows.hpp>
-
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
+#include <Bull/Render/Context/Wgl/PBufferHandler.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        DECLARE_HANDLE(HPBUFFER);
-
         class WglContext : public GlContext
         {
         public:

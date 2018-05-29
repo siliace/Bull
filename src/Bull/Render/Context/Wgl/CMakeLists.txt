@@ -1,11 +1,12 @@
 target_sources(bull-render
         PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/WglContext.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/PBufferHandler.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglContext.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/WglContext.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglContextNoError.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglCreateContextARB.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/WglExtensionsLoader.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglExtensionsLoader.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/WglExtensionsLoader.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglMultisampleARB.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglPbufferARB.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglPixelFormatARB.hpp
