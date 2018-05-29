@@ -1,5 +1,6 @@
 #include <unistd.h>
 
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Memory/String.hpp>
@@ -61,20 +62,14 @@ namespace Bull
             String string(reinterpret_cast<const char*>(data), length);
             ssize_t written = ::write(STDOUT_FILENO, string.getBuffer(), string.getSize());
 
-            if(written == -1)
-            {
-                Throw(InternalError, "ConsoleOutputImplUnix::write", "Failed to write buffer in stdout");
-            }
+            Expect(written != -1, Throw(InternalError, "ConsoleOutputImplUnix::write", "Failed to write buffer in stdout"));
 
             return written;
         }
 
         void ConsoleOutputImplUnix::flush()
         {
-            if(fflush(stdout) == -1)
-            {
-                Throw(InternalError, "ConsoleOutputImplUnix::flush", "Failed to flush stdout");
-            }
+            Expect(fflush(stdout) != -1, Throw(InternalError, "ConsoleOutputImplUnix::flush", "Failed to flush stdout"));
         }
 
         void ConsoleOutputImplUnix::clear()
