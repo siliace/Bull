@@ -50,6 +50,8 @@ namespace Bull
 
             void terminate() override;
 
+            void setName(const String& name) override;
+
         private:
 
             HANDLE m_handler;

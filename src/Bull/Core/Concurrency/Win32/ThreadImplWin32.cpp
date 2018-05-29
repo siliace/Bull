@@ -2,6 +2,7 @@
 #include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Exception/UnsupportedOperation.hpp>
 
 namespace Bull
 {
@@ -62,20 +63,19 @@ namespace Bull
         {
             Expect(GetCurrentThread() != m_handler, Throw(InternalError, "ThreadImplWin32::wait", "Failed to wait thread"));
 
-            if(WaitForSingleObject(m_handler, INFINITE) == WAIT_FAILED)
-            {
-                Throw(InternalError, "ThreadImplWin32::wait", "Failed to wait thread");
-            }
+            Expect(WaitForSingleObject(m_handler, INFINITE) != WAIT_FAILED, Throw(InternalError, "ThreadImplWin32::wait", "Failed to wait thread"));
         }
 
         void ThreadImplWin32::terminate()
         {
-            Expect(GetCurrentThread() != m_handler, Throw(InternalError, "ThreadImplWin32::wait", "Failed to terminate thread"));
+            Expect(GetCurrentThread() != m_handler, Throw(InternalError, "ThreadImplWin32::terminate", "Failed to terminate thread"));
 
-            if(!TerminateThread(m_handler, 0))
-            {
-                Throw(InternalError, "ThreadImplWin32::terminate", "Failed to terminate thread");
-            }
+            Expect(TerminateThread(m_handler, 0), Throw(InternalError, "ThreadImplWin32::terminate", "Failed to terminate thread"));
+        }
+
+        void ThreadImplWin32::setName(const Bull::String& name)
+        {
+            Throw(UnsupportedOperation, "ThreadImplWin32::setName", "Set thread name is not supported on your system");
         }
     }
 }
