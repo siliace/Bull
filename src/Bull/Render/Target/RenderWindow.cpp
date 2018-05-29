@@ -25,8 +25,11 @@ namespace Bull
             Thread::sleep(m_frameDelay - m_clock.getElapsedTime());
         }
 
-        setActive();
-        m_context->display();
+        if(m_context)
+        {
+            setActive();
+            m_context->display();
+        }
 
         m_clock.restart();
     }
