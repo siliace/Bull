@@ -322,12 +322,12 @@ namespace Bull
             {
                 do
                 {
-                    ArrayList<int> attribs;
+                    std::vector<int> attribs;
 
-                    attribs.add(GLX_CONTEXT_MAJOR_VERSION_ARB);
-                    attribs.add(m_settings.major);
-                    attribs.add(GLX_CONTEXT_MINOR_VERSION_ARB);
-                    attribs.add(m_settings.minor);
+                    attribs.emplace_back(GLX_CONTEXT_MAJOR_VERSION_ARB);
+                    attribs.emplace_back(m_settings.major);
+                    attribs.emplace_back(GLX_CONTEXT_MINOR_VERSION_ARB);
+                    attribs.emplace_back(m_settings.minor);
 
                     if(isSupported("GLX_ARB_create_context_profile"))
                     {
@@ -344,22 +344,22 @@ namespace Bull
                             flags |= GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB;
                         }
 
-                        attribs.add(GLX_CONTEXT_PROFILE_MASK_ARB);
-                        attribs.add(profile);
-                        attribs.add(GLX_CONTEXT_FLAGS_ARB);
-                        attribs.add(flags);
+                        attribs.emplace_back(GLX_CONTEXT_PROFILE_MASK_ARB);
+                        attribs.emplace_back(profile);
+                        attribs.emplace_back(GLX_CONTEXT_FLAGS_ARB);
+                        attribs.emplace_back(flags);
 
                         if(m_settings.type & ContextSettingsType_NoError)
                         {
                             if(isSupported("GLX_CONTEXT_OPENGL_NO_ERROR_ARB"))
                             {
-                                attribs.add(GLX_CONTEXT_OPENGL_NO_ERROR_ARB);
-                                attribs.add(1);
+                                attribs.emplace_back(GLX_CONTEXT_OPENGL_NO_ERROR_ARB);
+                                attribs.emplace_back(1);
                             }
                             else if(isSupported("GL_KHR_no_error"))
                             {
-                                attribs.add(CONTEXT_FLAG_NO_ERROR_BIT_KHR);
-                                attribs.add(1);
+                                attribs.emplace_back(CONTEXT_FLAG_NO_ERROR_BIT_KHR);
+                                attribs.emplace_back(1);
                             }
                             else
                             {
@@ -373,7 +373,7 @@ namespace Bull
                         m_settings.type = ContextSettingsType_Default;
                     }
 
-                    attribs.add(0);
+                    attribs.emplace_back(0);
 
                     m_render = glXCreateContextAttribs(m_display->getHandler(), m_config, sharedHandler, True, &attribs[0]);
 

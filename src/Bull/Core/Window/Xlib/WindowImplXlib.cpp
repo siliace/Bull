@@ -635,7 +635,7 @@ namespace Bull
             unsigned int defaultDepth = m_display->getDefaultDepth();
             XVisual* defaultVisual    = DefaultVisual(m_display->getHandler(), m_display->getDefaultScreen());
 
-            ByteArray pixels(icon.getPixels().getCapacity());
+            std::vector<Uint8> pixels(icon.getPixels().capacity());
 
             for(std::size_t i = 0; i < icon.getSize().width * icon.getSize().height; i++)
             {
@@ -667,7 +667,7 @@ namespace Bull
             XDestroyImage(image);
 
             std::size_t pitch = (width + 7 / 8);
-            ByteArray pixelMask(pitch * height);
+            std::vector<Uint8> pixelMask(pitch * height);
 
             for(std::size_t j = 0; j < height; j++)
             {
