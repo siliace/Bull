@@ -11,11 +11,13 @@
 #include <Bull/Render/Context/GlContext.hpp>
 
 #if defined BULL_OS_WINDOWS
-    #include <Bull/Render/Context/Wgl/WglExtensionsLoader.hpp>
+#include <Bull/Render/Context/Wgl/WglExtensionsLoader.hpp>
     typedef Bull::prv::WglExtensionsLoader ExtensionsLoaderType;
 #else
-    #include <Bull/Render/Context/Glx/GlxExtensionsLoader.hpp>
-    typedef Bull::prv::GlxExtensionsLoader ExtensionsLoaderType;
+#include <Bull/Render/Context/Glx/GlxExtensionsLoader.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
+
+typedef Bull::prv::GlxExtensionsLoader ExtensionsLoaderType;
 #endif
 
 namespace gl
@@ -231,41 +233,33 @@ namespace Bull
 
         void ExtensionsLoader::require(Extension& extension)
         {
-            if(m_loadedExtensions)
-            {
-               Throw(LogicError, "ExtensionsLoader::require", "Extensions already loaded");
-            }
+            Expect(!m_loadedExtensions, Throw(LogicError, "ExtensionsLoader::require", "Extensions already loaded"));
 
             m_extensions.emplace_back(extension);
         }
 
         void ExtensionsLoader::loadExtensions(SurfaceHandler surface)
         {
-            if(!m_loadedExtensions)
+            Expect(!m_loadedExtensions, Throw(LogicError, "ExtensionsLoader::loadExtensions", "Extensions already loaded"));
+
+            m_loadedExtensions = true;
+            m_allExtensions    = ExtensionsLoaderType::getExtensions(surface);
+
+            for(Extension& extension : m_extensions)
             {
-                m_loadedExtensions = true;
-                m_allExtensions    = ExtensionsLoaderType::getExtensions(surface);
-
-                for(Extension& extension : m_extensions)
+                if(isSupported(extension.getName()))
                 {
-                    if(isSupported(extension.getName()))
-                    {
-                        extension.load();
+                    extension.load();
 
-                        if(extension.isLoaded())
-                        {
-                            Log::getInstance()->info("Loaded OpenGL extension : " + extension.getName());
-                        }
-                        else
-                        {
-                            Log::getInstance()->info("Failed to load OpenGL extension : " + extension.getName());
-                        }
+                    if(extension.isLoaded())
+                    {
+                        Log::getInstance()->info("Loaded OpenGL extension : " + extension.getName());
+                    }
+                    else
+                    {
+                        Log::getInstance()->info("Failed to load OpenGL extension : " + extension.getName());
                     }
                 }
-            }
-            else
-            {
-                Throw(LogicError, "ExtensionsLoader::loadExtensions", "Extensions already loaded");
             }
         }
 
