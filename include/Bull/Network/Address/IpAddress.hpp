@@ -1,7 +1,6 @@
 #ifndef BULL_NETWORK_ADDRESS_IPADDRESS_HPP
 #define BULL_NETWORK_ADDRESS_IPADDRESS_HPP
 
-#include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Network/Export.hpp>
@@ -78,8 +77,8 @@ namespace Bull
 
     private:
 
-        ByteArray m_bytes;
-        bool       m_valid;
+        bool m_valid;
+        std::vector<Uint8> m_bytes;
     };
 }
 

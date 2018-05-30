@@ -2,7 +2,6 @@
 #define BULL_NETWORK_ADDRESS_UNIX_IPADDRESSIMPL_HPP
 
 #include <Bull/Core/Configuration/Integer.hpp>
-#include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Network/Address/NetProtocol.hpp>
@@ -20,10 +19,8 @@ namespace Bull
              * \param bytes    Bytes of the IpAddress
              * \param service  The service to use to resolve
              *
-             * \return True if the IpAddress was resolved successfully
-             *
              */
-            static bool resolve(const String& hostname, NetProtocol protocol, ByteArray& bytes, const String& service = "http");
+            static void resolve(const String& hostname, NetProtocol protocol, std::vector<Uint8>& bytes, const String& service = "http");
         };
     }
 }

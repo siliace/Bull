@@ -5,7 +5,9 @@ namespace Bull
 {
     void IpAddress::resolve(const String& hostname)
     {
-        m_valid = prv::IpAddressImpl::resolve(hostname, getProtocol(), m_bytes);
+        prv::IpAddressImpl::resolve(hostname, getProtocol(), m_bytes);
+
+        m_valid = true;
     }
 
     bool IpAddress::isValid() const
@@ -15,7 +17,7 @@ namespace Bull
 
     std::size_t IpAddress::getByteCount() const
     {
-        return m_bytes.getCapacity();
+        return m_bytes.capacity();
     }
 
     Uint8& IpAddress::at(std::size_t index)
@@ -33,6 +35,6 @@ namespace Bull
     IpAddress::IpAddress(std::size_t size, bool valid) :
         m_valid(valid)
     {
-        m_bytes.create(size);
+        m_bytes.reserve(size);
     }
 }

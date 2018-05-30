@@ -1,4 +1,7 @@
 #include <Bull/Core/Configuration/Macro.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Network/Address/SockAddrBuffer.hpp>
@@ -10,7 +13,7 @@ namespace Bull
 {
     namespace prv
     {
-        bool IpAddressImpl::resolve(const String& hostname, NetProtocol protocol, ByteArray& bytes, const String& service)
+        void IpAddressImpl::resolve(const String& hostname, NetProtocol protocol, std::vector<Uint8>& bytes, const String& service)
         {
             int error;
             addrinfo hints;
@@ -22,24 +25,17 @@ namespace Bull
 
             error = getaddrinfo(hostname.getBuffer(), service.getBuffer(), &hints, &info);
 
-            if(error == 0)
+            Expect(error == 0, Throw(InternalError, "IpAddressImpl::resolve", "Failed to get host address : " + String(gai_strerror(error))))
+
+            SockAddrBuffer buffer((*info->ai_addr), info->ai_addrlen);
+            const IpAddress& address = buffer.getIpAddress().getAddress();
+
+            for(std::size_t i = 0; i < address.getByteCount(); i++)
             {
-                SockAddrBuffer buffer((*info->ai_addr), info->ai_addrlen);
-                const IpAddress& address = buffer.getIpAddress().getAddress();
-
-                for(std::size_t i = 0; i < address.getByteCount(); i++)
-                {
-                    bytes[i] = address.at(i);
-                }
-
-                freeaddrinfo(info);
-
-                return true;
+                bytes[i] = address.at(i);
             }
 
-            Log::getInstance()->warning("Failed to get host address : " + String(gai_strerror(error)));
-
-            return false;
+            freeaddrinfo(info);
         }
     }
 }
