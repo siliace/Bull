@@ -1,5 +1,5 @@
-#ifndef Bull_GLXSWAPCONTROLGLI_hpp
-#define Bull_GLXSWAPCONTROLGLI_hpp
+#ifndef BULL_RENDER_CONTEXT_GLX_GLXSWAPCONTROLSGI_HPP
+#define BULL_RENDER_CONTEXT_GLX_GLXSWAPCONTROLSGI_HPP
 
 #include <Bull/Core/Support/Xlib/Xlib.hpp>
 
@@ -22,4 +22,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_GLXSWAPCONTROLGLI_hpp
+#endif // BULL_RENDER_CONTEXT_GLX_GLXSWAPCONTROLSGI_HPP

@@ -1,5 +1,5 @@
-#ifndef Bull_GlxExtensionsLoader_hpp
-#define Bull_GlxExtensionsLoader_hpp
+#ifndef BULL_RENDER_CONTEXT_GLX_GLXEXTENSIONSLOADER_HPP
+#define BULL_RENDER_CONTEXT_GLX_GLXEXTENSIONSLOADER_HPP
 
 #include <vector>
 
@@ -25,4 +25,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_GlxExtensionsLoader_hpp
+#endif // BULL_RENDER_CONTEXT_GLX_GLXEXTENSIONSLOADER_HPP
