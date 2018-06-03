@@ -3,21 +3,20 @@
 #include <GL/glcorearb.h>
 #include <GL/glext.h>
 
-#include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/LogicError.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
 
 #if defined BULL_OS_WINDOWS
-#include <Bull/Render/Context/Wgl/WglExtensionsLoader.hpp>
+    #include <Bull/Render/Context/Wgl/WglExtensionsLoader.hpp>
     typedef Bull::prv::WglExtensionsLoader ExtensionsLoaderType;
 #else
-#include <Bull/Render/Context/Glx/GlxExtensionsLoader.hpp>
-#include <Bull/Core/Exception/Expect.hpp>
-
-typedef Bull::prv::GlxExtensionsLoader ExtensionsLoaderType;
+    #include <Bull/Render/Context/Glx/GlxExtensionsLoader.hpp>
+    typedef Bull::prv::GlxExtensionsLoader ExtensionsLoaderType;
 #endif
 
 namespace gl
