@@ -27,7 +27,7 @@ namespace Bull
     {
         if(data && length)
         {
-            m_data = data;
+            m_data = static_cast<const unsigned char*>(data);
             m_size = length;
 
             return true;
@@ -53,7 +53,7 @@ namespace Bull
         if(m_data && m_size)
         {
             std::size_t count = std::min(size, m_size - m_cursor);
-            std::memcpy(data, &reinterpret_cast<const unsigned char*>(m_data)[m_cursor], count);
+            std::memcpy(data, &m_data[m_cursor], count);
             m_cursor += count;
 
             return count;

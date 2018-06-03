@@ -84,9 +84,9 @@ namespace Bull
 
     private:
 
-        const void* m_data;   /*!< Data to stream */
-        std::size_t m_size;   /*!< Size of data to stream */
+        std::size_t m_size; /*!< Size of data to stream */
         std::size_t m_cursor; /*!< The internal cursor */
+        const unsigned char* m_data; /*!< Data to stream */
     };
 }
 
