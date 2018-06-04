@@ -1,6 +1,7 @@
 #include <unistd.h>
 
 #include <Bull/Core/Concurrency/Unix/ThreadImplUnix.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Exception/UnsupportedOperation.hpp>
@@ -11,7 +12,7 @@ namespace Bull
     {
         void ThreadImplUnix::sleep(const Duration& time)
         {
-            usleep(static_cast<__useconds_t>(time.asMicroseconds()));
+            Expect(usleep(static_cast<__useconds_t>(time.asMicroseconds())) != -1, Throw(InternalError, "ThreadImplUnix::sleep", "Failed to sleep"));
         }
 
         void ThreadImplUnix::setCurrentName(const Bull::String& name)

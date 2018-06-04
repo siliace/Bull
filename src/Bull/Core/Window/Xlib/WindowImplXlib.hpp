@@ -207,7 +207,7 @@ namespace Bull
              * \param visible True to show the cursor, false to hide
              *
              */
-            void setMouseCursorVisible(bool visible = false) override;
+            void setMouseCursorVisible(bool visible) override;
 
             /*! \brief Check whether the mouse cursor is visible
              *
@@ -232,33 +232,33 @@ namespace Bull
 
             /*! \brief Open the window
              *
-             * \param mode
-             * \param title
-             * \param style
+             * \param mode  The VideoMode of the Window
+             * \param title The title of the Window
+             * \param style The decoration of the Window
              *
              */
             void open(const VideoMode& mode, const String& title, Uint32 style);
 
             /*! \brief Open the window
              *
-             * \param width
-             * \param height
-             * \param title
-             * \param style
-             * \param vi
+             * \param width  The width of the Window
+             * \param height The height of the Window
+             * \param title  The title of the Window
+             * \param style  The decoration of the Window
+             * \param vi     The VisualInfo parameters to use to open
              *
              */
             void open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi);
 
         private:
 
-            /*! \brief Perform internal intialization
+            /*! \brief Perform internal initialization
              *
              * \param title The title of the window to create
-             * \param WindowStyle The decortation of the window
+             * \param style The decoration of the window
              *
              */
-            void initialize(const String& title, Uint32 WindowStyle);
+            void initialize(const String& title, Uint32 style);
 
             /*! \brief Set Window manager protocols supported
              *
