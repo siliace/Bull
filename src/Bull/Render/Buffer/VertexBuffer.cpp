@@ -15,7 +15,7 @@ namespace Bull
         create(vertices, usage);
     }
 
-    bool VertexBuffer::create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage)
+    void VertexBuffer::create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage)
     {
         HardwareBuffer::create(vertices.size() * sizeof(Vertex), usage);
 

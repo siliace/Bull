@@ -15,7 +15,7 @@ namespace Bull
         create(indices, usage);
     }
 
-    bool IndexBuffer::create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage)
+    void IndexBuffer::create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage)
     {
         HardwareBuffer::create(indices.size() * sizeof(unsigned int), usage);
 

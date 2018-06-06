@@ -31,10 +31,8 @@ namespace Bull
          * \param indices Indices in the ElementBuffer
          * \param usage   The usage (static, dynamic, stream) of the ElementBuffer
          *
-         * \return True if the ElementBuffer was created successfully
-         *
          */
-        bool create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
+        void create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
 
         /*! \brief Get the DataType of the element buffer
          *
