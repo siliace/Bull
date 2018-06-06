@@ -1,6 +1,11 @@
 #ifndef BULL_CORE_UTILITY_STRINGUTILS_HPP
 #define BULL_CORE_UTILITY_STRINGUTILS_HPP
 
+#include <algorithm>
+
+#include <Bull/Core/Exception/Expect.hpp>
+#include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Utility/StringParameter.hpp>
 
@@ -32,7 +37,7 @@ namespace Bull
          */
         static String boolean(bool boolean);
 
-        /*! \brief Create a String from a List of Strings
+        /*! \brief Create a String from a list of Strings
          *
          * \param strings Strings to join
          * \param glue    The String to use to join two String
@@ -40,7 +45,30 @@ namespace Bull
          * \return The created String
          *
          */
-        static String join(const std::vector<String>& strings, const String& glue = String());
+        template <typename C>
+        static String join(const C& strings, const String& glue = String())
+        {
+            return join(strings.cbegin(), strings.cend(), glue);
+        }
+
+        /*! \brief Create a String from a list of Strings
+         *
+         * \param begin The begin iterator of the list
+         * \param end   The end iterator of the list
+         * \param glue  The String to use to join two String
+         *
+         * \return The created String
+         *
+         */
+        template <typename II>
+        static String join(II begin, II end, const String& glue = String())
+        {
+            Expect(begin < end, Throw(InvalidParameter, "StringUtils::join", "Invalid begin and end iterators"));
+
+            return std::accumulate(begin, end, String(), [&glue](const String& left, const String& right) -> String {
+                return left + (left.isEmpty() ? String() : glue) + right;
+            });
+        }
 
         /*! \brief Generate a random String
          *

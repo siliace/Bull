@@ -23,24 +23,6 @@ namespace Bull
         return boolean ? "true" : "false";
     }
 
-    String StringUtils::join(const std::vector<String>& strings, const String& glue)
-    {
-        OutStringStream oss;
-        std::size_t size = strings.size();
-
-        for(std::size_t i = 0; i < size; i++)
-        {
-            oss.write(strings[i]);
-
-            if(i < size - 1)
-            {
-                oss.write(glue);
-            }
-        }
-
-        return oss.toString();
-    }
-
     String StringUtils::random(std::size_t length, Uint32 flags)
     {
         String str;
