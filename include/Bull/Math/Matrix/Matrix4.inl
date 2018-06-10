@@ -69,13 +69,13 @@ namespace Bull
         T right  = plan.x + plan.width;
         T bottom = plan.y + plan.height;
 
-        projection(0, 0) = 2 / (right - left);
-        projection(1, 1) = 2 / (top - bottom);
-        projection(2, 2) = 1 / (zBounds.x - zBounds.y);
-        projection(3, 0) = (left + right) / (left - right);
-        projection(3, 1) = (top + bottom) / (bottom - top);
-        projection(3, 2) = zBounds.x / (zBounds.x - zBounds.y);
-        projection(3, 3) = 1;
+        projection.at(0, 0) = 2 / (right - left);
+        projection.at(1, 1) = 2 / (top - bottom);
+        projection.at(2, 2) = 1 / (zBounds.x() - zBounds.y());
+        projection.at(3, 0) = (left + right) / (left - right);
+        projection.at(3, 1) = (top + bottom) / (bottom - top);
+        projection.at(3, 2) = zBounds.x() / (zBounds.x() - zBounds.y());
+        projection.at(3, 3) = 1;
 
         return projection;
     }
