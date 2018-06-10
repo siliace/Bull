@@ -28,8 +28,18 @@ namespace Bull
 
     public:
 
+        /*! \brief Get the Date of the DateTime
+         *
+         * \return The Date
+         *
+         */
         const Date& getDate() const;
 
+        /*! \brief Get the Time of the DateTime
+         *
+         * \return The Time
+         *
+         */
         const Time& getTime() const;
 
         /*! \brief Compare two DateTime
