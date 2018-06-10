@@ -37,49 +37,6 @@ namespace Bull
          */
         static String boolean(bool boolean);
 
-        /*! \brief Create a String from a list of Strings
-         *
-         * \param strings Strings to join
-         * \param glue    The String to use to join two String
-         *
-         * \return The created String
-         *
-         */
-        template <typename C>
-        static String join(const C& strings, const String& glue = String())
-        {
-            return join(strings.cbegin(), strings.cend(), glue);
-        }
-
-        /*! \brief Create a String from a list of Strings
-         *
-         * \param begin The begin iterator of the list
-         * \param end   The end iterator of the list
-         * \param glue  The String to use to join two String
-         *
-         * \return The created String
-         *
-         */
-        template <typename II>
-        static String join(II begin, II end, const String& glue = String())
-        {
-            Expect(begin < end, Throw(InvalidParameter, "StringUtils::join", "Invalid begin and end iterators"));
-
-            return std::accumulate(begin, end, String(), [&glue](const String& left, const String& right) -> String {
-                return left + (left.isEmpty() ? String() : glue) + right;
-            });
-        }
-
-        /*! \brief Generate a random String
-         *
-         * \param length The length of the String to generate
-         * \param flags  Flags to use to generate the String
-         *
-         * \return The random String
-         *
-         */
-        static String random(std::size_t length, Uint32 flags = StringParameter_Numbers | StringParameter_Uppercase | StringParameter_Lowercase);
-
         /*! \brief Create a String by repeating another one
          *
          * \param string The String to repeat
