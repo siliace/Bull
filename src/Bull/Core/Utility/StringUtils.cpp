@@ -1,7 +1,6 @@
 #include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Utility/Random.hpp>
 #include <Bull/Core/Utility/StringUtils.hpp>
-#include <Bull/Core/Utility/StringParameter.hpp>
 
 namespace Bull
 {
