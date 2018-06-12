@@ -21,9 +21,6 @@
 
 #ifndef Button9
     #define Button9 9
-
-class RuntimeError;
-
 #endif // Button6
 
 namespace Bull
