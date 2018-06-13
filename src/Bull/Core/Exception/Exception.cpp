@@ -4,13 +4,6 @@
 
 namespace Bull
 {
-    Exception Exception::s_lastThrown("", 0, "", "", "");
-
-    const Exception& Exception::getLastThrown()
-    {
-        return s_lastThrown;
-    }
-
     const String& Exception::getFile() const
     {
         return m_file;

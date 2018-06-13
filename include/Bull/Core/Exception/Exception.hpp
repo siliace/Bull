@@ -22,19 +22,8 @@ namespace Bull
         template <typename T>
         static void throwException(const String& file, Uint64 line, const String& source, const String& description) noexcept(false)
         {
-            throw (s_lastThrown = T(file, line, source, description));
+            throw T(file, line, source, description);
         }
-
-        /*! \brief Get the last thrown Exception
-         *
-         * \return The Exception
-         *
-         */
-        static const Exception& getLastThrown();
-
-    private:
-
-        static Exception s_lastThrown;
 
     public:
 
