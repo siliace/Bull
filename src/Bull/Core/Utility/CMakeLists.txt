@@ -10,6 +10,8 @@ target_sources(bull-core
             ${BULL_INC_CORE_UTILITY}/Color.hpp
             ${BULL_SRC_CORE_UTILITY}/Color.cpp
             ${BULL_INC_CORE_UTILITY}/DataType.hpp
+            ${BULL_INC_CORE_UTILITY}/Function.hpp
+            ${BULL_INC_CORE_UTILITY}/Optional.hpp
             ${BULL_INC_CORE_UTILITY}/Random.hpp
             ${BULL_SRC_CORE_UTILITY}/Random.cpp
             ${BULL_INC_CORE_UTILITY}/Size.hpp
