@@ -6,7 +6,7 @@
         #include <cstring>
         #define BULL_HAS_CSTRING
     #endif
-    #define BULL_ZERO_MEMORY(Object) std::memset(&Object, 0, sizeof(decltype(Object)))
+    #define BULL_ZERO_MEMORY(Object) std::memset(&(Object), 0, sizeof(decltype(Object)))
 #endif
 
 #ifndef BULL_ZERO_MEMORY_PTR
