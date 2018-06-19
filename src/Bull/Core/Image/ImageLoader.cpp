@@ -6,7 +6,7 @@
 #include <Bull/Core/Image/ImageLoader.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Log/Log.hpp>
-#include <Bull/Core/Utility/CleanupCallback.hpp>
+#include <Bull/Core/Utility/Finaly.hpp>
 
 namespace Bull
 {

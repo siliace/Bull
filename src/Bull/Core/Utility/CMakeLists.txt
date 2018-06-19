@@ -5,11 +5,11 @@ target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE_UTILITY}/Character.hpp
             ${BULL_SRC_CORE_UTILITY}/Character.cpp
-            ${BULL_INC_CORE_UTILITY}/CleanupCallback.hpp
-            ${BULL_SRC_CORE_UTILITY}/CleanupCallback.cpp
             ${BULL_INC_CORE_UTILITY}/Color.hpp
             ${BULL_SRC_CORE_UTILITY}/Color.cpp
             ${BULL_INC_CORE_UTILITY}/DataType.hpp
+            ${BULL_INC_CORE_UTILITY}/Finaly.hpp
+            ${BULL_SRC_CORE_UTILITY}/Finaly.cpp
             ${BULL_INC_CORE_UTILITY}/Function.hpp
             ${BULL_INC_CORE_UTILITY}/Optional.hpp
             ${BULL_INC_CORE_UTILITY}/Random.hpp

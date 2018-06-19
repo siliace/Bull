@@ -1,5 +1,5 @@
-#ifndef BULL_CORE_UTILITY_CALLONEXIT_HPP
-#define BULL_CORE_UTILITY_CALLONEXIT_HPP
+#ifndef BULL_CORE_UTILITY_FINALY_HPP
+#define BULL_CORE_UTILITY_FINALY_HPP
 
 #include <functional>
 
@@ -7,28 +7,28 @@
 
 namespace Bull
 {
-    class BULL_CORE_API CleanupCallback : public NonCopyable
+    class BULL_CORE_API Finaly : public NonCopyable
     {
     public:
 
         /*! \brief Default constructor
          *
          */
-        CleanupCallback();
+        Finaly();
 
         /*! \brief Constructor
          *
          * \param callback The function to call when the instance is destroyed
          *
          */
-        explicit CleanupCallback(const std::function<void()>& callback);
+        explicit Finaly(const std::function<void()>& callback);
 
         /*! \brief Destructor
          *
          * Call the callback if enable
          *
          */
-        ~CleanupCallback();
+        ~Finaly();
 
         /*! \brief Change the callback
          *
@@ -58,4 +58,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_CORE_UTILITY_CALLONEXIT_HPP
+#endif // BULL_CORE_UTILITY_FINALY_HPP
