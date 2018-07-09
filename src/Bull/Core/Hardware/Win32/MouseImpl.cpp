@@ -17,7 +17,7 @@ namespace Bull
 
             GetCursorPos(&p);
 
-            return Size(p.x, p.y);
+            return {p.x, p.y};
         }
 
         bool MouseImpl::isButtonPressed(MouseButton button)

@@ -8,7 +8,7 @@ namespace Bull
     namespace prv
     {
         Win32Error::Win32Error(const String& file, Uint64 line, const String& source, const String& description) :
-            Exception(file, line, "Win32Error", source, createDescription())
+                Exception(file, line, "Win32Error", source, createDescription())
         {
             /// Nothing
         }
@@ -17,20 +17,20 @@ namespace Bull
         {
             DWORD error = GetLastError();
 
-            if(error)
+            if(!error)
             {
-                char* messageBuffer = nullptr;
-                size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-                                             nullptr, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, nullptr);
-
-                String message(messageBuffer, size);
-
-                LocalFree(messageBuffer);
-
-                return message;
+                Throw(LogicError, "Win32Error::createDescription", "No error occured");
             }
 
-            Throw(LogicError, "Win32Error::createDescription", "No error occured");
+            char* messageBuffer = nullptr;
+            size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                                         nullptr, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, nullptr);
+
+            String message(messageBuffer, size);
+
+            LocalFree(messageBuffer);
+
+            return message;
         }
     }
 }

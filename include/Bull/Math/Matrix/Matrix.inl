@@ -50,6 +50,8 @@ namespace Bull
     Matrix<T, W, H>& Matrix<T, W, H>::set(T value)
     {
         m_matrix.fill(value);
+
+        return *this;
     }
 
     template <typename T, std::size_t W, std::size_t H>

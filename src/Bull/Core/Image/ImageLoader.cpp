@@ -69,7 +69,7 @@ namespace Bull
 
     void ImageLoader::loadFromStream(AbstractImage& image, InStream& stream)
     {
-        createTask([&image, &stream, this]() -> bool{
+        createTask([&image, &stream, this]() {
             stbi_io_callbacks callbacks;
             int width, height, channels;
 
@@ -89,7 +89,7 @@ namespace Bull
 
     void ImageLoader::loadFromMemory(AbstractImage& image, const void* data, std::size_t length)
     {
-        createTask([&image, data, length, this]() -> bool{
+        createTask([&image, data, length, this]() {
             int width, height, channels;
             stbi_uc* buffer = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &width, &height, &channels, STBI_rgb_alpha);
 

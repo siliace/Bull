@@ -25,7 +25,7 @@ namespace Bull
         return prv::FileImpl::copy(path, newPath);
     }
 
-    bool File::rename(const Path& name, const String& newName)
+    void File::rename(const Path& name, const String& newName)
     {
         Expect(File::exists(name.toString()), Throw(InvalidParameter, "File::rename", "The file to rename does not exists"));
         Expect(!File::exists(newName), Throw(InvalidParameter, "File::rename", "A file with the new name already exists"));

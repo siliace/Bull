@@ -21,7 +21,7 @@ namespace Bull
 
     void ShaderStageLoader::loadFromStream(ShaderStage& stage, InStream& stream, ShaderStageType type)
     {
-        createTask([&stage, &stream, type]() -> bool {
+        createTask([&stage, &stream, type]() {
             stage.create(type);
             stage.compile(stream.readAll());
         });
@@ -29,7 +29,7 @@ namespace Bull
 
     void ShaderStageLoader::loadFromMemory(ShaderStage& stage, const void* data, std::size_t length, ShaderStageType type)
     {
-        createTask([&stage, data, length, type]() -> bool {
+        createTask([&stage, data, length, type]() {
             String code(reinterpret_cast<const char*>(data), length);
 
             stage.create(type);

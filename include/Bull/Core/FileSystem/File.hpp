@@ -59,10 +59,8 @@ namespace Bull
          * \param name    The name of the File to rename
          * \param newName The new name of the File
          *
-         * \return True if the file was renamed successfully
-         *
          */
-        static bool rename(const Path& name, const String& newName);
+        static void rename(const Path& name, const String& newName);
 
         /*! \brief Delete a file
          *

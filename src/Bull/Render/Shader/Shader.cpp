@@ -33,7 +33,7 @@ namespace Bull
         gl::deleteProgram(m_program);
     }
 
-    bool Shader::create(const ShaderBinary& shaderBinary)
+    void Shader::create(const ShaderBinary& shaderBinary)
     {
         Expect(shaderBinary.isValid(), Throw(InvalidParameter, "Shader::create", "Invalid shader binary"));
 

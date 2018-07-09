@@ -301,10 +301,8 @@ namespace Bull
          *
          * \param enable False to leave the fullscreen mode, true to enter the fullscreen mode
          *
-         * \return True if the switch was done successfully
-         *
          */
-        bool enableFullscreen(bool enable = true);
+        void enableFullscreen(bool enable = true);
 
         /*! \brief Check if a window is in fullscreen
          *

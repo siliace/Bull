@@ -43,10 +43,8 @@ namespace Bull
          *
          * \param shaderBinary The binary of the Shader
          *
-         * \return True if the Shader was created successfully
-         *
          */
-        bool create(const ShaderBinary& shaderBinary);
+        void create(const ShaderBinary& shaderBinary);
 
         /*! \brief Create a Shader by loading its stages from their Path
          *
