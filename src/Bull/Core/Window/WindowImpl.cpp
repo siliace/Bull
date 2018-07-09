@@ -1,5 +1,6 @@
+#include <thread>
+
 #include <Bull/Core/Hardware/Mouse.hpp>
-#include <Bull/Core/Concurrency/Thread.hpp>
 #include <Bull/Core/Window/JoystickManager.hpp>
 #include <Bull/Core/Window/WindowImpl.hpp>
 
@@ -39,7 +40,8 @@ namespace Bull
                     {
                         startProcessEvents();
                         manager->processEvents(m_events);
-                        Thread::sleep(Duration::milliseconds(10));
+
+                        std::this_thread::sleep_for(std::chrono::milliseconds(20));
                     }while(m_events.empty());
                 }
             }

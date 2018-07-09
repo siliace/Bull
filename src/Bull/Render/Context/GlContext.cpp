@@ -24,7 +24,8 @@ namespace Bull
 
         namespace
         {
-            Mutex mutex;
+            /// A lock to ensure to create only once the shared context
+            std::mutex sharedContextMutex;
 
             /// The context shared with all others
             std::unique_ptr<ContextType> shared;
@@ -34,16 +35,13 @@ namespace Bull
 
             /// The internal context of this thread
             thread_local std::unique_ptr<Context> internal = nullptr;
-            const ContextSettings internalSettings = ContextSettings(0, 0, 0, 3, 3);
 
-            std::unique_ptr<Context>& getInternalContext()
+            Context& getInternalContext()
             {
                 if(!internal)
                 {
-                    Lock l(mutex);
-
                     ContextSettings realInternalSettings;
-                    internal = std::make_unique<Context>(VideoMode::getCurrent().bitsPerPixel, internalSettings);
+                    internal = std::make_unique<Context>(VideoMode::getCurrent().bitsPerPixel, ContextSettings(0, 0, 0, 3, 3));
 
                     realInternalSettings = internal->getSettings();
 
@@ -53,12 +51,14 @@ namespace Bull
                     Expect(major > 3 || major == 3 && minor >= 3, Throw(WrongOpenGLVersion, "getInternalContext", "Bull needs OpenGL 3.3 or higher to work"));
                 }
 
-                return internal;
+                return *internal;
             }
         }
 
         void GlContext::globalInit()
         {
+            std::lock_guard<std::mutex> lock(sharedContextMutex);
+
             shared = std::make_unique<ContextType>(nullptr);
             shared->setActive(true);
 
@@ -79,18 +79,12 @@ namespace Bull
 
         void GlContext::ensureContext()
         {
-            Lock l(mutex);
-
-            if(current == nullptr)
-            {
-                getInternalContext();
-            }
+            /// This will create a context if there no one in the current thread, do nothing otherwise
+            getInternalContext();
         }
 
         std::unique_ptr<GlContext> GlContext::createInstance()
         {
-            Lock l(mutex);
-
             std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared.get());
             context->initialize();
 
@@ -99,8 +93,6 @@ namespace Bull
 
         std::unique_ptr<GlContext> GlContext::createInstance(const VideoMode& mode, const ContextSettings& settings)
         {
-            Lock l(mutex);
-
             std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared.get(), mode, settings);
             context->initialize();
 
@@ -109,8 +101,6 @@ namespace Bull
 
         std::unique_ptr<GlContext> GlContext::createInstance(unsigned int bitsPerPixel, const ContextSettings& settings)
         {
-            Lock l(mutex);
-
             std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared.get(), bitsPerPixel, settings);
             context->initialize(settings);
 
@@ -119,8 +109,6 @@ namespace Bull
 
         std::unique_ptr<GlContext> GlContext::createInstance(const WindowImpl& window, unsigned int bitsPerPixel, const ContextSettings& settings)
         {
-            Lock l(mutex);
-
             std::unique_ptr<GlContext> context = std::make_unique<ContextType>(shared.get(), window, bitsPerPixel, settings);
             context->initialize(settings);
 
@@ -202,8 +190,6 @@ namespace Bull
             {
                 if(current != this)
                 {
-                    Lock l(mutex);
-
                     makeCurrent();
 
                     current = this;
@@ -213,9 +199,7 @@ namespace Bull
             {
                 if(current == this)
                 {
-                    Lock l(mutex);
-
-                    getInternalContext()->setActive(true);
+                    getInternalContext().setActive(true);
                 }
             }
         }

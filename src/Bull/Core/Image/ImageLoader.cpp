@@ -103,7 +103,7 @@ namespace Bull
 
     String ImageLoader::getErrorMessage() const
     {
-        Lock lock(m_mutex);
+        std::lock_guard<std::mutex> lock(m_mutex);
 
         return stbi_failure_reason();
     }

@@ -1,6 +1,7 @@
 #ifndef BULL_CORE_IMAGE_IMAGELOADER_HPP
 #define BULL_CORE_IMAGE_IMAGELOADER_HPP
 
+#include <mutex>
 #include <vector>
 
 #include <Bull/Core/Assets/AssetIOScheduler.hpp>
@@ -8,7 +9,6 @@
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/Image/AbstractImage.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
-#include <Bull/Core/Concurrency/Mutex.hpp>
 
 namespace Bull
 {
@@ -133,7 +133,7 @@ namespace Bull
          */
         void createImage(AbstractImage& image, const unsigned char* buffer, int width, int height, int channels);
 
-        mutable Mutex m_mutex;
+        mutable std::mutex m_mutex;
     };
 }
 

@@ -1,10 +1,10 @@
 #ifndef BULL_CORE_PATTERN_SINGLETON_HPP
 #define BULL_CORE_PATTERN_SINGLETON_HPP
 
+#include <mutex>
 #include <memory>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Concurrency/Lock.hpp>
 
 namespace Bull
 {
@@ -24,7 +24,7 @@ namespace Bull
             {
                 if(!s_instance)
                 {
-                    Lock lock(s_mutex);
+                    std::lock_guard<std::mutex> lock(s_mutex);
 
                     if(!s_instance)
                     {
@@ -66,12 +66,12 @@ namespace Bull
 
     private:
 
-        static Mutex              s_mutex;
+        static std::mutex         s_mutex;
         static std::unique_ptr<T> s_instance;
     };
 
     template <typename T>
-    Mutex Singleton<T>::s_mutex;
+    std::mutex Singleton<T>::s_mutex;
 
     template <typename T>
     std::unique_ptr<T> Singleton<T>::s_instance;

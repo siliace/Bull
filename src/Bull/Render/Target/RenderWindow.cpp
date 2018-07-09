@@ -1,4 +1,4 @@
-#include <Bull/Core/Concurrency/Thread.hpp>
+#include <thread>
 
 #include <Bull/Render/Context/GlContext.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
@@ -22,7 +22,9 @@ namespace Bull
     {
         if(m_frameDelay != Duration::Zero && m_frameDelay > m_clock.getElapsedTime())
         {
-            Thread::sleep(m_frameDelay - m_clock.getElapsedTime());
+            std::this_thread::sleep_for(std::chrono::milliseconds(
+                    static_cast<Uint64>(m_frameDelay.asMilliseconds() - m_clock.getElapsedTime().asMilliseconds())
+            ));
         }
 
         if(m_context)

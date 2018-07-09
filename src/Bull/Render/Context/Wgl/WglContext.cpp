@@ -416,11 +416,11 @@ namespace Bull
 
                 if(shared)
                 {
-                    static Mutex mutex;
+                    static std::mutex mutex;
 
                     m_log->info("Create legacy WglContext");
 
-                    Lock lock(mutex);
+                    std::lock_guard<std::mutex> lock(mutex);
 
                     wglShareLists(sharedHandler, m_render);
                 }

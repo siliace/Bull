@@ -9,7 +9,6 @@ target_sources(bull-core
         )
 
 add_subdirectory(Assets)
-add_subdirectory(Concurrency)
 add_subdirectory(Configuration)
 add_subdirectory(Exception)
 add_subdirectory(FileSystem)
