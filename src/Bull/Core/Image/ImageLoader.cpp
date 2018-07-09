@@ -18,7 +18,7 @@ namespace Bull
     void ImageLoader::skip(void* user, int n)
     {
         std::vector<Uint8> buffer(n);
-        reinterpret_cast<InStream*>(user)->read(&buffer[0], buffer.capacity());
+        reinterpret_cast<InStream*>(user)->read(buffer.data(), buffer.capacity());
     }
 
     int ImageLoader::eof(void* user)
@@ -49,7 +49,7 @@ namespace Bull
     void ImageLoader::getInfo(ImageInfo& info, const void* data, std::size_t length)
     {
         createTask([&info, data, length]() {
-            stbi_info_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels)) == 0;
+            stbi_info_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
         });
     }
 
