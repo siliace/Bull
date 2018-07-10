@@ -3,7 +3,6 @@
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Support/Xlib/Display.hpp>
-#include <Bull/Core/Concurrency/Lock.hpp>
 
 
 namespace Bull
@@ -26,8 +25,8 @@ namespace Bull
 
         private:
 
-            static Mutex s_mutex;
-            static bool  s_errorOccurred;
+            static std::mutex s_mutex;
+            static bool s_errorOccurred;
 
         public:
 
@@ -65,9 +64,9 @@ namespace Bull
 
         private:
 
-            Lock          m_lock;
-            bool          m_isBound;
+            bool m_isBound;
             XErrorHandler m_previousHandler;
+            std::lock_guard<std::mutex> m_lock;
         };
     }
 }

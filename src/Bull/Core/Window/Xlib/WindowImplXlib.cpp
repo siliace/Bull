@@ -1,4 +1,5 @@
-#include <Bull/Core/Concurrency/Thread.hpp>
+#include <thread>
+
 #include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
@@ -352,7 +353,7 @@ namespace Bull
 
                                 if(!grabbed)
                                 {
-                                    Thread::sleep(Duration::milliseconds(10.f));
+                                    std::this_thread::sleep_for(std::chrono::milliseconds(10));
                                 }
                             }while(!grabbed);
                         }
@@ -483,7 +484,7 @@ namespace Bull
 
                     if(!grabbed)
                     {
-                        Thread::sleep(Duration::milliseconds(10.f));
+                        std::this_thread::sleep_for(std::chrono::milliseconds(10));
                     }
                 }while(!grabbed);
             }

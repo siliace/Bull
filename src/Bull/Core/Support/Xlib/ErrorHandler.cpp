@@ -6,7 +6,7 @@ namespace Bull
 {
     namespace prv
     {
-        Mutex ErrorHandler::s_mutex;
+        std::mutex ErrorHandler::s_mutex;
         bool ErrorHandler::s_errorOccurred = false;
 
         int ErrorHandler::handle(XDisplay* display, XErrorEvent* error)
