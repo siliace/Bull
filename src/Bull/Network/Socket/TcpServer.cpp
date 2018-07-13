@@ -1,4 +1,5 @@
-#include <Bull/Core/Concurrency/Thread.hpp>
+#include <thread>
+
 #include <Bull/Core/Time/Clock.hpp>
 #include <Bull/Core/Utility/Finaly.hpp>
 
@@ -88,7 +89,7 @@ namespace Bull
                     return SocketState();
                 }
 
-                Thread::sleep(pause);
+                std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<unsigned int>(pause.asMilliseconds())));
             }while(clock.getElapsedTime() < timeout);
         }
 
