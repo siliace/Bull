@@ -13,3 +13,5 @@ target_sources(bull-render
             ${BULL_SRC_RENDER_SHADER}/ShaderStageLoader.cpp
             ${BULL_INC_RENDER_SHADER}/ShaderStageType.hpp
         )
+
+add_subdirectory(Ast)
