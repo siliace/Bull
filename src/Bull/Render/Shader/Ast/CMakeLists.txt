@@ -3,6 +3,7 @@ set(BULL_SRC_RENDER_SHADER_AST ${BULL_SRC_RENDER_SHADER}/Ast)
 
 target_sources(bull-render
         PUBLIC
+            ${BULL_INC_RENDER_SHADER_AST}/Constant.hpp
             ${BULL_INC_RENDER_SHADER_AST}/Function.hpp
             ${BULL_INC_RENDER_SHADER_AST}/InVariable.hpp
             ${BULL_INC_RENDER_SHADER_AST}/Node.hpp
