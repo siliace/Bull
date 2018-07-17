@@ -1,5 +1,5 @@
-#ifndef BULL_RENDER_SHADER_AST_Type_HPP
-#define BULL_RENDER_SHADER_AST_Type_HPP
+#ifndef BULL_RENDER_SHADER_AST_TYPE_HPP
+#define BULL_RENDER_SHADER_AST_TYPE_HPP
 
 #include <Bull/Core/Memory/String.hpp>
 
@@ -34,4 +34,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_RENDER_SHADER_AST_Type_HPP
+#endif // BULL_RENDER_SHADER_AST_TYPE_HPP

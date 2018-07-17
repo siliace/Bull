@@ -3,7 +3,7 @@
 
 #include <Bull/Core/Utility/Optional.hpp>
 
-#include <Bull/Render/Shader/Ast/Types/Variable.hpp>
+#include <Bull/Render/Shader/Ast/Type/Variable.hpp>
 
 namespace Bull
 {

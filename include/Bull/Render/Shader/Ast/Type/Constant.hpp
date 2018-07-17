@@ -1,7 +1,7 @@
 #ifndef BULL_RENDER_SHADER_AST_CONSTANT_HPP
 #define BULL_RENDER_SHADER_AST_CONSTANT_HPP
 
-#include <Bull/Render/Shader/Ast/Types/Variable.hpp>
+#include <Bull/Render/Shader/Ast/Type/Variable.hpp>
 
 namespace Bull
 {
