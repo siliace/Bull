@@ -6,10 +6,10 @@
 #include <Bull/Core/Utility/StringUtils.hpp>
 
 #include <Bull/Render/Shader/Ast/Glsl/TypeMapper.hpp>
-#include <Bull/Render/Shader/Ast/Function.hpp>
-#include <Bull/Render/Shader/Ast/InVariable.hpp>
-#include <Bull/Render/Shader/Ast/OutVariable.hpp>
-#include <Bull/Render/Shader/Ast/Uniform.hpp>
+#include <Bull/Render/Shader/Ast/Types/Function.hpp>
+#include <Bull/Render/Shader/Ast/Types/InVariable.hpp>
+#include <Bull/Render/Shader/Ast/Types/OutVariable.hpp>
+#include <Bull/Render/Shader/Ast/Types/Uniform.hpp>
 
 namespace Bull
 {

@@ -1,10 +1,10 @@
-#include <Bull/Render/Shader/Ast/Node.hpp>
+#include <Bull/Render/Shader/Ast/Type/Type.hpp>
 
 namespace Bull
 {
     namespace Ast
     {
-        Node::Node(const String& name) :
+        Node::Type(const String& name) :
             m_name(name)
         {
             /// Nothing

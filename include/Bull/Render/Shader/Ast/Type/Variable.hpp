@@ -1,19 +1,19 @@
 #ifndef BULL_RENDER_SHADER_AST_VARIABLE_HPP
 #define BULL_RENDER_SHADER_AST_VARIABLE_HPP
 
-#include <Bull/Render/Shader/Ast/Node.hpp>
+#include <Bull/Render/Shader/Ast/Type/Type.hpp>
 
 namespace Bull
 {
     namespace Ast
     {
         template <typename T>
-        class Variable : public Node
+        class Variable : public Type
         {
         public:
 
             explicit Variable(const String& name) :
-                Node(name)
+                Type(name)
             {
                 /// Nothing
             }

@@ -1,7 +1,7 @@
 #ifndef CUBE_HPP
 #define CUBE_HPP
 
-#include <Bull/Graphics/Model/Node.hpp>
+#include <Bull/Graphics/Model/Type.hpp>
 
 #include <Bull/Graphics/Model/Mesh.hpp>
 

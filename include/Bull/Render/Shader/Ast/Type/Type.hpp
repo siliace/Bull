@@ -1,5 +1,5 @@
-#ifndef BULL_RENDER_SHADER_AST_NODE_HPP
-#define BULL_RENDER_SHADER_AST_NODE_HPP
+#ifndef BULL_RENDER_SHADER_AST_Type_HPP
+#define BULL_RENDER_SHADER_AST_Type_HPP
 
 #include <Bull/Core/Memory/String.hpp>
 
@@ -9,18 +9,18 @@ namespace Bull
 {
     namespace Ast
     {
-        class BULL_RENDER_API Node
+        class BULL_RENDER_API Type
         {
         public:
 
             /*! \brief Constructor
              *
-             * \param name The name of the node
+             * \param name The name of the Type
              *
              */
-            explicit Node(const String& name);
+            explicit Type(const String& name);
 
-            /*! \brief Get the name of the Node
+            /*! \brief Get the name of the Type
              *
              * \return The name
              *
@@ -34,4 +34,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_RENDER_SHADER_AST_NODE_HPP
+#endif // BULL_RENDER_SHADER_AST_Type_HPP
