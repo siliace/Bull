@@ -1,9 +1,19 @@
 #ifndef BULL_RENDER_SHADER_AST_GLSL_TYPEMAPPER_HPP
 #define BULL_RENDER_SHADER_AST_GLSL_TYPEMAPPER_HPP
 
+#include <Bull/Math/Matrix/Matrix2.hpp>
+#include <Bull/Math/Matrix/Matrix3.hpp>
+#include <Bull/Math/Matrix/Matrix4.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
 #include <Bull/Math/Vector/Vector3.hpp>
 #include <Bull/Math/Vector/Vector4.hpp>
+
+#define DeclareTypeMapper(Type, Out)          \
+template <>                                   \
+struct TypeMapper<Type>                       \
+{                                             \
+    static constexpr const char* value = Out; \
+}                                             \
 
 namespace Bull
 {
@@ -17,41 +27,22 @@ namespace Bull
 
             };
 
-            template <>
-            struct TypeMapper<void>
-            {
-                static constexpr const char* value = "void";
-            };
+            DeclareTypeMapper(void,  "void");
+            DeclareTypeMapper(bool,  "bool");
+            DeclareTypeMapper(int,   "int");
+            DeclareTypeMapper(float, "float");
 
-            template <>
-            struct TypeMapper<int>
-            {
-                static constexpr const char* value = "int";
-            };
+            DeclareTypeMapper(Vector2F, "vec2");
+            DeclareTypeMapper(Vector3F, "vec3");
+            DeclareTypeMapper(Vector4F, "vec4");
 
-            template <>
-            struct TypeMapper<float>
-            {
-                static constexpr const char* value = "float";
-            };
+            DeclareTypeMapper(Vector2I, "ivec2");
+            DeclareTypeMapper(Vector3I, "ivec3");
+            DeclareTypeMapper(Vector4I, "ivec4");
 
-            template <>
-            struct TypeMapper<Vector2F>
-            {
-                static constexpr const char* value = "vec2";
-            };
-
-            template <>
-            struct TypeMapper<Vector3F>
-            {
-                static constexpr const char* value = "vec3";
-            };
-
-            template <>
-            struct TypeMapper<Vector4F>
-            {
-                static constexpr const char* value = "vec4";
-            };
+            DeclareTypeMapper(Matrix2F, "mat2");
+            DeclareTypeMapper(Matrix3F, "mat3");
+            DeclareTypeMapper(Matrix4F, "mat4");
         }
     }
 }
