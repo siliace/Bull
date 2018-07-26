@@ -3,6 +3,7 @@ set(BULL_SRC_RENDER_SHADER_AST_TYPE ${BULL_SRC_RENDER_SHADER_AST}/Type)
 
 target_sources(bull-render
         PUBLIC
+            ${BULL_INC_RENDER_SHADER_AST_TYPE}/Array.hpp
             ${BULL_INC_RENDER_SHADER_AST_TYPE}/BuiltIn.hpp
             ${BULL_INC_RENDER_SHADER_AST_TYPE}/Constant.hpp
             ${BULL_INC_RENDER_SHADER_AST_TYPE}/Function.hpp
