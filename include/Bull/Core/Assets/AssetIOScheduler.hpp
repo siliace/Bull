@@ -13,12 +13,32 @@ namespace Bull
     {
     public:
 
+        /*! \brief Get the loading progression in percentage
+         *
+         * \return The progression
+         *
+         */
+        float getProgression() const
+        {
+            std::size_t ready = 0;
+
+            for(const auto& future : m_futures)
+            {
+                if(future.wait_for(std::chrono::seconds::zero()) == std::future_status::ready)
+                {
+                    ready += 1;
+                }
+            }
+
+            return (ready / m_futures.size()) * 100.f;
+        }
+
         /*! \brief Wait every Asset has been loaded
          *
          */
         void wait()
         {
-            for(std::future<void>& future : m_futures)
+            for(auto& future : m_futures)
             {
                 future.get();
             }
