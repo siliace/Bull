@@ -1,5 +1,0 @@
-set(BULL_INC_RENDER_SHADER_AST ${BULL_INC_RENDER_SHADER}/Ast)
-set(BULL_SRC_RENDER_SHADER_AST ${BULL_SRC_RENDER_SHADER}/Ast)
-
-add_subdirectory(Type)
-add_subdirectory(Glsl)
