@@ -7,17 +7,6 @@ namespace Bull
 {
     struct BULL_CORE_API Character
     {
-        /*! \brief Tell whether a character is alpha numeric
-         *
-         * A character is alpha numeric if it's a letter (in lowercase or uppercase) or a number
-         *
-         * \param character The character to test
-         *
-         * \return True if the character is alpha numeric
-         *
-         */
-        static bool isAlphaNumeric(char character);
-
         /*! \brief Convert a lowercase character to the uppercase equivalent character
           *
           * \param character the character to convert

@@ -2,11 +2,6 @@
 
 namespace Bull
 {
-    bool Character::isAlphaNumeric(char character)
-    {
-        return std::isalnum(character);
-    }
-
     char Character::toUpper(char character)
     {
         if(character >= 'a' && character <= 'z')
