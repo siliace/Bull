@@ -4,14 +4,11 @@
 #include <memory>
 #include <queue>
 
-#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Window/CursorImpl.hpp>
 #include <Bull/Core/Window/VideoMode.hpp>
 #include <Bull/Core/Window/WindowHandler.hpp>
 #include <Bull/Core/Window/WindowEvent.hpp>
-
-#include <Bull/Math/Vector/Vector2.hpp>
 
 namespace Bull
 {

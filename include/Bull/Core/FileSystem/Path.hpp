@@ -1,7 +1,6 @@
 #ifndef BULL_CORE_FILESYSTEM_PATH_HPP
 #define BULL_CORE_FILESYSTEM_PATH_HPP
 
-#include <Bull/Core/Configuration/OS.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull

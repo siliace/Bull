@@ -4,7 +4,6 @@
 #include <vector>
 
 #include <Bull/Core/Assets/Asset.hpp>
-#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Utility/Size.hpp>
 
 namespace Bull

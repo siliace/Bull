@@ -1,4 +1,3 @@
-#include <Bull/Core/Configuration/Macro.hpp>
 #include <Bull/Core/Log/MessageWindowLogger.hpp>
 
 namespace Bull

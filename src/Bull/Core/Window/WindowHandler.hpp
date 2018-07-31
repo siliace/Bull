@@ -1,7 +1,7 @@
 #ifndef BULL_WINDOWHANDLER_HPP
 #define BULL_WINDOWHANDLER_HPP
 
-#include <Bull/Core/Configuration/OS.hpp>
+#include <Bull/Core/Prerequisites.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Core/Support/Win32/Windows.hpp>

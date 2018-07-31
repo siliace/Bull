@@ -1,4 +1,3 @@
-#include <Bull/Core/Configuration/OS.hpp>
 #include <Bull/Core/FileSystem/DirectoryImpl.hpp>
 
 #if defined BULL_OS_WINDOWS

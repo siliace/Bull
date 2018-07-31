@@ -1,8 +1,6 @@
 #ifndef BULL_RENDER_CONTEXT_CONTEXTSETTINGS_HPP
 #define BULL_RENDER_CONTEXT_CONTEXTSETTINGS_HPP
 
-#include <Bull/Core/Configuration/Integer.hpp>
-
 #include <Bull/Render/Context/ContextSettingsProfile.hpp>
 #include <Bull/Render/Context/ContextSettingsType.hpp>
 #include <Bull/Render/Export.hpp>

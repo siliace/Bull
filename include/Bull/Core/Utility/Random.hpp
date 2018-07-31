@@ -3,7 +3,6 @@
 
 #include <random>
 
-#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull

@@ -2,7 +2,6 @@
 #define BULL_CORE_UTILITY_COLOR_HPP
 
 #include <Bull/Core/Export.hpp>
-#include <Bull/Core/Configuration/Integer.hpp>
 
 namespace Bull
 {

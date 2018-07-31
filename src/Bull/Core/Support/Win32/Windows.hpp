@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_SUPPORT_WINDOWS_HPP
 #define BULL_CORE_SUPPORT_WINDOWS_HPP
 
-#include <Bull/Core/Configuration/OS.hpp>
+#include <Bull/Core/Prerequisites.hpp>
 
 #ifndef WIN32_LEAN_AND_MEAN
     #define WIN32_LEAN_AND_MEAN 1

@@ -3,7 +3,6 @@
 
 #include <array>
 
-#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Memory/RangeCheck.hpp>
 
 namespace Bull

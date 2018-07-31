@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_EXPORT_HPP
 #define BULL_CORE_EXPORT_HPP
 
-#include <Bull/Core/Configuration/Export.hpp>
+#include <Bull/Core/Prerequisites.hpp>
 
 #if defined BULL_BUILD
     #define BULL_CORE_API BULL_API_EXPORT

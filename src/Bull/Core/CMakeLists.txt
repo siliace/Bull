@@ -6,10 +6,10 @@ bull_add_library(bull-core)
 target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE}/Export.hpp
+            ${BULL_INC_CORE}/Prerequisites.hpp
         )
 
 add_subdirectory(Assets)
-add_subdirectory(Configuration)
 add_subdirectory(Exception)
 add_subdirectory(FileSystem)
 add_subdirectory(Hardware)

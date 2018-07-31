@@ -1,8 +1,7 @@
 #ifndef BULL_CORE_FILESYSTEM_FILESYSTEMINFO_HPP
 #define BULL_CORE_FILESYSTEM_FILESYSTEMINFO_HPP
 
-#include <Bull/Core/Configuration/Integer.hpp>
-#include <Bull/Core/Export.hpp>
+#include <Bull/Core/Prerequisites.hpp>
 
 namespace Bull
 {

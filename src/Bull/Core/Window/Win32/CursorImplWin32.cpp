@@ -1,4 +1,3 @@
-#include <Bull/Core/Configuration/Macro.hpp>
 #include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/LackOfImplementation.hpp>

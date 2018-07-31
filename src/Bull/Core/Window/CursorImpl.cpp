@@ -1,5 +1,3 @@
-#include <Bull/Core/Configuration/OS.hpp>
-
 #include <Bull/Core/Window/CursorImpl.hpp>
 
 #if defined BULL_OS_WINDOWS

@@ -3,7 +3,6 @@
 
 #include <memory>
 
-#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Utility/Color.hpp>
 #include <Bull/Core/Window/VideoMode.hpp>

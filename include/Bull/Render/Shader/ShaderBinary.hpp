@@ -3,8 +3,6 @@
 
 #include <vector>
 
-#include <Bull/Core/Configuration/Integer.hpp>
-
 #include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull

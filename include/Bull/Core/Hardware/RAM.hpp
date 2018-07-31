@@ -1,8 +1,6 @@
 #ifndef BULL_CORE_HARDWARE_RAM_HPP
 #define BULL_CORE_HARDWARE_RAM_HPP
 
-#include <Bull/Core/Configuration/Integer.hpp>
-
 #include <Bull/Core/Export.hpp>
 
 namespace Bull

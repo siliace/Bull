@@ -1,9 +1,8 @@
 #include <bitset>
 
-#include <Bull/Core/Configuration/Macro.hpp>
 #include <Bull/Core/Hardware/Win32/JoystickImpl.hpp>
 
-#include <Bull/Math/Angle.hpp>
+#include <Bull/Math/Angle.hpp> /// TODO: should not be here!
 
 namespace Bull
 {

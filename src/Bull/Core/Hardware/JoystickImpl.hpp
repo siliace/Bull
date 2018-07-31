@@ -1,4 +1,4 @@
-#include <Bull/Core/Configuration/OS.hpp>
+#include <Bull/Core/Prerequisites.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Core/Hardware/Win32/JoystickImpl.hpp>

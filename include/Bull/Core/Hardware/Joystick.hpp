@@ -3,7 +3,6 @@
 
 #include <array>
 
-#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Hardware/JoystickAxis.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Time/Duration.hpp>

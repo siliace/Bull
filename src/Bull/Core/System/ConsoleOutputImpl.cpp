@@ -1,6 +1,5 @@
 #include <memory>
 
-#include <Bull/Core/Configuration/OS.hpp>
 #include <Bull/Core/System/ConsoleOutputImpl.hpp>
 
 #if defined BULL_OS_WINDOWS

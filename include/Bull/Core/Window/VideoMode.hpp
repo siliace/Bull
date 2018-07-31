@@ -3,7 +3,6 @@
 
 #include <vector>
 
-#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Export.hpp>
 
 namespace Bull

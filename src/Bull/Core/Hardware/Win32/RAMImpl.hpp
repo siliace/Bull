@@ -1,7 +1,7 @@
-#ifndef Bull_RAMImpl_hpp
-#define Bull_RAMImpl_hpp
+#ifndef BULL_CORE_HARDWARE_WIN32_RAM_HPP
+#define BULL_CORE_HARDWARE_WIN32_RAM_HPP
 
-#include <Bull/Core/Configuration/Integer.hpp>
+#include <Bull/Core/Prerequisites.hpp>
 
 namespace Bull
 {
@@ -19,4 +19,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_RAMImpl_hpp
+#endif // BULL_CORE_HARDWARE_WIN32_RAM_HPP
