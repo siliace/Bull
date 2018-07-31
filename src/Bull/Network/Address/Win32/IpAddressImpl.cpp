@@ -9,7 +9,7 @@ namespace Bull
 {
     namespace prv
     {
-        bool IpAddressImpl::resolve(const String& hostname, NetProtocol protocol, ByteArray& bytes, const String& service)
+        bool IpAddressImpl::resolve(const String& hostname, NetProtocol protocol, std::vector<Uint8>& bytes, const String& service)
         {
             int error;
             addrinfo hints;
