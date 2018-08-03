@@ -32,12 +32,12 @@ namespace Bull
             if(it == m_assets.end())
             {
                 it = m_assets.insert(
-                        std::make_pair(name, new U(std::forward<Args>(args)...))
+                        std::make_pair(name, new T(std::forward<Args>(args)...))
                 ).first;
             }
             else
             {
-                it->second = std::make_unique<U>(std::forward<Args>(args)...);
+                it->second = std::make_unique<T>(std::forward<Args>(args)...);
             }
 
             return AssetHandler<T>(*it->second.get(), it->first);
