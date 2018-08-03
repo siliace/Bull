@@ -27,20 +27,6 @@ namespace Bull
         template <typename... Args>
         AssetHandler<T> create(const String& name, Args&&... args)
         {
-            return create<T>(name, std::forward<Args>(args)...);
-        }
-
-        /*! \brief Create an Asset and register it the AssetManager
-         *
-         * \param name The name of the Asset to create
-         * \param args Arguments to create the Asset
-         *
-         * \return A handler to the created Asset
-         *
-         */
-        template <typename U, typename... Args>
-        AssetHandler<T> create(const String& name, Args&&... args)
-        {
             typename AssetMap::iterator it = m_assets.find(name);
 
             if(it == m_assets.end())
