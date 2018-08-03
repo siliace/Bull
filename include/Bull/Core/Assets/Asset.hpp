@@ -7,6 +7,11 @@ namespace Bull
 {
     struct BULL_CORE_API Asset
     {
+        /*! \brief Destructor
+         *
+         */
+        virtual ~Asset() = default;
+
         /*! \brief Tell whether an Asset is loaded
          *
          * \return True if the Asset is loaded

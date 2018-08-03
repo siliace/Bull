@@ -2,15 +2,17 @@
 #define BULL_CORE_ASSETS_ASSETMANAGER_HPP
 
 #include <map>
+#include <memory>
 
-#include <Bull/Core/Assets/Asset.hpp>
-#include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Pattern/Singleton.hpp>
+#include <Bull/Core/Assets/AssetHandler.hpp>
+#include <Bull/Core/Exception/Expect.hpp>
+#include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/Throw.hpp>
 
 namespace Bull
 {
-    template <typename T, typename = std::enable_if<std::is_base_of<Asset, T>::value>>
-    class BULL_CORE_API AssetManager : public Singleton<AssetManager<T>>
+    template <typename T>
+    class BULL_CORE_API AssetManager
     {
     public:
 
@@ -19,43 +21,66 @@ namespace Bull
          * \param name The name of the Asset to create
          * \param args Arguments to create the Asset
          *
-         * \return The Asset
+         * \return A handler to the created Asset
          *
          */
         template <typename... Args>
-        T& create(const String& name, Args&&... args)
+        AssetHandler<T> create(const String& name, Args&&... args)
+        {
+            return create<T>(name, std::forward<Args>(args)...);
+        }
+
+        /*! \brief Create an Asset and register it the AssetManager
+         *
+         * \param name The name of the Asset to create
+         * \param args Arguments to create the Asset
+         *
+         * \return A handler to the created Asset
+         *
+         */
+        template <typename U, typename... Args>
+        AssetHandler<T> create(const String& name, Args&&... args)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
             if(it == m_assets.end())
             {
                 it = m_assets.insert(
-                        std::make_pair(name, new T(std::forward<Args>(args)...))
+                        std::make_pair(name, new U(std::forward<Args>(args)...))
                 ).first;
             }
             else
             {
-                it->second = std::make_unique<T>(std::forward<Args>(args)...);
+                it->second = std::make_unique<U>(std::forward<Args>(args)...);
             }
 
-            return *it->second.get();
+            return AssetHandler<T>(*it->second.get(), it->first);
         }
 
         /*! \brief Register an Asset in the AssetManager
          *
-         * \param asset    The Asset to register
-         * \param name     The name of the Asset to register
-         * \param override True to override the existing Asset
+         * \param asset The Asset to register
+         * \param name  The name of the Asset to register
+         *
+         * \return A handler to the added Asset
          *
          */
-        bool add(T* asset, const String& name, bool override = true)
+        AssetHandler<T> add(std::unique_ptr<T>&& asset, const String& name)
         {
-            if(!has(name) || override)
+            typename AssetMap::iterator it = m_assets.find(name);
+
+            if(it == m_assets.end())
             {
-                return m_assets.insert(std::make_pair(name, asset)).second;
+                it = m_assets.insert(
+                        std::make_pair(name, std::move(asset))
+                ).first;
+            }
+            else
+            {
+                it->second = std::move(asset);
             }
 
-            return false;
+            return AssetHandler<T>(*it->second.get(), it->first);
         }
 
         /*! \brief Remove an Asset from the AssetManager
@@ -63,9 +88,9 @@ namespace Bull
          * \param name The name of the Asset to remove
          *
          */
-        void remove(const String& name)
+        std::unique_ptr<T> remove(const String& name)
         {
-            m_assets.erase(m_assets.find(name));
+            return m_assets.erase(m_assets.find(name))->second;
         }
 
         /*! \brief Tell whether an Asset exists in the AssetManager
@@ -84,19 +109,16 @@ namespace Bull
          *
          * \param name The name of the Asset to find
          *
-         * \return The Asset
+         * \return A handler to the Asset
          *
          */
-        T* find(const String& name)
+        AssetHandler<T> find(const String& name)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
-            if(it != m_assets.end())
-            {
-                return it->second.get();
-            }
+            Expect(it != m_assets.end(), Throw(InvalidParameter, "AssetManager::find", "The manager does not contains any asset " + name));
 
-            return nullptr;
+            return AssetHandler<T>(*it->second.get(), it->first);
         }
 
         /*! \brief Find an Asset by its name or create a new one and return it
@@ -106,9 +128,16 @@ namespace Bull
          * \return The Asset
          *
          */
-        T* findOrCreate(const String& name)
+        AssetHandler<T> findOrCreate(const String& name)
         {
-            return find(name) ?: create(name);
+            typename AssetMap::iterator it = m_assets.find(name);
+
+            if(it == m_assets.end())
+            {
+                it = m_assets.insert(std::make_pair(name, std::make_unique<T>())).first;
+            }
+
+            return AssetHandler<T>(*it->second.get(), it->first);
         }
 
         /*! \brief Delete every Asset
@@ -118,15 +147,6 @@ namespace Bull
         {
             m_assets.clear();
         }
-
-    private:
-
-        friend class Singleton<AssetManager<T>>;
-
-        /*! \brief Default constructor
-         *
-         */
-        AssetManager() = default;
 
     private:
 

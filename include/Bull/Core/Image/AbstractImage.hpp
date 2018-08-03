@@ -10,6 +10,11 @@ namespace Bull
 {
     struct BULL_CORE_API AbstractImage : public Asset
     {
+        /*! \brief Destructor
+         *
+         */
+        virtual ~AbstractImage() = default;
+
         /*! \brief Create the AbstractImage
          *
          * \param size The size of the AbstractImage
