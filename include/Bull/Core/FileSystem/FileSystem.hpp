@@ -1,7 +1,6 @@
 #ifndef BULL_CORE_FILESYSTEM_FILESYSTEM_HPP
 #define BULL_CORE_FILESYSTEM_FILESYSTEM_HPP
 
-#include <Bull/Core/Export.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/FileSystem/FileSystemInfo.hpp>
 
