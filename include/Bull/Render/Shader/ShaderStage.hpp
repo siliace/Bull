@@ -19,10 +19,14 @@ namespace Bull
          */
         ShaderStage();
 
+        ShaderStage(ShaderStage&& right) noexcept;
+
         /*! \brief Destructor
          *
          */
         ~ShaderStage();
+
+        ShaderStage& operator=(ShaderStage&& right) noexcept;
 
         /*! \brief Create the shader
          *

@@ -38,30 +38,26 @@ namespace Bull
     {
         Expect(isSupportedFormat(parameters.format), Throw(InvalidParameter, "ImageSaver::saveToPath", "Unsupported image format"));
 
-        createTask([image, path, parameters]() {
-            switch(parameters.format)
-            {
-                case ImageFormat_Bmp: stbi_write_bmp(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().data());
-                case ImageFormat_Png: stbi_write_png(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.stride);
-                case ImageFormat_Jpg: stbi_write_jpg(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.quality);
-                case ImageFormat_Tga: stbi_write_tga(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().data());
-            }
-        });
+        switch(parameters.format)
+        {
+            case ImageFormat_Bmp: stbi_write_bmp(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().data());
+            case ImageFormat_Png: stbi_write_png(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.stride);
+            case ImageFormat_Jpg: stbi_write_jpg(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.quality);
+            case ImageFormat_Tga: stbi_write_tga(path.toString().getBuffer(), image.getSize().width, image.getSize().height, 4, image.getPixels().data());
+        }
     }
 
     void ImageSaver::saveToStream(const Image& image, OutStream& stream, const ImageSavingParameters& parameters)
     {
         Expect(isSupportedFormat(parameters.format), Throw(InvalidParameter, "ImageSaver::saveToStream", "Unsupported image format"));
 
-        createTask([&image, &stream, parameters]() {
-            switch(parameters.format)
-            {
-                case ImageFormat_Bmp: stbi_write_bmp_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().data());
-                case ImageFormat_Png: stbi_write_png_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.stride);
-                case ImageFormat_Jpg: stbi_write_jpg_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.quality);
-                case ImageFormat_Tga: stbi_write_tga_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().data());
-            }
-        });
+        switch(parameters.format)
+        {
+            case ImageFormat_Bmp: stbi_write_bmp_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().data());
+            case ImageFormat_Png: stbi_write_png_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.stride);
+            case ImageFormat_Jpg: stbi_write_jpg_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.quality);
+            case ImageFormat_Tga: stbi_write_tga_to_func(&ImageSaver::writeToStream, &stream, image.getSize().width, image.getSize().height, 4, image.getPixels().data());
+        }
     }
 
     void ImageSaver::saveToMemory(const Image& image, void* data, std::size_t length, const ImageSavingParameters& parameters)
@@ -70,17 +66,15 @@ namespace Bull
         {
             Expect(isSupportedFormat(parameters.format), Throw(InvalidParameter, "ImageSaver::saveToMemory", "Unsupported image format"));
 
-            createTask([&image, data, length, parameters]() {
-                Buffer buffer = {data, length};
+            Buffer buffer = {data, length};
 
-                switch(parameters.format)
-                {
-                    case ImageFormat_Bmp: stbi_write_bmp_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().data());
-                    case ImageFormat_Png: stbi_write_png_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.stride);
-                    case ImageFormat_Jpg: stbi_write_jpg_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.quality);
-                    case ImageFormat_Tga: stbi_write_tga_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().data());
-                }
-            });
+            switch(parameters.format)
+            {
+                case ImageFormat_Bmp: stbi_write_bmp_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().data());
+                case ImageFormat_Png: stbi_write_png_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.stride);
+                case ImageFormat_Jpg: stbi_write_jpg_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().data(), parameters.quality);
+                case ImageFormat_Tga: stbi_write_tga_to_func(&ImageSaver::writeToMemory, &buffer, image.getSize().width, image.getSize().height, 4, image.getPixels().data());
+            }
         }
     }
 }

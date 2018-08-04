@@ -17,20 +17,47 @@ namespace Bull
         return static_cast<unsigned int>(size);
     }
 
+    Texture Texture::from(const Image& image)
+    {
+        Texture texture;
+        texture.create(image);
+
+        return texture;
+    }
+
     Texture::Texture() :
         m_id(0),
         m_size(0, 0),
         m_isSmooth(false),
         m_isRepeated(false)
     {
-        gl::genTextures(1, &m_id);
+        /// Nothing
+    }
 
-        Expect(m_id, Throw(InternalError, "Texture::Texture", "Failed to create the texture"));
+    Texture::Texture(Texture&& right) noexcept
+    {
+        std::swap(m_id, right.m_id);
+        std::swap(m_size, right.m_size);
+        std::swap(m_isSmooth, right.m_isSmooth);
+        std::swap(m_isRepeated, right.m_isRepeated);
     }
 
     Texture::~Texture()
     {
-        gl::deleteTextures(1, &m_id);
+        if(gl::isTexture(m_id))
+        {
+            gl::deleteTextures(1, &m_id);
+        }
+    }
+
+    Texture& Texture::operator=(Texture&& right) noexcept
+    {
+        std::swap(m_id, right.m_id);
+        std::swap(m_size, right.m_size);
+        std::swap(m_isSmooth, right.m_isSmooth);
+        std::swap(m_isRepeated, right.m_isRepeated);
+
+        return *this;
     }
 
     void Texture::create(const Image& image)
@@ -43,6 +70,13 @@ namespace Bull
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Texture::create", "Invalid texture size"));
 
         ensureContext();
+
+        if(!gl::isTexture(m_id))
+        {
+           gl::genTextures(1, &m_id);
+
+            Expect(m_id, Throw(InternalError, "Texture::Texture", "Failed to create the texture"));
+        }
 
         m_size = size;
 

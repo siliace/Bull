@@ -21,6 +21,15 @@ namespace Bull
          */
         static unsigned int getMaximumSize();
 
+        /*! \brief Create a Texture from an Image
+         *
+         * \param image The Image
+         *
+         * \return The Texture
+         *
+         */
+        static Texture from(const Image& image);
+
     public:
 
         /*! \brief Default constructor
@@ -28,10 +37,26 @@ namespace Bull
          */
         Texture();
 
+        /*! \brief
+         *
+         * \param right
+         *
+         */
+        Texture(Texture&& right) noexcept;
+
         /*! \brief Destructor
          *
          */
         ~Texture();
+
+        /*! \brief
+         *
+         * \param right
+         *
+         * \return
+         *
+         */
+        Texture& operator=(Texture&& right) noexcept;
 
         /*! \brief Load a Texture form an Image
          *

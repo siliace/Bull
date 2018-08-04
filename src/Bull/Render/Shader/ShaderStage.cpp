@@ -20,9 +20,25 @@ namespace Bull
         /// Nothing
     }
 
+    ShaderStage::ShaderStage(ShaderStage&& right) noexcept
+    {
+        std::swap(m_id, right.m_id);
+        std::swap(m_type, right.m_type);
+        std::swap(m_isCompiled, right.m_isCompiled);
+    }
+
     ShaderStage::~ShaderStage()
     {
         destroy();
+    }
+
+    ShaderStage& ShaderStage::operator=(ShaderStage&& right) noexcept
+    {
+        std::swap(m_id, right.m_id);
+        std::swap(m_type, right.m_type);
+        std::swap(m_isCompiled, right.m_isCompiled);
+
+        return *this;
     }
 
     void ShaderStage::create(ShaderStageType type)
@@ -56,9 +72,12 @@ namespace Bull
 
     void ShaderStage::destroy()
     {
-        ensureContext();
+        if(gl::isShader(m_id))
+        {
+            ensureContext();
 
-        gl::deleteShader(m_id);
+            gl::deleteShader(m_id);
+        }
     }
 
     bool ShaderStage::isCompiled() const

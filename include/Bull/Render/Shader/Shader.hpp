@@ -46,23 +46,6 @@ namespace Bull
          */
         void create(const ShaderBinary& shaderBinary);
 
-        /*! \brief Create a Shader by loading its stages from their Path
-         *
-         * \param vertex   The Path of the vertex shader
-         * \param fragment The Path of the fragment shader
-         *
-         */
-        void create(const Path& vertex, const Path& fragment);
-
-        /*! \brief Create a Shader by loading its stages from their Path
-         *
-         * \param vertex   The Path of the vertex shader
-         * \param fragment The Path of the fragment shader
-         * \param geometry The Path of the geometry shader
-         *
-         */
-        void create(const Path& vertex, const Path& fragment, const Path& geometry);
-
         /*! \brief Attach a ShaderStage to this Shader
          *
          * \param stage The stage to attach to this Shader
@@ -185,8 +168,7 @@ namespace Bull
          */
         int getUniformLocation(const String& name);
 
-        unsigned int                m_program;
-        ShaderStageLoader::Instance m_stageLoader;
+        unsigned int m_program;
     };
 }
 

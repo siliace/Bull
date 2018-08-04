@@ -2,17 +2,13 @@
 #define BULL_CORE_IMAGE_IMAGELOADER_HPP
 
 #include <mutex>
-#include <vector>
 
-#include <Bull/Core/Assets/AssetIOScheduler.hpp>
-#include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/IO/InStream.hpp>
-#include <Bull/Core/Image/AbstractImage.hpp>
-#include <Bull/Core/Pattern/Singleton.hpp>
+#include <Bull/Core/Assets/AsyncAssetLoader.hpp>
+#include <Bull/Core/Image/Image.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API ImageLoader : public Singleton<ImageLoader>, public AssetIOScheduler<AbstractImage>
+    class BULL_CORE_API ImageLoader : public AsyncAssetLoader<Image>
     {
     public:
 
@@ -54,64 +50,64 @@ namespace Bull
 
     public:
 
-        /*! \brief Get the width, the height and the number of channels of and Image on disk
+        /*! \brief Read the width, the height and the number of channels of and Image on disk
          *
-         * \param info Information about the Image
          * \param path The Path of the Image
          *
-         */
-        void getInfo(ImageInfo& info, const Path& path);
-
-        /*! \brief Get the width, the height and the number of channels of and Image from a stream
+         * \return The ImageInfo
          *
-         * \param info   Information about the Image
+         */
+        ImageInfo getInfo(const Path& path) const;
+
+        /*! \brief Read the width, the height and the number of channels of and Image from a stream
+         *
          * \param stream The stream to read
          *
-         */
-        void getInfo(ImageInfo& info, InStream& stream);
-
-        /*! \brief Get the width, the height and the number of channels of and Image from a memory area
+         * \return The ImageInfo
          *
-         * \param info   Information about the Image
+         */
+        ImageInfo getInfo(InStream& stream) const;
+
+        /*! \brief Read the width, the height and the number of channels of and Image from a memory area
+         *
          * \param data   Data to read
          * \param length The length of the data
          *
-         */
-        void getInfo(ImageInfo& info, const void* data, std::size_t length);
-
-        /*! \brief Load an AbstractImage from a File
+         * \return The ImageInfo
          *
-         * \param image The AbstractImage to load
+         */
+        ImageInfo getInfo(const void* data, std::size_t length) const;
+
+        /*! \brief Load an Image from a File
+         *
+         * \param image The Image to load
          * \param path  The Path of the File to read
          *
-         */
-        void loadFromPath(AbstractImage& image, const Path& path);
-
-        /*! \brief Load an AbstractImage from an InStream
+         * \return The loaded Image
          *
-         * \param image  The AbstractImage to load
+         */
+        Image loadFromPath(const Path& path) const override;
+
+        /*! \brief Load an Image from an InStream
+         *
+         * \param image  The Image to load
          * \param stream The InStream to read
          *
-         */
-        void loadFromStream(AbstractImage& image, InStream& stream);
-
-        /*! \brief Load a AbstractImage from a memory area
+         * \return The loaded Image
          *
-         * \param image  The AbstractImage to load
+         */
+        Image loadFromStream(InStream& stream) const override;
+
+        /*! \brief Load a Image from a memory area
+         *
+         * \param image  The Image to load
          * \param path   Data to read
          * \param length The length of data to read
          *
-         */
-        void loadFromMemory(AbstractImage& image, const void* data, std::size_t length);
-
-    private:
-
-        friend class Singleton<ImageLoader>;
-
-        /*! \brief Default constructor
+         * \return The loaded Image
          *
          */
-        ImageLoader() = default;
+        Image loadFromMemory(const void* data, std::size_t length) const override;
 
     private:
 
@@ -122,16 +118,19 @@ namespace Bull
          */
         String getErrorMessage() const;
 
-        /*! \brief Create an AbstractImage from a buffer of pixels
+        /*! \brief Create an Image from a buffer of pixels
          *
-         * \param image    The AbstractImage to load
          * \param buffer   The buffer that contains the pixels of the image
          * \param width    The width in pixel of the image
          * \param height   The height in pixel of the image
          * \param channels The number of channels per pixel
          *
+         * \return The created Image
+         *
          */
-        void createImage(AbstractImage& image, const unsigned char* buffer, int width, int height, int channels);
+        Image createImage(const unsigned char* buffer, int width, int height, int channels) const;
+
+    private:
 
         mutable std::mutex m_mutex;
     };

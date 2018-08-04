@@ -26,79 +26,87 @@ namespace Bull
         return reinterpret_cast<InStream*>(user)->isAtEnd() ? 1 : 0;
     }
 
-    void ImageLoader::getInfo(ImageInfo& info, const Path& path)
+    ImageLoader::ImageInfo ImageLoader::getInfo(const Path& path) const
     {
-        createTask([&info, path]() {
-            stbi_info(path.toString().getBuffer(), &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
-        });
+        ImageInfo info;
+
+        stbi_info(path.toString().getBuffer(), &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
+
+        return info;
     }
 
-    void ImageLoader::getInfo(ImageInfo& info, InStream& stream)
+    ImageLoader::ImageInfo ImageLoader::getInfo(InStream& stream) const
     {
-        createTask([&info, &stream]() {
-            stbi_io_callbacks callbacks;
+        ImageInfo info;
+        stbi_io_callbacks callbacks;
 
-            callbacks.read = &ImageLoader::read;
-            callbacks.skip = &ImageLoader::skip;
-            callbacks.eof  = &ImageLoader::eof;
+        callbacks.read = &ImageLoader::read;
+        callbacks.skip = &ImageLoader::skip;
+        callbacks.eof  = &ImageLoader::eof;
 
-            stbi_info_from_callbacks(&callbacks, &stream, &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
-        });
+        stbi_info_from_callbacks(&callbacks, &stream, &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
+
+        return info;
     }
 
-    void ImageLoader::getInfo(ImageInfo& info, const void* data, std::size_t length)
+    ImageLoader::ImageInfo ImageLoader::getInfo(const void* data, std::size_t length) const
     {
-        createTask([&info, data, length]() {
-            stbi_info_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
-        });
+        ImageInfo info;
+
+        stbi_info_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
+
+        return info;
     }
 
-    void ImageLoader::loadFromPath(AbstractImage& image, const Path& path)
+    Image ImageLoader::loadFromPath(const Path& path) const
     {
-        createTask([&image, path, this]() {
-            int width, height, channels;
-            stbi_uc* buffer = stbi_load(path.toString().getBuffer(), &width, &height, &channels, STBI_rgb_alpha);
+        Image image;
+        int width, height, channels;
+        stbi_uc* buffer = stbi_load(path.toString().getBuffer(), &width, &height, &channels, STBI_rgb_alpha);
 
-            Expect(buffer, Throw(InternalError, "ImageLoader::loadFromPath", "Failed to load image: " + getErrorMessage()));
+        Expect(buffer, Throw(InternalError, "ImageLoader::loadFromPath", "Failed to load image: " + getErrorMessage()));
 
-            createImage(image, buffer, width, height, channels);
+        image = createImage(buffer, width, height, channels);
 
-            stbi_image_free(buffer);
-        });
+        stbi_image_free(buffer);
+
+        return image;
     }
 
-    void ImageLoader::loadFromStream(AbstractImage& image, InStream& stream)
+    Image ImageLoader::loadFromStream(InStream& stream) const
     {
-        createTask([&image, &stream, this]() {
-            stbi_io_callbacks callbacks;
-            int width, height, channels;
+        Image image;
+        stbi_io_callbacks callbacks;
+        int width, height, channels;
 
-            callbacks.read = &ImageLoader::read;
-            callbacks.skip = &ImageLoader::skip;
-            callbacks.eof  = &ImageLoader::eof;
+        callbacks.read = &ImageLoader::read;
+        callbacks.skip = &ImageLoader::skip;
+        callbacks.eof  = &ImageLoader::eof;
 
-            stbi_uc* buffer = stbi_load_from_callbacks(&callbacks, &stream, &width, &height, &channels, STBI_rgb_alpha);
+        stbi_uc* buffer = stbi_load_from_callbacks(&callbacks, &stream, &width, &height, &channels, STBI_rgb_alpha);
 
-            Expect(buffer, Throw(InternalError, "ImageLoader::loadFromPath", "Failed to load image: " + getErrorMessage()));
+        Expect(buffer, Throw(InternalError, "ImageLoader::loadFromStream", "Failed to load image: " + getErrorMessage()));
 
-            createImage(image, buffer, width, height, channels);
+        image = createImage(buffer, width, height, channels);
 
-            stbi_image_free(buffer);
-        });
+        stbi_image_free(buffer);
+
+        return image;
     }
 
-    void ImageLoader::loadFromMemory(AbstractImage& image, const void* data, std::size_t length)
+    Image ImageLoader::loadFromMemory(const void* data, std::size_t length) const
     {
-        createTask([&image, data, length, this]() {
-            int width, height, channels;
-            stbi_uc* buffer = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &width, &height, &channels, STBI_rgb_alpha);
+        Image image;
+        int width, height, channels;
+        stbi_uc* buffer = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &width, &height, &channels, STBI_rgb_alpha);
 
-            Expect(buffer, Throw(InternalError, "ImageLoader::loadFromPath", "Failed to load image: " + getErrorMessage()));
+        Expect(buffer, Throw(InternalError, "ImageLoader::loadFromMemory", "Failed to load image: " + getErrorMessage()));
 
-            createImage(image, buffer, width, height, channels);
+        image = createImage(buffer, width, height, channels);
 
-            stbi_image_free(buffer);
-        });
+        stbi_image_free(buffer);
+
+        return image;
     }
 
     String ImageLoader::getErrorMessage() const
@@ -108,15 +116,17 @@ namespace Bull
         return stbi_failure_reason();
     }
 
-    void ImageLoader::createImage(AbstractImage& image, const unsigned char* buffer, int width, int height, int channels)
+    Image ImageLoader::createImage(const unsigned char* buffer, int width, int height, int channels) const
     {
+        Image image;
         std::vector<Uint8> pixels;
-        std::size_t pixelsCount = width * height * channels;
 
-        pixels.reserve(pixelsCount);
+        pixels.resize(width * height * channels, 0);
 
-        std::copy(buffer, buffer + pixelsCount, pixels.begin());
+        std::memcpy(&pixels[0], buffer, pixels.capacity());
 
         image.create(pixels, Size(width, height));
+
+        return image;
     }
 }

@@ -18,6 +18,9 @@ using namespace Bull;
 
 int main(int argc, char* argv[])
 {
+    ImageLoader imageLoader;
+    ShaderStageLoader stageLoader;
+
     ConsoleLogger& logger = Log::getInstance()->createLogger<ConsoleLogger>();
 
     Shader phong;
@@ -29,17 +32,17 @@ int main(int argc, char* argv[])
     Vector3F position(0, 0, 3), forward = Vector3F::Backward, up = Vector3F::Up;
     Matrix4F projection = Matrix4F::makePerspective(fov, window.getSize().getRatio(), Vector2F(0.1f, 100.f));
 
-    ImageLoader::getInstance()->loadFromPath(diffuse, Path("../resources/textures/container.png"));
-    ImageLoader::getInstance()->loadFromPath(specular, Path("../resources/textures/container_specular.png"));
-    ImageLoader::getInstance()->loadFromPath(emission, Path("../resources/textures/container_emission.png"));
-
-    ImageLoader::getInstance()->wait();
+    diffuse = Texture::from(imageLoader.loadFromPath(Path("../resources/textures/container.png")));
+    specular = Texture::from(imageLoader.loadFromPath(Path("../resources/textures/container_specular.png")));
+    emission = Texture::from(imageLoader.loadFromPath(Path("../resources/textures/container_emission.png")));
 
     diffuse.enableSmooth();
     specular.enableSmooth();
     emission.enableSmooth();
 
-    phong.create(Path("../resources/shaders/phong/phong.vert"), Path("../resources/shaders/phong/phong.frag"));
+    phong.attach(stageLoader.loadFromPath(Path("../resources/shaders/phong/phong.vert"), ShaderStageType_Vertex));
+    phong.attach(stageLoader.loadFromPath(Path("../resources/shaders/phong/phong.frag"), ShaderStageType_Fragment));
+    phong.link();
 
     std::vector<Cube> cubes(10);
 

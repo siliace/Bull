@@ -7,33 +7,37 @@
 
 namespace Bull
 {
-    void ShaderStageLoader::loadFromPath(ShaderStage& stage, const Path& path, ShaderStageType type)
+    ShaderStage ShaderStageLoader::loadFromPath(const Path& path, ShaderStageType type) const
     {
-        createTask([&stage, path, type]() {
-            File file(path);
+        File file(path);
+        ShaderStage stage;
 
-            Expect(file, Throw(InternalError, "ShaderStageLoader::loadFromPath", "Failed to open " + path.toString()));
+        Expect(file, Throw(InternalError, "ShaderStageLoader::loadFromPath", "Failed to open " + path.toString()));
 
-            stage.create(type);
-            stage.compile(file.readAll());
-        });
+        stage.create(type);
+        stage.compile(file.readAll());
+
+        return stage;
     }
 
-    void ShaderStageLoader::loadFromStream(ShaderStage& stage, InStream& stream, ShaderStageType type)
+    ShaderStage ShaderStageLoader::loadFromStream(InStream& stream, ShaderStageType type) const
     {
-        createTask([&stage, &stream, type]() {
-            stage.create(type);
-            stage.compile(stream.readAll());
-        });
+        ShaderStage stage;
+
+        stage.create(type);
+        stage.compile(stream.readAll());
+
+        return stage;
     }
 
-    void ShaderStageLoader::loadFromMemory(ShaderStage& stage, const void* data, std::size_t length, ShaderStageType type)
+    ShaderStage ShaderStageLoader::loadFromMemory(const void* data, std::size_t length, ShaderStageType type) const
     {
-        createTask([&stage, data, length, type]() {
-            String code(reinterpret_cast<const char*>(data), length);
+        ShaderStage stage;
+        String code(reinterpret_cast<const char*>(data), length);
 
-            stage.create(type);
-            stage.compile(code);
-        });
+        stage.create(type);
+        stage.compile(code);
+
+        return stage;
     }
 }

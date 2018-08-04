@@ -40,38 +40,6 @@ namespace Bull
         gl::programBinary(m_program, shaderBinary.format, shaderBinary.binary.data(), shaderBinary.binary.capacity());
     }
 
-    void Shader::create(const Path& vertex, const Path& fragment)
-    {
-        ShaderStage vertexStage, fragmentStage;
-
-        m_stageLoader->loadFromPath(vertexStage, vertex, ShaderStageType_Vertex);
-        m_stageLoader->loadFromPath(fragmentStage, fragment, ShaderStageType_Fragment);
-
-        m_stageLoader->wait();
-
-        attach(vertexStage);
-        attach(fragmentStage);
-
-        link();
-    }
-
-    void Shader::create(const Path& vertex, const Path& fragment, const Path& geometry)
-    {
-        ShaderStage vertexStage, fragmentStage, geometryStage;
-
-        m_stageLoader->loadFromPath(vertexStage, vertex, ShaderStageType_Vertex);
-        m_stageLoader->loadFromPath(fragmentStage, fragment, ShaderStageType_Fragment);
-        m_stageLoader->loadFromPath(geometryStage, geometry, ShaderStageType_Geometry);
-
-        m_stageLoader->wait();
-
-        attach(vertexStage);
-        attach(fragmentStage);
-        attach(geometryStage);
-
-        link();
-    }
-
     void Shader::attach(const ShaderStage& stage)
     {
         Expect(stage.isValid(), Throw(InvalidParameter, "Shader::attach", "Can't attach invalid ShaderStage"));
