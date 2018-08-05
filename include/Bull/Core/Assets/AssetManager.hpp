@@ -3,7 +3,6 @@
 
 #include <map>
 
-#include <Bull/Core/Assets/AssetHandler.hpp>
 #include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Exception/Throw.hpp>
@@ -24,7 +23,7 @@ namespace Bull
          *
          */
         template <typename... Args>
-        AssetHandler<T> create(const String& name, Args&&... args)
+        T& create(const String& name, Args&&... args)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
@@ -39,7 +38,9 @@ namespace Bull
                 it->second = T(std::forward<Args>(args)...);
             }
 
-            return AssetHandler<T>(it->second, it->first);
+            it->second.setName(name);
+
+            return it->second;
         }
 
         /*! \brief Register an Asset in the AssetManager
@@ -50,7 +51,7 @@ namespace Bull
          * \return A handler to the added Asset
          *
          */
-        AssetHandler<T> add(T&& asset, const String& name)
+        T& add(T&& asset, const String& name)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
@@ -65,7 +66,9 @@ namespace Bull
                 it->second = std::forward<T>(asset);
             }
 
-            return AssetHandler<T>(it->second, it->first);
+            it->second.setName(name);
+
+            return it->second;
         }
 
         /*! \brief Remove an Asset from the AssetManager
@@ -103,13 +106,13 @@ namespace Bull
          * \return A handler to the Asset
          *
          */
-        AssetHandler<T> find(const String& name)
+        T& find(const String& name)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
             Expect(it != m_assets.end(), Throw(InvalidParameter, "AssetManager::find", "The manager does not contains any asset " + name));
 
-            return AssetHandler<T>(it->second, it->first);
+            return it->second;
         }
 
         /*! \brief Find an Asset by its name or create a new one and return it
@@ -120,28 +123,33 @@ namespace Bull
          *
          */
         template <typename... Args>
-        AssetHandler<T> findOrCreate(const String& name, Args&&... args)
+        T& findOrCreate(const String& name, Args&&... args)
         {
-            typename AssetMap::iterator it = m_assets.find(name);
-
-            if(it == m_assets.end())
-            {
-                it = m_assets.insert(std::make_pair(name, T(std::forward<Args>(args)...))).first;
-            }
-
-            return AssetHandler<T>(it->second, it->first);
+            return findOrCreateWithFactory(name, [&args...]() -> T {
+                return T(std::forward<Args>(args)...);
+            });
         }
 
-        AssetHandler<T> findOrCreateWithFactory(const String& name, const std::function<T()>& factory)
+        /*! \brief Find or create an Asset by its name or create a new one using a factory and return it
+         *
+         * \param name    The name of the Asset to create
+         * \param factory The factory to use to create the Asset
+         *
+         * \return The created Asset
+         *
+         */
+        T& findOrCreateWithFactory(const String& name, const std::function<T()>& factory)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
             if(it == m_assets.end())
             {
                 it = m_assets.insert(std::make_pair(name, factory())).first;
+
+                it->second.setName(name);
             }
 
-            return AssetHandler<T>(it->second, it->first);
+            return it->second;
         }
 
         /*! \brief Delete every Asset

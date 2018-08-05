@@ -104,14 +104,7 @@ namespace Bull
 
     bool Texture::isLoaded() const
     {
-        int width, height;
-
-        bind();
-
-        gl::getTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_WIDTH, &width);
-        gl::getTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_HEIGHT, &height);
-
-        return width && height;
+        return gl::isTexture(m_id);
     }
 
     void Texture::bind() const

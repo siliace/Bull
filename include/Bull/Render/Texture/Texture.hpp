@@ -37,9 +37,9 @@ namespace Bull
          */
         Texture();
 
-        /*! \brief
+        /*! \brief Constructor by movement
          *
-         * \param right
+         * \param right The Texture to move
          *
          */
         Texture(Texture&& right) noexcept;
@@ -49,11 +49,11 @@ namespace Bull
          */
         ~Texture();
 
-        /*! \brief
+        /*! \brief Basic assignment operator by movement
          *
-         * \param right
+         * \param right The Texture to move
          *
-         * \return
+         * \return This
          *
          */
         Texture& operator=(Texture&& right) noexcept;
