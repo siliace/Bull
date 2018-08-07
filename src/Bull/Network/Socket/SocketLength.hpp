@@ -1,7 +1,7 @@
 #ifndef BULL_NETWORK_SOCKET_SOCKETLENGTH_HPP
 #define BULL_NETWORK_SOCKET_SOCKETLENGTH_HPP
 
-#include <Bull/Core/Configuration/OS.hpp>
+#include <Bull/Core/Prerequisites.hpp>
 
 namespace Bull
 {

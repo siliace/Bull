@@ -14,14 +14,14 @@ int main()
     {
         cout.writeLine("Failed to connect");
 
-        return EXIT_FAILURE;
+        return -1;
     }
 
     if(!poller.add(client, Bull::SocketPollerEvent_Read))
     {
         cout.writeLine("Failed to add client");
 
-        return EXIT_FAILURE;
+        return -1;
     }
 
     if(poller.wait())
@@ -38,7 +38,7 @@ int main()
 
                 cout.writeLine(message.getBuffer());
 
-                return EXIT_SUCCESS;
+                return 0;
             }
         }
         else if(poller.isReadyToWrite(client))
@@ -55,5 +55,5 @@ int main()
         cout.writeLine("Failed to wait");
     }
 
-    return EXIT_FAILURE;
+    return -1;
 }

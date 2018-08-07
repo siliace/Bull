@@ -1,7 +1,5 @@
 #include <algorithm>
 
-#include <Bull/Core/Configuration/OS.hpp>
-
 #include <Bull/Network/Socket/SocketPollerImpl.hpp>
 
 #if defined BULL_OS_WINDOWS

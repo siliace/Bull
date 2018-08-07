@@ -1,5 +1,3 @@
-#include <Bull/Core/Configuration/Macro.hpp>
-
 #include <Bull/Network/Address/SockAddrBuffer.hpp>
 
 namespace Bull

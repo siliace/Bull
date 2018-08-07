@@ -1,4 +1,4 @@
-#include <Bull/Core/Configuration/OS.hpp>
+#include <Bull/Core/Prerequisites.hpp>
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Network/Socket/Win32/SocketHeader.hpp>

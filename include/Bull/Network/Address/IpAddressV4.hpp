@@ -3,8 +3,6 @@
 
 #include <array>
 
-#include <Bull/Core/Configuration/Integer.hpp>
-
 #include <Bull/Network/Address/IpAddress.hpp>
 
 namespace Bull

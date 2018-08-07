@@ -1,11 +1,7 @@
 #ifndef BULL_NETWORK_SOCKET_SOCKETHANDLER_HPP
 #define BULL_NETWORK_SOCKET_SOCKETHANDLER_HPP
 
-#include <Bull/Core/Configuration/OS.hpp>
-
-#if defined BULL_OS_WINDOWS
-    #include <Bull/Core/Configuration/Integer.hpp>
-#endif
+#include <Bull/Core/Prerequisites.hpp>
 
 namespace Bull
 {

@@ -1,4 +1,3 @@
-#include <Bull/Core/Configuration/Macro.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Network/Address/SockAddrBuffer.hpp>

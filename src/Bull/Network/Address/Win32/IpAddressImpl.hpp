@@ -1,7 +1,6 @@
 #ifndef BULL_NETWORK_ADDRESS_WIN32_IPADDRESSIMPL_HPP
 #define BULL_NETWORK_ADDRESS_WIN32_IPADDRESSIMPL_HPP
 
-#include <Bull/Core/Configuration/Integer.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Network/Address/NetProtocol.hpp>
