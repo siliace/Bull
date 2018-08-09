@@ -21,7 +21,11 @@ namespace Bull
          * \param rotation The rotation of the polygon
          *
          */
-        Triangle(const Vector2<T>& center, T radius = 0, const Angle<T>& rotation = Angle<T>::Zero);
+        Triangle(const Vector2<T>& center, T radius = 0, const Angle<T>& rotation = Angle<T>::Zero) :
+            RegularPolygon<T, 3>(center, radius, rotation)
+        {
+            /// Nothing
+        }
     };
 
     typedef Triangle<int> TriangleI;
@@ -29,7 +33,5 @@ namespace Bull
     typedef Triangle<double> TriangleD;
     typedef Triangle<unsigned int> TriangleUI;
 }
-
-#include <Bull/Math/Polygon/Triangle.inl>
 
 #endif // BULL_TRIANGLE_HPP

@@ -1,5 +1,5 @@
-#ifndef BULL_POLYGON_HPP
-#define BULL_POLYGON_HPP
+#ifndef BULL_MATH_POLYGON_POLYGON_HPP
+#define BULL_MATH_POLYGON_POLYGON_HPP
 
 #include <algorithm>
 
@@ -33,10 +33,26 @@ namespace Bull
          * \return Bounds of the polygon
          *
          */
-        Rectangle<T> getBounds() const;
+        Rectangle<T> getBounds() const
+        {
+            T xMin, xMax, yMin, yMax;
+
+            xMin = yMin = std::numeric_limits<T>::max();
+            xMax = yMax = std::numeric_limits<T>::min();
+
+            for(unsigned int i = 0; i < getVertexCount(); i++)
+            {
+                Vector2<T> vertex = getVertex(i);
+
+                xMin = std::min(xMin, vertex.x);
+                yMin = std::min(yMin, vertex.y);
+                xMax = std::max(xMax, vertex.x);
+                yMax = std::max(yMax, vertex.y);
+            }
+
+            return Rectangle<T>(xMin, yMin, xMax - xMin, yMax - yMin);
+        }
     };
 }
 
-#include <Bull/Math/Polygon/Polygon.inl>
-
-#endif // BULL_POLYGON_HPP
+#endif // BULL_MATH_POLYGON_POLYGON_HPP
