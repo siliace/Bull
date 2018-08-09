@@ -22,7 +22,11 @@ namespace Bull
          * \param value The value to use to fill the Matrix
          *
          */
-        Matrix2(T value);
+        explicit Matrix2(T value) :
+            SquareMatrix<T, 2>(value)
+        {
+            /// Nothing
+        }
 
         /*! \brief Copy constructor
          *
@@ -30,7 +34,11 @@ namespace Bull
          *
          */
         template <typename U, std::size_t WU, std::size_t HU>
-        Matrix2(const Matrix<U, WU, HU>& copy);
+        Matrix2(const Matrix<U, WU, HU>& copy) :
+            SquareMatrix<T, 2>(copy)
+        {
+            /// Nothing
+        }
     };
 
     template<typename T>
@@ -41,7 +49,5 @@ namespace Bull
     typedef Matrix2<double> Matrix2D;
     typedef Matrix2<unsigned int> Matrix2UI;
 }
-
-#include <Bull/Math/Matrix/Matrix2.inl>
 
 #endif // BULL_MATRIX2_HPP

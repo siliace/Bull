@@ -7,6 +7,12 @@ namespace Bull
     }
 
     template <typename T>
+    Quaternion<T> Quaternion<T>::normalize(const Bull::Quaternion<T>& quaternion)
+    {
+        return Quaternion<T>(quaternion).normalize();
+    }
+
+    template <typename T>
     Quaternion<T> Quaternion<T>::fromEulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw)
     {
         return Quaternion<T>(EulerAngles<T>(roll, pitch, yaw));

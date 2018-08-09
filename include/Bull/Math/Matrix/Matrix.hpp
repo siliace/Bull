@@ -15,14 +15,21 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Matrix();
+        Matrix() :
+            Matrix<T, W, H>(0)
+        {
+            /// Nothing
+        }
 
         /*! \brief Constructor
          *
          * \param value The value to use to fill the Matrix
          *
          */
-        explicit Matrix(T value);
+        explicit Matrix(T value)
+        {
+            set(value);
+        }
 
         /*! \brief Copy constructor
          *
@@ -30,7 +37,17 @@ namespace Bull
          *
          */
         template <typename U, std::size_t WU, std::size_t HU>
-        Matrix(const Matrix<U, WU, HU>& copy);
+        Matrix(const Matrix<U, WU, HU>& copy) :
+            Matrix<T, W, H>(0)
+        {
+            for(std::size_t j = 0; j < std::min(H, HU); j++)
+            {
+                for(std::size_t i = 0; i < std::min(W, WU); i++)
+                {
+                    at(i, j) = static_cast<T>(copy.at(i, j));
+                }
+            }
+        }
 
         /*! \brief Basic assignment operator
          *
@@ -40,7 +57,20 @@ namespace Bull
          *
          */
         template <typename U, std::size_t WU, std::size_t HU>
-        Matrix<T, W, H>& operator=(const Matrix<U, WU, HU>& copy);
+        Matrix<T, W, H>& operator=(const Matrix<U, WU, HU>& copy)
+        {
+            set(0);
+
+            for(std::size_t j = 0; j < std::min(H, HU); j++)
+            {
+                for(std::size_t i = 0; i < std::min(W, WU); i++)
+                {
+                    at(i, j) = static_cast<T>(copy.at(i, j));
+                }
+            }
+
+            return (*this);
+        }
 
         /*! \brief Set the Matrix
          *
@@ -49,7 +79,12 @@ namespace Bull
          * \return This
          *
          */
-        Matrix<T, W, H>& set(T value);
+        Matrix<T, W, H>& set(T value)
+        {
+            m_matrix.fill(value);
+
+            return *this;
+        }
 
         /*! \brief Compare two Matrix
          *
@@ -58,7 +93,10 @@ namespace Bull
          * \return True if this and right are equal
          *
          */
-        bool operator==(const Matrix<T, W, H>& right) const;
+        bool operator==(const Matrix<T, W, H>& right) const
+        {
+            return m_matrix == right.m_matrix;
+        }
 
         /*! \brief Compare two Matrix
          *
@@ -67,7 +105,10 @@ namespace Bull
          * \return True if this and right are not equal
          *
          */
-        bool operator!=(const Matrix<T, W, H>& right) const;
+        bool operator!=(const Matrix<T, W, H>& right) const
+        {
+            return m_matrix != right.m_matrix;
+        }
 
         /*! \brief Access to a Matrix cell
          *
@@ -77,7 +118,13 @@ namespace Bull
          * \return The cell
          *
          */
-        T& at(std::size_t x, std::size_t y);
+        T& at(std::size_t x, std::size_t y)
+        {
+            RangeCheck(x, W);
+            RangeCheck(y, H);
+
+            return m_matrix.at(y * W + x);
+        }
 
         /*! \brief Access to a Matrix cell
          *
@@ -87,7 +134,13 @@ namespace Bull
          * \return The cell
          *
          */
-        const T& at(std::size_t x, std::size_t y) const;
+        const T& at(std::size_t x, std::size_t y) const
+        {
+            RangeCheck(x, W);
+            RangeCheck(y, H);
+
+            return m_matrix.at(y * W + x);
+        }
 
         /*! \brief Set a row of the Matrix
          *
@@ -97,7 +150,15 @@ namespace Bull
          * \return This
          *
          */
-        Matrix<T, W, H>& setRow(const Vector<T, H>& row, std::size_t index);
+        Matrix<T, W, H>& setRow(const Vector<T, H>& row, std::size_t index)
+        {
+            for(std::size_t i = 0; i < W; i++)
+            {
+                at(index, i) = row.at(i);
+            }
+
+            return (*this);
+        }
 
         /*! \brief Get a row of the Matrix
          *
@@ -106,7 +167,17 @@ namespace Bull
          * \return The row
          *
          */
-        Vector<T, W> getRow(std::size_t row) const;
+        Vector<T, W> getRow(std::size_t row) const
+        {
+            Vector<T, W> rowVec;
+
+            for(std::size_t i = 0; i < W; i++)
+            {
+                rowVec.at(i) = at(row, i);
+            }
+
+            return rowVec;
+        }
 
         /*! \brief Set a column of the Matrix
          *
@@ -116,7 +187,15 @@ namespace Bull
          * \return This
          *
          */
-        Matrix<T, W, H>& setColumn(const Vector<T, H>& column, std::size_t index);
+        Matrix<T, W, H>& setColumn(const Vector<T, H>& column, std::size_t index)
+        {
+            for(std::size_t i = 0; i < W; i++)
+            {
+                at(i, index) = column.at(i);
+            }
+
+            return (*this);
+        }
 
         /*! \brief Get a column of the Matrix
          *
@@ -125,21 +204,44 @@ namespace Bull
          * \return The column
          *
          */
-        Vector<T, H> getColumn(std::size_t column) const;
+        Vector<T, H> getColumn(std::size_t column) const
+        {
+            Vector<T, W> columnVec;
+
+            for(std::size_t i = 0; i < W; i++)
+            {
+                columnVec.at(i) = at(i, column);
+            }
+
+            return columnVec;
+        }
 
         /*! \brief Negation operator
          *
          * \return The opposite Matrix of this
          *
          */
-        Matrix<T, W, H> operator-() const;
+        Matrix<T, W, H> operator-() const
+        {
+            Matrix<T, W, H> negation;
+
+            for(std::size_t i = 0; i < W * H; i++)
+            {
+                negation.at(i) = -at(i);
+            }
+
+            return negation;
+        }
 
         /*! \brief Get a pointer to the matrix
          *
          * \return The pointer
          *
          */
-        const T* getPtr() const;
+        const T* getPtr() const
+        {
+            return m_matrix.data();
+        }
 
     private:
 
@@ -155,7 +257,20 @@ namespace Bull
      *
      */
     template <typename T, std::size_t W, std::size_t H>
-    Matrix<T, W, H> operator+(const Matrix<T, W, H>& left, const Matrix<T, W, H>& right);
+    Matrix<T, W, H> operator+(const Matrix<T, W, H>& left, const Matrix<T, W, H>& right)
+    {
+        Matrix<T, W, H> sum;
+
+        for(std::size_t j = 0; j < H; j++)
+        {
+            for(std::size_t i = 0; i < W; i++)
+            {
+                sum.at(i, j) = left.at(i, j) + right(i, j);
+            }
+        }
+
+        return sum;
+    }
 
     /*! \brief Subtract two Matrix
      *
@@ -166,9 +281,10 @@ namespace Bull
      *
      */
     template <typename T, std::size_t W, std::size_t H>
-    Matrix<T, W, H> operator-(const Matrix<T, W, H>& left, const Matrix<T, W, H>& right);
+    Matrix<T, W, H> operator-(const Matrix<T, W, H>& left, const Matrix<T, W, H>& right)
+    {
+        return left + -right;
+    }
 }
-
-#include <Bull/Math/Matrix/Matrix.inl>
 
 #endif // BULL_MATH_MATRIX_MATRIX_HPP

@@ -9,7 +9,7 @@ namespace Bull
     template <typename T>
     Vector3<T>::Vector3(T value)
     {
-        set(value);
+        set(value, value, value);
     }
 
     template <typename T>

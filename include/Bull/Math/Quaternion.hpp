@@ -10,6 +10,9 @@ namespace Bull
     template <typename T>
     class EulerAngles;
 
+    template <typename T>
+    class Angle;
+
     /*! \class Quaternion
      * \brief Implement 3D rotations with Quaternion
      *
@@ -26,6 +29,15 @@ namespace Bull
          *
          */
         static Quaternion<T> conjugate(const Quaternion<T>& quaternion);
+
+        /*! \brief Normalize a Quaternion
+         *
+         * \param quaternion The Quaternion to normalize
+         *
+         * \return The normalized Quaternion
+         *
+         */
+        static Quaternion<T> normalize(const Quaternion<T>& quaternion);
 
         /*! \brief Create a quaternion from three angles
          *

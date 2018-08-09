@@ -132,22 +132,22 @@ namespace Bull
         Angle<T>& operator/=(T right);
 
         template <typename U>
-        friend float std::cos(const Angle<U>& angle);
+        friend float std::cos(const Bull::Angle<U>& angle);
 
         template <typename U>
-        friend float std::acos(const Angle<U>& angle);
+        friend float std::acos(const Bull::Angle<U>& angle);
 
         template <typename U>
-        friend float std::sin(const Angle<U>& angle);
+        friend float std::sin(const Bull::Angle<U>& angle);
 
         template <typename U>
-        friend float std::asin(const Angle<U>& angle);
+        friend float std::asin(const Bull::Angle<U>& angle);
 
         template <typename U>
-        friend float std::tan(const Angle<U>& angle);
+        friend float std::tan(const Bull::Angle<U>& angle);
 
         template <typename U>
-        friend float std::atan(const Angle<U>& angle);
+        friend float std::atan(const Bull::Angle<U>& angle);
 
     private:
 
