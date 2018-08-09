@@ -6,14 +6,11 @@ add_library(bull-math INTERFACE)
 target_sources(bull-math
         INTERFACE
             ${BULL_INC_MATH}/Angle.hpp
-            ${BULL_INC_MATH}/Angle.inl
             ${BULL_INC_MATH}/Clamp.hpp
             ${BULL_INC_MATH}/Constants.hpp
             ${BULL_INC_MATH}/EulerAngles.hpp
-            ${BULL_INC_MATH}/EulerAngles.inl
             ${BULL_INC_MATH}/Normalize.hpp
             ${BULL_INC_MATH}/Quaternion.hpp
-            ${BULL_INC_MATH}/Quaternion.inl
         )
 
 add_subdirectory(Matrix)

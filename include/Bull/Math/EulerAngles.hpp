@@ -25,14 +25,20 @@ namespace Bull
          * \return The normalized EulerAngles
          *
          */
-        static EulerAngles<T> normalize(const EulerAngles<T>& angles);
+        static EulerAngles<T> normalize(const EulerAngles<T>& angles)
+        {
+            return EulerAngles<T>(angles).normalize();
+        }
 
         /*! \brief Constructor
          *
          * \param quaternion The Quaternion to compute as an EulerAngles
          *
          */
-        EulerAngles(const Quaternion<T>& quaternion);
+        explicit EulerAngles(const Quaternion<T>& quaternion)
+        {
+            set(quaternion);
+        }
 
         /*! \brief Constructor
          *
@@ -41,7 +47,10 @@ namespace Bull
          * \param yaw   the yaw of the EulerAngles
          *
          */
-        EulerAngles(const Angle<T>& roll = Angle<T>::Zero, const Angle<T>& pitch = Angle<T>::Zero, const Angle<T>& yaw = Angle<T>::Zero);
+        explicit EulerAngles(const Angle<T>& roll = Angle<T>::Zero, const Angle<T>& pitch = Angle<T>::Zero, const Angle<T>& yaw = Angle<T>::Zero)
+        {
+            set(roll, pitch, yaw);
+        }
 
         /*! \brief Set the EulerAngles
          *
@@ -50,7 +59,14 @@ namespace Bull
          * \return This
          *
          */
-        EulerAngles<T>& set(const EulerAngles<T>& copy);
+        EulerAngles<T>& set(const EulerAngles<T>& copy)
+        {
+            roll  = copy.roll;
+            pitch = copy.pitch;
+            yaw   = copy.yaw;
+
+            return (*this);
+        }
 
         /*! \brief Set the EulerAngles
          *
@@ -59,7 +75,16 @@ namespace Bull
          * \return This
          *
          */
-        EulerAngles<T>& set(const Quaternion<T>& quaternion);
+        EulerAngles<T>& set(const Quaternion<T>& quaternion)
+        {
+            EulerAngles<T> representation = quaternion.toEulerAngles();
+
+            roll  = representation.roll;
+            pitch = representation.pitch;
+            yaw   = representation.yaw;
+
+            return (*this);
+        }
 
         /*! \brief Set the EulerAngles
          *
@@ -70,21 +95,38 @@ namespace Bull
          * \return This
          *
          */
-        EulerAngles<T>& set(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw);
+        EulerAngles<T>& set(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw)
+        {
+            this->roll  = roll;
+            this->pitch = pitch;
+            this->yaw   = yaw;
+
+            return (*this);
+        }
 
         /*! \brief Normalize the angle of each rotation
          *
          * \return This
          *
          */
-        EulerAngles<T>& normalize();
+        EulerAngles<T>& normalize()
+        {
+            roll.normalize();
+            pitch.normalize();
+            yaw.normalize();
+
+            return (*this);
+        }
 
         /*! \brief Convert the EulerAngles as a Quaternion
          *
          * \return The Quaternion
          *
          */
-        Quaternion<T> toQuaternion() const;
+        Quaternion<T> toQuaternion() const
+        {
+            return Quaternion<T>((*this));
+        }
 
         /*! \brief Compare two EulerAngles
          *
@@ -93,7 +135,12 @@ namespace Bull
          * \return True if right and this are equal
          *
          */
-        bool operator==(const EulerAngles<T>& right);
+        bool operator==(const EulerAngles<T>& right)
+        {
+            return (roll  == right.roll)  &&
+                   (pitch == right.pitch) &&
+                   (yaw   == right.yaw);
+        }
 
         /*! \brief Compare two EulerAngles
          *
@@ -102,7 +149,10 @@ namespace Bull
          * \return True if right and this are not equal
          *
          */
-        bool operator!=(const EulerAngles<T>& right);
+        bool operator!=(const EulerAngles<T>& right)
+        {
+            return !((*this) == right);
+        }
 
         /*! \brief Addition two EulerAngles
          *
@@ -111,7 +161,10 @@ namespace Bull
          * \return This
          *
          */
-        EulerAngles<T> operator+(const EulerAngles<T>& right) const;
+        EulerAngles<T> operator+(const EulerAngles<T>& right) const
+        {
+            return EulerAngles<T>((*this)) += right;
+        }
 
         /*! \brief Addition two EulerAngles
          *
@@ -120,7 +173,15 @@ namespace Bull
          * \return The sum of this and right
          *
          */
-        EulerAngles<T>& operator+=(const EulerAngles<T>& right);
+        EulerAngles<T>& operator+=(const EulerAngles<T>& right)
+        {
+            roll  += right.roll;
+            pitch += right.pitch;
+            yaw   += right.yaw;
+
+
+            return (*this);
+        }
 
         /*! \brief Subtract two EulerAngles
          *
@@ -129,7 +190,10 @@ namespace Bull
          * \return This
          *
          */
-        EulerAngles<T> operator-(const EulerAngles<T>& right) const;
+        EulerAngles<T> operator-(const EulerAngles<T>& right) const
+        {
+            return EulerAngles<T>((*this)) -= right;
+        }
 
         /*! \brief Addition two EulerAngles
          *
@@ -138,7 +202,14 @@ namespace Bull
          * \return The difference of this and right
          *
          */
-        EulerAngles<T>& operator-=(const EulerAngles<T>& right);
+        EulerAngles<T>& operator-=(const EulerAngles<T>& right)
+        {
+            roll  -= right.roll;
+            pitch -= right.pitch;
+            yaw   -= right.yaw;
+
+            return (*this);
+        }
 
         Angle<T> roll;  /*!< The rotation around the X axis */
         Angle<T> pitch; /*!< The rotation around the Y axis */
@@ -153,7 +224,5 @@ namespace Bull
     template <typename T>
     EulerAngles<T> EulerAngles<T>::Zero = EulerAngles<T>();
 }
-
-#include <Bull/Math/EulerAngles.inl>
 
 #endif //BULL_EULERANGLES_HPP

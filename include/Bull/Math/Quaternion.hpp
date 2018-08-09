@@ -28,7 +28,10 @@ namespace Bull
          * \return The conjugate Quaternion
          *
          */
-        static Quaternion<T> conjugate(const Quaternion<T>& quaternion);
+        static Quaternion<T> conjugate(const Quaternion<T>& quaternion)
+        {
+            return Quaternion<T>(quaternion).conjugate();
+        }
 
         /*! \brief Normalize a Quaternion
          *
@@ -37,7 +40,10 @@ namespace Bull
          * \return The normalized Quaternion
          *
          */
-        static Quaternion<T> normalize(const Quaternion<T>& quaternion);
+        static Quaternion<T> normalize(const Quaternion<T>& quaternion)
+        {
+            return Quaternion<T>(quaternion).normalize();
+        }
 
         /*! \brief Create a quaternion from three angles
          *
@@ -48,12 +54,19 @@ namespace Bull
          * \return The created Quaternion
          *
          */
-        static Quaternion<T> fromEulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw);
+        static Quaternion<T> fromEulerAngles(const Angle<T>& roll, const Angle<T>& pitch, const Angle<T>& yaw)
+        {
+            return Quaternion<T>(EulerAngles<T>(roll, pitch, yaw));
+        }
 
         /*! \brief Default constructor
          *
          */
-        Quaternion();
+        Quaternion() :
+            Quaternion<T>(0, 0, 0, 0)
+        {
+            /// Nothing
+        }
 
         /*! \brief Constructor
          *
@@ -62,42 +75,85 @@ namespace Bull
          * \param y The y value of the Quaternion
          * \param z The z value of the Quaternion
          */
-        Quaternion(T w, T x, T y, T z);
+        Quaternion(T w, T x, T y, T z) :
+            w(w),
+            x(x),
+            y(y),
+            z(z)
+        {
+            /// Nothing
+        }
 
         /*! \brief Constructor
          *
          * \param angles Angles to compute as the Quaternion
          *
          */
-        Quaternion(const EulerAngles<T>& angles);
+        explicit Quaternion(const EulerAngles<T>& angles)
+        {
+            T cy = std::cos(angles.yaw   * static_cast<T>(0.5));
+            T sy = std::sin(angles.yaw   * static_cast<T>(0.5));
+            T cr = std::cos(angles.roll  * static_cast<T>(0.5));
+            T sr = std::sin(angles.roll  * static_cast<T>(0.5));
+            T cp = std::cos(angles.pitch * static_cast<T>(0.5));
+            T sp = std::sin(angles.pitch * static_cast<T>(0.5));
+
+            w = cy * cr * cp + sy * sr * sp;
+            x = cy * sr * cp - sy * cr * sp;
+            y = cy * cr * sp + sy * sr * cp;
+            z = sy * cr * cp - cy * sr * sp;
+        }
 
         /*! \brief Get the length of the Quaternion
          *
          * \return The length
          *
          */
-        float getLength() const;
+        float getLength() const
+        {
+            return std::pow(w, 2) + std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2);
+        }
 
         /*! \brief Get the square root of the length
          *
          * \return The square root of the length
          *
          */
-        float getSquareRootLength() const;
+        float getSquareRootLength() const
+        {
+            return std::sqrt(getLength());
+        }
 
         /*! \brief Normalize the Quaternion
          *
          * \return This
          *
          */
-        Quaternion<T>& normalize();
+        Quaternion<T>& normalize()
+        {
+            T n = Quaternion<T>::getSquareRootLength();
+
+            w /= n;
+            x /= n;
+            y /= n;
+            z /= n;
+
+            return (*this);
+        }
 
         /*! \brief Get the conjugate of the Quaternion
          *
          * \return The conjugate
          *
          */
-        Quaternion<T>& conjugate();
+        Quaternion<T>& conjugate()
+        {
+            x = -x;
+            y = -y;
+            z = -z;
+
+            return (*this);
+        }
 
         /*! \brief Compare two Quaternions
          *
@@ -106,7 +162,13 @@ namespace Bull
          * \return True if right and this are equal
          *
          */
-        bool operator==(const Quaternion<T>& right) const;
+        bool operator==(const Quaternion<T>& right) const
+        {
+            return w == right.w &&
+                   x == right.x &&
+                   y == right.y &&
+                   z == right.z;
+        }
 
         /*! \brief Compare two Quaternions
          *
@@ -115,7 +177,10 @@ namespace Bull
          * \return True if right and this are not equal
          *
          */
-        bool operator!=(const Quaternion<T>& right) const;
+        bool operator!=(const Quaternion<T>& right) const
+        {
+            return !((*this) == right);
+        }
 
         /*! \brief Multiply the Quaternion with a scalar. Scale the Quaternion by the scalar
          *
@@ -123,7 +188,13 @@ namespace Bull
          *
          * \return The scaled Quaternion
          */
-        Quaternion<T> operator*(T scale);
+        Quaternion<T> operator*(T scale)
+        {
+            return Quaternion<T>(w * scale,
+                                 x * scale,
+                                 y * scale,
+                                 z * scale);
+        }
 
         /*! \brief Multiply the Quaternion with a Vector3
          *
@@ -132,7 +203,17 @@ namespace Bull
          * \return The product of this and right
          *
          */
-        Vector3<T> operator*(const Vector3<T>& right);
+        Vector3<T> operator*(const Vector3<T>& right)
+        {
+            Vector3<T> quaternionVector(x, y, z);
+            Vector3<T> uv  = Vector3<T>::crossProduct(quaternionVector, right);
+            Vector3<T> uuv = Vector3<T>::crossProduct(quaternionVector, uv);
+
+            uv  *= 2 * w;
+            uuv *= 2;
+
+            return right + uv + uuv;
+        }
 
         T w, x, y, z;
     };
@@ -142,7 +223,5 @@ namespace Bull
     typedef Quaternion<double> QuaternionD;
     typedef Quaternion<unsigned int> QuaternionUI;
 }
-
-#include <Bull/Math/Quaternion.inl>
 
 #endif // BULL_QUATERNION_HPP
