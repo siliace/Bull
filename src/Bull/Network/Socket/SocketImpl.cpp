@@ -30,6 +30,8 @@ namespace Bull
                 case SocketType_Udp: return SOCK_DGRAM;
                 case SocketType_Raw: return SOCK_RAW;
             }
+
+            return 0;
         }
 
         int SocketImpl::convertNetProtocol(NetProtocol protocol)
@@ -39,6 +41,8 @@ namespace Bull
                 case NetProtocol_Ipv4: return AF_INET;
                 case NetProtocol_Ipv6: return AF_INET6;
             }
+
+            return 0;
         }
 
         SocketError SocketImpl::getLastError()

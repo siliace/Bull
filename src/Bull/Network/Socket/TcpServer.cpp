@@ -1,7 +1,7 @@
 #include <thread>
 
 #include <Bull/Core/Time/Clock.hpp>
-#include <Bull/Core/Utility/Finaly.hpp>
+#include <Bull/Core/Utility/Finally.hpp>
 
 #include <Bull/Network/Socket/SocketImpl.hpp>
 #include <Bull/Network/Socket/TcpClient.hpp>
@@ -74,7 +74,7 @@ namespace Bull
             Clock clock;
             bool blocking = isEnableBlockingMode();
 
-            Finaly cleanup([this, blocking](){
+            Finally cleanup([this, blocking](){
                 enableBlockingMode(blocking);
             });
 

@@ -20,6 +20,8 @@ namespace Bull
                 case EdgeMode_Reflect: return STBIR_EDGE_REFLECT;
                 case EdgeMode_None:    return STBIR_EDGE_ZERO;
             }
+
+            return STBIR_EDGE_CLAMP;
         }
     }
 

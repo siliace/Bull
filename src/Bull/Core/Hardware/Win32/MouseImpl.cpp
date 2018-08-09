@@ -35,6 +35,8 @@ namespace Bull
                 case MouseButton_Extra1: return VK_XBUTTON1;
                 case MouseButton_Extra2: return VK_XBUTTON2;
             }
+
+            return 0;
         }
     }
 }

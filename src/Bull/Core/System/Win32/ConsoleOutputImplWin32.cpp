@@ -28,6 +28,8 @@ namespace Bull
                 case ConsoleColor_Yellow:      return FOREGROUND_INTENSITY | FOREGROUND_RED   | FOREGROUND_GREEN;
                 case ConsoleColor_White:       return FOREGROUND_INTENSITY | FOREGROUND_RED   | FOREGROUND_GREEN | FOREGROUND_BLUE;
             }
+
+            return 0;
         }
 
         WORD ConsoleOutputImplWin32::colorToBackgroundAttribute(ConsoleColor color)
@@ -50,6 +52,8 @@ namespace Bull
                 case ConsoleColor_Yellow:      return BACKGROUND_INTENSITY | BACKGROUND_RED   | BACKGROUND_GREEN;
                 case ConsoleColor_White:       return BACKGROUND_INTENSITY | BACKGROUND_RED   | BACKGROUND_GREEN | BACKGROUND_BLUE;
             }
+
+            return 0;
         }
 
         ConsoleOutputImplWin32::ConsoleOutputImplWin32() :

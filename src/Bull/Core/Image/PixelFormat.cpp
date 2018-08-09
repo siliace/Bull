@@ -46,5 +46,7 @@ namespace Bull
             case PixelFormatType_RGB32F: return {"RGB32F", PixelDataType_Float,       32};
             case PixelFormatType_RGB32I: return {"RGB32I", PixelDataType_Int,         32};
         }
+
+        return PixelFormat::Info();
     }
 }

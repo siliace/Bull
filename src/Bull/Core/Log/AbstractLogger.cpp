@@ -13,6 +13,8 @@ namespace Bull
             case LogLevel_Warning: return "Warning";
             case LogLevel_Error:   return "Error";
         }
+
+        return "";
     }
 
     void AbstractLogger::setMinimalSeverity(LogLevel level)

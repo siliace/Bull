@@ -11,6 +11,8 @@ namespace Bull
             case LogLevel_Warning: return MessageWindowIcon_Warning;
             case LogLevel_Info:    return MessageWindowIcon_Information;
         }
+
+        return MessageWindowIcon_Error;
     }
 
     MessageWindowLogger::MessageWindowLogger()
