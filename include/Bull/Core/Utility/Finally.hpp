@@ -11,11 +11,6 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
-         *
-         */
-        Finally();
-
         /*! \brief Constructor
          *
          * \param callback The function to call when the instance is destroyed

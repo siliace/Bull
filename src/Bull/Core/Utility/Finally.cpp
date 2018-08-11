@@ -2,11 +2,6 @@
 
 namespace Bull
 {
-    Finally::Finally()
-    {
-        enable(false);
-    }
-
     Finally::Finally(const std::function<void()>& callback)
     {
         enable();
