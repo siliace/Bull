@@ -1,28 +1,28 @@
-#include <Bull/Render/Buffer/VertexBuffer.hpp>
+#include <Bull/Render/Buffer/ArrayBuffer.hpp>
 #include <Bull/Render/Context/GlFunctions.hpp>
 
 namespace Bull
 {
-    VertexBuffer::VertexBuffer() :
+    ArrayBuffer::ArrayBuffer() :
         HardwareBuffer(HardwareBufferType_Array)
     {
         /// Nothing
     }
 
-    VertexBuffer::VertexBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage) :
-        VertexBuffer()
+    ArrayBuffer::ArrayBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage) :
+        ArrayBuffer()
     {
         create(vertices, usage);
     }
 
-    void VertexBuffer::create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage)
+    void ArrayBuffer::create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage)
     {
         HardwareBuffer::create(vertices.size() * sizeof(Vertex), usage);
 
         fill(&vertices[0], getCapacity(), 0);
     }
 
-    void VertexBuffer::setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride, std::size_t start)
+    void ArrayBuffer::setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride, std::size_t start)
     {
         bind();
 

@@ -1,7 +1,7 @@
 #ifndef BULL_GRAPHICS_MESH_HPP
 #define BULL_GRAPHICS_MESH_HPP
 
-#include <Bull/Render/Buffer/VertexBuffer.hpp>
+#include <Bull/Render/Buffer/ArrayBuffer.hpp>
 #include <Bull/Render/Buffer/IndexBuffer.hpp>
 #include <Bull/Render/Buffer/VertexArrayObject.hpp>
 #include <Bull/Render/Draw/RenderPrimitive.hpp>
@@ -50,7 +50,7 @@ namespace Bull
     private:
 
         IndexBuffer m_ebo;
-        VertexBuffer m_vbo;
+        ArrayBuffer m_vbo;
         VertexArrayObject m_vao;
 
         bool m_hasIndex;

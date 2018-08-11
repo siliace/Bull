@@ -1,5 +1,5 @@
-#ifndef BULL_RENDER_BUFFER_VERTEXBUFFER_HPP
-#define BULL_RENDER_BUFFER_VERTEXBUFFER_HPP
+#ifndef BULL_RENDER_BUFFER_ARRAYBUFFER_HPP
+#define BULL_RENDER_BUFFER_ARRAYBUFFER_HPP
 
 #include <vector>
 
@@ -8,14 +8,12 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API VertexBuffer : public HardwareBuffer
+    struct BULL_RENDER_API ArrayBuffer : public HardwareBuffer
     {
-    public:
-
         /*! \brief Default constructor
          *
          */
-        VertexBuffer();
+        ArrayBuffer();
 
         /*! \brief Constructor
          *
@@ -23,7 +21,7 @@ namespace Bull
          * \param usage    The usage (static, dynamic, stream) of the ArrayBuffer
          *
          */
-        explicit VertexBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
+        explicit ArrayBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
 
         /*! \brief Create the ArrayBuffer from a Vertex vector
          *
@@ -45,4 +43,4 @@ namespace Bull
     };
 }
 
-#endif // BULL_RENDER_BUFFER_VERTEXBUFFER_HPP
+#endif // BULL_RENDER_BUFFER_ARRAYBUFFER_HPP
