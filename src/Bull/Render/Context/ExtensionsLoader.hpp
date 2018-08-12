@@ -14,15 +14,6 @@ namespace Bull
         {
         public:
 
-            /*! \brief Get the list of supported OpenGL extensions
-             *
-             * \return The list of extensions
-             *
-             */
-            static std::vector<String> getSupportedExtensions();
-
-        public:
-
             /*! \brief Default constructor
              *
              */
@@ -59,6 +50,7 @@ namespace Bull
         private:
 
             std::vector<std::reference_wrapper<Extension>> m_extensions;
+            std::vector<String>                            m_allExtensions;
             bool                                           m_loadedFunctions;
             bool                                           m_loadedExtensions;
         };

@@ -9,6 +9,14 @@
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
 
+#if defined BULL_OS_WINDOWS
+    #include <Bull/Render/Context/Wgl/WglExtensionsLoader.hpp>
+    typedef Bull::prv::WglExtensionsLoader ExtensionsLoaderType;
+#else
+    #include <Bull/Render/Context/Glx/GlxExtensionsLoader.hpp>
+    typedef Bull::prv::GlxExtensionsLoader ExtensionsLoaderType;
+#endif
+
 namespace gl
 {
     PFNGLACTIVETEXTUREPROC            activeTexture            = nullptr;
@@ -213,28 +221,6 @@ namespace Bull
 {
     namespace prv
     {
-        std::vector<String> ExtensionsLoader::getSupportedExtensions()
-        {
-            int extensionsCount;
-            std::vector<String> extensions;
-
-            gl::getIntegerv(GL_NUM_EXTENSIONS, &extensionsCount);
-
-            extensions.resize(extensionsCount);
-
-            for(unsigned int i = 0; i < extensionsCount; i++)
-            {
-                String extension(reinterpret_cast<const char*>(gl::getStringi(GL_EXTENSIONS, i)));
-
-                if(!extension.isEmpty())
-                {
-                    extensions[i] = extension;
-                }
-            }
-
-            return extensions;
-        }
-
         ExtensionsLoader::ExtensionsLoader() :
             m_loadedFunctions(false),
             m_loadedExtensions(false)
@@ -254,6 +240,7 @@ namespace Bull
             Expect(!m_loadedExtensions, Throw(LogicError, "ExtensionsLoader::loadExtensions", "Extensions already loaded"));
 
             m_loadedExtensions = true;
+            m_allExtensions    = ExtensionsLoaderType::getExtensions(surface);
 
             for(Extension& extension : m_extensions)
             {
@@ -263,11 +250,11 @@ namespace Bull
 
                     if(extension.isLoaded())
                     {
-                        Log::getInstance()->info("Loaded context extension : " + extension.getName());
+                        Log::getInstance()->info("Loaded OpenGL extension : " + extension.getName());
                     }
                     else
                     {
-                        Log::getInstance()->info("Failed to load context extension : " + extension.getName());
+                        Log::getInstance()->info("Failed to load OpenGL extension : " + extension.getName());
                     }
                 }
             }
@@ -464,11 +451,9 @@ namespace Bull
 
         bool ExtensionsLoader::isSupported(const String& extension) const
         {
-            std::vector<String> allExtensions = getSupportedExtensions();
-
             if(m_loadedExtensions)
             {
-                return std::find(allExtensions.begin(), allExtensions.end(), extension) != allExtensions.end();
+                return std::find(m_allExtensions.begin(), m_allExtensions.end(), extension) != m_allExtensions.end();
             }
 
             return false;
