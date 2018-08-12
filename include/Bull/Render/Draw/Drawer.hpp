@@ -10,10 +10,8 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API Drawer
+    struct BULL_RENDER_API Drawer
     {
-    public:
-
         /*! \brief Draw arrays
          *
          * \param primitive The primitive to use to draw
@@ -32,26 +30,6 @@ namespace Bull
          *
          */
         static void drawElements(RenderPrimitive primitive, std::size_t count, DataType type, const void* indices = nullptr);
-
-    private:
-
-        /*! \brief Convert a RenderPrimitive to the corresponding OpenGL rendering mode
-         *
-         * \param primitive The RenderPrimitive to convert
-         *
-         * \return The OpenGL rendering mode
-         *
-         */
-        static unsigned int convertPrimitive(RenderPrimitive primitive);
-
-        /*! \brief Convert a DataType to the corresponding OpenGL data type
-         *
-         * \param primitive The DataType to convert
-         *
-         * \return The OpenGL data type
-         *
-         */
-        static unsigned int convertDataType(DataType type);
     };
 }
 

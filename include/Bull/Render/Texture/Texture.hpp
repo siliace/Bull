@@ -137,7 +137,7 @@ namespace Bull
     private:
 
         unsigned int m_id;
-        Size    m_size;
+        Size         m_size;
         bool         m_isSmooth;
         bool         m_isRepeated;
     };
