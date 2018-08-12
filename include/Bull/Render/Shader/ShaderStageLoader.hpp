@@ -10,7 +10,6 @@ namespace Bull
 {
     struct BULL_RENDER_API ShaderStageLoader : public AsyncAssetLoader<ShaderStage, ShaderStageType>
     {
-
         /*! \brief Load an ShaderStage from a File
          *
          * \param path The Path of the File to read

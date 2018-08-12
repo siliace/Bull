@@ -34,10 +34,26 @@ namespace Bull
          */
         Shader();
 
+        /*! \brief Constructor by movement
+         *
+         * \param right The Shader to move
+         *
+         */
+        Shader(Shader&& right) noexcept;
+
         /*! \brief Destructor
          *
          */
         ~Shader();
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param directory The Shader to move
+         *
+         * \return This
+         *
+         */
+        Shader& operator=(Shader&& right) noexcept;
 
         /*! \brief Create a Shader from a ShaderBinary
          *

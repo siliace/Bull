@@ -27,10 +27,22 @@ namespace Bull
     {
         Expect(gl::isProgram(m_program), Throw(InternalError, "Shader::Shader", "Failed to create shader"));
     }
+    
+    Shader::Shader(Shader&& right) noexcept
+    {
+        std::swap(m_program, right.m_program);
+    }
 
     Shader::~Shader()
     {
         gl::deleteProgram(m_program);
+    }
+
+    Shader& Shader::operator=(Shader&& right) noexcept
+    {
+        std::swap(m_program, right.m_program);
+
+        return *this;
     }
 
     void Shader::create(const ShaderBinary& shaderBinary)
