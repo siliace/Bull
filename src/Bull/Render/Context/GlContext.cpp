@@ -66,8 +66,14 @@ namespace Bull
             ExtensionsLoader::Instance loader;
 
             ContextType::requireExtensions(loader);
-            loader->loadExtensions(shared->getSurfaceHandler());
             loader->loadFunctions();
+
+            for(const String& extension : ExtensionsLoader::getSupportedExtensions())
+            {
+                Log::getInstance()->info("Found OpenGL extension : " + extension);
+            }
+
+            loader->loadExtensions(shared->getSurfaceHandler());
 
             shared->initialize();
 
