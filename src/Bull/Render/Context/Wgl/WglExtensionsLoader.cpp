@@ -1,6 +1,4 @@
-#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
 
 #include <Bull/Render/Context/GlContext.hpp>
