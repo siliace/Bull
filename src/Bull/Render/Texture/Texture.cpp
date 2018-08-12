@@ -1,7 +1,5 @@
-#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 
 #include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Texture/Texture.hpp>

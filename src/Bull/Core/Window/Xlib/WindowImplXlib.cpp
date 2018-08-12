@@ -1,8 +1,6 @@
 #include <thread>
 
-#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 #include <Bull/Core/Support/Xlib/WMHints.hpp>
 #include <Bull/Core/Window/WindowStyle.hpp>

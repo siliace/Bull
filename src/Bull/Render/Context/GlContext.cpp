@@ -1,6 +1,4 @@
-#include <Bull/Core/Exception/DeclareException.hpp>
-#include <Bull/Core/Exception/Expect.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
+#include <Bull/Core/Exception/Exception.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Utility/Character.hpp>
 

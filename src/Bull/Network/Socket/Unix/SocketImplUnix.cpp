@@ -2,9 +2,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
-
 #include <Bull/Network/Socket/Unix/SocketImplUnix.hpp>
 
 namespace Bull

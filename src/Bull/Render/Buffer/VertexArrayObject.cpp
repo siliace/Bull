@@ -1,6 +1,3 @@
-#include <Bull/Core/Exception/Expect.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
-
 #include <Bull/Render/Buffer/VertexArrayObject.hpp>
 #include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Context/OpenGLHandlerError.hpp>

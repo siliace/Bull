@@ -1,5 +1,5 @@
 #include <Bull/Core/Exception/InternalError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
+
 #include <Bull/Core/Support/Xlib/Display.hpp>
 
 namespace Bull

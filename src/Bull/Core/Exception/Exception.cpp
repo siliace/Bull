@@ -29,7 +29,7 @@ namespace Bull
         return m_description;
     }
 
-    Exception::Exception(const String& file, Uint64 line, const String& type, const String& source, const String& description) noexcept :
+    Exception::Exception(const String& file, Uint64 line, const String& type, const String& source, const String& description) :
         m_file(file),
         m_line(line),
         m_type(type),

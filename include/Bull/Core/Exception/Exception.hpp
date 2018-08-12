@@ -5,6 +5,27 @@
 
 #include <Bull/Core/Log/Log.hpp>
 
+#define DeclareExceptionFrom(ExceptionName, ParentException)                                          \
+struct ExceptionName : public ParentException                                                         \
+{                                                                                                     \
+    ExceptionName(const String& file, Uint64 line, const String& source, const String& description) : \
+        ParentException(file, line, #ExceptionName, source, description)                              \
+    {                                                                                                 \
+                                                                                                      \
+    }                                                                                                 \
+};
+
+#define Expect(BooleanExpression, ThrowStatement) \
+if(!(BooleanExpression))                          \
+{                                                 \
+    ThrowStatement;                               \
+}                                                 \
+
+
+#define Throw(Exception, Source, Description) Bull::prv::__throw<Exception>(__FILE__, __LINE__, Source, Description)
+
+#define DeclareException(ExceptionName) DeclareExceptionFrom(ExceptionName, Bull::Exception)
+
 namespace Bull
 {
     class BULL_CORE_API Exception : public std::exception
@@ -20,7 +41,7 @@ namespace Bull
          *
          */
         template <typename T>
-        static void throwException(const String& file, Uint64 line, const String& source, const String& description) noexcept(false)
+        static void throwException(const String& file, Uint64 line, const String& source, const String& description)
         {
             throw T(file, line, source, description);
         }
@@ -73,7 +94,7 @@ namespace Bull
          * \param description The message describing the Exception
          *
          */
-        Exception(const String& file, Uint64 line, const String& type, const String& source, const String& description) noexcept;
+        Exception(const String& file, Uint64 line, const String& type, const String& source, const String& description);
 
     private:
 
@@ -93,6 +114,15 @@ namespace Bull
         String        m_source;
         String        m_description;
     };
+
+    namespace prv
+    {
+        template <typename T, typename = std::enable_if<std::is_base_of<Exception, T>::value>>
+        void __throw(const String& file, Uint64 line, const String& source, const String& description)
+        {
+            Exception::throwException<T>(file, line, source, description);
+        }
+    }
 }
 
 #endif // BULL_CORE_EXCEPTION_EXCEPTION_HPP

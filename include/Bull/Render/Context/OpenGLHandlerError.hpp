@@ -1,7 +1,7 @@
 #ifndef BULL_OPENGLHANDLERERROR_HPP
 #define BULL_OPENGLHANDLERERROR_HPP
 
-#include <Bull/Core/Exception/DeclareException.hpp>
+#include <Bull/Core/Exception/Exception.hpp>
 
 namespace Bull
 {

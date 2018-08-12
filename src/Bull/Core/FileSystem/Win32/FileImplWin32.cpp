@@ -1,5 +1,3 @@
-#include <Bull/Core/Exception/Expect.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/Win32/FileImplWin32.hpp>
 #include <Bull/Core/Support/Win32/DateHelper.hpp>
 #include <Bull/Core/Support/Win32/Win32Error.hpp>

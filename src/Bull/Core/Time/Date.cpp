@@ -1,8 +1,6 @@
 #include <map>
 
-#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Time/Date.hpp>
 #include <Bull/Core/Time/DateImpl.hpp>
 

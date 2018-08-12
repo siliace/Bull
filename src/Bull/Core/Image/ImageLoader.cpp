@@ -1,8 +1,6 @@
 #include <stb_image/stb_image.h>
 
-#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Image/ImageLoader.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/Log/Log.hpp>

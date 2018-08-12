@@ -1,5 +1,4 @@
 #include <Bull/Core/System/Win32/LibraryImplWin32.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
 
 namespace Bull

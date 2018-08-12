@@ -1,7 +1,5 @@
 #include <Bull/Core/Configuration/Macro.hpp>
-#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Network/Address/SockAddrBuffer.hpp>

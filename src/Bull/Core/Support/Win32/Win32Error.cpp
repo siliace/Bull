@@ -1,5 +1,4 @@
 #include <Bull/Core/Exception/LogicError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
 

@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_EXCEPTION_INVALIDPARAMETER_HPP
 #define BULL_CORE_EXCEPTION_INVALIDPARAMETER_HPP
 
-#include <Bull/Core/Exception/DeclareException.hpp>
+#include <Bull/Core/Exception/Exception.hpp>
 
 namespace Bull
 {

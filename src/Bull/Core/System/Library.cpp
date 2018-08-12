@@ -1,5 +1,4 @@
 #include <Bull/Core/Exception/InternalError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/System/Library.hpp>
 #include <Bull/Core/System/LibraryImpl.hpp>
 
@@ -7,10 +6,7 @@ namespace Bull
 {
     Library::Library(const String& name)
     {
-        if(!load(name))
-        {
-            Throw(InternalError, "Library::Library", "Failed to load library " + name);
-        }
+        Expect(load(name), Throw(InternalError, "Library::Library", "Failed to load library " + name));
     }
 
     Library::~Library()

@@ -1,6 +1,6 @@
-#include <Bull/Core/Exception/Expect.hpp>
+
 #include <Bull/Core/Exception/LogicError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
+
 #include <Bull/Core/Window/Window.hpp>
 #include <Bull/Core/Window/WindowImpl.hpp>
 

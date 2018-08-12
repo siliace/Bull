@@ -1,5 +1,4 @@
 #include <Bull/Core/Exception/InternalError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 
 #include <Bull/Network/Socket/SocketHeader.hpp>
 #include <Bull/Network/Socket/Win32/SocketImplWin32.hpp>

@@ -1,7 +1,7 @@
 #ifndef BULL_RENDER_SHADER_SHADER_HPP
 #define BULL_RENDER_SHADER_SHADER_HPP
 
-#include <Bull/Core/Exception/DeclareException.hpp>
+#include <Bull/Core/Exception/Exception.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/Utility/Color.hpp>

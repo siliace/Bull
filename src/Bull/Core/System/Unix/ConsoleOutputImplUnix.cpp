@@ -1,8 +1,6 @@
 #include <unistd.h>
 
-#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/System/Unix/ConsoleOutputImplUnix.hpp>
 #include <Bull/Core/Utility/StringUtils.hpp>

@@ -1,11 +1,9 @@
 #include <cstring>
 #include <map>
 
-#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Exception/LogicError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 
 #include <Bull/Render/Buffer/HardwareBuffer.hpp>
 #include <Bull/Render/Context/GlFunctions.hpp>

@@ -3,9 +3,7 @@
 #include <GL/glcorearb.h>
 #include <GL/glext.h>
 
-#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/LogicError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Log/Log.hpp>
 
 #include <Bull/Render/Context/ExtensionsLoader.hpp>

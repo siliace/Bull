@@ -1,5 +1,4 @@
 #include <Bull/Core/Exception/InternalError.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Log/FileLogger.hpp>
 
 namespace Bull

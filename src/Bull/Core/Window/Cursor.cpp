@@ -1,5 +1,4 @@
 #include <Bull/Core/Exception/InvalidParameter.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Window/Cursor.hpp>
 #include <Bull/Core/Window/CursorImpl.hpp>
 

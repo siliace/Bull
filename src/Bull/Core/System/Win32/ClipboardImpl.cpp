@@ -1,10 +1,8 @@
 #include <cstring>
 
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
 #include <Bull/Core/System/Win32/ClipboardImpl.hpp>
-#include <Bull/Core/Exception/Expect.hpp>
 
 namespace Bull
 {

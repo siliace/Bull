@@ -1,4 +1,3 @@
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Exception/UnsupportedOperation.hpp>
 #include <Bull/Core/System/Win32/ClipboardImpl.hpp>
 

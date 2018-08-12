@@ -1,6 +1,4 @@
-#include <Bull/Core/Exception/Expect.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/Image/Image.hpp>
 
 namespace Bull

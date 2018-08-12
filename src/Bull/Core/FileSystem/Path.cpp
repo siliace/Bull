@@ -1,5 +1,4 @@
 #include <Bull/Core/Exception/FileNotFound.hpp>
-#include <Bull/Core/Exception/Throw.hpp>
 #include <Bull/Core/FileSystem/Directory.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/FileSystem/PathImpl.hpp>
