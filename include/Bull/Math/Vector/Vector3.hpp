@@ -33,19 +33,20 @@ namespace Bull
          * \return The normal Vector3
          *
          */
-        static Vector3<T> crossProduct(const Vector3<T>& left, const Vector3<T>& right);
-
-        /*! \brief Default constructor
-         *
-         */
-        Vector3() = default;
+        static Vector3<T> crossProduct(const Vector3<T>& left, const Vector3<T>& right)
+        {
+            return Vector3<T>(left).crossProduct(right);
+        }
 
         /*! \brief Constructor
          *
          * \param value The value of all components
          *
          */
-        explicit Vector3(T value);
+        explicit Vector3(T value = 0)
+        {
+            set(value, value, value);
+        }
 
         /*! \brief Constructor
          *
@@ -54,7 +55,10 @@ namespace Bull
          * \param z The z component
          *
          */
-        Vector3(T x, T y, T z);
+        Vector3(T x, T y, T z)
+        {
+            set(x, y, z);
+        }
 
         /*! \brief Copy constructor
          *
@@ -62,7 +66,11 @@ namespace Bull
          *
          */
         template <typename U, std::size_t US>
-        Vector3(const Vector<U, US>& copy);
+        Vector3(const Vector<U, US>& copy) :
+            Vector<T, US>(copy)
+        {
+            /// Nothing
+        }
 
         /*! \brief Set the Vector3
          *
@@ -73,7 +81,14 @@ namespace Bull
          * \return This
          *
          */
-        Vector3<T>& set(T x, T y, T z);
+        Vector3<T>& set(T x, T y, T z)
+        {
+            this->x() = x;
+            this->y() = y;
+            this->z() = z;
+
+            return (*this);
+        }
 
         /*! \brief Compute the cross product of two Vector3
          *
@@ -82,49 +97,72 @@ namespace Bull
          * \return This
          *
          */
-        Vector3<T>& crossProduct(const Vector3<T>& right);
+        Vector3<T>& crossProduct(const Vector3<T>& right)
+        {
+            return set((y() * right.z()) - (z() * right.y()),
+                       (z() * right.x()) - (x() * right.z()),
+                       (x() * right.y()) - (y() * right.x()));
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        T& x();
+        T& x()
+        {
+            return this->at(0);
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        const T& x() const;
+        const T& x() const
+        {
+            return this->at(0);
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        T& y();
+        T& y()
+        {
+            return this->at(1);
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        const T& y() const;
+        const T& y() const
+        {
+            return this->at(1);
+        }
 
         /*! \brief Get the Z component
          *
          * \return The component
          *
          */
-        T& z();
+        T& z()
+        {
+            return this->at(2);
+        }
 
         /*! \brief Get the Z component
          *
          * \return The component
          *
          */
-        const T& z() const;
+        const T& z() const
+        {
+            return this->at(2);
+        }
     };
 
     template<typename T>
@@ -165,7 +203,5 @@ namespace Bull
     typedef Vector3<double> Vector3D;
     typedef Vector3<unsigned int> Vector3UI;
 }
-
-#include <Bull/Math/Vector/Vector3.inl>
 
 #endif // BULL_MATH_VECTOR_VECTOR3_HPP

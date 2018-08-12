@@ -10,10 +10,15 @@ namespace Bull
     {
         static Vector2<T> Zero;
 
-        /*! \brief Default constructor
+        /*! \brief Constructor
+         *
+         * \param value The value of all components
          *
          */
-        Vector2() = default;
+        explicit Vector2(T value = 0)
+        {
+            set(value, value);
+        }
 
         /*! \brief Constructor
          *
@@ -21,7 +26,10 @@ namespace Bull
          * \param y The Y component
          *
          */
-        Vector2(T x, T y);
+        Vector2(T x, T y)
+        {
+            set(x, y);
+        }
 
         /*! \brief Copy constructor
          *
@@ -29,7 +37,11 @@ namespace Bull
          *
          */
         template <typename U, std::size_t US>
-        Vector2(const Vector<U, US>& copy);
+        Vector2(const Vector<U, US>& copy) :
+            Vector<T, 2>(copy)
+        {
+            /// Nothing
+        }
 
         /*! \brief Set the Vector2
          *
@@ -39,42 +51,63 @@ namespace Bull
          * \return This
          *
          */
-        Vector2<T>& set(T x, T y);
+        Vector2<T>& set(T x, T y)
+        {
+            this->x() = x;
+            this->y() = y;
+
+            return (*this);
+        }
 
         /*! \brief Get the ratio of the Vector
          *
          * \return The ratio
          *
          */
-        float getRatio() const;
+        float getRatio() const
+        {
+            return static_cast<float>(x()) / static_cast<float>(y());
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        T& x();
+        T& x()
+        {
+            return this->at(0);
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        const T& x() const;
+        const T& x() const
+        {
+            return this->at(0);
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        T& y();
+        T& y()
+        {
+            return this->at(0);
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        const T& y() const;
+        const T& y() const
+        {
+            return this->at(0);
+        }
     };
 
     template <typename T>
@@ -85,7 +118,5 @@ namespace Bull
     typedef Vector2<double> Vector2D;
     typedef Vector2<unsigned int> Vector2UI;
 }
-
-#include <Bull/Math/Vector/Vector2.inl>
 
 #endif // BULL_MATH_VECTOR_VECTOR2_HPP

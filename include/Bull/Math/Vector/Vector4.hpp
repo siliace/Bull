@@ -32,17 +32,15 @@ namespace Bull
             );
         }
 
-        /*! \brief Default constructor
-         *
-         */
-        Vector4() = default;
-
         /*! \brief Constructor
          *
          * \param value The value of all components
          *
          */
-        explicit Vector4(T value);
+        explicit Vector4(T value = 0)
+        {
+            set(value, value, value, value);
+        }
 
         /*! \brief Constructor
          *
@@ -52,14 +50,21 @@ namespace Bull
          * \param w The w component
          *
          */
-        Vector4(T x, T y, T z, T w = 0);
+        Vector4(T x, T y, T z, T w = 0)
+        {
+            set(x, y, z, w);
+        }
 
         /*! \brief Constructor
          *
          * \param copy The X/Y/W components
          * \param w    The W component
          */
-        Vector4(const Vector3<T>& copy, T w);
+        Vector4(const Vector3<T>& copy, T w) :
+            Vector<T, 4>(copy)
+        {
+            this->w() = w;
+        }
 
         /*! \brief Copy constructor
          *
@@ -67,7 +72,11 @@ namespace Bull
          *
          */
         template <typename U, std::size_t US>
-        Vector4(const Vector<U, US>& copy);
+        Vector4(const Vector<U, US>& copy) :
+            Vector<T, 4>(copy)
+        {
+            /// Nothing
+        }
 
         /*! \brief Set the Vector3
          *
@@ -79,63 +88,95 @@ namespace Bull
          * \return This
          *
          */
-        Vector4<T>& set(T x, T y, T z, T w = 0);
+        Vector4<T>& set(T x, T y, T z, T w = 0)
+        {
+            this->x() = x;
+            this->y() = y;
+            this->z() = z;
+            this->w() = w;
+
+            return (*this);
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        T& x();
+        T& x()
+        {
+            return this->at(0);
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        const T& x() const;
+        const T& x() const
+        {
+            return this->at(0);
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        T& y();
+        T& y()
+        {
+            return this->at(1);
+        }
 
         /*! \brief Get the X component
          *
          * \return The component
          *
          */
-        const T& y() const;
+        const T& y() const
+        {
+            return this->at(1);
+        }
 
         /*! \brief Get the Z component
          *
          * \return The component
          *
          */
-        T& z();
+        T& z()
+        {
+            return this->at(2);
+        }
 
         /*! \brief Get the Z component
          *
          * \return The component
          *
          */
-        const T& z() const;
+        const T& z() const
+        {
+            return this->at(2);
+        }
 
         /*! \brief Get the W component
          *
          * \return The component
          *
          */
-        T& w();
+        T& w()
+        {
+            return this->at(3);
+        }
 
         /*! \brief Get the W component
          *
          * \return The component
          *
          */
-        const T& w() const;
+        const T& w() const
+        {
+            return this->at(3);
+        }
     };
 
     template<typename T>
@@ -149,7 +190,5 @@ namespace Bull
     typedef Vector4<double> Vector4D;
     typedef Vector4<unsigned int> Vector4UI;
 }
-
-#include <Bull/Math/Vector/Vector4.inl>
 
 #endif // BULL_MATH_VECTOR_VECTOR4_HPP
