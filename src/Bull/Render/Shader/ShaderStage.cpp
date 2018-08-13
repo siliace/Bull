@@ -63,7 +63,7 @@ namespace Bull
         gl::shaderSource(m_id, 1, &source, nullptr);
         gl::compileShader(m_id);
 
-        Expect(isCompiled(), Throw(InternalError, "ShaderStage::compile", "Failed to compile ShaderStage"));
+        Expect(isCompiled(), Throw(InternalError, "ShaderStage::compile", "Failed to compile ShaderStage + (" + getErrorMessage() + ")"));
 
         m_isCompiled = true;
     }
