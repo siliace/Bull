@@ -11,7 +11,9 @@
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Render/Context/Wgl/WglExtensionsLoader.hpp>
-    typedef Bull::prv::WglExtensionsLoader ExtensionsLoaderType;
+#include "ExtensionsLoader.hpp"
+
+typedef Bull::prv::WglExtensionsLoader ExtensionsLoaderType;
 #else
     #include <Bull/Render/Context/Glx/GlxExtensionsLoader.hpp>
     typedef Bull::prv::GlxExtensionsLoader ExtensionsLoaderType;
@@ -221,6 +223,25 @@ namespace Bull
 {
     namespace prv
     {
+        std::set<String> ExtensionsLoader::getAllExtensions(SurfaceHandler surface)
+        {
+            int extensionsCount;
+            std::set<String> extensions;
+
+            gl::getIntegerv(GL_NUM_EXTENSIONS, &extensionsCount);
+
+            for(unsigned int i = 0; i < extensionsCount; i++)
+            {
+                extensions.insert(String(reinterpret_cast<const char*>(gl::getStringi(GL_EXTENSIONS, i))));
+            }
+
+            std::vector<String> tokens = ExtensionsLoaderType::getExtensions(surface);
+
+            extensions.insert(tokens.begin(), tokens.end());
+
+            return extensions;
+        }
+
         ExtensionsLoader::ExtensionsLoader() :
             m_loadedFunctions(false),
             m_loadedExtensions(false)
@@ -240,7 +261,12 @@ namespace Bull
             Expect(!m_loadedExtensions, Throw(LogicError, "ExtensionsLoader::loadExtensions", "Extensions already loaded"));
 
             m_loadedExtensions = true;
-            m_allExtensions    = ExtensionsLoaderType::getExtensions(surface);
+            m_allExtensions = getAllExtensions(surface);
+
+            for(const String& extension : m_allExtensions)
+            {
+                Log::getInstance()->info("Found extension : " + extension);
+            }
 
             for(Extension& extension : m_extensions)
             {

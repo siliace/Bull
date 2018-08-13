@@ -64,8 +64,8 @@ namespace Bull
             ExtensionsLoader::Instance loader;
 
             ContextType::requireExtensions(loader);
-            loader->loadExtensions(shared->getSurfaceHandler());
             loader->loadFunctions();
+            loader->loadExtensions(shared->getSurfaceHandler());
 
             shared->initialize();
 

@@ -1,6 +1,8 @@
 #ifndef BULL_RENDER_CONTEXT_EXTENSIONSLOADER_HPP
 #define BULL_RENDER_CONTEXT_EXTENSIONSLOADER_HPP
 
+#include <set>
+
 #include <Bull/Core/Pattern/Singleton.hpp>
 
 #include <Bull/Render/Context/Extension.hpp>
@@ -12,6 +14,17 @@ namespace Bull
     {
         class ExtensionsLoader : public Singleton<ExtensionsLoader>
         {
+        private:
+
+            /*! \brief Get all extensions available on the system
+             *
+             * \param surface The surface to get extensions from
+             *
+             * \return The list of extensions
+             *
+             */
+            static std::set<String> getAllExtensions(SurfaceHandler surface);
+
         public:
 
             /*! \brief Default constructor
@@ -50,7 +63,7 @@ namespace Bull
         private:
 
             std::vector<std::reference_wrapper<Extension>> m_extensions;
-            std::vector<String>                            m_allExtensions;
+            std::set<String>                               m_allExtensions;
             bool                                           m_loadedFunctions;
             bool                                           m_loadedExtensions;
         };
