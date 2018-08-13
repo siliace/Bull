@@ -18,10 +18,26 @@ namespace Bull
          */
         VertexArrayObject();
 
+        /*! \brief Constructor by movement semantic
+         *
+         * \param right The VertexArrayObject to move
+         *
+         */
+        VertexArrayObject(VertexArrayObject&& right) noexcept;
+
         /*! \brief Destructor
          *
          */
         ~VertexArrayObject();
+
+        /*! \brief Basic assignment operator by movement semantic
+         *
+         * \param right The VertexArrayObject to move
+         *
+         * \return This
+         *
+         */
+        VertexArrayObject& operator=(VertexArrayObject&& right) noexcept;
 
         /*! \brief Run a Functor with the VertexArrayObject bound
          *

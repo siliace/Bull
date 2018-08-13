@@ -13,9 +13,21 @@ namespace Bull
         Expect(gl::isVertexArray(m_vao), Throw(OpenGLHandlerError, "VertexArrayObject::VertexArrayObject", "Failed to create VAO"));
     }
 
+    VertexArrayObject::VertexArrayObject(VertexArrayObject&& right) noexcept
+    {
+        std::swap(m_vao, right.m_vao);
+    }
+
     VertexArrayObject::~VertexArrayObject()
     {
         gl::deleteVertexArrays(1, &m_vao);
+    }
+
+    VertexArrayObject& VertexArrayObject::operator=(VertexArrayObject&& right) noexcept
+    {
+        std::swap(m_vao, right.m_vao);
+
+        return *this;
     }
 
     void VertexArrayObject::runBound(const std::function<void()>& functor) const

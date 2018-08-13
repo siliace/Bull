@@ -98,6 +98,22 @@ namespace Bull
          */
         explicit HardwareBuffer(HardwareBufferType type);
 
+        /*! \brief Constructor by movement semantic
+         *
+         * \param right The HardwareBuffer to move
+         *
+         */
+        HardwareBuffer(HardwareBuffer&& right) noexcept;
+
+        /*! \brief Basic assignment operator by movement semantic
+         *
+         * \param right The HardwareBuffer to move
+         *
+         * \return This
+         *
+         */
+        HardwareBuffer& operator=(HardwareBuffer&& right) noexcept;
+
         /*! \brief Bind the buffer
          *
          */

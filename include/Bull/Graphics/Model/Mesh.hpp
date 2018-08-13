@@ -17,6 +17,22 @@ namespace Bull
          */
         Mesh();
 
+        /*! \brief Constructor by movement semantic
+         *
+         * \param right The Mesh to move
+         *
+         */
+        Mesh(Mesh&& right) noexcept = default;
+
+        /*! \brief Basic assignment operator by movement semantic
+         *
+         * \param right The Mesh to move
+         *
+         * \return This
+         *
+         */
+        Mesh& operator=(Mesh&& right) noexcept = default;
+
         /*! \brief Constructor
          *
          * \param vertices

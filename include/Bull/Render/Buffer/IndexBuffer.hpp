@@ -18,6 +18,22 @@ namespace Bull
          */
         IndexBuffer();
 
+        /*! \brief Constructor by movement semantic
+         *
+         * \param right The IndexBuffer to move
+         *
+         */
+        IndexBuffer(IndexBuffer&& right) noexcept;
+
+        /*! \brief Basic assignment operator by movement semantic
+         *
+         * \param right The IndexBuffer to move
+         *
+         * \return This
+         *
+         */
+        IndexBuffer& operator=(IndexBuffer&& right) noexcept;
+
         /*! \brief Constructor
          *
          * \param indices Indices in the ElementBuffer
@@ -26,7 +42,7 @@ namespace Bull
          */
         explicit IndexBuffer(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
 
-        /*! \brief Create the ElementBuffer from a indice vector
+        /*! \brief Create the ElementBuffer from a indices vector
          *
          * \param indices Indices in the ElementBuffer
          * \param usage   The usage (static, dynamic, stream) of the ElementBuffer

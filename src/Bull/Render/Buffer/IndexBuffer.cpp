@@ -9,6 +9,21 @@ namespace Bull
         /// Nothing
     }
 
+    IndexBuffer::IndexBuffer(IndexBuffer&& right) noexcept :
+        HardwareBuffer(std::move(right))
+    {
+        std::swap(m_dataType, right.m_dataType);
+    }
+
+    IndexBuffer& IndexBuffer::operator=(IndexBuffer&& right) noexcept
+    {
+        std::swap(m_dataType, right.m_dataType);
+
+        HardwareBuffer::operator=(std::move(right));
+
+        return *this;
+    }
+
     IndexBuffer::IndexBuffer(const std::vector<unsigned int>& indices, HardwareBufferUsage usage) :
         IndexBuffer()
     {

@@ -153,6 +153,19 @@ namespace Bull
         /// Nothing
     }
 
+    HardwareBuffer::HardwareBuffer(HardwareBuffer&& right) noexcept
+    {
+        std::swap(m_id, right.m_id);
+        std::swap(m_type, right.m_type);
+    }
+
+    HardwareBuffer& HardwareBuffer::operator=(HardwareBuffer&& right) noexcept
+    {
+        std::swap(m_id, right.m_id);
+        std::swap(m_type, right.m_type);
+
+        return *this;
+    }
 
     void HardwareBuffer::bind() const
     {

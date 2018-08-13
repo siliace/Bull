@@ -15,6 +15,22 @@ namespace Bull
          */
         ArrayBuffer();
 
+        /*! \brief Constructor by movement semantic
+         *
+         * \param right The ArrayBuffer to move
+         *
+         */
+        ArrayBuffer(ArrayBuffer&& right) noexcept = default;
+
+        /*! \brief Basic assignment operator by movement semantic
+         *
+         * \param right The ArrayBuffer to move
+         *
+         * \return This
+         *
+         */
+        ArrayBuffer& operator=(ArrayBuffer&& right) noexcept = default;
+
         /*! \brief Constructor
          *
          * \param vertices Vertices in the ArrayBuffer
