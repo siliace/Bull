@@ -46,8 +46,6 @@ namespace Bull
             destroy();
         }
 
-        ensureContext();
-
         m_type = type;
         m_id   = gl::createShader(shaderType[type]);
 
@@ -70,10 +68,10 @@ namespace Bull
 
     void ShaderStage::destroy()
     {
+        ensureContext();
+
         if(gl::isShader(m_id))
         {
-            ensureContext();
-
             gl::deleteShader(m_id);
         }
     }
@@ -83,8 +81,6 @@ namespace Bull
         if(isValid())
         {
             int error = 0;
-
-            ensureContext();
 
             gl::getShaderiv(m_id, GL_COMPILE_STATUS, &error);
 
