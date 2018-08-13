@@ -96,7 +96,7 @@ namespace Bull
          */
         T& y()
         {
-            return this->at(0);
+            return this->at(1);
         }
 
         /*! \brief Get the X component
@@ -106,7 +106,7 @@ namespace Bull
          */
         const T& y() const
         {
-            return this->at(0);
+            return this->at(1);
         }
     };
 
