@@ -3,7 +3,6 @@ target_sources(bull-render
             ${CMAKE_CURRENT_SOURCE_DIR}/PBufferHandler.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglContext.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglContext.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/WglContextNoError.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglCreateContextARB.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglExtensionsLoader.hpp
             ${CMAKE_CURRENT_SOURCE_DIR}/WglExtensionsLoader.cpp

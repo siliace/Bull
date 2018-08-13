@@ -6,7 +6,6 @@
 #include <Bull/Core/Utility/StringUtils.hpp>
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
-#include <Bull/Render/Context/Wgl/WglContextNoError.hpp>
 #include <Bull/Render/Context/Wgl/WglCreateContextARB.hpp>
 #include <Bull/Render/Context/Wgl/WglMultisampleARB.hpp>
 #include <Bull/Render/Context/Wgl/WglPbufferARB.hpp>
@@ -366,20 +365,6 @@ namespace Bull
                         attribs.emplace_back(profile);
                         attribs.emplace_back(WGL_CONTEXT_FLAGS_ARB);
                         attribs.emplace_back(flags);
-                    }
-
-                    if(m_settings.type == ContextSettingsType_NoError)
-                    {
-                        if(isSupported("WGL_ARB_create_context_no_error"))
-                        {
-                            attribs.emplace_back(WGL_CONTEXT_OPENGL_NO_ERROR_ARB);
-                            attribs.emplace_back(1);
-                        }
-                        else
-                        {
-                            m_settings.type = ContextSettingsType_Default;
-                            m_log->warning("WGL_CONTEXT_OPENGL_NO_ERROR_ARB is not available");
-                        }
                     }
 
                     attribs.emplace_back(0);

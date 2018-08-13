@@ -11,8 +11,6 @@ target_sources(bull-render
             ${BULL_SRC_RENDER_CONTEXT}/ContextSettings.cpp
             ${BULL_INC_RENDER_CONTEXT}/ContextSettingsProfile.hpp
             ${BULL_INC_RENDER_CONTEXT}/ContextSettingsType.hpp
-            ${BULL_INC_RENDER_CONTEXT}/OpenGLHandlerError.hpp
-        PUBLIC
             ${BULL_SRC_RENDER_CONTEXT}/Extension.hpp
             ${BULL_SRC_RENDER_CONTEXT}/Extension.cpp
             ${BULL_SRC_RENDER_CONTEXT}/ExtensionsLoader.hpp
@@ -20,7 +18,7 @@ target_sources(bull-render
             ${BULL_SRC_RENDER_CONTEXT}/GlContext.hpp
             ${BULL_SRC_RENDER_CONTEXT}/GlContext.cpp
             ${BULL_SRC_RENDER_CONTEXT}/GlFunctions.hpp
-            ${BULL_SRC_RENDER_CONTEXT}/GlKhrNoError.hpp
+            ${BULL_INC_RENDER_CONTEXT}/OpenGLHandlerError.hpp
             ${BULL_SRC_RENDER_CONTEXT}/SurfaceHandler.hpp
         )
 

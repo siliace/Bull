@@ -346,25 +346,6 @@ namespace Bull
                         attribs.emplace_back(profile);
                         attribs.emplace_back(GLX_CONTEXT_FLAGS_ARB);
                         attribs.emplace_back(flags);
-
-                        if(m_settings.type & ContextSettingsType_NoError)
-                        {
-                            if(isSupported("GLX_CONTEXT_OPENGL_NO_ERROR_ARB"))
-                            {
-                                attribs.emplace_back(GLX_CONTEXT_OPENGL_NO_ERROR_ARB);
-                                attribs.emplace_back(1);
-                            }
-                            else if(isSupported("GL_KHR_no_error"))
-                            {
-                                attribs.emplace_back(CONTEXT_FLAG_NO_ERROR_BIT_KHR);
-                                attribs.emplace_back(1);
-                            }
-                            else
-                            {
-                                m_settings.type &= ~ContextSettingsType_NoError;
-                                m_log->warning("GLX_CONTEXT_OPENGL_NO_ERROR_ARB is not available");
-                            }
-                        }
                     }
                     else
                     {
