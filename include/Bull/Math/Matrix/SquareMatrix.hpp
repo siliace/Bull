@@ -72,20 +72,21 @@ namespace Bull
     {
         SquareMatrix<T, S> product;
 
-        for(std::size_t j = 0; j < S; j++)
+        for(std::size_t y = 0; y < S; y++)
         {
-            for(std::size_t i = 0; i < S; i++)
+            for(std::size_t x = 0; x < S; x++)
             {
                 T sum = 0;
-                Vector<T, S> row = left.getRow(j);
-                Vector<T, S> column = right.getColumn(i);
 
-                for(std::size_t k = 0; k < S; k++)
+                Vector<T, S> row = left.getRow(x);
+                Vector<T, S> column = right.getColumn(y);
+
+                for(std::size_t i = 0; i < S; i++)
                 {
-                    sum += row.at(k) * column.at(k);
+                    sum += row.at(i) * column.at(i);
                 }
 
-                product.at(i, j) = sum;
+                product.at(x, y) = sum;
             }
         }
 
