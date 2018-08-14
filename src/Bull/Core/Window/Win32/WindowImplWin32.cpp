@@ -346,7 +346,7 @@ namespace Bull
 
             GetWindowRect(m_handler, &r);
 
-            return Size(r.left, r.top);
+            return {r.left, r.top};
         }
 
         void WindowImplWin32::setMinSize(const Size& size)
@@ -399,7 +399,7 @@ namespace Bull
 
             GetClientRect(m_handler, &r);
 
-            return Size(static_cast<unsigned int>(r.right - r.left), static_cast<unsigned int>(r.bottom - r.top));
+            return {r.right - r.left, r.bottom - r.top};
         }
 
         void WindowImplWin32::setTitle(const String& title)
