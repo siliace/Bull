@@ -2,9 +2,9 @@
 #define CUBE_HPP
 
 #include <Bull/Graphics/Model/Mesh.hpp>
-#include <Bull/Graphics/Model/Node.hpp>
+#include <Bull/Graphics/Model/Transformable.hpp>
 
-class Cube : public Bull::Node
+class Cube : public Bull::Transformable
 {
 public:
 

@@ -1,35 +1,35 @@
-#include <Bull/Graphics/Model/Node.hpp>
+#include <Bull/Graphics/Model/Transformable.hpp>
 
 namespace Bull
 {
-    Node::Node() :
+    Transformable::Transformable() :
         m_scale(Vector3F::Unit)
     {
         /// Nothing
     }
 
-    Node& Node::scale(const Vector3F& scale)
+    Transformable& Transformable::scale(const Vector3F& scale)
     {
         m_scale += scale;
 
-        return (*this);
+        return *this;
     }
 
-    Node& Node::rotate(const EulerAnglesF& rotation)
+    Transformable& Transformable::rotate(const EulerAnglesF& rotation)
     {
         m_rotation += rotation;
 
-        return (*this);
+        return *this;
     }
 
-    Node& Node::move(const Vector3F& translation)
+    Transformable& Transformable::move(const Vector3F& translation)
     {
         m_translation += translation;
 
-        return (*this);
+        return *this;
     }
 
-    Matrix4F Node::getModelMatrix() const
+    Matrix4F Transformable::getModelMatrix() const
     {
         QuaternionF rotationQuaternion(EulerAnglesF::normalize(m_rotation));
 

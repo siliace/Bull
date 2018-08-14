@@ -8,6 +8,6 @@ target_sources(bull-graphics
             ${BULL_INC_GRAPHICS_MODEL}/Mesh.hpp
             ${BULL_SRC_GRAPHICS_MODEL}/Mesh.cpp
             ${BULL_INC_GRAPHICS_MODEL}/TextureType.hpp
-            ${BULL_INC_GRAPHICS_MODEL}/Node.hpp
-            ${BULL_SRC_GRAPHICS_MODEL}/Node.cpp
+            ${BULL_INC_GRAPHICS_MODEL}/Transformable.hpp
+            ${BULL_SRC_GRAPHICS_MODEL}/Transformable.cpp
         )
