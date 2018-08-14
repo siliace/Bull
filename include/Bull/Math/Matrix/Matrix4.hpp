@@ -43,7 +43,7 @@ namespace Bull
          */
         static Matrix4<T> makeRotation(const Quaternion<T>& rotation)
         {
-            Matrix4<T> model;
+            Matrix4<T> model = Identity;
 
             T tx  = rotation.x + rotation.x;
             T ty  = rotation.y + rotation.y;
