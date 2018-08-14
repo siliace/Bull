@@ -82,6 +82,8 @@ namespace Bull
 
     bool HardwareBuffer::isValid() const
     {
+        ensureContext();
+
         return gl::isBuffer(m_id);
     }
 
