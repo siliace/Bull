@@ -30,6 +30,43 @@ namespace Bull
             return EulerAngles<T>(angles).normalize();
         }
 
+        /*! \brief Create an EulerAngles with a rotation on the X axis
+         *
+         * \param angle The rotation
+         *
+         * \return The created EulerAngles
+         *
+         */
+        static EulerAngles<T> onX(const Bull::Angle<T>& angle)
+        {
+            return EulerAngles<T>(angle);
+        }
+
+
+        /*! \brief Create an EulerAngles with a rotation on the Y axis
+         *
+         * \param angle The rotation
+         *
+         * \return The created EulerAngles
+         *
+         */
+        static EulerAngles<T> onY(const Bull::Angle<T>& angle)
+        {
+            return EulerAngles<T>(Angle<T>::Zero, angle);
+        }
+
+        /*! \brief Create an EulerAngles with a rotation on the Z axis
+         *
+         * \param angle The rotation
+         *
+         * \return The created EulerAngles
+         *
+         */
+        static EulerAngles<T> onZ(const Bull::Angle<T>& angle)
+        {
+            return EulerAngles<T>(Angle<T>::Zero, Angle<T>::Zero, angle);
+        }
+
         /*! \brief Constructor
          *
          * \param quaternion The Quaternion to compute as an EulerAngles
