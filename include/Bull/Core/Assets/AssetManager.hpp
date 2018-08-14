@@ -1,6 +1,7 @@
 #ifndef BULL_CORE_ASSETS_ASSETMANAGER_HPP
 #define BULL_CORE_ASSETS_ASSETMANAGER_HPP
 
+#include <functional>
 #include <map>
 
 #include <Bull/Core/Exception/InvalidParameter.hpp>
