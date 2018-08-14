@@ -29,7 +29,7 @@ namespace Bull
 
     float Size::getRatio() const
     {
-        return width / height;
+        return static_cast<float>(width) / static_cast<float>(height);
     }
 
     Size& Size::operator+=(const Size& right)
