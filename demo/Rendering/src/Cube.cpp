@@ -89,5 +89,9 @@ void Cube::render(Bull::Shader& shader)
     m_material.getTexture(Bull::TextureType_Specular)->bind();
     shader.setUniform("material.specular", 1);
 
+    gl::activeTexture(GL_TEXTURE2);
+    m_material.getTexture(Bull::TextureType_Emission)->bind();
+    shader.setUniform("material.emission", 2);
+
     m_mesh.render(Bull::RenderPrimitive_Triangles);
 }

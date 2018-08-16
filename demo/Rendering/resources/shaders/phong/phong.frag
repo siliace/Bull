@@ -91,9 +91,19 @@ vec4 getSpecular(vec3 lightDirection, vec4 light)
     return texture(material.specular, frag_texCoord) * specularFactor * light;
 }
 
+vec4 getEmission()
+{
+    return texture(material.emission, frag_texCoord);
+}
+
 vec4 directionalLight(DirectionalLight light)
 {
-    return getAmbient(light.ambient) + getDiffuse(light.direction, light.diffuse) + getSpecular(light.direction, light.specular);
+    vec4 emission = getEmission();
+    vec4 ambient = getAmbient(light.ambient);
+    vec4 diffuse = getDiffuse(light.direction, light.diffuse);
+    vec4 specular = getSpecular(light.direction, light.specular);
+
+    return ambient + diffuse + specular + emission;
 }
 
 vec4 pointLight(PointLight light)
