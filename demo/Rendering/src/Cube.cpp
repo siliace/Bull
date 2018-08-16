@@ -1,9 +1,9 @@
 #include <vector>
 
-#include <Bull/Core/Utility/Random.hpp>
-#include <Bull/Render/Vertex/Vertex.hpp>
-
 #include <Bull/Math/EulerAngles.hpp>
+
+#include <Bull/Render/Context/GlFunctions.hpp>
+#include <Bull/Render/Vertex/Vertex.hpp>
 
 #include <Cube.hpp>
 
@@ -66,29 +66,28 @@ namespace
             20, 21, 22,
             21, 22, 23
     };
-
-    Bull::RandomGenerator generator;
 }
 
-Cube::Cube()
+Cube::Cube(const Bull::Material& material) :
+        m_mesh(vertices, indices),
+        m_material(material)
 {
-    Bull::Vector3F translation;
-    Bull::EulerAnglesF rotation;
-
-    m_mesh.create(vertices, indices);
-
-    rotation.roll  = Bull::AngleF::degree(generator.number(0.f, 360.f));
-    rotation.pitch = Bull::AngleF::degree(generator.number(0.f, 360.f));
-    rotation.yaw   = Bull::AngleF::degree(generator.number(0.f, 360.f));
-
-    translation.x() = generator.number(-3.f, 3.f);
-    translation.y() = generator.number(-3.f, 3.f);
-    translation.z() = generator.number(-3.f, 3.f);
-
-    rotate(rotation).move(translation);
+    /// Nothing
 }
 
-void Cube::render()
+void Cube::render(Bull::Shader& shader)
 {
+    shader.setUniformMatrix("model", getModelMatrix());
+
+    shader.setUniform("material.shininess", 32.f);
+
+    gl::activeTexture(GL_TEXTURE0);
+    m_material.getTexture(Bull::TextureType_Diffuse)->bind();
+    shader.setUniform("material.diffuse", 0);
+
+    gl::activeTexture(GL_TEXTURE1);
+    m_material.getTexture(Bull::TextureType_Specular)->bind();
+    shader.setUniform("material.specular", 1);
+
     m_mesh.render(Bull::RenderPrimitive_Triangles);
 }

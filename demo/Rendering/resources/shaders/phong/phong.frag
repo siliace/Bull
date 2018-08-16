@@ -2,10 +2,10 @@
 
 struct Material
 {
-    float shininess;
+    float     shininess;
     sampler2D diffuse;
-    sampler2D emission;
     sampler2D specular;
+    sampler2D emission;
 };
 
 struct DirectionalLight
@@ -21,13 +21,13 @@ struct PointLight
 {
     vec3 position;
 
-    float linear;
-    float constant;
-    float quadratic;
-
     vec4 ambient;
     vec4 diffuse;
     vec4 specular;
+
+    float constant;
+    float linear;
+    float quadratic;
 };
 
 struct SpotLight
@@ -35,16 +35,16 @@ struct SpotLight
     vec3 position;
     vec3 direction;
 
-    float innerCutOff;
-    float outerCutOff;
-
-    float linear;
-    float constant;
-    float quadratic;
-
     vec4 ambient;
     vec4 diffuse;
     vec4 specular;
+
+    float constant;
+    float linear;
+    float quadratic;
+
+    float innerCutOff;
+    float outerCutOff;
 };
 
 in vec3 frag_position;
@@ -54,58 +54,83 @@ in vec3 frag_normal;
 
 out vec4 pixel;
 
-uniform Material material;
-uniform vec3 camera_position;
-uniform SpotLight light;
+uniform DirectionalLight dl;
+uniform PointLight       pls[3];
+uniform SpotLight        sp;
 
-vec4 ambient(sampler2D ambientMap, vec2 texCoord, vec4 lightAmbient)
+uniform Material  material;
+
+uniform vec3      eye_position;
+
+float getAttenuation(float constant, float linear, float quadratic)
 {
-    return texture(ambientMap, texCoord) * lightAmbient;
-}
-
-vec4 diffusion(sampler2D diffuseMap, vec2 texCoord, vec3 normal, vec3 lightOrigin, vec4 lightDiffuse)
-{
-     float diffuseFactor = max(dot(normal, lightOrigin), 0.f);
-
-     return texture(diffuseMap, texCoord) * diffuseFactor * lightDiffuse;
-}
-
-vec4 specularity(sampler2D specularityMap, vec3 position, vec2 texCoord, vec3 normal, vec3 lightOrigin, vec4 lightSpecular, vec3 camera)
-{
-    vec3 reflectDirection = reflect(-lightOrigin, normal);
-    vec3 cameraDirection = normalize(camera - position);
-    float specularityFactor = pow(max(dot(reflectDirection, cameraDirection), 0.f), material.shininess);
-
-    return texture(specularityMap, texCoord) * specularityFactor * lightSpecular;
-}
-
-float attenuation(vec3 lightPosition, float constant, float linear, float quadratic, vec3 position)
-{
-    float distance = length(lightPosition - position);
+    float distance = length(frag_position - eye_position);
 
     return 1.f / (constant + linear * distance + quadratic * pow(distance, 2.f));
 }
 
-void main()
+vec4 getAmbient(vec4 light)
 {
-    vec3 normal = normalize(frag_normal);
-    vec3 lightOrigin = normalize(light.position - frag_position);
+    return texture(material.diffuse, frag_texCoord) * light;
+}
 
-    float epsilon = light.innerCutOff - light.outerCutOff;
-    float theta = dot(lightOrigin, normalize(-light.direction));
+vec4 getDiffuse(vec3 lightDirection, vec4 light)
+{
+    float diffuseFactor = max(dot(frag_normal, -lightDirection), 0.f);
+
+    return texture(material.diffuse, frag_texCoord) * diffuseFactor * light;
+}
+
+vec4 getSpecular(vec3 lightDirection, vec4 light)
+{
+    vec3 viewDirection = normalize(frag_position - eye_position);
+    vec3 reflectionDirection = reflect(lightDirection, frag_normal);
+
+    float specularFactor = pow(max(dot(-viewDirection, reflectionDirection), 0.f), material.shininess);
+
+    return texture(material.specular, frag_texCoord) * specularFactor * light;
+}
+
+vec4 directionalLight(DirectionalLight light)
+{
+    return getAmbient(light.ambient) + getDiffuse(light.direction, light.diffuse) + getSpecular(light.direction, light.specular);
+}
+
+vec4 pointLight(PointLight light)
+{
+    vec3 direction = normalize(frag_position - light.position);
+
+    float attenuation = getAttenuation(light.constant, light.linear, light.quadratic);
+
+    return (getAmbient(light.ambient) + getDiffuse(direction, light.diffuse) + getSpecular(direction, light.specular)) * attenuation;
+}
+
+vec4 spotLight(SpotLight light)
+{
+    float attenuation = getAttenuation(light.constant, light.linear, light.quadratic);
+
+    float theta = dot(normalize(frag_position - light.position), light.direction);
+
+    float epsilon   = light.innerCutOff - light.outerCutOff;
     float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.f, 1.f);
 
-    vec4 ambientLight = ambient(material.diffuse, frag_texCoord, light.ambient);
-    vec4 diffuseLight  = diffusion(material.diffuse, frag_texCoord, normal, lightOrigin, light.diffuse);
-    vec4 specularLight = specularity(material.specular, frag_position, frag_texCoord, normal, lightOrigin, light.specular, camera_position);
+    vec4 ambient = getAmbient(light.ambient);
+    vec4 diffuse = getDiffuse(light.direction, light.diffuse) * intensity;
+    vec4 specular = getSpecular(light.direction, light.specular) * intensity;
 
-    diffuseLight *= intensity;
-    specularLight *= intensity;
+    return (ambient + diffuse + specular) * attenuation;
+}
 
-    float attenuationFactor = attenuation(light.position, light.constant, light.linear, light.quadratic, frag_position);
-    ambientLight *= attenuationFactor;
-    diffuseLight *= attenuationFactor;
-    specularLight *= attenuationFactor;
+void main()
+{
+    vec4 color = directionalLight(dl);
 
-    pixel = (ambientLight + diffuseLight + specularLight) * frag_color;
+    for(int i = 0; i < 3; i++)
+    {
+        color += pointLight(pls[i]);
+    }
+
+    color += spotLight(sp);
+
+    pixel = color * frag_color;
 }

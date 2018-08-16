@@ -19,7 +19,7 @@ void main()
     frag_position = vec3(model * vec4(in_position, 1.f));
     frag_color    = in_color;
     frag_texCoord = in_texCoord;
-    frag_normal   = mat3(model) * in_normal;
+    frag_normal   = mat3(transpose(inverse(model))) * in_normal;
 
     gl_Position = projection * view * vec4(frag_position, 1.f);
 }

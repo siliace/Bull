@@ -15,10 +15,10 @@ namespace Bull
     {
         setColor(color);
         constant    = 1.f;
-        linear      = 0.32f;
-        quadratic   = 0.07f;
-        innerCutOff = AngleF::radian(12.5f);
-        outerCutOff = AngleF::radian(17.5f);
+        linear      = 0.09f;
+        quadratic   = 0.0032f;
+        innerCutOff = AngleF::degree(12.5f);
+        outerCutOff = AngleF::degree(17.5f);
     }
 
     void SpotLight::setUniforms(Shader& shader, const String& name) const

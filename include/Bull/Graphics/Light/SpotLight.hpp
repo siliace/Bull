@@ -31,7 +31,7 @@ namespace Bull
          * \param name   The name of the uniform
          *
          */
-        virtual void setUniforms(Shader& shader, const String& name) const override;
+        void setUniforms(Shader& shader, const String& name) const override;
 
         float    linear;
         float    constant;
