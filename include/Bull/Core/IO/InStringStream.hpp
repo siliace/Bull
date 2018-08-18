@@ -27,13 +27,6 @@ namespace Bull
          */
         std::size_t read(void* data, std::size_t size) override;
 
-        /*! \brief
-         *
-         * \return
-         *
-         */
-        bool isAtEof() const;
-
         /*! \brief Get the size of the stream
          *
          * \return Return the size of the stream
@@ -57,13 +50,6 @@ namespace Bull
          */
         std::size_t getCursor() const override;
 
-        /*! \brief
-         *
-         * \return
-         *
-         */
-        const String& getString() const;
-        
     private:
 
         std::size_t   m_cursor;

@@ -31,11 +31,6 @@ namespace Bull
         return toRead;
     }
 
-    bool InStringStream::isAtEof() const
-    {
-        return m_cursor >= getSize();
-    }
-
     std::size_t InStringStream::getSize() const
     {
         return m_string.getSize();
@@ -51,10 +46,5 @@ namespace Bull
     std::size_t InStringStream::getCursor() const
     {
         return m_cursor;
-    }
-
-    const String& InStringStream::getString() const
-    {
-        return m_string;
     }
 }
