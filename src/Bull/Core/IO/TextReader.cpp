@@ -17,7 +17,7 @@ namespace Bull
 
         while(!m_stream.isAtEnd())
         {
-            content += readLine();
+            content += readLine() + '\n';
         }
 
         return content;
