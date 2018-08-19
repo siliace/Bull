@@ -8,9 +8,9 @@ namespace Bull
         /// Nothing
     }
 
-    void TextWriter::write(const String& line)
+    void TextWriter::write(const String& string)
     {
-        m_stream.write(ByteArray::memoryCopy(line.getBuffer(), line.getSize()));
+        m_stream.write(ByteArray::fromString(string));
     }
 
     void TextWriter::writeLine(const String& line)
