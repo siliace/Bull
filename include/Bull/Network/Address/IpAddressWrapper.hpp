@@ -46,6 +46,22 @@ namespace Bull
          */
         IpAddressWrapper& operator=(const IpAddressWrapper& copy);
 
+        /*! \brief Constructor by movement semantic
+         *
+         * \param right The IpAddressWrapper to move
+         *
+         */
+        IpAddressWrapper(IpAddressWrapper&& right) noexcept;
+
+        /*! \brief Basic assignment by movement semantic
+         *
+         * \param right The IpAddressWrapper to move
+         *
+         * \return This
+         *
+         */
+        IpAddressWrapper& operator=(IpAddressWrapper&& right) noexcept;
+
         /*! \brief Tell whether the wrapped IpAddress is valid
          *
          * \return True if the IpAddress is valid

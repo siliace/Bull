@@ -48,6 +48,20 @@ namespace Bull
         return (*this);
     }
 
+    IpAddressWrapper::IpAddressWrapper(IpAddressWrapper&& right) noexcept
+    {
+        std::swap(m_wrapper, right.m_wrapper);
+        std::swap(m_protocol, right.m_protocol);
+    }
+
+    IpAddressWrapper& IpAddressWrapper::operator=(IpAddressWrapper&& right) noexcept
+    {
+        std::swap(m_wrapper, right.m_wrapper);
+        std::swap(m_protocol, right.m_protocol);
+
+        return *this;
+    }
+
     bool IpAddressWrapper::isValid() const
     {
         return getAddress().isValid();

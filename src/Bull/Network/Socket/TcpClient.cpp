@@ -68,6 +68,18 @@ namespace Bull
         m_hostAddress = IpAddressV4::None;
     }
 
+    size_t TcpClient::write(const ByteArray& bytes)
+    {
+        std::size_t sent;
+
+        if(!send(bytes.getBuffer(), bytes.getCapacity(), sent))
+        {
+            return 0;
+        }
+
+        return sent;
+    }
+
     SocketState TcpClient::send(const void* data, std::size_t length, std::size_t& sent)
     {
         if(isConnected() && data && length)
@@ -91,6 +103,21 @@ namespace Bull
         return SocketState(prv::SocketImpl::getLastError());
     }
 
+    ByteArray TcpClient::read(std::size_t length)
+    {
+        std::size_t read;
+        ByteArray byteArray(length);
+
+        if(!receive(&byteArray[0], byteArray.getCapacity(), read))
+        {
+            return ByteArray();
+        }
+
+        byteArray.resize(read);
+
+        return byteArray;
+    }
+
     SocketState TcpClient::receive(void* data, std::size_t length, std::size_t& received)
     {
         if(isConnected() && data && length && m_impl->reveive(data, length, received))
@@ -99,6 +126,26 @@ namespace Bull
         }
 
         return SocketState(prv::SocketImpl::getLastError());
+    }
+
+    void TcpClient::flush()
+    {
+        /// Since TCP protocol is stream based and not message based, flushing it does not make any sens
+    }
+
+    void TcpClient::skip(std::size_t length)
+    {
+        read(length);
+    }
+
+    bool TcpClient::isAtEnd() const
+    {
+        return !isConnected();
+    }
+
+    size_t TcpClient::getSize() const
+    {
+        return getPendingLength();
     }
 
     NetPort TcpClient::getRemotePort() const

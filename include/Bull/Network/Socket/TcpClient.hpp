@@ -1,6 +1,8 @@
 #ifndef BULL_NETWORK_SOCKET_TCPCLIENT_HPP
 #define BULL_NETWORK_SOCKET_TCPCLIENT_HPP
 
+#include <Bull/Core/IO/InStream.hpp>
+#include <Bull/Core/IO/OutStream.hpp>
 #include <Bull/Core/Memory/AbstractBuffer.hpp>
 #include <Bull/Core/Time/Duration.hpp>
 
@@ -17,7 +19,7 @@ namespace Bull
         class TcpClientImpl;
     }
 
-    class BULL_NETWORK_API TcpClient : public Socket
+    class BULL_NETWORK_API TcpClient : public Socket, public InStream, public OutStream
     {
     public:
 
@@ -81,6 +83,15 @@ namespace Bull
          */
         void disconnect();
 
+        /*! \brief Write data into a stream
+         *
+         * \param bytes Bytes to write
+         *
+         * \return Return the number of bytes written
+         *
+         */
+        size_t write(const ByteArray& bytes) override;
+
         /*! \brief Send a data buffer the remote host
          *
          * \param data   Data to send
@@ -92,6 +103,15 @@ namespace Bull
          */
         SocketState send(const void* data, std::size_t length, std::size_t& sent);
 
+        /*! \brief Read bytes from the TcpClient
+         *
+         * \param length The length of data to read
+         *
+         * \return Read bytes
+         *
+         */
+        ByteArray read(std::size_t length) override;
+
         /*! \brief Receive data from the remote host
          *
          * \param data     Data to receive
@@ -102,6 +122,34 @@ namespace Bull
          *
          */
         SocketState receive(void* data, std::size_t length, std::size_t& received);
+
+        /*! \brief Flush the TcpClient
+         *
+         */
+        void flush() override;
+
+        /*! \brief Skip bytes in the TcpClient
+         *
+         * \param length The number of bytes to skip
+         *
+         */
+        void skip(std::size_t length) override;
+
+        /*! \brief Tell whether the TcpClient is at its end
+         *
+         * An TcpClient is considered at its end when there is not left to read
+         *
+         * \return True if the TcpClient is at its end
+         *
+         */
+        bool isAtEnd() const override;
+
+        /*! \brief Get the size of the TcpSocket
+         *
+         * \return Return the size of the TcpSocket
+         *
+         */
+        size_t getSize() const override;
 
         /*! \brief Get the remote NetPort
          *
@@ -135,8 +183,8 @@ namespace Bull
     private:
 
         std::unique_ptr<prv::TcpClientImpl> m_impl;
-        NetPort                     m_hostPort;
-        IpAddressWrapper            m_hostAddress;
+        NetPort                             m_hostPort;
+        IpAddressWrapper                    m_hostAddress;
     };
 }
 
