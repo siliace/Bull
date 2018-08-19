@@ -1,12 +1,12 @@
 #ifndef BULL_CORE_IO_INSTRINGSTREAM_HPP
 #define BULL_CORE_IO_INSTRINGSTREAM_HPP
 
-#include <Bull/Core/IO/CursorAwareInStream.hpp>
+#include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API InStringStream : public CursorAwareInStream
+    class BULL_CORE_API InStringStream : public InStream
     {
     public:
 
@@ -17,38 +17,37 @@ namespace Bull
          */
         explicit InStringStream(const String& string);
 
-        /*! \brief Read data from a stream
+        /*! \brief Read bytes from the String
          *
-         * \param data A pointer to the memory area to fill
-         * \param size The size of the memory area to fill
+         * \param length The number of bytes to read
          *
-         * \return Return the number of read bytes
+         * \return Read bytes
          *
          */
-        std::size_t read(void* data, std::size_t size) override;
+        ByteArray read(std::size_t length) override;
 
-        /*! \brief Get the size of the stream
+        /*! \brief Skip bytes in the InStringStream
          *
-         * \return Return the size of the stream
-         *
-         */
-        std::size_t getSize() const override;
-        
-        /*! \brief Set the reading position in the stream
-         *
-         * \param position The position to seek to
-         *
-         * \return Return the actual position
+         * \param length The number of bytes to skip
          *
          */
-        std::size_t setCursor(std::size_t position) override;
+        void skip(std::size_t length) override;
 
-        /*! \brief Get the reading position in the stream
+        /*! \brief Get the size of the InStringStream
          *
-         * \return Return the current position
+         * \return The size of the InStringStream
          *
          */
-        std::size_t getCursor() const override;
+        size_t getSize() const override;
+
+        /*! \brief Tell whether the InStringStream is at its end
+         *
+         * An InStream is considered at its end when there is not left to read
+         *
+         * \return True if the InStringStream is at its end
+         *
+         */
+        bool isAtEnd() const override;
 
     private:
 

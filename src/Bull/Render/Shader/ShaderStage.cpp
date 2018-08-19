@@ -111,7 +111,7 @@ namespace Bull
 
         gl::getShaderiv(m_id, GL_SHADER_SOURCE_LENGTH, &capacity);
 
-        code.create(capacity);
+        code.setSize(capacity);
         gl::getShaderSource(m_id, code.getSize(), &size, &code[0]);
 
         return code;

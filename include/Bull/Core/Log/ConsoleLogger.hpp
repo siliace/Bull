@@ -4,6 +4,7 @@
 #include <map>
 
 #include <Bull/Core/Log/AbstractLogger.hpp>
+#include <Bull/Core/IO/TextWriter.hpp>
 #include <Bull/Core/System/ConsoleOutput.hpp>
 
 namespace Bull
@@ -58,6 +59,7 @@ namespace Bull
         using ColorMap = std::map<LogLevel, ConsoleColor>;
 
         ConsoleOutput m_output;
+        TextWriter    m_writer;
         ColorMap      m_levelTextColor;
         ColorMap      m_levelBackgroundColor;
     };

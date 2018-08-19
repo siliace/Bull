@@ -85,34 +85,34 @@ namespace Bull
         m_mode = FileOpeningMode_None;
     }
 
-    std::size_t File::read(void* data, std::size_t size)
+    ByteArray File::read(std::size_t length)
     {
         if(m_impl)
         {
-            return m_impl->read(data, size);
+            return m_impl->read(length);
+        }
+
+        return ByteArray();
+    }
+
+    std::size_t File::write(const ByteArray& bytes)
+    {
+        if(m_impl)
+        {
+            return m_impl->write(bytes);
         }
 
         return 0;
     }
 
-    std::size_t File::write(const String& line)
+    void File::skip(std::size_t length)
     {
-        return write(line.getBuffer(), line.getSize());
+        read(length);
     }
 
-    std::size_t File::writeLine(const String& line)
+    bool File::isAtEnd() const
     {
-        return write(line + EndOfLine);
-    }
-
-    std::size_t File::write(const void* data, std::size_t size)
-    {
-        if(m_impl)
-        {
-            return m_impl->write(data, size);
-        }
-
-        return 0;
+        return getCursor() >= getSize();
     }
 
     void File::flush()

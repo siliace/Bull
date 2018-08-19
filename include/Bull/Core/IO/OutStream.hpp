@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_IO_OUTSTREAM_HPP
 #define BULL_CORE_IO_OUTSTREAM_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Memory/ByteArray.hpp>
 
 namespace Bull
 {
@@ -14,13 +14,12 @@ namespace Bull
 
         /*! \brief Write data into a stream
          *
-         * \param data A pointer to the memory area to write
-         * \param size The size of the memory area to write
+         * \param bytes Bytes to write
          *
-         * \return Return the number of written bytes
+         * \return Return the number of bytes written
          *
          */
-        virtual std::size_t write(const void* data, std::size_t size) = 0;
+        virtual std::size_t write(const ByteArray& bytes) = 0;
 
         /*! \brief Flush the OutStream
          *

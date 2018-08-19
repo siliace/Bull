@@ -5,7 +5,7 @@
 
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
-#include <Bull/Core/IO/CursorAwareInStream.hpp>
+#include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
 #include <Bull/Core/Time/DateTime.hpp>
 
@@ -16,7 +16,7 @@ namespace Bull
         class FileImpl;
     }
 
-    class BULL_CORE_API File : public CursorAwareInStream, public OutStream
+    class BULL_CORE_API File : public InStream, public OutStream
     {
     private:
 
@@ -130,43 +130,37 @@ namespace Bull
          */
         void close();
 
-        /*! \brief Read bytes from the file
+        /*! \brief Read bytes from the File
          *
-         * \param data The buffer to fill with data of the file
-         * \param size The size of the buffer
+         * \param length The length of data to read
          *
-         * \return Return the number of bytes actually read
+         * \return Read bytes
          *
          */
-        std::size_t read(void* data, std::size_t size) override;
+        ByteArray read(std::size_t length) override;
 
-        /*! \brief Write a String to the File
+        /*! \brief Write data into the File
          *
-         * \param string The String to write
+         * \param bytes Bytes to write
          *
-         * \return The number of bytes written
+         * \return Return the number of bytes written
          *
          */
-        std::size_t write(const String& line);
+        std::size_t write(const ByteArray& bytes) override;
 
-        /*! \brief Write a line to the File
+        /*! \brief Skip bytes in the File
          *
-         * \param string The String to write
-         *
-         * \return The number of bytes written
+         * \param length The number of bytes to skip
          *
          */
-        std::size_t writeLine(const String& line);
+        void skip(std::size_t length) override;
 
-        /*! \brief Write a buffer in the file
+        /*! \brief Tell whether the File is at its end
          *
-         * \param data The buffer to write into the file
-         * \param size The size of the buffer
-         *
-         * \return Return the number of bytes actually written
+         * \return True if the File is at the end
          *
          */
-        std::size_t write(const void* data, std::size_t size) override;
+        bool isAtEnd() const override;
 
         /*! \brief Flush the File
          *
@@ -199,7 +193,7 @@ namespace Bull
          * \return Return the position of the cursor in the file
          *
          */
-        std::size_t getCursor() const override;
+        std::size_t getCursor() const;
 
         /*! \brief Move the reading position in the file
          *
@@ -217,7 +211,7 @@ namespace Bull
          * \return Return the actual position of the cursor
          *
          */
-        std::size_t setCursor(std::size_t position) override;
+        std::size_t setCursor(std::size_t position);
 
         /*! \brief Get the path of the file
          *

@@ -1,5 +1,6 @@
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
+#include <Bull/Core/IO/TextReader.hpp>
 
 #include <Bull/Render/Shader/ShaderStageLoader.hpp>
 
@@ -13,7 +14,7 @@ namespace Bull
         Expect(file, Throw(InternalError, "ShaderStageLoader::loadFromPath", "Failed to open " + path.toString()));
 
         stage.create(type);
-        stage.compile(file.readAll());
+        stage.compile(TextReader(file).readAll());
 
         return stage;
     }
@@ -23,7 +24,7 @@ namespace Bull
         ShaderStage stage;
 
         stage.create(type);
-        stage.compile(stream.readAll());
+        stage.compile(TextReader(stream).readAll());
 
         return stage;
     }

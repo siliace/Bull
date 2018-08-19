@@ -2,7 +2,8 @@
 
 namespace Bull
 {
-    ConsoleLogger::ConsoleLogger()
+    ConsoleLogger::ConsoleLogger() :
+        m_writer(m_output)
     {
         m_output.setTextColor(ConsoleColor_Gray);
         m_output.setBackgroundColor(ConsoleColor_Black);
@@ -30,7 +31,7 @@ namespace Bull
 
     void ConsoleLogger::write(const String& entry)
     {
-        m_output.writeLine(entry);
+        m_writer.writeLine(entry);
     }
 
     String ConsoleLogger::formatEntry(const String& entry, LogLevel level, const DateTime& date)

@@ -66,22 +66,23 @@ namespace Bull
              */
             bool open(const Path& name, Uint32 mode) override;
 
-            /*! \brief Read in a file
+            /*! \brief Read bytes from the File
              *
-             * \param dst The destination of the read data
-             * \param size The number of byte to read
+             * \param length The length of data to read
              *
-             * \param Return the number of byte read
+             * \return Read bytes
              *
              */
-            std::size_t read(void* data, std::size_t size) override;
+            ByteArray read(std::size_t length) override;
 
-            /*! \brief Write a byte in this file
+            /*! \brief Write data into a File
              *
-             * \param byte A byte to write
+             * \param bytes Bytes to write
+             *
+             * \return Return the number of bytes written
              *
              */
-            std::size_t write(const void* data, std::size_t size) override;
+            size_t write(const ByteArray& bytes) override;
 
             /*! \brief Flush the File
              *

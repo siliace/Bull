@@ -11,40 +11,29 @@ namespace Bull
         /// Nothing
     }
 
-    std::size_t InStringStream::read(void* data, std::size_t size)
+    ByteArray InStringStream::read(std::size_t length)
     {
-        std::size_t toRead;
+        ByteArray bytes(length);
 
-        if(m_cursor + size > getSize())
-        {
-            toRead = getSize() - m_cursor;
-        }
-        else
-        {
-            toRead = size;
-        }
+        std::memcpy(&bytes[0], &m_string[m_cursor], length);
 
-        std::memcpy(data, &m_string[m_cursor], toRead);
+        m_cursor += length;
 
-        m_cursor += toRead;
-
-        return toRead;
+        return bytes;
     }
 
-    std::size_t InStringStream::getSize() const
+    void InStringStream::skip(std::size_t length)
+    {
+        m_cursor += length;
+    }
+
+    size_t InStringStream::getSize() const
     {
         return m_string.getSize();
     }
 
-    std::size_t InStringStream::setCursor(std::size_t position)
+    bool InStringStream::isAtEnd() const
     {
-        m_cursor = std::min(position, getSize());
-
-        return m_cursor;
-    }
-
-    std::size_t InStringStream::getCursor() const
-    {
-        return m_cursor;
+        return m_cursor < m_string.getSize();
     }
 }

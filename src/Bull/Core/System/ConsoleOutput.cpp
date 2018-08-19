@@ -14,14 +14,14 @@ namespace Bull
         flush();
     }
 
-    void ConsoleOutput::write(const String& string)
+    std::size_t ConsoleOutput::write(const ByteArray& bytes)
     {
-        write(string.getBuffer(), string.getSize());
+        return m_impl->write(bytes);
     }
 
-    void ConsoleOutput::writeLine(const String& string)
+    void ConsoleOutput::flush()
     {
-        write(string + '\n');
+        m_impl->flush();
     }
 
     void ConsoleOutput::clear()
@@ -37,15 +37,5 @@ namespace Bull
     void ConsoleOutput::setBackgroundColor(ConsoleColor color)
     {
         m_impl->setBackgroundColor(color);
-    }
-
-    std::size_t ConsoleOutput::write(const void* data, std::size_t size)
-    {
-        return m_impl->write(data, size);
-    }
-
-    void ConsoleOutput::flush()
-    {
-        m_impl->flush();
     }
 }

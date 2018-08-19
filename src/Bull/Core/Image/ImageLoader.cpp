@@ -1,22 +1,24 @@
 #include <stb_image/stb_image.h>
 
 #include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Image/ImageLoader.hpp>
-#include <Bull/Core/IO/OutStringStream.hpp>
-#include <Bull/Core/Log/Log.hpp>
-#include <Bull/Core/Utility/Finally.hpp>
+#include <Bull/Core/Memory/MemoryStream.hpp>
 
 namespace Bull
 {
     int ImageLoader::read(void* user, char* data, int size)
     {
-        return reinterpret_cast<InStream*>(user)->read(data, size);
+        ByteArray bytes = reinterpret_cast<InStream*>(user)->read(size);
+
+        std::memcpy(data, bytes.getBuffer(), bytes.getCapacity());
+
+        return bytes.getCapacity();
     }
 
     void ImageLoader::skip(void* user, int n)
     {
-        std::vector<Uint8> buffer(n);
-        reinterpret_cast<InStream*>(user)->read(buffer.data(), buffer.capacity());
+        reinterpret_cast<InStream*>(user)->skip(n);
     }
 
     int ImageLoader::eof(void* user)

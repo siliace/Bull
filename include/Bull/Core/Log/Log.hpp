@@ -85,6 +85,8 @@ namespace Bull
          */
         void write(const String& message, LogLevel level);
 
+    private:
+
         std::vector<std::unique_ptr<AbstractLogger>> m_listeners;
     };
 }

@@ -79,16 +79,13 @@ namespace Bull
             CloseHandle(m_handler);
         }
 
-        size_t ConsoleOutputImplWin32::write(const void* data, std::size_t length)
+        size_t ConsoleOutputImplWin32::write(const ByteArray& bytes)
         {
             std::size_t written;
 
-            if(WriteConsole(m_handler, data, length, reinterpret_cast<LPDWORD>(&written), nullptr))
-            {
-                return written;
-            }
+            Expect(WriteConsole(m_handler, bytes.getBuffer(), bytes.getCapacity(), reinterpret_cast<LPDWORD>(&written), nullptr), Throw(Win32Error, "ConsoleOutputImplWin32::clear", "Failed to write into console"));
 
-            return 0;
+            return written;
         }
 
         void ConsoleOutputImplWin32::flush()

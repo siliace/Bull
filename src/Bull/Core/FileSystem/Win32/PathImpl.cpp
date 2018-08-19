@@ -1,5 +1,6 @@
 #include <Bull/Core/FileSystem/Win32/PathImpl.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 
 namespace Bull
 {
@@ -7,10 +8,9 @@ namespace Bull
     {
         String PathImpl::realPath(const String& relative)
         {
-            String absolute;
-            absolute.create(MAX_PATH);
+            String absolute = StringUtils::ofSize(MAX_PATH);
 
-            GetFullPathName(relative.getBuffer(), absolute.getCapacity(), &absolute[0], nullptr);
+            GetFullPathName(relative.getBuffer(), absolute.getSize(), &absolute[0], nullptr);
 
             return absolute;
         }

@@ -99,28 +99,35 @@ namespace Bull
             return m_handler != INVALID_HANDLE_VALUE;
         }
 
-        std::size_t FileImplWin32::read(void* data, std::size_t size)
+        ByteArray FileImplWin32::read(std::size_t length)
         {
             DWORD read;
+            String buffer;
             LARGE_INTEGER cursor;
+
+            ByteArray bytes(length);
+
             cursor.QuadPart = getCursor();
 
-            LockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(size), 0);
-            ReadFile(m_handler, data, size, &read, nullptr);
-            UnlockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(size), 0);
+            LockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(length), 0);
+            ReadFile(m_handler, &bytes[0], length, &read, nullptr);
+            UnlockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(length), 0);
 
-            return read;
+            bytes.resize(read);
+
+            return bytes;
         }
 
-        std::size_t FileImplWin32::write(const void* data, std::size_t size)
+        std::size_t FileImplWin32::write(const ByteArray& bytes)
         {
             DWORD written = 0;
             LARGE_INTEGER cursor;
+
             cursor.QuadPart = getCursor();
 
-            LockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(size), 0);
-            WriteFile(m_handler, data, static_cast<DWORD>(size), &written, nullptr);
-            UnlockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(size), 0);
+            LockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(bytes.getCapacity()), 0);
+            WriteFile(m_handler, bytes.getBuffer(), static_cast<DWORD>(bytes.getCapacity()), &written, nullptr);
+            UnlockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(bytes.getCapacity()), 0);
 
             return written;
         }

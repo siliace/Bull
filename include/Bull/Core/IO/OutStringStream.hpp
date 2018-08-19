@@ -15,34 +15,24 @@ namespace Bull
          */
         ~OutStringStream();
 
-        /*! \brief Flush the OutStringStream
+        /*! \brief Write data into a OutStringStream
+         *
+         * \param bytes Bytes to write
+         *
+         * \return Return the number of bytes written
          *
          */
-        void clear();
-
-        /*! \brief Write a String into the OutStringStream
-         *
-         * \param string The String to write
-         *
-         * \return The number of bytes written
-         *
-         */
-        std::size_t write(const String& string);
-
-        /*! \brief Write data into the OutStringStream
-         *
-         * \param data A pointer to the memory area to write
-         * \param size The size of the memory area to write
-         *
-         * \return Return the number of written bytes
-         *
-         */
-        std::size_t write(const void* data, std::size_t size) override;
+        std::size_t write(const ByteArray& bytes) override;
 
         /*! \brief Flush the OutStream
          *
          */
         void flush() override;
+
+        /*! \brief Flush the OutStringStream
+         *
+         */
+        void clear();
 
         /*! \brief Get the content of the stream
          *
@@ -50,58 +40,6 @@ namespace Bull
          *
          */
         const String& toString() const;
-
-        /*! \brief Adds the representation of an integer
-         *
-         * \param right The integer to add
-         *
-         * \return Return a reference to this
-         *
-         */
-        OutStringStream& operator<<(int right);
-
-        /*! \brief Adds the representation of a boolean
-         *
-         * \param right The boolean to add
-         *
-         * \return Return a reference to this
-         *
-         */
-        OutStringStream& operator<<(bool right);
-
-        /*! \brief Adds the representation of an char
-         *
-         * \param right The char to add
-         *
-         * \return Return a reference to this
-         *
-         */
-        OutStringStream& operator<<(char right);
-
-        /*! \brief Adds the representation of an char array
-         *
-         * \param right The char array to add
-         *
-         * \return Return a reference to this
-         *
-         */
-        OutStringStream& operator<<(const char* right);
-
-        /*! \brief Adds the representation of a String
-         *
-         * \param right The String to add
-         *
-         * \return Return a reference to this
-         *
-         */
-        OutStringStream& operator<<(const String& right);
-
-        /*! \brief Convert the OutStringStream to a String
-         *
-         * \return Return the representation of this as a String
-         *
-         */
-        explicit operator const String&() const;
 
     private:
 

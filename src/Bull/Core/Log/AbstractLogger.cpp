@@ -1,4 +1,5 @@
 #include <Bull/Core/IO/OutStringStream.hpp>
+#include <Bull/Core/IO/TextWriter.hpp>
 #include <Bull/Core/Log/AbstractLogger.hpp>
 #include <Bull/Core/Utility/StringUtils.hpp>
 
@@ -49,12 +50,13 @@ namespace Bull
     String AbstractLogger::formatEntry(const String& entry, LogLevel level, const DateTime& date)
     {
         OutStringStream oss;
+        TextWriter writer(oss);
 
-        oss << "[" << StringUtils::number(date.getDate().getYear()) << "/" << StringUtils::number(date.getDate().getMonth()) <<  "/" << StringUtils::number(date.getDate().getDay());
-        oss << " " << StringUtils::number(date.getTime().getHour()) << ":" << StringUtils::number(date.getTime().getMinute()) << ":" << StringUtils::number(date.getTime().getSecond());
-        oss << "]";
-        oss << "(" << logLevelToString(level) << ")";
-        oss << " " << entry;
+        writer << "[" << StringUtils::number(date.getDate().getYear()) << "/" << StringUtils::number(date.getDate().getMonth()) <<  "/" << StringUtils::number(date.getDate().getDay());
+        writer << " " << StringUtils::number(date.getTime().getHour()) << ":" << StringUtils::number(date.getTime().getMinute()) << ":" << StringUtils::number(date.getTime().getSecond());
+        writer << "]";
+        writer << "(" << logLevelToString(level) << ")";
+        writer << " " << entry;
 
         return oss.toString();
     }

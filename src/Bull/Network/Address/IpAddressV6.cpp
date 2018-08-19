@@ -1,4 +1,5 @@
 #include <Bull/Core/IO/OutStringStream.hpp>
+#include <Bull/Core/IO/TextWriter.hpp>
 
 #include <Bull/Network/Address/IpAddressImpl.hpp>
 #include <Bull/Network/Address/IpAddressV6.hpp>
@@ -13,19 +14,20 @@ namespace Bull
 
     String IpAddressV6::toString() const
     {
-        OutStringStream ss;
+        OutStringStream oss;
+        TextWriter textWriter(oss);
 
         for(std::size_t i = 0; i < getByteCount(); i++)
         {
-            ss << at(i);
+            textWriter << at(i);
 
             if(i < getByteCount() - 1)
             {
-                ss << ':';
+                textWriter << ':';
             }
         }
 
-        return ss.toString();
+        return oss.toString();
     }
 
     NetProtocol IpAddressV6::getProtocol() const

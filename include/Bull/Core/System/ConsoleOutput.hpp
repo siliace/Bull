@@ -27,19 +27,14 @@ namespace Bull
          */
         ~ConsoleOutput();
 
-        /*! \brief Write a String into the ConsoleOutput
+        /*! \brief Write bytes in the ConsoleOutput
          *
-         * \param string The String to write
+         * \param bytes Bytes to write
          *
-         */
-        void write(const String& string);
-
-        /*! \brief Write a String into the ConsoleOutput
-         *
-         * \param string The String to write
+         * \return The number of bytes written
          *
          */
-        void writeLine(const String& string);
+        std::size_t write(const ByteArray& bytes) override;
 
         /*! \brief Flush the ConsoleOutput
          *
@@ -64,18 +59,6 @@ namespace Bull
          *
          */
         void setBackgroundColor(ConsoleColor color);
-
-    protected:
-
-        /*! \brief Write data into the ConsoleOutput
-         *
-         * \param data A pointer to the memory area to write
-         * \param size The size of the memory area to write
-         *
-         * \return The number of bytes written
-         *
-         */
-        std::size_t write(const void* data, std::size_t size) override;
 
     private:
 

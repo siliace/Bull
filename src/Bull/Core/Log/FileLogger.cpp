@@ -1,4 +1,5 @@
 #include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/IO/TextWriter.hpp>
 #include <Bull/Core/Log/FileLogger.hpp>
 
 namespace Bull
@@ -28,6 +29,6 @@ namespace Bull
 
     void FileLogger::write(const String& entry)
     {
-        m_file.writeLine(entry);
+        TextWriter(m_file).writeLine(entry);
     }
 }

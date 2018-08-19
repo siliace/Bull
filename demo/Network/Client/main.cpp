@@ -1,25 +1,26 @@
+#include <Bull/Core/IO/TextWriter.hpp>
 #include <Bull/Core/System/ConsoleOutput.hpp>
 
 #include <Bull/Network/Socket/SocketPoller.hpp>
 #include <Bull/Network/Socket/TcpClient.hpp>
-#include <Bull/Network/Socket/TcpSocketStream.hpp>
 
 int main()
 {
     Bull::TcpClient client;
     Bull::ConsoleOutput cout;
     Bull::SocketPoller poller;
+    Bull::TextWriter writer(cout);
 
     if(!client.connect(Bull::IpAddressV4::Loopback, Bull::NetPort(6969)))
     {
-        cout.writeLine("Failed to connect");
+        writer.writeLine("Failed to connect");
 
         return -1;
     }
 
     if(!poller.add(client, Bull::SocketPollerEvent_Read))
     {
-        cout.writeLine("Failed to add client");
+        writer.writeLine("Failed to add client");
 
         return -1;
     }
@@ -32,27 +33,27 @@ int main()
             Bull::String message;
             message.setSize(256);
 
-            if(client.receive(&message[0], message.getCapacity(), size))
+            if(client.receive(&message[0], message.getSize(), size))
             {
                 message.setSize(size);
 
-                cout.writeLine(message.getBuffer());
+                writer.writeLine(message.getBuffer());
 
                 return 0;
             }
         }
         else if(poller.isReadyToWrite(client))
         {
-            cout.writeLine("Ready to write");
+            writer.writeLine("Ready to write");
         }
         else
         {
-            cout.writeLine("Can't read");
+            writer.writeLine("Can't read");
         }
     }
     else
     {
-        cout.writeLine("Failed to wait");
+        writer.writeLine("Failed to wait");
     }
 
     return -1;

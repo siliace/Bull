@@ -1,5 +1,6 @@
 #include <Bull/Core/Exception/Exception.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
+#include <Bull/Core/IO/TextWriter.hpp>
 #include <Bull/Core/Utility/Character.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
@@ -127,31 +128,32 @@ namespace Bull
         {
             String message(msg);
             OutStringStream oss;
+            TextWriter writer(oss);
 
             switch(type)
             {
-                case GL_DEBUG_TYPE_ERROR:               oss << "[Type: Error]"; break;
-                case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: oss << "[Type: Deprecated Behaviour]"; break;
-                case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  oss << "[Type: Undefined Behaviour]"; break;
-                case GL_DEBUG_TYPE_PORTABILITY:         oss << "[Type: Portability]"; break;
-                case GL_DEBUG_TYPE_PERFORMANCE:         oss << "[Type: Performance]"; break;
-                case GL_DEBUG_TYPE_MARKER:              oss << "[Type: Marker]"; break;
-                case GL_DEBUG_TYPE_PUSH_GROUP:          oss << "[Type: Push Group]"; break;
-                case GL_DEBUG_TYPE_POP_GROUP:           oss << "[Type: Pop Group]"; break;
-                case GL_DEBUG_TYPE_OTHER:               oss << "[Type: Other]"; break;
+                case GL_DEBUG_TYPE_ERROR:               writer << "[Type: Error]"; break;
+                case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: writer << "[Type: Deprecated Behaviour]"; break;
+                case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  writer << "[Type: Undefined Behaviour]"; break;
+                case GL_DEBUG_TYPE_PORTABILITY:         writer << "[Type: Portability]"; break;
+                case GL_DEBUG_TYPE_PERFORMANCE:         writer << "[Type: Performance]"; break;
+                case GL_DEBUG_TYPE_MARKER:              writer << "[Type: Marker]"; break;
+                case GL_DEBUG_TYPE_PUSH_GROUP:          writer << "[Type: Push Group]"; break;
+                case GL_DEBUG_TYPE_POP_GROUP:           writer << "[Type: Pop Group]"; break;
+                case GL_DEBUG_TYPE_OTHER:               writer << "[Type: Other]"; break;
             }
 
             switch(source)
             {
-                case GL_DEBUG_SOURCE_API:             oss << "[Source: API]"; break;
-                case GL_DEBUG_SOURCE_WINDOW_SYSTEM:   oss << "[Source: Window System]"; break;
-                case GL_DEBUG_SOURCE_SHADER_COMPILER: oss << "[Source: Shader Compiler]"; break;
-                case GL_DEBUG_SOURCE_THIRD_PARTY:     oss << "[Source: Third Party]"; break;
-                case GL_DEBUG_SOURCE_APPLICATION:     oss << "[Source: Application]"; break;
-                case GL_DEBUG_SOURCE_OTHER:           oss << "[Source: Other]"; break;
+                case GL_DEBUG_SOURCE_API:             writer << "[Source: API]"; break;
+                case GL_DEBUG_SOURCE_WINDOW_SYSTEM:   writer << "[Source: Window System]"; break;
+                case GL_DEBUG_SOURCE_SHADER_COMPILER: writer << "[Source: Shader Compiler]"; break;
+                case GL_DEBUG_SOURCE_THIRD_PARTY:     writer << "[Source: Third Party]"; break;
+                case GL_DEBUG_SOURCE_APPLICATION:     writer << "[Source: Application]"; break;
+                case GL_DEBUG_SOURCE_OTHER:           writer << "[Source: Other]"; break;
             }
 
-            oss << message;
+            writer << message;
 
             if(severity == GL_DEBUG_SEVERITY_NOTIFICATION)
             {

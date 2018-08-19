@@ -42,15 +42,7 @@ namespace Bull
              */
             ~ConsoleOutputImplWin32();
 
-            /*! \brief Write bytes in console
-             *
-             * \param data   Data to write
-             * \param length The length of data
-             *
-             * \return The number of bytes written
-             *
-             */
-            size_t write(const void* data, std::size_t length) override;
+            size_t write(const ByteArray& bytes) override;
 
             /*! \brief Flush the ConsoleOutput
              *

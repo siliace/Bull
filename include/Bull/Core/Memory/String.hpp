@@ -4,11 +4,11 @@
 #include <string>
 #include <vector>
 
-#include <Bull/Core/Memory/AbstractBuffer.hpp>
+#include <Bull/Core/Export.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API String : public AbstractBuffer
+    class BULL_CORE_API String
     {
     public:
 
@@ -59,26 +59,8 @@ namespace Bull
          *
          * \param size The new size of the String
          *
-         * \return This
-         *
          */
-        String& setSize(std::size_t size);
-
-        /*! \brief Create the String
-         *
-         * \param capacity The capacity of the String to create
-         *
-         */
-        void create(std::size_t capacity) override;
-
-        /*! \brief Fill the String
-         *
-         * \param data   Data to insert in the String
-         * \param size   The length of data
-         * \param offset The offset of the data in the String
-         *
-         */
-        void fill(const void* data, std::size_t size, std::size_t offset = 0) override;
+        void setSize(std::size_t size);
 
         /*! \brief The the first occurence of a String
          *
@@ -222,7 +204,7 @@ namespace Bull
          * Make the String empty (but some memory can be still allocated)
          *
          */
-        void clear() override;
+        void clear();
 
         /*! \brief Get the buffer of the String
          *
@@ -241,15 +223,6 @@ namespace Bull
          *
          */
         std::size_t getSize() const;
-
-        /*! \brief Get the capacity of the String
-         *
-         * The capacity is the size of the memory area allocated by the String
-         *
-         * \return The capacity
-         *
-         */
-        std::size_t getCapacity() const override;
 
         /*! \brief Compare two String
          *

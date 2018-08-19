@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_IO_INSTREAM_HPP
 #define BULL_CORE_IO_INSTREAM_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Memory/ByteArray.hpp>
 
 namespace Bull
 {
@@ -12,32 +12,21 @@ namespace Bull
          */
         virtual ~InStream();
 
-        /*! \brief Get all the content of the stream
+        /*! \brief Read bytes from the InStream
          *
-         * \return Return the content of the stream
+         * \param length The length of data to read
+         *
+         * \return Read bytes
          *
          */
-        String readAll();
+        virtual ByteArray read(std::size_t length) = 0;
 
-        /*! \brief Read a line from the InStream
+        /*! \brief Skip bytes in the InStream
          *
-         * \param line      The String to fill with the line
-         * \param separator The character that delimit two lines
-         *
-         * \return True if a line could be read
+         * \param length The number of bytes to skip
          *
          */
-        bool readLine(String& line, char separator = '\n');
-
-        /*! \brief Read data from a stream
-         *
-         * \param data A pointer to the memory area to fill
-         * \param size The size of the memory area to fill
-         *
-         * \return Return the number of read bytes
-         *
-         */
-        virtual std::size_t read(void* data, std::size_t size) = 0;
+        virtual void skip(std::size_t length) = 0;
 
         /*! \brief Get the size of the stream
          *

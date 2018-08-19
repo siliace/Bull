@@ -1,6 +1,7 @@
 #include <cstring>
 
 #include <Bull/Core/IO/InStringStream.hpp>
+#include <Bull/Core/IO/TextReader.hpp>
 #include <Bull/Core/Memory/RangeCheck.hpp>
 
 namespace Bull
@@ -18,24 +19,12 @@ namespace Bull
 
     String::String(const char* string, std::size_t size)
     {
-        fill(string, size);
+        m_string.insert(0, string, size);
     }
 
-    String& String::setSize(std::size_t size)
+    void String::setSize(std::size_t size)
     {
         m_string.resize(size, NullByte);
-
-        return (*this);
-    }
-
-    void String::create(std::size_t capacity)
-    {
-        m_string.resize(capacity);
-    }
-
-    void String::fill(const void* data, std::size_t size, std::size_t offset)
-    {
-        m_string.insert(offset, reinterpret_cast<const char*>(data), size);
     }
 
     std::size_t String::first(const String& search) const
@@ -74,10 +63,13 @@ namespace Bull
     {
         String              token;
         std::vector<String> tokens;
-        InStringStream      stream(*this);
+        InStringStream      iss(*this);
+        TextReader          reader(iss);
 
-        while(stream.readLine(token, separator))
+        while(!iss.isAtEnd())
         {
+            token = reader.readLine(separator);
+
             if(!token.isEmpty() || !ignoreEmpty)
             {
                 tokens.emplace_back(token);
@@ -142,11 +134,6 @@ namespace Bull
     std::size_t String::getSize() const
     {
         return m_string.size();
-    }
-
-    std::size_t String::getCapacity() const
-    {
-        return m_string.capacity();
     }
 
     bool String::operator==(const String& right) const

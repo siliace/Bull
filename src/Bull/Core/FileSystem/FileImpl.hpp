@@ -74,22 +74,23 @@ namespace Bull
              */
             virtual bool open(const Path& name, Uint32 mode) = 0;
 
-            /*! \brief Read in a file
+            /*! \brief Read bytes from the File
              *
-             * \param dst The destination of the read data
-             * \param size The number of byte to read
+             * \param length The length of data to read
              *
-             * \param Return the number of byte read
+             * \return Read bytes
              *
              */
-            virtual std::size_t read(void* dst, std::size_t size) = 0;
+            virtual ByteArray read(std::size_t length) = 0;
 
-            /*! \brief Write a byte in this file
+            /*! \brief Write data into a File
              *
-             * \param byte A byte to write
+             * \param bytes Bytes to write
+             *
+             * \return Return the number of bytes written
              *
              */
-            virtual std::size_t write(const void* data, std::size_t size) = 0;
+            virtual std::size_t write(const ByteArray& bytes) = 0;
 
             /*! \brief Flush the File
              *

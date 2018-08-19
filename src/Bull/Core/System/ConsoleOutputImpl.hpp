@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/System/ConsoleColor.hpp>
 
@@ -28,22 +29,18 @@ namespace Bull
              */
             virtual ~ConsoleOutputImpl();
 
-            /*! \brief Write bytes in console
-             *
-             * \param data   Data to write
-             * \param length The length of data
-             *
-             * \return The number of bytes written
-             *
-             */
-            virtual std::size_t write(const void* data, std::size_t length) = 0;
+            virtual std::size_t write(const ByteArray& bytes) = 0;
 
             /*! \brief Flush the ConsoleOutput
+             *
+             * Flushing the ConsoleOutput will wait that every write instruction has been executed
              *
              */
             virtual void flush() = 0;
 
             /*! \brief Clear the console output
+             *
+             * Clearing the ConsoleOutput will clear every character written in the screen
              *
              */
             virtual void clear() = 0;

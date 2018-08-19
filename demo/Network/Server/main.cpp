@@ -1,3 +1,4 @@
+#include <Bull/Core/IO/TextWriter.hpp>
 #include <Bull/Core/System/ConsoleOutput.hpp>
 
 #include <Bull/Network/Socket/TcpClient.hpp>
@@ -9,6 +10,7 @@ int main()
     Bull::TcpClient client;
     Bull::TcpServer server;
     Bull::ConsoleOutput cout;
+    Bull::TextWriter writer(cout);
 
     if(server.listen(Bull::NetPort(6969)))
     {
@@ -17,27 +19,27 @@ int main()
             std::size_t sent = 0;
             Bull::String hello = "Hello World";
 
-            cout.writeLine("Client accepted: " + client.getRemoteAddress().toString());
+            writer.writeLine("Client accepted: " + client.getRemoteAddress().toString());
 
             if(client.send(hello.getBuffer(), hello.getSize(), sent))
             {
-                cout.writeLine(Bull::StringUtils::number(sent) + " bytes sent");
+                writer.writeLine(Bull::StringUtils::number(sent) + " bytes sent");
 
                 return 0;
             }
             else
             {
-                cout.writeLine("Failed to send");
+                writer.writeLine("Failed to send");
             }
         }
         else
         {
-            cout.writeLine("Failed to accept");
+            writer.writeLine("Failed to accept");
         }
     }
     else
     {
-        cout.writeLine("Failed to listen");
+        writer.writeLine("Failed to listen");
     }
 
     return -1;
