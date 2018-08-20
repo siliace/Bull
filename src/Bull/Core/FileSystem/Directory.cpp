@@ -3,6 +3,7 @@
 #include <Bull/Core/FileSystem/Directory.hpp>
 #include <Bull/Core/FileSystem/DirectoryImpl.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
+#include <Bull/Core/FileSystem/Path.hpp>
 
 namespace Bull
 {
@@ -18,13 +19,8 @@ namespace Bull
 
     bool Directory::copy(const Path& path, const String& newPath)
     {
-        Directory target;
         bool success = true;
-
-        if(!target.open(path))
-        {
-            return false;
-        }
+        Directory target = path.toDirectory();
 
         if(!Directory::exists(newPath))
         {
@@ -64,37 +60,6 @@ namespace Bull
         return prv::DirectoryImpl::remove(path);
     }
 
-    Directory::Directory() = default;
-
-    Directory::Directory(const Path& path)
-    {
-        open(path);
-    }
-
-    Directory::~Directory()
-    {
-        close();
-    }
-
-    bool Directory::open(const Path& path)
-    {
-        m_path = path;
-        m_impl = prv::DirectoryImpl::createInstance(path);
-
-        return true;
-    }
-
-    bool Directory::isOpen() const
-    {
-        return m_impl != nullptr;
-    }
-
-    void Directory::close()
-    {
-        m_impl.reset();
-        m_path = Path();
-    }
-
     std::vector<Path> Directory::getContent(Uint32 flags)
     {
         std::vector<Path> entities;
@@ -107,8 +72,14 @@ namespace Bull
         return entities;
     }
 
-    const Path& Directory::getPath() const
+    const String& Directory::getPath() const
     {
         return m_path;
+    }
+
+    Directory::Directory(const String& path)
+    {
+        m_path = path;
+        m_impl = prv::DirectoryImpl::createInstance(path);
     }
 }

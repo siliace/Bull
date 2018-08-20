@@ -22,9 +22,9 @@ Bull::Material loadMaterialFromPath(const Bull::Path& path)
 {
     Bull::Material material;
     Bull::ImageLoader imageLoader;
-    Bull::Texture& diffuse = textureManager.add(Bull::Texture::from(imageLoader.loadFromPath(path.getChild("container.png"))), "diffuse");
-    Bull::Texture& specular = textureManager.add(Bull::Texture::from(imageLoader.loadFromPath(path.getChild("container_specular.png"))), "specular");
-    Bull::Texture& emission = textureManager.add(Bull::Texture::from(imageLoader.loadFromPath(path.getChild("container_emission.png"))), "emission");
+    Bull::Texture& diffuse = textureManager.add(Bull::Texture::from(imageLoader.loadFromPath(path.resolve("container.png"))), "diffuse");
+    Bull::Texture& specular = textureManager.add(Bull::Texture::from(imageLoader.loadFromPath(path.resolve("container_specular.png"))), "specular");
+    Bull::Texture& emission = textureManager.add(Bull::Texture::from(imageLoader.loadFromPath(path.resolve("container_emission.png"))), "emission");
 
     diffuse.enableSmooth();
     specular.enableSmooth();
@@ -42,8 +42,8 @@ Bull::Shader loadShaderFromPath(const Bull::Path& path)
     Bull::Shader shader;
     Bull::ShaderStageLoader shaderStageLoader;
 
-    shader.attach(shaderStageLoader.loadFromPath(path.getChild("phong.vert"), Bull::ShaderStageType_Vertex));
-    shader.attach(shaderStageLoader.loadFromPath(path.getChild("phong.frag"), Bull::ShaderStageType_Fragment));
+    shader.attach(shaderStageLoader.loadFromPath(path.resolve("phong.vert"), Bull::ShaderStageType_Vertex));
+    shader.attach(shaderStageLoader.loadFromPath(path.resolve("phong.frag"), Bull::ShaderStageType_Fragment));
     shader.link();
 
     return shader;

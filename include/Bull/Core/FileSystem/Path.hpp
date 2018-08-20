@@ -1,19 +1,19 @@
 #ifndef BULL_CORE_FILESYSTEM_PATH_HPP
 #define BULL_CORE_FILESYSTEM_PATH_HPP
 
+#include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
+    class File;
+    class Directory;
+
     class BULL_CORE_API Path
     {
     public:
 
-        #ifdef BULL_OS_WINDOWS
-            static constexpr char Separator = '\\';
-        #else
-            static constexpr char Separator = '/';
-        #endif
+        static constexpr char Separator = '/';
 
         /*! \brief Create a canonical Path
          *
@@ -35,25 +35,11 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
-         *
-         */
-        Path() = default;
-
         /*! \brief Constructor
          *
          * \param path The path to open
          */
         explicit Path(const String& path);
-
-        /*! \brief Open a Path
-         *
-         * \param path The path to open
-         *
-         * \return This
-         *
-         */
-        Path& open(const String& path);
 
         /*! \brief Compare two Path
          *
@@ -87,14 +73,7 @@ namespace Bull
          * \return The child Path
          *
          */
-        Path getChild(const String& child) const;
-
-        /*! \brief Get the extension of the file path
-         *
-         * \return The file's extension
-         *
-         */
-        String getFileExtension() const;
+        Path resolve(const String& child) const;
 
         /*! \brief Tell whether the Path is a file
          *
@@ -103,12 +82,28 @@ namespace Bull
          */
         bool isFile() const;
 
+        /*! \brief Open the Path as a File
+         *
+         * \param mode The mode to use to open the File
+         *
+         * \return The File
+         *
+         */
+        File toFile(Uint32 mode = FileOpeningMode_ReadWrite) const;
+
         /*! \brief Tell whether the Path is a directory
          *
          * \return True if the Path is a directory
          *
          */
         bool isDirectory() const;
+
+        /*! \brief Open the Path as a Directory
+         *
+         * \return The Directory
+         *
+         */
+        Directory toDirectory() const;
 
         /*! \brief Convert the Path to a String
          *

@@ -5,7 +5,6 @@ namespace Bull
 {
     enum FileOpeningMode
     {
-        FileOpeningMode_None      = 0x00,
         FileOpeningMode_Append    = 0x01,
         FileOpeningMode_Write     = 0x02,
         FileOpeningMode_Exists    = 0x04,

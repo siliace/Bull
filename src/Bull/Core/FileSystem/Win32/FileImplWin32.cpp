@@ -43,12 +43,7 @@ namespace Bull
             return DeleteFile(name.toString().getBuffer()) == TRUE;
         }
 
-        FileImplWin32::~FileImplWin32()
-        {
-            CloseHandle(m_handler);
-        }
-
-        bool FileImplWin32::open(const Path& name, Uint32 mode)
+        FileImplWin32::FileImplWin32(const String& path, Uint32 mode)
         {
             DWORD creationMode = 0;
             DWORD openingMode  = 0;
@@ -84,11 +79,11 @@ namespace Bull
                 }
                 else
                 {
-                    creationMode = exists(name.toString()) ? OPEN_EXISTING : CREATE_NEW;
+                    creationMode = exists(path) ? OPEN_EXISTING : CREATE_NEW;
                 }
             }
 
-            m_handler = CreateFile(name.toString().getBuffer(),
+            m_handler = CreateFile(path.getBuffer(),
                                    openingMode,
                                    FILE_SHARE_READ,
                                    nullptr,
@@ -96,7 +91,12 @@ namespace Bull
                                    FILE_ATTRIBUTE_NORMAL,
                                    nullptr);
 
-            return m_handler != INVALID_HANDLE_VALUE;
+            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "FileImplWin32::FileImplWin32", "Failed to open file " + path));
+        }
+
+        FileImplWin32::~FileImplWin32()
+        {
+            CloseHandle(m_handler);
         }
 
         ByteArray FileImplWin32::read(std::size_t length)

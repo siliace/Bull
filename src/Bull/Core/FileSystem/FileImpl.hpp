@@ -2,6 +2,7 @@
 #define BULL_CORE_FILESYSTEM_FILEIMPL_HPP
 
 #include <Bull/Core/FileSystem/File.hpp>
+#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
@@ -19,10 +20,10 @@ namespace Bull
              * \param name The name of the file to open
              * \param mode The opening mode of the file
              *
-             * \return Return the instance of the FileImpl if the file exist, nullptr otherwise
+             * \return The created FileImpl
              *
              */
-            static std::unique_ptr<FileImpl> createInstance(const Path& name, Uint32 mode);
+            static std::unique_ptr<FileImpl> createInstance(const String& name, Uint32 mode);
 
             /*! \brief Create a file
              *
@@ -63,16 +64,6 @@ namespace Bull
              *
              */
             virtual ~FileImpl();
-
-            /*! \brief Open a file
-             *
-             * \param name The name of the file
-             * \param mode The opening mode of the file (read, write or both)
-             *
-             * \return Return true if the file was open successfully, false otherwise
-             *
-             */
-            virtual bool open(const Path& name, Uint32 mode) = 0;
 
             /*! \brief Read bytes from the File
              *

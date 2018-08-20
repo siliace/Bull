@@ -3,7 +3,6 @@
 
 #include <memory>
 
-#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
@@ -11,6 +10,8 @@
 
 namespace Bull
 {
+    class Path;
+
     namespace prv
     {
         class FileImpl;
@@ -71,19 +72,6 @@ namespace Bull
 
     public:
 
-        /*! \brief Constructor
-         *
-         */
-        File();
-
-        /*! \brief Constructor
-         *
-         * \param path The path of the file to open
-         * \param mode The opening mode of the file (read, write or both)
-         *
-         */
-        explicit File(const Path& path, Uint32 mode = FileOpeningMode_ReadWrite);
-
         /*! \brief Constructor by movement
          *
          * \param file The File to move
@@ -104,31 +92,6 @@ namespace Bull
          *
          */
         File& operator=(File&& file) noexcept = default;
-
-        /*! \brief Open a file
-         *
-         * \param path The path of the file to open
-         * \param mode The opening mode of the file (read, write or both)
-         *
-         * \return Return true if the file was opened successfully, false otherwise
-         *
-         */
-        bool open(const Path& path, Uint32 mode = FileOpeningMode_ReadWrite);
-
-        /*! \brief Check if a file is open
-         *
-         * \return Return true if the file is open, false otherwise
-         *
-         */
-        inline bool isOpen() const
-        {
-            return m_impl != nullptr;
-        }
-
-        /*! \brief Close a file
-         *
-         */
-        void close();
 
         /*! \brief Read bytes from the File
          *
@@ -218,7 +181,7 @@ namespace Bull
          * \return Return the path of the file
          *
          */
-        inline const Path& getPath() const
+        inline const String& getPath() const
         {
             return m_path;
         }
@@ -230,40 +193,22 @@ namespace Bull
          */
         std::size_t getSize() const override;
 
-        /*! \brief Get the opening mode of the file
-         *
-         * \return Return the opening mode of the file
-         *
-         */
-        Uint32 getOpeningMode() const
-        {
-            return m_mode;
-        }
+    private:
 
-        /*! \brief Check if this file is open with read permission
-         *
-         * \return Return true if this file is open with read permission, false otherwise
-         *
-         */
-        bool canRead() const
-        {
-            return m_mode & FileOpeningMode_Read;
-        }
+        friend class Path;
 
-        /*! \brief Check if this file is open with write permission
+        /*! \brief Constructor
          *
-         * \return Return true if this file is open with write permission, false otherwise
+         * \param path The path of the file to open
+         * \param mode The opening mode of the file (read, write or both)
          *
          */
-        bool canWrite() const
-        {
-            return m_mode & FileOpeningMode_Write;
-        }
+        File(const String& path, Uint32 mode);
 
     private:
 
-        Path                   m_path;
-        Uint32                 m_mode;
+        String                         m_path;
+        Uint32                         m_mode;
         std::unique_ptr<prv::FileImpl> m_impl;
     };
 }

@@ -1,10 +1,12 @@
 #include <cstdio>
 #include <cstring>
 
+#include <Bull/Core/Exception/FileNotFound.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/FileSystem/FileImpl.hpp>
+#include <Bull/Core/FileSystem/Path.hpp>
 
 namespace Bull
 {
@@ -36,73 +38,19 @@ namespace Bull
         prv::FileImpl::remove(name);
     }
 
-    File::File() :
-        m_mode(FileOpeningMode_None)
-    {
-        /// Nothing
-    }
-
-    File::File(const Path& path, Uint32 mode)
-    {
-        open(path, mode);
-    }
-
     File::~File()
     {
-        close();
-    }
-
-    bool File::open(const Path& path, Uint32 mode)
-    {
-        if(path.isFile())
-        {
-            if(isOpen())
-            {
-                close();
-            }
-
-            m_path = path;
-            m_mode = mode;
-            m_impl = prv::FileImpl::createInstance(m_path, m_mode);
-
-            if(mode & FileOpeningMode_Read)
-            {
-                setCursor(0);
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    void File::close()
-    {
         flush();
-
-        m_impl.reset();
-        m_path = Path();
-        m_mode = FileOpeningMode_None;
     }
 
     ByteArray File::read(std::size_t length)
     {
-        if(m_impl)
-        {
-            return m_impl->read(length);
-        }
-
-        return ByteArray();
+        return m_impl->read(length);
     }
 
     std::size_t File::write(const ByteArray& bytes)
     {
-        if(m_impl)
-        {
-            return m_impl->write(bytes);
-        }
-
-        return 0;
+        return m_impl->write(bytes);
     }
 
     void File::skip(std::size_t length)
@@ -117,79 +65,55 @@ namespace Bull
 
     void File::flush()
     {
-        if(m_impl)
-        {
-            m_impl->flush();
-        }
+        m_impl->flush();
     }
 
     DateTime File::getCreationDate() const
     {
-        if(m_impl)
-        {
-            return m_impl->getCreationDate();
-        }
-
-        return DateTime::now();
+        return m_impl->getCreationDate();
     }
 
     DateTime File::getLastAccessDate() const
     {
-        if(m_impl)
-        {
-            return m_impl->getLastAccessDate();
-        }
-
-        return DateTime::now();
+        return m_impl->getLastAccessDate();
     }
 
     DateTime File::getLastWriteDate() const
     {
-        if(m_impl)
-        {
-            return m_impl->getLastWriteDate();
-        }
-
-        return DateTime::now();
+        return m_impl->getLastWriteDate();
     }
 
     std::size_t File::getCursor() const
     {
-        if(m_impl)
-        {
-            return m_impl->getCursor();
-        }
-
-        return 0;
+        return m_impl->getCursor();
     }
 
     std::size_t File::moveCursor(Int64 offset)
     {
-        if(m_impl)
-        {
-            return m_impl->moveCursor(offset);
-        }
-
-        return 0;
+        return m_impl->moveCursor(offset);
     }
 
     std::size_t File::setCursor(std::size_t position)
     {
-        if(m_impl)
-        {
-            return m_impl->setCursor(position);
-        }
-
-        return 0;
+        return m_impl->setCursor(position);
     }
 
     std::size_t File::getSize() const
     {
-        if(m_impl)
-        {
-            return m_impl->getSize();
-        }
+        return m_impl->getSize();
+    }
 
-        return 0;
+    File::File(const String& path, Uint32 mode)
+    {
+        Expect(File::exists(path) || mode != FileOpeningMode_Read, Throw(FileNotFound, "File::File", "The file " + path + " does not exists"))
+
+        m_path = path;
+        m_mode = mode;
+        m_impl = prv::FileImpl::createInstance(m_path, m_mode);
+
+        if(mode & FileOpeningMode_Read)
+        {
+            setCursor(0);
+        }
     }
 }

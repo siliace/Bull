@@ -1,30 +1,21 @@
 #include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/FileSystem/File.hpp>
+#include <Bull/Core/FileSystem/FileImpl.hpp>
 #include <Bull/Core/IO/TextWriter.hpp>
 #include <Bull/Core/Log/FileLogger.hpp>
 
 namespace Bull
 {
-    FileLogger::FileLogger()
+    FileLogger::FileLogger() :
+        FileLogger(Path("bull.log"))
     {
-        String path = "bull.log";
-
-        if(!File::exists(path))
-        {
-            File::create(path);
-        }
-
-        if(!m_file.open(Path(path), FileOpeningMode_Truncate | FileOpeningMode_Write))
-        {
-            Throw(InternalError, "FileLogger::FileLogger", "Failed to open log file");
-        }
+        /// Nothing
     }
 
-    FileLogger::FileLogger(const Path& path)
+    FileLogger::FileLogger(const Path& path) :
+        m_file(path.toFile(FileOpeningMode_Truncate | FileOpeningMode_Write))
     {
-        if(!m_file.open(path, FileOpeningMode_Truncate | FileOpeningMode_Write))
-        {
-            Throw(InternalError, "FileLogger::FileLogger", "Failed to open log file");
-        }
+        /// Nothing
     }
 
     void FileLogger::write(const String& entry)

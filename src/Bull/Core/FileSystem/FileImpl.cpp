@@ -13,12 +13,9 @@ namespace Bull
 {
     namespace prv
     {
-        std::unique_ptr<FileImpl> FileImpl::createInstance(const Path& name, Uint32 mode)
+        std::unique_ptr<FileImpl> FileImpl::createInstance(const String& name, Uint32 mode)
         {
-            std::unique_ptr<FileImpl> ptr = std::make_unique<FileImplType>();
-            ptr->open(name, mode);
-
-            return ptr;
+            return std::make_unique<FileImplType>(name, mode);
         }
 
         void FileImpl::create(const String& name)

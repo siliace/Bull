@@ -4,7 +4,7 @@
 #include <vector>
 
 #include <Bull/Core/FileSystem/Directory.hpp>
-#include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/FileSystem/Path.hpp>
 
 namespace Bull
 {
@@ -21,7 +21,7 @@ namespace Bull
              * \return Return the instance of the DirectoryImpl if the file exist, nullptr otherwise
              *
              */
-            static std::unique_ptr<DirectoryImpl> createInstance(const Path& path);
+            static std::unique_ptr<DirectoryImpl> createInstance(const String& path);
 
             /*! \brief Create a directory
              *
@@ -56,15 +56,6 @@ namespace Bull
              *
              */
             virtual ~DirectoryImpl();
-
-            /*! \brief Open a directory
-             *
-             * \param path The path of the directory
-             *
-             * \return Return true is the directory was opened successfully, false otherwise
-             *
-             */
-            virtual bool open(const Path& path) = 0;
 
             /*! \brief Get the content of this Directory
              *

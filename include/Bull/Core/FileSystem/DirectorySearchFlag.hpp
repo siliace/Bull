@@ -5,7 +5,6 @@ namespace Bull
 {
     enum DirectorySearchFlag
     {
-        DirectorySearchFlag_None        = 0x00,
         DirectorySearchFlag_Files       = 0x01,
         DirectorySearchFlag_Directories = 0x02,
         DirectorySearchFlag_All         = DirectorySearchFlag_Files | DirectorySearchFlag_Directories

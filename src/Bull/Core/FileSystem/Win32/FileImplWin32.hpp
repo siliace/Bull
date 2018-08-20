@@ -51,20 +51,18 @@ namespace Bull
 
         public:
 
+            /*! \brief Constructor
+             *
+             * \param path The path of the file to open
+             * \param mode The opening mode of the file
+             *
+             */
+            FileImplWin32(const String& path, Uint32 mode);
+
             /*! \brief Destructor
              *
              */
             ~FileImplWin32();
-
-            /*! \brief Open the file
-             *
-             * \param name The name of the file to open
-             * \param mode The opening mode of the file (read, write or both)
-             *
-             * \return Return true if the file was open successfully, false otherwise
-             *
-             */
-            bool open(const Path& name, Uint32 mode) override;
 
             /*! \brief Read bytes from the File
              *

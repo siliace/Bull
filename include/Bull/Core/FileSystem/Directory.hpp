@@ -5,16 +5,19 @@
 #include <vector>
 
 #include <Bull/Core/FileSystem/DirectorySearchFlag.hpp>
-#include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
 {
+    class Path;
+
     namespace prv
     {
         class DirectoryImpl;
     }
 
-    class BULL_CORE_API Directory
+    class BULL_CORE_API Directory : public NonCopyable
     {
     public:
 
@@ -67,29 +70,12 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
-         *
-         */
-        Directory();
-
-        /*! \brief Constructor
-         *
-         * \param path The path of the directory
-         *
-         */
-        explicit Directory(const Path& path);
-
         /*! \brief Constructor by movement
          *
          * \param directory The Directory to move
          *
          */
         Directory(Directory&& directory) noexcept = default;
-
-        /*! \brief Destructor
-         *
-         */
-        ~Directory();
 
         /*! \brief Basic assignment operator by movement
          *
@@ -99,27 +85,6 @@ namespace Bull
          *
          */
         Directory& operator=(Directory&& directory) noexcept = default;
-
-        /*! \brief Open a directory
-         *
-         * \param path The path of the directory
-         *
-         * \return Return true is the directory was opened successfully, false otherwise
-         *
-         */
-        bool open(const Path& path);
-
-        /*! \brief Check whether the directory is open
-         *
-         * \return Return true if the directory is open, false otherwise
-         *
-         */
-        bool isOpen() const;
-
-        /*! \brief Close the directory
-         *
-         */
-        void close();
 
         /*! \brief Get the content of this Directory
          *
@@ -132,14 +97,25 @@ namespace Bull
 
         /*! \brief Get the path of the directory
          *
-         * \return Return the path of the directory
+         * \return The path of the directory
          *
          */
-        const Path& getPath() const;
+        const String& getPath() const;
 
     private:
 
-        Path                        m_path;
+        friend class Path;
+
+        /*! \brief Constructor
+         *
+         * \param path The path of the directory
+         *
+         */
+        explicit Directory(const String& path);
+
+    private:
+
+        String                              m_path;
         std::unique_ptr<prv::DirectoryImpl> m_impl;
     };
 }

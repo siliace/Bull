@@ -42,17 +42,17 @@ namespace Bull
 
         public:
 
+            /*! \brief Constructor
+             *
+             * \param path The path of the directory to open
+             *
+             */
+            explicit DirectoryImplWin32(const String& path);
+
             /*! \brief Destructor
              *
              */
             ~DirectoryImplWin32();
-
-            /*! \brief Constructor
-             *
-             * \param name The name of the directory to open
-             *
-             */
-            bool open(const Path& name) override;
 
             /*! \brief Get the content of this Directory
              *
@@ -65,7 +65,7 @@ namespace Bull
 
         private:
 
-            Path            m_base;
+            String          m_path;
             WIN32_FIND_DATA m_result;
             HANDLE          m_handler;
         };

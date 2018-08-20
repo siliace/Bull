@@ -17,6 +17,7 @@ target_sources(bull-core
             ${BULL_SRC_CORE_FILESYSTEM}/FileSystem.cpp
             ${BULL_SRC_CORE_FILESYSTEM}/FileSystemImpl.hpp
             ${BULL_INC_CORE_FILESYSTEM}/FileSystemInfo.hpp
+            ${BULL_INC_CORE_FILESYSTEM}/INode.hpp
             ${BULL_INC_CORE_FILESYSTEM}/Path.hpp
             ${BULL_SRC_CORE_FILESYSTEM}/Path.cpp
             ${BULL_SRC_CORE_FILESYSTEM}/PathImpl.hpp

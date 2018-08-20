@@ -2,6 +2,7 @@
 
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
+#include <Bull/Core/FileSystem/FileImpl.hpp>
 #include <Bull/Core/Image/ImageLoader.hpp>
 #include <Bull/Core/Memory/MemoryStream.hpp>
 
@@ -28,11 +29,9 @@ namespace Bull
 
     ImageLoader::ImageInfo ImageLoader::getInfo(const Path& path) const
     {
-        ImageInfo info;
+        File file = path.toFile(FileOpeningMode_Read);
 
-        stbi_info(path.toString().getBuffer(), &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
-
-        return info;
+        return getInfo(file);
     }
 
     ImageLoader::ImageInfo ImageLoader::getInfo(InStream& stream) const
@@ -51,26 +50,16 @@ namespace Bull
 
     ImageLoader::ImageInfo ImageLoader::getInfo(const void* data, std::size_t length) const
     {
-        ImageInfo info;
+        MemoryStream memoryStream(data, length);
 
-        stbi_info_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
-
-        return info;
+        return getInfo(memoryStream);
     }
 
     Image ImageLoader::loadFromPath(const Path& path) const
     {
-        Image image;
-        int width, height, channels;
-        stbi_uc* buffer = stbi_load(path.toString().getBuffer(), &width, &height, &channels, STBI_rgb_alpha);
+        File file = path.toFile(FileOpeningMode_Read);
 
-        Expect(buffer, Throw(InternalError, "ImageLoader::loadFromPath", "Failed to load image: " + getErrorMessage()));
-
-        image = createImage(buffer, width, height, channels);
-
-        stbi_image_free(buffer);
-
-        return image;
+        return loadFromStream(file);
     }
 
     Image ImageLoader::loadFromStream(InStream& stream) const
@@ -96,17 +85,9 @@ namespace Bull
 
     Image ImageLoader::loadFromMemory(const void* data, std::size_t length) const
     {
-        Image image;
-        int width, height, channels;
-        stbi_uc* buffer = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(data), length, &width, &height, &channels, STBI_rgb_alpha);
+        MemoryStream memoryStream(data, length);
 
-        Expect(buffer, Throw(InternalError, "ImageLoader::loadFromMemory", "Failed to load image: " + getErrorMessage()));
-
-        image = createImage(buffer, width, height, channels);
-
-        stbi_image_free(buffer);
-
-        return image;
+        return loadFromStream(memoryStream);
     }
 
     String ImageLoader::getErrorMessage() const

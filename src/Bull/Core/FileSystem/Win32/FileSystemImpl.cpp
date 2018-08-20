@@ -18,12 +18,12 @@ namespace Bull
             char buffer[255] = {0};
             GetEnvironmentVariable("homepath", buffer, 255);
 
-            return getRoot().getChild(buffer);
+            return getRoot().resolve(buffer);
         }
 
         Path FileSystemImpl::getTempPath()
         {
-            return getHome().getChild("AppData").getChild("Local").getChild("Temp");
+            return getHome().resolve("AppData").resolve("Local").resolve("Temp");
         }
 
         bool FileSystemImpl::setCurrentDirectory(const Path& path)

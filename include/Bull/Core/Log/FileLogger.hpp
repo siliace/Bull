@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_LOG_FILELOGGER_HPP
 #define BULL_CORE_LOG_FILELOGGER_HPP
 
-#include <Bull/Core/FileSystem/File.hpp>
+#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Log/AbstractLogger.hpp>
 
 namespace Bull
