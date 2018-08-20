@@ -25,7 +25,7 @@ namespace Bull
 
     Path FileSystem::getCurrentDirectory()
     {
-        return Path::canonical(".");
+        return Path(".").toAbsolute();
     }
 
     FileSystemInfo FileSystem::getFileSystemInfo(const Path& base)

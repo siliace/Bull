@@ -7,16 +7,6 @@
 
 namespace Bull
 {
-    Path Path::canonical(const String& path)
-    {
-        return Path(prv::PathImpl::realPath(path));
-    }
-
-    Path Path::canonical(const Path& path)
-    {
-        return canonical(path.toString());
-    }
-
     Path::Path(const String& path) :
         m_path(path)
     {
@@ -41,6 +31,11 @@ namespace Bull
     Path Path::resolve(const String& child) const
     {
         return Path(toString() + Separator + child);
+    }
+
+    Path Path::toAbsolute() const
+    {
+        return Path(prv::PathImpl::realPath(m_path));
     }
 
     bool Path::isFile() const

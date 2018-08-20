@@ -10,7 +10,7 @@ namespace Bull
             char buffer[255] = {0};
             GetEnvironmentVariable("systemdrive", buffer, 255);
 
-            return Path::canonical(buffer);
+            return Path(buffer).toAbsolute();
         }
 
         Path FileSystemImpl::getHome()

@@ -15,24 +15,6 @@ namespace Bull
 
         static constexpr char Separator = '/';
 
-        /*! \brief Create a canonical Path
-         *
-         * \param path The relative path
-         *
-         * \return The canonical Path
-         *
-         */
-        static Path canonical(const String& path);
-
-        /*! \brief Create a canonical Path
-         *
-         * \param path The relative path
-         *
-         * \return The canonical Path
-         *
-         */
-        static Path canonical(const Path& path);
-
     public:
 
         /*! \brief Constructor
@@ -74,6 +56,13 @@ namespace Bull
          *
          */
         Path resolve(const String& child) const;
+
+        /*! \brief Convert the Path to an absolute Path
+         *
+         * \return The absolute Path
+         *
+         */
+        Path toAbsolute() const;
 
         /*! \brief Tell whether the Path is a file
          *
