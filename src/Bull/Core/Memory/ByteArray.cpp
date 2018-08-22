@@ -1,5 +1,6 @@
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Memory/ByteArray.hpp>
+#include <Bull/Core/Memory/RangeCheck.hpp>
 
 namespace Bull
 {
@@ -68,11 +69,15 @@ namespace Bull
 
     Uint8& ByteArray::operator[](std::size_t index)
     {
+        RangeCheck(index, m_array.size());
+
         return m_array.at(index);
     }
 
     const Uint8& ByteArray::operator[](std::size_t index) const
     {
+        RangeCheck(index, m_array.size());
+
         return m_array.at(index);
     }
 }
