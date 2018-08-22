@@ -27,20 +27,25 @@ namespace Bull
          * \param data   Data to stream
          * \param length The length of data
          *
-         * \return True if the stream was opened successfully
+         * \throw InvalidParameter
          *
          */
-        bool open(const void* data, std::size_t length);
+        void open(const void* data, std::size_t length);
 
-        /*! \brief
+        /*! \brief Read bytes from the MemoryStream
          *
-         * \param length
+         * \param length The length of data to read
          *
-         * \return
+         * \return Read bytes
          *
          */
         ByteArray read(std::size_t length) override;
 
+        /*! \brief Skip bytes in the MemoryStream
+         *
+         * \param length The number of bytes to skip
+         *
+         */
         void skip(std::size_t length) override;
 
         /*! \brief Check if the stream is open
@@ -50,6 +55,13 @@ namespace Bull
          */
         bool isOpen() const;
 
+        /*! \brief Tell whether the MemoryStream is at its end
+         *
+         * An MemoryStream is considered at its end when there is not left to read
+         *
+         * \return True if the MemoryStream is at its end
+         *
+         */
         bool isAtEnd() const override;
 
         /*! \brief Close the stream

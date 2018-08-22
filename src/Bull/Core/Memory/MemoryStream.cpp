@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <cstring>
 
+#include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Memory/MemoryStream.hpp>
 
 namespace Bull
@@ -18,17 +19,12 @@ namespace Bull
         open(data, length);
     }
 
-    bool MemoryStream::open(const void* data, std::size_t length)
+    void MemoryStream::open(const void* data, std::size_t length)
     {
-        if(data && length)
-        {
-            m_data = static_cast<const unsigned char*>(data);
-            m_size = length;
+        Expect(data && length, Throw(InvalidParameter, "MemoryStream::open", "Invalid buffer"));
 
-            return true;
-        }
-
-        return false;
+        m_data = static_cast<const unsigned char*>(data);
+        m_size = length;
     }
 
     ByteArray MemoryStream::read(std::size_t length)
