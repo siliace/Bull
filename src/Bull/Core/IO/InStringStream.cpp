@@ -13,9 +13,7 @@ namespace Bull
 
     ByteArray InStringStream::read(std::size_t length)
     {
-        ByteArray bytes(length);
-
-        std::memcpy(&bytes[0], &m_string[m_cursor], length);
+        ByteArray bytes = ByteArray::memoryCopy(&m_string[m_cursor], length);
 
         m_cursor += length;
 
@@ -34,6 +32,6 @@ namespace Bull
 
     bool InStringStream::isAtEnd() const
     {
-        return m_cursor < m_string.getSize();
+        return m_cursor >= getSize();
     }
 }
