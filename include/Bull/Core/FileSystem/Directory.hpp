@@ -5,13 +5,11 @@
 #include <vector>
 
 #include <Bull/Core/FileSystem/DirectorySearchFlag.hpp>
-#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
 {
-    class Path;
-
     namespace prv
     {
         class DirectoryImpl;
@@ -25,10 +23,8 @@ namespace Bull
          *
          * \param path The Path of the Directory to create
          *
-         * \return True if the file was created successfully
-         *
          */
-        static bool create(const String& path);
+        static void create(const Path& path);
 
         /*! \brief Check if a Directory exists
          *
@@ -37,38 +33,44 @@ namespace Bull
          * \return True if the Directory exists
          *
          */
-        static bool exists(const String& path);
+        static bool exists(const Path& path);
 
         /*! \brief Copy a Directory
          *
          * \param path    The Path of the directory to copy
          * \param newPath The Path of the copied directory
          *
-         * \return True if the copy was successfully
-         *
          */
-        static bool copy(const Path& path, const String& newPath);
+        static void copy(const Path& path, const Path& newPath);
 
         /*! \brief Rename a Directory
          *
          * \param path    The Path of the Directory to rename
          * \param newPath The new Path of the Directory
          *
-         * \return True if the directory was renamed successfully
-         *
          */
-        static bool rename(const Path& path, const String& newPath);
+        static void rename(const Path& path, const Path& newPath);
 
         /*! \brief Delete a Directory
          *
          * \param path The Path of the directory to delete
          *
-         * \return True if the Directory was deleted successfully
-         *
          */
-        static bool remove(const Path& path);
+        static void remove(const Path& path);
 
     public:
+
+        /*! \brief Default constructor
+         *
+         */
+        Directory() = default;
+
+        /*! \brief Constructor
+         *
+         * \param path The Path of the directory
+         *
+         */
+        explicit Directory(const Path& path);
 
         /*! \brief Constructor by movement
          *
@@ -76,6 +78,11 @@ namespace Bull
          *
          */
         Directory(Directory&& directory) noexcept = default;
+
+        /*! \brief Destructor
+         *
+         */
+        ~Directory();
 
         /*! \brief Basic assignment operator by movement
          *
@@ -85,6 +92,13 @@ namespace Bull
          *
          */
         Directory& operator=(Directory&& directory) noexcept = default;
+
+        /*! \brief Open the Directory
+         *
+         * \param path The Path of the Directory to open
+         *
+         */
+        void open(const Path& path);
 
         /*! \brief Get the content of this Directory
          *
@@ -100,22 +114,11 @@ namespace Bull
          * \return The path of the directory
          *
          */
-        const String& getPath() const;
+        const Path& getPath() const;
 
     private:
 
-        friend class Path;
-
-        /*! \brief Constructor
-         *
-         * \param path The path of the directory
-         *
-         */
-        explicit Directory(const String& path);
-
-    private:
-
-        String                              m_path;
+        Path                                m_path;
         std::unique_ptr<prv::DirectoryImpl> m_impl;
     };
 }

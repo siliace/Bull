@@ -6,16 +6,22 @@
 
 namespace Bull
 {
-    class File;
-    class Directory;
-
     class BULL_CORE_API Path
     {
     public:
 
+    #if defined BULL_OS_WINDOWS
+        static constexpr char Separator = '\\';
+    #else
         static constexpr char Separator = '/';
+    #endif
 
     public:
+
+        /*! \brief Default constructor
+         *
+         */
+        Path() = default;
 
         /*! \brief Constructor
          *
@@ -64,6 +70,15 @@ namespace Bull
          */
         Path toAbsolute() const;
 
+        /*! \brief Get the file name of the Path
+         *
+         * This method will return last element of the Path
+         *
+         * \return The file name
+         *
+         */
+        String getFileName() const;
+
         /*! \brief Tell whether the Path is a file
          *
          * \return True if the Path is a file
@@ -71,28 +86,12 @@ namespace Bull
          */
         bool isFile() const;
 
-        /*! \brief Open the Path as a File
-         *
-         * \param mode The mode to use to open the File
-         *
-         * \return The File
-         *
-         */
-        File toFile(Uint32 mode = FileOpeningMode_ReadWrite) const;
-
         /*! \brief Tell whether the Path is a directory
          *
          * \return True if the Path is a directory
          *
          */
         bool isDirectory() const;
-
-        /*! \brief Open the Path as a Directory
-         *
-         * \return The Directory
-         *
-         */
-        Directory toDirectory() const;
 
         /*! \brief Convert the Path to a String
          *

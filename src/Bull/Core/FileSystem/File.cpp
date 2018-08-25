@@ -1,36 +1,31 @@
-#include <cstdio>
-#include <cstring>
-
 #include <Bull/Core/Exception/FileNotFound.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/IO/TextReader.hpp>
+#include <Bull/Core/IO/TextWriter.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/FileSystem/FileImpl.hpp>
-#include <Bull/Core/FileSystem/Path.hpp>
 
 namespace Bull
 {
-    void File::create(const String& name)
+    void File::create(const Path& path)
     {
-        prv::FileImpl::create(name);
+        prv::FileImpl::create(path);
     }
 
-    bool File::exists(const String& name)
+    bool File::exists(const Path& path)
     {
-        return prv::FileImpl::exists(name);
+        return prv::FileImpl::exists(path);
     }
 
-    bool File::copy(const Path& path, const String& newPath)
+    void File::copy(const Path& path, const Path& newPath)
     {
-        return prv::FileImpl::copy(path, newPath);
+        prv::FileImpl::copy(path, newPath);
     }
 
-    void File::rename(const Path& name, const String& newName)
+    void File::rename(const Path& path, const Path& newPath)
     {
-        Expect(File::exists(name.toString()), Throw(InvalidParameter, "File::rename", "The file to rename does not exists"));
-        Expect(!File::exists(newName), Throw(InvalidParameter, "File::rename", "A file with the new name already exists"));
-
-        Expect(::rename(name.toString().getBuffer(), newName.getBuffer()) != 0, Throw(InternalError, "File::rename", "Failed to rename file"));
+        prv::FileImpl::rename(path, newPath);
     }
 
     void File::remove(const Path& name)
@@ -38,9 +33,35 @@ namespace Bull
         prv::FileImpl::remove(name);
     }
 
+    File::File() :
+        m_mode(0)
+    {
+        /// Nothing
+    }
+
+    File::File(const Path& path, Uint32 mode)
+    {
+        open(path, mode);
+    }
+
     File::~File()
     {
         flush();
+    }
+
+    void File::open(const Path& path, Uint32 mode)
+    {
+        Expect(path.isFile(), Throw(InvalidParameter, "File::File", "The path " + path.toString() + " is not a file"));
+        Expect(File::exists(path) || mode != FileOpeningMode_Read, Throw(FileNotFound, "File::File", "The file " + path.toString() + " does not exists"));
+
+        m_path = path;
+        m_mode = mode;
+        m_impl = prv::FileImpl::createInstance(m_path, m_mode);
+
+        if(mode & FileOpeningMode_Read)
+        {
+            setCursor(0);
+        }
     }
 
     ByteArray File::read(std::size_t length)
@@ -55,7 +76,7 @@ namespace Bull
 
     void File::skip(std::size_t length)
     {
-        read(length);
+        setCursor(getCursor() + length);
     }
 
     bool File::isAtEnd() const
@@ -101,19 +122,5 @@ namespace Bull
     std::size_t File::getSize() const
     {
         return m_impl->getSize();
-    }
-
-    File::File(const String& path, Uint32 mode)
-    {
-        Expect(File::exists(path) || mode != FileOpeningMode_Read, Throw(FileNotFound, "File::File", "The file " + path + " does not exists"))
-
-        m_path = path;
-        m_mode = mode;
-        m_impl = prv::FileImpl::createInstance(m_path, m_mode);
-
-        if(mode & FileOpeningMode_Read)
-        {
-            setCursor(0);
-        }
     }
 }

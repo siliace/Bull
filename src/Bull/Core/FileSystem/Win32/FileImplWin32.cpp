@@ -1,3 +1,4 @@
+#include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/FileSystem/Win32/FileImplWin32.hpp>
 #include <Bull/Core/Support/Win32/DateHelper.hpp>
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
@@ -6,9 +7,9 @@ namespace Bull
 {
     namespace prv
     {
-        bool FileImplWin32::create(const String& name)
+        void FileImplWin32::create(const Path& path)
         {
-            HANDLE handler = CreateFile(name.getBuffer(),
+            HANDLE handler = CreateFile(path.toString().getBuffer(),
                                         GENERIC_READ | GENERIC_WRITE,
                                         FILE_SHARE_READ,
                                         nullptr,
@@ -16,34 +17,44 @@ namespace Bull
                                         FILE_ATTRIBUTE_NORMAL,
                                         nullptr);
 
-            if(handler != INVALID_HANDLE_VALUE)
-            {
-                CloseHandle(handler);
-
-                return true;
-            }
-
-            return false;
+            Expect(
+                    handler != INVALID_HANDLE_VALUE,
+                    Throw(Win32Error, "FileImplWin32::create", "Failed to create file " + path.toString())
+            );
         }
 
-        bool FileImplWin32::exists(const String& name)
+        bool FileImplWin32::exists(const Path& name)
         {
-            DWORD attribs = GetFileAttributes(name.getBuffer());
+            DWORD attribs = GetFileAttributes(name.toString().getBuffer());
 
             return (attribs != INVALID_FILE_ATTRIBUTES &&  !(attribs & FILE_ATTRIBUTE_DIRECTORY));
         }
 
-        bool FileImplWin32::copy(const Path& path, const String& newPath)
+        void FileImplWin32::copy(const Path& path, const Path& newPath)
         {
-            return CopyFile(path.toString().getBuffer(), newPath.getBuffer(), true) == TRUE;
+            Expect(
+                    CopyFile(path.toString().getBuffer(), newPath.toString().getBuffer(), true),
+                    Throw(Win32Error, "FileImplWin32::copy", "Failed to copy file " + path.toString())
+            );
         }
 
-        bool FileImplWin32::remove(const Path& name)
+        void FileImplWin32::rename(const Path& path, const Path& newPath)
         {
-            return DeleteFile(name.toString().getBuffer()) == TRUE;
+            Expect(
+                    MoveFile(path.toString().getBuffer(), newPath.toString().getBuffer()),
+                    Throw(Win32Error, "FileImplWin32::rename", "Failed to rename file " + path.toString())
+            );
         }
 
-        FileImplWin32::FileImplWin32(const String& path, Uint32 mode)
+        void FileImplWin32::remove(const Path& path)
+        {
+            Expect(
+                    DeleteFile(path.toString().getBuffer()),
+                    Throw(Win32Error, "FileImplWin32::remove", "Failed to remove file " + path.toString())
+            );
+        }
+
+        FileImplWin32::FileImplWin32(const Path& path, Uint32 mode)
         {
             DWORD creationMode = 0;
             DWORD openingMode  = 0;
@@ -83,7 +94,7 @@ namespace Bull
                 }
             }
 
-            m_handler = CreateFile(path.getBuffer(),
+            m_handler = CreateFile(path.toString().getBuffer(),
                                    openingMode,
                                    FILE_SHARE_READ,
                                    nullptr,
@@ -91,7 +102,10 @@ namespace Bull
                                    FILE_ATTRIBUTE_NORMAL,
                                    nullptr);
 
-            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "FileImplWin32::FileImplWin32", "Failed to open file " + path));
+            Expect(
+                    m_handler != INVALID_HANDLE_VALUE,
+                    Throw(Win32Error, "FileImplWin32::FileImplWin32", "Failed to open file " + path.toString())
+            );
         }
 
         FileImplWin32::~FileImplWin32()
@@ -216,7 +230,7 @@ namespace Bull
             distance.QuadPart = offset;
 
             Expect(
-                    SetFilePointerEx(m_handler, distance, &position, FILE_CURRENT),
+                    SetFilePointerEx(m_handler, distance, &position, FILE_BEGIN),
                     Throw(Win32Error, "FileImplWin32::setCursor", "Failed to set file cursor")
             );
 

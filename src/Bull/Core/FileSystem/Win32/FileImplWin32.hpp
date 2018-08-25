@@ -12,42 +12,44 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a file
+            /*! \brief Create a File
              *
-             * \param name The name of the file to create
-             *
-             * \return Return true if the file was created successfully, else otherwise
+             * \param path The Path of the file to create
              *
              */
-            static bool create(const String& name);
+            static void create(const Path& name);
 
-            /*! \brief Check if a file exists
+            /*! \brief Tell whether a File exists
              *
-             * \param name The name of the file to check
+             * \param path The Path of the File
              *
-             * \return Return true if the file exists, false otherwise
+             * \return True if the file exists
              *
              */
-            static bool exists(const String& name);
+            static bool exists(const Path& path);
 
-            /*! \brief Copy a file
+            /*! \brief Copy a File
              *
-             * \param path The path (relative or absolute) of the file to copy
-             * \param path The new path (relative or absolute) of the file
-             *
-             * \return Return true if the copy was successfully, false otherwise
+             * \param path    The Path of the file to copy
+             * \param newPath The new Path copied File
              *
              */
-            static bool copy(const Path& path, const String& newPath);
+            static void copy(const Path& path, const Path& newPath);
 
-            /*! \brief Delete a file
+            /*! \brief Rename a File
              *
-             * \param name The name of the file to delete
-             *
-             * \return Return true if the file was deleted successfully, false otherwise
+             * \param path    The Path of the File to rename
+             * \param newPath The new Path of the File
              *
              */
-            static bool remove(const Path& name);
+            static void rename(const Path& path, const Path& newPath);
+
+            /*! \brief Delete a File
+             *
+             * \param path The Path of the File to delete
+             *
+             */
+            static void remove(const Path& path);
 
         public:
 
@@ -57,7 +59,7 @@ namespace Bull
              * \param mode The opening mode of the file
              *
              */
-            FileImplWin32(const String& path, Uint32 mode);
+            FileImplWin32(const Path& path, Uint32 mode);
 
             /*! \brief Destructor
              *

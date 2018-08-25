@@ -1,8 +1,9 @@
 #ifndef BULL_CORE_LOG_FILELOGGER_HPP
 #define BULL_CORE_LOG_FILELOGGER_HPP
 
-#include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Log/AbstractLogger.hpp>
+#include <Bull/Core/IO/TextWriter.hpp>
 
 namespace Bull
 {
@@ -33,7 +34,8 @@ namespace Bull
 
     private:
 
-        File m_file;
+        File       m_file;
+        TextWriter m_writer;
     };
 }
 

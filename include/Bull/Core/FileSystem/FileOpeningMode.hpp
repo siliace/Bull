@@ -10,7 +10,6 @@ namespace Bull
         FileOpeningMode_Exists    = 0x04,
         FileOpeningMode_Truncate  = 0x08,
         FileOpeningMode_Read      = 0x16,
-        FileOpeningMode_ReadWrite = FileOpeningMode_Read | FileOpeningMode_Write,
     };
 }
 

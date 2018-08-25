@@ -4,20 +4,20 @@
 #include <memory>
 
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
+#include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Time/DateTime.hpp>
 
 namespace Bull
 {
-    class Path;
-
     namespace prv
     {
         class FileImpl;
     }
 
-    class BULL_CORE_API File : public InStream, public OutStream
+    class BULL_CORE_API File : public NonCopyable, public InStream, public OutStream
     {
     private:
 
@@ -29,48 +29,59 @@ namespace Bull
 
     public:
 
-        /*! \brief Create a file
+        /*! \brief Create a File
          *
-         * \param name The name of the file to create
+         * \param path The Path of the file to create
          *
          */
-        static void create(const String& name);
+        static void create(const Path& path);
 
-        /*! \brief Check if a file exists
+        /*! \brief Tell whether a File exists
          *
-         * \param name The name of the file to check
+         * \param path The Path of the File
          *
-         * \return Return true if the file exists, false otherwise
+         * \return True if the file exists
          *
          */
-        static bool exists(const String& name);
+        static bool exists(const Path& path);
 
         /*! \brief Copy a File
          *
          * \param path    The Path of the file to copy
          * \param newPath The new Path copied File
          *
-         * \return True if the copy was successfully
-         *
          */
-        static bool copy(const Path& path, const String& newPath);
+        static void copy(const Path& path, const Path& newPath);
 
         /*! \brief Rename a File
          *
-         * \param name    The name of the File to rename
-         * \param newName The new name of the File
+         * \param path    The Path of the File to rename
+         * \param newPath The new Path of the File
          *
          */
-        static void rename(const Path& name, const String& newName);
+        static void rename(const Path& path, const Path& newPath);
 
-        /*! \brief Delete a file
+        /*! \brief Delete a File
          *
-         * \param name The name of the file to delete
+         * \param path The Path of the File to delete
          *
          */
-        static void remove(const Path& name);
+        static void remove(const Path& path);
 
     public:
+
+        /*! \brief Default constructor
+         *
+         */
+        File();
+
+        /*! \brief Constructor
+         *
+         * \param path The Path of the file to open
+         * \param mode The opening mode of the file (read, write or both)
+         *
+         */
+        explicit File(const Path& path, Uint32 mode = FileOpeningMode_Read | FileOpeningMode_Write);
 
         /*! \brief Constructor by movement
          *
@@ -86,12 +97,20 @@ namespace Bull
 
         /*! \brief Basic assignment operator by movement
          *
-         * \param directory The File to move
+         * \param File The File to move
          *
          * \return This
          *
          */
         File& operator=(File&& file) noexcept = default;
+
+        /*! \brief Open the File
+         *
+         * \param path The path of the file to open
+         * \param mode The opening mode of the file (read, write or both)
+         *
+         */
+        void open(const Path& path, Uint32 mode);
 
         /*! \brief Read bytes from the File
          *
@@ -181,7 +200,7 @@ namespace Bull
          * \return Return the path of the file
          *
          */
-        inline const String& getPath() const
+        inline const Path& getPath() const
         {
             return m_path;
         }
@@ -195,19 +214,7 @@ namespace Bull
 
     private:
 
-        friend class Path;
-
-        /*! \brief Constructor
-         *
-         * \param path The path of the file to open
-         * \param mode The opening mode of the file (read, write or both)
-         *
-         */
-        File(const String& path, Uint32 mode);
-
-    private:
-
-        String                         m_path;
+        Path                           m_path;
         Uint32                         m_mode;
         std::unique_ptr<prv::FileImpl> m_impl;
     };

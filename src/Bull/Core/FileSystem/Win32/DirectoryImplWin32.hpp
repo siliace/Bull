@@ -3,7 +3,6 @@
 
 #include <Bull/Core/FileSystem/DirectoryImpl.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
-#include <Bull/Core/Time/Date.hpp>
 
 namespace Bull
 {
@@ -13,32 +12,36 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a directory
+            /*! \brief Create a Directory
              *
-             * \param name The name of the directory to create
-             *
-             * \return Return true if the file was created successfully, else otherwise
+             * \param path The path of the directory to create
              *
              */
-            static bool create(const String& name);
+            static void create(const Path& path);
 
-            /*! \brief Check if a directory exists
+            /*! \brief Tell whether a Directory exists
              *
-             * \param name The name of the directory to check
+             * \param path The path of the Directory to check
              *
-             * \return Return true if the directory exists, false otherwise
+             * \return True if the directory exists
              *
              */
-            static bool exists(const String& name);
+            static bool exists(const Path& path);
 
-            /*! \brief Delete a directory
+            /*! \brief Rename a Directory
              *
-             * \param name The name of the directory to delete
-             *
-             * \return Return true if the directory was deleted successfully, false otherwise
+             * \param path    The Path of the Directory to rename
+             * \param newPath The new Path of the Directory
              *
              */
-            static bool remove(const Path& name);
+            static void rename(const Path& path, const Path& newPath);
+
+            /*! \brief Remove a Directory
+             *
+             * \param path The path of the Directory to remove
+             *
+             */
+            static void remove(const Path& path);
 
         public:
 
@@ -47,7 +50,7 @@ namespace Bull
              * \param path The path of the directory to open
              *
              */
-            explicit DirectoryImplWin32(const String& path);
+            explicit DirectoryImplWin32(const Path& path);
 
             /*! \brief Destructor
              *
@@ -65,7 +68,7 @@ namespace Bull
 
         private:
 
-            String          m_path;
+            Path            m_path;
             WIN32_FIND_DATA m_result;
             HANDLE          m_handler;
         };

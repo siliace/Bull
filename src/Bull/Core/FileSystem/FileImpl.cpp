@@ -3,7 +3,9 @@
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Core/FileSystem/Win32/FileImplWin32.hpp>
-    typedef Bull::prv::FileImplWin32 FileImplType;
+#include "FileImpl.hpp"
+
+typedef Bull::prv::FileImplWin32 FileImplType;
 #else
     #include <Bull/Core/FileSystem/Unix/FileImplUnix.hpp>
     typedef Bull::prv::FileImplUnix FileImplType;
@@ -13,29 +15,34 @@ namespace Bull
 {
     namespace prv
     {
-        std::unique_ptr<FileImpl> FileImpl::createInstance(const String& name, Uint32 mode)
+        std::unique_ptr<FileImpl> FileImpl::createInstance(const Path& path, Uint32 mode)
         {
-            return std::make_unique<FileImplType>(name, mode);
+            return std::make_unique<FileImplType>(path, mode);
         }
 
-        void FileImpl::create(const String& name)
+        void FileImpl::create(const Path& path)
         {
-            FileImplType::create(name);
+            FileImplType::create(path);
         }
 
-        bool FileImpl::exists(const String& name)
+        bool FileImpl::exists(const Path& path)
         {
-            return FileImplType::exists(name);
+            return FileImplType::exists(path);
         }
 
-        bool FileImpl::copy(const Path& path, const String& newPath)
+        void FileImpl::copy(const Path& path, const Path& newPath)
         {
-            return FileImplType::copy(path, newPath);
+            FileImplType::copy(path, newPath);
         }
 
-        void FileImpl::remove(const Path& name)
+        void FileImpl::rename(const Path& path, const Path& newPath)
         {
-            FileImplType::remove(name);
+            FileImplType::rename(path, newPath);
+        }
+
+        void FileImpl::remove(const Path& path)
+        {
+            FileImplType::remove(path);
         }
 
         FileImpl::~FileImpl() = default;

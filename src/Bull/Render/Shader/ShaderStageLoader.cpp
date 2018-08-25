@@ -1,6 +1,5 @@
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/FileSystem/FileImpl.hpp>
 #include <Bull/Core/IO/TextReader.hpp>
 #include <Bull/Core/Memory/MemoryStream.hpp>
 
@@ -10,7 +9,7 @@ namespace Bull
 {
     ShaderStage ShaderStageLoader::loadFromPath(const Path& path, ShaderStageType type) const
     {
-        File file = path.toFile(FileOpeningMode_Read);
+        File file(path, FileOpeningMode_Read);
 
         return loadFromStream(file, type);
     }

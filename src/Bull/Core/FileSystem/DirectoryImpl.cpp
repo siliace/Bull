@@ -12,24 +12,29 @@ namespace Bull
 {
     namespace prv
     {
-        std::unique_ptr<DirectoryImpl> DirectoryImpl::createInstance(const String& name)
+        std::unique_ptr<DirectoryImpl> DirectoryImpl::createInstance(const Path& path)
         {
-            return std::make_unique<DirectoryImplType>(name);
+            return std::make_unique<DirectoryImplType>(path);
         }
 
-        bool DirectoryImpl::create(const String& name)
+        void DirectoryImpl::create(const Path& path)
         {
-            return DirectoryImplType::create(name);
+            DirectoryImplType::create(path);
         }
 
-        bool DirectoryImpl::exists(const String& name)
+        bool DirectoryImpl::exists(const Path& path)
         {
-            return DirectoryImplType::exists(name);
+            return DirectoryImplType::exists(path);
         }
 
-        bool DirectoryImpl::remove(const Path& name)
+        void DirectoryImpl::rename(const Path& path, const Path& newPath)
         {
-            return DirectoryImplType::remove(name);
+            DirectoryImplType::rename(path, newPath);
+        }
+
+        void DirectoryImpl::remove(const Path& path)
+        {
+            DirectoryImplType::remove(path);
         }
 
         DirectoryImpl::~DirectoryImpl() = default;

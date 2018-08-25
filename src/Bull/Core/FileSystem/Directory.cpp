@@ -1,85 +1,73 @@
 #include <cstdio>
 
 #include <Bull/Core/FileSystem/Directory.hpp>
-#include <Bull/Core/FileSystem/DirectoryImpl.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/FileSystem/Path.hpp>
+#include <Bull/Core/FileSystem/DirectoryImpl.hpp>
 
 namespace Bull
 {
-    bool Directory::create(const String& path)
+    void Directory::create(const Path& path)
     {
-        return prv::DirectoryImpl::create(path);
+        prv::DirectoryImpl::create(path);
     }
 
-    bool Directory::exists(const String& path)
+    bool Directory::exists(const Path& path)
     {
         return prv::DirectoryImpl::exists(path);
     }
 
-    bool Directory::copy(const Path& path, const String& newPath)
+    void Directory::copy(const Path& path, const Path& newPath)
     {
-        bool success = true;
-        Directory target = path.toDirectory();
+        Directory target(path);
 
         if(!Directory::exists(newPath))
         {
             Directory::create(newPath);
         }
 
-        for(const Path& entity : target.getContent())
+        for(const Path& p : target.getContent())
         {
-            if(entity.toString() != "." && entity.toString() != "..")
+            if(p.isDirectory())
             {
-                if(entity.isDirectory())
-                {
-                    success &= Directory::copy(Path(path.toString() + Path::Separator + entity.toString()), newPath + Path::Separator + entity.toString());
-                }
-                else
-                {
-                    success &= File::copy(Path(path.toString() + Path::Separator + entity.toString()), newPath + Path::Separator + entity.toString());
-                }
+                Directory::copy(path.resolve(p.toString()), newPath.resolve(p.toString()));
+            }
+            else
+            {
+                File::copy(path.resolve(p.toString()), newPath.resolve(p.toString()));
             }
         }
-
-        return success;
     }
 
-    bool Directory::rename(const Path& path, const String& newPath)
+    void Directory::rename(const Path& path, const Path& newPath)
     {
-        if(exists(path.toString()) && !exists(newPath))
-        {
-            return std::rename(path.toString().getBuffer(), newPath.getBuffer()) == 0;
-        }
-
-        return false;
+        prv::DirectoryImpl::rename(path, newPath);
     }
 
-    bool Directory::remove(const Path& path)
+    void Directory::remove(const Path& path)
     {
-        return prv::DirectoryImpl::remove(path);
+        prv::DirectoryImpl::remove(path);
+    }
+
+    Directory::Directory(const Path& path)
+    {
+        open(path);
+    }
+
+    Directory::~Directory() = default;
+
+    void Directory::open(const Path& path)
+    {
+        m_path = path;
+        m_impl = prv::DirectoryImpl::createInstance(path);
     }
 
     std::vector<Path> Directory::getContent(Uint32 flags)
     {
-        std::vector<Path> entities;
-
-        if(m_impl)
-        {
-            entities = m_impl->getContent(flags);
-        }
-
-        return entities;
+        return m_impl->getContent(flags);
     }
 
-    const String& Directory::getPath() const
+    const Path& Directory::getPath() const
     {
         return m_path;
-    }
-
-    Directory::Directory(const String& path)
-    {
-        m_path = path;
-        m_impl = prv::DirectoryImpl::createInstance(path);
     }
 }

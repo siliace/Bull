@@ -1,3 +1,4 @@
+#include <Bull/Core/FileSystem/DirectorySearchFlag.hpp>
 #include <Bull/Core/FileSystem/Win32/DirectoryImplWin32.hpp>
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
 
@@ -5,36 +6,50 @@ namespace Bull
 {
     namespace prv
     {
-        bool DirectoryImplWin32::create(const String& name)
+        void DirectoryImplWin32::create(const Path& path)
         {
-            return CreateDirectory(name.getBuffer(), nullptr) == TRUE;
+            Expect(
+                    CreateDirectory(path.toString().getBuffer(), nullptr),
+                    Throw(Win32Error, "DirectoryImplWin32::create", "Failed to create the directory " + path.toString())
+            );
         }
 
-        bool DirectoryImplWin32::exists(const String& name)
+        bool DirectoryImplWin32::exists(const Path& path)
         {
-            DWORD attribs = GetFileAttributes(name.getBuffer());
+            DWORD attribs = GetFileAttributes(path.toString().getBuffer());
 
-            if(attribs == INVALID_FILE_ATTRIBUTES)
-            {
-                return  false;
-            }
+            Expect(
+                    attribs != INVALID_FILE_ATTRIBUTES,
+                    Throw(Win32Error, "DirectoryImplWin32::exists", "Failed to get information of the directory " + path.toString())
+            );
 
             return attribs & FILE_ATTRIBUTE_DIRECTORY;
         }
 
-        bool DirectoryImplWin32::remove(const Path& name)
+        void DirectoryImplWin32::rename(const Path& path, const Path& newPath)
         {
-            return RemoveDirectory(name.toString().getBuffer()) == TRUE;
+            Expect(
+                MoveFile(path.toString().getBuffer(), newPath.toString().getBuffer()),
+                Throw(Win32Error, "DirectoryImplWin32::rename", "Failed to rename the directory " + path.toString())
+            );
         }
 
-        DirectoryImplWin32::DirectoryImplWin32(const String& path) :
+        void DirectoryImplWin32::remove(const Path& path)
+        {
+            Expect(
+                    RemoveDirectory(path.toString().getBuffer()),
+                    Throw(Win32Error, "DirectoryImplWin32::remove", "Failed to remove the directory " + path.toString())
+            );
+        }
+
+        DirectoryImplWin32::DirectoryImplWin32(const Path& path) :
             m_path(path)
         {
-            String base = m_path + "\\*";
+            String base = m_path.toString() + "\\*";
 
-            m_handler = FindFirstFile(path.getBuffer(), &m_result);
+            m_handler = FindFirstFile(base.getBuffer(), &m_result);
 
-            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "DirectoryImplWin32::DirectoryImplWin32", "Failed to open directory " + m_path));
+            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "DirectoryImplWin32::DirectoryImplWin32", "Failed to open directory " + m_path.toString()));
         }
 
         DirectoryImplWin32::~DirectoryImplWin32()
@@ -48,11 +63,11 @@ namespace Bull
 
             do
             {
-                Path p(m_path + "/" + m_result.cFileName);
+                String fileName = m_result.cFileName;
 
-                if((flags & (DirectorySearchFlag_Directories) && p.isDirectory()) || (flags & (DirectorySearchFlag_Files) && p.isFile()))
+                if(fileName != "." && fileName != "..")
                 {
-                    content.push_back(p);
+                    content.push_back(m_path.resolve(m_result.cFileName));
                 }
             }while(FindNextFile(m_handler, &m_result));
 
