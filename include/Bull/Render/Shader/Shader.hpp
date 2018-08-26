@@ -48,7 +48,7 @@ namespace Bull
 
         /*! \brief Basic assignment operator by movement
          *
-         * \param directory The Shader to move
+         * \param right The Shader to move
          *
          * \return This
          *
