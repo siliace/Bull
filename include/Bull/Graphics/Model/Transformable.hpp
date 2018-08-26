@@ -18,14 +18,28 @@ namespace Bull
          */
         Transformable();
 
-        /*! \brief Scale the Transformable
+        /*! \brief Constructor by movement
          *
-         * \param scale The scaling factor
+         * \param right The Transformable to move
+         *
+         */
+        Transformable(Transformable&& right) = default;
+
+        /*! \brief Basic assignment operator by movement
+         *
+         * \param right The Transformable to move
          *
          * \return This
          *
          */
-        Transformable& scale(const Vector3F& scale);
+        Transformable& operator=(Transformable&& right) = default;
+
+        /*! \brief Scale the Transformable
+         *
+         * \param scale The scaling factor
+         *
+         */
+        void scale(const Vector3F& scale);
 
         /*! \brief Set the scale of the Transformable
          *
@@ -51,10 +65,8 @@ namespace Bull
          *
          * \param rotation The rotation
          *
-         * \return This
-         *
          */
-        Transformable& rotate(const EulerAnglesF& rotation);
+        void rotate(const EulerAnglesF& rotation);
 
         /*! \brief Set the rotation of the Transformable
          *
@@ -80,10 +92,8 @@ namespace Bull
          *
          * \param translation The translation
          *
-         * \return This
-         *
          */
-        Transformable& move(const Vector3F& translation);
+        void move(const Vector3F& translation);
 
         /*! \brief Set the translation of the Transformable
          *

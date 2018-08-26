@@ -52,7 +52,7 @@ Bull::Shader loadShaderFromPath(const Bull::Path& path)
 void moveRandom(Cube& cube)
 {
     cube.rotate(Bull::EulerAnglesF::onX(Bull::AngleF::degree(random.number(0.f, 360.f))));
-    cube.move(Bull::Vector3F(random.number(-2.f, 2.f), random.number(-2.f, 2.f), random.number(-6.f, 6.f)));
+    cube.move(Bull::Vector3F(random.number(-20.f, 20.f), random.number(-20.f, 20.f), random.number(-20.f, 20.f)));
     cube.scale(Bull::Vector3F::Unit * random.number(1.f, 4.f));
 }
 
