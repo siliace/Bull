@@ -112,7 +112,12 @@ vec4 pointLight(PointLight light)
 
     float attenuation = getAttenuation(light.constant, light.linear, light.quadratic);
 
-    return (getAmbient(light.ambient) + getDiffuse(direction, light.diffuse) + getSpecular(direction, light.specular)) * attenuation;
+    vec4 emission = getEmission();
+    vec4 ambient = getAmbient(light.ambient);
+    vec4 diffuse = getDiffuse(direction, light.diffuse);
+    vec4 specular = getSpecular(direction, light.specular);
+
+    return (ambient + diffuse + specular + emission) * attenuation;
 }
 
 vec4 spotLight(SpotLight light)
@@ -124,11 +129,12 @@ vec4 spotLight(SpotLight light)
     float epsilon   = light.innerCutOff - light.outerCutOff;
     float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.f, 1.f);
 
+    vec4 emission = getEmission();
     vec4 ambient = getAmbient(light.ambient);
     vec4 diffuse = getDiffuse(light.direction, light.diffuse) * intensity;
     vec4 specular = getSpecular(light.direction, light.specular) * intensity;
 
-    return (ambient + diffuse + specular) * attenuation;
+    return (ambient + diffuse + specular + emission) * attenuation;
 }
 
 void main()

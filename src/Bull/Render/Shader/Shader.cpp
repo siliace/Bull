@@ -82,7 +82,14 @@ namespace Bull
     {
         int location = getUniformLocation(name);
 
+        #if defined BULL_SHADER_UNIFORM_STRICT
         Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        #else
+        if(location == -1)
+        {
+            return;
+        }
+        #endif
 
         if(gl::programUniform1i)
         {
@@ -100,7 +107,14 @@ namespace Bull
     {
         int location = getUniformLocation(name);
 
+        #if defined BULL_SHADER_UNIFORM_STRICT
         Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        #else
+        if(location == -1)
+        {
+            return;
+        }
+        #endif
 
         if(gl::programUniform1i)
         {
@@ -118,7 +132,14 @@ namespace Bull
     {
         int location = getUniformLocation(name);
 
+        #if defined BULL_SHADER_UNIFORM_STRICT
         Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        #else
+        if(location == -1)
+        {
+            return;
+        }
+        #endif
 
         if(gl::programUniform1i)
         {
@@ -136,7 +157,14 @@ namespace Bull
     {
         int location = getUniformLocation(name);
 
+        #if defined BULL_SHADER_UNIFORM_STRICT
         Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        #else
+        if(location == -1)
+        {
+            return;
+        }
+        #endif
 
         if(gl::programUniform4f)
         {
@@ -162,7 +190,14 @@ namespace Bull
     {
         int location = getUniformLocation(name);
 
+        #if defined BULL_SHADER_UNIFORM_STRICT
         Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        #else
+        if(location == -1)
+        {
+            return;
+        }
+        #endif
 
         if(gl::programUniform2f)
         {
@@ -180,7 +215,14 @@ namespace Bull
     {
         int location = getUniformLocation(name);
 
+        #if defined BULL_SHADER_UNIFORM_STRICT
         Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        #else
+        if(location == -1)
+        {
+            return;
+        }
+        #endif
 
         if(gl::programUniform3f)
         {
@@ -198,7 +240,14 @@ namespace Bull
     {
         int location = getUniformLocation(name);
 
+        #if defined BULL_SHADER_UNIFORM_STRICT
         Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        #else
+        if(location == -1)
+        {
+            return;
+        }
+        #endif
 
         if(gl::programUniform4f)
         {
@@ -216,7 +265,14 @@ namespace Bull
     {
         int location = getUniformLocation(name);
 
+        #if defined BULL_SHADER_UNIFORM_STRICT
         Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        #else
+        if(location == -1)
+        {
+            return;
+        }
+        #endif
 
         if(gl::programUniformMatrix4fv)
         {

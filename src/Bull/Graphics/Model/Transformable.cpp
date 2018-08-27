@@ -25,10 +25,10 @@ namespace Bull
 
     Matrix4F Transformable::getModelMatrix() const
     {
-        Matrix4F rotation = Matrix4F::makeRotation(QuaternionF(EulerAnglesF::normalize(m_rotation)));
         Matrix4F scaling = Matrix4F::makeScale(m_scale);
         Matrix4F translation = Matrix4F::makeTranslation(m_translation);
+        Matrix4F rotation = Matrix4F::makeRotation(QuaternionF(EulerAnglesF::normalize(m_rotation)));
 
-        return scaling * rotation * translation;
+        return translation * rotation * scaling;
     }
 }

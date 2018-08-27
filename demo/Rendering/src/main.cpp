@@ -52,8 +52,7 @@ Bull::Shader loadShaderFromPath(const Bull::Path& path)
 void moveRandom(Cube& cube)
 {
     cube.rotate(Bull::EulerAnglesF::onX(Bull::AngleF::degree(random.number(0.f, 360.f))));
-    cube.move(Bull::Vector3F(random.number(-20.f, 20.f), random.number(-20.f, 20.f), random.number(-20.f, 20.f)));
-    cube.scale(Bull::Vector3F::Unit * random.number(1.f, 4.f));
+    cube.move(Bull::Vector3F(random.number(-5.f, 5.f), random.number(-5.f, 5.f), random.number(-5.f, 5.f)));
 }
 
 int main()
@@ -65,7 +64,7 @@ int main()
     Bull::Vector3F forward = Bull::Vector3F::Backward;
     Bull::Vector3F position = Bull::Vector3F::UnitZ * 3.f;
 
-    Bull::DirectionalLight dl(Bull::Vector3F::Down, Bull::Color::Blue);
+    Bull::DirectionalLight dl(Bull::Vector3F::Down);
     Bull::SpotLight sp(Bull::Vector3F::UnitZ * 10.f, Bull::Vector3F::Backward);
 
     Bull::RenderWindow window(Bull::VideoMode(800, 600), "Demonstration rendering");
