@@ -1,11 +1,11 @@
 #ifndef BULL_CORE_MEMORY_MEMORYSTREAM_HPP
 #define BULL_CORE_MEMORY_MEMORYSTREAM_HPP
 
-#include <Bull/Core/IO/InStream.hpp>
+#include <Bull/Core/IO/CursorAwareInStream.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API MemoryStream : public InStream
+    class BULL_CORE_API MemoryStream : public CursorAwareInStream
     {
     public:
 
@@ -41,28 +41,12 @@ namespace Bull
          */
         ByteArray read(std::size_t length) override;
 
-        /*! \brief Skip bytes in the MemoryStream
-         *
-         * \param length The number of bytes to skip
-         *
-         */
-        void skip(std::size_t length) override;
-
         /*! \brief Check if the stream is open
          *
          * \return True is the stream is open
          *
          */
         bool isOpen() const;
-
-        /*! \brief Tell whether the MemoryStream is at its end
-         *
-         * An MemoryStream is considered at its end when there is not left to read
-         *
-         * \return True if the MemoryStream is at its end
-         *
-         */
-        bool isAtEnd() const override;
 
         /*! \brief Close the stream
          *
@@ -83,14 +67,14 @@ namespace Bull
          * \return Return the actual position
          *
          */
-        std::size_t setCursor(std::size_t position);
+        std::size_t setCursor(std::size_t position) override;
 
         /*! \brief Get the reading position in the stream
          *
          * \return Return the current position
          *
          */
-        std::size_t getCursor() const;
+        std::size_t getCursor() const override;
 
     private:
 

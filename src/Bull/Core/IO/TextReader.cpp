@@ -1,7 +1,4 @@
-#include <numeric>
-
 #include <Bull/Core/IO/TextReader.hpp>
-#include <Bull/Core/Utility/Character.hpp>
 
 namespace Bull
 {

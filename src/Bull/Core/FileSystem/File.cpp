@@ -74,16 +74,6 @@ namespace Bull
         return m_impl->write(bytes);
     }
 
-    void File::skip(std::size_t length)
-    {
-        setCursor(getCursor() + length);
-    }
-
-    bool File::isAtEnd() const
-    {
-        return getCursor() >= getSize();
-    }
-
     void File::flush()
     {
         m_impl->flush();

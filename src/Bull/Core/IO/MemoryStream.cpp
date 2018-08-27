@@ -36,19 +36,9 @@ namespace Bull
         return bytes;
     }
 
-    void MemoryStream::skip(std::size_t length)
-    {
-        m_cursor += length;
-    }
-
     bool MemoryStream::isOpen() const
     {
         return m_data != nullptr;
-    }
-
-    bool MemoryStream::isAtEnd() const
-    {
-        return m_cursor >= m_size;
     }
 
     void MemoryStream::close()

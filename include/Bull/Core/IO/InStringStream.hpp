@@ -1,12 +1,12 @@
 #ifndef BULL_CORE_IO_INSTRINGSTREAM_HPP
 #define BULL_CORE_IO_INSTRINGSTREAM_HPP
 
-#include <Bull/Core/IO/InStream.hpp>
+#include <Bull/Core/IO/CursorAwareInStream.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API InStringStream : public InStream
+    class BULL_CORE_API InStringStream : public CursorAwareInStream
     {
     public:
 
@@ -26,13 +26,6 @@ namespace Bull
          */
         ByteArray read(std::size_t length) override;
 
-        /*! \brief Skip bytes in the InStringStream
-         *
-         * \param length The number of bytes to skip
-         *
-         */
-        void skip(std::size_t length) override;
-
         /*! \brief Get the size of the InStringStream
          *
          * \return The size of the InStringStream
@@ -40,14 +33,24 @@ namespace Bull
          */
         size_t getSize() const override;
 
-        /*! \brief Tell whether the InStringStream is at its end
+        /*! \brief Set the reading position in the InStringStream
          *
-         * An InStream is considered at its end when there is not left to read
+         * \param position The position to seek to
          *
-         * \return True if the InStringStream is at its end
+         * \return The actual position of the cursor
          *
          */
-        bool isAtEnd() const override;
+        std::size_t setCursor(std::size_t cursor) override;
+
+        /*! \brief Get the position of the cursor in the InStringStream
+         *
+         * \return The position of the cursor in the InStringStream
+         *
+         */
+        inline std::size_t getCursor() const override
+        {
+            return m_cursor;
+        }
 
     private:
 

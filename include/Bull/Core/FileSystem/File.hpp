@@ -5,7 +5,7 @@
 
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/IO/InStream.hpp>
+#include <Bull/Core/IO/CursorAwareInStream.hpp>
 #include <Bull/Core/IO/OutStream.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 #include <Bull/Core/Time/DateTime.hpp>
@@ -17,7 +17,7 @@ namespace Bull
         class FileImpl;
     }
 
-    class BULL_CORE_API File : public NonCopyable, public InStream, public OutStream
+    class BULL_CORE_API File : public NonCopyable, public CursorAwareInStream, public OutStream
     {
     private:
 
@@ -130,20 +130,6 @@ namespace Bull
          */
         std::size_t write(const ByteArray& bytes) override;
 
-        /*! \brief Skip bytes in the File
-         *
-         * \param length The number of bytes to skip
-         *
-         */
-        void skip(std::size_t length) override;
-
-        /*! \brief Tell whether the File is at its end
-         *
-         * \return True if the File is at the end
-         *
-         */
-        bool isAtEnd() const override;
-
         /*! \brief Flush the File
          *
          */
@@ -175,7 +161,7 @@ namespace Bull
          * \return Return the position of the cursor in the file
          *
          */
-        std::size_t getCursor() const;
+        std::size_t getCursor() const override;
 
         /*! \brief Move the reading position in the file
          *
@@ -193,7 +179,7 @@ namespace Bull
          * \return Return the actual position of the cursor
          *
          */
-        std::size_t setCursor(std::size_t position);
+        std::size_t setCursor(std::size_t position) override;
 
         /*! \brief Get the path of the file
          *
