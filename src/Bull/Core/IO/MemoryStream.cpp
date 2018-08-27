@@ -2,7 +2,7 @@
 #include <cstring>
 
 #include <Bull/Core/Exception/InvalidParameter.hpp>
-#include <Bull/Core/Memory/MemoryStream.hpp>
+#include <Bull/Core/IO/MemoryStream.hpp>
 
 namespace Bull
 {

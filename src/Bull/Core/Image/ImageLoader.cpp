@@ -3,7 +3,7 @@
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Image/ImageLoader.hpp>
-#include <Bull/Core/Memory/MemoryStream.hpp>
+#include <Bull/Core/IO/MemoryStream.hpp>
 
 namespace Bull
 {

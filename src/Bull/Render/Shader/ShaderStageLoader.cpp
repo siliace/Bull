@@ -1,7 +1,7 @@
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/IO/TextReader.hpp>
-#include <Bull/Core/Memory/MemoryStream.hpp>
+#include <Bull/Core/IO/MemoryStream.hpp>
 
 #include <Bull/Render/Shader/ShaderStageLoader.hpp>
 
