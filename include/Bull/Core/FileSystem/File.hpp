@@ -107,10 +107,10 @@ namespace Bull
         /*! \brief Open the File
          *
          * \param path The path of the file to open
-         * \param mode The opening mode of the file (read, write or both)
+         * \param mode The opening mode of the file
          *
          */
-        void open(const Path& path, Uint32 mode);
+        void open(const Path& path, Uint32 mode = FileOpeningMode_Read | FileOpeningMode_Write);
 
         /*! \brief Read bytes from the File
          *
