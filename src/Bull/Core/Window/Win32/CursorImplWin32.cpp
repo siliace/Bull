@@ -92,7 +92,7 @@ namespace Bull
                 Throw(InternalError, "CursorImplWin32::create", "Failed to create color bitmaps");
             }
 
-            std::memcpy(bitmap, cursor.getPixels().data(), size.width * size.height * 4);
+            std::memcpy(bitmap, cursor.getPixels().getBuffer(), size.width * size.height * 4);
 
             /// Create a dummy mask required in the ICONINFO by CreateIconIndirect
             HBITMAP mask = CreateBitmap(size.width, size.height, 1, 1, nullptr);

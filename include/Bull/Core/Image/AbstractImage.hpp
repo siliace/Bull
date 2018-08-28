@@ -3,12 +3,12 @@
 
 #include <vector>
 
-#include <Bull/Core/Assets/Asset.hpp>
+#include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/Utility/Size.hpp>
 
 namespace Bull
 {
-    struct BULL_CORE_API AbstractImage : public Asset
+    struct BULL_CORE_API AbstractImage
     {
         /*! \brief Destructor
          *
@@ -28,14 +28,21 @@ namespace Bull
          * \param size   The size of the Image
          *
          */
-        virtual void create(const std::vector<Uint8>& pixels, const Size& size) = 0;
+        virtual void create(const ByteArray& pixels, const Size& size) = 0;
 
         /*! \brief Get the size of the AbstractImage
          *
          * \return The size
          *
          */
-        virtual const Size& getSize() const = 0;
+        virtual Size getSize() const = 0;
+
+        /*! \brief
+         *
+         * \return
+         *
+         */
+        virtual ByteArray getPixels() const = 0;
     };
 }
 

@@ -25,7 +25,6 @@ namespace Bull
 
     Texture::Texture() :
         m_id(0),
-        m_size(0, 0),
         m_isSmooth(false),
         m_isRepeated(false)
     {
@@ -35,7 +34,6 @@ namespace Bull
     Texture::Texture(Texture&& right) noexcept
     {
         std::swap(m_id, right.m_id);
-        std::swap(m_size, right.m_size);
         std::swap(m_isSmooth, right.m_isSmooth);
         std::swap(m_isRepeated, right.m_isRepeated);
     }
@@ -51,7 +49,6 @@ namespace Bull
     Texture& Texture::operator=(Texture&& right) noexcept
     {
         std::swap(m_id, right.m_id);
-        std::swap(m_size, right.m_size);
         std::swap(m_isSmooth, right.m_isSmooth);
         std::swap(m_isRepeated, right.m_isRepeated);
 
@@ -76,25 +73,23 @@ namespace Bull
             Expect(m_id, Throw(InternalError, "Texture::Texture", "Failed to create the texture"));
         }
 
-        m_size = size;
-
         gl::bindTexture(GL_TEXTURE_2D, m_id);
-        gl::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.width , m_size.height , 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+        gl::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.width , size.height , 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
     }
 
-    void Texture::create(const std::vector<Uint8>& pixels, const Size& size)
+    void Texture::create(const ByteArray& pixels, const Size& size)
     {
         create(size);
 
         gl::bindTexture(GL_TEXTURE_2D, m_id);
 
-        for(unsigned int i = 0; i < m_size.height ; i++)
+        for(unsigned int i = 0; i < size.height ; i++)
         {
-            gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, m_size.width , 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[m_size.width * (m_size.height - i - 1) * 4]);
+            gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, size.width , 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[size.width * (size.height - i - 1) * 4]);
         }
 
         gl::generateMipmap(GL_TEXTURE_2D);
@@ -145,20 +140,28 @@ namespace Bull
 
     Image Texture::getImage() const
     {
-        Image image;
-        std::vector<Uint8> pixels(m_size.width * m_size.height * 4);
+        return Image(getPixels(), getSize());
+    }
+
+    Size Texture::getSize() const
+    {
+        Size size;
+
+        gl::getTexParameteriv(m_id, GL_TEXTURE_WIDTH, &size.width);
+        gl::getTexParameteriv(m_id, GL_TEXTURE_WIDTH, &size.height);
+
+        return size;
+    }
+
+    ByteArray Texture::getPixels() const
+    {
+        Size size = getSize();
+        ByteArray pixels(size.width * size.height * 4);
 
         bind();
 
         gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);
 
-        image.create(pixels, m_size);
-
-        return image;
-    }
-
-    const Size& Texture::getSize() const
-    {
-        return m_size;
+        return pixels;
     }
 }

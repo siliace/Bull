@@ -3,15 +3,25 @@
 
 namespace Bull
 {
+    Image::Image(const Size& size)
+    {
+        create(size);
+    }
+
+    Image::Image(const ByteArray& pixels, const Size& size)
+    {
+        create(pixels, size);
+    }
+
     void Image::create(const Size& size)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Image::create", "Invalid image size"));
 
         m_size   = size;
-        m_pixels = std::vector<Uint8>(m_size.width * m_size.height * 4);
+        m_pixels = ByteArray(m_size.width * m_size.height * 4);
     }
 
-    void Image::create(const std::vector<Uint8>& pixels, const Size& size)
+    void Image::create(const ByteArray& pixels, const Size& size)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Image::create", "Invalid image size"));
 
@@ -20,7 +30,7 @@ namespace Bull
         m_size   = size;
         m_pixels = pixels;
 
-        if(m_pixels.capacity() != pixelsCount)
+        if(m_pixels.getCapacity() != pixelsCount)
         {
             m_pixels.resize(pixelsCount);
         }
@@ -28,28 +38,26 @@ namespace Bull
 
     bool Image::isLoaded() const
     {
-        return !m_pixels.empty();
+        return !m_pixels.isEmpty();
     }
 
-    Image& Image::fill(const Color& color)
+    void Image::fill(const Color& color)
     {
-        for(std::size_t i = 0; i < m_pixels.capacity() / 4; i++)
+        for(std::size_t i = 0; i < m_pixels.getCapacity() / 4; i++)
         {
             m_pixels[i * 4 + 0] = color.red;
             m_pixels[i * 4 + 1] = color.green;
             m_pixels[i * 4 + 2] = color.blue;
             m_pixels[i * 4 + 3] = color.alpha;
         }
-
-        return (*this);
     }
 
-    const Size& Image::getSize() const
+    Size Image::getSize() const
     {
         return m_size;
     }
 
-    const std::vector<Uint8>& Image::getPixels() const
+    ByteArray Image::getPixels() const
     {
         return m_pixels;
     }

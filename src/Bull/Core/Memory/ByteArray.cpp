@@ -42,6 +42,11 @@ namespace Bull
         std::memcpy(&m_array[offset], data, size);
     }
 
+    bool ByteArray::isEmpty() const
+    {
+        return getCapacity() == 0;
+    }
+
     void ByteArray::resize(std::size_t length)
     {
         m_array.resize(length);

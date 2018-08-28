@@ -1,6 +1,7 @@
 #ifndef BULL_RENDER_TEXTURE_TEXTURE_HPP
 #define BULL_RENDER_TEXTURE_TEXTURE_HPP
 
+#include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Image/Image.hpp>
 
 #include <Bull/Math/Polygon/Rectangle.hpp>
@@ -10,7 +11,7 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API Texture : public ContextResource, public AbstractImage
+    class BULL_RENDER_API Texture : public ContextResource, public AbstractImage, public Asset
     {
     public:
 
@@ -78,7 +79,7 @@ namespace Bull
          * \param size   The size of the Texture
          *
          */
-        void create(const std::vector<Uint8>& pixels, const Size& size) override;
+        void create(const ByteArray& pixels, const Size& size) override;
 
         /*! \brief Tell whether an Asset is loaded
          *
@@ -132,12 +133,13 @@ namespace Bull
          * \return The size
          *
          */
-        const Size& getSize() const override;
+        Size getSize() const override;
+
+        ByteArray getPixels() const override;
 
     private:
 
         unsigned int m_id;
-        Size         m_size;
         bool         m_isSmooth;
         bool         m_isRepeated;
     };

@@ -1,12 +1,13 @@
 #ifndef BULL_CORE_IMAGE_IMAGE_HPP
 #define BULL_CORE_IMAGE_IMAGE_HPP
 
+#include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Image/AbstractImage.hpp>
 #include <Bull/Core/Utility/Color.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API Image : public AbstractImage
+    class BULL_CORE_API Image : public AbstractImage, public Asset
     {
     public:
 
@@ -14,6 +15,21 @@ namespace Bull
          *
          */
         Image() = default;
+
+        /*! \brief Constructor
+         *
+         * \param size The size of the Image
+         *
+         */
+        explicit Image(const Size& size);
+
+        /*! \brief Constructor
+         *
+         * \param pixels Pixels of the Image
+         * \param size   The size of the Image
+         *
+         */
+        Image(const ByteArray& pixels, const Size& size);
 
         /*! \brief Create the Image
          *
@@ -28,7 +44,7 @@ namespace Bull
          * \param size   The size of the Image
          *
          */
-        void create(const std::vector<Uint8>& pixels, const Size& size) override;
+        void create(const ByteArray& pixels, const Size& size) override;
 
         /*! \brief Tell whether an Image is loaded
          *
@@ -41,29 +57,27 @@ namespace Bull
          *
          * \param color The Color
          *
-         * \return This
-         *
          */
-        Image& fill(const Color& color);
-
-        /*! \brief Get pixels of the Image
-         *
-         * \return The pixels
-         *
-         */
-        const std::vector<Uint8>& getPixels() const;
+        void fill(const Color& color);
 
         /*! \brief Get the size of the Image
          *
          * \return The size
          *
          */
-        const Size& getSize() const override;
+        Size getSize() const override;
+
+        /*! \brief Get pixels of the Image
+         *
+         * \return The pixels
+         *
+         */
+        ByteArray getPixels() const override;
 
     private:
 
         Size m_size;
-        std::vector<Uint8> m_pixels;
+        ByteArray m_pixels;
     };
 }
 

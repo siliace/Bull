@@ -470,14 +470,15 @@ namespace Bull
 
         void WindowImplWin32::setIcon(const Image& icon)
         {
-            std::vector<Uint8> pixels(icon.getSize().width * icon.getSize().height * 4);
+            ByteArray iconPixels = icon.getPixels();
+            ByteArray pixels(iconPixels.getCapacity());
 
-            for(std::size_t i = 0; i < pixels.capacity() / 4; i += 4)
+            for(std::size_t i = 0; i < pixels.getCapacity() / 4; i += 4)
             {
-                pixels.at(i * 4 + 0) = icon.getPixels().at(i * 4 + 2);
-                pixels.at(i * 4 + 1) = icon.getPixels().at(i * 4 + 1);
-                pixels.at(i * 4 + 2) = icon.getPixels().at(i * 4 + 0);
-                pixels.at(i * 4 + 3) = icon.getPixels().at(i * 4 + 3);
+                pixels[i * 4 + 0] = iconPixels[i * 4 + 2];
+                pixels[i * 4 + 1] = iconPixels[i * 4 + 1];
+                pixels[i * 4 + 2] = iconPixels[i * 4 + 0];
+                pixels[i * 4 + 3] = iconPixels[i * 4 + 3];
             }
 
             if(m_icon)
@@ -485,7 +486,7 @@ namespace Bull
                 DestroyIcon(m_icon);
             }
 
-            m_icon = CreateIcon(instance, icon.getSize().width, icon.getSize().height, 1, 32, nullptr, pixels.data());
+            m_icon = CreateIcon(instance, icon.getSize().width, icon.getSize().height, 1, 32, nullptr, pixels.getBuffer());
 
             Expect(m_icon, Throw(Win32Error, "WindowImplWin32::setIcon", "Failed to set window's icon"));
 

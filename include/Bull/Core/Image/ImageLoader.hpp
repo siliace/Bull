@@ -118,18 +118,6 @@ namespace Bull
          */
         String getErrorMessage() const;
 
-        /*! \brief Create an Image from a buffer of pixels
-         *
-         * \param buffer   The buffer that contains the pixels of the image
-         * \param width    The width in pixel of the image
-         * \param height   The height in pixel of the image
-         * \param channels The number of channels per pixel
-         *
-         * \return The created Image
-         *
-         */
-        Image createImage(const unsigned char* buffer, int width, int height, int channels) const;
-
     private:
 
         mutable std::mutex m_mutex;

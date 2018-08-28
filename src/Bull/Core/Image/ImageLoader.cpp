@@ -75,7 +75,7 @@ namespace Bull
 
         Expect(buffer, Throw(InternalError, "ImageLoader::loadFromStream", "Failed to load image: " + getErrorMessage()));
 
-        image = createImage(buffer, width, height, channels);
+        image.create(ByteArray::memoryCopy(buffer, width * height * channels), Size(width, height));
 
         stbi_image_free(buffer);
 
@@ -94,19 +94,5 @@ namespace Bull
         std::lock_guard<std::mutex> lock(m_mutex);
 
         return stbi_failure_reason();
-    }
-
-    Image ImageLoader::createImage(const unsigned char* buffer, int width, int height, int channels) const
-    {
-        Image image;
-        std::vector<Uint8> pixels;
-
-        pixels.resize(width * height * channels, 0);
-
-        std::memcpy(&pixels[0], buffer, pixels.capacity());
-
-        image.create(pixels, Size(width, height));
-
-        return image;
     }
 }

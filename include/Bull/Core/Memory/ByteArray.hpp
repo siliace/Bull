@@ -63,6 +63,13 @@ namespace Bull
          */
         void fill(const void* data, std::size_t size, std::size_t offset) override;
 
+        /*! \brief Tell whether the ByteArray is empty (i.e getCapacity == 0)
+         *
+         * \return True if empty
+         *
+         */
+        bool isEmpty() const;
+
         /*! \brief Change the size of the ByteArray
          *
          *  If the new size is lower than the current size, lasts elements are discarded
