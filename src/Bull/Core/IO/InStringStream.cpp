@@ -13,11 +13,9 @@ namespace Bull
 
     ByteArray InStringStream::read(std::size_t length)
     {
-        std::size_t toRead = std::min(m_cursor + length, getSize());
+        ByteArray bytes = ByteArray::memoryCopy(&m_string[m_cursor], length);
 
-        ByteArray bytes = ByteArray::memoryCopy(&m_string[m_cursor], toRead);
-
-        m_cursor += toRead;
+        m_cursor += length;
 
         return bytes;
     }
