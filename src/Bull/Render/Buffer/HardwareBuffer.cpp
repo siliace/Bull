@@ -89,63 +89,42 @@ namespace Bull
 
     void* HardwareBuffer::map()
     {
-        if(isValid())
-        {
-            bind();
+        bind();
 
-            return gl::mapBuffer(bufferTypeMapper[m_type], GL_READ_WRITE);
-        }
-
-        return nullptr;
+        return gl::mapBuffer(bufferTypeMapper[m_type], GL_READ_WRITE);
     }
 
     const void* HardwareBuffer::map() const
     {
-        if(isValid())
-        {
-            bind();
+        bind();
 
-            return gl::mapBuffer(bufferTypeMapper[m_type], GL_READ_ONLY);
-        }
-
-        return nullptr;
+        return gl::mapBuffer(bufferTypeMapper[m_type], GL_READ_ONLY);
     }
 
     void HardwareBuffer::unmap() const
     {
-        if(isValid())
-        {
-            bind();
+        bind();
 
-            gl::unmapBuffer(bufferTypeMapper[m_type]);
-        }
+        gl::unmapBuffer(bufferTypeMapper[m_type]);
     }
 
     void HardwareBuffer::clear()
     {
-        if(isValid())
-        {
-            bind();
+        bind();
 
-            int usage;
-            gl::getBufferParameteriv(bufferTypeMapper[m_type], GL_BUFFER_USAGE, &usage);
-            gl::bufferData(bufferTypeMapper[m_type], getCapacity(), nullptr, usage);
-        }
+        int usage;
+        gl::getBufferParameteriv(bufferTypeMapper[m_type], GL_BUFFER_USAGE, &usage);
+        gl::bufferData(bufferTypeMapper[m_type], getCapacity(), nullptr, usage);
     }
 
     std::size_t HardwareBuffer::getCapacity() const
     {
-        if(isValid())
-        {
-            bind();
+        bind();
 
-            int capacity;
-            gl::getBufferParameteriv(bufferTypeMapper[m_type], GL_BUFFER_SIZE, &capacity);
+        int capacity;
+        gl::getBufferParameteriv(bufferTypeMapper[m_type], GL_BUFFER_SIZE, &capacity);
 
-            return static_cast<std::size_t>(capacity);
-        }
-
-        return 0;
+        return static_cast<std::size_t>(capacity);
     }
 
     HardwareBuffer::HardwareBuffer(HardwareBufferType type) :
