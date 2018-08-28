@@ -52,9 +52,7 @@ namespace Bull
         template <typename T, typename... Args>
         T& createLogger(Args&&... args)
         {
-            std::unique_ptr<AbstractLogger> logger(new T(std::forward<Args>(args)...));
-
-            return static_cast<T&>(addLogger(std::move(logger)));
+            return static_cast<T&>(addLogger(std::make_unique<T>(std::forward<Args>(args)...)));
         }
 
         /*! \brief Add an AbstractLogger
