@@ -14,4 +14,6 @@ target_sources(bull-core
             ${BULL_SRC_CORE_LOG}/Log.cpp
             ${BULL_INC_CORE_LOG}/MessageWindowLogger.hpp
             ${BULL_SRC_CORE_LOG}/MessageWindowLogger.cpp
+            ${BULL_INC_CORE_LOG}/StreamLogger.hpp
+            ${BULL_SRC_CORE_LOG}/StreamLogger.cpp
         )
