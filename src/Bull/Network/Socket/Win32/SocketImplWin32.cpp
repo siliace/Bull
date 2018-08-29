@@ -10,12 +10,12 @@ namespace Bull
     {
         namespace
         {
-            WsaService::Instance wsa = WsaService::getInstance();
+            WsaService& wsa = WsaService::getInstance();
         }
 
         SocketError SocketImplWin32::getLastError()
         {
-            int error = wsa->getLastError();
+            int error = wsa.getLastError();
 
             if(error)
             {

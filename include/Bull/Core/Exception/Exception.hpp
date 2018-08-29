@@ -107,12 +107,11 @@ namespace Bull
 
     private:
 
-        Log::Instance m_log;
-        String        m_file;
-        Uint64        m_line;
-        String        m_type;
-        String        m_source;
-        String        m_description;
+        String m_file;
+        Uint64 m_line;
+        String m_type;
+        String m_source;
+        String m_description;
     };
 
     namespace prv

@@ -62,11 +62,11 @@ namespace Bull
             shared->setActive(true);
 
             /// We load OpenGL functions before initialize because this method uses OpenGL functions (glEnable, glGetIntegerv...)
-            ExtensionsLoader::Instance loader;
+            ExtensionsLoader& loader = ExtensionsLoader::getInstance();
 
             ContextType::requireExtensions(loader);
-            loader->loadFunctions();
-            loader->loadExtensions(shared->getSurfaceHandler());
+            loader.loadFunctions();
+            loader.loadExtensions(shared->getSurfaceHandler());
 
             shared->initialize();
 
@@ -121,7 +121,7 @@ namespace Bull
 
         bool GlContext::isSupported(const String& extension)
         {
-            return ExtensionsLoader::getInstance()->isSupported(extension);
+            return ExtensionsLoader::getInstance().isSupported(extension);
         }
 
         void GlContext::debugProc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* msg, const void* userParam)
@@ -129,6 +129,7 @@ namespace Bull
             String message(msg);
             OutStringStream oss;
             TextWriter writer(oss);
+            Log& log = Log::getInstance();
 
             switch(type)
             {
@@ -157,11 +158,11 @@ namespace Bull
 
             if(severity == GL_DEBUG_SEVERITY_NOTIFICATION)
             {
-                Log::getInstance()->info(oss.toString());
+                log.info(oss.toString());
             }
             else
             {
-                Log::getInstance()->error(oss.toString());
+                log.error(oss.toString());
             }
         }
 

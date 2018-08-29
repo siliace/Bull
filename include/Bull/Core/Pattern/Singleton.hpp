@@ -13,47 +13,24 @@ namespace Bull
     {
     public:
 
-        struct Instance
-        {
-            /*! \brief Default constructor
-             *
-             * Create the instance is not exists
-             *
-             */
-            Instance()
-            {
-                if(!s_instance)
-                {
-                    std::lock_guard<std::mutex> lock(s_mutex);
-
-                    if(!s_instance)
-                    {
-                        s_instance.reset(new T());
-                    }
-                }
-            }
-
-            /*! \brief Access operator
-             *
-             * \return A pointer to the instance
-             *
-             */
-            T* operator->()
-            {
-                return s_instance.get();
-            }
-        };
-
-    public:
-
         /*! \brief Get the Instance of the Singleton. Create the instance if needed
          *
          * \return The Instance
          *
          */
-        static Instance getInstance()
+        static T& getInstance()
         {
-            return Instance();
+            if(!s_instance)
+            {
+                std::lock_guard<std::mutex> lock(s_mutex);
+
+                if(!s_instance)
+                {
+                    s_instance.reset(new T());
+                }
+            }
+
+            return *s_instance;
         }
 
         /*! \brief Reset the Instance

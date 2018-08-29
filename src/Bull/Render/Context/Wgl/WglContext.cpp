@@ -38,12 +38,12 @@ namespace Bull
             return reinterpret_cast<void*>(library.getFunction(function));
         }
 
-        void WglContext::requireExtensions(ExtensionsLoader::Instance& loader)
+        void WglContext::requireExtensions(ExtensionsLoader& loader)
         {
-            loader->require(wglCreateContext);
-            loader->require(wglPixelFormat);
-            loader->require(wglSwapControl);
-            loader->require(wglPbuffer);
+            loader.require(wglCreateContext);
+            loader.require(wglPixelFormat);
+            loader.require(wglSwapControl);
+            loader.require(wglPbuffer);
         }
 
         int WglContext::getBestPixelFormat(HDC device, Uint8 bitsPerPixel, const ContextSettings& settings, bool usePbuffer)
@@ -288,7 +288,7 @@ namespace Bull
 
                         if(!m_device)
                         {
-                            m_log->warning("Failed to get device context from PBuffer");
+                            Log::getInstance().warning("Failed to get device context from PBuffer");
 
                             wglDestroyPbuffer(m_pbuffer);
                         }
@@ -331,6 +331,7 @@ namespace Bull
 
         void WglContext::createContext(const WglContext* shared)
         {
+            Log& log = Log::getInstance();
             HGLRC sharedHandler = shared ? shared->m_render : nullptr;
 
             if(wglCreateContext.isLoaded())
@@ -371,7 +372,7 @@ namespace Bull
 
                     if(!m_render)
                     {
-                        m_log->warning("Failed to create WglContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
+                        log.warning("Failed to create WglContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
 
                         if(m_settings.minor == 0)
                         {
@@ -385,7 +386,7 @@ namespace Bull
                     }
                     else
                     {
-                        m_log->info("Create WglContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
+                        log.info("Create WglContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
                     }
                 }while(!m_render && m_settings.major >= 1);
             }
@@ -400,7 +401,7 @@ namespace Bull
                 {
                     static std::mutex mutex;
 
-                    m_log->info("Create legacy WglContext");
+                    log.info("Create legacy WglContext");
 
                     std::lock_guard<std::mutex> lock(mutex);
 
@@ -408,7 +409,7 @@ namespace Bull
                 }
                 else
                 {
-                    m_log->info("Create shared WglContext");
+                    log.info("Create shared WglContext");
                 }
             }
 

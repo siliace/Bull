@@ -67,7 +67,7 @@ namespace Bull
             }
             else
             {
-                Log::getInstance()->warning("Failed to get initial console configuration");
+                Log::getInstance().warning("Failed to get initial console configuration");
 
                 m_initialAttributes = colorToTextAttribute(ConsoleColor_White) | colorToBackgroundAttribute(ConsoleColor_Black);
             }

@@ -27,19 +27,19 @@ namespace Bull
 
         bool WindowImpl::popEvent(WindowEvent& e, bool block)
         {
-            JoystickManager::Instance manager = JoystickManager::getInstance();
+            JoystickManager& manager = JoystickManager::getInstance();
 
             if(m_events.empty())
             {
                 startProcessEvents();
-                manager->processEvents(m_events);
+                manager.processEvents(m_events);
 
                 if(m_events.empty() && block)
                 {
                     do
                     {
                         startProcessEvents();
-                        manager->processEvents(m_events);
+                        manager.processEvents(m_events);
 
                         std::this_thread::sleep_for(std::chrono::milliseconds(20));
                     }while(m_events.empty());

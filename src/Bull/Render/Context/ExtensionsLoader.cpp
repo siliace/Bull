@@ -260,12 +260,14 @@ namespace Bull
         {
             Expect(!m_loadedExtensions, Throw(LogicError, "ExtensionsLoader::loadExtensions", "Extensions already loaded"));
 
+            Log& log = Log::getInstance();
+
             m_loadedExtensions = true;
             m_allExtensions = getAllExtensions(surface);
 
             for(const String& extension : m_allExtensions)
             {
-                Log::getInstance()->info("Found extension : " + extension);
+                log.info("Found extension : " + extension);
             }
 
             for(Extension& extension : m_extensions)
@@ -276,11 +278,11 @@ namespace Bull
 
                     if(extension.isLoaded())
                     {
-                        Log::getInstance()->info("Loaded OpenGL extension : " + extension.getName());
+                        log.info("Loaded OpenGL extension : " + extension.getName());
                     }
                     else
                     {
-                        Log::getInstance()->info("Failed to load OpenGL extension : " + extension.getName());
+                        log.info("Failed to load OpenGL extension : " + extension.getName());
                     }
                 }
             }

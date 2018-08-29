@@ -27,7 +27,7 @@ namespace Bull
              * \param loader The instance of the extension loader to use
              *
              */
-            static void requireExtensions(ExtensionsLoader::Instance& loader);
+            static void requireExtensions(ExtensionsLoader& loader);
 
         private:
 
@@ -151,7 +151,8 @@ namespace Bull
              */
             void updateSettings();
 
-            Log::Instance m_log;
+        private:
+
             HWND          m_window;
             HDC           m_device;
             HGLRC         m_render;
