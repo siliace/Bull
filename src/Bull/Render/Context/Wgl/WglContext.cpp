@@ -173,12 +173,9 @@ namespace Bull
         {
             createSurface(shared, mode.width, mode.height, mode.bitsPerPixel);
 
-            if(m_device)
-            {
-                setPixelFormat(mode.bitsPerPixel);
+            setPixelFormat(mode.bitsPerPixel);
 
-                createContext(shared);
-            }
+            createContext(shared);
         }
 
         WglContext::WglContext(const WglContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
@@ -196,12 +193,9 @@ namespace Bull
         {
             createSurface(window);
 
-            if(m_device)
-            {
-                setPixelFormat(bitsPerPixel);
+            setPixelFormat(bitsPerPixel);
 
-                createContext(shared);
-            }
+            createContext(shared);
         }
 
         WglContext::~WglContext()
@@ -274,6 +268,8 @@ namespace Bull
             m_window = window.getSystemHandler();
 
             m_device = GetDC(m_window);
+
+            Expect(m_device != INVALID_HANDLE_VALUE, Throw(Win32Error, "WglContext::createSurface", "Failed to get device context from WindowImpl"));
         }
 
         void WglContext::createSurface(const WglContext* shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel)
@@ -314,6 +310,8 @@ namespace Bull
                 Expect(m_window != INVALID_HANDLE_VALUE, Throw(Win32Error, "WglContext::createSurface", "Failed to create internal window"));
 
                 m_device = GetDC(m_window);
+
+                Expect(m_device != INVALID_HANDLE_VALUE, Throw(Win32Error, "WglContext::createSurface", "Failed to get device context"));
 
                 m_ownWindow = true;
             }
