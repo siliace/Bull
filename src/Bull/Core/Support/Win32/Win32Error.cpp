@@ -7,7 +7,7 @@ namespace Bull
     namespace prv
     {
         Win32Error::Win32Error(const String& file, Uint64 line, const String& source, const String& description) :
-                Exception(file, line, "Win32Error", source, createDescription())
+                Exception(file, line, "Win32Error", source, description + " - " + createDescription())
         {
             /// Nothing
         }
@@ -18,7 +18,7 @@ namespace Bull
 
             if(!error)
             {
-                Throw(LogicError, "Win32Error::createDescription", "No error occured");
+                Throw(LogicError, "Win32Error::createDescription", "No error occurred");
             }
 
             char* messageBuffer = nullptr;
