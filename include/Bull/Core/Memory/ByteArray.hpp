@@ -104,6 +104,24 @@ namespace Bull
          */
         String toString() const;
 
+        /*! \brief Compare two ByteArray
+         *
+         * \param right The ByteArray to compare to this
+         *
+         * \return True if this and right are equal
+         *
+         */
+        bool operator==(const ByteArray& right) const;
+
+        /*! \brief Compare two ByteArray
+         *
+         * \param right The ByteArray to compare to this
+         *
+         * \return True if this and right are not equal
+         *
+         */
+        bool operator!=(const ByteArray& right) const;
+
         /*! \brief Access operator
          *
          * \param index The index of the element to access

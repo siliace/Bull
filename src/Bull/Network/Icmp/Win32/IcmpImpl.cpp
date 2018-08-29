@@ -1,6 +1,8 @@
 #include <iphlpapi.h>
 #include <icmpapi.h>
 
+#include <Bull/Core/Support/Win32/Win32Error.hpp>
+
 #include <Bull/Network/Icmp/Win32/IcmpImpl.hpp>
 
 namespace Bull
@@ -9,29 +11,23 @@ namespace Bull
     {
         Duration IcmpImpl::ping(const IpAddressV4& address, const Duration& timeout)
         {
-            Duration duration = Duration::Infinite;
             HANDLE icmpHandle = IcmpCreateFile();
 
-            if(icmpHandle != INVALID_HANDLE_VALUE)
-            {
-                std::vector<Uint8> request(32);
-                IPAddr addr = address.toInt();
-                std::vector<Uint8> response(sizeof(ICMP_ECHO_REPLY) + request.size());
+            Expect(icmpHandle != INVALID_HANDLE_VALUE, Throw(Win32Error, "IcmpImpl::ping", "Failed to create ICMP handler"));
 
-                if(IcmpSendEcho(icmpHandle,
-                                addr,
-                                &request[0], request.size(),
-                                nullptr,
-                                &response[0], response.size(),
-                                timeout.asMilliseconds()) > 0)
-                {
-                    const ICMP_ECHO_REPLY* reply = reinterpret_cast<const ICMP_ECHO_REPLY*>(response.data());
+            ByteArray request(32);
+            IPAddr addr = address.toInt();
+            ByteArray response(sizeof(ICMP_ECHO_REPLY) + request.getCapacity());
 
-                    duration = Duration::milliseconds(reply->RoundTripTime);
-                }
+            DWORD retval = IcmpSendEcho(icmpHandle, addr, &request[0], request.getCapacity(), nullptr, &response[0], response.getCapacity(), timeout.asMilliseconds());
 
-                IcmpCloseHandle(icmpHandle);
-            }
+            Expect(retval > 0, Throw(Win32Error, "IcmpImpl::ping", "Failed to send ICMP request"));
+
+            const ICMP_ECHO_REPLY* reply = reinterpret_cast<const ICMP_ECHO_REPLY*>(response.getBuffer());
+
+            Duration duration = Duration::milliseconds(reply->RoundTripTime);
+
+            IcmpCloseHandle(icmpHandle);
 
             return duration;
         }

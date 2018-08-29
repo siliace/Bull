@@ -17,7 +17,7 @@ namespace Bull
          * \return The ping duration
          *
          */
-        static Duration ping(const IpAddressV4& address, const Duration& timeout);
+        static Duration ping(const IpAddressV4& address, const Duration& timeout = Duration::seconds(1.f));
     };
 }
 

@@ -85,4 +85,14 @@ namespace Bull
 
         return m_array.at(index);
     }
+
+    bool ByteArray::operator==(const ByteArray& right) const
+    {
+        return m_array == right.m_array;
+    }
+
+    bool ByteArray::operator!=(const ByteArray& right) const
+    {
+        return !(*this == right);
+    }
 }

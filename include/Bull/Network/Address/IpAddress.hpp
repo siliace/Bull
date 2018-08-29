@@ -1,7 +1,7 @@
 #ifndef BULL_NETWORK_ADDRESS_IPADDRESS_HPP
 #define BULL_NETWORK_ADDRESS_IPADDRESS_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Memory/ByteArray.hpp>
 
 #include <Bull/Network/Export.hpp>
 #include <Bull/Network/Address/NetProtocol.hpp>
@@ -63,7 +63,25 @@ namespace Bull
          * \return The byte
          *
          */
-        Uint8 at(std::size_t index) const;
+        const Uint8& at(std::size_t index) const;
+
+        /*! \brief Compare two IpAddress
+         *
+         * \param right The IpAddress to compare to this
+         *
+         * \return True if this and right are equal
+         *
+         */
+        bool operator==(const IpAddress& right) const;
+
+        /*! \brief Compare two IpAddress
+         *
+         * \param right The IpAddress to compare to this
+         *
+         * \return True if this and right are not equal
+         *
+         */
+        bool operator!=(const IpAddress& right) const;
 
     protected:
 
@@ -78,7 +96,7 @@ namespace Bull
     private:
 
         bool m_valid;
-        std::vector<Uint8> m_bytes;
+        ByteArray m_bytes;
     };
 }
 
