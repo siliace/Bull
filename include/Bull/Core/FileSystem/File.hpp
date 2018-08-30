@@ -88,7 +88,7 @@ namespace Bull
          * \param file The File to move
          *
          */
-        File(File&& file) noexcept = default;
+        File(File&& file) noexcept;
 
         /*! \brief Destructor
          *
@@ -102,7 +102,7 @@ namespace Bull
          * \return This
          *
          */
-        File& operator=(File&& file) noexcept = default;
+        File& operator=(File&& file) noexcept;
 
         /*! \brief Open the File
          *

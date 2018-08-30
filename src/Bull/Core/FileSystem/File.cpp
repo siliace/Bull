@@ -44,9 +44,25 @@ namespace Bull
         open(path, mode);
     }
 
+    File::File(File&& file) noexcept
+    {
+        std::swap(m_path, file.m_path);
+        std::swap(m_mode, file.m_mode);
+        std::swap(m_impl, file.m_impl);
+    }
+
     File::~File()
     {
         flush();
+    }
+
+    File& File::operator=(File&& file) noexcept
+    {
+        std::swap(m_path, file.m_path);
+        std::swap(m_mode, file.m_mode);
+        std::swap(m_impl, file.m_impl);
+
+        return *this;
     }
 
     void File::open(const Path& path, Uint32 mode)
