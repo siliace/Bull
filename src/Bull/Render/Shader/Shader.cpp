@@ -47,7 +47,7 @@ namespace Bull
     {
         Expect(shaderBinary.isValid(), Throw(InvalidParameter, "Shader::create", "Invalid shader binary"));
 
-        gl::programBinary(m_program, shaderBinary.format, shaderBinary.binary.data(), shaderBinary.binary.capacity());
+        gl::programBinary(m_program, shaderBinary.format, shaderBinary.content.getBuffer(), shaderBinary.content.getCapacity());
     }
 
     void Shader::attach(const ShaderStage& stage)
@@ -297,9 +297,9 @@ namespace Bull
 
         if(length)
         {
-            shaderBinary.binary.reserve(length);
+            shaderBinary.content.resize(length);
 
-            gl::getProgramBinary(getSystemHandler(), length, nullptr, &shaderBinary.format, &shaderBinary.binary[0]);
+            gl::getProgramBinary(getSystemHandler(), length, nullptr, &shaderBinary.format, &shaderBinary.content[0]);
 
             Expect(shaderBinary.isValid(), Throw(InternalError, "Shader::getBinary", "Failed to download program binary"));
         }

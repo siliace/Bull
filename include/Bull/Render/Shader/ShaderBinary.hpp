@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include <Bull/Core/Memory/ByteArray.hpp>
+
 #include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull
@@ -28,8 +30,8 @@ namespace Bull
          */
         bool isValid() const;
 
+        ByteArray content; /*!< The binary */
         unsigned int format; /*!< The binary format */
-        std::vector<Uint8> binary; /*!< The binary */
     };
 }
 
