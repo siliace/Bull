@@ -1,5 +1,6 @@
 #include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/IO/TextWriter.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 
 #include <Bull/Network/Address/IpAddressImpl.hpp>
 #include <Bull/Network/Address/IpAddressV4.hpp>
@@ -47,7 +48,7 @@ namespace Bull
 
         for(std::size_t i = 0; i < getByteCount(); i++)
         {
-            writer << at(i);
+            writer << StringUtils::number(at(i));
 
             if(i < 3)
             {
