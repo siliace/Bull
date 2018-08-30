@@ -18,9 +18,28 @@ namespace Bull
         /// Nothing
     }
 
+    TcpServer::TcpServer(TcpServer&& right) noexcept :
+        Socket(std::move(right))
+    {
+        std::swap(m_impl, right.m_impl);
+        std::swap(m_port, right.m_port);
+        std::swap(m_backlog, right.m_backlog);
+    }
+
     TcpServer::~TcpServer()
     {
         disconnect();
+    }
+
+    TcpServer& TcpServer::operator=(TcpServer&& right) noexcept
+    {
+        std::swap(m_impl, right.m_impl);
+        std::swap(m_port, right.m_port);
+        std::swap(m_backlog, right.m_backlog);
+
+        Socket::operator=(std::move(right));
+
+        return *this;
     }
 
     void TcpServer::listen(NetPort port, const IpAddressWrapper& host, int backlog)

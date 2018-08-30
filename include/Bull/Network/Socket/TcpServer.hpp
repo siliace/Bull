@@ -30,10 +30,10 @@ namespace Bull
 
         /*! \brief Constructor by movement
          *
-         * \param move The TcpServer to move
+         * \param right The TcpServer to move
          *
          */
-        TcpServer(TcpServer&& move) noexcept = default;
+        TcpServer(TcpServer&& right) noexcept;
 
         /*! \brief Destructor
          *
@@ -42,12 +42,12 @@ namespace Bull
 
         /*! \brief Basic assignment operator by movement
          *
-         * \param move The TcpServer to move
+         * \param right The TcpServer to move
          *
          * \return This
          *
          */
-        TcpServer& operator=(TcpServer&& move) noexcept = default;
+        TcpServer& operator=(TcpServer&& right) noexcept;
 
         /*! \brief Start to listen a NetPort
          *
