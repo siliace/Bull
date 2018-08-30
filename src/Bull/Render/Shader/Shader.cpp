@@ -43,14 +43,14 @@ namespace Bull
         return *this;
     }
 
-    void Shader::create(const ShaderBinary& shaderBinary)
+    void Shader::create(const ShaderBinary& shaderBinary) const
     {
         Expect(shaderBinary.isValid(), Throw(InvalidParameter, "Shader::create", "Invalid shader binary"));
 
         gl::programBinary(m_program, shaderBinary.format, shaderBinary.content.getBuffer(), shaderBinary.content.getCapacity());
     }
 
-    void Shader::attach(const ShaderStage& stage)
+    void Shader::attach(const ShaderStage& stage) const
     {
         Expect(stage.isValid(), Throw(InvalidParameter, "Shader::attach", "Can't attach invalid ShaderStage"));
         Expect(stage.isCompiled(), Throw(InvalidParameter, "Shader::attach", "Can't attach non compiled ShaderStage"));
@@ -58,7 +58,7 @@ namespace Bull
         gl::attachShader(m_program, stage.getSystemHandler());
     }
 
-    void Shader::link()
+    void Shader::link() const
     {
         gl::linkProgram(m_program);
 
@@ -78,7 +78,7 @@ namespace Bull
         return status == GL_TRUE;
     }
 
-    void Shader::setUniform(const String& name, int uniform)
+    void Shader::setUniform(const String& name, int uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -103,7 +103,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniform(const String& name, unsigned int uniform)
+    void Shader::setUniform(const String& name, unsigned int uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -128,7 +128,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniform(const String& name, float uniform)
+    void Shader::setUniform(const String& name, float uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -153,7 +153,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniformColor(const String& name, const Color& uniform)
+    void Shader::setUniformColor(const String& name, const Color& uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -186,7 +186,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniformVector(const String& name, const Vector<float, 2>& uniform)
+    void Shader::setUniformVector(const String& name, const Vector<float, 2>& uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -211,7 +211,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniformVector(const String& name, const Vector<float, 3>& uniform)
+    void Shader::setUniformVector(const String& name, const Vector<float, 3>& uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -236,7 +236,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniformVector(const String& name, const Vector<float, 4>& uniform)
+    void Shader::setUniformVector(const String& name, const Vector<float, 4>& uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -261,7 +261,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniformMatrix(const String& name, const Matrix4F& uniform)
+    void Shader::setUniformMatrix(const String& name, const Matrix4F& uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -328,7 +328,7 @@ namespace Bull
         return message;
     }
 
-    int Shader::getUniformLocation(const String& name)
+    int Shader::getUniformLocation(const String& name) const
     {
         return gl::getUniformLocation(m_program, name.getBuffer());
     }

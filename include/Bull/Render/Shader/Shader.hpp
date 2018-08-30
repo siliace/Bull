@@ -2,15 +2,13 @@
 #define BULL_RENDER_SHADER_SHADER_HPP
 
 #include <Bull/Core/Exception/Exception.hpp>
-#include <Bull/Core/FileSystem/Path.hpp>
-#include <Bull/Core/IO/InStream.hpp>
 #include <Bull/Core/Utility/Color.hpp>
 
 #include <Bull/Math/Matrix/Matrix4.hpp>
 #include <Bull/Math/Vector/Vector.hpp>
 
+#include <Bull/Render/Shader/ShaderStage.hpp>
 #include <Bull/Render/Shader/ShaderBinary.hpp>
-#include <Bull/Render/Shader/ShaderStageLoader.hpp>
 
 namespace Bull
 {
@@ -60,19 +58,19 @@ namespace Bull
          * \param shaderBinary The binary of the Shader
          *
          */
-        void create(const ShaderBinary& shaderBinary);
+        void create(const ShaderBinary& shaderBinary) const;
 
         /*! \brief Attach a ShaderStage to this Shader
          *
          * \param stage The stage to attach to this Shader
          *
          */
-        void attach(const ShaderStage& stage);
+        void attach(const ShaderStage& stage) const;
 
         /*! \brief Link the shader
          *
          */
-        void link();
+        void link() const;
 
         /*! \brief Bind the shader
          *
@@ -92,7 +90,7 @@ namespace Bull
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniform(const String& name, int uniform);
+        void setUniform(const String& name, int uniform) const;
 
         /*! \brief Set an uniform variable
          *
@@ -100,7 +98,7 @@ namespace Bull
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniform(const String& name, unsigned int uniform);
+        void setUniform(const String& name, unsigned int uniform) const;
 
         /*! \brief Set an uniform variable
          *
@@ -108,7 +106,7 @@ namespace Bull
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniform(const String& name, float uniform);
+        void setUniform(const String& name, float uniform) const;
 
         /*! \brief Set an uniform variable
          *
@@ -116,7 +114,7 @@ namespace Bull
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniformColor(const String& name, const Color& uniform);
+        void setUniformColor(const String& name, const Color& uniform) const;
 
         /*! \brief Set an uniform variable
          *
@@ -124,7 +122,7 @@ namespace Bull
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniformVector(const String& name, const Vector<float, 2>& uniform);
+        void setUniformVector(const String& name, const Vector<float, 2>& uniform) const;
 
         /*! \brief Set an uniform variable
          *
@@ -132,7 +130,7 @@ namespace Bull
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniformVector(const String& name, const Vector<float, 3>& uniform);
+        void setUniformVector(const String& name, const Vector<float, 3>& uniform) const;
 
         /*! \brief Set an uniform variable
          *
@@ -140,7 +138,7 @@ namespace Bull
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniformVector(const String& name, const Vector<float, 4>& uniform);
+        void setUniformVector(const String& name, const Vector<float, 4>& uniform) const;
 
         /*! \brief Set an uniform variable
          *
@@ -148,7 +146,7 @@ namespace Bull
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniformMatrix(const String& name, const Matrix4F& uniform);
+        void setUniformMatrix(const String& name, const Matrix4F& uniform) const;
 
         /*! \brief Get the program as a binary format
          *
@@ -182,7 +180,7 @@ namespace Bull
          * \return Return the location of the uniform
          *
          */
-        int getUniformLocation(const String& name);
+        int getUniformLocation(const String& name) const;
 
         unsigned int m_program;
     };

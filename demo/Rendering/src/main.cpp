@@ -11,6 +11,7 @@
 
 #include <Bull/Math/Clamp.hpp>
 
+#include <Bull/Render/Shader/ShaderStageLoader.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
 
 #include <Cube.hpp>
