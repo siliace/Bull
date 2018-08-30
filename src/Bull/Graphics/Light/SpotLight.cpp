@@ -10,27 +10,27 @@ namespace Bull
 
     SpotLight::SpotLight(const Vector3F& position, const Vector3F& direction, const Color& color) :
         AbstractLight(LightType_Spot),
-        position(position),
-        direction(direction)
+        m_position(position),
+        m_direction(direction)
     {
         setColor(color);
-        constant    = 1.f;
-        linear      = 0.09f;
-        quadratic   = 0.0032f;
-        innerCutOff = AngleF::degree(12.5f);
-        outerCutOff = AngleF::degree(17.5f);
+        m_constant    = 1.f;
+        m_linear      = 0.09f;
+        m_quadratic   = 0.0032f;
+        m_innerCutOff = AngleF::degree(12.5f);
+        m_outerCutOff = AngleF::degree(17.5f);
     }
 
     void SpotLight::setUniforms(Shader& shader, const String& name) const
     {
         AbstractLight::setUniforms(shader, name);
 
-        shader.setUniform(compose(name, "linear"), linear);
-        shader.setUniform(compose(name, "constant"), constant);
-        shader.setUniform(compose(name, "quadratic"), quadratic);
-        shader.setUniformVector(compose(name, "position"), position);
-        shader.setUniformVector(compose(name, "direction"), direction);
-        shader.setUniform(compose(name, "innerCutOff"), std::cos(innerCutOff));
-        shader.setUniform(compose(name, "outerCutOff"), std::cos(outerCutOff));
+        shader.setUniform(compose(name, "linear"), m_linear);
+        shader.setUniform(compose(name, "constant"), m_constant);
+        shader.setUniform(compose(name, "quadratic"), m_quadratic);
+        shader.setUniformVector(compose(name, "position"), m_position);
+        shader.setUniformVector(compose(name, "direction"), m_direction);
+        shader.setUniform(compose(name, "innerCutOff"), std::cos(m_innerCutOff));
+        shader.setUniform(compose(name, "outerCutOff"), std::cos(m_outerCutOff));
     }
 }

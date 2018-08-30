@@ -169,8 +169,8 @@ int main()
 
         shader.setUniformVector("eye_position", position);
 
-        sp.position = position;
-        sp.direction = forward;
+        sp.setPosition(position);
+        sp.setDirection(forward);
         sp.setUniforms(shader, "sp");
 
         dl.setUniforms(shader, "dl");
