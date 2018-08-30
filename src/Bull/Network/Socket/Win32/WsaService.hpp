@@ -1,6 +1,7 @@
 #ifndef BULL_NETWORK_SOCKET_WIN32_WSASERVICE_HPP
 #define BULL_NETWORK_SOCKET_WIN32_WSASERVICE_HPP
 
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/Singleton.hpp>
 
 #include <Bull/Network/Socket/SocketHeader.hpp>

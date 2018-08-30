@@ -3,9 +3,7 @@
 
 #if defined BULL_OS_WINDOWS
     #include <Bull/Core/FileSystem/Win32/FileImplWin32.hpp>
-#include "FileImpl.hpp"
-
-typedef Bull::prv::FileImplWin32 FileImplType;
+    typedef Bull::prv::FileImplWin32 FileImplType;
 #else
     #include <Bull/Core/FileSystem/Unix/FileImplUnix.hpp>
     typedef Bull::prv::FileImplUnix FileImplType;
