@@ -265,7 +265,7 @@ namespace Bull
         {
             for(std::size_t i = 0; i < W; i++)
             {
-                sum.at(i, j) = left.at(i, j) + right(i, j);
+                sum.at(i, j) = left.at(i, j) + right.at(i, j);
             }
         }
 

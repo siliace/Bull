@@ -118,7 +118,7 @@ namespace Bull
          */
         RegularPolygon<T, S>& setRadius(T radius)
         {
-            m_radius = static_cast<T>(radius);
+            m_radius = radius;
 
             update();
 
@@ -151,8 +151,8 @@ namespace Bull
 
             for(Vector2<T>& vertex : m_vertices)
             {
-                vertex.x = std::cos(angle) * m_radius;
-                vertex.y = std::sin(angle) * m_radius;
+                vertex.x() = std::cos(angle) * m_radius;
+                vertex.y() = std::sin(angle) * m_radius;
 
                 angle += step;
             }
