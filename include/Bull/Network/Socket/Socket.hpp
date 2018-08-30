@@ -69,19 +69,15 @@ namespace Bull
          *
          * \param protocol The NetProtocol to use in the Socket
          *
-         * \return True if the Socket was created successfully
-         *
          */
-        bool create(NetProtocol protocol);
+        void create(NetProtocol protocol);
 
         /*! \brief Create the Socket
          *
          * \param handler The SocketHandler
          *
-         * \return True if the Socket was created successfully
-         *
          */
-        bool create(SocketHandler handler);
+        void create(SocketHandler handler);
 
         /*! \brief Close the Socket
          *
@@ -97,7 +93,7 @@ namespace Bull
          * \param move The Socket to move
          *
          */
-        Socket(Socket&& move) noexcept = default;
+        Socket(Socket&& move) noexcept;
 
         /*! \brief Basic assignment operator by movement
          *
@@ -106,7 +102,7 @@ namespace Bull
          * \return This
          *
          */
-        Socket& operator=(Socket&& move) noexcept = default;
+        Socket& operator=(Socket&& move) noexcept;
 
         /*! \brief Get the SocketImpl of the Socket
          *

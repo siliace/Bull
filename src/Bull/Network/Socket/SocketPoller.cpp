@@ -1,3 +1,5 @@
+#include <Bull/Core/Exception/InvalidParameter.hpp>
+
 #include <Bull/Network/Socket/SocketImpl.hpp>
 #include <Bull/Network/Socket/SocketPoller.hpp>
 #include <Bull/Network/Socket/SocketPollerImpl.hpp>
@@ -12,21 +14,17 @@ namespace Bull
 
     SocketPoller::~SocketPoller() = default;
 
-    bool SocketPoller::add(const Socket& socket, SocketPollerEvent event)
+    void SocketPoller::add(const Socket& socket, SocketPollerEvent event)
     {
-        if(!isAdded(socket) && socket.getImpl().isValid())
+        if(!isAdded(socket))
         {
             m_impl->add(socket.getImpl().getHandler(), event);
-
-            return true;
         }
-
-        return false;
     }
 
     void SocketPoller::remove(const Socket& socket)
     {
-        if(isAdded(socket) && socket.getImpl().isValid())
+        if(isAdded(socket))
         {
             m_impl->remove(socket.getImpl().getHandler());
         }
@@ -49,12 +47,14 @@ namespace Bull
 
     bool SocketPoller::isAdded(const Socket& socket)
     {
+        Expect(socket.getImpl().isValid(), Throw(InvalidParameter, "SocketPoller::add", "Invalid Socket"));
+
         return m_impl->isAdded(socket.getImpl().getHandler());
     }
 
     bool SocketPoller::isReadyToRead(const Socket& socket)
     {
-        if(isAdded(socket) && socket.getImpl().isValid())
+        if(isAdded(socket))
         {
             return m_impl->isReadyToRead(socket.getImpl().getHandler());
         }
@@ -64,7 +64,7 @@ namespace Bull
 
     bool SocketPoller::isReadyToWrite(const Socket& socket)
     {
-        if(isAdded(socket) && socket.getImpl().isValid())
+        if(isAdded(socket))
         {
             return m_impl->isReadyToWrite(socket.getImpl().getHandler());
         }

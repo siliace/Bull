@@ -20,26 +20,22 @@ namespace Bull
              * \param socket The SocketImpl to use
              *
              */
-            TcpServerImpl(const prv::SocketImpl& socket);
+            explicit TcpServerImpl(const prv::SocketImpl& socket);
 
             /*! \brief Bind the SocketImpl on an IpAddress and a NetPort
              *
              * \param address The IpAddress
              * \param port    The NetPort
              *
-             * \return True if the TcpServerImpl has been bound correctly
-             *
              */
-            bool bind(const IpAddressWrapper& address, NetPort port);
+            void bind(const IpAddressWrapper& address, NetPort port);
 
             /*! \brief Start to listen the NetPort
              *
              * \param backlog The number of simultaneous active connection on the TcpServerImpl
              *
-             * \return True if the TcpServerImpl is listening the NetPort
-             *
              */
-            bool listen(int backlog);
+            void listen(int backlog);
 
             /*! \brief Accept an incoming connection
              *

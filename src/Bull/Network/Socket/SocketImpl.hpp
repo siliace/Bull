@@ -7,7 +7,6 @@
 
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
-#include <Bull/Network/Socket/SocketError.hpp>
 #include <Bull/Network/Socket/SocketHandler.hpp>
 #include <Bull/Network/Socket/SocketType.hpp>
 
@@ -48,13 +47,6 @@ namespace Bull
              */
             static int convertNetProtocol(NetProtocol protocol);
 
-            /*! \brief Get the last socket error
-             *
-             * \return The error
-             *
-             */
-            static SocketError getLastError();
-
         public:
 
             /*! \brief Destructor
@@ -67,10 +59,8 @@ namespace Bull
              * \param protocol The NetProtocol to use on the SocketImpl
              * \param type     The SocketType to use on the SocketType
              *
-             * \return True if the SocketImpl was created successfully
-             *
              */
-            bool create(NetProtocol protocol, SocketType type);
+            void create(NetProtocol protocol, SocketType type);
 
             /*! \brief Create the SocketImpl
              *
@@ -79,7 +69,7 @@ namespace Bull
              * \return True if the SocketImpl was created successfully
              *
              */
-            bool create(SocketHandler handler);
+            void create(SocketHandler handler);
 
             /*! \brief Tell whether the SocketImpl is valid
              *

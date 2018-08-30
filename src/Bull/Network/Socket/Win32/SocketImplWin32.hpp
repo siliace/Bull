@@ -14,13 +14,6 @@ namespace Bull
 
             static constexpr SocketHandler InvalidHandler = INVALID_SOCKET;
 
-            /*! \brief Get the last socket error
-             *
-             * \return The error
-             *
-             */
-            static SocketError getLastError();
-
         public:
 
             /*! \brief Default constructor

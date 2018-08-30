@@ -16,7 +16,7 @@ namespace Bull
              * \param sockets Sockets to poll
              * \param timeout The time before the function fail
              *
-             * \return The number of sockets updated during the poll, SocketError if an error occurred
+             * \return The number of sockets updated during the poll
              *
              */
             int poll(std::vector<SocketPollDescriptor>& sockets, int timeout) const;

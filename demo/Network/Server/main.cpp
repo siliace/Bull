@@ -12,35 +12,18 @@ int main()
     Bull::ConsoleOutput cout;
     Bull::TextWriter writer(cout);
 
-    if(server.listen(Bull::NetPort(6969)))
-    {
-        if(server.accept(client))
-        {
-            std::size_t sent = 0;
-            Bull::String hello = "Hello World";
+    server.listen(Bull::NetPort(6969));
 
-            writer.writeLine("Client accepted: " + client.getRemoteAddress().toString());
+    client = server.accept();
 
-            if(client.send(hello.getBuffer(), hello.getSize(), sent))
-            {
-                writer.writeLine(Bull::StringUtils::number(sent) + " bytes sent");
+    std::size_t sent = 0;
+    Bull::String hello = "Hello World";
 
-                return 0;
-            }
-            else
-            {
-                writer.writeLine("Failed to send");
-            }
-        }
-        else
-        {
-            writer.writeLine("Failed to accept");
-        }
-    }
-    else
-    {
-        writer.writeLine("Failed to listen");
-    }
+    writer.writeLine("Client accepted: " + client.getRemoteAddress().toString());
 
-    return -1;
+    sent = client.send(hello.getBuffer(), hello.getSize());
+
+    writer.writeLine(Bull::StringUtils::number(sent) + " bytes sent");
+
+    return 0;
 }

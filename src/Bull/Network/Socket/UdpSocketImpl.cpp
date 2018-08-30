@@ -1,3 +1,6 @@
+#include <Bull/Core/Exception/LogicError.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+
 #include <Bull/Network/Address/SockAddrBuffer.hpp>
 #include <Bull/Network/Socket/SocketLength.hpp>
 #include <Bull/Network/Socket/UdpSocketImpl.hpp>
@@ -12,55 +15,47 @@ namespace Bull
             /// Nothing
         }
 
-        bool UdpSocketImpl::bind(NetPort port, const IpAddressWrapper& address)
+        void UdpSocketImpl::bind(NetPort port, const IpAddressWrapper& address)
         {
-            if(m_socket.isValid())
-            {
-                SockAddrBuffer buffer(address, port);
+            Expect(m_socket.isValid(), Throw(LogicError, "UdpSocketImpl::bind", "Invalid socket"));
 
-                return ::bind(m_socket.getHandler(), buffer.getSockAddr(), buffer.getLength()) == 0;
-            }
+            SockAddrBuffer buffer(address, port);
 
-            return false;
+            int ret = ::bind(m_socket.getHandler(), buffer.getSockAddr(), buffer.getLength()) == 0;
+
+            Expect(ret == 0, Throw(InternalError, "UdpSocketImpl::bind", "Failed to bind the socket"));
         }
 
-        bool UdpSocketImpl::sendTo(const IpAddressWrapper& address, NetPort port, const void* data, std::size_t length, std::size_t& sent) const
+        std::size_t UdpSocketImpl::sendTo(const IpAddressWrapper& address, NetPort port, const void* data, std::size_t length) const
         {
-            if(m_socket.isValid())
-            {
-                SockAddrBuffer buffer(address, port);
+            Expect(m_socket.isValid(), Throw(LogicError, "UdpSocketImpl::sendTo", "Invalid socket"));
 
-                return ::sendto(m_socket.getHandler(), reinterpret_cast<const char*>(data), length, 0, buffer.getSockAddr(), buffer.getLength()) == 0;
-            }
+            SockAddrBuffer buffer(address, port);
 
-            sent = 0;
+            int sent = ::sendto(m_socket.getHandler(), reinterpret_cast<const char*>(data), length, 0, buffer.getSockAddr(), buffer.getLength()) == 0;
 
-            return false;
+            Expect(sent >= 0, Throw(InternalError, "UdpSocketImpl::sendTo", "Failed to send data to the remote host"));
+
+            return sent;
         }
 
-        bool UdpSocketImpl::receiveFrom(IpAddressWrapper& address, NetPort& port, void* data, std::size_t length, std::size_t& received) const
+        std::size_t UdpSocketImpl::receiveFrom(IpAddressWrapper& address, NetPort& port, void* data, std::size_t length) const
         {
-            if(m_socket.isValid())
-            {
-                sockaddr addr;
-                SocketLength sockLength = sizeof(sockaddr);
+            Expect(m_socket.isValid(), Throw(LogicError, "UdpSocketImpl::bind", "Invalid socket"));
 
-                received = ::recvfrom(m_socket.getHandler(), reinterpret_cast<char*>(data), length, 0, &addr, &sockLength);
+            sockaddr addr;
+            SocketLength sockLength = sizeof(sockaddr);
 
-                if(received >= 0)
-                {
-                    SockAddrBuffer buffer(addr, sockLength);
+            int received = ::recvfrom(m_socket.getHandler(), reinterpret_cast<char*>(data), length, 0, &addr, &sockLength);
 
-                    port    = buffer.getPort();
-                    address = buffer.getIpAddress();
+            Expect(received >= 0, Throw(InternalError, "UdpSocketImpl::sendTo", "Failed to receive data to from remote host"));
 
-                    return true;
-                }
-            }
+            SockAddrBuffer buffer(addr, sockLength);
 
-            received = 0;
+            port    = buffer.getPort();
+            address = buffer.getIpAddress();
 
-            return false;
+            return received;
         }
     }
 }

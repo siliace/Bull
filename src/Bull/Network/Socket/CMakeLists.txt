@@ -5,32 +5,28 @@ target_sources(bull-network
         PUBLIC
             ${BULL_INC_NETWORK_SOCKET}/Socket.hpp
             ${BULL_SRC_NETWORK_SOCKET}/Socket.cpp
-            ${BULL_INC_NETWORK_SOCKET}/SocketError.hpp
             ${BULL_INC_NETWORK_SOCKET}/SocketHandler.hpp
-            ${BULL_INC_NETWORK_SOCKET}/SocketPoller.hpp
-            ${BULL_SRC_NETWORK_SOCKET}/SocketPoller.cpp
-            ${BULL_INC_NETWORK_SOCKET}/SocketPollerEvent.hpp
-            ${BULL_INC_NETWORK_SOCKET}/SocketState.hpp
-            ${BULL_SRC_NETWORK_SOCKET}/SocketState.cpp
-            ${BULL_INC_NETWORK_SOCKET}/SocketType.hpp
-            ${BULL_INC_NETWORK_SOCKET}/TcpClient.hpp
-            ${BULL_SRC_NETWORK_SOCKET}/TcpClient.cpp
-            ${BULL_INC_NETWORK_SOCKET}/TcpServer.hpp
-            ${BULL_SRC_NETWORK_SOCKET}/TcpServer.cpp
-            ${BULL_INC_NETWORK_SOCKET}/UdpSocket.hpp
-            ${BULL_SRC_NETWORK_SOCKET}/UdpSocket.cpp
-        PUBLIC
             ${BULL_SRC_NETWORK_SOCKET}/SocketHeader.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketImpl.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketImpl.cpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketLength.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketPollDescriptor.hpp
+            ${BULL_INC_NETWORK_SOCKET}/SocketPoller.hpp
+            ${BULL_SRC_NETWORK_SOCKET}/SocketPoller.cpp
+            ${BULL_INC_NETWORK_SOCKET}/SocketPollerEvent.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketPollerImpl.hpp
             ${BULL_SRC_NETWORK_SOCKET}/SocketPollerImpl.cpp
+            ${BULL_INC_NETWORK_SOCKET}/SocketType.hpp
+            ${BULL_INC_NETWORK_SOCKET}/TcpClient.hpp
+            ${BULL_SRC_NETWORK_SOCKET}/TcpClient.cpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpClientImpl.hpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpClientImpl.cpp
+            ${BULL_INC_NETWORK_SOCKET}/TcpServer.hpp
+            ${BULL_SRC_NETWORK_SOCKET}/TcpServer.cpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpServerImpl.hpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpServerImpl.cpp
+            ${BULL_INC_NETWORK_SOCKET}/UdpSocket.hpp
+            ${BULL_SRC_NETWORK_SOCKET}/UdpSocket.cpp
             ${BULL_SRC_NETWORK_SOCKET}/UdpSocketImpl.hpp
             ${BULL_SRC_NETWORK_SOCKET}/UdpSocketImpl.cpp
         )

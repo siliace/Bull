@@ -50,12 +50,7 @@ namespace Bull
         {
             if(!m_sockets.empty())
             {
-                int result = poll(m_sockets, -1);
-
-                if(result != SocketPollerImplType::SocketError)
-                {
-                    return result > 0;
-                }
+                return poll(m_sockets, -1) > 0;
             }
 
             return false;
@@ -65,12 +60,7 @@ namespace Bull
         {
             if(!m_sockets.empty())
             {
-                int result = poll(m_sockets, static_cast<int>(timeout.asMilliseconds()));
-
-                if(result != SocketPollerImplType::SocketError)
-                {
-                    return result > 0;
-                }
+                return poll(m_sockets, static_cast<int>(timeout.asMilliseconds())) > 0;
             }
 
             return false;

@@ -29,10 +29,8 @@ namespace Bull
              * \param port    The NetPort to listen
              * \param address The IpAddress to listen
              *
-             * \return True if the UdpSocket was bound successfully
-             *
              */
-            bool bind(NetPort port, const IpAddressWrapper& address);
+            void bind(NetPort port, const IpAddressWrapper& address);
 
             /*! \brief Send data to a remote host
              *
@@ -40,12 +38,11 @@ namespace Bull
              * \param port    The NetPort of the remote host to use
              * \param data    Data to send
              * \param length  The length of data to send
-             * \param sent    The amount of bytes sent
              *
-             * \return True if the data were sent successfully
+             * \return The amount of bytes sent
              *
              */
-            bool sendTo(const IpAddressWrapper& address, NetPort port, const void* data, std::size_t length, std::size_t& sent) const;
+            std::size_t sendTo(const IpAddressWrapper& address, NetPort port, const void* data, std::size_t length) const;
 
             /*! \brief Receive data from a remote host
              *
@@ -53,12 +50,11 @@ namespace Bull
              * \param port     The NetPort of the remote host
              * \param data     Data to receive
              * \param length   The length of data to receive
-             * \param received The amount of bytes received
              *
-             * \return True if the data were received successfully
+             * \return The amount of bytes received
              *
              */
-            bool receiveFrom(IpAddressWrapper& address, NetPort& port, void* data, std::size_t length, std::size_t& received) const;
+            std::size_t receiveFrom(IpAddressWrapper& address, NetPort& port, void* data, std::size_t length) const;
 
         private:
 

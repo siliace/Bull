@@ -4,7 +4,6 @@
 #include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
 #include <Bull/Network/Socket/Socket.hpp>
-#include <Bull/Network/Socket/SocketState.hpp>
 
 namespace Bull
 {
@@ -45,13 +44,11 @@ namespace Bull
 
         /*! \brief Bind the UdpSocket to a NetPort
          *
-         * \param port    The NetPort to listen
-         * \param address The IpAddress to listen
-         *
-         * \return The new SocketState
+         * \param port The NetPort to listen
+         * \param host The IpAddress to listen
          *
          */
-        SocketState bind(NetPort port, const IpAddressWrapper& address = IpAddressV4::Any);
+        void bind(NetPort port, const IpAddressWrapper& host = IpAddressV4::Any);
 
         /*! \brief Tell whether the UdpSocket is bound
          *
@@ -71,12 +68,11 @@ namespace Bull
          * \param port    The NetPort of the remote host to use
          * \param data    Data to send
          * \param length  The length of data to send
-         * \param sent    The amount of bytes sent
          *
-         * \return The new SocketState
+         * \return The amount of bytes sent
          *
          */
-        SocketState sendTo(const IpAddressWrapper& address, NetPort port, const void* data, std::size_t length, std::size_t& sent) const;
+        std::size_t sendTo(const IpAddressWrapper& address, NetPort port, const void* data, std::size_t length) const;
 
         /*! \brief Receive data from a remote host
          *
@@ -84,12 +80,11 @@ namespace Bull
          * \param port     The NetPort of the remote host
          * \param data     Data to receive
          * \param length   The length of data to receive
-         * \param received The amount of bytes received
          *
-         * \return The new SocketState
+         * \return The amount of bytes received
          *
          */
-        SocketState receiveFrom(IpAddressWrapper& address, NetPort& port, void* data, std::size_t length, std::size_t& received) const;
+        std::size_t receiveFrom(IpAddressWrapper& address, NetPort& port, void* data, std::size_t length) const;
 
     private:
 

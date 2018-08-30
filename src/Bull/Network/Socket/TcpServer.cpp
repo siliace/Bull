@@ -1,7 +1,7 @@
 #include <thread>
 
-#include <Bull/Core/Time/Clock.hpp>
-#include <Bull/Core/Utility/Finally.hpp>
+#include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/LogicError.hpp>
 
 #include <Bull/Network/Socket/SocketImpl.hpp>
 #include <Bull/Network/Socket/TcpClient.hpp>
@@ -23,25 +23,21 @@ namespace Bull
         disconnect();
     }
 
-    SocketState TcpServer::listen(NetPort port, const IpAddressWrapper& host, int backlog)
+    void TcpServer::listen(NetPort port, const IpAddressWrapper& host, int backlog)
     {
-        if(port != NetPort_Any && host.isValid() && create(host.getProtocol()))
-        {
-            m_impl = std::make_unique<prv::TcpServerImpl>(getImpl());
+        Expect(host.isValid(), Throw(InvalidParameter, "TcpServer::listen", "Invalid IpAddress"));
+        Expect(port != NetPort_Any, Throw(InvalidParameter, "TcpServer::listen", "Invalid NetPort"));
 
-            if(m_impl->bind(host, port))
-            {
-                if(m_impl->listen(backlog))
-                {
-                    m_port    = port;
-                    m_backlog = backlog;
+        create(host.getProtocol());
 
-                    return SocketState();
-                }
-            }
-        }
+        m_impl = std::make_unique<prv::TcpServerImpl>(getImpl());
 
-        return SocketState(prv::SocketImpl::getLastError());
+        m_impl->bind(host, port);
+
+        m_impl->listen(backlog);
+
+        m_port    = port;
+        m_backlog = backlog;
     }
 
     bool TcpServer::isListening() const
@@ -49,51 +45,17 @@ namespace Bull
         return m_impl != nullptr;
     }
 
-    SocketState TcpServer::accept(TcpClient& client)
+    TcpClient TcpServer::accept()
     {
-        if(isListening())
-        {
-            NetPort port;
-            IpAddressWrapper address;
+        NetPort port;
+        TcpClient client;
+        IpAddressWrapper address;
 
-            SocketHandler socket = m_impl->accept(address, port);
+        Expect(isListening(), Throw(LogicError, "TcpServer::accept", "The TcpServer is not listening"));
 
-            if(socket != prv::SocketImpl::getInvalidSocket() && client.create(socket, address, port))
-            {
-                return SocketState();
-            }
-        }
+        client.create(m_impl->accept(address, port), address, port);
 
-        return SocketState(prv::SocketImpl::getLastError());
-    }
-
-    SocketState TcpServer::accept(TcpClient& client, const Duration& timeout, const Duration& pause)
-    {
-        if(isListening())
-        {
-            Clock clock;
-            bool blocking = isEnableBlockingMode();
-
-            Finally cleanup([this, blocking](){
-                enableBlockingMode(blocking);
-            });
-
-            enableBlockingMode(false);
-
-            clock.start();
-
-            do
-            {
-                if(accept(client))
-                {
-                    return SocketState();
-                }
-
-                std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<unsigned int>(pause.asMilliseconds())));
-            }while(clock.getElapsedTime() < timeout);
-        }
-
-        return SocketState(prv::SocketImpl::getLastError());
+        return client;
     }
 
     void TcpServer::disconnect()

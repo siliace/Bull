@@ -1,3 +1,5 @@
+#include <Bull/Core/Exception/InvalidParameter.hpp>
+
 #include <Bull/Network/Socket/SocketImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
@@ -45,25 +47,18 @@ namespace Bull
             return 0;
         }
 
-        SocketError SocketImpl::getLastError()
-        {
-            return SocketImplType::getLastError();
-        }
-
         SocketImpl::~SocketImpl() = default;
 
-        bool SocketImpl::create(NetProtocol protocol, SocketType type)
+        void SocketImpl::create(NetProtocol protocol, SocketType type)
         {
-            m_handler = socket(convertNetProtocol(protocol), convertSocketType(type), 0);
-
-            return isValid();
+            create(socket(convertNetProtocol(protocol), convertSocketType(type), 0));
         }
 
-        bool SocketImpl::create(SocketHandler handler)
+        void SocketImpl::create(SocketHandler handler)
         {
-            m_handler = handler;
+            Expect(handler != SocketImpl::getInvalidSocket(), Throw(InvalidParameter, "SocketImpl::create", "Invalid socket handler"));
 
-            return isValid();
+            m_handler = handler;
         }
 
         bool SocketImpl::isValid() const

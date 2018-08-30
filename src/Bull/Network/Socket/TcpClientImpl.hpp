@@ -22,39 +22,35 @@ namespace Bull
              * \param socket The SocketImpl to use
              *
              */
-            TcpClientImpl(const prv::SocketImpl& socket);
+            explicit TcpClientImpl(const prv::SocketImpl& socket);
 
             /*! \brief Connect the TcpClientImpl to a remote host
              *
              * \param address The IpAddress of the remote host
              * \param port    The NetPort of the remote host
              *
-             * \return True if the TcpClientImpl is connected
-             *
              */
-            bool connect(const IpAddressWrapper& address, NetPort port);
+            void connect(const IpAddressWrapper& address, NetPort port);
 
             /*! \brief Send a data buffer the remote host
              *
              * \param data   Data to send
              * \param length The length of data to send
-             * \param sent   The amount of bytes sent
              *
-             * \return True if data were sent successfully
+             * \return The amount of bytes sent
              *
              */
-            bool send(const void* data, std::size_t length, std::size_t& sent);
+            std::size_t send(const void* data, std::size_t length);
 
             /*! \brief Receive data from the remote host
              *
              * \param data     Data to receive
              * \param length   The length of data to receive
-             * \param received The amount of bytes received
              *
-             * \return True if data were received successfully
+             * \return The amount of bytes received
              *
              */
-            bool reveive(void* data , std::size_t length, std::size_t& received);
+            std::size_t receive(void* data , std::size_t length);
 
         private:
 

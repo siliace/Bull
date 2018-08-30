@@ -8,7 +8,6 @@
 
 #include <Bull/Network/Socket/Socket.hpp>
 #include <Bull/Network/Socket/SocketHandler.hpp>
-#include <Bull/Network/Socket/SocketState.hpp>
 
 namespace Bull
 {
@@ -33,7 +32,7 @@ namespace Bull
          * \param move The TcpClient to move
          *
          */
-        TcpClient(TcpClient&& move) noexcept = default;
+        TcpClient(TcpClient&& move) noexcept;
 
         /*! \brief Destructor
          *
@@ -47,29 +46,15 @@ namespace Bull
          * \return This
          *
          */
-        TcpClient& operator=(TcpClient&& move) noexcept = default;
+        TcpClient& operator=(TcpClient&& move) noexcept;
 
         /*! \brief Connect the TcpClient to a remote host
          *
          * \param address The IpAddress of the remote host
          * \param port    The NetPort of the remote host
          *
-         * \return The new SocketState
-         *
          */
-        SocketState connect(const IpAddressWrapper& address, NetPort port);
-
-        /*! \brief Connect the TcpClient to a remote host
-         *
-         * \param address The IpAddress of the remote host
-         * \param port    The NetPort of the remote host
-         * \param timeout The time before the function fail
-         * \param pause   The time between two try
-         *
-         * \return The new SocketState
-         *
-         */
-        SocketState connect(const IpAddressWrapper& address, NetPort port, const Duration& timeout, const Duration& pause = Duration::milliseconds(20.f));
+        void connect(const IpAddressWrapper& address, NetPort port);
 
         /*! \brief Tell whether the TcpClient is connected
          *
@@ -96,12 +81,11 @@ namespace Bull
          *
          * \param data   Data to send
          * \param length The length of data to send
-         * \param sent   The amount of bytes sent
          *
-         * \return The new SocketState
+         * \return The amount of bytes sent
          *
          */
-        SocketState send(const void* data, std::size_t length, std::size_t& sent);
+        std::size_t send(const void* data, std::size_t length);
 
         /*! \brief Read bytes from the TcpClient
          *
@@ -116,12 +100,11 @@ namespace Bull
          *
          * \param data     Data to receive
          * \param length   The length of data to receive
-         * \param received The amount of bytes received
          *
-         * \return The new SocketState
+         * \return The amount of bytes received
          *
          */
-        SocketState receive(void* data, std::size_t length, std::size_t& received);
+        std::size_t receive(void* data, std::size_t length);
 
         /*! \brief Flush the TcpClient
          *
@@ -175,10 +158,8 @@ namespace Bull
          * \param address The new IpAddress
          * \param port    The new NetPort
          *
-         * \return True if the TcpClient was created successfully
-         *
          */
-        bool create(SocketHandler handler, const IpAddressWrapper& address, NetPort port);
+        void create(SocketHandler handler, const IpAddressWrapper& address, NetPort port);
 
     private:
 

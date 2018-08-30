@@ -48,29 +48,43 @@ namespace Bull
         /// Nothing
     }
 
-    bool Socket::create(NetProtocol protocol)
+    void Socket::create(NetProtocol protocol)
     {
         if(m_impl->isValid())
         {
             close();
         }
 
-        return m_impl->create(protocol, m_type);
+        m_impl->create(protocol, m_type);
     }
 
-    bool Socket::create(SocketHandler handler)
+    void Socket::create(SocketHandler handler)
     {
         if(m_impl->isValid())
         {
             close();
         }
 
-        return m_impl->create(handler);
+        m_impl->create(handler);
     }
 
     void Socket::close()
     {
         m_impl.reset();
+    }
+
+    Socket::Socket(Socket&& move) noexcept
+    {
+        std::swap(m_impl, move.m_impl);
+        std::swap(m_type, move.m_type);
+    }
+
+    Socket& Socket::operator=(Socket&& move) noexcept
+    {
+        std::swap(m_impl, move.m_impl);
+        std::swap(m_type, move.m_type);
+
+        return *this;
     }
 
     const prv::SocketImpl& Socket::getImpl() const

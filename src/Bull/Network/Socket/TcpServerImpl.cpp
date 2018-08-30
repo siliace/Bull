@@ -1,3 +1,6 @@
+#include <Bull/Core/Exception/LogicError.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
+
 #include <Bull/Network/Address/SockAddrBuffer.hpp>
 #include <Bull/Network/Socket/SocketLength.hpp>
 #include <Bull/Network/Socket/TcpServerImpl.hpp>
@@ -7,52 +10,46 @@ namespace Bull
     namespace prv
     {
         TcpServerImpl::TcpServerImpl(const prv::SocketImpl& socket) :
-            m_socket(socket)
+                m_socket(socket)
         {
             /// Nothing
         }
 
-        bool TcpServerImpl::bind(const IpAddressWrapper& address, NetPort port)
+        void TcpServerImpl::bind(const IpAddressWrapper& address, NetPort port)
         {
-            if(m_socket.isValid())
-            {
-                SockAddrBuffer buffer(address, port);
+            Expect(m_socket.isValid(), Throw(LogicError, "TcpServerImpl::bind", "Invalid socket"));
 
-                return ::bind(m_socket.getHandler(), buffer.getSockAddr(), buffer.getLength()) == 0;
-            }
+            SockAddrBuffer buffer(address, port);
 
-            return false;
+            int ret = ::bind(m_socket.getHandler(), buffer.getSockAddr(), buffer.getLength());
+
+            Expect(ret == 0, Throw(InternalError, "TcpServerImpl::bind", "Failed to bind the socket"));
         }
 
-        bool TcpServerImpl::listen(int backlog)
+        void TcpServerImpl::listen(int backlog)
         {
-            if(m_socket.isValid())
-            {
-                return ::listen(m_socket.getHandler(), backlog) == 0;
-            }
+            Expect(m_socket.isValid(), Throw(LogicError, "TcpServerImpl::listen", "Invalid socket"));
 
-            return false;
+            int ret = ::listen(m_socket.getHandler(), backlog);
+
+            Expect(ret == 0, Throw(InternalError, "TcpServerImpl::listen", "Failed to listen the port"));
         }
 
         SocketHandler TcpServerImpl::accept(IpAddressWrapper& address, NetPort& port)
         {
-            SocketHandler client = SocketImpl::getInvalidSocket();
+            Expect(m_socket.isValid(), Throw(LogicError, "TcpServerImpl::accept", "Invalid socket"));
 
-            if(m_socket.isValid())
-            {
-                sockaddr addr;
-                SocketLength length = sizeof(sockaddr);
+            sockaddr addr;
+            SocketLength length = sizeof(sockaddr);
 
-                client = ::accept(m_socket.getHandler(), &addr, &length);
+            SocketHandler client = ::accept(m_socket.getHandler(), &addr, &length);
 
-                if(client != SocketImpl::getInvalidSocket())
-                {
-                    SockAddrBuffer buffer(addr, length);
+            Expect(client != SocketImpl::getInvalidSocket(), Throw(InternalError, "TcpServerImpl::accept", "Failed to accept client"));
 
-                    port = buffer.getPort();
-                    address = buffer.getIpAddress();
-                }
-            }
+            SockAddrBuffer buffer(addr, length);
+
+            port = buffer.getPort();
+            address = buffer.getIpAddress();
 
             return client;
         }

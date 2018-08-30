@@ -48,10 +48,8 @@ namespace Bull
          * \param socket The Socket to add
          * \param events Events to listen
          *
-         * \return True if the Socket was add successfully
-         *
          */
-        bool add(const Socket& socket, SocketPollerEvent event);
+        void add(const Socket& socket, SocketPollerEvent event);
 
         /*! \brief Remove a Socket from SocketPoller
          *
@@ -67,7 +65,7 @@ namespace Bull
 
         /*! \brief Wait until a Socket is ready to read or write
          *
-         * \return True if the SocketPoller waited successfully
+         * \return True if at less one socket can be read or written
          *
          */
         bool wait();
@@ -76,7 +74,7 @@ namespace Bull
          *
          * \param timeout The time before the function fail
          *
-         * \return True if the SocketPoller waited successfully
+         * \return True if at less one socket can be read or written
          *
          */
         bool wait(const Duration& timeout);
