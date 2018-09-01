@@ -35,6 +35,11 @@ namespace Bull
 
     Path Path::resolve(const String& child) const
     {
+        if(child.at(0) == Separator)
+        {
+            return Path(toString() + child);
+        }
+
         return Path(toString() + Separator + child);
     }
 
