@@ -3,11 +3,14 @@
 
 namespace Bull
 {
-    thread_local const Context* Context::s_active = nullptr;
+    namespace
+    {
+        thread_local const Context* g_active = nullptr;
+    }
 
     const Context* Context::getActive()
     {
-        return s_active;
+        return g_active;
     }
 
     Context::Context() :
@@ -37,7 +40,7 @@ namespace Bull
     {
         m_context->setActive(active);
 
-        s_active = active ? this : nullptr;
+        g_active = active ? this : nullptr;
     }
 
     const ContextSettings& Context::getSettings() const

@@ -28,10 +28,6 @@ namespace Bull
          */
         static const Context* getActive();
 
-    private:
-
-        static thread_local const Context* s_active; /*!< The thread local pointer to the active context */
-
     public:
 
         /*! \brief Default constructor
