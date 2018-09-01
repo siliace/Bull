@@ -107,7 +107,7 @@ namespace Bull
          * \return Return the list of content entity
          *
          */
-        std::vector<Path> getContent(Uint32 flags = DirectorySearchFlag_All);
+        std::vector<Path> getContent(Uint32 flags = DirectorySearchFlag_All) const;
 
         /*! \brief Get the path of the directory
          *

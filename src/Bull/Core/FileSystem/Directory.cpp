@@ -61,7 +61,7 @@ namespace Bull
         m_impl = prv::DirectoryImpl::createInstance(path);
     }
 
-    std::vector<Path> Directory::getContent(Uint32 flags)
+    std::vector<Path> Directory::getContent(Uint32 flags) const
     {
         return m_impl->getContent(flags);
     }
