@@ -62,7 +62,7 @@ namespace Bull
          */
         void setSize(std::size_t size);
 
-        /*! \brief The the first occurence of a String
+        /*! \brief The the first occurrence of a String
          *
          * \param search The String to search
          *
@@ -71,7 +71,7 @@ namespace Bull
          */
         std::size_t first(const String& search) const;
 
-        /*! \brief The the last occurence of a String
+        /*! \brief The the last occurrence of a String
          *
          * \param search The String to search
          *
