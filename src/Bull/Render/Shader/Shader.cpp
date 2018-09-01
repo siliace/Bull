@@ -295,14 +295,11 @@ namespace Bull
 
         gl::getProgramiv(m_program, GL_PROGRAM_BINARY_LENGTH, &length);
 
-        if(length)
-        {
-            shaderBinary.content.resize(length);
+        shaderBinary.content.resize(length);
 
-            gl::getProgramBinary(getSystemHandler(), length, nullptr, &shaderBinary.format, &shaderBinary.content[0]);
+        gl::getProgramBinary(getSystemHandler(), length, nullptr, &shaderBinary.format, &shaderBinary.content[0]);
 
-            Expect(shaderBinary.isValid(), Throw(InternalError, "Shader::getBinary", "Failed to download program binary"));
-        }
+        Expect(shaderBinary.isValid(), Throw(InternalError, "Shader::getBinary", "Failed to download program binary"));
 
         return shaderBinary;
     }
@@ -319,11 +316,8 @@ namespace Bull
 
         gl::getProgramiv(m_program, GL_INFO_LOG_LENGTH, &capacity);
 
-        if(capacity)
-        {
-            message.setSize(static_cast<std::size_t>(capacity));
-            gl::getProgramInfoLog(m_program, capacity, nullptr, &message[0]);
-        }
+        message.setSize(static_cast<std::size_t>(capacity));
+        gl::getProgramInfoLog(m_program, capacity, nullptr, &message[0]);
 
         return message;
     }
