@@ -21,9 +21,10 @@ namespace Bull
         /// Nothing
     }
 
-    String::String(const char* string, std::size_t size)
+    String::String(const char* string, std::size_t size) :
+        m_string(string, size)
     {
-        m_string.insert(0, string, size);
+        /// Nothing
     }
 
     void String::setSize(std::size_t size)
