@@ -67,7 +67,12 @@ namespace Bull
 
                 if(fileName != "." && fileName != "..")
                 {
-                    content.push_back(m_path.resolve(m_result.cFileName));
+                    Path child = m_path.resolve(m_result.cFileName);
+
+                    if((child.isFile() && (flags & DirectorySearchFlag_Files)) || (child.isDirectory() && (flags & DirectorySearchFlag_Directories)))
+                    {
+                        content.push_back(child);
+                    }
                 }
             }while(FindNextFile(m_handler, &m_result));
 
