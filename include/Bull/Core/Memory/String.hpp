@@ -89,6 +89,26 @@ namespace Bull
          */
         std::size_t find(const String& search) const;
 
+        /*! \brief Tell whether the String starts with a given String
+         *
+         * \param search        The String to search
+         * \param caseSensitive True to search case sensitively
+         *
+         * \return True if the String starts with the searched one
+         *
+         */
+        bool startsWith(const String& search, bool caseSensitive = true) const;
+
+        /*! \brief Tell whether the String ends with a given String
+         *
+         * \param search        The String to search
+         * \param caseSensitive True to search case sensitively
+         *
+         * \return True if the String ends with the searched one
+         *
+         */
+        bool endsWith(const String& search, bool caseSensitive = true) const;
+
         /*! \brief Insert a String at a given position
          *
          * \param string   The String to insert
@@ -133,6 +153,32 @@ namespace Bull
          *
          */
         std::size_t replace(const String& search, const String& replace);
+
+        /*! \brief Convert the String to a lowercase String
+         *
+         * Convert characters of the String in uppercase to lowercase. If a character is not a letter
+         * or is already in lowercase, its ignored
+         *
+         * \param begin The index of the first character of the String to convert to lowercase
+         * \param end   The index of the last character of the String to convert to lowercase
+         *
+         * \return The lowercase String
+         *
+         */
+        String toLowercase(std::size_t begin = 0, std::size_t end = InvalidPosition) const;
+
+        /*! \brief Convert the String to a lowercase String
+         *
+         * Convert characters of the String in lowercase to uppercase. If a character is not a letter
+         * or is already in uppercase, its ignored
+         *
+         * \param begin The index of the first character of the String to convert to uppercase
+         * \param end   The index of the last character of the String to convert to uppercase
+         *
+         * \return The uppercase String
+         *
+         */
+        String toUppercase(std::size_t begin = 0, std::size_t end = InvalidPosition) const;
 
         /*! \brief Tell whether the String is empty
          *

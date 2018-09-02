@@ -3,6 +3,10 @@
 #include <Bull/Core/IO/InStringStream.hpp>
 #include <Bull/Core/IO/TextReader.hpp>
 #include <Bull/Core/Memory/RangeCheck.hpp>
+#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Utility/Character.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
+
 
 namespace Bull
 {
@@ -40,6 +44,27 @@ namespace Bull
     std::size_t String::find(const String& search) const
     {
         return m_string.find(search.m_string);
+    }
+
+    bool String::startsWith(const String& search, bool caseSensitive) const
+    {
+        if(caseSensitive)
+        {
+            return find(search) == 0;
+        }
+
+        return subString(0, search.getSize()).toUppercase() == search.toUppercase();
+    }
+
+    bool String::endsWith(const String& search, bool caseSensitive) const
+    {
+        if(caseSensitive)
+        {
+            return subString(getSize() - search.getSize()) == search;
+
+        }
+
+        return subString(getSize() - search.getSize()).toUppercase() == search.toUppercase();
     }
 
     void String::insert(const String& string, size_t position)
@@ -90,6 +115,30 @@ namespace Bull
         }
 
         return count;
+    }
+
+    String String::toLowercase(size_t begin, size_t end) const
+    {
+        String lower = *this;
+
+        for(std::size_t i = begin; i < std::min(getSize(), end); i++)
+        {
+            lower.at(i) = Character::toLower(at(i));
+        }
+
+        return lower;
+    }
+
+    String String::toUppercase(size_t begin, size_t end) const
+    {
+        String upper = *this;
+
+        for(std::size_t i = begin; i < std::min(getSize(), end); i++)
+        {
+            upper.at(i) = Character::toUpper(at(i));
+        }
+
+        return upper;
     }
 
     bool String::isEmpty() const
