@@ -1,5 +1,6 @@
 #include <limits>
 
+#include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
 #include <Bull/Core/Window/Win32/WindowImplWin32.hpp>
 #include <Bull/Core/Window/WindowStyle.hpp>
@@ -15,7 +16,7 @@ namespace Bull
             unsigned int instanceCounter = 0;
         }
 
-        bool WindowImplWin32::registerWindowClass()
+        void WindowImplWin32::registerWindowClass()
         {
             WNDCLASSEXW winClass;
 
@@ -32,19 +33,23 @@ namespace Bull
             winClass.lpszClassName = windowClassName;
             winClass.hIconSm       = nullptr;
 
-            return RegisterClassExW(&winClass) == TRUE;
+            Expect(RegisterClassExW(&winClass) != 0, Throw(Win32Error, "WindowImplWin32::registerWindowClass", "Failed to register window class"));
         }
 
         LRESULT CALLBACK WindowImplWin32::globalEvent(HWND handler, UINT message, WPARAM wParam, LPARAM lParam)
         {
+            WindowImplWin32* window;
+
             if(message == WM_CREATE)
             {
-                WindowImplWin32* createdImpl  = static_cast<WindowImplWin32*>(reinterpret_cast<CREATESTRUCT*>(lParam)->lpCreateParams);
+                window = static_cast<WindowImplWin32*>(reinterpret_cast<CREATESTRUCT*>(lParam)->lpCreateParams);
 
-                SetWindowLongPtr(handler, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(createdImpl));
+                SetWindowLongPtr(handler, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(window));
             }
-
-            WindowImplWin32* window = reinterpret_cast<WindowImplWin32*>(GetWindowLongPtrW(handler, GWLP_USERDATA));
+            else
+            {
+                window = reinterpret_cast<WindowImplWin32*>(GetWindowLongPtrW(handler, GWLP_USERDATA));
+            }
 
             if(window)
             {

@@ -15,10 +15,10 @@ namespace Bull
 
             /*! \brief Register the window class
              *
-             * \return Return true if the class was registered successfully, false otherwise
+             * \throw Win32Error if the window class failed to be register
              *
              */
-            static bool registerWindowClass();
+            static void registerWindowClass();
 
             /*! \brief Window callback event
              *
