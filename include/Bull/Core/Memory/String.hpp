@@ -134,7 +134,7 @@ namespace Bull
          */
         String subString(std::size_t begin, std::size_t end = InvalidPosition) const;
 
-        /*! \brief Explose the String to tokens
+        /*! \brief Explode the String to tokens
          *
          * \param separator   The character between two tokens
          * \param ignoreEmpty True to ignore empty tokens
