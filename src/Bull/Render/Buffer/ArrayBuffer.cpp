@@ -22,7 +22,7 @@ namespace Bull
         fill(&vertices[0], getCapacity(), 0);
     }
 
-    void ArrayBuffer::setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride, std::size_t start)
+    void ArrayBuffer::setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride, std::size_t start) const
     {
         bind();
 

@@ -55,7 +55,7 @@ namespace Bull
          * \param start  The beginning of the attribute in the stride
          *
          */
-        void setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride = 0, std::size_t start = 0);
+        void setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride = 0, std::size_t start = 0) const;
 
         /*! \brief Set a buffer array attribute divisor
          *
