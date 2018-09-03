@@ -3,11 +3,12 @@
 
 #include <Bull/Graphics/Model/Material.hpp>
 #include <Bull/Graphics/Model/Mesh.hpp>
-#include <Bull/Graphics/Model/Transformable.hpp>
+#include <Bull/Graphics/Rendering/Transformable.hpp>
+#include <Bull/Graphics/Rendering/Renderable.hpp>
 
 #include <Bull/Render/Shader/Shader.hpp>
 
-class Cube : public Bull::Transformable
+class Cube : public Bull::Transformable, public Bull::Renderable
 {
 public:
 
@@ -15,7 +16,7 @@ public:
 
     Cube(Cube&& cube) noexcept = default;
 
-    void render(Bull::Shader& shader);
+    void render(const Bull::Shader& shader) const override;
 
 private:
 

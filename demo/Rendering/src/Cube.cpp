@@ -75,7 +75,7 @@ Cube::Cube(const Bull::Material& material) :
     /// Nothing
 }
 
-void Cube::render(Bull::Shader& shader)
+void Cube::render(const Bull::Shader& shader) const
 {
     shader.setUniformMatrix("model", getModelMatrix());
 

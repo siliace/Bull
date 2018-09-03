@@ -1,4 +1,4 @@
-#include <Bull/Graphics/Model/Transformable.hpp>
+#include <Bull/Graphics/Rendering/Transformable.hpp>
 
 namespace Bull
 {
