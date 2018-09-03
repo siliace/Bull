@@ -5,8 +5,8 @@
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
-#include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
+#include <Bull/Network/Address/NetProtocol.hpp>
 #include <Bull/Network/Socket/SocketHandler.hpp>
 #include <Bull/Network/Socket/SocketType.hpp>
 

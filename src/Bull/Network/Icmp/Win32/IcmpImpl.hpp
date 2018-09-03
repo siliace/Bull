@@ -3,7 +3,7 @@
 
 #include <Bull/Core/Time/Duration.hpp>
 
-#include <Bull/Network/Address/IpAddressWrapper.hpp>
+#include <Bull/Network/Address/IpAddressV4.hpp>
 
 namespace Bull
 {

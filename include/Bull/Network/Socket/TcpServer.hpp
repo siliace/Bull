@@ -3,18 +3,11 @@
 
 #include <Bull/Core/Time/Duration.hpp>
 
-#include <Bull/Network/Address/IpAddressWrapper.hpp>
-#include <Bull/Network/Socket/Socket.hpp>
+#include <Bull/Network/Address/IpAddressV4.hpp>
+#include <Bull/Network/Socket/TcpClient.hpp>
 
 namespace Bull
 {
-    class TcpClient;
-
-    namespace prv
-    {
-        class TcpServerImpl;
-    }
-
     class BULL_NETWORK_API TcpServer : public Socket
     {
     public:
@@ -56,7 +49,7 @@ namespace Bull
          * \param backlog The number of simultaneous active connection on the TcpServer
          *
          */
-        void listen(NetPort port, const IpAddressWrapper& host = IpAddressV4::Any, int backlog = UnlimitedBacklog);
+        void listen(NetPort port, const IpAddress& host = IpAddressV4::Any, int backlog = UnlimitedBacklog);
 
         /*! \brief Tell whether the TcpServer is listening a NetPort
          *
@@ -93,9 +86,8 @@ namespace Bull
 
     private:
 
-        std::unique_ptr<prv::TcpServerImpl> m_impl;
-        NetPort                             m_port;
-        int                                 m_backlog;
+        NetPort m_port;
+        int     m_backlog;
     };
 }
 

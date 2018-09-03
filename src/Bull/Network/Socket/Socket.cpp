@@ -1,3 +1,5 @@
+#include <Bull/Core/Exception/LogicError.hpp>
+
 #include <Bull/Network/Socket/Socket.hpp>
 #include <Bull/Network/Socket/SocketImpl.hpp>
 
@@ -8,37 +10,35 @@ namespace Bull
         close();
     }
 
-    SocketType Socket::getType() const
+    bool Socket::isValid() const
     {
-        return m_type;
+        return m_impl->isValid();
     }
 
     void Socket::enableBlockingMode(bool enable)
     {
-        if(m_impl->isValid())
-        {
-            m_impl->enableBlockingMode(enable);
-        }
+        Expect(isValid(), Throw(LogicError, "Socket::enableBlockingMode", "Invalid Socket"));
+
+        m_impl->enableBlockingMode(enable);
     }
 
     bool Socket::isEnableBlockingMode() const
     {
-        if(m_impl->isValid())
-        {
-            return m_impl->isEnableBlockingMode();
-        }
+        Expect(isValid(), Throw(LogicError, "Socket::isEnableBlockingMode", "Invalid Socket"));
 
-        return false;
+        return m_impl->isEnableBlockingMode();
     }
 
     std::size_t Socket::getPendingLength() const
     {
-        if(m_impl->isValid())
-        {
-            return m_impl->getPendingLength();
-        }
+        Expect(isValid(), Throw(LogicError, "Socket::getPendingLength", "Invalid Socket"));
 
-        return 0;
+        return m_impl->getPendingLength();
+    }
+
+    SocketType Socket::getType() const
+    {
+        return m_type;
     }
 
     Socket::Socket(SocketType type) :
@@ -87,8 +87,10 @@ namespace Bull
         return *this;
     }
 
-    const prv::SocketImpl& Socket::getImpl() const
+    SocketHandler Socket::getHandler() const
     {
-        return *m_impl;
+        Expect(isValid(), Throw(LogicError, "Socket::getHandler", "Invalid Socket"));
+
+        return m_impl->getHandler();
     }
 }

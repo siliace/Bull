@@ -14,6 +14,13 @@ namespace Bull
          */
         IpAddressV6();
 
+        /*! \brief Constructor
+         *
+         * \param bytes Bytes of the IpAddressV6
+         *
+         */
+        explicit IpAddressV6(const ByteArray& bytes);
+
         /*! \brief Convert the IpAddressV6 to a String
          *
          * \return The IpAddressV6 as a String

@@ -93,10 +93,11 @@ namespace Bull
          */
         explicit IpAddress(std::size_t size, bool valid = true);
 
+        ByteArray m_bytes;
+
     private:
 
         bool m_valid;
-        ByteArray m_bytes;
     };
 }
 

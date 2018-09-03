@@ -1,7 +1,9 @@
 #ifndef BULL_NETWORK_ADDRESS_SOCKADDRBUFFER_HPP
 #define BULL_NETWORK_ADDRESS_SOCKADDRBUFFER_HPP
 
-#include <Bull/Network/Address/IpAddressWrapper.hpp>
+#include <memory>
+
+#include <Bull/Network/Address/IpAddress.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
 #include <Bull/Network/Socket/SocketHeader.hpp>
 
@@ -23,11 +25,11 @@ namespace Bull
 
             /*! \brief Constructor
              *
-             * \param wrapper The IpAddress to convert
+             * \param address The IpAddress to convert
              * \param port    The NetPort to convert
              *
              */
-            SockAddrBuffer(const IpAddressWrapper& wrapper, NetPort port);
+            SockAddrBuffer(const IpAddress& address, NetPort port);
 
             /*! \brief Get the NetPort of the SockAddrBuffer
              *
@@ -41,7 +43,7 @@ namespace Bull
              * \param return The IpAddress
              *
              */
-            IpAddressWrapper getIpAddress();
+            std::unique_ptr<IpAddress> getIpAddress();
 
             /*! \brief Get the length of the SockAddrBuffer
              *
@@ -80,14 +82,16 @@ namespace Bull
              * \param return The IpAddress
              *
              */
-            IpAddressV4 createFromSockAddrV4() const;
+            std::unique_ptr<IpAddress> createFromSockAddrV4() const;
 
             /*! \brief Create an IpAddressV6 from a SockAddrBuffer
              *
              * \param return The IpAddress
              *
              */
-            IpAddressV6 createFromSockAddrV6() const;
+            std::unique_ptr<IpAddress> createFromSockAddrV6() const;
+
+        private:
 
             sockaddr m_addr;
             int      m_length;

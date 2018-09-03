@@ -24,11 +24,11 @@ namespace Bull
             Expect(error == 0, Throw(Win32Error, "IpAddressImpl::resolve", "Failed to resolve hostname " + hostname));
 
             SockAddrBuffer buffer((*info->ai_addr), info->ai_addrlen);
-            const IpAddress& address = buffer.getIpAddress().getAddress();
+            std::unique_ptr<IpAddress> address = buffer.getIpAddress();
 
-            for(std::size_t i = 0; i < address.getByteCount(); i++)
+            for(std::size_t i = 0; i < address->getByteCount(); i++)
             {
-                bytes[i] = address.at(i);
+                bytes[i] = address->at(i);
             }
 
             freeaddrinfo(info);

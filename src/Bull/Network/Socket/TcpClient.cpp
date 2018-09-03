@@ -1,12 +1,12 @@
 #include <thread>
 
 #include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/LogicError.hpp>
 #include <Bull/Core/Time/Clock.hpp>
 
-#include <Bull/Network/Address/IpAddressWrapper.hpp>
+#include <Bull/Network/Address/SockAddrBuffer.hpp>
 #include <Bull/Network/Socket/TcpClient.hpp>
-#include <Bull/Network/Socket/TcpClientImpl.hpp>
 
 namespace Bull
 {
@@ -16,12 +16,11 @@ namespace Bull
         /// Nothing
     }
 
-    TcpClient::TcpClient(TcpClient&& move) noexcept :
-        Socket(std::move(move))
+    TcpClient::TcpClient(TcpClient&& right) noexcept :
+        Socket(std::move(right))
     {
-        std::swap(m_impl, move.m_impl);
-        std::swap(m_hostPort, move.m_hostPort);
-        std::swap(m_hostAddress, move.m_hostAddress);
+        std::swap(m_hostPort, right.m_hostPort);
+        std::swap(m_hostAddress, right.m_hostAddress);
     }
 
     TcpClient::~TcpClient()
@@ -29,40 +28,40 @@ namespace Bull
         close();
     }
 
-    TcpClient& TcpClient::operator=(TcpClient&& move) noexcept
+    TcpClient& TcpClient::operator=(TcpClient&& right) noexcept
     {
-        std::swap(m_impl, move.m_impl);
-        std::swap(m_hostPort, move.m_hostPort);
-        std::swap(m_hostAddress, move.m_hostAddress);
+        std::swap(m_hostPort, right.m_hostPort);
+        std::swap(m_hostAddress, right.m_hostAddress);
 
-        Socket::operator=(std::move(move));
+        Socket::operator=(std::move(right));
 
         return *this;
     }
 
-    void TcpClient::connect(const IpAddressWrapper& address, NetPort port)
+    void TcpClient::connect(const IpAddress& address, NetPort port)
     {
         Expect(address.isValid(), Throw(InvalidParameter, "TcpClient::connect", "Invalid IpAddress"));
         Expect(port != NetPort_Any, Throw(InvalidParameter, "TcpClient::connect", "Invalid NetPort"));
 
         Socket::create(address.getProtocol());
 
-        m_impl = std::make_unique<prv::TcpClientImpl>(getImpl());
+        prv::SockAddrBuffer buffer(address, port);
 
-        m_impl->connect(address, port);
+        int ret = ::connect(getHandler(), buffer.getSockAddr(), buffer.getLength());
+
+        Expect(ret == 0, Throw(InternalError, "TcpClientImpl::connect", "Failed to connect to the remote host"));
     }
 
     bool TcpClient::isConnected() const
     {
-        return m_impl != nullptr;
+        return isValid();
     }
 
     void TcpClient::disconnect()
     {
         close();
-        m_impl.reset();
+        m_hostAddress.reset();
         m_hostPort = NetPort_Any;
-        m_hostAddress = IpAddressV4::None;
     }
 
     size_t TcpClient::write(const ByteArray& bytes)
@@ -75,7 +74,11 @@ namespace Bull
         Expect(data && length, Throw(InvalidParameter, "TcpClient::send", "Invalid buffer"));
         Expect(isConnected(), Throw(LogicError, "TcpClient::send", "TcpClient is not connected"));
 
-        return m_impl->send(data, length);
+        int sent = ::send(getHandler(), reinterpret_cast<const char*>(data), length, 0);
+
+        Expect(sent >= 0, Throw(InternalError, "TcpClientImpl::send", "Failed to send data to the remote host"));
+
+        return sent;
     }
 
     ByteArray TcpClient::read(std::size_t length)
@@ -94,7 +97,11 @@ namespace Bull
         Expect(data && length, Throw(InvalidParameter, "TcpClient::send", "Invalid buffer"));
         Expect(isConnected(), Throw(LogicError, "TcpClient::send", "TcpClient is not connected"));
 
-        return m_impl->receive(data, length);
+        int received = ::recv(getHandler(), reinterpret_cast<char*>(data), length, 0);
+
+        Expect(received >= 0, Throw(InternalError, "TcpClientImpl::receive", "Failed to receive data from the remote host"));
+
+        return received;
     }
 
     void TcpClient::flush()
@@ -128,15 +135,14 @@ namespace Bull
     {
         Expect(isConnected(), Throw(LogicError, "TcpClient::send", "TcpClient is not connected"));
 
-        return m_hostAddress.getAddress();
+        return *m_hostAddress;
     }
 
-    void TcpClient::create(SocketHandler handler, const IpAddressWrapper& address, NetPort port)
+    void TcpClient::create(SocketHandler handler, std::unique_ptr<IpAddress>&& address, NetPort port)
     {
         Socket::create(handler);
 
         m_hostPort    = port;
-        m_hostAddress = address;
-        m_impl        = std::make_unique<prv::TcpClientImpl>(getImpl());
+        m_hostAddress = std::move(address);
     }
 }

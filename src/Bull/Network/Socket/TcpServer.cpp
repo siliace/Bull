@@ -1,12 +1,13 @@
 #include <thread>
 
 #include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/LogicError.hpp>
 
+#include <Bull/Network/Address/SockAddrBuffer.hpp>
+#include <Bull/Network/Socket/SocketLength.hpp>
 #include <Bull/Network/Socket/SocketImpl.hpp>
-#include <Bull/Network/Socket/TcpClient.hpp>
 #include <Bull/Network/Socket/TcpServer.hpp>
-#include <Bull/Network/Socket/TcpServerImpl.hpp>
 
 namespace Bull
 {
@@ -21,7 +22,6 @@ namespace Bull
     TcpServer::TcpServer(TcpServer&& right) noexcept :
         Socket(std::move(right))
     {
-        std::swap(m_impl, right.m_impl);
         std::swap(m_port, right.m_port);
         std::swap(m_backlog, right.m_backlog);
     }
@@ -33,7 +33,6 @@ namespace Bull
 
     TcpServer& TcpServer::operator=(TcpServer&& right) noexcept
     {
-        std::swap(m_impl, right.m_impl);
         std::swap(m_port, right.m_port);
         std::swap(m_backlog, right.m_backlog);
 
@@ -42,18 +41,24 @@ namespace Bull
         return *this;
     }
 
-    void TcpServer::listen(NetPort port, const IpAddressWrapper& host, int backlog)
+    void TcpServer::listen(NetPort port, const IpAddress& host, int backlog)
     {
         Expect(host.isValid(), Throw(InvalidParameter, "TcpServer::listen", "Invalid IpAddress"));
         Expect(port != NetPort_Any, Throw(InvalidParameter, "TcpServer::listen", "Invalid NetPort"));
 
+        int ret;
+
         create(host.getProtocol());
 
-        m_impl = std::make_unique<prv::TcpServerImpl>(getImpl());
+        prv::SockAddrBuffer buffer(host, port);
 
-        m_impl->bind(host, port);
+        ret = ::bind(getHandler(), buffer.getSockAddr(), buffer.getLength());
 
-        m_impl->listen(backlog);
+        Expect(ret == 0, Throw(InternalError, "TcpServerImpl::bind", "Failed to bind the socket"));
+
+        ret = ::listen(getHandler(), backlog);
+
+        Expect(ret == 0, Throw(InternalError, "TcpServerImpl::listen", "Failed to listen the port"));
 
         m_port    = port;
         m_backlog = backlog;
@@ -61,18 +66,24 @@ namespace Bull
 
     bool TcpServer::isListening() const
     {
-        return m_impl != nullptr;
+        return isValid();
     }
 
     TcpClient TcpServer::accept()
     {
-        NetPort port;
-        TcpClient client;
-        IpAddressWrapper address;
-
         Expect(isListening(), Throw(LogicError, "TcpServer::accept", "The TcpServer is not listening"));
 
-        client.create(m_impl->accept(address, port), address, port);
+        sockaddr addr;
+        TcpClient client;
+        prv::SocketLength length = sizeof(sockaddr);
+
+        SocketHandler clientHandler = ::accept(getHandler(), &addr, &length);
+
+        Expect(clientHandler != prv::SocketImpl::getInvalidSocket(), Throw(InternalError, "TcpServerImpl::accept", "Failed to accept client"));
+
+        prv::SockAddrBuffer buffer(addr, length);
+
+        client.create(clientHandler, buffer.getIpAddress(), buffer.getPort());
 
         return client;
     }
@@ -81,7 +92,6 @@ namespace Bull
     {
         close();
         m_backlog = 0;
-        m_impl.reset();
         m_port = NetPort_Any;
     }
 

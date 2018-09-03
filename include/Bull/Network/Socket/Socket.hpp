@@ -5,8 +5,9 @@
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
-#include <Bull/Network/Address/IpAddressWrapper.hpp>
 #include <Bull/Network/Address/NetPort.hpp>
+#include <Bull/Network/Address/NetProtocol.hpp>
+#include <Bull/Network/Export.hpp>
 #include <Bull/Network/Socket/SocketHandler.hpp>
 #include <Bull/Network/Socket/SocketType.hpp>
 
@@ -27,6 +28,13 @@ namespace Bull
          *
          */
         virtual ~Socket();
+
+        /*! \brief Tell whether the Socket is valid to be used
+         *
+         * \return True if the Socket is valid
+         *
+         */
+        bool isValid() const;
 
         /*! \brief Enable the blocking mode of the Socket
          *
@@ -104,12 +112,12 @@ namespace Bull
          */
         Socket& operator=(Socket&& move) noexcept;
 
-        /*! \brief Get the SocketImpl of the Socket
+        /*! \brief Get the underlying SocketHandler of the Socket
          *
-         * \return The SocketImpl
+         * \return The SocketHandler
          *
          */
-        const prv::SocketImpl& getImpl() const;
+        SocketHandler getHandler() const;
 
     private:
 

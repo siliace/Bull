@@ -2,6 +2,7 @@
 #include <Bull/Core/System/ConsoleOutput.hpp>
 #include <Bull/Core/Utility/StringUtils.hpp>
 
+#include <Bull/Network/Address/IpAddressV4.hpp>
 #include <Bull/Network/Socket/SocketPoller.hpp>
 #include <Bull/Network/Socket/TcpClient.hpp>
 

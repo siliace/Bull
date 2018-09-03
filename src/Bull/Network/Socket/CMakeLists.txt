@@ -19,16 +19,11 @@ target_sources(bull-network
             ${BULL_INC_NETWORK_SOCKET}/SocketType.hpp
             ${BULL_INC_NETWORK_SOCKET}/TcpClient.hpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpClient.cpp
-            ${BULL_SRC_NETWORK_SOCKET}/TcpClientImpl.hpp
-            ${BULL_SRC_NETWORK_SOCKET}/TcpClientImpl.cpp
             ${BULL_INC_NETWORK_SOCKET}/TcpServer.hpp
             ${BULL_SRC_NETWORK_SOCKET}/TcpServer.cpp
-            ${BULL_SRC_NETWORK_SOCKET}/TcpServerImpl.hpp
-            ${BULL_SRC_NETWORK_SOCKET}/TcpServerImpl.cpp
+            ${BULL_INC_NETWORK_SOCKET}/Datagram.hpp
             ${BULL_INC_NETWORK_SOCKET}/UdpSocket.hpp
             ${BULL_SRC_NETWORK_SOCKET}/UdpSocket.cpp
-            ${BULL_SRC_NETWORK_SOCKET}/UdpSocketImpl.hpp
-            ${BULL_SRC_NETWORK_SOCKET}/UdpSocketImpl.cpp
         )
 
 if(BULL_OS_WINDOWS)

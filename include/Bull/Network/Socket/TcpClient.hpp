@@ -6,17 +6,13 @@
 #include <Bull/Core/Memory/AbstractBuffer.hpp>
 #include <Bull/Core/Time/Duration.hpp>
 
+#include <Bull/Network/Address/IpAddress.hpp>
 #include <Bull/Network/Socket/Socket.hpp>
 #include <Bull/Network/Socket/SocketHandler.hpp>
 
 namespace Bull
 {
     class TcpServer;
-
-    namespace prv
-    {
-        class TcpClientImpl;
-    }
 
     class BULL_NETWORK_API TcpClient : public Socket, public InStream, public OutStream
     {
@@ -29,10 +25,10 @@ namespace Bull
 
         /*! \brief Constructor by movement
          *
-         * \param move The TcpClient to move
+         * \param right The TcpClient to move
          *
          */
-        TcpClient(TcpClient&& move) noexcept;
+        TcpClient(TcpClient&& right) noexcept;
 
         /*! \brief Destructor
          *
@@ -41,12 +37,12 @@ namespace Bull
 
         /*! \brief Basic assignment operator by movement
          *
-         * \param move The TcpClient to move
+         * \param right The TcpClient to move
          *
          * \return This
          *
          */
-        TcpClient& operator=(TcpClient&& move) noexcept;
+        TcpClient& operator=(TcpClient&& right) noexcept;
 
         /*! \brief Connect the TcpClient to a remote host
          *
@@ -54,7 +50,7 @@ namespace Bull
          * \param port    The NetPort of the remote host
          *
          */
-        void connect(const IpAddressWrapper& address, NetPort port);
+        void connect(const IpAddress& address, NetPort port);
 
         /*! \brief Tell whether the TcpClient is connected
          *
@@ -159,13 +155,12 @@ namespace Bull
          * \param port    The new NetPort
          *
          */
-        void create(SocketHandler handler, const IpAddressWrapper& address, NetPort port);
+        void create(SocketHandler handler, std::unique_ptr<IpAddress>&& address, NetPort port);
 
     private:
 
-        std::unique_ptr<prv::TcpClientImpl> m_impl;
-        NetPort                             m_hostPort;
-        IpAddressWrapper                    m_hostAddress;
+        NetPort                    m_hostPort;
+        std::unique_ptr<IpAddress> m_hostAddress;
     };
 }
 
