@@ -38,8 +38,18 @@ namespace Bull
         gl::drawArrays(primitiveMapper[primitive], start, count);
     }
 
+    void Drawer::drawArraysInstanced(Bull::RenderPrimitive primitive, std::size_t instanceCount, std::size_t start, std::size_t count)
+    {
+        gl::drawArraysInstanced(primitiveMapper[primitive], start, count, instanceCount);
+    }
+
     void Drawer::drawElements(RenderPrimitive primitive, std::size_t count, DataType type, const void* indices)
     {
         gl::drawElements(primitiveMapper[primitive], count, datatypeMapper[type], indices);
+    }
+
+    void Drawer::drawElementsInstanced(RenderPrimitive primitive, std::size_t instanceCount, std::size_t count, DataType type, const void* indices)
+    {
+        gl::drawElementsInstanced(primitiveMapper[primitive], count, datatypeMapper[type], indices, instanceCount);
     }
 }
