@@ -56,6 +56,14 @@ namespace Bull
          *
          */
         void setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride = 0, std::size_t start = 0);
+
+        /*! \brief Set a buffer array attribute divisor
+         *
+         * \param attrib  The attribute's index
+         * \param divisor The divisor
+         *
+         */
+        void setAttribDivisor(unsigned int attrib, unsigned int divisor) const;
     };
 }
 
