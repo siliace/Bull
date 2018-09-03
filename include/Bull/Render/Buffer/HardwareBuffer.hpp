@@ -40,6 +40,11 @@ namespace Bull
          */
         void create(std::size_t capacity, HardwareBufferUsage usage);
 
+        /*! \brief Bind the buffer
+         *
+         */
+        void bind() const;
+
         /*! \brief Fill the buffer
          *
          * \param data   Data to use to fill the buffer
@@ -113,11 +118,6 @@ namespace Bull
          *
          */
         HardwareBuffer& operator=(HardwareBuffer&& right) noexcept;
-
-        /*! \brief Bind the buffer
-         *
-         */
-        void bind() const;
 
         /*! \brief Get the buffer system handler
          *

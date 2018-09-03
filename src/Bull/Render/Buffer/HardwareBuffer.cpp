@@ -53,6 +53,13 @@ namespace Bull
         gl::bufferData(bufferTypeMapper[m_type], size, nullptr, bufferUsageMapper[usage]);
     }
 
+    void HardwareBuffer::bind() const
+    {
+        Expect(isValid(), Throw(LogicError, "HardwareBuffer::bind", "The buffer was not created"));
+
+        gl::bindBuffer(bufferTypeMapper[m_type], m_id);
+    }
+
     void HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
     {
         Expect(isValid(), Throw(LogicError, "HardwareBuffer::fill", "The buffer is not created"));
@@ -146,13 +153,6 @@ namespace Bull
         std::swap(m_type, right.m_type);
 
         return *this;
-    }
-
-    void HardwareBuffer::bind() const
-    {
-        Expect(isValid(), Throw(LogicError, "HardwareBuffer::bind", "The buffer was not created"));
-
-        gl::bindBuffer(bufferTypeMapper[m_type], m_id);
     }
 
     unsigned int HardwareBuffer::getSystemHandler() const
