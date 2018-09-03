@@ -62,9 +62,8 @@ namespace Bull
 
     void HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
     {
+        Expect(data && size, Throw(InvalidParameter, "HardwareBuffer::fill", "Invalid buffer"));
         Expect(isValid(), Throw(LogicError, "HardwareBuffer::fill", "The buffer is not created"));
-        Expect(data, Throw(LogicError, "HardwareBuffer::fill", "Invalid buffer pointer"));
-        Expect(size, Throw(InvalidParameter, "HardwareBuffer::fill", "Invalid buffer size"));
         Expect(size + offset <= getCapacity(), Throw(InvalidParameter, "HardwareBuffer::fill", "Invalid buffer size"));
 
         bind();
