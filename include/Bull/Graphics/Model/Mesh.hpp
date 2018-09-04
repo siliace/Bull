@@ -1,6 +1,8 @@
 #ifndef BULL_GRAPHICS_MESH_HPP
 #define BULL_GRAPHICS_MESH_HPP
 
+#include <Bull/Graphics/Export.hpp>
+
 #include <Bull/Render/Buffer/ArrayBuffer.hpp>
 #include <Bull/Render/Buffer/IndexBuffer.hpp>
 #include <Bull/Render/Buffer/VertexArrayObject.hpp>
@@ -8,7 +10,7 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API Mesh
+    class BULL_GRAPHICS_API Mesh
     {
     public:
 
