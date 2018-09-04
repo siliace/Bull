@@ -67,7 +67,7 @@ namespace Bull
 
     void File::open(const Path& path, Uint32 mode)
     {
-        Expect(path.isFile(), Throw(InvalidParameter, "File::File", "The path " + path.toString() + " is not a file"));
+        Expect(!path.isDirectory(), Throw(InvalidParameter, "File::File", "The path " + path.toString() + " is not a file"));
         Expect(File::exists(path) || mode != FileOpeningMode_Read, Throw(FileNotFound, "File::File", "The file " + path.toString() + " does not exists"));
 
         m_path = path;
