@@ -283,15 +283,19 @@ namespace Bull
             if(m_settings.antialiasing > 0 && wanted.antialiasing > 0)
             {
                 gl::enable(GL_MULTISAMPLE);
-
-                if(!gl::isEnabled(GL_MULTISAMPLE))
-                {
-                    m_settings.antialiasing = 0;
-                }
             }
             else
             {
                 m_settings.antialiasing = 0;
+            }
+
+            if(m_settings.stencil > 0 && wanted.stencil > 0)
+            {
+                gl::enable(GL_STENCIL_TEST);
+            }
+            else
+            {
+                m_settings.stencil = 0;
             }
         }
     }
