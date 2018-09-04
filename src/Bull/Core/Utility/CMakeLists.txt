@@ -3,6 +3,8 @@ set(BULL_SRC_CORE_UTILITY ${BULL_SRC_CORE}/Utility)
 
 target_sources(bull-core
         PUBLIC
+            ${BULL_INC_CORE_UTILITY}/AtInit.hpp
+            ${BULL_SRC_CORE_UTILITY}/AtInit.cpp
             ${BULL_INC_CORE_UTILITY}/Character.hpp
             ${BULL_SRC_CORE_UTILITY}/Character.cpp
             ${BULL_INC_CORE_UTILITY}/Color.hpp
