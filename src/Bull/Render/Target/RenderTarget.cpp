@@ -16,6 +16,11 @@ namespace Bull
                        static_cast<float>(alpha) / 255.f);
 
         gl::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        if(gl::isEnabled(GL_STENCIL_TEST))
+        {
+            gl::clear(GL_STENCIL_BUFFER_BIT);
+        }
     }
 
     void RenderTarget::clear(const Color& color)
