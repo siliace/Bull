@@ -52,6 +52,33 @@ namespace Bull
         Expect(ret == 0, Throw(InternalError, "TcpClientImpl::connect", "Failed to connect to the remote host"));
     }
 
+    void TcpClient::connect(const IpAddress& address, NetPort port, const Duration& timeout, const Duration& pause)
+    {
+        Expect(address.isValid(), Throw(InvalidParameter, "TcpClient::connect", "Invalid IpAddress"));
+        Expect(port != NetPort_Any, Throw(InvalidParameter, "TcpClient::connect", "Invalid NetPort"));
+
+        int ret;
+        Clock clock;
+
+        Socket::create(address.getProtocol());
+
+        prv::SockAddrBuffer buffer(address, port);
+
+        clock.start();
+
+        do
+        {
+            ret = ::connect(getHandler(), buffer.getSockAddr(), buffer.getLength());
+
+            if(ret != 0)
+            {
+                std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<long long>(pause.asMilliseconds())));
+            }
+        }while(ret != 0 && clock.getElapsedTime() < timeout);
+
+        Expect(ret == 0, Throw(InternalError, "TcpClientImpl::connect", "Failed to connect to the remote host"));
+    }
+
     bool TcpClient::isConnected() const
     {
         return isValid();

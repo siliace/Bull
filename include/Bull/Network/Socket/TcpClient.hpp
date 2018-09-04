@@ -52,6 +52,16 @@ namespace Bull
          */
         void connect(const IpAddress& address, NetPort port);
 
+        /*! \brief Connect the TcpClient to a remote host with a timeout
+         *
+         * \param address The IpAddress of the remote host
+         * \param port    The NetPort of the remote host
+         * \param timeout The timeout
+         * \param pause   The pause between two connection attempts
+         *
+         */
+        void connect(const IpAddress& address, NetPort port, const Duration& timeout, const Duration& pause = Duration::milliseconds(50.f));
+
         /*! \brief Tell whether the TcpClient is connected
          *
          * \return True if the TcpClient is connected
