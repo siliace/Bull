@@ -200,7 +200,7 @@ namespace Bull
          */
         EulerAngles<T> operator+(const EulerAngles<T>& right) const
         {
-            return EulerAngles<T>((*this)) += right;
+            return EulerAngles<T>(*this) += right;
         }
 
         /*! \brief Addition two EulerAngles
@@ -215,7 +215,6 @@ namespace Bull
             roll  += right.roll;
             pitch += right.pitch;
             yaw   += right.yaw;
-
 
             return (*this);
         }
