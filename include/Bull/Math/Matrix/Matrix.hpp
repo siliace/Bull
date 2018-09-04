@@ -110,6 +110,26 @@ namespace Bull
             return m_matrix != right.m_matrix;
         }
 
+        /*! \brief Get the transpose Matrix
+         *
+         * \return The transpose
+         *
+         */
+        Matrix<T, H, W> transpose() const
+        {
+            Matrix<T, H, W> transpose;
+
+            for(std::size_t i = 0; i < H; i++)
+            {
+                for(std::size_t j = 0; j < W; j++)
+                {
+                    transpose.at(i, j) = at(j, i);
+                }
+            }
+
+            return transpose;
+        }
+
         /*! \brief Access to a Matrix cell
          *
          * \param x The abscissa of the cell
