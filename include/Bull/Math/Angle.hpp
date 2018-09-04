@@ -87,12 +87,24 @@ namespace Bull
          */
         Angle<T>& normalize()
         {
+            const float pi2 = 2 * Pi;
+
             while(m_value >= 2 * Pi)
             {
-                m_value /= 2 * Pi;
+                m_value -= 2 * Pi;
             }
 
             return (*this);
+        }
+
+        float toDegree() const
+        {
+            return m_value * 180 / Pi;
+        }
+
+        float toRadian() const
+        {
+            return m_value;
         }
 
         /*! \brief Clamp the Angle
