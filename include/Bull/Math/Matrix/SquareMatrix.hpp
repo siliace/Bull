@@ -78,8 +78,8 @@ namespace Bull
             {
                 T sum = 0;
 
-                Vector<T, S> row = left.getRow(x);
-                Vector<T, S> column = right.getColumn(y);
+                Vector<T, S> row = right.getRow(x);
+                Vector<T, S> column = left.getColumn(y);
 
                 for(std::size_t i = 0; i < S; i++)
                 {
