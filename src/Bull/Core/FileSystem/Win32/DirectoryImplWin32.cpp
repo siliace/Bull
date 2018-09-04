@@ -18,12 +18,7 @@ namespace Bull
         {
             DWORD attribs = GetFileAttributes(path.toString().getBuffer());
 
-            Expect(
-                    attribs != INVALID_FILE_ATTRIBUTES,
-                    Throw(Win32Error, "DirectoryImplWin32::exists", "Failed to get information of the directory " + path.toString())
-            );
-
-            return attribs & FILE_ATTRIBUTE_DIRECTORY;
+            return (attribs != INVALID_FILE_ATTRIBUTES) && (attribs & FILE_ATTRIBUTE_DIRECTORY);
         }
 
         void DirectoryImplWin32::rename(const Path& path, const Path& newPath)
