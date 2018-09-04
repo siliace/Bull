@@ -10,7 +10,7 @@ namespace Bull
 
     void Transformable::scale(const Vector3F& scale)
     {
-        m_scale += scale;
+        m_scale *= scale;
     }
 
     void Transformable::rotate(const EulerAnglesF& rotation)
