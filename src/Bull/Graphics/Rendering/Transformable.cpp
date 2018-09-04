@@ -15,7 +15,7 @@ namespace Bull
 
     void Transformable::rotate(const EulerAnglesF& rotation)
     {
-        m_rotation += rotation;
+        m_rotation = EulerAnglesF::normalize(m_rotation += rotation);
     }
 
     void Transformable::move(const Vector3F& translation)
