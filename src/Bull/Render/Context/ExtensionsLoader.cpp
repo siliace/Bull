@@ -169,6 +169,7 @@ namespace gl
     PFNGLSHADERSOURCEPROC             shaderSource             = nullptr;
     PFNGLSTENCILFUNCPROC              stencilFunc              = nullptr;
     PFNGLSTENCILFUNCSEPARATEPROC      stencilFuncSeparate      = nullptr;
+    PFNGLSTENCILMASKPROC              stencilMask              = nullptr;
     PFNGLSTENCILOPPROC                stencilOp                = nullptr;
     PFNGLSTENCILOPSEPARATEPROC        stencilOpSeparate        = nullptr;
     PFNGLTEXIMAGE1DPROC               texImage1D               = nullptr;
@@ -434,6 +435,7 @@ namespace Bull
                 gl::shaderSource             = reinterpret_cast<PFNGLSHADERSOURCEPROC>(GlContext::getFunction("glShaderSource"));
                 gl::stencilFunc              = reinterpret_cast<PFNGLSTENCILFUNCPROC>(GlContext::getFunction("glStencilFunc"));
                 gl::stencilFuncSeparate      = reinterpret_cast<PFNGLSTENCILFUNCSEPARATEPROC>(GlContext::getFunction("glStencilFuncSeparate"));
+                gl::stencilMask              = reinterpret_cast<PFNGLSTENCILMASKPROC>(GlContext::getFunction("glStencilMask"));
                 gl::stencilOp                = reinterpret_cast<PFNGLSTENCILOPPROC>(GlContext::getFunction("glStencilOp"));
                 gl::stencilOpSeparate        = reinterpret_cast<PFNGLSTENCILOPSEPARATEPROC>(GlContext::getFunction("glStencilOpSeparate"));
                 gl::texImage2D               = reinterpret_cast<PFNGLTEXIMAGE2DPROC>(GlContext::getFunction("glTexImage2D"));

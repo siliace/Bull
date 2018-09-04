@@ -154,6 +154,7 @@ namespace gl
     extern PFNGLSHADERSOURCEPROC              shaderSource;
     extern PFNGLSTENCILFUNCPROC               stencilFunc;
     extern PFNGLSTENCILFUNCSEPARATEPROC       stencilFuncSeparate;
+    extern PFNGLSTENCILMASKPROC               stencilMask;
     extern PFNGLSTENCILOPPROC                 stencilOp;
     extern PFNGLSTENCILOPSEPARATEPROC         stencilOpSeparate;
     extern PFNGLTEXIMAGE1DPROC                texImage1D;
