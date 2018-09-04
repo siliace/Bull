@@ -3,13 +3,12 @@
 
 #include <map>
 
-#include <Bull/Core/Log/AbstractLogger.hpp>
-#include <Bull/Core/IO/TextWriter.hpp>
+#include <Bull/Core/Log/StreamLogger.hpp>
 #include <Bull/Core/System/ConsoleOutput.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API ConsoleLogger : public AbstractLogger
+    class BULL_CORE_API ConsoleLogger : public StreamLogger
     {
     public:
 
@@ -36,13 +35,6 @@ namespace Bull
 
     protected:
 
-        /*! \brief Write an entry in the StreamLogger
-         *
-         * \param entry The entry to write
-         *
-         */
-        void write(const String& entry) override;
-
         /*! \brief Format a log entry
          *
          * \param entry The log entry to format
@@ -59,7 +51,6 @@ namespace Bull
         using ColorMap = std::map<LogLevel, ConsoleColor>;
 
         ConsoleOutput m_output;
-        TextWriter    m_writer;
         ColorMap      m_levelTextColor;
         ColorMap      m_levelBackgroundColor;
     };

@@ -12,14 +12,9 @@ namespace Bull
     }
 
     FileLogger::FileLogger(const Path& path) :
-        m_file(path, FileOpeningMode_Truncate | FileOpeningMode_Write),
-        m_writer(m_file)
+        StreamLogger(m_file),
+        m_file(path, FileOpeningMode_Truncate | FileOpeningMode_Write)
     {
         /// Nothing
-    }
-
-    void FileLogger::write(const String& entry)
-    {
-        m_writer.writeLine(entry);
     }
 }
