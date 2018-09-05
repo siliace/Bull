@@ -23,9 +23,9 @@ Bull::Material loadMaterialFromPath(const Bull::Path& path)
 {
     Bull::Material material;
     Bull::ImageLoader imageLoader;
-    Bull::Texture& diffuse = textureManager.add(Bull::Texture::from(imageLoader.loadFromPath(path.resolve("container.png"))), "diffuse");
-    Bull::Texture& specular = textureManager.add(Bull::Texture::from(imageLoader.loadFromPath(path.resolve("container_specular.png"))), "specular");
-    Bull::Texture& emission = textureManager.add(Bull::Texture::from(imageLoader.loadFromPath(path.resolve("container_emission.png"))), "emission");
+    Bull::Texture& diffuse = textureManager.add(Bull::Texture(imageLoader.loadFromPath(path.resolve("container.png"))), "diffuse");
+    Bull::Texture& specular = textureManager.add(Bull::Texture(imageLoader.loadFromPath(path.resolve("container_specular.png"))), "specular");
+    Bull::Texture& emission = textureManager.add(Bull::Texture(imageLoader.loadFromPath(path.resolve("container_emission.png"))), "emission");
 
     diffuse.enableSmooth();
     specular.enableSmooth();

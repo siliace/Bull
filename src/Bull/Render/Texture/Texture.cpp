@@ -15,20 +15,27 @@ namespace Bull
         return static_cast<unsigned int>(size);
     }
 
-    Texture Texture::from(const Image& image)
-    {
-        Texture texture;
-        texture.create(image);
-
-        return texture;
-    }
-
     Texture::Texture() :
         m_id(0),
         m_isSmooth(false),
         m_isRepeated(false)
     {
         /// Nothing
+    }
+
+    Texture::Texture(const Image& image)
+    {
+        create(image);
+    }
+
+    Texture::Texture(const Size& size)
+    {
+        create(size);
+    }
+
+    Texture::Texture(const ByteArray& pixels, const Size& size)
+    {
+        create(pixels, size);
     }
 
     Texture::Texture(Texture&& right) noexcept
