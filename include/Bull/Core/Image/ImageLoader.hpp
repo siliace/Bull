@@ -15,7 +15,7 @@ namespace Bull
         struct ImageInfo
         {
             Size  size;
-            Uint8 channels;
+            Uint8 channels = 0;
         };
 
     private:
