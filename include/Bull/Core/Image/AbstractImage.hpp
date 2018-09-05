@@ -37,9 +37,9 @@ namespace Bull
          */
         virtual Size getSize() const = 0;
 
-        /*! \brief
+        /*! \brief Pixels of the AbstractImage
          *
-         * \return
+         * \return Pixels
          *
          */
         virtual ByteArray getPixels() const = 0;
