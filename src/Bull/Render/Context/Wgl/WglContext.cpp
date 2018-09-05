@@ -1,6 +1,7 @@
 #include <limits>
 
 #include <Bull/Core/Exception/InternalError.hpp>
+#include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
 #include <Bull/Core/System/Library.hpp>
 #include <Bull/Core/Utility/StringUtils.hpp>

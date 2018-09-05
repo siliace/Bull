@@ -3,7 +3,7 @@
 
 #include <exception>
 
-#include <Bull/Core/Log/Log.hpp>
+#include <Bull/Core/Memory/String.hpp>
 
 #define DeclareExceptionFrom(ExceptionName, ParentException)                                          \
 struct ExceptionName : public ParentException                                                         \

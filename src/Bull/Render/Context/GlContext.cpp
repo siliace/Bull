@@ -1,6 +1,7 @@
 #include <Bull/Core/Exception/Exception.hpp>
 #include <Bull/Core/IO/OutStringStream.hpp>
 #include <Bull/Core/IO/TextWriter.hpp>
+#include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Utility/Character.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
