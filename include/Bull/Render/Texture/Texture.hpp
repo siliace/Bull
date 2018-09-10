@@ -3,6 +3,7 @@
 
 #include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Image/Image.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Math/Polygon/Rectangle.hpp>
 #include <Bull/Math/Vector/Vector2.hpp>
@@ -11,7 +12,7 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API Texture : public ContextResource, public AbstractImage, public Asset
+    class BULL_RENDER_API Texture : public ContextResource, public NonCopyable, public AbstractImage, public Asset
     {
     public:
 
