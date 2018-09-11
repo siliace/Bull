@@ -92,6 +92,19 @@ namespace Bull
 
         return product;
     }
+
+    template <typename T, std::size_t S>
+    Vector<T, S> operator*(const SquareMatrix<T, S>& left, const Vector<T, S>& right)
+    {
+        Vector<T, S> product;
+
+        for(std::size_t i = 0; i < S; i++)
+        {
+            product.at(i) = Vector<T, S>::dotProduct(right, left.getColumn(i));
+        }
+
+        return product;
+    }
 }
 
 #endif // BULL_MATH_MATRIX_SQUAREMATRIX_HPP
