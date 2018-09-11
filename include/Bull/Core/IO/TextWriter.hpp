@@ -31,6 +31,8 @@ namespace Bull
          */
         void writeLine(const String& line);
 
+        void breakLine();
+
         /*! \brief Write a String in the OutStream
          *
          * \param string The String to write

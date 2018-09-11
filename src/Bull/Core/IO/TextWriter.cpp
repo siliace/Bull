@@ -15,7 +15,13 @@ namespace Bull
 
     void TextWriter::writeLine(const String& line)
     {
-        write(line + '\n');
+        write(line);
+        breakLine();
+    }
+
+    void TextWriter::breakLine()
+    {
+        write('\n');
     }
 
     TextWriter& TextWriter::operator<<(const char* string)
