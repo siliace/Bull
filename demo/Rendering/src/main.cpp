@@ -31,9 +31,11 @@ Bull::Material loadMaterialFromPath(const Bull::Path& path)
     specular.enableSmooth();
     emission.enableSmooth();
 
+    material.setShininess(32.f);
     material.setTexture(&diffuse, Bull::TextureType_Diffuse);
     material.setTexture(&specular, Bull::TextureType_Specular);
     material.setTexture(&emission, Bull::TextureType_Emission);
+
 
     return material;
 }
