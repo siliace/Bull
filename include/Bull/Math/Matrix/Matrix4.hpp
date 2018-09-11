@@ -103,18 +103,21 @@ namespace Bull
         {
             Matrix4<T> projection;
 
+            T n = zBounds.x();
+            T f = zBounds.y();
+
             T top    = plan.y;
             T left   = plan.x;
             T right  = plan.x + plan.width;
             T bottom = plan.y + plan.height;
 
-            projection.at(0, 0) = 2.0 / (right - left);
-            projection.at(1, 1) = 2.0 / (top - bottom);
-            projection.at(2, 2) = 1.0 / (zBounds.x() - zBounds.y());
-            projection.at(3, 0) = (left + right) / (left - right);
-            projection.at(3, 1) = (top + bottom) / (bottom - top);
-            projection.at(3, 2) = zBounds.x() / (zBounds.x() - zBounds.y());
-            projection.at(3, 3) = 1.0;
+            projection.at(0, 0) =  2 / (right - left);
+            projection.at(1, 1) =  2 / (top - bottom);
+            projection.at(2, 2) = -2 / (f - n);
+            projection.at(3, 0) = -((right + left) / (right - left));
+            projection.at(3, 1) = -((top + bottom) / (top - bottom));
+            projection.at(3, 2) = -((f + n) / (f - n));
+            projection.at(3, 3) = 1;
 
             return projection;
         }
