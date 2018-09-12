@@ -10,7 +10,7 @@
 namespace Bull
 {
     DepthTexture::DepthTexture() :
-            m_handler(0)
+        m_handler(0)
     {
         /// Nothing
     }
