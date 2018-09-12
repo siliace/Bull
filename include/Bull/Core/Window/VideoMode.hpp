@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <Bull/Core/Export.hpp>
+#include <Bull/Core/Utility/Size.hpp>
 
 namespace Bull
 {
@@ -30,8 +30,16 @@ namespace Bull
 
         /*! \brief Constructor
          *
-         * \param width The width of the window to open with this VideoMode
-         * \param height The height of the window to open with this VideoMode
+         * \param size         The Size
+         * \param bitsPerPixel The number of bits per pixel (8, 16, 24 or 32)
+         *
+         */
+        explicit VideoMode(const Size& size, Uint8 bitsPerPixel = getCurrent().bitsPerPixel);
+
+        /*! \brief Constructor
+         *
+         * \param width        The width
+         * \param height       The height
          * \param bitsPerPixel The number of bits per pixel (8, 16, 24 or 32)
          *
          */

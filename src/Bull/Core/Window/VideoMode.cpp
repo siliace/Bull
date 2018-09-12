@@ -23,6 +23,14 @@ namespace Bull
         /// Nothing
     }
 
+    VideoMode::VideoMode(const Size& size, Uint8 bitsPerPixel) :
+        width(size.width),
+        height(size.height),
+        bitsPerPixel(bitsPerPixel)
+    {
+        /// Nothing
+    }
+
     VideoMode::VideoMode(unsigned int width, unsigned int height, Uint8 bitsPerPixel)  :
         width(width),
         height(height),
