@@ -3,11 +3,11 @@
 
 #include <functional>
 
-#include <Bull/Core/Export.hpp>
+#include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API AtInit
+    class BULL_CORE_API AtInit : public NonCopyable
     {
     public:
 
@@ -30,11 +30,6 @@ namespace Bull
          */
         AtInit(const std::function<void()>& init, std::function<void()>& clean);
 
-        /*! \brief Copy constructor
-         *
-         */
-        AtInit(const AtInit&) = delete;
-
         /*! \brief Constructor by movement semantic
          *
          */
@@ -46,11 +41,6 @@ namespace Bull
          *
          */
         ~AtInit();
-
-        /*! \brief Basic assignment operator
-         *
-         */
-        AtInit& operator=(const AtInit&) = delete;
 
         /*! \brief Basic assignment operator by movement semantic
          *
