@@ -11,18 +11,6 @@ namespace Bull
     {
     public:
 
-        /*! \brief
-         *
-         * \param size
-         * \param pixelFormat
-         *
-         * \return
-         *
-         */
-        static std::size_t getBytesCount(const Size& size, PixelFormat pixelFormat);
-
-    public:
-
         /*! \brief Default constructor
          *
          */

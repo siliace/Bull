@@ -79,7 +79,7 @@ namespace Bull
 
     void Texture::create(const Image& image)
     {
-        create(image.getPixels(), image.getSize());
+        create(image.getPixels(), image.getSize(), image.getPixelFormat());
     }
 
     void Texture::create(const Size& size, PixelFormat pixelFormat)
@@ -95,23 +95,28 @@ namespace Bull
             Expect(m_id, Throw(InternalError, "Texture::Texture", "Failed to create the texture"));
         }
 
+        m_pixelFormat = pixelFormat;
+
         gl::bindTexture(GL_TEXTURE_2D, m_id);
-        gl::texImage2D(GL_TEXTURE_2D, 0, pixelFormats[pixelFormat], size.width , size.height , 0, pixelFormats[pixelFormat], dataTypes[pixelFormat], nullptr);
+        gl::texImage2D(GL_TEXTURE_2D, 0, pixelFormats[m_pixelFormat], size.width , size.height , 0, pixelFormats[m_pixelFormat], dataTypes[m_pixelFormat], nullptr);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
+
     }
 
     void Texture::create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
     {
         create(size);
 
+        m_pixelFormat = pixelFormat;
+
         gl::bindTexture(GL_TEXTURE_2D, m_id);
 
         for(unsigned int i = 0; i < size.height ; i++)
         {
-            gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, size.width , 1, pixelFormats[pixelFormat], dataTypes[pixelFormat], &pixels[size.width * (size.height - i - 1) * 4]);
+            gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, size.width , 1, pixelFormats[m_pixelFormat], dataTypes[m_pixelFormat], &pixels[size.width * (size.height - i - 1) * PixelFormatUtils::getPixelFormatSize(m_pixelFormat)]);
         }
 
         gl::generateMipmap(GL_TEXTURE_2D);

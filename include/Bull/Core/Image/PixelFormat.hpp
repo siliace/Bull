@@ -23,6 +23,8 @@ namespace Bull
          *
          */
         static std::size_t getPixelFormatSize(PixelFormat pixelFormat);
+
+        static std::size_t getImageByteCount(const Size& size, PixelFormat pixelFormat);
     };
 }
 

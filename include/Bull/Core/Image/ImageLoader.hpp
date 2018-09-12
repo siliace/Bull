@@ -8,106 +8,40 @@
 
 namespace Bull
 {
-    class BULL_CORE_API ImageLoader : public AsyncAssetLoader<Image>
+    class BULL_CORE_API ImageLoader : public AsyncAssetLoader<Image, PixelFormat>
     {
     public:
 
-        struct ImageInfo
-        {
-            Size  size;
-            Uint8 channels = 0;
-        };
-
-    private:
-
-        /*! \brief Read data from a stream
-         *
-         * \param user The stream to read
-         * \param data The buffer to fill
-         * \param size The number of bytes to read
-         *
-         * \return The number of bytes read
-         *
-         */
-        static int read(void* user, char* data, int size);
-
-        /*! \brief Skip bytes
-         *
-         * \param user The stream
-         * \param n    The number of bytes to skip
-         *
-         */
-        static void skip(void* user, int n);
-
-        /*! \brief Tell whether the stream is at its end
-         *
-         * \param user The stream
-         *
-         * \return 1 if the stream is at its end, 0 otherwise
-         *
-         */
-        static int eof(void* user);
-
-    public:
-
-        /*! \brief Read the width, the height and the number of channels of and Image on disk
-         *
-         * \param path The Path of the Image
-         *
-         * \return The ImageInfo
-         *
-         */
-        ImageInfo getInfo(const Path& path) const;
-
-        /*! \brief Read the width, the height and the number of channels of and Image from a stream
-         *
-         * \param stream The stream to read
-         *
-         * \return The ImageInfo
-         *
-         */
-        ImageInfo getInfo(InStream& stream) const;
-
-        /*! \brief Read the width, the height and the number of channels of and Image from a memory area
-         *
-         * \param data   Data to read
-         * \param length The length of the data
-         *
-         * \return The ImageInfo
-         *
-         */
-        ImageInfo getInfo(const void* data, std::size_t length) const;
-
         /*! \brief Load an Image from a File
          *
-         * \param image The Image to load
-         * \param path  The Path of the File to read
+         * \param path        The Path of the File to read
+         * \param pixelFormat The PixelFormat of the Image to create
          *
          * \return The loaded Image
          *
          */
-        Image loadFromPath(const Path& path) const override;
+        Image loadFromPath(const Path& path, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
 
         /*! \brief Load an Image from an InStream
          *
-         * \param image  The Image to load
-         * \param stream The InStream to read
+         * \param stream      The InStream to read
+         * \param pixelFormat The PixelFormat of the Image to create
          *
          * \return The loaded Image
          *
          */
-        Image loadFromStream(InStream& stream) const override;
+        Image loadFromStream(InStream& stream, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
 
         /*! \brief Load a Image from a memory area
          *
-         * \param image  The Image to load
-         * \param path   Data to read
-         * \param length The length of data to read
+         * \param path        Data to read
+         * \param length      The length of data to read
+         * \param pixelFormat The PixelFormat of the Image to create
          *
          * \return The loaded Image
          *
          */
-        Image loadFromMemory(const void* data, std::size_t length) const override;
+        Image loadFromMemory(const void* data, std::size_t length, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
 
     private:
 

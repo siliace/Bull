@@ -7,86 +7,68 @@
 
 namespace Bull
 {
-    int ImageLoader::read(void* user, char* data, int size)
+    namespace stbi
     {
-        ByteArray bytes = reinterpret_cast<InStream*>(user)->read(size);
-
-        std::memcpy(data, bytes.getBuffer(), bytes.getCapacity());
-
-        return bytes.getCapacity();
+        int channels(PixelFormat pixelFormat)
+        {
+            switch(pixelFormat)
+            {
+                case PixelFormat_Luma8: return STBI_grey;
+                case PixelFormat_Luma8Alpha8: return STBI_grey_alpha;
+                case PixelFormat_Rgb8: return STBI_rgb;
+                case PixelFormat_Rgb8Alpha8: return STBI_rgb_alpha;
+            }
+        }
     }
 
-    void ImageLoader::skip(void* user, int n)
-    {
-        reinterpret_cast<InStream*>(user)->skip(n);
-    }
-
-    int ImageLoader::eof(void* user)
-    {
-        return reinterpret_cast<InStream*>(user)->isAtEnd() ? 1 : 0;
-    }
-
-    ImageLoader::ImageInfo ImageLoader::getInfo(const Path& path) const
-    {
-        File file(path, Bull::FileOpeningMode_Read);
-
-        return getInfo(file);
-    }
-
-    ImageLoader::ImageInfo ImageLoader::getInfo(InStream& stream) const
-    {
-        ImageInfo info;
-        stbi_io_callbacks callbacks;
-
-        callbacks.read = &ImageLoader::read;
-        callbacks.skip = &ImageLoader::skip;
-        callbacks.eof  = &ImageLoader::eof;
-
-        stbi_info_from_callbacks(&callbacks, &stream, &info.size.width, &info.size.height, reinterpret_cast<int*>(&info.channels));
-
-        return info;
-    }
-
-    ImageLoader::ImageInfo ImageLoader::getInfo(const void* data, std::size_t length) const
-    {
-        MemoryStream memoryStream(data, length);
-
-        return getInfo(memoryStream);
-    }
-
-    Image ImageLoader::loadFromPath(const Path& path) const
+    Image ImageLoader::loadFromPath(const Path& path, PixelFormat pixelFormat) const
     {
         File file(path, FileOpeningMode_Read);
 
-        return loadFromStream(file);
+        return loadFromStream(file, pixelFormat);
     }
 
-    Image ImageLoader::loadFromStream(InStream& stream) const
+    Image ImageLoader::loadFromStream(InStream& stream, PixelFormat pixelFormat) const
     {
+        Size size;
         Image image;
+        int channels;
         stbi_io_callbacks callbacks;
-        int width, height, channels;
 
-        callbacks.read = &ImageLoader::read;
-        callbacks.skip = &ImageLoader::skip;
-        callbacks.eof  = &ImageLoader::eof;
+        callbacks.read = [](void* user, char* data, int size) -> int {
+            ByteArray bytes = reinterpret_cast<InStream*>(user)->read(size);
 
-        stbi_uc* buffer = stbi_load_from_callbacks(&callbacks, &stream, &width, &height, &channels, STBI_rgb_alpha);
+            std::memcpy(data, bytes.getBuffer(), bytes.getCapacity());
+
+            return bytes.getCapacity();
+        };
+
+        callbacks.skip = [](void* user, int n) {
+            reinterpret_cast<InStream*>(user)->skip(n);
+        };
+
+        callbacks.eof  = [](void* user) -> int {
+            return reinterpret_cast<InStream*>(user)->isAtEnd() ? 1 : 0;
+        };
+
+        stbi_uc* buffer = stbi_load_from_callbacks(&callbacks, &stream, &size.width, &size.height, &channels, stbi::channels(pixelFormat));
 
         Expect(buffer, Throw(InternalError, "ImageLoader::loadFromStream", "Failed to load image: " + getErrorMessage()));
 
-        image.create(ByteArray::memoryCopy(buffer, width * height * channels), Size(width, height), PixelFormat_Rgb8Alpha8);
+        std::size_t bytesCount = PixelFormatUtils::getImageByteCount(size, pixelFormat);
+
+        image.create(ByteArray::memoryCopy(buffer, bytesCount), size, pixelFormat);
 
         stbi_image_free(buffer);
 
         return image;
     }
 
-    Image ImageLoader::loadFromMemory(const void* data, std::size_t length) const
+    Image ImageLoader::loadFromMemory(const void* data, std::size_t length, PixelFormat pixelFormat) const
     {
         MemoryStream memoryStream(data, length);
 
-        return loadFromStream(memoryStream);
+        return loadFromStream(memoryStream, pixelFormat);
     }
 
     String ImageLoader::getErrorMessage() const

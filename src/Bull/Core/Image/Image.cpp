@@ -3,11 +3,6 @@
 
 namespace Bull
 {
-    std::size_t Image::getBytesCount(const Size& size, PixelFormat pixelFormat)
-    {
-        return size.width * size.height * PixelFormatUtils::getPixelFormatSize(pixelFormat);
-    }
-
     Image::Image(const Size& size, PixelFormat pixelFormat)
     {
         create(size, pixelFormat);
@@ -25,18 +20,18 @@ namespace Bull
         m_size = size;
         m_pixelFormat = pixelFormat;
 
-        m_pixels.create(getBytesCount(m_size, m_pixelFormat));
+        m_pixels.create(PixelFormatUtils::getImageByteCount(m_size, m_pixelFormat));
     }
 
     void Image::create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Image::create", "Invalid image size"));
 
-        std::size_t bytes = getBytesCount(size, pixelFormat);
-
         m_size = size;
         m_pixels = pixels;
         m_pixelFormat = pixelFormat;
+
+        std::size_t bytes = PixelFormatUtils::getImageByteCount(m_size, m_pixelFormat);
 
         if(m_pixels.getCapacity() != bytes)
         {
