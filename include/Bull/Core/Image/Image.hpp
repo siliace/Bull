@@ -11,6 +11,18 @@ namespace Bull
     {
     public:
 
+        /*! \brief
+         *
+         * \param size
+         * \param pixelFormat
+         *
+         * \return
+         *
+         */
+        static std::size_t getBytesCount(const Size& size, PixelFormat pixelFormat);
+
+    public:
+
         /*! \brief Default constructor
          *
          */
@@ -21,7 +33,7 @@ namespace Bull
          * \param size The size of the Image
          *
          */
-        explicit Image(const Size& size);
+        explicit Image(const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
 
         /*! \brief Constructor
          *
@@ -29,14 +41,14 @@ namespace Bull
          * \param size   The size of the Image
          *
          */
-        Image(const ByteArray& pixels, const Size& size);
+        Image(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
 
         /*! \brief Create the Image
          *
          * \param size The size of the Image
          *
          */
-        void create(const Size& size) override;
+        void create(const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) override;
 
         /*! \brief Create the Image
          *
@@ -44,7 +56,7 @@ namespace Bull
          * \param size   The size of the Image
          *
          */
-        void create(const ByteArray& pixels, const Size& size) override;
+        void create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) override;
 
         /*! \brief Tell whether an Image is loaded
          *
@@ -52,13 +64,6 @@ namespace Bull
          *
          */
         bool isLoaded() const override;
-
-        /*! \brief Fill the Image with a Color
-         *
-         * \param color The Color
-         *
-         */
-        void fill(const Color& color);
 
         /*! \brief Get the size of the Image
          *
@@ -74,10 +79,18 @@ namespace Bull
          */
         ByteArray getPixels() const override;
 
+        /*! \brief Get the PixelFormat used by the Image
+         *
+         * \return The PixelFormat
+         *
+         */
+        PixelFormat getPixelFormat() const override;
+
     private:
 
         Size m_size;
         ByteArray m_pixels;
+        PixelFormat m_pixelFormat;
     };
 }
 

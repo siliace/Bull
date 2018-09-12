@@ -75,7 +75,7 @@ namespace Bull
 
         Expect(buffer, Throw(InternalError, "ImageLoader::loadFromStream", "Failed to load image: " + getErrorMessage()));
 
-        image.create(ByteArray::memoryCopy(buffer, width * height * channels), Size(width, height));
+        image.create(ByteArray::memoryCopy(buffer, width * height * channels), Size(width, height), PixelFormat_Rgb8Alpha8);
 
         stbi_image_free(buffer);
 

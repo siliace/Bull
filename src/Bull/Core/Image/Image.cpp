@@ -3,53 +3,50 @@
 
 namespace Bull
 {
-    Image::Image(const Size& size)
+    std::size_t Image::getBytesCount(const Size& size, PixelFormat pixelFormat)
     {
-        create(size);
+        return size.width * size.height * PixelFormatUtils::getPixelFormatSize(pixelFormat);
     }
 
-    Image::Image(const ByteArray& pixels, const Size& size)
+    Image::Image(const Size& size, PixelFormat pixelFormat)
     {
-        create(pixels, size);
+        create(size, pixelFormat);
     }
 
-    void Image::create(const Size& size)
+    Image::Image(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
+    {
+        create(pixels, size, pixelFormat);
+    }
+
+    void Image::create(const Size& size, PixelFormat pixelFormat)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Image::create", "Invalid image size"));
 
-        m_size   = size;
-        m_pixels = ByteArray(m_size.width * m_size.height * 4);
+        m_size = size;
+        m_pixelFormat = pixelFormat;
+
+        m_pixels.create(getBytesCount(m_size, m_pixelFormat));
     }
 
-    void Image::create(const ByteArray& pixels, const Size& size)
+    void Image::create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Image::create", "Invalid image size"));
 
-        std::size_t pixelsCount = size.width * size.height * 4;
+        std::size_t bytes = getBytesCount(size, pixelFormat);
 
-        m_size   = size;
+        m_size = size;
         m_pixels = pixels;
+        m_pixelFormat = pixelFormat;
 
-        if(m_pixels.getCapacity() != pixelsCount)
+        if(m_pixels.getCapacity() != bytes)
         {
-            m_pixels.resize(pixelsCount);
+            m_pixels.resize(bytes);
         }
     }
 
     bool Image::isLoaded() const
     {
         return !m_pixels.isEmpty();
-    }
-
-    void Image::fill(const Color& color)
-    {
-        for(std::size_t i = 0; i < m_pixels.getCapacity() / 4; i++)
-        {
-            m_pixels[i * 4 + 0] = color.red;
-            m_pixels[i * 4 + 1] = color.green;
-            m_pixels[i * 4 + 2] = color.blue;
-            m_pixels[i * 4 + 3] = color.alpha;
-        }
     }
 
     Size Image::getSize() const
@@ -60,5 +57,10 @@ namespace Bull
     ByteArray Image::getPixels() const
     {
         return m_pixels;
+    }
+
+    PixelFormat Image::getPixelFormat() const
+    {
+        return m_pixelFormat;
     }
 }

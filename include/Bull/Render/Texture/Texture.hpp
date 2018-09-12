@@ -42,7 +42,7 @@ namespace Bull
          * \param size The size of the Texture
          *
          */
-        explicit Texture(const Size& size);
+        explicit Texture(const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
 
         /*! \brief Constructor
          *
@@ -50,7 +50,7 @@ namespace Bull
          * \param size   The size of the Texture
          *
          */
-        explicit Texture(const ByteArray& pixels, const Size& size);
+        explicit Texture(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
 
         /*! \brief Constructor by movement
          *
@@ -85,7 +85,7 @@ namespace Bull
          * \param size The size of the Texture to create
          *
          */
-        void create(const Size& size) override;
+        void create(const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) override;
 
         /*! \brief Create a Texture
          *
@@ -93,7 +93,7 @@ namespace Bull
          * \param size   The size of the Texture
          *
          */
-        void create(const ByteArray& pixels, const Size& size) override;
+        void create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) override;
 
         /*! \brief Tell whether an Asset is loaded
          *
@@ -151,11 +151,14 @@ namespace Bull
 
         ByteArray getPixels() const override;
 
+        PixelFormat getPixelFormat() const override;
+
     private:
 
         unsigned int m_id;
         bool         m_isSmooth;
         bool         m_isRepeated;
+        PixelFormat  m_pixelFormat;
     };
 }
 

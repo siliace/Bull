@@ -1,3 +1,5 @@
+#include <map>
+
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 
@@ -6,6 +8,19 @@
 
 namespace Bull
 {
+    namespace
+    {
+        std::map<PixelFormat, GLenum> pixelFormats = {
+                {PixelFormat_Rgb8, GL_RGB},
+                {PixelFormat_Rgb8Alpha8, GL_RGBA},
+        };
+
+        std::map<PixelFormat, GLenum> dataTypes = {
+                {PixelFormat_Rgb8, GL_UNSIGNED_BYTE},
+                {PixelFormat_Rgb8Alpha8, GL_UNSIGNED_BYTE},
+        };
+    }
+
     unsigned int Texture::getMaximumSize()
     {
         int size;
@@ -28,14 +43,14 @@ namespace Bull
         create(image);
     }
 
-    Texture::Texture(const Size& size)
+    Texture::Texture(const Size& size, PixelFormat pixelFormat)
     {
-        create(size);
+        create(size, pixelFormat);
     }
 
-    Texture::Texture(const ByteArray& pixels, const Size& size)
+    Texture::Texture(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
     {
-        create(pixels, size);
+        create(pixels, size, pixelFormat);
     }
 
     Texture::Texture(Texture&& right) noexcept
@@ -67,7 +82,7 @@ namespace Bull
         create(image.getPixels(), image.getSize());
     }
 
-    void Texture::create(const Size& size)
+    void Texture::create(const Size& size, PixelFormat pixelFormat)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Texture::create", "Invalid texture size"));
 
@@ -81,14 +96,14 @@ namespace Bull
         }
 
         gl::bindTexture(GL_TEXTURE_2D, m_id);
-        gl::texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.width , size.height , 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+        gl::texImage2D(GL_TEXTURE_2D, 0, pixelFormats[pixelFormat], size.width , size.height , 0, pixelFormats[pixelFormat], dataTypes[pixelFormat], nullptr);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
     }
 
-    void Texture::create(const ByteArray& pixels, const Size& size)
+    void Texture::create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
     {
         create(size);
 
@@ -96,7 +111,7 @@ namespace Bull
 
         for(unsigned int i = 0; i < size.height ; i++)
         {
-            gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, size.width , 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[size.width * (size.height - i - 1) * 4]);
+            gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, size.width , 1, pixelFormats[pixelFormat], dataTypes[pixelFormat], &pixels[size.width * (size.height - i - 1) * 4]);
         }
 
         gl::generateMipmap(GL_TEXTURE_2D);
@@ -147,7 +162,7 @@ namespace Bull
 
     Image Texture::getImage() const
     {
-        return Image(getPixels(), getSize());
+        return Image(getPixels(), getSize(), m_pixelFormat);
     }
 
     Size Texture::getSize() const
@@ -163,12 +178,17 @@ namespace Bull
     ByteArray Texture::getPixels() const
     {
         Size size = getSize();
-        ByteArray pixels(size.width * size.height * 4);
+        ByteArray pixels(size.width * size.height * PixelFormatUtils::getPixelFormatSize(m_pixelFormat));
 
         bind();
 
         gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);
 
         return pixels;
+    }
+
+    PixelFormat Texture::getPixelFormat() const
+    {
+        return m_pixelFormat;
     }
 }
