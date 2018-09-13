@@ -149,8 +149,18 @@ namespace Bull
          */
         Size getSize() const override;
 
+        /*! \brief Get pixels of the Texture
+         *
+         * \return Pixels
+         *
+         */
         ByteArray getPixels() const override;
 
+        /*! \brief Get the PixelFormat used by the Texture
+         *
+         * \return The PixelFormat
+         *
+         */
         PixelFormat getPixelFormat() const override;
 
     private:
