@@ -14,6 +14,7 @@
 #include <Bull/Render/Shader/ShaderStageLoader.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
 
+#include <Camera.hpp>
 #include <Cube.hpp>
 
 Bull::RandomGenerator random;
@@ -63,14 +64,15 @@ int main()
     std::vector<Cube> cubes;
     std::vector<Bull::PointLight> points;
 
-    Bull::Vector3F up = Bull::Vector3F::Up;
-    Bull::Vector3F forward = Bull::Vector3F::Backward;
-    Bull::Vector3F position = Bull::Vector3F::UnitZ * 3.f;
-
     Bull::DirectionalLight dl(Bull::Vector3F::Down);
     Bull::SpotLight sp(Bull::Vector3F::UnitZ * 10.f, Bull::Vector3F::Backward);
 
     Bull::RenderWindow window(Bull::VideoMode(800, 600), "Demonstration rendering");
+
+    Camera camera(window);
+    camera.setForward(Bull::Vector3F::Backward);
+    camera.setPosition(Bull::Vector3F::UnitZ * 3.f);
+    camera.setFieldOfView(Bull::AngleF::degree(45.f));
 
     Bull::Shader shader = loadShaderFromPath(Bull::Path("../resources/shaders/phong"));
     Bull::Material material = loadMaterialFromPath(Bull::Path("../resources/textures"));
@@ -99,6 +101,9 @@ int main()
 
             if(event.type == Bull::WindowEventType_KeyDown)
             {
+                Bull::Vector3F forward = camera.getForward();
+                Bull::Vector3F position = camera.getPosition();
+
                 if(event.key.code == Bull::KeyboardKey_S)
                 {
                     position -= forward;
@@ -111,13 +116,15 @@ int main()
 
                 if(event.key.code == Bull::KeyboardKey_D)
                 {
-                    position += Bull::Vector3F::crossProduct(forward, up).normalize();
+                    position += Bull::Vector3F::crossProduct(forward, Bull::Vector3F::Up).normalize();
                 }
 
                 if(event.key.code == Bull::KeyboardKey_Q)
                 {
-                    position -= Bull::Vector3F::crossProduct(forward, up).normalize();
+                    position -= Bull::Vector3F::crossProduct(forward, Bull::Vector3F::Up).normalize();
                 }
+
+                camera.setPosition(position);
             }
 
             if(event.type == Bull::WindowEventType_MouseMoved)
@@ -146,20 +153,17 @@ int main()
 
                     pitch = Bull::clamp(pitch, Bull::AngleF::degree(-89.f), Bull::AngleF::degree(89.f));
 
-                    forward.x() = std::cos(yaw) * std::cos(pitch);
-                    forward.y() = std::sin(pitch);
-                    forward.z() = std::sin(yaw) * std::cos(pitch);
-                    forward.normalize();
+                    float x = std::cos(yaw) * std::cos(pitch);
+                    float y = std::sin(pitch);
+                    float z = std::sin(yaw) * std::cos(pitch);
+
+                    camera.setForward({x, y, z});
                 }
             }
 
             if(event.type == Bull::WindowEventType_Resized)
             {
-                shader.setUniformMatrix("projection", Bull::Matrix4F::makePerspective(
-                        Bull::AngleF::degree(45.f),
-                        window.getSize().getRatio(),
-                        Bull::Vector2F(0.1f, 100.f)
-                ));
+                camera.resize(window.getSize());
             }
         }
 
@@ -167,12 +171,10 @@ int main()
 
         shader.bind();
 
-        shader.setUniformMatrix("view", Bull::Matrix4F::makeLookAt(position, position + forward, up));
+        shader.setUniformVector("eye_position", camera.getPosition());
 
-        shader.setUniformVector("eye_position", position);
-
-        sp.setPosition(position);
-        sp.setDirection(forward);
+        sp.setPosition(camera.getPosition());
+        sp.setDirection(camera.getForward());
         sp.setUniforms(shader, "sp");
 
         dl.setUniforms(shader, "dl");
@@ -184,6 +186,7 @@ int main()
 
         for(Cube& cube : cubes)
         {
+            shader.setUniformMatrix("mvp", camera.getModelViewProjectionMatrix(cube));
             cube.render(shader);
         }
 
