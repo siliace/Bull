@@ -35,7 +35,7 @@ namespace Bull
 
     void HardwareBuffer::create(std::size_t size)
     {
-        create(size, DefaultUsage);
+        create(size, HardwareBufferUsage_StaticDraw);
     }
 
     void HardwareBuffer::create(std::size_t size, HardwareBufferUsage usage)

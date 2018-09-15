@@ -16,10 +16,6 @@ namespace Bull
     {
     public:
 
-        static constexpr HardwareBufferUsage DefaultUsage = HardwareBufferUsage_StaticDraw;
-
-    public:
-
         /*! \brief Destructor
          *
          */
