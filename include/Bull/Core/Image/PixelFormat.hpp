@@ -24,6 +24,14 @@ namespace Bull
          */
         static std::size_t getPixelFormatSize(PixelFormat pixelFormat);
 
+        /*! \brief Compute the number of bytes to allocate to store an image of a given Size and a PixelFormat
+         *
+         * \param size        The Size
+         * \param pixelFormat The PixelFormat
+         *
+         * \return The byte count
+         *
+         */
         static std::size_t getImageByteCount(const Size& size, PixelFormat pixelFormat);
     };
 }
