@@ -11,6 +11,8 @@ namespace Bull
     {
     public:
 
+        Image() = default;
+
         /*! \brief Constructor
          *
          * \param size The size of the Image
