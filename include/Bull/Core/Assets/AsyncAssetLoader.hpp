@@ -18,9 +18,9 @@ namespace Bull
          * \return A future to the loaded Asset
          *
          */
-        virtual std::future<T> loadFromPathAsync(const Path& path, Args... args) const
+        virtual std::future<Asset<T>> loadFromPathAsync(const Path& path, Args... args) const
         {
-            return std::async([this, &path, &args...]() -> T {
+            return std::async([this, &path, &args...]() -> Asset<T> {
                 return this->loadFromPath(path, args...);
             });
         }
@@ -33,9 +33,9 @@ namespace Bull
          * \return A future to the loaded Asset
          *
          */
-        virtual std::future<T> loadFromStreamAsync(InStream& stream, Args... args) const
+        virtual std::future<Asset<T>> loadFromStreamAsync(InStream& stream, Args... args) const
         {
-            return std::async([this, &stream, &args...]() -> T {
+            return std::async([this, &stream, &args...]() -> Asset<T> {
                 return this->loadFromStream(stream, args...);
             });
         }
@@ -49,9 +49,9 @@ namespace Bull
          * \return A future to the loaded Asset
          *
          */
-        virtual std::future<T> loadFromMemoryAsync(const void* data, std::size_t length, Args... args) const
+        virtual std::future<Asset<T>> loadFromMemoryAsync(const void* data, std::size_t length, Args... args) const
         {
-            return std::async([this, data, length, &args...]() -> T {
+            return std::async([this, data, length, &args...]() -> Asset<T> {
                 return this->loadFromMemory(data, length, args...);
             });
         }

@@ -1,6 +1,8 @@
 #ifndef BULL_CORE_ASSETS_ASSET_HPP
 #define BULL_CORE_ASSETS_ASSET_HPP
 
+#include <memory>
+
 #include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
@@ -8,50 +10,66 @@ namespace Bull
     template <typename T>
     class AssetManager;
 
+    template <typename T>
     class BULL_CORE_API Asset
     {
     public:
 
-        /*! \brief Destructor
-         *
-         */
-        virtual ~Asset() = default;
-
-        /*! \brief Tell whether an Asset is loaded
-         *
-         * \return True if the Asset is loaded
-         *
-         */
-        virtual bool isLoaded() const = 0;
-
-        /*! \brief Get the name of the Asset in the manager
-         *
-         * \return The name
-         *
-         */
-        inline const String& getName()
+        Asset() :
+            m_manager(nullptr)
         {
-            return m_name;
+            /// Nothing
+        }
+
+        explicit Asset(std::shared_ptr<T> instance) :
+            m_instance(instance),
+            m_manager(nullptr)
+        {
+            /// Nothing
+        }
+
+        T* get()
+        {
+            return m_instance.get();
+        }
+
+        const T* get() const
+        {
+            return m_instance.get();
+        }
+
+        T* operator->()
+        {
+            return get();
+        }
+
+        T& operator*()
+        {
+            return *m_instance;
+        }
+
+        const T& operator*() const
+        {
+            return *m_instance;
         }
 
     private:
 
-        template <typename T>
-        friend class AssetManager;
+        friend class AssetManager<T>;
 
-        /*! \brief Set the name of the Asset in the manager
-         *
-         * \param name The name
-         *
-         */
-        inline void setName(const String& name)
+        Asset(std::shared_ptr<T> instance, const String& name, AssetManager<T>* manager) :
+            m_name(name),
+            m_instance(instance),
+            m_manager(manager)
         {
-            m_name = name;
+            /// Nothing
         }
 
     private:
 
-        String m_name;
+        String             m_name;
+        std::shared_ptr<T> m_instance;
+        AssetManager<T>*   m_manager;
     };
 }
 

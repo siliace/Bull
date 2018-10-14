@@ -12,7 +12,7 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API Texture : public ContextResource, public NonCopyable, public AbstractImage, public Asset
+    class BULL_RENDER_API Texture : public ContextResource, public NonCopyable, public AbstractImage
     {
     public:
 
@@ -22,6 +22,15 @@ namespace Bull
          *
          */
         static unsigned int getMaximumSize();
+
+        /*! \brief Create a Texture Asset from an Image Asset
+         *
+         * \param asset The Image Asset
+         *
+         * \return The created Texture Asset
+         *
+         */
+        static Asset<Texture> make(const Asset<Image>& asset);
 
     public:
 
@@ -94,13 +103,6 @@ namespace Bull
          *
          */
         void create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) override;
-
-        /*! \brief Tell whether an Asset is loaded
-         *
-         * \return True if the Asset is loaded
-         *
-         */
-        bool isLoaded() const override;
 
         /*! \brief Bind the Texture
          *

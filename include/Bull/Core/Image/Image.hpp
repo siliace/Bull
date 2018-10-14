@@ -7,14 +7,9 @@
 
 namespace Bull
 {
-    class BULL_CORE_API Image : public AbstractImage, public Asset
+    class BULL_CORE_API Image : public AbstractImage
     {
     public:
-
-        /*! \brief Default constructor
-         *
-         */
-        Image() = default;
 
         /*! \brief Constructor
          *
@@ -45,13 +40,6 @@ namespace Bull
          *
          */
         void create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) override;
-
-        /*! \brief Tell whether an Image is loaded
-         *
-         * \return True if the Image is loaded
-         *
-         */
-        bool isLoaded() const override;
 
         /*! \brief Get the size of the Image
          *

@@ -30,6 +30,13 @@ namespace Bull
         return static_cast<unsigned int>(size);
     }
 
+    Asset<Texture> Texture::make(const Asset<Image>& asset)
+    {
+        return Asset<Texture>(
+                std::make_shared<Texture>(*asset)
+        );
+    }
+
     Texture::Texture() :
         m_id(0),
         m_isSmooth(false),
@@ -120,11 +127,6 @@ namespace Bull
         }
 
         gl::generateMipmap(GL_TEXTURE_2D);
-    }
-
-    bool Texture::isLoaded() const
-    {
-        return gl::isTexture(m_id);
     }
 
     void Texture::bind() const

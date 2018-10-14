@@ -1,4 +1,3 @@
-#include <Bull/Core/Assets/AssetManager.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Image/ImageLoader.hpp>
 #include <Bull/Core/Utility/StringUtils.hpp>
@@ -18,25 +17,23 @@
 #include <Cube.hpp>
 
 Bull::RandomGenerator random;
-Bull::AssetManager<Bull::Texture> textureManager;
 
 Bull::Material loadMaterialFromPath(const Bull::Path& path)
 {
     Bull::Material material;
     Bull::ImageLoader imageLoader;
-    Bull::Texture& diffuse = textureManager.add(Bull::Texture(imageLoader.loadFromPath(path.resolve("container.png"))), "diffuse");
-    Bull::Texture& specular = textureManager.add(Bull::Texture(imageLoader.loadFromPath(path.resolve("container_specular.png"))), "specular");
-    Bull::Texture& emission = textureManager.add(Bull::Texture(imageLoader.loadFromPath(path.resolve("container_emission.png"))), "emission");
+    Bull::Asset<Bull::Texture> diffuse =  Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container.png")));
+    Bull::Asset<Bull::Texture> specular = Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container_specular.png")));
+    Bull::Asset<Bull::Texture> emission = Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container_emission.png")));
 
-    diffuse.enableSmooth();
-    specular.enableSmooth();
-    emission.enableSmooth();
+    diffuse->enableSmooth();
+    specular->enableSmooth();
+    emission->enableSmooth();
 
     material.setShininess(32.f);
-    material.setTexture(&diffuse, Bull::TextureType_Diffuse);
-    material.setTexture(&specular, Bull::TextureType_Specular);
-    material.setTexture(&emission, Bull::TextureType_Emission);
-
+    material.setTexture(diffuse, Bull::TextureType_Diffuse);
+    material.setTexture(specular, Bull::TextureType_Specular);
+    material.setTexture(emission, Bull::TextureType_Emission);
 
     return material;
 }
@@ -45,9 +42,13 @@ Bull::Shader loadShaderFromPath(const Bull::Path& path)
 {
     Bull::Shader shader;
     Bull::ShaderStageLoader shaderStageLoader;
+    Bull::Asset<Bull::ShaderStage> vertex, fragment;
 
-    shader.attach(shaderStageLoader.loadFromPath(path.resolve("phong.vert"), Bull::ShaderStageType_Vertex));
-    shader.attach(shaderStageLoader.loadFromPath(path.resolve("phong.frag"), Bull::ShaderStageType_Fragment));
+    vertex = shaderStageLoader.loadFromPath(path.resolve("phong.vert"), Bull::ShaderStageType_Vertex);
+    fragment = shaderStageLoader.loadFromPath(path.resolve("phong.frag"), Bull::ShaderStageType_Fragment);
+
+    shader.attach(*vertex);
+    shader.attach(*fragment);
     shader.link();
 
     return shader;

@@ -10,7 +10,7 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource, public Asset
+    class BULL_RENDER_API ShaderStage : public NonCopyable, public ContextResource
     {
     public:
 
@@ -60,13 +60,6 @@ namespace Bull
          *
          */
         bool isValid() const;
-
-        /*! \brief Tell whether the ShaderStage is loaded
-         *
-         * \return True if the ShaderStage is loaded
-         *
-         */
-        bool isLoaded() const override;
 
         /*! \brief Get the source code of the shader
          *

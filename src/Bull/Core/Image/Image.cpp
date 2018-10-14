@@ -39,11 +39,6 @@ namespace Bull
         }
     }
 
-    bool Image::isLoaded() const
-    {
-        return !m_pixels.isEmpty();
-    }
-
     Size Image::getSize() const
     {
         return m_size;

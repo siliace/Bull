@@ -1,7 +1,7 @@
 #ifndef BULL_GRAPHICS_MATERIAL_HPP
 #define BULL_GRAPHICS_MATERIAL_HPP
 
-#include <array>
+#include <map>
 
 #include <Bull/Core/Utility/Color.hpp>
 
@@ -41,7 +41,7 @@ namespace Bull
          * \param type    The type of the texture
          *
          */
-        void setTexture(const Texture* texture, TextureType type);
+        void setTexture(const Asset<Texture>& texture, TextureType type);
 
         /*! \brief Get a Texture
          *
@@ -54,12 +54,12 @@ namespace Bull
 
     private:
 
-        std::array<const Texture*, 7> m_textures;
-        float                         m_shininess;
-        Color                         m_ambientColor;
-        Color                         m_diffuseColor;
-        Color                         m_specularColor;
-        float                         m_alphaThreshold;
+        std::map<TextureType, Asset<Texture>> m_textures;
+        float                                 m_shininess;
+        Color                                 m_ambientColor;
+        Color                                 m_diffuseColor;
+        Color                                 m_specularColor;
+        float                                 m_alphaThreshold;
     };
 }
 

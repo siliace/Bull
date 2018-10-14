@@ -21,19 +21,19 @@ namespace Bull
         }
     }
 
-    Image ImageLoader::loadFromPath(const Path& path, PixelFormat pixelFormat) const
+    Asset<Image> ImageLoader::loadFromPath(const Path& path, PixelFormat pixelFormat) const
     {
         File file(path, FileOpeningMode_Read);
 
         return loadFromStream(file, pixelFormat);
     }
 
-    Image ImageLoader::loadFromStream(InStream& stream, PixelFormat pixelFormat) const
+    Asset<Image> ImageLoader::loadFromStream(InStream& stream, PixelFormat pixelFormat) const
     {
         Size size;
-        Image image;
         int channels;
         stbi_io_callbacks callbacks;
+        std::shared_ptr<Image> image;
 
         callbacks.read = [](void* user, char* data, int size) -> int {
             ByteArray bytes = reinterpret_cast<InStream*>(user)->read(size);
@@ -57,14 +57,14 @@ namespace Bull
 
         std::size_t bytesCount = PixelFormatUtils::getImageByteCount(size, pixelFormat);
 
-        image.create(ByteArray::memoryCopy(buffer, bytesCount), size, pixelFormat);
+        image = std::make_shared<Image>(ByteArray::memoryCopy(buffer, bytesCount), size, pixelFormat);
 
         stbi_image_free(buffer);
 
-        return image;
+        return Asset<Image>(image);
     }
 
-    Image ImageLoader::loadFromMemory(const void* data, std::size_t length, PixelFormat pixelFormat) const
+    Asset<Image> ImageLoader::loadFromMemory(const void* data, std::size_t length, PixelFormat pixelFormat) const
     {
         MemoryStream memoryStream(data, length);
 
