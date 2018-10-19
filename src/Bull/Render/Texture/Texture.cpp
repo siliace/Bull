@@ -30,11 +30,6 @@ namespace Bull
         return static_cast<unsigned int>(size);
     }
 
-    std::shared_ptr<Texture> Texture::make(const std::shared_ptr<AbstractImage>& image)
-    {
-        return std::make_shared<Texture>(image->getPixels(), image->getSize(), image->getPixelFormat());
-    }
-
     Texture::Texture() :
         m_id(0),
         m_isSmooth(false),

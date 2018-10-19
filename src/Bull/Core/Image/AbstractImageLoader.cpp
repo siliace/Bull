@@ -1,9 +1,7 @@
 #include <stb_image/stb_image.h>
 
 #include <Bull/Core/Exception/InternalError.hpp>
-#include <Bull/Core/FileSystem/File.hpp>
-#include <Bull/Core/Image/ImageLoader.hpp>
-#include <Bull/Core/IO/MemoryStream.hpp>
+#include <Bull/Core/Image/AbstractImageLoader.hpp>
 
 namespace Bull
 {
@@ -21,19 +19,18 @@ namespace Bull
         }
     }
 
-    std::shared_ptr<Image> ImageLoader::loadFromPath(const Path& path, PixelFormat pixelFormat) const
+    String AbstractImageLoader::getErrorMessage() const
     {
-        File file(path, FileOpeningMode_Read);
+        std::lock_guard<std::mutex> lock(m_mutex);
 
-        return loadFromStream(file, pixelFormat);
+        return stbi_failure_reason();
     }
 
-    std::shared_ptr<Image> ImageLoader::loadFromStream(InStream& stream, PixelFormat pixelFormat) const
+    AbstractImageLoader::RawImage AbstractImageLoader::loadPixelsFromStream(InStream& stream, PixelFormat pixelFormat) const
     {
         Size size;
         int channels;
         stbi_io_callbacks callbacks;
-        std::shared_ptr<Image> image;
 
         callbacks.read = [](void* user, char* data, int size) -> int {
             ByteArray bytes = reinterpret_cast<InStream*>(user)->read(size);
@@ -55,26 +52,10 @@ namespace Bull
 
         Expect(buffer, Throw(InternalError, "ImageLoader::loadFromStream", "Failed to load image: " + getErrorMessage()));
 
-        std::size_t bytesCount = PixelFormatUtils::getImageByteCount(size, pixelFormat);
-
-        image = std::make_shared<Image>(ByteArray::memoryCopy(buffer, bytesCount), size, pixelFormat);
+        ByteArray pixels = ByteArray::memoryCopy(buffer, PixelFormatUtils::getImageByteCount(size, pixelFormat));
 
         stbi_image_free(buffer);
 
-        return std::shared_ptr<Image>(image);
-    }
-
-    std::shared_ptr<Image> ImageLoader::loadFromMemory(const void* data, std::size_t length, PixelFormat pixelFormat) const
-    {
-        MemoryStream memoryStream(data, length);
-
-        return loadFromStream(memoryStream, pixelFormat);
-    }
-
-    String ImageLoader::getErrorMessage() const
-    {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
-        return stbi_failure_reason();
+        return { pixels, size, channels };
     }
 }

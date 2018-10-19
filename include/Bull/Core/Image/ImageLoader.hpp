@@ -4,11 +4,13 @@
 #include <mutex>
 
 #include <Bull/Core/Assets/AsyncAssetLoader.hpp>
+#include <Bull/Core/Image/AbstractImageLoader.hpp>
 #include <Bull/Core/Image/Image.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API ImageLoader : public AsyncAssetLoader<Image, PixelFormat>
+    template <typename T>
+    class BULL_CORE_API ImageLoader : public AbstractImageLoader, public AsyncAssetLoader<T, PixelFormat>
     {
     public:
 
@@ -20,7 +22,10 @@ namespace Bull
          * \return The loaded Image
          *
          */
-        std::shared_ptr<Image> loadFromPath(const Path& path, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
+        std::shared_ptr<T> loadFromPath(const Path& path, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override
+        {
+            return std::static_pointer_cast<T>(AbstractImageLoader::loadFromPath<T>(path, pixelFormat));
+        }
 
         /*! \brief Load an Image from an InStream
          *
@@ -30,7 +35,10 @@ namespace Bull
          * \return The loaded Image
          *
          */
-        std::shared_ptr<Image> loadFromStream(InStream& stream, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
+        std::shared_ptr<T> loadFromStream(InStream& stream, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override
+        {
+            return std::static_pointer_cast<T>(AbstractImageLoader::loadFromStream<T>(stream, pixelFormat));
+        }
 
         /*! \brief Load a Image from a memory area
          *
@@ -41,20 +49,11 @@ namespace Bull
          * \return The loaded Image
          *
          */
-        std::shared_ptr<Image> loadFromMemory(const void* data, std::size_t length, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
+        std::shared_ptr<T> loadFromMemory(const void* data, std::size_t length, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override
+        {
+            return std::static_pointer_cast<T>(AbstractImageLoader::loadFromMemory<T>(data, length, pixelFormat));
+        }
 
-    private:
-
-        /*! \brief Get the last loading error message
-         *
-         * \return The error message
-         *
-         */
-        String getErrorMessage() const;
-
-    private:
-
-        mutable std::mutex m_mutex;
     };
 }
 

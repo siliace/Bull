@@ -18,15 +18,14 @@
 #include <Cube.hpp>
 
 Bull::RandomGenerator random;
-Bull::AssetManager<Bull::Image> manager;
 
 Bull::Material loadMaterialFromPath(const Bull::Path& path)
 {
     Bull::Material material;
-    Bull::ImageLoader imageLoader;
-    std::shared_ptr<Bull::Texture> diffuse =  Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container.png")));
-    std::shared_ptr<Bull::Texture> specular = Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container_specular.png")));
-    std::shared_ptr<Bull::Texture> emission = Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container_emission.png")));
+    Bull::ImageLoader<Bull::Texture> imageLoader;
+    std::shared_ptr<Bull::Texture> diffuse =  imageLoader.loadFromPath(path.resolve("container.png"));
+    std::shared_ptr<Bull::Texture> specular = imageLoader.loadFromPath(path.resolve("container_specular.png"));
+    std::shared_ptr<Bull::Texture> emission = imageLoader.loadFromPath(path.resolve("container_emission.png"));
 
     diffuse->enableSmooth();
     specular->enableSmooth();

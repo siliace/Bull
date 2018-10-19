@@ -24,15 +24,6 @@ namespace Bull
          */
         static unsigned int getMaximumSize();
 
-        /*! \brief Create a Texture Asset from an Image Asset
-         *
-         * \param image The Image
-         *
-         * \return The created Texture
-         *
-         */
-        static std::shared_ptr<Texture> make(const std::shared_ptr<AbstractImage>& image);
-
     public:
 
         /*! \brief Default constructor
