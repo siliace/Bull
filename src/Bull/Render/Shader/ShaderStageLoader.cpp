@@ -7,24 +7,24 @@
 
 namespace Bull
 {
-    Asset<ShaderStage> ShaderStageLoader::loadFromPath(const Path& path, ShaderStageType type) const
+    std::shared_ptr<ShaderStage> ShaderStageLoader::loadFromPath(const Path& path, ShaderStageType type) const
     {
         File file(path, FileOpeningMode_Read);
 
         return loadFromStream(file, type);
     }
 
-    Asset<ShaderStage> ShaderStageLoader::loadFromStream(InStream& stream, ShaderStageType type) const
+    std::shared_ptr<ShaderStage> ShaderStageLoader::loadFromStream(InStream& stream, ShaderStageType type) const
     {
         std::shared_ptr<ShaderStage> stage = std::make_shared<ShaderStage>();
 
         stage->create(type);
         stage->compile(TextReader(stream).readAll());
 
-        return Asset<ShaderStage>(stage);
+        return stage;
     }
 
-    Asset<ShaderStage> ShaderStageLoader::loadFromMemory(const void* data, std::size_t length, ShaderStageType type) const
+    std::shared_ptr<ShaderStage> ShaderStageLoader::loadFromMemory(const void* data, std::size_t length, ShaderStageType type) const
     {
         MemoryStream memoryStream(data, length);
 

@@ -1,3 +1,4 @@
+#include <Bull/Core/Assets/AssetManager.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/Image/ImageLoader.hpp>
 #include <Bull/Core/Utility/StringUtils.hpp>
@@ -17,14 +18,15 @@
 #include <Cube.hpp>
 
 Bull::RandomGenerator random;
+Bull::AssetManager<Bull::Image> manager;
 
 Bull::Material loadMaterialFromPath(const Bull::Path& path)
 {
     Bull::Material material;
     Bull::ImageLoader imageLoader;
-    Bull::Asset<Bull::Texture> diffuse =  Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container.png")));
-    Bull::Asset<Bull::Texture> specular = Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container_specular.png")));
-    Bull::Asset<Bull::Texture> emission = Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container_emission.png")));
+    std::shared_ptr<Bull::Texture> diffuse =  Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container.png")));
+    std::shared_ptr<Bull::Texture> specular = Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container_specular.png")));
+    std::shared_ptr<Bull::Texture> emission = Bull::Texture::make(imageLoader.loadFromPath(path.resolve("container_emission.png")));
 
     diffuse->enableSmooth();
     specular->enableSmooth();
@@ -42,7 +44,7 @@ Bull::Shader loadShaderFromPath(const Bull::Path& path)
 {
     Bull::Shader shader;
     Bull::ShaderStageLoader shaderStageLoader;
-    Bull::Asset<Bull::ShaderStage> vertex, fragment;
+    std::shared_ptr<Bull::ShaderStage> vertex, fragment;
 
     vertex = shaderStageLoader.loadFromPath(path.resolve("phong.vert"), Bull::ShaderStageType_Vertex);
     fragment = shaderStageLoader.loadFromPath(path.resolve("phong.frag"), Bull::ShaderStageType_Fragment);

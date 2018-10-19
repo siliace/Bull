@@ -16,7 +16,7 @@ namespace Bull
          * \param type The type of ShaderStage to load
          *
          */
-        Asset<ShaderStage> loadFromPath(const Path& path, ShaderStageType type) const override;
+        std::shared_ptr<ShaderStage> loadFromPath(const Path& path, ShaderStageType type) const override;
 
         /*! \brief Load an ShaderStage from an InStream
          *
@@ -24,7 +24,7 @@ namespace Bull
          * \param type   The type of ShaderStage to load
          *
          */
-        Asset<ShaderStage> loadFromStream(InStream& stream, ShaderStageType type) const override;
+        std::shared_ptr<ShaderStage> loadFromStream(InStream& stream, ShaderStageType type) const override;
 
         /*! \brief Load an ShaderStage from a memory area
          *
@@ -33,7 +33,7 @@ namespace Bull
          * \param type   The type of ShaderStage to load
          *
          */
-        Asset<ShaderStage> loadFromMemory(const void* data, std::size_t length, ShaderStageType type) const override;
+        std::shared_ptr<ShaderStage> loadFromMemory(const void* data, std::size_t length, ShaderStageType type) const override;
     };
 }
 

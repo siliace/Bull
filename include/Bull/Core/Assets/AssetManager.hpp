@@ -3,8 +3,8 @@
 
 #include <functional>
 #include <map>
+#include <memory>
 
-#include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 
 namespace Bull
@@ -23,7 +23,7 @@ namespace Bull
          *
          */
         template <typename... Args>
-        Asset<T> create(const String& name, Args&&... args)
+        std::shared_ptr<T> create(const String& name, Args&&... args)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
@@ -38,9 +38,7 @@ namespace Bull
                 it->second = T(std::forward<Args>(args)...);
             }
 
-            it->second.setName(name);
-
-            return createHandle(it);
+            return it->second;
         }
 
         /*! \brief Register an Asset in the AssetManager
@@ -51,7 +49,7 @@ namespace Bull
          * \return A handler to the added Asset
          *
          */
-        Asset<T> add(T&& asset, const String& name)
+        std::shared_ptr<T> add(T&& asset, const String& name)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
@@ -66,9 +64,7 @@ namespace Bull
                 it->second = std::forward<T>(asset);
             }
 
-            it->second.setName(name);
-
-            return createHandle(it);
+            return it->second;
         }
 
         /*! \brief Remove an Asset from the AssetManager
@@ -78,13 +74,13 @@ namespace Bull
          * \return The removed
          *
          */
-        Asset<T> remove(const String& name)
+        std::shared_ptr<T> remove(const String& name)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
             Expect(it != m_assets.end(), Throw(InvalidParameter, "AssetManager::find", "The manager does not contains any asset " + name));
 
-            return Asset<T>(std::move(m_assets.erase(it)->second), this);
+            return m_assets.erase(it)->second;
         }
 
         /*! \brief Tell whether an Asset exists in the AssetManager
@@ -106,13 +102,13 @@ namespace Bull
          * \return A handler to the Asset
          *
          */
-        Asset<T> find(const String& name)
+        std::shared_ptr<T> find(const String& name)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
             Expect(it != m_assets.end(), Throw(InvalidParameter, "AssetManager::find", "The manager does not contains any asset " + name));
 
-            return createHandle(it);
+            return it->second;
         }
 
         /*! \brief Find an Asset by its name or create a new one and return it
@@ -123,7 +119,7 @@ namespace Bull
          *
          */
         template <typename... Args>
-        Asset<T> findOrCreate(const String& name, Args&&... args)
+        std::shared_ptr<T> findOrCreate(const String& name, Args&&... args)
         {
             return findOrCreateWithFactory(name, [&args...]() -> T {
                 return T(std::forward<Args>(args)...);
@@ -138,18 +134,16 @@ namespace Bull
          * \return The created Asset
          *
          */
-        Asset<T> findOrCreateWithFactory(const String& name, const std::function<T()>& factory)
+        std::shared_ptr<T> findOrCreateWithFactory(const String& name, const std::function<T()>& factory)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
             if(it == m_assets.end())
             {
                 it = m_assets.insert(std::make_pair(name, factory())).first;
-
-                it->second.setName(name);
             }
 
-            return createHandle(it);
+            return it->second;
         }
 
         /*! \brief Delete every Asset
@@ -163,11 +157,6 @@ namespace Bull
     private:
 
         using AssetMap = std::map<String, std::shared_ptr<T>>;
-
-        Asset<T> createHandle(typename AssetMap::iterator iterator)
-        {
-            return Asset<T>(iterator->second, iterator->first, this);
-        }
 
         AssetMap m_assets;
     };

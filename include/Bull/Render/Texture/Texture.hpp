@@ -1,7 +1,8 @@
 #ifndef BULL_RENDER_TEXTURE_TEXTURE_HPP
 #define BULL_RENDER_TEXTURE_TEXTURE_HPP
 
-#include <Bull/Core/Assets/Asset.hpp>
+#include <memory>
+
 #include <Bull/Core/Image/Image.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
@@ -25,12 +26,12 @@ namespace Bull
 
         /*! \brief Create a Texture Asset from an Image Asset
          *
-         * \param asset The Image Asset
+         * \param image The Image
          *
-         * \return The created Texture Asset
+         * \return The created Texture
          *
          */
-        static Asset<Texture> make(const Asset<Image>& asset);
+        static std::shared_ptr<Texture> make(const std::shared_ptr<AbstractImage>& image);
 
     public:
 

@@ -18,7 +18,7 @@ namespace Bull
         return m_shininess;
     }
 
-    void Material::setTexture(const Asset<Texture>& texture, TextureType type)
+    void Material::setTexture(const std::shared_ptr<Texture>& texture, TextureType type)
     {
         m_textures[type] = texture;
     }

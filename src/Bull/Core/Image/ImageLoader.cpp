@@ -21,14 +21,14 @@ namespace Bull
         }
     }
 
-    Asset<Image> ImageLoader::loadFromPath(const Path& path, PixelFormat pixelFormat) const
+    std::shared_ptr<Image> ImageLoader::loadFromPath(const Path& path, PixelFormat pixelFormat) const
     {
         File file(path, FileOpeningMode_Read);
 
         return loadFromStream(file, pixelFormat);
     }
 
-    Asset<Image> ImageLoader::loadFromStream(InStream& stream, PixelFormat pixelFormat) const
+    std::shared_ptr<Image> ImageLoader::loadFromStream(InStream& stream, PixelFormat pixelFormat) const
     {
         Size size;
         int channels;
@@ -61,10 +61,10 @@ namespace Bull
 
         stbi_image_free(buffer);
 
-        return Asset<Image>(image);
+        return std::shared_ptr<Image>(image);
     }
 
-    Asset<Image> ImageLoader::loadFromMemory(const void* data, std::size_t length, PixelFormat pixelFormat) const
+    std::shared_ptr<Image> ImageLoader::loadFromMemory(const void* data, std::size_t length, PixelFormat pixelFormat) const
     {
         MemoryStream memoryStream(data, length);
 

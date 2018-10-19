@@ -20,7 +20,7 @@ namespace Bull
          * \return The loaded Image
          *
          */
-        Asset<Image> loadFromPath(const Path& path, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
+        std::shared_ptr<Image> loadFromPath(const Path& path, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
 
         /*! \brief Load an Image from an InStream
          *
@@ -30,7 +30,7 @@ namespace Bull
          * \return The loaded Image
          *
          */
-        Asset<Image> loadFromStream(InStream& stream, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
+        std::shared_ptr<Image> loadFromStream(InStream& stream, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
 
         /*! \brief Load a Image from a memory area
          *
@@ -41,7 +41,7 @@ namespace Bull
          * \return The loaded Image
          *
          */
-        Asset<Image> loadFromMemory(const void* data, std::size_t length, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
+        std::shared_ptr<Image> loadFromMemory(const void* data, std::size_t length, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) const override;
 
     private:
 

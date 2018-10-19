@@ -1,7 +1,6 @@
 #ifndef BULL_CORE_IMAGE_IMAGE_HPP
 #define BULL_CORE_IMAGE_IMAGE_HPP
 
-#include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Image/AbstractImage.hpp>
 #include <Bull/Core/Utility/Color.hpp>
 

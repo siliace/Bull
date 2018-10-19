@@ -41,7 +41,7 @@ namespace Bull
          * \param type    The type of the texture
          *
          */
-        void setTexture(const Asset<Texture>& texture, TextureType type);
+        void setTexture(const std::shared_ptr<Texture>& texture, TextureType type);
 
         /*! \brief Get a Texture
          *
@@ -54,12 +54,12 @@ namespace Bull
 
     private:
 
-        std::map<TextureType, Asset<Texture>> m_textures;
-        float                                 m_shininess;
-        Color                                 m_ambientColor;
-        Color                                 m_diffuseColor;
-        Color                                 m_specularColor;
-        float                                 m_alphaThreshold;
+        std::map<TextureType, std::shared_ptr<Texture>> m_textures;
+        float                                           m_shininess;
+        Color                                           m_ambientColor;
+        Color                                           m_diffuseColor;
+        Color                                           m_specularColor;
+        float                                           m_alphaThreshold;
     };
 }
 

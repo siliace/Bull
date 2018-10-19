@@ -1,7 +1,8 @@
 #ifndef BULL_CORE_ASSET_ASSETLOADER_HPP
 #define BULL_CORE_ASSET_ASSETLOADER_HPP
 
-#include <Bull/Core/Assets/Asset.hpp>
+#include <memory>
+
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/InStream.hpp>
 
@@ -18,7 +19,7 @@ namespace Bull
          * \return The loaded Asset
          *
          */
-        virtual Asset<T> loadFromPath(const Path& path, Args... args) const = 0;
+        virtual std::shared_ptr<T> loadFromPath(const Path& path, Args... args) const = 0;
 
         /*! \brief Load an Asset from an InStream
          *
@@ -28,7 +29,7 @@ namespace Bull
          * \return The loaded Asset
          *
          */
-        virtual Asset<T> loadFromStream(InStream& stream, Args... args) const = 0;
+        virtual std::shared_ptr<T> loadFromStream(InStream& stream, Args... args) const = 0;
 
         /*! \brief Load an Asset from a memory area
          *
@@ -39,7 +40,7 @@ namespace Bull
          * \return The loaded Asset
          *
          */
-        virtual Asset<T> loadFromMemory(const void* data, std::size_t length, Args... args) const = 0;
+        virtual std::shared_ptr<T> loadFromMemory(const void* data, std::size_t length, Args... args) const = 0;
     };
 }
 

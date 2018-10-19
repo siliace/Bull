@@ -1,7 +1,6 @@
 #ifndef BULL_RENDER_SHADER_SHADERSTAGE_HPP
 #define BULL_RENDER_SHADER_SHADERSTAGE_HPP
 
-#include <Bull/Core/Assets/Asset.hpp>
 #include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
