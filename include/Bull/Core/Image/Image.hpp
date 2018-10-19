@@ -10,7 +10,12 @@ namespace Bull
     {
     public:
 
-        Image() = default;
+        /*! \brief Constructor
+         *
+         * \param pixelFormat
+         *
+         */
+        explicit Image(PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
 
         /*! \brief Constructor
          *
@@ -32,7 +37,7 @@ namespace Bull
          * \param size The size of the Image
          *
          */
-        void create(const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) override;
+        void create(const Size& size) override;
 
         /*! \brief Create the Image
          *
@@ -40,7 +45,7 @@ namespace Bull
          * \param size   The size of the Image
          *
          */
-        void create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) override;
+        void create(const ByteArray& pixels, const Size& size) override;
 
         /*! \brief Get the size of the Image
          *

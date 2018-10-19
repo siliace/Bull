@@ -21,7 +21,7 @@ namespace Bull
          * \param size The size of the AbstractImage
          *
          */
-        virtual void create(const Size& size, PixelFormat pixelFormat) = 0;
+        virtual void create(const Size& size) = 0;
 
         /*! \brief Create the AbstractImage
          *
@@ -29,7 +29,7 @@ namespace Bull
          * \param size   The size of the Image
          *
          */
-        virtual void create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat) = 0;
+        virtual void create(const ByteArray& pixels, const Size& size) = 0;
 
         /*! \brief Get the size of the AbstractImage
          *

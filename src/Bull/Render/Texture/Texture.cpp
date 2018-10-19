@@ -30,27 +30,25 @@ namespace Bull
         return static_cast<unsigned int>(size);
     }
 
-    Texture::Texture() :
+    Texture::Texture(PixelFormat pixelFormat) :
         m_id(0),
         m_isSmooth(false),
-        m_isRepeated(false)
+        m_isRepeated(false),
+        m_pixelFormat(pixelFormat)
     {
         /// Nothing
     }
 
-    Texture::Texture(const Image& image)
+    Texture::Texture(const Size& size, PixelFormat pixelFormat) :
+        Texture(pixelFormat)
     {
-        create(image);
+        create(size);
     }
 
-    Texture::Texture(const Size& size, PixelFormat pixelFormat)
+    Texture::Texture(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat) :
+        Texture(pixelFormat)
     {
-        create(size, pixelFormat);
-    }
-
-    Texture::Texture(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
-    {
-        create(pixels, size, pixelFormat);
+        create(pixels, size);
     }
 
     Texture::Texture(Texture&& right) noexcept
@@ -58,6 +56,7 @@ namespace Bull
         std::swap(m_id, right.m_id);
         std::swap(m_isSmooth, right.m_isSmooth);
         std::swap(m_isRepeated, right.m_isRepeated);
+        std::swap(m_pixelFormat, right.m_pixelFormat);
     }
 
     Texture::~Texture()
@@ -73,16 +72,12 @@ namespace Bull
         std::swap(m_id, right.m_id);
         std::swap(m_isSmooth, right.m_isSmooth);
         std::swap(m_isRepeated, right.m_isRepeated);
+        std::swap(m_pixelFormat, right.m_pixelFormat);
 
         return *this;
     }
 
-    void Texture::create(const Image& image)
-    {
-        create(image.getPixels(), image.getSize(), image.getPixelFormat());
-    }
-
-    void Texture::create(const Size& size, PixelFormat pixelFormat)
+    void Texture::create(const Size& size)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Texture::create", "Invalid texture size"));
 
@@ -95,8 +90,6 @@ namespace Bull
             Expect(m_id, Throw(InternalError, "Texture::Texture", "Failed to create the texture"));
         }
 
-        m_pixelFormat = pixelFormat;
-
         gl::bindTexture(GL_TEXTURE_2D, m_id);
         gl::texImage2D(GL_TEXTURE_2D, 0, pixelFormats[m_pixelFormat], size.width , size.height , 0, pixelFormats[m_pixelFormat], dataTypes[m_pixelFormat], nullptr);
         gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
@@ -106,11 +99,9 @@ namespace Bull
 
     }
 
-    void Texture::create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
+    void Texture::create(const ByteArray& pixels, const Size& size)
     {
         create(size);
-
-        m_pixelFormat = pixelFormat;
 
         gl::bindTexture(GL_TEXTURE_2D, m_id);
 
@@ -185,10 +176,5 @@ namespace Bull
         gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);
 
         return pixels;
-    }
-
-    PixelFormat Texture::getPixelFormat() const
-    {
-        return m_pixelFormat;
     }
 }

@@ -26,17 +26,10 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
-         *
-         */
-        Texture();
-
         /*! \brief Constructor
          *
-         * \param image The image to load
-         *
          */
-        explicit Texture(const Image& image);
+        explicit Texture(PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
 
         /*! \brief Constructor
          *
@@ -74,19 +67,12 @@ namespace Bull
          */
         Texture& operator=(Texture&& right) noexcept;
 
-        /*! \brief Load a Texture form an Image
-         *
-         * \param image The Image to load
-         *
-         */
-        void create(const Image& image);
-
         /*! \brief Create an empty Texture
          *
          * \param size The size of the Texture to create
          *
          */
-        void create(const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) override;
+        void create(const Size& size) override;
 
         /*! \brief Create a Texture
          *
@@ -94,7 +80,7 @@ namespace Bull
          * \param size   The size of the Texture
          *
          */
-        void create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8) override;
+        void create(const ByteArray& pixels, const Size& size) override;
 
         /*! \brief Bind the Texture
          *
@@ -155,7 +141,10 @@ namespace Bull
          * \return The PixelFormat
          *
          */
-        PixelFormat getPixelFormat() const override;
+        inline PixelFormat getPixelFormat() const override
+        {
+            return m_pixelFormat;
+        }
 
     private:
 

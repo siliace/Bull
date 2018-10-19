@@ -3,33 +3,39 @@
 
 namespace Bull
 {
-    Image::Image(const Size& size, PixelFormat pixelFormat)
+    Image::Image(PixelFormat pixelFormat) :
+        m_pixelFormat(pixelFormat)
     {
-        create(size, pixelFormat);
+        /// Nothing
     }
 
-    Image::Image(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
+    Image::Image(const Size& size, PixelFormat pixelFormat) :
+        m_pixelFormat(pixelFormat)
     {
-        create(pixels, size, pixelFormat);
+        create(size);
     }
 
-    void Image::create(const Size& size, PixelFormat pixelFormat)
+    Image::Image(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat) :
+        m_pixelFormat(pixelFormat)
+    {
+        create(pixels, size);
+    }
+
+    void Image::create(const Size& size)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Image::create", "Invalid image size"));
 
         m_size = size;
-        m_pixelFormat = pixelFormat;
 
         m_pixels.create(PixelFormatUtils::getImageByteCount(m_size, m_pixelFormat));
     }
 
-    void Image::create(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
+    void Image::create(const ByteArray& pixels, const Size& size)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Image::create", "Invalid image size"));
 
         m_size = size;
         m_pixels = pixels;
-        m_pixelFormat = pixelFormat;
 
         std::size_t bytes = PixelFormatUtils::getImageByteCount(m_size, m_pixelFormat);
 

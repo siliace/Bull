@@ -41,10 +41,10 @@ namespace Bull
         template <typename T, typename = std::enable_if<std::is_base_of<AbstractImage, T>::value>>
         std::shared_ptr<AbstractImage> loadFromStream(InStream& stream, PixelFormat pixelFormat) const
         {
-            std::shared_ptr<AbstractImage> image = std::make_shared<T>();
+            std::shared_ptr<AbstractImage> image = std::make_shared<T>(pixelFormat);
 
             RawImage raw = loadPixelsFromStream(stream, pixelFormat);
-            image->create(raw.pixels, raw.size, pixelFormat);
+            image->create(raw.pixels, raw.size);
 
             return image;
         }
