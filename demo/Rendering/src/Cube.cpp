@@ -82,11 +82,11 @@ void Cube::render(const Bull::Shader& shader) const
     shader.setUniform("material.shininess", m_material.getShininess());
 
     gl::activeTexture(GL_TEXTURE0);
-    m_material.getTexture(Bull::TextureType_Diffuse)->bind();
+    Bull::Texture::bind(*m_material.getTexture(Bull::TextureType_Diffuse));
     shader.setUniform("material.diffuse", 0);
 
     gl::activeTexture(GL_TEXTURE1);
-    m_material.getTexture(Bull::TextureType_Specular)->bind();
+    Bull::Texture::bind(*m_material.getTexture(Bull::TextureType_Specular));
     shader.setUniform("material.specular", 1);
 
     m_mesh.render(Bull::RenderPrimitive_Triangles);

@@ -13,6 +13,7 @@
 
 #include <Bull/Render/Shader/ShaderStageLoader.hpp>
 #include <Bull/Render/Target/RenderWindow.hpp>
+#include <Bull/Render/Texture/ImageTexture.hpp>
 
 #include <Camera.hpp>
 #include <Cube.hpp>
@@ -22,14 +23,10 @@ Bull::RandomGenerator random;
 Bull::Material loadMaterialFromPath(const Bull::Path& path)
 {
     Bull::Material material;
-    Bull::ImageLoader<Bull::Texture> imageLoader;
-    std::shared_ptr<Bull::Texture> diffuse =  imageLoader.loadFromPath(path.resolve("container.png"));
-    std::shared_ptr<Bull::Texture> specular = imageLoader.loadFromPath(path.resolve("container_specular.png"));
-    std::shared_ptr<Bull::Texture> emission = imageLoader.loadFromPath(path.resolve("container_emission.png"));
-
-    diffuse->enableSmooth();
-    specular->enableSmooth();
-    emission->enableSmooth();
+    Bull::ImageLoader<Bull::ImageTexture> imageLoader;
+    std::shared_ptr<Bull::ImageTexture> diffuse =  imageLoader.loadFromPath(path.resolve("container.png"));
+    std::shared_ptr<Bull::ImageTexture> specular = imageLoader.loadFromPath(path.resolve("container_specular.png"));
+    std::shared_ptr<Bull::ImageTexture> emission = imageLoader.loadFromPath(path.resolve("container_emission.png"));
 
     material.setShininess(32.f);
     material.setTexture(diffuse, Bull::TextureType_Diffuse);

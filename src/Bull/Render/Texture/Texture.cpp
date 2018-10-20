@@ -1,180 +1,127 @@
-#include <map>
-
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
+#include <Bull/Core/Exception/LogicError.hpp>
 
-#include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
+#include <Bull/Render/Context/GlFunctions.hpp>
 
 namespace Bull
 {
     namespace
     {
-        std::map<PixelFormat, GLenum> pixelFormats = {
-                {PixelFormat_Rgb8, GL_RGB},
-                {PixelFormat_Rgb8Alpha8, GL_RGBA},
-        };
+        GLenum convertInternalFormat(PixelFormat pixelFormat)
+        {
+            switch(pixelFormat)
+            {
+                case PixelFormat_Rgb8: return GL_RGB;
+                case PixelFormat_Rgb8Alpha8: return GL_RGBA;
+                case PixelFormat_Depth16: return GL_DEPTH_COMPONENT16;
+                case PixelFormat_Depth24: return GL_DEPTH_COMPONENT24;
+                case PixelFormat_Depth32: return GL_DEPTH_COMPONENT32;
+            }
 
-        std::map<PixelFormat, GLenum> dataTypes = {
-                {PixelFormat_Rgb8, GL_UNSIGNED_BYTE},
-                {PixelFormat_Rgb8Alpha8, GL_UNSIGNED_BYTE},
-        };
+            return 0;
+        }
+
+        GLenum convertFormat(PixelFormat pixelFormat)
+        {
+            switch(pixelFormat)
+            {
+                case PixelFormat_Rgb8: return GL_RGB;
+                case PixelFormat_Rgb8Alpha8: return GL_RGBA;
+                case PixelFormat_Depth16: return GL_DEPTH_COMPONENT;
+                case PixelFormat_Depth24: return GL_DEPTH_COMPONENT;
+                case PixelFormat_Depth32: return GL_DEPTH_COMPONENT;
+            }
+
+            return 0;
+        }
+
+        GLenum convertDataType(PixelFormat pixelFormat)
+        {
+            switch(pixelFormat)
+            {
+                case PixelFormat_Rgb8: return GL_UNSIGNED_BYTE;
+                case PixelFormat_Rgb8Alpha8: return GL_UNSIGNED_BYTE;
+                case PixelFormat_Depth16: return GL_UNSIGNED_SHORT;
+                case PixelFormat_Depth24: return GL_UNSIGNED_INT;
+                case PixelFormat_Depth32: return GL_UNSIGNED_INT;
+            }
+        }
     }
 
-    unsigned int Texture::getMaximumSize()
+    void Texture::bind(const Texture& texture)
     {
-        int size;
-
-        gl::getIntegerv(GL_MAX_TEXTURE_SIZE, &size);
-
-        return static_cast<unsigned int>(size);
+        gl::bindTexture(GL_TEXTURE_2D, texture.getSystemHandle());
     }
 
-    Texture::Texture(PixelFormat pixelFormat) :
-        m_id(0),
-        m_isSmooth(false),
-        m_isRepeated(false),
-        m_pixelFormat(pixelFormat)
+    void Texture::unbind()
+    {
+        gl::bindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    Texture::Texture() :
+        m_handle(0)
     {
         /// Nothing
     }
 
-    Texture::Texture(const Size& size, PixelFormat pixelFormat) :
-        Texture(pixelFormat)
+    Texture::Texture(Texture&& texture) noexcept
     {
-        create(size);
+        std::swap(m_handle, texture.m_handle);
     }
 
-    Texture::Texture(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat) :
-        Texture(pixelFormat)
+    Texture& Texture::operator=(Texture&& texture) noexcept
     {
-        create(pixels, size);
-    }
-
-    Texture::Texture(Texture&& right) noexcept
-    {
-        std::swap(m_id, right.m_id);
-        std::swap(m_isSmooth, right.m_isSmooth);
-        std::swap(m_isRepeated, right.m_isRepeated);
-        std::swap(m_pixelFormat, right.m_pixelFormat);
-    }
-
-    Texture::~Texture()
-    {
-        if(gl::isTexture(m_id))
-        {
-            gl::deleteTextures(1, &m_id);
-        }
-    }
-
-    Texture& Texture::operator=(Texture&& right) noexcept
-    {
-        std::swap(m_id, right.m_id);
-        std::swap(m_isSmooth, right.m_isSmooth);
-        std::swap(m_isRepeated, right.m_isRepeated);
-        std::swap(m_pixelFormat, right.m_pixelFormat);
+        std::swap(m_handle, texture.m_handle);
 
         return *this;
     }
 
-    void Texture::create(const Size& size)
+    Texture::~Texture()
     {
-        Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Texture::create", "Invalid texture size"));
-
-        ensureContext();
-
-        if(!gl::isTexture(m_id))
+        if(isValid())
         {
-           gl::genTextures(1, &m_id);
-
-            Expect(m_id, Throw(InternalError, "Texture::Texture", "Failed to create the texture"));
+            gl::deleteTextures(1, &m_handle);
         }
-
-        gl::bindTexture(GL_TEXTURE_2D, m_id);
-        gl::texImage2D(GL_TEXTURE_2D, 0, pixelFormats[m_pixelFormat], size.width , size.height , 0, pixelFormats[m_pixelFormat], dataTypes[m_pixelFormat], nullptr);
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
-
     }
 
-    void Texture::create(const ByteArray& pixels, const Size& size)
+    bool Texture::isValid() const
     {
-        create(size);
-
-        gl::bindTexture(GL_TEXTURE_2D, m_id);
-
-        for(unsigned int i = 0; i < size.height ; i++)
-        {
-            gl::texSubImage2D(GL_TEXTURE_2D, 0, 0, i, size.width , 1, pixelFormats[m_pixelFormat], dataTypes[m_pixelFormat], &pixels[size.width * (size.height - i - 1) * PixelFormatUtils::getPixelFormatSize(m_pixelFormat)]);
-        }
-
-        gl::generateMipmap(GL_TEXTURE_2D);
-    }
-
-    void Texture::bind() const
-    {
-        ensureContext();
-
-        gl::bindTexture(GL_TEXTURE_2D, m_id);
-    }
-
-    void Texture::enableRepeat(bool enable)
-    {
-        m_isRepeated = enable;
-
-        bind();
-
-        gl::bindTexture(GL_TEXTURE_2D, m_id);
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, m_isRepeated ? GL_REPEAT : GL_CLAMP_TO_BORDER);
-    }
-
-    bool Texture::isEnableRepeat() const
-    {
-        return m_isRepeated;
-    }
-
-    void Texture::enableSmooth(bool enable)
-    {
-        m_isSmooth = enable;
-
-        bind();
-
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
-        gl::texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_isSmooth ? GL_LINEAR : GL_NEAREST);
-    }
-
-    bool Texture::isEnableSmooth() const
-    {
-        return m_isSmooth;
-    }
-
-    Image Texture::getImage() const
-    {
-        return Image(getPixels(), getSize(), m_pixelFormat);
+        return gl::isTexture(m_handle);
     }
 
     Size Texture::getSize() const
     {
         Size size;
 
-        gl::getTexParameteriv(m_id, GL_TEXTURE_WIDTH, &size.width);
-        gl::getTexParameteriv(m_id, GL_TEXTURE_WIDTH, &size.height);
+        gl::bindTexture(GL_TEXTURE_2D, m_handle);
+        gl::getTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_WIDTH, &size.width);
+        gl::getTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_HEIGHT, &size.height);
 
         return size;
     }
 
-    ByteArray Texture::getPixels() const
+    void Texture::create(const Size& size, PixelFormat pixelFormat)
     {
-        Size size = getSize();
-        ByteArray pixels(size.width * size.height * PixelFormatUtils::getPixelFormatSize(m_pixelFormat));
+        Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Texture::create", "Invalid texture size"));
 
-        bind();
+        if(!isValid())
+        {
+            gl::genTextures(1, &m_handle);
 
-        gl::getTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);
+            Expect(m_handle, Throw(InternalError, "Texture::create", "Failed to create texture"));
+        }
 
-        return pixels;
+        gl::bindTexture(GL_TEXTURE_2D, m_handle);
+        gl::texImage2D(GL_TEXTURE_2D, 0, convertInternalFormat(pixelFormat), size.width, size.height, 0, convertFormat(pixelFormat), convertDataType(pixelFormat), nullptr);
+    }
+
+    void Texture::setPixels(unsigned int xOffset, unsigned int yOffset, const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
+    {
+        Expect(isValid(), Throw(LogicError, "Texture::setPixels", "Invalid texture"));
+
+        gl::bindTexture(GL_TEXTURE_2D, m_handle);
+        gl::texSubImage2D(GL_TEXTURE_2D, 0, xOffset, yOffset, size.width, size.height, convertFormat(pixelFormat), convertDataType(pixelFormat), pixels.getBuffer());
     }
 }

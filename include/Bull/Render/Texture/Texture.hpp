@@ -13,145 +13,42 @@
 
 namespace Bull
 {
-    class BULL_RENDER_API Texture : public ContextResource, public NonCopyable, public AbstractImage
+    class BULL_RENDER_API Texture : public ContextResource, public NonCopyable
     {
     public:
 
-        /*! \brief Get the maximum size of a Texture
-         *
-         * \return The size
-         *
-         */
-        static unsigned int getMaximumSize();
+        static void bind(const Texture& texture);
+
+        static void unbind();
 
     public:
 
-        /*! \brief Constructor
-         *
-         */
-        explicit Texture(PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
+        Texture();
 
-        /*! \brief Constructor
-         *
-         * \param size The size of the Texture
-         *
-         */
-        explicit Texture(const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
+        Texture(Texture&& texture) noexcept;
 
-        /*! \brief Constructor
-         *
-         * \param pixels Pixels of the Texture
-         * \param size   The size of the Texture
-         *
-         */
-        explicit Texture(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
+        virtual ~Texture();
 
-        /*! \brief Constructor by movement
-         *
-         * \param right The Texture to move
-         *
-         */
-        Texture(Texture&& right) noexcept;
+        Texture& operator=(Texture&& texture) noexcept;
 
-        /*! \brief Destructor
-         *
-         */
-        ~Texture();
+        bool isValid() const;
 
-        /*! \brief Basic assignment operator by movement
-         *
-         * \param right The Texture to move
-         *
-         * \return This
-         *
-         */
-        Texture& operator=(Texture&& right) noexcept;
+        Size getSize() const;
 
-        /*! \brief Create an empty Texture
-         *
-         * \param size The size of the Texture to create
-         *
-         */
-        void create(const Size& size) override;
+    protected:
 
-        /*! \brief Create a Texture
-         *
-         * \param pixels Pixels of the Texture
-         * \param size   The size of the Texture
-         *
-         */
-        void create(const ByteArray& pixels, const Size& size) override;
+        void create(const Size& size, PixelFormat pixelFormat);
 
-        /*! \brief Bind the Texture
-         *
-         */
-        void bind() const;
+        void setPixels(unsigned int xOffset, unsigned int yOffset, const ByteArray& pixels, const Size& size, PixelFormat pixelFormat);
 
-        /*! \brief Enable or disable the Texture repeat
-         *
-         * \param enable True to enable, false to disable
-         *
-         */
-        void enableRepeat(bool enable = true);
-
-        /*! \brief Check whether the Texture repeat is enable
-         *
-         * \return Return true if the Texture repeat is enable, false otherwise
-         *
-         */
-        bool isEnableRepeat() const;
-
-        /*! \brief Enable or disable the Texture smooth
-         *
-         * \param enable True to enable, false to disable
-         *
-         */
-        void enableSmooth(bool enable = true);
-
-        /*! \brief Check whether the Texture smooth is enable
-         *
-         * \return Return true if the Texture smooth is enable, false otherwise
-         *
-         */
-        bool isEnableSmooth() const;
-
-        /*! \brief Download the Texture from the VRAM
-         *
-         * \return Return return the image
-         *
-         */
-        Image getImage() const;
-
-        /*! \brief Get the size of the Image
-         *
-         * \return The size
-         *
-         */
-        Size getSize() const override;
-
-        /*! \brief Get pixels of the Texture
-         *
-         * \return Pixels
-         *
-         */
-        ByteArray getPixels() const override;
-
-        /*! \brief Get the PixelFormat used by the Texture
-         *
-         * \return The PixelFormat
-         *
-         */
-        inline PixelFormat getPixelFormat() const override
+        inline unsigned int getSystemHandle() const
         {
-            return m_pixelFormat;
+            return m_handle;
         }
 
     private:
 
-        unsigned int m_id;
-        bool         m_isSmooth;
-        bool         m_isRepeated;
-        PixelFormat  m_pixelFormat;
+        unsigned int m_handle;
     };
 }
 

@@ -1,76 +1,44 @@
 #ifndef BULL_RENDER_TEXTURE_DEPTHTEXTURE_HPP
 #define BULL_RENDER_TEXTURE_DEPTHTEXTURE_HPP
 
-#include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/Utility/Size.hpp>
-
 #include <Bull/Render/Context/Context.hpp>
+#include <Bull/Render/Texture/Texture.hpp>
 
 namespace Bull
 {
-    class BULL_RENDER_API DepthTexture : public NonCopyable, public ContextResource
+    enum DepthValue
+    {
+        DepthValue_16,
+        DepthValue_24,
+        DepthValue_32,
+    };
+
+    class BULL_RENDER_API DepthTexture : public Texture
     {
     public:
 
-        /*! \brief Default constructor
-         *
-         */
-        DepthTexture();
-
         /*! \brief Constructor
          *
-         * \param size  The size of the DepthTexture
-         * \param depth The precision of the depth data
-         *
          */
-        explicit DepthTexture(const Size& size, unsigned int depth = Context::getActive()->getSettings().depths);
+        explicit DepthTexture(const Size& size, DepthValue depth);
 
-        /*! \brief Constructor by movement semantic
-         *
-         * \param right The DepthTexture to move
-         *
-         */
-        DepthTexture(DepthTexture&& right) noexcept;
+        DepthTexture(DepthTexture&& depthTexture) noexcept;
 
-        /*! \brief Destructor
-         *
-         */
-        ~DepthTexture();
-
-        /*! \brief Basic assignment operator
-         *
-         * \param right The DepthTexture to move
-         *
-         * \return This
-         *
-         */
-        DepthTexture& operator=(DepthTexture&& right) noexcept;
+        DepthTexture& operator=(DepthTexture&& depthTexture) noexcept;
 
         /*! \brief Create the DepthTexture
          *
-         * \param size  The size of the DepthTexture
-         * \param depth The precision of the depth data
-         *
          */
-        void create(const Size& size, unsigned int depth = Context::getActive()->getSettings().depths);
+        void create(const Size& size);
 
-        /*! \brief Tell whether the DepthTexture is valid
-         *
-         * \return True if valid
-         *
-         */
-        bool isValid() const;
-
-        /*! \brief Get the size of the DepthTexture
-         *
-         * \return The Size
-         *
-         */
-        Size getSize() const;
+        inline DepthValue getDepthValue() const
+        {
+            return m_depthValue;
+        }
 
     private:
 
-        unsigned int m_handler;
+        DepthValue m_depthValue;
     };
 }
 

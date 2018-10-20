@@ -11,6 +11,9 @@ namespace Bull
         PixelFormat_Luma8Alpha8,
         PixelFormat_Rgb8,
         PixelFormat_Rgb8Alpha8,
+        PixelFormat_Depth16,
+        PixelFormat_Depth24,
+        PixelFormat_Depth32,
     };
 
     struct BULL_CORE_API PixelFormatUtils
