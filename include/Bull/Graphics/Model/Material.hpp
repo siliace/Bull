@@ -2,6 +2,7 @@
 #define BULL_GRAPHICS_MATERIAL_HPP
 
 #include <map>
+#include <memory>
 
 #include <Bull/Core/Utility/Color.hpp>
 

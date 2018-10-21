@@ -8,31 +8,58 @@ namespace Bull
 {
     enum DepthValue
     {
-        DepthValue_16,
-        DepthValue_24,
-        DepthValue_32,
+        DepthValue_16, /*!< 16 bits of depth */
+        DepthValue_24, /*!< 24 bits of depth */
+        DepthValue_32, /*!< 32 bits of depth */
     };
 
     class BULL_RENDER_API DepthTexture : public Texture
     {
     public:
 
+        /*! \brief Constructor
+         *
+         * \param depthValue The StencilValue of the StencilTexture
+         *
+         */
         explicit DepthTexture(DepthValue depthValue);
 
         /*! \brief Constructor
          *
+         * \param size       The Size of the StencilTexture
+         * \param depthValue The StencilValue of the StencilTexture
+         *
          */
         DepthTexture(const Size& size, DepthValue depthValue);
 
-        DepthTexture(DepthTexture&& depthTexture) noexcept;
-
-        DepthTexture& operator=(DepthTexture&& depthTexture) noexcept;
-
-        /*! \brief Create the DepthTexture
+        /*! \brief Constructor by movement semantic
+         *
+         * \param depthTexture The DepthTexture to move
          *
          */
-        void create(const Size& size);
+        DepthTexture(DepthTexture&& depthTexture) noexcept;
 
+        /*! \brief Assignment operator by movement semantic
+         *
+         * \param depthTexture The DepthTexture to move
+         *
+         * \return This
+         *
+         */
+        DepthTexture& operator=(DepthTexture&& depthTexture) noexcept;
+
+        /*! \brief Create the DepthTexture with a given Size
+         *
+         * \param size The Size
+         *
+         */
+        void create(const Size& size) override;
+
+        /*! \brief Get the DepthValue of the DepthTexture
+         *
+         * \return The DepthValue
+         *
+         */
         inline DepthValue getDepthValue() const
         {
             return m_depthValue;

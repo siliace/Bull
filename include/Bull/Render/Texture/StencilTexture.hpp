@@ -7,26 +7,59 @@ namespace Bull
 {
     enum StencilValue
     {
-        StencilValue_1,
-        StencilValue_4,
-        StencilValue_8,
-        StencilValue_16,
+        StencilValue_1,  /*!< 1 bit of stencil */
+        StencilValue_4,  /*!< 4 bits of stencil */
+        StencilValue_8,  /*!< 8 bits of stencil */
+        StencilValue_16, /*!< 16 bits of stencil */
     };
 
     class BULL_RENDER_API StencilTexture : public Texture
     {
     public:
 
+        /*! \brief Constructor
+         *
+         * \param stencilValue The StencilValue of the StencilTexture
+         *
+         */
         explicit StencilTexture(StencilValue stencilValue);
 
+        /*! \brief Constructor
+         *
+         * \param size         The Size of the StencilTexture
+         * \param stencilValue The StencilValue of the StencilTexture
+         *
+         */
         StencilTexture(const Size& size, StencilValue stencilValue);
 
-        StencilTexture(StencilTexture&& depthTexture) noexcept;
+        /*! \brief Constructor by movement semantic
+         *
+         * \param stencilTexture The StencilTexture to move
+         *
+         */
+        StencilTexture(StencilTexture&& stencilTexture) noexcept;
 
-        StencilTexture& operator=(StencilTexture&& depthTexture) noexcept;
+        /*! \brief Assignment operator by movement semantic
+         *
+         * \param stencilTexture The StencilTexture to move
+         *
+         * \return This
+         *
+         */
+        StencilTexture& operator=(StencilTexture&& stencilTexture) noexcept;
 
-        void create(const Size& size);
+        /*! \brief Create the StencilTexture with a given Size
+         *
+         * \param size The Size
+         *
+         */
+        void create(const Size& size) override;
 
+        /*! \brief Get the StencilValue of the StencilTexture
+         *
+         * \return The StencilValue
+         *
+         */
         inline StencilValue getStencilValue() const
         {
             return m_stencilValue;

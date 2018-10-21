@@ -9,6 +9,24 @@ namespace Bull
         /// Nothing
     }
 
+    ImageTexture::ImageTexture(const AbstractImage& image) :
+        m_pixelFormat(image.getPixelFormat())
+    {
+        create(image.getPixels(), image.getSize());
+    }
+
+    ImageTexture::ImageTexture(const Size& size, PixelFormat pixelFormat) :
+        m_pixelFormat(pixelFormat)
+    {
+        create(size);
+    }
+
+    ImageTexture::ImageTexture(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat) :
+        m_pixelFormat(pixelFormat)
+    {
+        create(pixels, size);
+    }
+
     ImageTexture::ImageTexture(ImageTexture&& imageTexture) noexcept :
         Texture(static_cast<Texture&&>(imageTexture))
     {
@@ -44,6 +62,13 @@ namespace Bull
 
     ByteArray ImageTexture::getPixels() const
     {
-        return ByteArray();
+        ByteArray pixels(PixelFormatUtils::getImageByteCount(getSize(), m_pixelFormat));
+
+        ensureContext();
+
+        gl::bindTexture(GL_TEXTURE_2D, getSystemHandle());
+        gl::getTexImage(GL_TEXTURE_2D, 0, m_pixelFormat, GL_UNSIGNED_BYTE, &pixels[0]);
+
+        return pixels;
     }
 }
