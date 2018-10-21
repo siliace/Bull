@@ -9,6 +9,12 @@
 
 namespace Bull
 {
+    DepthTexture::DepthTexture(DepthValue depthValue) :
+        m_depthValue(depthValue)
+    {
+        /// Nothing
+    }
+
     DepthTexture::DepthTexture(const Size& size, DepthValue depth) :
         m_depthValue(depth)
     {

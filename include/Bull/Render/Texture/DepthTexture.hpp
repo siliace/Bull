@@ -17,10 +17,12 @@ namespace Bull
     {
     public:
 
+        explicit DepthTexture(DepthValue depthValue);
+
         /*! \brief Constructor
          *
          */
-        explicit DepthTexture(const Size& size, DepthValue depth);
+        DepthTexture(const Size& size, DepthValue depthValue);
 
         DepthTexture(DepthTexture&& depthTexture) noexcept;
 

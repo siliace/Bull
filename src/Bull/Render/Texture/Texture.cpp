@@ -13,11 +13,16 @@ namespace Bull
         {
             switch(pixelFormat)
             {
-                case PixelFormat_Rgb8: return GL_RGB;
-                case PixelFormat_Rgb8Alpha8: return GL_RGBA;
-                case PixelFormat_Depth16: return GL_DEPTH_COMPONENT16;
-                case PixelFormat_Depth24: return GL_DEPTH_COMPONENT24;
-                case PixelFormat_Depth32: return GL_DEPTH_COMPONENT32;
+                case PixelFormat_Rgb8:            return GL_RGB;
+                case PixelFormat_Rgb8Alpha8:      return GL_RGBA;
+                case PixelFormat_Depth16:         return GL_DEPTH_COMPONENT16;
+                case PixelFormat_Depth24:         return GL_DEPTH_COMPONENT24;
+                case PixelFormat_Depth32:         return GL_DEPTH_COMPONENT32;
+                case PixelFormat_Stencil1:        return GL_STENCIL_INDEX1;
+                case PixelFormat_Stencil4:        return GL_STENCIL_INDEX4;
+                case PixelFormat_Stencil8:        return GL_STENCIL_INDEX8;
+                case PixelFormat_Stencil16:       return GL_STENCIL_INDEX16;
+                case PixelFormat_Depth24Stencil8: return GL_DEPTH24_STENCIL8;
             }
 
             return 0;
@@ -27,11 +32,16 @@ namespace Bull
         {
             switch(pixelFormat)
             {
-                case PixelFormat_Rgb8: return GL_RGB;
-                case PixelFormat_Rgb8Alpha8: return GL_RGBA;
-                case PixelFormat_Depth16: return GL_DEPTH_COMPONENT;
-                case PixelFormat_Depth24: return GL_DEPTH_COMPONENT;
-                case PixelFormat_Depth32: return GL_DEPTH_COMPONENT;
+                case PixelFormat_Rgb8:            return GL_RGB;
+                case PixelFormat_Rgb8Alpha8:      return GL_RGBA;
+                case PixelFormat_Depth16:         return GL_DEPTH_COMPONENT;
+                case PixelFormat_Depth24:         return GL_DEPTH_COMPONENT;
+                case PixelFormat_Depth32:         return GL_DEPTH_COMPONENT;
+                case PixelFormat_Stencil1:        return GL_STENCIL_INDEX;
+                case PixelFormat_Stencil4:        return GL_STENCIL_INDEX;
+                case PixelFormat_Stencil8:        return GL_STENCIL_INDEX;
+                case PixelFormat_Stencil16:       return GL_STENCIL_INDEX;
+                case PixelFormat_Depth24Stencil8: return GL_DEPTH_STENCIL;
             }
 
             return 0;
@@ -41,11 +51,16 @@ namespace Bull
         {
             switch(pixelFormat)
             {
-                case PixelFormat_Rgb8: return GL_UNSIGNED_BYTE;
-                case PixelFormat_Rgb8Alpha8: return GL_UNSIGNED_BYTE;
-                case PixelFormat_Depth16: return GL_UNSIGNED_SHORT;
-                case PixelFormat_Depth24: return GL_UNSIGNED_INT;
-                case PixelFormat_Depth32: return GL_UNSIGNED_INT;
+                case PixelFormat_Rgb8:            return GL_UNSIGNED_BYTE;
+                case PixelFormat_Rgb8Alpha8:      return GL_UNSIGNED_BYTE;
+                case PixelFormat_Depth16:         return GL_UNSIGNED_SHORT;
+                case PixelFormat_Depth24:         return GL_UNSIGNED_INT;
+                case PixelFormat_Depth32:         return GL_UNSIGNED_INT;
+                case PixelFormat_Stencil1:        return GL_UNSIGNED_BYTE;
+                case PixelFormat_Stencil4:        return GL_UNSIGNED_BYTE;
+                case PixelFormat_Stencil8:        return GL_UNSIGNED_BYTE;
+                case PixelFormat_Stencil16:       return GL_UNSIGNED_SHORT;
+                case PixelFormat_Depth24Stencil8: return GL_UNSIGNED_INT_24_8;
             }
         }
     }

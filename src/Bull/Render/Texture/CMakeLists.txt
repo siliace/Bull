@@ -8,6 +8,8 @@ target_sources(bull-render
             ${BULL_SRC_RENDER_TEXTURE}/DepthTexture.cpp
             ${BULL_INC_RENDER_TEXTURE}/ImageTexture.hpp
             ${BULL_SRC_RENDER_TEXTURE}/ImageTexture.cpp
+            ${BULL_INC_RENDER_TEXTURE}/StencilTexture.hpp
+            ${BULL_SRC_RENDER_TEXTURE}/StencilTexture.cpp
             ${BULL_INC_RENDER_TEXTURE}/Texture.hpp
             ${BULL_SRC_RENDER_TEXTURE}/Texture.cpp
         )

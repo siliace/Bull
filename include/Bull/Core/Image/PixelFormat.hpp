@@ -14,6 +14,11 @@ namespace Bull
         PixelFormat_Depth16,
         PixelFormat_Depth24,
         PixelFormat_Depth32,
+        PixelFormat_Stencil1,
+        PixelFormat_Stencil4,
+        PixelFormat_Stencil8,
+        PixelFormat_Stencil16,
+        PixelFormat_Depth24Stencil8,
     };
 
     struct BULL_CORE_API PixelFormatUtils
