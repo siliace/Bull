@@ -1,6 +1,8 @@
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Exception/LogicError.hpp>
+#include <Bull/Core/Memory/ByteArray.hpp>
+#include <Bull/Core/Utility/Size.hpp>
 
 #include <Bull/Render/Texture/Texture.hpp>
 #include <Bull/Render/Context/GlFunctions.hpp>

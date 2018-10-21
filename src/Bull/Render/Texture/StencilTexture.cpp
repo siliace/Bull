@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <Bull/Render/Texture/StencilTexture.hpp>
 
 namespace Bull

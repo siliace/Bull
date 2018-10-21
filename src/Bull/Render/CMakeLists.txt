@@ -11,6 +11,7 @@ target_sources(bull-render
 add_subdirectory(Buffer)
 add_subdirectory(Context)
 add_subdirectory(Draw)
+add_subdirectory(FrameBuffer)
 add_subdirectory(Shader)
 add_subdirectory(Target)
 add_subdirectory(Texture)

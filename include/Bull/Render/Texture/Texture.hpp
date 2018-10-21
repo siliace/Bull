@@ -2,13 +2,16 @@
 #define BULL_RENDER_TEXTURE_TEXTURE_HPP
 
 #include <Bull/Core/Image/PixelFormat.hpp>
-#include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull
 {
+    class Size;
+    class ByteArray;
+    class FrameBuffer;
+
     class BULL_RENDER_API Texture : public ContextResource, public NonCopyable
     {
     public:
@@ -94,6 +97,10 @@ namespace Bull
          *
          */
         void setPixels(unsigned int xOffset, unsigned int yOffset, const ByteArray& pixels, const Size& size, PixelFormat pixelFormat);
+
+    protected:
+
+        friend class FrameBuffer;
 
         /*! \brief Get the handle of the Texture
          *
