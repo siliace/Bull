@@ -5,11 +5,11 @@
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
-#include <Bull/Render/Export.hpp>
+#include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull
 {
-    class BULL_RENDER_API VertexArrayObject : public NonCopyable
+    class BULL_RENDER_API VertexArrayObject : public ContextResource, public NonCopyable
     {
     public:
 
