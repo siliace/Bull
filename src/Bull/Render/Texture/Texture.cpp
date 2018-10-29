@@ -69,6 +69,8 @@ namespace Bull
 
     void Texture::bind(const Texture& texture)
     {
+        Expect(texture.isValid(), Throw(InvalidParameter, "Texture::bind", "Invalid texture"));
+
         gl::bindTexture(GL_TEXTURE_2D, texture.getSystemHandle());
     }
 

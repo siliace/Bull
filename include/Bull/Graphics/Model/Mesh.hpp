@@ -1,78 +1,142 @@
-#ifndef BULL_GRAPHICS_MESH_HPP
-#define BULL_GRAPHICS_MESH_HPP
+#ifndef BULL_GRAPHICS_MODEL_MESH_HPP
+#define BULL_GRAPHICS_MODEL_MESH_HPP
 
-#include <Bull/Graphics/Export.hpp>
+#include <Bull/Graphics/Model/SubMesh.hpp>
 
-#include <Bull/Render/Buffer/ArrayBuffer.hpp>
-#include <Bull/Render/Buffer/IndexBuffer.hpp>
-#include <Bull/Render/Buffer/VertexArrayObject.hpp>
-#include <Bull/Render/Draw/RenderPrimitive.hpp>
+#include <Bull/Render/Shader/Shader.hpp>
 
 namespace Bull
 {
-    class BULL_GRAPHICS_API Mesh
+    class BULL_GRAPHICS_API Mesh : public NonCopyable
     {
     public:
 
-        /*! \brief Default constructor
+        /*! \brief Constructor
+         *
+         * \param parent           The parent Mesh
+         * \param localModelMatrix The model matrix of the mesh relatively to the parent
          *
          */
-        Mesh();
+        explicit Mesh(const Mesh* parent = nullptr, const Matrix4F& localModelMatrix = Matrix4F::Identity);
 
         /*! \brief Constructor by movement semantic
          *
-         * \param right The Mesh to move
+         * \param mesh The Mesh to move
          *
          */
-        Mesh(Mesh&& right) noexcept = default;
+        Mesh(Mesh&& mesh) noexcept = default;
 
-        /*! \brief Basic assignment operator by movement semantic
+        /*! \param Assignment operator by movement semantic
          *
-         * \param right The Mesh to move
+         * \param mesh The Mesh to move
          *
          * \return This
          *
          */
-        Mesh& operator=(Mesh&& right) noexcept = default;
+        Mesh& operator=(Mesh&& mesh) noexcept = default;
 
-        /*! \brief Constructor
+        /*! \brief Add a child Mesh to the Mesh
          *
-         * \param vertices
-         * \param indices
+         * \param mesh The child Mesh
          *
          */
-        Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+        void addChild(Mesh&& mesh);
 
-        /*! \brief Create the Mesh
+        /*! \brief Add a SubMesh to the Mesh
          *
-         * \param vertices
+         * \param subMesh The SubMesh
          *
          */
-        void create(const std::vector<Vertex>& vertices);
+        void addSubMesh(SubMesh&& subMesh);
 
-        /*! \brief Create the Mesh
+        /*! \brief Tell whether the Mesh is valid
          *
-         * \param vertices
-         * \param indices
+         * A Mesh is valid if it has at least one child Mesh or has at least one SubMesh
+         *
+         * \return True if valid
          *
          */
-        void create(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+        bool isValid() const;
 
-        /*! \brief Render the Mesh
+        /*! \brief Render the Mesh thought a Shader
          *
-         * \param primitive The primitive to use to render the Mesh
+         * \param shader          The Shader
+         * \param modelMatrix     The model matrix of the parent Mesh
+         * \param renderPrimitive The RenderPrimitive to use to render the mesh
          *
          */
-        void render(RenderPrimitive primitive) const;
+        void render(const Shader& shader, const Matrix4F& modelMatrix, RenderPrimitive renderPrimitive) const;
+
+        /*! \brief Tell whether the Mesh is a root
+         *
+         * A Mesh is a root if it does not have a parent (i.e getParent() == nullptr)
+         *
+         * \return True if root
+         *
+         */
+        inline bool isRoot() const
+        {
+            return m_parent == nullptr;
+        }
+
+        /*! \brief
+         *
+         * \param name
+         *
+         */
+        inline void setName(const String& name)
+        {
+            m_name = name;
+        }
+
+        /*! \brief
+         *
+         * \return
+         *
+         */
+        inline const String& getName() const
+        {
+            return m_name;
+        }
+
+        /*! \brief
+         *
+         * \return
+         *
+         */
+        inline const Mesh* getParent() const
+        {
+            return m_parent;
+        }
+
+        /*! \brief
+         *
+         * \param localModelMatrix
+         *
+         */
+        inline void setLocalModelMatrix(const Matrix4F& localModelMatrix)
+        {
+            m_localModelMatrix = localModelMatrix;
+        }
+
+        /*! \brief
+         *
+         * \return
+         *
+         */
+        inline const Matrix4F& getLocalModelMatrix() const
+        {
+            return m_localModelMatrix;
+        }
 
     private:
 
-        IndexBuffer m_ebo;
-        ArrayBuffer m_vbo;
-        VertexArrayObject m_vao;
-
-        bool m_hasIndex;
+        String               m_name;
+        const Mesh*          m_parent;
+        std::vector<Mesh>    m_children;
+        std::vector<SubMesh> m_subMeshes;
+        Matrix4F             m_localModelMatrix;
     };
 }
 
-#endif // BULL_GRAPHICS_MESH_HPP
+#endif // BULL_GRAPHICS_MODEL_MESH_HPP

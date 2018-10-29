@@ -80,12 +80,13 @@ int main()
     points.emplace_back(Bull::Vector3F::Down * 3.f, Bull::Color::Magenta);
     points.emplace_back(Bull::Vector3F::Forward * 3.f, Bull::Color::White);
 
-    cubes.emplace_back(material); cubes.emplace_back(material); cubes.emplace_back(material);
-    cubes.emplace_back(material); cubes.emplace_back(material); cubes.emplace_back(material);
-    cubes.emplace_back(material); cubes.emplace_back(material); cubes.emplace_back(material);
-    cubes.emplace_back(material); cubes.emplace_back(material); cubes.emplace_back(material);
+    for(std::size_t i = 0; i < 10; i++)
+    {
+        Cube cube;
+        moveRandom(cube);
 
-    std::for_each(cubes.begin(), cubes.end(), &moveRandom);
+        cubes.emplace_back(std::move(cube));
+    }
 
     while(window.isOpen())
     {
@@ -186,7 +187,7 @@ int main()
         for(Cube& cube : cubes)
         {
             shader.setUniformMatrix("mvp", camera.getModelViewProjectionMatrix(cube));
-            cube.render(shader);
+            cube.render(shader, material);
         }
 
         window.display();

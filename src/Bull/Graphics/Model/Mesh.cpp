@@ -1,58 +1,43 @@
 #include <Bull/Graphics/Model/Mesh.hpp>
 
-#include <Bull/Render/Draw/Drawer.hpp>
-
 namespace Bull
 {
-    Mesh::Mesh() :
-        m_hasIndex(false)
+    Mesh::Mesh(const Mesh* parent, const Matrix4F& localModelMatrix) :
+        m_parent(parent),
+        m_localModelMatrix(localModelMatrix)
     {
         /// Nothing
     }
 
-    Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
+    void Mesh::addChild(Mesh&& mesh)
     {
-        create(vertices, indices);
+        m_children.emplace_back(std::move(mesh));
     }
 
-    void Mesh::create(const std::vector<Vertex>& vertices)
+    void Mesh::addSubMesh(SubMesh&& subMesh)
     {
-        m_hasIndex = false;
-
-        m_vao.runBound([this, vertices](){
-            m_vbo.create(vertices);
-            m_vbo.setAttribPointer(0, 3, sizeof(Vertex));
-            m_vbo.setAttribPointer(1, 4, sizeof(Vertex), sizeof(Vector3F));
-            m_vbo.setAttribPointer(2, 2, sizeof(Vertex), sizeof(Vector3F) + sizeof(Vector4F));
-            m_vbo.setAttribPointer(3, 3, sizeof(Vertex), sizeof(Vector3F) + sizeof(Vector4F) + sizeof(Vector2F));
-        });
+        m_subMeshes.emplace_back(std::move(subMesh));
     }
 
-    void Mesh::create(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
+    bool Mesh::isValid() const
     {
-        m_hasIndex = true;
-
-        m_vao.runBound([this, vertices, indices](){
-            m_ebo.create(indices);
-            m_vbo.create(vertices);
-            m_vbo.setAttribPointer(0, 3, sizeof(Vertex));
-            m_vbo.setAttribPointer(1, 4, sizeof(Vertex), sizeof(Vector3F));
-            m_vbo.setAttribPointer(2, 2, sizeof(Vertex), sizeof(Vector3F) + sizeof(Vector4F));
-            m_vbo.setAttribPointer(3, 3, sizeof(Vertex), sizeof(Vector3F) + sizeof(Vector4F) + sizeof(Vector2F));
-        });
+        return !m_children.empty() || !m_subMeshes.empty();
     }
 
-    void Mesh::render(RenderPrimitive primitive) const
+    void Mesh::render(const Shader& shader, const Matrix4F& modelMatrix, RenderPrimitive renderPrimitive) const
     {
-        m_vao.runBound([this, primitive](){
-            if(m_hasIndex)
-            {
-                Drawer::drawElements(primitive, m_ebo.getCapacity(), m_ebo.getDataType());
-            }
-            else
-            {
-                Drawer::drawArrays(primitive, 0, m_vbo.getCapacity());
-            }
-        });
+        Matrix4F meshModelMatrix = modelMatrix * m_localModelMatrix;
+
+        for(const Mesh& child : m_children)
+        {
+            child.render(shader, meshModelMatrix, renderPrimitive);
+        }
+
+        shader.setUniformMatrix("model", meshModelMatrix);
+
+        for(const SubMesh& subMesh : m_subMeshes)
+        {
+            subMesh.render(renderPrimitive);
+        }
     }
 }

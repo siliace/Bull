@@ -68,26 +68,25 @@ namespace
     };
 }
 
-Cube::Cube(const Bull::Material& material) :
-        m_mesh(vertices, indices),
-        m_material(material)
+Cube::Cube()
 {
-    /// Nothing
+    std::shared_ptr<Bull::Mesh> mesh = std::make_shared<Bull::Mesh>();
+    mesh->addSubMesh(Bull::SubMesh(vertices, indices));
+
+    setMesh(mesh);
 }
 
-void Cube::render(const Bull::Shader& shader) const
+void Cube::render(const Bull::Shader& shader, const Bull::Material& material) const
 {
-    shader.setUniformMatrix("model", getModelMatrix());
-
-    shader.setUniform("material.shininess", m_material.getShininess());
+    shader.setUniform("material.shininess", material.getShininess());
 
     gl::activeTexture(GL_TEXTURE0);
-    Bull::Texture::bind(*m_material.getTexture(Bull::TextureType_Diffuse));
+    Bull::Texture::bind(*material.getTexture(Bull::TextureType_Diffuse));
     shader.setUniform("material.diffuse", 0);
 
     gl::activeTexture(GL_TEXTURE1);
-    Bull::Texture::bind(*m_material.getTexture(Bull::TextureType_Specular));
+    Bull::Texture::bind(*material.getTexture(Bull::TextureType_Specular));
     shader.setUniform("material.specular", 1);
 
-    m_mesh.render(Bull::RenderPrimitive_Triangles);
+    Model::render(shader);
 }
