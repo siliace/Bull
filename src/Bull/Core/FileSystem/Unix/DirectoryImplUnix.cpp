@@ -2,21 +2,22 @@
 #include <sys/stat.h>
 
 #include <Bull/Core/FileSystem/Unix/DirectoryImplUnix.hpp>
+#include <Bull/Core/FileSystem/DirectorySearchFlag.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        bool DirectoryImplUnix::create(const String& path)
+        void DirectoryImplUnix::create(const Path& path)
         {
-            return mkdir(path.getBuffer(), S_IRWXU | S_IRGRP | S_IROTH) != -1;
+            mkdir(path.toString().getBuffer(), S_IRWXU | S_IRGRP | S_IROTH);
         }
 
-        bool DirectoryImplUnix::exists(const String& path)
+        bool DirectoryImplUnix::exists(const Path& path)
         {
             struct stat64 filestats;
 
-            if(stat64(path.getBuffer(), &filestats) == -1)
+            if(stat64(path.toString().getBuffer(), &filestats) == -1)
             {
                 return false;
             }
@@ -24,37 +25,23 @@ namespace Bull
             return S_ISDIR(filestats.st_mode);
         }
 
-        bool DirectoryImplUnix::remove(const Path& path)
+        void DirectoryImplUnix::remove(const Path& path)
         {
-            return rmdir(path.toString().getBuffer()) != -1;
+            rmdir(path.toString().getBuffer());
         }
 
-        DirectoryImplUnix::DirectoryImplUnix() :
-            m_handler(nullptr)
+        DirectoryImplUnix::DirectoryImplUnix(const Path& path) :
+            m_path(path)
         {
-            /// Nothing
+            m_handle = opendir(path.toString().getBuffer());
         }
 
         DirectoryImplUnix::~DirectoryImplUnix()
         {
-            if(m_handler)
+            if(m_handle)
             {
-                closedir(m_handler);
+                closedir(m_handle);
             }
-        }
-
-        bool DirectoryImplUnix::open(const Path& path)
-        {
-            m_handler = opendir(path.toString().getBuffer());
-
-            if(!m_handler)
-            {
-                return false;
-            }
-
-            m_path = path;
-
-            return true;
         }
 
         std::vector<Path> DirectoryImplUnix::getContent(Uint32 flags)
@@ -62,7 +49,7 @@ namespace Bull
             dirent64* result;
             std::vector<Path> content;
 
-            while((result = readdir64(m_handler)))
+            while((result = readdir64(m_handle)))
             {
                 Path p = Path(m_path.toString() + Path::Separator + result->d_name);
 

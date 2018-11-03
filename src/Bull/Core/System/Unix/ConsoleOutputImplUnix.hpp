@@ -34,13 +34,12 @@ namespace Bull
 
             /*! \brief Write bytes in console
              *
-             * \param data   Data to write
-             * \param length The length of data
+             * \param bytes Bytes to write
              *
              * \return The number of bytes written
              *
              */
-            std::size_t write(const void* data, std::size_t length) override;
+            std::size_t write(const ByteArray& bytes) override;
 
             /*! \brief Flush the ConsoleOutput
              *
@@ -65,17 +64,6 @@ namespace Bull
              *
              */
             void setBackgroundColor(ConsoleColor color) override;
-
-        private:
-
-            /*! \brief Write a String in the console
-             *
-             * \param string The String to write
-             *
-             * \return The number of bytes written
-             *
-             */
-            std::size_t write(const String& string);
         };
     }
 }

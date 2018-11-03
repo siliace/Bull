@@ -18,7 +18,7 @@
 #include <Camera.hpp>
 #include <Cube.hpp>
 
-Bull::RandomGenerator random;
+Bull::RandomGenerator randomGenerator;
 
 Bull::Material loadMaterialFromPath(const Bull::Path& path)
 {
@@ -54,8 +54,8 @@ Bull::Shader loadShaderFromPath(const Bull::Path& path)
 
 void moveRandom(Cube& cube)
 {
-    cube.rotate(Bull::EulerAnglesF::onX(Bull::AngleF::degree(random.number(0.f, 360.f))));
-    cube.move(Bull::Vector3F(random.number(-5.f, 5.f), random.number(-5.f, 5.f), random.number(-5.f, 5.f)));
+    cube.rotate(Bull::EulerAnglesF::onX(Bull::AngleF::degree(randomGenerator.number(0.f, 360.f))));
+    cube.move(Bull::Vector3F(randomGenerator.number(-5.f, 5.f), randomGenerator.number(-5.f, 5.f), randomGenerator.number(-5.f, 5.f)));
 }
 
 int main()

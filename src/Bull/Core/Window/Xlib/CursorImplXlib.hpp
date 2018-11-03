@@ -52,8 +52,8 @@ namespace Bull
              */
             void destroy();
 
-            XCursor            m_handler;
-            Display::Instance  m_display;
+            XCursor  m_handler;
+            Display& m_display;
         };
     }
 }

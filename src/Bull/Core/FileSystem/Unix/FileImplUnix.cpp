@@ -5,6 +5,7 @@
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/LackOfImplementation.hpp>
 #include <Bull/Core/Exception/UnsupportedOperation.hpp>
+#include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/FileSystem/Unix/FileImplUnix.hpp>
 #include <Bull/Core/Support/Unix/DateHelper.hpp>
 
@@ -12,32 +13,32 @@ namespace Bull
 {
     namespace prv
     {
-        void FileImplUnix::create(const String& name)
+        void FileImplUnix::create(const Path& path)
         {
-            int handler = ::open64(name.getBuffer(), O_CREAT | O_TRUNC | O_EXCL, S_IRWXU);
+            int handler = ::open64(path.toString().getBuffer(), O_CREAT | O_TRUNC | O_EXCL, S_IRWXU);
 
             Expect(handler != -1, Throw(InternalError, "FileImplUnix::create", "Failed to create file"));
 
             close(handler);
         }
 
-        bool FileImplUnix::exists(const String& name)
+        bool FileImplUnix::exists(const Path& path)
         {
             struct stat64 filestats;
 
-            Expect(stat64(name.getBuffer(), &filestats) != -1, Throw(InternalError, "FileImplUnix::exists", "Failed to check whether a file exists"))
+            Expect(stat64(path.toString().getBuffer(), &filestats) != -1, Throw(InternalError, "FileImplUnix::exists", "Failed to check whether a file exists"))
 
             return S_ISREG(filestats.st_mode);
         }
 
-        bool FileImplUnix::copy(const Path& path, const String& newPath)
+        void FileImplUnix::copy(const Path& path, const Path& newPath)
         {
             Throw(LackOfImplementation, "FileImplUnix::copy", "Unimplemented method");
         }
 
-        void FileImplUnix::remove(const Path& name)
+        void FileImplUnix::remove(const Path& path)
         {
-            Expect(unlink(name.toString().getBuffer()) != -1, Throw(InternalError, "FileImplUnix::remove", "Failed to remove file"));
+            Expect(unlink(path.toString().getBuffer()) != -1, Throw(InternalError, "FileImplUnix::remove", "Failed to remove file"));
         }
 
         FileImplUnix::~FileImplUnix()
@@ -45,11 +46,11 @@ namespace Bull
             close(m_handler);
         }
 
-        bool FileImplUnix::open(const Path& name, Uint32 mode)
+        FileImplUnix::FileImplUnix(const Path& name, Uint32 mode)
         {
             int flags = 0;
 
-            if(mode & FileOpeningMode_ReadWrite)
+            if(mode & (FileOpeningMode_Read | FileOpeningMode_Write))
             {
                 flags |= O_RDWR;
             }
@@ -76,23 +77,25 @@ namespace Bull
             }
 
             m_handler = ::open64(name.toString().getBuffer(), flags, S_IRWXU);
-
-            return m_handler != -1;
         }
 
-        Uint64 FileImplUnix::read(void* dst, Uint64 size)
+        ByteArray FileImplUnix::read(std::size_t length)
         {
-            lockf64(m_handler, F_LOCK, size);
-            Uint64 read = ::read(m_handler, dst, size);
-            lockf64(m_handler, F_ULOCK, size);
+            ByteArray bytes(length);
 
-            return read;
+            lockf64(m_handler, F_LOCK, length);
+            Uint64 written = ::read(m_handler, &bytes[0], length);
+            lockf64(m_handler, F_ULOCK, length);
+
+            return bytes;
         }
 
-        Uint64 FileImplUnix::write(const void* data, Uint64 size)
+        std::size_t FileImplUnix::write(const ByteArray& bytes)
         {
+            Uint64 size = bytes.getCapacity();
+
             lockf64(m_handler, F_LOCK, size);
-            Uint64 written = ::write(m_handler, data, size);
+            Uint64 written = ::write(m_handler, bytes.getBuffer(), size);
             lockf64(m_handler, F_ULOCK, size);
 
             return written;

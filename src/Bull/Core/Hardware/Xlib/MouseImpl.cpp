@@ -8,10 +8,10 @@ namespace Bull
     {
         void MouseImpl::setPosition(const Size& position)
         {
-            Display::Instance display = Display::getInstance();
+            Display& display = Display::getInstance();
 
-            XWarpPointer(display->getHandler(), XNone, display->getRootWindow(), 0, 0, 0, 0, position.width, position.height);
-            display->flush();
+            XWarpPointer(display.getHandler(), XNone, display.getRootWindow(), 0, 0, 0, 0, position.width, position.height);
+            display.flush();
         }
 
         Size MouseImpl::getPosition()
@@ -20,14 +20,11 @@ namespace Bull
             int rootX, rootY;
             XWindow root, child;
             unsigned int buttons;
-            Display::Instance display = Display::getInstance();
+            Display& display = Display::getInstance();
 
-            if(XQueryPointer(display->getHandler(), display->getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))
-            {
-                return Size(x, y);
-            }
+            XQueryPointer(display.getHandler(), display.getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons);
 
-            return Size();
+            return { x, y };
         }
 
         bool MouseImpl::isButtonPressed(MouseButton button)
@@ -36,9 +33,9 @@ namespace Bull
             int rootX, rootY;
             XWindow root, child;
             unsigned int buttons;
-            Display::Instance display = Display::getInstance();
+            Display& display = Display::getInstance();
 
-            if(XQueryPointer(display->getHandler(), display->getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))
+            if(XQueryPointer(display.getHandler(), display.getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons))
             {
                 switch(button)
                 {

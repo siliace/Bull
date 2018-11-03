@@ -49,7 +49,7 @@ namespace Bull
                 case CursorType_Wait:      shape = XC_watch;               break;
             }
 
-            m_handler = XCreateFontCursor(m_display->getHandler(), shape);
+            m_handler = XCreateFontCursor(m_display.getHandler(), shape);
 
             Expect(m_handler, Throw(InternalError, "CursorImplXlib::create", "Failed to create cursor"));
         }
@@ -68,7 +68,7 @@ namespace Bull
         {
             if(m_handler != XNone)
             {
-                XFreeCursor(m_display->getHandler(), m_handler);
+                XFreeCursor(m_display.getHandler(), m_handler);
                 m_handler = XNone;
             }
         }

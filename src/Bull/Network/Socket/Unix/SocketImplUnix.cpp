@@ -9,27 +9,6 @@ namespace Bull
 {
     namespace prv
     {
-        SocketError SocketImplUnix::getLastError()
-        {
-            if(errno)
-            {
-                switch(errno)
-                {
-                    case EFAULT:       return SocketError_Error;
-                    case ENOBUFS:      return SocketError_Error;
-                    case ENETDOWN:     return SocketError_Error;
-                    case EWOULDBLOCK:  return SocketError_Error;
-                    case ETIMEDOUT:    return SocketError_Timeout;
-                    case ECONNABORTED: return SocketError_Disconnected;
-                    case ENETUNREACH:  return SocketError_NetworkFailed;
-                    case EHOSTUNREACH: return SocketError_NetworkFailed;
-                    case ECONNREFUSED: return SocketError_ConnectionRefused;
-                }
-            }
-
-            return SocketError_Ok;
-        }
-
         SocketImplUnix::~SocketImplUnix()
         {
             close(getHandler());

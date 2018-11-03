@@ -57,6 +57,20 @@ namespace Bull
         m_array.clear();
     }
 
+    Uint8 ByteArray::at(std::size_t index) const
+    {
+        RangeCheck(index, m_array.size());
+
+        return m_array.at(index);
+    }
+
+    Uint8& ByteArray::at(std::size_t index)
+    {
+        RangeCheck(index, m_array.size());
+
+        return m_array.at(index);
+    }
+
     size_t ByteArray::getCapacity() const
     {
         return m_array.size();
@@ -74,16 +88,12 @@ namespace Bull
 
     Uint8& ByteArray::operator[](std::size_t index)
     {
-        RangeCheck(index, m_array.size());
-
-        return m_array.at(index);
+        return at(index);
     }
 
     const Uint8& ByteArray::operator[](std::size_t index) const
     {
-        RangeCheck(index, m_array.size());
-
-        return m_array.at(index);
+        return at(index);
     }
 
     bool ByteArray::operator==(const ByteArray& right) const

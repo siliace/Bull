@@ -10,7 +10,7 @@ namespace Bull
     {
         std::vector<String> GlxExtensionsLoader::getExtensions(SurfaceHandler handler)
         {
-            return String(glXQueryExtensionsString(Display::getInstance()->getHandler(), handler)).explode(' ');
+            return String(glXQueryExtensionsString(Display::getInstance().getHandler(), handler)).explode(' ');
         }
     }
 }

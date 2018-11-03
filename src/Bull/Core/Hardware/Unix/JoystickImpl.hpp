@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_HARDWARE_JOYSTICKIMPL_HPP
 #define BULL_CORE_HARDWARE_JOYSTICKIMPL_HPP
 
-#include <Bull/Core/Configuration/Integer.hpp>
+#include <Bull/Core/Prerequisites.hpp>
 #include <Bull/Core/Hardware/Joystick.hpp>
 
 namespace Bull

@@ -13,53 +13,44 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a directory
+            /*! \brief Create a Directory
              *
-             * \param path The path of the directory to create
-             *
-             * \return Return true if the file was created successfully, else otherwise
+             * \param path The Path of the directory to create
              *
              */
-            static bool create(const String& path);
+            static void create(const Path& path);
 
             /*! \brief Check if a directory exists
              *
              * \param path The path of the directory to check
              *
-             * \return Return true if the directory exists, false otherwise
+             * \return True if the directory exists
              *
              */
-            static bool exists(const String& path);
+            static bool exists(const Path& path);
 
             /*! \brief Delete a directory
              *
              * \param path The path of the directory to delete
              *
-             * \return Return true if the directory was deleted successfully, false otherwise
+             * \return True if the directory was deleted successfully
              *
              */
-            static bool remove(const Path& path);
+            static void remove(const Path& path);
 
         public:
 
-            /*! \brief Default constructor
-             * 
+            /*! \brief Constructor
+             *
+             * \param path The Path of the Directory
+             *
              */
-            DirectoryImplUnix();
+            explicit DirectoryImplUnix(const Path& path);
 
             /*! \brief Destructor
              *
              */
             ~DirectoryImplUnix();
-
-            /*! \brief Open a directory
-             *
-             * \param path The path of the directory
-             *
-             * \return Return true is the directory was opened successfully, false otherwise
-             *
-             */
-            bool open(const Path& path) override;
 
             /*! \brief Get the content of this Directory
              *
@@ -73,7 +64,7 @@ namespace Bull
         private:
 
             Path m_path;
-            DIR* m_handler;
+            DIR* m_handle;
         };
     }
 }

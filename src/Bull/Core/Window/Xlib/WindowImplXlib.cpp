@@ -123,19 +123,19 @@ namespace Bull
             }
         }
 
-        XCursor WindowImplXlib::createHiddenCursor(Display::Instance display, XWindow window)
+        XCursor WindowImplXlib::createHiddenCursor(Display& display, XWindow window)
         {
-            XPixmap cursorPixmap = XCreatePixmap(display->getHandler(), window, 1, 1, 1);
-            XGC graphicsContext = XCreateGC(display->getHandler(), cursorPixmap, 0, nullptr);
-            XDrawPoint(display->getHandler(), cursorPixmap, graphicsContext, 0, 0);
-            XFreeGC(display->getHandler(), graphicsContext);
+            XPixmap cursorPixmap = XCreatePixmap(display.getHandler(), window, 1, 1, 1);
+            XGC graphicsContext = XCreateGC(display.getHandler(), cursorPixmap, 0, nullptr);
+            XDrawPoint(display.getHandler(), cursorPixmap, graphicsContext, 0, 0);
+            XFreeGC(display.getHandler(), graphicsContext);
 
             XColor color;
             color.flags = DoRed | DoGreen | DoBlue;
             color.red = color.blue = color.green = 0;
-            XCursor hidden = XCreatePixmapCursor(display->getHandler(), cursorPixmap, cursorPixmap, &color, &color, 0, 0);
+            XCursor hidden = XCreatePixmapCursor(display.getHandler(), cursorPixmap, cursorPixmap, &color, &color, 0, 0);
 
-            XFreePixmap(display->getHandler(), cursorPixmap);
+            XFreePixmap(display.getHandler(), cursorPixmap);
 
             return hidden;
         }
@@ -150,34 +150,34 @@ namespace Bull
         {
             if(m_colormap)
             {
-                XFreeColormap(m_display->getHandler(), m_colormap);
+                XFreeColormap(m_display.getHandler(), m_colormap);
             }
 
             if(m_hiddenCursor)
             {
-                XFreeCursor(m_display->getHandler(), m_hiddenCursor);
+                XFreeCursor(m_display.getHandler(), m_hiddenCursor);
             }
 
             if(m_handler)
             {
-                XDestroyWindow(m_display->getHandler(), m_handler);
-                m_display->flush();
+                XDestroyWindow(m_display.getHandler(), m_handler);
+                m_display.flush();
             }
         }
 
         void WindowImplXlib::startProcessEvents()
         {
             XEvent e;
-            while(XPending(m_display->getHandler()))
+            while(XPending(m_display.getHandler()))
             {
-                XNextEvent(m_display->getHandler(), &e);
+                XNextEvent(m_display.getHandler(), &e);
                 switch(e.type)
                 {
                     case ClientMessage:
                     {
-                        static XAtom atomDelete = m_display->getAtom("WM_DELETE_WINDOW");
+                        static XAtom atomDelete = m_display.getAtom("WM_DELETE_WINDOW");
 
-                        if(e.xclient.message_type == m_display->getAtom("WM_PROTOCOLS"))
+                        if(e.xclient.message_type == m_display.getAtom("WM_PROTOCOLS"))
                         {
                             if(e.xclient.data.l[0] == static_cast<long>(atomDelete))
                             {
@@ -341,7 +341,7 @@ namespace Bull
 
                             do
                             {
-                                grabbed = XGrabPointer(m_display->getHandler(), m_handler,
+                                grabbed = XGrabPointer(m_display.getHandler(), m_handler,
                                                        True,
                                                        XNone,
                                                        GrabModeAsync, GrabModeAsync,
@@ -368,8 +368,8 @@ namespace Bull
 
                         if(m_captureCursor)
                         {
-                            XUndefineCursor(m_display->getHandler(), CurrentTime);
-                            m_display->flush();
+                            XUndefineCursor(m_display.getHandler(), CurrentTime);
+                            m_display.flush();
                         }
 
                         pushEvent(event);
@@ -472,7 +472,7 @@ namespace Bull
 
                 do
                 {
-                    grabbed = XGrabPointer(m_display->getHandler(), m_handler,
+                    grabbed = XGrabPointer(m_display.getHandler(), m_handler,
                                            True,
                                            XNone,
                                            GrabModeAsync, GrabModeAsync,
@@ -488,15 +488,15 @@ namespace Bull
             }
             else
             {
-                XUngrabPointer(m_display->getHandler(), CurrentTime);
-                m_display->flush();
+                XUngrabPointer(m_display.getHandler(), CurrentTime);
+                m_display.flush();
             }
         }
 
         void WindowImplXlib::setPosition(const Size& position)
         {
-            XMoveWindow(m_display->getHandler(), m_handler, position.width, position.height);
-            m_display->flush();
+            XMoveWindow(m_display.getHandler(), m_handler, position.width, position.height);
+            m_display.flush();
         }
 
         Size WindowImplXlib::getPosition() const
@@ -505,10 +505,10 @@ namespace Bull
             int localX, localY, x, y;
             unsigned int width, height, border, depth;
 
-            XGetGeometry(m_display->getHandler(), m_handler, &root, &localX, &localY, &width, &height, &border, &depth);
-            XTranslateCoordinates(m_display->getHandler(), m_handler, root, localX, localY, &x, &y, &child);
+            XGetGeometry(m_display.getHandler(), m_handler, &root, &localX, &localY, &width, &height, &border, &depth);
+            XTranslateCoordinates(m_display.getHandler(), m_handler, root, localX, localY, &x, &y, &child);
 
-            return Size(x, y);
+            return { x, y };
         }
 
         void WindowImplXlib::setMinSize(const Size& size)
@@ -519,16 +519,16 @@ namespace Bull
             hints.max_height = (size.height > 0) ? size.height : 0;
             hints.flags      = PMinSize;
 
-            XSetNormalHints(m_display->getHandler(), m_handler, &hints);
+            XSetNormalHints(m_display.getHandler(), m_handler, &hints);
         }
 
         Size WindowImplXlib::getMinSize() const
         {
             XSizeHints hints;
 
-            XGetNormalHints(m_display->getHandler(), m_handler, &hints);
+            XGetNormalHints(m_display.getHandler(), m_handler, &hints);
 
-            return Size(hints.min_width, hints.min_height);
+            return { hints.min_width, hints.min_height };
         }
 
         void WindowImplXlib::setMaxSize(const Size& size)
@@ -539,37 +539,37 @@ namespace Bull
             hints.max_height = (size.height > 0) ? size.height : m_screen->height;
             hints.flags      = PMaxSize;
 
-            XSetNormalHints(m_display->getHandler(), m_handler, &hints);
+            XSetNormalHints(m_display.getHandler(), m_handler, &hints);
         }
 
         Size WindowImplXlib::getMaxSize() const
         {
             XSizeHints hints;
 
-            XGetNormalHints(m_display->getHandler(), m_handler, &hints);
+            XGetNormalHints(m_display.getHandler(), m_handler, &hints);
 
-            return Size(hints.max_width, hints.max_height);
+            return { hints.max_width, hints.max_height };
         }
 
         void WindowImplXlib::setSize(const Size& size)
         {
-            XResizeWindow(m_display->getHandler(), m_handler, size.width, size.height);
+            XResizeWindow(m_display.getHandler(), m_handler, size.width, size.height);
             m_lastSize = size;
-            m_display->flush();
+            m_display.flush();
         }
 
         Size WindowImplXlib::getSize() const
         {
             XWindowAttributes attributes;
 
-            XGetWindowAttributes(m_display->getHandler(), m_handler, &attributes);
+            XGetWindowAttributes(m_display.getHandler(), m_handler, &attributes);
 
-            return Size(attributes.width, attributes.height);
+            return { attributes.width, attributes.height };
         }
 
         void WindowImplXlib::setTitle(const String& title)
         {
-            XStoreName(m_display->getHandler(), m_handler, title.getBuffer());
+            XStoreName(m_display.getHandler(), m_handler, title.getBuffer());
         }
 
         String WindowImplXlib::getTitle() const
@@ -577,7 +577,7 @@ namespace Bull
             String title;
             char* buffer = new char[256];
 
-            XFetchName(m_display->getHandler(), m_handler, &buffer);
+            XFetchName(m_display.getHandler(), m_handler, &buffer);
 
             title = buffer;
 
@@ -600,8 +600,8 @@ namespace Bull
         {
             if(visible)
             {
-                XMapWindow(m_display->getHandler(), m_handler);
-                m_display->flush();
+                XMapWindow(m_display.getHandler(), m_handler);
+                m_display.flush();
 
                 while(!m_isMapped)
                 {
@@ -610,8 +610,8 @@ namespace Bull
             }
             else
             {
-                XUnmapWindow(m_display->getHandler(), m_handler);
-                m_display->flush();
+                XUnmapWindow(m_display.getHandler(), m_handler);
+                m_display.flush();
 
                 while(m_isMapped)
                 {
@@ -628,10 +628,10 @@ namespace Bull
 
             unsigned int width        = icon.getSize().width;
             unsigned int height       = icon.getSize().height;
-            unsigned int defaultDepth = m_display->getDefaultDepth();
-            XVisual* defaultVisual    = DefaultVisual(m_display->getHandler(), m_display->getDefaultScreen());
+            unsigned int defaultDepth = m_display.getDefaultDepth();
+            XVisual* defaultVisual    = DefaultVisual(m_display.getHandler(), m_display.getDefaultScreen());
 
-            std::vector<Uint8> pixels(icon.getPixels().capacity());
+            std::vector<Uint8> pixels(icon.getPixels().getCapacity());
 
             for(std::size_t i = 0; i < icon.getSize().width * icon.getSize().height; i++)
             {
@@ -641,25 +641,25 @@ namespace Bull
                 pixels.at(i * 4 + 3) = icon.getPixels().at(i * 4 + 3);
             }
 
-            image = XCreateImage(m_display->getHandler(), defaultVisual,defaultDepth, ZPixmap, 0, reinterpret_cast<char*>(&pixels[0]), width, height, 32, 0);
+            image = XCreateImage(m_display.getHandler(), defaultVisual,defaultDepth, ZPixmap, 0, reinterpret_cast<char*>(&pixels[0]), width, height, 32, 0);
 
             Expect(image, Throw(InternalError, "WindowImplXlib::setIcon", "Failed to set window's icon"));
 
             if(m_icon)
             {
-                XFreePixmap(m_display->getHandler(), m_icon);
+                XFreePixmap(m_display.getHandler(), m_icon);
             }
 
             if(m_iconMask)
             {
-                XFreePixmap(m_display->getHandler(), m_iconMask);
+                XFreePixmap(m_display.getHandler(), m_iconMask);
             }
 
-            m_icon = XCreatePixmap(m_display->getHandler(), m_display->getRootWindow(), width, height, defaultDepth);
-            iconGraphicContext = XCreateGC(m_display->getHandler(), m_icon, 0, &values);
+            m_icon = XCreatePixmap(m_display.getHandler(), m_display.getRootWindow(), width, height, defaultDepth);
+            iconGraphicContext = XCreateGC(m_display.getHandler(), m_icon, 0, &values);
 
-            XPutImage(m_display->getHandler(), m_icon, iconGraphicContext, image, 0, 0, 0, 0, width, height);
-            XFreeGC(m_display->getHandler(), iconGraphicContext);
+            XPutImage(m_display.getHandler(), m_icon, iconGraphicContext, image, 0, 0, 0, 0, width, height);
+            XFreeGC(m_display.getHandler(), iconGraphicContext);
             XDestroyImage(image);
 
             std::size_t pitch = (width + 7 / 8);
@@ -677,13 +677,13 @@ namespace Bull
                 }
             }
 
-            m_iconMask = XCreatePixmapFromBitmapData(m_display->getHandler(), m_handler, reinterpret_cast<char*>(&pixels[0]), width, height, 1, 0, 1);
+            m_iconMask = XCreatePixmapFromBitmapData(m_display.getHandler(), m_handler, reinterpret_cast<char*>(&pixels[0]), width, height, 1, 0, 1);
 
             XWMHints* hints = XAllocWMHints();
             hints->icon_pixmap = m_icon;
             hints->icon_mask   = m_iconMask;
             hints->flags       = IconPixmapHint | IconMaskHint;
-            XSetWMHints(m_display->getHandler(), m_handler, hints);
+            XSetWMHints(m_display.getHandler(), m_handler, hints);
             XFree(hints);
 
             std::vector<unsigned long> icccmPixels(width * height + 2);
@@ -698,16 +698,16 @@ namespace Bull
                                      (pixels[i * 4 + 3] << 24);
             }
 
-            XChangeProperty(m_display->getHandler(), m_handler,
-                            m_display->getAtom("_NET_WM_ICON"), XA_CARDINAL, 32, PropModeReplace,
+            XChangeProperty(m_display.getHandler(), m_handler,
+                            m_display.getAtom("_NET_WM_ICON"), XA_CARDINAL, 32, PropModeReplace,
                             reinterpret_cast<const unsigned char*>(&icccmPixels[0]), icccmPixels.size());
 
-            m_display->flush();
+            m_display.flush();
         }
 
         void WindowImplXlib::setMouseCursor(const CursorImpl& cursor)
         {
-            XDefineCursor(m_display->getHandler(), m_handler, cursor.getSystemHandler());
+            XDefineCursor(m_display.getHandler(), m_handler, cursor.getSystemHandler());
         }
 
         void WindowImplXlib::setMouseCursorVisible(bool visible)
@@ -717,8 +717,8 @@ namespace Bull
                 m_hiddenCursor = createHiddenCursor(m_display, m_handler);
             }
 
-            XDefineCursor(m_display->getHandler(), m_handler, visible ? XNone : m_hiddenCursor);
-            m_display->flush();
+            XDefineCursor(m_display.getHandler(), m_handler, visible ? XNone : m_hiddenCursor);
+            m_display.flush();
 
             m_cursorVisible = visible;
         }
@@ -741,18 +741,18 @@ namespace Bull
             m_cursorVisible(true),
             m_captureCursor(false)
         {
-            m_screen = ScreenOfDisplay(m_display->getHandler(), m_display->getDefaultScreen());
+            m_screen = ScreenOfDisplay(m_display.getHandler(), m_display.getDefaultScreen());
         }
 
         void WindowImplXlib::open(const VideoMode& mode, const String& title, Uint32 style)
         {
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
-            int                  screen     = m_display->getDefaultScreen();
-            Visual*              visual     = XDefaultVisual(m_display->getHandler(), screen);
+            int                  screen     = m_display.getDefaultScreen();
+            Visual*              visual     = XDefaultVisual(m_display.getHandler(), screen);
 
-            m_colormap = XCreateColormap(m_display->getHandler(),
-                                         m_display->getRootWindow(screen),
+            m_colormap = XCreateColormap(m_display.getHandler(),
+                                         m_display.getRootWindow(screen),
                                          visual,
                                          AllocNone);
 
@@ -761,8 +761,8 @@ namespace Bull
             attributes.colormap          = m_colormap;
             attributes.event_mask        = WindowImplXlib::EventsMasks;
 
-            m_handler = XCreateWindow(m_display->getHandler(),
-                                      m_display->getRootWindow(screen),
+            m_handler = XCreateWindow(m_display.getHandler(),
+                                      m_display.getRootWindow(screen),
                                       0, 0,
                                       mode.width, mode.height,
                                       0,
@@ -782,8 +782,8 @@ namespace Bull
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
 
-            m_colormap = XCreateColormap(m_display->getHandler(),
-                                         m_display->getRootWindow(vi->screen),
+            m_colormap = XCreateColormap(m_display.getHandler(),
+                                         m_display.getRootWindow(vi->screen),
                                          vi->visual,
                                          AllocNone);
 
@@ -792,8 +792,8 @@ namespace Bull
             attributes.colormap          = m_colormap;
             attributes.event_mask        = WindowImplXlib::EventsMasks;
 
-            m_handler = XCreateWindow(m_display->getHandler(),
-                                      m_display->getRootWindow(vi->screen),
+            m_handler = XCreateWindow(m_display.getHandler(),
+                                      m_display.getRootWindow(vi->screen),
                                       0, 0,
                                       width, height,
                                       0,
@@ -816,7 +816,7 @@ namespace Bull
 
             if(style != WindowStyle_Fullscreen)
             {
-                XAtom hintsAtom = m_display->getAtom("_MOTIF_WM_HINTS", false);
+                XAtom hintsAtom = m_display.getAtom("_MOTIF_WM_HINTS", false);
                 if(hintsAtom)
                 {
                     WMHints hints;
@@ -851,7 +851,7 @@ namespace Bull
                         hints.functions   |= WMHints::Function_Close;
                     }
 
-                    XChangeProperty(m_display->getHandler(),
+                    XChangeProperty(m_display.getHandler(),
                                     m_handler,
                                     hintsAtom,
                                     hintsAtom,
@@ -869,9 +869,9 @@ namespace Bull
 
         void WindowImplXlib::setProtocols()
         {
-            Atom wmDeleteWindow = m_display->getAtom("WM_DELETE_WINDOW");
+            Atom wmDeleteWindow = m_display.getAtom("WM_DELETE_WINDOW");
 
-            XSetWMProtocols(m_display->getHandler(), m_handler, &wmDeleteWindow, 1);
+            XSetWMProtocols(m_display.getHandler(), m_handler, &wmDeleteWindow, 1);
         }
     }
 }

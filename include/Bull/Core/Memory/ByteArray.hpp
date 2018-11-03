@@ -83,6 +83,10 @@ namespace Bull
          */
         void clear() override;
 
+        Uint8 at(std::size_t index) const;
+
+        Uint8& at(std::size_t index);
+
         /*! \brief Get the capacity of the ByteArray
          *
          * \return The capacity

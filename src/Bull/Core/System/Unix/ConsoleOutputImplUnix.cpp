@@ -55,10 +55,9 @@ namespace Bull
             }
         }
 
-        std::size_t ConsoleOutputImplUnix::write(const void* data, std::size_t length)
+        std::size_t ConsoleOutputImplUnix::write(const ByteArray& bytes)
         {
-            String string(reinterpret_cast<const char*>(data), length);
-            ssize_t written = ::write(STDOUT_FILENO, string.getBuffer(), string.getSize());
+            ssize_t written = ::write(STDOUT_FILENO, bytes.getBuffer(), bytes.getCapacity());
 
             Expect(written != -1, Throw(InternalError, "ConsoleOutputImplUnix::write", "Failed to write buffer in stdout"));
 
@@ -72,22 +71,17 @@ namespace Bull
 
         void ConsoleOutputImplUnix::clear()
         {
-            write("\e[1;1H\e[2J");
+            write(ByteArray::fromString("\e[1;1H\e[2J"));
         }
 
         void ConsoleOutputImplUnix::setTextColor(ConsoleColor color)
         {
-            write("\033[" + StringUtils::number(colorToTextAttribute(color)) + "m");
+            write(ByteArray::fromString("\033[" + StringUtils::number(colorToTextAttribute(color)) + "m"));
         }
 
         void ConsoleOutputImplUnix::setBackgroundColor(ConsoleColor color)
         {
-            write("\033[" + StringUtils::number(colorToBackgroundAttribute(color)) + "m");
-        }
-
-        std::size_t ConsoleOutputImplUnix::write(const String& string)
-        {
-            write(string.getBuffer(), string.getSize());
+            write(ByteArray::fromString("\033[" + StringUtils::number(colorToBackgroundAttribute(color)) + "m"));
         }
     }
 }

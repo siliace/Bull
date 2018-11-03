@@ -10,17 +10,17 @@ namespace Bull
     {
         Path FileSystemImpl::getRoot()
         {
-            return Path::canonical("/");
+            return Path("/");
         }
 
         Path FileSystemImpl::getHome()
         {
-            return Path::canonical("~");
+            return Path("~").toAbsolute();
         }
 
         Path FileSystemImpl::getTempPath()
         {
-            return getRoot().getChild("tmp");
+            return getRoot().resolve("tmp");
         }
 
         void FileSystemImpl::setCurrentDirectory(const Path& path)

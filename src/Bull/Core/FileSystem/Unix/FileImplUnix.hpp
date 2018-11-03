@@ -13,70 +13,67 @@ namespace Bull
 
             /*! \brief Create a file
              *
-             * \param name The name of the file to create
+             * \param path The Path of the File to create
              *
              */
-            static void create(const String& name);
+            static void create(const Path& path);
 
-            /*! \brief Check if a file exists
+            /*! \brief Check if a File exists
              *
-             * \param name The name of the file to check
+             * \param path The Path of the File to check
              *
-             * \return Return true if the file exists, false otherwise
+             * \return True if the file exists
              *
              */
-            static bool exists(const String& name);
+            static bool exists(const Path& path);
 
-            /*! \brief Copy a file
+            /*! \brief Copy a File
              *
-             * \param path The path (relative or absolute) of the file to copy
-             * \param path The new path (relative or absolute) of the file
-             *
-             * \return Return true if the copy was successfully, false otherwise
+             * \param path    The path (relative or absolute) of the File to copy
+             * \param newPath The new path (relative or absolute) of the File
              *
              */
-            static bool copy(const Path& path, const String& newPath);
+            static void copy(const Path& path, const Path& newPath);
 
             /*! \brief Delete a file
              *
-             * \param name The name of the file to delete
+             * \param path The Path of the file to delete
              *
              */
-            static void remove(const Path& name);
+            static void remove(const Path& path);
 
         public:
+
+            /*! \brief Open a File
+             *
+             * \param name The name of the File
+             * \param mode The opening mode of the File
+             *
+             */
+            FileImplUnix(const Path& name, Uint32 mode);
 
             /*! \brief Destructor
              *
              */
             ~FileImplUnix();
 
-            /*! \brief Open a file
+            /*! \brief Read bytes from the File
              *
-             * \param name The name of the file
-             * \param mode The opening mode of the file (read, write or both)
+             * \param length The length of data to read
              *
-             * \return Return true if the file was open successfully, false otherwise
+             * \return Read bytes
              *
              */
-            bool open(const Path& name, Uint32 mode);
+            ByteArray read(std::size_t length) override;
 
-            /*! \brief Read in a file
+            /*! \brief Write data into the File
              *
-             * \param dst The destination of the read data
-             * \param size The number of byte to read
+             * \param bytes Bytes to write
              *
-             * \param Return the number of byte read
-             *
-             */
-            Uint64 read(void* dst, Uint64 size) override;
-
-            /*! \brief Write a byte in this file
-             *
-             * \param byte A byte to write
+             * \return Return the number of bytes written
              *
              */
-            Uint64 write(const void* data, Uint64 size) override;
+            std::size_t write(const ByteArray& bytes) override;
 
             /*! \brief Flush the File
              *

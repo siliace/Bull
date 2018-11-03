@@ -4,9 +4,7 @@
 #include <Bull/Core/Support/Xlib/ErrorHandler.hpp>
 #include <Bull/Core/Utility/StringUtils.hpp>
 
-#include <Bull/Render/Context/GlKhrNoError.hpp>
 #include <Bull/Render/Context/Glx/GlxContext.hpp>
-#include <Bull/Render/Context/Glx/GlxContextNoError.hpp>
 #include <Bull/Render/Context/Glx/GlxCreateContextARB.hpp>
 #include <Bull/Render/Context/Glx/GlxPBufferSGIX.hpp>
 #include <Bull/Render/Context/Glx/GlxSwapControlEXT.hpp>
@@ -26,16 +24,16 @@ namespace Bull
             );
         }
 
-        void GlxContext::requireExtensions(ExtensionsLoader::Instance& loader)
+        void GlxContext::requireExtensions(ExtensionsLoader& loader)
         {
-            loader->require(glxCreateContextARB);
-            loader->require(glxPbuffer);
-            loader->require(glxSwapControlEXT);
-            loader->require(glxSwapControlMESA);
-            loader->require(glxSwapControlSGI);
+            loader.require(glxCreateContextARB);
+            loader.require(glxPbuffer);
+            loader.require(glxSwapControlEXT);
+            loader.require(glxSwapControlMESA);
+            loader.require(glxSwapControlSGI);
         }
 
-        GLXFBConfig GlxContext::chooseBestConfig(Display::Instance display, const ContextSettings& settings, Uint8 bitsPerPixel)
+        GLXFBConfig GlxContext::chooseBestConfig(Display& display, const ContextSettings& settings, Uint8 bitsPerPixel)
         {
             int fbCounts = 0;
             GLXFBConfig config;
@@ -61,7 +59,7 @@ namespace Bull
                     0
                 };
 
-                configs = glXChooseFBConfig(display->getHandler(), display->getDefaultScreen(), attributes, &fbCounts);
+                configs = glXChooseFBConfig(display.getHandler(), display.getDefaultScreen(), attributes, &fbCounts);
 
                 if(fbCounts == 0)
                 {
@@ -71,7 +69,7 @@ namespace Bull
 
             for(int i = 0; i < fbCounts; i++)
             {
-                XVisualInfo* vi = glXGetVisualFromFBConfig(display->getHandler(), configs[i]);
+                XVisualInfo* vi = glXGetVisualFromFBConfig(display.getHandler(), configs[i]);
 
                 if(vi)
                 {
@@ -79,16 +77,16 @@ namespace Bull
                     int sampleBuffers, samples;
                     int red, green, blue, alpha;
 
-                    glXGetFBConfigAttrib(display->getHandler(), configs[i], GLX_RED_SIZE,   &red);
-                    glXGetFBConfigAttrib(display->getHandler(), configs[i], GLX_GREEN_SIZE, &green);
-                    glXGetFBConfigAttrib(display->getHandler(), configs[i], GLX_BLUE_SIZE,  &blue);
-                    glXGetFBConfigAttrib(display->getHandler(), configs[i], GLX_ALPHA_SIZE, &alpha);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_RED_SIZE,   &red);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_GREEN_SIZE, &green);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_BLUE_SIZE,  &blue);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_ALPHA_SIZE, &alpha);
 
-                    glXGetFBConfigAttrib(display->getHandler(), configs[i], GLX_SAMPLE_BUFFERS, &sampleBuffers);
-                    glXGetFBConfigAttrib(display->getHandler(), configs[i], GLX_SAMPLES,        &samples);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_SAMPLE_BUFFERS, &sampleBuffers);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_SAMPLES,        &samples);
 
-                    glXGetFBConfigAttrib(display->getHandler(), configs[i], GLX_DEPTH_SIZE,   &depths);
-                    glXGetFBConfigAttrib(display->getHandler(), configs[i], GLX_STENCIL_SIZE, &stencil);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_DEPTH_SIZE,   &depths);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_STENCIL_SIZE, &stencil);
 
                     int currentBitsPerPixel = red + green + blue + alpha;
                     int score = evaluatePixelFormat(currentBitsPerPixel, depths, stencil, sampleBuffers ? samples : 0, bitsPerPixel, settings);
@@ -120,10 +118,12 @@ namespace Bull
 
         GlxContext::GlxContext(const GlxContext* shared, const VideoMode& mode, const ContextSettings& settings) :
             GlContext(settings),
+            m_log(Log::getInstance()),
             m_window(0),
             m_render(nullptr),
             m_config(nullptr),
             m_pbuffer(0),
+            m_display(Display::getInstance()),
             m_colormap(0),
             m_ownWindow(false)
         {
@@ -145,10 +145,12 @@ namespace Bull
 
         GlxContext::GlxContext(const GlxContext* shared, const WindowImpl& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
             GlContext(settings),
+            m_log(Log::getInstance()),
             m_window(0),
             m_render(nullptr),
             m_config(nullptr),
             m_pbuffer(0),
+            m_display(Display::getInstance()),
             m_colormap(0),
             m_ownWindow(false)
         {
@@ -170,23 +172,23 @@ namespace Bull
             {
                 if(glXGetCurrentContext() == m_render)
                 {
-                    Expect(glXMakeCurrent(m_display->getHandler(), XNone, nullptr), Throw(InternalError, "GlxContext::~GlxContext", "Failed to disable current context"));
+                    Expect(glXMakeCurrent(m_display.getHandler(), XNone, nullptr), Throw(InternalError, "GlxContext::~GlxContext", "Failed to disable current context"));
                 }
 
-                glXDestroyContext(m_display->getHandler(), m_render);
+                glXDestroyContext(m_display.getHandler(), m_render);
             }
 
             if(m_pbuffer)
             {
-                glXDestroyPbuffer(m_display->getHandler(), m_pbuffer);
+                glXDestroyPbuffer(m_display.getHandler(), m_pbuffer);
             }
 
             if(m_ownWindow && m_window)
             {
-                XDestroyWindow(m_display->getHandler(), m_window);
-                XFreeColormap(m_display->getHandler(), m_colormap);
+                XDestroyWindow(m_display.getHandler(), m_window);
+                XFreeColormap(m_display.getHandler(), m_colormap);
 
-                m_display->flush();
+                m_display.flush();
             }
         }
 
@@ -196,11 +198,11 @@ namespace Bull
 
             if(m_window)
             {
-                glXSwapBuffers(m_display->getHandler(), m_window);
+                glXSwapBuffers(m_display.getHandler(), m_window);
             }
             else if(m_pbuffer)
             {
-                glXSwapBuffers(m_display->getHandler(), m_pbuffer);
+                glXSwapBuffers(m_display.getHandler(), m_pbuffer);
             }
         }
 
@@ -210,7 +212,7 @@ namespace Bull
 
             if(glxSwapControlEXT.isLoaded())
             {
-                ext::glXSwapInterval(m_display->getHandler(), glXGetCurrentDrawable(), active ? 1 : 0);
+                ext::glXSwapInterval(m_display.getHandler(), glXGetCurrentDrawable(), active ? 1 : 0);
             }
             else if(glxSwapControlMESA.isLoaded())
             {
@@ -222,13 +224,13 @@ namespace Bull
             }
             else
             {
-                m_log->warning("VSync is not available on your system");
+                m_log.warning("VSync is not available on your system");
             }
         }
 
         SurfaceHandler GlxContext::getSurfaceHandler() const
         {
-            return m_display->getDefaultScreen();
+            return m_display.getDefaultScreen();
         }
 
         void GlxContext::makeCurrent()
@@ -237,11 +239,11 @@ namespace Bull
 
             if(m_window)
             {
-                Expect(glXMakeCurrent(m_display->getHandler(), m_window, m_render), Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current"));
+                Expect(glXMakeCurrent(m_display.getHandler(), m_window, m_render), Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current"));
             }
             else if(m_pbuffer)
             {
-                Expect(glXMakeContextCurrent(m_display->getHandler(), m_pbuffer, m_pbuffer, m_render), Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current"));
+                Expect(glXMakeContextCurrent(m_display.getHandler(), m_pbuffer, m_pbuffer, m_render), Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current"));
             }
         }
 
@@ -257,7 +259,7 @@ namespace Bull
             if(glxPbuffer.isLoaded() && shared)
             {
                 int fbCounts         = 0;
-                GLXFBConfig* configs = glXChooseFBConfig(m_display->getHandler(), m_display->getDefaultScreen(), nullptr, &fbCounts);
+                GLXFBConfig* configs = glXChooseFBConfig(m_display.getHandler(), m_display.getDefaultScreen(), nullptr, &fbCounts);
 
                 if(fbCounts && configs)
                 {
@@ -269,7 +271,7 @@ namespace Bull
 
                     m_config = configs[0];
 
-                    m_pbuffer = glXCreatePbuffer(m_display->getHandler(), m_config, attributes);
+                    m_pbuffer = glXCreatePbuffer(m_display.getHandler(), m_config, attributes);
 
                     XFree(configs);
                 }
@@ -280,17 +282,17 @@ namespace Bull
                 XVisualInfo*         vi;
                 XSetWindowAttributes attributes;
 
-                vi = glXGetVisualFromFBConfig(m_display->getHandler(), m_config);
+                vi = glXGetVisualFromFBConfig(m_display.getHandler(), m_config);
 
-                m_colormap = XCreateColormap(m_display->getHandler(), m_display->getRootWindow(vi->screen), vi->visual, AllocNone);
+                m_colormap = XCreateColormap(m_display.getHandler(), m_display.getRootWindow(vi->screen), vi->visual, AllocNone);
 
                 attributes.border_pixel      = 0;
                 attributes.background_pixmap = XNone;
                 attributes.colormap          = m_colormap;
                 attributes.event_mask        = StructureNotifyMask;
 
-                m_window = XCreateWindow(m_display->getHandler(),
-                                         m_display->getRootWindow(vi->screen),
+                m_window = XCreateWindow(m_display.getHandler(),
+                                         m_display.getRootWindow(vi->screen),
                                          0, 0,
                                          width, height,
                                          0,
@@ -314,7 +316,7 @@ namespace Bull
             int glxMajor, glxMinor;
             GLXContext sharedHandler = shared ? shared->m_render : nullptr;
 
-            glXQueryVersion(m_display->getHandler(), &glxMajor, &glxMinor);
+            glXQueryVersion(m_display.getHandler(), &glxMajor, &glxMinor);
 
             if(glxCreateContextARB.isLoaded() && (glxMajor > 1 || glxMinor >= 3))
             {
@@ -354,11 +356,11 @@ namespace Bull
 
                     attribs.emplace_back(0);
 
-                    m_render = glXCreateContextAttribs(m_display->getHandler(), m_config, sharedHandler, True, &attribs[0]);
+                    m_render = glXCreateContextAttribs(m_display.getHandler(), m_config, sharedHandler, True, &attribs[0]);
 
                     if(!m_render)
                     {
-                        m_log->warning("Failed to create GlxContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
+                        m_log.warning("Failed to create GlxContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
 
                         if(m_settings.minor == 0)
                         {
@@ -372,24 +374,24 @@ namespace Bull
                     }
                     else
                     {
-                        m_log->info("Create GlxContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
+                        m_log.info("Create GlxContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
                     }
                 }while(!m_render && m_settings.major >= 1);
             }
 
             if(!m_render)
             {
-                m_render = glXCreateNewContext(m_display->getHandler(), m_config, GLX_RGBA_TYPE, sharedHandler, True);
+                m_render = glXCreateNewContext(m_display.getHandler(), m_config, GLX_RGBA_TYPE, sharedHandler, True);
 
                 Expect(m_render, Throw(InternalError, "GlxContext::createContext", "Failed to create legacy/shared GlxContext"));
 
                 if(shared)
                 {
-                    m_log->info("Create shared GlxContext");
+                    m_log.info("Create shared GlxContext");
                 }
                 else
                 {
-                    m_log->info("Create legacy GlxContext");
+                    m_log.info("Create legacy GlxContext");
                 }
             }
 
@@ -401,11 +403,11 @@ namespace Bull
             int depths, stencil;
             int sampleBuffers, samples;
 
-            glXGetFBConfigAttrib(m_display->getHandler(), m_config, GLX_SAMPLE_BUFFERS, &sampleBuffers);
-            glXGetFBConfigAttrib(m_display->getHandler(), m_config, GLX_SAMPLES,        &samples);
+            glXGetFBConfigAttrib(m_display.getHandler(), m_config, GLX_SAMPLE_BUFFERS, &sampleBuffers);
+            glXGetFBConfigAttrib(m_display.getHandler(), m_config, GLX_SAMPLES,        &samples);
 
-            glXGetFBConfigAttrib(m_display->getHandler(), m_config, GLX_DEPTH_SIZE,   &depths);
-            glXGetFBConfigAttrib(m_display->getHandler(), m_config, GLX_STENCIL_SIZE, &stencil);
+            glXGetFBConfigAttrib(m_display.getHandler(), m_config, GLX_DEPTH_SIZE,   &depths);
+            glXGetFBConfigAttrib(m_display.getHandler(), m_config, GLX_STENCIL_SIZE, &stencil);
 
             m_settings.depths       = static_cast<Uint8>(depths);
             m_settings.stencil      = static_cast<Uint8>(stencil);
