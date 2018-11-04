@@ -5,11 +5,11 @@
 
 #include <Bull/Core/Memory/ByteArray.hpp>
 
-#include <Bull/Render/Context/ContextResource.hpp>
+#include <Bull/Render/Export.hpp>
 
 namespace Bull
 {
-    struct BULL_RENDER_API ShaderBinary : public ContextResource
+    struct BULL_RENDER_API ShaderBinary
     {
         /*! \brief Get the list of supported shader binary formats
          *

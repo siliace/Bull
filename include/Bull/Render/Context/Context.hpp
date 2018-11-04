@@ -28,6 +28,11 @@ namespace Bull
          */
         static const Context* getActive();
 
+        /*! \brief Ensure a Context is active in the current thread
+         *
+         */
+        static void ensureContext();
+
     public:
 
         /*! \brief Default constructor

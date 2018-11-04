@@ -1,5 +1,6 @@
 #include <algorithm>
 
+#include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Shader/ShaderBinary.hpp>
 
@@ -10,7 +11,7 @@ namespace Bull
         int length;
         std::vector<int> formats;
 
-        ensureContext();
+        Context::ensureContext();
 
         gl::getIntegerv(GL_NUM_PROGRAM_BINARY_FORMATS, &length);
 

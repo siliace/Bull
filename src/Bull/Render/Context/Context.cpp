@@ -13,6 +13,11 @@ namespace Bull
         return g_active;
     }
 
+    void Context::ensureContext()
+    {
+        prv::GlContext::ensureContext();
+    }
+
     Context::Context() :
         m_context(prv::GlContext::createInstance())
     {
@@ -45,11 +50,6 @@ namespace Bull
 
     const ContextSettings& Context::getSettings() const
     {
-        if(m_context)
-        {
-            return m_context->getSettings();
-        }
-
-        return ContextSettings::Empty;
+        return m_context->getSettings();
     }
 }
