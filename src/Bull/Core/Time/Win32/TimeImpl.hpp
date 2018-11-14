@@ -7,8 +7,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct TimeImpl
+        class TimeImpl
         {
+        public:
+
             /*! \brief Create a Time of now
              *
              * \return The created time

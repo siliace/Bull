@@ -10,7 +10,7 @@ namespace Bull
         {
             String absolute = StringUtils::ofSize(MAX_PATH);
 
-            GetFullPathName(relative.getBuffer(), absolute.getSize(), &absolute[0], nullptr);
+            GetFullPathName(relative.getBuffer(), static_cast<DWORD>(absolute.getSize()), &absolute[0], nullptr);
 
             return absolute;
         }

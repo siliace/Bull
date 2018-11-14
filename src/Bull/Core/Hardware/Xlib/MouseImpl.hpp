@@ -7,8 +7,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct MouseImpl
+        class MouseImpl
         {
+        public:
+
             /*! \brief Set the position of the cursor on the screen
              *
              * \param position The new position of the cursor on the screen

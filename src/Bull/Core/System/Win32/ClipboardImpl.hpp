@@ -7,8 +7,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct ClipboardImpl
+        class ClipboardImpl
         {
+        public:
+
             /*! \brief Flush the content of the Clipboard
              *
              */

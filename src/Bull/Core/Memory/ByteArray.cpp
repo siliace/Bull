@@ -91,7 +91,7 @@ namespace Bull
         return at(index);
     }
 
-    const Uint8& ByteArray::operator[](std::size_t index) const
+    Uint8 ByteArray::operator[](std::size_t index) const
     {
         return at(index);
     }

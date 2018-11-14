@@ -15,6 +15,7 @@ namespace Bull
         /// Nothing
     }
 
+    #ifndef BULL_COMPILER_MSC /// FIXME : provide a fallback implementation for MSC
     template <>
     char RandomGenerator::number<char>(char min, char max)
     {
@@ -28,6 +29,7 @@ namespace Bull
         std::uniform_int_distribution<unsigned char> distribution(min, max);
         return distribution(m_generator);
     }
+    #endif
 
     template <>
     short RandomGenerator::number<short>(short min, short max)

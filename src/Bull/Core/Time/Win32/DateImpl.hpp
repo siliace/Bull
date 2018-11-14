@@ -7,8 +7,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct DateImpl
+        class DateImpl
         {
+        public:
+
             /*! \brief Get the current date
              *
              * \return Return the current date

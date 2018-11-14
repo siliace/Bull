@@ -7,8 +7,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct KeyboardImpl
+        class KeyboardImpl
         {
+        public:
+
             /*! \brief Check if a key is pressed
              *
              * \param key To key to check the state

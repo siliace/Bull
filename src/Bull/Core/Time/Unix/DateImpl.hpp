@@ -1,5 +1,5 @@
-#ifndef Bull_DateImpl_hpp
-#define Bull_DateImpl_hpp
+#ifndef BULL_CORE_TIME_UNIX_DATEIMPL_HPP
+#define BULL_CORE_TIME_UNIX_DATEIMPL_HPP
 
 #include <Bull/Core/Time/Date.hpp>
 
@@ -7,8 +7,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct DateImpl
+        class DateImpl
         {
+        public:
+
             /*! \brief Get the current date
              *
              * \return Return the current date
@@ -19,4 +21,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_DateImpl_hpp
+#endif // BULL_CORE_TIME_UNIX_DATEIMPL_HPP

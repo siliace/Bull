@@ -20,6 +20,8 @@ namespace Bull
                 case AttachmentPoint_Stencil: return GL_STENCIL_ATTACHMENT;
                 case AttachmentPoint_DepthStencil: return GL_DEPTH_STENCIL_ATTACHMENT;
             }
+
+            return 0;
         }
     }
 

@@ -7,9 +7,13 @@ namespace Bull
 {
     namespace prv
     {
-        struct SocketPollerImplUnix : public SocketPollerImpl
+        class SocketPollerImplUnix : public SocketPollerImpl
         {
+        public:
+
             static constexpr int SocketError = -1;
+
+        public:
 
             /*! \brief Poll sockets
              *

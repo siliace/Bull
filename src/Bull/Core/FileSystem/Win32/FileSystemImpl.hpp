@@ -8,8 +8,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct FileSystemImpl
+        class FileSystemImpl
         {
+        public:
+
             /*! \brief Get the root path of the filesystem
              *
              * \return The root

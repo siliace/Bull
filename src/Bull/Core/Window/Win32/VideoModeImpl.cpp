@@ -14,7 +14,7 @@ namespace Bull
 
             EnumDisplaySettings(nullptr, ENUM_CURRENT_SETTINGS, &mode);
 
-            return VideoMode(mode.dmPelsWidth, mode.dmPelsHeight, mode.dmBitsPerPel);
+            return { mode.dmPelsWidth, mode.dmPelsHeight, mode.dmBitsPerPel };
         }
 
         std::vector<VideoMode> VideoModeImpl::getAllAvailable()

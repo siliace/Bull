@@ -9,8 +9,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct IpAddressImpl
+        class IpAddressImpl
         {
+        public:
+
             /*! \brief Resolve an IpAddress
              *
              * \param hostname The hostname to resolve

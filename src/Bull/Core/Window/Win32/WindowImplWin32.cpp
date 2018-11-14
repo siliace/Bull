@@ -418,7 +418,7 @@ namespace Bull
 
             buffer.resize(GetWindowTextLengthW(m_handler) + 1);
 
-            GetWindowTextW(m_handler, &buffer[0], buffer.capacity());
+            GetWindowTextW(m_handler, &buffer[0], static_cast<int>(buffer.capacity()));
 
             return String(reinterpret_cast<const char*>(buffer.data()), buffer.capacity());
         }

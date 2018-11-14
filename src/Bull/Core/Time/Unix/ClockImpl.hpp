@@ -1,5 +1,5 @@
-#ifndef Bull_ClockImpl_hpp
-#define Bull_ClockImpl_hpp
+#ifndef BULL_CORE_TIME_UNIX_CLOCKIMPL_HPP
+#define BULL_CORE_TIME_UNIX_CLOCKIMPL_HPP
 
 #include <Bull/Core/Time/Duration.hpp>
 
@@ -7,8 +7,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct ClockImpl
+        class ClockImpl
         {
+        public:
+
             /*! \brief Get the uptime
              *
              * \return Return the update
@@ -19,4 +21,4 @@ namespace Bull
     }
 }
 
-#endif // Bull_ClockImpl_hpp
+#endif // BULL_CORE_TIME_UNIX_CLOCKIMPL_HPP

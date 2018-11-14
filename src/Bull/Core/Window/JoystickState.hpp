@@ -10,8 +10,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct JoystickState
+        class JoystickState
         {
+        public:
+
             /*! \brief Default constructor
              *
              */
@@ -42,7 +44,9 @@ namespace Bull
              */
             bool operator!=(const JoystickState& right) const;
 
-            std::array<float, Joystick::CountAxis>                    axes;
+        public:
+
+            std::array<unsigned int, Joystick::CountAxis>             axes;
             std::array<std::pair<bool, Clock>, Joystick::CountButton> buttons;
             bool                                                      connected;
         };

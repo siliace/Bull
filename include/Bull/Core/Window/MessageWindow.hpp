@@ -52,8 +52,10 @@ namespace Bull
         MessageWindowIcon_Exclamation,
     };
 
-    struct BULL_CORE_API MessageWindow : public NonCopyable
+    class BULL_CORE_API MessageWindow : public NonCopyable
     {
+    public:
+
         /*! \brief Default constructor
          *
          */
@@ -78,6 +80,8 @@ namespace Bull
          *
          */
         MessageWindowResponse open(const String& message, const String& title, const Window* parent = nullptr);
+
+    public:
 
         MessageWindowIcon          icon;
         MessageWindowButtons       buttons;

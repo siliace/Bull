@@ -11,8 +11,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct GlxExtensionsLoader
+        class GlxExtensionsLoader
         {
+        public:
+
             /*! \brief Get a list of supported extensions
              *
              * \param handler The surface to use to check whether an extension is supported

@@ -8,8 +8,10 @@ namespace Bull
 {
     class Window;
 
-    struct BULL_CORE_API Mouse
+    class BULL_CORE_API Mouse
     {
+    public:
+
         /*! \brief Move the cursor to the center of a Window
          *
          * \param window The Window to move the cursor in

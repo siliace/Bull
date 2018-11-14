@@ -8,8 +8,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct MessageWindowImpl
+        class MessageWindowImpl
         {
+        public:
+
             /*! \brief
              *
              * \param message

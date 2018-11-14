@@ -9,8 +9,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct RenderWindowImpl : public NonCopyable
+        class RenderWindowImpl : public NonCopyable
         {
+        public:
+
             /*! \brief Create an OS specific implementation of RenderWindowImpl
              *
              * \param mode     The VideoMode of the RenderWindow

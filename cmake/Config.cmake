@@ -6,7 +6,12 @@ else()
     set(CMAKE_CXX_STANDARD 14)
 endif()
 
-set(CMAKE_CXX_FLAGS "-Bstatic")
+if(MSVC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Bstatic")
+endif()
+
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "bin/${CMAKE_BUILD_TYPE}")
 
 set(BULL_ROOT ${CMAKE_CURRENT_SOURCE_DIR})

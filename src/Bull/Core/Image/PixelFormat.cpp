@@ -18,6 +18,8 @@ namespace Bull
             case PixelFormat_Rgb8Alpha8:
                 return 4;
         }
+
+        return 0;
     }
 
     std::size_t PixelFormatUtils::getImageByteCount(const Size& size, PixelFormat pixelFormat)

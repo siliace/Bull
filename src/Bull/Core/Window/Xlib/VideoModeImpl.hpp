@@ -1,5 +1,5 @@
-#ifndef BULL_VIDEOMODEIMPL_HPP
-#define BULL_VIDEOMODEIMPL_HPP
+#ifndef BULL_CORE_WINDOW_VIDEOMODEIMPL_HPP
+#define BULL_CORE_WINDOW_VIDEOMODEIMPL_HPP
 
 #include <vector>
 
@@ -9,8 +9,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct VideoModeImpl
+        class VideoModeImpl
         {
+        public:
+
             /*! \brief Get the current VideoMode of the main screen
              *
              * \return Return a VideoMode with the current width, height and the deepness of the main screen
@@ -28,4 +30,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_VIDEOMODEIMPL_HPP
+#endif // BULL_CORE_WINDOW_VIDEOMODEIMPL_HPP

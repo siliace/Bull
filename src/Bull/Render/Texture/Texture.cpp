@@ -64,6 +64,8 @@ namespace Bull
                 case PixelFormat_Stencil16:       return GL_UNSIGNED_SHORT;
                 case PixelFormat_Depth24Stencil8: return GL_UNSIGNED_INT_24_8;
             }
+
+            return 0;
         }
     }
 

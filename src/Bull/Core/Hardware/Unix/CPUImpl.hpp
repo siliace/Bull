@@ -7,8 +7,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct CPUImpl
+        class CPUImpl
         {
+        public:
+
             /*! \brief Get the number of CPU
              *
              * \return Return the number of CPU

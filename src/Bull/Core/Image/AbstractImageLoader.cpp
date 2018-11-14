@@ -16,6 +16,8 @@ namespace Bull
                 case PixelFormat_Rgb8: return STBI_rgb;
                 case PixelFormat_Rgb8Alpha8: return STBI_rgb_alpha;
             }
+
+            return 0;
         }
     }
 

@@ -66,7 +66,7 @@ namespace Bull
          * \return The position of the axis
          *
          */
-        static float getAxisPosition(JoystickAxis axis, Uint8 joystick);
+        static unsigned int getAxisPosition(JoystickAxis axis, Uint8 joystick);
 
         /*! \brief Enable or disable the key repeat
          *

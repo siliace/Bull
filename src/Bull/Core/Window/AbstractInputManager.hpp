@@ -1,5 +1,5 @@
-#ifndef BULL_COREABSTRACTINPUTMANAGER_HPP
-#define BULL_COREABSTRACTINPUTMANAGER_HPP
+#ifndef BULL_CORE_WINDOW_ABSTRACTINPUTMANAGER_HPP
+#define BULL_CORE_WINDOW_ABSTRACTINPUTMANAGER_HPP
 
 #include <queue>
 
@@ -10,8 +10,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct AbstractInputManager
+        class AbstractInputManager
         {
+        public:
+
             /*! \brief Process events for every joysticks
              *
              * \param eventQueue The event queue to fill
@@ -50,4 +52,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_COREABSTRACTINPUTMANAGER_HPP
+#endif // BULL_CORE_WINDOW_ABSTRACTINPUTMANAGER_HPP

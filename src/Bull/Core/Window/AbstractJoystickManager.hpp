@@ -1,5 +1,5 @@
-#ifndef BULL_COREABSTRACTJOYSTICKMANAGER_HPP
-#define BULL_COREABSTRACTJOYSTICKMANAGER_HPP
+#ifndef BULL_CORE_WINDOW_ABSTRACTJOYSTICKMANAGER_HPP
+#define BULL_CORE_WINDOW_ABSTRACTJOYSTICKMANAGER_HPP
 
 #include <Bull/Core/Window/AbstractInputManager.hpp>
 
@@ -7,8 +7,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct AbstractJoystickManager : public AbstractInputManager
+        class AbstractJoystickManager : public AbstractInputManager
         {
+        public:
+
             /*! \brief Set the threshold of an axis movement to trigger an event
              *
              * \param threshold The threshold to use
@@ -26,4 +28,4 @@ namespace Bull
     }
 }
 
-#endif // BULL_COREABSTRACTJOYSTICKMANAGER_HPP
+#endif // BULL_CORE_WINDOW_ABSTRACTJOYSTICKMANAGER_HPP

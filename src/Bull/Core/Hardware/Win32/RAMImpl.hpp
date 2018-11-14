@@ -7,8 +7,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct RAMImpl
+        class RAMImpl
         {
+        public:
+
             /*! \brief Retrieves the amount of RAM that is physically installed on the computer
              *
              * \return Return the amount of RAM

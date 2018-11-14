@@ -11,8 +11,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct DirectoryImpl : public NonCopyable
+        class DirectoryImpl : public NonCopyable
         {
+        public:
+
             /*! \brief Create a OS specific DirectoryImpl
              *
              * \param path The Path of the Directory to open
@@ -52,6 +54,8 @@ namespace Bull
              *
              */
             static void remove(const Path& path);
+
+        public:
 
             /*! \brief Destructor
              *

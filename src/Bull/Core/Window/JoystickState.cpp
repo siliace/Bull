@@ -1,3 +1,5 @@
+#include <limits>
+
 #include <Bull/Core/Window/JoystickState.hpp>
 
 namespace Bull
@@ -8,7 +10,7 @@ namespace Bull
             connected(false)
         {
             buttons.fill(std::make_pair(false, Clock()));
-            axes.fill(32767.f);
+            axes.fill(std::numeric_limits<unsigned int>::max() / 2);
         }
 
         JoystickState::JoystickState(Uint8 joystick) :

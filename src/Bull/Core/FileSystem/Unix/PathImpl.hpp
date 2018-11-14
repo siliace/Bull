@@ -7,8 +7,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct PathImpl
+        class PathImpl
         {
+        public:
+
             /*! \brief Get the absolute path for a given relative path
              *
              * \param relative The relative path

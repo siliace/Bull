@@ -65,7 +65,7 @@ namespace Bull
             return std::bitset<Joystick::CountButton>(getJoystickState(joystick).dwButtons).test(button);
         }
 
-        float JoystickImpl::getAxisPosition(JoystickAxis axis, Uint8 joystick)
+        unsigned int JoystickImpl::getAxisPosition(JoystickAxis axis, Uint8 joystick)
         {
             JOYINFOEX joystickState = getJoystickState(joystick);
 
@@ -77,8 +77,8 @@ namespace Bull
                 case JoystickAxis_R:    return joystickState.dwRpos;
                 case JoystickAxis_U:    return joystickState.dwUpos;
                 case JoystickAxis_V:    return joystickState.dwVpos;
-                case JoystickAxis_PovX: return std::cos(AngleUI::degree(joystickState.dwPOV));
-                case JoystickAxis_PovY: return std::sin(AngleUI::degree(joystickState.dwPOV));
+                case JoystickAxis_PovX: return joystickState.dwPOV;
+                case JoystickAxis_PovY: return joystickState.dwPOV;
             }
 
             return 0;

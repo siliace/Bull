@@ -9,8 +9,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct RenderWindowImplWin32 : public WindowImplWin32
+        class RenderWindowImplWin32 : public WindowImplWin32
         {
+        public:
+
             /*! \brief Constructor
              *
              * \param mode  The VideoMode of the RenderWindow

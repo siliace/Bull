@@ -146,7 +146,7 @@ namespace Bull
          * \throw InvalidParameter
          *
          */
-        const Uint8& operator[](std::size_t index) const;
+        Uint8 operator[](std::size_t index) const;
 
     private:
 

@@ -231,9 +231,9 @@ namespace Bull
 
             gl::getIntegerv(GL_NUM_EXTENSIONS, &extensionsCount);
 
-            for(unsigned int i = 0; i < extensionsCount; i++)
+            for(int i = 0; i < extensionsCount; i++)
             {
-                extensions.insert(String(reinterpret_cast<const char*>(gl::getStringi(GL_EXTENSIONS, i))));
+                extensions.insert(String(reinterpret_cast<const char*>(gl::getStringi(GL_EXTENSIONS, static_cast<unsigned int>(i)))));
             }
 
             std::vector<String> tokens = ExtensionsLoaderType::getExtensions(surface);

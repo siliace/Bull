@@ -7,9 +7,13 @@ namespace Bull
 {
     namespace prv
     {
-        struct SocketPollerImplWin32 : public SocketPollerImpl
+        class SocketPollerImplWin32 : public SocketPollerImpl
         {
+        public:
+
             static constexpr int SocketError = SOCKET_ERROR;
+
+        public:
 
             /*! \brief Poll sockets
              *
@@ -19,7 +23,7 @@ namespace Bull
              * \return The number of sockets updated during the poll
              *
              */
-            int poll(std::vector<SocketPollDescriptor>& sockets, int timeout) const;
+            int poll(std::vector<SocketPollDescriptor>& sockets, int timeout) const override;
         };
     }
 }

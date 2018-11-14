@@ -12,8 +12,10 @@ namespace Bull
 {
     namespace prv
     {
-        struct FileImpl : public NonCopyable
+        class FileImpl : public NonCopyable
         {
+        public:
+
             /*! \brief Create a OS specific FileImpl
              *
              * \param name The Path of the File to open
@@ -62,6 +64,8 @@ namespace Bull
              *
              */
             static void remove(const Path& path);
+
+        public:
 
             /*! \brief Destructor
              *
