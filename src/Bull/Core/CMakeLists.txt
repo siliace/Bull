@@ -35,5 +35,3 @@ else()
     target_link_libraries(bull-core ${X11_X11_LIB})
     target_link_libraries(bull-core ${X11_Xrandr_LIB})
 endif()
-
-target_link_libraries(bull-core stbimage)

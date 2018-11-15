@@ -1,3 +1,4 @@
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image/stb_image.h>
 
 #include <Bull/Core/Exception/InternalError.hpp>
