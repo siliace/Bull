@@ -15,7 +15,7 @@ namespace Bull
         /// Nothing
     }
 
-    #ifndef BULL_COMPILER_MSC /// FIXME : provide a fallback implementation for MSC
+    #if BULL_COMPILER != BULL_COMPILER_MSC /// FIXME : provide a fallback implementation for MSC
     template <>
     char RandomGenerator::number<char>(char min, char max)
     {
