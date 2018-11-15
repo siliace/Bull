@@ -17,11 +17,11 @@ namespace Bull
             VideoMode desktopMode;
             Display&  display = Display::getInstance();
 
-            Expect(display.isSupportedExtension("RANDR"), Throw(InternalError, "VideoModeImpl::getCurrent", "Missing XRandR extension"));
+            Expect(display.isSupportedExtension("RANDR"), Throw(InternalError, "Missing XRandR extension"));
 
             XRRScreenConfiguration* config = XRRGetScreenInfo(display.getHandler(), display.getRootWindow());
 
-            Expect(config, Throw(InternalError, "VideoModeImpl::getAllAvailable", "Failed to get screen configurations"));
+            Expect(config, Throw(InternalError, "Failed to get screen configurations"));
 
             int currentMode = XRRConfigCurrentConfiguration(config, &rotation);
 
@@ -55,11 +55,11 @@ namespace Bull
             int                    depthsCount;
             Display& display = Display::getInstance();
 
-            Expect(display.isSupportedExtension("RANDR"), Throw(InternalError, "VideoModeImpl::getAllAvailable", "Missing XRandR extension"));
+            Expect(display.isSupportedExtension("RANDR"), Throw(InternalError, "Missing XRandR extension"));
 
             XRRScreenConfiguration* config = XRRGetScreenInfo(display.getHandler(), display.getRootWindow());
 
-            Expect(config, Throw(InternalError, "VideoModeImpl::getAllAvailable", "Failed to get screen configurations"));
+            Expect(config, Throw(InternalError, "Failed to get screen configurations"));
 
             XRRScreenSize* sizes  = XRRConfigSizes(config, &sizesCount);
             int*           depths = XListDepths(display.getHandler(), display.getDefaultScreen(), &depthsCount);

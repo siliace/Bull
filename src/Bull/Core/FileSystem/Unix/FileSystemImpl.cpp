@@ -25,7 +25,7 @@ namespace Bull
 
         void FileSystemImpl::setCurrentDirectory(const Path& path)
         {
-            Expect(chdir(path.toString().getBuffer()) != -1, Throw(InternalError, "FileSystemImpl::setCurrentDirectory", "Failed to set current directory"));
+            Expect(chdir(path.toString().getBuffer()) != -1, Throw(InternalError, "Failed to set current directory"));
         }
 
         FileSystemInfo FileSystemImpl::getFileSystemInfo(const Path& base)
@@ -44,7 +44,7 @@ namespace Bull
 
         void FileSystemImpl::createLink(const Path& target, const String& link)
         {
-            Expect(symlink(target.toString().getBuffer(), link.getBuffer()) != -1, Throw(InternalError, "FileSystemImpl::createLink", "Failed to create link"));
+            Expect(symlink(target.toString().getBuffer(), link.getBuffer()) != -1, Throw(InternalError, "Failed to create link"));
         }
     }
 }

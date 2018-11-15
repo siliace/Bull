@@ -23,7 +23,7 @@ namespace Bull
 
             error = getaddrinfo(hostname.getBuffer(), service.getBuffer(), &hints, &info);
 
-            Expect(error == 0, Throw(InternalError, "IpAddressImpl::resolve", "Failed to get host address : " + String(gai_strerror(error))))
+            Expect(error == 0, Throw(InternalError, "Failed to get host address : " + String(gai_strerror(error))))
 
             SockAddrBuffer buffer((*info->ai_addr), info->ai_addrlen);
             std::unique_ptr<IpAddress> address = buffer.getIpAddress();

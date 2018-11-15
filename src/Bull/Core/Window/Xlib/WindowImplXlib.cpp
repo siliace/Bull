@@ -643,7 +643,7 @@ namespace Bull
 
             image = XCreateImage(m_display.getHandler(), defaultVisual,defaultDepth, ZPixmap, 0, reinterpret_cast<char*>(&pixels[0]), width, height, 32, 0);
 
-            Expect(image, Throw(InternalError, "WindowImplXlib::setIcon", "Failed to set window's icon"));
+            Expect(image, Throw(InternalError, "Failed to set window's icon"));
 
             if(m_icon)
             {
@@ -772,7 +772,7 @@ namespace Bull
                                       CWColormap | CWEventMask | CWBorderPixel,
                                       &attributes);
 
-            Expect(m_handler, Throw(InternalError, "WindowImplXlib::open", "Failed to create window"));
+            Expect(m_handler, Throw(InternalError, "Failed to create window"));
 
             initialize(title, style);
         }
@@ -803,7 +803,7 @@ namespace Bull
                                       CWColormap | CWEventMask | CWBorderPixel,
                                       &attributes);
 
-            Expect(m_handler, Throw(InternalError, "WindowImplXlib::open", "Failed to create window"));
+            Expect(m_handler, Throw(InternalError, "Failed to create window"));
 
             initialize(title, style);
         }

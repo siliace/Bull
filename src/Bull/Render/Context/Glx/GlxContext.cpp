@@ -101,7 +101,7 @@ namespace Bull
                 XFree(vi);
             }
 
-            Expect(bestConfig != -1, Throw(InternalError, "GlxContext::chooseBestConfig", "Failed to get best framebuffer configuration"))
+            Expect(bestConfig != -1, Throw(InternalError, "Failed to get best framebuffer configuration"))
 
             config = configs[bestConfig];
 
@@ -239,11 +239,11 @@ namespace Bull
 
             if(m_window)
             {
-                Expect(glXMakeCurrent(m_display.getHandler(), m_window, m_render), Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current"));
+                Expect(glXMakeCurrent(m_display.getHandler(), m_window, m_render), Throw(InternalError, "Failed to make context current"));
             }
             else if(m_pbuffer)
             {
-                Expect(glXMakeContextCurrent(m_display.getHandler(), m_pbuffer, m_pbuffer, m_render), Throw(InternalError, "GlxContext::makeCurrent", "Failed to make context current"));
+                Expect(glXMakeContextCurrent(m_display.getHandler(), m_pbuffer, m_pbuffer, m_render), Throw(InternalError, "Failed to make context current"));
             }
         }
 
@@ -307,7 +307,7 @@ namespace Bull
                 XFree(vi);
             }
 
-            Expect(m_ownWindow && m_window || m_pbuffer, Throw(InternalError, "GlxContext::createSurface", "Failed to create rendering surface"));
+            Expect(m_ownWindow && m_window || m_pbuffer, Throw(InternalError, "Failed to create rendering surface"));
         }
 
         void GlxContext::createContext(const GlxContext* shared)
@@ -383,7 +383,7 @@ namespace Bull
             {
                 m_render = glXCreateNewContext(m_display.getHandler(), m_config, GLX_RGBA_TYPE, sharedHandler, True);
 
-                Expect(m_render, Throw(InternalError, "GlxContext::createContext", "Failed to create legacy/shared GlxContext"));
+                Expect(m_render, Throw(InternalError, "Failed to create legacy/shared GlxContext"));
 
                 if(shared)
                 {

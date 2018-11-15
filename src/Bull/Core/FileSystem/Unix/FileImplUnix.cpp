@@ -17,7 +17,7 @@ namespace Bull
         {
             int handler = ::open64(path.toString().getBuffer(), O_CREAT | O_TRUNC | O_EXCL, S_IRWXU);
 
-            Expect(handler != -1, Throw(InternalError, "FileImplUnix::create", "Failed to create file"));
+            Expect(handler != -1, Throw(InternalError, "Failed to create file"));
 
             close(handler);
         }
@@ -26,7 +26,7 @@ namespace Bull
         {
             struct stat64 filestats;
 
-            Expect(stat64(path.toString().getBuffer(), &filestats) != -1, Throw(InternalError, "FileImplUnix::exists", "Failed to check whether a file exists"))
+            Expect(stat64(path.toString().getBuffer(), &filestats) != -1, Throw(InternalError, "Failed to check whether a file exists"))
 
             return S_ISREG(filestats.st_mode);
         }
@@ -38,7 +38,7 @@ namespace Bull
 
         void FileImplUnix::remove(const Path& path)
         {
-            Expect(unlink(path.toString().getBuffer()) != -1, Throw(InternalError, "FileImplUnix::remove", "Failed to remove file"));
+            Expect(unlink(path.toString().getBuffer()) != -1, Throw(InternalError, "Failed to remove file"));
         }
 
         FileImplUnix::~FileImplUnix()
@@ -103,7 +103,7 @@ namespace Bull
 
         void FileImplUnix::flush()
         {
-            Expect(fsync(m_handler) != -1, Throw(InternalError, "FileImplUnix::flush", "Failed to sync file descriptor"));
+            Expect(fsync(m_handler) != -1, Throw(InternalError, "Failed to sync file descriptor"));
         }
 
         DateTime FileImplUnix::getCreationDate() const

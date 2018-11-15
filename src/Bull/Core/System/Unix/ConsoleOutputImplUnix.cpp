@@ -59,14 +59,14 @@ namespace Bull
         {
             ssize_t written = ::write(STDOUT_FILENO, bytes.getBuffer(), bytes.getCapacity());
 
-            Expect(written != -1, Throw(InternalError, "ConsoleOutputImplUnix::write", "Failed to write buffer in stdout"));
+            Expect(written != -1, Throw(InternalError, "Failed to write buffer in stdout"));
 
             return written;
         }
 
         void ConsoleOutputImplUnix::flush()
         {
-            Expect(fflush(stdout) != -1, Throw(InternalError, "ConsoleOutputImplUnix::flush", "Failed to flush stdout"));
+            Expect(fflush(stdout) != -1, Throw(InternalError, "Failed to flush stdout"));
         }
 
         void ConsoleOutputImplUnix::clear()
