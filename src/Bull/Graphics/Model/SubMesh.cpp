@@ -4,9 +4,10 @@
 
 namespace Bull
 {
-    SubMesh::SubMesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
+    SubMesh::SubMesh(RenderPrimitive primitive) :
+        m_primitive(primitive)
     {
-        create(vertices, indices);
+        /// Nothing
     }
 
     void SubMesh::create(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
@@ -22,10 +23,10 @@ namespace Bull
         });
     }
 
-    void SubMesh::render(RenderPrimitive primitive) const
+    void SubMesh::render() const
     {
-        m_vao.runBound([this, primitive](){
-            Drawer::drawElements(primitive, m_indices.getCapacity(), m_indices.getDataType());
+        m_vao.runBound([this](){
+            Drawer::drawElements(m_primitive, m_indices.getCapacity(), m_indices.getDataType());
         });
     }
 }

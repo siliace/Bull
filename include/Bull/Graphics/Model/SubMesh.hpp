@@ -14,18 +14,12 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
-         *
-         */
-        SubMesh() = default;
-
         /*! \brief Constructor
          *
-         * \param vertices
-         * \param indices
+         * \param primitive The RenderPrimitive to use to render the SubMesh
          *
          */
-        SubMesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+        explicit SubMesh(RenderPrimitive primitive = RenderPrimitive_Triangles);
 
         /*! \brief Constructor by movement semantic
          *
@@ -45,8 +39,8 @@ namespace Bull
 
         /*! \brief Create the SubMesh
          *
-         * \param vertices
-         * \param indices
+         * \param vertices Vertices of the SubMesh
+         * \param indices  Indices of the SubMesh
          *
          */
         void create(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
@@ -56,13 +50,14 @@ namespace Bull
          * \param primitive The RenderPrimitive to use to render the SubMesh
          *
          */
-        void render(RenderPrimitive primitive) const;
+        void render() const;
 
     private:
 
         VertexArrayObject m_vao;
         IndexBuffer       m_indices;
         ArrayBuffer       m_vertices;
+        RenderPrimitive   m_primitive;
     };
 }
 

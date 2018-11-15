@@ -9,14 +9,14 @@ namespace Bull
         /// Nothing
     }
 
-    void Mesh::addChild(Mesh&& mesh)
+    void Mesh::addChild(const Mesh& mesh)
     {
-        m_children.emplace_back(std::move(mesh));
+        m_children.push_back(mesh);
     }
 
-    void Mesh::addSubMesh(SubMesh&& subMesh)
+    void Mesh::addSubMesh(const std::shared_ptr<SubMesh>& subMesh)
     {
-        m_subMeshes.emplace_back(std::move(subMesh));
+        m_subMeshes.push_back(subMesh);
     }
 
     bool Mesh::isValid() const
@@ -24,20 +24,20 @@ namespace Bull
         return !m_children.empty() || !m_subMeshes.empty();
     }
 
-    void Mesh::render(const Shader& shader, const Matrix4F& modelMatrix, RenderPrimitive renderPrimitive) const
+    void Mesh::render(const Shader& shader, const Matrix4F& modelMatrix) const
     {
         Matrix4F meshModelMatrix = modelMatrix * m_localModelMatrix;
 
         for(const Mesh& child : m_children)
         {
-            child.render(shader, meshModelMatrix, renderPrimitive);
+            child.render(shader, meshModelMatrix);
         }
 
         shader.setUniformMatrix("model", meshModelMatrix);
 
-        for(const SubMesh& subMesh : m_subMeshes)
+        for(const std::shared_ptr<SubMesh>& subMesh : m_subMeshes)
         {
-            subMesh.render(renderPrimitive);
+            subMesh->render();
         }
     }
 }

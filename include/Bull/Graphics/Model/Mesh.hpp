@@ -1,13 +1,15 @@
 #ifndef BULL_GRAPHICS_MODEL_MESH_HPP
 #define BULL_GRAPHICS_MODEL_MESH_HPP
 
+#include <memory>
+
 #include <Bull/Graphics/Model/SubMesh.hpp>
 
 #include <Bull/Render/Shader/Shader.hpp>
 
 namespace Bull
 {
-    class BULL_GRAPHICS_API Mesh : public NonCopyable
+    class BULL_GRAPHICS_API Mesh
     {
     public:
 
@@ -19,35 +21,19 @@ namespace Bull
          */
         explicit Mesh(const Mesh* parent = nullptr, const Matrix4F& localModelMatrix = Matrix4F::Identity);
 
-        /*! \brief Constructor by movement semantic
-         *
-         * \param mesh The Mesh to move
-         *
-         */
-        Mesh(Mesh&& mesh) noexcept = default;
-
-        /*! \param Assignment operator by movement semantic
-         *
-         * \param mesh The Mesh to move
-         *
-         * \return This
-         *
-         */
-        Mesh& operator=(Mesh&& mesh) noexcept = default;
-
         /*! \brief Add a child Mesh to the Mesh
          *
          * \param mesh The child Mesh
          *
          */
-        void addChild(Mesh&& mesh);
+        void addChild(const Mesh& mesh);
 
         /*! \brief Add a SubMesh to the Mesh
          *
          * \param subMesh The SubMesh
          *
          */
-        void addSubMesh(SubMesh&& subMesh);
+        void addSubMesh(const std::shared_ptr<SubMesh>& subMesh);
 
         /*! \brief Tell whether the Mesh is valid
          *
@@ -60,12 +46,11 @@ namespace Bull
 
         /*! \brief Render the Mesh thought a Shader
          *
-         * \param shader          The Shader
-         * \param modelMatrix     The model matrix of the parent Mesh
-         * \param renderPrimitive The RenderPrimitive to use to render the mesh
+         * \param shader      The Shader
+         * \param modelMatrix The model matrix of the parent Mesh
          *
          */
-        void render(const Shader& shader, const Matrix4F& modelMatrix, RenderPrimitive renderPrimitive) const;
+        void render(const Shader& shader, const Matrix4F& modelMatrix) const;
 
         /*! \brief Tell whether the Mesh is a root
          *
@@ -79,9 +64,9 @@ namespace Bull
             return m_parent == nullptr;
         }
 
-        /*! \brief
+        /*! \brief Set the name of the Mesh
          *
-         * \param name
+         * \param name The name
          *
          */
         inline void setName(const String& name)
@@ -89,9 +74,9 @@ namespace Bull
             m_name = name;
         }
 
-        /*! \brief
+        /*! \brief Get the name of the Mesh
          *
-         * \return
+         * \return The name
          *
          */
         inline const String& getName() const
@@ -99,9 +84,9 @@ namespace Bull
             return m_name;
         }
 
-        /*! \brief
+        /*! \brief Get the parent Mesh
          *
-         * \return
+         * \return The parent
          *
          */
         inline const Mesh* getParent() const
@@ -109,9 +94,9 @@ namespace Bull
             return m_parent;
         }
 
-        /*! \brief
+        /*! \brief Set the local model matrix of the Mesh
          *
-         * \param localModelMatrix
+         * \param localModelMatrix The matrix
          *
          */
         inline void setLocalModelMatrix(const Matrix4F& localModelMatrix)
@@ -119,9 +104,9 @@ namespace Bull
             m_localModelMatrix = localModelMatrix;
         }
 
-        /*! \brief
+        /*! \brief Get the local model matrix of the Mesh
          *
-         * \return
+         * \return The matrix
          *
          */
         inline const Matrix4F& getLocalModelMatrix() const
@@ -131,11 +116,11 @@ namespace Bull
 
     private:
 
-        String               m_name;
-        const Mesh*          m_parent;
-        std::vector<Mesh>    m_children;
-        std::vector<SubMesh> m_subMeshes;
-        Matrix4F             m_localModelMatrix;
+        String                                m_name;
+        const Mesh*                           m_parent;
+        std::vector<Mesh>                     m_children;
+        std::vector<std::shared_ptr<SubMesh>> m_subMeshes;
+        Matrix4F                              m_localModelMatrix;
     };
 }
 

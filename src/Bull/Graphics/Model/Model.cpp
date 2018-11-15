@@ -12,6 +12,6 @@ namespace Bull
     {
         shader.bind();
 
-        m_mesh->render(shader, getModelMatrix(), RenderPrimitive_Triangles);
+        m_mesh->render(shader, getModelMatrix());
     }
 }
