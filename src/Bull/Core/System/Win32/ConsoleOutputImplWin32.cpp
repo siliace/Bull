@@ -84,7 +84,7 @@ namespace Bull
         {
             std::size_t written;
 
-            Expect(WriteConsole(m_handler, bytes.getBuffer(), bytes.getCapacity(), reinterpret_cast<LPDWORD>(&written), nullptr), Throw(Win32Error, "ConsoleOutputImplWin32::clear", "Failed to write into console"));
+            Expect(WriteConsole(m_handler, bytes.getBuffer(), bytes.getCapacity(), reinterpret_cast<LPDWORD>(&written), nullptr), Throw(Win32Error, "Failed to write into console"));
 
             return written;
         }
@@ -99,15 +99,15 @@ namespace Bull
             CONSOLE_SCREEN_BUFFER_INFO info;
             COORD                      screen = {0, 0};
 
-            Expect(GetConsoleScreenBufferInfo(m_handler, &info), Throw(Win32Error, "ConsoleOutputImplWin32::clear", "Failed to get console info"));
+            Expect(GetConsoleScreenBufferInfo(m_handler, &info), Throw(Win32Error, "Failed to get console info"));
 
             DWORD consoleSize = info.dwSize.X * info.dwSize.Y;
 
-            Expect(FillConsoleOutputCharacter(m_handler, ' ', consoleSize, screen, nullptr), Throw(Win32Error, "ConsoleOutputImplWin32::clear", "Failed to fill console with blanks"));
+            Expect(FillConsoleOutputCharacter(m_handler, ' ', consoleSize, screen, nullptr), Throw(Win32Error, "Failed to fill console with blanks"));
 
-            Expect(GetConsoleScreenBufferInfo(m_handler, &info), Throw(Win32Error, "ConsoleOutputImplWin32::clear", "Failed to get console info"));
+            Expect(GetConsoleScreenBufferInfo(m_handler, &info), Throw(Win32Error, "Failed to get console info"));
 
-            Expect(FillConsoleOutputAttribute(m_handler, info.wAttributes, consoleSize, screen, nullptr), Throw(Win32Error, "ConsoleOutputImplWin32::clear", "Failed to set console attributes"));
+            Expect(FillConsoleOutputAttribute(m_handler, info.wAttributes, consoleSize, screen, nullptr), Throw(Win32Error, "Failed to set console attributes"));
 
             SetConsoleCursorPosition(m_handler, screen);
         }

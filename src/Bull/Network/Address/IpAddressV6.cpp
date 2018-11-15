@@ -16,7 +16,7 @@ namespace Bull
     IpAddressV6::IpAddressV6(const ByteArray& bytes) :
         IpAddress(16, true)
     {
-        Expect(bytes.getCapacity() == 16, Throw(InvalidParameter, "IpAddressV6::IpAddressV6", "Invalid buffer size"));
+        Expect(bytes.getCapacity() == 16, Throw(InvalidParameter, "Invalid buffer size"));
 
         m_bytes = bytes;
     }

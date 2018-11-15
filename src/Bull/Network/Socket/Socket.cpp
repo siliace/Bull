@@ -17,21 +17,21 @@ namespace Bull
 
     void Socket::enableBlockingMode(bool enable)
     {
-        Expect(isValid(), Throw(LogicError, "Socket::enableBlockingMode", "Invalid Socket"));
+        Expect(isValid(), Throw(LogicError, "Invalid Socket"));
 
         m_impl->enableBlockingMode(enable);
     }
 
     bool Socket::isEnableBlockingMode() const
     {
-        Expect(isValid(), Throw(LogicError, "Socket::isEnableBlockingMode", "Invalid Socket"));
+        Expect(isValid(), Throw(LogicError, "Invalid Socket"));
 
         return m_impl->isEnableBlockingMode();
     }
 
     std::size_t Socket::getPendingLength() const
     {
-        Expect(isValid(), Throw(LogicError, "Socket::getPendingLength", "Invalid Socket"));
+        Expect(isValid(), Throw(LogicError, "Invalid Socket"));
 
         return m_impl->getPendingLength();
     }
@@ -89,7 +89,7 @@ namespace Bull
 
     SocketHandler Socket::getHandler() const
     {
-        Expect(isValid(), Throw(LogicError, "Socket::getHandler", "Invalid Socket"));
+        Expect(isValid(), Throw(LogicError, "Invalid Socket"));
 
         return m_impl->getHandler();
     }

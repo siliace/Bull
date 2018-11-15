@@ -33,7 +33,7 @@ namespace Bull
 
         void FileImplUnix::copy(const Path& path, const Path& newPath)
         {
-            Throw(LackOfImplementation, "FileImplUnix::copy", "Unimplemented method");
+            Throw(LackOfImplementation, "Unimplemented method");
         }
 
         void FileImplUnix::remove(const Path& path)
@@ -108,7 +108,7 @@ namespace Bull
 
         DateTime FileImplUnix::getCreationDate() const
         {
-            Throw(UnsupportedOperation, "FileImplUnix::getCreationDate", "Creation date is not supported on your system");
+            Throw(UnsupportedOperation, "Creation date is not supported on your system");
         }
 
         DateTime FileImplUnix::getLastAccessDate() const

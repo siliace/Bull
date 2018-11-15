@@ -20,21 +20,21 @@ namespace Bull
             
             if(flags == -1)
             {
-                Throw(InternalError, "SocketImplUnix::enableBlockingMode", "Failed to get socket flags");
+                Throw(InternalError, "Failed to get socket flags");
             }
 
             if(enable && !m_blocking)
             {
                 if(fcntl(getHandler(), F_SETFL, flags & ~O_NONBLOCK) == -1)
                 {
-                    Throw(InternalError, "SocketImplUnix::enableBlockingMode", "Failed to enable blocking mode");
+                    Throw(InternalError, "Failed to enable blocking mode");
                 }
             }
             else if(!enable && m_blocking)
             {
                 if(fcntl(getHandler(), F_SETFL, flags | O_NONBLOCK) == -1)
                 {
-                    Throw(InternalError, "SocketImplUnix::enableBlockingMode", "Failed to disable blocking mode");
+                    Throw(InternalError, "Failed to disable blocking mode");
                 }
             }
 
@@ -52,7 +52,7 @@ namespace Bull
 
             if(ioctl(getHandler(), FIONREAD, &pending) == -1)
             {
-                Throw(InternalError, "SocketImplUnix::getPendingLength", "Failed to perform IO operation on socket");
+                Throw(InternalError, "Failed to perform IO operation on socket");
             }
 
             return pending;

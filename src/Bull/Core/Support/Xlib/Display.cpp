@@ -14,7 +14,7 @@ namespace Bull
 
             if(!m_display)
             {
-                Throw(InternalError, "Display::Display", "Failed to open display");
+                Throw(InternalError, "Failed to open display");
             }
         }
 

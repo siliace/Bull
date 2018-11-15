@@ -26,7 +26,7 @@ namespace Bull
 
             if(ioctlsocket(getHandler(), FIONBIO, &blocking) != NO_ERROR)
             {
-                Throw(InternalError, "SocketImplWin32::enableBlockingMode", "Failed to switch blocking mode");
+                Throw(InternalError, "Failed to switch blocking mode");
             }
         }
 
@@ -41,7 +41,7 @@ namespace Bull
 
             if(ioctlsocket(getHandler(), FIONREAD, &length) != NO_ERROR)
             {
-                Throw(InternalError, "SocketImplWin32::getPendingLength", "Failed to get pending length");
+                Throw(InternalError, "Failed to get pending length");
             }
 
             return length;

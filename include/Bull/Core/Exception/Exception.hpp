@@ -22,7 +22,7 @@ if(!(BooleanExpression))                          \
 }                                                 \
 
 
-#define Throw(Exception, Source, Description) Bull::prv::__throw<Exception>(__FILE__, __LINE__, Source, Description)
+#define Throw(Exception, Description) Bull::prv::__throw<Exception>(__FILE__, __LINE__, __PRETTY_FUNCTION__, Description)
 
 #define DeclareException(ExceptionName) DeclareExceptionFrom(ExceptionName, Bull::Exception)
 

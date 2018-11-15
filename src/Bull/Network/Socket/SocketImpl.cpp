@@ -56,7 +56,7 @@ namespace Bull
 
         void SocketImpl::create(SocketHandler handler)
         {
-            Expect(handler != SocketImpl::getInvalidSocket(), Throw(InvalidParameter, "SocketImpl::create", "Invalid socket handler"));
+            Expect(handler != SocketImpl::getInvalidSocket(), Throw(InvalidParameter, "Invalid socket handler"));
 
             m_handler = handler;
         }

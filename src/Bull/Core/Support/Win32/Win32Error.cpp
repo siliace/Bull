@@ -18,7 +18,7 @@ namespace Bull
 
             if(!error)
             {
-                Throw(LogicError, "Win32Error::createDescription", "No error occurred");
+                Throw(LogicError, "No error occurred");
             }
 
             char* messageBuffer = nullptr;

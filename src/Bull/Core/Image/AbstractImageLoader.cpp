@@ -53,7 +53,7 @@ namespace Bull
 
         stbi_uc* buffer = stbi_load_from_callbacks(&callbacks, &stream, &size.width, &size.height, &channels, stbi::channels(pixelFormat));
 
-        Expect(buffer, Throw(InternalError, "ImageLoader::loadFromStream", "Failed to load image: " + getErrorMessage()));
+        Expect(buffer, Throw(InternalError, "Failed to load image: " + getErrorMessage()));
 
         ByteArray pixels = ByteArray::memoryCopy(buffer, PixelFormatUtils::getImageByteCount(size, pixelFormat));
 

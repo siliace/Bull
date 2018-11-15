@@ -8,7 +8,7 @@ namespace Bull
     {
         if(WSAStartup(MAKEWORD(2, 2), &m_data) != 0)
         {
-            Throw(InternalError, "WsaService::WsaService", "Failed to initialize Wsa Service");
+            Throw(InternalError, "Failed to initialize Wsa Service");
         }
     }
 

@@ -17,10 +17,7 @@ namespace Bull
                                         FILE_ATTRIBUTE_NORMAL,
                                         nullptr);
 
-            Expect(
-                    handler != INVALID_HANDLE_VALUE,
-                    Throw(Win32Error, "FileImplWin32::create", "Failed to create file " + path.toString())
-            );
+            Expect(handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "Failed to create file " + path.toString()));
         }
 
         bool FileImplWin32::exists(const Path& name)
@@ -32,26 +29,17 @@ namespace Bull
 
         void FileImplWin32::copy(const Path& path, const Path& newPath)
         {
-            Expect(
-                    CopyFile(path.toString().getBuffer(), newPath.toString().getBuffer(), true),
-                    Throw(Win32Error, "FileImplWin32::copy", "Failed to copy file " + path.toString())
-            );
+            Expect(CopyFile(path.toString().getBuffer(), newPath.toString().getBuffer(), true), Throw(Win32Error, "Failed to copy file " + path.toString()));
         }
 
         void FileImplWin32::rename(const Path& path, const Path& newPath)
         {
-            Expect(
-                    MoveFile(path.toString().getBuffer(), newPath.toString().getBuffer()),
-                    Throw(Win32Error, "FileImplWin32::rename", "Failed to rename file " + path.toString())
-            );
+            Expect(MoveFile(path.toString().getBuffer(), newPath.toString().getBuffer()), Throw(Win32Error, "Failed to rename file " + path.toString()));
         }
 
         void FileImplWin32::remove(const Path& path)
         {
-            Expect(
-                    DeleteFile(path.toString().getBuffer()),
-                    Throw(Win32Error, "FileImplWin32::remove", "Failed to remove file " + path.toString())
-            );
+            Expect(DeleteFile(path.toString().getBuffer()), Throw(Win32Error, "Failed to remove file " + path.toString()));
         }
 
         FileImplWin32::FileImplWin32(const Path& path, Uint32 mode)
@@ -102,10 +90,7 @@ namespace Bull
                                    FILE_ATTRIBUTE_NORMAL,
                                    nullptr);
 
-            Expect(
-                    m_handler != INVALID_HANDLE_VALUE,
-                    Throw(Win32Error, "FileImplWin32::FileImplWin32", "Failed to open file " + path.toString())
-            );
+            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "Failed to open file " + path.toString()));
         }
 
         FileImplWin32::~FileImplWin32()
@@ -155,10 +140,7 @@ namespace Bull
         {
             FILETIME date;
 
-            Expect(
-                    GetFileTime(m_handler, &date, nullptr, nullptr),
-                    Throw(Win32Error, "FileImplWin32::getCreationDate", "Failed to get file creation date")
-            );
+            Expect(GetFileTime(m_handler, &date, nullptr, nullptr), Throw(Win32Error, "Failed to get file creation date"));
 
             SYSTEMTIME sysDate;
             FileTimeToSystemTime(&date, &sysDate);
@@ -170,10 +152,7 @@ namespace Bull
         {
             FILETIME date;
 
-            Expect(
-                    GetFileTime(m_handler, &date, nullptr, nullptr),
-                    Throw(Win32Error, "FileImplWin32::getLastAccessDate", "Failed to get file last access date")
-            );
+            Expect(GetFileTime(m_handler, &date, nullptr, nullptr), Throw(Win32Error, "Failed to get file last access date"));
 
             SYSTEMTIME sysDate;
             FileTimeToSystemTime(&date, &sysDate);
@@ -185,10 +164,7 @@ namespace Bull
         {
             FILETIME date;
 
-            Expect(
-                    GetFileTime(m_handler, &date, nullptr, nullptr),
-                    Throw(Win32Error, "FileImplWin32::getLastWriteDate", "Failed to get file last write date")
-            );
+            Expect(GetFileTime(m_handler, &date, nullptr, nullptr), Throw(Win32Error, "Failed to get file last write date"));
 
             SYSTEMTIME sysDate;
             FileTimeToSystemTime(&date, &sysDate);
@@ -201,10 +177,7 @@ namespace Bull
             LARGE_INTEGER zero = {0};
             LARGE_INTEGER position;
 
-            Expect(
-                    SetFilePointerEx(m_handler, zero, &position, FILE_CURRENT),
-                    Throw(Win32Error, "FileImplWin32::getCursor", "Failed to get file cursor")
-            );
+            Expect(SetFilePointerEx(m_handler, zero, &position, FILE_CURRENT), Throw(Win32Error, "Failed to get file cursor"));
 
             return static_cast<std::size_t>(position.QuadPart);
         }
@@ -215,10 +188,7 @@ namespace Bull
             LARGE_INTEGER position;
             distance.QuadPart = offset;
 
-            Expect(
-                    SetFilePointerEx(m_handler, distance, &position, FILE_CURRENT),
-                    Throw(Win32Error, "FileImplWin32::moveCursor", "Failed to move file cursor")
-            );
+            Expect(SetFilePointerEx(m_handler, distance, &position, FILE_CURRENT), Throw(Win32Error, "Failed to move file cursor"));
 
             return position.QuadPart;
         }
@@ -229,10 +199,7 @@ namespace Bull
             LARGE_INTEGER position;
             distance.QuadPart = offset;
 
-            Expect(
-                    SetFilePointerEx(m_handler, distance, &position, FILE_BEGIN),
-                    Throw(Win32Error, "FileImplWin32::setCursor", "Failed to set file cursor")
-            );
+            Expect(SetFilePointerEx(m_handler, distance, &position, FILE_BEGIN), Throw(Win32Error, "Failed to set file cursor"));
 
             return position.QuadPart;
         }

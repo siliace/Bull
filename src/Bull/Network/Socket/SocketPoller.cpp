@@ -47,7 +47,7 @@ namespace Bull
 
     bool SocketPoller::isAdded(const Socket& socket)
     {
-        Expect(socket.isValid(), Throw(InvalidParameter, "SocketPoller::add", "Invalid Socket"));
+        Expect(socket.isValid(), Throw(InvalidParameter, "Invalid Socket"));
 
         return m_impl->isAdded(socket.getHandler());
     }

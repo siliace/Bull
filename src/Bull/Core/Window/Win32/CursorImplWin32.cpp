@@ -50,7 +50,7 @@ namespace Bull
 
             if(!m_handler)
             {
-                Throw(InternalError, "CursorImplWin32::create", "Failed to create cursor");
+                Throw(InternalError, "Failed to create cursor");
             }
         }
 
@@ -89,7 +89,7 @@ namespace Bull
 
             if(!color)
             {
-                Throw(InternalError, "CursorImplWin32::create", "Failed to create color bitmaps");
+                Throw(InternalError, "Failed to create color bitmaps");
             }
 
             std::memcpy(bitmap, cursor.getPixels().getBuffer(), size.width * size.height * 4);
@@ -101,7 +101,7 @@ namespace Bull
             {
                 DeleteObject(color);
 
-                Throw(InternalError, "CursorImplWin32::create", "Failed to create mask bitmaps");
+                Throw(InternalError, "Failed to create mask bitmaps");
             }
 
             ICONINFO iconInfo;
@@ -119,7 +119,7 @@ namespace Bull
             DeleteObject(mask);
             DeleteObject(color);
 
-            Expect(m_handler, Throw(InternalError, "CursorImplWin32::create", "Failed to create cursor from Image"));
+            Expect(m_handler, Throw(InternalError, "Failed to create cursor from Image"));
         }
 
         CursorHandler CursorImplWin32::getSystemHandler() const

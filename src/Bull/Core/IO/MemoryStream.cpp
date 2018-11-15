@@ -21,7 +21,7 @@ namespace Bull
 
     void MemoryStream::open(const void* data, std::size_t length)
     {
-        Expect(data && length, Throw(InvalidParameter, "MemoryStream::open", "Invalid buffer"));
+        Expect(data && length, Throw(InvalidParameter, "Invalid buffer"));
 
         m_data = static_cast<const unsigned char*>(data);
         m_size = length;

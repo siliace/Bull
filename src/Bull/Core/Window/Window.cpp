@@ -312,8 +312,8 @@ namespace Bull
 
     void Window::enableFullscreen(bool fullscreen)
     {
-        Expect(m_impl, Throw(LogicError, "Window::enableFullscreen", "The Window is not open"));
-        Expect(!s_fullscreen && fullscreen || s_fullscreen == this && !fullscreen, Throw(LogicError, "Window::enableFullscreen", "Another Window is already in fullscreen"));
+        Expect(m_impl, Throw(LogicError, "The Window is not open"));
+        Expect(!s_fullscreen && fullscreen || s_fullscreen == this && !fullscreen, Throw(LogicError, "Another Window is already in fullscreen"));
 
         m_impl->switchFullscreen(fullscreen);
 

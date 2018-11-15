@@ -33,7 +33,7 @@ namespace Bull
             winClass.lpszClassName = windowClassName;
             winClass.hIconSm       = nullptr;
 
-            Expect(RegisterClassExW(&winClass) != 0, Throw(Win32Error, "WindowImplWin32::registerWindowClass", "Failed to register window class"));
+            Expect(RegisterClassExW(&winClass) != 0, Throw(Win32Error, "Failed to register window class"));
         }
 
         LRESULT CALLBACK WindowImplWin32::globalEvent(HWND handler, UINT message, WPARAM wParam, LPARAM lParam)
@@ -262,7 +262,7 @@ namespace Bull
                                         instance,
                                         this);
 
-            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "WindowImplWin32::WindowImplWin32", "Failed to create window"));
+            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "Failed to create window"));
 
             UpdateWindow(m_handler);
 
@@ -493,7 +493,7 @@ namespace Bull
 
             m_icon = CreateIcon(instance, icon.getSize().width, icon.getSize().height, 1, 32, nullptr, pixels.getBuffer());
 
-            Expect(m_icon, Throw(Win32Error, "WindowImplWin32::setIcon", "Failed to set window's icon"));
+            Expect(m_icon, Throw(Win32Error, "Failed to set window's icon"));
 
             SendMessageW(m_handler, WM_SETICON, ICON_BIG,   (LPARAM)m_icon);
             SendMessageW(m_handler, WM_SETICON, ICON_SMALL, (LPARAM)m_icon);

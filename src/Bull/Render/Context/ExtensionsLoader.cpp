@@ -252,14 +252,14 @@ namespace Bull
 
         void ExtensionsLoader::require(Extension& extension)
         {
-            Expect(!m_loadedExtensions, Throw(LogicError, "ExtensionsLoader::require", "Extensions already loaded"));
+            Expect(!m_loadedExtensions, Throw(LogicError, "Extensions already loaded"));
 
             m_extensions.emplace_back(extension);
         }
 
         void ExtensionsLoader::loadExtensions(SurfaceHandler surface)
         {
-            Expect(!m_loadedExtensions, Throw(LogicError, "ExtensionsLoader::loadExtensions", "Extensions already loaded"));
+            Expect(!m_loadedExtensions, Throw(LogicError, "Extensions already loaded"));
 
             Log& log = Log::getInstance();
 

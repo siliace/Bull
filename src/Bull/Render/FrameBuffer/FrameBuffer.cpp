@@ -63,7 +63,7 @@ namespace Bull
         {
             auto it = getNextColorAttachment();
 
-            Expect(it != m_colorAttachmentTable.end(), Throw(LogicError, "FrameBuffer::attach", "No more color sampler available in the framebuffer"));
+            Expect(it != m_colorAttachmentTable.end(), Throw(LogicError, "No more color sampler available in the framebuffer"));
 
             target += it->first;
             it->second = false;

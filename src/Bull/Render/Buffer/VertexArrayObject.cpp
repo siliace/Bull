@@ -10,7 +10,7 @@ namespace Bull
         gl::genVertexArrays(1, &m_vao);
         gl::bindVertexArray(m_vao);
 
-        Expect(gl::isVertexArray(m_vao), Throw(OpenGLHandlerError, "VertexArrayObject::VertexArrayObject", "Failed to create VAO"));
+        Expect(gl::isVertexArray(m_vao), Throw(OpenGLHandlerError, "Failed to create VAO"));
     }
 
     VertexArrayObject::VertexArrayObject(VertexArrayObject&& right) noexcept

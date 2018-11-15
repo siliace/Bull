@@ -41,8 +41,8 @@ namespace Bull
 
     Date Date::make(unsigned int year, DateMonth month, unsigned int day)
     {
-        Expect(month <= 12, Throw(InvalidParameter, "Date::make", "Invalid month"));
-        Expect(day <= 31, Throw(InvalidParameter, "Date::make", "Invalid month"));
+        Expect(month <= 12, Throw(InvalidParameter, "Invalid month"));
+        Expect(day <= 31, Throw(InvalidParameter, "Invalid month"));
 
         return {year, month, day};
     }

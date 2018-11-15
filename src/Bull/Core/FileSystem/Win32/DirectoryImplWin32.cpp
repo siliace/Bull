@@ -10,7 +10,7 @@ namespace Bull
         {
             Expect(
                     CreateDirectory(path.toString().getBuffer(), nullptr),
-                    Throw(Win32Error, "DirectoryImplWin32::create", "Failed to create the directory " + path.toString())
+                    Throw(Win32Error, "Failed to create the directory " + path.toString())
             );
         }
 
@@ -25,7 +25,7 @@ namespace Bull
         {
             Expect(
                 MoveFile(path.toString().getBuffer(), newPath.toString().getBuffer()),
-                Throw(Win32Error, "DirectoryImplWin32::rename", "Failed to rename the directory " + path.toString())
+                Throw(Win32Error, "Failed to rename the directory " + path.toString())
             );
         }
 
@@ -33,7 +33,7 @@ namespace Bull
         {
             Expect(
                     RemoveDirectory(path.toString().getBuffer()),
-                    Throw(Win32Error, "DirectoryImplWin32::remove", "Failed to remove the directory " + path.toString())
+                    Throw(Win32Error, "Failed to remove the directory " + path.toString())
             );
         }
 
@@ -44,7 +44,7 @@ namespace Bull
 
             m_handler = FindFirstFile(base.getBuffer(), &m_result);
 
-            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "DirectoryImplWin32::DirectoryImplWin32", "Failed to open directory " + m_path.toString()));
+            Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "Failed to open directory " + m_path.toString()));
         }
 
         DirectoryImplWin32::~DirectoryImplWin32()

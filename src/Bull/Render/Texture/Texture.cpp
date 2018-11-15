@@ -71,7 +71,7 @@ namespace Bull
 
     void Texture::bind(const Texture& texture)
     {
-        Expect(texture.isValid(), Throw(InvalidParameter, "Texture::bind", "Invalid texture"));
+        Expect(texture.isValid(), Throw(InvalidParameter, "Invalid texture"));
 
         gl::bindTexture(GL_TEXTURE_2D, texture.getSystemHandle());
     }
@@ -125,13 +125,13 @@ namespace Bull
 
     void Texture::create(const Size& size, PixelFormat pixelFormat)
     {
-        Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Texture::create", "Invalid texture size"));
+        Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Invalid texture size"));
 
         if(!isValid())
         {
             gl::genTextures(1, &m_handle);
 
-            Expect(m_handle, Throw(InternalError, "Texture::create", "Failed to create texture"));
+            Expect(m_handle, Throw(InternalError, "Failed to create texture"));
         }
 
         gl::bindTexture(GL_TEXTURE_2D, m_handle);
@@ -140,7 +140,7 @@ namespace Bull
 
     void Texture::setPixels(unsigned int xOffset, unsigned int yOffset, const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
     {
-        Expect(isValid(), Throw(LogicError, "Texture::setPixels", "Invalid texture"));
+        Expect(isValid(), Throw(LogicError, "Invalid texture"));
 
         gl::bindTexture(GL_TEXTURE_2D, m_handle);
         gl::texSubImage2D(GL_TEXTURE_2D, 0, xOffset, yOffset, size.width, size.height, convertFormat(pixelFormat), convertDataType(pixelFormat), pixels.getBuffer());

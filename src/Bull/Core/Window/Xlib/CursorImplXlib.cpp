@@ -56,7 +56,7 @@ namespace Bull
 
         void CursorImplXlib::create(const Image& cursor, const Size& hotSpot)
         {
-            Throw(LackOfImplementation, "CursorImplXlib::create", "Unimplemented method");
+            Throw(LackOfImplementation, "Unimplemented method");
         }
 
         CursorHandler CursorImplXlib::getSystemHandler() const

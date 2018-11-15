@@ -15,7 +15,7 @@ namespace Bull
         {
             wglGetExtensionsStringARB = reinterpret_cast<const char* (WINAPI*)(HDC)>(GlContext::getFunction("wglGetExtensionsStringARB"));
 
-            Expect(wglGetExtensionsStringARB, Throw(InternalError, "WglExtensionsLoader::getExtensions", "Failed to load wglGetExtensionsStringARB function"));
+            Expect(wglGetExtensionsStringARB, Throw(InternalError, "Failed to load wglGetExtensionsStringARB function"));
 
             return String(wglGetExtensionsStringARB(handler)).explode(' ');
         }

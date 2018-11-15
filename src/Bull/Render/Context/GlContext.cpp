@@ -48,7 +48,7 @@ namespace Bull
                     Uint8 major = realInternalSettings.major;
                     Uint8 minor = realInternalSettings.minor;
 
-                    Expect(major > 3 || major == 3 && minor >= 3, Throw(WrongOpenGLVersion, "getInternalContext", "Bull needs OpenGL 3.3 or higher to work"));
+                    Expect(major > 3 || major == 3 && minor >= 3, Throw(WrongOpenGLVersion, "Bull needs OpenGL 3.3 or higher to work"));
                 }
 
                 return *internal;

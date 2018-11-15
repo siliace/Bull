@@ -32,7 +32,7 @@ namespace Bull
             {
                 case AF_INET: return NetPort(ntohs(reinterpret_cast<const sockaddr_in*>(&m_addr)->sin_port));
                 case AF_INET6: return NetPort(ntohs(reinterpret_cast<const sockaddr_in6*>(&m_addr)->sin6_port));
-                default: Throw(InvalidParameter, "SockAddrBuffer::getPort", "Unsupported AF type");
+                default: Throw(InvalidParameter, "Unsupported AF type");
             }
         }
 
@@ -42,7 +42,7 @@ namespace Bull
             {
                 case AF_INET: return createFromSockAddrV4();
                 case AF_INET6: return createFromSockAddrV6();
-                default: Throw(InvalidParameter, "SockAddrBuffer::getIpAddress", "Unsupported AF type");
+                default: Throw(InvalidParameter, "Unsupported AF type");
             }
         }
 

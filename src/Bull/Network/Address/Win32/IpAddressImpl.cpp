@@ -21,7 +21,7 @@ namespace Bull
 
             error = getaddrinfo(hostname.getBuffer(), service.getBuffer(), &hints, &info);
 
-            Expect(error == 0, Throw(Win32Error, "IpAddressImpl::resolve", "Failed to resolve hostname " + hostname));
+            Expect(error == 0, Throw(Win32Error, "Failed to resolve hostname " + hostname));
 
             SockAddrBuffer buffer((*info->ai_addr), info->ai_addrlen);
             std::unique_ptr<IpAddress> address = buffer.getIpAddress();

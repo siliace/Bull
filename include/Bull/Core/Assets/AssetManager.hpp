@@ -78,7 +78,7 @@ namespace Bull
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
-            Expect(it != m_assets.end(), Throw(InvalidParameter, "AssetManager::find", "The manager does not contains any asset " + name));
+            Expect(it != m_assets.end(), Throw(InvalidParameter, "The manager does not contains any asset " + name));
 
             return m_assets.erase(it)->second;
         }
@@ -106,7 +106,7 @@ namespace Bull
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
-            Expect(it != m_assets.end(), Throw(InvalidParameter, "AssetManager::find", "The manager does not contains any asset " + name));
+            Expect(it != m_assets.end(), Throw(InvalidParameter, "The manager does not contains any asset " + name));
 
             return it->second;
         }

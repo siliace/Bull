@@ -7,17 +7,17 @@ namespace Bull
     {
         void ClipboardImpl::flush()
         {
-            Throw(UnsupportedOperation, "ClipboardImpl::flush", "Operation not implemented yet");
+            Throw(UnsupportedOperation, "Operation not implemented yet");
         }
 
         void ClipboardImpl::setContent(const String& content)
         {
-            Throw(UnsupportedOperation, "ClipboardImpl::setContent", "Operation not implemented yet");
+            Throw(UnsupportedOperation, "Operation not implemented yet");
         }
 
         String ClipboardImpl::getContent()
         {
-            Throw(UnsupportedOperation, "ClipboardImpl::getContent", "Operation not implemented yet");
+            Throw(UnsupportedOperation, "Operation not implemented yet");
         }
     }
 }

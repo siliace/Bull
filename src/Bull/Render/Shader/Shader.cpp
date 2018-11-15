@@ -23,7 +23,7 @@ namespace Bull
     Shader::Shader() :
         m_program(gl::createProgram())
     {
-        Expect(gl::isProgram(m_program), Throw(InternalError, "Shader::Shader", "Failed to create shader"));
+        Expect(gl::isProgram(m_program), Throw(InternalError, "Failed to create shader"));
     }
     
     Shader::Shader(Shader&& right) noexcept
@@ -45,15 +45,15 @@ namespace Bull
 
     void Shader::create(const ShaderBinary& shaderBinary) const
     {
-        Expect(shaderBinary.isValid(), Throw(InvalidParameter, "Shader::create", "Invalid shader binary"));
+        Expect(shaderBinary.isValid(), Throw(InvalidParameter, "Invalid shader binary"));
 
         gl::programBinary(m_program, shaderBinary.format, shaderBinary.content.getBuffer(), shaderBinary.content.getCapacity());
     }
 
     void Shader::attach(const ShaderStage& stage) const
     {
-        Expect(stage.isValid(), Throw(InvalidParameter, "Shader::attach", "Can't attach invalid ShaderStage"));
-        Expect(stage.isCompiled(), Throw(InvalidParameter, "Shader::attach", "Can't attach non compiled ShaderStage"));
+        Expect(stage.isValid(), Throw(InvalidParameter, "Can't attach invalid ShaderStage"));
+        Expect(stage.isCompiled(), Throw(InvalidParameter, "Can't attach non compiled ShaderStage"));
 
         gl::attachShader(m_program, stage.getSystemHandler());
     }
@@ -62,7 +62,7 @@ namespace Bull
     {
         gl::linkProgram(m_program);
 
-        Expect(isLinked(), Throw(InternalError, "Shader::link", "Failed to link shader"));
+        Expect(isLinked(), Throw(InternalError, "Failed to link shader"));
     }
 
     void Shader::bind() const
@@ -83,7 +83,7 @@ namespace Bull
         int location = getUniformLocation(name);
 
         #if defined BULL_SHADER_UNIFORM_STRICT
-        Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        Expect(location != -1, Throw(UniformVariableNotFound, "Uniform " + name + " not found"));
         #else
         if(location == -1)
         {
@@ -108,7 +108,7 @@ namespace Bull
         int location = getUniformLocation(name);
 
         #if defined BULL_SHADER_UNIFORM_STRICT
-        Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        Expect(location != -1, Throw(UniformVariableNotFound, "Uniform " + name + " not found"));
         #else
         if(location == -1)
         {
@@ -133,7 +133,7 @@ namespace Bull
         int location = getUniformLocation(name);
 
         #if defined BULL_SHADER_UNIFORM_STRICT
-        Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        Expect(location != -1, Throw(UniformVariableNotFound, "Uniform " + name + " not found"));
         #else
         if(location == -1)
         {
@@ -158,7 +158,7 @@ namespace Bull
         int location = getUniformLocation(name);
 
         #if defined BULL_SHADER_UNIFORM_STRICT
-        Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        Expect(location != -1, Throw(UniformVariableNotFound, "Uniform " + name + " not found"));
         #else
         if(location == -1)
         {
@@ -191,7 +191,7 @@ namespace Bull
         int location = getUniformLocation(name);
 
         #if defined BULL_SHADER_UNIFORM_STRICT
-        Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        Expect(location != -1, Throw(UniformVariableNotFound, "Uniform " + name + " not found"));
         #else
         if(location == -1)
         {
@@ -216,7 +216,7 @@ namespace Bull
         int location = getUniformLocation(name);
 
         #if defined BULL_SHADER_UNIFORM_STRICT
-        Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        Expect(location != -1, Throw(UniformVariableNotFound, "Uniform " + name + " not found"));
         #else
         if(location == -1)
         {
@@ -241,7 +241,7 @@ namespace Bull
         int location = getUniformLocation(name);
 
         #if defined BULL_SHADER_UNIFORM_STRICT
-        Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        Expect(location != -1, Throw(UniformVariableNotFound, "Uniform " + name + " not found"));
         #else
         if(location == -1)
         {
@@ -266,7 +266,7 @@ namespace Bull
         int location = getUniformLocation(name);
 
         #if defined BULL_SHADER_UNIFORM_STRICT
-        Expect(location != -1, Throw(UniformVariableNotFound, "Shader::setUniform", "Uniform " + name + " not found"));
+        Expect(location != -1, Throw(UniformVariableNotFound, "Uniform " + name + " not found"));
         #else
         if(location == -1)
         {
@@ -291,7 +291,7 @@ namespace Bull
         int length;
         ShaderBinary shaderBinary;
 
-        Expect(isLinked(), Throw(LogicError, "Shader::getBinary", "Cannot get binary from a non linked shader"));
+        Expect(isLinked(), Throw(LogicError, "Cannot get binary from a non linked shader"));
 
         gl::getProgramiv(m_program, GL_PROGRAM_BINARY_LENGTH, &length);
 
@@ -299,7 +299,7 @@ namespace Bull
 
         gl::getProgramBinary(getSystemHandler(), length, nullptr, &shaderBinary.format, &shaderBinary.content[0]);
 
-        Expect(shaderBinary.isValid(), Throw(InternalError, "Shader::getBinary", "Failed to download program binary"));
+        Expect(shaderBinary.isValid(), Throw(InternalError, "Failed to download program binary"));
 
         return shaderBinary;
     }

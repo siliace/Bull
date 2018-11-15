@@ -19,7 +19,7 @@ namespace Bull
 
     RangeCheck& RangeCheck::apply(std::size_t index)
     {
-        Expect(index < m_max, Throw(InvalidParameter, "RangeCheck::apply", "Index out of range, expected in range [0, " + StringUtils::number(index) + "["));
+        Expect(index < m_max, Throw(InvalidParameter, "Index out of range, expected in range [0, " + StringUtils::number(index) + "["));
 
         return (*this);
     }

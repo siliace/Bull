@@ -48,23 +48,23 @@ namespace Bull
         gl::genBuffers(1, &m_id);
         gl::bindBuffer(bufferTypeMapper[m_type], m_id);
 
-        Expect(gl::isBuffer(m_id), Throw(OpenGLHandlerError, "HardwareBuffer::create", "Failed to create buffer"));
+        Expect(gl::isBuffer(m_id), Throw(OpenGLHandlerError, "Failed to create buffer"));
 
         gl::bufferData(bufferTypeMapper[m_type], size, nullptr, bufferUsageMapper[usage]);
     }
 
     void HardwareBuffer::bind() const
     {
-        Expect(isValid(), Throw(LogicError, "HardwareBuffer::bind", "The buffer was not created"));
+        Expect(isValid(), Throw(LogicError, "The buffer was not created"));
 
         gl::bindBuffer(bufferTypeMapper[m_type], m_id);
     }
 
     void HardwareBuffer::fill(const void* data, std::size_t size, std::size_t offset)
     {
-        Expect(data && size, Throw(InvalidParameter, "HardwareBuffer::fill", "Invalid buffer"));
-        Expect(isValid(), Throw(LogicError, "HardwareBuffer::fill", "The buffer is not created"));
-        Expect(size + offset <= getCapacity(), Throw(InvalidParameter, "HardwareBuffer::fill", "Invalid buffer size"));
+        Expect(data && size, Throw(InvalidParameter, "Invalid buffer"));
+        Expect(isValid(), Throw(LogicError, "The buffer is not created"));
+        Expect(size + offset <= getCapacity(), Throw(InvalidParameter, "Invalid buffer size"));
 
         bind();
 
@@ -78,7 +78,7 @@ namespace Bull
         {
             unsigned char* ptr = reinterpret_cast<unsigned char*>(map());
 
-            Expect(ptr, Throw(InternalError, "HardwareBuffer::fill", "Failed to map HardwareBuffer"));
+            Expect(ptr, Throw(InternalError, "Failed to map HardwareBuffer"));
 
             std::memcpy(ptr + offset, data, size);
 

@@ -10,7 +10,7 @@ namespace Bull
         {
             int updated = WSAPoll(&sockets[0], static_cast<ULONG>(sockets.size()), timeout);
 
-            Expect(updated != SocketError, Throw(InternalError, "SocketPollerImplWin32::poll", "Failed to poll sockets"));
+            Expect(updated != SocketError, Throw(InternalError, "Failed to poll sockets"));
 
             return updated;
         }

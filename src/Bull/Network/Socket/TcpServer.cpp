@@ -43,8 +43,8 @@ namespace Bull
 
     void TcpServer::listen(NetPort port, const IpAddress& host, int backlog)
     {
-        Expect(host.isValid(), Throw(InvalidParameter, "TcpServer::listen", "Invalid IpAddress"));
-        Expect(port != NetPort_Any, Throw(InvalidParameter, "TcpServer::listen", "Invalid NetPort"));
+        Expect(host.isValid(), Throw(InvalidParameter, "Invalid IpAddress"));
+        Expect(port != NetPort_Any, Throw(InvalidParameter, "Invalid NetPort"));
 
         int ret;
 
@@ -54,11 +54,11 @@ namespace Bull
 
         ret = ::bind(getHandler(), buffer.getSockAddr(), buffer.getLength());
 
-        Expect(ret == 0, Throw(InternalError, "TcpServerImpl::bind", "Failed to bind the socket"));
+        Expect(ret == 0, Throw(InternalError, "Failed to bind the socket"));
 
         ret = ::listen(getHandler(), backlog);
 
-        Expect(ret == 0, Throw(InternalError, "TcpServerImpl::listen", "Failed to listen the port"));
+        Expect(ret == 0, Throw(InternalError, "Failed to listen the port"));
 
         m_port    = port;
         m_backlog = backlog;
@@ -71,7 +71,7 @@ namespace Bull
 
     TcpClient TcpServer::accept()
     {
-        Expect(isListening(), Throw(LogicError, "TcpServer::accept", "The TcpServer is not listening"));
+        Expect(isListening(), Throw(LogicError, "The TcpServer is not listening"));
 
         sockaddr addr;
         TcpClient client;
@@ -79,7 +79,7 @@ namespace Bull
 
         SocketHandler clientHandler = ::accept(getHandler(), &addr, &length);
 
-        Expect(clientHandler != prv::SocketImpl::getInvalidSocket(), Throw(InternalError, "TcpServerImpl::accept", "Failed to accept client"));
+        Expect(clientHandler != prv::SocketImpl::getInvalidSocket(), Throw(InternalError, "Failed to accept client"));
 
         prv::SockAddrBuffer buffer(addr, length);
 

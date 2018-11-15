@@ -49,7 +49,7 @@ namespace Bull
         m_type = type;
         m_id   = gl::createShader(shaderType[type]);
 
-        Expect(isValid(), Throw(InternalError, "ShaderStage::create", "Failed to create ShaderStage"));
+        Expect(isValid(), Throw(InternalError, "Failed to create ShaderStage"));
     }
 
     void ShaderStage::compile(const String& code)
@@ -61,7 +61,7 @@ namespace Bull
         gl::shaderSource(m_id, 1, &source, nullptr);
         gl::compileShader(m_id);
 
-        Expect(isCompiled(), Throw(InternalError, "ShaderStage::compile", "Failed to compile ShaderStage + (" + getErrorMessage() + ")"));
+        Expect(isCompiled(), Throw(InternalError, "Failed to compile ShaderStage + (" + getErrorMessage() + ")"));
 
         m_isCompiled = true;
     }

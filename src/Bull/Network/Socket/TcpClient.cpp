@@ -40,8 +40,8 @@ namespace Bull
 
     void TcpClient::connect(const IpAddress& address, NetPort port)
     {
-        Expect(address.isValid(), Throw(InvalidParameter, "TcpClient::connect", "Invalid IpAddress"));
-        Expect(port != NetPort_Any, Throw(InvalidParameter, "TcpClient::connect", "Invalid NetPort"));
+        Expect(address.isValid(), Throw(InvalidParameter, "Invalid IpAddress"));
+        Expect(port != NetPort_Any, Throw(InvalidParameter, "Invalid NetPort"));
 
         Socket::create(address.getProtocol());
 
@@ -49,13 +49,13 @@ namespace Bull
 
         int ret = ::connect(getHandler(), buffer.getSockAddr(), buffer.getLength());
 
-        Expect(ret == 0, Throw(InternalError, "TcpClientImpl::connect", "Failed to connect to the remote host"));
+        Expect(ret == 0, Throw(InternalError, "Failed to connect to the remote host"));
     }
 
     void TcpClient::connect(const IpAddress& address, NetPort port, const Duration& timeout, const Duration& pause)
     {
-        Expect(address.isValid(), Throw(InvalidParameter, "TcpClient::connect", "Invalid IpAddress"));
-        Expect(port != NetPort_Any, Throw(InvalidParameter, "TcpClient::connect", "Invalid NetPort"));
+        Expect(address.isValid(), Throw(InvalidParameter, "Invalid IpAddress"));
+        Expect(port != NetPort_Any, Throw(InvalidParameter, "Invalid NetPort"));
 
         int ret;
         Clock clock;
@@ -76,7 +76,7 @@ namespace Bull
             }
         }while(ret != 0 && clock.getElapsedTime() < timeout);
 
-        Expect(ret == 0, Throw(InternalError, "TcpClientImpl::connect", "Failed to connect to the remote host"));
+        Expect(ret == 0, Throw(InternalError, "Failed to connect to the remote host"));
     }
 
     bool TcpClient::isConnected() const
@@ -98,12 +98,12 @@ namespace Bull
 
     std::size_t TcpClient::send(const void* data, std::size_t length)
     {
-        Expect(data && length, Throw(InvalidParameter, "TcpClient::send", "Invalid buffer"));
-        Expect(isConnected(), Throw(LogicError, "TcpClient::send", "TcpClient is not connected"));
+        Expect(data && length, Throw(InvalidParameter, "Invalid buffer"));
+        Expect(isConnected(), Throw(LogicError, "TcpClient is not connected"));
 
         int sent = ::send(getHandler(), reinterpret_cast<const char*>(data), length, 0);
 
-        Expect(sent >= 0, Throw(InternalError, "TcpClientImpl::send", "Failed to send data to the remote host"));
+        Expect(sent >= 0, Throw(InternalError, "Failed to send data to the remote host"));
 
         return sent;
     }
@@ -121,12 +121,12 @@ namespace Bull
 
     std::size_t TcpClient::receive(void* data, std::size_t length)
     {
-        Expect(data && length, Throw(InvalidParameter, "TcpClient::send", "Invalid buffer"));
-        Expect(isConnected(), Throw(LogicError, "TcpClient::send", "TcpClient is not connected"));
+        Expect(data && length, Throw(InvalidParameter, "Invalid buffer"));
+        Expect(isConnected(), Throw(LogicError, "TcpClient is not connected"));
 
         int received = ::recv(getHandler(), reinterpret_cast<char*>(data), length, 0);
 
-        Expect(received >= 0, Throw(InternalError, "TcpClientImpl::receive", "Failed to receive data from the remote host"));
+        Expect(received >= 0, Throw(InternalError, "Failed to receive data from the remote host"));
 
         return received;
     }
@@ -153,14 +153,14 @@ namespace Bull
 
     NetPort TcpClient::getRemotePort() const
     {
-        Expect(isConnected(), Throw(LogicError, "TcpClient::send", "TcpClient is not connected"));
+        Expect(isConnected(), Throw(LogicError, "TcpClient is not connected"));
 
         return m_hostPort;
     }
 
     const IpAddress& TcpClient::getRemoteAddress() const
     {
-        Expect(isConnected(), Throw(LogicError, "TcpClient::send", "TcpClient is not connected"));
+        Expect(isConnected(), Throw(LogicError, "TcpClient is not connected"));
 
         return *m_hostAddress;
     }

@@ -33,7 +33,7 @@ namespace Bull
     {
         if(image.getSize().width <= 0 || image.getSize().height <= 0)
         {
-            Throw(InvalidParameter, "Cursor::create", "Can not create a Cursor with an Image of size zero or negative");
+            Throw(InvalidParameter, "Can not create a Cursor with an Image of size zero or negative");
         }
 
         m_impl->create(image, hotSpot);

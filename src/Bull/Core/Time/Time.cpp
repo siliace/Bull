@@ -23,12 +23,12 @@ namespace Bull
 
     Time Time::make(unsigned int hour, unsigned int minute, unsigned int second, unsigned int millisecond)
     {
-        Expect(hour < 24, Throw(InvalidParameter, "Time::make", "Invalid hour"));
-        Expect(minute < 60, Throw(InvalidParameter, "Time::make", "Invalid minute"));
-        Expect(second < 60, Throw(InvalidParameter, "Time::make", "Invalid second"));
-        Expect(millisecond < 1000, Throw(InvalidParameter, "Time::make", "Invalid millisecond"));
+        Expect(hour < 24, Throw(InvalidParameter, "Invalid hour"));
+        Expect(minute < 60, Throw(InvalidParameter, "Invalid minute"));
+        Expect(second < 60, Throw(InvalidParameter, "Invalid second"));
+        Expect(millisecond < 1000, Throw(InvalidParameter, "Invalid millisecond"));
 
-        return {hour, minute, second, millisecond};
+        return { hour, minute, second, millisecond };
     }
 
     bool Time::operator==(const Time& right) const {

@@ -6,7 +6,7 @@ namespace Bull
 {
     Library::Library(const String& name)
     {
-        Expect(load(name), Throw(InternalError, "Library::Library", "Failed to load library " + name));
+        Expect(load(name), Throw(InternalError, "Failed to load library " + name));
     }
 
     Library::~Library()

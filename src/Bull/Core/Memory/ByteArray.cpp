@@ -12,7 +12,7 @@ namespace Bull
     ByteArray ByteArray::memoryCopy(const void* data, std::size_t length)
     {
         ByteArray bytes;
-        Expect(data && length, Throw(InvalidParameter, "ByteArray::memoryCopy", "Invalid buffer"));
+        Expect(data && length, Throw(InvalidParameter, "Invalid buffer"));
 
         bytes.create(length);
 
