@@ -172,7 +172,7 @@ namespace Bull
             {
                 if(glXGetCurrentContext() == m_render)
                 {
-                    Expect(glXMakeCurrent(m_display.getHandler(), XNone, nullptr), Throw(InternalError, "GlxContext::~GlxContext", "Failed to disable current context"));
+                    Expect(glXMakeCurrent(m_display.getHandler(), XNone, nullptr), Throw(InternalError, "Failed to disable current context"));
                 }
 
                 glXDestroyContext(m_display.getHandler(), m_render);
