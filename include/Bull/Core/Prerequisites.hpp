@@ -2,26 +2,35 @@
 #define BULL_CORE_PREREQUISITES_HPP
 
 #include <cstdint>
+#include <cstring>
 
 #define BULL_COMPILER_MSC      1
 #define BULL_COMPILER_GCC      2
-#define BULL_COMPILER_INTEL    3
-#define BULL_COMPILER_CLANG    4
 #define BULL_COMPILER_MINGW_32 5
 #define BULL_COMPILER_MINGW_64 6
 
 #if defined _MSC_VER
     #define BULL_COMPILER BULL_COMPILER_MSC
 #elif defined __GNUC__
-    #define BULL_COMPILER BULL_COMPILER_GCC
-    #define BULL_COMPILER_VERSION __GNUC__
-#elif defined __MINGW32__
-    #define BULL_COMPILER BULL_COMPILER_MINGW_32
-#elif defined __MINGW64__
-	#define BULL_COMPILER BULL_COMPILER_MINGW_64
+    #if defined __MINGW32__ && defined __MINGW64__
+        #define BULL_COMPILER BULL_COMPILER_MINGW_64
+		#define BULL_COMPILER_VERSION_MAJOR  __MINGW64_VERSION_MAJOR
+		#define BULL_COMPILER_VERSION_MINOR  __MINGW64_VERSION_MINOR
+		#define BULL_COMPILER_VERSION_BUGFIX __MINGW64_VERSION_BUGFIX
+		#define BULL_COMPILER_VERSION_STRING __MINGW64_VERSION_STR
+    #elif defined __MINGW32__
+        #define BULL_COMPILER BULL_COMPILER_MINGW_32
+		#define BULL_COMPILER_VERSION_MAJOR  __MINGW32_VERSION_MAJOR
+		#define BULL_COMPILER_VERSION_MINOR  __MINGW32_VERSION_MINOR
+		#define BULL_COMPILER_VERSION_BUGFIX __MINGW32_VERSION_BUGFIX
+		#define BULL_COMPILER_VERSION_STRING __MINGW32_VERSION_STR
+    #else
+        #define BULL_COMPILER BULL_COMPILER_GCC
+    #endif
 #else
-	#error Unsupported compiler
+	#warning Unsupported compiler
 #endif
+
 #if defined _WIN32
     #define BULL_OS_WINDOWS
 
@@ -73,18 +82,10 @@
 #endif
 
 #ifndef BULL_ZERO_MEMORY
-    #ifndef BULL_HAS_CSTRING
-        #include <cstring>
-        #define BULL_HAS_CSTRING
-    #endif
     #define BULL_ZERO_MEMORY(Object) std::memset(&(Object), 0, sizeof(decltype(Object)))
 #endif
 
 #ifndef BULL_ZERO_MEMORY_PTR
-    #ifndef BULL_HAS_CSTRING
-        #include <cstring>
-        #define BULL_HAS_CSTRING
-    #endif
     #define BULL_ZERO_MEMORY_PTR(Pointer, Length) std::memset(Pointer, 0, Length)
 #endif
 
