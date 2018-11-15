@@ -37,20 +37,14 @@ namespace Bull
          * \param mesh The Mesh
          *
          */
-        inline void setMesh(const std::shared_ptr<Mesh>& mesh)
-        {
-            m_mesh = mesh;
-        }
+        void setMesh(const std::shared_ptr<Mesh>& mesh);
 
         /*! \brief Get the Mesh of the Model
          *
          * \return The Mesh
          *
          */
-        inline const Mesh* getMesh() const
-        {
-            return m_mesh.get();
-        }
+        const Mesh* getMesh() const;
 
     private:
 

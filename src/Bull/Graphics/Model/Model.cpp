@@ -14,4 +14,14 @@ namespace Bull
 
         m_mesh->render(shader, getModelMatrix());
     }
+
+    void Model::setMesh(const std::shared_ptr<Mesh>& mesh)
+    {
+        m_mesh = mesh;
+    }
+
+    const Mesh* Model::getMesh() const
+    {
+        return m_mesh.get();
+    }
 }

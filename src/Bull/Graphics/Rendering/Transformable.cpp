@@ -31,4 +31,34 @@ namespace Bull
 
         return translation * rotation * scaling;
     }
+
+    void Transformable::setScale(const Vector3F& scale)
+    {
+        m_scale = scale;
+    }
+
+    const Vector3F& Transformable::getScale() const
+    {
+        return m_scale;
+    }
+
+    void Transformable::setRotation(const EulerAnglesF& rotation)
+    {
+        m_rotation = rotation;
+    }
+
+    const EulerAnglesF& Transformable::getRotation() const
+    {
+        return m_rotation;
+    }
+
+    void Transformable::setTranslation(const Vector3F& translation)
+    {
+        m_translation = translation;
+    }
+
+    const Vector3F& Transformable::getTranslation() const
+    {
+        return m_translation;
+    }
 }

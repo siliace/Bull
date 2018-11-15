@@ -41,52 +41,12 @@ namespace Bull
          */
         void scale(const Vector3F& scale);
 
-        /*! \brief Set the scale of the Transformable
-         *
-         * \param scale The scale
-         *
-         */
-        inline void setScale(const Vector3F& scale)
-        {
-            m_scale = scale;
-        }
-
-        /*! \brief Get the scale of the Transformable
-         *
-         * \return The scale
-         *
-         */
-        inline const Vector3F& getScale() const
-        {
-            return m_scale;
-        }
-
         /*! \brief Rotate the Transformable
          *
          * \param rotation The rotation
          *
          */
         void rotate(const EulerAnglesF& rotation);
-
-        /*! \brief Set the rotation of the Transformable
-         *
-         * \param rotation The rotation
-         *
-         */
-        inline void setRotation(const EulerAnglesF& rotation)
-        {
-            m_rotation = rotation;
-        }
-
-        /*! \brief Get the rotation of the Transformable
-         *
-         * \return The rotation
-         *
-         */
-        inline const EulerAnglesF& getRotation() const
-        {
-            return m_rotation;
-        }
 
         /*! \brief Move the Transformable
          *
@@ -95,32 +55,54 @@ namespace Bull
          */
         void move(const Vector3F& translation);
 
-        /*! \brief Set the translation of the Transformable
-         *
-         * \param translation The translation
-         *
-         */
-        inline void setTranslation(const Vector3F& translation)
-        {
-            m_translation = translation;
-        }
-
-        /*! \brief Get the translation of the Transformable
-         *
-         * \return The translation
-         *
-         */
-        inline const Vector3F& getTranslation() const
-        {
-            return m_translation;
-        }
-
         /*! \brief Get the model Matrix of the Transformable
          *
          * \return The model Matrix
          *
          */
         Matrix4F getModelMatrix() const;
+
+        /*! \brief Set the scale of the Transformable
+         *
+         * \param scale The scale
+         *
+         */
+        void setScale(const Vector3F& scale);
+
+        /*! \brief Get the scale of the Transformable
+         *
+         * \return The scale
+         *
+         */
+        const Vector3F& getScale() const;
+
+        /*! \brief Set the rotation of the Transformable
+         *
+         * \param rotation The rotation
+         *
+         */
+        void setRotation(const EulerAnglesF& rotation);
+
+        /*! \brief Get the rotation of the Transformable
+         *
+         * \return The rotation
+         *
+         */
+        const EulerAnglesF& getRotation() const;
+
+        /*! \brief Set the translation of the Transformable
+         *
+         * \param translation The translation
+         *
+         */
+        void setTranslation(const Vector3F& translation);
+
+        /*! \brief Get the translation of the Transformable
+         *
+         * \return The translation
+         *
+         */
+        const Vector3F& getTranslation() const;
 
     private:
 

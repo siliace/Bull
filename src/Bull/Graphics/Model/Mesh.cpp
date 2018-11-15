@@ -40,4 +40,34 @@ namespace Bull
             subMesh->render();
         }
     }
+
+    bool Mesh::isRoot() const
+    {
+        return m_parent == nullptr;
+    }
+
+    void Mesh::setName(const String& name)
+    {
+        m_name = name;
+    }
+
+    const String& Mesh::getName() const
+    {
+        return m_name;
+    }
+
+    const Mesh* Mesh::getParent() const
+    {
+        return m_parent;
+    }
+
+    void Mesh::setLocalModelMatrix(const Matrix4F& localModelMatrix)
+    {
+        m_localModelMatrix = localModelMatrix;
+    }
+
+    const Matrix4F& Mesh::getLocalModelMatrix() const
+    {
+        return m_localModelMatrix;
+    }
 }

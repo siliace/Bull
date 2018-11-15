@@ -33,75 +33,103 @@ namespace Bull
          */
         void setUniforms(Shader& shader, const String& name) const override;
 
-        inline float getLinear() const
-        {
-            return m_linear;
-        }
+        /*! \brief Set the linear attenuation factor of the SpotLight
+         *
+         * \param linear The linear attenuation factor
+         *
+         */
+        void setLinear(float linear);
 
-        inline void setLinear(float linear)
-        {
-            m_linear = linear;
-        }
+        /*! \brief Get the linear attenuation factor of the SpotLight
+         *
+         * \return The linear attenuation factor
+         *
+         */
+        float getLinear() const;
 
-        inline float getConstant() const
-        {
-            return m_constant;
-        }
+        /*! \brief Set the constant attenuation factor of the SpotLight
+         *
+         * \param constant The constant attenuation factor
+         *
+         */
+        void setConstant(float constant);
 
-        inline void setConstant(float constant)
-        {
-            m_constant = constant;
-        }
+        /*! \brief Get the constant attenuation factor of the SpotLight
+         *
+         * \return The constant attenuation factor
+         *
+         */
+        float getConstant() const;
 
-        inline const Vector3F& getPosition() const
-        {
-            return m_position;
-        }
+        /*! \brief Set the position of the SpotLight
+         *
+         * \param position The position
+         *
+         */
+        void setPosition(const Vector3F& position);
 
-        inline void setPosition(const Vector3F& position)
-        {
-            m_position = position;
-        }
+        /*! \brief Get the position of the SpotLight
+         *
+         * \return The position
+         *
+         */
+        const Vector3F& getPosition() const;
 
-        inline const Vector3F& getDirection() const
-        {
-            return m_direction;
-        }
+        /*! \brief Set the direction of the SpotLight
+         *
+         * \param direction The direction
+         *
+         */
+        void setDirection(const Vector3F& direction);
 
-        inline void setDirection(const Vector3F& direction)
-        {
-            m_direction = direction;
-        }
+        /*! \brief Get the direction of the SpotLight
+         *
+         * \return The direction
+         *
+         */
+        const Vector3F& getDirection() const;
 
-        inline float getQuadratic() const
-        {
-            return m_quadratic;
-        }
+        /*! \brief Set the quadratic attenuation factor of the SpotLight
+         *
+         * \param quadratic The quadratic attenuation factor
+         *
+         */
+        void setQuadratic(float quadratic);
 
-        inline void setQuadratic(float quadratic)
-        {
-            m_quadratic = quadratic;
-        }
+        /*! \brief Get the quadratic attenuation factor of the SpotLight
+         *
+         * \return The quadratic attenuation factor
+         *
+         */
+        float getQuadratic() const;
 
-        inline const AngleF& getInnerCutOff() const
-        {
-            return m_innerCutOff;
-        }
+        /*! \brief Get the inner cut off angle of the SpotLight
+         *
+         * \param innerCutOff The inner cut off angle
+         *
+         */
+        void setInnerCutOff(const AngleF& innerCutOff);
 
-        inline void setInnerCutOff(const AngleF& innerCutOff)
-        {
-            m_innerCutOff = innerCutOff;
-        }
+        /*! \brief Get the inner cut off angle of the SpotLight
+         *
+         * \return The outer cut off angle
+         *
+         */
+        const AngleF& getInnerCutOff() const;
 
-        inline const AngleF& getOuterCutOff() const
-        {
-            return m_outerCutOff;
-        }
+        /*! \brief Get the outer cut off angle of the SpotLight
+         *
+         * \param outerCutOff The outer cut off angle
+         *
+         */
+        void setOuterCutOff(const AngleF& outerCutOff);
 
-        inline void setOuterCutOff(const AngleF& outerCutOff)
-        {
-            m_outerCutOff = outerCutOff;
-        }
+        /*! \brief Get the outer cut off angle of the SpotLight
+         *
+         * \return The outer cut off angle
+         *
+         */
+        const AngleF& getOuterCutOff() const;
 
     private:
 

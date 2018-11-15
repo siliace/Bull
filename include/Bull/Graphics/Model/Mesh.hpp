@@ -59,60 +59,42 @@ namespace Bull
          * \return True if root
          *
          */
-        inline bool isRoot() const
-        {
-            return m_parent == nullptr;
-        }
+        bool isRoot() const;
 
         /*! \brief Set the name of the Mesh
          *
          * \param name The name
          *
          */
-        inline void setName(const String& name)
-        {
-            m_name = name;
-        }
+        void setName(const String& name);
 
         /*! \brief Get the name of the Mesh
          *
          * \return The name
          *
          */
-        inline const String& getName() const
-        {
-            return m_name;
-        }
+        const String& getName() const;
 
         /*! \brief Get the parent Mesh
          *
          * \return The parent
          *
          */
-        inline const Mesh* getParent() const
-        {
-            return m_parent;
-        }
+        const Mesh* getParent() const;
 
         /*! \brief Set the local model matrix of the Mesh
          *
          * \param localModelMatrix The matrix
          *
          */
-        inline void setLocalModelMatrix(const Matrix4F& localModelMatrix)
-        {
-            m_localModelMatrix = localModelMatrix;
-        }
+        void setLocalModelMatrix(const Matrix4F& localModelMatrix);
 
         /*! \brief Get the local model matrix of the Mesh
          *
          * \return The matrix
          *
          */
-        inline const Matrix4F& getLocalModelMatrix() const
-        {
-            return m_localModelMatrix;
-        }
+        const Matrix4F& getLocalModelMatrix() const;
 
     private:
 
