@@ -127,8 +127,10 @@ namespace Bull
             cursor.QuadPart = getCursor();
 
             LockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(bytes.getCapacity()), 0);
-            WriteFile(m_handler, bytes.getBuffer(), static_cast<DWORD>(bytes.getCapacity()), &written, nullptr);
+            BOOL success = WriteFile(m_handler, bytes.getBuffer(), static_cast<DWORD>(bytes.getCapacity()), &written, nullptr);
             UnlockFile(m_handler, cursor.LowPart, cursor.HighPart, static_cast<DWORD>(bytes.getCapacity()), 0);
+
+            Expect(success, Throw(Win32Error, "Failed to write into file"));
 
             return written;
         }
