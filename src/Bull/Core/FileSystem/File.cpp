@@ -10,7 +10,10 @@ namespace Bull
 {
     void File::create(const Path& path)
     {
-        prv::FileImpl::create(path);
+        if(!exists(path))
+        {
+            prv::FileImpl::create(path);
+        }
     }
 
     bool File::exists(const Path& path)
