@@ -7,8 +7,10 @@
 namespace Bull
 {
     template<typename T>
-    struct Rectangle : public Polygon<T>
+    class Rectangle : public Polygon<T>
     {
+    public:
+
         /*! \brief Default constructor
          *
          */

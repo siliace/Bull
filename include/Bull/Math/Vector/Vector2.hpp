@@ -6,9 +6,13 @@
 namespace Bull
 {
     template <typename T>
-    struct Vector2 : public Vector<T, 2>
+    class Vector2 : public Vector<T, 2>
     {
+    public:
+
         static Vector2<T> Zero;
+
+    public:
 
         /*! \brief Constructor
          *

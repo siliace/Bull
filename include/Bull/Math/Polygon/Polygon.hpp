@@ -11,8 +11,10 @@ namespace Bull
     class Rectangle;
 
     template<typename T>
-    struct Polygon
+    class Polygon
     {
+    public:
+
         /*! \brief Get a vertex form the polygon
          *
          * \param index The index of the vertex to get

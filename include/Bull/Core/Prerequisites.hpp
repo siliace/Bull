@@ -11,7 +11,9 @@
 
 #if defined _MSC_VER
     #define BULL_COMPILER BULL_COMPILER_MSC
+    #define BULL_PRETTY_FUNCTION __FUNCSIG__
 #elif defined __GNUC__
+    #define BULL_COMPILER __PRETTY_FUNCTION__
     #if defined __MINGW32__ && defined __MINGW64__
         #define BULL_COMPILER BULL_COMPILER_MINGW_64
 		#define BULL_COMPILER_VERSION_MAJOR  __MINGW64_VERSION_MAJOR

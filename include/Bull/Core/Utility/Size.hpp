@@ -5,8 +5,10 @@
 
 namespace Bull
 {
-    struct BULL_CORE_API Size
+    class BULL_CORE_API Size
     {
+    public:
+
         /*! \brief Default constructor
          *
          */

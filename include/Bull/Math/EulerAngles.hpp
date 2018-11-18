@@ -14,8 +14,10 @@ namespace Bull
      *
      */
     template <typename T>
-    struct EulerAngles
+    class EulerAngles
     {
+    public:
+
         static EulerAngles<T> Zero;
 
         /*! \brief Normalize an EulerAngles
@@ -42,7 +44,6 @@ namespace Bull
             return EulerAngles<T>(angle);
         }
 
-
         /*! \brief Create an EulerAngles with a rotation on the Y axis
          *
          * \param angle The rotation
@@ -66,6 +67,8 @@ namespace Bull
         {
             return EulerAngles<T>(Angle<T>::Zero, Angle<T>::Zero, angle);
         }
+
+    public:
 
         /*! \brief Constructor
          *

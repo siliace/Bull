@@ -5,8 +5,10 @@
 
 namespace Bull
 {
-    struct BULL_CORE_API NonCopyable
+    class BULL_CORE_API NonCopyable
     {
+    public:
+
         /*! \brief Default constructor
          *
          */

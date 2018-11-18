@@ -9,8 +9,10 @@
 namespace Bull
 {
     template <typename T>
-    struct Vector4 : public Vector<T, 4>
+    class Vector4 : public Vector<T, 4>
     {
+    public:
+
         static Vector4<T> Zero;
 
         static Vector4<T> Unit;
@@ -31,6 +33,8 @@ namespace Bull
                     static_cast<T>(color.alpha) / 255
             );
         }
+
+    public:
 
         /*! \brief Constructor
          *

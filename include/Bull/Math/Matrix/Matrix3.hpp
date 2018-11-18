@@ -8,9 +8,13 @@
 namespace Bull
 {
     template<typename T>
-    struct Matrix3 : public SquareMatrix<T, 3>
+    class Matrix3 : public SquareMatrix<T, 3>
     {
+    public:
+
         static Matrix3<T> Identity;
+
+    public:
 
         /*! \brief Default constructor
          *

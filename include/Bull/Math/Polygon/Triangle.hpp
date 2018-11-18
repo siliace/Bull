@@ -7,8 +7,10 @@
 namespace Bull
 {
     template<typename T>
-    struct Triangle : public RegularPolygon<T, 3>
+    class Triangle : public RegularPolygon<T, 3>
     {
+    public:
+
         /*! \brief Default constructor
          *
          */
@@ -21,7 +23,7 @@ namespace Bull
          * \param rotation The rotation of the polygon
          *
          */
-        Triangle(const Vector2<T>& center, T radius = 0, const Angle<T>& rotation = Angle<T>::Zero) :
+        explicit Triangle(const Vector2<T>& center, T radius = 0, const Angle<T>& rotation = Angle<T>::Zero) :
             RegularPolygon<T, 3>(center, radius, rotation)
         {
             /// Nothing

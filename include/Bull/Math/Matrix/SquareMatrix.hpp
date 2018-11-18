@@ -6,8 +6,10 @@
 namespace Bull
 {
     template <typename T, std::size_t S>
-    struct SquareMatrix : public Matrix<T, S, S>
+    class SquareMatrix : public Matrix<T, S, S>
     {
+    public:
+
         static SquareMatrix<T, S> Zero;
 
         /*! \brief Create an identity SquareMatrix
@@ -26,6 +28,8 @@ namespace Bull
 
             return identity;
         }
+
+    public:
 
         /*! \brief Default constructor
          *

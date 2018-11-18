@@ -19,8 +19,10 @@ namespace Bull
      * \tparam T
      */
     template <typename T>
-    struct Quaternion
+    class Quaternion
     {
+    public:
+
         /*! \brief Compute the conjugate of the Quaternion
          *
          * \param quaternion The Quaternion to get the conjugate
@@ -58,6 +60,8 @@ namespace Bull
         {
             return Quaternion<T>(EulerAngles<T>(roll, pitch, yaw));
         }
+
+    public:
 
         /*! \brief Default constructor
          *

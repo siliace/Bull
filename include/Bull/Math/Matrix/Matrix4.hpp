@@ -12,8 +12,10 @@
 namespace Bull
 {
     template<typename T>
-    struct Matrix4 : public SquareMatrix<T, 4>
+    class Matrix4 : public SquareMatrix<T, 4>
     {
+    public:
+
         static Matrix4<T> Identity;
 
         /*! \brief Create a scaling transformation matrix
@@ -172,6 +174,8 @@ namespace Bull
 
             return view;
         }
+
+    public:
 
         /*! \brief Default constructor
          *

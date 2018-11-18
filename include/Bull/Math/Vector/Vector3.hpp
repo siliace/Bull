@@ -7,8 +7,10 @@
 namespace Bull
 {
     template<typename T>
-    struct Vector3 : public Vector<T, 3>
+    class Vector3 : public Vector<T, 3>
     {
+    public:
+
         static Vector3<T> Zero;
 
         static Vector3<T> Unit;
@@ -37,6 +39,8 @@ namespace Bull
         {
             return Vector3<T>(left).crossProduct(right);
         }
+
+    public:
 
         /*! \brief Constructor
          *
