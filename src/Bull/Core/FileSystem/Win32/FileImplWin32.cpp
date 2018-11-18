@@ -18,6 +18,8 @@ namespace Bull
                                         nullptr);
 
             Expect(handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "Failed to create file " + path.toString()));
+
+            CloseHandle(handler);
         }
 
         bool FileImplWin32::exists(const Path& name)
