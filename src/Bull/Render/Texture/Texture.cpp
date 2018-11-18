@@ -117,8 +117,8 @@ namespace Bull
         Size size;
 
         gl::bindTexture(GL_TEXTURE_2D, m_handle);
-        gl::getTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_WIDTH, &size.width);
-        gl::getTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_HEIGHT, &size.height);
+        gl::getTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &size.width);
+        gl::getTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &size.height);
 
         return size;
     }
