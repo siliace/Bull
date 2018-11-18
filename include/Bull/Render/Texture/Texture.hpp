@@ -63,22 +63,6 @@ namespace Bull
          */
         virtual void create(const Size& size) = 0;
 
-        /*! \brief Tell whether the Texture is valid (i.e has been created)
-         *
-         * \return True if valid
-         *
-         */
-        bool isValid() const;
-
-        /*! \brief Get the Size of the Texture
-         *
-         * \return The Size
-         *
-         */
-        Size getSize() const;
-
-    protected:
-
         /*! \brief Create the Texture of a given Size with a PixelFormat
          *
          * \param size        The Size
@@ -97,6 +81,27 @@ namespace Bull
          *
          */
         void setPixels(unsigned int xOffset, unsigned int yOffset, const ByteArray& pixels, const Size& size, PixelFormat pixelFormat);
+
+        /*! \brief Tell whether the Texture is valid (i.e has been created)
+         *
+         * \return True if valid
+         *
+         */
+        bool isValid() const;
+
+        /*! \brief Get the Size of the Texture
+         *
+         * \return The Size
+         *
+         */
+        Size getSize() const;
+
+        /*! \brief Get the pixels of the Texture
+         *
+         * \return Pixels
+         *
+         */
+        ByteArray getPixels(PixelFormat pixelFormat) const;
 
     protected:
 

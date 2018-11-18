@@ -3,17 +3,17 @@
 
 namespace Bull
 {
-    enum ImageFormat
+    enum class ImageFormat
     {
-        ImageFormat_Jpg,
-        ImageFormat_Png,
-        ImageFormat_Bmp,
-        ImageFormat_Psd,
-        ImageFormat_Tga,
-        ImageFormat_Gif,
-        ImageFormat_Hdr,
-        ImageFormat_Pic,
-        ImageFormat_Pnm
+        Jpg,
+        Png,
+        Bmp,
+        Psd,
+        Tga,
+        Gif,
+        Hdr,
+        Pic,
+        Pnm
     };
 }
 

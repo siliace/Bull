@@ -62,13 +62,6 @@ namespace Bull
 
     ByteArray ImageTexture::getPixels() const
     {
-        ByteArray pixels(PixelFormatUtils::getImageByteCount(getSize(), m_pixelFormat));
-
-        ensureContext();
-
-        gl::bindTexture(GL_TEXTURE_2D, getSystemHandle());
-        gl::getTexImage(GL_TEXTURE_2D, 0, m_pixelFormat, GL_UNSIGNED_BYTE, &pixels[0]);
-
-        return pixels;
+        return Texture::getPixels(m_pixelFormat);
     }
 }

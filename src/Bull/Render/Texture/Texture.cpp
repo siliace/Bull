@@ -145,4 +145,16 @@ namespace Bull
         gl::bindTexture(GL_TEXTURE_2D, m_handle);
         gl::texSubImage2D(GL_TEXTURE_2D, 0, xOffset, yOffset, size.width, size.height, convertFormat(pixelFormat), convertDataType(pixelFormat), pixels.getBuffer());
     }
+
+    ByteArray Texture::getPixels(PixelFormat pixelFormat) const
+    {
+        ByteArray pixels(PixelFormatUtils::getImageByteCount(getSize(), pixelFormat));
+
+        ensureContext();
+
+        gl::bindTexture(GL_TEXTURE_2D, getSystemHandle());
+        gl::getTexImage(GL_TEXTURE_2D, 0, convertFormat(pixelFormat), convertDataType(pixelFormat), &pixels[0]);
+
+        return pixels;
+    }
 }
