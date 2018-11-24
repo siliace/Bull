@@ -3,11 +3,11 @@
 
 namespace Bull
 {
-    enum ShaderStageType
+    enum class ShaderStageType
     {
-        ShaderStageType_Vertex,
-        ShaderStageType_Fragment,
-        ShaderStageType_Geometry
+        Vertex,
+        Fragment,
+        Geometry
     };
 }
 

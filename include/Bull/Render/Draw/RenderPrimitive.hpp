@@ -3,19 +3,19 @@
 
 namespace Bull
 {
-    enum RenderPrimitive
+    enum class RenderPrimitive
     {
-        RenderPrimitive_Points,
-        RenderPrimitive_Lines,
-        RenderPrimitive_LineLoop,
-        RenderPrimitive_LineStrip,
-        RenderPrimitive_Triangles,
-        RenderPrimitive_TriangleFan ,
-        RenderPrimitive_TriangleStrip,
-        RenderPrimitive_LinesAdjacency,
-        RenderPrimitive_LineStripAdjacency,
-        RenderPrimitive_TrianglesAdjacency,
-        RenderPrimitive_TriangleStripAdjacency,
+        Lines,
+        Points,
+        LineLoop,
+        LineStrip,
+        Triangles,
+        TriangleFan,
+        TriangleStrip,
+        LinesAdjacency,
+        LineStripAdjacency,
+        TrianglesAdjacency,
+        TriangleStripAdjacency,
     };
 }
 

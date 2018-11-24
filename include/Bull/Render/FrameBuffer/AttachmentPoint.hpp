@@ -3,12 +3,12 @@
 
 namespace Bull
 {
-    enum AttachmentPoint
+    enum class AttachmentPoint
     {
-        AttachmentPoint_Color,
-        AttachmentPoint_Depth,
-        AttachmentPoint_Stencil,
-        AttachmentPoint_DepthStencil,
+        Color,
+        Depth,
+        Stencil,
+        DepthStencil,
     };
 }
 

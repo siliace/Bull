@@ -3,14 +3,10 @@
 
 #include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/Shader/ShaderStage.hpp>
+#include <Bull/Render/OpenGL.hpp>
 
 namespace Bull
 {
-    namespace
-    {
-        unsigned int shaderType[] = {GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, GL_GEOMETRY_SHADER};
-    }
-
     ShaderStage::ShaderStage() :
         m_id(0),
         m_isCompiled(false)
@@ -47,7 +43,7 @@ namespace Bull
         }
 
         m_type = type;
-        m_id   = gl::createShader(shaderType[type]);
+        m_id   = gl::createShader(OpenGL::shaderStageType(type));
 
         Expect(isValid(), Throw(InternalError, "Failed to create ShaderStage"));
     }

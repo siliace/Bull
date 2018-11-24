@@ -37,7 +37,7 @@ namespace Bull
          * \param usage    The usage (static, dynamic, stream) of the ArrayBuffer
          *
          */
-        explicit ArrayBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
+        explicit ArrayBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage = HardwareBufferUsage::StaticDraw);
 
         /*! \brief Create the ArrayBuffer from a Vertex vector
          *
@@ -45,7 +45,7 @@ namespace Bull
          * \param usage    The usage (static, dynamic, stream) of the ArrayBuffer
          *
          */
-        void create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage = HardwareBufferUsage_StaticDraw);
+        void create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage = HardwareBufferUsage::StaticDraw);
 
         /*! \brief Set a buffer array attribute pointer
          *

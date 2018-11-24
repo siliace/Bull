@@ -71,7 +71,7 @@ namespace
 Cube::Cube()
 {
     std::shared_ptr<Bull::Mesh> mesh = std::make_shared<Bull::Mesh>();
-    std::shared_ptr<Bull::SubMesh> submesh = std::make_shared<Bull::SubMesh>(Bull::RenderPrimitive_Triangles);
+    std::shared_ptr<Bull::SubMesh> submesh = std::make_shared<Bull::SubMesh>(Bull::RenderPrimitive::Triangles);
     submesh->create(vertices, indices);
 
     mesh->addSubMesh(submesh);

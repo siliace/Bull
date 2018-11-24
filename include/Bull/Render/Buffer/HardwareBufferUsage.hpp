@@ -3,11 +3,11 @@
 
 namespace Bull
 {
-    enum HardwareBufferUsage
+    enum class HardwareBufferUsage
     {
-        HardwareBufferUsage_StaticDraw,
-        HardwareBufferUsage_DynamicDraw,
-        HardwareBufferUsage_StreamDraw,
+        StaticDraw,
+        DynamicDraw,
+        StreamDraw,
     };
 }
 

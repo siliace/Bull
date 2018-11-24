@@ -3,7 +3,7 @@
 namespace Bull
 {
     IndexBuffer::IndexBuffer() :
-        HardwareBuffer(HardwareBufferType_Element),
+        HardwareBuffer(HardwareBufferType::Element),
         m_dataType(DataType_UnsignedInt)
     {
         /// Nothing

@@ -19,7 +19,7 @@ namespace Bull
          * \param primitive The RenderPrimitive to use to render the SubMesh
          *
          */
-        explicit SubMesh(RenderPrimitive primitive = RenderPrimitive_Triangles);
+        explicit SubMesh(RenderPrimitive primitive = RenderPrimitive::Triangles);
 
         /*! \brief Constructor by movement semantic
          *

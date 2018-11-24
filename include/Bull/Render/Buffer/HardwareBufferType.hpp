@@ -3,10 +3,10 @@
 
 namespace Bull
 {
-    enum HardwareBufferType
+    enum class HardwareBufferType
     {
-        HardwareBufferType_Array,
-        HardwareBufferType_Element
+        Array,
+        Element
     };
 }
 

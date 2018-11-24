@@ -42,8 +42,8 @@ Bull::Shader loadShaderFromPath(const Bull::Path& path)
     Bull::ShaderStageLoader shaderStageLoader;
     std::shared_ptr<Bull::ShaderStage> vertex, fragment;
 
-    vertex = shaderStageLoader.loadFromPath(path.resolve("phong.vert"), Bull::ShaderStageType_Vertex);
-    fragment = shaderStageLoader.loadFromPath(path.resolve("phong.frag"), Bull::ShaderStageType_Fragment);
+    vertex = shaderStageLoader.loadFromPath(path.resolve("phong.vert"), Bull::ShaderStageType::Vertex);
+    fragment = shaderStageLoader.loadFromPath(path.resolve("phong.frag"), Bull::ShaderStageType::Fragment);
 
     shader.attach(*vertex);
     shader.attach(*fragment);

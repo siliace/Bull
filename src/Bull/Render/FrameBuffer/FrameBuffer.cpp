@@ -5,26 +5,11 @@
 
 #include <Bull/Render/Context/GlFunctions.hpp>
 #include <Bull/Render/FrameBuffer/FrameBuffer.hpp>
+#include <Bull/Render/OpenGL.hpp>
 #include <Bull/Render/Texture/Texture.hpp>
 
 namespace Bull
 {
-    namespace
-    {
-        unsigned int convertAttachmentPoint(AttachmentPoint attachmentPoint)
-        {
-            switch(attachmentPoint)
-            {
-                case AttachmentPoint_Color: return GL_COLOR_ATTACHMENT0;
-                case AttachmentPoint_Depth: return GL_DEPTH_ATTACHMENT;
-                case AttachmentPoint_Stencil: return GL_STENCIL_ATTACHMENT;
-                case AttachmentPoint_DepthStencil: return GL_DEPTH_STENCIL_ATTACHMENT;
-            }
-
-            return 0;
-        }
-    }
-
     void FrameBuffer::bind(const FrameBuffer& frameBuffer)
     {
         ensureContext();
@@ -57,9 +42,9 @@ namespace Bull
 
     void FrameBuffer::attach(const Texture& texture, AttachmentPoint attachmentPoint)
     {
-        unsigned int target = convertAttachmentPoint(attachmentPoint);
+        unsigned int target = OpenGL::attachmentPoint(attachmentPoint);
 
-        if(attachmentPoint == AttachmentPoint_Color)
+        if(attachmentPoint == AttachmentPoint::Color)
         {
             auto it = getNextColorAttachment();
 

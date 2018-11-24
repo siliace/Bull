@@ -6,6 +6,8 @@ bull_add_library(bull-render)
 target_sources(bull-render
         PUBLIC
             ${BULL_INC_RENDER}/Export.hpp
+            ${BULL_SRC_RENDER}/OpenGL.hpp
+            ${BULL_SRC_RENDER}/OpenGL.cpp
         )
 
 add_subdirectory(Buffer)

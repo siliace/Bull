@@ -4,7 +4,7 @@
 namespace Bull
 {
     ArrayBuffer::ArrayBuffer() :
-        HardwareBuffer(HardwareBufferType_Array)
+        HardwareBuffer(HardwareBufferType::Array)
     {
         /// Nothing
     }

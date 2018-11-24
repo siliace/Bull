@@ -10,8 +10,10 @@
 
 namespace Bull
 {
-    struct BULL_RENDER_API Drawer
+    class BULL_RENDER_API Drawer
     {
+    public:
+
         /*! \brief Draw arrays
          *
          * \param primitive The primitive to use to draw
