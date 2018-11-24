@@ -20,7 +20,7 @@
     #define _WIN32_WINNT BULL_WINDOWS_VERSION
 #endif
 
-#include <windows.h>
+#include <Windows.h>
 #include <windowsx.h>
 #include <mmsystem.h>
 

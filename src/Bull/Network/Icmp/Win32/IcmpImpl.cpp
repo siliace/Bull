@@ -1,8 +1,6 @@
-#include <iphlpapi.h>
-#include <icmpapi.h>
-
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
 
+#include <Bull/Network/Icmp/Win32/IcmpHeader.hpp>
 #include <Bull/Network/Icmp/Win32/IcmpImpl.hpp>
 
 namespace Bull
