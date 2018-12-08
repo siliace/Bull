@@ -1,24 +1,23 @@
 #ifndef BULL_CORE_PATTERN_SINGLETON_HPP
 #define BULL_CORE_PATTERN_SINGLETON_HPP
 
-#include <mutex>
 #include <memory>
+#include <mutex>
 
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
 {
-    template<typename T>
+    template <typename T>
     class BULL_CORE_API Singleton : public NonCopyable
     {
     public:
 
-        /*! \brief Get the Instance of the Singleton. Create the instance if needed
-         *
-         * \return The Instance
-         *
-         */
-        static T& getInstance()
+        using Instance = T&;
+
+    public:
+
+        static Instance getInstance()
         {
             if(!s_instance)
             {
@@ -33,10 +32,7 @@ namespace Bull
             return *s_instance;
         }
 
-        /*! \brief Reset the Instance
-         *
-         */
-        static void destroyInstance()
+        static void destroy()
         {
             s_instance.reset();
         }

@@ -83,6 +83,8 @@
     #define BULL_API_IMPORT
 #endif
 
+#define BULL_PLUGIN_API extern "C" BULL_API_EXPORT
+
 #ifndef BULL_ZERO_MEMORY
     #define BULL_ZERO_MEMORY(Object) std::memset(&(Object), 0, sizeof(decltype(Object)))
 #endif

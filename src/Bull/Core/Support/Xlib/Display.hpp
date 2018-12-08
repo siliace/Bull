@@ -4,14 +4,14 @@
 #include <map>
 
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Pattern/Singleton.hpp>
+#include <Bull/Core/Pattern/SharedSingleton.hpp>
 #include <Bull/Core/Support/Xlib/Xlib.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        class Display : public Singleton<Display>
+        class Display : public SharedSingleton<Display>
         {
         public:
 
@@ -92,7 +92,7 @@ namespace Bull
 
         private:
 
-            friend class Singleton<Display>;
+            friend class SharedSingleton<Display>;
 
             /*! \brief Default constructor
              *

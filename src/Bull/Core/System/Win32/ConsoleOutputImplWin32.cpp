@@ -84,7 +84,7 @@ namespace Bull
         {
             std::size_t written;
 
-            Expect(WriteConsole(m_handler, bytes.getBuffer(), bytes.getCapacity(), reinterpret_cast<LPDWORD>(&written), nullptr), Throw(Win32Error, "Failed to write into console"));
+            WriteConsole(m_handler, bytes.getBuffer(), bytes.getCapacity(), reinterpret_cast<LPDWORD>(&written), nullptr);
 
             return written;
         }

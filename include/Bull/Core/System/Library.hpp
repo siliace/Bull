@@ -58,10 +58,8 @@ namespace Bull
          *
          * \param name The name or the path to the library to load
          *
-         * \return Return true if the library is loaded, false otherwise
-         *
          */
-        bool load(const String& name);
+        void load(const String& name);
 
         /*! \brief Check whether the library is loaded
          *
@@ -77,7 +75,7 @@ namespace Bull
          * \return Return the function or nullptr if the function does not exists
          *
          */
-        LibFunction getFunction(const String& name);
+        LibFunction getFunction(const String& name) const;
 
         /*! \brief Free the library
          *

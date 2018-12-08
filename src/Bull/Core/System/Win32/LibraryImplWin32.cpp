@@ -5,38 +5,20 @@ namespace Bull
 {
     namespace prv
     {
-        LibraryImplWin32::LibraryImplWin32() :
-            m_handler(nullptr)
+        LibraryImplWin32::LibraryImplWin32(const String& name) :
+            m_handler(LoadLibrary(name.getBuffer()))
         {
-            /// Nothing
+            Expect(m_handler, Throw(Win32Error, "Failed to load library " + name))
         }
 
         LibraryImplWin32::~LibraryImplWin32()
         {
-            if(isLoaded())
-            {
-                FreeLibrary(m_handler);
-            }
+            FreeLibrary(m_handler);
         }
 
-        bool LibraryImplWin32::load(const String& name)
+        Library::LibFunction LibraryImplWin32::getFunction(const String& name) const
         {
-            return (m_handler = LoadLibrary(name.getBuffer())) != nullptr;
-        }
-
-        bool LibraryImplWin32::isLoaded() const
-        {
-            return m_handler != nullptr;
-        }
-
-        Library::LibFunction LibraryImplWin32::getFunction(const String& name)
-        {
-            if(isLoaded())
-            {
-                return reinterpret_cast<Library::LibFunction>(GetProcAddress(m_handler, name.getBuffer()));
-            }
-
-            return nullptr;
+            return reinterpret_cast<Library::LibFunction>(GetProcAddress(m_handler, name.getBuffer()));
         }
     }
 }

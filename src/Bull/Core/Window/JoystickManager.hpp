@@ -5,7 +5,7 @@
 #include <queue>
 
 #include <Bull/Core/Hardware/Joystick.hpp>
-#include <Bull/Core/Pattern/Singleton.hpp>
+#include <Bull/Core/Pattern/SharedSingleton.hpp>
 #include <Bull/Core/Window/AbstractJoystickManager.hpp>
 #include <Bull/Core/Window/JoystickState.hpp>
 #include <Bull/Core/Window/WindowEvent.hpp>
@@ -14,14 +14,9 @@ namespace Bull
 {
     namespace prv
     {
-        class JoystickManager : public Singleton<JoystickManager>, public AbstractJoystickManager
+        class JoystickManager : public SharedSingleton<JoystickManager>, public AbstractJoystickManager
         {
         public:
-
-            /*! \brief Default constructor
-             *
-             */
-            JoystickManager();
 
             /*! \brief Process events for every joysticks
              *
@@ -74,6 +69,15 @@ namespace Bull
 
         private:
 
+            friend class SharedSingleton<JoystickManager>;
+
+            /*! \brief Default constructor
+             *
+             */
+            JoystickManager();
+
+        private:
+
             /*! \brief Update joystick events
              *
              * \param id The id of the joystick
@@ -82,10 +86,12 @@ namespace Bull
              */
             void processJoystick(Uint8 joystick, std::queue<WindowEvent>& eventQueue);
 
+        private:
+
             bool                                             m_keyrepeat;
             float                                            m_threshold;
             std::array<JoystickState, Joystick::CountButton> m_stateCache;
-            Duration                                             m_repeatDelay;
+            Duration                                         m_repeatDelay;
         };
     }
 }

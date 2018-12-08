@@ -15,29 +15,15 @@ namespace Bull
 
             /*! \brief Constructor
              *
+             * \param name The name or the path to the library to load
+             *
              */
-            LibraryImplWin32();
+            explicit LibraryImplWin32(const String& name);
 
             /*! \brief Destructor
              *
              */
             ~LibraryImplWin32();
-
-            /*! \brief Load a library
-             *
-             * \param name The name or the path to the library to load
-             *
-             * \return Return true if the library is loaded, false otherwise
-             *
-             */
-            bool load(const String& name);
-
-            /*! \brief Tell whether the library is loaded
-             *
-             * \return True if the library is loaded
-             *
-             */
-            bool isLoaded() const override;
 
             /*! \brief Get a function from the library
              *
@@ -46,7 +32,7 @@ namespace Bull
              * \return Return the function or nullptr if the function does not exists
              *
              */
-            Library::LibFunction getFunction(const String& name);
+            Library::LibFunction getFunction(const String& name) const override;
 
         private:
 

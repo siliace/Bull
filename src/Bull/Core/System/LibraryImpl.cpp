@@ -14,14 +14,7 @@ namespace Bull
     {
         std::unique_ptr<LibraryImpl> LibraryImpl::createInstance(const String& name)
         {
-            std::unique_ptr<LibraryImpl> ptr = std::make_unique<LibraryImplType>();
-
-            if(ptr->load(name))
-            {
-                return ptr;
-            }
-
-            return nullptr;
+            return std::make_unique<LibraryImplType>(name);
         }
 
         LibraryImpl::~LibraryImpl() = default;

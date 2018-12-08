@@ -6,7 +6,7 @@ namespace Bull
 {
     Library::Library(const String& name)
     {
-        Expect(load(name), Throw(InternalError, "Failed to load library " + name));
+        load(name);
     }
 
     Library::~Library()
@@ -14,29 +14,22 @@ namespace Bull
         free();
     }
 
-    bool Library::load(const String& name)
+    void Library::load(const String& name)
     {
-        if(!isLoaded())
+        if(isLoaded())
         {
-            m_impl = prv::LibraryImpl::createInstance(name);
-
-            return isLoaded();
+            free();
         }
 
-        return false;
+        m_impl = prv::LibraryImpl::createInstance(name);
     }
 
     bool Library::isLoaded() const
     {
-        if(m_impl)
-        {
-            return m_impl->isLoaded();
-        }
-
-        return false;
+        return m_impl != nullptr;
     }
 
-    Library::LibFunction Library::getFunction(const String& name)
+    Library::LibFunction Library::getFunction(const String& name) const
     {
         if(isLoaded())
         {

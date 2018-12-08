@@ -3,7 +3,7 @@
 
 #include <set>
 
-#include <Bull/Core/Pattern/Singleton.hpp>
+#include <Bull/Core/Pattern/SharedSingleton.hpp>
 
 #include <Bull/Render/Context/Extension.hpp>
 #include <Bull/Render/Context/SurfaceHandler.hpp>
@@ -12,7 +12,7 @@ namespace Bull
 {
     namespace prv
     {
-        class ExtensionsLoader : public Singleton<ExtensionsLoader>
+        class ExtensionsLoader : public SharedSingleton<ExtensionsLoader>
         {
         private:
 
@@ -26,11 +26,6 @@ namespace Bull
             static std::set<String> getAllExtensions(SurfaceHandler surface);
 
         public:
-
-            /*! \brief Default constructor
-             *
-             */
-            ExtensionsLoader();
 
             /*! \brief Add an extension to load
              *
@@ -59,6 +54,15 @@ namespace Bull
              *
              */
             bool isSupported(const String& extension) const;
+
+        private:
+
+            friend class SharedSingleton<ExtensionsLoader>;
+
+            /*! \brief Default constructor
+             *
+             */
+            ExtensionsLoader();
 
         private:
 

@@ -12,11 +12,6 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
-         *
-         */
-        WsaService();
-
         /*! \brief Destructor
          *
          */
@@ -35,6 +30,15 @@ namespace Bull
          *
          */
         int getLastError() const;
+
+    private:
+
+        friend class Singleton<WsaService>;
+
+        /*! \brief Default constructor
+         *
+         */
+        WsaService();
 
     private:
 

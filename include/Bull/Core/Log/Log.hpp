@@ -6,11 +6,11 @@
 
 #include <Bull/Core/Log/AbstractLogger.hpp>
 #include <Bull/Core/Memory/String.hpp>
-#include <Bull/Core/Pattern/Singleton.hpp>
+#include <Bull/Core/Pattern/SharedSingleton.hpp>
 
 namespace Bull
 {
-    class BULL_CORE_API Log : public Singleton<Log>
+    class BULL_CORE_API Log : public SharedSingleton<Log>
     {
     public:
 
@@ -66,7 +66,7 @@ namespace Bull
 
     private:
 
-        friend class Singleton<Log>;
+        friend class SharedSingleton<Log>;
 
         /*! \brief Default constructor
          *

@@ -7,6 +7,7 @@ target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE}/Export.hpp
             ${BULL_INC_CORE}/Prerequisites.hpp
+            ${BULL_INC_CORE}/RunTime.hpp
         )
 
 add_subdirectory(Assets)
@@ -18,6 +19,7 @@ add_subdirectory(IO)
 add_subdirectory(Log)
 add_subdirectory(Memory)
 add_subdirectory(Pattern)
+add_subdirectory(Plugin)
 add_subdirectory(Signal)
 add_subdirectory(Support)
 add_subdirectory(System)
