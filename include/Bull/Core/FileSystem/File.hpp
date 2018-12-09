@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include <Bull/Core/Exception/Exception.hpp>
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
 #include <Bull/Core/FileSystem/Path.hpp>
 #include <Bull/Core/IO/CursorAwareInStream.hpp>
@@ -12,6 +13,9 @@
 
 namespace Bull
 {
+    DeclareException(FileNotFound);
+    DeclareException(FileAlreadyExists);
+
     namespace prv
     {
         class FileImpl;

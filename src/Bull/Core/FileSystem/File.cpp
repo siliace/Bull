@@ -1,4 +1,3 @@
-#include <Bull/Core/Exception/FileNotFound.hpp>
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/IO/TextReader.hpp>
@@ -10,10 +9,9 @@ namespace Bull
 {
     void File::create(const Path& path)
     {
-        if(!exists(path))
-        {
-            prv::FileImpl::create(path);
-        }
+        Expect(!exists(path), Throw(FileAlreadyExists, "The file " + path.toString() + " already exists"));
+
+        prv::FileImpl::create(path);
     }
 
     bool File::exists(const Path& path)
@@ -23,17 +21,25 @@ namespace Bull
 
     void File::copy(const Path& path, const Path& newPath)
     {
+        Expect(exists(path), Throw(FileNotFound, "The file " + path.toString() + " does not exists"));
+        Expect(!exists(newPath), Throw(FileAlreadyExists, "The file " + newPath.toString() + " already exists"));
+
         prv::FileImpl::copy(path, newPath);
     }
 
     void File::rename(const Path& path, const Path& newPath)
     {
+        Expect(exists(path), Throw(FileNotFound, "The file " + path.toString() + " does not exists"));
+        Expect(!exists(newPath), Throw(FileAlreadyExists, "The file " + newPath.toString() + " already exists"));
+
         prv::FileImpl::rename(path, newPath);
     }
 
-    void File::remove(const Path& name)
+    void File::remove(const Path& path)
     {
-        prv::FileImpl::remove(name);
+        Expect(exists(path), Throw(FileNotFound, "The file " + path.toString() + " does not exists"));
+
+        prv::FileImpl::remove(path);
     }
 
     File::File() :

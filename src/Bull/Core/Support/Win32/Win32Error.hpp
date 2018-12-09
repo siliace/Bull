@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_SUPPORT_WIN32ERROR_HPP
 #define BULL_CORE_SUPPORT_WIN32ERROR_HPP
 
-#include <Bull/Core/Exception/Exception.hpp>
+#include <Bull/Core/Exception/InternalError.hpp>
 
 namespace Bull
 {

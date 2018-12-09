@@ -7,7 +7,7 @@ namespace Bull
     namespace prv
     {
         Win32Error::Win32Error(const String& file, Uint64 line, const String& source, const String& description) :
-                Exception(file, line, "Win32Error", source, description + " - " + createDescription())
+            Exception(file, line, "Win32Error", source, description + " - " + createDescription())
         {
             /// Nothing
         }

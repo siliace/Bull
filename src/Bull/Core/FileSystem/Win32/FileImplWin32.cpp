@@ -26,7 +26,7 @@ namespace Bull
         {
             DWORD attribs = GetFileAttributes(name.toString().getBuffer());
 
-            return (attribs != INVALID_FILE_ATTRIBUTES &&  !(attribs & FILE_ATTRIBUTE_DIRECTORY));
+            return (attribs != INVALID_FILE_ATTRIBUTES && !(attribs & FILE_ATTRIBUTE_DIRECTORY));
         }
 
         void FileImplWin32::copy(const Path& path, const Path& newPath)
