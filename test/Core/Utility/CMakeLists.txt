@@ -1,0 +1,4 @@
+bull_add_core_test(CharacterTest)
+bull_add_core_test(MapUtilsTest)
+bull_add_core_test(RandomTest)
+bull_add_core_test(StringUtilsTest)

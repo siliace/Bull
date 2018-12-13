@@ -40,4 +40,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin/${CMAKE_BUILD
 add_subdirectory(demo)
 add_subdirectory(src)
 
-add_subdirectory(test/Core/FileSystem)
+if(BULL_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(test)
+endif()

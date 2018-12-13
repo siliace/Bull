@@ -1,3 +1,4 @@
+#include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Utility/Character.hpp>
 
 namespace Bull
@@ -22,14 +23,17 @@ namespace Bull
         return character;
     }
 
-    char Character::intToChar(int integer)
+    char Character::intToChar(int number)
     {
-        return static_cast<char>(integer) + '0';
+        Expect(number >= 0 && number <= 9, Throw(InvalidParameter, "Number parameter should be between 0 and 9"));
+
+        return static_cast<char>(number) + '0';
     }
 
-    int Character::charToInt(char character)
+    int Character::charToInt(char number)
     {
-        return character - '0';
-    }
+        Expect(number >= '0' && number <= '9', Throw(InvalidParameter, "Number parameter should be between 0 and 9"));
 
+        return number - '0';
+    }
 }
