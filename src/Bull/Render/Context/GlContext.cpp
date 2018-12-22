@@ -157,13 +157,12 @@ namespace Bull
 
             writer << message;
 
-            if(severity == GL_DEBUG_SEVERITY_NOTIFICATION)
+            switch (severity)
             {
-                log.info(oss.toString());
-            }
-            else
-            {
-                log.error(oss.toString());
+                case GL_DEBUG_SEVERITY_NOTIFICATION: log.debug(oss.toString()); break;
+                case GL_DEBUG_SEVERITY_LOW: log.info(oss.toString()); break;
+                case GL_DEBUG_SEVERITY_MEDIUM: log.warning(oss.toString()); break;
+                case GL_DEBUG_SEVERITY_HIGH: log.error(oss.toString()); break;
             }
         }
 
