@@ -29,11 +29,11 @@ namespace Bull
         return m_impl != nullptr;
     }
 
-    Library::LibFunction Library::getFunction(const String& name) const
+    void* Library::getSymbolPointer(const String& name) const
     {
         if(isLoaded())
         {
-            return m_impl->getFunction(name);
+            return m_impl->getSymbolPointer(name);
         }
 
         return nullptr;

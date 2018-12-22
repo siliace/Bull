@@ -1,15 +1,16 @@
 #include <dlfcn.h>
 
+#include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/System/Unix/LibraryImplUnix.hpp>
 
 namespace Bull
 {
     namespace prv
     {
-        LibraryImplUnix::LibraryImplUnix() :
-            m_handler(nullptr)
+        LibraryImplUnix::LibraryImplUnix(const String& name) :
+            m_handler(dlopen(name.getBuffer(), RTLD_LAZY))
         {
-            /// Nothing
+            Expect(m_handler, Throw(InternalError, "Failed to load library " + name));
         }
 
         LibraryImplUnix::~LibraryImplUnix()
@@ -17,21 +18,9 @@ namespace Bull
             dlclose(m_handler);
         }
 
-        bool LibraryImplUnix::load(const String& name)
+        void* LibraryImplUnix::getSymbolPointer(const String& name) const
         {
-            m_handler = dlopen(name.getBuffer(), RTLD_LAZY);
-
-            return m_handler == nullptr;
-        }
-
-        bool LibraryImplUnix::isLoaded() const
-        {
-            return m_handler != nullptr;
-        }
-
-        Library::LibFunction LibraryImplUnix::getFunction(const String& name)
-        {
-            return reinterpret_cast<Library::LibFunction>(dlsym(m_handler, name.getBuffer()));
+            return dlsym(m_handler, name.getBuffer());
         }
     }
 }

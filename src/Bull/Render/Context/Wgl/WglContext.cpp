@@ -36,7 +36,7 @@ namespace Bull
                 return nullptr;
             }
 
-            return reinterpret_cast<void*>(library.getFunction(function));
+            return library.getSymbolPointer(function);
         }
 
         void WglContext::requireExtensions(ExtensionsLoader& loader)

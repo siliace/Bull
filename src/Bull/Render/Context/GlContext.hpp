@@ -92,7 +92,7 @@ namespace Bull
              * \param userParam
              *
              */
-            static void debugProc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* msg, const void *userParam);
+            static void APIENTRY debugProc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* msg, const void *userParam);
 
         protected:
 

@@ -1,8 +1,10 @@
 #ifndef BULL_CORE_SYSTEM_LIBRARYIMPL_HPP
 #define BULL_CORE_SYSTEM_LIBRARYIMPL_HPP
 
+#include <memory>
+
+#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
-#include <Bull/Core/System/Library.hpp>
 
 namespace Bull
 {
@@ -35,7 +37,7 @@ namespace Bull
              * \return The function or nullptr if the function does not exists
              *
              */
-            virtual Library::LibFunction getFunction(const String& name) const = 0;
+            virtual void* getSymbolPointer(const String& name) const = 0;
 
         protected:
 

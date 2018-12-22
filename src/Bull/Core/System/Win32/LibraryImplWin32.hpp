@@ -32,7 +32,7 @@ namespace Bull
              * \return Return the function or nullptr if the function does not exists
              *
              */
-            Library::LibFunction getFunction(const String& name) const override;
+            void* getSymbolPointer(const String& name) const override;
 
         private:
 

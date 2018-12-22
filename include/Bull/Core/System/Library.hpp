@@ -1,6 +1,7 @@
 #ifndef BULL_CORE_SYSTEM_LIBRARY_HPP
 #define BULL_CORE_SYSTEM_LIBRARY_HPP
 
+#include <functional>
 #include <memory>
 
 #include <Bull/Core/Memory/String.hpp>
@@ -15,10 +16,6 @@ namespace Bull
 
     class BULL_CORE_API Library : public NonCopyable
     {
-    public:
-
-        using LibFunction = int(*)();
-
     public:
 
         /*! \brief Default constructor
@@ -75,7 +72,24 @@ namespace Bull
          * \return Return the function or nullptr if the function does not exists
          *
          */
-        LibFunction getFunction(const String& name) const;
+        template <typename T>
+        std::function<T> getFunction(const String& name) const
+        {
+            return std::function<T>(
+                    reinterpret_cast<T*>(getSymbolPointer(name))
+            );
+        }
+
+        /*! \brief Get a function from the library
+         *
+         * Used only for internal purposes
+         *
+         * \param name The name of the function
+         *
+         * \return Return the function or nullptr if the function does not exists
+         *
+         */
+        void* getSymbolPointer(const String& name) const;
 
         /*! \brief Free the library
          *

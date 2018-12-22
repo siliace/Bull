@@ -16,9 +16,9 @@ namespace Bull
             FreeLibrary(m_handler);
         }
 
-        Library::LibFunction LibraryImplWin32::getFunction(const String& name) const
+        void* LibraryImplWin32::getSymbolPointer(const String& name) const
         {
-            return reinterpret_cast<Library::LibFunction>(GetProcAddress(m_handler, name.getBuffer()));
+            return reinterpret_cast<void*>(GetProcAddress(m_handler, name.getBuffer()));
         }
     }
 }

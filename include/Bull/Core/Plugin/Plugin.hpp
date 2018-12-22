@@ -53,9 +53,7 @@ namespace Bull
         template <typename R, typename... Args>
         R call(const String& function, Args&&... args) const
         {
-            std::function<R(Args...)> func(
-                    reinterpret_cast<R(*)(Args...)>(m_library.getFunction(function))
-            );
+            std::function<R(Args...)> func = m_library.getFunction<R(Args...)>(function);
 
             Expect(func, Throw(InvalidParameter, "No function " + function + " found in plugin"));
 
