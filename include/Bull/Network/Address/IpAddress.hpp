@@ -63,7 +63,7 @@ namespace Bull
          * \return The byte
          *
          */
-        const Uint8& at(std::size_t index) const;
+        Uint8 at(std::size_t index) const;
 
         /*! \brief Compare two IpAddress
          *

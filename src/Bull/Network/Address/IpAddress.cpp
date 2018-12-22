@@ -26,7 +26,7 @@ namespace Bull
         return m_bytes[index];
     }
 
-    const Uint8& IpAddress::at(std::size_t index) const
+    Uint8 IpAddress::at(std::size_t index) const
     {
         return m_bytes[index];
     }

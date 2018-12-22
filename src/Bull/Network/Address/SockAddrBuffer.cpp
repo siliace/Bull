@@ -34,6 +34,8 @@ namespace Bull
                 case AF_INET6: return NetPort(ntohs(reinterpret_cast<const sockaddr_in6*>(&m_addr)->sin6_port));
                 default: Throw(InvalidParameter, "Unsupported AF type");
             }
+
+            return NetPort_Any;
         }
 
         std::unique_ptr<IpAddress> SockAddrBuffer::getIpAddress()
@@ -44,6 +46,8 @@ namespace Bull
                 case AF_INET6: return createFromSockAddrV6();
                 default: Throw(InvalidParameter, "Unsupported AF type");
             }
+
+            return nullptr;
         }
 
         const sockaddr* SockAddrBuffer::getSockAddr() const
