@@ -7,6 +7,11 @@
 #include <Bull/Render/Context/ExtensionsLoader.hpp>
 #include <Bull/Render/Context/SurfaceHandler.hpp>
 
+/// In some system, APIENTRY is not defined
+#ifndef APIENTRY
+    #define APIENTRY
+#endif
+
 namespace Bull
 {
     namespace prv
