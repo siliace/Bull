@@ -183,7 +183,7 @@ namespace Bull
                 glXDestroyPbuffer(m_display.getHandler(), m_pbuffer);
             }
 
-            if(m_ownWindow && m_window)
+            if(m_ownWindow)
             {
                 XDestroyWindow(m_display.getHandler(), m_window);
                 XFreeColormap(m_display.getHandler(), m_colormap);
