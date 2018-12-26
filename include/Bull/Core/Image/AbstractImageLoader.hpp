@@ -70,9 +70,9 @@ namespace Bull
 
         struct RawImage
         {
-            ByteArray pixels;
-            Size size;
-            int channels;
+            ByteArray         pixels;
+            Size<std::size_t> size;
+            int               channels;
         };
 
         /*! \brief Get the last loading error message

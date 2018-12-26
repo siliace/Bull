@@ -66,7 +66,7 @@ int main()
     Bull::DirectionalLight dl(Bull::Vector3F::Down);
     Bull::SpotLight sp(Bull::Vector3F::UnitZ * 10.f, Bull::Vector3F::Backward);
 
-    Bull::RenderWindow window(Bull::VideoMode(800, 600), "Demonstration rendering");
+    Bull::RenderWindow window(Bull::VideoMode(Bull::SizeUI(800, 600)), "Demonstration rendering");
 
     Camera camera(window);
     camera.setForward(Bull::Vector3F::Backward);

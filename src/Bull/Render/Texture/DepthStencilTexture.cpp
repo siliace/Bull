@@ -2,7 +2,7 @@
 
 namespace Bull
 {
-    DepthStencilTexture::DepthStencilTexture(const Size& size)
+    DepthStencilTexture::DepthStencilTexture(const Size<std::size_t>& size)
     {
         create(size);
     }
@@ -20,7 +20,7 @@ namespace Bull
         return *this;
     }
 
-    void DepthStencilTexture::create(const Size& size)
+    void DepthStencilTexture::create(const Size<std::size_t>& size)
     {
         Texture::create(size, PixelFormat_Depth24Stencil8);
     }

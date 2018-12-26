@@ -30,7 +30,7 @@ namespace Bull
          * \param depthValue The StencilValue of the StencilTexture
          *
          */
-        DepthTexture(const Size& size, DepthValue depthValue);
+        DepthTexture(const Size<std::size_t>& size, DepthValue depthValue);
 
         /*! \brief Constructor by movement semantic
          *
@@ -53,17 +53,14 @@ namespace Bull
          * \param size The Size
          *
          */
-        void create(const Size& size) override;
+        void create(const Size<std::size_t>& size) override;
 
         /*! \brief Get the DepthValue of the DepthTexture
          *
          * \return The DepthValue
          *
          */
-        inline DepthValue getDepthValue() const
-        {
-            return m_depthValue;
-        }
+        DepthValue getDepthValue() const;
 
     private:
 

@@ -16,7 +16,6 @@ target_sources(bull-core
             ${BULL_INC_CORE_UTILITY}/Random.hpp
             ${BULL_SRC_CORE_UTILITY}/Random.cpp
             ${BULL_INC_CORE_UTILITY}/Size.hpp
-            ${BULL_SRC_CORE_UTILITY}/Size.cpp
             ${BULL_INC_CORE_UTILITY}/StringUtils.hpp
             ${BULL_SRC_CORE_UTILITY}/StringUtils.cpp
         )

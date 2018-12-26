@@ -43,7 +43,7 @@ namespace Bull
              * \param hotSpot The hotspot of the Cursor
              *
              */
-            virtual void create(const Image& cursor, const Size& hotSpot) = 0;
+            virtual void create(const Image& cursor, const SizeUI& hotSpot) = 0;
 
             /*! \brief Get the native system handler of the cursor
              *

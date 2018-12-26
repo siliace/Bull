@@ -14,7 +14,7 @@ namespace Bull
          * \param size The Size of the DepthStencilTexture
          *
          */
-        explicit DepthStencilTexture(const Size& size);
+        explicit DepthStencilTexture(const Size<std::size_t>& size);
 
         /*! \brief Constructor by movement semantic
          *
@@ -37,7 +37,7 @@ namespace Bull
          * \param size The Size
          *
          */
-        void create(const Size& size) override;
+        void create(const Size<std::size_t>& size) override;
     };
 }
 

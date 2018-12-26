@@ -52,7 +52,7 @@ namespace Bull
          * \return The size
          *
          */
-        Size getSize() const override;
+        AbstractImage::Size getSize() const override;
 
         /*! \brief Get pixels of the Image
          *
@@ -70,9 +70,9 @@ namespace Bull
 
     private:
 
-        Size m_size;
-        ByteArray m_pixels;
-        PixelFormat m_pixelFormat;
+        AbstractImage::Size m_size;
+        ByteArray           m_pixels;
+        PixelFormat         m_pixelFormat;
     };
 }
 

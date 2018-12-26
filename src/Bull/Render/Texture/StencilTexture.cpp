@@ -10,7 +10,7 @@ namespace Bull
         /// Nothing
     }
 
-    StencilTexture::StencilTexture(const Size& size, StencilValue stencilValue) :
+    StencilTexture::StencilTexture(const Size<std::size_t>& size, StencilValue stencilValue) :
         m_stencilValue(stencilValue)
     {
         create(size);
@@ -31,7 +31,7 @@ namespace Bull
         return *this;
     }
 
-    void StencilTexture::create(const Size& size)
+    void StencilTexture::create(const Size<std::size_t>& size)
     {
         switch(m_stencilValue)
         {
@@ -40,5 +40,10 @@ namespace Bull
             case StencilValue_8: Texture::create(size, PixelFormat_Stencil8); break;
             case StencilValue_16: Texture::create(size, PixelFormat_Stencil16); break;
         }
+    }
+
+    StencilValue StencilTexture::getStencilValue() const
+    {
+        return m_stencilValue;
     }
 }

@@ -12,17 +12,7 @@ namespace Bull
         /*! \brief Default constructor
          *
          */
-        Viewport();
-
-        /*! \brief Constructor
-         *
-         * \param x
-         * \param y
-         * \param width
-         * \param height
-         *
-         */
-        Viewport(int x, int y, int width, int height);
+        Viewport() = default;
 
         /*! \brief Constructor
          *
@@ -30,7 +20,7 @@ namespace Bull
          * \param size
          *
          */
-        Viewport(const Size& position, const Size& size);
+        Viewport(const SizeI& position, const SizeUI& size);
 
         /*! \brief Compare two viewports
          *
@@ -55,18 +45,10 @@ namespace Bull
          * \param offset The offset to move the viewport
          *
          */
-        void move(const Size& offset);
+        void move(const SizeI& offset);
 
-        /*! \brief Move the viewport
-         *
-         * \param x The offset on x-axis
-         * \param y The offset on y-axis
-         *
-         */
-        void move(int x, int y);
-
-        int x, y;
-        int width, height;
+        SizeI position;
+        SizeUI size;
     };
 }
 

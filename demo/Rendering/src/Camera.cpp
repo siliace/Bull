@@ -17,9 +17,9 @@ Bull::Matrix4F Camera::getModelViewProjectionMatrix(const Bull::Transformable& t
     return getViewProjectionMatrix() * transformable.getModelMatrix();
 }
 
-void Camera::resize(const Bull::Size& size)
+void Camera::resize(const Bull::SizeUI& size)
 {
-    m_projection = Bull::Matrix4F::makePerspective(m_fov, size.getRatio(), Bull::Vector2F(0.1f, 100.f));
+    m_projection = Bull::Matrix4F::makePerspective(m_fov, size.getRatio<float>(), Bull::Vector2F(0.1f, 100.f));
 }
 
 void Camera::setFieldOfView(const Bull::AngleF& angle)
@@ -60,7 +60,5 @@ void Camera::updateView()
 
 void Camera::updatePerspective()
 {
-    float ratio = static_cast<float>(m_target.getDefaultViewport().width) / static_cast<float>(m_target.getDefaultViewport().height);
-
-    m_projection = Bull::Matrix4F::makePerspective(m_fov, ratio, Bull::Vector2F(0.1f, 100.f));
+    m_projection = Bull::Matrix4F::makePerspective(m_fov, m_target.getDefaultViewport().size.getRatio<float>(), Bull::Vector2F(0.1f, 100.f));
 }

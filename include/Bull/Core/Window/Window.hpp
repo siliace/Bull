@@ -144,7 +144,7 @@ namespace Bull
          * \param position The new position of the window
          *
          */
-        void setPosition(const Size& position);
+        void setPosition(const SizeI& position);
 
         /*! \brief Set the window position
          *
@@ -159,73 +159,49 @@ namespace Bull
          * \return Return the window position
          *
          */
-        Size getPosition() const;
+        SizeI getPosition() const;
 
         /*! \brief Set the minimal size of the window
          *
          * \param size The minimal size of the window
          *
          */
-        void setMinSize(const Size& size);
-
-        /*! \brief Set the minimal size of the window
-         *
-         * \param width  The minimal width of the window
-         * \param height The minimal height of the window
-         *
-         */
-        void setMinSize(int width, int height);
+        void setMinSize(const Size<unsigned int>& size);
 
         /*! \brief Get the minimal size of the window
          *
          * \return The minimal size
          *
          */
-        Size getMinSize() const;
+        SizeUI getMinSize() const;
 
         /*! \brief Set the maximal size of the window
          *
          * \param size The maximal size of the window
          *
          */
-        void setMaxSize(const Size& size);
-
-        /*! \brief Set the maximal size of the window
-         *
-         * \param width  The maximal width of the window
-         * \param height The maximal height of the window
-         *
-         */
-        void setMaxSize(int width, int height);
+        void setMaxSize(const SizeUI& size);
 
         /*! \brief Get the maximal size of the window
          *
          * \return The maximal size
          *
          */
-        Size getMaxSize() const;
+        SizeUI getMaxSize() const;
 
         /*! \brief Set the size of the window
          *
          * \param size The new size of the window
          *
          */
-        void setSize(const Size& size);
-
-        /*! \brief Set the size of the window
-         *
-         * \param x The new width of the window
-         * \param y The new height of the window
-         *
-         */
-        void setSize(unsigned int x, unsigned int y);
+        void setSize(const SizeUI& size);
 
         /*! \brief Get the size of the window
          *
          * \return Return the size of the window
          *
          */
-        Size getSize() const;
+        SizeUI getSize() const;
 
         /*! \brief Set the title of the window
          *

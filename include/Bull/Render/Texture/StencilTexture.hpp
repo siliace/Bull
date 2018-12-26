@@ -30,7 +30,7 @@ namespace Bull
          * \param stencilValue The StencilValue of the StencilTexture
          *
          */
-        StencilTexture(const Size& size, StencilValue stencilValue);
+        StencilTexture(const Size<std::size_t>& size, StencilValue stencilValue);
 
         /*! \brief Constructor by movement semantic
          *
@@ -53,17 +53,14 @@ namespace Bull
          * \param size The Size
          *
          */
-        void create(const Size& size) override;
+        void create(const Size<std::size_t>& size) override;
 
         /*! \brief Get the StencilValue of the StencilTexture
          *
          * \return The StencilValue
          *
          */
-        inline StencilValue getStencilValue() const
-        {
-            return m_stencilValue;
-        }
+        StencilValue getStencilValue() const;
 
     private:
 

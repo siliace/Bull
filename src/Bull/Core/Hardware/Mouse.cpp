@@ -9,18 +9,18 @@ namespace Bull
         setPosition(window.getSize() / 2, window);
     }
 
-    void Mouse::setPosition(const Size& position)
+    void Mouse::setPosition(const SizeI& position)
     {
         prv::MouseImpl::setPosition(position);
     }
 
-    void Mouse::setPosition(const Size& position, const Window& relative)
+    void Mouse::setPosition(const SizeI& position, const Window& relative)
     {
         relative.ignoreNextMouseEvent();
         prv::MouseImpl::setPosition(relative.getPosition() + position);
     }
 
-    Size Mouse::getPosition()
+    SizeI Mouse::getPosition()
     {
         return prv::MouseImpl::getPosition();
     }

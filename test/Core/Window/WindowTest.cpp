@@ -9,7 +9,7 @@ SCENARIO("Create window and change its settings")
     GIVEN("A valid video mode and title")
     {
         String title("Unit test window");
-        VideoMode videoMode(800, 600);
+        VideoMode videoMode(SizeUI(800, 600));
         Uint32 style = WindowStyle_Default;
 
         Window window(videoMode, title, style);
@@ -22,7 +22,7 @@ SCENARIO("Create window and change its settings")
             }
             AND_THEN("The window should have the right size")
             {
-                REQUIRE(window.getSize() == videoMode.toSize());
+                REQUIRE(window.getSize() == videoMode.size);
             }
             AND_THEN("The window should have the right title")
             {
@@ -32,7 +32,7 @@ SCENARIO("Create window and change its settings")
 
         WHEN("Change the window size")
         {
-            const Size newSize(1360, 768);
+            const SizeUI newSize(1360, 768);
 
             window.setSize(newSize);
 

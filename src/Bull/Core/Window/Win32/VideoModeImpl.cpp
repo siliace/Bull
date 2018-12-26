@@ -14,7 +14,7 @@ namespace Bull
 
             EnumDisplaySettings(nullptr, ENUM_CURRENT_SETTINGS, &mode);
 
-            return { mode.dmPelsWidth, mode.dmPelsHeight, mode.dmBitsPerPel };
+            return VideoMode(SizeUI(mode.dmPelsWidth, mode.dmPelsHeight), mode.dmBitsPerPel);
         }
 
         std::vector<VideoMode> VideoModeImpl::getAllAvailable()
@@ -24,7 +24,7 @@ namespace Bull
 
             for(unsigned int i = 0; EnumDisplaySettings(nullptr, i, &devMode); i++)
             {
-                VideoMode mode(devMode.dmPelsWidth, devMode.dmPelsHeight, devMode.dmBitsPerPel);
+                VideoMode mode(SizeUI(devMode.dmPelsWidth, devMode.dmPelsHeight), devMode.dmBitsPerPel);
 
                 if(std::find(modes.begin(), modes.end(), mode) == modes.end())
                 {

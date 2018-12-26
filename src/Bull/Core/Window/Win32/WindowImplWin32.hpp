@@ -56,7 +56,7 @@ namespace Bull
              * \return The adjusted Size
              *
              */
-            static Size getAdjustedSize(const Size& size, DWORD style);
+            static SizeUI getAdjustedSize(const SizeUI& size, DWORD style);
 
         public:
 
@@ -115,56 +115,56 @@ namespace Bull
              * \param size The new size of the window
              *
              */
-            void setPosition(const Size& position) override;
+            void setPosition(const SizeI& position) override;
 
             /*! \brief Get the position in the screen of the window
              *
              * \return Return the window position
              *
              */
-            Size getPosition() const override;
+            SizeI getPosition() const override;
 
             /*! \brief Set the minimal size of the window
              *
              * \param size The minimal size of the window
              *
              */
-            void setMinSize(const Size& size) override;
+            void setMinSize(const SizeUI& size) override;
 
             /*! \brief Get the minimal size of the window
              *
              * \return The minimal size
              *
              */
-            Size getMinSize() const override;
+            SizeUI getMinSize() const override;
 
             /*! \brief Set the maximal size of the window
              *
              * \param size The maximal size of the window
              *
              */
-            void setMaxSize(const Size& size) override;
+            void setMaxSize(const SizeUI& size) override;
 
             /*! \brief Get the maximal size of the window
              *
              * \return The maximal size
              *
              */
-            Size getMaxSize() const override;
+            SizeUI getMaxSize() const override;
 
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window
              *!
              */
-            void setSize(const Size& size) override;
+            void setSize(const SizeUI& size) override;
 
             /*! \brief Get the size of the window
              *
              * \return Return the size of the window
              *
              */
-            Size getSize() const override;
+            SizeUI getSize() const override;
 
             /*! \brief Set the title of the window
              *
@@ -255,17 +255,17 @@ namespace Bull
              */
             void processEvent(UINT message, WPARAM wParam, LPARAM lParam);
 
-            HICON           m_icon;
-            HCURSOR         m_cursor;
-            HWND            m_handler;
-            Size        m_maxSize;
-            Size        m_minSize;
-            Size       m_lastSize;
-            SavedWindowInfo m_savedInfo;
-            bool            m_isResizing;
-            bool            m_isFullscreen;
-            Size        m_lastPosition;
-            bool            m_cursorVisible;
+            HICON                   m_icon;
+            HCURSOR                 m_cursor;
+            HWND                    m_handler;
+            std::unique_ptr<SizeUI> m_maxSize;
+            std::unique_ptr<SizeUI> m_minSize;
+            SizeUI                  m_lastSize;
+            SavedWindowInfo         m_savedInfo;
+            bool                    m_isResizing;
+            bool                    m_isFullscreen;
+            SizeI                   m_lastPosition;
+            bool                    m_cursorVisible;
         };
     }
 }

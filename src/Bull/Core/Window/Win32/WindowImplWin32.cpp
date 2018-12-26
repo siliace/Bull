@@ -226,9 +226,9 @@ namespace Bull
             return windowWindowStyle;
         }
 
-        Size WindowImplWin32::getAdjustedSize(const Size& size, DWORD style)
+        SizeUI WindowImplWin32::getAdjustedSize(const SizeUI& size, DWORD style)
         {
-            Size adjusted;
+            SizeUI adjusted;
             RECT rectangle = {0, 0,
                               static_cast<LONG>(size.width),
                               static_cast<LONG>(size.height)};
@@ -244,22 +244,13 @@ namespace Bull
             m_icon(nullptr),
             m_cursor(LoadCursor(nullptr, IDC_ARROW)),
             m_isResizing(false),
-            m_minSize(-1, -1),
-            m_maxSize(-1, -1),
             m_cursorVisible(true)
         {
-            Size size;
-            m_isFullscreen = style & WindowStyle_Fullscreen;
+            SizeUI size;
+            m_isFullscreen = style == WindowStyle_Fullscreen;
             DWORD winWindowStyle = computeWindowStyle(style);
 
-            if(style == WindowStyle_Fullscreen)
-            {
-                size = mode.toSize();
-            }
-            else
-            {
-                size = getAdjustedSize(mode.toSize(), winWindowStyle);
-            }
+            size = m_isFullscreen ? mode.size : getAdjustedSize(mode.size, winWindowStyle);
 
             m_handler = CreateWindowEx(0,
                                        windowClassName,
@@ -341,12 +332,12 @@ namespace Bull
             }
         }
 
-        void WindowImplWin32::setPosition(const Size& position)
+        void WindowImplWin32::setPosition(const SizeI& position)
         {
             SetWindowPos(m_handler, nullptr, position.width, position.height, 0, 0, SWP_NOSIZE);
         }
 
-        Size WindowImplWin32::getPosition() const
+        SizeI WindowImplWin32::getPosition() const
         {
             RECT r = {0, 0, 0, 0};
 
@@ -355,46 +346,40 @@ namespace Bull
             return {r.left, r.top};
         }
 
-        void WindowImplWin32::setMinSize(const Size& size)
+        void WindowImplWin32::setMinSize(const SizeUI& size)
         {
-            Size adjusted = getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE)));
-
-            m_minSize.width = (size.width != -1) ? adjusted.width : -1;
-            m_minSize.height = (size.height != -1) ? adjusted.height : -1;
+            m_minSize = std::make_unique<SizeUI>(getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE))));
         }
 
-        Size WindowImplWin32::getMinSize() const
+        SizeUI WindowImplWin32::getMinSize() const
         {
-            return m_minSize;
+            return m_minSize ? *m_minSize : SizeUI::Zero;
         }
 
-        void WindowImplWin32::setMaxSize(const Size& size)
+        void WindowImplWin32::setMaxSize(const SizeUI& size)
         {
-            Size adjusted = getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE)));
-
-            m_maxSize.width = (size.width != -1) ? adjusted.width : -1;
-            m_maxSize.height = (size.height != -1) ? adjusted.height : -1;
+            m_maxSize = std::make_unique<SizeUI>(getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE))));
         }
 
-        Size WindowImplWin32::getMaxSize() const
+        SizeUI WindowImplWin32::getMaxSize() const
         {
-            return m_maxSize;
+            return m_maxSize ? *m_maxSize : SizeUI::Infinite;
         }
 
-        void WindowImplWin32::setSize(const Size& size)
+        void WindowImplWin32::setSize(const SizeUI& size)
         {
-            Size adjusted = getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE)));
+            SizeUI adjusted = getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE)));
 
             SetWindowPos(m_handler, nullptr, 0, 0, adjusted.width, adjusted.height, SWP_NOMOVE | SWP_NOZORDER);
         }
 
-        Size WindowImplWin32::getSize() const
+        SizeUI WindowImplWin32::getSize() const
         {
             RECT r = { 0, 0, 0, 0 };
 
             GetClientRect(m_handler, &r);
 
-            return { r.right - r.left, r.bottom - r.top };
+            return SizeUI(r.right - r.left, r.bottom - r.top);
         }
 
         void WindowImplWin32::setTitle(const String& title)
@@ -438,7 +423,7 @@ namespace Bull
                 SetWindowLongPtr(m_handler, GWL_STYLE,   WS_POPUP        | WS_VISIBLE);
                 SetWindowLongPtr(m_handler, GWL_EXSTYLE, WS_EX_APPWINDOW | WS_EX_TOPMOST);
 
-                SetWindowPos(m_handler, HWND_TOPMOST, 0, 0, current.width, current.height, SWP_SHOWWINDOW);
+                SetWindowPos(m_handler, HWND_TOPMOST, 0, 0, current.size.width, current.size.height, SWP_SHOWWINDOW);
 
                 ShowWindow(m_handler, SW_MAXIMIZE);
             }
@@ -863,31 +848,18 @@ namespace Bull
                 {
                     if(!m_isFullscreen)
                     {
-                        Size min               = getMinSize();
-                        Size max               = getMaxSize();
                         MINMAXINFO* minmaxinfo = reinterpret_cast<MINMAXINFO*>(lParam);
 
-                        minmaxinfo->ptMaxSize.x = std::numeric_limits<LONG>::max();
-                        minmaxinfo->ptMaxSize.y = std::numeric_limits<LONG>::max();
-
-                        if(min.width > -1)
+                        if(m_minSize)
                         {
-                            minmaxinfo->ptMinTrackSize.x = min.width;
+                            minmaxinfo->ptMinTrackSize.x = m_minSize->width;
+                            minmaxinfo->ptMinTrackSize.y = m_minSize->height;
                         }
 
-                        if(min.height > -1)
+                        if(m_maxSize)
                         {
-                            minmaxinfo->ptMinTrackSize.y = min.height;
-                        }
-
-                        if(max.width > -1)
-                        {
-                            minmaxinfo->ptMaxTrackSize.x = max.width;
-                        }
-
-                        if(max.height > -1)
-                        {
-                            minmaxinfo->ptMaxTrackSize.y = max.height;
+                            minmaxinfo->ptMaxTrackSize.x = m_maxSize->width;
+                            minmaxinfo->ptMaxTrackSize.y = m_maxSize->height;
                         }
                     }
                 }

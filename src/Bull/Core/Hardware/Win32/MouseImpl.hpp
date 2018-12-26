@@ -17,15 +17,14 @@ namespace Bull
              * \param position The new position of the cursor on the screen
              *
              */
-            static void setPosition(const Size& position);
+            static void setPosition(const SizeI& position);
 
             /*! \brief Get the cursor position
              *
              * \return Return the cursor position
              *
              */
-            static Size getPosition();
-
+            static SizeI getPosition();
 
             /*! \brief Check whether a button is pressed
              *

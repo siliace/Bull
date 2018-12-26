@@ -12,7 +12,7 @@ namespace Bull
     {
         return s_fullscreen;
     }
-    
+
     Window::Window() :
         m_ignoreNextMouse(false)
     {
@@ -130,7 +130,7 @@ namespace Bull
         return false;
     }
 
-    void Window::setPosition(const Size& position)
+    void Window::setPosition(const SizeI& position)
     {
         if(m_impl)
         {
@@ -138,22 +138,17 @@ namespace Bull
         }
     }
 
-    void Window::setPosition(int x, int y)
-    {
-        return setPosition(Size(x, y));
-    }
-
-    Size Window::getPosition() const
+    SizeI Window::getPosition() const
     {
         if(m_impl)
         {
             return m_impl->getPosition();
         }
 
-        return Size();
+        return { 0, 0 };
     }
 
-    void Window::setMinSize(const Size& size)
+    void Window::setMinSize(const SizeUI& size)
     {
         if(m_impl)
         {
@@ -161,22 +156,17 @@ namespace Bull
         }
     }
 
-    void Window::setMinSize(int width, int height)
-    {
-        return setMinSize(Size(width, height));
-    }
-
-    Size Window::getMinSize() const
+    SizeUI Window::getMinSize() const
     {
         if(m_impl)
         {
             return m_impl->getMinSize();
         }
 
-        return Size();
+        return { 0, 0 };
     }
 
-    void Window::setMaxSize(const Size& size)
+    void Window::setMaxSize(const SizeUI& size)
     {
         if(m_impl)
         {
@@ -184,22 +174,17 @@ namespace Bull
         }
     }
 
-    void Window::setMaxSize(int width, int height)
-    {
-        return setMaxSize(Size(width, height));
-    }
-
-    Size Window::getMaxSize() const
+    SizeUI Window::getMaxSize() const
     {
         if(m_impl)
         {
             return m_impl->getMinSize();
         }
 
-        return Size();
+        return { 0, 0 };
     }
 
-    void Window::setSize(const Size& size)
+    void Window::setSize(const SizeUI& size)
     {
         if(m_impl)
         {
@@ -207,12 +192,7 @@ namespace Bull
         }
     }
 
-    void Window::setSize(unsigned int x, unsigned int y)
-    {
-        return setSize(Size(x, y));
-    }
-
-    Size Window::getSize() const
+    SizeUI Window::getSize() const
     {
         if(m_impl)
         {

@@ -3,12 +3,12 @@
 
 #include <Bull/Core/Image/PixelFormat.hpp>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
+#include <Bull/Core/Utility/Size.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
 
 namespace Bull
 {
-    class Size;
     class ByteArray;
     class FrameBuffer;
 
@@ -61,7 +61,7 @@ namespace Bull
          * \param size The Size
          *
          */
-        virtual void create(const Size& size) = 0;
+        virtual void create(const Size<std::size_t>& size) = 0;
 
         /*! \brief Create the Texture of a given Size with a PixelFormat
          *
@@ -69,7 +69,7 @@ namespace Bull
          * \param pixelFormat The PixelFormat
          *
          */
-        void create(const Size& size, PixelFormat pixelFormat);
+        void create(const Size<std::size_t>& size, PixelFormat pixelFormat);
 
         /*! \brief Set pixels of the Texture
          *
@@ -80,7 +80,7 @@ namespace Bull
          * \param pixelFormat The PixelFormat of the pixels
          *
          */
-        void setPixels(unsigned int xOffset, unsigned int yOffset, const ByteArray& pixels, const Size& size, PixelFormat pixelFormat);
+        void setPixels(unsigned int xOffset, unsigned int yOffset, const ByteArray& pixels, const Size<std::size_t>& size, PixelFormat pixelFormat);
 
         /*! \brief Tell whether the Texture is valid (i.e has been created)
          *
@@ -94,7 +94,7 @@ namespace Bull
          * \return The Size
          *
          */
-        Size getSize() const;
+        Size<std::size_t> getSize() const;
 
         /*! \brief Get the pixels of the Texture
          *
@@ -112,10 +112,7 @@ namespace Bull
          * \return The handle
          *
          */
-        inline unsigned int getSystemHandle() const
-        {
-            return m_handle;
-        }
+        unsigned int getSystemHandle() const;
 
     private:
 

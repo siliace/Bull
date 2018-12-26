@@ -270,7 +270,7 @@ namespace Bull
             Display&  m_display;
             XWindow   m_handler;
             XPixmap   m_iconMask;
-            Size      m_lastSize;
+            SizeUI    m_lastSize;
             bool      m_isMapped;
             XColormap m_colormap;
             XCursor   m_hiddenCursor;

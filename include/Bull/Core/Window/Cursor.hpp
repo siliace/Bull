@@ -38,7 +38,7 @@ namespace Bull
          * \param hotSpot
          *
          */
-        Cursor(const Image& cursor, const Size& hotSpot);
+        Cursor(const Image& cursor, const Size<unsigned int>& hotSpot);
 
         /*! \brief Constructor by movement
          *
@@ -74,7 +74,7 @@ namespace Bull
          * \param hotSpot The hotSpot of the Cursor
          *
          */
-        void create(const Image& image, const Size& hotSpot);
+        void create(const Image& image, const Size<unsigned int>& hotSpot);
 
     private:
 

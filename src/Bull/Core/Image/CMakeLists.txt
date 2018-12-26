@@ -13,5 +13,6 @@ target_sources(bull-core
             ${BULL_INC_CORE_IMAGE}/ImageFormat.hpp
             ${BULL_INC_CORE_IMAGE}/ImageLoader.hpp
             ${BULL_INC_CORE_IMAGE}/PixelFormat.hpp
-            ${BULL_SRC_CORE_IMAGE}/PixelFormat.cpp
+            ${BULL_INC_CORE_IMAGE}/PixelFormatUtils.hpp
+            ${BULL_SRC_CORE_IMAGE}/PixelFormatUtils.cpp
         )

@@ -24,7 +24,7 @@ namespace Bull
          * \param position The new position of the cursor on the screen
          *
          */
-        static void setPosition(const Size& position);
+        static void setPosition(const SizeI& position);
 
         /*! \brief Set the position of the cursor on the screen relatively to a Window
          *
@@ -32,14 +32,14 @@ namespace Bull
          * \param relative The Window relative to
          *
          */
-        static void setPosition(const Size& position, const Window& relative);
+        static void setPosition(const SizeI& position, const Window& relative);
 
         /*! \brief Get the cursor position on the screen
          *
          * \return Return the cursor position of the screen
          *
          */
-        static Size getPosition();
+        static SizeI getPosition();
 
         /*! \brief Check whether a button is pressed
          *

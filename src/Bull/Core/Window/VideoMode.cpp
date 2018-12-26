@@ -16,24 +16,13 @@ namespace Bull
     }
 
     VideoMode::VideoMode() :
-        width(0),
-        height(0),
         bitsPerPixel(0)
     {
         /// Nothing
     }
 
-    VideoMode::VideoMode(const Size& size, unsigned int bitsPerPixel) :
-        width(static_cast<unsigned int>(size.width)),
-        height(static_cast<unsigned int>(size.height)),
-        bitsPerPixel(bitsPerPixel)
-    {
-        /// Nothing
-    }
-
-    VideoMode::VideoMode(unsigned int width, unsigned int height, unsigned int bitsPerPixel)  :
-        width(width),
-        height(height),
+    VideoMode::VideoMode(const SizeUI& size, unsigned int bitsPerPixel) :
+        size(size),
         bitsPerPixel(bitsPerPixel)
     {
         /// Nothing
@@ -43,21 +32,18 @@ namespace Bull
     {
         std::vector<VideoMode> all = VideoMode::getAllAvailable();
 
-        return std::find(all.begin(), all.end(), (*this)) != all.end();
+        return std::find(all.begin(), all.end(), *this) != all.end();
     }
 
-    Size VideoMode::toSize() const
-    {
-        return Size(width, height);
-    }
 
     bool VideoMode::operator==(const VideoMode& right)
     {
-        return (width == right.width) && (height == right.height) && (bitsPerPixel == right.bitsPerPixel);
+        return size == right.size &&
+               bitsPerPixel == right.bitsPerPixel;
     }
 
     bool VideoMode::operator!=(const VideoMode& right)
     {
-        return !((*this) == right);
+        return !(*this == right);
     }
 }

@@ -36,7 +36,7 @@ namespace Bull
              * \param hotSpot The hotspot of the Cursor
              *
              */
-            void create(const Image& cursor, const Size& hotSpot) override;
+            void create(const Image& cursor, const SizeUI& hotSpot) override;
 
             /*! \brief Get the native system handler of the cursor
              *

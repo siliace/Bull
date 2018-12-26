@@ -5,6 +5,7 @@
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/FileSystem/File.hpp>
 #include <Bull/Core/Image/AbstractImageSaver.hpp>
+#include <Bull/Core/Image/PixelFormatUtils.hpp>
 #include <Bull/Core/Memory/MemoryAccumulator.hpp>
 
 namespace Bull
@@ -28,7 +29,7 @@ namespace Bull
 
     OutStream& AbstractImageSaver::saveToStream(OutStream& stream, const AbstractImage& image, const AbstractImageSaver::Parameters& parameters) const
     {
-        Size size(image.getSize());
+        AbstractImage::Size size(image.getSize());
         int channels = PixelFormatUtils::getPixelFormatSize(image.getPixelFormat());
 
         switch(parameters.format)
@@ -61,7 +62,7 @@ namespace Bull
         return accumulator.getBytes();
     }
 
-    void AbstractImageSaver::saveToBmp(OutStream& stream, const Size& size, int channels, const ByteArray& pixels) const
+    void AbstractImageSaver::saveToBmp(OutStream& stream, const AbstractImage::Size& size, int channels, const ByteArray& pixels) const
     {
         int success = stbi_write_bmp_to_func(&AbstractImageSaver::write, &stream,
                                              size.width, size.height,
@@ -71,7 +72,7 @@ namespace Bull
         Expect(success != 0, Throw(InternalError, "Failed to write image in a stream"));
     }
 
-    void AbstractImageSaver::saveToTga(OutStream& stream, const Size& size, int channels, const ByteArray& pixels) const
+    void AbstractImageSaver::saveToTga(OutStream& stream, const AbstractImage::Size& size, int channels, const ByteArray& pixels) const
     {
         int success = stbi_write_tga_to_func(&AbstractImageSaver::write, &stream,
                                              size.width, size.height,
@@ -81,7 +82,7 @@ namespace Bull
         Expect(success != 0, Throw(InternalError, "Failed to write image in a stream"));
     }
 
-    void AbstractImageSaver::saveToPng(OutStream& stream, const Size& size, int channels, const ByteArray& pixels, int stride) const
+    void AbstractImageSaver::saveToPng(OutStream& stream, const AbstractImage::Size& size, int channels, const ByteArray& pixels, int stride) const
     {
         int success = stbi_write_png_to_func(&AbstractImageSaver::write, &stream,
                                              size.width, size.height,
@@ -92,7 +93,7 @@ namespace Bull
         Expect(success != 0, Throw(InternalError, "Failed to write image in a stream"));
     }
 
-    void AbstractImageSaver::saveToJpg(OutStream& stream, const Size& size, int channels, const ByteArray& pixels, int quality) const
+    void AbstractImageSaver::saveToJpg(OutStream& stream, const AbstractImage::Size& size, int channels, const ByteArray& pixels, int quality) const
     {
         quality = ((quality > 100) ? 100 : (quality < 0) ? 0 : quality);
 

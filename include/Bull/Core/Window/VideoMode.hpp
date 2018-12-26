@@ -38,16 +38,7 @@ namespace Bull
          * \param bitsPerPixel The number of bits per pixel (8, 16, 24 or 32)
          *
          */
-        explicit VideoMode(const Size& size, unsigned int bitsPerPixel = getCurrent().bitsPerPixel);
-
-        /*! \brief Constructor
-         *
-         * \param width        The width
-         * \param height       The height
-         * \param bitsPerPixel The number of bits per pixel (8, 16, 24 or 32)
-         *
-         */
-        VideoMode(unsigned int width, unsigned int height, unsigned int bitsPerPixel = getCurrent().bitsPerPixel);
+        explicit VideoMode(const Size<unsigned int>& size, unsigned int bitsPerPixel = getCurrent().bitsPerPixel);
 
         /*! \brief Check if a VideoMode is valid
          *
@@ -55,15 +46,6 @@ namespace Bull
          *
          */
         bool isValid() const;
-
-        /*! \brief Brief convert the VideoMode to a Size
-         *
-         * Convert the VideoMode to a Size containing the width and the height of the VideoMode
-         *
-         * \return The Size
-         *
-         */
-        Size toSize() const;
 
         /*! \brief == operator override
          *
@@ -85,8 +67,7 @@ namespace Bull
 
     public:
 
-        unsigned int width;        /*!< The width of the window */
-        unsigned int height;       /*!< The height of the window */
+        SizeUI size;
         unsigned int bitsPerPixel; /*!< The the number of bits per pixel to create colors */
     };
 }

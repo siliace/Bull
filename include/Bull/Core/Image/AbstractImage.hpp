@@ -9,8 +9,14 @@
 
 namespace Bull
 {
-    struct BULL_CORE_API AbstractImage
+    class BULL_CORE_API AbstractImage
     {
+    public:
+
+        using Size = Size<std::size_t>;
+
+    public:
+
         /*! \brief Destructor
          *
          */

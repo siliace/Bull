@@ -18,7 +18,7 @@ namespace Bull
          * \param size The new Size
          *
          */
-        virtual void resize(const Size& size) = 0;
+        virtual void resize(const SizeUI& size) = 0;
 
         /*! \brief Get the product of the projection matrix with the view matrix held by the AbstractViewer
          *

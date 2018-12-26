@@ -55,7 +55,7 @@ namespace Bull
         gl::generateMipmap(GL_TEXTURE_2D);
     }
 
-    Size ImageTexture::getSize() const
+    AbstractImage::Size ImageTexture::getSize() const
     {
         return Texture::getSize();
     }

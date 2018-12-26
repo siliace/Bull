@@ -76,13 +76,13 @@ namespace Bull
 
     private:
 
-        void saveToBmp(OutStream& stream, const Size& size, int channels, const ByteArray& pixels) const;
+        void saveToBmp(OutStream& stream, const AbstractImage::Size& size, int channels, const ByteArray& pixels) const;
 
-        void saveToTga(OutStream& stream, const Size& size, int channels, const ByteArray& pixels) const;
+        void saveToTga(OutStream& stream, const AbstractImage::Size& size, int channels, const ByteArray& pixels) const;
 
-        void saveToPng(OutStream& stream, const Size& size, int channels, const ByteArray& pixels, int stride) const;
+        void saveToPng(OutStream& stream, const AbstractImage::Size& size, int channels, const ByteArray& pixels, int stride) const;
 
-        void saveToJpg(OutStream& stream, const Size& size, int channels, const ByteArray& pixels, int quality) const;
+        void saveToJpg(OutStream& stream, const AbstractImage::Size& size, int channels, const ByteArray& pixels, int quality) const;
     };
 }
 

@@ -66,14 +66,7 @@ namespace Bull
 
     Viewport RenderWindow::getDefaultViewport() const
     {
-        Viewport viewport;
-
-        viewport.x      = 0;
-        viewport.y      = 0;
-        viewport.width  = getSize().width;
-        viewport.height = getSize().height;
-
-        return viewport;
+        return { SizeI::Zero, getSize() };
     }
 
     void RenderWindow::onOpen()

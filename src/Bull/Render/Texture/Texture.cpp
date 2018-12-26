@@ -1,6 +1,7 @@
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Exception/LogicError.hpp>
+#include <Bull/Core/Image/PixelFormatUtils.hpp>
 #include <Bull/Core/Memory/ByteArray.hpp>
 #include <Bull/Core/Utility/Size.hpp>
 
@@ -112,9 +113,9 @@ namespace Bull
         return gl::isTexture(m_handle);
     }
 
-    Size Texture::getSize() const
+    AbstractImage::Size Texture::getSize() const
     {
-        Size size;
+        SizeI size;
 
         gl::bindTexture(GL_TEXTURE_2D, m_handle);
         gl::getTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &size.width);
@@ -123,7 +124,7 @@ namespace Bull
         return size;
     }
 
-    void Texture::create(const Size& size, PixelFormat pixelFormat)
+    void Texture::create(const Size<std::size_t>& size, PixelFormat pixelFormat)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Invalid texture size"));
 
@@ -138,7 +139,7 @@ namespace Bull
         gl::texImage2D(GL_TEXTURE_2D, 0, convertInternalFormat(pixelFormat), size.width, size.height, 0, convertFormat(pixelFormat), convertDataType(pixelFormat), nullptr);
     }
 
-    void Texture::setPixels(unsigned int xOffset, unsigned int yOffset, const ByteArray& pixels, const Size& size, PixelFormat pixelFormat)
+    void Texture::setPixels(unsigned int xOffset, unsigned int yOffset, const ByteArray& pixels, const Size<std::size_t>& size, PixelFormat pixelFormat)
     {
         Expect(isValid(), Throw(LogicError, "Invalid texture"));
 
@@ -156,5 +157,10 @@ namespace Bull
         gl::getTexImage(GL_TEXTURE_2D, 0, convertFormat(pixelFormat), convertDataType(pixelFormat), &pixels[0]);
 
         return pixels;
+    }
+
+    unsigned int Texture::getSystemHandle() const
+    {
+        return m_handle;
     }
 }

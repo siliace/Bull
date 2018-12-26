@@ -3,6 +3,7 @@
 
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Image/AbstractImageLoader.hpp>
+#include <Bull/Core/Image/PixelFormatUtils.hpp>
 
 namespace Bull
 {
@@ -31,7 +32,7 @@ namespace Bull
 
     AbstractImageLoader::RawImage AbstractImageLoader::loadPixelsFromStream(InStream& stream, PixelFormat pixelFormat) const
     {
-        Size size;
+        SizeI size;
         int channels;
         stbi_io_callbacks callbacks;
 

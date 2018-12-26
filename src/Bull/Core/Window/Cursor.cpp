@@ -16,7 +16,7 @@ namespace Bull
         create(cursor);
     }
 
-    Cursor::Cursor(const Image& cursor, const Size& hotSpot) :
+    Cursor::Cursor(const Image& cursor, const SizeUI& hotSpot) :
         m_impl(prv::CursorImpl::createInstance())
     {
         create(cursor, hotSpot);
@@ -29,7 +29,7 @@ namespace Bull
         m_impl->create(cursor);
     }
 
-    void Cursor::create(const Image& image, const Size& hotSpot)
+    void Cursor::create(const Image& image, const SizeUI& hotSpot)
     {
         if(image.getSize().width <= 0 || image.getSize().height <= 0)
         {

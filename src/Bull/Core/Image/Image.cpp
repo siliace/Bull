@@ -1,5 +1,6 @@
 #include <Bull/Core/Exception/InvalidParameter.hpp>
 #include <Bull/Core/Image/Image.hpp>
+#include <Bull/Core/Image/PixelFormatUtils.hpp>
 
 namespace Bull
 {
@@ -9,7 +10,7 @@ namespace Bull
         /// Nothing
     }
 
-    Image::Image(const Size& size, PixelFormat pixelFormat) :
+    Image::Image(const AbstractImage::Size& size, PixelFormat pixelFormat) :
         m_pixelFormat(pixelFormat)
     {
         create(size);
@@ -45,7 +46,7 @@ namespace Bull
         }
     }
 
-    Size Image::getSize() const
+    AbstractImage::Size Image::getSize() const
     {
         return m_size;
     }

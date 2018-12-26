@@ -1,8 +1,8 @@
-#include <Bull/Core/Image/PixelFormat.hpp>
+#include <Bull/Core/Image/PixelFormatUtils.hpp>
 
 namespace Bull
 {
-    std::size_t PixelFormatUtils::getPixelFormatSize(Bull::PixelFormat pixelFormat)
+    std::size_t PixelFormatUtils::getPixelFormatSize(PixelFormat pixelFormat)
     {
         switch(pixelFormat)
         {
@@ -22,7 +22,7 @@ namespace Bull
         return 0;
     }
 
-    std::size_t PixelFormatUtils::getImageByteCount(const Size& size, PixelFormat pixelFormat)
+    std::size_t PixelFormatUtils::getImageByteCount(const AbstractImage::Size& size, PixelFormat pixelFormat)
     {
         return size.width * size.height * getPixelFormatSize(pixelFormat);
     }

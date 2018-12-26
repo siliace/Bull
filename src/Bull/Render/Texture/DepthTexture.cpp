@@ -15,7 +15,7 @@ namespace Bull
         /// Nothing
     }
 
-    DepthTexture::DepthTexture(const Size& size, DepthValue depth) :
+    DepthTexture::DepthTexture(const Size<std::size_t>& size, DepthValue depth) :
         m_depthValue(depth)
     {
         create(size);
@@ -36,7 +36,7 @@ namespace Bull
         return *this;
     }
 
-    void DepthTexture::create(const Size& size)
+    void DepthTexture::create(const Size<std::size_t>& size)
     {
         switch(m_depthValue)
         {
@@ -44,5 +44,10 @@ namespace Bull
             case DepthValue_24: Texture::create(size, PixelFormat_Depth24); break;
             case DepthValue_32: Texture::create(size, PixelFormat_Depth32); break;
         }
+    }
+
+    DepthValue DepthTexture::getDepthValue() const
+    {
+        return m_depthValue;
     }
 }

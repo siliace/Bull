@@ -54,12 +54,12 @@ namespace Bull
             }
         }
 
-        void CursorImplWin32::create(const Image& cursor, const Size& hotSpot)
+        void CursorImplWin32::create(const Image& cursor, const SizeUI& hotSpot)
         {
             BITMAPV5HEADER header;
             BULL_ZERO_MEMORY(header);
 
-            Size size = cursor.getSize();
+            SizeUI size = cursor.getSize();
 
             destroy();
 
