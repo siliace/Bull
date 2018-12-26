@@ -1,0 +1,1 @@
+bull_add_core_test(WindowTest)

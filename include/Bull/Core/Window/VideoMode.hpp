@@ -49,6 +49,22 @@ namespace Bull
          */
         VideoMode(unsigned int width, unsigned int height, unsigned int bitsPerPixel = getCurrent().bitsPerPixel);
 
+        /*! \brief Check if a VideoMode is valid
+         *
+         * \return Return true if the mode is valid, else return false
+         *
+         */
+        bool isValid() const;
+
+        /*! \brief Brief convert the VideoMode to a Size
+         *
+         * Convert the VideoMode to a Size containing the width and the height of the VideoMode
+         *
+         * \return The Size
+         *
+         */
+        Size toSize() const;
+
         /*! \brief == operator override
          *
          * \param right The VideoMode to compare
@@ -66,13 +82,6 @@ namespace Bull
          *
          */
         bool operator!=(const VideoMode& right);
-
-        /*! \brief Check if a VideoMode is valid
-         *
-         * \return Return true if the mode is valid, else return false
-         *
-         */
-        bool isValid() const;
 
     public:
 

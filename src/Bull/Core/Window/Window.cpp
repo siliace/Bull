@@ -12,7 +12,7 @@ namespace Bull
     {
         return s_fullscreen;
     }
-
+    
     Window::Window() :
         m_ignoreNextMouse(false)
     {
@@ -219,7 +219,7 @@ namespace Bull
             return m_impl->getSize();
         }
 
-        return Size();
+        return { 0, 0 };
     }
 
     void Window::setTitle(const String& title)
@@ -347,13 +347,6 @@ namespace Bull
         {
             enableFullscreen(true);
         }
-
-        setTitle(title);
-        setVisible(true);
-        setMinSize(-1, -1);
-        setMaxSize(-1, -1);
-        enableKeyRepeat(true);
-        setMouseCursorVisible(true);
 
         onOpen();
     }

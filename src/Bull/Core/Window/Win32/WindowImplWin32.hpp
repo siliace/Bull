@@ -11,14 +11,7 @@ namespace Bull
     {
         class WindowImplWin32 : public WindowImpl
         {
-        private:
-
-            /*! \brief Register the window class
-             *
-             * \throw Win32Error if the window class failed to be register
-             *
-             */
-            static void registerWindowClass();
+        public:
 
             /*! \brief Window callback event
              *
@@ -32,6 +25,8 @@ namespace Bull
              */
             static LRESULT CALLBACK globalEvent(HWND handler, UINT message, WPARAM wParam, LPARAM lParam);
 
+        private:
+
             /*! \brief Convert a windows key value to a Bull::Keyboard::Key
              *
              * \param vkey To VK to convert
@@ -41,14 +36,27 @@ namespace Bull
              */
             static KeyboardKey convertVKToBullkey(WPARAM vkey);
 
-            /*! \brief Convert a Bull::VideoWindowStyle to a WS
+            /*! \brief Convert a Bull::WindowStyle to a WS
              *
-             * \param WindowStyle The Bull::VideoWindowStyle to convert
+             * \param style The Bull::WindowStyle to convert
              *
              * \return Return the WS equivalent
              *
              */
-            static DWORD computeWindowStyle(Uint32 WindowStyle);
+            static DWORD computeWindowStyle(Uint32 style);
+
+            /*! \brief Calculates the required Size of the Window
+             *
+             * Calculates the required Size of the Window, based on the desired client-rectangle Size.
+             * The Size can then be passed to the create the Window whose client area is the desired Size.
+             *
+             * \param size  The Size
+             * \param style The WindowStyle of the window whose required size is to be calculated
+             *
+             * \return The adjusted Size
+             *
+             */
+            static Size getAdjustedSize(const Size& size, DWORD style);
 
         public:
 

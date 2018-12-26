@@ -39,6 +39,18 @@ namespace Bull
         /// Nothing
     }
 
+    bool VideoMode::isValid() const
+    {
+        std::vector<VideoMode> all = VideoMode::getAllAvailable();
+
+        return std::find(all.begin(), all.end(), (*this)) != all.end();
+    }
+
+    Size VideoMode::toSize() const
+    {
+        return Size(width, height);
+    }
+
     bool VideoMode::operator==(const VideoMode& right)
     {
         return (width == right.width) && (height == right.height) && (bitsPerPixel == right.bitsPerPixel);
@@ -47,12 +59,5 @@ namespace Bull
     bool VideoMode::operator!=(const VideoMode& right)
     {
         return !((*this) == right);
-    }
-
-    bool VideoMode::isValid() const
-    {
-        std::vector<VideoMode> all = VideoMode::getAllAvailable();
-
-        return std::find(all.begin(), all.end(), (*this)) != all.end();
     }
 }

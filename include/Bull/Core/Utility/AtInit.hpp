@@ -28,7 +28,7 @@ namespace Bull
          * \param clean The clean function
          *
          */
-        AtInit(const std::function<void()>& init, std::function<void()>& clean);
+        AtInit(const std::function<void()>& init, const std::function<void()>& clean);
 
         /*! \brief Constructor by movement semantic
          *

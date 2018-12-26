@@ -2,8 +2,11 @@
 
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
+#include <Bull/Core/Utility/AtInit.hpp>
+#include <Bull/Core/Utility/StringUtils.hpp>
 #include <Bull/Core/Window/Win32/WindowImplWin32.hpp>
 #include <Bull/Core/Window/WindowStyle.hpp>
+
 
 namespace Bull
 {
@@ -11,29 +14,29 @@ namespace Bull
     {
         namespace
         {
-            HINSTANCE instance           = GetModuleHandle(nullptr);
-            LPCWSTR   windowClassName    = L"BullWindow";
-            unsigned int instanceCounter = 0;
-        }
+            HINSTANCE instance       = GetModuleHandle(nullptr);
+            LPCSTR   windowClassName = "BullWindow";
 
-        void WindowImplWin32::registerWindowClass()
-        {
-            WNDCLASSEXW winClass;
+            AtInit registerWindowClass([]() {
+                WNDCLASSEX winClass;
 
-            winClass.cbSize        = sizeof(WNDCLASSEXW);
-            winClass.style         = CS_DBLCLKS;
-            winClass.lpfnWndProc   = WindowImplWin32::globalEvent;
-            winClass.cbClsExtra    = 0;
-            winClass.cbWndExtra    = 0;
-            winClass.hInstance     = instance;
-            winClass.hIcon         = LoadIcon(instance, IDI_APPLICATION);
-            winClass.hCursor       = nullptr;
-            winClass.hbrBackground = nullptr;
-            winClass.lpszMenuName  = nullptr;
-            winClass.lpszClassName = windowClassName;
-            winClass.hIconSm       = nullptr;
+                winClass.cbSize        = sizeof(WNDCLASSEXW);
+                winClass.style         = CS_DBLCLKS;
+                winClass.lpfnWndProc   = &WindowImplWin32::globalEvent;
+                winClass.cbClsExtra    = 0;
+                winClass.cbWndExtra    = 0;
+                winClass.hInstance     = instance;
+                winClass.hIcon         = LoadIcon(instance, IDI_APPLICATION);
+                winClass.hCursor       = nullptr;
+                winClass.hbrBackground = nullptr;
+                winClass.lpszMenuName  = nullptr;
+                winClass.lpszClassName = windowClassName;
+                winClass.hIconSm       = nullptr;
 
-            Expect(RegisterClassExW(&winClass) != 0, Throw(Win32Error, "Failed to register window class"));
+                Expect(RegisterClassEx(&winClass) != 0, Throw(Win32Error, "Failed to register window class"));
+            }, []() {
+                UnregisterClass(windowClassName, instance);
+            });
         }
 
         LRESULT CALLBACK WindowImplWin32::globalEvent(HWND handler, UINT message, WPARAM wParam, LPARAM lParam)
@@ -191,31 +194,50 @@ namespace Bull
             }
         }
 
-        DWORD WindowImplWin32::computeWindowStyle(Uint32 WindowStyle)
+        DWORD WindowImplWin32::computeWindowStyle(Uint32 style)
         {
             DWORD windowWindowStyle = WS_VISIBLE;
 
-            if(WindowStyle & (WindowStyle_Closable))
+            if(style != WindowStyle_Fullscreen)
             {
-                windowWindowStyle |= WS_SYSMENU;
-            }
+                windowWindowStyle |= WS_CAPTION;
 
-            if(WindowStyle & (WindowStyle_Maximizable))
-            {
-                windowWindowStyle |= WS_MAXIMIZEBOX;
-            }
+                if(style & (WindowStyle_Closable))
+                {
+                    windowWindowStyle |= WS_SYSMENU;
+                }
 
-            if(WindowStyle & (WindowStyle_Minimizable))
-            {
-                windowWindowStyle |= WS_MINIMIZEBOX;
-            }
+                if(style & (WindowStyle_Maximizable))
+                {
+                    windowWindowStyle |= WS_MAXIMIZEBOX;
+                }
 
-            if(WindowStyle & (WindowStyle_Resizable))
-            {
-                windowWindowStyle |= WS_THICKFRAME;
+                if(style & (WindowStyle_Minimizable))
+                {
+                    windowWindowStyle |= WS_MINIMIZEBOX;
+                }
+
+                if(style & (WindowStyle_Resizable))
+                {
+                    windowWindowStyle |= WS_THICKFRAME;
+                }
             }
 
             return windowWindowStyle;
+        }
+
+        Size WindowImplWin32::getAdjustedSize(const Size& size, DWORD style)
+        {
+            Size adjusted;
+            RECT rectangle = {0, 0,
+                              static_cast<LONG>(size.width),
+                              static_cast<LONG>(size.height)};
+
+            AdjustWindowRect(&rectangle, style, false);
+            adjusted.width  = static_cast<unsigned int>(rectangle.right - rectangle.left);
+            adjusted.height = static_cast<unsigned int>(rectangle.bottom - rectangle.top);
+
+            return adjusted;
         }
 
         WindowImplWin32::WindowImplWin32(const VideoMode& mode, const String& title, Uint32 style) :
@@ -226,41 +248,29 @@ namespace Bull
             m_maxSize(-1, -1),
             m_cursorVisible(true)
         {
-            unsigned int width, height;
+            Size size;
             m_isFullscreen = style & WindowStyle_Fullscreen;
             DWORD winWindowStyle = computeWindowStyle(style);
 
-            if(instanceCounter == 0)
+            if(style == WindowStyle_Fullscreen)
             {
-                registerWindowClass();
-            }
-
-            if(m_isFullscreen)
-            {
-                RECT rectangle = {0, 0,
-                                  static_cast<LONG>(mode.width),
-                                  static_cast<LONG>(mode.height)};
-
-                AdjustWindowRect(&rectangle, winWindowStyle, false);
-                width  = static_cast<unsigned int>(rectangle.right - rectangle.left);
-                height = static_cast<unsigned int>(rectangle.bottom - rectangle.top);
+                size = mode.toSize();
             }
             else
             {
-                width  = mode.width;
-                height = mode.height;
+                size = getAdjustedSize(mode.toSize(), winWindowStyle);
             }
 
-            m_handler = CreateWindowExW(0,
-                                        windowClassName,
-                                        reinterpret_cast<LPCWSTR>(title.getBuffer()),
-                                        winWindowStyle,
-                                        CW_USEDEFAULT, CW_USEDEFAULT,
-                                        width, height,
-                                        nullptr,
-                                        nullptr,
-                                        instance,
-                                        this);
+            m_handler = CreateWindowEx(0,
+                                       windowClassName,
+                                       title.getBuffer(),
+                                       winWindowStyle,
+                                       CW_USEDEFAULT, CW_USEDEFAULT,
+                                       size.width, size.height,
+                                       nullptr,
+                                       nullptr,
+                                       instance,
+                                       this);
 
             Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "Failed to create window"));
 
@@ -268,22 +278,13 @@ namespace Bull
 
             m_lastSize     = getSize();
             m_lastPosition = getPosition();
-
-            instanceCounter += 1;
         }
 
         WindowImplWin32::~WindowImplWin32()
         {
-            instanceCounter -= 1;
-
             if(m_icon)
             {
                 DestroyIcon(m_icon);
-            }
-
-            if(instanceCounter == 0)
-            {
-                UnregisterClassW(windowClassName, instance);
             }
 
             DestroyWindow(m_handler);
@@ -356,14 +357,10 @@ namespace Bull
 
         void WindowImplWin32::setMinSize(const Size& size)
         {
-            RECT r = {0, 0,
-                      size.width,
-                      size.height,
-            };
-            AdjustWindowRect(&r, static_cast<DWORD>(GetWindowLongPtr(m_handler, GWL_STYLE)), false);
+            Size adjusted = getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE)));
 
-            m_minSize.width = (size.width != -1) ? r.right  - r.left : -1;
-            m_minSize.height = (size.height != -1) ? r.bottom - r.top  : -1;
+            m_minSize.width = (size.width != -1) ? adjusted.width : -1;
+            m_minSize.height = (size.height != -1) ? adjusted.height : -1;
         }
 
         Size WindowImplWin32::getMinSize() const
@@ -373,14 +370,10 @@ namespace Bull
 
         void WindowImplWin32::setMaxSize(const Size& size)
         {
-            RECT r = {0, 0,
-                      size.width,
-                      size.height,
-            };
-            AdjustWindowRect(&r, static_cast<DWORD>(GetWindowLongPtr(m_handler, GWL_STYLE)), false);
+            Size adjusted = getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE)));
 
-            m_maxSize.width = (size.width != -1) ? r.right  - r.left : -1;
-            m_maxSize.height = (size.height != -1) ? r.bottom - r.top  : -1;
+            m_maxSize.width = (size.width != -1) ? adjusted.width : -1;
+            m_maxSize.height = (size.height != -1) ? adjusted.height : -1;
         }
 
         Size WindowImplWin32::getMaxSize() const
@@ -390,37 +383,40 @@ namespace Bull
 
         void WindowImplWin32::setSize(const Size& size)
         {
-            RECT r = {0, 0,
-                      static_cast<LONG>(size.width),
-                      static_cast<LONG>(size.height),
-            };
-            AdjustWindowRect(&r, static_cast<DWORD>(GetWindowLongPtr(m_handler, GWL_STYLE)), false);
-            SetWindowPos(m_handler, nullptr, 0, 0, r.right - r.left, r.bottom - r.top, SWP_NOMOVE);
+            Size adjusted = getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE)));
+
+            SetWindowPos(m_handler, nullptr, 0, 0, adjusted.width, adjusted.height, SWP_NOMOVE | SWP_NOZORDER);
         }
 
         Size WindowImplWin32::getSize() const
         {
-            RECT r = {0, 0, 0, 0};
+            RECT r = { 0, 0, 0, 0 };
 
             GetClientRect(m_handler, &r);
 
-            return {r.right - r.left, r.bottom - r.top};
+            return { r.right - r.left, r.bottom - r.top };
         }
 
         void WindowImplWin32::setTitle(const String& title)
         {
-            SetWindowTextW(m_handler, reinterpret_cast<LPCWSTR>(title.getBuffer()));
+            SetWindowText(m_handler, title.getBuffer());
         }
 
         String WindowImplWin32::getTitle() const
         {
-            std::vector<wchar_t> buffer;
+            String title;
+            int length = GetWindowTextLength(m_handler);
 
-            buffer.resize(GetWindowTextLengthW(m_handler) + 1);
+            if(length > 0)
+            {
+                title = StringUtils::ofSize(length + 1);
 
-            GetWindowTextW(m_handler, &buffer[0], static_cast<int>(buffer.capacity()));
+                GetWindowText(m_handler, &title[0], title.getSize());
 
-            return String(reinterpret_cast<const char*>(buffer.data()), buffer.capacity());
+                title.setSize(length);
+            }
+
+            return title;
         }
 
         bool WindowImplWin32::hasFocus() const
