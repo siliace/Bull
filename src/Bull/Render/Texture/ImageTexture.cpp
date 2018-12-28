@@ -15,13 +15,13 @@ namespace Bull
         create(image.getPixels(), image.getSize());
     }
 
-    ImageTexture::ImageTexture(const Size& size, PixelFormat pixelFormat) :
+    ImageTexture::ImageTexture(const Size<std::size_t>& size, PixelFormat pixelFormat) :
         m_pixelFormat(pixelFormat)
     {
         create(size);
     }
 
-    ImageTexture::ImageTexture(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat) :
+    ImageTexture::ImageTexture(const ByteArray& pixels, const Size<std::size_t>& size, PixelFormat pixelFormat) :
         m_pixelFormat(pixelFormat)
     {
         create(pixels, size);
@@ -42,12 +42,12 @@ namespace Bull
         return *this;
     }
 
-    void ImageTexture::create(const Size& size)
+    void ImageTexture::create(const Size<std::size_t>& size)
     {
         Texture::create(size, m_pixelFormat);
     }
 
-    void ImageTexture::create(const ByteArray& pixels, const Size& size)
+    void ImageTexture::create(const ByteArray& pixels, const Size<std::size_t>& size)
     {
         Texture::create(size, m_pixelFormat);
         Texture::setPixels(0, 0, pixels, size, m_pixelFormat);
@@ -55,7 +55,7 @@ namespace Bull
         gl::generateMipmap(GL_TEXTURE_2D);
     }
 
-    AbstractImage::Size ImageTexture::getSize() const
+    Size<std::size_t> ImageTexture::getSize() const
     {
         return Texture::getSize();
     }

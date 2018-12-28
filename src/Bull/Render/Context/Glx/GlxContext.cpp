@@ -111,7 +111,7 @@ namespace Bull
         }
 
         GlxContext::GlxContext(const GlxContext* shared) :
-            GlxContext(shared, VideoMode(1, 1), ContextSettings::Worst)
+            GlxContext(shared, VideoMode(SizeUI(1, 1)), ContextSettings::Worst)
         {
             /// Nothing
         }
@@ -129,7 +129,7 @@ namespace Bull
         {
             m_config = chooseBestConfig(m_display, m_settings, mode.bitsPerPixel);
 
-            createSurface(shared, mode.width, mode.height);
+            createSurface(shared, mode.size);
 
             if(m_window || m_pbuffer)
             {
@@ -138,7 +138,7 @@ namespace Bull
         }
 
         GlxContext::GlxContext(const GlxContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
-            GlxContext(shared, VideoMode(1, 1, bitsPerPixel), settings)
+            GlxContext(shared, VideoMode(SizeUI(1, 1), bitsPerPixel), settings)
         {
             /// Nothing
         }
@@ -252,7 +252,7 @@ namespace Bull
             m_window = window.getSystemHandler();
         }
 
-        void GlxContext::createSurface(const GlxContext* shared, unsigned int width, unsigned int height)
+        void GlxContext::createSurface(const GlxContext* shared, const SizeUI& size)
         {
             ErrorHandler handler;
 
@@ -264,8 +264,8 @@ namespace Bull
                 if(fbCounts && configs)
                 {
                     int attributes[] = {
-                        GLX_PBUFFER_WIDTH,  static_cast<int>(width),
-                        GLX_PBUFFER_HEIGHT, static_cast<int>(height),
+                        GLX_PBUFFER_WIDTH,  static_cast<int>(size.width),
+                        GLX_PBUFFER_HEIGHT, static_cast<int>(size.height),
                         0
                     };
 
@@ -294,7 +294,7 @@ namespace Bull
                 m_window = XCreateWindow(m_display.getHandler(),
                                          m_display.getRootWindow(vi->screen),
                                          0, 0,
-                                         width, height,
+                                         size.width, size.height,
                                          0,
                                          vi->depth,
                                          InputOutput,

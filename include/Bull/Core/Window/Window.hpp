@@ -146,14 +146,6 @@ namespace Bull
          */
         void setPosition(const SizeI& position);
 
-        /*! \brief Set the window position
-         *
-         * \param x The new position of the left side of the window in the screen
-         * \param y The new position of the top of the window in the screen
-         *
-         */
-        void setPosition(int x, int y);
-
         /*! \brief Get the position in the screen of the window
          *
          * \return Return the window position

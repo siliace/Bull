@@ -113,7 +113,7 @@ namespace Bull
         return gl::isTexture(m_handle);
     }
 
-    AbstractImage::Size Texture::getSize() const
+    Size<std::size_t> Texture::getSize() const
     {
         SizeI size;
 

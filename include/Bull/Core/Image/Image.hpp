@@ -22,7 +22,7 @@ namespace Bull
          * \param size The size of the Image
          *
          */
-        explicit Image(const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
+        explicit Image(const Size<std::size_t>& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
 
         /*! \brief Constructor
          *
@@ -30,14 +30,14 @@ namespace Bull
          * \param size   The size of the Image
          *
          */
-        Image(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
+        Image(const ByteArray& pixels, const Size<std::size_t>& size, PixelFormat pixelFormat = PixelFormat_Rgb8Alpha8);
 
         /*! \brief Create the Image
          *
          * \param size The size of the Image
          *
          */
-        void create(const Size& size) override;
+        void create(const Size<std::size_t>& size) override;
 
         /*! \brief Create the Image
          *
@@ -45,14 +45,14 @@ namespace Bull
          * \param size   The size of the Image
          *
          */
-        void create(const ByteArray& pixels, const Size& size) override;
+        void create(const ByteArray& pixels, const Size<std::size_t>& size) override;
 
         /*! \brief Get the size of the Image
          *
          * \return The size
          *
          */
-        AbstractImage::Size getSize() const override;
+        Size<std::size_t> getSize() const override;
 
         /*! \brief Get pixels of the Image
          *
@@ -70,9 +70,9 @@ namespace Bull
 
     private:
 
-        AbstractImage::Size m_size;
-        ByteArray           m_pixels;
-        PixelFormat         m_pixelFormat;
+        Size<std::size_t> m_size;
+        ByteArray         m_pixels;
+        PixelFormat       m_pixelFormat;
     };
 }
 

@@ -22,7 +22,7 @@ namespace Bull
         return 0;
     }
 
-    std::size_t PixelFormatUtils::getImageByteCount(const AbstractImage::Size& size, PixelFormat pixelFormat)
+    std::size_t PixelFormatUtils::getImageByteCount(const Size<std::size_t>& size, PixelFormat pixelFormat)
     {
         return size.width * size.height * getPixelFormatSize(pixelFormat);
     }

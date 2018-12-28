@@ -10,19 +10,19 @@ namespace Bull
         /// Nothing
     }
 
-    Image::Image(const AbstractImage::Size& size, PixelFormat pixelFormat) :
+    Image::Image(const Size<std::size_t>& size, PixelFormat pixelFormat) :
         m_pixelFormat(pixelFormat)
     {
         create(size);
     }
 
-    Image::Image(const ByteArray& pixels, const Size& size, PixelFormat pixelFormat) :
+    Image::Image(const ByteArray& pixels, const Size<std::size_t>& size, PixelFormat pixelFormat) :
         m_pixelFormat(pixelFormat)
     {
         create(pixels, size);
     }
 
-    void Image::create(const Size& size)
+    void Image::create(const Size<std::size_t>& size)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Invalid image size"));
 
@@ -31,7 +31,7 @@ namespace Bull
         m_pixels.create(PixelFormatUtils::getImageByteCount(m_size, m_pixelFormat));
     }
 
-    void Image::create(const ByteArray& pixels, const Size& size)
+    void Image::create(const ByteArray& pixels, const Size<std::size_t>& size)
     {
         Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Invalid image size"));
 
@@ -46,7 +46,7 @@ namespace Bull
         }
     }
 
-    AbstractImage::Size Image::getSize() const
+    Size<std::size_t> Image::getSize() const
     {
         return m_size;
     }

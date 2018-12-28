@@ -31,7 +31,7 @@ namespace Bull
          * \param pixelFormat The PixelFormat of the ImageTexture
          *
          */
-        ImageTexture(const AbstractImage::Size& size, PixelFormat pixelFormat);
+        ImageTexture(const Size<std::size_t>& size, PixelFormat pixelFormat);
 
         /*! \brief Constructor
          *
@@ -40,7 +40,7 @@ namespace Bull
          * \param pixelFormat The PixelFormat of the ImageTexture
          *
          */
-        ImageTexture(const ByteArray& pixels, const AbstractImage::Size& size, PixelFormat pixelFormat);
+        ImageTexture(const ByteArray& pixels, const Size<std::size_t>& size, PixelFormat pixelFormat);
 
         /*! \brief Constructor by movement semantic
          *
@@ -63,7 +63,7 @@ namespace Bull
          * \param size The Size
          *
          */
-        void create(const Size& size) override;
+        void create(const Size<std::size_t>& size) override;
 
         /*! \brief Create the ImageTexture from pixels
          *
@@ -71,14 +71,14 @@ namespace Bull
          * \param size   The Size of the pixels
          *
          */
-        void create(const ByteArray& pixels, const Size& size) override;
+        void create(const ByteArray& pixels, const Size<std::size_t>& size) override;
 
         /*! \brief Get the Size of the ImageTexture
          *
          * \return The Size
          *
          */
-        AbstractImage::Size getSize() const override;
+        Size<std::size_t> getSize() const override;
 
         /*! \brief Get the pixels of the ImageTexture
          *

@@ -125,11 +125,10 @@ namespace Bull
             /*! \brief Create the render surface
              *
              * \param shared The shared context
-             * \param width  The width of the surface
-             * \param height The height of the surface
+             * \param size   The Size of the surface to create
              *
              */
-            void createSurface(const GlxContext* shared, unsigned int width, unsigned int height);
+            void createSurface(const GlxContext* shared, const SizeUI& size);
 
             /*! \brief Create the render context
              *

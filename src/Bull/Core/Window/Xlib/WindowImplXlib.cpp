@@ -379,8 +379,8 @@ namespace Bull
                     case ConfigureNotify:
                     {
                         WindowEvent event;
-                        Size size(e.xconfigure.width, e.xconfigure.height);
-                        Size  position(e.xconfigure.x, e.xconfigure.y);
+                        SizeI position(e.xconfigure.x, e.xconfigure.y);
+                        SizeUI size(e.xconfigure.width, e.xconfigure.height);
 
                         if(size != m_lastSize)
                         {
@@ -493,13 +493,13 @@ namespace Bull
             }
         }
 
-        void WindowImplXlib::setPosition(const Size& position)
+        void WindowImplXlib::setPosition(const SizeI& position)
         {
             XMoveWindow(m_display.getHandler(), m_handler, position.width, position.height);
             m_display.flush();
         }
 
-        Size WindowImplXlib::getPosition() const
+        SizeI WindowImplXlib::getPosition() const
         {
             XWindow root, child;
             int localX, localY, x, y;
@@ -511,60 +511,74 @@ namespace Bull
             return { x, y };
         }
 
-        void WindowImplXlib::setMinSize(const Size& size)
+        void WindowImplXlib::setMinSize(const SizeUI& size)
         {
             XSizeHints hints;
+            SizeUI clampedSize;
+            SizeUI currentSize = getSize();
 
             hints.max_width  = (size.width > 0) ? size.width : 0;
             hints.max_height = (size.height > 0) ? size.height : 0;
             hints.flags      = PMinSize;
 
+            clampedSize.width = std::max(size.width, currentSize.width);
+            clampedSize.height = std::max(size.height, currentSize.height);
+
             XSetNormalHints(m_display.getHandler(), m_handler, &hints);
+
+            setSize(clampedSize);
         }
 
-        Size WindowImplXlib::getMinSize() const
+        SizeUI WindowImplXlib::getMinSize() const
         {
             XSizeHints hints;
 
             XGetNormalHints(m_display.getHandler(), m_handler, &hints);
 
-            return { hints.min_width, hints.min_height };
+            return SizeI(hints.min_width, hints.min_height);
         }
 
-        void WindowImplXlib::setMaxSize(const Size& size)
+        void WindowImplXlib::setMaxSize(const SizeUI& size)
         {
             XSizeHints hints;
+            SizeUI clampedSize;
+            SizeUI currentSize = getSize();
 
             hints.max_width  = (size.width > 0) ? size.width : m_screen->width;
             hints.max_height = (size.height > 0) ? size.height : m_screen->height;
             hints.flags      = PMaxSize;
 
+            clampedSize.width = std::min(size.width, currentSize.width);
+            clampedSize.height = std::min(size.height, currentSize.height);
+
             XSetNormalHints(m_display.getHandler(), m_handler, &hints);
+
+            setSize(clampedSize);
         }
 
-        Size WindowImplXlib::getMaxSize() const
+        SizeUI WindowImplXlib::getMaxSize() const
         {
             XSizeHints hints;
 
             XGetNormalHints(m_display.getHandler(), m_handler, &hints);
 
-            return { hints.max_width, hints.max_height };
+            return SizeI(hints.max_width, hints.max_height);
         }
 
-        void WindowImplXlib::setSize(const Size& size)
+        void WindowImplXlib::setSize(const SizeUI& size)
         {
             XResizeWindow(m_display.getHandler(), m_handler, size.width, size.height);
             m_lastSize = size;
             m_display.flush();
         }
 
-        Size WindowImplXlib::getSize() const
+        SizeUI WindowImplXlib::getSize() const
         {
             XWindowAttributes attributes;
 
             XGetWindowAttributes(m_display.getHandler(), m_handler, &attributes);
 
-            return { attributes.width, attributes.height };
+            return SizeI(attributes.width, attributes.height);
         }
 
         void WindowImplXlib::setTitle(const String& title)
@@ -764,7 +778,7 @@ namespace Bull
             m_handler = XCreateWindow(m_display.getHandler(),
                                       m_display.getRootWindow(screen),
                                       0, 0,
-                                      mode.width, mode.height,
+                                      mode.size.width, mode.size.height,
                                       0,
                                       mode.bitsPerPixel,
                                       InputOutput,
@@ -777,7 +791,7 @@ namespace Bull
             initialize(title, style);
         }
 
-        void WindowImplXlib::open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi)
+        void WindowImplXlib::open(const SizeUI& size, const String& title, Uint32 style, XVisualInfo* vi)
         {
             ErrorHandler         handler;
             XSetWindowAttributes attributes;
@@ -795,7 +809,7 @@ namespace Bull
             m_handler = XCreateWindow(m_display.getHandler(),
                                       m_display.getRootWindow(vi->screen),
                                       0, 0,
-                                      width, height,
+                                      size.width, size.height,
                                       0,
                                       vi->depth,
                                       InputOutput,

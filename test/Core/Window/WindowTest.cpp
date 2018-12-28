@@ -54,6 +54,68 @@ SCENARIO("Create window and change its settings")
             }
         }
 
+        WHEN("Set a maximum size prior than the window's size")
+        {
+            const SizeUI maxSize(1000, 800);
+            const SizeUI initialSize = window.getSize();
+
+            window.setMaxSize(maxSize);
+
+            THEN("The window shouldn't have been resized")
+            {
+                REQUIRE(window.getSize() == initialSize);
+            }
+        }
+
+        WHEN("Set a maximum size lowest than the window's size")
+        {
+            const SizeUI maxSize(600, 400);
+
+            window.setMaxSize(maxSize);
+
+            THEN("The window should have been resized")
+            {
+                REQUIRE(window.getSize() == maxSize);
+            }
+        }
+
+        WHEN("Set a minimum size prior than the window's size")
+        {
+            const SizeUI minSize(1000, 800);
+
+            window.setMinSize(minSize);
+
+            THEN("The window should have been resized")
+            {
+                REQUIRE(window.getSize() == minSize);
+            }
+        }
+
+        WHEN("Set a minimum size lowest than the window's size")
+        {
+            const SizeUI minSize(600, 400);
+            const SizeUI initialSize = window.getSize();
+
+            window.setMinSize(minSize);
+
+            THEN("The window shouldn't have been resized")
+            {
+                REQUIRE(window.getSize() == initialSize);
+            }
+        }
+
+        WHEN("Change the position of the window")
+        {
+            const SizeI position(50, 50);
+
+            window.setPosition(position);
+
+            THEN("The window should have move")
+            {
+                REQUIRE(window.getPosition() == position);
+            }
+        }
+
         WHEN("Close the window")
         {
             window.close();

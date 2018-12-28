@@ -33,13 +33,13 @@ namespace Bull
 
                 if(rotation == RR_Rotate_90 || rotation == RR_Rotate_270)
                 {
-                    desktopMode.height = sizes[currentMode].width;
-                    desktopMode.width  = sizes[currentMode].height;
+                    desktopMode.size.height = sizes[currentMode].width;
+                    desktopMode.size.width  = sizes[currentMode].height;
                 }
                 else
                 {
-                    desktopMode.width  = sizes[currentMode].width;
-                    desktopMode.height = sizes[currentMode].height;
+                    desktopMode.size.width  = sizes[currentMode].width;
+                    desktopMode.size.height = sizes[currentMode].height;
                 }
             }
 
@@ -73,8 +73,8 @@ namespace Bull
                         VideoMode mode;
 
                         mode.bitsPerPixel = depths[j];
-                        mode.width        = sizes[i].width;
-                        mode.height       = sizes[i].height;
+                        mode.size.width   = sizes[i].width;
+                        mode.size.height  = sizes[i].height;
 
                         if(std::find(modes.begin(), modes.end(), mode) == modes.end())
                         {

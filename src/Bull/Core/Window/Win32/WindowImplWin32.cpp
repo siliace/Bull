@@ -343,12 +343,20 @@ namespace Bull
 
             GetWindowRect(m_handler, &r);
 
-            return {r.left, r.top};
+            return { r.left, r.top };
         }
 
         void WindowImplWin32::setMinSize(const SizeUI& size)
         {
+            SizeUI clampedSize;
+            SizeUI currentSize = getSize();
+
+            clampedSize.width = std::max(size.width, currentSize.width);
+            clampedSize.height = std::max(size.height, currentSize.height);
+
             m_minSize = std::make_unique<SizeUI>(getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE))));
+
+            setSize(clampedSize);
         }
 
         SizeUI WindowImplWin32::getMinSize() const
@@ -358,7 +366,15 @@ namespace Bull
 
         void WindowImplWin32::setMaxSize(const SizeUI& size)
         {
+            SizeUI clampedSize;
+            SizeUI currentSize = getSize();
+
+            clampedSize.width = std::min(size.width, currentSize.width);
+            clampedSize.height = std::min(size.height, currentSize.height);
+
             m_maxSize = std::make_unique<SizeUI>(getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE))));
+
+            setSize(clampedSize);
         }
 
         SizeUI WindowImplWin32::getMaxSize() const

@@ -101,7 +101,7 @@ namespace Bull
              * \param size The new size of the window
              *
              */
-            void setPosition(const Size& position) override;
+            void setPosition(const SizeI& position) override;
 
             /*! \brief Set the size of the window
              *
@@ -109,49 +109,49 @@ namespace Bull
              * \param y The new height of the window
              *
              */
-            Size getPosition() const override;
+            SizeI getPosition() const override;
 
             /*! \brief Set the minimal size of the window
              *
              * \param size The minimal size of the window
              *
              */
-            void setMinSize(const Size& size) override;
+            void setMinSize(const SizeUI& size) override;
 
             /*! \brief Get the minimal size of the window
              *
              * \return The minimal size
              *
              */
-            Size getMinSize() const override;
+            SizeUI getMinSize() const override;
 
             /*! \brief Set the maximal size of the window
              *
              * \param size The maximal size of the window
              *
              */
-            void setMaxSize(const Size& size) override;
+            void setMaxSize(const SizeUI& size) override;
 
             /*! \brief Get the maximal size of the window
              *
              * \return The maximal size
              *
              */
-            Size getMaxSize() const override;
+            SizeUI getMaxSize() const override;
 
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window
              *
              */
-            void setSize(const Size& size) override;
+            void setSize(const SizeUI& size) override;
 
             /*! \brief Get the size of the window
              *
              * \return Return the size of the window
              *
              */
-            Size getSize() const override;
+            SizeUI getSize() const override;
 
             /*! \brief Set the title of the window
              *
@@ -241,14 +241,13 @@ namespace Bull
 
             /*! \brief Open the window
              *
-             * \param width  The width of the Window
-             * \param height The height of the Window
-             * \param title  The title of the Window
-             * \param style  The decoration of the Window
-             * \param vi     The VisualInfo parameters to use to open
+             * \param size  The Size of the Window
+             * \param title The title of the Window
+             * \param style The decoration of the Window
+             * \param vi    The VisualInfo parameters to use to open
              *
              */
-            void open(unsigned int width, unsigned int height, const String& title, Uint32 style, XVisualInfo* vi);
+            void open(const SizeUI& size, const String& title, Uint32 style, XVisualInfo* vi);
 
         private:
 

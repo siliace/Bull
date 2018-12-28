@@ -24,7 +24,7 @@ namespace Bull
          * \return The byte count
          *
          */
-        static std::size_t getImageByteCount(const AbstractImage::Size& size, PixelFormat pixelFormat);
+        static std::size_t getImageByteCount(const Size<std::size_t>& size, PixelFormat pixelFormat);
     };
 }
 
