@@ -275,6 +275,7 @@ namespace Bull
 
         void WglContext::createSurface(const WglContext* shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel)
         {
+        #ifdef BULL_WGL_PBUFFER_SUPPORT
             if(wglPbuffer.isLoaded() && shared)
             {
                 int format = getBestPixelFormat(shared->m_device, bitsPerPixel, m_settings, true);
@@ -296,6 +297,9 @@ namespace Bull
                     }
                 }
             }
+        #else
+            BULL_UNUSED(bitsPerPixel);
+        #endif
 
             if(!m_device)
             {
