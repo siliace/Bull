@@ -9,7 +9,16 @@ namespace Bull
 
         for(std::size_t i = 0; i < polygon.getVertexCount(); i++)
         {
-            vertices.add(Vertex(Vector3F(polygon.getVertex(i), depth), colorVector, Vector2F::Zero, normal));
+            Vertex vertex;
+            {
+                vertex.position = polygon.getVertex(i);
+                vertex.position.z() = depth;
+                vertex.color = colorVector;
+                vertex.texCoord = Vector2F::Zero;
+                vertex.normal = normal;
+            }
+
+            vertices.add(vertex);
         }
 
         return vertices;
