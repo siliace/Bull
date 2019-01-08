@@ -70,10 +70,10 @@ namespace Bull
          *
          */
         template <typename U, std::size_t US>
-        Vector3(const Vector<U, US>& copy) :
-            Vector<T, US>(copy)
+        Vector3(const Vector<U, US>& copy, T z = 0.0) :
+            Vector<T, 3>(copy)
         {
-            /// Nothing
+            this->z() = z;
         }
 
         /*! \brief Set the Vector3

@@ -10,7 +10,7 @@ namespace Bull
         /// Nothing
     }
 
-    void SubMesh::create(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
+    void SubMesh::create(const VertexArray& vertices, const std::vector<unsigned int>& indices)
     {
         m_vao.runBound([this, vertices, indices](){
             m_indices.create(indices);

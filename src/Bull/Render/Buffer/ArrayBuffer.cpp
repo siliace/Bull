@@ -9,17 +9,17 @@ namespace Bull
         /// Nothing
     }
 
-    ArrayBuffer::ArrayBuffer(const std::vector<Vertex>& vertices, HardwareBufferUsage usage) :
+    ArrayBuffer::ArrayBuffer(const VertexArray& vertices, HardwareBufferUsage usage) :
         ArrayBuffer()
     {
         create(vertices, usage);
     }
 
-    void ArrayBuffer::create(const std::vector<Vertex>& vertices, HardwareBufferUsage usage)
+    void ArrayBuffer::create(const VertexArray& vertices, HardwareBufferUsage usage)
     {
-        HardwareBuffer::create(vertices.size() * sizeof(Vertex), usage);
+        HardwareBuffer::create(vertices.getSize() * sizeof(Vertex), usage);
 
-        fill(&vertices[0], getCapacity(), 0);
+        fill(vertices.getBuffer(), getCapacity(), 0);
     }
 
     void ArrayBuffer::setAttribPointer(unsigned int attrib, std::size_t size, std::size_t stride, std::size_t start) const

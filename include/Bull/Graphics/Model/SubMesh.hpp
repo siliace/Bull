@@ -43,7 +43,7 @@ namespace Bull
          * \param indices  Indices of the SubMesh
          *
          */
-        void create(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+        void create(const VertexArray& vertices, const std::vector<unsigned int>& indices);
 
         /*! \brief Render the SubMesh
          *
