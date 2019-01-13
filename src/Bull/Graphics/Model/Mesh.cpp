@@ -46,6 +46,7 @@ namespace Bull
         return m_parent == nullptr;
     }
 
+#if defined BULL_MESH_HAS_NAME
     void Mesh::setName(const String& name)
     {
         m_name = name;
@@ -55,6 +56,7 @@ namespace Bull
     {
         return m_name;
     }
+#endif
 
     const Mesh* Mesh::getParent() const
     {

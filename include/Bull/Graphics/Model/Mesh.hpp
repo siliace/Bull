@@ -61,6 +61,7 @@ namespace Bull
          */
         bool isRoot() const;
 
+    #if defined BULL_MESH_HAS_NAME
         /*! \brief Set the name of the Mesh
          *
          * \param name The name
@@ -74,6 +75,7 @@ namespace Bull
          *
          */
         const String& getName() const;
+    #endif
 
         /*! \brief Get the parent Mesh
          *
@@ -98,7 +100,9 @@ namespace Bull
 
     private:
 
+    #if defined BULL_MESH_HAS_NAME
         String                                m_name;
+    #endif
         const Mesh*                           m_parent;
         std::vector<Mesh>                     m_children;
         std::vector<std::shared_ptr<SubMesh>> m_subMeshes;
