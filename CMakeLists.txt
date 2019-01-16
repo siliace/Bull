@@ -13,6 +13,7 @@ endif()
 
 if(BULL_OS_WINDOWS)
     set(WINDOWS_BUILD_VERSION "BULL_BUILD_WINDOWS_VISTA")
+    add_definitions("-DNOMINMAX")
     add_definitions("-D${WINDOWS_BUILD_VERSION}")
 endif()
 
