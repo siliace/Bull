@@ -1,10 +1,10 @@
-#include <Catch.hpp>
+#include <Catch/catch.hpp>
 
 #include <Bull/Core/Utility/Random.hpp>
 
 using namespace Bull;
 
-TEST_CASE("Random::number", "[Core::Random]")
+TEST_CASE("Random::number", "[Core][Random]")
 {
     RandomGenerator generator;
 

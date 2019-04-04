@@ -1,10 +1,10 @@
-#include <Catch.hpp>
+#include <Catch/catch.hpp>
 
 #include <Bull/Core/Utility/StringUtils.hpp>
 
 using namespace Bull;
 
-TEST_CASE("StringUtils::boolean", "[Core::StringUtils]")
+TEST_CASE("StringUtils::boolean", "[Core][StringUtils]")
 {
     SECTION("Create a \"true\" string")
     {
@@ -17,7 +17,7 @@ TEST_CASE("StringUtils::boolean", "[Core::StringUtils]")
     }
 }
 
-TEST_CASE("StringUtils::repeat", "[Core::StringUtils]")
+TEST_CASE("StringUtils::repeat", "[Core][StringUtils]")
 {
     SECTION("Repeat a String once")
     {
@@ -40,7 +40,7 @@ TEST_CASE("StringUtils::repeat", "[Core::StringUtils]")
     }
 }
 
-TEST_CASE("StringUtils::ofSize", "[Core::StringUtils]")
+TEST_CASE("StringUtils::ofSize", "[Core][StringUtils]")
 {
     SECTION("Create a String of size 0")
     {

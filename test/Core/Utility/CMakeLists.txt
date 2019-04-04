@@ -1,4 +1,7 @@
-bull_add_core_test(CharacterTest)
-bull_add_core_test(MapUtilsTest)
-bull_add_core_test(RandomTest)
-bull_add_core_test(StringUtilsTest)
+target_sources(bull-core-test
+        PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/CharacterTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/MapUtilsTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/RandomTest.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/StringUtilsTest.cpp
+        )

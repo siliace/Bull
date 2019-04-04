@@ -1,4 +1,4 @@
-#include <Catch.hpp>
+#include <Catch/catch.hpp>
 
 #include <Bull/Core/Window/Window.hpp>
 

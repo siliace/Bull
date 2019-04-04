@@ -1,4 +1,4 @@
-#include <Catch.hpp>
+#include <Catch/catch.hpp>
 
 #include <Bull/Core/Exception/InternalError.hpp>
 #include <Bull/Core/FileSystem/File.hpp>

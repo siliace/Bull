@@ -25,13 +25,3 @@ macro(bull_add_library target)
                 RUNTIME DESTINATION ${BULL_RUNTIME_INSTALL_PATH}
             )
 endmacro()
-
-macro(bull_add_core_test name)
-    set(TEST_FILE "${name}.cpp")
-
-    add_executable(${name} "${TEST_FILE}")
-    target_link_libraries(${name} bull-core)
-    target_include_directories(${name} PUBLIC "${BULL_ROOT}/test")
-
-    add_test(NAME ${name} COMMAND ${name})
-endmacro()
