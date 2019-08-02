@@ -4,13 +4,14 @@ namespace Bull
 {
     IndexBuffer::IndexBuffer() :
         HardwareBuffer(HardwareBufferType::Element),
-        m_dataType(DataType_UnsignedInt)
+        m_dataType(DataType::UnsignedInt)
     {
         /// Nothing
     }
 
     IndexBuffer::IndexBuffer(IndexBuffer&& right) noexcept :
-        HardwareBuffer(std::move(right))
+        HardwareBuffer(std::move(right)),
+        m_dataType(DataType::UnsignedInt)
     {
         std::swap(m_dataType, right.m_dataType);
     }

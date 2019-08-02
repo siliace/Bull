@@ -6,10 +6,14 @@ namespace Bull
     {
         switch(attachmentPoint)
         {
-            case AttachmentPoint::Color: return GL_COLOR_ATTACHMENT0;
-            case AttachmentPoint::Depth: return GL_DEPTH_ATTACHMENT;
-            case AttachmentPoint::Stencil: return GL_STENCIL_ATTACHMENT;
-            case AttachmentPoint::DepthStencil: return GL_DEPTH_STENCIL_ATTACHMENT;
+            case AttachmentPoint::Color:
+                return GL_COLOR_ATTACHMENT0;
+            case AttachmentPoint::Depth:
+                return GL_DEPTH_ATTACHMENT;
+            case AttachmentPoint::Stencil:
+                return GL_STENCIL_ATTACHMENT;
+            case AttachmentPoint::DepthStencil:
+                return GL_DEPTH_STENCIL_ATTACHMENT;
         }
 
         return 0;
@@ -106,30 +110,20 @@ namespace Bull
 
     GLenum OpenGL::dataType(DataType dataType)
     {
-        switch(dataType)
+        switch(dataType.getSize())
         {
-            case DataType_Byte:
-                return GL_BYTE;
+            case sizeof(Uint8):
+                return dataType.isUnsigned() ? GL_UNSIGNED_BYTE : GL_BYTE;
 
-            case DataType_UnsignedByte:
-                return GL_UNSIGNED_BYTE;
+            case sizeof(Uint16):
+                return dataType.isUnsigned() ? GL_UNSIGNED_SHORT : GL_SHORT;
 
-            case DataType_Short:
-                return GL_SHORT;
+            case sizeof(Uint32):
+                if(dataType.isFloatingPoint())
+                    return GL_FLOAT;
+                return dataType.isUnsigned() ? GL_UNSIGNED_INT : GL_INT;
 
-            case DataType_UnsignedShort:
-                return GL_UNSIGNED_SHORT;
-
-            case DataType_Int:
-                return GL_INT;
-
-            case DataType_UnsignedInt:
-                return GL_UNSIGNED_INT;
-
-            case DataType_Float:
-                return GL_FLOAT;
-
-            case DataType_Double:
+            case sizeof(double):
                 return GL_DOUBLE;
         }
 
