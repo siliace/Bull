@@ -3,14 +3,14 @@
 
 #include <mutex>
 
-#include <Bull/Core/Assets/AsyncAssetLoader.hpp>
+#include <Bull/Core/Assets/AssetLoader.hpp>
 #include <Bull/Core/Image/AbstractImageLoader.hpp>
 #include <Bull/Core/Image/Image.hpp>
 
 namespace Bull
 {
     template <typename T>
-    class BULL_CORE_API ImageLoader : public AbstractImageLoader, public AsyncAssetLoader<T, PixelFormat>
+    class BULL_CORE_API ImageLoader : public AbstractImageLoader, public AssetLoader<T, PixelFormat>
     {
     public:
 

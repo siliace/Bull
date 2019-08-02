@@ -1,14 +1,14 @@
 #ifndef BULL_RENDER_SHADER_SHADERSTAGELOADER_HPP
 #define BULL_RENDER_SHADER_SHADERSTAGELOADER_HPP
 
-#include <Bull/Core/Assets/AsyncAssetLoader.hpp>
+#include <Bull/Core/Assets/AssetLoader.hpp>
 #include <Bull/Core/Memory/String.hpp>
 
 #include <Bull/Render/Shader/ShaderStage.hpp>
 
 namespace Bull
 {
-    struct BULL_RENDER_API ShaderStageLoader : public AsyncAssetLoader<ShaderStage, ShaderStageType>
+    struct BULL_RENDER_API ShaderStageLoader : public AssetLoader<ShaderStage, ShaderStageType>
     {
         /*! \brief Load an ShaderStage from a File
          *
