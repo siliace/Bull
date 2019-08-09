@@ -16,33 +16,6 @@ namespace Bull
         return prv::DirectoryImpl::exists(path);
     }
 
-    void Directory::copy(const Path& path, const Path& newPath)
-    {
-        Directory target(path);
-
-        if(!Directory::exists(newPath))
-        {
-            Directory::create(newPath);
-        }
-
-        for(const Path& p : target.getContent())
-        {
-            if(p.isDirectory())
-            {
-                Directory::copy(path.resolve(p.toString()), newPath.resolve(p.toString()));
-            }
-            else
-            {
-                File::copy(path.resolve(p.toString()), newPath.resolve(p.toString()));
-            }
-        }
-    }
-
-    void Directory::rename(const Path& path, const Path& newPath)
-    {
-        prv::DirectoryImpl::rename(path, newPath);
-    }
-
     void Directory::remove(const Path& path)
     {
         prv::DirectoryImpl::remove(path);

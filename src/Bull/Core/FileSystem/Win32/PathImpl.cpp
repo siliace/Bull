@@ -6,6 +6,16 @@ namespace Bull
 {
     namespace prv
     {
+        void PathImpl::copy(const Path& path, const Path& newPath, bool failsIfExists)
+        {
+            CopyFile(path.toString().getBuffer(), newPath.toString().getBuffer(), failsIfExists);
+        }
+
+        void PathImpl::rename(const Path& path, const Path& newPath)
+        {
+            MoveFile(path.toString().getBuffer(), newPath.toString().getBuffer());
+        }
+
         String PathImpl::realPath(const String& relative)
         {
             String absolute = StringUtils::ofSize(MAX_PATH);

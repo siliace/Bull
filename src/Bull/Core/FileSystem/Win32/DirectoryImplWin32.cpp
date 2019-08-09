@@ -21,14 +21,6 @@ namespace Bull
             return (attribs != INVALID_FILE_ATTRIBUTES) && (attribs & FILE_ATTRIBUTE_DIRECTORY);
         }
 
-        void DirectoryImplWin32::rename(const Path& path, const Path& newPath)
-        {
-            Expect(
-                MoveFile(path.toString().getBuffer(), newPath.toString().getBuffer()),
-                Throw(Win32Error, "Failed to rename the directory " + path.toString())
-            );
-        }
-
         void DirectoryImplWin32::remove(const Path& path)
         {
             Expect(

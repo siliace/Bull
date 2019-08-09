@@ -28,14 +28,6 @@ namespace Bull
              */
             static bool exists(const Path& path);
 
-            /*! \brief Rename a Directory
-             *
-             * \param path    The Path of the Directory to rename
-             * \param newPath The new Path of the Directory
-             *
-             */
-            static void rename(const Path& path, const Path& newPath);
-
             /*! \brief Remove a Directory
              *
              * \param path The path of the Directory to remove

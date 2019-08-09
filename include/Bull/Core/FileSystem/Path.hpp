@@ -6,15 +6,29 @@
 
 namespace Bull
 {
+    /**
+     * \brief
+     */
     class BULL_CORE_API Path
     {
     public:
 
-    #if defined BULL_OS_WINDOWS
         static constexpr char Separator = '\\';
-    #else
-        static constexpr char Separator = '/';
-    #endif
+
+        /**
+         * \brief
+         * \param path
+         * \param newPath
+         * \param failIfExists
+         */
+        static void copy(const Path& path, const Path& newPath, bool failIfExists = false);
+
+        /**
+         * \brief
+         * \param path
+         * \param newPath
+         */
+        static void rename(const Path& path, const Path& newPath);
 
     public:
 

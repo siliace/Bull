@@ -19,22 +19,6 @@ namespace Bull
         return prv::FileImpl::exists(path);
     }
 
-    void File::copy(const Path& path, const Path& newPath)
-    {
-        Expect(exists(path), Throw(FileNotFound, "The file " + path.toString() + " does not exists"));
-        Expect(!exists(newPath), Throw(FileAlreadyExists, "The file " + newPath.toString() + " already exists"));
-
-        prv::FileImpl::copy(path, newPath);
-    }
-
-    void File::rename(const Path& path, const Path& newPath)
-    {
-        Expect(exists(path), Throw(FileNotFound, "The file " + path.toString() + " does not exists"));
-        Expect(!exists(newPath), Throw(FileAlreadyExists, "The file " + newPath.toString() + " already exists"));
-
-        prv::FileImpl::rename(path, newPath);
-    }
-
     void File::remove(const Path& path)
     {
         Expect(exists(path), Throw(FileNotFound, "The file " + path.toString() + " does not exists"));

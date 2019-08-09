@@ -49,22 +49,6 @@ namespace Bull
          */
         static bool exists(const Path& path);
 
-        /*! \brief Copy a File
-         *
-         * \param path    The Path of the file to copy
-         * \param newPath The new Path copied File
-         *
-         */
-        static void copy(const Path& path, const Path& newPath);
-
-        /*! \brief Rename a File
-         *
-         * \param path    The Path of the File to rename
-         * \param newPath The new Path of the File
-         *
-         */
-        static void rename(const Path& path, const Path& newPath);
-
         /*! \brief Delete a File
          *
          * \param path The Path of the File to delete

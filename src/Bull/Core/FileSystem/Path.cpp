@@ -5,6 +5,16 @@
 
 namespace Bull
 {
+    void Path::copy(const Path& path, const Path& newPath, bool failIfExists)
+    {
+        prv::PathImpl::copy(path, newPath, failIfExists);
+    }
+
+    void Path::rename(const Path& path, const Path& newPath)
+    {
+        prv::PathImpl::rename(path, newPath);
+    }
+
     Path::Path(const String& path) :
         m_path(path)
     {

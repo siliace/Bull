@@ -22,7 +22,7 @@ SCENARIO("Create window and change its settings")
             }
             AND_THEN("The window should have the right size")
             {
-                REQUIRE(window.getSize() == videoMode.size);
+                REQUIRE(window.getSize() == videoMode.getSize());
             }
             AND_THEN("The window should have the right title")
             {
