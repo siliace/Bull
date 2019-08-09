@@ -2,7 +2,7 @@
 
 namespace Bull
 {
-    Viewport::Viewport(const SizeI& position, const SizeUI& size) :
+    Viewport::Viewport(const Size<int>& position, const Size<unsigned int>& size) :
         position(position),
         size(size)
     {
@@ -19,7 +19,7 @@ namespace Bull
         return !(*this == right);
     }
 
-    void Viewport::move(const SizeI& offset)
+    void Viewport::move(const Size<int>& offset)
     {
         position += offset;
     }

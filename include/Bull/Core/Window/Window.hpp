@@ -144,14 +144,14 @@ namespace Bull
          * \param position The new position of the window
          *
          */
-        void setPosition(const SizeI& position);
+        void setPosition(const Size<int>& position);
 
         /*! \brief Get the position in the screen of the window
          *
          * \return Return the window position
          *
          */
-        SizeI getPosition() const;
+        Size<int> getPosition() const;
 
         /*! \brief Set the minimal size of the window
          *
@@ -165,35 +165,35 @@ namespace Bull
          * \return The minimal size
          *
          */
-        SizeUI getMinSize() const;
+        Size<unsigned int> getMinSize() const;
 
         /*! \brief Set the maximal size of the window
          *
          * \param size The maximal size of the window
          *
          */
-        void setMaxSize(const SizeUI& size);
+        void setMaxSize(const Size<unsigned int>& size);
 
         /*! \brief Get the maximal size of the window
          *
          * \return The maximal size
          *
          */
-        SizeUI getMaxSize() const;
+        Size<unsigned int> getMaxSize() const;
 
         /*! \brief Set the size of the window
          *
          * \param size The new size of the window
          *
          */
-        void setSize(const SizeUI& size);
+        void setSize(const Size<unsigned int>& size);
 
         /*! \brief Get the size of the window
          *
          * \return Return the size of the window
          *
          */
-        SizeUI getSize() const;
+        Size<unsigned int> getSize() const;
 
         /*! \brief Set the title of the window
          *

@@ -43,8 +43,8 @@ namespace Bull
         m_currentViewport = viewport;
 
         gl::viewport(
-                m_currentViewport.position.width, m_currentViewport.position.height,
-                m_currentViewport.size.width, m_currentViewport.size.height
+                m_currentViewport.position.getWidth(), m_currentViewport.position.getHeight(),
+                m_currentViewport.size.getWidth(), m_currentViewport.size.getHeight()
         );
     }
 

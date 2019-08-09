@@ -6,12 +6,12 @@ namespace Bull
 {
     namespace prv
     {
-        void MouseImpl::setPosition(const SizeI& position)
+        void MouseImpl::setPosition(const Size<int>& position)
         {
-            SetCursorPos(position.width, position.height);
+            SetCursorPos(position.getWidth(), position.getHeight());
         }
 
-        SizeI MouseImpl::getPosition()
+        Size<int> MouseImpl::getPosition()
         {
             POINT p;
 

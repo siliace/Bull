@@ -226,16 +226,16 @@ namespace Bull
             return windowWindowStyle;
         }
 
-        SizeUI WindowImplWin32::getAdjustedSize(const SizeUI& size, DWORD style)
+        Size<unsigned int> WindowImplWin32::getAdjustedSize(const Size<unsigned int>& size, DWORD style)
         {
-            SizeUI adjusted;
+            Size<unsigned int> adjusted;
             RECT rectangle = {0, 0,
-                              static_cast<LONG>(size.width),
-                              static_cast<LONG>(size.height)};
+                              static_cast<LONG>(size.getWidth()),
+                              static_cast<LONG>(size.getHeight())};
 
             AdjustWindowRect(&rectangle, style, false);
-            adjusted.width  = static_cast<unsigned int>(rectangle.right - rectangle.left);
-            adjusted.height = static_cast<unsigned int>(rectangle.bottom - rectangle.top);
+            adjusted.setWidth(rectangle.right - rectangle.left);
+            adjusted.setHeight(rectangle.bottom - rectangle.top);
 
             return adjusted;
         }
@@ -246,18 +246,18 @@ namespace Bull
             m_isResizing(false),
             m_cursorVisible(true)
         {
-            SizeUI size;
+            Size<unsigned int> size;
             m_isFullscreen = style == WindowStyle_Fullscreen;
             DWORD winWindowStyle = computeWindowStyle(style);
 
-            size = m_isFullscreen ? mode.size : getAdjustedSize(mode.size, winWindowStyle);
+            size = m_isFullscreen ? mode.getSize() : getAdjustedSize(mode.getSize(), winWindowStyle);
 
             m_handler = CreateWindowEx(0,
                                        windowClassName,
                                        title.getBuffer(),
                                        winWindowStyle,
                                        CW_USEDEFAULT, CW_USEDEFAULT,
-                                       size.width, size.height,
+                                       size.getWidth(), size.getHeight(),
                                        nullptr,
                                        nullptr,
                                        instance,
@@ -332,12 +332,12 @@ namespace Bull
             }
         }
 
-        void WindowImplWin32::setPosition(const SizeI& position)
+        void WindowImplWin32::setPosition(const Size<int>& position)
         {
-            SetWindowPos(m_handler, nullptr, position.width, position.height, 0, 0, SWP_NOSIZE);
+            SetWindowPos(m_handler, nullptr, position.getWidth(), position.getHeight(), 0, 0, SWP_NOSIZE);
         }
 
-        SizeI WindowImplWin32::getPosition() const
+        Size<int> WindowImplWin32::getPosition() const
         {
             RECT r = {0, 0, 0, 0};
 
@@ -346,56 +346,56 @@ namespace Bull
             return { r.left, r.top };
         }
 
-        void WindowImplWin32::setMinSize(const SizeUI& size)
+        void WindowImplWin32::setMinSize(const Size<unsigned int>& size)
         {
-            SizeUI clampedSize;
-            SizeUI currentSize = getSize();
+            Size<unsigned int> clampedSize;
+            Size<unsigned int> currentSize = getSize();
 
-            clampedSize.width = std::max(size.width, currentSize.width);
-            clampedSize.height = std::max(size.height, currentSize.height);
+            clampedSize.setWidth(std::max(size.getWidth(), currentSize.getWidth()));
+            clampedSize.setHeight(std::max(size.getHeight(), currentSize.getHeight()));
 
-            m_minSize = std::make_unique<SizeUI>(getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE))));
+            m_minSize = std::make_unique<Size<unsigned int>>(getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE))));
 
             setSize(clampedSize);
         }
 
-        SizeUI WindowImplWin32::getMinSize() const
+        Size<unsigned int> WindowImplWin32::getMinSize() const
         {
-            return m_minSize ? *m_minSize : SizeUI::Zero;
+            return m_minSize ? *m_minSize : Size<unsigned int>::Zero;
         }
 
-        void WindowImplWin32::setMaxSize(const SizeUI& size)
+        void WindowImplWin32::setMaxSize(const Size<unsigned int>& size)
         {
-            SizeUI clampedSize;
-            SizeUI currentSize = getSize();
+            Size<unsigned int> clampedSize;
+            Size<unsigned int> currentSize = getSize();
 
-            clampedSize.width = std::min(size.width, currentSize.width);
-            clampedSize.height = std::min(size.height, currentSize.height);
+            clampedSize.setWidth(std::min(size.getWidth(), currentSize.getWidth()));
+            clampedSize.setHeight(std::min(size.getHeight(), currentSize.getHeight()));
 
-            m_maxSize = std::make_unique<SizeUI>(getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE))));
+            m_maxSize = std::make_unique<Size<unsigned int>>(getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE))));
 
             setSize(clampedSize);
         }
 
-        SizeUI WindowImplWin32::getMaxSize() const
+        Size<unsigned int> WindowImplWin32::getMaxSize() const
         {
-            return m_maxSize ? *m_maxSize : SizeUI::Infinite;
+            return m_maxSize ? *m_maxSize : Size<unsigned int>::Infinite;
         }
 
-        void WindowImplWin32::setSize(const SizeUI& size)
+        void WindowImplWin32::setSize(const Size<unsigned int>& size)
         {
-            SizeUI adjusted = getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE)));
+            Size<unsigned int> adjusted = getAdjustedSize(size, static_cast<Uint32>(GetWindowLongPtr(m_handler, GWL_STYLE)));
 
-            SetWindowPos(m_handler, nullptr, 0, 0, adjusted.width, adjusted.height, SWP_NOMOVE | SWP_NOZORDER);
+            SetWindowPos(m_handler, nullptr, 0, 0, adjusted.getWidth(), adjusted.getHeight(), SWP_NOMOVE | SWP_NOZORDER);
         }
 
-        SizeUI WindowImplWin32::getSize() const
+        Size<unsigned int> WindowImplWin32::getSize() const
         {
             RECT r = { 0, 0, 0, 0 };
 
             GetClientRect(m_handler, &r);
 
-            return SizeUI(r.right - r.left, r.bottom - r.top);
+            return Size<unsigned int>(r.right - r.left, r.bottom - r.top);
         }
 
         void WindowImplWin32::setTitle(const String& title)
@@ -439,7 +439,7 @@ namespace Bull
                 SetWindowLongPtr(m_handler, GWL_STYLE,   WS_POPUP        | WS_VISIBLE);
                 SetWindowLongPtr(m_handler, GWL_EXSTYLE, WS_EX_APPWINDOW | WS_EX_TOPMOST);
 
-                SetWindowPos(m_handler, HWND_TOPMOST, 0, 0, current.size.width, current.size.height, SWP_SHOWWINDOW);
+                SetWindowPos(m_handler, HWND_TOPMOST, 0, 0, current.getSize().getWidth(), current.getSize().getHeight(), SWP_SHOWWINDOW);
 
                 ShowWindow(m_handler, SW_MAXIMIZE);
             }
@@ -488,7 +488,7 @@ namespace Bull
                 DestroyIcon(m_icon);
             }
 
-            m_icon = CreateIcon(instance, icon.getSize().width, icon.getSize().height, 1, 32, nullptr, pixels.getBuffer());
+            m_icon = CreateIcon(instance, icon.getSize().getWidth(), icon.getSize().getHeight(), 1, 32, nullptr, pixels.getBuffer());
 
             Expect(m_icon, Throw(Win32Error, "Failed to set window's icon"));
 
@@ -597,8 +597,8 @@ namespace Bull
                         m_lastSize = getSize();
 
                         e.type                = WindowEventType_Resized;
-                        e.windowResize.width  = m_lastSize.width;
-                        e.windowResize.height = m_lastSize.height;
+                        e.windowResize.width  = m_lastSize.getWidth();
+                        e.windowResize.height = m_lastSize.getHeight();
 
                         pushEvent(e);
                     }
@@ -609,8 +609,8 @@ namespace Bull
                         m_lastPosition = getPosition();
 
                         e.type         = WindowEventType_Moved;
-                        e.windowMove.x = getPosition().width;
-                        e.windowMove.y = getPosition().height;
+                        e.windowMove.x = getPosition().getWidth();
+                        e.windowMove.y = getPosition().getHeight();
 
                         pushEvent(e);
                     }
@@ -690,8 +690,8 @@ namespace Bull
                     e.type           = WindowEventType_MouseMoved;
                     e.mouseMove.x    = GET_X_LPARAM(lParam);
                     e.mouseMove.y    = GET_Y_LPARAM(lParam);
-                    e.mouseMove.xRel = e.mouseMove.x - getCursorPosition().width;
-                    e.mouseMove.yRel = e.mouseMove.y - getCursorPosition().height;
+                    e.mouseMove.xRel = e.mouseMove.x - getCursorPosition().getWidth();
+                    e.mouseMove.yRel = e.mouseMove.y - getCursorPosition().getHeight();
 
                     pushEvent(e);
                 }
@@ -868,14 +868,14 @@ namespace Bull
 
                         if(m_minSize)
                         {
-                            minmaxinfo->ptMinTrackSize.x = m_minSize->width;
-                            minmaxinfo->ptMinTrackSize.y = m_minSize->height;
+                            minmaxinfo->ptMinTrackSize.x = m_minSize->getWidth();
+                            minmaxinfo->ptMinTrackSize.y = m_minSize->getHeight();
                         }
 
                         if(m_maxSize)
                         {
-                            minmaxinfo->ptMaxTrackSize.x = m_maxSize->width;
-                            minmaxinfo->ptMaxTrackSize.y = m_maxSize->height;
+                            minmaxinfo->ptMaxTrackSize.x = m_maxSize->getWidth();
+                            minmaxinfo->ptMaxTrackSize.y = m_maxSize->getHeight();
                         }
                     }
                 }

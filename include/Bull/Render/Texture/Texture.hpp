@@ -103,10 +103,6 @@ namespace Bull
          */
         ByteArray getPixels(PixelFormat pixelFormat) const;
 
-    protected:
-
-        friend class FrameBuffer;
-
         /*! \brief Get the handle of the Texture
          *
          * \return The handle
@@ -116,7 +112,8 @@ namespace Bull
 
     private:
 
-        unsigned int m_handle; /*!< The handle of the Texture into the VRAM */
+        Size<std::size_t> m_size; /*!< The size of the Texture */
+        unsigned int      m_handle; /*!< The handle of the Texture into the VRAM */
     };
 }
 

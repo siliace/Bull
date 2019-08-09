@@ -1,5 +1,3 @@
-#include <algorithm>
-
 #include <Bull/Core/Window/VideoMode.hpp>
 #include <Bull/Core/Window/VideoModeImpl.hpp>
 
@@ -10,40 +8,57 @@ namespace Bull
         return prv::VideoModeImpl::getCurrent();
     }
 
-    std::vector<VideoMode> VideoMode::getAllAvailable()
+    std::unordered_set<VideoMode> VideoMode::getAllAvailable()
     {
         return prv::VideoModeImpl::getAllAvailable();
     }
 
     VideoMode::VideoMode() :
-        bitsPerPixel(0)
+        m_bitsPerPixel(0)
     {
         /// Nothing
     }
 
-    VideoMode::VideoMode(const SizeUI& size, unsigned int bitsPerPixel) :
-        size(size),
-        bitsPerPixel(bitsPerPixel)
+    VideoMode::VideoMode(const Size<unsigned int>& size, unsigned int bitsPerPixel) :
+        m_size(size),
+        m_bitsPerPixel(bitsPerPixel)
     {
         /// Nothing
     }
 
     bool VideoMode::isValid() const
     {
-        std::vector<VideoMode> all = VideoMode::getAllAvailable();
-
-        return std::find(all.begin(), all.end(), *this) != all.end();
+        std::unordered_set<VideoMode> all = VideoMode::getAllAvailable();
+        return all.find(*this) != all.end();
     }
 
-
-    bool VideoMode::operator==(const VideoMode& right)
+    const Size<unsigned int>& VideoMode::getSize() const
     {
-        return size == right.size &&
-               bitsPerPixel == right.bitsPerPixel;
+        return m_size;
     }
 
-    bool VideoMode::operator!=(const VideoMode& right)
+    void VideoMode::setSize(const Size<unsigned int>& size)
     {
-        return !(*this == right);
+        m_size = size;
+    }
+
+    unsigned int VideoMode::getBitsPerPixel() const
+    {
+        return m_bitsPerPixel;
+    }
+
+    void VideoMode::setBitsPerPixel(unsigned int bitsPerPixel)
+    {
+        m_bitsPerPixel = bitsPerPixel;
+    }
+
+    bool VideoMode::operator==(const VideoMode& right) const
+    {
+        return std::tie(m_size, m_bitsPerPixel) == std::tie(right.m_size, right.m_bitsPerPixel);
+    }
+
+    bool VideoMode::operator!=(const VideoMode& right) const
+    {
+        return std::tie(m_size, m_bitsPerPixel) != std::tie(right.m_size, right.m_bitsPerPixel);
     }
 }

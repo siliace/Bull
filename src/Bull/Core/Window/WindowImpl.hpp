@@ -87,7 +87,7 @@ namespace Bull
              * \param size The new size of the window
              *
              */
-            virtual void setPosition(const SizeI& position) = 0;
+            virtual void setPosition(const Size<int>& position) = 0;
 
             /*! \brief Set the size of the window
              *
@@ -95,49 +95,49 @@ namespace Bull
              * \param y The new height of the window
              *
              */
-            virtual SizeI getPosition() const = 0;
+            virtual Size<int> getPosition() const = 0;
 
             /*! \brief Set the minimal size of the window
              *
              * \param size The minimal size of the window
              *
              */
-            virtual void setMinSize(const SizeUI& size) = 0;
+            virtual void setMinSize(const Size<unsigned int>& size) = 0;
 
             /*! \brief Get the minimal size of the window
              *
              * \return The minimal size
              *
              */
-            virtual SizeUI getMinSize() const = 0;
+            virtual Size<unsigned int> getMinSize() const = 0;
 
             /*! \brief Set the maximal size of the window
              *
              * \param size The maximal size of the window
              *
              */
-            virtual void setMaxSize(const SizeUI& size) = 0;
+            virtual void setMaxSize(const Size<unsigned int>& size) = 0;
 
             /*! \brief Get the maximal size of the window
              *
              * \return The maximal size
              *
              */
-            virtual SizeUI getMaxSize() const = 0;
+            virtual Size<unsigned int> getMaxSize() const = 0;
 
             /*! \brief Set the size of the window
              *
              * \param size The new size of the window
              *
              */
-            virtual void setSize(const SizeUI& size) = 0;
+            virtual void setSize(const Size<unsigned int>& size) = 0;
 
             /*! \brief Get the size of the window
              *
              * \return Return the size of the window
              *
              */
-            virtual SizeUI getSize() const = 0;
+            virtual Size<unsigned int> getSize() const = 0;
 
             /*! \brief Set the title of the window
              *
@@ -243,13 +243,13 @@ namespace Bull
              *
              * \return The position of the cursor
              */
-            const SizeI& getCursorPosition() const;
+            const Size<int>& getCursorPosition() const;
 
         private:
 
             std::queue<WindowEvent> m_events;         /*!< The event queue */
             bool                    m_keyrepeat;      /*!< Does the key repeat is enable? */
-            SizeI                   m_cursorPosition; /*!< The position of the cursor in the window */
+            Size<int>                   m_cursorPosition; /*!< The position of the cursor in the window */
         };
     }
 }

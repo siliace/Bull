@@ -1,8 +1,6 @@
 #ifndef BULL_CORE_WINDOW_WIN32_VIDEOMODEIMPL_HPP
 #define BULL_CORE_WINDOW_WIN32_VIDEOMODEIMPL_HPP
 
-#include <vector>
-
 #include <Bull/Core/Window/VideoMode.hpp>
 
 namespace Bull
@@ -25,7 +23,7 @@ namespace Bull
              * \return Return all available video modes
              *
              */
-            static std::vector<VideoMode> getAllAvailable();
+            static std::unordered_set<VideoMode> getAllAvailable();
         };
     }
 }

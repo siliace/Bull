@@ -15,7 +15,7 @@ namespace Bull
     {
         Window::create(prv::RenderWindowImpl::createInstance(mode, title, style, settings), title, style);
 
-        m_context = prv::GlContext::createInstance(*m_impl, mode.bitsPerPixel, settings);
+        m_context = prv::GlContext::createInstance(*m_impl, mode.getBitsPerPixel(), settings);
     }
 
     void RenderWindow::display()
@@ -66,7 +66,7 @@ namespace Bull
 
     Viewport RenderWindow::getDefaultViewport() const
     {
-        return { SizeI::Zero, getSize() };
+        return { Size<int>::Zero, getSize() };
     }
 
     void RenderWindow::onOpen()

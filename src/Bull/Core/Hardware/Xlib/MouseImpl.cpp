@@ -6,7 +6,7 @@ namespace Bull
 {
     namespace prv
     {
-        void MouseImpl::setPosition(const SizeI& position)
+        void MouseImpl::setPosition(const Size<int>& position)
         {
             Display& display = Display::getInstance();
 
@@ -14,7 +14,7 @@ namespace Bull
             display.flush();
         }
 
-        SizeI MouseImpl::getPosition()
+        Size<int> MouseImpl::getPosition()
         {
             int x, y;
             int rootX, rootY;

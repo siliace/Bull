@@ -20,7 +20,7 @@ namespace Bull
          * \param size
          *
          */
-        Viewport(const SizeI& position, const SizeUI& size);
+        Viewport(const Size<int>& position, const Size<unsigned int>& size);
 
         /*! \brief Compare two viewports
          *
@@ -45,10 +45,10 @@ namespace Bull
          * \param offset The offset to move the viewport
          *
          */
-        void move(const SizeI& offset);
+        void move(const Size<int>& offset);
 
-        SizeI position;
-        SizeUI size;
+        Size<int> position;
+        Size<unsigned int> size;
     };
 }
 

@@ -9,7 +9,7 @@ SCENARIO("Create window and change its settings")
     GIVEN("A valid video mode and title")
     {
         String title("Unit test window");
-        VideoMode videoMode(SizeUI(800, 600));
+        VideoMode videoMode(Size<unsigned int>(800, 600));
         Uint32 style = WindowStyle_Default;
 
         Window window(videoMode, title, style);
@@ -32,7 +32,7 @@ SCENARIO("Create window and change its settings")
 
         WHEN("Change the window size")
         {
-            const SizeUI newSize(1360, 768);
+            const Size<unsigned int> newSize(1360, 768);
 
             window.setSize(newSize);
 
@@ -56,8 +56,8 @@ SCENARIO("Create window and change its settings")
 
         WHEN("Set a maximum size prior than the window's size")
         {
-            const SizeUI maxSize(1000, 800);
-            const SizeUI initialSize = window.getSize();
+            const Size<unsigned int> maxSize(1000, 800);
+            const Size<unsigned int> initialSize = window.getSize();
 
             window.setMaxSize(maxSize);
 
@@ -69,7 +69,7 @@ SCENARIO("Create window and change its settings")
 
         WHEN("Set a maximum size lowest than the window's size")
         {
-            const SizeUI maxSize(600, 400);
+            const Size<unsigned int> maxSize(600, 400);
 
             window.setMaxSize(maxSize);
 
@@ -81,7 +81,7 @@ SCENARIO("Create window and change its settings")
 
         WHEN("Set a minimum size prior than the window's size")
         {
-            const SizeUI minSize(1000, 800);
+            const Size<unsigned int> minSize(1000, 800);
 
             window.setMinSize(minSize);
 
@@ -93,8 +93,8 @@ SCENARIO("Create window and change its settings")
 
         WHEN("Set a minimum size lowest than the window's size")
         {
-            const SizeUI minSize(600, 400);
-            const SizeUI initialSize = window.getSize();
+            const Size<unsigned int> minSize(600, 400);
+            const Size<unsigned int> initialSize = window.getSize();
 
             window.setMinSize(minSize);
 
@@ -106,7 +106,7 @@ SCENARIO("Create window and change its settings")
 
         WHEN("Change the position of the window")
         {
-            const SizeI position(50, 50);
+            const Size<int> position(50, 50);
 
             window.setPosition(position);
 

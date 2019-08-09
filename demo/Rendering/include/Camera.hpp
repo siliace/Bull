@@ -9,7 +9,7 @@ public:
 
     explicit Camera(const Bull::RenderTarget& target);
 
-    void resize(const Bull::SizeUI& size) override;
+    void resize(const Bull::Size<unsigned int>& size) override;
 
     void setFieldOfView(const Bull::AngleF& angle);
 

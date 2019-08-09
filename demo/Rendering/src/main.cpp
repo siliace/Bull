@@ -70,7 +70,7 @@ int main()
     Bull::DirectionalLight dl(Bull::Vector3F::Down);
     Bull::SpotLight sp(Bull::Vector3F::UnitZ * 10.f, Bull::Vector3F::Backward);
 
-    Bull::RenderWindow window(Bull::VideoMode(Bull::SizeUI(800, 600)), "Demonstration rendering");
+    Bull::RenderWindow window(Bull::VideoMode(Bull::Size<unsigned int>(800, 600)), "Demonstration rendering");
     window.enableVsync();
     window.setFramerateLimit(60);
 

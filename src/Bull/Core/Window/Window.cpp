@@ -130,7 +130,7 @@ namespace Bull
         return false;
     }
 
-    void Window::setPosition(const SizeI& position)
+    void Window::setPosition(const Size<int>& position)
     {
         if(m_impl)
         {
@@ -138,7 +138,7 @@ namespace Bull
         }
     }
 
-    SizeI Window::getPosition() const
+    Size<int> Window::getPosition() const
     {
         if(m_impl)
         {
@@ -148,7 +148,7 @@ namespace Bull
         return { 0, 0 };
     }
 
-    void Window::setMinSize(const SizeUI& size)
+    void Window::setMinSize(const Size<unsigned int>& size)
     {
         if(m_impl)
         {
@@ -156,7 +156,7 @@ namespace Bull
         }
     }
 
-    SizeUI Window::getMinSize() const
+    Size<unsigned int> Window::getMinSize() const
     {
         if(m_impl)
         {
@@ -166,7 +166,7 @@ namespace Bull
         return { 0, 0 };
     }
 
-    void Window::setMaxSize(const SizeUI& size)
+    void Window::setMaxSize(const Size<unsigned int>& size)
     {
         if(m_impl)
         {
@@ -174,7 +174,7 @@ namespace Bull
         }
     }
 
-    SizeUI Window::getMaxSize() const
+    Size<unsigned int> Window::getMaxSize() const
     {
         if(m_impl)
         {
@@ -184,7 +184,7 @@ namespace Bull
         return { 0, 0 };
     }
 
-    void Window::setSize(const SizeUI& size)
+    void Window::setSize(const Size<unsigned int>& size)
     {
         if(m_impl)
         {
@@ -192,7 +192,7 @@ namespace Bull
         }
     }
 
-    SizeUI Window::getSize() const
+    Size<unsigned int> Window::getSize() const
     {
         if(m_impl)
         {

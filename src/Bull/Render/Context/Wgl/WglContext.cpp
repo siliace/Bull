@@ -160,7 +160,7 @@ namespace Bull
         }
 
         WglContext::WglContext(const WglContext* shared) :
-            WglContext(shared, VideoMode(SizeUI(1, 1)), ContextSettings())
+            WglContext(shared, VideoMode(Size<unsigned int>(1, 1)), ContextSettings())
         {
             /// Nothing
         }
@@ -172,15 +172,15 @@ namespace Bull
             m_pbuffer(nullptr),
             m_ownWindow(false)
         {
-            createSurface(shared, mode.size.width, mode.size.height, mode.bitsPerPixel);
+            createSurface(shared, mode.getSize().getWidth(), mode.getSize().getHeight(), mode.getBitsPerPixel());
 
-            setPixelFormat(mode.bitsPerPixel);
+            setPixelFormat(mode.getBitsPerPixel());
 
             createContext(shared);
         }
 
         WglContext::WglContext(const WglContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
-            WglContext(shared, VideoMode(SizeUI(1, 1), bitsPerPixel), settings)
+            WglContext(shared, VideoMode(Size<unsigned int>(1, 1), bitsPerPixel), settings)
         {
             /// Nothing
         }

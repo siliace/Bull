@@ -1,8 +1,9 @@
 #ifndef BULL_CORE_WINDOW_VIDEOMODE_HPP
 #define BULL_CORE_WINDOW_VIDEOMODE_HPP
 
-#include <vector>
+#include <unordered_set>
 
+#include <Bull/Core/Export.hpp>
 #include <Bull/Core/Utility/Size.hpp>
 
 namespace Bull
@@ -23,7 +24,7 @@ namespace Bull
          * \return Return all available video modes
          *
          */
-        static std::vector<VideoMode> getAllAvailable();
+        static std::unordered_set<VideoMode> getAllAvailable();
 
     public:
 
@@ -38,7 +39,7 @@ namespace Bull
          * \param bitsPerPixel The number of bits per pixel (8, 16, 24 or 32)
          *
          */
-        explicit VideoMode(const Size<unsigned int>& size, unsigned int bitsPerPixel = getCurrent().bitsPerPixel);
+        explicit VideoMode(const Size<unsigned int>& size, unsigned int bitsPerPixel = getCurrent().getBitsPerPixel());
 
         /*! \brief Check if a VideoMode is valid
          *
@@ -47,6 +48,34 @@ namespace Bull
          */
         bool isValid() const;
 
+        /*! \brief
+         *
+         * \return
+         *
+         */
+        const Size<unsigned int>& getSize() const;
+
+        /*! \brief
+         *
+         * \param size
+         *
+         */
+        void setSize(const Size<unsigned int>& size);
+
+        /*! \brief
+         *
+         * \return
+         *
+         */
+        unsigned int getBitsPerPixel() const;
+
+        /*! \brief
+         *
+         * \param bitsPerPixel
+         *
+         */
+        void setBitsPerPixel(unsigned int bitsPerPixel);
+
         /*! \brief == operator override
          *
          * \param right The VideoMode to compare
@@ -54,7 +83,7 @@ namespace Bull
          * \return Return true if this and compare are equal, else return false
          *
          */
-        bool operator==(const VideoMode& right);
+        bool operator==(const VideoMode& right) const;
 
         /*! \brief != operator override
          *
@@ -63,12 +92,24 @@ namespace Bull
          * \return Return true if this and compare are not equal, else return false
          *
          */
-        bool operator!=(const VideoMode& right);
+        bool operator!=(const VideoMode& right) const;
 
-    public:
+    private:
 
-        SizeUI size;
-        unsigned int bitsPerPixel; /*!< The the number of bits per pixel to create colors */
+        Size<unsigned int> m_size;
+        unsigned int m_bitsPerPixel; /*!< The the number of bits per pixel to create colors */
+    };
+}
+
+namespace std
+{
+    template <>
+    struct hash<Bull::VideoMode>
+    {
+        size_t operator()(const Bull::VideoMode& videoMode) const noexcept
+        {
+            return videoMode.getSize().getWidth() ^ videoMode.getSize().getHeight() ^ videoMode.getBitsPerPixel();
+        }
     };
 }
 

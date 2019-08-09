@@ -16,7 +16,7 @@ namespace Bull
         create(cursor);
     }
 
-    Cursor::Cursor(const Image& cursor, const SizeUI& hotSpot) :
+    Cursor::Cursor(const Image& cursor, const Size<unsigned int>& hotSpot) :
         m_impl(prv::CursorImpl::createInstance())
     {
         create(cursor, hotSpot);
@@ -29,9 +29,9 @@ namespace Bull
         m_impl->create(cursor);
     }
 
-    void Cursor::create(const Image& image, const SizeUI& hotSpot)
+    void Cursor::create(const Image& image, const Size<unsigned int>& hotSpot)
     {
-        if(image.getSize().width <= 0 || image.getSize().height <= 0)
+        if(image.getSize().getWidth() <= 0 || image.getSize().getHeight() <= 0)
         {
             Throw(InvalidParameter, "Can not create a Cursor with an Image of size zero or negative");
         }

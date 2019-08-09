@@ -14,23 +14,16 @@ namespace Bull
 
             EnumDisplaySettings(nullptr, ENUM_CURRENT_SETTINGS, &mode);
 
-            return VideoMode(SizeUI(mode.dmPelsWidth, mode.dmPelsHeight), mode.dmBitsPerPel);
+            return VideoMode(Size<unsigned int>(mode.dmPelsWidth, mode.dmPelsHeight), mode.dmBitsPerPel);
         }
 
-        std::vector<VideoMode> VideoModeImpl::getAllAvailable()
+        std::unordered_set<VideoMode> VideoModeImpl::getAllAvailable()
         {
-            std::vector<VideoMode> modes;
             DEVMODE devMode;
+            std::unordered_set<VideoMode> modes;
 
             for(unsigned int i = 0; EnumDisplaySettings(nullptr, i, &devMode); i++)
-            {
-                VideoMode mode(SizeUI(devMode.dmPelsWidth, devMode.dmPelsHeight), devMode.dmBitsPerPel);
-
-                if(std::find(modes.begin(), modes.end(), mode) == modes.end())
-                {
-                    modes.push_back(mode);
-                }
-            }
+                modes.insert(VideoMode({devMode.dmPelsWidth, devMode.dmPelsHeight}, devMode.dmBitsPerPel));
 
             return modes;
         }

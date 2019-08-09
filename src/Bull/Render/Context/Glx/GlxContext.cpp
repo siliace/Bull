@@ -111,7 +111,7 @@ namespace Bull
         }
 
         GlxContext::GlxContext(const GlxContext* shared) :
-            GlxContext(shared, VideoMode(SizeUI(1, 1)), ContextSettings::Worst)
+            GlxContext(shared, VideoMode(Size<unsigned int>(1, 1)), ContextSettings::Worst)
         {
             /// Nothing
         }
@@ -138,7 +138,7 @@ namespace Bull
         }
 
         GlxContext::GlxContext(const GlxContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
-            GlxContext(shared, VideoMode(SizeUI(1, 1), bitsPerPixel), settings)
+            GlxContext(shared, VideoMode(Size<unsigned int>(1, 1), bitsPerPixel), settings)
         {
             /// Nothing
         }
@@ -252,7 +252,7 @@ namespace Bull
             m_window = window.getSystemHandler();
         }
 
-        void GlxContext::createSurface(const GlxContext* shared, const SizeUI& size)
+        void GlxContext::createSurface(const GlxContext* shared, const Size<unsigned int>& size)
         {
             ErrorHandler handler;
 

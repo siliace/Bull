@@ -78,13 +78,13 @@ namespace Bull
         {
             if(e.type == WindowEventType_MouseMoved)
             {
-                m_cursorPosition = SizeI(e.mouseMove.x, e.mouseMove.y);
+                m_cursorPosition = Size<int>(e.mouseMove.x, e.mouseMove.y);
             }
 
             m_events.push(e);
         }
 
-        const SizeI& WindowImpl::getCursorPosition() const
+        const Size<int>& WindowImpl::getCursorPosition() const
         {
             return m_cursorPosition;
         }

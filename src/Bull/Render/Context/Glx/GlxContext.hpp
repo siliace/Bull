@@ -128,7 +128,7 @@ namespace Bull
              * \param size   The Size of the surface to create
              *
              */
-            void createSurface(const GlxContext* shared, const SizeUI& size);
+            void createSurface(const GlxContext* shared, const Size<unsigned int>& size);
 
             /*! \brief Create the render context
              *

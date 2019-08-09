@@ -24,7 +24,7 @@ namespace Bull
 
     void Image::create(const Size<std::size_t>& size)
     {
-        Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Invalid image size"));
+        Expect(size.getWidth() > 0 && size.getHeight() > 0, Throw(InvalidParameter, "Invalid image size"));
 
         m_size = size;
 
@@ -33,7 +33,7 @@ namespace Bull
 
     void Image::create(const ByteArray& pixels, const Size<std::size_t>& size)
     {
-        Expect(size.width > 0 && size.height > 0, Throw(InvalidParameter, "Invalid image size"));
+        Expect(size.getWidth() > 0 && size.getHeight() > 0, Throw(InvalidParameter, "Invalid image size"));
 
         m_size = size;
         m_pixels = pixels;

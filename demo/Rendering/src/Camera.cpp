@@ -17,7 +17,7 @@ Bull::Matrix4F Camera::getModelViewProjectionMatrix(const Bull::Transformable& t
     return getViewProjectionMatrix() * transformable.getModelMatrix();
 }
 
-void Camera::resize(const Bull::SizeUI& size)
+void Camera::resize(const Bull::Size<unsigned int>& size)
 {
     m_projection = Bull::Matrix4F::makePerspective(m_fov, size.getRatio<float>(), Bull::Vector2F(0.1f, 100.f));
 }

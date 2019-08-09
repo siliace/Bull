@@ -54,12 +54,12 @@ namespace Bull
             }
         }
 
-        void CursorImplWin32::create(const Image& cursor, const SizeUI& hotSpot)
+        void CursorImplWin32::create(const Image& cursor, const Size<unsigned int>& hotSpot)
         {
             BITMAPV5HEADER header;
             BULL_ZERO_MEMORY(header);
 
-            SizeUI size = cursor.getSize();
+            Size<LONG> size(cursor.getSize().getWidth(), cursor.getSize().getHeight());
 
             destroy();
 
@@ -69,8 +69,8 @@ namespace Bull
             header.bV5RedMask     = 0x00ff0000;
             header.bV5GreenMask   = 0x0000ff00;
             header.bV5BlueMask    = 0x000000ff;
-            header.bV5Width       = size.width;
-            header.bV5Height      = -size.height;
+            header.bV5Width       = size.getWidth();
+            header.bV5Height      = -size.getHeight();
             header.bV5Compression = BI_BITFIELDS;
             header.bV5Size        = sizeof(BITMAPV5HEADER);
 
@@ -92,10 +92,10 @@ namespace Bull
                 Throw(InternalError, "Failed to create color bitmaps");
             }
 
-            std::memcpy(bitmap, cursor.getPixels().getBuffer(), size.width * size.height * 4);
+            std::memcpy(bitmap, cursor.getPixels().getBuffer(), size.getWidth() * size.getHeight() * 4);
 
             /// Create a dummy mask required in the ICONINFO by CreateIconIndirect
-            HBITMAP mask = CreateBitmap(size.width, size.height, 1, 1, nullptr);
+            HBITMAP mask = CreateBitmap(size.getWidth(), size.getHeight(), 1, 1, nullptr);
 
             if(!mask)
             {
@@ -110,8 +110,8 @@ namespace Bull
             iconInfo.hbmMask  = mask;
             iconInfo.hbmColor = color;
             iconInfo.fIcon    = FALSE;
-            iconInfo.xHotspot = hotSpot.width;
-            iconInfo.yHotspot = hotSpot.height;
+            iconInfo.xHotspot = hotSpot.getWidth();
+            iconInfo.yHotspot = hotSpot.getHeight();
 
             m_handler = CreateIconIndirect(&iconInfo);
 

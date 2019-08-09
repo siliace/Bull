@@ -32,8 +32,8 @@ namespace Bull
 
     AbstractImageLoader::RawImage AbstractImageLoader::loadPixelsFromStream(InStream& stream, PixelFormat pixelFormat) const
     {
-        SizeI size;
         int channels;
+        int width, height;
         stbi_io_callbacks callbacks;
 
         callbacks.read = [](void* user, char* data, int size) -> int {
@@ -52,10 +52,11 @@ namespace Bull
             return reinterpret_cast<InStream*>(user)->isAtEnd() ? 1 : 0;
         };
 
-        stbi_uc* buffer = stbi_load_from_callbacks(&callbacks, &stream, &size.width, &size.height, &channels, stbi::channels(pixelFormat));
+        stbi_uc* buffer = stbi_load_from_callbacks(&callbacks, &stream, &width, &height, &channels, stbi::channels(pixelFormat));
 
         Expect(buffer, Throw(InternalError, "Failed to load image: " + getErrorMessage()));
 
+        Size<std::size_t> size(width, height);
         ByteArray pixels = ByteArray::memoryCopy(buffer, PixelFormatUtils::getImageByteCount(size, pixelFormat));
 
         stbi_image_free(buffer);

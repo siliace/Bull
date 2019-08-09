@@ -41,7 +41,7 @@ namespace Bull
                 if(!internal)
                 {
                     ContextSettings realInternalSettings;
-                    internal = std::make_unique<Context>(VideoMode::getCurrent().bitsPerPixel, ContextSettings(0, 0, 0, 3, 3));
+                    internal = std::make_unique<Context>(VideoMode::getCurrent().getBitsPerPixel(), ContextSettings(0, 0, 0, 3, 3));
 
                     realInternalSettings = internal->getSettings();
 

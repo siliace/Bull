@@ -379,8 +379,8 @@ namespace Bull
                     case ConfigureNotify:
                     {
                         WindowEvent event;
-                        SizeI position(e.xconfigure.x, e.xconfigure.y);
-                        SizeUI size(e.xconfigure.width, e.xconfigure.height);
+                        Size<int> position(e.xconfigure.x, e.xconfigure.y);
+                        Size<unsigned int> size(e.xconfigure.width, e.xconfigure.height);
 
                         if(size != m_lastSize)
                         {
@@ -493,13 +493,13 @@ namespace Bull
             }
         }
 
-        void WindowImplXlib::setPosition(const SizeI& position)
+        void WindowImplXlib::setPosition(const Size<int>& position)
         {
             XMoveWindow(m_display.getHandler(), m_handler, position.width, position.height);
             m_display.flush();
         }
 
-        SizeI WindowImplXlib::getPosition() const
+        Size<int> WindowImplXlib::getPosition() const
         {
             XWindow root, child;
             int localX, localY, x, y;
@@ -511,11 +511,11 @@ namespace Bull
             return { x, y };
         }
 
-        void WindowImplXlib::setMinSize(const SizeUI& size)
+        void WindowImplXlib::setMinSize(const Size<unsigned int>& size)
         {
             XSizeHints hints;
-            SizeUI clampedSize;
-            SizeUI currentSize = getSize();
+            Size<unsigned int> clampedSize;
+            Size<unsigned int> currentSize = getSize();
 
             hints.max_width  = (size.width > 0) ? size.width : 0;
             hints.max_height = (size.height > 0) ? size.height : 0;
@@ -529,20 +529,20 @@ namespace Bull
             setSize(clampedSize);
         }
 
-        SizeUI WindowImplXlib::getMinSize() const
+        Size<unsigned int> WindowImplXlib::getMinSize() const
         {
             XSizeHints hints;
 
             XGetNormalHints(m_display.getHandler(), m_handler, &hints);
 
-            return SizeI(hints.min_width, hints.min_height);
+            return Size<int>(hints.min_width, hints.min_height);
         }
 
-        void WindowImplXlib::setMaxSize(const SizeUI& size)
+        void WindowImplXlib::setMaxSize(const Size<unsigned int>& size)
         {
             XSizeHints hints;
-            SizeUI clampedSize;
-            SizeUI currentSize = getSize();
+            Size<unsigned int> clampedSize;
+            Size<unsigned int> currentSize = getSize();
 
             hints.max_width  = (size.width > 0) ? size.width : m_screen->width;
             hints.max_height = (size.height > 0) ? size.height : m_screen->height;
@@ -556,29 +556,29 @@ namespace Bull
             setSize(clampedSize);
         }
 
-        SizeUI WindowImplXlib::getMaxSize() const
+        Size<unsigned int> WindowImplXlib::getMaxSize() const
         {
             XSizeHints hints;
 
             XGetNormalHints(m_display.getHandler(), m_handler, &hints);
 
-            return SizeI(hints.max_width, hints.max_height);
+            return Size<int>(hints.max_width, hints.max_height);
         }
 
-        void WindowImplXlib::setSize(const SizeUI& size)
+        void WindowImplXlib::setSize(const Size<unsigned int>& size)
         {
             XResizeWindow(m_display.getHandler(), m_handler, size.width, size.height);
             m_lastSize = size;
             m_display.flush();
         }
 
-        SizeUI WindowImplXlib::getSize() const
+        Size<unsigned int> WindowImplXlib::getSize() const
         {
             XWindowAttributes attributes;
 
             XGetWindowAttributes(m_display.getHandler(), m_handler, &attributes);
 
-            return SizeI(attributes.width, attributes.height);
+            return Size<int>(attributes.width, attributes.height);
         }
 
         void WindowImplXlib::setTitle(const String& title)
@@ -791,7 +791,7 @@ namespace Bull
             initialize(title, style);
         }
 
-        void WindowImplXlib::open(const SizeUI& size, const String& title, Uint32 style, XVisualInfo* vi)
+        void WindowImplXlib::open(const Size<unsigned int>& size, const String& title, Uint32 style, XVisualInfo* vi)
         {
             ErrorHandler         handler;
             XSetWindowAttributes attributes;

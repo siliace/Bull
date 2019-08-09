@@ -5,5 +5,4 @@ target_sources(bull-core
         PUBLIC
             ${BULL_INC_CORE_ASSETS}/AssetLoader.hpp
             ${BULL_INC_CORE_ASSETS}/AssetManager.hpp
-            ${BULL_INC_CORE_ASSETS}/AsyncAssetLoader.hpp
         )

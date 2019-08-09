@@ -54,7 +54,7 @@ namespace Bull
             Expect(m_handler, Throw(InternalError, "Failed to create cursor"));
         }
 
-        void CursorImplXlib::create(const Image& cursor, const SizeUI& hotSpot)
+        void CursorImplXlib::create(const Image& cursor, const Size<unsigned int>& hotSpot)
         {
             Throw(LackOfImplementation, "Unimplemented method");
         }

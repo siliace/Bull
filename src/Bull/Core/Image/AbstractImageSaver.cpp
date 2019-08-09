@@ -65,7 +65,7 @@ namespace Bull
     void AbstractImageSaver::saveToBmp(OutStream& stream, const Size<std::size_t>& size, int channels, const ByteArray& pixels) const
     {
         int success = stbi_write_bmp_to_func(&AbstractImageSaver::write, &stream,
-                                             size.width, size.height,
+                                             size.getWidth(), size.getHeight(),
                                              channels,
                                              pixels.getBuffer());
 
@@ -75,7 +75,7 @@ namespace Bull
     void AbstractImageSaver::saveToTga(OutStream& stream, const Size<std::size_t>& size, int channels, const ByteArray& pixels) const
     {
         int success = stbi_write_tga_to_func(&AbstractImageSaver::write, &stream,
-                                             size.width, size.height,
+                                             size.getWidth(), size.getHeight(),
                                              channels,
                                              pixels.getBuffer());
 
@@ -85,7 +85,7 @@ namespace Bull
     void AbstractImageSaver::saveToPng(OutStream& stream, const Size<std::size_t>& size, int channels, const ByteArray& pixels, int stride) const
     {
         int success = stbi_write_png_to_func(&AbstractImageSaver::write, &stream,
-                                             size.width, size.height,
+                                             size.getWidth(), size.getHeight(),
                                              channels,
                                              pixels.getBuffer(),
                                              stride);
@@ -98,7 +98,7 @@ namespace Bull
         quality = ((quality > 100) ? 100 : (quality < 0) ? 0 : quality);
 
         int success = stbi_write_jpg_to_func(&AbstractImageSaver::write, &stream,
-                                             size.width, size.height,
+                                             size.getWidth(), size.getHeight(),
                                              channels,
                                              pixels.getBuffer(),
                                              quality);

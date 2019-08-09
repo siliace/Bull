@@ -2,15 +2,17 @@
 #define BULL_CORE_UTILITY_SIZE_HPP
 
 #include <limits>
-
-#include <Bull/Core/Export.hpp>
+#include <numeric>
+#include <tuple>
 
 namespace Bull
 {
     template <typename T>
-    class BULL_CORE_API Size
+    class Size
     {
     public:
+
+        static_assert(std::is_arithmetic<T>::value, "T type is not arithmetic");
 
         static Size Zero;
         static Size Infinite;
@@ -21,8 +23,7 @@ namespace Bull
          *
          */
         Size() :
-            width(0),
-            height(0)
+            Size(0, 0)
         {
             /// Nothing
         }
@@ -34,27 +35,10 @@ namespace Bull
          *
          */
         Size(T width, T height) :
-            width(width),
-            height(height)
+                m_width(width),
+                m_height(height)
         {
             /// Nothing
-        }
-
-        template <typename U>
-        Size(const Size<U>& size) :
-            width(size.width),
-            height(size.height)
-        {
-            /// Nothing
-        }
-
-        template <typename U>
-        Size operator=(const Size<U>& size)
-        {
-            width = size.width;
-            height = size.height;
-
-            return *this;
         }
 
         /*! \brief Get the ratio of the Size
@@ -65,58 +49,109 @@ namespace Bull
          *
          */
         template <typename U>
-        U getRatio() const
+        float getRatio() const
         {
-            return static_cast<U>(width) / static_cast<U>(height);
+            return static_cast<float>(m_width) / static_cast<float>(m_height);
         }
 
-        template <typename U>
-        Size operator+=(const Size<U>& right)
+        /*! \brief
+         *
+         * \return
+         *
+         */
+        T getWidth() const
         {
-            width += static_cast<T>(right.width);
-            height += static_cast<T>(right.height);
+            return m_width;
+        }
+
+        /*! \brief
+         *
+         * \param width
+         *
+         */
+        void setWidth(T width)
+        {
+            m_width = width;
+        }
+
+        /*! \brief
+         *
+         * \return
+         *
+         */
+        T getHeight() const
+        {
+            return m_height;
+        }
+
+        /*! \brief
+         *
+         * \param height
+         *
+         */
+        void setHeight(T height)
+        {
+            m_height = height;
+        }
+
+        bool operator==(const Size& rhs) const
+        {
+            return std::tie(m_width, m_height) == std::tie(rhs.m_width, rhs.m_height);
+        }
+
+        bool operator!=(const Size& rhs) const
+        {
+            return std::tie(m_width, m_height) != std::tie(rhs.m_width, rhs.m_height);
+        }
+
+        /*! \brief
+         *
+         * \param rhs
+         *
+         * \return
+         *
+         */
+        Size<T> operator+(const Size<T>& rhs) const
+        {
+            return {m_width + rhs.m_width, m_height + rhs.m_height};
+        }
+
+        /*! \brief
+         *
+         * \param rhs
+         *
+         * \return
+         *
+         */
+        Size<T>& operator+=(const Size<T>& rhs)
+        {
+            m_width += rhs.m_width;
+            m_height += rhs.m_height;
 
             return *this;
         }
 
-    public:
+        /*! \brief
+         *
+         * \param rhs
+         * \return
+         */
+        Size<T> operator/(T rhs) const
+        {
+            return {m_width / rhs, m_height / rhs};
+        }
 
-        T width, height;
+    private:
+
+        T m_width;
+        T m_height;
     };
-
-    template <typename L, typename R>
-    bool operator==(const Size<L>& left, const Size<R>& right)
-    {
-        return left.width == right.width &&
-               left.height == right.height;
-    }
-
-    template <typename L, typename R>
-    bool operator!=(const Size<L>& left, const Size<R>& right)
-    {
-        return !(left == right);
-    }
-
-    template <typename L, typename R>
-    Size<R> operator+(const Size<L>& left, const Size<R>& right)
-    {
-        return { left.width + right.width, right.height + left.height };
-    }
-
-    template <typename L, typename R>
-    Size<R> operator/(const Size<L>& left, R right)
-    {
-        return {static_cast<R>(left.width) / right, static_cast<R>(left.height) / right };
-    }
 
     template <typename T>
     Size<T> Size<T>::Zero(0, 0);
 
     template <typename T>
     Size<T> Size<T>::Infinite(std::numeric_limits<T>::max(), std::numeric_limits<T>::max());
-
-    typedef Size<int>          SizeI;
-    typedef Size<unsigned int> SizeUI;
 }
 
 #endif // BULL_CORE_UTILITY_SIZE_HPP
