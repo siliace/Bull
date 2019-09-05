@@ -3,7 +3,7 @@
 namespace Bull
 {
     Material::Material() :
-        m_shininess(0.f)
+            m_shininess(0.f)
     {
         /// Nothing
     }

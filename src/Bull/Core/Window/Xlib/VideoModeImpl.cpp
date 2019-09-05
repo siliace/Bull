@@ -12,10 +12,10 @@ namespace Bull
     {
         VideoMode VideoModeImpl::getCurrent()
         {
-            Rotation  rotation;
-            int       sizesCount;
+            Rotation rotation;
+            int sizesCount;
             VideoMode desktopMode;
-            Display&  display = Display::getInstance();
+            Display& display = Display::getInstance();
 
             Expect(display.isSupportedExtension("RANDR"), Throw(InternalError, "Missing XRandR extension"));
 
@@ -34,11 +34,11 @@ namespace Bull
                 if(rotation == RR_Rotate_90 || rotation == RR_Rotate_270)
                 {
                     desktopMode.size.height = sizes[currentMode].width;
-                    desktopMode.size.width  = sizes[currentMode].height;
+                    desktopMode.size.width = sizes[currentMode].height;
                 }
                 else
                 {
-                    desktopMode.size.width  = sizes[currentMode].width;
+                    desktopMode.size.width = sizes[currentMode].width;
                     desktopMode.size.height = sizes[currentMode].height;
                 }
             }
@@ -51,8 +51,8 @@ namespace Bull
         std::vector<VideoMode> VideoModeImpl::getAllAvailable()
         {
             std::vector<VideoMode> modes;
-            int                    sizesCount;
-            int                    depthsCount;
+            int sizesCount;
+            int depthsCount;
             Display& display = Display::getInstance();
 
             Expect(display.isSupportedExtension("RANDR"), Throw(InternalError, "Missing XRandR extension"));
@@ -61,8 +61,8 @@ namespace Bull
 
             Expect(config, Throw(InternalError, "Failed to get screen configurations"));
 
-            XRRScreenSize* sizes  = XRRConfigSizes(config, &sizesCount);
-            int*           depths = XListDepths(display.getHandler(), display.getDefaultScreen(), &depthsCount);
+            XRRScreenSize* sizes = XRRConfigSizes(config, &sizesCount);
+            int* depths = XListDepths(display.getHandler(), display.getDefaultScreen(), &depthsCount);
 
             if(sizes && sizesCount > 0 && depths && depthsCount > 0)
             {
@@ -73,8 +73,8 @@ namespace Bull
                         VideoMode mode;
 
                         mode.bitsPerPixel = depths[j];
-                        mode.size.width   = sizes[i].width;
-                        mode.size.height  = sizes[i].height;
+                        mode.size.width = sizes[i].width;
+                        mode.size.height = sizes[i].height;
 
                         if(std::find(modes.begin(), modes.end(), mode) == modes.end())
                         {

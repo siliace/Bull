@@ -3,25 +3,25 @@
 namespace Bull
 {
     SpotLight::SpotLight() :
-        SpotLight(Vector3F::Zero, Vector3F::Zero)
+            SpotLight(Vector3F::Zero, Vector3F::Zero)
     {
         /// Nothing
     }
 
     SpotLight::SpotLight(const Vector3F& position, const Vector3F& direction, const Color& color) :
-        AbstractLight(LightType_Spot),
-        m_position(position),
-        m_direction(direction)
+            AbstractLight(LightType_Spot),
+            m_position(position),
+            m_direction(direction)
     {
         setColor(color);
-        m_constant    = 1.f;
-        m_linear      = 0.09f;
-        m_quadratic   = 0.0032f;
+        m_constant = 1.f;
+        m_linear = 0.09f;
+        m_quadratic = 0.0032f;
         m_innerCutOff = AngleF::degree(12.5f);
         m_outerCutOff = AngleF::degree(17.5f);
     }
 
-    void SpotLight::setUniforms(Shader& shader, const String& name) const
+    void SpotLight::setUniforms(Shader& shader, const std::string& name) const
     {
         AbstractLight::setUniforms(shader, name);
 

@@ -16,7 +16,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a OS specific CursorImpl instance
+            /** \brief Create a OS specific CursorImpl instance
              *
              * \return The instance
              *
@@ -25,19 +25,19 @@ namespace Bull
 
         public:
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             virtual ~CursorImpl();
 
-            /*! \brief Create a Cursor from the system
+            /** \brief Create a Cursor from the system
              *
              * \param cursor The type of cursor to create
              *
              */
             virtual void create(CursorType cursor) = 0;
 
-            /*! \brief Create a Cursor from an image
+            /** \brief Create a Cursor from an image
              *
              * \param cursor  The image of the Cursor
              * \param hotSpot The hotspot of the Cursor
@@ -45,7 +45,7 @@ namespace Bull
              */
             virtual void create(const Image& cursor, const Size<unsigned int>& hotSpot) = 0;
 
-            /*! \brief Get the native system handler of the cursor
+            /** \brief Get the native system handler of the cursor
              *
              * \return The system handler
              *
@@ -54,7 +54,7 @@ namespace Bull
 
         protected:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             CursorImpl() = default;

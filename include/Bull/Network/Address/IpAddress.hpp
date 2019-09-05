@@ -12,42 +12,42 @@ namespace Bull
     {
     public:
 
-        /*! \brief \brief Resolve an hostname to an IpAddress
+        /** \brief \brief Resolve an hostname to an IpAddress
          *
          * \param hostname The hostname to resolve
          *
          */
-        void resolve(const String& hostname);
+        void resolve(const std::string& hostname);
 
-        /*! \brief Tell whether the IpAddress is valid
+        /** \brief Tell whether the IpAddress is valid
          *
          * \return True if the IpAddress is valid
          *
          */
         bool isValid() const;
 
-        /*! \brief Convert the IpAddress to a String
+        /** \brief Convert the IpAddress to a std::string
          *
-         * \return The IpAddress as a String
+         * \return The IpAddress as a std::string
          *
          */
-        virtual String toString() const = 0;
+        virtual std::string toString() const = 0;
 
-        /*! \brief Get the NetProtocol used by the IpAddress
+        /** \brief Get the NetProtocol used by the IpAddress
          *
          * \return The NetProtocol
          *
          */
         virtual NetProtocol getProtocol() const = 0;
 
-        /*! \brief Get the number of bytes used by the IpAddress
+        /** \brief Get the number of bytes used by the IpAddress
          *
          * \return The number of bytes
          *
          */
         std::size_t getByteCount() const;
 
-        /*! \brief Get a byte of the IpAddress
+        /** \brief Get a byte of the IpAddress
          *
          * \param index The index of the byte
          *
@@ -56,7 +56,7 @@ namespace Bull
          */
         Uint8& at(std::size_t index);
 
-        /*! \brief Get a byte of the IpAddress
+        /** \brief Get a byte of the IpAddress
          *
          * \param index The index of the byte
          *
@@ -65,7 +65,7 @@ namespace Bull
          */
         Uint8 at(std::size_t index) const;
 
-        /*! \brief Compare two IpAddress
+        /** \brief Compare two IpAddress
          *
          * \param right The IpAddress to compare to this
          *
@@ -74,7 +74,7 @@ namespace Bull
          */
         bool operator==(const IpAddress& right) const;
 
-        /*! \brief Compare two IpAddress
+        /** \brief Compare two IpAddress
          *
          * \param right The IpAddress to compare to this
          *
@@ -85,7 +85,7 @@ namespace Bull
 
     protected:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param size  The byte count of the IpAddress
          * \param valid True if the IpAddress is valid

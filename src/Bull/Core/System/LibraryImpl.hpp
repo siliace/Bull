@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
@@ -14,34 +14,34 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a OS specific instance of LibraryImpl
+            /** \brief Create a OS specific instance of LibraryImpl
              *
              * \param name The name or the path to the library to load
              *
              * \return The created instance
              *
              */
-            static std::unique_ptr<LibraryImpl> createInstance(const String& name);
+            static std::unique_ptr<LibraryImpl> createInstance(const std::string& name);
 
         public:
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             virtual ~LibraryImpl();
 
-            /*! \brief Get a function from the library
+            /** \brief Get a function from the library
              *
              * \param name The name of the function
              *
              * \return The function or nullptr if the function does not exists
              *
              */
-            virtual void* getSymbolPointer(const String& name) const = 0;
+            virtual void* getSymbolPointer(const std::string& name) const = 0;
 
         protected:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             LibraryImpl() = default;

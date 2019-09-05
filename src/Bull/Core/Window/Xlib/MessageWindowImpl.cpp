@@ -4,7 +4,7 @@ namespace Bull
 {
     namespace prv
     {
-        MessageWindowResponse MessageWindowImpl::open(const String& message, const String& title, MessageWindowIcon icon, MessageWindowButtons buttons, MessageWindowDefaultButton defaultButton, WindowHandler parent)
+        MessageWindowResponse MessageWindowImpl::open(const std::string& message, const std::string& title, MessageWindowIcon icon, MessageWindowButtons buttons, MessageWindowDefaultButton defaultButton, WindowHandler parent)
         {
             return MessageWindowResponse_Ok;
         }

@@ -23,7 +23,7 @@ namespace Bull
     }
 
     ShaderBinary::ShaderBinary() :
-        format(0)
+            format(0)
     {
         /// Nothing
     }

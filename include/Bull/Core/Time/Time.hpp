@@ -9,14 +9,14 @@ namespace Bull
     {
     public:
 
-        /*! \brief Create a Time of now
+        /** \brief Create a Time of now
          *
          * \return The created time
          *
          */
         static Time now();
 
-        /*! \brief Create a Time of a given hour
+        /** \brief Create a Time of a given hour
          *
          * \param hour The hour
          *
@@ -25,7 +25,7 @@ namespace Bull
          */
         static Time make(unsigned int hour);
 
-        /*! \brief Create a Time of a given hour and minute
+        /** \brief Create a Time of a given hour and minute
          *
          * \param hour   The hour
          * \param minute The minute
@@ -35,7 +35,7 @@ namespace Bull
          */
         static Time make(unsigned int hour, unsigned int minute);
 
-        /*! \brief Create a Time of a given hour, minute, second and millisecond
+        /** \brief Create a Time of a given hour, minute, second and millisecond
          *
          * \param hour        The hour
          * \param minute      The minute
@@ -49,7 +49,7 @@ namespace Bull
 
     public:
 
-        /*! \brief Get the hour of the Time
+        /** \brief Get the hour of the Time
          *
          * \return The hour
          *
@@ -59,7 +59,7 @@ namespace Bull
             return m_hour;
         }
 
-        /*! \brief Get the minute of the Time
+        /** \brief Get the minute of the Time
          *
          * \return The minute
          *
@@ -69,7 +69,7 @@ namespace Bull
             return m_minute;
         }
 
-        /*! \brief Get the second of the Time
+        /** \brief Get the second of the Time
          *
          * \return The second
          *
@@ -79,7 +79,7 @@ namespace Bull
             return m_second;
         }
 
-        /*! \brief Get the millisecond of the Time
+        /** \brief Get the millisecond of the Time
          *
          * \return The millisecond
          *
@@ -89,7 +89,7 @@ namespace Bull
             return m_millisecond;
         }
 
-        /*! \brief Compare two Time
+        /** \brief Compare two Time
          *
          * \param right The Time to compare to this
          *
@@ -98,7 +98,7 @@ namespace Bull
          */
         bool operator==(const Time& right) const;
 
-        /*! \brief Compare two Time
+        /** \brief Compare two Time
          *
          * \param right The Time to compare to this
          *
@@ -109,7 +109,7 @@ namespace Bull
 
     private:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param hour        The hour of the Time
          * \param minute      The minute of the Time

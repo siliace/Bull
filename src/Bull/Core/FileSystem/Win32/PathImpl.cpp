@@ -1,6 +1,5 @@
 #include <Bull/Core/FileSystem/Win32/PathImpl.hpp>
 #include <Bull/Core/Support/Win32/Windows.hpp>
-#include <Bull/Core/Utility/StringUtils.hpp>
 
 namespace Bull
 {
@@ -8,19 +7,19 @@ namespace Bull
     {
         void PathImpl::copy(const Path& path, const Path& newPath, bool failsIfExists)
         {
-            CopyFile(path.toString().getBuffer(), newPath.toString().getBuffer(), failsIfExists);
+            CopyFile(path.toString().c_str(), newPath.toString().c_str(), failsIfExists);
         }
 
         void PathImpl::rename(const Path& path, const Path& newPath)
         {
-            MoveFile(path.toString().getBuffer(), newPath.toString().getBuffer());
+            MoveFile(path.toString().c_str(), newPath.toString().c_str());
         }
 
-        String PathImpl::realPath(const String& relative)
+        std::string PathImpl::realPath(const std::string& relative)
         {
-            String absolute = StringUtils::ofSize(MAX_PATH);
+            char buffer[MAX_PATH], absolute[MAX_PATH];
 
-            GetFullPathName(relative.getBuffer(), static_cast<DWORD>(absolute.getSize()), &absolute[0], nullptr);
+            GetFullPathName(buffer, MAX_PATH, absolute, nullptr);
 
             return absolute;
         }

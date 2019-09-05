@@ -1,7 +1,7 @@
 #ifndef BULL_RENDER_SHADER_SHADERSTAGE_HPP
 #define BULL_RENDER_SHADER_SHADERSTAGE_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 #include <Bull/Render/Context/ContextResource.hpp>
@@ -13,68 +13,68 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         ShaderStage();
 
         ShaderStage(ShaderStage&& right) noexcept;
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         ~ShaderStage();
 
         ShaderStage& operator=(ShaderStage&& right) noexcept;
 
-        /*! \brief Create the shader
+        /** \brief Create the shader
          *
          * \param type The type of shader to create
          *
          */
         void create(ShaderStageType type);
 
-        /*! \brief Compile the ShaderStage
+        /** \brief Compile the ShaderStage
          *
          * \param code The code of the ShaderStage
          *
          */
-        void compile(const String& code);
+        void compile(const std::string& code);
 
-        /*! \brief Destroy the shader
+        /** \brief Destroy the shader
          *
          */
         void destroy();
 
-        /*! \brief Check whether a shader is compiled
+        /** \brief Check whether a shader is compiled
          *
          * \return True if the shader is compiled
          *
          */
         bool isCompiled() const;
 
-        /*! \brief Check if the shader is valid (e.g exists in the GPU's memory)
+        /** \brief Check if the shader is valid (e.g exists in the GPU's memory)
          *
          * \return True if the shader is valid
          *
          */
         bool isValid() const;
 
-        /*! \brief Get the source code of the shader
+        /** \brief Get the source code of the shader
          *
          * \return The source code
          *
          */
-        String getSource() const;
+        std::string getSource() const;
 
-        /*! \brief Get the type of the shader
+        /** \brief Get the type of the shader
          *
          * \return The type
          *
          */
         ShaderStageType getType() const;
 
-        /*! \brief Get the ShaderStage system handler
+        /** \brief Get the ShaderStage system handler
          *
          * \return The native ShaderStage system handler
          *
@@ -83,18 +83,18 @@ namespace Bull
 
     protected:
 
-        /*! \brief Get the current error message of the shader
+        /** \brief Get the current error message of the shader
          *
          * \return The error message
          *
          */
-        String getErrorMessage() const;
+        std::string getErrorMessage() const;
 
     private:
 
-        unsigned int    m_id;         /*!< The OpenGL shader handler */
-        ShaderStageType m_type;       /*!< The shader type */
-        bool            m_isCompiled; /*!< Does the shader is compiled? */
+        unsigned int m_id;         /**< The OpenGL shader handler */
+        ShaderStageType m_type;       /**< The shader type */
+        bool m_isCompiled; /**< Does the shader is compiled? */
     };
 }
 

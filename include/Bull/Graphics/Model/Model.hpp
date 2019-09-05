@@ -13,33 +13,33 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Model() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param mesh The Mesh of the Model
          *
          */
         explicit Model(const std::shared_ptr<Mesh>& mesh);
 
-        /*! \brief Render the Mesh of the Model thought a Shader
+        /** \brief Render the Mesh of the Model thought a Shader
          *
          * \param shader The Shader
          *
          */
         void render(const Shader& shader) const override;
 
-        /*! \brief Set the Mesh of the Model
+        /** \brief Set the Mesh of the Model
          *
          * \param mesh The Mesh
          *
          */
         void setMesh(const std::shared_ptr<Mesh>& mesh);
 
-        /*! \brief Get the Mesh of the Model
+        /** \brief Get the Mesh of the Model
          *
          * \return The Mesh
          *

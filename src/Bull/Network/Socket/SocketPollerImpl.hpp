@@ -19,7 +19,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create an OS specific instance of SocketPollerImpl
+            /** \brief Create an OS specific instance of SocketPollerImpl
              *
              * \return The created instance
              *
@@ -32,7 +32,7 @@ namespace Bull
 
         public:
 
-            /*! \brief Add a Socket to the SocketPollerImpl
+            /** \brief Add a Socket to the SocketPollerImpl
              *
              * \param socket The Socket to add
              * \param events Events to listen
@@ -40,26 +40,26 @@ namespace Bull
              */
             void add(SocketHandler socket, SocketPollerEvent event);
 
-            /*! \brief Remove a Socket from SocketPollerImpl
+            /** \brief Remove a Socket from SocketPollerImpl
              *
              * \param socket The Socket to remove
              *
              */
             void remove(SocketHandler socket);
 
-            /*! \brief Clear the SocketPollerImpl
+            /** \brief Clear the SocketPollerImpl
              *
              */
             void clear();
 
-            /*! \brief Wait until a Socket is ready to read or write
+            /** \brief Wait until a Socket is ready to read or write
              *
              * \return True if the SocketPollerImpl waited successfully
              *
              */
             bool wait();
 
-            /*! \brief Wait until a Socket is ready to read or write
+            /** \brief Wait until a Socket is ready to read or write
              *
              * \param timeout The time before the function fail
              *
@@ -68,7 +68,7 @@ namespace Bull
              */
             bool wait(const Duration& timeout);
 
-            /*! \brief Tell whether a Socket can be waited by the SocketPollerImpl
+            /** \brief Tell whether a Socket can be waited by the SocketPollerImpl
              *
              * \param socket The Socket
              *
@@ -77,7 +77,7 @@ namespace Bull
              */
             bool isAdded(SocketHandler socket);
 
-            /*! \brief Tell whether a Socket is ready to read
+            /** \brief Tell whether a Socket is ready to read
              *
              * \param socket The Socket to check the state
              *
@@ -86,7 +86,7 @@ namespace Bull
              */
             bool isReadyToRead(SocketHandler socket);
 
-            /*! \brief Tell whether a Socket is ready to write
+            /** \brief Tell whether a Socket is ready to write
              *
              * \param socket The Socket to check the state
              *
@@ -97,12 +97,12 @@ namespace Bull
 
         protected:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             SocketPollerImpl() = default;
 
-            /*! \brief Poll sockets
+            /** \brief Poll sockets
              *
              * \param sockets Sockets to poll
              * \param timeout The time before the function fail
@@ -114,7 +114,7 @@ namespace Bull
 
         private:
 
-            /*! \brief Get an iterator to a SocketHandler
+            /** \brief Get an iterator to a SocketHandler
              *
              * \param socket The SocketHandler to get
              *

@@ -15,7 +15,7 @@ namespace Bull
 {
     namespace prv
     {
-        void* GlxContext::getFunction(const String& function)
+        void* GlxContext::getFunction(const std::string& function)
         {
             return reinterpret_cast<void*>(
                     glXGetProcAddressARB(
@@ -45,18 +45,18 @@ namespace Bull
             do
             {
                 int attributes[] = {
-                    GLX_X_RENDERABLE  , True,
-                    GLX_DRAWABLE_TYPE , GLX_WINDOW_BIT,
-                    GLX_RENDER_TYPE   , GLX_RGBA_BIT,
-                    GLX_X_VISUAL_TYPE , GLX_TRUE_COLOR,
-                    GLX_BUFFER_SIZE   , static_cast<int>(bitsPerPixel),
-                    GLX_ALPHA_SIZE    , bitsPerPixel == 32 ? 8 : 0,
-                    GLX_DEPTH_SIZE    , settings.depths,
-                    GLX_STENCIL_SIZE  , settings.stencil,
-                    GLX_DOUBLEBUFFER  , True,
-                    GLX_SAMPLE_BUFFERS, antialiasing > 0 ? True : False,
-                    GLX_SAMPLES       , static_cast<int>(antialiasing),
-                    0
+                        GLX_X_RENDERABLE, True,
+                        GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
+                        GLX_RENDER_TYPE, GLX_RGBA_BIT,
+                        GLX_X_VISUAL_TYPE, GLX_TRUE_COLOR,
+                        GLX_BUFFER_SIZE, static_cast<int>(bitsPerPixel),
+                        GLX_ALPHA_SIZE, bitsPerPixel == 32 ? 8 : 0,
+                        GLX_DEPTH_SIZE, settings.depths,
+                        GLX_STENCIL_SIZE, settings.stencil,
+                        GLX_DOUBLEBUFFER, True,
+                        GLX_SAMPLE_BUFFERS, antialiasing > 0 ? True : False,
+                        GLX_SAMPLES, static_cast<int>(antialiasing),
+                        0
                 };
 
                 configs = glXChooseFBConfig(display.getHandler(), display.getDefaultScreen(), attributes, &fbCounts);
@@ -77,15 +77,15 @@ namespace Bull
                     int sampleBuffers, samples;
                     int red, green, blue, alpha;
 
-                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_RED_SIZE,   &red);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_RED_SIZE, &red);
                     glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_GREEN_SIZE, &green);
-                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_BLUE_SIZE,  &blue);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_BLUE_SIZE, &blue);
                     glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_ALPHA_SIZE, &alpha);
 
                     glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_SAMPLE_BUFFERS, &sampleBuffers);
-                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_SAMPLES,        &samples);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_SAMPLES, &samples);
 
-                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_DEPTH_SIZE,   &depths);
+                    glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_DEPTH_SIZE, &depths);
                     glXGetFBConfigAttrib(display.getHandler(), configs[i], GLX_STENCIL_SIZE, &stencil);
 
                     int currentBitsPerPixel = red + green + blue + alpha;
@@ -93,7 +93,7 @@ namespace Bull
 
                     if(bestScore > score)
                     {
-                        bestScore  = score;
+                        bestScore = score;
                         bestConfig = i;
                     }
                 }
@@ -111,21 +111,21 @@ namespace Bull
         }
 
         GlxContext::GlxContext(const GlxContext* shared) :
-            GlxContext(shared, VideoMode(Size<unsigned int>(1, 1)), ContextSettings::Worst)
+                GlxContext(shared, VideoMode(Size<unsigned int>(1, 1)), ContextSettings::Worst)
         {
             /// Nothing
         }
 
         GlxContext::GlxContext(const GlxContext* shared, const VideoMode& mode, const ContextSettings& settings) :
-            GlContext(settings),
-            m_log(Log::getInstance()),
-            m_window(0),
-            m_render(nullptr),
-            m_config(nullptr),
-            m_pbuffer(0),
-            m_display(Display::getInstance()),
-            m_colormap(0),
-            m_ownWindow(false)
+                GlContext(settings),
+                m_log(Log::getInstance()),
+                m_window(0),
+                m_render(nullptr),
+                m_config(nullptr),
+                m_pbuffer(0),
+                m_display(Display::getInstance()),
+                m_colormap(0),
+                m_ownWindow(false)
         {
             m_config = chooseBestConfig(m_display, m_settings, mode.bitsPerPixel);
 
@@ -138,21 +138,21 @@ namespace Bull
         }
 
         GlxContext::GlxContext(const GlxContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
-            GlxContext(shared, VideoMode(Size<unsigned int>(1, 1), bitsPerPixel), settings)
+                GlxContext(shared, VideoMode(Size<unsigned int>(1, 1), bitsPerPixel), settings)
         {
             /// Nothing
         }
 
         GlxContext::GlxContext(const GlxContext* shared, const WindowImpl& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
-            GlContext(settings),
-            m_log(Log::getInstance()),
-            m_window(0),
-            m_render(nullptr),
-            m_config(nullptr),
-            m_pbuffer(0),
-            m_display(Display::getInstance()),
-            m_colormap(0),
-            m_ownWindow(false)
+                GlContext(settings),
+                m_log(Log::getInstance()),
+                m_window(0),
+                m_render(nullptr),
+                m_config(nullptr),
+                m_pbuffer(0),
+                m_display(Display::getInstance()),
+                m_colormap(0),
+                m_ownWindow(false)
         {
             m_config = chooseBestConfig(m_display, m_settings, bitsPerPixel);
 
@@ -258,15 +258,15 @@ namespace Bull
 
             if(glxPbuffer.isLoaded() && shared)
             {
-                int fbCounts         = 0;
+                int fbCounts = 0;
                 GLXFBConfig* configs = glXChooseFBConfig(m_display.getHandler(), m_display.getDefaultScreen(), nullptr, &fbCounts);
 
                 if(fbCounts && configs)
                 {
                     int attributes[] = {
-                        GLX_PBUFFER_WIDTH,  static_cast<int>(size.width),
-                        GLX_PBUFFER_HEIGHT, static_cast<int>(size.height),
-                        0
+                            GLX_PBUFFER_WIDTH, static_cast<int>(size.width),
+                            GLX_PBUFFER_HEIGHT, static_cast<int>(size.height),
+                            0
                     };
 
                     m_config = configs[0];
@@ -279,17 +279,17 @@ namespace Bull
 
             if(!m_pbuffer)
             {
-                XVisualInfo*         vi;
+                XVisualInfo* vi;
                 XSetWindowAttributes attributes;
 
                 vi = glXGetVisualFromFBConfig(m_display.getHandler(), m_config);
 
                 m_colormap = XCreateColormap(m_display.getHandler(), m_display.getRootWindow(vi->screen), vi->visual, AllocNone);
 
-                attributes.border_pixel      = 0;
+                attributes.border_pixel = 0;
                 attributes.background_pixmap = XNone;
-                attributes.colormap          = m_colormap;
-                attributes.event_mask        = StructureNotifyMask;
+                attributes.colormap = m_colormap;
+                attributes.event_mask = StructureNotifyMask;
 
                 m_window = XCreateWindow(m_display.getHandler(),
                                          m_display.getRootWindow(vi->screen),
@@ -331,7 +331,7 @@ namespace Bull
 
                     if(isSupported("GLX_ARB_create_context_profile"))
                     {
-                        int flags   = 0;
+                        int flags = 0;
                         int profile = (m_settings.profile & ContextSettingsProfile_Compatibility) ? GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB : GLX_CONTEXT_CORE_PROFILE_BIT_ARB;
 
                         if(m_settings.type & ContextSettingsType_Debug)
@@ -360,12 +360,12 @@ namespace Bull
 
                     if(!m_render)
                     {
-                        m_log.warning("Failed to create GlxContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
+                        m_log.warning("Failed to create GlxContext with version " + std::to_string(m_settings.major) + "." + std::to_string(m_settings.minor));
 
                         if(m_settings.minor == 0)
                         {
                             m_settings.major -= 1;
-                            m_settings.minor  = 9;
+                            m_settings.minor = 9;
                         }
                         else
                         {
@@ -374,7 +374,7 @@ namespace Bull
                     }
                     else
                     {
-                        m_log.info("Create GlxContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
+                        m_log.info("Create GlxContext with version " + std::to_string(m_settings.major) + "." + std::to_string(m_settings.minor));
                     }
                 }while(!m_render && m_settings.major >= 1);
             }
@@ -404,13 +404,13 @@ namespace Bull
             int sampleBuffers, samples;
 
             glXGetFBConfigAttrib(m_display.getHandler(), m_config, GLX_SAMPLE_BUFFERS, &sampleBuffers);
-            glXGetFBConfigAttrib(m_display.getHandler(), m_config, GLX_SAMPLES,        &samples);
+            glXGetFBConfigAttrib(m_display.getHandler(), m_config, GLX_SAMPLES, &samples);
 
-            glXGetFBConfigAttrib(m_display.getHandler(), m_config, GLX_DEPTH_SIZE,   &depths);
+            glXGetFBConfigAttrib(m_display.getHandler(), m_config, GLX_DEPTH_SIZE, &depths);
             glXGetFBConfigAttrib(m_display.getHandler(), m_config, GLX_STENCIL_SIZE, &stencil);
 
-            m_settings.depths       = static_cast<Uint8>(depths);
-            m_settings.stencil      = static_cast<Uint8>(stencil);
+            m_settings.depths = static_cast<Uint8>(depths);
+            m_settings.stencil = static_cast<Uint8>(stencil);
             m_settings.antialiasing = static_cast<Uint8>(sampleBuffers > 0 ? samples : 0);
         }
     }

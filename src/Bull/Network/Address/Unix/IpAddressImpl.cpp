@@ -10,7 +10,7 @@ namespace Bull
 {
     namespace prv
     {
-        ByteArray IpAddressImpl::resolve(const String& hostname, NetProtocol protocol, const String& service)
+        ByteArray IpAddressImpl::resolve(const std::string& hostname, NetProtocol protocol, const std::string& service)
         {
             int error;
             addrinfo hints;
@@ -23,7 +23,7 @@ namespace Bull
 
             error = getaddrinfo(hostname.getBuffer(), service.getBuffer(), &hints, &info);
 
-            Expect(error == 0, Throw(InternalError, "Failed to get host address : " + String(gai_strerror(error))))
+            Expect(error == 0, Throw(InternalError, "Failed to get host address : " + std::string(gai_strerror(error))))
 
             SockAddrBuffer buffer((*info->ai_addr), info->ai_addrlen);
             std::unique_ptr<IpAddress> address = buffer.getIpAddress();

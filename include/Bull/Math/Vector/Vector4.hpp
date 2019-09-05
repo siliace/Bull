@@ -17,7 +17,7 @@ namespace Bull
 
         static Vector4<T> Unit;
 
-        /*! \brief Create a Vector4 from a Color
+        /** \brief Create a Vector4 from a Color
          *
          * \param color The color
          *
@@ -27,16 +27,16 @@ namespace Bull
         static Vector4<T> makeFromColor(const Color& color)
         {
             return Vector4<T>(
-                    static_cast<T>(color.red)   / 255,
+                    static_cast<T>(color.red) / 255,
                     static_cast<T>(color.green) / 255,
-                    static_cast<T>(color.blue)  / 255,
+                    static_cast<T>(color.blue) / 255,
                     static_cast<T>(color.alpha) / 255
             );
         }
 
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param value The value of all components
          *
@@ -46,7 +46,7 @@ namespace Bull
             set(value, value, value, value);
         }
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param x The x component
          * \param y The y component
@@ -59,30 +59,30 @@ namespace Bull
             set(x, y, z, w);
         }
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param copy The X/Y/W components
          * \param w    The W component
          */
-        Vector4(const Vector3<T>& copy, T w) :
-            Vector<T, 4>(copy)
+        Vector4(const Vector3 <T>& copy, T w) :
+                Vector<T, 4>(copy)
         {
             this->w() = w;
         }
 
-        /*! \brief Copy constructor
+        /** \brief Copy constructor
          *
          * \param copy The Vector to copy
          *
          */
         template <typename U, std::size_t US>
-        Vector4(const Vector<U, US>& copy) :
-            Vector<T, 4>(copy)
+        Vector4(const Vector <U, US>& copy) :
+                Vector<T, 4>(copy)
         {
             /// Nothing
         }
 
-        /*! \brief Set the Vector3
+        /** \brief Set the Vector3
          *
          * \param x The X component
          * \param y The Y component
@@ -102,7 +102,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *
@@ -112,7 +112,7 @@ namespace Bull
             return this->at(0);
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *
@@ -122,7 +122,7 @@ namespace Bull
             return this->at(0);
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *
@@ -132,7 +132,7 @@ namespace Bull
             return this->at(1);
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *
@@ -142,7 +142,7 @@ namespace Bull
             return this->at(1);
         }
 
-        /*! \brief Get the Z component
+        /** \brief Get the Z component
          *
          * \return The component
          *
@@ -152,7 +152,7 @@ namespace Bull
             return this->at(2);
         }
 
-        /*! \brief Get the Z component
+        /** \brief Get the Z component
          *
          * \return The component
          *
@@ -162,7 +162,7 @@ namespace Bull
             return this->at(2);
         }
 
-        /*! \brief Get the W component
+        /** \brief Get the W component
          *
          * \return The component
          *
@@ -172,7 +172,7 @@ namespace Bull
             return this->at(3);
         }
 
-        /*! \brief Get the W component
+        /** \brief Get the W component
          *
          * \return The component
          *
@@ -183,10 +183,10 @@ namespace Bull
         }
     };
 
-    template<typename T>
+    template <typename T>
     Vector4<T> Vector4<T>::Zero = Vector4<T>(0, 0, 0, 0);
 
-    template<typename T>
+    template <typename T>
     Vector4<T> Vector4<T>::Unit = Vector4<T>(1, 1, 1, 1);
 
     typedef Vector4<int> Vector4I;

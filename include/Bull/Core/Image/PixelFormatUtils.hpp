@@ -7,7 +7,7 @@ namespace Bull
 {
     struct BULL_CORE_API PixelFormatUtils
     {
-        /*! \brief Get the number of bytes needed by a PixelFormat to encode one pixel
+        /** \brief Get the number of bytes needed by a PixelFormat to encode one pixel
          *
          * \param pixelFormat The PixelFormat
          *
@@ -16,7 +16,7 @@ namespace Bull
          */
         static std::size_t getPixelFormatSize(PixelFormat pixelFormat);
 
-        /*! \brief Compute the number of bytes to allocate to store an image of a given Size and a PixelFormat
+        /** \brief Compute the number of bytes to allocate to store an image of a given Size and a PixelFormat
          *
          * \param size        The Size
          * \param pixelFormat The PixelFormat

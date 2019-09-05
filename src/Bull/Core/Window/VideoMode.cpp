@@ -14,14 +14,14 @@ namespace Bull
     }
 
     VideoMode::VideoMode() :
-        m_bitsPerPixel(0)
+            m_bitsPerPixel(0)
     {
         /// Nothing
     }
 
     VideoMode::VideoMode(const Size<unsigned int>& size, unsigned int bitsPerPixel) :
-        m_size(size),
-        m_bitsPerPixel(bitsPerPixel)
+            m_size(size),
+            m_bitsPerPixel(bitsPerPixel)
     {
         /// Nothing
     }

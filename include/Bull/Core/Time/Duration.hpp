@@ -9,7 +9,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Construct a Duration form nanoseconds
+        /** \brief Construct a Duration form nanoseconds
          *
          * \param nanoseconds The number of nanoseconds
          *
@@ -17,7 +17,7 @@ namespace Bull
          */
         static Duration nanoseconds(float nanoseconds);
 
-        /*! \brief Construct a Duration form microseconds
+        /** \brief Construct a Duration form microseconds
          *
          * \param microseconds The number of microseconds
          *
@@ -25,7 +25,7 @@ namespace Bull
          */
         static Duration microseconds(float microseconds);
 
-        /*! \brief Construct a Duration form milliseconds
+        /** \brief Construct a Duration form milliseconds
          *
          * \param milliseconds The number of milliseconds
          *
@@ -33,7 +33,7 @@ namespace Bull
          */
         static Duration milliseconds(float milliseconds);
 
-        /*! \brief Construct a Duration form seconds
+        /** \brief Construct a Duration form seconds
          *
          * \param seconds The number of seconds
          *
@@ -41,7 +41,7 @@ namespace Bull
          */
         static Duration seconds(float seconds);
 
-        /*! \brief Construct a Duration form minutes
+        /** \brief Construct a Duration form minutes
          *
          * \param minutes The number of minutes
          *
@@ -49,7 +49,7 @@ namespace Bull
          */
         static Duration minutes(float minutes);
 
-        /*! \brief Construct a Duration form hours
+        /** \brief Construct a Duration form hours
          *
          * \param hours The number of hours
          *
@@ -57,7 +57,7 @@ namespace Bull
          */
         static Duration hours(float hours);
 
-        /*! \brief Construct a Duration form days
+        /** \brief Construct a Duration form days
          *
          * \param days The number of days
          *
@@ -71,68 +71,68 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Duration();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param duration The number of seconds
          *
          */
         explicit Duration(float duration);
 
-        /*! \brief Convert a duration to nanoseconds
+        /** \brief Convert a duration to nanoseconds
          *
          * \return Return the duration converted to nanoseconds
          *
          */
         float asNanoseconds() const;
 
-        /*! \brief Convert a duration to microseconds
+        /** \brief Convert a duration to microseconds
          *
          * \return Return the duration converted to microseconds
          *
          */
         float asMicroseconds() const;
 
-        /*! \brief Convert a duration to milliseconds
+        /** \brief Convert a duration to milliseconds
          *
          * \return Return the duration converted to milliseconds
          *
          */
         float asMilliseconds() const;
 
-        /*! \brief Convert a duration to seconds
+        /** \brief Convert a duration to seconds
          *
          * \return Return the duration converted to seconds
          *
          */
         float asSeconds() const;
 
-        /*! \brief Convert a duration to minutes
+        /** \brief Convert a duration to minutes
          *
          * \return Return the duration converted to minutes
          *
          */
         float asMinutes() const;
 
-        /*! \brief Convert a duration to hours
+        /** \brief Convert a duration to hours
          *
          * \return Return the duration converted to hours
          *
          */
         float asHours() const;
 
-        /*! \brief Convert a duration to days
+        /** \brief Convert a duration to days
          *
          * \return Return the duration converted to days
          *
          */
         float asDays() const;
 
-        /*! \brief Override == operator
+        /** \brief Override == operator
          *
          * \param right The duration to compare
          *
@@ -141,7 +141,7 @@ namespace Bull
          */
         bool operator==(const Duration& right) const;
 
-        /*! \brief Override != operator
+        /** \brief Override != operator
          *
          * \param right The duration to compare
          *
@@ -150,7 +150,7 @@ namespace Bull
          */
         bool operator!=(const Duration& right) const;
 
-        /*! \brief Override <= operator
+        /** \brief Override <= operator
          *
          * \param right The duration to compare
          *
@@ -159,7 +159,7 @@ namespace Bull
          */
         bool operator<=(const Duration& right) const;
 
-        /*! \brief Override < operator
+        /** \brief Override < operator
          *
          * \param right The duration to compare
          *
@@ -168,7 +168,7 @@ namespace Bull
          */
         bool operator<(const Duration& right) const;
 
-        /*! \brief Override >= operator
+        /** \brief Override >= operator
          *
          * \param right The duration to compare
          *
@@ -177,7 +177,7 @@ namespace Bull
          */
         bool operator>=(const Duration& right) const;
 
-        /*! \brief Override > operator
+        /** \brief Override > operator
          *
          * \param right The duration to compare
          *
@@ -186,7 +186,7 @@ namespace Bull
          */
         bool operator>(const Duration& right) const;
 
-        /*! \brief Addition a Duration to this
+        /** \brief Addition a Duration to this
          *
          * \param right The duration to add
          *
@@ -195,7 +195,7 @@ namespace Bull
          */
         Duration operator+(const Duration& right) const;
 
-        /*! \brief Addition a Duration to this
+        /** \brief Addition a Duration to this
          *
          * \param right The duration to add
          *
@@ -204,7 +204,7 @@ namespace Bull
          */
         Duration& operator+=(const Duration& right);
 
-        /*! \brief Subtract a Duration to this
+        /** \brief Subtract a Duration to this
          *
          * \param right The duration to subtract
          *
@@ -213,7 +213,7 @@ namespace Bull
          */
         Duration operator-(const Duration& right) const;
 
-        /*! \brief Subtract a Duration to this
+        /** \brief Subtract a Duration to this
          *
          * \param right The duration to subtract
          *
@@ -222,7 +222,7 @@ namespace Bull
          */
         Duration& operator-=(const Duration& right);
 
-        /*! \brief Override * operator
+        /** \brief Override * operator
          *
          * \param right The duration to multiply
          *
@@ -231,7 +231,7 @@ namespace Bull
          */
         Duration operator*(float right) const;
 
-        /*! \brief Override *= operator
+        /** \brief Override *= operator
          *
          * \param right The duration to multiply
          *
@@ -240,7 +240,7 @@ namespace Bull
          */
         Duration& operator*=(float right);
 
-        /*! \brief Override / operator
+        /** \brief Override / operator
          *
          * \param right The duration to divide
          *
@@ -249,7 +249,7 @@ namespace Bull
          */
         Duration operator/(float right) const;
 
-        /*! \brief Override /= operator
+        /** \brief Override /= operator
          *
          * \param right The duration to divide
          *

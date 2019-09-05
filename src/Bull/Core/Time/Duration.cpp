@@ -43,13 +43,13 @@ namespace Bull
     }
 
     Duration::Duration() :
-        m_duration(0.f)
+            m_duration(0.f)
     {
         /// Nothing
     }
 
     Duration::Duration(float time) :
-        m_duration(time)
+            m_duration(time)
     {
         /// Nothing
     }

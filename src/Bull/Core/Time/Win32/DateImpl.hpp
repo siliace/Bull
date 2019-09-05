@@ -11,7 +11,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Get the current date
+            /** \brief Get the current date
              *
              * \return Return the current date
              *

@@ -7,14 +7,14 @@ namespace Bull
     namespace prv
     {
         JoystickState::JoystickState() :
-            connected(false)
+                connected(false)
         {
             buttons.fill(std::make_pair(false, Clock()));
             axes.fill(std::numeric_limits<unsigned int>::max() / 2);
         }
 
         JoystickState::JoystickState(Uint8 joystick) :
-            JoystickState()
+                JoystickState()
         {
             connected = Joystick::isConnected(joystick);
 

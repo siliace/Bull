@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_WINDOW_MESSAGEWINDOW_HPP
 #define BULL_CORE_WINDOW_MESSAGEWINDOW_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 #include <Bull/Core/Window/Window.hpp>
 
 namespace Bull
@@ -56,21 +56,21 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         MessageWindow();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param message The message to display in the MessageWindow
          * \param title   The title of the MessageWindow
          * \param parent  The parent Window
          *
          */
-        MessageWindow(const String& message, const String& title, const Window* parent = nullptr);
+        MessageWindow(const std::string& message, const std::string& title, const Window* parent = nullptr);
 
-        /*! \brief Open the MessageWindow
+        /** \brief Open the MessageWindow
          *
          * \param message The message to display in the MessageWindow
          * \param title   The title of the MessageWindow
@@ -79,12 +79,12 @@ namespace Bull
          * \return The user's response
          *
          */
-        MessageWindowResponse open(const String& message, const String& title, const Window* parent = nullptr);
+        MessageWindowResponse open(const std::string& message, const std::string& title, const Window* parent = nullptr);
 
     public:
 
-        MessageWindowIcon          icon;
-        MessageWindowButtons       buttons;
+        MessageWindowIcon icon;
+        MessageWindowButtons buttons;
         MessageWindowDefaultButton defaultButton;
     };
 }

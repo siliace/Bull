@@ -18,49 +18,49 @@ namespace Bull
         {
         public:
 
-            /*! \brief Process events for every joysticks
+            /** \brief Process events for every joysticks
              *
              * \param eventQueue The event queue to fill
              *
              */
             void processEvents(std::queue<WindowEvent>& eventQueue) override;
 
-            /*! \brief Enable or disable the key repeat
+            /** \brief Enable or disable the key repeat
              *
              * \param enable The state of the key repeat
              *
              */
             void enableKeyRepeat(bool enable) override;
 
-            /*! \brief Get the state of the key repeat
+            /** \brief Get the state of the key repeat
              *
              * \param Return true if the key repeat is enable, false otherwise
              *
              */
             bool isKeyRepeatEnable() const override;
 
-            /*! \brief Set the threshold of an axis movement to trigger an event
+            /** \brief Set the threshold of an axis movement to trigger an event
              *
              * \param threshold The threshold to use
              *
              */
             void setThreshold(float threshold) override;
 
-            /*! \brief Get the threshold of an axis movement to trigger an event
+            /** \brief Get the threshold of an axis movement to trigger an event
              *
              * \return threshold The threshold used
              *
              */
             float getThreshold() const override;
 
-            /*! \brief Set the delay between two key repeat
+            /** \brief Set the delay between two key repeat
              *
              * \param delay The delay between two key repeat
              *
              */
             void setRepeatDelay(const Duration& delay) override;
 
-            /*! \brief Get the delay between two key repeat
+            /** \brief Get the delay between two key repeat
              *
              * \return delay The delay between two key repeat
              *
@@ -71,14 +71,14 @@ namespace Bull
 
             friend class SharedSingleton<JoystickManager>;
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             JoystickManager();
 
         private:
 
-            /*! \brief Update joystick events
+            /** \brief Update joystick events
              *
              * \param id The id of the joystick
              * \param eventQueue The event queue to fill
@@ -88,10 +88,10 @@ namespace Bull
 
         private:
 
-            bool                                             m_keyrepeat;
-            float                                            m_threshold;
+            bool m_keyrepeat;
+            float m_threshold;
             std::array<JoystickState, Joystick::CountButton> m_stateCache;
-            Duration                                         m_repeatDelay;
+            Duration m_repeatDelay;
         };
     }
 }

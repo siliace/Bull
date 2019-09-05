@@ -3,7 +3,7 @@
 namespace Bull
 {
     Transformable::Transformable() :
-        m_scale(Vector3F::Unit)
+            m_scale(Vector3F::Unit)
     {
         /// Nothing
     }

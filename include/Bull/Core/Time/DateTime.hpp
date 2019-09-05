@@ -10,13 +10,13 @@ namespace Bull
     {
     public:
 
-        /*! \brief Create a DateTime of now
+        /** \brief Create a DateTime of now
          *
          * \return The created DateTime
          */
         static DateTime now();
 
-        /*! \brief Create a DateTime form a Date and a Time
+        /** \brief Create a DateTime form a Date and a Time
          *
          * \param date The Date
          * \param time The Time
@@ -28,21 +28,21 @@ namespace Bull
 
     public:
 
-        /*! \brief Get the Date of the DateTime
+        /** \brief Get the Date of the DateTime
          *
          * \return The Date
          *
          */
         const Date& getDate() const;
 
-        /*! \brief Get the Time of the DateTime
+        /** \brief Get the Time of the DateTime
          *
          * \return The Time
          *
          */
         const Time& getTime() const;
 
-        /*! \brief Compare two DateTime
+        /** \brief Compare two DateTime
          *
          * \param right The DateTime to compare to this
          *
@@ -51,7 +51,7 @@ namespace Bull
          */
         bool operator==(const DateTime& right) const;
 
-        /*! \brief Compare two DateTime
+        /** \brief Compare two DateTime
          *
          * \param right The DateTime to compare to this
          *
@@ -62,7 +62,7 @@ namespace Bull
 
     private:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param date The Date
          * \param time The Time

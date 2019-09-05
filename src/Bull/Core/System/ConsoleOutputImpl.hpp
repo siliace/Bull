@@ -15,7 +15,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create an OS specific instance of ConsoleOutputImpl
+            /** \brief Create an OS specific instance of ConsoleOutputImpl
              *
              * \return The instance
              *
@@ -24,35 +24,35 @@ namespace Bull
 
         public:
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             virtual ~ConsoleOutputImpl();
 
             virtual std::size_t write(const ByteArray& bytes) = 0;
 
-            /*! \brief Flush the ConsoleOutput
+            /** \brief Flush the ConsoleOutput
              *
              * Flushing the ConsoleOutput will wait that every write instruction has been executed
              *
              */
             virtual void flush() = 0;
 
-            /*! \brief Clear the console output
+            /** \brief Clear the console output
              *
              * Clearing the ConsoleOutput will clear every character written in the screen
              *
              */
             virtual void clear() = 0;
 
-            /*! \brief Set the color of the text in the console
+            /** \brief Set the color of the text in the console
              *
              * \param color The color
              *
              */
             virtual void setTextColor(ConsoleColor color) = 0;
 
-            /*! \brief Set the color of the background in the console
+            /** \brief Set the color of the background in the console
              *
              * \param color The color
              *
@@ -61,7 +61,7 @@ namespace Bull
 
         protected:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             ConsoleOutputImpl() = default;

@@ -15,7 +15,7 @@ namespace Bull
 
         public:
 
-            /*! \brief Poll sockets
+            /** \brief Poll sockets
              *
              * \param sockets Sockets to poll
              * \param timeout The time before the function fail

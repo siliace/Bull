@@ -13,19 +13,19 @@ namespace Bull
     {
     public:
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         virtual ~AbstractImage() = default;
 
-        /*! \brief Create the AbstractImage
+        /** \brief Create the AbstractImage
          *
          * \param size The size of the AbstractImage
          *
          */
         virtual void create(const Size<std::size_t>& size) = 0;
 
-        /*! \brief Create the AbstractImage
+        /** \brief Create the AbstractImage
          *
          * \param pixels Pixels of the Image
          * \param size   The size of the Image
@@ -33,21 +33,21 @@ namespace Bull
          */
         virtual void create(const ByteArray& pixels, const Size<std::size_t>& size) = 0;
 
-        /*! \brief Get the size of the AbstractImage
+        /** \brief Get the size of the AbstractImage
          *
          * \return The size
          *
          */
         virtual Size<std::size_t> getSize() const = 0;
 
-        /*! \brief Pixels of the AbstractImage
+        /** \brief Pixels of the AbstractImage
          *
          * \return Pixels
          *
          */
         virtual ByteArray getPixels() const = 0;
 
-        /*! \brief Get the PixelFormat used by the AbstractImage
+        /** \brief Get the PixelFormat used by the AbstractImage
          *
          * \return The PixelFormat
          *

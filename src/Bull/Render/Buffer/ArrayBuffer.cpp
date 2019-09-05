@@ -4,13 +4,13 @@
 namespace Bull
 {
     ArrayBuffer::ArrayBuffer() :
-        HardwareBuffer(HardwareBufferType::Array)
+            HardwareBuffer(HardwareBufferType::Array)
     {
         /// Nothing
     }
 
     ArrayBuffer::ArrayBuffer(const VertexArray& vertices, HardwareBufferUsage usage) :
-        ArrayBuffer()
+            ArrayBuffer()
     {
         create(vertices, usage);
     }
@@ -27,7 +27,7 @@ namespace Bull
         bind();
 
         gl::enableVertexAttribArray(attrib);
-        gl::vertexAttribPointer(attrib, static_cast<int>(size), GL_FLOAT, GL_FALSE, static_cast<int>(stride), (void*)start);
+        gl::vertexAttribPointer(attrib, static_cast<int>(size), GL_FLOAT, GL_FALSE, static_cast<int>(stride), (void*) start);
     }
 
     void ArrayBuffer::setAttribDivisor(unsigned int attrib, unsigned int divisor) const

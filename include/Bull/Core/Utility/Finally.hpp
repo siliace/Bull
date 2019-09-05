@@ -11,35 +11,35 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param callback The function to call when the instance is destroyed
          *
          */
         explicit Finally(const std::function<void()>& callback);
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          * Call the callback if enable
          *
          */
         ~Finally();
 
-        /*! \brief Change the callback
+        /** \brief Change the callback
          *
          * \param callback The new callback
          *
          */
         void reset(const std::function<void()>& callback);
 
-        /*! \brief Enable or disable the callback
+        /** \brief Enable or disable the callback
          *
          * \param enable Is the callback is enable?
          *
          */
         void enable(bool enable = true);
 
-        /*! \brief Check if the callback is enable
+        /** \brief Check if the callback is enable
          *
          * \return Return true if the callback is enable, false otherwise
          *
@@ -48,7 +48,7 @@ namespace Bull
 
     private:
 
-        bool                  m_enable;
+        bool m_enable;
         std::function<void()> m_callback;
     };
 }

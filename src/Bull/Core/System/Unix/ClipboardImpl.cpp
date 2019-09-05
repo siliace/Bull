@@ -10,12 +10,12 @@ namespace Bull
             Throw(UnsupportedOperation, "Operation not implemented yet");
         }
 
-        void ClipboardImpl::setContent(const String& content)
+        void ClipboardImpl::setContent(const std::string& content)
         {
             Throw(UnsupportedOperation, "Operation not implemented yet");
         }
 
-        String ClipboardImpl::getContent()
+        std::string ClipboardImpl::getContent()
         {
             Throw(UnsupportedOperation, "Operation not implemented yet");
         }

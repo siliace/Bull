@@ -11,7 +11,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Get the uptime
+            /** \brief Get the uptime
              *
              * \return Return the update
              *

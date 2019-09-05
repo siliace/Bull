@@ -11,24 +11,24 @@ namespace Bull
         {
         public:
 
-            /*! \brief Default Constructor
+            /** \brief Default Constructor
              *
              */
-            explicit LibraryImplUnix(const String& name);
+            explicit LibraryImplUnix(const std::string& name);
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             ~LibraryImplUnix();
 
-            /*! \brief Get a function from the library
+            /** \brief Get a function from the library
              *
              * \param name The name of the function
              *
              * \return The function or nullptr if the function does not exists
              *
              */
-            void* getSymbolPointer(const String& name) const override;
+            void* getSymbolPointer(const std::string& name) const override;
 
         private:
 

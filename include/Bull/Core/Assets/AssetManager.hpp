@@ -14,7 +14,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Create an Asset and register it the AssetManager
+        /** \brief Create an Asset and register it the AssetManager
          *
          * \param name The name of the Asset to create
          * \param args Arguments to create the Asset
@@ -23,7 +23,7 @@ namespace Bull
          *
          */
         template <typename... Args>
-        std::shared_ptr<T> create(const String& name, Args&&... args)
+        std::shared_ptr<T> create(const std::string& name, Args&& ... args)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
@@ -41,7 +41,7 @@ namespace Bull
             return it->second;
         }
 
-        /*! \brief Register an Asset in the AssetManager
+        /** \brief Register an Asset in the AssetManager
          *
          * \param asset The Asset to register
          * \param name  The name of the Asset to register
@@ -49,7 +49,7 @@ namespace Bull
          * \return A handler to the added Asset
          *
          */
-        std::shared_ptr<T> add(T&& asset, const String& name)
+        std::shared_ptr<T> add(T&& asset, const std::string& name)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
@@ -67,14 +67,14 @@ namespace Bull
             return it->second;
         }
 
-        /*! \brief Remove an Asset from the AssetManager
+        /** \brief Remove an Asset from the AssetManager
          *
          * \param name The name of the Asset to remove
          *
          * \return The removed
          *
          */
-        std::shared_ptr<T> remove(const String& name)
+        std::shared_ptr<T> remove(const std::string& name)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
@@ -83,26 +83,26 @@ namespace Bull
             return m_assets.erase(it)->second;
         }
 
-        /*! \brief Tell whether an Asset exists in the AssetManager
+        /** \brief Tell whether an Asset exists in the AssetManager
          *
          * \param name The name of the Asset to get
          *
          * \return True if the Asset exists
          *
          */
-        bool has(const String& name) const
+        bool has(const std::string& name) const
         {
             return m_assets.find(name) != m_assets.end();
         }
 
-        /*! \brief Find an Asset by its name a new one and return it
+        /** \brief Find an Asset by its name a new one and return it
          *
          * \param name The name of the Asset to find
          *
          * \return A handler to the Asset
          *
          */
-        std::shared_ptr<T> find(const String& name)
+        std::shared_ptr<T> find(const std::string& name)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
@@ -111,7 +111,7 @@ namespace Bull
             return it->second;
         }
 
-        /*! \brief Find an Asset by its name or create a new one and return it
+        /** \brief Find an Asset by its name or create a new one and return it
          *
          * \param name The name of the Asset to find
          *
@@ -119,14 +119,15 @@ namespace Bull
          *
          */
         template <typename... Args>
-        std::shared_ptr<T> findOrCreate(const String& name, Args&&... args)
+        std::shared_ptr<T> findOrCreate(const std::string& name, Args&& ... args)
         {
-            return findOrCreateWithFactory(name, [&args...]() -> T {
+            return findOrCreateWithFactory(name, [&args...]() -> T
+            {
                 return T(std::forward<Args>(args)...);
             });
         }
 
-        /*! \brief Find or create an Asset by its name or create a new one using a factory and return it
+        /** \brief Find or create an Asset by its name or create a new one using a factory and return it
          *
          * \param name    The name of the Asset to create
          * \param factory The factory to use to create the Asset
@@ -134,7 +135,7 @@ namespace Bull
          * \return The created Asset
          *
          */
-        std::shared_ptr<T> findOrCreateWithFactory(const String& name, const std::function<T()>& factory)
+        std::shared_ptr<T> findOrCreateWithFactory(const std::string& name, const std::function<T()>& factory)
         {
             typename AssetMap::iterator it = m_assets.find(name);
 
@@ -146,7 +147,7 @@ namespace Bull
             return it->second;
         }
 
-        /*! \brief Delete every Asset
+        /** \brief Delete every Asset
          *
          */
         void clear()
@@ -156,7 +157,7 @@ namespace Bull
 
     private:
 
-        using AssetMap = std::map<String, std::shared_ptr<T>>;
+        using AssetMap = std::map<std::string, std::shared_ptr<T>>;
 
         AssetMap m_assets;
     };

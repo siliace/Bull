@@ -15,7 +15,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a OS specific DirectoryImpl
+            /** \brief Create a OS specific DirectoryImpl
              *
              * \param path The Path of the Directory to open
              *
@@ -24,14 +24,14 @@ namespace Bull
              */
             static std::unique_ptr<DirectoryImpl> createInstance(const Path& path);
 
-            /*! \brief Create a Directory
+            /** \brief Create a Directory
              *
              * \param path The path of the directory to create
              *
              */
             static void create(const Path& path);
 
-            /*! \brief Tell whether a Directory exists
+            /** \brief Tell whether a Directory exists
              *
              * \param path The path of the Directory to check
              *
@@ -40,7 +40,7 @@ namespace Bull
              */
             static bool exists(const Path& path);
 
-            /*! \brief Rename a Directory
+            /** \brief Rename a Directory
              *
              * \param path    The Path of the Directory to rename
              * \param newPath The new Path of the Directory
@@ -48,7 +48,7 @@ namespace Bull
              */
             static void rename(const Path& path, const Path& newPath);
 
-            /*! \brief Remove a Directory
+            /** \brief Remove a Directory
              *
              * \param path The path of the Directory to remove
              *
@@ -57,12 +57,12 @@ namespace Bull
 
         public:
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             virtual ~DirectoryImpl();
 
-            /*! \brief Get the content of this Directory
+            /** \brief Get the content of this Directory
              *
              * \param flags What we have to look for
              *

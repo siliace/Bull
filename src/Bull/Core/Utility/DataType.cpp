@@ -38,9 +38,9 @@ namespace Bull
     }
 
     DataType::DataType(size_t size, bool isUnsigned, bool isFloatingPoint) :
-        m_size(size),
-        m_isUnsigned(isUnsigned),
-        m_isFloatingPoint(isFloatingPoint)
+            m_size(size),
+            m_isUnsigned(isUnsigned),
+            m_isFloatingPoint(isFloatingPoint)
     {
         /// Nothing
     }

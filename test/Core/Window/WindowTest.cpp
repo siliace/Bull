@@ -8,7 +8,7 @@ SCENARIO("Create window and change its settings")
 {
     GIVEN("A valid video mode and title")
     {
-        String title("Unit test window");
+        std::string title("Unit test window");
         VideoMode videoMode(Size<unsigned int>(800, 600));
         Uint32 style = WindowStyle_Default;
 
@@ -44,7 +44,7 @@ SCENARIO("Create window and change its settings")
 
         WHEN("Change the window title")
         {
-            const String newTitle("New window test title");
+            const std::string newTitle("New window test title");
 
             window.setTitle(newTitle);
 

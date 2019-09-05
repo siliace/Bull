@@ -25,15 +25,15 @@ namespace Bull
 
         void FileSystemImpl::setCurrentDirectory(const Path& path)
         {
-            Expect(chdir(path.toString().getBuffer()) != -1, Throw(InternalError, "Failed to set current directory"));
+            Expect(chdir(path.toString().c_str()) != -1, Throw(InternalError, "Failed to set current directory"));
         }
 
         FileSystemInfo FileSystemImpl::getFileSystemInfo(const Path& base)
         {
-            FileSystemInfo   info;
+            FileSystemInfo info;
             struct statvfs64 stats;
 
-            statvfs64(base.toString().getBuffer(), &stats);
+            statvfs64(base.toString().c_str(), &stats);
 
             info.free = stats.f_bfree * stats.f_bsize;
             info.capacity = stats.f_blocks * stats.f_bsize;
@@ -42,9 +42,9 @@ namespace Bull
             return info;
         }
 
-        void FileSystemImpl::createLink(const Path& target, const String& link)
+        void FileSystemImpl::createLink(const Path& target, const std::string& link)
         {
-            Expect(symlink(target.toString().getBuffer(), link.getBuffer()) != -1, Throw(InternalError, "Failed to create link"));
+            Expect(symlink(target.toString().c_str(), link.getBuffer()) != -1, Throw(InternalError, "Failed to create link"));
         }
     }
 }

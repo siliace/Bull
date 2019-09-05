@@ -13,26 +13,26 @@ namespace Bull
         {
         public:
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param name The name or the path to the library to load
              *
              */
-            explicit LibraryImplWin32(const String& name);
+            explicit LibraryImplWin32(const std::string& name);
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             ~LibraryImplWin32();
 
-            /*! \brief Get a function from the library
+            /** \brief Get a function from the library
              *
              * \param name The name of the function
              *
              * \return Return the function or nullptr if the function does not exists
              *
              */
-            void* getSymbolPointer(const String& name) const override;
+            void* getSymbolPointer(const std::string& name) const override;
 
         private:
 

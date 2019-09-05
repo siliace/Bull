@@ -8,7 +8,7 @@ namespace Bull
         DateTime systemTimeToDate(SYSTEMTIME sysTime)
         {
             return DateTime::make(
-                    Date::make(sysTime.wYear, DateMonth(sysTime.wMonth),sysTime.wDay),
+                    Date::make(sysTime.wYear, DateMonth(sysTime.wMonth), sysTime.wDay),
                     Time::make(sysTime.wHour, sysTime.wMinute, sysTime.wSecond, sysTime.wMilliseconds)
             );
         }

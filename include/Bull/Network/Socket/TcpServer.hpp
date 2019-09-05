@@ -16,24 +16,24 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         TcpServer();
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          * \param right The TcpServer to move
          *
          */
         TcpServer(TcpServer&& right) noexcept;
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         ~TcpServer();
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \param right The TcpServer to move
          *
@@ -42,7 +42,7 @@ namespace Bull
          */
         TcpServer& operator=(TcpServer&& right) noexcept;
 
-        /*! \brief Start to listen a NetPort
+        /** \brief Start to listen a NetPort
          *
          * \param port    The NetPort to listen
          * \param host    The host to listen
@@ -51,33 +51,33 @@ namespace Bull
          */
         void listen(NetPort port, const IpAddress& host = IpAddressV4::Any, int backlog = UnlimitedBacklog);
 
-        /*! \brief Tell whether the TcpServer is listening a NetPort
+        /** \brief Tell whether the TcpServer is listening a NetPort
          *
          * \return True if the TcpServer is listening
          *
          */
         bool isListening() const;
 
-        /*! \brief Accept an incoming connection
+        /** \brief Accept an incoming connection
          *
          * \return The client accepted
          *
          */
         TcpClient accept();
 
-        /*! \brief Disconnect the TcpServer
+        /** \brief Disconnect the TcpServer
          *
          */
         void disconnect();
 
-        /*! \brief The number of simultaneous active connection on the TcpServer
+        /** \brief The number of simultaneous active connection on the TcpServer
          *
          * \return The number of simultaneous active connection
          *
          */
         int getBacklog() const;
 
-        /*! \brief Get the NetPort listened by the TcpServer
+        /** \brief Get the NetPort listened by the TcpServer
          *
          * \return The NetPort
          *
@@ -87,7 +87,7 @@ namespace Bull
     private:
 
         NetPort m_port;
-        int     m_backlog;
+        int m_backlog;
     };
 }
 

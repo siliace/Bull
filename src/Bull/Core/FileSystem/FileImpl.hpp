@@ -16,7 +16,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a OS specific FileImpl
+            /** \brief Create a OS specific FileImpl
              *
              * \param name The Path of the File to open
              * \param mode The opening mode of the File
@@ -26,14 +26,14 @@ namespace Bull
              */
             static std::unique_ptr<FileImpl> createInstance(const Path& path, Uint32 mode);
 
-            /*! \brief Create a File
+            /** \brief Create a File
              *
              * \param path The Path of the file to create
              *
              */
             static void create(const Path& path);
 
-            /*! \brief Tell whether a File exists
+            /** \brief Tell whether a File exists
              *
              * \param path The Path of the File
              *
@@ -42,7 +42,7 @@ namespace Bull
              */
             static bool exists(const Path& path);
 
-            /*! \brief Copy a file
+            /** \brief Copy a file
              *
              * \param path The Path of the File to copy
              * \param path The new Path of the File
@@ -50,7 +50,7 @@ namespace Bull
              */
             static void copy(const Path& path, const Path& newPath);
 
-            /*! \brief Rename a File
+            /** \brief Rename a File
              *
              * \param path    The Path of the File to rename
              * \param newPath The new Path of the File
@@ -58,7 +58,7 @@ namespace Bull
              */
             static void rename(const Path& path, const Path& newPath);
 
-            /*! \brief Delete a file
+            /** \brief Delete a file
              *
              * \param path The Path of the File to delete
              *
@@ -67,12 +67,12 @@ namespace Bull
 
         public:
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             virtual ~FileImpl();
 
-            /*! \brief Read bytes from the File
+            /** \brief Read bytes from the File
              *
              * \param length The length of data to read
              *
@@ -81,7 +81,7 @@ namespace Bull
              */
             virtual ByteArray read(std::size_t length) = 0;
 
-            /*! \brief Write data into a File
+            /** \brief Write data into a File
              *
              * \param bytes Bytes to write
              *
@@ -90,40 +90,40 @@ namespace Bull
              */
             virtual std::size_t write(const ByteArray& bytes) = 0;
 
-            /*! \brief Flush the File
+            /** \brief Flush the File
              *
              */
             virtual void flush() = 0;
 
-            /*! \brief Get the date of the creation of the file
+            /** \brief Get the date of the creation of the file
              *
              * \return Return the date of the creation of the file
              *
              */
             virtual DateTime getCreationDate() const = 0;
 
-            /*! \brief Get the date of the creation of the file
+            /** \brief Get the date of the creation of the file
              *
              * \return Return the date of the last access of the file
              *
              */
             virtual DateTime getLastAccessDate() const = 0;
 
-            /*! \brief Get the date of the creation of the file
+            /** \brief Get the date of the creation of the file
              *
              * \return Return the date of the last write of the file
              *
              */
             virtual DateTime getLastWriteDate() const = 0;
 
-            /*! \brief Get the position of the cursor in the file
+            /** \brief Get the position of the cursor in the file
              *
              * \return Return the position of the cursor in the file
              *
              */
             virtual std::size_t getCursor() const = 0;
 
-            /*! \brief Move the reading position in the file
+            /** \brief Move the reading position in the file
              *
              * \param offset The offset to move the cursor
              *
@@ -132,7 +132,7 @@ namespace Bull
              */
             virtual std::size_t moveCursor(Int64 offset) = 0;
 
-            /*! \brief Set the reading position in the file
+            /** \brief Set the reading position in the file
              *
              * \param position The position to seek to
              *
@@ -141,7 +141,7 @@ namespace Bull
              */
             virtual std::size_t setCursor(std::size_t offset) = 0;
 
-            /*! \brief Get the size of the file
+            /** \brief Get the size of the file
              *
              * \return Return the size of the file
              *

@@ -1,10 +1,10 @@
 #ifndef BULL_CORE_MEMORY_BYTEARRAY_HPP
 #define BULL_CORE_MEMORY_BYTEARRAY_HPP
 
+#include <string>
 #include <vector>
 
 #include <Bull/Core/Memory/AbstractBuffer.hpp>
-#include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
@@ -12,16 +12,16 @@ namespace Bull
     {
     public:
 
-        /*! \brief Create a ByteArray from a String
+        /** \brief Create a ByteArray from a std::string
          *
-         * \param string The String
+         * \param string The std::string
          *
          * \return The created ByteArray
          *
          */
-        static ByteArray fromString(const String& string);
+        static ByteArray fromString(const std::string& string);
 
-        /*! \brief Create a ByteArray from a copy of a memory area
+        /** \brief Create a ByteArray from a copy of a memory area
          *
          * \param data   The memory area
          * \param length The length of the memory area
@@ -35,26 +35,26 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         ByteArray() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param length The length of the ByteArray
          *
          */
         explicit ByteArray(std::size_t length);
 
-        /*! \brief Create the ByteArray
+        /** \brief Create the ByteArray
          *
          * \param capacity The capacity of the ByteArray to create
          *
          */
         void create(std::size_t capacity) override;
 
-        /*! \brief Fill the ByteArray
+        /** \brief Fill the ByteArray
          *
          * \param data   Data to insert in the ByteArray
          * \param size   The length of data
@@ -63,14 +63,14 @@ namespace Bull
          */
         void fill(const void* data, std::size_t size, std::size_t offset) override;
 
-        /*! \brief Tell whether the ByteArray is empty (i.e getCapacity == 0)
+        /** \brief Tell whether the ByteArray is empty (i.e getCapacity == 0)
          *
          * \return True if empty
          *
          */
         bool isEmpty() const;
 
-        /*! \brief Change the size of the ByteArray
+        /** \brief Change the size of the ByteArray
          *
          *  If the new size is lower than the current size, lasts elements are discarded
          *
@@ -78,7 +78,7 @@ namespace Bull
          */
         void resize(std::size_t length);
 
-        /*! \brief Clear the ByteArray
+        /** \brief Clear the ByteArray
          *
          */
         void clear() override;
@@ -87,28 +87,28 @@ namespace Bull
 
         Uint8& at(std::size_t index);
 
-        /*! \brief Get the capacity of the ByteArray
+        /** \brief Get the capacity of the ByteArray
          *
          * \return The capacity
          *
          */
         size_t getCapacity() const override;
 
-        /*! \brief Get a pointer to the underlying buffer of the ByteArray
+        /** \brief Get a pointer to the underlying buffer of the ByteArray
          *
          * \return The pointer
          *
          */
         const Uint8* getBuffer() const;
 
-        /*! \brief Convert the ByteArray to a String
+        /** \brief Convert the ByteArray to a std::string
          *
-         * \return The String
+         * \return The std::string
          *
          */
-        String toString() const;
+        std::string toString() const;
 
-        /*! \brief Compare two ByteArray
+        /** \brief Compare two ByteArray
          *
          * \param right The ByteArray to compare to this
          *
@@ -117,7 +117,7 @@ namespace Bull
          */
         bool operator==(const ByteArray& right) const;
 
-        /*! \brief Compare two ByteArray
+        /** \brief Compare two ByteArray
          *
          * \param right The ByteArray to compare to this
          *
@@ -126,7 +126,7 @@ namespace Bull
          */
         bool operator!=(const ByteArray& right) const;
 
-        /*! \brief Access operator
+        /** \brief Access operator
          *
          * \param index The index of the element to access
          *
@@ -137,7 +137,7 @@ namespace Bull
          */
         Uint8& operator[](std::size_t index);
 
-        /*! \brief Access operator
+        /** \brief Access operator
          *
          * \param index The index of the element to access
          *

@@ -7,7 +7,7 @@
 namespace Bull
 {
     SocketPoller::SocketPoller() :
-        m_impl(prv::SocketPollerImpl::createInstance())
+            m_impl(prv::SocketPollerImpl::createInstance())
     {
         /// Nothing
     }

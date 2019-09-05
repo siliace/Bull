@@ -1,13 +1,13 @@
 #ifndef BULL_CORE_UTILITY_CHARACTER_HPP
 #define BULL_CORE_UTILITY_CHARACTER_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 
 namespace Bull
 {
     struct BULL_CORE_API Character
     {
-        /*! \brief Convert a lowercase character to the uppercase equivalent character
+        /** \brief Convert a lowercase character to the uppercase equivalent character
           *
           * \param character the character to convert
           *
@@ -16,7 +16,7 @@ namespace Bull
           */
         static char toUpper(char character);
 
-        /*! \brief Convert a uppercase character to the lowercase equivalent character
+        /** \brief Convert a uppercase character to the lowercase equivalent character
          *
          * \param character the character to convert
          *
@@ -25,7 +25,7 @@ namespace Bull
          */
         static char toLower(char character);
 
-        /*! \brief Convert a single number to its character equivalent
+        /** \brief Convert a single number to its character equivalent
          *
          * \param integer The integer value to convert as a character
          *
@@ -34,7 +34,7 @@ namespace Bull
          */
         static char intToChar(int integer);
 
-        /*! \brief Convert a character to its integer equivalent
+        /** \brief Convert a character to its integer equivalent
          *
          * \param character The character value to convert as a integer
          *

@@ -19,16 +19,16 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Size() :
-            Size(0, 0)
+                Size(0, 0)
         {
             /// Nothing
         }
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param width  The width of the Size
          * \param height The height of the Size
@@ -41,7 +41,7 @@ namespace Bull
             /// Nothing
         }
 
-        /*! \brief Get the ratio of the Size
+        /** \brief Get the ratio of the Size
          *
          * Get the result of width / height
          *
@@ -54,7 +54,7 @@ namespace Bull
             return static_cast<float>(m_width) / static_cast<float>(m_height);
         }
 
-        /*! \brief
+        /** \brief
          *
          * \return
          *
@@ -64,7 +64,7 @@ namespace Bull
             return m_width;
         }
 
-        /*! \brief
+        /** \brief
          *
          * \param width
          *
@@ -74,7 +74,7 @@ namespace Bull
             m_width = width;
         }
 
-        /*! \brief
+        /** \brief
          *
          * \return
          *
@@ -84,7 +84,7 @@ namespace Bull
             return m_height;
         }
 
-        /*! \brief
+        /** \brief
          *
          * \param height
          *
@@ -104,7 +104,7 @@ namespace Bull
             return std::tie(m_width, m_height) != std::tie(rhs.m_width, rhs.m_height);
         }
 
-        /*! \brief
+        /** \brief
          *
          * \param rhs
          *
@@ -116,7 +116,7 @@ namespace Bull
             return {m_width + rhs.m_width, m_height + rhs.m_height};
         }
 
-        /*! \brief
+        /** \brief
          *
          * \param rhs
          *
@@ -131,7 +131,7 @@ namespace Bull
             return *this;
         }
 
-        /*! \brief
+        /** \brief
          *
          * \param rhs
          * \return

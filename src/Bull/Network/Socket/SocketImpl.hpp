@@ -18,19 +18,19 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create an OS specific instance of SocketImpl
+            /** \brief Create an OS specific instance of SocketImpl
              *
              */
             static std::unique_ptr<SocketImpl> createInstance();
 
-            /*! \brief Get an invalid SocketHandler value
+            /** \brief Get an invalid SocketHandler value
              *
              * \return The SocketHandler
              *
              */
             static SocketHandler getInvalidSocket();
 
-            /*! \brief Convert a SocketType to a SOCK value
+            /** \brief Convert a SocketType to a SOCK value
              *
              * \param type The SocketType
              *
@@ -39,7 +39,7 @@ namespace Bull
              */
             static int convertSocketType(SocketType type);
 
-            /*! \brief Convert a NetProtocol to the equivalent address family value
+            /** \brief Convert a NetProtocol to the equivalent address family value
              *
              * \param protocol The NetProtocol
              *
@@ -49,12 +49,12 @@ namespace Bull
 
         public:
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             virtual ~SocketImpl();
 
-            /*! \brief Create the SocketImpl
+            /** \brief Create the SocketImpl
              *
              * \param protocol The NetProtocol to use on the SocketImpl
              * \param type     The SocketType to use on the SocketType
@@ -62,7 +62,7 @@ namespace Bull
              */
             void create(NetProtocol protocol, SocketType type);
 
-            /*! \brief Create the SocketImpl
+            /** \brief Create the SocketImpl
              *
              * \param handler The SocketHandler
              *
@@ -71,35 +71,35 @@ namespace Bull
              */
             void create(SocketHandler handler);
 
-            /*! \brief Tell whether the SocketImpl is valid
+            /** \brief Tell whether the SocketImpl is valid
              *
              * \return True if the SocketImpl is valid
              *
              */
             bool isValid() const;
 
-            /*! \brief Enable the blocking mode of the SocketImpl
+            /** \brief Enable the blocking mode of the SocketImpl
              *
              * \param enable True to enable
              *
              */
             virtual void enableBlockingMode(bool enable) = 0;
 
-            /*! \brief Tell whether SocketImpl is in blocking mode
+            /** \brief Tell whether SocketImpl is in blocking mode
              *
              * \return True if the blocking mode is enable
              *
              */
             virtual bool isEnableBlockingMode() const = 0;
 
-            /*! \brief Get the length of data in pending to be read
+            /** \brief Get the length of data in pending to be read
              *
              * \return The length
              *
              */
             virtual std::size_t getPendingLength() const = 0;
 
-            /*! \brief Get the SocketHandler of the SocketImpl
+            /** \brief Get the SocketHandler of the SocketImpl
              *
              * \return The SocketHandler
              *
@@ -108,7 +108,7 @@ namespace Bull
 
         protected:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             SocketImpl();

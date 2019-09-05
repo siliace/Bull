@@ -12,7 +12,8 @@ SCENARIO("MapUtils::create")
 
         WHEN("Create a map")
         {
-            std::map<int, int> map = MapUtils::create<int, int>(size, [](int index) {
+            std::map<int, int> map = MapUtils::create<int, int>(size, [](int index)
+            {
                 return std::make_pair(index, index);
             });
 
@@ -36,7 +37,8 @@ SCENARIO("MapUtils::create")
 
         WHEN("Create a map")
         {
-            std::map<int, int> map = MapUtils::create<int, int>(size, [](int index) {
+            std::map<int, int> map = MapUtils::create<int, int>(size, [](int index)
+            {
                 return std::make_pair(index, index);
             });
 

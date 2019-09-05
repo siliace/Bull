@@ -3,7 +3,7 @@
 namespace Bull
 {
     WindowEvent::WindowEvent() :
-        type(WindowEventType_None)
+            type(WindowEventType_None)
     {
         /// Nothing
     }

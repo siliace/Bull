@@ -3,7 +3,6 @@
 #include <Bull/Core/Image/ImageLoader.hpp>
 #include <Bull/Core/Log/ConsoleLogger.hpp>
 #include <Bull/Core/Log/Log.hpp>
-#include <Bull/Core/Utility/StringUtils.hpp>
 #include <Bull/Core/Utility/Random.hpp>
 
 #include <Bull/Graphics/Model/Material.hpp>
@@ -187,7 +186,7 @@ int main()
 
         for(std::size_t i = 0; i < points.size(); i++)
         {
-            points.at(i).setUniforms(shader, "pls[" + Bull::StringUtils::number(i) + "]");
+            points.at(i).setUniforms(shader, "pls[" +std::to_string(i) + "]");
         }
 
         for(Cube& cube : cubes)

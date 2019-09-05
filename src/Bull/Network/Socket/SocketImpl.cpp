@@ -3,11 +3,13 @@
 #include <Bull/Network/Socket/SocketImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
+
     #include <Bull/Network/Socket/Win32/SocketImplWin32.hpp>
-    typedef Bull::prv::SocketImplWin32 SocketImplType;
+
+typedef Bull::prv::SocketImplWin32 SocketImplType;
 #else
     #include <Bull/Network/Socket/Unix/SocketImplUnix.hpp>
-    typedef Bull::prv::SocketImplUnix SocketImplType;
+typedef Bull::prv::SocketImplUnix SocketImplType;
 #endif
 
 namespace Bull
@@ -28,9 +30,12 @@ namespace Bull
         {
             switch(type)
             {
-                case SocketType_Tcp: return SOCK_STREAM;
-                case SocketType_Udp: return SOCK_DGRAM;
-                case SocketType_Raw: return SOCK_RAW;
+                case SocketType_Tcp:
+                    return SOCK_STREAM;
+                case SocketType_Udp:
+                    return SOCK_DGRAM;
+                case SocketType_Raw:
+                    return SOCK_RAW;
             }
 
             return 0;
@@ -40,8 +45,10 @@ namespace Bull
         {
             switch(protocol)
             {
-                case NetProtocol_Ipv4: return AF_INET;
-                case NetProtocol_Ipv6: return AF_INET6;
+                case NetProtocol_Ipv4:
+                    return AF_INET;
+                case NetProtocol_Ipv6:
+                    return AF_INET6;
             }
 
             return 0;
@@ -72,7 +79,7 @@ namespace Bull
         }
 
         SocketImpl::SocketImpl() :
-            m_handler(SocketImplType::InvalidHandler)
+                m_handler(SocketImplType::InvalidHandler)
         {
             /// Nothing
         }

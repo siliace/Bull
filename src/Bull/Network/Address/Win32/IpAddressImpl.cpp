@@ -8,7 +8,7 @@ namespace Bull
 {
     namespace prv
     {
-        ByteArray IpAddressImpl::resolve(const String& hostname, NetProtocol protocol, const String& service)
+        ByteArray IpAddressImpl::resolve(const std::string& hostname, NetProtocol protocol, const std::string& service)
         {
             int error;
             addrinfo hints;
@@ -19,7 +19,7 @@ namespace Bull
 
             hints.ai_family = SocketImpl::convertNetProtocol(protocol);
 
-            error = getaddrinfo(hostname.getBuffer(), service.getBuffer(), &hints, &info);
+            error = getaddrinfo(hostname.c_str(), service.c_str(), &hints, &info);
 
             Expect(error == 0, Throw(Win32Error, "Failed to resolve hostname " + hostname));
 

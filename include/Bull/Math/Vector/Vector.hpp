@@ -13,7 +13,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Get a normalized Vector
+        /** \brief Get a normalized Vector
          *
          * \param vector The Vector to normalize
          *
@@ -25,7 +25,7 @@ namespace Bull
             return Vector<T, S>(vector).normalize();
         }
 
-        /*! \brief Computer the dot product of two Vector
+        /** \brief Computer the dot product of two Vector
          *
          * \param left  The left Vector of the product
          * \param right The right Vector of the product
@@ -40,7 +40,7 @@ namespace Bull
 
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param value The value of all components
          *
@@ -50,14 +50,14 @@ namespace Bull
             m_components.fill(value);
         }
 
-        /*! \brief Copy constructor
+        /** \brief Copy constructor
          *
          * \param copy The Vector to copy
          *
          */
         template <typename U, std::size_t US>
         explicit Vector(const Vector<U, US>& copy) :
-            Vector<T, S>()
+                Vector<T, S>()
         {
             for(std::size_t i = 0; i < std::min(S, US); i++)
             {
@@ -65,7 +65,7 @@ namespace Bull
             }
         }
 
-        /*! \brief Basic assignment operator
+        /** \brief Basic assignment operator
          *
          * \param copy The Vector to copy
          *
@@ -85,7 +85,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Set the value of the Vector
+        /** \brief Set the value of the Vector
          *
          * \param value The value
          *
@@ -99,7 +99,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Compute the length
+        /** \brief Compute the length
          *
          * \return Return the length of the vector
          *
@@ -116,7 +116,7 @@ namespace Bull
             return std::sqrt(length);
         }
 
-        /*! \brief Normalize the Vector
+        /** \brief Normalize the Vector
          *
          * \return This
          *
@@ -136,7 +136,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Calculate the dot(scalar) product of two vectors
+        /** \brief Calculate the dot(scalar) product of two vectors
          *
          * \param right The other to calculate the dot product with
          *
@@ -155,7 +155,7 @@ namespace Bull
             return sum;
         }
 
-        /*! \brief == operator override
+        /** \brief == operator override
          *
          * \param right The vector to compare
          *
@@ -167,7 +167,7 @@ namespace Bull
             return m_components == right.m_components;
         }
 
-        /*! \brief != operator override
+        /** \brief != operator override
          *
          * \param right The vector to compare
          *
@@ -179,7 +179,7 @@ namespace Bull
             return m_components != right.m_components;
         }
 
-        /*! \brief Get a coordinate
+        /** \brief Get a coordinate
          *
          * \param index The index of the coordinate to get
          *
@@ -193,7 +193,7 @@ namespace Bull
             return m_components.at(index);
         }
 
-        /*! \brief Get a coordinate
+        /** \brief Get a coordinate
          *
          * \param index The index of the coordinate to get
          *
@@ -207,7 +207,7 @@ namespace Bull
             return m_components.at(index);
         }
 
-        /*! \brief Negation operator
+        /** \brief Negation operator
          *
          * \return The negated Vector
          *
@@ -224,7 +224,7 @@ namespace Bull
             return negation;
         };
 
-        /*! \brief Addition a Vector and a scalar
+        /** \brief Addition a Vector and a scalar
          *
          * \param right The scalar to add to this
          *
@@ -241,7 +241,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Addition two Vector
+        /** \brief Addition two Vector
          *
          * \param right The scalar to add to this
          *
@@ -258,7 +258,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Subtract a Vector and a scalar
+        /** \brief Subtract a Vector and a scalar
          *
          * \param right The scalar to subtract to this
          *
@@ -275,7 +275,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Subtract two Vector
+        /** \brief Subtract two Vector
          *
          * \param right The Vector to subtract to this
          *
@@ -292,7 +292,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Multiply a Vector and a scalar
+        /** \brief Multiply a Vector and a scalar
          *
          * \param right The scalar to multiply to this
          *
@@ -309,7 +309,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Multiply two Vector
+        /** \brief Multiply two Vector
          *
          * \param right The Vector to multiply to this
          *
@@ -326,7 +326,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Divide a Vector and a scalar
+        /** \brief Divide a Vector and a scalar
          *
          * \param right The scalar to divide with this
          *
@@ -343,7 +343,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Divide two Vector
+        /** \brief Divide two Vector
          *
          * \param right The Vector to divide with this
          *
@@ -362,7 +362,7 @@ namespace Bull
 
     private:
 
-        std::array<T, S> m_components; /*!< Components of the Vector */
+        std::array<T, S> m_components; /**< Components of the Vector */
     };
 
     template <typename T, std::size_t S>

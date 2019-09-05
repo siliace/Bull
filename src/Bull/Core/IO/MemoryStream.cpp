@@ -7,9 +7,9 @@
 namespace Bull
 {
     MemoryStream::MemoryStream() :
-        m_data(nullptr),
-        m_size(0),
-        m_cursor(0)
+            m_data(nullptr),
+            m_size(0),
+            m_cursor(0)
     {
         /// Nothing
     }
@@ -43,8 +43,8 @@ namespace Bull
 
     void MemoryStream::close()
     {
-        m_data   = nullptr;
-        m_size   = 0;
+        m_data = nullptr;
+        m_size = 0;
         m_cursor = 0;
     }
 

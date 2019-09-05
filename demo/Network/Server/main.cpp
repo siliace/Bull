@@ -3,8 +3,6 @@
 
 #include <Bull/Network/Socket/TcpClient.hpp>
 #include <Bull/Network/Socket/TcpServer.hpp>
-#include <Bull/Core/Utility/StringUtils.hpp>
-
 int main()
 {
     Bull::TcpClient client;
@@ -17,13 +15,13 @@ int main()
     client = server.accept();
 
     std::size_t sent = 0;
-    Bull::String hello = "Hello World";
+    std::string hello = "Hello World";
 
     writer.writeLine("Client accepted: " + client.getRemoteAddress().toString());
 
-    sent = client.send(hello.getBuffer(), hello.getSize());
+    sent = client.send(hello.c_str(), hello.length());
 
-    writer.writeLine(Bull::StringUtils::number(sent) + " bytes sent");
+    writer.writeLine(std::to_string(sent) + " bytes sent");
 
     return 0;
 }

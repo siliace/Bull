@@ -3,17 +3,17 @@
 namespace Bull
 {
     TextWriter::TextWriter(OutStream& stream) :
-        m_stream(stream)
+            m_stream(stream)
     {
         /// Nothing
     }
 
-    void TextWriter::write(const String& string)
+    void TextWriter::write(const std::string& string)
     {
         m_stream.write(ByteArray::fromString(string));
     }
 
-    void TextWriter::writeLine(const String& line)
+    void TextWriter::writeLine(const std::string& line)
     {
         write(line);
         breakLine();
@@ -21,7 +21,7 @@ namespace Bull
 
     void TextWriter::breakLine()
     {
-        write('\n');
+        write("\n");
     }
 
     TextWriter& TextWriter::operator<<(const char* string)
@@ -31,7 +31,7 @@ namespace Bull
         return *this;
     }
 
-    TextWriter& TextWriter::operator<<(const String& string)
+    TextWriter& TextWriter::operator<<(const std::string& string)
     {
         write(string);
 

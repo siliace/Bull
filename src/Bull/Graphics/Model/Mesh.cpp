@@ -3,8 +3,8 @@
 namespace Bull
 {
     Mesh::Mesh(const Mesh* parent, const Matrix4F& localModelMatrix) :
-        m_parent(parent),
-        m_localModelMatrix(localModelMatrix)
+            m_parent(parent),
+            m_localModelMatrix(localModelMatrix)
     {
         /// Nothing
     }
@@ -47,12 +47,12 @@ namespace Bull
     }
 
 #if defined BULL_MESH_HAS_NAME
-    void Mesh::setName(const String& name)
+    void Mesh::setName(const std::string& name)
     {
         m_name = name;
     }
 
-    const String& Mesh::getName() const
+    const std::string& Mesh::getName() const
     {
         return m_name;
     }

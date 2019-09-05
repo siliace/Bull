@@ -9,27 +9,27 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         NonCopyable() = default;
 
-        /*! \brief Copy constructor
+        /** \brief Copy constructor
          *
          */
         NonCopyable(const NonCopyable&) = delete;
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          */
         NonCopyable(NonCopyable&&) noexcept = default;
 
-        /*! \brief Basic assignment operator
+        /** \brief Basic assignment operator
          *
          */
         NonCopyable& operator=(const NonCopyable&) = delete;
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \return This
          *

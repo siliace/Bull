@@ -1,30 +1,32 @@
 #ifndef BULL_CORE_SYSTEM_CLIPBOARD_HPP
 #define BULL_CORE_SYSTEM_CLIPBOARD_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
+
+#include <Bull/Core/Export.hpp>
 
 namespace Bull
 {
-    struct BULL_CORE_API Clipboard
+    class BULL_CORE_API Clipboard
     {
-        /*! \brief Flush the content of the Clipboard
-         *
+    public:
+
+        /**
+         * \brief Flush the content of the Clipboard
          */
         static void flush();
 
-        /*! \brief Set the content of the Clipboard
-         *
-         * \param content The String inside the clipboard
-         *
+        /**
+         * \brief Set the content of the Clipboard
+         * \param content The std::string inside the clipboard
          */
-        static void setContent(const String& content);
+        static void setContent(const std::string& content);
 
-        /*! \brief Get the content of the Clipboard
-         *
-         * \return The String inside the Clipboard
-         *
+        /**
+         * \brief Get the content of the Clipboard
+         * \return The std::string inside the Clipboard
          */
-        static String getContent();
+        static std::string getContent();
     };
 }
 

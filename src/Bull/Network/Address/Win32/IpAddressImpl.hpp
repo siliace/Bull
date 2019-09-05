@@ -13,7 +13,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Resolve an IpAddress
+            /** \brief Resolve an IpAddress
              *
              * \param hostname The hostname to resolve
              * \param protocol The NetProtocol of the IpAddress to resolve
@@ -22,7 +22,7 @@ namespace Bull
              * \return Bytes of the resolved IpAddress
              *
              */
-            static ByteArray resolve(const String& hostname, NetProtocol protocol, const String& service = "http");
+            static ByteArray resolve(const std::string& hostname, NetProtocol protocol, const std::string& service = "http");
         };
     }
 }

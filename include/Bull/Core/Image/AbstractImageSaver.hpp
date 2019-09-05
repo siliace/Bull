@@ -19,19 +19,19 @@ namespace Bull
             Parameters() = default;
 
             explicit Parameters(ImageFormat format) :
-                format(format)
+                    format(format)
             {
                 /// Nothing
             }
 
-            std::size_t stride  = 0;
+            std::size_t stride = 0;
             std::size_t quality = 100;
-            ImageFormat format  = ImageFormat::Png;
+            ImageFormat format = ImageFormat::Png;
         };
 
     private:
 
-        /*! \brief
+        /** \brief
          *
          * \param context
          * \param data
@@ -42,7 +42,7 @@ namespace Bull
 
     public:
 
-        /*! \brief
+        /** \brief
          *
          * \param path
          * \param image
@@ -53,7 +53,7 @@ namespace Bull
          */
         File saveToPath(const Path& path, const AbstractImage& image, const Parameters& parameters) const;
 
-        /*! \brief
+        /** \brief
          *
          * \param stream
          * \param image
@@ -64,7 +64,7 @@ namespace Bull
          */
         OutStream& saveToStream(OutStream& stream, const AbstractImage& image, const Parameters& parameters) const;
 
-        /*! \brief
+        /** \brief
          *
          * \param image
          * \param parameters

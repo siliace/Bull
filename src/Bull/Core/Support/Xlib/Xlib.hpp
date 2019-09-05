@@ -16,17 +16,17 @@ namespace Bull
 {
     namespace prv
     {
-        typedef ::GC       XGC;
-        typedef ::Atom     XAtom;
-        typedef ::Font     XFont;
-        typedef ::Mask     XMask;
-        typedef ::Time     XTime;
-        typedef ::Cursor   XCursor;
-        typedef ::Pixmap   XPixmap;
-        typedef ::Screen   XScreen;
-        typedef ::Visual   XVisual;
-        typedef ::Window   XWindow;
-        typedef ::Display  XDisplay;
+        typedef ::GC XGC;
+        typedef ::Atom XAtom;
+        typedef ::Font XFont;
+        typedef ::Mask XMask;
+        typedef ::Time XTime;
+        typedef ::Cursor XCursor;
+        typedef ::Pixmap XPixmap;
+        typedef ::Screen XScreen;
+        typedef ::Visual XVisual;
+        typedef ::Window XWindow;
+        typedef ::Display XDisplay;
         typedef ::Colormap XColormap;
         typedef ::Drawable XDrawable;
         typedef ::GContext XGContext;

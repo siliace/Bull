@@ -10,7 +10,7 @@ namespace Bull
     {
     private:
 
-        /*! \brief Get the MessageWindowIcon according to a LogLevel
+        /** \brief Get the MessageWindowIcon according to a LogLevel
          *
          * \param level The LogLevel
          *
@@ -21,21 +21,21 @@ namespace Bull
 
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          */
         MessageWindowLogger();
 
     protected:
 
-        /*! \brief Write an entry in the logger
+        /** \brief Write an entry in the logger
          *
          * \param entry The entry to write
          *
          */
-        void write(const String& entry) override;
+        void write(const std::string& entry) override;
 
-        /*! \brief Format a log entry
+        /** \brief Format a log entry
          *
          * \param entry The log entry to format
          * \param level The LogLevel to format
@@ -44,11 +44,11 @@ namespace Bull
          * \return The formatted entry
          *
          */
-        String formatEntry(const String& entry, LogLevel level, const DateTime& date) override;
+        std::string formatEntry(const std::string& entry, LogLevel level, const DateTime& date) override;
 
     private:
 
-        String        m_title;
+        std::string m_title;
         MessageWindow m_messageBox;
     };
 }

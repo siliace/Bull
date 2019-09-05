@@ -1,8 +1,9 @@
 #ifndef BULL_CORE_LOG_ABSTRACTLOGGER_HPP
 #define BULL_CORE_LOG_ABSTRACTLOGGER_HPP
 
+#include <string>
+
 #include <Bull/Core/Log/LogLevel.hpp>
-#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Time/DateTime.hpp>
 
 namespace Bull
@@ -13,25 +14,25 @@ namespace Bull
     {
     protected:
 
-        /*! \brief Convert a LogLevel to its String equivalent
+        /** \brief Convert a LogLevel to its std::string equivalent
          *
          * \param level The LogLevel to convert
          *
-         * \return The LogLevel as a String
+         * \return The LogLevel as a std::string
          *
          */
-        static String logLevelToString(LogLevel level);
+        static std::string logLevelToString(LogLevel level);
 
     public:
 
-        /*! \brief Set the minimal LogLevel required by a log entry to be written
+        /** \brief Set the minimal LogLevel required by a log entry to be written
          *
          * \param level The LogLevel
          *
          */
         void setMinimalSeverity(LogLevel level);
 
-        /*! \brief Get the minimal LogLevel required by a log entry to be written
+        /** \brief Get the minimal LogLevel required by a log entry to be written
          *
          * \return The LogLevel
          *
@@ -42,32 +43,32 @@ namespace Bull
 
         friend class Log;
 
-        /*! \brief Add a log entry in the logger
+        /** \brief Add a log entry in the logger
          *
          * \param message The entry
          * \param level   The LogLevel of the entry
          * \param date    The date when the entry should be added
          *
          */
-        void addEntry(const String& entry, LogLevel level, const DateTime& date = DateTime::now());
+        void addEntry(const std::string& entry, LogLevel level, const DateTime& date = DateTime::now());
 
     protected:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param minimalLevel The minimal LogLevel required by a log entry to be written
          *
          */
         explicit AbstractLogger(LogLevel minimalLevel = LogLevel_Info);
 
-        /*! \brief Write an entry in the logger
+        /** \brief Write an entry in the logger
          *
          * \param entry The entry to write
          *
          */
-        virtual void write(const String& entry) = 0;
+        virtual void write(const std::string& entry) = 0;
 
-        /*! \brief Format a log entry
+        /** \brief Format a log entry
          *
          * \param entry The log entry to format
          * \param level The LogLevel to format
@@ -76,11 +77,11 @@ namespace Bull
          * \return The formatted entry
          *
          */
-        virtual String formatEntry(const String& entry, LogLevel level, const DateTime& date);
+        virtual std::string formatEntry(const std::string& entry, LogLevel level, const DateTime& date);
 
     private:
 
-        /*! \brief Tell whether an entry should be written
+        /** \brief Tell whether an entry should be written
          *
          * \param level The LogLevel of the entry
          *

@@ -19,14 +19,14 @@ namespace Bull
     {
     public:
 
-        /*! \brief Create a Directory
+        /** \brief Create a Directory
          *
          * \param path The Path of the Directory to create
          *
          */
         static void create(const Path& path);
 
-        /*! \brief Check if a Directory exists
+        /** \brief Check if a Directory exists
          *
          * \param path The Path of the Directory to check
          *
@@ -35,7 +35,7 @@ namespace Bull
          */
         static bool exists(const Path& path);
 
-        /*! \brief Copy a Directory
+        /** \brief Copy a Directory
          *
          * \param path    The Path of the directory to copy
          * \param newPath The Path of the copied directory
@@ -43,7 +43,7 @@ namespace Bull
          */
         static void copy(const Path& path, const Path& newPath);
 
-        /*! \brief Rename a Directory
+        /** \brief Rename a Directory
          *
          * \param path    The Path of the Directory to rename
          * \param newPath The new Path of the Directory
@@ -51,7 +51,7 @@ namespace Bull
          */
         static void rename(const Path& path, const Path& newPath);
 
-        /*! \brief Delete a Directory
+        /** \brief Delete a Directory
          *
          * \param path The Path of the directory to delete
          *
@@ -60,31 +60,31 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Directory() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param path The Path of the directory
          *
          */
         explicit Directory(const Path& path);
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          * \param directory The Directory to move
          *
          */
         Directory(Directory&& directory) noexcept = default;
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         ~Directory();
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \param directory The Directory to move
          *
@@ -93,14 +93,14 @@ namespace Bull
          */
         Directory& operator=(Directory&& directory) noexcept = default;
 
-        /*! \brief Open the Directory
+        /** \brief Open the Directory
          *
          * \param path The Path of the Directory to open
          *
          */
         void open(const Path& path);
 
-        /*! \brief Get the content of this Directory
+        /** \brief Get the content of this Directory
          *
          * \param flags What we have to look for
          *
@@ -109,7 +109,7 @@ namespace Bull
          */
         std::vector<Path> getContent(Uint32 flags = DirectorySearchFlag_All) const;
 
-        /*! \brief Get the path of the directory
+        /** \brief Get the path of the directory
          *
          * \return The path of the directory
          *
@@ -118,7 +118,7 @@ namespace Bull
 
     private:
 
-        Path                                m_path;
+        Path m_path;
         std::unique_ptr<prv::DirectoryImpl> m_impl;
     };
 }

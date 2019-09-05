@@ -12,35 +12,35 @@ namespace Bull
         {
         public:
 
-            /*! \brief Get the root path of the filesystem
+            /** \brief Get the root path of the filesystem
              *
              * \return The root
              *
              */
             static Path getRoot();
 
-            /*! \brief Get the Path of user's home directory
+            /** \brief Get the Path of user's home directory
              *
              * \return The home directory
              *
              */
             static Path getHome();
 
-            /*! \brief Get the path of the temporary directory
+            /** \brief Get the path of the temporary directory
              *
              * \return The temp path
              *
              */
             static Path getTempPath();
 
-            /*! \brief Set the current directory of the process
+            /** \brief Set the current directory of the process
              *
              * \param path The new path of the process
              *
              */
             static void setCurrentDirectory(const Path& path);
 
-            /*! \brief Get information about the file system
+            /** \brief Get information about the file system
              *
              * \param base The base path
              *
@@ -49,13 +49,13 @@ namespace Bull
              */
             static FileSystemInfo getFileSystemInfo(const Path& path);
 
-            /*! \brief Create a link on the file system
+            /** \brief Create a link on the file system
              *
              * \param target The target of the link
              * \param link   The path of the link to create
              *
              */
-            static void createLink(const Path& target, const String& link);
+            static void createLink(const Path& target, const std::string& link);
         };
     }
 }

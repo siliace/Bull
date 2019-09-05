@@ -12,14 +12,14 @@ namespace Bull
     {
     public:
 
-        /*! \brief Get the current VideoMode of the main screen
+        /** \brief Get the current VideoMode of the main screen
          *
          * \return Return a VideoMode with the current width, height and the deepness of the main screen
          *
          */
         static VideoMode getCurrent();
 
-        /*! \brief Get all available video modes
+        /** \brief Get all available video modes
          *
          * \return Return all available video modes
          *
@@ -28,12 +28,12 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         VideoMode();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param size         The Size
          * \param bitsPerPixel The number of bits per pixel (8, 16, 24 or 32)
@@ -41,42 +41,42 @@ namespace Bull
          */
         explicit VideoMode(const Size<unsigned int>& size, unsigned int bitsPerPixel = getCurrent().getBitsPerPixel());
 
-        /*! \brief Check if a VideoMode is valid
+        /** \brief Check if a VideoMode is valid
          *
          * \return Return true if the mode is valid, else return false
          *
          */
         bool isValid() const;
 
-        /*! \brief
+        /** \brief
          *
          * \return
          *
          */
         const Size<unsigned int>& getSize() const;
 
-        /*! \brief
+        /** \brief
          *
          * \param size
          *
          */
         void setSize(const Size<unsigned int>& size);
 
-        /*! \brief
+        /** \brief
          *
          * \return
          *
          */
         unsigned int getBitsPerPixel() const;
 
-        /*! \brief
+        /** \brief
          *
          * \param bitsPerPixel
          *
          */
         void setBitsPerPixel(unsigned int bitsPerPixel);
 
-        /*! \brief == operator override
+        /** \brief == operator override
          *
          * \param right The VideoMode to compare
          *
@@ -85,7 +85,7 @@ namespace Bull
          */
         bool operator==(const VideoMode& right) const;
 
-        /*! \brief != operator override
+        /** \brief != operator override
          *
          * \param right The VideoMode to compare
          *
@@ -97,7 +97,7 @@ namespace Bull
     private:
 
         Size<unsigned int> m_size;
-        unsigned int m_bitsPerPixel; /*!< The the number of bits per pixel to create colors */
+        unsigned int m_bitsPerPixel; /**< The the number of bits per pixel to create colors */
     };
 }
 

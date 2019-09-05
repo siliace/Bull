@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_WINDOW_WIN32_MESSAGEBOXIMPL_HPP
 #define BULL_CORE_WINDOW_WIN32_MESSAGEBOXIMPL_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 #include <Bull/Core/Support/Win32/Windows.hpp>
 #include <Bull/Core/Window/MessageWindow.hpp>
 #include <Bull/Core/Window/WindowHandler.hpp>
@@ -14,7 +14,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief
+            /** \brief
              *
              * \param message
              * \param title
@@ -23,11 +23,11 @@ namespace Bull
              * \return
              *
              */
-            static MessageWindowResponse open(const String& message, const String& title, MessageWindowIcon icon, MessageWindowButtons buttons, MessageWindowDefaultButton defaultButton, WindowHandler parent);
+            static MessageWindowResponse open(const std::string& message, const std::string& title, MessageWindowIcon icon, MessageWindowButtons buttons, MessageWindowDefaultButton defaultButton, WindowHandler parent);
 
         private:
 
-            /*! \brief
+            /** \brief
              *
              * \param icon
              *
@@ -36,7 +36,7 @@ namespace Bull
              */
             static UINT translateIcon(MessageWindowIcon icon);
 
-            /*! \brief
+            /** \brief
              *
              * \param buttons
              *
@@ -45,7 +45,7 @@ namespace Bull
              */
             static UINT translateButtons(MessageWindowButtons buttons);
 
-            /*! \brief
+            /** \brief
              *
              * \param response
              *
@@ -54,7 +54,7 @@ namespace Bull
              */
             static MessageWindowResponse translateResponse(int response);
 
-            /*! \brief
+            /** \brief
              *
              * \param buttons
              *

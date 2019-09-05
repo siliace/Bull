@@ -3,8 +3,8 @@
 namespace Bull
 {
     Viewport::Viewport(const Size<int>& position, const Size<unsigned int>& size) :
-        position(position),
-        size(size)
+            position(position),
+            size(size)
     {
         /// Nothing
     }

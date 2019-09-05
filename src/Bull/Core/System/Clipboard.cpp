@@ -8,12 +8,12 @@ namespace Bull
         prv::ClipboardImpl::flush();
     }
 
-    void Clipboard::setContent(const String& content)
+    void Clipboard::setContent(const std::string& content)
     {
         prv::ClipboardImpl::setContent(content);
     }
 
-    String Clipboard::getContent()
+    std::string Clipboard::getContent()
     {
         return prv::ClipboardImpl::getContent();
     }

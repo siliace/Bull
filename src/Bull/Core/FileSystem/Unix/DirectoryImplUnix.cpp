@@ -10,14 +10,14 @@ namespace Bull
     {
         void DirectoryImplUnix::create(const Path& path)
         {
-            mkdir(path.toString().getBuffer(), S_IRWXU | S_IRGRP | S_IROTH);
+            mkdir(path.toString().c_str(), S_IRWXU | S_IRGRP | S_IROTH);
         }
 
         bool DirectoryImplUnix::exists(const Path& path)
         {
             struct stat64 filestats;
 
-            if(stat64(path.toString().getBuffer(), &filestats) == -1)
+            if(stat64(path.toString().c_str(), &filestats) == -1)
             {
                 return false;
             }
@@ -27,13 +27,13 @@ namespace Bull
 
         void DirectoryImplUnix::remove(const Path& path)
         {
-            rmdir(path.toString().getBuffer());
+            rmdir(path.toString().c_str());
         }
 
         DirectoryImplUnix::DirectoryImplUnix(const Path& path) :
-            m_path(path)
+                m_path(path)
         {
-            m_handle = opendir(path.toString().getBuffer());
+            m_handle = opendir(path.toString().c_str());
         }
 
         DirectoryImplUnix::~DirectoryImplUnix()

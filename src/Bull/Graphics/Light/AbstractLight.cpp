@@ -2,7 +2,7 @@
 
 namespace Bull
 {
-    String AbstractLight::compose(const String& base, const String& member)
+    std::string AbstractLight::compose(const std::string& base, const std::string& member)
     {
         return base + "." + member;
     }
@@ -43,13 +43,13 @@ namespace Bull
     }
 
     AbstractLight::AbstractLight(LightType type) :
-        m_type(type)
+            m_type(type)
     {
         setDiffuseFactor(1.f);
         setAmbientFactor(0.2f);
     }
 
-    void AbstractLight::setUniforms(Shader& shader, const String& name) const
+    void AbstractLight::setUniforms(Shader& shader, const std::string& name) const
     {
         shader.setUniformVector(compose(name, "ambient"), Vector4F::makeFromColor(m_color) * m_ambient);
         shader.setUniformVector(compose(name, "diffuse"), Vector4F::makeFromColor(m_color) * m_diffuse);

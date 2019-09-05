@@ -13,7 +13,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create an OS specific implementation of RenderWindowImpl
+            /** \brief Create an OS specific implementation of RenderWindowImpl
              *
              * \param mode     The VideoMode of the RenderWindow
              * \param title    The title of the RenderWindow
@@ -23,7 +23,7 @@ namespace Bull
              * \return The create instance
              *
              */
-            static std::unique_ptr<WindowImpl> createInstance(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+            static std::unique_ptr<WindowImpl> createInstance(const VideoMode& mode, const std::string& title, Uint32 style, const ContextSettings& settings);
         };
     }
 }

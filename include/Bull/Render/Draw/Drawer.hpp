@@ -14,7 +14,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Draw arrays
+        /** \brief Draw arrays
          *
          * \param primitive The primitive to use to draw
          * \param start     The index of the first vertex to draw
@@ -23,7 +23,7 @@ namespace Bull
          */
         static void drawArrays(RenderPrimitive primitive, std::size_t start, std::size_t count);
 
-        /*! \brief Draw arrays instanced
+        /** \brief Draw arrays instanced
          *
          * \param primitive     The primitive to use to draw
          * \param instanceCount The number of instance to draw
@@ -33,7 +33,7 @@ namespace Bull
          */
         static void drawArraysInstanced(RenderPrimitive primitive, std::size_t instanceCount, std::size_t start, std::size_t count);
 
-        /*! \brief Draw elements
+        /** \brief Draw elements
          *
          * \param primitive The primitive to use to draw
          * \param count     The number of elements to draw
@@ -43,7 +43,7 @@ namespace Bull
          */
         static void drawElements(RenderPrimitive primitive, std::size_t count, DataType type, const void* indices = nullptr);
 
-        /*! \brief Draw elements instanced
+        /** \brief Draw elements instanced
          *
          * \param primitive     The primitive to use to draw
          * \param instanceCount The number of instance to draw

@@ -10,22 +10,38 @@ namespace Bull
         {
             switch(color)
             {
-                case ConsoleColor_Black:       return 0;
-                case ConsoleColor_DarkRed:     return FOREGROUND_RED;
-                case ConsoleColor_DarkBlue:    return FOREGROUND_BLUE;
-                case ConsoleColor_DarkGreen:   return FOREGROUND_GREEN;
-                case ConsoleColor_Gray:        return FOREGROUND_INTENSITY;
-                case ConsoleColor_Red:         return FOREGROUND_INTENSITY | FOREGROUND_RED;
-                case ConsoleColor_Blue:        return FOREGROUND_INTENSITY | FOREGROUND_BLUE;
-                case ConsoleColor_DarkCyan:    return FOREGROUND_GREEN     | FOREGROUND_BLUE;
-                case ConsoleColor_DarkMagenta: return FOREGROUND_RED       | FOREGROUND_BLUE;
-                case ConsoleColor_Green:       return FOREGROUND_INTENSITY | FOREGROUND_GREEN;
-                case ConsoleColor_DarkYellow:  return FOREGROUND_RED       | FOREGROUND_GREEN;
-                case ConsoleColor_Magenta:     return FOREGROUND_INTENSITY | FOREGROUND_RED   | FOREGROUND_BLUE;
-                case ConsoleColor_Cyan:        return FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE;
-                case ConsoleColor_DarkGray:    return FOREGROUND_RED       | FOREGROUND_GREEN | FOREGROUND_BLUE;
-                case ConsoleColor_Yellow:      return FOREGROUND_INTENSITY | FOREGROUND_RED   | FOREGROUND_GREEN;
-                case ConsoleColor_White:       return FOREGROUND_INTENSITY | FOREGROUND_RED   | FOREGROUND_GREEN | FOREGROUND_BLUE;
+                case ConsoleColor_Black:
+                    return 0;
+                case ConsoleColor_DarkRed:
+                    return FOREGROUND_RED;
+                case ConsoleColor_DarkBlue:
+                    return FOREGROUND_BLUE;
+                case ConsoleColor_DarkGreen:
+                    return FOREGROUND_GREEN;
+                case ConsoleColor_Gray:
+                    return FOREGROUND_INTENSITY;
+                case ConsoleColor_Red:
+                    return FOREGROUND_INTENSITY | FOREGROUND_RED;
+                case ConsoleColor_Blue:
+                    return FOREGROUND_INTENSITY | FOREGROUND_BLUE;
+                case ConsoleColor_DarkCyan:
+                    return FOREGROUND_GREEN | FOREGROUND_BLUE;
+                case ConsoleColor_DarkMagenta:
+                    return FOREGROUND_RED | FOREGROUND_BLUE;
+                case ConsoleColor_Green:
+                    return FOREGROUND_INTENSITY | FOREGROUND_GREEN;
+                case ConsoleColor_DarkYellow:
+                    return FOREGROUND_RED | FOREGROUND_GREEN;
+                case ConsoleColor_Magenta:
+                    return FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE;
+                case ConsoleColor_Cyan:
+                    return FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE;
+                case ConsoleColor_DarkGray:
+                    return FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+                case ConsoleColor_Yellow:
+                    return FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN;
+                case ConsoleColor_White:
+                    return FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
             }
 
             return 0;
@@ -35,30 +51,45 @@ namespace Bull
         {
             switch(color)
             {
-                case ConsoleColor_Black:       return 0;
-                case ConsoleColor_DarkRed:     return BACKGROUND_RED;
-                case ConsoleColor_DarkBlue:    return BACKGROUND_BLUE;
-                case ConsoleColor_DarkGreen:   return BACKGROUND_GREEN;
-                case ConsoleColor_Red:         return BACKGROUND_INTENSITY | BACKGROUND_RED;
-                case ConsoleColor_Blue:        return BACKGROUND_INTENSITY | BACKGROUND_BLUE;
-                case ConsoleColor_DarkCyan:    return BACKGROUND_GREEN     | BACKGROUND_BLUE;
-                case ConsoleColor_DarkMagenta: return BACKGROUND_RED       | BACKGROUND_BLUE;
-                case ConsoleColor_Green:       return BACKGROUND_INTENSITY | BACKGROUND_GREEN;
-                case ConsoleColor_DarkYellow:  return BACKGROUND_RED       | BACKGROUND_GREEN;
-                case ConsoleColor_Magenta:     return BACKGROUND_INTENSITY | BACKGROUND_RED   | BACKGROUND_BLUE;
-                case ConsoleColor_Cyan:        return BACKGROUND_INTENSITY | BACKGROUND_GREEN | BACKGROUND_BLUE;
-                case ConsoleColor_DarkGray:    return BACKGROUND_RED       | BACKGROUND_GREEN | BACKGROUND_BLUE;
-                case ConsoleColor_Yellow:      return BACKGROUND_INTENSITY | BACKGROUND_RED   | BACKGROUND_GREEN;
-                case ConsoleColor_White:       return BACKGROUND_INTENSITY | BACKGROUND_RED   | BACKGROUND_GREEN | BACKGROUND_BLUE;
+                case ConsoleColor_Black:
+                    return 0;
+                case ConsoleColor_DarkRed:
+                    return BACKGROUND_RED;
+                case ConsoleColor_DarkBlue:
+                    return BACKGROUND_BLUE;
+                case ConsoleColor_DarkGreen:
+                    return BACKGROUND_GREEN;
+                case ConsoleColor_Red:
+                    return BACKGROUND_INTENSITY | BACKGROUND_RED;
+                case ConsoleColor_Blue:
+                    return BACKGROUND_INTENSITY | BACKGROUND_BLUE;
+                case ConsoleColor_DarkCyan:
+                    return BACKGROUND_GREEN | BACKGROUND_BLUE;
+                case ConsoleColor_DarkMagenta:
+                    return BACKGROUND_RED | BACKGROUND_BLUE;
+                case ConsoleColor_Green:
+                    return BACKGROUND_INTENSITY | BACKGROUND_GREEN;
+                case ConsoleColor_DarkYellow:
+                    return BACKGROUND_RED | BACKGROUND_GREEN;
+                case ConsoleColor_Magenta:
+                    return BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE;
+                case ConsoleColor_Cyan:
+                    return BACKGROUND_INTENSITY | BACKGROUND_GREEN | BACKGROUND_BLUE;
+                case ConsoleColor_DarkGray:
+                    return BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE;
+                case ConsoleColor_Yellow:
+                    return BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN;
+                case ConsoleColor_White:
+                    return BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE;
             }
 
             return 0;
         }
 
         ConsoleOutputImplWin32::ConsoleOutputImplWin32() :
-            m_handler(GetStdHandle(STD_OUTPUT_HANDLE)),
-            m_currentTextColor(ConsoleColor_White),
-            m_currentBackgroundColor(ConsoleColor_Black)
+                m_handler(GetStdHandle(STD_OUTPUT_HANDLE)),
+                m_currentTextColor(ConsoleColor_White),
+                m_currentBackgroundColor(ConsoleColor_Black)
         {
             CONSOLE_SCREEN_BUFFER_INFO info;
 
@@ -97,7 +128,7 @@ namespace Bull
         void ConsoleOutputImplWin32::clear()
         {
             CONSOLE_SCREEN_BUFFER_INFO info;
-            COORD                      screen = {0, 0};
+            COORD screen = {0, 0};
 
             Expect(GetConsoleScreenBufferInfo(m_handler, &info), Throw(Win32Error, "Failed to get console info"));
 
@@ -128,7 +159,7 @@ namespace Bull
 
         void ConsoleOutputImplWin32::applyColor()
         {
-            SetConsoleTextAttribute(m_handler, colorToTextAttribute(m_currentTextColor)| colorToBackgroundAttribute(m_currentBackgroundColor));
+            SetConsoleTextAttribute(m_handler, colorToTextAttribute(m_currentTextColor) | colorToBackgroundAttribute(m_currentBackgroundColor));
         }
     }
 }

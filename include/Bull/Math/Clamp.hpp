@@ -8,7 +8,7 @@
 namespace Bull
 {
     template <typename T>
-    Angle<T> clamp(const Angle<T>& angle, const Angle<T>& min, const Angle<T>& max)
+    Angle <T> clamp(const Angle <T>& angle, const Angle <T>& min, const Angle <T>& max)
     {
         return Angle<T>::clamp(angle, min, max);
     }

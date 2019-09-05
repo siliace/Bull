@@ -15,8 +15,8 @@ namespace Bull
         prv::PathImpl::rename(path, newPath);
     }
 
-    Path::Path(const String& path) :
-        m_path(path)
+    Path::Path(const std::string& path) :
+            m_path(path)
     {
         /// Nothing
     }
@@ -33,17 +33,17 @@ namespace Bull
 
     Path Path::getParent() const
     {
-        std::size_t end = m_path.last(Separator);
+        std::size_t end = m_path.find_last_of(Separator);
 
-        if(end == String::InvalidPosition)
+        if(end == std::string::npos)
         {
             return Path(m_path);
         }
 
-        return Path(m_path.subString(0, end));
+        return Path(m_path.substr(0, end));
     }
 
-    Path Path::resolve(const String& child) const
+    Path Path::resolve(const std::string& child) const
     {
         if(child.at(0) == Separator)
         {
@@ -53,16 +53,16 @@ namespace Bull
         return Path(toString() + Separator + child);
     }
 
-    String Path::getFileName() const
+    std::string Path::getFileName() const
     {
-        std::size_t start = m_path.last(Separator);
+        std::size_t start = m_path.find_last_of(Separator);
 
-        if(start == String::InvalidPosition)
+        if(start == std::string::npos)
         {
             return m_path;
         }
 
-        return m_path.subString(start + 1);
+        return m_path.substr(start + 1);
     }
 
     Path Path::toAbsolute() const
@@ -80,7 +80,7 @@ namespace Bull
         return Directory::exists(*this);
     }
 
-    const String& Path::toString() const
+    const std::string& Path::toString() const
     {
         return m_path;
     }

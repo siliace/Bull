@@ -26,14 +26,12 @@ namespace Bull
              */
             static void rename(const Path& path, const Path& newPath);
 
-            /*! \brief Get the absolute path for a given relative path
-             *
+            /**
+             * \brief Get the absolute path for a given relative path
              * \param relative The relative path
-             *
              * \return The absolute path
-             *
              */
-            static String realPath(const String& relative);
+            static std::string realPath(const std::string& relative);
         };
     }
 }

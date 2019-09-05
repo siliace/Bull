@@ -24,40 +24,40 @@ namespace Bull
     {
     public:
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         virtual ~Socket();
 
-        /*! \brief Tell whether the Socket is valid to be used
+        /** \brief Tell whether the Socket is valid to be used
          *
          * \return True if the Socket is valid
          *
          */
         bool isValid() const;
 
-        /*! \brief Enable the blocking mode of the Socket
+        /** \brief Enable the blocking mode of the Socket
          *
          * \param enable True to enable
          *
          */
         void enableBlockingMode(bool enable);
 
-        /*! \brief Tell whether Socket is in blocking mode
+        /** \brief Tell whether Socket is in blocking mode
          *
          * \return True if the blocking mode is enable
          *
          */
         bool isEnableBlockingMode() const;
 
-        /*! \brief Get the length of data in pending to be read
+        /** \brief Get the length of data in pending to be read
          *
          * \return The length
          *
          */
         std::size_t getPendingLength() const;
 
-        /*! \brief Get the SocketType of the Socket
+        /** \brief Get the SocketType of the Socket
          *
          * \return The SocketType
          *
@@ -66,28 +66,28 @@ namespace Bull
 
     protected:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param type The type of the Socket
          *
          */
         explicit Socket(SocketType type);
 
-        /*! \brief Create the Socket
+        /** \brief Create the Socket
          *
          * \param protocol The NetProtocol to use in the Socket
          *
          */
         void create(NetProtocol protocol);
 
-        /*! \brief Create the Socket
+        /** \brief Create the Socket
          *
          * \param handler The SocketHandler
          *
          */
         void create(SocketHandler handler);
 
-        /*! \brief Close the Socket
+        /** \brief Close the Socket
          *
          */
         void close();
@@ -96,14 +96,14 @@ namespace Bull
 
         friend class SocketPoller;
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          * \param move The Socket to move
          *
          */
         Socket(Socket&& move) noexcept;
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \param move The Socket to move
          *
@@ -112,7 +112,7 @@ namespace Bull
          */
         Socket& operator=(Socket&& move) noexcept;
 
-        /*! \brief Get the underlying SocketHandler of the Socket
+        /** \brief Get the underlying SocketHandler of the Socket
          *
          * \return The SocketHandler
          *
@@ -122,7 +122,7 @@ namespace Bull
     private:
 
         std::unique_ptr<prv::SocketImpl> m_impl;
-        SocketType                       m_type;
+        SocketType m_type;
     };
 }
 

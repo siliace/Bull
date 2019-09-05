@@ -12,12 +12,12 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          */
         ConsoleLogger();
 
-        /*! \brief Set the ConsoleColor to use to write a log entry according to its LogLevel
+        /** \brief Set the ConsoleColor to use to write a log entry according to its LogLevel
          *
          * \param level The LogLevel
          * \param color The ConsoleColor
@@ -25,7 +25,7 @@ namespace Bull
          */
         void setLevelTextColor(LogLevel level, ConsoleColor color);
 
-        /*! \brief Set the background ConsoleColor a log entry according to its LogLevel
+        /** \brief Set the background ConsoleColor a log entry according to its LogLevel
          *
          * \param level The LogLevel
          * \param color The ConsoleColor
@@ -35,7 +35,7 @@ namespace Bull
 
     protected:
 
-        /*! \brief Format a log entry
+        /** \brief Format a log entry
          *
          * \param entry The log entry to format
          * \param level The LogLevel to format
@@ -44,15 +44,15 @@ namespace Bull
          * \return The formatted entry
          *
          */
-        String formatEntry(const String& entry, LogLevel level, const DateTime& date) override;
+        std::string formatEntry(const std::string& entry, LogLevel level, const DateTime& date) override;
 
     private:
 
         using ColorMap = std::map<LogLevel, ConsoleColor>;
 
         ConsoleOutput m_output;
-        ColorMap      m_levelTextColor;
-        ColorMap      m_levelBackgroundColor;
+        ColorMap m_levelTextColor;
+        ColorMap m_levelBackgroundColor;
     };
 }
 

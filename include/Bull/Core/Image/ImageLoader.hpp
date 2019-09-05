@@ -14,7 +14,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Load an Image from a File
+        /** \brief Load an Image from a File
          *
          * \param path        The Path of the File to read
          * \param pixelFormat The PixelFormat of the Image to create
@@ -27,7 +27,7 @@ namespace Bull
             return std::static_pointer_cast<T>(AbstractImageLoader::loadFromPath<T>(path, pixelFormat));
         }
 
-        /*! \brief Load an Image from an InStream
+        /** \brief Load an Image from an InStream
          *
          * \param stream      The InStream to read
          * \param pixelFormat The PixelFormat of the Image to create
@@ -40,7 +40,7 @@ namespace Bull
             return std::static_pointer_cast<T>(AbstractImageLoader::loadFromStream<T>(stream, pixelFormat));
         }
 
-        /*! \brief Load a Image from a memory area
+        /** \brief Load a Image from a memory area
          *
          * \param path        Data to read
          * \param length      The length of data to read

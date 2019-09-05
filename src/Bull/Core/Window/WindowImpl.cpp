@@ -5,11 +5,13 @@
 #include <Bull/Core/Window/WindowImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
+
     #include <Bull/Core/Window/Win32/WindowImplWin32.hpp>
-    typedef Bull::prv::WindowImplWin32 WindowImplType;
+
+typedef Bull::prv::WindowImplWin32 WindowImplType;
 #elif defined BULL_OS_GNU_LINUX
     #include <Bull/Core/Window/Xlib/WindowImplXlib.hpp>
-    typedef Bull::prv::WindowImplXlib WindowImplType;
+typedef Bull::prv::WindowImplXlib WindowImplType;
 #else
     #error System not supported
 #endif
@@ -18,7 +20,7 @@ namespace Bull
 {
     namespace prv
     {
-        std::unique_ptr<WindowImpl> WindowImpl::createInstance(const VideoMode& mode, const String& title, Uint32 WindowStyle)
+        std::unique_ptr<WindowImpl> WindowImpl::createInstance(const VideoMode& mode, const std::string& title, Uint32 WindowStyle)
         {
             return std::make_unique<WindowImplType>(mode, title, WindowStyle);
         }
@@ -68,8 +70,8 @@ namespace Bull
         }
 
         WindowImpl::WindowImpl() :
-            m_keyrepeat(true),
-            m_cursorPosition(Mouse::getPosition())
+                m_keyrepeat(true),
+                m_cursorPosition(Mouse::getPosition())
         {
             /// Nothing
         }

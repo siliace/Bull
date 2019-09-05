@@ -20,7 +20,7 @@ namespace Bull
         static const DataType Float;
         static const DataType Double;
 
-        /*! \brief Create a DataType from a concrete type
+        /** \brief Create a DataType from a concrete type
          *
          * \tparam T The type
          * \return The DataType of T
@@ -38,28 +38,28 @@ namespace Bull
 
     public:
 
-        /*! \brief
+        /** \brief
          *
          * \return
          *
          */
         size_t getSize() const;
 
-        /*! \brief
+        /** \brief
          *
          * \return
          *
          */
         bool isUnsigned() const;
 
-        /*! \brief
+        /** \brief
          *
          * \return
          *
          */
         bool isFloatingPoint() const;
 
-        /*! \brief
+        /** \brief
          *
          * \param rhs
          *
@@ -68,7 +68,7 @@ namespace Bull
          */
         bool operator==(const DataType& rhs) const;
 
-        /*! \brief
+        /** \brief
          *
          * \param rhs
          *
@@ -79,7 +79,7 @@ namespace Bull
 
     private:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param size The size (in bytes of the data type)
          * \param isUnsigned True if the DataType is an unsigned type
@@ -91,8 +91,8 @@ namespace Bull
     private:
 
         std::size_t m_size;
-        bool        m_isUnsigned;
-        bool        m_isFloatingPoint;
+        bool m_isUnsigned;
+        bool m_isFloatingPoint;
     };
 }
 

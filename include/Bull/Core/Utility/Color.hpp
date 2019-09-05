@@ -17,12 +17,12 @@ namespace Bull
         static Color White;
         static Color Transparent;
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Color();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param red   The red component of the color
          * \param green The green component of the color
@@ -32,14 +32,14 @@ namespace Bull
          */
         Color(Uint8 red, Uint8 blue, Uint8 green, Uint8 alpha = 255);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param hexa The hexadecimal representation of the color
          *
          */
         explicit Color(Uint32 hexa);
 
-        /*! \brief Compare two colors
+        /** \brief Compare two colors
          *
          * \param right The color to compare to this one
          *
@@ -48,7 +48,7 @@ namespace Bull
          */
         bool operator==(const Color& right);
 
-        /*! \brief Compare two colors
+        /** \brief Compare two colors
          *
          * \param right The color to compare to this one
          *
@@ -57,14 +57,14 @@ namespace Bull
          */
         bool operator!=(const Color& right);
 
-        /*! \brief Convert the color to an hexadecimal value
+        /** \brief Convert the color to an hexadecimal value
          *
          * \return Return the representation of the color as an hexadecimal value
          *
          */
         Uint32 toHexa() const;
 
-        /*! \brief Combine two colors
+        /** \brief Combine two colors
          *
          * \param right The color to compare to this
          *
@@ -73,7 +73,7 @@ namespace Bull
          */
         Color& operator+=(const Color& right);
 
-        /*! \brief Combine two colors
+        /** \brief Combine two colors
          *
          * \param right The color to compare to this
          *
@@ -82,7 +82,7 @@ namespace Bull
          */
         Color operator+(const Color& right);
 
-        /*! \brief Combine two colors
+        /** \brief Combine two colors
          *
          * \param right The color to compare to this
          *
@@ -91,7 +91,7 @@ namespace Bull
          */
         Color& operator-=(const Color& right);
 
-        /*! \brief Combine two colors
+        /** \brief Combine two colors
          *
          * \param right The color to compare to this
          *

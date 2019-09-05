@@ -19,19 +19,19 @@ namespace Bull
     }
 
     Context::Context() :
-        m_context(prv::GlContext::createInstance())
+            m_context(prv::GlContext::createInstance())
     {
         setActive();
     }
 
     Context::Context(const VideoMode& mode, const ContextSettings& settings) :
-        m_context(prv::GlContext::createInstance(mode, settings))
+            m_context(prv::GlContext::createInstance(mode, settings))
     {
         setActive();
     }
 
     Context::Context(unsigned int bitsPerPixel, const ContextSettings& settings) :
-        m_context(prv::GlContext::createInstance(bitsPerPixel, settings))
+            m_context(prv::GlContext::createInstance(bitsPerPixel, settings))
     {
         setActive();
     }

@@ -14,6 +14,7 @@
 namespace Bull
 {
     DeclareException(FileNotFound);
+
     DeclareException(FileAlreadyExists);
 
     namespace prv
@@ -26,21 +27,21 @@ namespace Bull
     private:
 
         #if defined BULL_OS_WINDOWS
-            static constexpr const char* EndOfLine = "\r\n";
+        static constexpr const char* EndOfLine = "\r\n";
         #else
-            static constexpr char EndOfLine = '\n';
+        static constexpr char EndOfLine = '\n';
         #endif
 
     public:
 
-        /*! \brief Create a File
+        /** \brief Create a File
          *
          * \param path The Path of the file to create
          *
          */
         static void create(const Path& path);
 
-        /*! \brief Tell whether a File exists
+        /** \brief Tell whether a File exists
          *
          * \param path The Path of the File
          *
@@ -49,7 +50,7 @@ namespace Bull
          */
         static bool exists(const Path& path);
 
-        /*! \brief Delete a File
+        /** \brief Delete a File
          *
          * \param path The Path of the File to delete
          *
@@ -58,12 +59,12 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         File();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param path The Path of the file to open
          * \param mode The opening mode of the file (read, write or both)
@@ -71,19 +72,19 @@ namespace Bull
          */
         explicit File(const Path& path, Uint32 mode = FileOpeningMode_Read | FileOpeningMode_Write);
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          * \param file The File to move
          *
          */
         File(File&& file) noexcept;
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         ~File();
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \param File The File to move
          *
@@ -92,7 +93,7 @@ namespace Bull
          */
         File& operator=(File&& file) noexcept;
 
-        /*! \brief Open the File
+        /** \brief Open the File
          *
          * \param path The path of the file to open
          * \param mode The opening mode of the file
@@ -100,7 +101,7 @@ namespace Bull
          */
         void open(const Path& path, Uint32 mode = FileOpeningMode_Read | FileOpeningMode_Write);
 
-        /*! \brief Read bytes from the File
+        /** \brief Read bytes from the File
          *
          * \param length The length of data to read
          *
@@ -109,7 +110,7 @@ namespace Bull
          */
         ByteArray read(std::size_t length) override;
 
-        /*! \brief Write data into the File
+        /** \brief Write data into the File
          *
          * \param bytes Bytes to write
          *
@@ -118,40 +119,40 @@ namespace Bull
          */
         std::size_t write(const ByteArray& bytes) override;
 
-        /*! \brief Flush the File
+        /** \brief Flush the File
          *
          */
         void flush() override;
 
-        /*! \brief Get the date of the creation of the file
+        /** \brief Get the date of the creation of the file
          *
          * \return Return the date of the creation of the file
          *
          */
         DateTime getCreationDate() const;
 
-        /*! \brief Get the date of the creation of the file
+        /** \brief Get the date of the creation of the file
          *
          * \return Return the date of the last access of the file
          *
          */
         DateTime getLastAccessDate() const;
 
-        /*! \brief Get the date of the creation of the file
+        /** \brief Get the date of the creation of the file
          *
          * \return Return the date of the last write of the file
          *
          */
         DateTime getLastWriteDate() const;
 
-        /*! \brief Get the position of the cursor in the file
+        /** \brief Get the position of the cursor in the file
          *
          * \return Return the position of the cursor in the file
          *
          */
         std::size_t getCursor() const override;
 
-        /*! \brief Move the reading position in the file
+        /** \brief Move the reading position in the file
          *
          * \param offset The offset to move the cursor
          *
@@ -160,7 +161,7 @@ namespace Bull
          */
         std::size_t moveCursor(Int64 offset);
 
-        /*! \brief Set the reading position in the file
+        /** \brief Set the reading position in the file
          *
          * \param position The position to seek to
          *
@@ -169,7 +170,7 @@ namespace Bull
          */
         std::size_t setCursor(std::size_t position) override;
 
-        /*! \brief Get the path of the file
+        /** \brief Get the path of the file
          *
          * \return Return the path of the file
          *
@@ -179,7 +180,7 @@ namespace Bull
             return m_path;
         }
 
-        /*! \brief Get the size of the file
+        /** \brief Get the size of the file
          *
          * \return Return the size of the file
          *
@@ -188,8 +189,8 @@ namespace Bull
 
     private:
 
-        Path                           m_path;
-        Uint32                         m_mode;
+        Path m_path;
+        Uint32 m_mode;
         std::unique_ptr<prv::FileImpl> m_impl;
     };
 }

@@ -11,12 +11,12 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         PointLight();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param position The position of the PointLight
          * \param color    The color of the PointLight
@@ -24,7 +24,7 @@ namespace Bull
          */
         explicit PointLight(const Vector3F& position, const Color& color = Color::White);
 
-        /*! \brief Set the attenuation of the PointLight
+        /** \brief Set the attenuation of the PointLight
          *
          * \param constant
          * \param linear
@@ -33,22 +33,22 @@ namespace Bull
          */
         void setAttenuation(float constant, float linear, float quadratic);
 
-        /*! \brief Send uniforms values to a Shader
+        /** \brief Send uniforms values to a Shader
          *
          * \param shader The Shader
          * \param name   The name of the uniform
          *
          */
-        void setUniforms(Shader& shader, const String& name) const override;
+        void setUniforms(Shader& shader, const std::string& name) const override;
 
-        /*! \brief Set the position of the PointLight
+        /** \brief Set the position of the PointLight
          *
          * \param position The position
          *
          */
         void setPosition(const Vector3F& position);
 
-        /*! \brief Get the position of the PointLight
+        /** \brief Get the position of the PointLight
          *
          * \return The position
          *
@@ -57,10 +57,10 @@ namespace Bull
 
     private:
 
-        float    m_linear;
-        float    m_constant;
+        float m_linear;
+        float m_constant;
         Vector3F m_position;
-        float    m_quadratic;
+        float m_quadratic;
     };
 }
 

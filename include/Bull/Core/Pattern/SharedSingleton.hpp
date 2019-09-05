@@ -8,7 +8,7 @@
 
 namespace Bull
 {
-    template<typename T>
+    template <typename T>
     class BULL_CORE_API SharedSingleton : public NonCopyable
     {
     public:
@@ -17,7 +17,7 @@ namespace Bull
 
     public:
 
-        /*! \brief Import a SharedSingleton::Instance from another runtime
+        /** \brief Import a SharedSingleton::Instance from another runtime
          *
          * \param runtime The RumTime to import the Instance from
          *
@@ -31,7 +31,7 @@ namespace Bull
             return *s_instance;
         }
 
-        /*! \brief Get the Instance of the Singleton. Create the instance if needed
+        /** \brief Get the Instance of the Singleton. Create the instance if needed
          *
          * \return The Instance
          *
@@ -55,7 +55,7 @@ namespace Bull
 
     private:
 
-        static std::mutex         s_mutex;
+        static std::mutex s_mutex;
         static std::shared_ptr<T> s_instance;
     };
 

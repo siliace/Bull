@@ -11,7 +11,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Check if a key is pressed
+            /** \brief Check if a key is pressed
              *
              * \param key To key to check the state
              *

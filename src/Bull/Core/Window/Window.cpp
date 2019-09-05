@@ -14,18 +14,18 @@ namespace Bull
     }
 
     Window::Window() :
-        m_ignoreNextMouse(false)
+            m_ignoreNextMouse(false)
     {
         /// Nothing
     }
 
-    Window::Window(const VideoMode& mode, const String& title, Uint32 WindowStyle) :
-        Window()
+    Window::Window(const VideoMode& mode, const std::string& title, Uint32 WindowStyle) :
+            Window()
     {
         create(mode, title, WindowStyle);
     }
 
-    void Window::create(const VideoMode& mode, const String& title, Uint32 style)
+    void Window::create(const VideoMode& mode, const std::string& title, Uint32 style)
     {
         if(isOpen())
         {
@@ -145,7 +145,7 @@ namespace Bull
             return m_impl->getPosition();
         }
 
-        return { 0, 0 };
+        return {0, 0};
     }
 
     void Window::setMinSize(const Size<unsigned int>& size)
@@ -163,7 +163,7 @@ namespace Bull
             return m_impl->getMinSize();
         }
 
-        return { 0, 0 };
+        return {0, 0};
     }
 
     void Window::setMaxSize(const Size<unsigned int>& size)
@@ -181,7 +181,7 @@ namespace Bull
             return m_impl->getMinSize();
         }
 
-        return { 0, 0 };
+        return {0, 0};
     }
 
     void Window::setSize(const Size<unsigned int>& size)
@@ -199,10 +199,10 @@ namespace Bull
             return m_impl->getSize();
         }
 
-        return { 0, 0 };
+        return {0, 0};
     }
 
-    void Window::setTitle(const String& title)
+    void Window::setTitle(const std::string& title)
     {
         if(m_impl)
         {
@@ -210,14 +210,14 @@ namespace Bull
         }
     }
 
-    String Window::getTitle() const
+    std::string Window::getTitle() const
     {
         if(m_impl)
         {
             return m_impl->getTitle();
         }
 
-        return String();
+        return std::string();
     }
 
     void Window::enableKeyRepeat(bool enable)
@@ -308,13 +308,13 @@ namespace Bull
             s_fullscreen = nullptr;
         }
     }
-    
+
     bool Window::isFullscreenEnable() const
     {
         return this == s_fullscreen;
     }
 
-    void Window::create(std::unique_ptr<prv::WindowImpl>&& impl, const String& title, Uint32 style)
+    void Window::create(std::unique_ptr<prv::WindowImpl>&& impl, const std::string& title, Uint32 style)
     {
         if(style == WindowStyle_Fullscreen && s_fullscreen)
         {

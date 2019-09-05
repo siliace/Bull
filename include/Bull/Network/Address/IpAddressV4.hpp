@@ -14,19 +14,19 @@ namespace Bull
         static IpAddressV4 Loopback;
         static IpAddressV4 Broadcast;
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         IpAddressV4();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param address
          *
          */
         explicit IpAddressV4(Uint32 address);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param a The first byte of the IpAddressV4
          * \param b The second byte of the IpAddressV4
@@ -36,21 +36,21 @@ namespace Bull
          */
         IpAddressV4(Uint8 a, Uint8 b, Uint8 c, Uint8 d);
 
-        /*! \brief Convert the IpAddressV4 to an Uint32
+        /** \brief Convert the IpAddressV4 to an Uint32
          *
          * \return The IpAddressV4 as a Uint32
          *
          */
         Uint32 toInt() const;
 
-        /*! \brief Convert the IpAddressV4 to a String
+        /** \brief Convert the IpAddressV4 to a std::string
          *
-         * \return The IpAddressV4 as a String
+         * \return The IpAddressV4 as a std::string
          *
          */
-        String toString() const override;
+        std::string toString() const override;
 
-        /*! \brief Get the NetProtocol used by the IpAddress
+        /** \brief Get the NetProtocol used by the IpAddress
          *
          * \return The NetProtocol
          *

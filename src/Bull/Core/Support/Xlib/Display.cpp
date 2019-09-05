@@ -53,17 +53,17 @@ namespace Bull
             return DefaultDepth(m_display, screen);
         }
 
-        bool Display::isSupportedExtension(const String& name) const
+        bool Display::isSupportedExtension(const std::string& name) const
         {
             int version;
             return XQueryExtension(m_display, name.getBuffer(), &version, &version, &version) == True;
         }
 
-        Atom Display::getAtom(const String& name, bool mustExists)
+        Atom Display::getAtom(const std::string& name, bool mustExists)
         {
             XLockDisplay(m_display);
 
-            std::map<String, XAtom>::const_iterator iterator = m_atoms.find(name);
+            std::map<std::string, XAtom>::const_iterator iterator = m_atoms.find(name);
 
             if(iterator != m_atoms.end())
             {

@@ -28,7 +28,8 @@ namespace Bull
     {
         gl::genFramebuffers(1, &m_handle);
 
-        m_colorAttachmentTable = MapUtils::create<Uint8, bool>(16, [](std::size_t i) {
+        m_colorAttachmentTable = MapUtils::create<Uint8, bool>(16, [](std::size_t i)
+        {
             return std::make_pair(i, true);
         });
     }
@@ -76,7 +77,8 @@ namespace Bull
 
     FrameBuffer::ColorAttachmentMap::iterator FrameBuffer::getNextColorAttachment()
     {
-        return std::find_if(m_colorAttachmentTable.begin(), m_colorAttachmentTable.end(), [](const std::pair<Uint8, bool>& pair) -> bool {
+        return std::find_if(m_colorAttachmentTable.begin(), m_colorAttachmentTable.end(), [](const std::pair<Uint8, bool>& pair) -> bool
+        {
             return pair.second;
         });
     }

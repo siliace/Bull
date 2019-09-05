@@ -13,22 +13,22 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param path       The path of the Plugin to load
          * \param entryPoint The name of the entry point function in the plugin
          *
          */
-        Plugin(const Path& path, const String& entryPoint);
+        Plugin(const Path& path, const std::string& entryPoint);
 
-        /*! \brief Constructor by movement semantic
+        /** \brief Constructor by movement semantic
          *
          * \param plugin The Plugin to move
          *
          */
         Plugin(Plugin&& plugin) noexcept = default;
 
-        /*! \brief Assignment operator by movement semantic
+        /** \brief Assignment operator by movement semantic
          *
          * \param plugin The Plugin to move
          *
@@ -37,7 +37,7 @@ namespace Bull
          */
         Plugin& operator=(Plugin&& plugin) noexcept = default;
 
-        /*! \brief Call a free function from a Plugin
+        /** \brief Call a free function from a Plugin
          *
          * \tparam R    The return type of the function
          * \tparam Args Arguments types of the function
@@ -51,7 +51,7 @@ namespace Bull
          *
          */
         template <typename R, typename... Args>
-        R call(const String& function, Args&&... args) const
+        R call(const std::string& function, Args&& ... args) const
         {
             std::function<R(Args...)> func = m_library.getFunction<R(Args...)>(function);
 

@@ -4,7 +4,7 @@
 namespace Bull
 {
     ConsoleOutput::ConsoleOutput() :
-        m_impl(prv::ConsoleOutputImpl::createInstance())
+            m_impl(prv::ConsoleOutputImpl::createInstance())
     {
         /// Nothing
     }

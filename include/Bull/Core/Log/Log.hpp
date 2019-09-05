@@ -2,10 +2,10 @@
 #define BULL_CORE_LOG_LOG_HPP
 
 #include <memory>
+#include <string>
 #include <vector>
 
 #include <Bull/Core/Log/AbstractLogger.hpp>
-#include <Bull/Core/Memory/String.hpp>
 #include <Bull/Core/Pattern/SharedSingleton.hpp>
 
 namespace Bull
@@ -14,35 +14,35 @@ namespace Bull
     {
     public:
 
-        /*! \brief Write a message in the Log with a debug level
+        /** \brief Write a message in the Log with a debug level
          *
          * \param message The message to write
          *
          */
-        void debug(const String& message);
+        void debug(const std::string& message);
 
-        /*! \brief Write a message in the Log with a info level
+        /** \brief Write a message in the Log with a info level
          *
          * \param message The message to write
          *
          */
-        void info(const String& message);
+        void info(const std::string& message);
 
-        /*! \brief Write a message in the Log with a v level
+        /** \brief Write a message in the Log with a v level
          *
          * \param message The message to write
          *
          */
-        void warning(const String& message);
+        void warning(const std::string& message);
 
-        /*! \brief Write a message in the Log with a error level
+        /** \brief Write a message in the Log with a error level
          *
          * \param message The message to write
          *
          */
-        void error(const String& message);
+        void error(const std::string& message);
 
-        /*! \brief Create a new AbstractLogger
+        /** \brief Create a new AbstractLogger
          *
          * \param args Arguments to use to create the AbstractLogger
          *
@@ -50,12 +50,12 @@ namespace Bull
          *
          */
         template <typename T, typename... Args>
-        T& createLogger(Args&&... args)
+        T& createLogger(Args&& ... args)
         {
             return static_cast<T&>(addLogger(std::make_unique<T>(std::forward<Args>(args)...)));
         }
 
-        /*! \brief Add an AbstractLogger
+        /** \brief Add an AbstractLogger
          *
          * \param logger The AbstractLogger to add
          *
@@ -68,20 +68,20 @@ namespace Bull
 
         friend class SharedSingleton<Log>;
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Log() = default;
-        
+
     private:
 
-        /*! \brief Add an entry in every listener
+        /** \brief Add an entry in every listener
          *
          * \param message The message to log
          * \param level   The message error level
          *
          */
-        void write(const String& message, LogLevel level);
+        void write(const std::string& message, LogLevel level);
 
     private:
 

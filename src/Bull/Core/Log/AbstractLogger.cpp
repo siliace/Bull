@@ -1,18 +1,21 @@
-#include <Bull/Core/IO/OutStringStream.hpp>
-#include <Bull/Core/IO/TextWriter.hpp>
+#include <sstream>
+
 #include <Bull/Core/Log/AbstractLogger.hpp>
-#include <Bull/Core/Utility/StringUtils.hpp>
 
 namespace Bull
 {
-    String AbstractLogger::logLevelToString(LogLevel level)
+    std::string AbstractLogger::logLevelToString(LogLevel level)
     {
         switch(level)
         {
-            case LogLevel_Debug:   return "Debug";
-            case LogLevel_Info:    return "Info";
-            case LogLevel_Warning: return "Warning";
-            case LogLevel_Error:   return "Error";
+            case LogLevel_Debug:
+                return "Debug";
+            case LogLevel_Info:
+                return "Info";
+            case LogLevel_Warning:
+                return "Warning";
+            case LogLevel_Error:
+                return "Error";
         }
 
         return "";
@@ -28,7 +31,7 @@ namespace Bull
         return m_minimalLevel;
     }
 
-    void AbstractLogger::addEntry(const String& entry, LogLevel level, const DateTime& date)
+    void AbstractLogger::addEntry(const std::string& entry, LogLevel level, const DateTime& date)
     {
         if(shouldWriteEntry(level))
         {
@@ -37,7 +40,7 @@ namespace Bull
     }
 
     AbstractLogger::AbstractLogger(LogLevel minimalLevel) :
-        m_minimalLevel(minimalLevel)
+            m_minimalLevel(minimalLevel)
     {
         /// Nothing
     }
@@ -47,17 +50,16 @@ namespace Bull
         return level >= m_minimalLevel;
     }
 
-    String AbstractLogger::formatEntry(const String& entry, LogLevel level, const DateTime& date)
+    std::string AbstractLogger::formatEntry(const std::string& entry, LogLevel level, const DateTime& date)
     {
-        OutStringStream oss;
-        TextWriter writer(oss);
+        std::ostringstream oss;
 
-        writer << "[" << StringUtils::number(date.getDate().getYear()) << "/" << StringUtils::number(date.getDate().getMonth()) <<  "/" << StringUtils::number(date.getDate().getDay());
-        writer << " " << StringUtils::number(date.getTime().getHour()) << ":" << StringUtils::number(date.getTime().getMinute()) << ":" << StringUtils::number(date.getTime().getSecond());
-        writer << "]";
-        writer << "(" << logLevelToString(level) << ")";
-        writer << " " << entry;
+        oss << "[" << date.getDate().getYear() << "/" << date.getDate().getMonth() << "/" << date.getDate().getDay();
+        oss << " " << date.getTime().getHour() << ":" << date.getTime().getMinute() << ":" << date.getTime().getSecond();
+        oss << "]";
+        oss << "(" << logLevelToString(level) << ")";
+        oss << " " << entry;
 
-        return oss.toString();
+        return oss.str();
     }
 }

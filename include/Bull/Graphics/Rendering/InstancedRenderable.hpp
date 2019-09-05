@@ -7,7 +7,7 @@ namespace Bull
 {
     struct BULL_GRAPHICS_API InstancedRenderable : public Renderable
     {
-        /*! \brief Render the InstancedRenderable
+        /** \brief Render the InstancedRenderable
          *
          * \param shader The Shader to use to render
          * \param count  The number of instance of the object to render

@@ -6,12 +6,12 @@
 
 namespace Bull
 {
-    RenderWindow::RenderWindow(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+    RenderWindow::RenderWindow(const VideoMode& mode, const std::string& title, Uint32 style, const ContextSettings& settings)
     {
         create(mode, title, style, settings);
     }
 
-    void RenderWindow::create(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+    void RenderWindow::create(const VideoMode& mode, const std::string& title, Uint32 style, const ContextSettings& settings)
     {
         Window::create(prv::RenderWindowImpl::createInstance(mode, title, style, settings), title, style);
 
@@ -66,7 +66,7 @@ namespace Bull
 
     Viewport RenderWindow::getDefaultViewport() const
     {
-        return { Size<int>::Zero, getSize() };
+        return {Size<int>::Zero, getSize()};
     }
 
     void RenderWindow::onOpen()

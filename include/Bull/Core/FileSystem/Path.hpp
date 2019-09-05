@@ -1,8 +1,10 @@
 #ifndef BULL_CORE_FILESYSTEM_PATH_HPP
 #define BULL_CORE_FILESYSTEM_PATH_HPP
 
+#include <string>
+
+#include <Bull/Core/Export.hpp>
 #include <Bull/Core/FileSystem/FileOpeningMode.hpp>
-#include <Bull/Core/Memory/String.hpp>
 
 namespace Bull
 {
@@ -32,18 +34,18 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Path() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param path The path to open
          */
-        explicit Path(const String& path);
+        explicit Path(const std::string& path);
 
-        /*! \brief Compare two Path
+        /** \brief Compare two Path
          *
          * \param right The Path to compare to this
          *
@@ -52,7 +54,7 @@ namespace Bull
          */
         bool operator==(const Path& right) const;
 
-        /*! \brief Compare two Path
+        /** \brief Compare two Path
          *
          * \param right The Path to compare to this
          *
@@ -61,62 +63,62 @@ namespace Bull
          */
         bool operator!=(const Path& right) const;
 
-        /*! \brief Get the parent directory of this Path
+        /** \brief Get the parent directory of this Path
          *
          * \return The parent path
          *
          */
         Path getParent() const;
 
-        /*! \brief Get a child Path of this Path
+        /** \brief Get a child Path of this Path
          *
          * \param child The name of the child
          *
          * \return The child Path
          *
          */
-        Path resolve(const String& child) const;
+        Path resolve(const std::string& child) const;
 
-        /*! \brief Convert the Path to an absolute Path
+        /** \brief Convert the Path to an absolute Path
          *
          * \return The absolute Path
          *
          */
         Path toAbsolute() const;
 
-        /*! \brief Get the file name of the Path
+        /** \brief Get the file name of the Path
          *
          * This method will return last element of the Path
          *
          * \return The file name
          *
          */
-        String getFileName() const;
+        std::string getFileName() const;
 
-        /*! \brief Tell whether the Path is a file
+        /** \brief Tell whether the Path is a file
          *
          * \return True if the Path is a file
          *
          */
         bool isFile() const;
 
-        /*! \brief Tell whether the Path is a directory
+        /** \brief Tell whether the Path is a directory
          *
          * \return True if the Path is a directory
          *
          */
         bool isDirectory() const;
 
-        /*! \brief Convert the Path to a String
+        /** \brief Convert the Path to a std::string
          *
-         * \return The Path as a String
+         * \return The Path as a std::string
          *
          */
-        const String& toString() const;
+        const std::string& toString() const;
 
     private:
 
-        String m_path;
+        std::string m_path;
     };
 }
 

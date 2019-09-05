@@ -21,33 +21,33 @@ namespace Bull
     {
     public:
 
-        /*! \brief Get the active context in this thread
+        /** \brief Get the active context in this thread
          *
          * \return Return the context is available, nullptr otherwise
          *
          */
         static const Context* getActive();
 
-        /*! \brief Ensure a Context is active in the current thread
+        /** \brief Ensure a Context is active in the current thread
          *
          */
         static void ensureContext();
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Context();
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          * \param move The Context to move
          *
          */
         Context(Context&& move) noexcept = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param mode     The VideoMode to use to create the context
          * \param settings Settings to use to create the context
@@ -55,7 +55,7 @@ namespace Bull
          */
         Context(const VideoMode& mode, const ContextSettings& settings);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param bitsPerPixel Number of bits per pixel to use
          * \param settings     Settings to use to create the context
@@ -63,12 +63,12 @@ namespace Bull
          */
         Context(unsigned int bitsPerPixel, const ContextSettings& settings);
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         virtual ~Context();
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \param move The Context to move
          *
@@ -77,14 +77,14 @@ namespace Bull
          */
         Context& operator=(Context&& move) noexcept = default;
 
-        /*! \brief Activate or deactivate the context
+        /** \brief Activate or deactivate the context
          *
          * \param active True to activate, false to deactivate the context
          *
          */
         void setActive(bool active = true);
 
-        /*! \brief Get the ContextSettings of the context
+        /** \brief Get the ContextSettings of the context
          *
          * \return Return the ContextSettings
          *
@@ -93,7 +93,7 @@ namespace Bull
 
     protected:
 
-        std::unique_ptr<prv::GlContext> m_context; /*!< The concrete implementation of the context */
+        std::unique_ptr<prv::GlContext> m_context; /**< The concrete implementation of the context */
     };
 }
 

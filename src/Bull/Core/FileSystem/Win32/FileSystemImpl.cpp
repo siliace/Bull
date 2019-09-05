@@ -28,7 +28,7 @@ namespace Bull
 
         bool FileSystemImpl::setCurrentDirectory(const Path& path)
         {
-            return SetCurrentDirectory(path.toString().getBuffer()) == TRUE;
+            return SetCurrentDirectory(path.toString().c_str()) == TRUE;
         }
 
         FileSystemInfo FileSystemImpl::getFileSystemInfo(const Path& base)
@@ -36,19 +36,19 @@ namespace Bull
             ULARGE_INTEGER free, total, totalFree;
             FileSystemInfo fileSystemInfo = {0, 0, 0};
 
-            if(GetDiskFreeSpaceEx(base.toString().getBuffer(), &free, &total, &totalFree))
+            if(GetDiskFreeSpaceEx(base.toString().c_str(), &free, &total, &totalFree))
             {
-                fileSystemInfo.free      = totalFree.QuadPart;
+                fileSystemInfo.free = totalFree.QuadPart;
                 fileSystemInfo.available = free.QuadPart;
-                fileSystemInfo.capacity  = total.QuadPart;
+                fileSystemInfo.capacity = total.QuadPart;
             }
 
-			return fileSystemInfo;
+            return fileSystemInfo;
         }
 
-        bool FileSystemImpl::createLink(const Path& target, const String& link)
+        bool FileSystemImpl::createLink(const Path& target, const std::string& link)
         {
-			return CreateSymbolicLink(link.getBuffer(), target.toString().getBuffer(), target.isDirectory() ? SYMBOLIC_LINK_FLAG_DIRECTORY : 0) != 0;
+            return CreateSymbolicLink(link.c_str(), target.toString().c_str(), target.isDirectory() ? SYMBOLIC_LINK_FLAG_DIRECTORY : 0) != 0;
         }
     }
 }

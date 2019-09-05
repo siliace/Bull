@@ -40,7 +40,7 @@ namespace Bull
 
     private:
 
-        unsigned int       m_handle;
+        unsigned int m_handle;
         ColorAttachmentMap m_colorAttachmentTable;
     };
 }

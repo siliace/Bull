@@ -25,13 +25,13 @@ namespace Bull
     }
 
     VertexArray::VertexArray(std::size_t size) :
-        m_vertices(size)
+            m_vertices(size)
     {
         /// Nothing
     }
 
     VertexArray::VertexArray(const std::initializer_list<Vertex>& vertices) :
-        m_vertices(vertices)
+            m_vertices(vertices)
     {
         /// Nothing
     }

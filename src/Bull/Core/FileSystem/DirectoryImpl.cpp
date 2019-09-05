@@ -1,11 +1,13 @@
 #include <Bull/Core/FileSystem/DirectoryImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
+
     #include <Bull/Core/FileSystem/Win32/DirectoryImplWin32.hpp>
-    typedef Bull::prv::DirectoryImplWin32 DirectoryImplType;
+
+typedef Bull::prv::DirectoryImplWin32 DirectoryImplType;
 #else
     #include <Bull/Core/FileSystem/Unix/DirectoryImplUnix.hpp>
-    typedef Bull::prv::DirectoryImplUnix DirectoryImplType;
+typedef Bull::prv::DirectoryImplUnix DirectoryImplType;
 #endif
 
 namespace Bull

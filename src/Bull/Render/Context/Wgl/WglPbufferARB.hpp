@@ -17,19 +17,23 @@ namespace Bull
 {
     namespace prv
     {
-        HPBUFFER (WINAPI* wglCreatePbuffer)(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList) = nullptr;
+        HPBUFFER (WINAPI* wglCreatePbuffer)(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int* piAttribList) = nullptr;
+
         HDC (WINAPI* wglGetPbufferDC)(HPBUFFER hPbuffer) = nullptr;
+
         int (WINAPI* wglReleasePbufferDC)(HPBUFFER hPbuffer, HDC hDC) = nullptr;
+
         BOOL (WINAPI* wglDestroyPbuffer)(HPBUFFER hPbuffer) = nullptr;
-        BOOL (WINAPI* wglQueryPbuffer)(HPBUFFER hPbuffer, int iAttribute, int *piValue) = nullptr;
+
+        BOOL (WINAPI* wglQueryPbuffer)(HPBUFFER hPbuffer, int iAttribute, int* piValue) = nullptr;
 
         Extension wglPbuffer("WGL_ARB_pbuffer", []
         {
-            wglCreatePbuffer    = reinterpret_cast<HPBUFFER (WINAPI*)(HDC, int, int , int, const int*)>(GlContext::getFunction("wglCreatePbufferARB"));
-            wglGetPbufferDC     = reinterpret_cast<HDC (WINAPI*)(HPBUFFER)>(GlContext::getFunction("wglGetPbufferDCARB"));
+            wglCreatePbuffer = reinterpret_cast<HPBUFFER (WINAPI*)(HDC, int, int, int, const int*)>(GlContext::getFunction("wglCreatePbufferARB"));
+            wglGetPbufferDC = reinterpret_cast<HDC (WINAPI*)(HPBUFFER)>(GlContext::getFunction("wglGetPbufferDCARB"));
             wglReleasePbufferDC = reinterpret_cast<int (WINAPI*)(HPBUFFER, HDC hDC)>(GlContext::getFunction("wglReleasePbufferDCARB"));
-            wglDestroyPbuffer   = reinterpret_cast<BOOL (WINAPI*)(HPBUFFER)>(GlContext::getFunction("wglDestroyPbufferARB"));
-            wglQueryPbuffer     = reinterpret_cast<BOOL (WINAPI*)(HPBUFFER, int, int *)>(GlContext::getFunction("wglQueryPbufferARB"));
+            wglDestroyPbuffer = reinterpret_cast<BOOL (WINAPI*)(HPBUFFER)>(GlContext::getFunction("wglDestroyPbufferARB"));
+            wglQueryPbuffer = reinterpret_cast<BOOL (WINAPI*)(HPBUFFER, int, int*)>(GlContext::getFunction("wglQueryPbufferARB"));
 
             return wglCreatePbuffer && wglGetPbufferDC && wglReleasePbufferDC && wglDestroyPbuffer && wglQueryPbuffer;
         });

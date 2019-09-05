@@ -13,12 +13,12 @@ namespace Bull
         static ContextSettings Worst;
         static ContextSettings Empty;
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         ContextSettings();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param depths
          * \param stencil
@@ -29,7 +29,7 @@ namespace Bull
          */
         ContextSettings(Uint8 depths, Uint8 stencil, Uint8 antialiasing, Uint8 major, Uint8 minor);
 
-        /*! \brief Compare two ContextSettings
+        /** \brief Compare two ContextSettings
          *
          * \param right The ContextSettings to compare to this one
          *
@@ -38,7 +38,7 @@ namespace Bull
          */
         bool operator==(const ContextSettings& right) const;
 
-        /*! \brief Compare two ContextSettings
+        /** \brief Compare two ContextSettings
          *
          * \param right The ContextSettings to compare to this one
          *
@@ -47,13 +47,13 @@ namespace Bull
          */
         bool operator!=(const ContextSettings& right) const;
 
-        Uint32                 type;
-        Uint8                  major;
-        Uint8                  minor;
-        Uint8                  depths;
+        Uint32 type;
+        Uint8 major;
+        Uint8 minor;
+        Uint8 depths;
         ContextSettingsProfile profile;
-        Uint8                  stencil;
-        Uint8                  antialiasing;
+        Uint8 stencil;
+        Uint8 antialiasing;
     };
 }
 

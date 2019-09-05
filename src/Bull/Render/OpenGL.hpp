@@ -12,21 +12,22 @@
 
 namespace Bull
 {
-	class OpenGL
-	{
-	public:
+    class OpenGL
+    {
+    public:
 
         static GLenum attachmentPoint(AttachmentPoint attachmentPoint);
 
-	    static GLenum dataType(DataType dataType);
+        static GLenum dataType(DataType dataType);
 
         static GLenum hardwareBufferType(HardwareBufferType type);
+
         static GLenum hardwareBufferUsage(HardwareBufferUsage usage);
 
         static GLenum renderPrimitive(RenderPrimitive primitive);
 
-		static GLenum shaderStageType(ShaderStageType type);
-	};
+        static GLenum shaderStageType(ShaderStageType type);
+    };
 }
 
 #endif // !BULL_RENDER_OPENGL_HPP

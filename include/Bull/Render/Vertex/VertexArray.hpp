@@ -22,7 +22,7 @@ namespace Bull
 
         public:
 
-            /*! \brief Set the Color of the VertexStripe
+            /** \brief Set the Color of the VertexStripe
              *
              * \param color The Color
              *
@@ -37,7 +37,7 @@ namespace Bull
                 }
             }
 
-            /*! \brief Set the normal Vector of the VertexStripe
+            /** \brief Set the normal Vector of the VertexStripe
              *
              * \param normal The normal
              *
@@ -50,7 +50,7 @@ namespace Bull
                 }
             }
 
-            /*! \brief Get a sub stripe from the VertexStripe
+            /** \brief Get a sub stripe from the VertexStripe
              *
              * \tparam U    The size of the sub VertexStripe
              * \param index The index of the VertexStripe
@@ -66,7 +66,7 @@ namespace Bull
                 return VertexStripe<U>(std::next(m_it, index));
             }
 
-            /*! \brief Advance the VertexStripe into the parent VertexArray
+            /** \brief Advance the VertexStripe into the parent VertexArray
              *
              * \param offset The offset to advance
              *
@@ -76,7 +76,7 @@ namespace Bull
                 std::advance(m_it, offset);
             }
 
-            /*! \brief Get a next VertexStripe
+            /** \brief Get a next VertexStripe
              *
              * \param offset The offset of the VertexStripe to get
              *
@@ -90,13 +90,13 @@ namespace Bull
 
         private:
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param it The Vertex iterator to iterate on
              *
              */
             explicit VertexStripe(std::vector<Vertex>::iterator it) :
-                m_it(it)
+                    m_it(it)
             {
                 /// Nothing
             }
@@ -112,19 +112,19 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         VertexArray() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param size The size of the VertexArray
          *
          */
         explicit VertexArray(std::size_t size);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param vertices Vertices inside the VertexArray
          *
@@ -133,7 +133,7 @@ namespace Bull
 
         void add(const Vertex& vertex);
 
-        /*! \brief Get a VertexStripe from the VertexArray
+        /** \brief Get a VertexStripe from the VertexArray
          *
          * \tparam S The size of the VertexStripe
          * \param index The index of the VertexStripe to get
@@ -147,21 +147,21 @@ namespace Bull
             return VertexStripe<S>(m_vertices.begin() + index);
         }
 
-        /*! \brief Get the size of the VertexArray
+        /** \brief Get the size of the VertexArray
          *
          * \return The size
          *
          */
         std::size_t getSize() const;
 
-        /*! \brief
+        /** \brief
          *
          * \return
          *
          */
         Vertex* getBuffer();
 
-        /*! \brief
+        /** \brief
          *
          * \return
          *

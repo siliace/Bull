@@ -16,18 +16,18 @@ namespace Bull
             }
         }
 
-        void ClipboardImpl::setContent(const String& content)
+        void ClipboardImpl::setContent(const std::string& content)
         {
             flush();
 
             Expect(OpenClipboard(nullptr), Throw(Win32Error, "Failed to open clipboard"));
 
-            std::size_t size = (content.getSize() + 1) * sizeof(char);
+            std::size_t size = (content.length() + 1) * sizeof(char);
             HANDLE handler = GlobalAlloc(CF_UNICODETEXT, size);
 
             if(handler)
             {
-                std::memcpy(GlobalLock(handler), content.getBuffer(), size);
+                std::memcpy(GlobalLock(handler), content.c_str(), size);
                 GlobalUnlock(handler);
                 SetClipboardData(CF_UNICODETEXT, handler);
             }
@@ -35,9 +35,9 @@ namespace Bull
             CloseClipboard();
         }
 
-        String ClipboardImpl::getContent()
+        std::string ClipboardImpl::getContent()
         {
-            String text;
+            std::string text;
             HANDLE clipboard;
 
             Expect(OpenClipboard(nullptr), Throw(Win32Error, "Failed to open clipboard"));
@@ -46,7 +46,7 @@ namespace Bull
 
             Expect(clipboard, Throw(Win32Error, "Failed to get clipboard content"));
 
-            text = String(static_cast<const char*>(GlobalLock(clipboard)));
+            text = std::string(static_cast<const char*>(GlobalLock(clipboard)));
             GlobalUnlock(clipboard);
 
             CloseClipboard();

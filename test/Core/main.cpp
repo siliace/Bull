@@ -2,6 +2,7 @@
 #include <Bull/Core/Log/Log.hpp>
 
 #define CATCH_CONFIG_RUNNER
+
 #include <Catch/catch.hpp>
 
 int main(int argc, char* argv[])

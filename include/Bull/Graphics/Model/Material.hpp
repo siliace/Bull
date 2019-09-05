@@ -17,26 +17,26 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Material();
 
-        /*! \brief Set the shininess of the Material
+        /** \brief Set the shininess of the Material
          *
          * \param shininess The shininess
          *
          */
         void setShininess(float shininess);
 
-        /*! \brief Get the shininess of the Material
+        /** \brief Get the shininess of the Material
          *
          * \return The shininess
          *
          */
         float getShininess() const;
 
-        /*! \brief Set a Texture of the Material
+        /** \brief Set a Texture of the Material
          *
          * \param texture The texture
          * \param type    The type of the texture
@@ -44,7 +44,7 @@ namespace Bull
          */
         void setTexture(const std::shared_ptr<Texture>& texture, TextureType type);
 
-        /*! \brief Get a Texture
+        /** \brief Get a Texture
          *
          * \param type The type of the Texture
          *
@@ -56,11 +56,11 @@ namespace Bull
     private:
 
         std::map<TextureType, std::shared_ptr<Texture>> m_textures;
-        float                                           m_shininess;
-        Color                                           m_ambientColor;
-        Color                                           m_diffuseColor;
-        Color                                           m_specularColor;
-        float                                           m_alphaThreshold;
+        float m_shininess;
+        Color m_ambientColor;
+        Color m_diffuseColor;
+        Color m_specularColor;
+        float m_alphaThreshold;
     };
 }
 

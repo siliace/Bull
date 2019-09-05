@@ -1,6 +1,6 @@
+#include <sstream>
+
 #include <Bull/Core/Exception/Exception.hpp>
-#include <Bull/Core/IO/OutStringStream.hpp>
-#include <Bull/Core/IO/TextWriter.hpp>
 #include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Utility/Character.hpp>
 
@@ -9,11 +9,13 @@
 #include <Bull/Render/Context/GlFunctions.hpp>
 
 #if defined BULL_OS_WINDOWS
+
     #include <Bull/Render/Context/Wgl/WglContext.hpp>
-    typedef Bull::prv::WglContext ContextType;
+
+typedef Bull::prv::WglContext ContextType;
 #else
     #include <Bull/Render/Context/Glx/GlxContext.hpp>
-    typedef Bull::prv::GlxContext ContextType;
+typedef Bull::prv::GlxContext ContextType;
 #endif
 
 namespace Bull
@@ -115,67 +117,103 @@ namespace Bull
             return context;
         }
 
-        void* GlContext::getFunction(const String& function)
+        void* GlContext::getFunction(const std::string& function)
         {
             return ContextType::getFunction(function);
         }
 
-        bool GlContext::isSupported(const String& extension)
+        bool GlContext::isSupported(const std::string& extension)
         {
             return ExtensionsLoader::getInstance().isSupported(extension);
         }
 
         void APIENTRY GlContext::debugProc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* msg, const void* userParam)
         {
-            String message(msg);
-            OutStringStream oss;
-            TextWriter writer(oss);
+            std::ostringstream oss;
             Log& log = Log::getInstance();
 
             switch(type)
             {
-                case GL_DEBUG_TYPE_ERROR:               writer << "[Type: Error]"; break;
-                case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: writer << "[Type: Deprecated Behaviour]"; break;
-                case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  writer << "[Type: Undefined Behaviour]"; break;
-                case GL_DEBUG_TYPE_PORTABILITY:         writer << "[Type: Portability]"; break;
-                case GL_DEBUG_TYPE_PERFORMANCE:         writer << "[Type: Performance]"; break;
-                case GL_DEBUG_TYPE_MARKER:              writer << "[Type: Marker]"; break;
-                case GL_DEBUG_TYPE_PUSH_GROUP:          writer << "[Type: Push Group]"; break;
-                case GL_DEBUG_TYPE_POP_GROUP:           writer << "[Type: Pop Group]"; break;
-                case GL_DEBUG_TYPE_OTHER:               writer << "[Type: Other]"; break;
+                case GL_DEBUG_TYPE_ERROR:
+                    oss << "[Type: Error]";
+                    break;
+                case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
+                    oss << "[Type: Deprecated Behaviour]";
+                    break;
+                case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+                    oss << "[Type: Undefined Behaviour]";
+                    break;
+                case GL_DEBUG_TYPE_PORTABILITY:
+                    oss << "[Type: Portability]";
+                    break;
+                case GL_DEBUG_TYPE_PERFORMANCE:
+                    oss << "[Type: Performance]";
+                    break;
+                case GL_DEBUG_TYPE_MARKER:
+                    oss << "[Type: Marker]";
+                    break;
+                case GL_DEBUG_TYPE_PUSH_GROUP:
+                    oss << "[Type: Push Group]";
+                    break;
+                case GL_DEBUG_TYPE_POP_GROUP:
+                    oss << "[Type: Pop Group]";
+                    break;
+                case GL_DEBUG_TYPE_OTHER:
+                    oss << "[Type: Other]";
+                    break;
             }
 
             switch(source)
             {
-                case GL_DEBUG_SOURCE_API:             writer << "[Source: API]"; break;
-                case GL_DEBUG_SOURCE_WINDOW_SYSTEM:   writer << "[Source: Window System]"; break;
-                case GL_DEBUG_SOURCE_SHADER_COMPILER: writer << "[Source: Shader Compiler]"; break;
-                case GL_DEBUG_SOURCE_THIRD_PARTY:     writer << "[Source: Third Party]"; break;
-                case GL_DEBUG_SOURCE_APPLICATION:     writer << "[Source: Application]"; break;
-                case GL_DEBUG_SOURCE_OTHER:           writer << "[Source: Other]"; break;
+                case GL_DEBUG_SOURCE_API:
+                    oss << "[Source: API]";
+                    break;
+                case GL_DEBUG_SOURCE_WINDOW_SYSTEM:
+                    oss << "[Source: Window System]";
+                    break;
+                case GL_DEBUG_SOURCE_SHADER_COMPILER:
+                    oss << "[Source: Shader Compiler]";
+                    break;
+                case GL_DEBUG_SOURCE_THIRD_PARTY:
+                    oss << "[Source: Third Party]";
+                    break;
+                case GL_DEBUG_SOURCE_APPLICATION:
+                    oss << "[Source: Application]";
+                    break;
+                case GL_DEBUG_SOURCE_OTHER:
+                    oss << "[Source: Other]";
+                    break;
             }
 
-            writer << message;
+            oss << msg;
 
-            switch (severity)
+            switch(severity)
             {
-                case GL_DEBUG_SEVERITY_NOTIFICATION: log.debug(oss.toString()); break;
-                case GL_DEBUG_SEVERITY_LOW: log.info(oss.toString()); break;
-                case GL_DEBUG_SEVERITY_MEDIUM: log.warning(oss.toString()); break;
-                case GL_DEBUG_SEVERITY_HIGH: log.error(oss.toString()); break;
+                case GL_DEBUG_SEVERITY_NOTIFICATION:
+                    log.debug(oss.str());
+                    break;
+                case GL_DEBUG_SEVERITY_LOW:
+                    log.info(oss.str());
+                    break;
+                case GL_DEBUG_SEVERITY_MEDIUM:
+                    log.warning(oss.str());
+                    break;
+                case GL_DEBUG_SEVERITY_HIGH:
+                    log.error(oss.str());
+                    break;
             }
         }
 
         int GlContext::evaluatePixelFormat(unsigned int bitsPerPixel, int depths, int stencil, unsigned int antialiasing, unsigned int bitsPerPixelWanted, const ContextSettings& settingsWanted)
         {
-            int colorDiff        = bitsPerPixelWanted          - bitsPerPixel;
-            int depthDiff        = settingsWanted.depths       - depths;
-            int stencilDiff      = settingsWanted.stencil      - stencil;
+            int colorDiff = bitsPerPixelWanted - bitsPerPixel;
+            int depthDiff = settingsWanted.depths - depths;
+            int stencilDiff = settingsWanted.stencil - stencil;
             int antialiasingDiff = settingsWanted.antialiasing - antialiasing;
 
-            colorDiff        *= ((colorDiff        > 0) ? 100000 : 1);
-            depthDiff        *= ((depthDiff        > 0) ? 100000 : 1);
-            stencilDiff      *= ((stencilDiff      > 0) ? 100000 : 1);
+            colorDiff *= ((colorDiff > 0) ? 100000 : 1);
+            depthDiff *= ((depthDiff > 0) ? 100000 : 1);
+            stencilDiff *= ((stencilDiff > 0) ? 100000 : 1);
             antialiasingDiff *= ((antialiasingDiff > 0) ? 100000 : 1);
 
             int score = std::abs(colorDiff) + std::abs(depthDiff) + std::abs(stencilDiff) + std::abs(antialiasingDiff);
@@ -198,16 +236,13 @@ namespace Bull
                 if(current != this)
                 {
                     makeCurrent();
-
                     current = this;
                 }
             }
             else
             {
                 if(current == this)
-                {
                     getInternalContext().setActive(true);
-                }
             }
         }
 
@@ -217,7 +252,7 @@ namespace Bull
         }
 
         GlContext::GlContext(const ContextSettings& settings) :
-            m_settings(settings)
+                m_settings(settings)
         {
             /// Nothing
         }
@@ -241,9 +276,9 @@ namespace Bull
             }
             else
             {
-                String version = reinterpret_cast<const char*>(gl::getString(GL_VERSION));
+                std::string version = reinterpret_cast<const char*>(gl::getString(GL_VERSION));
 
-                if(!version.isEmpty())
+                if(!version.empty())
                 {
                     m_settings.major = static_cast<Uint8>(Character::charToInt(version[0]));
                     m_settings.minor = static_cast<Uint8>(Character::charToInt(version[2]));

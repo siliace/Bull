@@ -11,7 +11,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a Time of now
+            /** \brief Create a Time of now
              *
              * \return The created time
              *

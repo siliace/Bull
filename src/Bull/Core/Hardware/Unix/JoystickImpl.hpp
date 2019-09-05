@@ -12,7 +12,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Check if a joystick is connected
+            /** \brief Check if a joystick is connected
              *
              * \param id The unique ID of the joystick
              *
@@ -21,7 +21,7 @@ namespace Bull
              */
             static bool isConnected(Uint8 id);
 
-            /*! \brief Check if a joystick is connected
+            /** \brief Check if a joystick is connected
              *
              * \param id The unique ID of the joystick
              *
@@ -30,7 +30,7 @@ namespace Bull
              */
             static Joystick::Capabilities getCapabilities(Uint8 id);
 
-            /*! \brief Check if a button is pressed on a joystick
+            /** \brief Check if a button is pressed on a joystick
              *
              * \param button The ID of the button to check
              * \param joystick The unique ID of the joystick
@@ -40,7 +40,7 @@ namespace Bull
              */
             static bool isButtonPressed(unsigned int button, Uint8 joystick);
 
-            /*! \brief Get the state of an axis
+            /** \brief Get the state of an axis
              *
              * \param axis The axis to check
              * \param joystick The joystick to check

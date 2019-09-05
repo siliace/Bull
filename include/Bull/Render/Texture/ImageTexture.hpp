@@ -11,21 +11,21 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param pixelFormat The PixelFormat of the ImageTexture
          *
          */
         explicit ImageTexture(PixelFormat pixelFormat);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param image The AbstractImage to copy
          *
          */
         explicit ImageTexture(const AbstractImage& image);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param size        The Size of the ImageTexture
          * \param pixelFormat The PixelFormat of the ImageTexture
@@ -33,7 +33,7 @@ namespace Bull
          */
         ImageTexture(const Size<std::size_t>& size, PixelFormat pixelFormat);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param pixels      Pixels of the ImageTexture
          * \param size        The Size of the ImageTexture
@@ -42,14 +42,14 @@ namespace Bull
          */
         ImageTexture(const ByteArray& pixels, const Size<std::size_t>& size, PixelFormat pixelFormat);
 
-        /*! \brief Constructor by movement semantic
+        /** \brief Constructor by movement semantic
          *
          * \param imageTexture The ImageTexture to move
          *
          */
         ImageTexture(ImageTexture&& imageTexture) noexcept;
 
-        /*! \brief Assignment operator by movement semantic
+        /** \brief Assignment operator by movement semantic
          *
          * \param imageTexture The ImageTexture to move
          *
@@ -58,14 +58,14 @@ namespace Bull
          */
         ImageTexture& operator=(ImageTexture&& imageTexture) noexcept;
 
-        /*! \brief Create the ImageTexture with a given Size
+        /** \brief Create the ImageTexture with a given Size
          *
          * \param size The Size
          *
          */
         void create(const Size<std::size_t>& size) override;
 
-        /*! \brief Create the ImageTexture from pixels
+        /** \brief Create the ImageTexture from pixels
          *
          * \param pixels Pixels of the ImageTexture
          * \param size   The Size of the pixels
@@ -73,21 +73,21 @@ namespace Bull
          */
         void create(const ByteArray& pixels, const Size<std::size_t>& size) override;
 
-        /*! \brief Get the Size of the ImageTexture
+        /** \brief Get the Size of the ImageTexture
          *
          * \return The Size
          *
          */
         Size<std::size_t> getSize() const override;
 
-        /*! \brief Get the pixels of the ImageTexture
+        /** \brief Get the pixels of the ImageTexture
          *
          * \return Pixels
          *
          */
         ByteArray getPixels() const override;
 
-        /*! \brief Get the PixelFormat of the ImageTexture
+        /** \brief Get the PixelFormat of the ImageTexture
          *
          * \return The PixelFormat
          *

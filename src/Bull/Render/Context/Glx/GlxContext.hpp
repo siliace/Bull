@@ -17,23 +17,23 @@ namespace Bull
         {
         public:
 
-            /*! \brief Get an OpenGL function
+            /** \brief Get an OpenGL function
              *
              * \param function The function name
              *
              * \param Return the function, nullptr if the function is not available
              *
              */
-            static void* getFunction(const String& function);
+            static void* getFunction(const std::string& function);
 
-            /*! \brief Set the list of extensions to load
+            /** \brief Set the list of extensions to load
              *
              * \param loader The instance of the extension loader to use
              *
              */
             static void requireExtensions(ExtensionsLoader& loader);
 
-            /*! \brief Get the best config according to context settings
+            /** \brief Get the best config according to context settings
              *
              * \param settings     Context settings
              * \param bitsPerPixel The number of bits per pixel to use
@@ -45,14 +45,14 @@ namespace Bull
 
         public:
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param shared The shared context
              *
              */
             explicit GlxContext(const GlxContext* shared);
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param shared   The shared context
              * \param mode     The VideoMode to use to create the context
@@ -61,7 +61,7 @@ namespace Bull
              */
             GlxContext(const GlxContext* shared, const VideoMode& mode, const ContextSettings& settings);
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param shared The shared context
              * \param bitsPerPixel The number of bits to use per pixel
@@ -70,7 +70,7 @@ namespace Bull
              */
             GlxContext(const GlxContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings);
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param shared The shared context
              * \param window The window to bind the created context
@@ -80,17 +80,17 @@ namespace Bull
              */
             GlxContext(const GlxContext* shared, const WindowImpl& window, Uint8 bitsPerPixel, const ContextSettings& settings);
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             ~GlxContext();
 
-            /*! \brief Display what has been rendered so far
+            /** \brief Display what has been rendered so far
              *
              */
             void display() override;
 
-            /*! \brief Activate or deactivate the vertical synchronization
+            /** \brief Activate or deactivate the vertical synchronization
              *
              * \param active True to activate, false to deactivate
              *
@@ -99,7 +99,7 @@ namespace Bull
              */
             void enableVsync(bool active) override;
 
-            /*! \brief Get the render surface of the context
+            /** \brief Get the render surface of the context
              *
              * \return Return the render context
              *
@@ -108,21 +108,21 @@ namespace Bull
 
         protected:
 
-            /*! \brief Make the context current
+            /** \brief Make the context current
              *
              */
             void makeCurrent() override;
 
         private:
 
-            /*! \brief Create the render surface
+            /** \brief Create the render surface
              *
              * \param window The window to bind to this context
              *
              */
             void createSurface(const WindowImpl& window);
 
-            /*! \brief Create the render surface
+            /** \brief Create the render surface
              *
              * \param shared The shared context
              * \param size   The Size of the surface to create
@@ -130,26 +130,26 @@ namespace Bull
              */
             void createSurface(const GlxContext* shared, const Size<unsigned int>& size);
 
-            /*! \brief Create the render context
+            /** \brief Create the render context
              *
              * \param shared The shared context
              *
              */
             void createContext(const GlxContext* shared);
 
-            /*! \brief Update the ContextSettings according to the created context
+            /** \brief Update the ContextSettings according to the created context
              *
              */
             void updateSettings();
 
-            Log&        m_log;
-            XWindow     m_window;
-            GLXContext  m_render;
+            Log& m_log;
+            XWindow m_window;
+            GLXContext m_render;
             GLXFBConfig m_config;
-            GLXPbuffer  m_pbuffer;
-            Display&    m_display;
-            XColormap   m_colormap;
-            bool        m_ownWindow;
+            GLXPbuffer m_pbuffer;
+            Display& m_display;
+            XColormap m_colormap;
+            bool m_ownWindow;
         };
     }
 }

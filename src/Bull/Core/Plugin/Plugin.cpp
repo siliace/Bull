@@ -3,8 +3,8 @@
 
 namespace Bull
 {
-    Plugin::Plugin(const Path& path, const String& entryPoint) :
-        m_library(path.toString())
+    Plugin::Plugin(const Path& path, const std::string& entryPoint) :
+            m_library(path.toString())
     {
         call<void>(entryPoint, RunTime::getInstance());
     }

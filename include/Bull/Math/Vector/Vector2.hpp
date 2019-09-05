@@ -14,7 +14,7 @@ namespace Bull
 
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param value The value of all components
          *
@@ -24,7 +24,7 @@ namespace Bull
             set(value, value);
         }
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param x The X component
          * \param y The Y component
@@ -35,19 +35,19 @@ namespace Bull
             set(x, y);
         }
 
-        /*! \brief Copy constructor
+        /** \brief Copy constructor
          *
          * \param copy The Vector to copy
          *
          */
         template <typename U, std::size_t US>
-        Vector2(const Vector<U, US>& copy) :
-            Vector<T, 2>(copy)
+        Vector2(const Vector <U, US>& copy) :
+                Vector<T, 2>(copy)
         {
             /// Nothing
         }
 
-        /*! \brief Set the Vector2
+        /** \brief Set the Vector2
          *
          * \param x The X component
          * \param y The Y component
@@ -63,7 +63,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Get the ratio of the Vector
+        /** \brief Get the ratio of the Vector
          *
          * \return The ratio
          *
@@ -73,7 +73,7 @@ namespace Bull
             return static_cast<float>(x()) / static_cast<float>(y());
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *
@@ -83,7 +83,7 @@ namespace Bull
             return this->at(0);
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *
@@ -93,7 +93,7 @@ namespace Bull
             return this->at(0);
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *
@@ -103,7 +103,7 @@ namespace Bull
             return this->at(1);
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *

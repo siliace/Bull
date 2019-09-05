@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 
 #include <Bull/Render/Context/SurfaceHandler.hpp>
 
@@ -15,14 +15,14 @@ namespace Bull
         {
         public:
 
-            /*! \brief Get a list of supported extensions
+            /** \brief Get a list of supported extensions
              *
              * \param handler The surface to use to check whether an extension is supported
              *
              * \return Return the list
              *
              */
-            static std::vector<String> getExtensions(SurfaceHandler handler);
+            static std::vector<std::string> getExtensions(SurfaceHandler handler);
         };
     }
 }

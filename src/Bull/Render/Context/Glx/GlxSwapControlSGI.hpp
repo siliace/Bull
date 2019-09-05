@@ -11,10 +11,11 @@ namespace Bull
     {
         namespace sgi
         {
-            int (*glXSwapInterval)(int interval) = nullptr;
+            int (* glXSwapInterval)(int interval) = nullptr;
         }
 
-        Extension glxSwapControlSGI("GLX_SGI_swap_control", [] {
+        Extension glxSwapControlSGI("GLX_SGI_swap_control", []
+        {
             sgi::glXSwapInterval = reinterpret_cast<int (*)(int)>(GlContext::getFunction("glXSwapIntervalSGI"));
 
             return sgi::glXSwapInterval;

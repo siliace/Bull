@@ -11,14 +11,14 @@
 
 namespace Bull
 {
-    template<typename T>
+    template <typename T>
     class Matrix4 : public SquareMatrix<T, 4>
     {
     public:
 
         static Matrix4<T> Identity;
 
-        /*! \brief Create a scaling transformation matrix
+        /** \brief Create a scaling transformation matrix
          *
          * \param scale The scaling factor
          *
@@ -36,7 +36,7 @@ namespace Bull
             return model;
         }
 
-        /*! \brief Create a rotation transformation matrix
+        /** \brief Create a rotation transformation matrix
          *
          * \param rotation The rotation
          *
@@ -47,9 +47,9 @@ namespace Bull
         {
             Matrix4<T> model = Identity;
 
-            T tx  = rotation.x + rotation.x;
-            T ty  = rotation.y + rotation.y;
-            T tz  = rotation.z + rotation.z;
+            T tx = rotation.x + rotation.x;
+            T ty = rotation.y + rotation.y;
+            T tz = rotation.z + rotation.z;
             T twx = tx * rotation.w;
             T twy = ty * rotation.w;
             T twz = tz * rotation.w;
@@ -75,7 +75,7 @@ namespace Bull
             return model;
         }
 
-        /*! \brief Create a translation transformation matrix
+        /** \brief Create a translation transformation matrix
          *
          * \param translation The translation
          *
@@ -93,7 +93,7 @@ namespace Bull
             return model;
         }
 
-        /*! \brief Create an orthographic projection matrix
+        /** \brief Create an orthographic projection matrix
          *
          * \param plan
          * \param zBounds
@@ -108,13 +108,13 @@ namespace Bull
             T n = zBounds.x();
             T f = zBounds.y();
 
-            T top    = plan.y;
-            T left   = plan.x;
-            T right  = plan.x + plan.width;
+            T top = plan.y;
+            T left = plan.x;
+            T right = plan.x + plan.width;
             T bottom = plan.y + plan.height;
 
-            projection.at(0, 0) =  2 / (right - left);
-            projection.at(1, 1) =  2 / (top - bottom);
+            projection.at(0, 0) = 2 / (right - left);
+            projection.at(1, 1) = 2 / (top - bottom);
             projection.at(2, 2) = -2 / (f - n);
             projection.at(3, 0) = -((right + left) / (right - left));
             projection.at(3, 1) = -((top + bottom) / (top - bottom));
@@ -124,7 +124,7 @@ namespace Bull
             return projection;
         }
 
-        /*! \brief Create a perspective projection matrix
+        /** \brief Create a perspective projection matrix
          *
          * \param angle
          * \param ratio
@@ -149,7 +149,7 @@ namespace Bull
             return projection;
         }
 
-        /*! \brief Create a look at matrix
+        /** \brief Create a look at matrix
          *
          * \param eye    The position of the camera
          * \param center The target to look at
@@ -167,40 +167,40 @@ namespace Bull
             Vector3<T> s = Vector3<T>::crossProduct(f, u).normalize();
             u = Vector3<T>::crossProduct(s, f).normalize();
 
-            view.setColumn(Vector4<T>( s, -s.dotProduct(eye)), 0);
-            view.setColumn(Vector4<T>( u, -u.dotProduct(eye)), 1);
-            view.setColumn(Vector4<T>(-f,  f.dotProduct(eye)), 2);
-            view.setColumn(Vector4<T>(0.f, 0.f, 0.f, 1.f),     3);
+            view.setColumn(Vector4<T>(s, -s.dotProduct(eye)), 0);
+            view.setColumn(Vector4<T>(u, -u.dotProduct(eye)), 1);
+            view.setColumn(Vector4<T>(-f, f.dotProduct(eye)), 2);
+            view.setColumn(Vector4<T>(0.f, 0.f, 0.f, 1.f), 3);
 
             return view;
         }
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Matrix4() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param value The value to use to fill the Matrix
          *
          */
         explicit Matrix4(T value) :
-            SquareMatrix<T, 4>(value)
+                SquareMatrix<T, 4>(value)
         {
             /// Nothing
         }
 
-        /*! \brief Copy constructor
+        /** \brief Copy constructor
          *
          * \param copy The Matrix to copy
          *
          */
         template <typename U, std::size_t WU, std::size_t HU>
         Matrix4(const Matrix<U, WU, HU>& copy) :
-            SquareMatrix<T, 4>(copy)
+                SquareMatrix<T, 4>(copy)
         {
             /// Nothing
         }

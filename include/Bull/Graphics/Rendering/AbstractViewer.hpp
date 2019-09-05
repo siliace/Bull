@@ -11,7 +11,7 @@ namespace Bull
 {
     struct BULL_GRAPHICS_API AbstractViewer
     {
-        /*! \brief Resize the AbstractViewer
+        /** \brief Resize the AbstractViewer
          *
          * Resizing the abstract viewer will change the plan or the ratio of the projection
          *
@@ -20,14 +20,14 @@ namespace Bull
          */
         virtual void resize(const Size<unsigned int>& size) = 0;
 
-        /*! \brief Get the product of the projection matrix with the view matrix held by the AbstractViewer
+        /** \brief Get the product of the projection matrix with the view matrix held by the AbstractViewer
          *
          * \return The projection-view matrix
          *
          */
         virtual Matrix4F getViewProjectionMatrix() const = 0;
 
-        /*! \brief Get the projection-view matrix of a Transformable as seen by the AbstractViewer
+        /** \brief Get the projection-view matrix of a Transformable as seen by the AbstractViewer
          *
          * \param transformable The Transformable
          *

@@ -9,7 +9,7 @@ namespace Bull
 {
     struct BULL_GRAPHICS_API Renderable
     {
-        /*! \brief Render the Renderable
+        /** \brief Render the Renderable
          *
          * \param shader The Shader to use to render
          *

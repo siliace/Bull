@@ -1,7 +1,8 @@
 #ifndef BULL_CORE_IO_TEXTWRITTER_HPP
 #define BULL_CORE_IO_TEXTWRITTER_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
+
 #include <Bull/Core/IO/OutStream.hpp>
 
 namespace Bull
@@ -10,46 +11,46 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param stream The OutStream to write in
          *
          */
         explicit TextWriter(OutStream& stream);
 
-        /*! \brief Write a String in the OutStream
+        /** \brief Write a std::string in the OutStream
          *
-         * \param string The String to write
+         * \param string The std::string to write
          *
          */
-        void write(const String& string);
+        void write(const std::string& string);
 
-        /*! \brief Write a line in the OutStream
+        /** \brief Write a line in the OutStream
          *
          * \param line The line to write
          *
          */
-        void writeLine(const String& line);
+        void writeLine(const std::string& line);
 
         void breakLine();
 
-        /*! \brief Write a String in the OutStream
+        /** \brief Write a std::string in the OutStream
          *
-         * \param string The String to write
+         * \param string The std::string to write
          *
          * \return This
          *
          */
         TextWriter& operator<<(const char* string);
 
-        /*! \brief Write a String in the OutStream
+        /** \brief Write a std::string in the OutStream
          *
-         * \param string The String to write
+         * \param string The std::string to write
          *
          * \return This
          *
          */
-        TextWriter& operator<<(const String& string);
+        TextWriter& operator<<(const std::string& string);
 
     private:
 

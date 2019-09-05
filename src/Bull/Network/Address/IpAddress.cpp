@@ -3,7 +3,7 @@
 
 namespace Bull
 {
-    void IpAddress::resolve(const String& hostname)
+    void IpAddress::resolve(const std::string& hostname)
     {
         m_bytes = prv::IpAddressImpl::resolve(hostname, getProtocol());
         m_valid = true;
@@ -32,7 +32,7 @@ namespace Bull
     }
 
     IpAddress::IpAddress(std::size_t size, bool valid) :
-        m_valid(valid)
+            m_valid(valid)
     {
         m_bytes.resize(size);
     }

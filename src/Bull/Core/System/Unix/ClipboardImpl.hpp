@@ -1,7 +1,7 @@
 #ifndef BULL_CLIPBOARDIMPL_HPP
 #define BULL_CLIPBOARDIMPL_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 
 namespace Bull
 {
@@ -11,24 +11,24 @@ namespace Bull
         {
         public:
 
-            /*! \brief Flush the content of the Clipboard
+            /** \brief Flush the content of the Clipboard
              *
              */
             static void flush();
 
-            /*! \brief Set the content of the Clipboard
+            /** \brief Set the content of the Clipboard
              *
-             * \param content The String inside the clipboard
+             * \param content The std::string inside the clipboard
              *
              */
-            static void setContent(const String& content);
+            static void setContent(const std::string& content);
 
-            /*! \brief Get the content of the Clipboard
+            /** \brief Get the content of the Clipboard
              *
-             * \return The String inside the Clipboard
+             * \return The std::string inside the Clipboard
              *
              */
-            static String getContent();
+            static std::string getContent();
         };
     }
 }

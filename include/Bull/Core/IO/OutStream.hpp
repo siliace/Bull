@@ -7,12 +7,12 @@ namespace Bull
 {
     struct BULL_CORE_API OutStream
     {
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         virtual ~OutStream();
 
-        /*! \brief Write data into a stream
+        /** \brief Write data into a stream
          *
          * \param bytes Bytes to write
          *
@@ -21,7 +21,7 @@ namespace Bull
          */
         virtual std::size_t write(const ByteArray& bytes) = 0;
 
-        /*! \brief Flush the OutStream
+        /** \brief Flush the OutStream
          *
          */
         virtual void flush() = 0;

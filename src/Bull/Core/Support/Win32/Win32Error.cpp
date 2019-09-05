@@ -6,13 +6,13 @@ namespace Bull
 {
     namespace prv
     {
-        Win32Error::Win32Error(const String& file, Uint64 line, const String& source, const String& description) :
-            Exception(file, line, "Win32Error", source, description + " - " + createDescription())
+        Win32Error::Win32Error(const std::string& file, Uint64 line, const std::string& source, const std::string& description) :
+                Exception(file, line, "Win32Error", source, description + " - " + createDescription())
         {
             /// Nothing
         }
 
-        String Win32Error::createDescription() const
+        std::string Win32Error::createDescription() const
         {
             DWORD error = GetLastError();
 
@@ -23,9 +23,9 @@ namespace Bull
 
             char* messageBuffer = nullptr;
             size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-                                         nullptr, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, nullptr);
+                                         nullptr, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR) &messageBuffer, 0, nullptr);
 
-            String message(messageBuffer, size);
+            std::string message(messageBuffer, size);
 
             LocalFree(messageBuffer);
 

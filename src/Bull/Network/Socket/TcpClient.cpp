@@ -11,13 +11,13 @@
 namespace Bull
 {
     TcpClient::TcpClient() :
-        Socket(SocketType_Tcp)
+            Socket(SocketType_Tcp)
     {
         /// Nothing
     }
 
     TcpClient::TcpClient(TcpClient&& right) noexcept :
-        Socket(std::move(right))
+            Socket(std::move(right))
     {
         std::swap(m_hostPort, right.m_hostPort);
         std::swap(m_hostAddress, right.m_hostAddress);
@@ -169,7 +169,7 @@ namespace Bull
     {
         Socket::create(handler);
 
-        m_hostPort    = port;
+        m_hostPort = port;
         m_hostAddress = std::move(address);
     }
 }

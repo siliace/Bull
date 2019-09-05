@@ -9,12 +9,12 @@ namespace Bull
 {
     struct BULL_RENDER_API Viewport
     {
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Viewport() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param position
          * \param size
@@ -22,7 +22,7 @@ namespace Bull
          */
         Viewport(const Size<int>& position, const Size<unsigned int>& size);
 
-        /*! \brief Compare two viewports
+        /** \brief Compare two viewports
          *
          * \param right The viewport to compare to this one
          *
@@ -31,7 +31,7 @@ namespace Bull
          */
         bool operator==(const Viewport& right) const;
 
-        /*! \brief Compare two viewports
+        /** \brief Compare two viewports
          *
          * \param right The viewport to compare to this one
          *
@@ -40,7 +40,7 @@ namespace Bull
          */
         bool operator!=(const Viewport& right) const;
 
-        /*! \brief Move the viewport
+        /** \brief Move the viewport
          *
          * \param offset The offset to move the viewport
          *

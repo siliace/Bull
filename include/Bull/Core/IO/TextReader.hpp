@@ -9,30 +9,30 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param stream The InStream to read
          *
          */
         explicit TextReader(InStream& stream);
 
-        /*! \brief Read all the content of the OutStream
+        /** \brief Read all the content of the OutStream
          *
          * \return The content
          *
          */
-        String readAll();
+        std::string readAll();
 
-        /*! \brief Read the next line of the stream
+        /** \brief Read the next line of the stream
          *
          * \param separator The separator character between two lines
          *
          * \return The next line
          *
          */
-        String readLine(char separator = '\n');
+        std::string readLine(char separator = '\n');
 
-        /*! \brief Read the next character of the stream
+        /** \brief Read the next character of the stream
          *
          * \return The character read
          *

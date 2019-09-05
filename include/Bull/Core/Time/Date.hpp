@@ -11,14 +11,14 @@ namespace Bull
     {
     public:
 
-        /*! \brief Create a Date of now
+        /** \brief Create a Date of now
          *
          * \return The created Date
          *
          */
         static Date now();
 
-        /*! \brief Create a Date of the given year
+        /** \brief Create a Date of the given year
          *
          * \param year The year
          *
@@ -27,7 +27,7 @@ namespace Bull
          */
         static Date make(unsigned int year);
 
-        /*! \brief Create a Date of the given year and month
+        /** \brief Create a Date of the given year and month
          *
          * \param year  The year
          * \param month The month
@@ -37,7 +37,7 @@ namespace Bull
          */
         static Date make(unsigned int year, DateMonth month);
 
-        /*! \brief Create a Date of the given year, month and day
+        /** \brief Create a Date of the given year, month and day
          *
          * \param year  The year
          * \param month The month
@@ -50,7 +50,7 @@ namespace Bull
 
     public:
 
-        /*! \brief Get the year of the Date
+        /** \brief Get the year of the Date
          *
          * \return Teh year
          *
@@ -60,7 +60,7 @@ namespace Bull
             return m_year;
         }
 
-        /*! \brief Get the month of the Date
+        /** \brief Get the month of the Date
          *
          * \return The month
          *
@@ -70,7 +70,7 @@ namespace Bull
             return m_month;
         }
 
-        /*! \brief Get the day of the Date
+        /** \brief Get the day of the Date
          *
          * \return The day
          *
@@ -80,21 +80,21 @@ namespace Bull
             return m_day;
         }
 
-        /*! \brief Get the day of the year
+        /** \brief Get the day of the year
          *
          * \return The day of the year
          *
          */
         unsigned int getDayOfYear() const;
 
-        /*! \brief Tell whether the year of the Date is leap
+        /** \brief Tell whether the year of the Date is leap
          *
          * \return True if the year is leap
          *
          */
         bool isLeap() const;
 
-        /*! \brief Compare two dates
+        /** \brief Compare two dates
          *
          * \param left The Date to compare with this
          *
@@ -103,7 +103,7 @@ namespace Bull
          */
         bool operator==(const Date& left) const;
 
-        /*! \brief Compare two dates
+        /** \brief Compare two dates
          *
          * \param left The Date to compare with this
          *
@@ -114,7 +114,7 @@ namespace Bull
 
     private:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param year  The year of the Date
          * \param month The month of the Date
@@ -124,7 +124,7 @@ namespace Bull
         Date(unsigned int year, DateMonth month, unsigned int day);
 
         unsigned int m_year;
-        DateMonth    m_month;
+        DateMonth m_month;
         unsigned int m_day;
     };
 }

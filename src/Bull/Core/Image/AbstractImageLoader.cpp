@@ -1,4 +1,5 @@
 #define STB_IMAGE_IMPLEMENTATION
+
 #include <stb_image/stb_image.h>
 
 #include <Bull/Core/Exception/InternalError.hpp>
@@ -13,17 +14,21 @@ namespace Bull
         {
             switch(pixelFormat)
             {
-                case PixelFormat_Luma8: return STBI_grey;
-                case PixelFormat_Luma8Alpha8: return STBI_grey_alpha;
-                case PixelFormat_Rgb8: return STBI_rgb;
-                case PixelFormat_Rgb8Alpha8: return STBI_rgb_alpha;
+                case PixelFormat_Luma8:
+                    return STBI_grey;
+                case PixelFormat_Luma8Alpha8:
+                    return STBI_grey_alpha;
+                case PixelFormat_Rgb8:
+                    return STBI_rgb;
+                case PixelFormat_Rgb8Alpha8:
+                    return STBI_rgb_alpha;
             }
 
             return 0;
         }
     }
 
-    String AbstractImageLoader::getErrorMessage() const
+    std::string AbstractImageLoader::getErrorMessage() const
     {
         std::lock_guard<std::mutex> lock(m_mutex);
 
@@ -36,7 +41,8 @@ namespace Bull
         int width, height;
         stbi_io_callbacks callbacks;
 
-        callbacks.read = [](void* user, char* data, int size) -> int {
+        callbacks.read = [](void* user, char* data, int size) -> int
+        {
             ByteArray bytes = reinterpret_cast<InStream*>(user)->read(size);
 
             std::memcpy(data, bytes.getBuffer(), bytes.getCapacity());
@@ -44,11 +50,13 @@ namespace Bull
             return bytes.getCapacity();
         };
 
-        callbacks.skip = [](void* user, int n) {
+        callbacks.skip = [](void* user, int n)
+        {
             reinterpret_cast<InStream*>(user)->skip(n);
         };
 
-        callbacks.eof  = [](void* user) -> int {
+        callbacks.eof = [](void* user) -> int
+        {
             return reinterpret_cast<InStream*>(user)->isAtEnd() ? 1 : 0;
         };
 
@@ -61,6 +69,6 @@ namespace Bull
 
         stbi_image_free(buffer);
 
-        return { pixels, size, channels };
+        return {pixels, size, channels};
     }
 }

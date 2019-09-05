@@ -10,7 +10,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Write a ByteArray into the MemoryAccumulator
+        /** \brief Write a ByteArray into the MemoryAccumulator
          *
          * \param bytes Bytes to write
          *
@@ -19,7 +19,7 @@ namespace Bull
          */
         std::size_t write(const ByteArray& bytes) override;
 
-        /*! \brief Write the content of a memory area into the MemoryAccumulator
+        /** \brief Write the content of a memory area into the MemoryAccumulator
          *
          * \param data   The memory area to write
          * \param length The length of the memory area
@@ -29,14 +29,14 @@ namespace Bull
          */
         std::size_t write(const void* data, std::size_t length);
 
-        /*! \brief Flush the MemoryAccumulator
+        /** \brief Flush the MemoryAccumulator
          *
          * Writing operations are immediate so flushing doesn't have any effect
          *
          */
         void flush() override;
 
-        /*! \brief Get bytes written so far
+        /** \brief Get bytes written so far
          *
          * \return Bytes written
          *

@@ -10,12 +10,12 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         FileLogger();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param path The Path of the log file
          *

@@ -5,7 +5,7 @@ bull_add_library(bull-graphics)
 
 target_sources(bull-graphics
         PUBLIC
-            ${BULL_INC_GRAPHICS}/Export.hpp
+        ${BULL_INC_GRAPHICS}/Export.hpp
         )
 
 add_subdirectory(Light)

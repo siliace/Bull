@@ -15,17 +15,17 @@ namespace Bull
         {
         protected:
 
-            static constexpr long EventsMasks = KeyPressMask         | KeyReleaseMask    | /// Keyboard events
-                                                PointerMotionMask    | ButtonMotionMask  | /// Mouse move events
-                                                ButtonPressMask      | ButtonReleaseMask | /// Mouse buttons events
-                                                FocusChangeMask      |                     /// Focus events
-                                                StructureNotifyMask  |                     /// Resize events
+            static constexpr long EventsMasks = KeyPressMask | KeyReleaseMask | /// Keyboard events
+                                                PointerMotionMask | ButtonMotionMask | /// Mouse move events
+                                                ButtonPressMask | ButtonReleaseMask | /// Mouse buttons events
+                                                FocusChangeMask |                     /// Focus events
+                                                StructureNotifyMask |                     /// Resize events
                                                 VisibilityChangeMask |                     /// Visibility change (internal uses only)
-                                                EnterWindowMask      | LeaveWindowMask;    /// Mouse Enter/Leave
+                                                EnterWindowMask | LeaveWindowMask;    /// Mouse Enter/Leave
 
         private:
 
-            /*! \brief Convert a Xlib key value to a Bull::Keyboard::Key
+            /** \brief Convert a Xlib key value to a Bull::Keyboard::Key
              *
              * \param xkey The Xlib keycode to convert
              *
@@ -34,7 +34,7 @@ namespace Bull
              */
             static KeyboardKey convertXKToBullkey(KeySym xkey);
 
-            /*! \brief Create an hidden cursor
+            /** \brief Create an hidden cursor
              *
              * \param display A display connection
              * \param window  The window related to the cursor to create
@@ -46,64 +46,64 @@ namespace Bull
 
         public:
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param mode The VideoMode to use to create the window
              * \param title The title of the window
              * \param WindowStyle The WindowStyle to use to create the window
              *
              */
-            WindowImplXlib(const VideoMode& mode, const String& title, Uint32 WindowStyle);
+            WindowImplXlib(const VideoMode& mode, const std::string& title, Uint32 WindowStyle);
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             virtual ~WindowImplXlib();
 
-            /*! \brief Start to process events to fill event queue
+            /** \brief Start to process events to fill event queue
              *
              */
             void startProcessEvents() override;
 
-            /*! \brief Minimize a window
+            /** \brief Minimize a window
              *
              */
             void minimize() override;
 
-            /*! \brief Check if the window is minimized
+            /** \brief Check if the window is minimized
              *
              * \return Return true if the window is minimized, false otherwise
              *
              */
             bool isMinimized() const override;
 
-            /*! \brief Maximize a window
+            /** \brief Maximize a window
              *
              */
             void maximize() override;
 
-            /*! \brief Check if the window is maximized
+            /** \brief Check if the window is maximized
              *
              * \return Return true if the window is maximized, false otherwise
              *
              */
             bool isMaximized() const override;
 
-            /*! \brief Enable or disable the capture of the cursor inside the window
+            /** \brief Enable or disable the capture of the cursor inside the window
              *
              * \param enable The state of the capture
              *
              */
             void enableCaptureCursor(bool capture) override;
 
-            /*! \brief Set the size of the window
+            /** \brief Set the size of the window
              *
              * \param size The new size of the window
              *
              */
             void setPosition(const Size<int>& position) override;
 
-            /*! \brief Set the size of the window
+            /** \brief Set the size of the window
              *
              * \param x The new width of the window
              * \param y The new height of the window
@@ -111,112 +111,112 @@ namespace Bull
              */
             Size<int> getPosition() const override;
 
-            /*! \brief Set the minimal size of the window
+            /** \brief Set the minimal size of the window
              *
              * \param size The minimal size of the window
              *
              */
             void setMinSize(const Size<unsigned int>& size) override;
 
-            /*! \brief Get the minimal size of the window
+            /** \brief Get the minimal size of the window
              *
              * \return The minimal size
              *
              */
             Size<unsigned int> getMinSize() const override;
 
-            /*! \brief Set the maximal size of the window
+            /** \brief Set the maximal size of the window
              *
              * \param size The maximal size of the window
              *
              */
             void setMaxSize(const Size<unsigned int>& size) override;
 
-            /*! \brief Get the maximal size of the window
+            /** \brief Get the maximal size of the window
              *
              * \return The maximal size
              *
              */
             Size<unsigned int> getMaxSize() const override;
 
-            /*! \brief Set the size of the window
+            /** \brief Set the size of the window
              *
              * \param size The new size of the window
              *
              */
             void setSize(const Size<unsigned int>& size) override;
 
-            /*! \brief Get the size of the window
+            /** \brief Get the size of the window
              *
              * \return Return the size of the window
              *
              */
             Size<unsigned int> getSize() const override;
 
-            /*! \brief Set the title of the window
+            /** \brief Set the title of the window
              *
              * \param title The title to set to the window
              *
              */
-            void setTitle(const String& title) override;
+            void setTitle(const std::string& title) override;
 
-            /*! \brief Get the title of the window
+            /** \brief Get the title of the window
              *
              * \return Return the title of the window
              *
              */
-            String getTitle() const override;
+            std::string getTitle() const override;
 
-            /*! \brief Check if the window has the focus
+            /** \brief Check if the window has the focus
              *
              * \param Return true if the window has the focus, false otherwise
              *
              */
             bool hasFocus() const override;
 
-            /*! \brief Enter or leave the fullscreen mode
+            /** \brief Enter or leave the fullscreen mode
              *
              * \param fullscreen False to leave the fullscreen mode, true to enter the fullscreen mode
              *
              */
             void switchFullscreen(bool fullscreen) override;
 
-            /*! \brief Show or hide the window
+            /** \brief Show or hide the window
              *
              * \param visible True to show the window, false to hide the window
              *
              */
             void setVisible(bool visible) override;
 
-            /*! \brief Set the icon of the Window
+            /** \brief Set the icon of the Window
              *
              * \param icon The icon
              *
              */
             void setIcon(const Image& icon) override;
 
-            /*! \brief Set the mouse cursor of the Window
+            /** \brief Set the mouse cursor of the Window
              *
              * \param cursor The cursor
              *
              */
             void setMouseCursor(const CursorImpl& cursor) override;
 
-            /*! \brief Toggle cursor visibility
+            /** \brief Toggle cursor visibility
              *
              * \param visible True to show the cursor, false to hide
              *
              */
             void setMouseCursorVisible(bool visible) override;
 
-            /*! \brief Check whether the mouse cursor is visible
+            /** \brief Check whether the mouse cursor is visible
              *
              * \return True if the mouse cursor is visible
              *
              */
             bool isMouseCursorVisible() const override;
 
-            /*! \brief Get the window system handler
+            /** \brief Get the window system handler
              *
              * \return Return the native window system handler
              *
@@ -225,21 +225,21 @@ namespace Bull
 
         protected:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             WindowImplXlib();
 
-            /*! \brief Open the window
+            /** \brief Open the window
              *
              * \param mode  The VideoMode of the Window
              * \param title The title of the Window
              * \param style The decoration of the Window
              *
              */
-            void open(const VideoMode& mode, const String& title, Uint32 style);
+            void open(const VideoMode& mode, const std::string& title, Uint32 style);
 
-            /*! \brief Open the window
+            /** \brief Open the window
              *
              * \param size  The Size of the Window
              * \param title The title of the Window
@@ -247,34 +247,34 @@ namespace Bull
              * \param vi    The VisualInfo parameters to use to open
              *
              */
-            void open(const Size<unsigned int>& size, const String& title, Uint32 style, XVisualInfo* vi);
+            void open(const Size<unsigned int>& size, const std::string& title, Uint32 style, XVisualInfo* vi);
 
         private:
 
-            /*! \brief Perform internal initialization
+            /** \brief Perform internal initialization
              *
              * \param title The title of the window to create
              * \param style The decoration of the window
              *
              */
-            void initialize(const String& title, Uint32 style);
+            void initialize(const std::string& title, Uint32 style);
 
-            /*! \brief Set Window manager protocols supported
+            /** \brief Set Window manager protocols supported
              *
              */
             void setProtocols();
 
-            XPixmap   m_icon;
-            XScreen*  m_screen;
-            Display&  m_display;
-            XWindow   m_handler;
-            XPixmap   m_iconMask;
-            Size<unsigned int>    m_lastSize;
-            bool      m_isMapped;
+            XPixmap m_icon;
+            XScreen* m_screen;
+            Display& m_display;
+            XWindow m_handler;
+            XPixmap m_iconMask;
+            Size<unsigned int> m_lastSize;
+            bool m_isMapped;
             XColormap m_colormap;
-            XCursor   m_hiddenCursor;
-            bool      m_cursorVisible;
-            bool      m_captureCursor;
+            XCursor m_hiddenCursor;
+            bool m_cursorVisible;
+            bool m_captureCursor;
         };
     }
 }

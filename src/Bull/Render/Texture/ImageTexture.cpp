@@ -4,31 +4,31 @@
 namespace Bull
 {
     ImageTexture::ImageTexture(PixelFormat pixelFormat) :
-        m_pixelFormat(pixelFormat)
+            m_pixelFormat(pixelFormat)
     {
         /// Nothing
     }
 
     ImageTexture::ImageTexture(const AbstractImage& image) :
-        m_pixelFormat(image.getPixelFormat())
+            m_pixelFormat(image.getPixelFormat())
     {
         create(image.getPixels(), image.getSize());
     }
 
     ImageTexture::ImageTexture(const Size<std::size_t>& size, PixelFormat pixelFormat) :
-        m_pixelFormat(pixelFormat)
+            m_pixelFormat(pixelFormat)
     {
         create(size);
     }
 
     ImageTexture::ImageTexture(const ByteArray& pixels, const Size<std::size_t>& size, PixelFormat pixelFormat) :
-        m_pixelFormat(pixelFormat)
+            m_pixelFormat(pixelFormat)
     {
         create(pixels, size);
     }
 
     ImageTexture::ImageTexture(ImageTexture&& imageTexture) noexcept :
-        Texture(static_cast<Texture&&>(imageTexture))
+            Texture(static_cast<Texture&&>(imageTexture))
     {
         std::swap(m_pixelFormat, imageTexture.m_pixelFormat);
     }

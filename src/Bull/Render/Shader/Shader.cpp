@@ -21,11 +21,11 @@ namespace Bull
     }
 
     Shader::Shader() :
-        m_program(gl::createProgram())
+            m_program(gl::createProgram())
     {
         Expect(gl::isProgram(m_program), Throw(InternalError, "Failed to create shader"));
     }
-    
+
     Shader::Shader(Shader&& right) noexcept
     {
         std::swap(m_program, right.m_program);
@@ -78,7 +78,7 @@ namespace Bull
         return status == GL_TRUE;
     }
 
-    void Shader::setUniform(const String& name, int uniform) const
+    void Shader::setUniform(const std::string& name, int uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -103,7 +103,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniform(const String& name, unsigned int uniform) const
+    void Shader::setUniform(const std::string& name, unsigned int uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -128,7 +128,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniform(const String& name, float uniform) const
+    void Shader::setUniform(const std::string& name, float uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -153,7 +153,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniformColor(const String& name, const Color& uniform) const
+    void Shader::setUniformColor(const std::string& name, const Color& uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -169,9 +169,9 @@ namespace Bull
         if(gl::programUniform4f)
         {
             gl::programUniform4f(m_program, location,
-                                 static_cast<float>(uniform.red)   / 255.f,
+                                 static_cast<float>(uniform.red) / 255.f,
                                  static_cast<float>(uniform.green) / 255.f,
-                                 static_cast<float>(uniform.blue)  / 255.f,
+                                 static_cast<float>(uniform.blue) / 255.f,
                                  static_cast<float>(uniform.alpha) / 255.f);
         }
         else
@@ -179,14 +179,14 @@ namespace Bull
             bind();
 
             gl::uniform4f(location,
-                          static_cast<float>(uniform.red)   / 255.f,
+                          static_cast<float>(uniform.red) / 255.f,
                           static_cast<float>(uniform.green) / 255.f,
-                          static_cast<float>(uniform.blue)  / 255.f,
+                          static_cast<float>(uniform.blue) / 255.f,
                           static_cast<float>(uniform.alpha) / 255.f);
         }
     }
 
-    void Shader::setUniformVector(const String& name, const Vector<float, 2>& uniform) const
+    void Shader::setUniformVector(const std::string& name, const Vector<float, 2>& uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -211,7 +211,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniformVector(const String& name, const Vector<float, 3>& uniform) const
+    void Shader::setUniformVector(const std::string& name, const Vector<float, 3>& uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -236,7 +236,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniformVector(const String& name, const Vector<float, 4>& uniform) const
+    void Shader::setUniformVector(const std::string& name, const Vector<float, 4>& uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -261,7 +261,7 @@ namespace Bull
         }
     }
 
-    void Shader::setUniformMatrix(const String& name, const Matrix4F& uniform) const
+    void Shader::setUniformMatrix(const std::string& name, const Matrix4F& uniform) const
     {
         int location = getUniformLocation(name);
 
@@ -309,21 +309,21 @@ namespace Bull
         return m_program;
     }
 
-    String Shader::getErrorMessage() const
+    std::string Shader::getErrorMessage() const
     {
         int capacity;
-        String message;
+        std::string message;
 
         gl::getProgramiv(m_program, GL_INFO_LOG_LENGTH, &capacity);
 
-        message.setSize(static_cast<std::size_t>(capacity));
+        message.resize(static_cast<std::size_t>(capacity));
         gl::getProgramInfoLog(m_program, capacity, nullptr, &message[0]);
 
         return message;
     }
 
-    int Shader::getUniformLocation(const String& name) const
+    int Shader::getUniformLocation(const std::string& name) const
     {
-        return gl::getUniformLocation(m_program, name.getBuffer());
+        return gl::getUniformLocation(m_program, name.c_str());
     }
 }

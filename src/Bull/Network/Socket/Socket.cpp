@@ -42,8 +42,8 @@ namespace Bull
     }
 
     Socket::Socket(SocketType type) :
-        m_impl(prv::SocketImpl::createInstance()),
-        m_type(type)
+            m_impl(prv::SocketImpl::createInstance()),
+            m_type(type)
     {
         /// Nothing
     }

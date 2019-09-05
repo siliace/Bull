@@ -3,8 +3,8 @@ set(BULL_SRC_MATH_POLYGON ${BULL_SRC_MATH}/Polygon)
 
 target_sources(bull-math
         INTERFACE
-            ${BULL_INC_MATH_POLYGON}/Polygon.hpp
-            ${BULL_INC_MATH_POLYGON}/Rectangle.hpp
-            ${BULL_INC_MATH_POLYGON}/RegularPolygon.hpp
-            ${BULL_INC_MATH_POLYGON}/Triangle.hpp
+        ${BULL_INC_MATH_POLYGON}/Polygon.hpp
+        ${BULL_INC_MATH_POLYGON}/Rectangle.hpp
+        ${BULL_INC_MATH_POLYGON}/RegularPolygon.hpp
+        ${BULL_INC_MATH_POLYGON}/Triangle.hpp
         )

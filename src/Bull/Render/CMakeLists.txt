@@ -5,9 +5,9 @@ bull_add_library(bull-render)
 
 target_sources(bull-render
         PUBLIC
-            ${BULL_INC_RENDER}/Export.hpp
-            ${BULL_SRC_RENDER}/OpenGL.hpp
-            ${BULL_SRC_RENDER}/OpenGL.cpp
+        ${BULL_INC_RENDER}/Export.hpp
+        ${BULL_SRC_RENDER}/OpenGL.hpp
+        ${BULL_SRC_RENDER}/OpenGL.cpp
         )
 
 add_subdirectory(Buffer)
@@ -22,8 +22,8 @@ add_subdirectory(Vertex)
 find_package(OpenGL REQUIRED)
 target_link_libraries(bull-render ${OPENGL_gl_LIBRARY})
 
-if(BULL_OS_WINDOWS)
+if (BULL_OS_WINDOWS)
     target_link_libraries(bull-render gdi32)
-endif()
+endif ()
 
 target_link_libraries(bull-render bull-core)

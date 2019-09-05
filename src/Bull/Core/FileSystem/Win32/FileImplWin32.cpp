@@ -9,7 +9,7 @@ namespace Bull
     {
         void FileImplWin32::create(const Path& path)
         {
-            HANDLE handler = CreateFile(path.toString().getBuffer(),
+            HANDLE handler = CreateFile(path.toString().c_str(),
                                         GENERIC_READ | GENERIC_WRITE,
                                         FILE_SHARE_READ,
                                         nullptr,
@@ -24,30 +24,30 @@ namespace Bull
 
         bool FileImplWin32::exists(const Path& name)
         {
-            DWORD attribs = GetFileAttributes(name.toString().getBuffer());
+            DWORD attribs = GetFileAttributes(name.toString().c_str());
 
             return (attribs != INVALID_FILE_ATTRIBUTES && !(attribs & FILE_ATTRIBUTE_DIRECTORY));
         }
 
         void FileImplWin32::copy(const Path& path, const Path& newPath)
         {
-            Expect(CopyFile(path.toString().getBuffer(), newPath.toString().getBuffer(), true), Throw(Win32Error, "Failed to copy file " + path.toString()));
+            Expect(CopyFile(path.toString().c_str(), newPath.toString().c_str(), true), Throw(Win32Error, "Failed to copy file " + path.toString()));
         }
 
         void FileImplWin32::rename(const Path& path, const Path& newPath)
         {
-            Expect(MoveFile(path.toString().getBuffer(), newPath.toString().getBuffer()), Throw(Win32Error, "Failed to rename file " + path.toString()));
+            Expect(MoveFile(path.toString().c_str(), newPath.toString().c_str()), Throw(Win32Error, "Failed to rename file " + path.toString()));
         }
 
         void FileImplWin32::remove(const Path& path)
         {
-            Expect(DeleteFile(path.toString().getBuffer()), Throw(Win32Error, "Failed to remove file " + path.toString()));
+            Expect(DeleteFile(path.toString().c_str()), Throw(Win32Error, "Failed to remove file " + path.toString()));
         }
 
         FileImplWin32::FileImplWin32(const Path& path, Uint32 mode)
         {
             DWORD creationMode = 0;
-            DWORD openingMode  = 0;
+            DWORD openingMode = 0;
 
             if(mode & FileOpeningMode_Read)
             {
@@ -84,7 +84,7 @@ namespace Bull
                 }
             }
 
-            m_handler = CreateFile(path.toString().getBuffer(),
+            m_handler = CreateFile(path.toString().c_str(),
                                    openingMode,
                                    FILE_SHARE_READ,
                                    nullptr,
@@ -103,7 +103,7 @@ namespace Bull
         ByteArray FileImplWin32::read(std::size_t length)
         {
             DWORD read;
-            String buffer;
+            std::string buffer;
             LARGE_INTEGER cursor;
 
             ByteArray bytes(length);

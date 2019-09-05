@@ -5,11 +5,11 @@ namespace Bull
 {
     namespace prv
     {
-        RenderWindowImplXlib::RenderWindowImplXlib(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings)
+        RenderWindowImplXlib::RenderWindowImplXlib(const VideoMode& mode, const std::string& title, Uint32 style, const ContextSettings& settings)
         {
             XVisualInfo* vi;
-            GLXFBConfig  config;
-            Display&     display = Display::getInstance();
+            GLXFBConfig config;
+            Display& display = Display::getInstance();
 
             config = GlxContext::chooseBestConfig(display, settings, mode.bitsPerPixel);
 

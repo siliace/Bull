@@ -9,12 +9,12 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Clock();
 
-        /*! \brief Compare two Clock
+        /** \brief Compare two Clock
          *
          * \param right The clock to compare to this
          *
@@ -23,7 +23,7 @@ namespace Bull
          */
         bool operator==(const Clock& right) const;
 
-        /*! \brief Compare two Clock
+        /** \brief Compare two Clock
          *
          * \param right The clock to compare to this
          *
@@ -32,36 +32,36 @@ namespace Bull
          */
         bool operator!=(const Clock& right) const;
 
-        /*! \brief Start the clock
+        /** \brief Start the clock
          *
          */
         void start();
 
-        /*! \brief Stop the clock
+        /** \brief Stop the clock
          *
          */
         void pause();
 
-        /*! \brief Resume the clock
+        /** \brief Resume the clock
          *
          */
         void resume();
 
-        /*! \brief Get the elapsed time since the clock is started
+        /** \brief Get the elapsed time since the clock is started
          *
          * \return Return the time since the clock is started
          *
          */
         Duration getElapsedTime() const;
 
-        /*! \brief Get the state of the clock
+        /** \brief Get the state of the clock
          *
          * \return Return true if the clock is running, else otherwise
          *
          */
         bool isRunning() const;
 
-        /*! \brief Restart the clock
+        /** \brief Restart the clock
          *
          * \return Return the time since the clock is started before restart
          *

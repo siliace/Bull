@@ -11,12 +11,12 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         DirectionalLight();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param direction The direction of the DirectionalLight
          * \param color     The Color of the DirectionalLight
@@ -24,22 +24,22 @@ namespace Bull
          */
         explicit DirectionalLight(const Vector3F& direction, const Color& color = Color::White);
 
-        /*! \brief Send uniforms values to a Shader
+        /** \brief Send uniforms values to a Shader
          *
          * \param shader The Shader
          * \param name   The name of the uniform
          *
          */
-        void setUniforms(Shader& shader, const String& name) const override;
+        void setUniforms(Shader& shader, const std::string& name) const override;
 
-        /*! \brief Set the direction of the DirectionalLight
+        /** \brief Set the direction of the DirectionalLight
          *
          * \param direction The direction
          *
          */
         void setDirection(const Vector3F& direction);
 
-        /*! \brief Get the direction of the DirectionalLight
+        /** \brief Get the direction of the DirectionalLight
          *
          * \return The direction
          *

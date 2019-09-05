@@ -11,7 +11,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Retrieves the amount of RAM that is physically installed on the computer
+            /** \brief Retrieves the amount of RAM that is physically installed on the computer
              *
              * \return Return the amount of RAM
              *

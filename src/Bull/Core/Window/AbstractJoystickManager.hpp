@@ -11,14 +11,14 @@ namespace Bull
         {
         public:
 
-            /*! \brief Set the threshold of an axis movement to trigger an event
+            /** \brief Set the threshold of an axis movement to trigger an event
              *
              * \param threshold The threshold to use
              *
              */
             virtual void setThreshold(float threshold) = 0;
 
-            /*! \brief Get the threshold of an axis movement to trigger an event
+            /** \brief Get the threshold of an axis movement to trigger an event
              *
              * \return threshold The threshold used
              *

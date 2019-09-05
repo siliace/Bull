@@ -16,31 +16,31 @@ namespace Bull
 
         public:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             SocketImplUnix();
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             virtual ~SocketImplUnix();
 
-            /*! \brief Enable the blocking mode of the SocketImplUnix
+            /** \brief Enable the blocking mode of the SocketImplUnix
              *
              * \param enable True to enable
              *
              */
             void enableBlockingMode(bool enable) override;
 
-            /*! \brief Tell whether SocketImplUnix is in blocking mode
+            /** \brief Tell whether SocketImplUnix is in blocking mode
              *
              * \return True if the blocking mode is enable
              *
              */
             bool isEnableBlockingMode() const override;
 
-            /*! \brief Get the length of data in pending to be read
+            /** \brief Get the length of data in pending to be read
              *
              * \return The length
              *

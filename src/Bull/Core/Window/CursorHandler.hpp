@@ -4,7 +4,9 @@
 #include <Bull/Core/Prerequisites.hpp>
 
 #if defined BULL_OS_WINDOWS
+
     #include <Bull/Core/Support/Win32/Windows.hpp>
+
 #endif
 
 namespace Bull
@@ -12,11 +14,11 @@ namespace Bull
     namespace prv
     {
         #if defined BULL_OS_WINDOWS
-            typedef HCURSOR CursorHandler;
+        typedef HCURSOR CursorHandler;
         #elif defined BULL_OS_OSX
             #error Lack of implementation : CursorHandler
         #elif defined BULL_OS_GNU_LINUX
-            typedef unsigned long CursorHandler;
+        typedef unsigned long CursorHandler;
         #endif
     }
 }

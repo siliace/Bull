@@ -8,8 +8,8 @@
 namespace Bull
 {
     ShaderStage::ShaderStage() :
-        m_id(0),
-        m_isCompiled(false)
+            m_id(0),
+            m_isCompiled(false)
     {
         /// Nothing
     }
@@ -43,14 +43,14 @@ namespace Bull
         }
 
         m_type = type;
-        m_id   = gl::createShader(OpenGL::shaderStageType(type));
+        m_id = gl::createShader(OpenGL::shaderStageType(type));
 
         Expect(isValid(), Throw(InternalError, "Failed to create ShaderStage"));
     }
 
-    void ShaderStage::compile(const String& code)
+    void ShaderStage::compile(const std::string& code)
     {
-        const char* source = code.getBuffer();
+        const char* source = code.c_str();
 
         ensureContext();
 
@@ -93,17 +93,17 @@ namespace Bull
         return gl::isShader(m_id);
     }
 
-    String ShaderStage::getSource() const
+    std::string ShaderStage::getSource() const
     {
-        String code;
+        std::string code;
         int size, capacity;
 
         ensureContext();
 
         gl::getShaderiv(m_id, GL_SHADER_SOURCE_LENGTH, &capacity);
 
-        code.setSize(capacity);
-        gl::getShaderSource(m_id, code.getSize(), &size, &code[0]);
+        code.resize(capacity);
+        gl::getShaderSource(m_id, code.length(), &size, &code[0]);
 
         return code;
     }
@@ -118,10 +118,10 @@ namespace Bull
         return m_id;
     }
 
-    String ShaderStage::getErrorMessage() const
+    std::string ShaderStage::getErrorMessage() const
     {
         int capacity;
-        String message;
+        std::string message;
 
         ensureContext();
 
@@ -129,7 +129,7 @@ namespace Bull
 
         if(capacity)
         {
-            message.setSize(static_cast<std::size_t>(capacity));
+            message.resize(static_cast<std::size_t>(capacity));
             gl::getShaderInfoLog(m_id, capacity, nullptr, &message[0]);
         }
 

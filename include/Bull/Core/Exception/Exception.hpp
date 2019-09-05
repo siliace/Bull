@@ -2,13 +2,14 @@
 #define BULL_CORE_EXCEPTION_EXCEPTION_HPP
 
 #include <exception>
+#include <string>
 
-#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Export.hpp>
 
 #define DeclareExceptionFrom(ExceptionName, ParentException)                                          \
 struct ExceptionName : public ParentException                                                         \
 {                                                                                                     \
-    ExceptionName(const String& file, Uint64 line, const String& source, const String& description) : \
+    ExceptionName(const std::string& file, Uint64 line, const std::string& source, const std::string& description) : \
         ParentException(file, line, #ExceptionName, source, description)                              \
     {                                                                                                 \
                                                                                                       \
@@ -32,7 +33,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Throw an Exception
+        /** \brief Throw an Exception
          *
          * \param file
          * \param line
@@ -41,51 +42,51 @@ namespace Bull
          *
          */
         template <typename T>
-        static void throwException(const String& file, Uint64 line, const String& source, const String& description)
+        static void throwException(const std::string& file, Uint64 line, const std::string& source, const std::string& description)
         {
             throw T(file, line, source, description);
         }
 
     public:
 
-        /*! \brief Get the name file where the Exception was thrown
+        /** \brief Get the name file where the Exception was thrown
          *
          * \return The name of the file
          *
          */
-        const String& getFile() const;
+        const std::string& getFile() const;
 
-        /*! \brief Get the line where the Exception was thrown
+        /** \brief Get the line where the Exception was thrown
          *
          * \return The line
          *
          */
         Uint64 getLine() const;
 
-        /*! \brief Get the type of Exception thrown
+        /** \brief Get the type of Exception thrown
          *
          * \return The type of Exception
          *
          */
-        const String& getType() const;
+        const std::string& getType() const;
 
-        /*! \brief Get the method where the Exception was thrown
+        /** \brief Get the method where the Exception was thrown
          *
          * \return The method
          *
          */
-        const String& getSource() const;
+        const std::string& getSource() const;
 
-        /*!! \brief Get the message describing the Exception
+        /**! \brief Get the message describing the Exception
          *
          * \return The description
          *
          */
-        const String& getDescription() const;
+        const std::string& getDescription() const;
 
     protected:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param file        The name file where the Exception was thrown
          * \param line        The line where the Exception was thrown
@@ -94,11 +95,11 @@ namespace Bull
          * \param description The message describing the Exception
          *
          */
-        Exception(const String& file, Uint64 line, const String& type, const String& source, const String& description);
+        Exception(const std::string& file, Uint64 line, const std::string& type, const std::string& source, const std::string& description);
 
     private:
 
-        /*! \brief Get the exception's description as a C-Style string
+        /** \brief Get the exception's description as a C-Style string
          *
          * \return The description
          *
@@ -107,17 +108,17 @@ namespace Bull
 
     private:
 
-        String m_file;
+        std::string m_file;
         Uint64 m_line;
-        String m_type;
-        String m_source;
-        String m_description;
+        std::string m_type;
+        std::string m_source;
+        std::string m_description;
     };
 
     namespace prv
     {
         template <typename T, typename = std::enable_if<std::is_base_of<Exception, T>::value>>
-        void __throw(const String& file, Uint64 line, const String& source, const String& description)
+        void __throw(const std::string& file, Uint64 line, const std::string& source, const std::string& description)
         {
             Exception::throwException<T>(file, line, source, description);
         }

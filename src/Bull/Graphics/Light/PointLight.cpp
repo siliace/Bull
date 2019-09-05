@@ -3,13 +3,13 @@
 namespace Bull
 {
     PointLight::PointLight() :
-        PointLight(Vector3F::Zero)
+            PointLight(Vector3F::Zero)
     {
         /// Nothing
     }
 
     PointLight::PointLight(const Vector3F& position, const Color& color) :
-        AbstractLight(LightType_Point)
+            AbstractLight(LightType_Point)
     {
         setColor(color);
         setPosition(position);
@@ -18,12 +18,12 @@ namespace Bull
 
     void PointLight::setAttenuation(float constant, float linear, float quadratic)
     {
-        m_linear    = linear;
-        m_constant  = constant;
+        m_linear = linear;
+        m_constant = constant;
         m_quadratic = quadratic;
     }
 
-    void PointLight::setUniforms(Shader& shader, const String& name) const
+    void PointLight::setUniforms(Shader& shader, const std::string& name) const
     {
         if(shader.isLinked())
         {

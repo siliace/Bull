@@ -9,26 +9,26 @@ namespace Bull
 {
     struct BULL_NETWORK_API IpAddressV6 : public IpAddress
     {
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         IpAddressV6();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param bytes Bytes of the IpAddressV6
          *
          */
         explicit IpAddressV6(const ByteArray& bytes);
 
-        /*! \brief Convert the IpAddressV6 to a String
+        /** \brief Convert the IpAddressV6 to a std::string
          *
-         * \return The IpAddressV6 as a String
+         * \return The IpAddressV6 as a std::string
          *
          */
-        String toString() const override;
+        std::string toString() const override;
 
-        /*! \brief Get the NetProtocol used by the IpAddressV6
+        /** \brief Get the NetProtocol used by the IpAddressV6
          *
          * \return The NetProtocol
          *

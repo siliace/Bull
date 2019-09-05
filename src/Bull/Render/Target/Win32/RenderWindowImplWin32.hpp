@@ -13,14 +13,14 @@ namespace Bull
         {
         public:
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param mode  The VideoMode of the RenderWindow
              * \param title The title of the RenderWindow
              * \param style The WindowStyle of the RenderWindow
              *
              */
-            RenderWindowImplWin32(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& /*settings*/);
+            RenderWindowImplWin32(const VideoMode& mode, const std::string& title, Uint32 style, const ContextSettings& /*settings*/);
         };
     }
 }

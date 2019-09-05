@@ -3,7 +3,7 @@
 
 #include <functional>
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 
 namespace Bull
 {
@@ -13,38 +13,38 @@ namespace Bull
         {
         public:
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param name The name of the extension
              * \param loader The function to call to load the extension
              *
              */
-            Extension(const String& name, const std::function<bool()>& loader);
+            Extension(const std::string& name, const std::function<bool()>& loader);
 
-            /*! \briel Load the extension
+            /** \briel Load the extension
              *
              */
             void load();
 
-            /*! \brief Tell whether the Extension is loaded
+            /** \brief Tell whether the Extension is loaded
              *
              * \return True if the Extension is loaded
              *
              */
             bool isLoaded() const;
 
-            /*! \brief Get the name of the Extension
+            /** \brief Get the name of the Extension
              *
              * \return The name of the Extension
              *
              */
-            const String& getName() const;
+            const std::string& getName() const;
 
         private:
 
-            String                m_name;
+            std::string m_name;
             std::function<bool()> m_loader;
-            bool                  m_loaded;
+            bool m_loaded;
         };
     }
 }

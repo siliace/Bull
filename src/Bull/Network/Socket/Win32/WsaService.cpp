@@ -17,7 +17,7 @@ namespace Bull
         WSACleanup();
     }
 
-    String WsaService::getVendor() const
+    std::string WsaService::getVendor() const
     {
         return m_data.lpVendorInfo;
     }

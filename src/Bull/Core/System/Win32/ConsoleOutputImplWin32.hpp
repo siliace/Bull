@@ -12,7 +12,7 @@ namespace Bull
         {
         private:
 
-            /*! \brief Convert a ConsoleColor to a win32 text attribute
+            /** \brief Convert a ConsoleColor to a win32 text attribute
              *
              * \param color The color
              *
@@ -21,7 +21,7 @@ namespace Bull
              */
             static WORD colorToTextAttribute(ConsoleColor color);
 
-            /*! \brief Convert a ConsoleColor to a win32 background attribute
+            /** \brief Convert a ConsoleColor to a win32 background attribute
              *
              * \param color The color
              *
@@ -32,36 +32,36 @@ namespace Bull
 
         public:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             ConsoleOutputImplWin32();
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             ~ConsoleOutputImplWin32();
 
             size_t write(const ByteArray& bytes) override;
 
-            /*! \brief Flush the ConsoleOutput
+            /** \brief Flush the ConsoleOutput
              *
              */
             void flush() override;
 
-            /*! \brief Clear the console output
+            /** \brief Clear the console output
              *
              */
             void clear() override;
-            
-            /*! \brief Set the color of the text in the console
+
+            /** \brief Set the color of the text in the console
              *
              * \param color The color
              *
              */
             void setTextColor(ConsoleColor color) override;
 
-            /*! \brief Set the color of the background in the console
+            /** \brief Set the color of the background in the console
              *
              * \param color The color
              *
@@ -70,16 +70,16 @@ namespace Bull
 
         private:
 
-            /*! \brief Apply both foreground and background colors
+            /** \brief Apply both foreground and background colors
              *
              */
             void applyColor();
 
         private:
 
-            HANDLE       m_handler;
+            HANDLE m_handler;
             ConsoleColor m_currentTextColor;
-            WORD         m_initialAttributes;
+            WORD m_initialAttributes;
             ConsoleColor m_currentBackgroundColor;
         };
     }

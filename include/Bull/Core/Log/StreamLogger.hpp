@@ -10,7 +10,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param stream The OutStream to write in
          *
@@ -19,12 +19,12 @@ namespace Bull
 
     protected:
 
-        /*! \brief Write a log entry into the OutStream
+        /** \brief Write a log entry into the OutStream
          *
          * \param entry The entry to write
          *
          */
-        void write(const String& entry) override;
+        void write(const std::string& entry) override;
 
     private:
 

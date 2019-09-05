@@ -6,14 +6,14 @@
 namespace Bull
 {
     FileLogger::FileLogger() :
-        FileLogger(Path("bull.log"))
+            FileLogger(Path("bull.log"))
     {
         /// Nothing
     }
 
     FileLogger::FileLogger(const Path& path) :
-        StreamLogger(m_file),
-        m_file(path, FileOpeningMode_Truncate | FileOpeningMode_Write)
+            StreamLogger(m_file),
+            m_file(path, FileOpeningMode_Truncate | FileOpeningMode_Write)
     {
         /// Nothing
     }

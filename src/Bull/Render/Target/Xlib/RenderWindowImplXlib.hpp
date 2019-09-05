@@ -11,7 +11,7 @@ namespace Bull
     {
         struct RenderWindowImplXlib : public WindowImplXlib
         {
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param mode     The VideoMode of the RenderWindow
              * \param title    The title of the RenderWindow
@@ -19,7 +19,7 @@ namespace Bull
              * \param settings ContextSettings to use to create the GlContext
              *
              */
-            RenderWindowImplXlib(const VideoMode& mode, const String& title, Uint32 style, const ContextSettings& settings);
+            RenderWindowImplXlib(const VideoMode& mode, const std::string& title, Uint32 style, const ContextSettings& settings);
         };
     }
 }

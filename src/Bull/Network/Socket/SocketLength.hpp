@@ -8,9 +8,9 @@ namespace Bull
     namespace prv
     {
         #if defined BULL_OS_WINDOWS
-            typedef int SocketLength;
+        typedef int SocketLength;
         #else
-            typedef socklen_t SocketLength;
+        typedef socklen_t SocketLength;
         #endif
     }
 }

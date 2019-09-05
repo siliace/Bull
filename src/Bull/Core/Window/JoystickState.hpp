@@ -14,19 +14,19 @@ namespace Bull
         {
         public:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             JoystickState();
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              * \param joystick The ID of the joystick
              *
              */
             explicit JoystickState(Uint8 joystick);
 
-            /*! \brief == operator override
+            /** \brief == operator override
              *
              * \param right The JoystickState to compare
              *
@@ -35,7 +35,7 @@ namespace Bull
              */
             bool operator==(const JoystickState& right) const;
 
-            /*! \brief != operator override
+            /** \brief != operator override
              *
              * \param right The JoystickState to compare
              *
@@ -46,9 +46,9 @@ namespace Bull
 
         public:
 
-            std::array<unsigned int, Joystick::CountAxis>             axes;
+            std::array<unsigned int, Joystick::CountAxis> axes;
             std::array<std::pair<bool, Clock>, Joystick::CountButton> buttons;
-            bool                                                      connected;
+            bool connected;
         };
     }
 }

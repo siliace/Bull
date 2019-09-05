@@ -4,10 +4,10 @@
 namespace Bull
 {
     Clock::Clock() :
-        m_start(0.f),
-        m_pause(0.f),
-        m_totalPause(0.f),
-        m_isRunning(false)
+            m_start(0.f),
+            m_pause(0.f),
+            m_totalPause(0.f),
+            m_isRunning(false)
     {
         /// Nothing
     }
@@ -29,7 +29,7 @@ namespace Bull
         if(!isRunning())
         {
             m_isRunning = true;
-            m_start     = prv::ClockImpl::uptime();
+            m_start = prv::ClockImpl::uptime();
         }
     }
 
@@ -38,7 +38,7 @@ namespace Bull
         if(isRunning())
         {
             m_isRunning = false;
-            m_pause     = prv::ClockImpl::uptime();
+            m_pause = prv::ClockImpl::uptime();
         }
     }
 
@@ -49,7 +49,7 @@ namespace Bull
             m_totalPause += prv::ClockImpl::uptime() - m_pause;
 
             m_isRunning = true;
-            m_pause     = Duration::Zero;
+            m_pause = Duration::Zero;
         }
     }
 
@@ -72,10 +72,10 @@ namespace Bull
     {
         Duration elapsed = getElapsedTime();
 
-        m_isRunning  = true;
-        m_pause      = Duration::Zero;
+        m_isRunning = true;
+        m_pause = Duration::Zero;
         m_totalPause = Duration::Zero;
-        m_start      = prv::ClockImpl::uptime();
+        m_start = prv::ClockImpl::uptime();
 
         return elapsed;
     }

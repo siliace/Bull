@@ -10,24 +10,24 @@ namespace Bull
 {
     struct BULL_NETWORK_API UdpSocket : public Socket
     {
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         UdpSocket();
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          * \param move The UdpSocket to move
          *
          */
         UdpSocket(UdpSocket&& move) noexcept = default;
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         ~UdpSocket();
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \param move The UdpSocket to move
          *
@@ -36,7 +36,7 @@ namespace Bull
          */
         UdpSocket& operator=(UdpSocket&& move) noexcept = default;
 
-        /*! \brief Bind the UdpSocket to a NetPort
+        /** \brief Bind the UdpSocket to a NetPort
          *
          * \param port The NetPort to listen
          * \param host The IpAddress to listen
@@ -44,19 +44,19 @@ namespace Bull
          */
         void bind(NetPort port, const IpAddress& host = IpAddressV4::Any);
 
-        /*! \brief Tell whether the UdpSocket is bound
+        /** \brief Tell whether the UdpSocket is bound
          *
          * \return True if the UdpSocket is bound
          *
          */
         bool isBound() const;
 
-        /*! \brief Unbind the UdpSocket
+        /** \brief Unbind the UdpSocket
          *
          */
         void unbind();
 
-        /*! \brief Send data to a remote host
+        /** \brief Send data to a remote host
          *
          * \param address The IpAddress of the remote host to send data
          * \param port    The NetPort of the remote host to use
@@ -70,7 +70,7 @@ namespace Bull
 
         Datagram receiveFrom() const;
 
-        /*! \brief Receive data from a remote host
+        /** \brief Receive data from a remote host
          *
          * \param length The length of data to receive
          *

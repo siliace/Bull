@@ -1,7 +1,7 @@
 #ifndef BULL_NETWORK_SOCKET_WIN32_WSASERVICE_HPP
 #define BULL_NETWORK_SOCKET_WIN32_WSASERVICE_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 #include <Bull/Core/Pattern/Singleton.hpp>
 
 #include <Bull/Network/Socket/SocketHeader.hpp>
@@ -12,19 +12,19 @@ namespace Bull
     {
     public:
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         ~WsaService();
 
-        /*! \brief Get the vendor of the WsaService
+        /** \brief Get the vendor of the WsaService
          *
          * \return The vendor
          *
          */
-        String getVendor() const;
+        std::string getVendor() const;
 
-        /*! \brief Get the last error
+        /** \brief Get the last error
          *
          * \return The last error
          *
@@ -35,7 +35,7 @@ namespace Bull
 
         friend class Singleton<WsaService>;
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         WsaService();

@@ -9,25 +9,25 @@ namespace Bull
     {
     protected:
 
-        /*! \brief Ensure there is an active OpenGL context in this thread
+        /** \brief Ensure there is an active OpenGL context in this thread
          *
          */
         static void ensureContext();
 
     private:
 
-        static unsigned int s_instanceCount; /*!< Count every instances to perform initialization and cleanup */
+        static unsigned int s_instanceCount; /**< Count every instances to perform initialization and cleanup */
 
     protected:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * Initialize a render context if needed
          *
          */
         ContextResource();
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          * Clean up contexts if needed
          *

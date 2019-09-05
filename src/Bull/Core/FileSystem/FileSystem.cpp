@@ -33,7 +33,7 @@ namespace Bull
         return prv::FileSystemImpl::getFileSystemInfo(base);
     }
 
-    void FileSystem::createLink(const Path& target, const String& link)
+    void FileSystem::createLink(const Path& target, const std::string& link)
     {
         prv::FileSystemImpl::createLink(target, link);
     }

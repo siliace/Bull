@@ -5,8 +5,8 @@ namespace Bull
 {
     enum ContextSettingsProfile
     {
-        ContextSettingsProfile_Core              = 0x1,
-        ContextSettingsProfile_Compatibility     = 0x2,
+        ContextSettingsProfile_Core = 0x1,
+        ContextSettingsProfile_Compatibility = 0x2,
     };
 }
 

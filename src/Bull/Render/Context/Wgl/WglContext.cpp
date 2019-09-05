@@ -4,7 +4,6 @@
 #include <Bull/Core/Log/Log.hpp>
 #include <Bull/Core/Support/Win32/Win32Error.hpp>
 #include <Bull/Core/System/Library.hpp>
-#include <Bull/Core/Utility/StringUtils.hpp>
 
 #include <Bull/Render/Context/Wgl/WglContext.hpp>
 #include <Bull/Render/Context/Wgl/WglCreateContextARB.hpp>
@@ -17,9 +16,9 @@ namespace Bull
 {
     namespace prv
     {
-        void* WglContext::getFunction(const String& function)
+        void* WglContext::getFunction(const std::string& function)
         {
-            void* functionProc = reinterpret_cast<void*>(wglGetProcAddress(function.getBuffer()));
+            void* functionProc = reinterpret_cast<void*>(wglGetProcAddress(function.c_str()));
 
             if(functionProc)
             {
@@ -54,11 +53,11 @@ namespace Bull
             if(wglPixelFormat.isLoaded())
             {
                 static const int attribs[] = {
-                    WGL_DRAW_TO_WINDOW_ARB, 1,
-                    WGL_SUPPORT_OPENGL_ARB, 1,
-                    WGL_DOUBLE_BUFFER_ARB, 1,
-                    WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
-                    0
+                        WGL_DRAW_TO_WINDOW_ARB, 1,
+                        WGL_SUPPORT_OPENGL_ARB, 1,
+                        WGL_DOUBLE_BUFFER_ARB, 1,
+                        WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
+                        0
                 };
 
                 int formats[512];
@@ -74,13 +73,13 @@ namespace Bull
                         int format[7] = {0};
                         int sample[2] = {0};
                         static const int formatAttribs[] = {
-                            WGL_RED_BITS_ARB,
-                            WGL_GREEN_BITS_ARB,
-                            WGL_BLUE_BITS_ARB,
-                            WGL_ALPHA_BITS_ARB,
-                            WGL_DEPTH_BITS_ARB,
-                            WGL_STENCIL_BITS_ARB,
-                            WGL_ACCELERATION_ARB
+                                WGL_RED_BITS_ARB,
+                                WGL_GREEN_BITS_ARB,
+                                WGL_BLUE_BITS_ARB,
+                                WGL_ALPHA_BITS_ARB,
+                                WGL_DEPTH_BITS_ARB,
+                                WGL_STENCIL_BITS_ARB,
+                                WGL_ACCELERATION_ARB
                         };
 
                         if(!wglGetPixelFormatAttribiv(device, formats[i], PFD_MAIN_PLANE, 7, formatAttribs, format))
@@ -91,8 +90,8 @@ namespace Bull
                         if(isSupported("WGL_ARB_multisample"))
                         {
                             static const int sampleAttribs[] = {
-                                WGL_SAMPLE_BUFFERS_ARB,
-                                WGL_SAMPLES_ARB
+                                    WGL_SAMPLE_BUFFERS_ARB,
+                                    WGL_SAMPLES_ARB
                             };
 
                             if(!wglGetPixelFormatAttribiv(device, formats[i], PFD_MAIN_PLANE, 2, sampleAttribs, sample))
@@ -105,7 +104,7 @@ namespace Bull
                         {
                             int pbuffer;
                             static const int pbufferAttribs[] = {
-                                WGL_DRAW_TO_PBUFFER_ARB
+                                    WGL_DRAW_TO_PBUFFER_ARB
                             };
 
                             if(!wglGetPixelFormatAttribiv(device, formats[i], PFD_MAIN_PLANE, 1, pbufferAttribs, &pbuffer))
@@ -160,17 +159,17 @@ namespace Bull
         }
 
         WglContext::WglContext(const WglContext* shared) :
-            WglContext(shared, VideoMode(Size<unsigned int>(1, 1)), ContextSettings())
+                WglContext(shared, VideoMode(Size<unsigned int>(1, 1)), ContextSettings())
         {
             /// Nothing
         }
 
         WglContext::WglContext(const WglContext* shared, const VideoMode& mode, const ContextSettings& settings) :
-            GlContext(settings),
-            m_device(nullptr),
-            m_render(nullptr),
-            m_pbuffer(nullptr),
-            m_ownWindow(false)
+                GlContext(settings),
+                m_device(nullptr),
+                m_render(nullptr),
+                m_pbuffer(nullptr),
+                m_ownWindow(false)
         {
             createSurface(shared, mode.getSize().getWidth(), mode.getSize().getHeight(), mode.getBitsPerPixel());
 
@@ -180,17 +179,17 @@ namespace Bull
         }
 
         WglContext::WglContext(const WglContext* shared, Uint8 bitsPerPixel, const ContextSettings& settings) :
-            WglContext(shared, VideoMode(Size<unsigned int>(1, 1), bitsPerPixel), settings)
+                WglContext(shared, VideoMode(Size<unsigned int>(1, 1), bitsPerPixel), settings)
         {
             /// Nothing
         }
 
         WglContext::WglContext(const WglContext* shared, const WindowImpl& window, Uint8 bitsPerPixel, const ContextSettings& settings) :
-            GlContext(settings),
-            m_device(nullptr),
-            m_render(nullptr),
-            m_pbuffer(nullptr),
-            m_ownWindow(false)
+                GlContext(settings),
+                m_device(nullptr),
+                m_render(nullptr),
+                m_pbuffer(nullptr),
+                m_ownWindow(false)
         {
             createSurface(window);
 
@@ -275,7 +274,7 @@ namespace Bull
 
         void WglContext::createSurface(const WglContext* shared, unsigned int width, unsigned int height, Uint8 bitsPerPixel)
         {
-        #ifdef BULL_WGL_PBUFFER_SUPPORT
+            #ifdef BULL_WGL_PBUFFER_SUPPORT
             if(wglPbuffer.isLoaded() && shared)
             {
                 int format = getBestPixelFormat(shared->m_device, bitsPerPixel, m_settings, true);
@@ -297,9 +296,9 @@ namespace Bull
                     }
                 }
             }
-        #else
+            #else
             BULL_UNUSED(bitsPerPixel);
-        #endif
+            #endif
 
             if(!m_device)
             {
@@ -377,7 +376,7 @@ namespace Bull
 
                     if(!m_render)
                     {
-                        log.warning("Failed to create WglContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
+                        log.warning("Failed to create WglContext with version " + std::to_string(m_settings.major) + "." + std::to_string(m_settings.minor));
 
                         if(m_settings.minor == 0)
                         {
@@ -391,7 +390,7 @@ namespace Bull
                     }
                     else
                     {
-                        log.info("Create WglContext with version " + StringUtils::number(m_settings.major) + "." + StringUtils::number(m_settings.minor));
+                        log.info("Create WglContext with version " + std::to_string(m_settings.major) + "." + std::to_string(m_settings.minor));
                     }
                 }while(!m_render && m_settings.major >= 1);
             }
@@ -435,8 +434,8 @@ namespace Bull
                 int format[2] = {0};
 
                 static const int formatAttribs[] = {
-                    WGL_DEPTH_BITS_ARB,
-                    WGL_STENCIL_BITS_ARB
+                        WGL_DEPTH_BITS_ARB,
+                        WGL_STENCIL_BITS_ARB
                 };
 
                 if(wglGetPixelFormatAttribiv(m_device, pixelFormat, PFD_MAIN_PLANE, 2, formatAttribs, format))
@@ -454,8 +453,8 @@ namespace Bull
                 {
                     int sample[2] = {0};
                     static const int sampleAttribs[] = {
-                        WGL_SAMPLE_BUFFERS_ARB,
-                        WGL_SAMPLES_ARB
+                            WGL_SAMPLE_BUFFERS_ARB,
+                            WGL_SAMPLES_ARB
                     };
 
                     if(wglGetPixelFormatAttribiv(m_device, pixelFormat, PFD_MAIN_PLANE, 2, sampleAttribs, sample))

@@ -11,14 +11,14 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a file
+            /** \brief Create a file
              *
              * \param path The Path of the File to create
              *
              */
             static void create(const Path& path);
 
-            /*! \brief Check if a File exists
+            /** \brief Check if a File exists
              *
              * \param path The Path of the File to check
              *
@@ -27,7 +27,7 @@ namespace Bull
              */
             static bool exists(const Path& path);
 
-            /*! \brief Copy a File
+            /** \brief Copy a File
              *
              * \param path    The path (relative or absolute) of the File to copy
              * \param newPath The new path (relative or absolute) of the File
@@ -35,7 +35,7 @@ namespace Bull
              */
             static void copy(const Path& path, const Path& newPath);
 
-            /*! \brief Delete a file
+            /** \brief Delete a file
              *
              * \param path The Path of the file to delete
              *
@@ -44,7 +44,7 @@ namespace Bull
 
         public:
 
-            /*! \brief Open a File
+            /** \brief Open a File
              *
              * \param name The name of the File
              * \param mode The opening mode of the File
@@ -52,12 +52,12 @@ namespace Bull
              */
             FileImplUnix(const Path& name, Uint32 mode);
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             ~FileImplUnix();
 
-            /*! \brief Read bytes from the File
+            /** \brief Read bytes from the File
              *
              * \param length The length of data to read
              *
@@ -66,7 +66,7 @@ namespace Bull
              */
             ByteArray read(std::size_t length) override;
 
-            /*! \brief Write data into the File
+            /** \brief Write data into the File
              *
              * \param bytes Bytes to write
              *
@@ -75,40 +75,40 @@ namespace Bull
              */
             std::size_t write(const ByteArray& bytes) override;
 
-            /*! \brief Flush the File
+            /** \brief Flush the File
              *
              */
             void flush() override;
 
-            /*! \brief Get the date of the creation of the file
+            /** \brief Get the date of the creation of the file
              *
              * \return Return the date of the creation of the file
              *
              */
             DateTime getCreationDate() const override;
 
-            /*! \brief Get the date of the last access of the file
+            /** \brief Get the date of the last access of the file
              *
              * \return Return the date of the last access of the file
              *
              */
             DateTime getLastAccessDate() const override;
 
-            /*! \brief Get the date of the last write of the file
+            /** \brief Get the date of the last write of the file
              *
              * \return Return the date of the last write of the file
              *
              */
             DateTime getLastWriteDate() const override;
 
-            /*! \brief Get the position of the cursor in the file
+            /** \brief Get the position of the cursor in the file
              *
              * \return Return the position of the cursor in the file
              *
              */
             Uint64 getCursor() const;
 
-            /*! \brief Move the reading position in the file
+            /** \brief Move the reading position in the file
              *
              * \param offset The offset to move the cursor
              *
@@ -117,7 +117,7 @@ namespace Bull
              */
             Uint64 moveCursor(Int64 offset) override;
 
-            /*! \brief Set the reading position in the file
+            /** \brief Set the reading position in the file
              *
              * \param position The position to seek to
              *
@@ -126,7 +126,7 @@ namespace Bull
              */
             Uint64 setCursor(Uint64 offset) override;
 
-            /*! \brief Get the size of the file
+            /** \brief Get the size of the file
              *
              * \return Return the size of the file
              *

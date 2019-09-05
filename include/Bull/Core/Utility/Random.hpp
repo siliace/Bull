@@ -2,8 +2,9 @@
 #define BULL_CORE_UTILITY_RANDOM_HPP
 
 #include <random>
+#include <string>
 
-#include <Bull/Core/Memory/String.hpp>
+#include <Bull/Core/Export.hpp>
 
 namespace Bull
 {
@@ -11,19 +12,19 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         RandomGenerator();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param seed The seed to initialize the RandomGenerator
          *
          */
         explicit RandomGenerator(Uint64 seed);
 
-        /*! \brief Generate a random number
+        /** \brief Generate a random number
          *
          * \param min The lowest value of the generated random number
          * \param max The biggest value of the generated random number

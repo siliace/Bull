@@ -11,7 +11,7 @@ namespace Bull
     }
 
     AtInit::AtInit(const std::function<void()>& init, const std::function<void()>& clean) :
-        m_clean(clean)
+            m_clean(clean)
     {
         if(init)
         {

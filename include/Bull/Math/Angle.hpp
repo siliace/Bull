@@ -5,7 +5,7 @@
 
 namespace Bull
 {
-    /*! \class Angle
+    /** \class Angle
      *
      * \brief Implement an universal Angle to handle both degree and radian angles
      *
@@ -19,7 +19,7 @@ namespace Bull
 
         static Angle<T> Zero;
 
-        /*! \brief Create a Angle in degree
+        /** \brief Create a Angle in degree
          *
          * \param value The value of the Angle
          *
@@ -31,7 +31,7 @@ namespace Bull
             return Angle<T>(value, true);
         }
 
-        /*! \brief Create a Angle in radian
+        /** \brief Create a Angle in radian
          *
          * \param value The value of the Angle
          *
@@ -43,7 +43,7 @@ namespace Bull
             return Angle<T>(value);
         }
 
-        /*! \brief Normalize an Angle
+        /** \brief Normalize an Angle
          *
          * \param angle The Angle to normalize
          *
@@ -55,7 +55,7 @@ namespace Bull
             return Angle<T>(angle).normalize();
         }
 
-        /*! \brief Clamp an Angle
+        /** \brief Clamp an Angle
          *
          * \param angle The Angle to clamp
          * \param min   The min value of the Angle
@@ -71,16 +71,16 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Angle() :
-            Angle(0, false)
+                Angle(0, false)
         {
             /// Nothing
         }
 
-        /*! \brief Normalize the Angle
+        /** \brief Normalize the Angle
          *
          * \return This
          *
@@ -107,7 +107,7 @@ namespace Bull
             return m_value;
         }
 
-        /*! \brief Clamp the Angle
+        /** \brief Clamp the Angle
          *
          * \param min The min value of the Angle
          * \param max The max value of the Angle
@@ -129,7 +129,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Compare two Angle
+        /** \brief Compare two Angle
          *
          * \param right The Angle to compare to this
          *
@@ -141,7 +141,7 @@ namespace Bull
             return m_value == right.m_value;
         }
 
-        /*! \brief Compare two Angle
+        /** \brief Compare two Angle
          *
          * \param right The Angle to compare to this
          *
@@ -255,7 +255,7 @@ namespace Bull
 
     private:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param value   The value of the Angle
          * \param convert True if the value needs to be converted in radian

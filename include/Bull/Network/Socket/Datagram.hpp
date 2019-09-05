@@ -12,8 +12,8 @@ namespace Bull
 {
     struct BULL_NETWORK_API Datagram
     {
-        NetPort                    port;
-        ByteArray                  bytes;
+        NetPort port;
+        ByteArray bytes;
         std::unique_ptr<IpAddress> address;
     };
 }

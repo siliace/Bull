@@ -27,7 +27,7 @@ namespace Bull
     }
 
     File::File() :
-        m_mode(0)
+            m_mode(0)
     {
         /// Nothing
     }

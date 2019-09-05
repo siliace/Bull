@@ -11,14 +11,14 @@ namespace Bull
         {
         public:
 
-            /*! \brief Get the current VideoMode of the main screen
+            /** \brief Get the current VideoMode of the main screen
              *
              * \return Return a VideoMode with the current width, height and the deepness of the main screen
              *
              */
             static VideoMode getCurrent();
 
-            /*! \brief Get all available video modes
+            /** \brief Get all available video modes
              *
              * \return Return all available video modes
              *

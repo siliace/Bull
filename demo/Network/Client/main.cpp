@@ -1,6 +1,5 @@
 #include <Bull/Core/IO/TextWriter.hpp>
 #include <Bull/Core/System/ConsoleOutput.hpp>
-#include <Bull/Core/Utility/StringUtils.hpp>
 
 #include <Bull/Network/Address/IpAddressV4.hpp>
 #include <Bull/Network/Socket/SocketPoller.hpp>
@@ -21,12 +20,11 @@ int main()
     {
         if(poller.isReadyToRead(client))
         {
-            Bull::String message = Bull::StringUtils::ofSize(255);
-            std::size_t size = client.receive(&message[0], message.getSize());
+            std::string message;
+            message.resize(255);
+            std::size_t size = client.receive(&message[0], message.length());
 
-            message.setSize(size);
-
-            writer.writeLine(message.getBuffer());
+            writer.writeLine(message.c_str());
 
             return 0;
 

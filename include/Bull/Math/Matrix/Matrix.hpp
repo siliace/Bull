@@ -12,16 +12,16 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Matrix() :
-            Matrix<T, W, H>(0)
+                Matrix<T, W, H>(0)
         {
             /// Nothing
         }
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param value The value to use to fill the Matrix
          *
@@ -31,14 +31,14 @@ namespace Bull
             set(value);
         }
 
-        /*! \brief Copy constructor
+        /** \brief Copy constructor
          *
          * \param copy The Matrix to copy
          *
          */
         template <typename U, std::size_t WU, std::size_t HU>
         Matrix(const Matrix<U, WU, HU>& copy) :
-            Matrix<T, W, H>(0)
+                Matrix<T, W, H>(0)
         {
             for(std::size_t j = 0; j < std::min(H, HU); j++)
             {
@@ -49,7 +49,7 @@ namespace Bull
             }
         }
 
-        /*! \brief Basic assignment operator
+        /** \brief Basic assignment operator
          *
          * \param copy The Matrix to copy
          *
@@ -72,7 +72,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Set the Matrix
+        /** \brief Set the Matrix
          *
          * \param value The value to use to fill the Matrix
          *
@@ -86,7 +86,7 @@ namespace Bull
             return *this;
         }
 
-        /*! \brief Compare two Matrix
+        /** \brief Compare two Matrix
          *
          * \param right The Matrix to compare to this
          *
@@ -98,7 +98,7 @@ namespace Bull
             return m_matrix == right.m_matrix;
         }
 
-        /*! \brief Compare two Matrix
+        /** \brief Compare two Matrix
          *
          * \param right The Matrix to compare to this
          *
@@ -110,7 +110,7 @@ namespace Bull
             return m_matrix != right.m_matrix;
         }
 
-        /*! \brief Get the transpose Matrix
+        /** \brief Get the transpose Matrix
          *
          * \return The transpose
          *
@@ -130,7 +130,7 @@ namespace Bull
             return transpose;
         }
 
-        /*! \brief Access to a Matrix cell
+        /** \brief Access to a Matrix cell
          *
          * \param x The abscissa of the cell
          * \param y The ordinate of the cell
@@ -146,7 +146,7 @@ namespace Bull
             return m_matrix.at(y * W + x);
         }
 
-        /*! \brief Access to a Matrix cell
+        /** \brief Access to a Matrix cell
          *
          * \param x The abscissa of the cell
          * \param y The ordinate of the cell
@@ -162,7 +162,7 @@ namespace Bull
             return m_matrix.at(y * W + x);
         }
 
-        /*! \brief Set a row of the Matrix
+        /** \brief Set a row of the Matrix
          *
          * \param row   The row
          * \param index The index of the row
@@ -180,7 +180,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Get a row of the Matrix
+        /** \brief Get a row of the Matrix
          *
          * \param row The row to get
          *
@@ -199,7 +199,7 @@ namespace Bull
             return rowVec;
         }
 
-        /*! \brief Set a column of the Matrix
+        /** \brief Set a column of the Matrix
          *
          * \param column The column
          * \param index  The index of the column
@@ -217,7 +217,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Get a column of the Matrix
+        /** \brief Get a column of the Matrix
          *
          * \param column The column to get
          *
@@ -236,7 +236,7 @@ namespace Bull
             return columnVec;
         }
 
-        /*! \brief Negation operator
+        /** \brief Negation operator
          *
          * \return The opposite Matrix of this
          *
@@ -253,7 +253,7 @@ namespace Bull
             return negation;
         }
 
-        /*! \brief Get a pointer to the matrix
+        /** \brief Get a pointer to the matrix
          *
          * \return The pointer
          *
@@ -268,7 +268,7 @@ namespace Bull
         std::array<T, W * H> m_matrix;
     };
 
-    /*! \brief Addition two Matrix
+    /** \brief Addition two Matrix
      *
      * \param left  The left Matrix
      * \param right The right Matrix
@@ -292,7 +292,7 @@ namespace Bull
         return sum;
     }
 
-    /*! \brief Subtract two Matrix
+    /** \brief Subtract two Matrix
      *
      * \param left  The left Matrix
      * \param right The right Matrix

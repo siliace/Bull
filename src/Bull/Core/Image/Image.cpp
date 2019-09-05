@@ -5,19 +5,19 @@
 namespace Bull
 {
     Image::Image(PixelFormat pixelFormat) :
-        m_pixelFormat(pixelFormat)
+            m_pixelFormat(pixelFormat)
     {
         /// Nothing
     }
 
     Image::Image(const Size<std::size_t>& size, PixelFormat pixelFormat) :
-        m_pixelFormat(pixelFormat)
+            m_pixelFormat(pixelFormat)
     {
         create(size);
     }
 
     Image::Image(const ByteArray& pixels, const Size<std::size_t>& size, PixelFormat pixelFormat) :
-        m_pixelFormat(pixelFormat)
+            m_pixelFormat(pixelFormat)
     {
         create(pixels, size);
     }

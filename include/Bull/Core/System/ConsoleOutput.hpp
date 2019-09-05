@@ -17,17 +17,17 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         ConsoleOutput();
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         ~ConsoleOutput();
 
-        /*! \brief Write bytes in the ConsoleOutput
+        /** \brief Write bytes in the ConsoleOutput
          *
          * \param bytes Bytes to write
          *
@@ -36,24 +36,24 @@ namespace Bull
          */
         std::size_t write(const ByteArray& bytes) override;
 
-        /*! \brief Flush the ConsoleOutput
+        /** \brief Flush the ConsoleOutput
          *
          */
         void flush() override;
 
-        /*! \brief Clear the ConsoleOutput
+        /** \brief Clear the ConsoleOutput
          *
          */
         void clear();
 
-        /*! \brief Set the color of the text in the ConsoleOutput
+        /** \brief Set the color of the text in the ConsoleOutput
          *
          * \param color The color
          *
          */
         void setTextColor(ConsoleColor color);
 
-        /*! \brief Set the color of the background in the ConsoleOutput
+        /** \brief Set the color of the background in the ConsoleOutput
          *
          * \param color The color
          *

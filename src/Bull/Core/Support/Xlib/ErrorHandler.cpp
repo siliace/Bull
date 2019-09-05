@@ -12,7 +12,7 @@ namespace Bull
 
         int ErrorHandler::handle(XDisplay* display, XErrorEvent* error)
         {
-            String errorMessage = StringUtils::ofSize(256);
+            std::string errorMessage = StringUtils::ofSize(256);
 
             XGetErrorText(display, error->error_code, &errorMessage[0], errorMessage.getSize());
 
@@ -24,8 +24,8 @@ namespace Bull
         }
 
         ErrorHandler::ErrorHandler() :
-            m_lock(s_mutex),
-            m_isBound(false)
+                m_lock(s_mutex),
+                m_isBound(false)
         {
             s_errorOccurred = false;
 

@@ -3,19 +3,19 @@
 namespace Bull
 {
     ConsoleLogger::ConsoleLogger() :
-        StreamLogger(m_output)
+            StreamLogger(m_output)
     {
         m_output.setTextColor(ConsoleColor_Gray);
         m_output.setBackgroundColor(ConsoleColor_Black);
 
-        m_levelTextColor[LogLevel_Error]   = ConsoleColor_Red;
-        m_levelTextColor[LogLevel_Info]    = ConsoleColor_Cyan;
-        m_levelTextColor[LogLevel_Debug]   = ConsoleColor_Gray;
+        m_levelTextColor[LogLevel_Error] = ConsoleColor_Red;
+        m_levelTextColor[LogLevel_Info] = ConsoleColor_Cyan;
+        m_levelTextColor[LogLevel_Debug] = ConsoleColor_Gray;
         m_levelTextColor[LogLevel_Warning] = ConsoleColor_Yellow;
 
-        m_levelBackgroundColor[LogLevel_Error]   = ConsoleColor_Black;
-        m_levelBackgroundColor[LogLevel_Info]    = ConsoleColor_Black;
-        m_levelBackgroundColor[LogLevel_Debug]   = ConsoleColor_Black;
+        m_levelBackgroundColor[LogLevel_Error] = ConsoleColor_Black;
+        m_levelBackgroundColor[LogLevel_Info] = ConsoleColor_Black;
+        m_levelBackgroundColor[LogLevel_Debug] = ConsoleColor_Black;
         m_levelBackgroundColor[LogLevel_Warning] = ConsoleColor_Black;
     }
 
@@ -29,7 +29,7 @@ namespace Bull
         m_levelBackgroundColor[level] = color;
     }
 
-    String ConsoleLogger::formatEntry(const String& entry, LogLevel level, const DateTime& date)
+    std::string ConsoleLogger::formatEntry(const std::string& entry, LogLevel level, const DateTime& date)
     {
         m_output.setTextColor(m_levelTextColor[level]);
         m_output.setBackgroundColor(m_levelBackgroundColor[level]);

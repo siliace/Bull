@@ -6,7 +6,7 @@
 
 namespace Bull
 {
-    template<typename T>
+    template <typename T>
     class Vector3 : public Vector<T, 3>
     {
     public:
@@ -27,7 +27,7 @@ namespace Bull
         static Vector3<T> Forward;
         static Vector3<T> Backward;
 
-        /*! \brief Compute the crossProduct of two Vector3
+        /** \brief Compute the crossProduct of two Vector3
          *
          * \param left
          * \param right
@@ -42,7 +42,7 @@ namespace Bull
 
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param value The value of all components
          *
@@ -52,7 +52,7 @@ namespace Bull
             set(value, value, value);
         }
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param x The x component
          * \param y The y component
@@ -64,19 +64,19 @@ namespace Bull
             set(x, y, z);
         }
 
-        /*! \brief Copy constructor
+        /** \brief Copy constructor
          *
          * \param copy The Vector to copy
          *
          */
         template <typename U, std::size_t US>
         Vector3(const Vector<U, US>& copy) :
-            Vector<T, 3>(copy)
+                Vector<T, 3>(copy)
         {
             /// Nothing
         }
 
-        /*! \brief Set the Vector3
+        /** \brief Set the Vector3
          *
          * \param x The X component
          * \param y The Y component
@@ -94,7 +94,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Compute the cross product of two Vector3
+        /** \brief Compute the cross product of two Vector3
          *
          * \param right The other Vector3 to compute the cross product with
          *
@@ -108,7 +108,7 @@ namespace Bull
                        (x() * right.y()) - (y() * right.x()));
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *
@@ -118,7 +118,7 @@ namespace Bull
             return this->at(0);
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *
@@ -128,7 +128,7 @@ namespace Bull
             return this->at(0);
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *
@@ -138,7 +138,7 @@ namespace Bull
             return this->at(1);
         }
 
-        /*! \brief Get the X component
+        /** \brief Get the X component
          *
          * \return The component
          *
@@ -148,7 +148,7 @@ namespace Bull
             return this->at(1);
         }
 
-        /*! \brief Get the Z component
+        /** \brief Get the Z component
          *
          * \return The component
          *
@@ -158,7 +158,7 @@ namespace Bull
             return this->at(2);
         }
 
-        /*! \brief Get the Z component
+        /** \brief Get the Z component
          *
          * \return The component
          *
@@ -169,37 +169,37 @@ namespace Bull
         }
     };
 
-    template<typename T>
+    template <typename T>
     Vector3<T> Vector3<T>::Zero = Vector3<T>(0, 0, 0);
 
-    template<typename T>
-    Vector3<T> Vector3<T>::Unit  = Vector3<T>(1, 1, 1);
+    template <typename T>
+    Vector3<T> Vector3<T>::Unit = Vector3<T>(1, 1, 1);
 
-    template<typename T>
+    template <typename T>
     Vector3<T> Vector3<T>::UnitX = Vector3<T>(1, 0, 0);
 
-    template<typename T>
+    template <typename T>
     Vector3<T> Vector3<T>::UnitY = Vector3<T>(0, 1, 0);
 
-    template<typename T>
+    template <typename T>
     Vector3<T> Vector3<T>::UnitZ = Vector3<T>(0, 0, 1);
 
-    template<typename T>
-    Vector3<T> Vector3<T>::Left  = Vector3<T>(-1, 0, 0);
+    template <typename T>
+    Vector3<T> Vector3<T>::Left = Vector3<T>(-1, 0, 0);
 
-    template<typename T>
+    template <typename T>
     Vector3<T> Vector3<T>::Right = Vector3<T>(1, 0, 0);
 
-    template<typename T>
-    Vector3<T> Vector3<T>::Up   = Vector3<T>(0, 1, 0);
+    template <typename T>
+    Vector3<T> Vector3<T>::Up = Vector3<T>(0, 1, 0);
 
-    template<typename T>
+    template <typename T>
     Vector3<T> Vector3<T>::Down = Vector3<T>(0, -1, 0);
 
-    template<typename T>
-    Vector3<T> Vector3<T>::Forward  = Vector3<T>(0, 0, 1);
+    template <typename T>
+    Vector3<T> Vector3<T>::Forward = Vector3<T>(0, 0, 1);
 
-    template<typename T>
+    template <typename T>
     Vector3<T> Vector3<T>::Backward = Vector3<T>(0, 0, -1);
 
     typedef Vector3<int> Vector3I;

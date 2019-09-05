@@ -3,11 +3,13 @@
 #include <Bull/Network/Socket/SocketPollerImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
+
     #include <Bull/Network/Socket/Win32/SocketPollerImplWin32.hpp>
-    typedef Bull::prv::SocketPollerImplWin32 SocketPollerImplType;
+
+typedef Bull::prv::SocketPollerImplWin32 SocketPollerImplType;
 #else
     #include <Bull/Network/Socket/Unix/SocketPollerImplUnix.hpp>
-    typedef Bull::prv::SocketPollerImplUnix SocketPollerImplType;
+typedef Bull::prv::SocketPollerImplUnix SocketPollerImplType;
 #endif
 
 namespace Bull
@@ -83,7 +85,8 @@ namespace Bull
 
         SocketPollerImpl::SocketPollDescriptorList::iterator SocketPollerImpl::getSocketPoll(SocketHandler socket)
         {
-            return std::find_if(m_sockets.begin(), m_sockets.end(), [socket](SocketPollDescriptor descriptor){
+            return std::find_if(m_sockets.begin(), m_sockets.end(), [socket](SocketPollDescriptor descriptor)
+            {
                 return descriptor.fd == socket;
             });
         }

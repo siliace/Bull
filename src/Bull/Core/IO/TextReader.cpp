@@ -3,14 +3,14 @@
 namespace Bull
 {
     TextReader::TextReader(InStream& stream) :
-        m_stream(stream)
+            m_stream(stream)
     {
         /// Nothing
     }
 
-    String TextReader::readAll()
+    std::string TextReader::readAll()
     {
-        String content;
+        std::string content;
 
         while(!m_stream.isAtEnd())
         {
@@ -20,9 +20,9 @@ namespace Bull
         return content;
     }
 
-    String TextReader::readLine(char separator)
+    std::string TextReader::readLine(char separator)
     {
-        String line;
+        std::string line;
         bool found = false;
 
         while(!m_stream.isAtEnd() && !found)

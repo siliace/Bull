@@ -13,7 +13,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Handle Xlib errors
+            /** \brief Handle Xlib errors
              *
              * \param display The connection where the error was sent
              * \param error   The error
@@ -30,34 +30,34 @@ namespace Bull
 
         public:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             ErrorHandler();
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             ~ErrorHandler();
 
-            /*! \brief Tell whether an error occurred
+            /** \brief Tell whether an error occurred
              *
              * \return True if an error occurred during the object life time
              *
              */
             bool errorOccurred() const;
 
-            /*! \brief Reset the error
+            /** \brief Reset the error
              *
              */
             void resetError();
 
-            /*! \brief Start to listen errors to handle
+            /** \brief Start to listen errors to handle
              *
              */
             void listen();
 
-            /*! \brief Stop to listen errors
+            /** \brief Stop to listen errors
              *
              */
             void close();

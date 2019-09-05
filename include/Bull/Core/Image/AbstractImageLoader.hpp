@@ -14,7 +14,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Load an Image from a File
+        /** \brief Load an Image from a File
          *
          * \param path        The Path of the File to read
          * \param pixelFormat The PixelFormat of the Image to create
@@ -30,7 +30,7 @@ namespace Bull
             return loadFromStream<T>(file, pixelFormat);
         }
 
-        /*! \brief Load an Image from an InStream
+        /** \brief Load an Image from an InStream
          *
          * \param stream      The InStream to read
          * \param pixelFormat The PixelFormat of the Image to create
@@ -49,7 +49,7 @@ namespace Bull
             return image;
         }
 
-        /*! \brief Load a Image from a memory area
+        /** \brief Load a Image from a memory area
          *
          * \param path        Data to read
          * \param length      The length of data to read
@@ -70,17 +70,17 @@ namespace Bull
 
         struct RawImage
         {
-            ByteArray         pixels;
+            ByteArray pixels;
             Size<std::size_t> size;
-            int               channels;
+            int channels;
         };
 
-        /*! \brief Get the last loading error message
+        /** \brief Get the last loading error message
          *
          * \return The error message
          *
          */
-        String getErrorMessage() const;
+        std::string getErrorMessage() const;
 
         RawImage loadPixelsFromStream(InStream& stream, PixelFormat pixelFormat) const;
 

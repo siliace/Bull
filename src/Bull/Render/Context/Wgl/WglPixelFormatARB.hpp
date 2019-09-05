@@ -57,15 +57,17 @@ namespace Bull
 {
     namespace prv
     {
-        BOOL (WINAPI* wglGetPixelFormatAttribiv)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues) = nullptr;
-        BOOL (WINAPI* wglGetPixelFormatAttribfv)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues) = nullptr;
-        BOOL (WINAPI* wglChoosePixelFormat)(HDC hdc, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats) = nullptr;
+        BOOL (WINAPI* wglGetPixelFormatAttribiv)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int* piAttributes, int* piValues) = nullptr;
+
+        BOOL (WINAPI* wglGetPixelFormatAttribfv)(HDC hdc, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int* piAttributes, FLOAT* pfValues) = nullptr;
+
+        BOOL (WINAPI* wglChoosePixelFormat)(HDC hdc, const int* piAttribIList, const FLOAT* pfAttribFList, UINT nMaxFormats, int* piFormats, UINT* nNumFormats) = nullptr;
 
         Extension wglPixelFormat("WGL_ARB_pixel_format", []
         {
             wglGetPixelFormatAttribiv = reinterpret_cast<BOOL (WINAPI*)(HDC, int, int, UINT, const int*, int*)>(GlContext::getFunction("wglGetPixelFormatAttribivARB"));
             wglGetPixelFormatAttribfv = reinterpret_cast<BOOL (WINAPI*)(HDC, int, int, UINT, const int*, FLOAT*)>(GlContext::getFunction("wglGetPixelFormatAttribfvARB"));
-            wglChoosePixelFormat      = reinterpret_cast<BOOL (WINAPI*)(HDC, const int*, const FLOAT*, UINT, int*, UINT*)>(GlContext::getFunction("wglChoosePixelFormatARB"));
+            wglChoosePixelFormat = reinterpret_cast<BOOL (WINAPI*)(HDC, const int*, const FLOAT*, UINT, int*, UINT*)>(GlContext::getFunction("wglChoosePixelFormatARB"));
 
             return wglGetPixelFormatAttribiv && wglGetPixelFormatAttribfv && wglChoosePixelFormat;
         });

@@ -12,15 +12,15 @@
 namespace Bull
 {
     TcpServer::TcpServer() :
-        Socket(SocketType_Tcp),
-        m_port(NetPort_Any),
-        m_backlog(0)
+            Socket(SocketType_Tcp),
+            m_port(NetPort_Any),
+            m_backlog(0)
     {
         /// Nothing
     }
 
     TcpServer::TcpServer(TcpServer&& right) noexcept :
-        Socket(std::move(right))
+            Socket(std::move(right))
     {
         std::swap(m_port, right.m_port);
         std::swap(m_backlog, right.m_backlog);
@@ -60,7 +60,7 @@ namespace Bull
 
         Expect(ret == 0, Throw(InternalError, "Failed to listen the port"));
 
-        m_port    = port;
+        m_port = port;
         m_backlog = backlog;
     }
 

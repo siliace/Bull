@@ -2,11 +2,13 @@
 #include <Bull/Core/FileSystem/FileImpl.hpp>
 
 #if defined BULL_OS_WINDOWS
+
     #include <Bull/Core/FileSystem/Win32/FileImplWin32.hpp>
-    typedef Bull::prv::FileImplWin32 FileImplType;
+
+typedef Bull::prv::FileImplWin32 FileImplType;
 #else
     #include <Bull/Core/FileSystem/Unix/FileImplUnix.hpp>
-    typedef Bull::prv::FileImplUnix FileImplType;
+typedef Bull::prv::FileImplUnix FileImplType;
 #endif
 
 namespace Bull

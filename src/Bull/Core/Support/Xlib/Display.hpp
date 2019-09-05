@@ -3,7 +3,7 @@
 
 #include <map>
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 #include <Bull/Core/Pattern/SharedSingleton.hpp>
 #include <Bull/Core/Support/Xlib/Xlib.hpp>
 
@@ -15,31 +15,31 @@ namespace Bull
         {
         public:
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             ~Display();
 
-            /*! \brief Flush the display
+            /** \brief Flush the display
              *
              */
             void flush();
 
-            /*! \brief Get the default screen
+            /** \brief Get the default screen
              *
              * \return Return the ID of the default render screen
              *
              */
             int getDefaultScreen() const;
 
-            /*! \brief Get the root window the a screen
+            /** \brief Get the root window the a screen
              *
              * \return Return the root window of the default screen
              *
              */
             XWindow getRootWindow() const;
 
-            /*! \brief Get the root window the a screen
+            /** \brief Get the root window the a screen
              *
              * \param screen The screen
              *
@@ -48,14 +48,14 @@ namespace Bull
              */
             XWindow getRootWindow(int screen) const;
 
-            /*! \brief Get the default color depth of the default screen
+            /** \brief Get the default color depth of the default screen
              *
              * \return Return the depth
              *
              */
             int getDefaultDepth() const;
 
-            /*! \brief Get the default color depth of the specified screen
+            /** \brief Get the default color depth of the specified screen
              *
              * \param screen The screen
              *
@@ -64,16 +64,16 @@ namespace Bull
              */
             int getDefaultDepth(int screen);
 
-            /*! \brief Check whether an extension is supported
+            /** \brief Check whether an extension is supported
              *
              * \param name The name of the extension
              *
              * \return Return true if the extension is supported, false otherwise
              *
              */
-            bool isSupportedExtension(const String& name) const;
+            bool isSupportedExtension(const std::string& name) const;
 
-            /*! \brief Get an atom
+            /** \brief Get an atom
              *
              * \param name The name of the atom
              * \param mustExists If false and the atom does not exists, the atom is created
@@ -81,9 +81,9 @@ namespace Bull
              * \return Return the atom
              *
              */
-            Atom getAtom(const String& name, bool mustExists = false);
+            Atom getAtom(const std::string& name, bool mustExists = false);
 
-            /*! \brief Convert the display to a Xlib display
+            /** \brief Convert the display to a Xlib display
              *
              * \return
              *
@@ -94,15 +94,15 @@ namespace Bull
 
             friend class SharedSingleton<Display>;
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             Display();
 
         private:
 
-            std::map<String, XAtom> m_atoms;
-            XDisplay*               m_display;
+            std::map<std::string, XAtom> m_atoms;
+            XDisplay* m_display;
         };
     }
 }

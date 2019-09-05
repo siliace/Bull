@@ -6,17 +6,17 @@
 
 namespace Bull
 {
-    template<typename T>
+    template <typename T>
     class Triangle : public RegularPolygon<T, 3>
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Triangle() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param center   The center of the polygon
          * \param radius   The radius of the polygon
@@ -24,7 +24,7 @@ namespace Bull
          *
          */
         explicit Triangle(const Vector2<T>& center, T radius = 0, const Angle<T>& rotation = Angle<T>::Zero) :
-            RegularPolygon<T, 3>(center, radius, rotation)
+                RegularPolygon<T, 3>(center, radius, rotation)
         {
             /// Nothing
         }

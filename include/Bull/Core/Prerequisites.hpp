@@ -16,21 +16,21 @@
     #define BULL_PRETTY_FUNCTION __PRETTY_FUNCTION__
     #if defined __MINGW32__ && defined __MINGW64__
         #define BULL_COMPILER BULL_COMPILER_MINGW_64
-		#define BULL_COMPILER_VERSION_MAJOR  __MINGW64_VERSION_MAJOR
-		#define BULL_COMPILER_VERSION_MINOR  __MINGW64_VERSION_MINOR
-		#define BULL_COMPILER_VERSION_BUGFIX __MINGW64_VERSION_BUGFIX
-		#define BULL_COMPILER_VERSION_STRING __MINGW64_VERSION_STR
+        #define BULL_COMPILER_VERSION_MAJOR  __MINGW64_VERSION_MAJOR
+        #define BULL_COMPILER_VERSION_MINOR  __MINGW64_VERSION_MINOR
+        #define BULL_COMPILER_VERSION_BUGFIX __MINGW64_VERSION_BUGFIX
+        #define BULL_COMPILER_VERSION_STRING __MINGW64_VERSION_STR
     #elif defined __MINGW32__
         #define BULL_COMPILER BULL_COMPILER_MINGW_32
-		#define BULL_COMPILER_VERSION_MAJOR  __MINGW32_VERSION_MAJOR
-		#define BULL_COMPILER_VERSION_MINOR  __MINGW32_VERSION_MINOR
-		#define BULL_COMPILER_VERSION_BUGFIX __MINGW32_VERSION_BUGFIX
-		#define BULL_COMPILER_VERSION_STRING __MINGW32_VERSION_STR
+        #define BULL_COMPILER_VERSION_MAJOR  __MINGW32_VERSION_MAJOR
+        #define BULL_COMPILER_VERSION_MINOR  __MINGW32_VERSION_MINOR
+        #define BULL_COMPILER_VERSION_BUGFIX __MINGW32_VERSION_BUGFIX
+        #define BULL_COMPILER_VERSION_STRING __MINGW32_VERSION_STR
     #else
         #define BULL_COMPILER BULL_COMPILER_GCC
     #endif
 #else
-	#warning Unsupported compiler
+    #warning Unsupported compiler
 #endif
 
 #if defined _WIN32
@@ -77,7 +77,7 @@
                 #define BULL_API_IMPORT
             #endif
         #endif
-     #endif
+    #endif
 #else
     #define BULL_API_EXPORT
     #define BULL_API_IMPORT
@@ -99,11 +99,11 @@
 
 namespace Bull
 {
-    typedef int8_t   Int8;
-    typedef int16_t  Int16;
-    typedef int32_t  Int32;
-    typedef int64_t  Int64;
-    typedef uint8_t  Uint8;
+    typedef int8_t Int8;
+    typedef int16_t Int16;
+    typedef int32_t Int32;
+    typedef int64_t Int64;
+    typedef uint8_t Uint8;
     typedef uint16_t Uint16;
     typedef uint32_t Uint32;
     typedef uint64_t Uint64;

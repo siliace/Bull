@@ -5,19 +5,19 @@
 namespace Bull
 {
     Cursor::Cursor() :
-        m_impl(prv::CursorImpl::createInstance())
+            m_impl(prv::CursorImpl::createInstance())
     {
         /// Nothing
     }
 
-    Cursor::Cursor(CursorType cursor)  :
-        m_impl(prv::CursorImpl::createInstance())
+    Cursor::Cursor(CursorType cursor) :
+            m_impl(prv::CursorImpl::createInstance())
     {
         create(cursor);
     }
 
     Cursor::Cursor(const Image& cursor, const Size<unsigned int>& hotSpot) :
-        m_impl(prv::CursorImpl::createInstance())
+            m_impl(prv::CursorImpl::createInstance())
     {
         create(cursor, hotSpot);
     }

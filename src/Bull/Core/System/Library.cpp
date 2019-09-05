@@ -4,7 +4,7 @@
 
 namespace Bull
 {
-    Library::Library(const String& name)
+    Library::Library(const std::string& name)
     {
         load(name);
     }
@@ -14,7 +14,7 @@ namespace Bull
         free();
     }
 
-    void Library::load(const String& name)
+    void Library::load(const std::string& name)
     {
         if(isLoaded())
         {
@@ -29,7 +29,7 @@ namespace Bull
         return m_impl != nullptr;
     }
 
-    void* Library::getSymbolPointer(const String& name) const
+    void* Library::getSymbolPointer(const std::string& name) const
     {
         if(isLoaded())
         {

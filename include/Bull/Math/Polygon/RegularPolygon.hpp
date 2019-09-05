@@ -8,21 +8,21 @@
 
 namespace Bull
 {
-    template<typename T, std::size_t S>
+    template <typename T, std::size_t S>
     class RegularPolygon : public Polygon<T>
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         RegularPolygon() :
-            m_radius(0)
+                m_radius(0)
         {
             /// Nothing
         }
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param center   The center of the polygon
          * \param radius   The radius of the polygon
@@ -30,14 +30,14 @@ namespace Bull
          *
          */
         explicit RegularPolygon(const Vector2<T>& center, T radius = 0.0, const Angle<T>& rotation = Angle<T>::Zero) :
-            m_radius(radius),
-            m_rotation(rotation),
-            m_center(center)
+                m_radius(radius),
+                m_rotation(rotation),
+                m_center(center)
         {
             update();
         }
 
-        /*! \brief Get a vertex form the polygon
+        /** \brief Get a vertex form the polygon
          *
          * \param index The index of the vertex to get
          *
@@ -48,7 +48,7 @@ namespace Bull
             return m_vertices.at(index);
         }
 
-        /*! \brief Get the number of vertex in the polygon
+        /** \brief Get the number of vertex in the polygon
          *
          * \return The number of vertex
          *
@@ -58,7 +58,7 @@ namespace Bull
             return m_vertices.size();
         }
 
-        /*! \brief Set the center of the polygon
+        /** \brief Set the center of the polygon
          *
          * \param center The new center
          *
@@ -74,7 +74,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Get the center of the polygon
+        /** \brief Get the center of the polygon
          *
          * \return The center
          *
@@ -84,7 +84,7 @@ namespace Bull
             return m_center;
         }
 
-        /*! \brief Set the rotation of the polygon
+        /** \brief Set the rotation of the polygon
          * 
          * \param rotation The new rotation
          * 
@@ -98,8 +98,8 @@ namespace Bull
 
             return (*this);
         }
-        
-        /*! \brief Get the rotation of the polygon
+
+        /** \brief Get the rotation of the polygon
          * 
          * \return The rotation
          * 
@@ -109,7 +109,7 @@ namespace Bull
             return m_rotation;
         }
 
-        /*! \brief Set the radius of the polygon
+        /** \brief Set the radius of the polygon
          *
          * \param radius The new radius
          *
@@ -125,7 +125,7 @@ namespace Bull
             return (*this);
         }
 
-        /*! \brief Get the radius of the polygon
+        /** \brief Get the radius of the polygon
          *
          * \return The radius
          *
@@ -137,7 +137,7 @@ namespace Bull
 
     private:
 
-        /*! \brief Update vertices
+        /** \brief Update vertices
          *
          */
         void update()
@@ -160,9 +160,9 @@ namespace Bull
 
     private:
 
-        T                         m_radius;
-        Angle<T>                  m_rotation;
-        Vector2<T>                m_center;
+        T m_radius;
+        Angle<T> m_rotation;
+        Vector2<T> m_center;
         std::array<Vector2<T>, S> m_vertices;
     };
 }

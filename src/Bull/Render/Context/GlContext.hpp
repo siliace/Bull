@@ -20,24 +20,24 @@ namespace Bull
         {
         public:
 
-            /*! \brief Perform internal initialization
+            /** \brief Perform internal initialization
              *
              */
             static void globalInit();
 
-            /*! \brief Ensure there is an active OpenGL context in this thread
+            /** \brief Ensure there is an active OpenGL context in this thread
              *
              */
             static void ensureContext();
 
-            /*! \brief Create an OS specific instance of GlContext
+            /** \brief Create an OS specific instance of GlContext
              *
              * \return Return the created context
              *
              */
             static std::unique_ptr<GlContext> createInstance();
 
-            /*! \brief Create an OS specific instance of GlContext
+            /** \brief Create an OS specific instance of GlContext
              *
              * \param mode     The VideoMode to use to create the context
              * \param settings Settings to use to create the context
@@ -47,7 +47,7 @@ namespace Bull
              */
             static std::unique_ptr<GlContext> createInstance(const VideoMode& mode, const ContextSettings& settings);
 
-            /*! \brief Create an OS specific instance of GlContext
+            /** \brief Create an OS specific instance of GlContext
              *
              * \param bitsPerPixel Number of bits per pixel to use
              * \param settings     Settings to use to create the context
@@ -57,7 +57,7 @@ namespace Bull
              */
             static std::unique_ptr<GlContext> createInstance(unsigned int bitsPerPixel, const ContextSettings& settings);
 
-            /*! \brief Create an OS specific instance of GlContext
+            /** \brief Create an OS specific instance of GlContext
              *
              * \param window       The window to bind the created context
              * \param bitsPerPixel The number of bits to use per pixel
@@ -68,25 +68,25 @@ namespace Bull
              */
             static std::unique_ptr<GlContext> createInstance(const WindowImpl& window, unsigned int bitsPerPixel, const ContextSettings& settings);
 
-            /*! \brief Get an OpenGL function
+            /** \brief Get an OpenGL function
              *
              * \param function The function name
              *
              * \param Return the function, nullptr if the function is not available
              *
              */
-            static void* getFunction(const String& function);
+            static void* getFunction(const std::string& function);
 
-            /*! \brief Check whether an extensions is loaded
+            /** \brief Check whether an extensions is loaded
              *
              * \param  extension The name of the extension
              *
              * \return Return true if the extension is supported, false otherwise
              *
              */
-            static bool isSupported(const String& extension);
+            static bool isSupported(const std::string& extension);
 
-            /*! \brief The function called by OpenGL when an error occur
+            /** \brief The function called by OpenGL when an error occur
              *
              * \param source
              * \param type
@@ -97,11 +97,11 @@ namespace Bull
              * \param userParam
              *
              */
-            static void APIENTRY debugProc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* msg, const void *userParam);
+            static void APIENTRY debugProc(unsigned int source, unsigned int type, unsigned int id, unsigned int severity, int length, const char* msg, const void* userParam);
 
         protected:
 
-            /*! \brief Give a mark to a pixel format
+            /** \brief Give a mark to a pixel format
              *
              * \param bitsPerPixel
              * \param depths
@@ -117,24 +117,24 @@ namespace Bull
 
         public:
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             virtual ~GlContext();
 
-            /*! \brief Activate or deactivate the context
+            /** \brief Activate or deactivate the context
              *
              * \param active True to activate, false to deactivate
              *
              */
             void setActive(bool active);
 
-            /*! \brief Display what has been rendered so far
+            /** \brief Display what has been rendered so far
              *
              */
             virtual void display() = 0;
 
-            /*! \brief Activate or deactivate the vertical synchronization
+            /** \brief Activate or deactivate the vertical synchronization
              *
              * \param active True to activate, false to deactivate
              *
@@ -143,14 +143,14 @@ namespace Bull
              */
             virtual void enableVsync(bool active) = 0;
 
-            /*! \brief Get the render surface of the context
+            /** \brief Get the render surface of the context
              *
              * \return Return the render context
              *
              */
             virtual SurfaceHandler getSurfaceHandler() const = 0;
 
-            /*! \brief Get the ContextSettings of the context
+            /** \brief Get the ContextSettings of the context
              *
              * \return Return the ContextSettings
              *
@@ -159,19 +159,19 @@ namespace Bull
 
         protected:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             GlContext() = default;
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param settings Settings to use to create the context
              *
              */
             explicit GlContext(const ContextSettings& settings);
 
-            /*! \brief Make the context current
+            /** \brief Make the context current
              *
              */
             virtual void makeCurrent() = 0;
@@ -180,7 +180,7 @@ namespace Bull
 
         private:
 
-            /*! \brief Enable and perform initializations
+            /** \brief Enable and perform initializations
              *
              * \param wanted Settings wanted to create the context
              *

@@ -4,9 +4,9 @@
 
 namespace Bull
 {
-    ByteArray ByteArray::fromString(const String& string)
+    ByteArray ByteArray::fromString(const std::string& string)
     {
-        return memoryCopy(string.getBuffer(), string.getSize());
+        return memoryCopy(string.c_str(), string.length());
     }
 
     ByteArray ByteArray::memoryCopy(const void* data, std::size_t length)
@@ -22,7 +22,7 @@ namespace Bull
     }
 
     ByteArray::ByteArray(std::size_t length) :
-        m_array(length)
+            m_array(length)
     {
         /// Nothing
     }
@@ -81,9 +81,9 @@ namespace Bull
         return m_array.data();
     }
 
-    String ByteArray::toString() const
+    std::string ByteArray::toString() const
     {
-        return String(reinterpret_cast<const char*>(m_array.data()), m_array.size());
+        return std::string(reinterpret_cast<const char*>(m_array.data()), m_array.size());
     }
 
     Uint8& ByteArray::operator[](std::size_t index)

@@ -8,7 +8,7 @@ namespace Bull
     }
 
     DepthStencilTexture::DepthStencilTexture(DepthStencilTexture&& depthStencilTexture) noexcept :
-        Texture(static_cast<Texture&&>(depthStencilTexture))
+            Texture(static_cast<Texture&&>(depthStencilTexture))
     {
         /// Nothing
     }

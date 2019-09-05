@@ -9,14 +9,14 @@ namespace Bull
         void DirectoryImplWin32::create(const Path& path)
         {
             Expect(
-                    CreateDirectory(path.toString().getBuffer(), nullptr),
+                    CreateDirectory(path.toString().c_str(), nullptr),
                     Throw(Win32Error, "Failed to create the directory " + path.toString())
             );
         }
 
         bool DirectoryImplWin32::exists(const Path& path)
         {
-            DWORD attribs = GetFileAttributes(path.toString().getBuffer());
+            DWORD attribs = GetFileAttributes(path.toString().c_str());
 
             return (attribs != INVALID_FILE_ATTRIBUTES) && (attribs & FILE_ATTRIBUTE_DIRECTORY);
         }
@@ -24,17 +24,17 @@ namespace Bull
         void DirectoryImplWin32::remove(const Path& path)
         {
             Expect(
-                    RemoveDirectory(path.toString().getBuffer()),
+                    RemoveDirectory(path.toString().c_str()),
                     Throw(Win32Error, "Failed to remove the directory " + path.toString())
             );
         }
 
         DirectoryImplWin32::DirectoryImplWin32(const Path& path) :
-            m_path(path)
+                m_path(path)
         {
-            String base = m_path.toString() + "\\*";
+            std::string base = m_path.toString() + "\\*";
 
-            m_handler = FindFirstFile(base.getBuffer(), &m_result);
+            m_handler = FindFirstFile(base.c_str(), &m_result);
 
             Expect(m_handler != INVALID_HANDLE_VALUE, Throw(Win32Error, "Failed to open directory " + m_path.toString()));
         }
@@ -50,7 +50,7 @@ namespace Bull
 
             do
             {
-                String fileName = m_result.cFileName;
+                std::string fileName = m_result.cFileName;
 
                 if(fileName != "." && fileName != "..")
                 {

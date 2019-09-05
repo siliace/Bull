@@ -13,14 +13,14 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a Directory
+            /** \brief Create a Directory
              *
              * \param path The Path of the directory to create
              *
              */
             static void create(const Path& path);
 
-            /*! \brief Check if a directory exists
+            /** \brief Check if a directory exists
              *
              * \param path The path of the directory to check
              *
@@ -29,7 +29,7 @@ namespace Bull
              */
             static bool exists(const Path& path);
 
-            /*! \brief Delete a directory
+            /** \brief Delete a directory
              *
              * \param path The path of the directory to delete
              *
@@ -40,19 +40,19 @@ namespace Bull
 
         public:
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param path The Path of the Directory
              *
              */
             explicit DirectoryImplUnix(const Path& path);
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             ~DirectoryImplUnix();
 
-            /*! \brief Get the content of this Directory
+            /** \brief Get the content of this Directory
              *
              * \param flags What we have to look for
              *

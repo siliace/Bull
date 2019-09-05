@@ -19,7 +19,7 @@ namespace Bull
 {
     namespace prv
     {
-        HGLRC (WINAPI* wglCreateContextAttribs)(HDC hDC, HGLRC hShareContext, const int *attribList) = nullptr;
+        HGLRC (WINAPI* wglCreateContextAttribs)(HDC hDC, HGLRC hShareContext, const int* attribList) = nullptr;
 
         Extension wglCreateContext("WGL_ARB_create_context", []
         {

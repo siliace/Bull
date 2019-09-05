@@ -29,10 +29,10 @@ namespace Bull
         struct KeyEvent
         {
             KeyboardKey code;
-            bool        alt;
-            bool        control;
-            bool        shift;
-            bool        system;
+            bool alt;
+            bool control;
+            bool shift;
+            bool system;
         };
 
         struct MouseMoveEvent
@@ -75,19 +75,19 @@ namespace Bull
 
         union
         {
-            WindowResizedEvent      windowResize;
-            WindowMovedEvent        windowMove;
-            KeyEvent                key;
-            Uint32                  character;
-            MouseMoveEvent          mouseMove;
-            MouseButtonEvent        mouseButton;
-            MouseWheelEvent         mouseWheel;
+            WindowResizedEvent windowResize;
+            WindowMovedEvent windowMove;
+            KeyEvent key;
+            Uint32 character;
+            MouseMoveEvent mouseMove;
+            MouseButtonEvent mouseButton;
+            MouseWheelEvent mouseWheel;
             JoystickConnectionEvent joystickConnection;
-            JoystickMovedEvent      joystickMoved;
-            JoystickButtonEvent     joystickButton;
+            JoystickMovedEvent joystickMoved;
+            JoystickButtonEvent joystickButton;
         };
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         WindowEvent();

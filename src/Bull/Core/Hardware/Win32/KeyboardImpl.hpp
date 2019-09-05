@@ -11,7 +11,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Check if a key is pressed
+            /** \brief Check if a key is pressed
              *
              * \param key To key to check the state
              *
@@ -22,7 +22,7 @@ namespace Bull
 
         private:
 
-            /*! \brief Convert a Bull::Keyboard::Key to a windows key value
+            /** \brief Convert a Bull::Keyboard::Key to a windows key value
              *
              * \param vkey To Bull::Keyboard::Key to convert
              *

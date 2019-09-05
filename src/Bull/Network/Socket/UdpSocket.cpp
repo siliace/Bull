@@ -11,7 +11,7 @@
 namespace Bull
 {
     UdpSocket::UdpSocket() :
-        Socket(SocketType_Udp)
+            Socket(SocketType_Udp)
     {
         /// Nothing
     }
@@ -85,7 +85,7 @@ namespace Bull
 
         prv::SockAddrBuffer buffer(addr, sockLength);
 
-        datagram.port    = buffer.getPort();
+        datagram.port = buffer.getPort();
         datagram.address = buffer.getIpAddress();
 
         return datagram;

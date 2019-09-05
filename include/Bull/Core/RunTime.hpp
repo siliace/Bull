@@ -15,7 +15,7 @@ namespace Bull
 
         DeclareException(NoInstanceException);
 
-        /*! \brief Get the name of a Type
+        /** \brief Get the name of a Type
          *
          * \tparam T The type
          *
@@ -23,12 +23,12 @@ namespace Bull
          *
          */
         template <typename T>
-        static String typeName()
+        static std::string typeName()
         {
-            return String(typeid(T).name());
+            return typeid(T).name();
         }
 
-        /*! \brief Get the std::type_index of a Type
+        /** \brief Get the std::type_index of a Type
          *
          * \tparam T The type
          *
@@ -43,7 +43,7 @@ namespace Bull
 
     public:
 
-        /*! \brief Register an instance of a SharedSingleton
+        /** \brief Register an instance of a SharedSingleton
          *
          * \tparam T The type of the SharedSingleton to register
          *
@@ -56,7 +56,7 @@ namespace Bull
             m_instances[typeIndex<T>()] = &singleton;
         }
 
-        /*! \brief Get the instance of a SharedSingleton
+        /** \brief Get the instance of a SharedSingleton
          *
          * \tparam T The type of the SharedSingleton to get
          *
@@ -78,7 +78,7 @@ namespace Bull
 
         friend class Singleton<RunTime>;
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         RunTime() = default;

@@ -15,9 +15,9 @@ namespace Bull
         }
 
         void SocketImplUnix::enableBlockingMode(bool enable)
-        {      
+        {
             int flags = fcntl(getHandler(), F_GETFL, 0);
-            
+
             if(flags == -1)
             {
                 Throw(InternalError, "Failed to get socket flags");
@@ -59,7 +59,7 @@ namespace Bull
         }
 
         SocketImplUnix::SocketImplUnix() :
-            m_blocking(true)
+                m_blocking(true)
         {
             /// Nothing
         }

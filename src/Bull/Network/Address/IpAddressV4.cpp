@@ -1,6 +1,4 @@
-#include <Bull/Core/IO/OutStringStream.hpp>
-#include <Bull/Core/IO/TextWriter.hpp>
-#include <Bull/Core/Utility/StringUtils.hpp>
+#include <sstream>
 
 #include <Bull/Network/Address/IpAddressImpl.hpp>
 #include <Bull/Network/Address/IpAddressV4.hpp>
@@ -13,13 +11,13 @@ namespace Bull
     IpAddressV4 IpAddressV4::Broadcast = IpAddressV4(255, 255, 255, 255);
 
     IpAddressV4::IpAddressV4() :
-        IpAddress(4, false)
+            IpAddress(4, false)
     {
         /// Nothing
     }
 
     IpAddressV4::IpAddressV4(Uint32 address) :
-        IpAddress(4)
+            IpAddress(4)
     {
         at(0) = (address & 0x000000ff) >> 0;
         at(1) = (address & 0x0000ff00) >> 8;
@@ -28,7 +26,7 @@ namespace Bull
     }
 
     IpAddressV4::IpAddressV4(Uint8 a, Uint8 b, Uint8 c, Uint8 d) :
-        IpAddress(4)
+            IpAddress(4)
     {
         at(0) = a;
         at(1) = b;
@@ -41,22 +39,19 @@ namespace Bull
         return (at(0) << 24) | (at(1) << 16) | (at(2) << 8) | at(3);
     }
 
-    String IpAddressV4::toString() const
+    std::string IpAddressV4::toString() const
     {
-        OutStringStream oss;
-        TextWriter writer(oss);
+        std::ostringstream oss;
 
         for(std::size_t i = 0; i < getByteCount(); i++)
         {
-            writer << StringUtils::number(at(i));
+            oss << at(i);
 
             if(i < 3)
-            {
-                writer << '.';
-            }
+                oss << '.';
         }
 
-        return oss.toString();
+        return oss.str();
     }
 
     NetProtocol IpAddressV4::getProtocol() const

@@ -18,7 +18,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Get the maximum vertex attributes available
+        /** \brief Get the maximum vertex attributes available
          *
          * \return Return the max
          *
@@ -27,24 +27,24 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Shader();
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          * \param right The Shader to move
          *
          */
         Shader(Shader&& right) noexcept;
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         ~Shader();
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \param right The Shader to move
          *
@@ -53,109 +53,109 @@ namespace Bull
          */
         Shader& operator=(Shader&& right) noexcept;
 
-        /*! \brief Create a Shader from a ShaderBinary
+        /** \brief Create a Shader from a ShaderBinary
          *
          * \param shaderBinary The binary of the Shader
          *
          */
         void create(const ShaderBinary& shaderBinary) const;
 
-        /*! \brief Attach a ShaderStage to this Shader
+        /** \brief Attach a ShaderStage to this Shader
          *
          * \param stage The stage to attach to this Shader
          *
          */
         void attach(const ShaderStage& stage) const;
 
-        /*! \brief Link the shader
+        /** \brief Link the shader
          *
          */
         void link() const;
 
-        /*! \brief Bind the shader
+        /** \brief Bind the shader
          *
          */
         void bind() const;
 
-        /*! \brief Check whether the Shader is linked
+        /** \brief Check whether the Shader is linked
          *
          * \return True if the Shader is linked
          *
          */
         bool isLinked() const;
 
-        /*! \brief Set an uniform variable
+        /** \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniform(const String& name, int uniform) const;
+        void setUniform(const std::string& name, int uniform) const;
 
-        /*! \brief Set an uniform variable
+        /** \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniform(const String& name, unsigned int uniform) const;
+        void setUniform(const std::string& name, unsigned int uniform) const;
 
-        /*! \brief Set an uniform variable
+        /** \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniform(const String& name, float uniform) const;
+        void setUniform(const std::string& name, float uniform) const;
 
-        /*! \brief Set an uniform variable
+        /** \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniformColor(const String& name, const Color& uniform) const;
+        void setUniformColor(const std::string& name, const Color& uniform) const;
 
-        /*! \brief Set an uniform variable
+        /** \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniformVector(const String& name, const Vector<float, 2>& uniform) const;
+        void setUniformVector(const std::string& name, const Vector<float, 2>& uniform) const;
 
-        /*! \brief Set an uniform variable
+        /** \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniformVector(const String& name, const Vector<float, 3>& uniform) const;
+        void setUniformVector(const std::string& name, const Vector<float, 3>& uniform) const;
 
-        /*! \brief Set an uniform variable
+        /** \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniformVector(const String& name, const Vector<float, 4>& uniform) const;
+        void setUniformVector(const std::string& name, const Vector<float, 4>& uniform) const;
 
-        /*! \brief Set an uniform variable
+        /** \brief Set an uniform variable
          *
          * \param name    The name of the uniform variable in the shader
          * \param uniform The value to set to the uniform variable
          *
          */
-        void setUniformMatrix(const String& name, const Matrix4F& uniform) const;
+        void setUniformMatrix(const std::string& name, const Matrix4F& uniform) const;
 
-        /*! \brief Get the program as a binary format
+        /** \brief Get the program as a binary format
          *
          * \return The binary format
          *
          */
         ShaderBinary getBinary() const;
 
-        /*! \brief Get the Shader system handler
+        /** \brief Get the Shader system handler
          *
          * \return The native ShaderStage system handler
          *
@@ -164,23 +164,23 @@ namespace Bull
 
     protected:
 
-        /*! \brief Get the current error message of the program
+        /** \brief Get the current error message of the program
          *
          * \return The error message
          *
          */
-        String getErrorMessage() const;
+        std::string getErrorMessage() const;
 
     private:
 
-        /*! \brief Get the location of an uniform variable
+        /** \brief Get the location of an uniform variable
          *
          * \param name The name of the uniform variable in the shader
          *
          * \return Return the location of the uniform
          *
          */
-        int getUniformLocation(const String& name) const;
+        int getUniformLocation(const std::string& name) const;
 
         unsigned int m_program;
     };

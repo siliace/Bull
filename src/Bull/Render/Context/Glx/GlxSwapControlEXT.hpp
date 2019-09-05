@@ -14,10 +14,11 @@ namespace Bull
     {
         namespace ext
         {
-            void (*glXSwapInterval)(::Display* dpy, GLXDrawable drawable, int interval) = nullptr;
+            void (* glXSwapInterval)(::Display* dpy, GLXDrawable drawable, int interval) = nullptr;
         }
 
-        Extension glxSwapControlEXT("GLX_EXT_swap_control", [] {
+        Extension glxSwapControlEXT("GLX_EXT_swap_control", []
+        {
             ext::glXSwapInterval = reinterpret_cast<void (*)(::Display*, GLXDrawable, int)>(GlContext::getFunction("glXSwapIntervalEXT"));
 
             return ext::glXSwapInterval;

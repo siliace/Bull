@@ -7,14 +7,14 @@ namespace Bull
 {
     struct BULL_CORE_API AbstractBuffer
     {
-        /*! \brief Create the Buffer
+        /** \brief Create the Buffer
          *
          * \param capacity The capacity of the Buffer to create
          *
          */
         virtual void create(std::size_t capacity) = 0;
 
-        /*! \brief Fill the buffer
+        /** \brief Fill the buffer
          *
          * \param data   Data to insert in the Buffer
          * \param size   The length of data
@@ -23,12 +23,12 @@ namespace Bull
          */
         virtual void fill(const void* data, std::size_t size, std::size_t offset) = 0;
 
-        /*! \brief Clear the Buffer
+        /** \brief Clear the Buffer
          *
          */
         virtual void clear() = 0;
 
-        /*! \brief Get the capacity of the Buffer
+        /** \brief Get the capacity of the Buffer
          *
          * \return The capacity
          *

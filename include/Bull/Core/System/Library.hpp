@@ -4,7 +4,7 @@
 #include <functional>
 #include <memory>
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 #include <Bull/Core/Pattern/NonCopyable.hpp>
 
 namespace Bull
@@ -18,31 +18,31 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Library() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param name The name or the path to the library to load
          *
          */
-        explicit Library(const String& name);
+        explicit Library(const std::string& name);
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          * \param library The Library to move
          *
          */
         Library(Library&& library) noexcept = default;
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         ~Library();
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \param library The Library to move
          *
@@ -51,21 +51,21 @@ namespace Bull
          */
         Library& operator=(Library&& library) noexcept = default;
 
-        /*! \brief Load a library
+        /** \brief Load a library
          *
          * \param name The name or the path to the library to load
          *
          */
-        void load(const String& name);
+        void load(const std::string& name);
 
-        /*! \brief Check whether the library is loaded
+        /** \brief Check whether the library is loaded
          *
          * \return Return true if the library is loaded, false otherwise
          *
          */
         bool isLoaded() const;
 
-        /*! \brief Get a function from the library
+        /** \brief Get a function from the library
          *
          * \param name The name of the function
          *
@@ -73,14 +73,14 @@ namespace Bull
          *
          */
         template <typename T>
-        std::function<T> getFunction(const String& name) const
+        std::function<T> getFunction(const std::string& name) const
         {
             return std::function<T>(
                     reinterpret_cast<T*>(getSymbolPointer(name))
             );
         }
 
-        /*! \brief Get a function from the library
+        /** \brief Get a function from the library
          *
          * Used only for internal purposes
          *
@@ -89,14 +89,14 @@ namespace Bull
          * \return Return the function or nullptr if the function does not exists
          *
          */
-        void* getSymbolPointer(const String& name) const;
+        void* getSymbolPointer(const std::string& name) const;
 
-        /*! \brief Free the library
+        /** \brief Free the library
          *
          */
         void free();
 
-        /*! \brief Check whether the library is loaded
+        /** \brief Check whether the library is loaded
          *
          * \return Return true if the library is loaded, false otherwise
          *

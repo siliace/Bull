@@ -9,7 +9,7 @@ namespace Bull
 {
     struct BULL_NETWORK_API Icmp
     {
-        /*! \brief Send a ping
+        /** \brief Send a ping
          *
          * \param address The IpAddress to ping
          * \param timeout The time before the function fail

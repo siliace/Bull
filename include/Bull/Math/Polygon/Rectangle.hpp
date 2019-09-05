@@ -6,12 +6,12 @@
 
 namespace Bull
 {
-    template<typename T>
+    template <typename T>
     class Rectangle : public Polygon<T>
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Rectangle()
@@ -19,7 +19,7 @@ namespace Bull
             set(0, 0, 0, 0);
         }
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param x      The x coordinate of the top-left corner
          * \param y      The y coordinate of the top-left corner
@@ -32,7 +32,7 @@ namespace Bull
             set(x, y, width, height);
         }
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param size The size of the rectangle
          *
@@ -42,7 +42,7 @@ namespace Bull
             set(size);
         }
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param topLeft Coordinates of the top left corner of rectangle
          * \param width   The width of the rectangle
@@ -54,7 +54,7 @@ namespace Bull
             set(topLeft, width, height);
         }
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param topLeft     Coordinates of the top left corner of rectangle
          * \param bottomRight Coordinates of the top bottom right of rectangle
@@ -65,7 +65,7 @@ namespace Bull
             set(topLeft, bottomRight);
         }
 
-        /*! \brief Set the rectangle
+        /** \brief Set the rectangle
          *
          * \param x      The x coordinate of the top-left corner
          * \param y      The y coordinate of the top-left corner
@@ -77,15 +77,15 @@ namespace Bull
          */
         Rectangle& set(T x, T y, T width, T height)
         {
-            this->x      = x;
-            this->y      = y;
-            this->width  = width;
+            this->x = x;
+            this->y = y;
+            this->width = width;
             this->height = height;
 
             return (*this);
         }
 
-        /*! \brief Set the rectangle
+        /** \brief Set the rectangle
          *
          * \param size The size of the rectangle
          *
@@ -94,15 +94,15 @@ namespace Bull
          */
         Rectangle& set(const Vector2<T>& size)
         {
-            x      = 0;
-            y      = 0;
-            width  = size.x();
+            x = 0;
+            y = 0;
+            width = size.x();
             height = size.y();
 
             return (*this);
         }
 
-        /*! \brief Set the rectangle
+        /** \brief Set the rectangle
          *
          * \param topLeft Coordinates of the top left corner of rectangle
          * \param width   The width of the rectangle
@@ -116,7 +116,7 @@ namespace Bull
             return set(topLeft.x, topLeft.y, width, height);
         }
 
-        /*! \brief Set the rectangle
+        /** \brief Set the rectangle
          *
          * \param topLeft     Coordinates of the top left corner of rectangle
          * \param bottomRight Coordinates of the top bottom right of rectangle
@@ -129,7 +129,7 @@ namespace Bull
             return set(topLeft, bottomRight.x() - topLeft.x(), bottomRight.y() - topLeft.y());
         }
 
-        /*! \brief Get a vertex form the polygon
+        /** \brief Get a vertex form the polygon
          *
          * \param index The index of the vertex to get
          *
@@ -141,14 +141,18 @@ namespace Bull
 
             switch(index)
             {
-                case 0: return Vector2<T>(x, y);
-                case 1: return Vector2<T>(x + width, y);
-                case 2: return Vector2<T>(x + width, y + height);
-                case 3: return Vector2<T>(x, y + height);
+                case 0:
+                    return Vector2<T>(x, y);
+                case 1:
+                    return Vector2<T>(x + width, y);
+                case 2:
+                    return Vector2<T>(x + width, y + height);
+                case 3:
+                    return Vector2<T>(x, y + height);
             }
         }
 
-        /*! \brief Get the number of vertex in the polygon
+        /** \brief Get the number of vertex in the polygon
          *
          * \return The number of vertex
          *

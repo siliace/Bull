@@ -13,24 +13,24 @@ namespace Bull
         {
         public:
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             CursorImplWin32();
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             virtual ~CursorImplWin32();
 
-            /*! \brief Create a Cursor from the system
+            /** \brief Create a Cursor from the system
              *
              * \param cursor The type of cursor to create
              *
              */
             void create(CursorType cursor) override;
 
-            /*! \brief Create a Cursor from an image
+            /** \brief Create a Cursor from an image
              *
              * \param cursor  The image of the Cursor
              * \param hotSpot The hotspot of the Cursor
@@ -38,7 +38,7 @@ namespace Bull
              */
             void create(const Image& cursor, const Size<unsigned int>& hotSpot) override;
 
-            /*! \brief Get the native system handler of the cursor
+            /** \brief Get the native system handler of the cursor
              *
              * \return The system handler
              *
@@ -47,7 +47,7 @@ namespace Bull
 
         private:
 
-            /*! \brief Destroy the cursor
+            /** \brief Destroy the cursor
              *
              */
             void destroy();

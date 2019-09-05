@@ -12,14 +12,14 @@ namespace Bull
         {
         public:
 
-            /*! \brief Create a Directory
+            /** \brief Create a Directory
              *
              * \param path The path of the directory to create
              *
              */
             static void create(const Path& path);
 
-            /*! \brief Tell whether a Directory exists
+            /** \brief Tell whether a Directory exists
              *
              * \param path The path of the Directory to check
              *
@@ -28,7 +28,7 @@ namespace Bull
              */
             static bool exists(const Path& path);
 
-            /*! \brief Remove a Directory
+            /** \brief Remove a Directory
              *
              * \param path The path of the Directory to remove
              *
@@ -37,19 +37,19 @@ namespace Bull
 
         public:
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param path The path of the directory to open
              *
              */
             explicit DirectoryImplWin32(const Path& path);
 
-            /*! \brief Destructor
+            /** \brief Destructor
              *
              */
             ~DirectoryImplWin32();
 
-            /*! \brief Get the content of this Directory
+            /** \brief Get the content of this Directory
              *
              * \param flags What we have to look for
              *
@@ -60,9 +60,9 @@ namespace Bull
 
         private:
 
-            Path            m_path;
+            Path m_path;
             WIN32_FIND_DATA m_result;
-            HANDLE          m_handler;
+            HANDLE m_handler;
         };
     }
 }

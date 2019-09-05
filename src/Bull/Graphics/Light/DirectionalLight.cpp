@@ -3,19 +3,19 @@
 namespace Bull
 {
     DirectionalLight::DirectionalLight() :
-        AbstractLight(LightType_Directional)
+            AbstractLight(LightType_Directional)
     {
         /// Nothing
     }
 
     DirectionalLight::DirectionalLight(const Vector3F& direction, const Color& color) :
-        AbstractLight(LightType_Directional)
+            AbstractLight(LightType_Directional)
     {
         setColor(color);
         setDirection(direction);
     }
 
-    void DirectionalLight::setUniforms(Shader& shader, const String& name) const
+    void DirectionalLight::setUniforms(Shader& shader, const std::string& name) const
     {
         if(shader.isLinked())
         {

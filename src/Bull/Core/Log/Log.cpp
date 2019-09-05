@@ -2,22 +2,22 @@
 
 namespace Bull
 {
-    void Log::debug(const String& message)
+    void Log::debug(const std::string& message)
     {
         write(message, LogLevel_Debug);
     }
 
-    void Log::info(const String& message)
+    void Log::info(const std::string& message)
     {
         write(message, LogLevel_Info);
     }
 
-    void Log::warning(const String& message)
+    void Log::warning(const std::string& message)
     {
         write(message, LogLevel_Warning);
     }
 
-    void Log::error(const String& message)
+    void Log::error(const std::string& message)
     {
         write(message, LogLevel_Error);
     }
@@ -29,7 +29,7 @@ namespace Bull
         return (*m_listeners.back());
     }
 
-    void Log::write(const String& message, LogLevel level)
+    void Log::write(const std::string& message, LogLevel level)
     {
         for(auto& logger : m_listeners)
         {

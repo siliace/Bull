@@ -7,30 +7,30 @@
 
 namespace Bull
 {
-    template<typename T>
+    template <typename T>
     class Rectangle;
 
-    template<typename T>
+    template <typename T>
     class Polygon
     {
     public:
 
-        /*! \brief Get a vertex form the polygon
+        /** \brief Get a vertex form the polygon
          *
          * \param index The index of the vertex to get
          *
          * \return The vertex
          */
-        virtual Vector2<T> getVertex(std::size_t index) const = 0;
+        virtual Vector2 <T> getVertex(std::size_t index) const = 0;
 
-        /*! \brief Get the number of vertex in the polygon
+        /** \brief Get the number of vertex in the polygon
          *
          * \return The number of vertex
          *
          */
         virtual std::size_t getVertexCount() const = 0;
 
-        /*! \brief Get a rectangle representing bounds of the polygon
+        /** \brief Get a rectangle representing bounds of the polygon
          *
          * \return Bounds of the polygon
          *

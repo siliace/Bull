@@ -16,50 +16,50 @@ namespace Bull
         {
         private:
 
-            /*! \brief Get all extensions available on the system
+            /** \brief Get all extensions available on the system
              *
              * \param surface The surface to get extensions from
              *
              * \return The list of extensions
              *
              */
-            static std::set<String> getAllExtensions(SurfaceHandler surface);
+            static std::set<std::string> getAllExtensions(SurfaceHandler surface);
 
         public:
 
-            /*! \brief Add an extension to load
+            /** \brief Add an extension to load
              *
              * \param extension The extension to load
              *
              */
             void require(Extension& extension);
 
-            /*! \brief Load required extensions
+            /** \brief Load required extensions
              *
              * \param surface The surface to get extensions from
              *
              */
             void loadExtensions(SurfaceHandler surface);
 
-            /*! \brief Load OpenGL functions
+            /** \brief Load OpenGL functions
              *
              */
             void loadFunctions();
 
-            /*! \brief Check whether an OpenGL extension is supported
+            /** \brief Check whether an OpenGL extension is supported
              *
              * \param extension The name of the extension
              *
              * \return Return true if supported, false otherwise
              *
              */
-            bool isSupported(const String& extension) const;
+            bool isSupported(const std::string& extension) const;
 
         private:
 
             friend class SharedSingleton<ExtensionsLoader>;
 
-            /*! \brief Default constructor
+            /** \brief Default constructor
              *
              */
             ExtensionsLoader();
@@ -67,9 +67,9 @@ namespace Bull
         private:
 
             std::vector<std::reference_wrapper<Extension>> m_extensions;
-            std::set<String>                               m_allExtensions;
-            bool                                           m_loadedFunctions;
-            bool                                           m_loadedExtensions;
+            std::set<std::string> m_allExtensions;
+            bool m_loadedFunctions;
+            bool m_loadedExtensions;
         };
     }
 }

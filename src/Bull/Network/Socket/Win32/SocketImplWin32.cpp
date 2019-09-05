@@ -48,7 +48,7 @@ namespace Bull
         }
 
         SocketImplWin32::SocketImplWin32() :
-            m_blocking(true)
+                m_blocking(true)
         {
             /// Nothing
         }

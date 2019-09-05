@@ -13,19 +13,19 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         IndexBuffer();
 
-        /*! \brief Constructor by movement semantic
+        /** \brief Constructor by movement semantic
          *
          * \param right The IndexBuffer to move
          *
          */
         IndexBuffer(IndexBuffer&& right) noexcept;
 
-        /*! \brief Basic assignment operator by movement semantic
+        /** \brief Basic assignment operator by movement semantic
          *
          * \param right The IndexBuffer to move
          *
@@ -34,7 +34,7 @@ namespace Bull
          */
         IndexBuffer& operator=(IndexBuffer&& right) noexcept;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param indices Indices in the ElementBuffer
          * \param usage   The usage (static, dynamic, stream) of the ElementBuffer
@@ -42,7 +42,7 @@ namespace Bull
          */
         explicit IndexBuffer(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage::StaticDraw);
 
-        /*! \brief Create the ElementBuffer from a indices vector
+        /** \brief Create the ElementBuffer from a indices vector
          *
          * \param indices Indices in the ElementBuffer
          * \param usage   The usage (static, dynamic, stream) of the ElementBuffer
@@ -50,7 +50,7 @@ namespace Bull
          */
         void create(const std::vector<unsigned int>& indices, HardwareBufferUsage usage = HardwareBufferUsage::StaticDraw);
 
-        /*! \brief Get the DataType of the element buffer
+        /** \brief Get the DataType of the element buffer
          *
          * \return The DataType
          *

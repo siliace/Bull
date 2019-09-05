@@ -9,21 +9,21 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param size The Size of the DepthStencilTexture
          *
          */
         explicit DepthStencilTexture(const Size<std::size_t>& size);
 
-        /*! \brief Constructor by movement semantic
+        /** \brief Constructor by movement semantic
          *
          * \param depthStencilTexture The DepthStencilTexture to move
          *
          */
         DepthStencilTexture(DepthStencilTexture&& depthStencilTexture) noexcept;
 
-        /*! \brief Assignment operator by movement semantic
+        /** \brief Assignment operator by movement semantic
          *
          * \param depthStencilTexture The DepthStencilTexture to move
          *
@@ -32,7 +32,7 @@ namespace Bull
          */
         DepthStencilTexture& operator=(DepthStencilTexture&& depthStencilTexture) noexcept;
 
-        /*! \brief Create the DepthStencilTexture with a given Size
+        /** \brief Create the DepthStencilTexture with a given Size
          *
          * \param size The Size
          *

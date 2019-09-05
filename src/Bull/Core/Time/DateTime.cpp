@@ -26,18 +26,18 @@ namespace Bull
     }
 
     DateTime::DateTime(const Bull::Date& date, const Bull::Time& time) :
-        m_date(date),
-        m_time(time)
+            m_date(date),
+            m_time(time)
     {
         /// Nothing
     }
 
-    const Date &DateTime::getDate() const
+    const Date& DateTime::getDate() const
     {
         return m_date;
     }
 
-    const Time &DateTime::getTime() const
+    const Time& DateTime::getTime() const
     {
         return m_time;
     }

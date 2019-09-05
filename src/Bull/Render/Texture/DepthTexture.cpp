@@ -10,19 +10,19 @@
 namespace Bull
 {
     DepthTexture::DepthTexture(DepthValue depthValue) :
-        m_depthValue(depthValue)
+            m_depthValue(depthValue)
     {
         /// Nothing
     }
 
     DepthTexture::DepthTexture(const Size<std::size_t>& size, DepthValue depth) :
-        m_depthValue(depth)
+            m_depthValue(depth)
     {
         create(size);
     }
 
     DepthTexture::DepthTexture(DepthTexture&& depthTexture) noexcept :
-        Texture(static_cast<Texture&&>(depthTexture))
+            Texture(static_cast<Texture&&>(depthTexture))
     {
         std::swap(m_depthValue, depthTexture.m_depthValue);
     }
@@ -40,9 +40,15 @@ namespace Bull
     {
         switch(m_depthValue)
         {
-            case DepthValue_16: Texture::create(size, PixelFormat_Depth16); break;
-            case DepthValue_24: Texture::create(size, PixelFormat_Depth24); break;
-            case DepthValue_32: Texture::create(size, PixelFormat_Depth32); break;
+            case DepthValue_16:
+                Texture::create(size, PixelFormat_Depth16);
+                break;
+            case DepthValue_24:
+                Texture::create(size, PixelFormat_Depth24);
+                break;
+            case DepthValue_32:
+                Texture::create(size, PixelFormat_Depth32);
+                break;
         }
     }
 

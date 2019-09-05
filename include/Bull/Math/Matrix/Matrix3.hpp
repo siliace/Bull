@@ -7,7 +7,7 @@
 
 namespace Bull
 {
-    template<typename T>
+    template <typename T>
     class Matrix3 : public SquareMatrix<T, 3>
     {
     public:
@@ -16,36 +16,36 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Matrix3() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param value The value to use to fill the Matrix
          *
          */
         explicit Matrix3(T value) :
-            SquareMatrix<T, 3>(value)
+                SquareMatrix<T, 3>(value)
         {
             /// Nothing
         }
 
-        /*! \brief Copy constructor
+        /** \brief Copy constructor
          *
          * \param copy The Matrix to copy
          *
          */
         template <typename U, std::size_t WU, std::size_t HU>
         Matrix3(const Matrix<U, WU, HU>& copy) :
-            SquareMatrix<T, 3>(copy)
+                SquareMatrix<T, 3>(copy)
         {
             /// Nothing
         }
     };
 
-    template<typename T>
+    template <typename T>
     Matrix3<T> Matrix3<T>::Identity = Matrix3<T>::makeIdentity();
 
     typedef Matrix3<int> Matrix3I;

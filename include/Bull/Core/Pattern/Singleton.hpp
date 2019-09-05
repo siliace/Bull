@@ -39,7 +39,7 @@ namespace Bull
 
     private:
 
-        static std::mutex         s_mutex;
+        static std::mutex s_mutex;
         static std::unique_ptr<T> s_instance;
     };
 

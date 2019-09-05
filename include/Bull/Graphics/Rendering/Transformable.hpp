@@ -13,19 +13,19 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Transformable();
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          * \param right The Transformable to move
          *
          */
         Transformable(Transformable&& right) = default;
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \param right The Transformable to move
          *
@@ -34,70 +34,70 @@ namespace Bull
          */
         Transformable& operator=(Transformable&& right) = default;
 
-        /*! \brief Scale the Transformable
+        /** \brief Scale the Transformable
          *
          * \param scale The scaling factor
          *
          */
         void scale(const Vector3F& scale);
 
-        /*! \brief Rotate the Transformable
+        /** \brief Rotate the Transformable
          *
          * \param rotation The rotation
          *
          */
         void rotate(const EulerAnglesF& rotation);
 
-        /*! \brief Move the Transformable
+        /** \brief Move the Transformable
          *
          * \param translation The translation
          *
          */
         void move(const Vector3F& translation);
 
-        /*! \brief Get the model Matrix of the Transformable
+        /** \brief Get the model Matrix of the Transformable
          *
          * \return The model Matrix
          *
          */
         Matrix4F getModelMatrix() const;
 
-        /*! \brief Set the scale of the Transformable
+        /** \brief Set the scale of the Transformable
          *
          * \param scale The scale
          *
          */
         void setScale(const Vector3F& scale);
 
-        /*! \brief Get the scale of the Transformable
+        /** \brief Get the scale of the Transformable
          *
          * \return The scale
          *
          */
         const Vector3F& getScale() const;
 
-        /*! \brief Set the rotation of the Transformable
+        /** \brief Set the rotation of the Transformable
          *
          * \param rotation The rotation
          *
          */
         void setRotation(const EulerAnglesF& rotation);
 
-        /*! \brief Get the rotation of the Transformable
+        /** \brief Get the rotation of the Transformable
          *
          * \return The rotation
          *
          */
         const EulerAnglesF& getRotation() const;
 
-        /*! \brief Set the translation of the Transformable
+        /** \brief Set the translation of the Transformable
          *
          * \param translation The translation
          *
          */
         void setTranslation(const Vector3F& translation);
 
-        /*! \brief Get the translation of the Transformable
+        /** \brief Get the translation of the Transformable
          *
          * \return The translation
          *
@@ -106,9 +106,9 @@ namespace Bull
 
     private:
 
-        Vector3F     m_scale; /*!< The scale of the Transformable */
-        EulerAnglesF m_rotation; /*!< The rotation of the Transformable */
-        Vector3F     m_translation; /*!< The translation of the Transformable */
+        Vector3F m_scale; /**< The scale of the Transformable */
+        EulerAnglesF m_rotation; /**< The rotation of the Transformable */
+        Vector3F m_translation; /**< The translation of the Transformable */
     };
 }
 

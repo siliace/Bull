@@ -7,9 +7,9 @@ namespace Bull
     namespace prv
     {
         JoystickManager::JoystickManager() :
-            m_keyrepeat(true),
-            m_threshold(0.f),
-            m_repeatDelay(0.f)
+                m_keyrepeat(true),
+                m_threshold(0.f),
+                m_repeatDelay(0.f)
         {
             /// Nothing
         }
@@ -86,7 +86,7 @@ namespace Bull
                     e.type = (state.buttons[i].first) ? WindowEventType_JoystickButtonDown : WindowEventType_JoystickButtonUp;
 
                     e.joystickButton.joystick = joystick;
-                    e.joystickButton.button   = static_cast<Uint8>(i);
+                    e.joystickButton.button = static_cast<Uint8>(i);
 
                     eventQueue.push(e);
 
@@ -108,7 +108,7 @@ namespace Bull
                     e.type = WindowEventType_JoystickButtonDown;
 
                     e.joystickButton.joystick = joystick;
-                    e.joystickButton.button   = static_cast<Uint8>(i);
+                    e.joystickButton.button = static_cast<Uint8>(i);
 
                     eventQueue.push(e);
 
@@ -127,7 +127,7 @@ namespace Bull
                     e.type = WindowEventType_JoystickMoved;
 
                     e.joystickMoved.joystick = joystick;
-                    e.joystickMoved.axis     = static_cast<JoystickAxis>(i);
+                    e.joystickMoved.axis = static_cast<JoystickAxis>(i);
                     e.joystickMoved.position = state.axes[i];
                     e.joystickMoved.relative = relative;
 

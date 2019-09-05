@@ -8,7 +8,7 @@ namespace Bull
     namespace prv
     {
         CursorImplWin32::CursorImplWin32() :
-            m_handler(nullptr)
+                m_handler(nullptr)
         {
             /// Nothing
         }
@@ -26,24 +26,60 @@ namespace Bull
 
             switch(cursor)
             {
-                case CursorType_Crosshair:  shape = IDC_CROSS;       break;
-                case CursorType_Default:    shape = IDC_ARROW;       break;
-                case CursorType_Hand:       shape = IDC_HAND;        break;
-                case CursorType_Help:       shape = IDC_HELP;        break;
-                case CursorType_Move:       shape = IDC_SIZEALL;     break;
-                case CursorType_Pointer:    shape = IDC_HAND;        break;
-                case CursorType_Progress:   shape = IDC_APPSTARTING; break;
-                case CursorType_ResizeE:    shape = IDC_SIZEWE;      break;
-                case CursorType_ResizeN:    shape = IDC_SIZENS;      break;
-                case CursorType_ResizeNE:   shape = IDC_SIZENESW;    break;
-                case CursorType_ResizeNW:   shape = IDC_SIZENWSE;    break;
-                case CursorType_ResizeS:    shape = IDC_SIZENS;      break;
-                case CursorType_ResizeSE:   shape = IDC_SIZENWSE;    break;
-                case CursorType_ResizeSW:   shape = IDC_SIZENESW;    break;
-                case CursorType_ResizeW:    shape = IDC_SIZEWE;      break;
-                case CursorType_Text:       shape = IDC_IBEAM;       break;
-                case CursorType_Wait:       shape = IDC_WAIT;        break;
-                case CursorType_NotAllowed: shape = IDC_NO;          break;
+                case CursorType_Crosshair:
+                    shape = IDC_CROSS;
+                    break;
+                case CursorType_Default:
+                    shape = IDC_ARROW;
+                    break;
+                case CursorType_Hand:
+                    shape = IDC_HAND;
+                    break;
+                case CursorType_Help:
+                    shape = IDC_HELP;
+                    break;
+                case CursorType_Move:
+                    shape = IDC_SIZEALL;
+                    break;
+                case CursorType_Pointer:
+                    shape = IDC_HAND;
+                    break;
+                case CursorType_Progress:
+                    shape = IDC_APPSTARTING;
+                    break;
+                case CursorType_ResizeE:
+                    shape = IDC_SIZEWE;
+                    break;
+                case CursorType_ResizeN:
+                    shape = IDC_SIZENS;
+                    break;
+                case CursorType_ResizeNE:
+                    shape = IDC_SIZENESW;
+                    break;
+                case CursorType_ResizeNW:
+                    shape = IDC_SIZENWSE;
+                    break;
+                case CursorType_ResizeS:
+                    shape = IDC_SIZENS;
+                    break;
+                case CursorType_ResizeSE:
+                    shape = IDC_SIZENWSE;
+                    break;
+                case CursorType_ResizeSW:
+                    shape = IDC_SIZENESW;
+                    break;
+                case CursorType_ResizeW:
+                    shape = IDC_SIZEWE;
+                    break;
+                case CursorType_Text:
+                    shape = IDC_IBEAM;
+                    break;
+                case CursorType_Wait:
+                    shape = IDC_WAIT;
+                    break;
+                case CursorType_NotAllowed:
+                    shape = IDC_NO;
+                    break;
             }
 
             m_handler = CopyCursor(LoadCursor(nullptr, shape));
@@ -63,16 +99,16 @@ namespace Bull
 
             destroy();
 
-            header.bV5Planes      = 1;
-            header.bV5BitCount    = 32;
-            header.bV5AlphaMask   = 0xff000000;
-            header.bV5RedMask     = 0x00ff0000;
-            header.bV5GreenMask   = 0x0000ff00;
-            header.bV5BlueMask    = 0x000000ff;
-            header.bV5Width       = size.getWidth();
-            header.bV5Height      = -size.getHeight();
+            header.bV5Planes = 1;
+            header.bV5BitCount = 32;
+            header.bV5AlphaMask = 0xff000000;
+            header.bV5RedMask = 0x00ff0000;
+            header.bV5GreenMask = 0x0000ff00;
+            header.bV5BlueMask = 0x000000ff;
+            header.bV5Width = size.getWidth();
+            header.bV5Height = -size.getHeight();
             header.bV5Compression = BI_BITFIELDS;
-            header.bV5Size        = sizeof(BITMAPV5HEADER);
+            header.bV5Size = sizeof(BITMAPV5HEADER);
 
             Uint8* bitmap = nullptr;
 
@@ -107,9 +143,9 @@ namespace Bull
             ICONINFO iconInfo;
             BULL_ZERO_MEMORY(iconInfo);
 
-            iconInfo.hbmMask  = mask;
+            iconInfo.hbmMask = mask;
             iconInfo.hbmColor = color;
-            iconInfo.fIcon    = FALSE;
+            iconInfo.fIcon = FALSE;
             iconInfo.xHotspot = hotSpot.getWidth();
             iconInfo.yHotspot = hotSpot.getHeight();
 

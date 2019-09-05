@@ -17,7 +17,7 @@ namespace Bull
 
     public:
 
-        /*! \brief Connect a Slot to the Signal
+        /** \brief Connect a Slot to the Signal
          *
          * \param slot To Slot to connect
          *
@@ -27,12 +27,12 @@ namespace Bull
             m_slots.push_back(slot);
         }
 
-        /*! \brief Emit a Signal
+        /** \brief Emit a Signal
          *
          * \param args Arguments to send to each Slot
          *
          */
-        void emit(Args&&... args)
+        void emit(Args&& ... args)
         {
             for(const Slot& slot : m_slots)
             {
@@ -40,12 +40,12 @@ namespace Bull
             }
         }
 
-        /*! \brief Emit a Signal
+        /** \brief Emit a Signal
          *
          * \param args Arguments to send to each Slot
          *
          */
-        void operator()(Args&&... args)
+        void operator()(Args&& ... args)
         {
             emit(std::forward<Args>(args)...);
         }

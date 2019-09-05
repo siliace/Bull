@@ -8,9 +8,9 @@ namespace Bull
 {
     namespace prv
     {
-        std::vector<String> GlxExtensionsLoader::getExtensions(SurfaceHandler handler)
+        std::vector<std::string> GlxExtensionsLoader::getExtensions(SurfaceHandler handler)
         {
-            return String(glXQueryExtensionsString(Display::getInstance().getHandler(), handler)).explode(' ');
+            return std::string(glXQueryExtensionsString(Display::getInstance().getHandler(), handler)).explode(' ');
         }
     }
 }

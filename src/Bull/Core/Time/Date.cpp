@@ -9,18 +9,18 @@ namespace Bull
     namespace
     {
         std::map<DateMonth, unsigned int> monthDays = {
-                {DateMonth_January, 31},
-                {DateMonth_Febuary, 28},
-                {DateMonth_March, 31},
-                {DateMonth_April, 30},
-                {DateMonth_May, 31},
-                {DateMonth_June, 30},
-                {DateMonth_Juily, 31},
-                {DateMonth_August, 31},
+                {DateMonth_January,   31},
+                {DateMonth_Febuary,   28},
+                {DateMonth_March,     31},
+                {DateMonth_April,     30},
+                {DateMonth_May,       31},
+                {DateMonth_June,      30},
+                {DateMonth_Juily,     31},
+                {DateMonth_August,    31},
                 {DateMonth_September, 30},
-                {DateMonth_October, 31},
-                {DateMonth_November, 30},
-                {DateMonth_December, 31},
+                {DateMonth_October,   31},
+                {DateMonth_November,  30},
+                {DateMonth_December,  31},
         };
     }
 
@@ -95,9 +95,9 @@ namespace Bull
     }
 
     Date::Date(unsigned int year, Bull::DateMonth month, unsigned int day) :
-        m_year(year),
-        m_month(month),
-        m_day(day)
+            m_year(year),
+            m_month(month),
+            m_day(day)
     {
         /// Nothing
     }

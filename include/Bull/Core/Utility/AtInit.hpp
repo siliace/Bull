@@ -11,7 +11,7 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * Call the init function
          *
@@ -20,7 +20,7 @@ namespace Bull
          */
         explicit AtInit(const std::function<void()>& init);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * Call the init function
          *
@@ -30,19 +30,19 @@ namespace Bull
          */
         AtInit(const std::function<void()>& init, const std::function<void()>& clean);
 
-        /*! \brief Constructor by movement semantic
+        /** \brief Constructor by movement semantic
          *
          */
         AtInit(AtInit&&) = delete;
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          * Call the clean function
          *
          */
         ~AtInit();
 
-        /*! \brief Basic assignment operator by movement semantic
+        /** \brief Basic assignment operator by movement semantic
          *
          */
         AtInit& operator=(const AtInit&&) = delete;

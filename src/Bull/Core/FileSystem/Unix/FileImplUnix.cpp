@@ -15,7 +15,7 @@ namespace Bull
     {
         void FileImplUnix::create(const Path& path)
         {
-            int handler = ::open64(path.toString().getBuffer(), O_CREAT | O_TRUNC | O_EXCL, S_IRWXU);
+            int handler = ::open64(path.toString().c_str(), O_CREAT | O_TRUNC | O_EXCL, S_IRWXU);
 
             Expect(handler != -1, Throw(InternalError, "Failed to create file"));
 
@@ -26,7 +26,7 @@ namespace Bull
         {
             struct stat64 filestats;
 
-            Expect(stat64(path.toString().getBuffer(), &filestats) != -1, Throw(InternalError, "Failed to check whether a file exists"))
+            Expect(stat64(path.toString().c_str(), &filestats) != -1, Throw(InternalError, "Failed to check whether a file exists"))
 
             return S_ISREG(filestats.st_mode);
         }
@@ -38,7 +38,7 @@ namespace Bull
 
         void FileImplUnix::remove(const Path& path)
         {
-            Expect(unlink(path.toString().getBuffer()) != -1, Throw(InternalError, "Failed to remove file"));
+            Expect(unlink(path.toString().c_str()) != -1, Throw(InternalError, "Failed to remove file"));
         }
 
         FileImplUnix::~FileImplUnix()
@@ -76,7 +76,7 @@ namespace Bull
                 flags |= O_TRUNC;
             }
 
-            m_handler = ::open64(name.toString().getBuffer(), flags, S_IRWXU);
+            m_handler = ::open64(name.toString().c_str(), flags, S_IRWXU);
         }
 
         ByteArray FileImplUnix::read(std::size_t length)

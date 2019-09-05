@@ -9,12 +9,12 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         MemoryStream();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param data   Data to stream
          * \param length The length of data
@@ -22,7 +22,7 @@ namespace Bull
          */
         MemoryStream(const void* data, std::size_t length);
 
-        /*! \brief Open a stream
+        /** \brief Open a stream
          *
          * \param data   Data to stream
          * \param length The length of data
@@ -32,7 +32,7 @@ namespace Bull
          */
         void open(const void* data, std::size_t length);
 
-        /*! \brief Read bytes from the MemoryStream
+        /** \brief Read bytes from the MemoryStream
          *
          * \param length The length of data to read
          *
@@ -41,26 +41,26 @@ namespace Bull
          */
         ByteArray read(std::size_t length) override;
 
-        /*! \brief Check if the stream is open
+        /** \brief Check if the stream is open
          *
          * \return True is the stream is open
          *
          */
         bool isOpen() const;
 
-        /*! \brief Close the stream
+        /** \brief Close the stream
          *
          */
         void close();
 
-        /*! \brief Get the size of the stream
+        /** \brief Get the size of the stream
          *
          * \return Return the size of the stream
          *
          */
         std::size_t getSize() const override;
 
-        /*! \brief Set the reading position in the stream
+        /** \brief Set the reading position in the stream
          *
          * \param position The position to seek to
          *
@@ -69,7 +69,7 @@ namespace Bull
          */
         std::size_t setCursor(std::size_t position) override;
 
-        /*! \brief Get the reading position in the stream
+        /** \brief Get the reading position in the stream
          *
          * \return Return the current position
          *
@@ -78,9 +78,9 @@ namespace Bull
 
     private:
 
-        std::size_t          m_size;   /*!< Size of data to stream */
-        const unsigned char* m_data;   /*!< Data to stream */
-        std::size_t          m_cursor; /*!< The internal cursor */
+        std::size_t m_size;   /**< Size of data to stream */
+        const unsigned char* m_data;   /**< Data to stream */
+        std::size_t m_cursor; /**< The internal cursor */
     };
 }
 

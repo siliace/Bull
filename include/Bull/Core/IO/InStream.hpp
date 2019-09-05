@@ -7,12 +7,12 @@ namespace Bull
 {
     struct BULL_CORE_API InStream
     {
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         virtual ~InStream();
 
-        /*! \brief Read bytes from the InStream
+        /** \brief Read bytes from the InStream
          *
          * \param length The length of data to read
          *
@@ -21,21 +21,21 @@ namespace Bull
          */
         virtual ByteArray read(std::size_t length) = 0;
 
-        /*! \brief Skip bytes in the InStream
+        /** \brief Skip bytes in the InStream
          *
          * \param length The number of bytes to skip
          *
          */
         virtual void skip(std::size_t length) = 0;
 
-        /*! \brief Get the size of the stream
+        /** \brief Get the size of the stream
          *
          * \return Return the size of the stream
          *
          */
         virtual std::size_t getSize() const = 0;
 
-        /*! \brief Tell whether the InStream is at its end
+        /** \brief Tell whether the InStream is at its end
          *
          * An InStream is considered at its end when there is not left to read
          *
@@ -44,7 +44,7 @@ namespace Bull
          */
         virtual bool isAtEnd() const = 0;
 
-        /*! \brief Cast the InStream to a bool
+        /** \brief Cast the InStream to a bool
          *
          * \return True if the InStream is not at its end
          *

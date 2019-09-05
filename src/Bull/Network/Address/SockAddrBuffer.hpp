@@ -15,7 +15,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param addr   The sockaddr to convert
              * \param length The length of the sockaddr
@@ -23,7 +23,7 @@ namespace Bull
              */
             SockAddrBuffer(const sockaddr& address, int length);
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param address The IpAddress to convert
              * \param port    The NetPort to convert
@@ -31,28 +31,28 @@ namespace Bull
              */
             SockAddrBuffer(const IpAddress& address, NetPort port);
 
-            /*! \brief Get the NetPort of the SockAddrBuffer
+            /** \brief Get the NetPort of the SockAddrBuffer
              *
              * \return The NetPort
              *
              */
             NetPort getPort() const;
 
-            /*! \brief Get the IpAddress of the SockAddrBuffer
+            /** \brief Get the IpAddress of the SockAddrBuffer
              *
              * \param return The IpAddress
              *
              */
             std::unique_ptr<IpAddress> getIpAddress();
 
-            /*! \brief Get the length of the SockAddrBuffer
+            /** \brief Get the length of the SockAddrBuffer
              *
              * \return The length
              *
              */
             int getLength() const;
 
-            /*! \brief Convert the SockAddrBuffer to a sockaddr
+            /** \brief Convert the SockAddrBuffer to a sockaddr
              *
              * \return The sockaddr
              *
@@ -61,7 +61,7 @@ namespace Bull
 
         private:
 
-            /*! \brief Create a SockAddrBuffer with bytes from an IpAddressV4
+            /** \brief Create a SockAddrBuffer with bytes from an IpAddressV4
              *
              * \param address The IpAddressV4
              * \param port    The NetPort
@@ -69,7 +69,7 @@ namespace Bull
              */
             void createFromIpAddressV4(const IpAddress& address, NetPort port);
 
-            /*! \brief Create a SockAddrBuffer with bytes from an IpAddressV6
+            /** \brief Create a SockAddrBuffer with bytes from an IpAddressV6
              *
              * \param address The IpAddressV6
              * \param port    The NetPort
@@ -77,14 +77,14 @@ namespace Bull
              */
             void createFromIpAddressV6(const IpAddress& address, NetPort port);
 
-            /*! \brief Create an IpAddressV4 from a SockAddrBuffer
+            /** \brief Create an IpAddressV4 from a SockAddrBuffer
              *
              * \param return The IpAddress
              *
              */
             std::unique_ptr<IpAddress> createFromSockAddrV4() const;
 
-            /*! \brief Create an IpAddressV6 from a SockAddrBuffer
+            /** \brief Create an IpAddressV6 from a SockAddrBuffer
              *
              * \param return The IpAddress
              *
@@ -94,7 +94,7 @@ namespace Bull
         private:
 
             sockaddr m_addr;
-            int      m_length;
+            int m_length;
         };
     }
 }

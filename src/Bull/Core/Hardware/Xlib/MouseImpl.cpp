@@ -24,7 +24,7 @@ namespace Bull
 
             XQueryPointer(display.getHandler(), display.getRootWindow(), &root, &child, &rootX, &rootY, &x, &y, &buttons);
 
-            return { x, y };
+            return {x, y};
         }
 
         bool MouseImpl::isButtonPressed(MouseButton button)
@@ -39,11 +39,16 @@ namespace Bull
             {
                 switch(button)
                 {
-                    case MouseButton_Left:   return buttons & Button1Mask;
-                    case MouseButton_Middle: return buttons & Button2Mask;
-                    case MouseButton_Right:  return buttons & Button3Mask;
-                    case MouseButton_Extra1: return buttons & Button4Mask;
-                    case MouseButton_Extra2: return buttons & Button5Mask;
+                    case MouseButton_Left:
+                        return buttons & Button1Mask;
+                    case MouseButton_Middle:
+                        return buttons & Button2Mask;
+                    case MouseButton_Right:
+                        return buttons & Button3Mask;
+                    case MouseButton_Extra1:
+                        return buttons & Button4Mask;
+                    case MouseButton_Extra2:
+                        return buttons & Button5Mask;
                 }
             }
 

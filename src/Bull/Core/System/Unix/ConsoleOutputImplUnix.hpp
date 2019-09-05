@@ -1,7 +1,7 @@
 #ifndef BULL_CORE_SYSTEM_UNIX_CONSOLEOUTPUTIMPLUNIX_HPP
 #define BULL_CORE_SYSTEM_UNIX_CONSOLEOUTPUTIMPLUNIX_HPP
 
-#include <Bull/Core/Memory/String.hpp>
+#include <string>
 #include <Bull/Core/System/ConsoleOutputImpl.hpp>
 
 namespace Bull
@@ -12,7 +12,7 @@ namespace Bull
         {
         private:
 
-            /*! \brief Convert a ConsoleColor to a win32 text attribute
+            /** \brief Convert a ConsoleColor to a win32 text attribute
              *
              * \param color The color
              *
@@ -21,7 +21,7 @@ namespace Bull
              */
             static int colorToTextAttribute(ConsoleColor color);
 
-            /*! \brief Convert a ConsoleColor to a win32 background attribute
+            /** \brief Convert a ConsoleColor to a win32 background attribute
              *
              * \param color The color
              *
@@ -32,7 +32,7 @@ namespace Bull
 
         public:
 
-            /*! \brief Write bytes in console
+            /** \brief Write bytes in console
              *
              * \param bytes Bytes to write
              *
@@ -41,24 +41,24 @@ namespace Bull
              */
             std::size_t write(const ByteArray& bytes) override;
 
-            /*! \brief Flush the ConsoleOutput
+            /** \brief Flush the ConsoleOutput
              *
              */
             void flush() override;
 
-            /*! \brief Clear the console output
+            /** \brief Clear the console output
              *
              */
             void clear() override;
 
-            /*! \brief Set the color of the text in the console
+            /** \brief Set the color of the text in the console
              *
              * \param color The color
              *
              */
             void setTextColor(ConsoleColor color) override;
 
-            /*! \brief Set the color of the background in the console
+            /** \brief Set the color of the background in the console
              *
              * \param color The color
              *

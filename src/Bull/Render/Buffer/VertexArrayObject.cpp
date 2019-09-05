@@ -5,7 +5,7 @@
 namespace Bull
 {
     VertexArrayObject::VertexArrayObject() :
-        m_vao(0)
+            m_vao(0)
     {
         gl::genVertexArrays(1, &m_vao);
         gl::bindVertexArray(m_vao);

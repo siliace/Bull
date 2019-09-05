@@ -12,7 +12,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief
+            /** \brief
              *
              * \param message
              * \param title
@@ -21,7 +21,7 @@ namespace Bull
              * \return
              *
              */
-            static MessageWindowResponse open(const String& message, const String& title, MessageWindowIcon icon, MessageWindowButtons buttons, MessageWindowDefaultButton defaultButton, WindowHandler parent);
+            static MessageWindowResponse open(const std::string& message, const std::string& title, MessageWindowIcon icon, MessageWindowButtons buttons, MessageWindowDefaultButton defaultButton, WindowHandler parent);
         };
     }
 }

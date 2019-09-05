@@ -9,14 +9,14 @@ namespace Bull
     {
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param max The max value of the index
          *
          */
         explicit RangeCheck(std::size_t max);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param index The index
          * \param max   The max value of the index
@@ -24,7 +24,7 @@ namespace Bull
          */
         RangeCheck(std::size_t index, std::size_t max);
 
-        /*! \brief Perform range check
+        /** \brief Perform range check
          *
          * \param index The index to test
          *

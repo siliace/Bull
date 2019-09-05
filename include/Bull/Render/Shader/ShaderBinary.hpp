@@ -11,27 +11,27 @@ namespace Bull
 {
     struct BULL_RENDER_API ShaderBinary
     {
-        /*! \brief Get the list of supported shader binary formats
+        /** \brief Get the list of supported shader binary formats
          *
          * \return The list of supported formats
          *
          */
         static std::vector<int> getSupportedFormats();
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         ShaderBinary();
 
-        /*! \brief Tell whether the ShaderBinary is valid
+        /** \brief Tell whether the ShaderBinary is valid
          *
          * \return True if the ShaderBinary is valid
          *
          */
         bool isValid() const;
 
-        ByteArray content; /*!< The binary */
-        unsigned int format; /*!< The binary format */
+        ByteArray content; /**< The binary */
+        unsigned int format; /**< The binary format */
     };
 }
 

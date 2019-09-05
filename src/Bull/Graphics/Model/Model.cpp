@@ -3,7 +3,7 @@
 namespace Bull
 {
     Model::Model(const std::shared_ptr<Mesh>& mesh) :
-        m_mesh(mesh)
+            m_mesh(mesh)
     {
         /// Nothing
     }

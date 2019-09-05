@@ -5,8 +5,8 @@ namespace Bull
 {
     namespace prv
     {
-        LibraryImplWin32::LibraryImplWin32(const String& name) :
-            m_handler(LoadLibrary(name.getBuffer()))
+        LibraryImplWin32::LibraryImplWin32(const std::string& name) :
+                m_handler(LoadLibrary(name.c_str()))
         {
             Expect(m_handler, Throw(Win32Error, "Failed to load library " + name))
         }
@@ -16,9 +16,9 @@ namespace Bull
             FreeLibrary(m_handler);
         }
 
-        void* LibraryImplWin32::getSymbolPointer(const String& name) const
+        void* LibraryImplWin32::getSymbolPointer(const std::string& name) const
         {
-            return reinterpret_cast<void*>(GetProcAddress(m_handler, name.getBuffer()));
+            return reinterpret_cast<void*>(GetProcAddress(m_handler, name.c_str()));
         }
     }
 }

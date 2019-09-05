@@ -20,19 +20,19 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Cursor();
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param cursor
          *
          */
         explicit Cursor(CursorType cursor);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param cursor
          * \param hotSpot
@@ -40,19 +40,19 @@ namespace Bull
          */
         Cursor(const Image& cursor, const Size<unsigned int>& hotSpot);
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          * \param cursor The Cursor to move
          *
          */
         Cursor(Cursor&& cursor) noexcept = default;
 
-        /*! \brief Destructor
+        /** \brief Destructor
          *
          */
         ~Cursor();
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \param cursor The Cursor to move
          *
@@ -61,14 +61,14 @@ namespace Bull
          */
         Cursor& operator=(Cursor&& cursor) noexcept = default;
 
-        /*! \brief Create a Cursor from the system
+        /** \brief Create a Cursor from the system
          *
          * \param cursor The type of cursor to create
          *
          */
         void create(CursorType cursor);
 
-        /*! \brief Create a Cursor from an image
+        /** \brief Create a Cursor from an image
          *
          * \param image   The image of the Cursor
          * \param hotSpot The hotSpot of the Cursor
@@ -80,7 +80,7 @@ namespace Bull
 
         friend class Window;
 
-        /*! \brief Get the implementation of the cursor
+        /** \brief Get the implementation of the cursor
          *
          * \return The implementation
          *

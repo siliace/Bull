@@ -15,12 +15,12 @@ namespace Bull
     {
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         RenderWindow() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param mode     The VideoMode
          * \param title    The title of the window
@@ -28,16 +28,16 @@ namespace Bull
          * \param settings Settings to use to create the OpenGL context
          *
          */
-        RenderWindow(const VideoMode& mode, const String& title, Uint32 WindowStyle = WindowStyle_Default, const ContextSettings& settings = ContextSettings::Best);
+        RenderWindow(const VideoMode& mode, const std::string& title, Uint32 WindowStyle = WindowStyle_Default, const ContextSettings& settings = ContextSettings::Best);
 
-        /*! \brief Constructor by movement
+        /** \brief Constructor by movement
          *
          * \param move The RenderWindow to move
          *
          */
         RenderWindow(RenderWindow&& move) noexcept = default;
 
-        /*! \brief Basic assignment operator by movement
+        /** \brief Basic assignment operator by movement
          *
          * \param move The RenderWindow to move
          *
@@ -46,7 +46,7 @@ namespace Bull
          */
         RenderWindow& operator=(RenderWindow&& move) noexcept = default;
 
-        /*! \brief Create the window. If the Window was already opened, its closed
+        /** \brief Create the window. If the Window was already opened, its closed
          *
          * \param mode     The VideoMode
          * \param title    The title of the window
@@ -54,35 +54,35 @@ namespace Bull
          * \param settings Settings to use to create the OpenGL context
          *
          */
-        void create(const VideoMode& mode, const String& title, Uint32 style = WindowStyle_Default, const ContextSettings& settings = ContextSettings::Best);
+        void create(const VideoMode& mode, const std::string& title, Uint32 style = WindowStyle_Default, const ContextSettings& settings = ContextSettings::Best);
 
-        /*! \brief Display what has been rendered so far
+        /** \brief Display what has been rendered so far
          *
          */
         void display() override;
 
-        /*! \brief Set the maximum framerate of the RenderWindow
+        /** \brief Set the maximum framerate of the RenderWindow
          *
          * \param limit The maximum
          *
          */
         void setFramerateLimit(unsigned int limit);
 
-        /*! \brief Get the maximum framerate of the RenderWindow
+        /** \brief Get the maximum framerate of the RenderWindow
          *
          * \return limit The maximum
          *
          */
         unsigned int getFramerateLimit() const;
 
-        /*! \brief Activate or deactivate the vertical synchronization
+        /** \brief Activate or deactivate the vertical synchronization
          *
          * \param active True to activate, false to deactivate
          *
          */
         void enableVsync(bool active = true);
 
-        /*! \brief Get the default viewport of the RenderTarget
+        /** \brief Get the default viewport of the RenderTarget
          *
          * \return Return the viewport
          *
@@ -91,17 +91,17 @@ namespace Bull
 
     protected:
 
-        /*! \brief Function called when the Window is opened
+        /** \brief Function called when the Window is opened
          *
          */
         void onOpen() override;
 
-        /*! \brief Function called when the Window is resized
+        /** \brief Function called when the Window is resized
          *
          */
         void onResize() override;
 
-        /*! \brief Function called when the Window is closed
+        /** \brief Function called when the Window is closed
          *
          */
         void onClose() override;
@@ -109,7 +109,7 @@ namespace Bull
     private:
 
         Clock m_clock;
-        Duration  m_frameDelay;
+        Duration m_frameDelay;
     };
 }
 

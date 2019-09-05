@@ -8,23 +8,23 @@ namespace Bull
 {
     enum DepthValue
     {
-        DepthValue_16, /*!< 16 bits of depth */
-        DepthValue_24, /*!< 24 bits of depth */
-        DepthValue_32, /*!< 32 bits of depth */
+        DepthValue_16, /**< 16 bits of depth */
+        DepthValue_24, /**< 24 bits of depth */
+        DepthValue_32, /**< 32 bits of depth */
     };
 
     class BULL_RENDER_API DepthTexture : public Texture
     {
     public:
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param depthValue The StencilValue of the StencilTexture
          *
          */
         explicit DepthTexture(DepthValue depthValue);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param size       The Size of the StencilTexture
          * \param depthValue The StencilValue of the StencilTexture
@@ -32,14 +32,14 @@ namespace Bull
          */
         DepthTexture(const Size<std::size_t>& size, DepthValue depthValue);
 
-        /*! \brief Constructor by movement semantic
+        /** \brief Constructor by movement semantic
          *
          * \param depthTexture The DepthTexture to move
          *
          */
         DepthTexture(DepthTexture&& depthTexture) noexcept;
 
-        /*! \brief Assignment operator by movement semantic
+        /** \brief Assignment operator by movement semantic
          *
          * \param depthTexture The DepthTexture to move
          *
@@ -48,14 +48,14 @@ namespace Bull
          */
         DepthTexture& operator=(DepthTexture&& depthTexture) noexcept;
 
-        /*! \brief Create the DepthTexture with a given Size
+        /** \brief Create the DepthTexture with a given Size
          *
          * \param size The Size
          *
          */
         void create(const Size<std::size_t>& size) override;
 
-        /*! \brief Get the DepthValue of the DepthTexture
+        /** \brief Get the DepthValue of the DepthTexture
          *
          * \return The DepthValue
          *

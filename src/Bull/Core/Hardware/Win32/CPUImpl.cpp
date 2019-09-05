@@ -21,10 +21,14 @@ namespace Bull
 
             switch(info.wProcessorArchitecture)
             {
-                case PROCESSOR_ARCHITECTURE_AMD64: return CPUArchitecture_x64;
-                case PROCESSOR_ARCHITECTURE_ARM:   return CPUArchitecture_ARM;
-                case PROCESSOR_ARCHITECTURE_IA64:  return CPUArchitecture_IA64;
-                case PROCESSOR_ARCHITECTURE_INTEL: return CPUArchitecture_Intel;
+                case PROCESSOR_ARCHITECTURE_AMD64:
+                    return CPUArchitecture_x64;
+                case PROCESSOR_ARCHITECTURE_ARM:
+                    return CPUArchitecture_ARM;
+                case PROCESSOR_ARCHITECTURE_IA64:
+                    return CPUArchitecture_IA64;
+                case PROCESSOR_ARCHITECTURE_INTEL:
+                    return CPUArchitecture_Intel;
             }
 
             return CPUArchitecture_Unknown;

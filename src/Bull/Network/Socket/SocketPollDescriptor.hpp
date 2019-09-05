@@ -8,9 +8,9 @@ namespace Bull
     namespace prv
     {
         #if defined BULL_OS_WINDOWS
-            typedef WSAPOLLFD SocketPollDescriptor;
+        typedef WSAPOLLFD SocketPollDescriptor;
         #else
-            typedef struct pollfd SocketPollDescriptor;
+        typedef struct pollfd SocketPollDescriptor;
         #endif
     }
 }

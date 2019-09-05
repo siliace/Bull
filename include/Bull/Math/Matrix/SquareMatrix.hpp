@@ -12,7 +12,7 @@ namespace Bull
 
         static SquareMatrix<T, S> Zero;
 
-        /*! \brief Create an identity SquareMatrix
+        /** \brief Create an identity SquareMatrix
          *
          * \return The identity SquareMatrix
          *
@@ -31,30 +31,30 @@ namespace Bull
 
     public:
 
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         SquareMatrix() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param value The value to use to fill the Matrix
          *
          */
         explicit SquareMatrix(T value) :
-            Matrix<T, S, S>(value)
+                Matrix<T, S, S>(value)
         {
             /// Nothing
         }
 
-        /*! \brief Copy constructor
+        /** \brief Copy constructor
          *
          * \param copy The Matrix to copy
          *
          */
         template <typename U, std::size_t WU, std::size_t HU>
         SquareMatrix(const Matrix<U, WU, HU>& copy) :
-            Matrix<T, S, S>(copy)
+                Matrix<T, S, S>(copy)
         {
             /// Nothing
         }
@@ -63,7 +63,7 @@ namespace Bull
     template <typename T, std::size_t S>
     SquareMatrix<T, S> SquareMatrix<T, S>::Zero = SquareMatrix<T, S>();
 
-    /*! \brief Multiply two Matrix
+    /** \brief Multiply two Matrix
      *
      * \param left  The left Matrix
      * \param right The right Matrix

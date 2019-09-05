@@ -11,20 +11,20 @@
 namespace Bull
 {
     MessageWindow::MessageWindow() :
-        icon(MessageWindowIcon_None),
-        buttons(MessageWindowButtons_Ok),
-        defaultButton(MessageWindowDefaultButton_Button1)
+            icon(MessageWindowIcon_None),
+            buttons(MessageWindowButtons_Ok),
+            defaultButton(MessageWindowDefaultButton_Button1)
     {
         /// Nothing
     }
 
-    MessageWindow::MessageWindow(const String& message, const String& title, const Window* parent) :
-        MessageWindow()
+    MessageWindow::MessageWindow(const std::string& message, const std::string& title, const Window* parent) :
+            MessageWindow()
     {
         open(message, title, parent);
     }
 
-    MessageWindowResponse MessageWindow::open(const String& message, const String& title, const Window* parent)
+    MessageWindowResponse MessageWindow::open(const std::string& message, const std::string& title, const Window* parent)
     {
         return prv::MessageWindowImpl::open(message, title,
                                             icon, buttons, defaultButton,

@@ -4,7 +4,9 @@
 #include <Bull/Core/Prerequisites.hpp>
 
 #if defined BULL_OS_WINDOWS
+
     #include <Bull/Core/Support/Win32/Windows.hpp>
+
 #endif
 
 namespace Bull
@@ -12,9 +14,9 @@ namespace Bull
     namespace prv
     {
         #if defined BULL_OS_WINDOWS
-            typedef HDC SurfaceHandler;
+        typedef HDC SurfaceHandler;
         #else
-            typedef int SurfaceHandler;
+        typedef int SurfaceHandler;
         #endif
     }
 }

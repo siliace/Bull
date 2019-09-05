@@ -11,7 +11,7 @@ namespace Bull
         {
         public:
 
-            /*! \brief Constructor
+            /** \brief Constructor
              *
              * \param file        The name file where the Exception was thrown
              * \param line        The line where the Exception was thrown
@@ -20,16 +20,16 @@ namespace Bull
              * \param description The message describing the Exception
              *
              */
-            Win32Error(const String& file, Uint64 line, const String& source, const String& description);
+            Win32Error(const std::string& file, Uint64 line, const std::string& source, const std::string& description);
 
         private:
 
-            /*! \brief Create the description of the Win32Error
+            /** \brief Create the description of the Win32Error
              *
              * \return The description
              *
              */
-            String createDescription() const;
+            std::string createDescription() const;
         };
     }
 }

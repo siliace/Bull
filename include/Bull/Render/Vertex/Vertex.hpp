@@ -11,19 +11,19 @@ namespace Bull
 {
     struct BULL_RENDER_API Vertex
     {
-        /*! \brief Default constructor
+        /** \brief Default constructor
          *
          */
         Vertex() = default;
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param position The position of the Vertex
          *
          */
         explicit Vertex(const Vector3F& position);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param position The position of the Vertex
          * \param texCoord The texture coordinate of the Vertex
@@ -31,7 +31,7 @@ namespace Bull
          */
         Vertex(const Vector3F& position, const Vector2F& texCoord);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param position The position of the Vertex
          * \param normal   The normal of the Vertex
@@ -39,7 +39,7 @@ namespace Bull
          */
         Vertex(const Vector3F& position, const Vector3F& normal);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param position The position of the Vertex
          * \param texCoord The texture coordinate of the Vertex
@@ -48,7 +48,7 @@ namespace Bull
          */
         Vertex(const Vector3F& position, const Vector2F& texCoord, const Vector3F& normal);
 
-        /*! \brief Constructor
+        /** \brief Constructor
          *
          * \param position The position of the Vertex
          * \param color    The color of the Vertex
@@ -58,7 +58,7 @@ namespace Bull
          */
         Vertex(const Vector3F& position, const Vector4F& color, const Vector2F& texCoord = Vector2F::Zero, const Vector3F& normal = Vector3F::Zero);
 
-        /*! \brief Compare a Vertex to this
+        /** \brief Compare a Vertex to this
          *
          * \param right The Vertex to compare to this
          *
@@ -67,7 +67,7 @@ namespace Bull
          */
         bool operator==(const Vertex& right) const;
 
-        /*! \brief Compare a Vertex to this
+        /** \brief Compare a Vertex to this
          *
          * \param right The Vertex to compare to this
          *
@@ -76,10 +76,10 @@ namespace Bull
          */
         bool operator!=(const Vertex& right) const;
 
-        Vector3F position; /*!< The position of the Vertex */
-        Vector4F color;    /*!< The color of the Vertex */
-        Vector2F texCoord; /*!< The texture coordinate of the Vertex */
-        Vector3F normal;   /*!< The normal of the Vertex */
+        Vector3F position; /**< The position of the Vertex */
+        Vector4F color;    /**< The color of the Vertex */
+        Vector2F texCoord; /**< The texture coordinate of the Vertex */
+        Vector3F normal;   /**< The normal of the Vertex */
     };
 }
 

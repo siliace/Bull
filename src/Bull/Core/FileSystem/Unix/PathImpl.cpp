@@ -6,7 +6,7 @@ namespace Bull
 {
     namespace prv
     {
-        String PathImpl::realPath(const String& relative)
+        std::string PathImpl::realPath(const std::string& relative)
         {
             return realpath(relative.getBuffer(), nullptr);
         }
