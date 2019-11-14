@@ -2,7 +2,6 @@
 
 #include <Bull/Core/Exception/Exception.hpp>
 #include <Bull/Core/Log/Log.hpp>
-#include <Bull/Core/Utility/Character.hpp>
 
 #include <Bull/Render/Context/Context.hpp>
 #include <Bull/Render/Context/GlContext.hpp>
@@ -280,8 +279,8 @@ namespace Bull
 
                 if(!version.empty())
                 {
-                    m_settings.major = static_cast<Uint8>(Character::charToInt(version[0]));
-                    m_settings.minor = static_cast<Uint8>(Character::charToInt(version[2]));
+                    m_settings.major = static_cast<Uint8>(version[0] - '0');
+                    m_settings.minor = static_cast<Uint8>(version[2] - '0');
                 }
                 else
                 {

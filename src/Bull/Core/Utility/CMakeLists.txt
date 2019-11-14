@@ -5,8 +5,6 @@ target_sources(bull-core
         PUBLIC
         ${BULL_INC_CORE_UTILITY}/AtInit.hpp
         ${BULL_SRC_CORE_UTILITY}/AtInit.cpp
-        ${BULL_INC_CORE_UTILITY}/Character.hpp
-        ${BULL_SRC_CORE_UTILITY}/Character.cpp
         ${BULL_INC_CORE_UTILITY}/Color.hpp
         ${BULL_SRC_CORE_UTILITY}/Color.cpp
         ${BULL_INC_CORE_UTILITY}/DataType.hpp
